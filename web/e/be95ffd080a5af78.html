@@ -72,7 +72,7 @@
 <script src="../loica.js"></script>
 <script>
   pintarBarra("index.html");
-  const EV = {"id": "be95ffd080a5af78", "titulo": "PLANET ASIA & EL BRUTO CHR", "inicio": "2026-08-15T00:00:00", "fin": "2026-08-15T00:00:00", "lugar": "Bar Los Gatos", "direccion": "Rubio #331, Rancagua", "comuna": "", "lat": null, "lon": null, "precision": "sin_ubicar", "gratis": true, "precio": 0, "precio_texto": "", "categoria": "fiesta", "descripcion": "+FIESTA", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/492eef109cfb15867c257ff083b82f624806ec9134e42510d7686144287098b1.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/sitemap-events.xml"};
+  const EV = {"id": "be95ffd080a5af78", "titulo": "PLANET ASIA & EL BRUTO CHR", "inicio": "2026-08-15T00:00:00", "fin": "2026-08-15T00:00:00", "lugar": "Bar Los Gatos", "direccion": "Rubio #331, Rancagua", "comuna": "", "lat": null, "lon": null, "precision": "sin_ubicar", "gratis": true, "precio": 0, "precio_texto": "", "categoria": "fiesta", "publico": "adultos", "descripcion": "+FIESTA", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/492eef109cfb15867c257ff083b82f624806ec9134e42510d7686144287098b1.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/sitemap-events.xml"};
   document.getElementById("etiqueta-cat").innerHTML =
     mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 18) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

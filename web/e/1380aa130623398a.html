@@ -72,7 +72,7 @@
 <script src="../loica.js"></script>
 <script>
   pintarBarra("index.html");
-  const EV = {"id": "1380aa130623398a", "titulo": "Concierto de Fiestas Patrias en Maipú", "inicio": "2026-09-01T07:30:00", "fin": null, "lugar": "Universidad Andres Bello - Cultura UNAB", "direccion": "", "comuna": "Maipú", "lat": -33.511, "lon": -70.758, "precision": "comuna", "gratis": true, "precio": 0, "precio_texto": "a Cueca Inscribirse Gratuito Auditorio Municipal de Maipú ma", "categoria": "musica", "descripcion": "", "imagen": "https://cultura.unab.cl/app/uploads/2026/04/Concierto-de-Fiestas-Patrias-Teatro-Municipal-de-Maipu-0131-800x533-1-768x512.jpg", "fuente": "Universidad Andres Bello - Cultura UNAB", "url": "https://cultura.unab.cl/evento/concierto-de-fiestas-patrias/"};
+  const EV = {"id": "1380aa130623398a", "titulo": "Concierto de Fiestas Patrias en Maipú", "inicio": "2026-09-01T07:30:00", "fin": null, "lugar": "Universidad Andres Bello - Cultura UNAB", "direccion": "", "comuna": "Maipú", "lat": -33.511, "lon": -70.758, "precision": "comuna", "gratis": true, "precio": 0, "precio_texto": "a Cueca Inscribirse Gratuito Auditorio Municipal de Maipú ma", "categoria": "fiesta", "publico": "todos", "descripcion": "", "imagen": "https://cultura.unab.cl/app/uploads/2026/04/Concierto-de-Fiestas-Patrias-Teatro-Municipal-de-Maipu-0131-800x533-1-768x512.jpg", "fuente": "Universidad Andres Bello - Cultura UNAB", "url": "https://cultura.unab.cl/evento/concierto-de-fiestas-patrias/"};
   document.getElementById("etiqueta-cat").innerHTML =
     mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 18) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

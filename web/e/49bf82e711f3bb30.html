@@ -72,7 +72,7 @@
 <script src="../loica.js"></script>
 <script>
   pintarBarra("index.html");
-  const EV = {"id": "49bf82e711f3bb30", "titulo": "Cumpleyankees", "inicio": "2026-08-16T03:00:00", "fin": "2026-08-16T00:00:00", "lugar": "Spot Secreto", "direccion": "Los Carrera #330, La Unión", "comuna": "", "lat": null, "lon": null, "precision": "sin_ubicar", "gratis": false, "precio": 2000, "precio_texto": "desde $2.000", "categoria": "fiesta", "descripcion": "Fiesta Cumpleyankees", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/c1e79e14f4a18a8295e11ecee2631071293dc9d59b822b6aec2d661dc0366e9d.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/sitemap-events.xml"};
+  const EV = {"id": "49bf82e711f3bb30", "titulo": "Cumpleyankees", "inicio": "2026-08-16T03:00:00", "fin": "2026-08-16T00:00:00", "lugar": "Spot Secreto", "direccion": "Los Carrera #330, La Unión", "comuna": "", "lat": null, "lon": null, "precision": "sin_ubicar", "gratis": false, "precio": 2000, "precio_texto": "desde $2.000", "categoria": "fiesta", "publico": "adultos", "descripcion": "Fiesta Cumpleyankees", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/c1e79e14f4a18a8295e11ecee2631071293dc9d59b822b6aec2d661dc0366e9d.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/sitemap-events.xml"};
   document.getElementById("etiqueta-cat").innerHTML =
     mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 18) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

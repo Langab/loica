@@ -72,7 +72,7 @@
 <script src="../loica.js"></script>
 <script>
   pintarBarra("index.html");
-  const EV = {"id": "67fb75373a5931bd", "titulo": "ALPHA", "inicio": "2026-08-18T13:45:00", "fin": "2026-08-18T14:45:00", "lugar": "Oficina Dirección de Pastoral", "direccion": "", "comuna": "Providencia", "lat": -33.4256, "lon": -70.6096, "precision": "comuna", "gratis": true, "precio": 0, "precio_texto": "", "categoria": "otros", "descripcion": "¿Sientes que hay algo más? A veces todos nos hacemos preguntas como: ¿Qué sentido tiene mi vida? ¿Quién es realmente Jesús? ¿Vale la pena creer hoy? Si alguna vez has tenido inquietudes sobre la fe,…", "imagen": "https://finis.cl/wp-content/uploads/2026/08/Alpha-Agenda.webp", "fuente": "Universidad Finis Terrae - Agenda", "url": "https://finis.cl/agenda/alpha-5/"};
+  const EV = {"id": "67fb75373a5931bd", "titulo": "ALPHA", "inicio": "2026-08-18T13:45:00", "fin": "2026-08-18T14:45:00", "lugar": "Oficina Dirección de Pastoral", "direccion": "", "comuna": "Providencia", "lat": -33.4256, "lon": -70.6096, "precision": "comuna", "gratis": true, "precio": 0, "precio_texto": "", "categoria": "charla", "publico": "todos", "descripcion": "¿Sientes que hay algo más? A veces todos nos hacemos preguntas como: ¿Qué sentido tiene mi vida? ¿Quién es realmente Jesús? ¿Vale la pena creer hoy? Si alguna vez has tenido inquietudes sobre la fe,…", "imagen": "https://finis.cl/wp-content/uploads/2026/08/Alpha-Agenda.webp", "fuente": "Universidad Finis Terrae - Agenda", "url": "https://finis.cl/agenda/alpha-5/"};
   document.getElementById("etiqueta-cat").innerHTML =
     mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 18) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

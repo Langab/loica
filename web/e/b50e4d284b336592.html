@@ -72,7 +72,7 @@
 <script src="../loica.js"></script>
 <script>
   pintarBarra("index.html");
-  const EV = {"id": "b50e4d284b336592", "titulo": "Norteña. Memorias del comienzo, Julieta Venegas", "inicio": "2026-08-15T12:00:00", "fin": null, "lugar": "Centro Cultural La Moneda", "direccion": "", "comuna": "Santiago", "lat": -33.4429, "lon": -70.6539, "precision": "recinto", "gratis": true, "precio": 0, "precio_texto": "Nivel -2 Actividad gratuita / Cupos limitados / Inscripción", "categoria": "otros", "descripcion": "", "imagen": "https://www.cclm.cl/web/wp-content/uploads/2026/07/julieta-web-2.jpg", "fuente": "Centro Cultural La Moneda", "url": "https://www.cclm.cl/actividades/nortena-memorias-del-comienzo-julieta-venegas/"};
+  const EV = {"id": "b50e4d284b336592", "titulo": "Norteña. Memorias del comienzo, Julieta Venegas", "inicio": "2026-08-15T12:00:00", "fin": null, "lugar": "Centro Cultural La Moneda", "direccion": "", "comuna": "Santiago", "lat": -33.4429, "lon": -70.6539, "precision": "recinto", "gratis": true, "precio": 0, "precio_texto": "Nivel -2 Actividad gratuita / Cupos limitados / Inscripción", "categoria": "arte", "publico": "todos", "descripcion": "", "imagen": "https://www.cclm.cl/web/wp-content/uploads/2026/07/julieta-web-2.jpg", "fuente": "Centro Cultural La Moneda", "url": "https://www.cclm.cl/actividades/nortena-memorias-del-comienzo-julieta-venegas/"};
   document.getElementById("etiqueta-cat").innerHTML =
     mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 18) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

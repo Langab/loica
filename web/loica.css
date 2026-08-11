@@ -4,93 +4,146 @@
    Fuente de verdad: 02_marca_y_marketing/estrategia_marca.md
    ============================================================ */
 
-/* ---------- 1. TOKENS ---------- */
+/* ---------- 1. TOKENS ----------
+   Dirección "serigrafía chilena": tinta plana, contorno grueso, repisa dura.
+   Detalle y contrastes calculados en _direccion_visual.md. */
 :root{
-  /* Color de marca */
-  --rojo-loica:#E8442E;
-  --rojo-hover:#C9331F;
-  --azul-cordillera:#1E2A4A;
-  --crema-papel:#FAF3E7;
-  --amarillo-micro:#F5B52E;
-  --verde-cerro:#2E7D5B;
-  --rosado-atardecer:#F2778C;
+  /* Primitivos: rampas OKLCH ancladas en los 6 colores de marca */
+  --rojo-50:#FFF4F1;  --rojo-100:#FFE5DF; --rojo-200:#FFC9BE; --rojo-300:#FEA493;
+  --rojo-400:#F47662; --rojo-500:#E8442E; --rojo-600:#D13B27; --rojo-700:#AA2C1B;
+  --rojo-800:#801B0E; --rojo-900:#590B03;
+  --amarillo-50:#FEF6E8;  --amarillo-100:#FDEACA; --amarillo-200:#FAD391;
+  --amarillo-300:#F5B52E; --amarillo-400:#D89E1E; --amarillo-500:#BA8608;
+  --amarillo-700:#7E5900; --amarillo-900:#3E2A00;
+  --verde-100:#E5F1EB; --verde-200:#CFE3D8; --verde-300:#B4D0C1;
+  --verde-500:#74A68D; --verde-700:#2E7D5B; --verde-800:#1C523B; --verde-900:#113626;
+  --rosado-100:#FFE4E7; --rosado-200:#FFC8CE; --rosado-400:#F2778C;
+  --rosado-600:#B75566; --rosado-800:#712C39;
+  --azul-100:#EAEDF3; --azul-200:#D6DAE4; --azul-300:#BEC3D0; --azul-400:#A1A8B9;
+  --azul-600:#6D778F; --azul-700:#535E79; --azul-800:#384461; --azul-900:#1E2A4A;
+  --azul-950:#141A2B; --azul-975:#0B0F1C;
+  --morado-200:#DAD2FB; --morado-400:#A893E7; --morado-600:#7A4FCF; --morado-800:#4E3187;
+  --lapis-200:#C7DAF1; --lapis-400:#7DA5D5; --lapis-600:#2F6FB5; --lapis-800:#1C4777;
+  --naranjo-200:#F6CFAB; --naranjo-400:#E08A1E; --naranjo-600:#AB6604; --naranjo-800:#663A00;
+  --arena-50:#FFFBF5;  --arena-100:#FAF3E7; --arena-200:#EDE7DE; --arena-300:#DAD3C8;
+  --arena-400:#BEB6A9; --arena-500:#A29A8C; --arena-700:#645D51; --arena-900:#292621;
 
-  /* Semánticos — claro (se redefinen en oscuro) */
-  --fondo:#FAF3E7;
-  --fondo-elevado:#FFFDF9;
-  --fondo-hundido:#F2E9D9;
-  --tinta:#1E2A4A;
-  --tinta-suave:#5E6785;
-  --tinta-tenue:#8C93A8;
-  --borde:#E7DCC8;
-  --borde-fuerte:#D6C9B0;
-  --acento:var(--rojo-loica);
+  /* Alias de marca (los usan páginas antiguas) */
+  --rojo-loica:var(--rojo-500); --azul-cordillera:var(--azul-900);
+  --crema-papel:var(--arena-100); --amarillo-micro:var(--amarillo-300);
+  --verde-cerro:var(--verde-700); --rosado-atardecer:var(--rosado-400);
+  --rojo-hover:var(--rojo-700);
+
+  /* Semánticos — claro */
+  --fondo:var(--arena-100);
+  --fondo-elevado:var(--arena-50);
+  --fondo-hundido:var(--arena-200);
+  --tinta:var(--azul-900);
+  --tinta-suave:var(--azul-700);
+  --tinta-tenue:var(--arena-700);
+  --contorno:var(--azul-900);
+  --contorno-suave:var(--azul-800);
+  --borde:var(--arena-300);
+  --borde-fuerte:var(--arena-400);
+  --acento:var(--rojo-500);
+  --acento-solido:var(--rojo-600);
+  --acento-hover:var(--rojo-700);
   --acento-contraste:#fff;
-  --gratis:var(--verde-cerro);
-  --gratis-fondo:#E7F2EC;
+  --gratis:var(--verde-700);
+  --gratis-fondo:var(--verde-100);
+  --gratis-contraste:#fff;
+  --destacado:var(--amarillo-300);
+  --destacado-tinta:var(--azul-900);
+  --foco:var(--amarillo-300);
 
-  /* Tipografía. Escala con saltos de verdad (~1,15 abajo, ~1,25 arriba) y sin
-     medios píxeles: 11,5 y 14,5 no se distinguían de sus vecinos y delataban
-     una escala ajustada a ojo. */
+  /* Tipografía */
   --fuente-marca:"Baloo 2","Nunito",system-ui,sans-serif;
   --fuente-ui:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
   --t-xs:12px; --t-sm:13px; --t-base:15px; --t-md:17px;
   --t-lg:21px; --t-xl:27px; --t-2xl:35px; --t-3xl:46px;
 
-  /* Espaciado (escala de 4) */
+  /* Espaciado */
   --e-1:4px; --e-2:8px; --e-3:12px; --e-4:16px;
   --e-5:20px; --e-6:24px; --e-8:32px; --e-10:40px; --e-12:48px;
 
-  /* Bordes y sombras */
-  --r-sm:8px; --r-md:12px; --r-lg:18px; --r-xl:26px; --r-full:999px;
-  --sombra-1:0 1px 3px rgba(30,42,74,.07);
-  --sombra-2:0 3px 14px rgba(30,42,74,.11);
-  --sombra-3:0 10px 34px rgba(30,42,74,.17);
+  /* Forma: radios grandes (cartoon = redondo) */
+  --r-sm:10px; --r-md:16px; --r-lg:22px; --r-xl:28px; --r-2xl:36px;
+  --r-pill:999px; --r-full:999px;
+
+  /* Repisas: sombra dura hacia abajo, cero blur. ES el lenguaje. */
+  --repisa-1:0 3px 0 var(--contorno);
+  --repisa-2:0 4px 0 var(--contorno);
+  --repisa-3:0 5px 0 var(--contorno);
+  --repisa-4:0 6px 0 var(--contorno);
+  --sombra-1:var(--repisa-1); --sombra-2:var(--repisa-2); --sombra-3:var(--repisa-4);
 
   /* Movimiento */
-  --rapido:.13s cubic-bezier(.4,0,.2,1);
-  --medio:.24s cubic-bezier(.4,0,.2,1);
+  --rapido:.12s cubic-bezier(.4,0,.2,1);
+  --medio:.22s cubic-bezier(.2,0,0,1);
+  --lento:.4s cubic-bezier(.2,0,0,1);
+  --rebote:.34s cubic-bezier(.34,1.56,.64,1);
 }
 
-/* Modo oscuro: requisito de marca, no un extra. La app se usa de noche. */
+/* Modo oscuro: la tinta SE INVIERTE (contorno crema). Primera clase. */
 @media (prefers-color-scheme: dark){
   :root:not([data-tema="claro"]){
-    --fondo:#161E33;
-    --fondo-elevado:#1E2A4A;
-    --fondo-hundido:#111828;
-    --tinta:#F3EDE1;
-    --tinta-suave:#AEB6CC;
-    --tinta-tenue:#7B849E;
-    --borde:#2C3A5E;
-    --borde-fuerte:#3E4E77;
-    --acento:#FF5C44;
-    --gratis:#4FBF8B;
-    --gratis-fondo:#1B3A2C;
-    --sombra-1:0 1px 3px rgba(0,0,0,.3);
-    --sombra-2:0 3px 14px rgba(0,0,0,.4);
-    --sombra-3:0 10px 34px rgba(0,0,0,.5);
+  --fondo:var(--azul-950);
+  --fondo-elevado:#1E2740;
+  --fondo-hundido:var(--azul-975);
+  --tinta:var(--arena-100);
+  --tinta-suave:var(--arena-300);
+  --tinta-tenue:var(--arena-400);
+  --contorno:var(--arena-200);
+  --contorno-suave:var(--arena-300);
+  --borde:var(--azul-800);
+  --borde-fuerte:var(--azul-700);
+  --acento:var(--rojo-400);
+  --acento-solido:var(--rojo-400);
+  --acento-hover:var(--rojo-300);
+  --acento-contraste:var(--azul-900);
+  --gratis:var(--verde-300);
+  --gratis-fondo:var(--verde-900);
+  --gratis-contraste:var(--azul-900);
+  --destacado:var(--amarillo-300);
+  --destacado-tinta:var(--azul-900);
+  --foco:var(--amarillo-300);
   }
 }
 :root[data-tema="oscuro"]{
-  --fondo:#161E33; --fondo-elevado:#1E2A4A; --fondo-hundido:#111828;
-  --tinta:#F3EDE1; --tinta-suave:#AEB6CC; --tinta-tenue:#7B849E;
-  --borde:#2C3A5E; --borde-fuerte:#3E4E77; --acento:#FF5C44;
-  --gratis:#4FBF8B; --gratis-fondo:#1B3A2C;
-  --sombra-1:0 1px 3px rgba(0,0,0,.3);
-  --sombra-2:0 3px 14px rgba(0,0,0,.4);
-  --sombra-3:0 10px 34px rgba(0,0,0,.5);
+  --fondo:var(--azul-950);
+  --fondo-elevado:#1E2740;
+  --fondo-hundido:var(--azul-975);
+  --tinta:var(--arena-100);
+  --tinta-suave:var(--arena-300);
+  --tinta-tenue:var(--arena-400);
+  --contorno:var(--arena-200);
+  --contorno-suave:var(--arena-300);
+  --borde:var(--azul-800);
+  --borde-fuerte:var(--azul-700);
+  --acento:var(--rojo-400);
+  --acento-solido:var(--rojo-400);
+  --acento-hover:var(--rojo-300);
+  --acento-contraste:var(--azul-900);
+  --gratis:var(--verde-300);
+  --gratis-fondo:var(--verde-900);
+  --gratis-contraste:var(--azul-900);
+  --destacado:var(--amarillo-300);
+  --destacado-tinta:var(--azul-900);
+  --foco:var(--amarillo-300);
 }
 
-/* Colores por categoría-mascota */
+/* Colores por categoría-mascota. Cada color viaja con su tinta:
+   los oscuros llevan crema encima, los claros llevan tinta azul. */
 :root{
-  --c-fiesta:#7A4FCF;      /* Culpeo — noche */
-  --c-musica:#C9331F;      /* Cóndor — conciertos */
-  --c-cultura:#2F6FB5;     /* Chinchilla — teatro, cine, arte */
-  --c-clases:#E08A1E;      /* Chincol — talleres y barrio */
-  --c-libre:#2E7D5B;       /* Pudú — gratis y aire libre */
-  /* Loica: es la categoría más numerosa, así que lleva el rojo de la marca.
-     En gris daba 2,4:1 contra el mapa — el pin más común era el más invisible. */
-  --c-otros:#E8442E;
+  --c-fiesta:var(--morado-600);
+  --c-musica:var(--rojo-600);
+  --c-cultura:var(--lapis-600);
+  --c-clases:var(--naranjo-400);
+  --c-libre:var(--verde-700);
+  --c-otros:var(--amarillo-300);   /* el rojo queda solo para acción y marca */
+  --c-fiesta-suave:var(--morado-200); --c-musica-suave:var(--rojo-200);
+  --c-cultura-suave:var(--lapis-200); --c-clases-suave:var(--naranjo-200);
+  --c-libre-suave:var(--verde-200);   --c-otros-suave:var(--amarillo-200);
 }
 
 /* ---------- 2. BASE ---------- */
@@ -107,13 +160,13 @@ h2{font-size:var(--t-xl);line-height:1.2}
 h3{font-size:var(--t-lg);line-height:1.25}
 a{color:inherit}
 img{max-width:100%;display:block}
-:focus-visible{outline:2.5px solid var(--acento);outline-offset:2px;border-radius:4px}
+:focus-visible{outline:none;box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno);border-radius:6px}
 
 /* ---------- 3. NAVEGACIÓN ---------- */
 .barra{
   display:flex;align-items:center;gap:var(--e-3);
   padding:var(--e-3) var(--e-4);background:var(--fondo-elevado);
-  border-bottom:1px solid var(--borde);
+  border-bottom:2.5px solid var(--contorno);
 }
 .logo{display:flex;align-items:center;gap:var(--e-2);text-decoration:none;flex:none}
 .logo svg{width:32px;height:32px}
@@ -121,12 +174,16 @@ img{max-width:100%;display:block}
 .nav{display:flex;gap:var(--e-1);margin-left:var(--e-4);overflow-x:auto;scrollbar-width:none}
 .nav::-webkit-scrollbar{display:none}
 .nav a{
-  padding:7px var(--e-3);border-radius:var(--r-full);text-decoration:none;
-  font-size:var(--t-sm);font-weight:600;color:var(--tinta-suave);white-space:nowrap;
-  transition:var(--rapido);
+  display:inline-flex;align-items:center;min-height:42px;
+  padding:0 var(--e-4);border-radius:var(--r-pill);text-decoration:none;
+  font:700 var(--t-base)/1 var(--fuente-marca);color:var(--tinta-suave);
+  white-space:nowrap;transition:var(--rapido);
 }
 .nav a:hover{background:var(--fondo-hundido);color:var(--tinta)}
-.nav a[aria-current="page"]{background:var(--tinta);color:var(--fondo-elevado)}
+.nav a[aria-current="page"]{
+  background:var(--nav-color,var(--tinta));color:var(--nav-tinta,var(--arena-50));
+  border:2px solid var(--contorno);box-shadow:var(--repisa-1);
+}
 .barra-fin{margin-left:auto;display:flex;align-items:center;gap:var(--e-2)}
 
 /* Navegación inferior: en celular los destinos van al alcance del pulgar.
@@ -136,7 +193,7 @@ img{max-width:100%;display:block}
   .barra .nav{display:none}
   .nav-inferior{
     display:flex;position:fixed;inset:auto 0 0 0;z-index:20;
-    background:var(--fondo-elevado);border-top:1px solid var(--borde);
+    background:var(--fondo-elevado);border-top:2.5px solid var(--contorno);
     padding-bottom:env(safe-area-inset-bottom);
   }
   .nav-inferior a{
@@ -144,14 +201,26 @@ img{max-width:100%;display:block}
     padding:8px 4px 7px;text-decoration:none;color:var(--tinta-tenue);
     font-size:10.5px;font-weight:700;min-height:52px;justify-content:center;
   }
-  .nav-inferior a svg{width:22px;height:22px}
-  .nav-inferior a[aria-current="page"]{color:var(--acento)}
-  .nav-inferior a[aria-current="page"] .punto{
-    position:absolute;top:0;width:26px;height:3px;border-radius:0 0 3px 3px;background:var(--acento);
+  .nav-inferior a svg{width:23px;height:23px;transition:var(--rapido)}
+  .nav-inferior a[aria-current="page"]{color:var(--tinta)}
+  /* La pastilla de color tras el ícono: los colores de la Loica en la nav */
+  .nav-inferior a[aria-current="page"] svg{
+    background:var(--nav-color,var(--acento));color:var(--nav-tinta,var(--arena-50));
+    border:2px solid var(--contorno);border-radius:var(--r-pill);
+    padding:3px 13px;width:auto;height:24px;box-sizing:content-box;
   }
+  .nav-inferior a[aria-current="page"] .punto{display:none}
   .nav-inferior a{position:relative}
   body.con-nav-inferior{padding-bottom:calc(52px + env(safe-area-inset-bottom))}
 }
+
+/* Un color por destino; cada color viaja con su tinta (el naranjo y el
+   amarillo son claros: llevan tinta azul, no crema). */
+:root[data-pagina="mapa"]       {--nav-color:var(--c-musica); --nav-tinta:var(--arena-50)}
+:root[data-pagina="calendario"] {--nav-color:var(--c-cultura);--nav-tinta:var(--arena-50)}
+:root[data-pagina="blog"]       {--nav-color:var(--c-fiesta); --nav-tinta:var(--arena-50)}
+:root[data-pagina="agregar"]    {--nav-color:var(--c-clases); --nav-tinta:var(--azul-900)}
+:root[data-pagina="nosotros"]   {--nav-color:var(--c-libre);  --nav-tinta:var(--arena-50)}
 
 .idiomas{display:flex;gap:2px}
 .idiomas button, .tema{
@@ -167,16 +236,20 @@ img{max-width:100%;display:block}
   background:var(--fondo-elevado);border-bottom:1px solid var(--borde)}
 .filtros::-webkit-scrollbar{display:none}
 .chip{
-  flex:none;display:inline-flex;align-items:center;gap:6px;
-  border:1.5px solid var(--borde);background:var(--fondo-elevado);color:var(--tinta);
-  padding:7px 14px 7px 9px;border-radius:var(--r-full);
-  font:600 var(--t-sm)/1 var(--fuente-ui);cursor:pointer;white-space:nowrap;
-  transition:var(--rapido);
+  flex:none;display:inline-flex;align-items:center;gap:7px;
+  border:2px solid var(--contorno);background:var(--fondo-elevado);color:var(--tinta);
+  padding:8px 15px 8px 10px;border-radius:var(--r-pill);
+  font:700 var(--t-sm)/1 var(--fuente-marca);cursor:pointer;white-space:nowrap;
+  box-shadow:var(--repisa-1);transition:var(--rapido);
 }
-.chip:hover{border-color:var(--borde-fuerte);transform:translateY(-1px)}
-.chip svg{width:19px;height:19px;flex:none}
-.chip[aria-pressed="true"]{background:var(--tinta);color:var(--fondo-elevado);border-color:var(--tinta)}
-.chip.es-gratis[aria-pressed="true"]{background:var(--gratis);border-color:var(--gratis);color:#fff}
+.chip:hover{transform:translateY(-1px)}
+.chip:active{transform:translateY(3px);box-shadow:none}
+.chip svg{width:22px;height:22px;flex:none}
+.chip[aria-pressed="true"]{
+  background:var(--tinta);color:var(--fondo-elevado);
+  transform:translateY(3px);box-shadow:none;
+}
+.chip.es-gratis[aria-pressed="true"]{background:var(--gratis);color:var(--gratis-contraste)}
 
 /* ---------- 5. TARJETA DE EVENTO ----------
    Los dos datos que deciden si voy son la HORA y el PRECIO. Antes la
@@ -194,11 +267,12 @@ img{max-width:100%;display:block}
 .miniatura{
   width:58px;height:58px;border-radius:var(--r-md);overflow:hidden;
   background:var(--fondo-hundido);display:grid;place-items:center;position:relative;
+  border:2.5px solid var(--contorno);
 }
 /* La mascota va DEBAJO de la foto: si la imagen del organizador no carga o
    se cae, queda la mascota sin dejar un hueco negro. */
 .miniatura img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
-.miniatura > svg{width:34px;height:34px}
+.miniatura > svg{width:44px;height:44px}
 .miniatura .dia{
   position:absolute;inset:auto 0 0 0;background:rgba(30,42,74,.9);color:#fff;
   font:700 10px/1.4 var(--fuente-ui);text-align:center;padding:2px 0;letter-spacing:.04em;
@@ -230,14 +304,18 @@ img{max-width:100%;display:block}
 /* ---------- 6. BOTONES ---------- */
 .boton{
   display:inline-flex;align-items:center;justify-content:center;gap:var(--e-2);
-  background:var(--acento);color:var(--acento-contraste);border:0;
-  padding:13px var(--e-6);border-radius:var(--r-md);
-  font:700 var(--t-md)/1 var(--fuente-ui);cursor:pointer;text-decoration:none;
-  transition:var(--rapido);
+  background:var(--acento-solido);color:var(--acento-contraste);
+  border:3px solid var(--contorno);
+  padding:13px var(--e-6);border-radius:var(--r-pill);
+  font:800 var(--t-md)/1 var(--fuente-marca);cursor:pointer;text-decoration:none;
+  box-shadow:var(--repisa-3);transition:var(--rapido);
 }
-.boton:hover{background:var(--rojo-hover);transform:translateY(-1px);box-shadow:var(--sombra-2)}
-.boton.secundario{background:transparent;color:var(--tinta);border:1.5px solid var(--borde-fuerte)}
+.boton:hover{background:var(--acento-hover);transform:translateY(-1px)}
+.boton:active{transform:translateY(5px);box-shadow:none}
+.boton.secundario{background:var(--fondo-elevado);color:var(--tinta);
+  border:2.5px solid var(--contorno);box-shadow:var(--repisa-2)}
 .boton.secundario:hover{background:var(--fondo-hundido)}
+.boton.secundario:active{transform:translateY(4px);box-shadow:none}
 .boton.bloque{width:100%}
 
 /* ---------- 7. FORMULARIOS ---------- */
@@ -245,7 +323,7 @@ img{max-width:100%;display:block}
 .campo label{display:block;font-weight:700;font-size:var(--t-sm);margin-bottom:6px}
 .campo .ayuda{font-size:var(--t-xs);color:var(--tinta-tenue);margin-top:4px}
 .campo input,.campo select,.campo textarea{
-  width:100%;padding:11px var(--e-3);border:1.5px solid var(--borde);
+  width:100%;padding:11px var(--e-3);border:2px solid var(--contorno-suave);
   border-radius:var(--r-sm);background:var(--fondo);color:var(--tinta);
   font:var(--t-base)/1.4 var(--fuente-ui);transition:var(--rapido);
 }
@@ -264,17 +342,18 @@ img{max-width:100%;display:block}
 }
 .compartir-botones{display:flex;gap:var(--e-2);flex-wrap:wrap}
 .red{
-  width:42px;height:42px;border-radius:var(--r-full);cursor:pointer;
-  border:1.5px solid var(--borde);background:var(--fondo-elevado);color:var(--tinta-suave);
-  display:grid;place-items:center;transition:var(--rapido);
+  width:44px;height:44px;border-radius:var(--r-pill);cursor:pointer;
+  border:2px solid var(--contorno);background:var(--fondo-elevado);color:var(--tinta-suave);
+  box-shadow:var(--repisa-1);display:grid;place-items:center;transition:var(--rapido);
 }
+.red:active{transform:translateY(3px);box-shadow:none}
 .red:hover{background:var(--red);border-color:var(--red);color:#fff;transform:translateY(-2px)}
 .red.copiado{background:var(--gratis);border-color:var(--gratis);color:#fff}
 
 /* ---------- 8. CONTENEDORES ---------- */
 .contenido{max-width:760px;margin:0 auto;padding:var(--e-8) var(--e-5) var(--e-12)}
-.panel{background:var(--fondo-elevado);border:1px solid var(--borde);border-radius:var(--r-lg);
-  padding:var(--e-6);box-shadow:var(--sombra-1)}
+.panel{background:var(--fondo-elevado);border:2.5px solid var(--contorno);border-radius:var(--r-lg);
+  padding:var(--e-6);box-shadow:var(--repisa-2)}
 .vacio{padding:var(--e-10) var(--e-5);text-align:center;color:var(--tinta-suave)}
 .vacio svg{width:78px;height:78px;opacity:.5;margin:0 auto var(--e-3)}
 

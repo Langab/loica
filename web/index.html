@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Loica — ¿Qué hay hoy en Santiago?</title>
 <meta name="description" content="Todos los panoramas de Santiago en un mapa. Filtra por gratis, hoy o este finde.">
+<meta property="og:title" content="Loica — ¿Qué hay hoy en Santiago?">
+<meta property="og:description" content="Panoramas gratis y de los otros, en un mapa. Fiestas, teatro, ferias, clases y conciertos de Santiago de Chile.">
+<meta property="og:image" content="https://langab.github.io/loica/og-default.png">
+<meta property="og:url" content="https://langab.github.io/loica/">
+<meta property="og:site_name" content="Loica">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -18,18 +24,33 @@
   #mapa{position:absolute;inset:0;background:var(--fondo-hundido)}
 
   /* Pin: gota con la mascota adentro. Verde = gratis, el filtro estrella. */
-  .pin{
-    width:34px;height:34px;cursor:pointer;transition:transform var(--rapido);
-    filter:drop-shadow(0 3px 5px rgba(30,42,74,.32));
-  }
+  .pin{width:36px;height:36px;cursor:pointer;transition:transform var(--rapido)}
   .pin:hover,.pin.activo{transform:scale(1.18) translateY(-2px);z-index:9}
-  .pin .gota{fill:var(--tono)}
+  .pin .gota{fill:var(--tono);stroke:var(--contorno);stroke-width:2.5}
   .pin.gratis .gota{fill:var(--verde-cerro)}
+
+  /* La Loica que vuela: guía, no adorno. Cuatro disparadores, nunca tapa nada. */
+  #loica-vuelo{
+    position:absolute;top:0;left:0;width:54px;height:54px;z-index:5;
+    pointer-events:none;opacity:0;offset-rotate:auto;offset-distance:0%;
+    will-change:offset-distance,opacity;
+  }
+  #loica-vuelo.vuela{animation:loica-vuela var(--dur-vuelo,700ms) cubic-bezier(.3,0,.25,1) forwards}
+  @keyframes loica-vuela{
+    0%{opacity:0;offset-distance:0%} 12%{opacity:1}
+    88%{opacity:1} 100%{opacity:0;offset-distance:100%}
+  }
+  @media(prefers-reduced-motion:reduce){#loica-vuelo{display:none}}
+
+  .conteo b{display:inline-block}
+  .conteo b.pop{animation:pop var(--rebote)}
+  @keyframes pop{0%{transform:scale(1)}45%{transform:scale(1.35)}100%{transform:scale(1)}}
 
   /* --- Panel inferior: tres alturas y arrastre real --- */
   .panel-lista{
     position:absolute;left:0;right:0;bottom:0;background:var(--fondo-elevado);
-    border-radius:var(--r-xl) var(--r-xl) 0 0;box-shadow:var(--sombra-3);
+    border-radius:var(--r-xl) var(--r-xl) 0 0;
+    border:2.5px solid var(--contorno);border-bottom:0;
     display:flex;flex-direction:column;z-index:4;
     height:var(--alto-panel,268px);max-height:88%;
     transition:height var(--medio);touch-action:none;
@@ -49,7 +70,8 @@
 
   .ficha{
     position:absolute;inset:auto 0 0 0;background:var(--fondo-elevado);z-index:8;
-    border-radius:var(--r-xl) var(--r-xl) 0 0;box-shadow:var(--sombra-3);
+    border-radius:var(--r-xl) var(--r-xl) 0 0;
+    border:2.5px solid var(--contorno);border-bottom:0;
     transform:translateY(103%);transition:transform var(--medio);
     max-height:88%;overflow-y:auto;
   }
@@ -100,6 +122,7 @@
 
   <main>
     <div id="mapa"></div>
+    <div id="loica-vuelo" aria-hidden="true"></div>
     <div class="aviso" id="aviso" hidden></div>
 
     <section class="panel-lista" id="panel" aria-label="Lista de eventos">
@@ -118,7 +141,7 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="loica.js"></script>
 <script>
-let EVENTOS = [], filtroCat = null, soloGratis = false, cuando = "todo";
+let EVENTOS = [], filtroCat = null, soloGratis = false, cuando = "todo", publicoFiltro = null;
 let marcadores = [], seleccionado = null;
 
 pintarBarra("index.html");
@@ -220,6 +243,7 @@ const esFinde = ev => {
 const visibles = () => EVENTOS.filter(ev =>
   (!soloGratis || ev.gratis) &&
   (!filtroCat || ev.categoria === filtroCat) &&
+  (!publicoFiltro || ev.publico === publicoFiltro) &&
   (cuando === "todo" || (cuando === "hoy" ? esHoy(ev) : esFinde(ev))));
 
 function pintarFiltros(){
@@ -240,6 +264,14 @@ function pintarFiltros(){
   agregar(t("hoy"), cuando === "hoy", () => cuando = cuando === "hoy" ? "todo" : "hoy");
   agregar(t("finde"), cuando === "finde", () => cuando = cuando === "finde" ? "todo" : "finde");
 
+  // Público: responde "¿puedo llevar a mi hijo?" y "¿es de mayores?"
+  agregar(`${mascota("pudu", publicoFiltro === "ninos" ? "#fff" : "#2E7D5B", 22)} ${t("ninos")}`,
+          publicoFiltro === "ninos",
+          () => publicoFiltro = publicoFiltro === "ninos" ? null : "ninos");
+  agregar(`${mascota("culpeo", publicoFiltro === "adultos" ? "#fff" : "#7A4FCF", 22)} ${t("mas18")}`,
+          publicoFiltro === "adultos",
+          () => publicoFiltro = publicoFiltro === "adultos" ? null : "adultos");
+
   [...new Set(EVENTOS.map(e => e.categoria))]
     .sort((a,b) => cat(a)[IDIOMA].localeCompare(cat(b)[IDIOMA]))
     .forEach(c => {
@@ -249,9 +281,32 @@ function pintarFiltros(){
     });
 }
 
+/* La Loica vuela con propósito: al filtrar (chip → contador) y al abrir una
+   ficha (llega al pin antes que la cámara). Un vuelo nuevo cancela el anterior. */
+function volarLoica(desde, hasta, ms = 700){
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const el = document.getElementById("loica-vuelo");
+  if(!el.innerHTML) el.innerHTML = mascota("loica", "var(--tinta)", 54);
+  const cx = (desde.x + hasta.x) / 2;
+  const cy = Math.min(desde.y, hasta.y) - 90;   // el arco sube: esquiva pines
+  el.style.offsetPath = `path("M ${desde.x} ${desde.y} Q ${cx} ${cy} ${hasta.x} ${hasta.y}")`;
+  el.style.setProperty("--dur-vuelo", ms + "ms");
+  el.classList.remove("vuela");
+  void el.offsetWidth;
+  el.classList.add("vuela");
+}
+const centroDe = el => {
+  const r = el.getBoundingClientRect(), m = document.getElementById("mapa").getBoundingClientRect();
+  return {x: r.left + r.width/2 - m.left, y: r.top + r.height/2 - m.top};
+};
+
 function refrescar(){
   const lista = visibles();
-  document.getElementById("conteo").textContent = lista.length;
+  const conteoEl = document.getElementById("conteo");
+  if(conteoEl.textContent !== String(lista.length)){
+    conteoEl.classList.remove("pop"); void conteoEl.offsetWidth; conteoEl.classList.add("pop");
+  }
+  conteoEl.textContent = lista.length;
   document.getElementById("conteo-txt").textContent =
     lista.length === 1 ? t("evento") : t("eventos");
 
@@ -319,7 +374,13 @@ function abrirFicha(ev){
   document.getElementById("panel").classList.add("oculto");
   history.replaceState(null, "", "#/e/" + ev.id);
   document.getElementById("compartir-ficha").appendChild(botonesCompartir(ev));
-  if(ev.lat != null) mapa.flyTo({center:[ev.lon, ev.lat], zoom:15, offset:[0,-90], speed:1.5});
+  if(ev.lat != null){
+    const destino = mapa.project([ev.lon, ev.lat]);
+    const caja = document.getElementById("mapa").getBoundingClientRect();
+    volarLoica({x: caja.width/2, y: caja.height + 20},
+               {x: destino.x, y: destino.y}, 650);
+    mapa.flyTo({center:[ev.lon, ev.lat], zoom:15, offset:[0,-90], speed:1.5});
+  }
 }
 function cerrarFicha(){
   document.getElementById("ficha").classList.remove("visible");

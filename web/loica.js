@@ -87,18 +87,18 @@ function mascota(nombre, color, tamano=24){
    Sale de estrategia_marca.md: la mascota ES la señalética de la categoría. */
 const CATEGORIAS = {
   fiesta:    {mascota:"culpeo",     color:"var(--c-fiesta)",  hex:"#7A4FCF", es:"Fiestas",   en:"Parties",  pt:"Festas"},
-  musica:    {mascota:"condor",     color:"var(--c-musica)",  hex:"#E8442E", es:"Música",    en:"Music",    pt:"Música"},
+  musica:    {mascota:"condor",     color:"var(--c-musica)",  hex:"#D13B27", es:"Música",    en:"Music",    pt:"Música"},
   teatro:    {mascota:"chinchilla", color:"var(--c-cultura)", hex:"#2F6FB5", es:"Teatro",    en:"Theatre",  pt:"Teatro"},
   arte:      {mascota:"chinchilla", color:"var(--c-cultura)", hex:"#2F6FB5", es:"Arte",      en:"Art",      pt:"Arte"},
   cine:      {mascota:"chinchilla", color:"var(--c-cultura)", hex:"#2F6FB5", es:"Cine",      en:"Film",     pt:"Cinema"},
   charla:    {mascota:"chinchilla", color:"var(--c-cultura)", hex:"#2F6FB5", es:"Charlas",   en:"Talks",    pt:"Palestras"},
   clases:    {mascota:"chincol",    color:"var(--c-clases)",  hex:"#E08A1E", es:"Clases",    en:"Classes",  pt:"Aulas"},
   feria:     {mascota:"chincol",    color:"var(--c-clases)",  hex:"#E08A1E", es:"Ferias",    en:"Markets",  pt:"Feiras"},
-  deporte:   {mascota:"condor",     color:"var(--c-musica)",  hex:"#C9331F", es:"Deporte",   en:"Sports",   pt:"Esporte"},
+  deporte:   {mascota:"condor",     color:"var(--c-musica)",  hex:"#D13B27", es:"Deporte",   en:"Sports",   pt:"Esporte"},
   idiomas:   {mascota:"chincol",    color:"var(--c-clases)",  hex:"#E08A1E", es:"Idiomas",   en:"Languages",pt:"Idiomas"},
   familia:   {mascota:"pudu",       color:"var(--c-libre)",   hex:"#2E7D5B", es:"Familia",   en:"Family",   pt:"Família"},
   aire_libre:{mascota:"pudu",       color:"var(--c-libre)",   hex:"#2E7D5B", es:"Aire libre",en:"Outdoors", pt:"Ar livre"},
-  otros:     {mascota:"loica",      color:"var(--c-otros)",   hex:"#E8442E", es:"Otros",     en:"Other",    pt:"Outros"},
+  otros:     {mascota:"loica",      color:"var(--c-otros)",   hex:"#F5B52E", es:"Otros",     en:"Other",    pt:"Outros"},
 };
 const cat = c => CATEGORIAS[c] || CATEGORIAS.otros;
 
@@ -106,7 +106,7 @@ const cat = c => CATEGORIAS[c] || CATEGORIAS.otros;
 const TEXTOS = {
   es:{
     lema:"Santiago está pasando",
-    mapa:"Mapa", calendario:"Calendario", agregar:"Agrega tu evento", nosotros:"Nosotros",
+    mapa:"Mapa", blog:"Blog", ninos:"Niños", mas18:"+18", calendario:"Calendario", agregar:"Agrega tu evento", nosotros:"Nosotros",
     eventos:"eventos", evento:"evento", gratis:"Gratis", hoy:"Hoy", finde:"Este finde",
     cuando:"Cuándo", donde:"Dónde", precio:"Precio", ir:"Ver en la fuente original",
     vacio:"No hay eventos con esos filtros", vaciopista:"Prueba sacando algún filtro",
@@ -118,7 +118,7 @@ const TEXTOS = {
   },
   en:{
     lema:"Santiago is happening",
-    mapa:"Map", calendario:"Calendar", agregar:"Add your event", nosotros:"About",
+    mapa:"Map", blog:"Blog", ninos:"Kids", mas18:"18+", calendario:"Calendar", agregar:"Add your event", nosotros:"About",
     eventos:"events", evento:"event", gratis:"Free", hoy:"Today", finde:"This weekend",
     cuando:"When", donde:"Where", precio:"Price", ir:"View original source",
     vacio:"No events match these filters", vaciopista:"Try removing a filter",
@@ -130,7 +130,7 @@ const TEXTOS = {
   },
   pt:{
     lema:"Santiago está acontecendo",
-    mapa:"Mapa", calendario:"Calendário", agregar:"Adicione seu evento", nosotros:"Sobre nós",
+    mapa:"Mapa", blog:"Blog", ninos:"Crianças", mas18:"+18", calendario:"Calendário", agregar:"Adicione seu evento", nosotros:"Sobre nós",
     eventos:"eventos", evento:"evento", gratis:"Grátis", hoy:"Hoje", finde:"Neste fim de semana",
     cuando:"Quando", donde:"Onde", precio:"Preço", ir:"Ver na fonte original",
     vacio:"Nenhum evento com esses filtros", vaciopista:"Tente remover algum filtro",
@@ -181,20 +181,25 @@ const ICONOS_NAV = {
   agregar:`<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
         <path d="M12 8.2v7.6M8.2 12h7.6" stroke="currentColor" stroke-width="1.8"
         stroke-linecap="round"/>`,
+  blog:`<path d="M5 19.5c4-1 9.2-3.4 12.2-6.4 2.4-2.4 3.3-5.8 3.3-8.6-2.8 0-6.2.9-8.6 3.3-3 3-5.4 8.2-6.4 12.2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M4.5 20c1.5-4.5 4-8 7-10.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>`,
   nosotros:`<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
         <path d="M12 10.8v5.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
         <circle cx="12" cy="7.9" r="1.15" fill="currentColor"/>`,
 };
 const PAGINAS = [["index.html","mapa"],["calendario.html","calendario"],
-                 ["agrega.html","agregar"],["nosotros.html","nosotros"]];
+                 ["blog.html","blog"],["agrega.html","agregar"],["nosotros.html","nosotros"]];
 // En la barra inferior el espacio es de 4 columnas: etiquetas de una palabra
 const CORTOS = {
-  es:{mapa:"Mapa", calendario:"Calendario", agregar:"Publicar", nosotros:"Nosotros"},
-  en:{mapa:"Map", calendario:"Calendar", agregar:"Post", nosotros:"About"},
-  pt:{mapa:"Mapa", calendario:"Agenda", agregar:"Publicar", nosotros:"Sobre"},
+  es:{mapa:"Mapa", calendario:"Calendario", blog:"Blog", agregar:"Publicar", nosotros:"Nosotros"},
+  en:{mapa:"Map", calendario:"Calendar", blog:"Blog", agregar:"Post", nosotros:"About"},
+  pt:{mapa:"Mapa", calendario:"Agenda", blog:"Blog", agregar:"Publicar", nosotros:"Sobre"},
 };
 
 function pintarBarra(paginaActual){
+  // El color de la página activa (nav superior e inferior) sale de este atributo
+  const claveActual = (PAGINAS.find(([url]) => url === paginaActual) || [,"mapa"])[1];
+  document.documentElement.dataset.pagina = claveActual;
   const logo = `<a class="logo" href="index.html" aria-label="Loica">
       ${mascota("loica", "var(--tinta)", 32)}<b>loica</b></a>`;
   const enlaces = PAGINAS

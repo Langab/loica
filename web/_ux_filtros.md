@@ -1,19 +1,27 @@
 # Loica — UX de filtros
 
 Documento de decisiones. Medido sobre el código real (`index.html`, `loica.css`,
-`loica.js`) y sobre los 271 eventos de `eventos.json` generados el 2026-08-10.
+`loica.js`) y sobre los datos reales de `eventos.json`.
 
-Todos los números de este documento salen de medir, no de estimar. Cuando algo
-es una estimación, lo digo.
+Todos los números salen de medir, no de estimar. Cuando algo es una estimación,
+lo digo.
+
+> **Nota sobre los datos.** `eventos.json` se regeneró tres veces mientras
+> escribía esto (23:13 → 268 eventos, 23:51, 23:52). Los repartos por categoría
+> cambiaron fuerte entre corridas: `otros` pasó de 102 a 143 y después a 136.
+> Para que los números sean reproducibles, **todo lo que sigue está medido
+> sobre el snapshot `generado: 2026-08-10T23:52:18`, 268 eventos.** Si el
+> pipeline vuelve a correr, los valores absolutos se mueven; las conclusiones
+> no, porque son estructurales.
 
 ---
 
 ## 1. El problema real
 
-### 1.1 A 375px se ven 4 chips de 13
+### 1.1 A 375px se ven 4 chips de 15
 
 Renderé la fila de filtros actual con el CSS real (`.filtros` + `.chip` de
-`loica.css`), la fuente Manrope cargada, y las 13 etiquetas que produce hoy
+`loica.css`), Manrope cargada, y las 15 etiquetas que produce hoy
 `pintarFiltros()` con estos datos:
 
 ```
@@ -29,42 +37,70 @@ Familia      ancho   94.1px   borde derecho a   855px
 Fiestas      ancho   95.7px   borde derecho a   959px
 Música       ancho   95.2px   borde derecho a  1062px
 Otros        ancho   85.8px   borde derecho a  1156px
-Teatro       ancho   91.1px   borde derecho a  1255px
+Otros        ancho   85.8px   borde derecho a  1250px
+Otros        ancho   85.8px   borde derecho a  1343px
+Teatro       ancho   91.1px   borde derecho a  1443px
 
-scrollWidth = 1271px  ·  viewport = 375px
-oculto = 896px = 70,5% del riel
-scroll necesario = 3,39 pantallas
+scrollWidth = 1459px  ·  viewport = 375px
+oculto = 1.084px = 74,3% del riel
+scroll necesario = 3,89 pantallas
 ```
 
-**Cuatro chips visibles de trece.** Para llegar a "Teatro" hay que arrastrar
-1.164px, en un riel que no tiene barra (`scrollbar-width:none`) ni sombra de
-borde: nada en pantalla avisa que hay más.
+**Cuatro chips visibles de quince.** Para llegar a "Teatro" hay que arrastrar
+1.351px, en un riel que no tiene barra (`scrollbar-width:none`) ni sombra de
+borde: nada en pantalla avisa que hay más. Y de los cuatro visibles, tres son
+los de tiempo/precio: **de las once categorías, se ve una.**
 
-### 1.2 La única categoría visible es la más chica
+### 1.2 Hay tres chips distintos que dicen "Otros"
 
-El orden es alfabético (`sort` por `cat(a)[IDIOMA]`), y eso deja como única
-categoría a la vista a **"Aire libre", que tiene 4 eventos de 271 (1,5%)**.
-Fuera de pantalla quedan "Música" (38), "Otros" (102) y "Arte" (40).
+Este es un bug en vivo, no una opinión de diseño. `pintarFiltros()` dibuja un
+chip por cada valor distinto de `ev.categoria`:
 
-El criterio de orden está optimizado para nada. Ordena por el alfabeto en un
-riel donde solo caben 1,04 categorías.
-
-### 1.3 "Otros" es el 38% del catálogo
-
-```
-otros       102  (37,6%)      teatro      20
-arte         40               fiesta      16
-musica       38               clases      14
-charla       30               familia      4
-                              aire_libre   4
-                              cine         3
-                              idiomas      0  ← el chip nunca se dibuja
+```js
+[...new Set(EVENTOS.map(e => e.categoria))]
 ```
 
-Filtrar por categoría es hoy una promesa falsa: **toque el chip que toque, el
-usuario esconde silenciosamente más de un tercio del catálogo**, y ese tercio
-tiene música, teatro y stand-up de verdad adentro ("SURROUND SESSION: METALLICA
-BLACK ALBUM", "LA SOLE", "ARRINCONA2: STAND UP COMEDY", "Gemelos").
+El export de las 23:52 trae **doce** categorías, y tres de ellas —`otros`,
+`deporte`, `feria`— no están todas en el diccionario `CATEGORIAS` de
+`loica.js`. `cat()` cae a `CATEGORIAS.otros` para las que faltan:
+
+```js
+const cat = c => CATEGORIAS[c] || CATEGORIAS.otros;
+```
+
+Resultado: **tres chips con la misma etiqueta ("Otros"), el mismo color y la
+misma mascota, que devuelven 136, 1 y 1 eventos.** El usuario ve tres botones
+idénticos que hacen cosas distintas y no tiene manera de saber cuál es cuál.
+
+El pipeline puede inventar categorías nuevas cuando quiera; el front no tiene
+defensa. Cualquier categoría nueva se convierte en otro chip "Otros" duplicado.
+
+### 1.3 El orden alfabético deja arriba la categoría más chica
+
+El orden es `sort` por `cat(a)[IDIOMA]`, y eso deja como única categoría a la
+vista a **"Aire libre", con 1 evento de 268 (0,4%)**. Fuera de pantalla quedan
+"Música" (40), "Charlas" (33) y los tres "Otros" (138 entre los tres).
+
+El criterio no está optimizado para nada. Ordena por el alfabeto un riel donde
+cabe una categoría.
+
+### 1.4 Más de la mitad del catálogo cae bajo un chip que dice "Otros"
+
+```
+otros      136  (50,7%)      clases      11
+musica      40               teatro       7
+charla      33               cine         4
+fiesta      18               familia      4
+arte        12               deporte      1  ← se dibuja como "Otros"
+                             feria        1  ← se dibuja como "Otros"
+                             aire_libre   1
+```
+
+**138 de 268 eventos (51,5%) viven bajo una etiqueta "Otros".** Filtrar por
+categoría es una promesa falsa: toque el chip que toque, el usuario esconde
+silenciosamente más de la mitad del catálogo, y ahí adentro hay música, teatro
+y stand-up de verdad ("SURROUND SESSION: METALLICA BLACK ALBUM", "LA SOLE",
+"ARRINCONA2: STAND UP COMEDY", "Gemelos").
 
 La causa está en `exportar_web.py`. `clasificar()` hace `palabra in texto`, sin
 límite de palabra. Eso produce errores que verifiqué uno por uno en los datos:
@@ -73,13 +109,14 @@ límite de palabra. Eso produce errores que verifiqué uno por uno en los datos:
 |---|---|
 | `"nino"` | `RTR COBIJO DE F600 VS LEO**NINO** EN CITYLAB` |
 | `"club"` (fiesta) | `Grupo de lectura: George Canguilhem` → clasificado **fiesta**, porque la descripción dice "club de lectura" |
-| `"arte"` | matchea `artes`, `artesanal`, `Cartón`, `reparte` — por eso "arte" tenía 40 |
+| `"arte"` | matchea `artes`, `artesanal`, `Cartón`, `reparte` |
 | `"familia"` | `Niños del Cerro` (una banda) quedó en categoría **familia** |
+| `"media"` | matchea `comedia`, `Medieval`, `artes Mediales`, `intermedia`, `Mediación` |
 
-Las cuatro categorías más pobladas del producto están contaminadas por
-coincidencias de subcadena. Ninguna redistribución de chips arregla eso.
+Las categorías más pobladas del producto están contaminadas por coincidencias
+de subcadena. Ninguna redistribución de chips arregla eso.
 
-### 1.4 Combinaciones que hoy es imposible expresar
+### 1.5 Combinaciones que hoy es imposible expresar
 
 `visibles()` (index.html:210) es:
 
@@ -98,14 +135,15 @@ const visibles = () => EVENTOS.filter(ev =>
   126 eventos pagados con precio (mediana $8.000, tope $110.000).
 - **"Esta noche"** — no existe franja horaria. Hay 88 eventos entre 18 y 21h.
 - **"Para llevar a mi hijo"** — no existe. Es lo que pide el fundador.
-- **"Mañana"** — no existe, y mañana es el día con más eventos del set (31).
+- **"Mañana"** — no existe, y mañana es el día con más eventos del set (29).
 
-### 1.5 Dos bugs de fecha, verificados
+### 1.6 Dos bugs de fecha, verificados
 
 **"Hoy" devuelve 0 eventos en el JSON publicado.** El día 0 no tiene ningún
-evento; el primero es mañana (31 eventos). El export corre con
-`inicio >= date('now')` a las 23:13, así que lo de hoy ya pasó. El chip más
-prominente de la app entrega vacío el día que se publica el JSON.
+evento; el primero es mañana (29 eventos). El export corre con
+`inicio >= date('now')` a las 23:52, así que lo de hoy ya pasó. El chip más
+prominente de la app entrega vacío el día que se publica el JSON. No es un caso
+de borde: el pipeline corre de noche, así que es el estado normal.
 
 **"Este finde" puede mostrar dos fines de semana.** `esFinde` es:
 
@@ -118,12 +156,13 @@ No hay cota inferior ni acotación al fin de semana *próximo*. Si hoy es sábad
 `dias <= 7` alcanza el viernes y sábado siguientes. Con estos datos "Este finde"
 devuelve 32 eventos, pero la regla no garantiza que sean del mismo finde.
 
-### 1.6 Diagnóstico en una línea
+### 1.7 Diagnóstico en una línea
 
 El sistema no es poco intuitivo por el diseño de los chips. Es poco intuitivo
 porque **mezcla cinco dimensiones distintas (cuándo, precio, qué, para quién,
-dónde) en una sola fila plana de la que se ve el 30%, ordenada alfabéticamente,
-sobre datos donde el 38% no tiene categoría.**
+dónde) en una sola fila plana de la que se ve el 26%, ordenada alfabéticamente,
+sobre datos donde el 51% cae bajo un chip que dice "Otros" — y hay tres chips
+que dicen "Otros".**
 
 ---
 
@@ -161,16 +200,21 @@ Loica       Otros                        rojo   #E8442E
 Repartos con los datos de hoy (actual → con el clasificador de la sección 3.4):
 
 ```
-culpeo       16 →  38     Fiestas
-condor       38 →  72     Música
-chinchilla   93 → 131     Teatro, Arte, Cine, Charlas
-chincol      14 →  24     Clases, Idiomas
-pudu          8 →   6     Familia, Aire libre
-loica       102 →   0     Otros  ← desaparece
+culpeo       18 →  38     Fiestas
+condor       40 →  72     Música
+chinchilla   56 → 131     Teatro, Arte, Cine, Charlas
+chincol      11 →  24     Clases, Idiomas
+pudu          6 →   3     Familia, Aire libre
+loica       137 →   0     Otros  ← desaparece
 ```
 
-Seis botones donde ninguno es "Otros" y ninguno está vacío. Hoy, de diez chips,
-tres tienen menos de 5 eventos y uno tiene 102.
+Seis botones, ninguno llamado "Otros", ninguno duplicado. Hoy, de once chips de
+categoría, cinco tienen 4 eventos o menos, tres dicen lo mismo, y uno tiene 136.
+
+El Pudú se queda corto (3) porque en este catálogo casi no hay panoramas al aire
+libre ni infantiles — es un problema de fuentes, no de taxonomía. Vale la pena
+saberlo antes de prometerle al usuario un filtro de "aire libre" que no tiene
+qué mostrar.
 
 ### 2.3 Qué va siempre visible: el caso del viernes en la calle
 
@@ -335,7 +379,7 @@ function pasaCuando(ev){
   }
 }
 
-/* Franja horaria. OJO: 75 de 271 eventos no traen hora (quedan en 00:00).
+/* Franja horaria. OJO: 74 de 268 eventos no traen hora (quedan en 00:00).
    Esos NO se esconden — se muestran igual, porque esconderlos sería mentir
    sobre el catálogo. Se marcan con "hora por confirmar" en la tarjeta. */
 const sinHora = ev => ev.fecha.getHours() === 0 && ev.fecha.getMinutes() === 0;
@@ -440,16 +484,16 @@ function leerDeUrl(){
 
 Pedí a los datos que me dijeran la edad y los datos no la saben. Corrí un
 clasificador con límites de palabra sobre título + descripción + categoría +
-recinto + fuente de los 271 eventos:
+recinto + fuente de los 268 eventos del snapshot:
 
 ```
-todos          223   (82,3%)
+todos          220   (82,1%)
 adultos         38   (14,0%)
 adolescentes     8   ( 3,0%)
 ninos            2   ( 0,7%)
 ```
 
-**Dos eventos infantiles en 271.** Y de esos dos, uno ("Ñuñoa abre convocatoria
+**Dos eventos infantiles en 268.** Y de esos dos, uno ("Ñuñoa abre convocatoria
 para el 3° ciclo de Crecer jugando") no es un panorama, es una convocatoria de
 inscripción que debería estar filtrada por `NO_ES_PANORAMA`.
 
@@ -486,7 +530,7 @@ palabra +18            1     "maridaje"
 ```
 
 La regex de edad explícita es prácticamente 100% precisa cuando dispara. El
-problema es el recall: dispara en 7 eventos de 271.
+problema es el recall: dispara en 7 eventos de 268.
 
 **Adolescentes, vía palabra explícita.** 8 eventos, con 3 falsos positivos que
 detecté a mano: "Prenderse fuego, Las voces de Pedro Lemebel" matchea
@@ -511,13 +555,13 @@ Cuatro valores en el campo `publico`:
 | `ninos` | Hecho para niños. Aparece primero en "Con niños". | 2 |
 | `adolescentes` | Apuntado a 13–17. | 8 |
 | `adultos` | **Excluye menores.** +18, bar, club, cata. | 38 |
-| `todos` | Sin restricción detectada. Aparece en "Con niños" y en "Adolescentes". | 223 |
+| `todos` | Sin restricción detectada. Aparece en "Con niños" y en "Adolescentes". | 220 |
 
 Y el filtro de la UI:
 
-- **Con niños** = `publico ∈ {ninos, todos}` → **225 eventos**, con los 2
+- **Con niños** = `publico ∈ {ninos, todos}` → **222 eventos**, con los 2
   `ninos` ordenados arriba.
-- **Adolescentes** = `publico ∈ {adolescentes, todos}` → **231**.
+- **Adolescentes** = `publico ∈ {adolescentes, todos}` → **228**.
 - **Solo +18** = `publico = adultos` → **38**.
 
 Con eso, "Con niños" deja de ser un botón vacío y pasa a ser lo que la persona
@@ -550,11 +594,11 @@ Tres cambios de fondo respecto de lo que hay hoy:
    esto, "Ciclo de Teatro – Unplug" caía en *fiesta* porque su descripción de
    200 caracteres decía "la fiesta continúe".
 3. **Hay un prior por fuente/recinto** que se usa solo si el texto no dijo nada.
-   Con eso `otros` baja de 102 (37,6%) a 0. El origen queda marcado en el JSON
+   Con eso `otros` baja de 136 (50,7%) a 0. El origen queda marcado en el JSON
    (`titulo` / `descripcion` / `prior`) para poder auditarlo.
 
-Con los 271 eventos de hoy, el reparto de origen queda:
-`titulo 139 (51%) · descripcion 61 (23%) · prior 71 (26%)`.
+Con los 268 eventos del snapshot, el reparto de origen queda:
+`titulo 136 (51%) · descripcion 61 (23%) · prior 71 (26%)`.
 
 ```python
 # ============================================================
@@ -816,10 +860,10 @@ Revisé a mano los eventos que el clasificador marca distinto de `todos`.
 
 | Etiqueta | n | Precisión estimada | Errores que vi |
 |---|---|---|---|
-| `adultos` | 21 | **~90%** | Ninguno grave en la muestra. El riesgo es al revés: falta cobertura, hay bares que no dicen "bar" en el campo `lugar`. |
+| `adultos` | 38 | **~85%** | Los 21 que entran por "fiesta nocturna" heredan los errores de la categoría: "Punta Arenas vs Colo Colo" (un partido de fútbol) queda marcado +18 porque la fuente Toliv le da categoría fiesta. |
 | `adolescentes` | 8 | **~60%** | "Prenderse fuego, Las voces de Pedro Lemebel" (×3 fechas) matchea `juveniles` y es exposición para adultos. |
 | `ninos` | 2 | **~50%** | "Ñuñoa abre convocatoria… Crecer jugando" es una inscripción, no un panorama. |
-| `todos` | 240 | alto recall, bajo valor | Adentro hay obras infantiles reales sin etiquetar: "RAPUNZEL", "COCODRILO DANDEE", "CALEUCHÍSTICO". |
+| `todos` | 220 | alto recall, bajo valor | Adentro hay obras infantiles reales sin etiquetar: "RAPUNZEL", "COCODRILO DANDEE", "CALEUCHÍSTICO". |
 
 **El error que importa es el falso negativo en `adultos`**: si un evento +18 se
 etiqueta `todos`, alguien llega con un niño a un bar. Ese es el único error con
@@ -851,6 +895,8 @@ línea vale más que todas las reglas de arriba juntas:
 </div>
 ```
 
+Y estas claves adentro de `TX.es` (con sus equivalentes en `TX.en` y `TX.pt`):
+
 ```js
 lPublico:"¿Para quién es?",
 aPublico:"Si en tu evento no entran menores de 18, dilo acá. Es el dato que "
@@ -875,7 +921,7 @@ un dato declarado.
 
 ### 4.1 El problema que puede resolver
 
-Con 271 eventos y el mapa en `zoom: 12.5` centrado en `[-70.645, -33.437]`,
+Con 268 eventos y el mapa en `zoom: 12.5` centrado en `[-70.645, -33.437]`,
 cuando alguien filtra fuerte pasa esto: **quedan 3 resultados y ninguno está en
 pantalla.** El mapa se ve vacío, el panel dice "3 eventos", y no hay ninguna
 pista de hacia dónde mover el mapa. Es el momento exacto en que la app parece
@@ -1285,7 +1331,7 @@ los nombres de las mascotas tampoco.
 Antes de decidir si el mapa filtra, hay que mirar dónde están los pines:
 
 ```
-precision = "comuna"       124  (45,8%)   ← centroide de la comuna
+precision = "comuna"       122  (45,5%)   ← centroide de la comuna
 precision = "recinto"       81  (29,9%)
 precision = "sin_ubicar"    42  (15,5%)   ← sin pin
 precision = "fuente"        24  ( 8,9%)
@@ -1294,13 +1340,13 @@ precision = "fuente"        24  ( 8,9%)
 Y las coordenadas repetidas:
 
 ```
-(-33.4425, -70.6505)  →  45 eventos   ← centroide de Santiago
-(-33.4256, -70.6096)  →  44 eventos   ← centroide de Providencia
+(-33.4425, -70.6505)  →  44 eventos   ← centroide de Santiago
+(-33.4256, -70.6096)  →  43 eventos   ← centroide de Providencia
 (-33.4460, -70.6520)  →  25 eventos
 (-33.4436, -70.6836)  →  18 eventos
 ```
 
-**89 de los 229 eventos con pin (39%) están apilados en dos coordenadas
+**87 de los 226 eventos con pin (38%) están apilados en dos coordenadas
 idénticas.** `maplibregl.Marker` los dibuja uno encima de otro: en el pixel del
 centroide de Santiago hay 45 marcadores y el usuario solo puede tocar el de
 arriba. Los otros 44 existen en el DOM y son inalcanzables.
@@ -1313,7 +1359,7 @@ filtros. Hay que arreglarlo antes de agregarle inteligencia al mapa.
 Con estos datos, filtrar por viewport sería **activamente engañoso**:
 
 - Los 42 eventos sin coordenadas (15,5%) desaparecerían siempre, sin explicación.
-- Los 124 del centroide de comuna aparecen y desaparecen según el encuadre por
+- Los 122 del centroide de comuna aparecen y desaparecen según el encuadre por
   una ubicación que la app misma marca como *"Ubicación aproximada: centro de
   la comuna"*. Un evento en Ñuñoa dibujado en el centro de Ñuñoa entra o sale
   del cuadro por un motivo que no es real.
@@ -1369,7 +1415,7 @@ La segunda línea sí se actualiza con `moveend`, en gris, y "ver todos" hace
 
 ### 6.5 Antes de nada: arreglar los pines apilados
 
-Los 124 eventos con `precision: "comuna"` no deberían tener pin individual.
+Los 122 eventos con `precision: "comuna"` no deberían tener pin individual.
 Uno por comuna, con el conteo adentro y borde punteado — que se lea distinto de
 un pin exacto:
 
@@ -1387,6 +1433,8 @@ function pintarPines(lista){
          porComuna.get(k).push(e);
        });
 
+  // pinDeEvento() = el cuerpo actual del .map() de refrescar() (index.html:250-265),
+  // extraído tal cual a su propia función. No cambia nada de ese pin.
   exactos.forEach(ev => marcadores.push(pinDeEvento(ev)));
 
   porComuna.forEach((evs, comuna) => {
@@ -1445,6 +1493,31 @@ dibuja, pero sigue ocupando espacio en `CATEGORIAS` de `loica.js` y en el
 formulario de `agrega.html`. Con el agrupamiento por mascota deja de importar:
 cae dentro del Chincol.
 
+**El front no tiene defensa contra categorías nuevas.** En el export de las
+23:52 aparecieron `deporte` (1 evento, "Punta Arenas vs Colo Colo") y `feria`
+(1 evento, "La Veta"), que no existen en el diccionario `CATEGORIAS` de
+`loica.js`. Nadie las agregó al front, así que se dibujan como chips "Otros"
+duplicados (§1.2). El pipeline y el front comparten una taxonomía que no está
+escrita en ninguna parte y que solo uno de los dos conoce.
+
+Arreglo de dos líneas, mientras no exista el agrupamiento por mascota:
+
+```js
+// Agrupa bajo un solo chip todo lo que el front no reconoce.
+const CATEGORIAS_CONOCIDAS = new Set(Object.keys(CATEGORIAS));
+const catClave = c => CATEGORIAS_CONOCIDAS.has(c) ? c : "otros";
+```
+
+y usar `catClave(e.categoria)` en el `new Set(...)` de `pintarFiltros()` y en
+la comparación de `visibles()`. Con el modelo por mascota de §2.2 el problema
+desaparece solo, porque `MASCOTA_DE` ya cae a `CATEGORIAS.otros` → Loica.
+
+**Además hay que decidir dónde vive la taxonomía.** Hoy `exportar_web.py` tiene
+un diccionario `CATEGORIAS` y `loica.js` tiene otro, con llaves distintas. Que
+el exportador escriba en `eventos.json` la lista de categorías que usó
+(`"categorias": ["musica","teatro",…]`) le permite al front avisar en consola
+cuando aparece una que no conoce, en vez de dibujar un chip fantasma.
+
 **Los eventos de PortalTickets traen la descripción duplicada del título** más
 `"// PortalTickets.cl Sitio en mantención"`. Son 40 eventos donde la
 descripción no aporta nada al clasificador ni al usuario, y donde el texto
@@ -1454,17 +1527,20 @@ descripción no aporta nada al clasificador ni al usuario, y donde el texto
 
 ## 8. Orden de implementación
 
-| # | Qué | Dónde | Por qué primero |
-|---|---|---|---|
-| 1 | Límites de palabra en `clasificar()` + prior de fuente | `exportar_web.py` | Sin esto, cualquier filtro por categoría miente sobre el 38% del catálogo |
-| 2 | Arreglar `esFinde` y "Hoy" | `index.html` | Dos de los tres filtros visibles están malos |
-| 3 | `filtroCat` → `Set`, estado en `F` | `index.html` | Habilita todo lo demás; es refactor puro |
-| 4 | Barra primaria + hoja de filtros | `index.html`, `loica.css` | El cambio que se ve |
-| 5 | Pines de comuna agrupados | `index.html` | 44 eventos hoy son inalcanzables |
-| 6 | `publico` en el exportador + campo en `agrega.html` | `exportar_web.py`, `agrega.html` | El filtro de edades |
-| 7 | Loica mensajera | `index.html`, `loica.css` | Encima de todo lo anterior |
+| # | Qué | Dónde | Por qué primero | Tamaño |
+|---|---|---|---|---|
+| 0 | `catClave()` para no dibujar chips "Otros" duplicados | `index.html` | Hoy hay 3 chips idénticos que hacen cosas distintas | 2 líneas |
+| 1 | Límites de palabra + título sobre descripción + prior de fuente | `exportar_web.py` | Sin esto, el filtro por categoría miente sobre el 51% del catálogo | §3.4 completo |
+| 2 | Arreglar `esFinde` y "Hoy" | `index.html` | Dos de los tres filtros visibles están malos; "Hoy" da 0 | §2.6 |
+| 3 | `filtroCat` → `Set`, estado en `F` | `index.html` | Habilita todo lo demás; es refactor puro | §2.6 |
+| 4 | Barra primaria + hoja de filtros | `index.html`, `loica.css` | El cambio que se ve | §2.5, §2.4 |
+| 5 | Pines de comuna agrupados | `index.html` | 43 eventos hoy son inalcanzables con el dedo | §6.5 |
+| 6 | `publico` en el exportador + campo en `agrega.html` | `exportar_web.py`, `agrega.html` | El filtro de edades | §3.4, §3.6 |
+| 7 | Loica mensajera | `index.html`, `loica.css` | Va encima de todo lo anterior | §4.4 |
 
-Los pasos 1 y 2 se pueden hacer hoy y mejoran la app sin tocar el diseño.
+**Los pasos 0, 1 y 2 se pueden hacer hoy**, no tocan el diseño y arreglan tres
+bugs verificables. Si solo hay tiempo para una cosa, es el paso 1: mientras el
+51% del catálogo diga "Otros", cualquier rediseño de filtros es maquillaje.
 
 ---
 
@@ -1476,9 +1552,9 @@ Los pasos 1 y 2 se pueden hacer hoy y mejoran la app sin tocar el diseño.
   `getBoundingClientRect()` y `scrollWidth` con las fuentes ya resueltas
   (`document.fonts.ready`).
 - **Repartos, comunas, precios, horas, coordenadas repetidas:** conteos directos
-  sobre `web/eventos.json` (271 eventos, `generado: 2026-08-10T23:13:40`).
+  sobre el snapshot de `web/eventos.json` (268 eventos, `generado: 2026-08-10T23:52:18`).
 - **Clasificadores:** las reglas de la sección 3.4 se corrieron completas sobre
-  los 271 eventos antes de escribirlas acá. Los repartos que aparecen
+  los 268 eventos antes de escribirlas acá. Los repartos que aparecen
   (`otros: 102 → 0`, `adultos: 21`, `ninos: 2`) son resultados de esa corrida,
   no proyecciones.
 - **Precisión de las etiquetas:** revisión a mano, evento por evento, de los 31
