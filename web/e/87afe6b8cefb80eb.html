@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css">
+<link rel="stylesheet" href="../loica.css?v=4">
 <style>
   body{min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -44,7 +44,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../index.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
   <div class="foto" id="foto"><img src="https://www.uahurtado.cl/wp-content/uploads/2026/08/buen-trato-ilus.png" alt="" onerror="this.remove();document.getElementById('foto').classList.add('sin-foto')"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Jornada de reflexión sobre prevención y abordaje de la Ley Karin</h1>
@@ -62,24 +62,24 @@
   <div class="dato"><span class="et"></span><span>La Dirección de Género, Diversidad y Equidad (DGDE) y la Dirección de Personas (DIPER) invitan a las y los trabajadores de la Universidad a participar en la Jornada Reflexiva Ley Karin, un espacio…</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../index.html#/e/87afe6b8cefb80eb">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../mapa.html#/e/87afe6b8cefb80eb">Ver en el mapa</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Universidad Alberto Hurtado - Agenda de eventos</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js"></script>
+<script src="../loica.js?v=4"></script>
 <script>
-  pintarBarra("index.html");
+  pintarBarra("mapa.html", "../");
   const EV = {"id": "87afe6b8cefb80eb", "titulo": "Jornada de reflexión sobre prevención y abordaje de la Ley Karin", "inicio": "2026-08-11T10:00:00", "fin": "2026-08-11T13:00:00", "lugar": "Sala Belarmino Biblioteca UAH", "direccion": "", "comuna": "Santiago", "lat": -33.4425, "lon": -70.6505, "precision": "comuna", "gratis": true, "precio": 0, "precio_texto": "", "categoria": "charla", "publico": "todos", "descripcion": "La Dirección de Género, Diversidad y Equidad (DGDE) y la Dirección de Personas (DIPER) invitan a las y los trabajadores de la Universidad a participar en la Jornada Reflexiva Ley Karin, un espacio…", "imagen": "https://www.uahurtado.cl/wp-content/uploads/2026/08/buen-trato-ilus.png", "fuente": "Universidad Alberto Hurtado - Agenda de eventos", "url": "https://www.uahurtado.cl/event/jornada-de-reflexion-sobre-prevencion-y-abordaje-de-la-ley-karin-2/"};
   document.getElementById("etiqueta-cat").innerHTML =
-    mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 18) + " " + cat(EV.categoria)[IDIOMA];
+    carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));
   const caja = document.getElementById("foto");
   const ponerMascota = () => {
     if(!caja.querySelector("img") && !caja.querySelector("svg"))
-      caja.innerHTML = mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 78);
+      caja.innerHTML = cuerpo(cat(EV.categoria).mascota, cat(EV.categoria).hex, 96);
   };
   ponerMascota();
   new MutationObserver(ponerMascota).observe(caja, {childList:true});

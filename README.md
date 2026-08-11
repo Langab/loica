@@ -45,9 +45,26 @@ python3 -m http.server 8777 --directory web      # abre http://localhost:8777
 ```
 
 `exportar_web.py` toma los eventos vigentes, les pone coordenadas y deja
-`web/eventos.json`. `web/index.html` es la página: mapa con pines por
-categoría, filtros (Gratis, Hoy, Este finde y categorías), lista lateral,
-ficha de evento con link a la fuente, y los tres idiomas (es / en / pt).
+`web/eventos.json`.
+
+Las páginas son:
+
+| Archivo | Qué es |
+|---|---|
+| `web/index.html` | La **portada**: hero con el elenco de animales, panoramas de hoy y los cuatro destinos |
+| `web/mapa.html` | El **mapa**: pines agrupados por cercanía, filtros de fecha (Hoy / Mañana / 7 días / Finde), precio, público y categoría, lista lateral y ficha con anterior/siguiente |
+| `web/calendario.html` | Mes a mes |
+| `web/blog.html` | Las ediciones del blog |
+| `web/agrega.html` | Formulario para publicar |
+| `web/nosotros.html` | Quién hace esto y el elenco explicado |
+| `web/e/<id>.html` | Una ficha por evento, para que el link compartido tenga vista previa |
+
+Todas comparten `loica.css` (tokens y componentes) y `loica.js` (las siete
+mascotas en SVG, categorías, traducciones es/en/pt y utilidades). Los enlaces
+a esos dos archivos llevan `?v=N`: el sitio es estático y sin build, así que
+ese número es lo único que obliga al navegador a soltar la versión vieja
+después de un cambio de estilos. **Si tocas `loica.css` o `loica.js`, sube el
+número en las seis páginas y en la plantilla de `exportar_web.py`.**
 
 Es un **prototipo para ver la idea funcionando**, no la app de producción: usa
 MapLibre con mosaicos de OpenStreetMap (sin API key) y lee un archivo JSON en
@@ -74,7 +91,7 @@ Se edita `config/fuentes.yaml` — **no hay que tocar código**:
 Conviene probarla sola antes de sumarla a la corrida diaria:
 `python3 run_diario.py --probar --fuente mi_fuente`
 
-## Los cinco tipos de fuente
+## Los tipos de fuente
 
 | Tipo | Cuándo se usa |
 |---|---|
@@ -82,7 +99,55 @@ Conviene probarla sola antes de sumarla a la corrida diaria:
 | `eventon` | Calendario EventON servido por `admin-ajax.php`. |
 | `rss` | El sitio publica RSS o `sitemap.rss`. |
 | `html` | Hay que leer el HTML. Intenta primero JSON-LD (`schema.org/Event`) y si no, usa los selectores CSS de la configuración. |
-| `api` | API oficial con permiso explícito. Hoy: Ticketmaster Discovery. |
+| `sitemap` | El listado solo entrega links y los datos viven en cada ficha. |
+| `tabla` | Tablas de talleres municipales, con el recinto y su dirección en las filas sobre el encabezado. |
+| `json` | API JSON propia, con el mapeo de campos declarado en el YAML. |
+| `ticketmaster` | Ticketmaster Discovery (API oficial con permiso explícito). |
+
+> El tipo `api` ya no existe. Antes apuntaba fijo a Ticketmaster, así que
+> cualquier otra fuente declarada como `api` consultaba Ticketmaster en
+> silencio. Ahora cada API tiene su nombre y un tipo desconocido falla fuerte.
+
+### Talleres municipales: `tabla` y `json`
+
+Las municipalidades casi no publican eventos con fecha. Publican **talleres que
+se repiten**: "lunes, miércoles y viernes de 19:00 a 20:30, desde marzo". Los
+dos adaptadores traducen eso a las próximas sesiones (`loica/recurrencia.py`),
+porque la fecha que le sirve al usuario no es cuándo empezó el programa en
+marzo sino cuándo es la próxima clase.
+
+Después `colapsar_multidia` hace lo correcto con cada caso sin configuración:
+
+- Un taller de **lunes, miércoles y viernes** tiene huecos de 1 a 3 días, bajo
+  el máximo tolerado, así que se fusiona en una tarjeta con rango de fechas.
+- Un taller de **solo los sábados** tiene huecos de 7 días, sobre el máximo, y
+  sobrevive como sesiones sueltas — que es lo que hace que aparezca en "este
+  fin de semana", justo donde se lo busca.
+
+**Limitación conocida:** `Evento` todavía no tiene campo de recurrencia. La
+cadencia se guarda como texto en la descripción ("todos los martes y jueves a
+las 19:00"). Alcanza para el mapa y para el filtro de gratis, pero un taller
+semanal ocupa varias filas en vez de una.
+
+### Fuentes ruidosas: `buscar_terminos` y `filtro_palabras`
+
+Lo que mantenía apagadas a casi todas las municipalidades no era técnico: sus
+APIs están abiertas. El problema es que publican las actividades mezcladas con
+noticias municipales, y Recoleta tiene 2.532 posts.
+
+```yaml
+  buscar_terminos: [taller, feria, festival]   # ?search= contra el archivo completo
+  filtro_palabras: [taller, feria, concierto]  # tiene que aparecer una
+  descartar_palabras: [licitacion, ordenanza]  # si aparece, se descarta
+```
+
+`buscar_terminos` es el que importa: sin él se traen los 50 posts más recientes
+—que en un municipio son licitaciones y cortes de agua— y se filtra sobre eso.
+Con él se le pregunta al sitio por cada palabra y se recorre todo el archivo.
+
+`filtro_palabras` se aplica en un solo lugar (`run_diario.py`), así que sirve
+para cualquier tipo de fuente, y también antes de abrir fichas en `wordpress`,
+para no gastar la cuota del sitio en posts que se van a descartar igual.
 
 ## Reglas de buena ciudadanía (están en el código, no en un papel)
 

@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css">
+<link rel="stylesheet" href="../loica.css?v=4">
 <style>
   body{min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -44,7 +44,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../index.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
   <div class="foto" id="foto"><img src="https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/dfda459a8bbb6fa1d08deb9870a7c0d791ac6b193dfc1416cf2a0f5b611830e9.jpg" alt="" onerror="this.remove();document.getElementById('foto').classList.add('sin-foto')"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Latin Slav Mafia [Concert]</h1>
@@ -62,24 +62,24 @@
   <div class="dato"><span class="et"></span><span>Este 20 de Agosto, de 19:00 a 23:00 horas, vive una noche de concierto junto a YEVV, MESKA y UKRANIEKE. https://www.instagram.com/ukranieke/ https://www.instagram.com/yevv__…</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../index.html#/e/2d2ce337ed66ba89">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../mapa.html#/e/2d2ce337ed66ba89">Ver en el mapa</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Toliv (eventos under, fiestas y musica emergente)</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js"></script>
+<script src="../loica.js?v=4"></script>
 <script>
-  pintarBarra("index.html");
+  pintarBarra("mapa.html", "../");
   const EV = {"id": "2d2ce337ed66ba89", "titulo": "Latin Slav Mafia [Concert]", "inicio": "2026-08-20T00:13:00", "fin": "2026-08-21T00:13:00", "lugar": "Californa Cantina", "direccion": "Las Urbinas #56, Providencia", "comuna": "Providencia", "lat": -33.431447, "lon": -70.609333, "precision": "fuente", "gratis": false, "precio": 1000, "precio_texto": "desde $1.000", "categoria": "musica", "publico": "todos", "descripcion": "Este 20 de Agosto, de 19:00 a 23:00 horas, vive una noche de concierto junto a YEVV, MESKA y UKRANIEKE. https://www.instagram.com/ukranieke/ https://www.instagram.com/yevv__…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/dfda459a8bbb6fa1d08deb9870a7c0d791ac6b193dfc1416cf2a0f5b611830e9.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/sitemap-events.xml"};
   document.getElementById("etiqueta-cat").innerHTML =
-    mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 18) + " " + cat(EV.categoria)[IDIOMA];
+    carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));
   const caja = document.getElementById("foto");
   const ponerMascota = () => {
     if(!caja.querySelector("img") && !caja.querySelector("svg"))
-      caja.innerHTML = mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 78);
+      caja.innerHTML = cuerpo(cat(EV.categoria).mascota, cat(EV.categoria).hex, 96);
   };
   ponerMascota();
   new MutationObserver(ponerMascota).observe(caja, {childList:true});

@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css">
+<link rel="stylesheet" href="../loica.css?v=4">
 <style>
   body{min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -44,7 +44,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../index.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
   <div class="foto" id="foto"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">NAVE participa en encuentro de espacios de residencia en Coquimbo</h1>
@@ -62,24 +62,24 @@
   <div class="dato"><span class="et"></span><span>Fotografías: Ricardo General. Cortesía de Festival TeatroPuerto. El 9° Festival Internacional TeatroPuerto dio inicio a su programación este 8 de mayo con obras nacionales e internacionales,…</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../index.html#/e/bda32833cab991ca">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../mapa.html#/e/bda32833cab991ca">Ver en el mapa</a></p>
 
   <div class="pie-fuente">Información publicada por <b>NAVE Centro de Creacion y Residencia</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js"></script>
+<script src="../loica.js?v=4"></script>
 <script>
-  pintarBarra("index.html");
+  pintarBarra("mapa.html", "../");
   const EV = {"id": "bda32833cab991ca", "titulo": "NAVE participa en encuentro de espacios de residencia en Coquimbo", "inicio": "2027-05-08T00:00:00", "fin": null, "lugar": "NAVE Centro de Creacion y Residencia", "direccion": "", "comuna": "Santiago", "lat": -33.439, "lon": -70.669, "precision": "recinto", "gratis": true, "precio": 0, "precio_texto": "ás de las funciones gratuitas programadas en diferentes espa", "categoria": "teatro", "publico": "todos", "descripcion": "Fotografías: Ricardo General. Cortesía de Festival TeatroPuerto. El 9° Festival Internacional TeatroPuerto dio inicio a su programación este 8 de mayo con obras nacionales e internacionales,…", "imagen": "", "fuente": "NAVE Centro de Creacion y Residencia", "url": "https://nave.io/nave-participa-en-encuentro-de-espacios-de-residencia/"};
   document.getElementById("etiqueta-cat").innerHTML =
-    mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 18) + " " + cat(EV.categoria)[IDIOMA];
+    carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));
   const caja = document.getElementById("foto");
   const ponerMascota = () => {
     if(!caja.querySelector("img") && !caja.querySelector("svg"))
-      caja.innerHTML = mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 78);
+      caja.innerHTML = cuerpo(cat(EV.categoria).mascota, cat(EV.categoria).hex, 96);
   };
   ponerMascota();
   new MutationObserver(ponerMascota).observe(caja, {childList:true});

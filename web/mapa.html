@@ -1,0 +1,817 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mapa — ¿Qué hay hoy en Santiago?</title>
+<meta name="description" content="Todos los panoramas de Santiago en un mapa. Filtra por gratis, hoy, mañana o este fin de semana.">
+<meta property="og:title" content="Loica — ¿Qué hay hoy en Santiago?">
+<meta property="og:description" content="Panoramas gratis y de los otros, en un mapa. Fiestas, teatro, ferias, clases y conciertos de Santiago de Chile.">
+<meta property="og:image" content="https://langab.github.io/loica/og-default.png">
+<meta property="og:url" content="https://langab.github.io/loica/mapa.html">
+<meta property="og:site_name" content="Loica">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="loica.css?v=4">
+<style>
+  html,body{height:100%;overflow:hidden}
+  #app{display:flex;flex-direction:column;height:100dvh}
+  header{flex:none;z-index:6}
+  main{flex:1;position:relative;min-height:0}
+  #mapa{position:absolute;inset:0;background:var(--fondo-hundido)}
+
+  /* --- Cabecera: dos rieles y no tres ---
+     La fecha es una pregunta de una sola respuesta, así que va en un control
+     segmentado (compacto, se ve entero, no se puede elegir dos). Todo lo
+     demás son chips que sí se combinan. Antes las dos filas de chips se
+     comían 100px de mapa en un celular de 812px. */
+  .riel-fecha{
+    display:flex;gap:5px;padding:var(--e-2) var(--e-4);background:var(--fondo-elevado);
+    overflow-x:auto;scrollbar-width:none;
+  }
+  .riel-fecha::-webkit-scrollbar{display:none}
+  .segmentado{
+    display:inline-flex;gap:3px;padding:3px;flex:none;
+    background:var(--fondo-hundido);border:2.5px solid var(--contorno);
+    border-radius:var(--r-pill);box-shadow:var(--repisa-1);
+  }
+  .segmentado button{
+    flex:none;border:0;background:transparent;color:var(--tinta-suave);cursor:pointer;
+    padding:0 var(--e-4);min-height:36px;border-radius:var(--r-pill);
+    font:800 var(--t-sm)/1 var(--fuente-marca);white-space:nowrap;transition:var(--rapido);
+  }
+  .segmentado button:hover{color:var(--tinta)}
+  .segmentado button[aria-pressed="true"]{
+    background:var(--acento-solido);color:var(--acento-contraste);
+  }
+  .cuenta-rango{
+    display:flex;align-items:center;gap:5px;flex:none;margin-left:auto;padding-left:var(--e-3);
+    font-size:var(--t-xs);font-weight:700;color:var(--tinta-tenue);white-space:nowrap;
+  }
+
+  header .filtros{padding:var(--e-2) var(--e-4) var(--e-3);border-bottom:2.5px solid var(--contorno)}
+  header .filtros .chip{padding:6px 13px 6px 8px;gap:5px;font-size:var(--t-xs);
+    border-width:2px;box-shadow:0 2px 0 var(--contorno);min-height:38px}
+  header .filtros .chip svg{width:22px;height:22px}
+  header .filtros .chip:active,
+  header .filtros .chip[aria-pressed="true"]{transform:translateY(2px);box-shadow:none}
+  /* El separador entre "precio y público" y "tipo de panorama": son dos
+     preguntas distintas metidas en un solo riel para ahorrar alto. */
+  .separa-chips{flex:none;width:2px;background:var(--borde-fuerte);margin:4px 3px;border-radius:2px}
+
+  /* La Loica que vuela: guía, no adorno. Nunca tapa un dato. */
+  #loica-vuelo{
+    position:absolute;top:0;left:0;width:56px;height:56px;z-index:5;
+    pointer-events:none;opacity:0;offset-rotate:auto;offset-distance:0%;
+    will-change:offset-distance,opacity;
+  }
+  #loica-vuelo.vuela{animation:loica-vuela var(--dur-vuelo,700ms) cubic-bezier(.3,0,.25,1) forwards}
+  @keyframes loica-vuela{
+    0%{opacity:0;offset-distance:0%} 12%{opacity:1}
+    88%{opacity:1} 100%{opacity:0;offset-distance:100%}
+  }
+  @media(prefers-reduced-motion:reduce){#loica-vuelo{display:none}}
+
+  .conteo b{display:inline-block}
+  .conteo b.pop{animation:pop var(--rebote)}
+  @keyframes pop{0%{transform:scale(1)}45%{transform:scale(1.35)}100%{transform:scale(1)}}
+
+  /* --- Panel inferior: tres alturas y arrastre real --- */
+  .panel-lista{
+    position:absolute;left:0;right:0;bottom:0;background:var(--fondo-elevado);
+    border-radius:var(--r-xl) var(--r-xl) 0 0;
+    border:2.5px solid var(--contorno);border-bottom:0;
+    display:flex;flex-direction:column;z-index:4;
+    height:var(--alto-panel,268px);max-height:88%;
+    transition:height var(--medio);
+  }
+  .panel-lista.arrastrando{transition:none}
+  .panel-lista.oculto{transform:translateY(104%);pointer-events:none}
+  /* touch-action:none va SOLO en el tirador. Cuando estaba en el panel
+     entero, el navegador cancelaba el gesto de scroll de la lista: 37.000px
+     de eventos en una caja de 200px que no se podía mover con el dedo. Ese
+     era el "no funciona en celular". */
+  .tirador{padding:9px var(--e-4) 6px;cursor:grab;flex:none;touch-action:none}
+  .tirador:active{cursor:grabbing}
+  .barra-tirador{width:44px;height:4.5px;background:var(--borde-fuerte);border-radius:3px;margin:0 auto}
+  .conteo{display:flex;align-items:baseline;gap:7px;font-size:var(--t-sm);color:var(--tinta-suave);
+    padding:var(--e-1) var(--e-4) var(--e-2)}
+  .conteo b{font-family:var(--fuente-marca);font-size:var(--t-lg);color:var(--tinta)}
+  .lista{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;flex:1;min-height:0}
+  .fin-lista{padding:var(--e-4);text-align:center;color:var(--tinta-tenue);font-size:var(--t-xs)}
+
+  .ficha{
+    position:absolute;inset:auto 0 0 0;background:var(--fondo-elevado);z-index:8;
+    border-radius:var(--r-xl) var(--r-xl) 0 0;
+    border:2.5px solid var(--contorno);border-bottom:0;
+    transform:translateY(103%);transition:transform var(--medio);
+    max-height:88%;overflow-y:auto;-webkit-overflow-scrolling:touch;
+    display:flex;flex-direction:column;
+  }
+  .ficha.visible{transform:translateY(0)}
+  .ficha.cambiando .ficha-scroll{animation:entra-ficha var(--medio)}
+  @keyframes entra-ficha{from{opacity:.3;transform:translateX(var(--desde,14px))}to{opacity:1;transform:none}}
+  .ficha-scroll{overflow-y:auto;flex:1;min-height:0}
+
+  /* --- La barra de avanzar: el arreglo del pedido ---
+     Antes, para ver el evento de al lado había que cerrar con la X, buscar
+     dónde había quedado la lista y tocar el siguiente. Ahora los dos
+     vecinos están siempre en pantalla y también responden a swipe y a las
+     flechas del teclado. */
+  .ficha-nav{
+    flex:none;display:flex;align-items:center;gap:var(--e-2);
+    padding:var(--e-2) var(--e-3);background:var(--fondo-elevado);
+    border-bottom:2px solid var(--borde);border-radius:var(--r-xl) var(--r-xl) 0 0;
+  }
+  .nav-ev{
+    display:inline-flex;align-items:center;justify-content:center;gap:5px;
+    min-height:40px;padding:0 var(--e-3);border-radius:var(--r-pill);
+    border:2px solid var(--contorno);background:var(--fondo-elevado);color:var(--tinta);
+    font:800 var(--t-sm)/1 var(--fuente-marca);cursor:pointer;box-shadow:0 2px 0 var(--contorno);
+    transition:var(--rapido);
+  }
+  .nav-ev:hover:not(:disabled){background:var(--fondo-hundido)}
+  .nav-ev:active:not(:disabled){transform:translateY(2px);box-shadow:none}
+  .nav-ev:disabled{opacity:.34;cursor:default;box-shadow:none}
+  .nav-ev svg{width:16px;height:16px}
+  .ficha-pos{
+    flex:1;text-align:center;font-size:var(--t-xs);font-weight:700;
+    color:var(--tinta-tenue);font-variant-numeric:tabular-nums;
+  }
+  .cerrar-ficha{
+    flex:none;width:40px;height:40px;border-radius:var(--r-pill);
+    border:2px solid var(--contorno);background:var(--fondo-elevado);color:var(--tinta);
+    font-size:19px;line-height:1;cursor:pointer;box-shadow:0 2px 0 var(--contorno);
+  }
+  .cerrar-ficha:active{transform:translateY(2px);box-shadow:none}
+
+  .ficha-foto{height:158px;background:var(--fondo-hundido);position:relative;overflow:hidden}
+  .ficha-foto img{width:100%;height:100%;object-fit:cover}
+  .ficha-cuerpo{padding:var(--e-4) var(--e-5) var(--e-6)}
+  .ficha h2{margin:var(--e-1) 0 var(--e-3)}
+  .dato{display:flex;gap:var(--e-3);padding:9px 0;border-top:1px solid var(--borde);font-size:var(--t-base)}
+  .dato .et{color:var(--tinta-tenue);width:82px;flex:none;font-size:var(--t-sm);font-weight:600}
+  .aprox{font-size:var(--t-xs);color:var(--tinta-tenue);font-style:italic}
+  .fuente-pie{margin-top:var(--e-3);font-size:var(--t-xs);color:var(--tinta-tenue);text-align:center}
+
+  /* display:flex le gana a [hidden] del navegador, así que la pastilla vacía
+     quedaba flotando sobre el mapa siempre. Se veía como un bug y lo era. */
+  .aviso[hidden]{display:none}
+  .aviso{
+    position:absolute;top:var(--e-3);left:50%;transform:translateX(-50%);z-index:7;
+    background:var(--fondo-elevado);border:2px solid var(--contorno);border-radius:var(--r-full);
+    padding:8px var(--e-4);font-size:var(--t-sm);font-weight:600;box-shadow:var(--repisa-2);
+    display:flex;align-items:center;gap:7px;max-width:calc(100% - var(--e-8));
+  }
+
+  /* Marcador de grupo: los pines encimados del centro pasan a ser una sola
+     burbuja con el número. Es DOM y no capa del mapa porque son pocos
+     (nunca más de 20 en pantalla) y así el número usa la tipografía real. */
+  /* El grupo lleva la carita de la familia que manda adentro, no solo el
+     número: si al alejarte todo se vuelve un círculo rojo, la señalética de
+     mascotas —que es la marca— desaparece justo cuando más se necesita. */
+  .grupo{
+    display:flex;align-items:center;gap:3px;cursor:pointer;
+    padding:4px 10px 4px 5px;border-radius:var(--r-pill);
+    background:var(--tono,var(--acento-solido));color:#fff;
+    border:2.5px solid var(--contorno);box-shadow:var(--repisa-2);
+    font:800 var(--t-sm)/1 var(--fuente-marca);font-variant-numeric:tabular-nums;
+    transition:transform var(--rapido);
+  }
+  .grupo svg{width:var(--dm,24px);height:var(--dm,24px);flex:none}
+  .grupo.claro{color:var(--azul-900)}
+  .grupo:hover{transform:scale(1.09)}
+
+  /* En celular la cabecera compite con el mapa por cada píxel: tres bandas
+     de controles se comían el 21% de la pantalla. Acá se aprieta todo lo que
+     se puede sin bajar de 44px de área táctil en los chips. */
+  @media(max-width:879px){
+    .panel-lista{bottom:calc(52px + env(safe-area-inset-bottom))}
+    .ficha{bottom:calc(52px + env(safe-area-inset-bottom))}
+    .barra{padding:7px var(--e-3)}
+    .logo svg{width:30px;height:30px}
+    .logo b{font-size:19px}
+    .riel-fecha{padding:5px var(--e-3)}
+    .segmentado{padding:2px}
+    .segmentado button{min-height:34px;padding:0 var(--e-3)}
+    header .filtros{padding:5px var(--e-3) 7px}
+    header .filtros .chip{min-height:36px}
+    .cuenta-rango{display:none}
+  }
+  @media(min-width:880px){
+    .panel-lista{left:auto;right:var(--e-4);top:var(--e-4);bottom:var(--e-4);width:410px;
+      height:auto!important;border-radius:var(--r-lg);max-height:none;transition:none}
+    .tirador{display:none}
+    .conteo{padding-top:var(--e-3)}
+    .ficha{left:auto;right:var(--e-4);bottom:var(--e-4);width:410px;
+      border-radius:var(--r-lg);max-height:82%}
+    .ficha-nav{border-radius:var(--r-lg) var(--r-lg) 0 0}
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="barra" id="barra"></div>
+    <div class="riel-fecha">
+      <div class="segmentado" id="fechas" role="group"></div>
+      <span class="cuenta-rango" id="cuenta-rango"></span>
+    </div>
+    <div class="filtros" id="filtros" role="group"></div>
+  </header>
+
+  <main>
+    <div id="mapa"></div>
+    <div id="loica-vuelo" aria-hidden="true"></div>
+    <div class="aviso" id="aviso" hidden></div>
+
+    <section class="panel-lista" id="panel" aria-label="Lista de eventos">
+      <div class="tirador" id="tirador" role="button" tabindex="0"
+           aria-label="Arrastra para ver más eventos"><div class="barra-tirador"></div></div>
+      <div class="conteo"><b id="conteo">0</b> <span id="conteo-txt">eventos</span></div>
+      <div class="lista" id="lista"></div>
+    </section>
+
+    <article class="ficha" id="ficha" aria-live="polite"></article>
+  </main>
+</div>
+<nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="loica.js?v=4"></script>
+<script>
+let EVENTOS = [], filtroCat = null, soloGratis = false, cuando = "todo", publicoFiltro = null;
+let listaActual = [], seleccionado = null, mapa = null, hayMapa = false;
+
+pintarBarra("mapa.html");
+
+/* Teselas CARTO en vez de OpenStreetMap crudo: el estilo por defecto de OSM
+   mete más de 25 íconos propios en pantalla y el producto pierde contra su
+   propio fondo. Además hay versión oscura, y la marca dice que el modo oscuro
+   es de primera clase porque la app se usa de noche. */
+const TESELAS = {
+  claro:"https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png",
+  claroEtiquetas:"https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
+  oscuro:"https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png",
+  oscuroEtiquetas:"https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png",
+};
+const esOscuro = () => document.documentElement.dataset.tema === "oscuro"
+  || (!document.documentElement.dataset.tema && matchMedia("(prefers-color-scheme: dark)").matches);
+
+const urlesTeselas = clave => ["a","b","c"].map(s =>
+  TESELAS[clave].replace("{s}", s).replace("{r}", devicePixelRatio > 1.5 ? "@2x" : ""));
+
+function estiloMapa(){
+  const t = esOscuro() ? ["oscuro","oscuroEtiquetas"] : ["claro","claroEtiquetas"];
+  return {version:8,
+    sources:{
+      base:{type:"raster", tiles:urlesTeselas(t[0]), tileSize:256,
+            attribution:'© OpenStreetMap © CARTO'},
+      etiquetas:{type:"raster", tiles:urlesTeselas(t[1]), tileSize:256},
+    },
+    layers:[{id:"base",type:"raster",source:"base"},
+            {id:"etiquetas",type:"raster",source:"etiquetas"}]};
+}
+
+/* Si el aparato no tiene WebGL, MapLibre tira una excepción y antes se caía
+   la página entera: quedaba una pantalla en blanco sin lista y sin
+   explicación. Pasa en iPhone viejos y con la aceleración por hardware
+   apagada. Ahora la lista sigue siendo un producto completo. */
+try{
+  mapa = new maplibregl.Map({
+    container:"mapa", style:estiloMapa(),
+    center:[-70.645,-33.437], zoom:12.2, attributionControl:{compact:true}
+  });
+  hayMapa = true;
+}catch(e){
+  document.getElementById("mapa").innerHTML =
+    `<div class="vacio" style="padding-top:var(--e-12)">${cuerpo("loica","var(--acento)",96,{pose:"durmiendo"})}
+     <p><b>Este navegador no puede dibujar el mapa</b><br>
+     La lista de abajo funciona igual.</p></div>`;
+}
+
+if(hayMapa){
+  mapa.addControl(new maplibregl.NavigationControl({showCompass:false}), "top-left");
+
+  // El mapa nace antes de que su caja tenga tamaño final. Se compara el
+  // tamaño anterior porque redimensionar vuelve a disparar al observador.
+  (() => {
+    const caja = document.getElementById("mapa");
+    let ancho = 0, alto = 0;
+    new ResizeObserver(() => {
+      if(caja.clientWidth === ancho && caja.clientHeight === alto) return;
+      ancho = caja.clientWidth; alto = caja.clientHeight;
+      mapa.resize();
+    }).observe(caja);
+  })();
+
+  mapa.on("error", e => {
+    if(String(e.error?.message || "").match(/tile|fetch|network/i))
+      avisar(IDIOMA === "en" ? "Map is loading slowly — the list still works"
+           : IDIOMA === "pt" ? "O mapa está lento — a lista continua funcionando"
+           : "El mapa va lento — la lista igual funciona");
+  });
+}
+
+function avisar(texto, quien = "loica"){
+  const caja = document.getElementById("aviso");
+  caja.innerHTML = `${carita(quien,"var(--acento)",22)} <span>${escapar(texto)}</span>`;
+  caja.hidden = false;
+}
+
+/* ============================================================
+   PINES: capa de símbolos con agrupación, no 288 divs
+   ------------------------------------------------------------
+   Antes cada evento era un <div> con un SVG adentro. 288 marcadores DOM
+   sobre un canvas WebGL significan 288 elementos reposicionados en cada
+   cuadro mientras arrastras: en celular el mapa se movía a tirones. Ahora
+   los pines viven dentro del motor del mapa y se agrupan solos, que además
+   arregla que el centro de Santiago fuera una masa de gotas encimadas.
+
+   Los íconos se dibujan a canvas la primera vez que el mapa los pide
+   (`styleimagemissing`), así que solo se generan los que de verdad se ven.
+   ============================================================ */
+const ESCALA_PIN = 2;
+
+function svgAImagen(svg, ancho, alto){
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload = () => {
+      const lienzo = document.createElement("canvas");
+      lienzo.width = ancho * ESCALA_PIN; lienzo.height = alto * ESCALA_PIN;
+      const ctx = lienzo.getContext("2d");
+      ctx.drawImage(img, 0, 0, lienzo.width, lienzo.height);
+      resolve(ctx.getImageData(0, 0, lienzo.width, lienzo.height));
+    };
+    img.onerror = () => resolve(null);
+    img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  });
+}
+
+/* El disco interior del pin es crema SIEMPRE (también de noche), así que acá
+   la tinta va fija en azul: si usara var(--contorno), en modo oscuro sería
+   crema sobre crema y la carita perdería el contorno. */
+const TINTA_PIN = "#1E2A4A";
+
+function svgPin(clave, gratis){
+  const info = CATEGORIAS[clave] || CATEGORIAS.otros;
+  const tono = gratis ? "#0E8757" : info.hex;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 42" width="34" height="42">
+    <path d="M17 1C8.7 1 2 7.7 2 16c0 10.5 12.6 23 14.1 24.4.5.5 1.3.5 1.8 0C19.4 39 32 26.5 32 16 32 7.7 25.3 1 17 1z"
+          fill="${tono}" stroke="${TINTA_PIN}" stroke-width="2.5"/>
+    <circle cx="17" cy="15.6" r="11" fill="#FAF3E7"/>
+    <g transform="translate(4.4 3)scale(1.05)">${CARITAS[info.mascota](tono, TINTA_PIN, "posada")}</g>
+  </svg>`;
+}
+
+// Las siete familias de mascota, para saber cuál manda dentro de cada grupo
+const FAMILIAS = [...new Set(Object.values(CATEGORIAS).map(c => c.mascota))];
+const COLOR_FAMILIA = Object.fromEntries(
+  FAMILIAS.map(f => [f, Object.values(CATEGORIAS).find(c => c.mascota === f).hex]));
+
+function datosGeo(lista){
+  return {type:"FeatureCollection", features: lista
+    .filter(ev => ev.lat != null)
+    .map(ev => ({type:"Feature",
+      geometry:{type:"Point", coordinates:[ev.lon, ev.lat]},
+      properties:{id:ev.id, cat:CATEGORIAS[ev.categoria] ? ev.categoria : "otros",
+                  masc:cat(ev.categoria).mascota, gratis:!!ev.gratis}}))};
+}
+
+function montarCapas(){
+  if(!hayMapa || mapa.getSource("eventos")) return;
+  mapa.addSource("eventos", {
+    type:"geojson", data:datosGeo(listaActual),
+    cluster:true, clusterRadius:52, clusterMaxZoom:14,
+    // El motor va sumando cuántos hay de cada familia dentro del grupo; con
+    // eso el marcador sabe qué carita ponerse sin pedir los puntos de vuelta
+    clusterProperties: Object.fromEntries(FAMILIAS.map(f =>
+      [f, ["+", ["case", ["==", ["get","masc"], f], 1, 0]]]).concat(
+      [["gratis", ["+", ["case", ["get","gratis"], 1, 0]]]])),
+  });
+  mapa.addLayer({
+    id:"pines", type:"symbol", source:"eventos", filter:["!",["has","point_count"]],
+    layout:{
+      "icon-image":["concat","pin-",["get","cat"],["case",["get","gratis"],"-g",""]],
+      "icon-size":.5, "icon-anchor":"bottom",
+      "icon-allow-overlap":true, "icon-ignore-placement":true,
+    },
+  });
+  mapa.on("click", "pines", e => {
+    const ev = EVENTOS.find(x => x.id === e.features[0].properties.id);
+    if(ev) abrirFicha(ev);
+  });
+  mapa.on("mouseenter", "pines", () => mapa.getCanvas().style.cursor = "pointer");
+  mapa.on("mouseleave", "pines", () => mapa.getCanvas().style.cursor = "");
+  mapa.on("data", e => { if(e.sourceId === "eventos" && e.isSourceLoaded) pintarGrupos(); });
+  // moveend y no move: recalcular los grupos en cada cuadro del arrastre era
+  // volver a tener el problema que este cambio vino a arreglar.
+  mapa.on("moveend", pintarGrupos);
+}
+
+if(hayMapa){
+  mapa.on("styleimagemissing", async e => {
+    const m = e.id.match(/^pin-([a-z_]+)(-g)?$/);
+    if(!m || mapa.hasImage(e.id)) return;
+    const datos = await svgAImagen(svgPin(m[1], !!m[2]), 34, 42);
+    if(datos && !mapa.hasImage(e.id)) mapa.addImage(e.id, datos, {pixelRatio:ESCALA_PIN});
+  });
+  mapa.on("load", montarCapas);
+  // Cambiar de tema reconstruye el estilo y con él se van fuentes y capas
+  mapa.on("styledata", () => { if(!mapa.getSource("eventos")) montarCapas(); });
+  new MutationObserver(() => mapa.setStyle(estiloMapa()))
+    .observe(document.documentElement, {attributes:true, attributeFilter:["data-tema"]});
+}
+
+/* Los grupos van en DOM: nunca hay más de veinte en pantalla y así el número
+   usa la tipografía de la marca en vez de depender de un servidor de glifos
+   que este estilo de mapa (puro ráster) no tiene. */
+const marcadoresGrupo = new Map();   // cluster_id → Marker
+function pintarGrupos(){
+  if(!hayMapa || !mapa.getSource("eventos")) return;
+  const caja = mapa.getBounds();
+  const vivos = new Set();
+
+  for(const g of mapa.querySourceFeatures("eventos", {filter:["has","point_count"]})){
+    const id = g.properties.cluster_id;
+    // querySourceFeatures devuelve lo de todas las teselas cargadas, también
+    // las de fuera de pantalla, y el mismo grupo repetido en los bordes
+    if(vivos.has(id) || !caja.contains(g.geometry.coordinates)) continue;
+    vivos.add(id);
+    if(marcadoresGrupo.has(id)) continue;   // ya está puesto: no lo toco
+
+    const n = g.properties.point_count;
+    // La familia que más aparece adentro le presta la cara y el color al grupo
+    const manda = FAMILIAS.reduce((a,f) =>
+      (g.properties[f] || 0) > (g.properties[a] || 0) ? f : a, FAMILIAS[0]);
+    const tono = COLOR_FAMILIA[manda];
+    const el = document.createElement("div");
+    el.className = "grupo" + (manda === "loica" || manda === "chincol" ? " claro" : "");
+    el.style.setProperty("--tono", tono);
+    el.style.setProperty("--dm", (n < 10 ? 24 : n < 50 ? 28 : 32) + "px");
+    el.style.fontSize = (n < 10 ? 14 : n < 50 ? 16 : 19) + "px";
+    // Cara crema con tinta azul, igual que el disco del pin: sobre los siete
+    // colores de familia funciona la misma combinación
+    el.innerHTML = `${carita(manda, "#FAF3E7", 32, {tinta:TINTA_PIN})}
+                    <span>${n < 1000 ? n : "999+"}</span>`;
+    el.setAttribute("role","button");
+    el.setAttribute("aria-label", `${n} ${t("eventos")}`);
+    el.onclick = () => mapa.getSource("eventos")
+      .getClusterExpansionZoom(id)
+      .then(z => mapa.easeTo({center:g.geometry.coordinates, zoom:z + .25, duration:420}))
+      .catch(() => {});
+    marcadoresGrupo.set(id,
+      new maplibregl.Marker({element:el}).setLngLat(g.geometry.coordinates).addTo(mapa));
+  }
+  // Solo se van los que dejaron de existir: reconstruir la lista entera en
+  // cada paso hacía parpadear todos los números al arrastrar.
+  for(const [id, m] of marcadoresGrupo)
+    if(!vivos.has(id)){ m.remove(); marcadoresGrupo.delete(id); }
+}
+
+/* ---------- FILTROS ---------- */
+const visibles = () => EVENTOS.filter(ev =>
+  (!soloGratis || ev.gratis) &&
+  (!filtroCat || ev.categoria === filtroCat) &&
+  (!publicoFiltro || ev.publico === publicoFiltro) &&
+  enRango(ev.fecha, cuando));
+
+function pintarFiltros(){
+  /* --- Riel 1: cuándo. Una sola respuesta, por eso es segmentado ---
+     "Hoy" y "este finde" dejaban un hoyo: un martes, el finde son cuatro
+     días más y no había forma de preguntar por mañana. */
+  const fechas = document.getElementById("fechas");
+  fechas.innerHTML = "";
+  fechas.setAttribute("aria-label", t("filtrosCuando"));
+  [["todo", t("cuandoLargo").todo], ["hoy", t("hoy")], ["manana", t("manana")],
+   ["semana", t("semana")], ["finde", t("finde")]].forEach(([clave, etiqueta]) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = etiqueta;
+    b.setAttribute("aria-pressed", cuando === clave);
+    b.onclick = e => {
+      cuando = clave;
+      pintarFiltros(); refrescar();
+      volarDesde(e.currentTarget);
+    };
+    fechas.appendChild(b);
+  });
+  document.getElementById("cuenta-rango").innerHTML =
+    `${carita("loica","var(--acento)",18)} ${escapar(t("cuandoLargo")[cuando])}`;
+
+  /* --- Riel 2: precio, público y tipo. Se combinan entre sí --- */
+  const cont = document.getElementById("filtros");
+  cont.innerHTML = "";
+  cont.setAttribute("aria-label", t("filtrosRapidos") + " · " + t("filtrosTipo"));
+
+  const agregar = (contenido, activo, alPulsar, clase="") => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "chip " + clase;
+    b.innerHTML = contenido;
+    b.setAttribute("aria-pressed", activo);
+    b.onclick = e => { alPulsar(); pintarFiltros(); refrescar(); volarDesde(e.currentTarget); };
+    cont.appendChild(b);
+    return b;
+  };
+
+  // El Pudú es la mascota de lo gratis: el filtro estrella tiene cara propia
+  agregar(`${carita("pudu", soloGratis ? "#fff" : "#0E8757", 22)} ${t("gratis")}`,
+          soloGratis, () => soloGratis = !soloGratis, "es-gratis");
+  // Público: responde "¿puedo llevar a mi hijo?" y "¿es de mayores?"
+  agregar(`${carita("pudu", publicoFiltro === "ninos" ? "#fff" : "#0E8757", 22)} ${t("ninos")}`,
+          publicoFiltro === "ninos",
+          () => publicoFiltro = publicoFiltro === "ninos" ? null : "ninos");
+  agregar(`${carita("culpeo", publicoFiltro === "adultos" ? "#fff" : "#7A3FE0", 22)} ${t("mas18")}`,
+          publicoFiltro === "adultos",
+          () => publicoFiltro = publicoFiltro === "adultos" ? null : "adultos");
+
+  const sep = document.createElement("div");
+  sep.className = "separa-chips";
+  sep.setAttribute("aria-hidden","true");
+  cont.appendChild(sep);
+
+  [...new Set(EVENTOS.map(e => e.categoria))]
+    .sort((a,b) => cat(a)[IDIOMA].localeCompare(cat(b)[IDIOMA]))
+    .forEach(c => {
+      const info = cat(c);
+      agregar(`${carita(info.mascota, filtroCat === c ? "#fff" : info.hex, 22)} ${info[IDIOMA]}`,
+              filtroCat === c, () => filtroCat = filtroCat === c ? null : c);
+    });
+}
+
+/* ---------- LA LOICA QUE VUELA ---------- */
+function volarLoica(desde, hasta, ms = 700){
+  if(!hayMapa || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const el = document.getElementById("loica-vuelo");
+  if(!el.innerHTML) el.innerHTML = cuerpo("loica", "var(--acento)", 56, {pose:"volando"});
+  const cx = (desde.x + hasta.x) / 2;
+  const cy = Math.min(desde.y, hasta.y) - 90;   // el arco sube: esquiva pines
+  el.style.offsetPath = `path("M ${desde.x} ${desde.y} Q ${cx} ${cy} ${hasta.x} ${hasta.y}")`;
+  el.style.setProperty("--dur-vuelo", ms + "ms");
+  el.classList.remove("vuela");
+  void el.offsetWidth;
+  el.classList.add("vuela");
+}
+const centroDe = el => {
+  const r = el.getBoundingClientRect(), m = document.getElementById("mapa").getBoundingClientRect();
+  return {x: r.left + r.width/2 - m.left, y: r.top + r.height/2 - m.top};
+};
+// Al filtrar la Loica vuela del chip que tocaste al contador y suelta el número
+const volarDesde = chip =>
+  volarLoica(centroDe(chip), centroDe(document.getElementById("conteo")), 480);
+
+/* ---------- LISTA POR TANDAS ----------
+   345 tarjetas con 298 imágenes remotas de una sola vez es lo que hacía que
+   el panel llegara trabado a la primera pasada de dedo. Se pintan de a 24 y
+   el resto entra cuando el centinela asoma. */
+const TANDA = 24;
+let pintados = 0, observador = null;
+
+function refrescar(){
+  listaActual = visibles();
+  const conteoEl = document.getElementById("conteo");
+  if(conteoEl.textContent !== String(listaActual.length)){
+    conteoEl.classList.remove("pop"); void conteoEl.offsetWidth; conteoEl.classList.add("pop");
+  }
+  conteoEl.textContent = listaActual.length;
+  document.getElementById("conteo-txt").textContent =
+    listaActual.length === 1 ? t("evento") : t("eventos");
+
+  if(hayMapa && mapa.getSource("eventos")) mapa.getSource("eventos").setData(datosGeo(listaActual));
+
+  const cont = document.getElementById("lista");
+  cont.innerHTML = "";
+  pintados = 0;
+  observador?.disconnect();
+
+  if(!listaActual.length){
+    cont.innerHTML = `<div class="vacio">${cuerpo("loica","var(--tinta-tenue)",92,{pose:"durmiendo"})}
+      <p><b>${t("vacio")}</b><br>${t("vaciopista")}</p></div>`;
+    return;
+  }
+  cont.scrollTop = 0;
+  // La clase se pone solo para la primera tanda: si quedara puesta, cada
+  // vez que entran 24 más se reanimarían las de arriba al hacer scroll
+  cont.classList.add("lista-anima");
+  masTarjetas();
+  setTimeout(() => cont.classList.remove("lista-anima"), 500);
+
+  const centinela = document.createElement("div");
+  centinela.className = "fin-lista";
+  centinela.id = "centinela";
+  cont.appendChild(centinela);
+  observador = new IntersectionObserver(e => { if(e[0].isIntersecting) masTarjetas(); },
+                                        {root:cont, rootMargin:"420px"});
+  observador.observe(centinela);
+}
+
+function masTarjetas(){
+  const cont = document.getElementById("lista");
+  const centinela = document.getElementById("centinela");
+  const trozo = listaActual.slice(pintados, pintados + TANDA);
+  const caja = document.createDocumentFragment();
+  trozo.forEach(ev => caja.appendChild(tarjetaEvento(ev, abrirFicha)));
+  cont.insertBefore(caja, centinela);
+  pintados += trozo.length;
+  if(centinela && pintados >= listaActual.length){
+    centinela.textContent = "·";
+    observador?.disconnect();
+  }
+}
+
+/* ---------- FICHA ---------- */
+function abrirFicha(ev, direccion = 0){
+  const idx = listaActual.findIndex(x => x.id === ev.id);
+  seleccionado = ev;
+  const info = cat(ev.categoria);
+  const fecha = ev.fecha.toLocaleDateString(localeDe(),
+                  {weekday:"long", day:"numeric", month:"long"});
+  const hora = (ev.fecha.getHours() || ev.fecha.getMinutes())
+    ? ev.fecha.toLocaleTimeString(localeDe(),{hour:"2-digit",minute:"2-digit",hour12:false}) : "";
+  const flecha = d => `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${d}"
+      fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+  const ficha = document.getElementById("ficha");
+  ficha.innerHTML = `
+    <div class="ficha-nav">
+      <button class="nav-ev" id="ev-prev" ${idx <= 0 ? "disabled" : ""}>
+        ${flecha("M14 5l-7 7 7 7")}<span>${t("anteriorEv")}</span></button>
+      <span class="ficha-pos">${idx + 1} ${t("deN")} ${listaActual.length}</span>
+      <button class="nav-ev" id="ev-sig" ${idx >= listaActual.length - 1 ? "disabled" : ""}>
+        <span>${t("siguienteEv")}</span>${flecha("M10 5l7 7-7 7")}</button>
+      <button class="cerrar-ficha" id="ev-cerrar" aria-label="${t("cerrar")}">×</button>
+    </div>
+    <div class="ficha-scroll">
+      ${ev.imagen ? `<div class="ficha-foto">
+          <img src="${escapar(ev.imagen)}" alt="" onerror="this.parentElement.remove()">
+        </div>` : ""}
+      <div class="ficha-cuerpo">
+        <span class="mascota-nombre" style="color:${info.tintaVar}">
+          ${carita(info.mascota, info.hex, 20)} ${info[IDIOMA]}</span>
+        <h2>${escapar(ev.titulo)}</h2>
+        <a class="boton bloque" href="${escapar(ev.url)}"
+           target="_blank" rel="noopener">${t("ir")} ↗</a>
+        <div class="dato" style="margin-top:var(--e-4)"><span class="et">${t("cuando")}</span>
+          <span>${fecha}${hora ? " · " + hora : ""}</span></div>
+        <div class="dato"><span class="et">${t("donde")}</span>
+          <span>${escapar(ev.lugar)}${ev.comuna ? ", " + escapar(ev.comuna) : ""}
+          ${ev.precision === "comuna" ? `<br><span class="aprox">${t("aprox")}</span>` : ""}
+          ${ev.precision === "sin_ubicar" ? `<br><span class="aprox">${t("sinUbicar")}</span>` : ""}</span></div>
+        <div class="dato"><span class="et">${t("precio")}</span>
+          <span class="precio${ev.gratis ? " libre" : ""}">${ev.gratis ? t("libre") : textoPrecio(ev)}</span></div>
+        ${ev.descripcion ? `<div class="dato"><span class="et"></span>
+          <span>${escapar(ev.descripcion)}</span></div>` : ""}
+        <div id="compartir-ficha" style="margin-top:var(--e-4)"></div>
+        <div class="fuente-pie">${t("fuente")} <b>${escapar(ev.fuente)}</b></div>
+      </div>
+    </div>`;
+
+  ficha.style.setProperty("--desde", (direccion ? direccion * 18 : 0) + "px");
+  ficha.classList.remove("cambiando"); void ficha.offsetWidth;
+  if(direccion) ficha.classList.add("cambiando");
+  ficha.classList.add("visible");
+  document.getElementById("panel").classList.add("oculto");
+  history.replaceState(null, "", "#/e/" + ev.id);
+  document.getElementById("compartir-ficha").appendChild(botonesCompartir(ev));
+
+  document.getElementById("ev-prev").onclick = () => moverFicha(-1);
+  document.getElementById("ev-sig").onclick  = () => moverFicha(1);
+  document.getElementById("ev-cerrar").onclick = cerrarFicha;
+
+  if(hayMapa && ev.lat != null){
+    const destino = mapa.project([ev.lon, ev.lat]);
+    const caja = document.getElementById("mapa").getBoundingClientRect();
+    volarLoica({x: caja.width/2, y: caja.height + 20},
+               {x: destino.x, y: destino.y}, 650);
+    mapa.flyTo({center:[ev.lon, ev.lat], zoom:Math.max(mapa.getZoom(), 15),
+                offset:[0,-90], speed:1.5});
+  }
+}
+
+// paso = -1 anterior, +1 siguiente. Es lo mismo que usan el botón, el swipe
+// y las flechas del teclado, así los tres se comportan igual.
+function moverFicha(paso){
+  if(!seleccionado) return;
+  const i = listaActual.findIndex(x => x.id === seleccionado.id);
+  const siguiente = listaActual[i + paso];
+  if(siguiente) abrirFicha(siguiente, paso);
+}
+
+function cerrarFicha(){
+  document.getElementById("ficha").classList.remove("visible");
+  document.getElementById("panel").classList.remove("oculto");
+  if(location.hash.startsWith("#/e/")) history.replaceState(null, "", location.pathname);
+  seleccionado = null;
+}
+
+/* Deslizar de lado para cambiar de evento. Solo cuenta si el gesto es
+   claramente horizontal: si no, robaría el scroll vertical de la ficha. */
+(() => {
+  const ficha = document.getElementById("ficha");
+  let x0 = 0, y0 = 0, activo = false;
+  ficha.addEventListener("pointerdown", e => {
+    if(e.pointerType === "mouse") return;
+    activo = true; x0 = e.clientX; y0 = e.clientY;
+  });
+  ficha.addEventListener("pointerup", e => {
+    if(!activo) return;
+    activo = false;
+    const dx = e.clientX - x0, dy = e.clientY - y0;
+    if(Math.abs(dx) > 64 && Math.abs(dx) > Math.abs(dy) * 1.8) moverFicha(dx < 0 ? 1 : -1);
+  });
+  ficha.addEventListener("pointercancel", () => activo = false);
+})();
+
+/* --- Arrastre del panel: tres alturas, con gesto de verdad --- */
+(() => {
+  const panel = document.getElementById("panel");
+  const tirador = document.getElementById("tirador");
+  const alturas = () => {
+    const disponible = panel.parentElement.clientHeight;
+    return [268, Math.round(disponible * .58), Math.round(disponible * .88)];
+  };
+  let indice = 0, arrastrando = false, inicioY = 0, inicioAlto = 0;
+
+  const fijar = i => {
+    indice = Math.max(0, Math.min(2, i));
+    panel.style.setProperty("--alto-panel", alturas()[indice] + "px");
+  };
+  fijar(0);
+
+  tirador.addEventListener("pointerdown", e => {
+    arrastrando = true; inicioY = e.clientY; inicioAlto = panel.clientHeight;
+    panel.classList.add("arrastrando");
+    tirador.setPointerCapture(e.pointerId);
+  });
+  tirador.addEventListener("pointermove", e => {
+    if(!arrastrando) return;
+    const alto = Math.min(panel.parentElement.clientHeight * .88,
+                          Math.max(120, inicioAlto - (e.clientY - inicioY)));
+    panel.style.setProperty("--alto-panel", alto + "px");
+  });
+  const soltar = () => {
+    if(!arrastrando) return;
+    arrastrando = false;
+    panel.classList.remove("arrastrando");
+    const actual = panel.clientHeight;
+    const opciones = alturas();
+    fijar(opciones.indexOf(opciones.reduce((a,b) =>
+      Math.abs(b - actual) < Math.abs(a - actual) ? b : a)));
+  };
+  tirador.addEventListener("pointerup", soltar);
+  tirador.addEventListener("pointercancel", soltar);
+  tirador.addEventListener("click", () => { if(!arrastrando) fijar(indice === 2 ? 0 : indice + 1); });
+  tirador.addEventListener("keydown", e => {
+    if(e.key === "ArrowUp"){ e.preventDefault(); fijar(indice + 1); }
+    if(e.key === "ArrowDown"){ e.preventDefault(); fijar(indice - 1); }
+    if(e.key === "Enter" || e.key === " "){ e.preventDefault(); fijar(indice === 2 ? 0 : indice + 1); }
+  });
+  addEventListener("resize", () => fijar(indice));
+})();
+
+/* ---------- ARRANQUE ---------- */
+cargarEventos()
+  .then(evs => {
+    EVENTOS = evs;
+    pintarFiltros(); refrescar();
+    const enlace = location.hash.match(/^#\/e\/(.+)$/);
+    if(enlace){
+      const ev = EVENTOS.find(e => e.id === enlace[1]);
+      if(ev) abrirFicha(ev);
+    }
+  })
+  .catch(() => {
+    document.getElementById("lista").innerHTML =
+      `<div class="vacio">${cuerpo("loica","var(--tinta-tenue)",88,{pose:"durmiendo"})}
+       <p><b>${IDIOMA === "en" ? "Couldn't load events" :
+               IDIOMA === "pt" ? "Não consegui carregar os eventos" :
+               "No pude cargar los eventos"}</b><br>
+       <button class="boton secundario" style="margin-top:12px"
+         onclick="location.reload()">${IDIOMA === "en" ? "Try again" :
+           IDIOMA === "pt" ? "Tentar de novo" : "Reintentar"}</button></p></div>`;
+  });
+
+window.addEventListener("loica:idioma", () => {
+  pintarFiltros(); refrescar(); if(seleccionado) abrirFicha(seleccionado);
+});
+
+// Tocar el mapa cierra la ficha, salvo que hayas tocado un pin: ahí el
+// manejador de la capa la va a reemplazar por el evento nuevo.
+if(hayMapa) mapa.on("click", e => {
+  if(mapa.getLayer("pines") &&
+     mapa.queryRenderedFeatures(e.point, {layers:["pines"]}).length) return;
+  cerrarFicha();
+});
+addEventListener("keydown", e => {
+  if(e.key === "Escape") cerrarFicha();
+  if(!seleccionado) return;
+  if(e.key === "ArrowRight"){ e.preventDefault(); moverFicha(1); }
+  if(e.key === "ArrowLeft"){ e.preventDefault(); moverFicha(-1); }
+});
+</script>
+</body>
+</html>

@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css">
+<link rel="stylesheet" href="../loica.css?v=4">
 <style>
   body{min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -44,7 +44,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../index.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
   <div class="foto" id="foto"><img src="https://www.m100.cl/wp-content/uploads/2026/08/niños-del-cerroinvitados_slidehome_1920x1488-768x595.jpg" alt="" onerror="this.remove();document.getElementById('foto').classList.add('sin-foto')"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Niños del Cerro + Invitados (día 4)</h1>
@@ -62,24 +62,24 @@
   <div class="dato"><span class="et"></span><span>Niños del Cerro retorna a Matucana 100 para mostrar Alma Tadema, su último disco junto a invitados muy especiales que iremos develando próximamente. #sp-ea-129014 .spcollapsing { height: 0; overflow:…</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../index.html#/e/8a67d7009ce571ec">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../mapa.html#/e/8a67d7009ce571ec">Ver en el mapa</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Matucana 100</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js"></script>
+<script src="../loica.js?v=4"></script>
 <script>
-  pintarBarra("index.html");
+  pintarBarra("mapa.html", "../");
   const EV = {"id": "8a67d7009ce571ec", "titulo": "Niños del Cerro + Invitados (día 4)", "inicio": "2026-10-12T00:00:00", "fin": null, "lugar": "Matucana 100", "direccion": "", "comuna": "Santiago", "lat": -33.4436, "lon": -70.6836, "precision": "recinto", "gratis": false, "precio": 10000, "precio_texto": "o) 17 hrs Preventa: $10.000 General: $12.000 Día del evento:", "categoria": "arte", "publico": "todos", "descripcion": "Niños del Cerro retorna a Matucana 100 para mostrar Alma Tadema, su último disco junto a invitados muy especiales que iremos develando próximamente. #sp-ea-129014 .spcollapsing { height: 0; overflow:…", "imagen": "https://www.m100.cl/wp-content/uploads/2026/08/niños-del-cerroinvitados_slidehome_1920x1488-768x595.jpg", "fuente": "Matucana 100", "url": "https://www.m100.cl/programacion/musica/ninos-del-cerro-invitados/"};
   document.getElementById("etiqueta-cat").innerHTML =
-    mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 18) + " " + cat(EV.categoria)[IDIOMA];
+    carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));
   const caja = document.getElementById("foto");
   const ponerMascota = () => {
     if(!caja.querySelector("img") && !caja.querySelector("svg"))
-      caja.innerHTML = mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 78);
+      caja.innerHTML = cuerpo(cat(EV.categoria).mascota, cat(EV.categoria).hex, 96);
   };
   ponerMascota();
   new MutationObserver(ponerMascota).observe(caja, {childList:true});

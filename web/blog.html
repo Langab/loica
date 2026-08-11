@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css">
+<link rel="stylesheet" href="loica.css?v=4">
 <style>
   body{overflow-x:hidden}
   .contenido-blog{max-width:760px;margin:0 auto;padding:var(--e-6) var(--e-4) var(--e-12)}
@@ -42,45 +42,68 @@
   .blog-cabecera p{max-width:540px;margin:0 auto;color:var(--tinta-suave);line-height:1.62;font-size:var(--t-md)}
   .blog-actualizado{display:block;margin-top:var(--e-3);font-size:var(--t-xs);color:var(--tinta-tenue);font-weight:600}
 
-  /* Los tres formatos */
+  /* Los tres formatos. Cada uno tiene animal y color propios: el lector
+     aprende que la verde es la de los gratis antes de leer la etiqueta. */
   .formatos-legend{
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--e-3);
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:var(--e-3);
     margin:var(--e-6) 0;
   }
   .formato-chip{
     display:flex;align-items:center;gap:var(--e-3);
-    background:var(--fondo-elevado);border:1px solid var(--borde);border-left:4px solid var(--tono,var(--acento));
-    border-radius:var(--r-md);padding:var(--e-3);
+    background:var(--suave);color:var(--azul-900);
+    border:2.5px solid var(--contorno);border-radius:var(--r-lg);
+    box-shadow:var(--repisa-2);padding:var(--e-3) var(--e-4);
   }
-  .formato-chip .icono{flex:none;width:38px;height:38px;border-radius:50%;
-    background:var(--fondo-hundido);display:grid;place-items:center}
-  .formato-chip b{display:block;font-family:var(--fuente-marca);font-size:var(--t-base)}
-  .formato-chip span{display:block;font-size:var(--t-xs);color:var(--tinta-tenue);margin-top:1px}
+  .formato-chip .icono{
+    flex:none;width:42px;height:42px;border-radius:var(--r-pill);
+    background:var(--tono);border:2.5px solid var(--contorno);display:grid;place-items:center;
+  }
+  .formato-chip b{display:block;font-family:var(--fuente-marca);font-size:var(--t-md)}
+  .formato-chip span{display:block;font-size:var(--t-xs);color:#4A5878;margin-top:1px;font-weight:600}
 
-  /* Lista de posts */
-  .lista-posts{display:flex;flex-direction:column;gap:var(--e-4);margin-top:var(--e-6)}
-  .entrada-post{
-    display:flex;gap:var(--e-4);text-decoration:none;color:inherit;align-items:flex-start;
-    background:var(--fondo-elevado);border:1px solid var(--borde);border-radius:var(--r-lg);
-    padding:var(--e-5);transition:var(--rapido);
+  /* ---------- Lista de posts ----------
+     La tapa sale de la foto del primer panorama del post: no hay presupuesto
+     de ilustración, pero sí hay 300 fotos de organizadores en eventos.json. */
+  .lista-posts{display:grid;gap:var(--e-5);margin-top:var(--e-6)}
+  .post-tarjeta{
+    display:block;text-decoration:none;color:inherit;overflow:hidden;
+    background:var(--fondo-elevado);border:3px solid var(--contorno);border-radius:var(--r-xl);
+    box-shadow:var(--repisa-4);transition:var(--rapido);
   }
-  .entrada-post:hover{border-color:var(--tono,var(--acento));box-shadow:var(--sombra-2);transform:translateY(-2px)}
-  .entrada-post.destacado{border-width:1.5px;border-color:var(--tono,var(--acento))}
-  .entrada-post-mascota{flex:none;width:46px;height:46px;border-radius:50%;
-    background:var(--fondo-hundido);display:grid;place-items:center}
-  .entrada-post-cuerpo{min-width:0}
-  .entrada-post-meta{display:flex;gap:8px;align-items:center;margin-bottom:6px;flex-wrap:wrap}
+  .post-tarjeta:hover{transform:translateY(-2px)}
+  .post-tarjeta:active{transform:translateY(5px);box-shadow:none}
+  .post-tapa{
+    position:relative;height:180px;background:var(--suave);
+    border-bottom:3px solid var(--contorno);display:grid;place-items:center;overflow:hidden;
+  }
+  /* Los afiches suelen tener el título arriba: encuadrar al centro justo les
+     corta la cabeza. Un tercio más arriba salva casi todos. */
+  .post-tapa img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 32%}
+  .post-formato{
+    position:absolute;top:var(--e-3);left:var(--e-3);z-index:1;
+    display:inline-flex;align-items:center;gap:7px;
+    background:var(--tono);color:#fff;border:2.5px solid var(--contorno);
+    border-radius:var(--r-pill);padding:4px 14px 4px 4px;
+    font:800 var(--t-sm)/1.5 var(--fuente-marca);box-shadow:var(--repisa-1);
+  }
+  .post-formato .bolita{
+    width:28px;height:28px;border-radius:var(--r-pill);background:#FFFBF5;
+    display:grid;place-items:center;
+  }
+  .post-tarjeta-cuerpo{padding:var(--e-5)}
+  .post-tarjeta h2{font-size:var(--t-xl);line-height:1.18;margin-bottom:var(--e-2)}
+  .post-tarjeta p{color:var(--tinta-suave);line-height:1.6;margin:0 0 var(--e-3)}
+  .post-pie{display:flex;gap:var(--e-2);align-items:center;flex-wrap:wrap;
+    font-size:var(--t-xs);color:var(--tinta-tenue);font-weight:700}
   .etiqueta-formato{
-    display:inline-flex;align-items:center;gap:5px;font-size:var(--t-xs);font-weight:800;
-    color:var(--tono,var(--acento));text-transform:uppercase;letter-spacing:.04em;
+    display:inline-flex;align-items:center;gap:6px;font-size:var(--t-sm);font-weight:800;
+    color:var(--tono-tinta,var(--acento));text-transform:uppercase;letter-spacing:.04em;
   }
   .etiqueta-destacado,.etiqueta-evergreen{
-    font-size:11px;font-weight:700;padding:2px 8px;border-radius:var(--r-full);
-    background:var(--fondo-hundido);color:var(--tinta-suave);
+    font-size:11px;font-weight:800;padding:2px 10px;border-radius:var(--r-pill);
+    background:var(--amarillo-300);color:var(--azul-900);border:2px solid var(--contorno);
   }
-  .entrada-post h2{font-size:var(--t-lg);margin-bottom:4px;line-height:1.25}
-  .entrada-post p{color:var(--tinta-suave);font-size:var(--t-sm);line-height:1.55;margin:0 0 8px}
-  .entrada-post-fecha{font-size:var(--t-xs);color:var(--tinta-tenue);font-weight:600}
+  .etiqueta-evergreen{background:var(--verde-200)}
 
   /* Vista de un post */
   .volver{display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:var(--tinta-suave);
@@ -105,40 +128,86 @@
   .post-cuerpo p{margin:0 0 var(--e-4)}
   .post-cuerpo strong{color:var(--tinta)}
 
-  /* Eventos dentro del post */
-  .eventos-post{margin-top:var(--e-8)}
-  .eventos-post h2{margin-bottom:var(--e-4);font-size:var(--t-lg)}
-  .lista-eventos-post{display:flex;flex-direction:column;gap:var(--e-3)}
-  .tarjeta-post{
-    display:flex;gap:var(--e-4);background:var(--fondo-elevado);border:1px solid var(--borde);
-    border-radius:var(--r-lg);padding:var(--e-4);
+  /* ---------- Cada recomendación ----------
+     La foto manda: es lo que hace que un panorama se distinga del de al lado.
+     Cuando el organizador no publicó ninguna, queda el pastel de la categoría
+     con su animal, que también identifica de qué se trata. */
+  .eventos-post{margin-top:var(--e-10)}
+  .eventos-post h2{margin-bottom:var(--e-5);font-size:var(--t-xl)}
+  .lista-eventos-post{display:grid;gap:var(--e-5)}
+  .reco{
+    display:grid;grid-template-columns:235px 1fr;
+    background:var(--fondo-elevado);border:3px solid var(--contorno);border-radius:var(--r-xl);
+    box-shadow:var(--repisa-3);overflow:hidden;
   }
-  .tarjeta-post .miniatura{width:66px;height:66px;flex:none}
-  .tarjeta-post-cuerpo{min-width:0;flex:1}
-  .tarjeta-post-cuerpo h3{font-size:var(--t-md);margin:2px 0 4px;font-family:var(--fuente-ui);font-weight:700;line-height:1.28}
-  .tarjeta-post-cuerpo h3 a{text-decoration:none;color:var(--tinta)}
-  .tarjeta-post-cuerpo h3 a:hover{text-decoration:underline}
-  .tarjeta-post .tarjeta-meta{margin-bottom:6px}
-  .tarjeta-post .tarjeta-meta .precio{margin-left:auto;padding-top:0}
+  .reco-foto{
+    position:relative;background:var(--suave);min-height:200px;
+    display:grid;place-items:center;border-right:3px solid var(--contorno);
+  }
+  .reco-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .reco-dia{
+    position:absolute;top:9px;right:9px;z-index:1;background:var(--azul-900);color:#FFFBF5;
+    border:2px solid var(--contorno);border-radius:var(--r-pill);padding:3px 10px;
+    font:800 11px/1.5 var(--fuente-ui);text-transform:uppercase;letter-spacing:.05em;
+  }
+  .reco-dia.pronto{background:var(--rojo-500)}
+  .reco-cat{
+    position:absolute;left:9px;bottom:9px;z-index:1;display:inline-flex;align-items:center;gap:6px;
+    background:var(--cat);color:#fff;border:2px solid var(--contorno);border-radius:var(--r-pill);
+    padding:3px 12px 3px 3px;font:800 var(--t-xs)/1.7 var(--fuente-ui);
+  }
+  .reco-cat .bolita{
+    width:23px;height:23px;border-radius:var(--r-pill);background:#FFFBF5;
+    display:grid;place-items:center;
+  }
+  .reco-cuerpo{padding:var(--e-4) var(--e-5) var(--e-5);min-width:0}
+  .reco-hora{font:800 var(--t-sm)/1 var(--fuente-ui);color:var(--cat-tinta);
+    font-variant-numeric:tabular-nums;letter-spacing:.02em}
+  .reco h3{font-size:var(--t-lg);line-height:1.22;margin:5px 0 6px}
+  .reco h3 a{text-decoration:none;color:var(--tinta)}
+  .reco h3 a:hover{text-decoration:underline}
+  .reco-donde{font-size:var(--t-sm);color:var(--tinta-suave);margin-bottom:var(--e-3)}
+  .reco-precio{
+    display:inline-block;background:var(--azul-900);color:#FFFBF5;border:2px solid var(--contorno);
+    border-radius:var(--r-pill);padding:2px 12px;font:800 var(--t-sm)/1.6 var(--fuente-ui);
+    margin-right:6px;vertical-align:middle;
+  }
+  .reco-precio.libre{background:var(--c-libre)}
   .bandera{
-    display:inline-flex;align-items:center;font-size:11px;font-weight:700;
-    padding:3px 9px;border-radius:var(--r-full);background:var(--fondo-hundido);
-    color:var(--tinta-suave);border:1px solid var(--borde-fuerte);margin-bottom:8px;
+    display:inline-block;font-size:11px;font-weight:800;padding:2px 10px;
+    border-radius:var(--r-pill);background:var(--fondo-hundido);color:var(--tinta-suave);
+    border:2px dashed var(--borde-fuerte);vertical-align:middle;
   }
-  .bandera.bandera-agotado{background:rgba(232,68,46,.12);color:var(--acento);border-color:transparent}
-  .nota-editor{
-    font-size:var(--t-sm);color:var(--tinta-suave);font-style:italic;line-height:1.5;
-    margin:2px 0 var(--e-3);padding-left:var(--e-3);border-left:2.5px solid var(--borde-fuerte);
+  .bandera.bandera-agotado{background:var(--rojo-100);color:var(--rojo-700);border-style:solid;border-color:var(--rojo-700)}
+
+  /* La nota es lo único que no sale de eventos.json: es la voz de quien
+     revisó. Por eso va en globo y con el animal del formato al lado. */
+  .reco-nota{
+    position:relative;display:flex;gap:var(--e-3);align-items:flex-start;
+    background:var(--suave);color:var(--azul-900);
+    border:2.5px solid var(--contorno);border-radius:var(--r-md);
+    padding:var(--e-3) var(--e-4);margin:var(--e-4) 0;
   }
-  .tarjeta-post-botones{display:flex;gap:8px;flex-wrap:wrap}
-  .tarjeta-post-botones .boton{padding:8px 14px;font-size:var(--t-sm)}
-  .tarjeta-post-rota{opacity:.72}
-  .tarjeta-post-rota-msg{display:flex;align-items:center;gap:8px;font-size:var(--t-sm);color:var(--tinta-tenue);margin:0 0 6px}
+  .reco-nota:before{
+    content:"";position:absolute;left:20px;top:-9px;width:14px;height:14px;
+    background:var(--suave);border-left:2.5px solid var(--contorno);border-top:2.5px solid var(--contorno);
+    transform:rotate(45deg);
+  }
+  .reco-nota .quien{
+    flex:none;width:32px;height:32px;border-radius:var(--r-pill);background:var(--tono);
+    border:2px solid var(--contorno);display:grid;place-items:center;
+  }
+  .reco-nota p{margin:0;font-size:var(--t-sm);line-height:1.55;font-weight:600}
+  .reco-botones{display:flex;gap:8px;flex-wrap:wrap}
+  .reco-botones .boton{padding:8px 14px;font-size:var(--t-sm);box-shadow:var(--repisa-1)}
+  .reco-botones .boton:active{transform:translateY(3px);box-shadow:none}
+  .reco-rota{grid-template-columns:1fr;opacity:.75}
+  .reco-rota-msg{display:flex;align-items:center;gap:8px;font-size:var(--t-sm);color:var(--tinta-tenue);margin:0 0 6px}
 
   @media(max-width:600px){
-    .entrada-post{flex-direction:column}
-    .tarjeta-post{flex-direction:column}
-    .tarjeta-post .miniatura{width:100%;height:140px}
+    .reco{grid-template-columns:1fr}
+    .reco-foto{min-height:0;height:175px;border-right:0;border-bottom:3px solid var(--contorno)}
+    .post-tapa{height:150px}
   }
 </style>
 </head>
@@ -148,7 +217,7 @@
 <main class="contenido-blog" id="vista"></main>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="loica.js"></script>
+<script src="loica.js?v=4"></script>
 <script>
 /* ============================================================
    BLOG — índice + vista de post, ruteado por hash (#/p/<slug>).
@@ -168,6 +237,30 @@ const AVISO_IDIOMA = {
   en: "This blog is written in Spanish for now.",
   pt: "Este blog está escrito em espanhol por enquanto.",
 };
+
+/* Paleta de cada formato: relleno fuerte, pastel de fondo y la tinta que sí
+   puede tocar texto. blog.json trae un color por formato, pero el amarillo
+   del culpeo da 2,4:1 sobre crema y como texto no se lee; acá se usa la
+   misma familia que el animal tiene en el mapa. */
+const PALETA_FORMATO = {
+  finde:  {animal:"loica",  tono:"var(--rojo-500)",  suave:"var(--rojo-100)",        tinta:"var(--rojo-700)"},
+  gratis: {animal:"pudu",   tono:"var(--c-libre)",   suave:"var(--c-libre-suave)",   tinta:"var(--c-libre-tinta)"},
+  ruta:   {animal:"culpeo", tono:"var(--c-fiesta)",  suave:"var(--c-fiesta-suave)",  tinta:"var(--c-fiesta-tinta)"},
+};
+const paletaDe = post => PALETA_FORMATO[post.formato] ||
+  {animal:"loica", tono:"var(--acento)", suave:"var(--rojo-100)", tinta:"var(--rojo-700)"};
+/* Sobre pastel y sobre relleno fuerte —que no cambian con el tema— el
+   contorno de la mascota hay que fijarlo, o de noche se queda sin borde. */
+const TINTA_FIJA = {tinta:"#1E2A4A"};
+
+/* La tapa de un post es la foto del primer panorama que tenga una. */
+function fotoDePost(post){
+  for(const ref of (post.eventos || [])){
+    const ev = EVENTOS.find(e => e.id === ref.id);
+    if(ev && ev.imagen) return ev.imagen;
+  }
+  return "";
+}
 
 pintarBarra("blog.html");
 mostrarCargando();
@@ -260,11 +353,14 @@ function pintarIndice(noEncontrado){
 
   const avisoIdioma = avisoIdiomaHtml();
 
-  const legend = Object.values(BLOG.formatos || {}).map(f => `
-    <div class="formato-chip" style="--tono:${f.color}">
-      <div class="icono">${mascota(f.mascota, f.color, 22)}</div>
+  const legend = Object.entries(BLOG.formatos || {}).map(([clave, f]) => {
+    const p = PALETA_FORMATO[clave] || {tono:f.color, suave:"var(--fondo-hundido)", animal:f.mascota};
+    return `
+    <div class="formato-chip" style="--tono:${p.tono};--suave:${p.suave}">
+      <div class="icono">${mascota(p.animal || f.mascota, "#FFFBF5", 26, TINTA_FIJA)}</div>
       <div><b>${escapar(f.etiqueta)}</b><span>${escapar(f.cadencia)}</span></div>
-    </div>`).join("");
+    </div>`;
+  }).join("");
 
   const lista = orden.length
     ? orden.map(pintarTarjetaIndice).join("")
@@ -278,8 +374,9 @@ function pintarIndice(noEncontrado){
     <header class="blog-cabecera" lang="es">
       <div class="volando">${mascota("loica","var(--acento)",56)}</div>
       <h1>El blog</h1>
-      <p>La capa humana sobre el mapa: alguien abre cada link, descarta lo que no sirve
-        y le pone un motivo. Es la versión larga de <em>Los datos del finde</em>.</p>
+      <p>El mapa muestra todo lo que hay. Acá va lo que vale la pena y por qué: alguien
+        abrió cada link, confirmó el precio real y dejó fuera lo que no daba. Tres
+        formatos fijos: el finde, lo gratis y un barrio por vez.</p>
       ${BLOG.actualizado ? `<span class="blog-actualizado">Actualizado el ${fechaLarga(BLOG.actualizado)}</span>` : ""}
     </header>
     <div class="formatos-legend">${legend}</div>
@@ -288,20 +385,32 @@ function pintarIndice(noEncontrado){
 
 function pintarTarjetaIndice(post){
   const f = formatoDe(post);
+  const p = paletaDe(post);
   const vencidoPost = vencido(post);
+  const foto = fotoDePost(post);
+  const animal = post.mascota || p.animal || f.mascota;
+  const cuantos = (post.eventos || []).length;
+
   return `
-    <a class="entrada-post${post.destacado ? " destacado" : ""}" style="--tono:${f.color}"
+    <a class="post-tarjeta" style="--tono:${p.tono};--suave:${p.suave};--tono-tinta:${p.tinta}"
        href="#/p/${encodeURIComponent(post.slug)}">
-      <div class="entrada-post-mascota">${mascota(post.mascota || f.mascota, f.color, 28)}</div>
-      <div class="entrada-post-cuerpo" lang="es">
-        <div class="entrada-post-meta">
-          <span class="etiqueta-formato">${escapar(f.etiqueta)}</span>
+      <div class="post-tapa">
+        ${mascota(animal, p.tono, 84, TINTA_FIJA)}
+        ${foto ? `<img src="${escapar(foto)}" alt="" loading="lazy" onerror="this.remove()">` : ""}
+        <span class="post-formato">
+          <span class="bolita">${mascota(animal, p.tono, 22, TINTA_FIJA)}</span>
+          ${escapar(f.etiqueta)}
+        </span>
+      </div>
+      <div class="post-tarjeta-cuerpo" lang="es">
+        <h2>${escapar(post.titulo)}</h2>
+        <p>${escapar(post.bajada)}</p>
+        <div class="post-pie">
+          <span>${fechaCorta(post.publicado)}</span>
+          ${cuantos ? `<span>· ${cuantos} panoramas revisados</span>` : ""}
           ${post.destacado ? `<span class="etiqueta-destacado">Destacado</span>` : ""}
           ${vencidoPost && post.evergreen ? `<span class="etiqueta-evergreen">Guía vigente</span>` : ""}
         </div>
-        <h2>${escapar(post.titulo)}</h2>
-        <p>${escapar(post.bajada)}</p>
-        <span class="entrada-post-fecha">${fechaCorta(post.publicado)}</span>
       </div>
     </a>`;
 }
@@ -309,6 +418,7 @@ function pintarTarjetaIndice(post){
 /* ---------- vista de un post ---------- */
 function pintarPost(post){
   const f = formatoDe(post);
+  const pal = paletaDe(post);
   const seo = post.seo || {};
   // seo.titulo ya viene listo para usar como <title> tal cual (algunos posts
   // incluyen "| Loica" y otros no, es criterio editorial) — no se le agrega
@@ -326,12 +436,12 @@ function pintarPost(post){
       ${mascota("loica","var(--tinta-tenue)",22)}
       <span><b>Esta edición ya pasó.</b> Se publicó el ${fechaLarga(post.publicado)}
       y venció el ${fechaLarga(post.vence)}. Mira
-      <a href="#/">las ediciones vigentes del blog</a> o <a href="index.html">el mapa</a>.</span>
+      <a href="#/">las ediciones vigentes del blog</a> o <a href="mapa.html">el mapa</a>.</span>
     </div>`;
   } else if(vencidoPost && post.evergreen){
     const destino = post.barrio
-      ? `qué hay ahora en <a href="index.html">${escapar(post.barrio)}, en el mapa</a>`
-      : `<a href="index.html">qué hay ahora en el mapa</a>`;
+      ? `qué hay ahora en <a href="mapa.html">${escapar(post.barrio)}, en el mapa</a>`
+      : `<a href="mapa.html">qué hay ahora en el mapa</a>`;
     banner = `<div class="banner-vencido evergreen">
       ${mascota(post.mascota || f.mascota, f.color, 22)}
       <span>Los lugares siguen ahí; los eventos de esta lista pueden haber cambiado. Mira ${destino}.</span>
@@ -339,19 +449,21 @@ function pintarPost(post){
   }
 
   const tieneEventos = Array.isArray(post.eventos) && post.eventos.length > 0;
-  const eventosHtml = tieneEventos ? post.eventos.map(tarjetaEventoPost).join("") : "";
+  const eventosHtml = tieneEventos
+    ? post.eventos.map(ref => tarjetaEventoPost(ref, pal, post.mascota || pal.animal)).join("")
+    : "";
   const primerId = tieneEventos ? post.eventos[0].id : null;
 
   vista.innerHTML = `
     <a class="volver" href="#/">← Volver al blog</a>
     ${avisoIdiomaHtml()}
     <article class="post">
-      <header class="post-cabecera" style="--tono:${f.color}" lang="es">
-        <span class="etiqueta-formato">${mascota(post.mascota || f.mascota, f.color, 20)} ${escapar(f.etiqueta)}</span>
+      <header class="post-cabecera" style="--tono:${pal.tono};--tono-tinta:${pal.tinta}" lang="es">
+        <span class="etiqueta-formato">${mascota(post.mascota || pal.animal, pal.tinta, 22)} ${escapar(f.etiqueta)}</span>
         <h1>${escapar(post.titulo)}</h1>
         <p class="post-bajada">${escapar(post.bajada)}</p>
-        <div class="post-meta">Por <b>${escapar(post.autor)}</b> — ${fechaLarga(post.publicado)}
-          ${post.barrio ? ` · ${escapar(post.barrio)}` : ""}</div>
+        <div class="post-meta">${fechaLarga(post.publicado)}
+          ${post.barrio ? ` · ${escapar(post.barrio)}` : ""} · revisado a mano, uno por uno</div>
       </header>
 
       ${banner}
@@ -360,7 +472,7 @@ function pintarPost(post){
 
       ${tieneEventos ? `
         <section class="eventos-post" lang="es">
-          <h2>Los panoramas de este post</h2>
+          <h2>Los panoramas, uno por uno</h2>
           <div class="lista-eventos-post">${eventosHtml}</div>
         </section>
         <a class="boton bloque" style="margin-top:var(--e-5)"
@@ -393,16 +505,16 @@ function pintarCuerpo(cuerpo){
 /* Tarjeta de un evento referenciado por el post: busca el evento real en
    eventos.json (fecha, lugar, precio, foto) y le suma la nota del editor y
    la bandera de honestidad, que son lo único que no sale de eventos.json. */
-function tarjetaEventoPost(ref){
+function tarjetaEventoPost(ref, pal, animalNota){
   const ev = EVENTOS.find(e => e.id === ref.id);
   if(!ev){
     // Defensivo: si algún día un id queda huérfano, no se rompe la página
     // (ver _blog_plan.md §2.4, chequeo 1 — esto no debería pasar nunca).
-    return `<article class="tarjeta-post tarjeta-post-rota">
-      <div class="tarjeta-post-cuerpo">
-        <p class="tarjeta-post-rota-msg">${mascota("loica","var(--tinta-tenue)",20)}
+    return `<article class="reco reco-rota" style="--tono:${pal.tono};--suave:${pal.suave}">
+      <div class="reco-cuerpo">
+        <p class="reco-rota-msg">${mascota("loica","var(--tinta-tenue)",20)}
           Este panorama ya no está en la base de datos.</p>
-        ${ref.nota ? `<p class="nota-editor">${escapar(ref.nota)}</p>` : ""}
+        ${ref.nota ? `<p>${escapar(ref.nota)}</p>` : ""}
       </div>
     </article>`;
   }
@@ -414,23 +526,29 @@ function tarjetaEventoPost(ref){
   const banderaTexto = ref.bandera && BLOG.banderas && BLOG.banderas[ref.bandera];
 
   return `
-    <article class="tarjeta-post">
-      <div class="miniatura">
-        ${mascota(info.mascota, info.hex, 32)}
+    <article class="reco" style="--tono:${pal.tono};--suave:${pal.suave};--cat:${info.hex};--cat-tinta:${info.tinta}">
+      <div class="reco-foto" style="--suave:${info.hex}22">
+        ${mascota(info.mascota, info.hex, 76, TINTA_FIJA)}
         ${ev.imagen ? `<img src="${escapar(ev.imagen)}" alt="" loading="lazy" onerror="this.remove()">` : ""}
-        <span class="dia${dia.pronto ? " pronto" : ""}">${dia.texto}</span>
+        <span class="reco-dia${dia.pronto ? " pronto" : ""}">${dia.texto}</span>
+        <span class="reco-cat">
+          <span class="bolita">${mascota(info.mascota, info.hex, 19, TINTA_FIJA)}</span>
+          ${escapar(info[IDIOMA] || info.es)}
+        </span>
       </div>
-      <div class="tarjeta-post-cuerpo">
-        ${hora ? `<div class="hora">${hora}</div>` : ""}
+      <div class="reco-cuerpo">
+        ${hora ? `<div class="reco-hora">${hora}</div>` : ""}
         <h3><a href="e/${encodeURIComponent(ev.id)}.html">${escapar(ev.titulo)}</a></h3>
-        <div class="tarjeta-meta">
-          <span>${escapar(ev.lugar)}</span>
-          ${ev.comuna ? `<span>· ${escapar(ev.comuna)}</span>` : ""}
-          <span class="precio${ev.gratis ? " libre" : ""}">${precio}</span>
+        <div class="reco-donde">${escapar(ev.lugar)}${ev.comuna ? " · " + escapar(ev.comuna) : ""}</div>
+        <div>
+          <span class="reco-precio${ev.gratis ? " libre" : ""}">${precio}</span>
+          ${banderaTexto ? `<span class="bandera${ref.bandera === "agotado" ? " bandera-agotado" : ""}">${escapar(banderaTexto)}</span>` : ""}
         </div>
-        ${banderaTexto ? `<span class="bandera${ref.bandera === "agotado" ? " bandera-agotado" : ""}">${escapar(banderaTexto)}</span>` : ""}
-        ${ref.nota ? `<p class="nota-editor" lang="es">${escapar(ref.nota)}</p>` : ""}
-        <div class="tarjeta-post-botones">
+        ${ref.nota ? `<div class="reco-nota" lang="es">
+          <span class="quien">${mascota(animalNota, "#FFFBF5", 22, TINTA_FIJA)}</span>
+          <p>${escapar(ref.nota)}</p>
+        </div>` : ""}
+        <div class="reco-botones">
           <a class="boton secundario" href="index.html#/e/${encodeURIComponent(ev.id)}">${t("verMapa")}</a>
           <a class="boton secundario" href="${escapar(ev.url)}" target="_blank" rel="noopener">${t("ir")} ↗</a>
         </div>

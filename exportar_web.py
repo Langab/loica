@@ -80,7 +80,7 @@ PLANTILLA_FICHA = """<!doctype html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css">
+<link rel="stylesheet" href="../loica.css?v=4">
 <style>
   body{{min-height:100dvh}}
   .ficha-sola{{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}}
@@ -100,7 +100,7 @@ PLANTILLA_FICHA = """<!doctype html>
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../index.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
   <div class="foto" id="foto">{foto}</div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">{titulo_html}</h1>
@@ -118,24 +118,24 @@ PLANTILLA_FICHA = """<!doctype html>
   {bloque_descripcion}
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../index.html#/e/{id_evento}">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../mapa.html#/e/{id_evento}">Ver en el mapa</a></p>
 
   <div class="pie-fuente">Información publicada por <b>{fuente_html}</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js"></script>
+<script src="../loica.js?v=4"></script>
 <script>
-  pintarBarra("index.html");
+  pintarBarra("mapa.html", "../");
   const EV = {evento_json};
   document.getElementById("etiqueta-cat").innerHTML =
-    mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 18) + " " + cat(EV.categoria)[IDIOMA];
+    carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));
   const caja = document.getElementById("foto");
   const ponerMascota = () => {{
     if(!caja.querySelector("img") && !caja.querySelector("svg"))
-      caja.innerHTML = mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 78);
+      caja.innerHTML = cuerpo(cat(EV.categoria).mascota, cat(EV.categoria).hex, 96);
   }};
   ponerMascota();
   new MutationObserver(ponerMascota).observe(caja, {{childList:true}});

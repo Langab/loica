@@ -4,3 +4,6 @@ __pycache__/
 *.pyc
 .venv/
 .DS_Store
+
+# Configuración local de Claude Code: es por máquina, no del proyecto
+.claude/settings.local.json

@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css">
+<link rel="stylesheet" href="../loica.css?v=4">
 <style>
   body{min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -44,7 +44,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../index.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
   <div class="foto" id="foto"><img src="https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/b1a6c52e32f3dc67d8d6e62d05f486cc317f898908c13c0debd032f056344473.jpg" alt="" onerror="this.remove();document.getElementById('foto').classList.add('sin-foto')"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">CLUB ROMA SEMÁFORO 🚦❤️</h1>
@@ -62,24 +62,24 @@
   <div class="dato"><span class="et"></span><span>CLUB ROMA SEMÁFORO 🚦❤️ 💮 FIESTA PRIVADA 💮 ❕No somos un local, fiestas privadas estilo casa❕ ¿Dónde? Vicuña Mackenna 1895 ¿Cuándo? 14 de agosto ¿Hora? desde las 21:00-04:30 📍Metro ñuble 🚇…</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../index.html#/e/2a811911867fa9de">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../mapa.html#/e/2a811911867fa9de">Ver en el mapa</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Toliv (eventos under, fiestas y musica emergente)</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js"></script>
+<script src="../loica.js?v=4"></script>
 <script>
-  pintarBarra("index.html");
+  pintarBarra("mapa.html", "../");
   const EV = {"id": "2a811911867fa9de", "titulo": "CLUB ROMA SEMÁFORO 🚦❤️", "inicio": "2026-08-15T00:00:00", "fin": "2026-08-15T03:00:00", "lugar": "Vicuña Mackenna 1895", "direccion": "Avenida Vicuña Mackenna #1895, Ñuñoa", "comuna": "Ñuñoa", "lat": -33.456668, "lon": -70.597842, "precision": "fuente", "gratis": false, "precio": 3000, "precio_texto": "desde $3.000", "categoria": "fiesta", "publico": "adultos", "descripcion": "CLUB ROMA SEMÁFORO 🚦❤️ 💮 FIESTA PRIVADA 💮 ❕No somos un local, fiestas privadas estilo casa❕ ¿Dónde? Vicuña Mackenna 1895 ¿Cuándo? 14 de agosto ¿Hora? desde las 21:00-04:30 📍Metro ñuble 🚇…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/b1a6c52e32f3dc67d8d6e62d05f486cc317f898908c13c0debd032f056344473.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/sitemap-events.xml"};
   document.getElementById("etiqueta-cat").innerHTML =
-    mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 18) + " " + cat(EV.categoria)[IDIOMA];
+    carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));
   const caja = document.getElementById("foto");
   const ponerMascota = () => {
     if(!caja.querySelector("img") && !caja.querySelector("svg"))
-      caja.innerHTML = mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 78);
+      caja.innerHTML = cuerpo(cat(EV.categoria).mascota, cat(EV.categoria).hex, 96);
   };
   ponerMascota();
   new MutationObserver(ponerMascota).observe(caja, {childList:true});

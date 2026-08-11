@@ -132,18 +132,40 @@
   --foco:var(--amarillo-300);
 }
 
-/* Colores por categoría-mascota. Cada color viaja con su tinta:
-   los oscuros llevan crema encima, los claros llevan tinta azul. */
+/* Colores por categoría-mascota. Tres versiones de cada familia y cada una
+   tiene un solo trabajo:
+     --c-X        relleno fuerte. Pin, pastilla, lomo. Siempre con contorno.
+     --c-X-tinta  el mismo color oscurecido hasta pasar 4,5:1 sobre crema.
+                  Es el ÚNICO que puede tocar texto.
+     --c-X-suave  fondo de pastilla, con tinta azul encima.
+   La regla de arriba no es adorno: el naranjo fuerte sobre crema da 2,4:1.
+   Como relleno es alegre, como texto es invisible. */
 :root{
-  --c-fiesta:var(--morado-600);
-  --c-musica:var(--rojo-600);
-  --c-cultura:var(--lapis-600);
-  --c-clases:var(--naranjo-400);
-  --c-libre:var(--verde-700);
-  --c-otros:var(--amarillo-300);   /* el rojo queda solo para acción y marca */
+  --c-fiesta:#7A3FE0;  --c-fiesta-tinta:#5B2BAF;
+  --c-musica:#DE3A1E;  --c-musica-tinta:#A82B12;
+  --c-cultura:#1B6FD1; --c-cultura-tinta:#1A5599;
+  --c-clases:#F08800;  --c-clases-tinta:#8A5000;
+  --c-libre:#0E8757;   --c-libre-tinta:#0A6141;
+  --c-deporte:#0C8B9B; --c-deporte-tinta:#065C66;   /* el Chungungo */
+  --c-otros:#FFB61F;   --c-otros-tinta:#7E5900;     /* el rojo queda para acción y marca */
   --c-fiesta-suave:var(--morado-200); --c-musica-suave:var(--rojo-200);
   --c-cultura-suave:var(--lapis-200); --c-clases-suave:var(--naranjo-200);
   --c-libre-suave:var(--verde-200);   --c-otros-suave:var(--amarillo-200);
+  --c-deporte-suave:#BFE6EA;
+}
+/* En oscuro la tinta se invierte: sobre azul-950 el que falla es el oscuro.
+   Se usa el relleno fuerte, que ahí sí pasa de sobra. */
+@media (prefers-color-scheme: dark){
+  :root:not([data-tema="claro"]){
+    --c-fiesta-tinta:#A893E7; --c-musica-tinta:#F47662; --c-cultura-tinta:#7DA5D5;
+    --c-clases-tinta:#F6B65E; --c-libre-tinta:#5FC79B; --c-deporte-tinta:#5FC8D6;
+    --c-otros-tinta:#FAD391;
+  }
+}
+:root[data-tema="oscuro"]{
+  --c-fiesta-tinta:#A893E7; --c-musica-tinta:#F47662; --c-cultura-tinta:#7DA5D5;
+  --c-clases-tinta:#F6B65E; --c-libre-tinta:#5FC79B; --c-deporte-tinta:#5FC8D6;
+  --c-otros-tinta:#FAD391;
 }
 
 /* ---------- 2. BASE ---------- */
@@ -263,6 +285,24 @@ img{max-width:100%;display:block}
 }
 .tarjeta:hover{background:var(--fondo-hundido)}
 .tarjeta-gratis{box-shadow:inset 3px 0 0 var(--gratis)}
+
+/* Entrada escalonada. La regla es de _direccion_visual.md §8.4 y es una regla
+   de rendimiento antes que de gusto: escalonar 345 tarjetas es un desastre.
+   Solo las 12 primeras, 20ms entre una y otra, 240ms de techo. */
+.lista-anima .tarjeta{animation:tarjeta-entra var(--medio) backwards}
+.lista-anima .tarjeta:nth-child(1){animation-delay:0ms}
+.lista-anima .tarjeta:nth-child(2){animation-delay:20ms}
+.lista-anima .tarjeta:nth-child(3){animation-delay:40ms}
+.lista-anima .tarjeta:nth-child(4){animation-delay:60ms}
+.lista-anima .tarjeta:nth-child(5){animation-delay:80ms}
+.lista-anima .tarjeta:nth-child(6){animation-delay:100ms}
+.lista-anima .tarjeta:nth-child(7){animation-delay:120ms}
+.lista-anima .tarjeta:nth-child(8){animation-delay:140ms}
+.lista-anima .tarjeta:nth-child(9){animation-delay:160ms}
+.lista-anima .tarjeta:nth-child(10){animation-delay:180ms}
+.lista-anima .tarjeta:nth-child(11){animation-delay:200ms}
+.lista-anima .tarjeta:nth-child(12){animation-delay:220ms}
+@keyframes tarjeta-entra{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
 
 .miniatura{
   width:58px;height:58px;border-radius:var(--r-md);overflow:hidden;

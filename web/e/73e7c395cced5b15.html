@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css">
+<link rel="stylesheet" href="../loica.css?v=4">
 <style>
   body{min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -44,7 +44,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../index.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
   <div class="foto" id="foto"><img src="https://www.estacionmapocho.cl/wp-content/uploads/2026/02/DSC_0273-768x512.jpg" alt="" onerror="this.remove();document.getElementById('foto').classList.add('sin-foto')"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">One Piece Card Game Championships 26-27 Finals</h1>
@@ -62,24 +62,24 @@
   <div class="dato"><span class="et"></span><span>El próximo 15 y 16 de agosto, el Centro Cultural Estación Mapocho One Piece Card Game Championships 26-27 Finals Santiago , uno de los eventos competitivos más importantes del circuito oficial de ONE…</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../index.html#/e/73e7c395cced5b15">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../mapa.html#/e/73e7c395cced5b15">Ver en el mapa</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Centro Cultural Estacion Mapocho</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js"></script>
+<script src="../loica.js?v=4"></script>
 <script>
-  pintarBarra("index.html");
+  pintarBarra("mapa.html", "../");
   const EV = {"id": "73e7c395cced5b15", "titulo": "One Piece Card Game Championships 26-27 Finals", "inicio": "2026-08-16T00:00:00", "fin": null, "lugar": "Centro Cultural Estacion Mapocho", "direccion": "", "comuna": "Santiago", "lat": -33.4425, "lon": -70.6505, "precision": "comuna", "gratis": false, "precio": null, "precio_texto": "", "categoria": "otros", "publico": "todos", "descripcion": "El próximo 15 y 16 de agosto, el Centro Cultural Estación Mapocho One Piece Card Game Championships 26-27 Finals Santiago , uno de los eventos competitivos más importantes del circuito oficial de ONE…", "imagen": "https://www.estacionmapocho.cl/wp-content/uploads/2026/02/DSC_0273-768x512.jpg", "fuente": "Centro Cultural Estacion Mapocho", "url": "https://www.estacionmapocho.cl/?evngrnpb=one-piece-card-game-championships-26-27-finals"};
   document.getElementById("etiqueta-cat").innerHTML =
-    mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 18) + " " + cat(EV.categoria)[IDIOMA];
+    carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));
   const caja = document.getElementById("foto");
   const ponerMascota = () => {
     if(!caja.querySelector("img") && !caja.querySelector("svg"))
-      caja.innerHTML = mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 78);
+      caja.innerHTML = cuerpo(cat(EV.categoria).mascota, cat(EV.categoria).hex, 96);
   };
   ponerMascota();
   new MutationObserver(ponerMascota).observe(caja, {childList:true});

@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css">
+<link rel="stylesheet" href="../loica.css?v=4">
 <style>
   body{min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -44,7 +44,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../index.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
   <div class="foto" id="foto"><img src="https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/72e2492116ac736f2b8cb87643639eafd603ccd40deda17524e2121985a285ad.jpg" alt="" onerror="this.remove();document.getElementById('foto').classList.add('sin-foto')"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Colmillo Rosa💋🔥</h1>
@@ -62,24 +62,24 @@
   <div class="dato"><span class="et"></span><span>Colmillo Rosa 💋🔥 ✨ Colmillo Rosa no es solo un evento; es un espacio queer creado por y para disidencias donde la libertad es la única regla. Ven a bailar en un espacio único donde todo el mundo es…</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../index.html#/e/5ab2ae1e7f6afb11">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../mapa.html#/e/5ab2ae1e7f6afb11">Ver en el mapa</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Toliv (eventos under, fiestas y musica emergente)</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js"></script>
+<script src="../loica.js?v=4"></script>
 <script>
-  pintarBarra("index.html");
+  pintarBarra("mapa.html", "../");
   const EV = {"id": "5ab2ae1e7f6afb11", "titulo": "Colmillo Rosa💋🔥", "inicio": "2026-08-30T00:50:00", "fin": "2026-08-30T00:50:00", "lugar": "Colmillo Rosa💋🔥", "direccion": "Avenida Almirante Blanco Encalada #2185, Santiago", "comuna": "Santiago", "lat": -33.4691199, "lon": -70.641997, "precision": "fuente", "gratis": false, "precio": 8000, "precio_texto": "desde $8.000", "categoria": "fiesta", "publico": "adultos", "descripcion": "Colmillo Rosa 💋🔥 ✨ Colmillo Rosa no es solo un evento; es un espacio queer creado por y para disidencias donde la libertad es la única regla. Ven a bailar en un espacio único donde todo el mundo es…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/72e2492116ac736f2b8cb87643639eafd603ccd40deda17524e2121985a285ad.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/sitemap-events.xml"};
   document.getElementById("etiqueta-cat").innerHTML =
-    mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 18) + " " + cat(EV.categoria)[IDIOMA];
+    carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));
   const caja = document.getElementById("foto");
   const ponerMascota = () => {
     if(!caja.querySelector("img") && !caja.querySelector("svg"))
-      caja.innerHTML = mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 78);
+      caja.innerHTML = cuerpo(cat(EV.categoria).mascota, cat(EV.categoria).hex, 96);
   };
   ponerMascota();
   new MutationObserver(ponerMascota).observe(caja, {childList:true});

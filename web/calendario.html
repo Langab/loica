@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css">
+<link rel="stylesheet" href="loica.css?v=4">
 <style>
   html,body{height:100%;overflow:hidden}
   #app{display:flex;flex-direction:column;height:100dvh}
@@ -82,6 +82,7 @@
     .dia{align-items:center;justify-content:center;gap:4px}
     .puntos{display:flex;gap:2px;flex-wrap:wrap;justify-content:center}
     .puntos i{width:5px;height:5px;border-radius:50%;background:var(--tono)}
+    .marca-ev i{background:var(--punto,var(--tono))}
   }
   @media(min-width:901px){.puntos{display:none}}
 </style>
@@ -119,7 +120,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegacion principal"></nav>
 
-<script src="loica.js"></script>
+<script src="loica.js?v=4"></script>
 <script>
 let EVENTOS = [], filtroCat = null, soloGratis = false;
 let mesVisible = new Date(), diaElegido = new Date();
@@ -149,13 +150,13 @@ function pintarFiltros(){
     b.onclick = () => { alPulsar(); pintarFiltros(); pintarMes(); mostrarDia(diaElegido); };
     cont.appendChild(b);
   };
-  agregar(`${mascota("pudu", soloGratis ? "#fff" : "#2E7D5B", 19)} ${t("gratis")}`,
+  agregar(`${carita("pudu", soloGratis ? "#fff" : "#0E8757", 22)} ${t("gratis")}`,
           soloGratis, () => soloGratis = !soloGratis, "es-gratis");
   [...new Set(EVENTOS.map(e => e.categoria))]
     .sort((a,b) => cat(a)[IDIOMA].localeCompare(cat(b)[IDIOMA]))
     .forEach(c => {
       const info = cat(c);
-      agregar(`${mascota(info.mascota, filtroCat === c ? "#fff" : info.hex, 19)} ${info[IDIOMA]}`,
+      agregar(`${carita(info.mascota, filtroCat === c ? "#fff" : info.hex, 22)} ${info[IDIOMA]}`,
               filtroCat === c, () => filtroCat = filtroCat === c ? null : c);
     });
 }
@@ -202,7 +203,7 @@ function pintarMes(){
     const marcas = delDia.slice(0,3).map(ev => {
       const info = cat(ev.categoria);
       return `<span class="marca-ev${ev.gratis ? " libre" : ""}"
-        style="--tono:${info.hex};--tono-suave:${info.hex}1f">
+        style="--tono:${info.tintaVar};--punto:${info.hex};--tono-suave:${info.hex}1f">
         <i></i>${escapar(ev.titulo)}</span>`;
     }).join("");
     const puntos = delDia.slice(0,4).map(ev =>
@@ -227,7 +228,7 @@ function mostrarDia(dia){
   const cont = document.getElementById("agenda-lista");
   cont.innerHTML = "";
   if(!delDia.length){
-    cont.innerHTML = `<div class="vacio">${mascota("chincol","var(--tinta-tenue)",70)}
+    cont.innerHTML = `<div class="vacio">${cuerpo("chincol","var(--tinta-tenue)",88,{pose:"durmiendo"})}
       <p>${t("vacio")}</p></div>`;
     return;
   }

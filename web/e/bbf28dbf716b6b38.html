@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css">
+<link rel="stylesheet" href="../loica.css?v=4">
 <style>
   body{min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -44,7 +44,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../index.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
   <div class="foto" id="foto"><img src="https://images.portaldisc.com/l/eventos/360/20755.jpg" alt="" onerror="this.remove();document.getElementById('foto').classList.add('sin-foto')"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">TRIO LADIES, LA MAQUINA DEL TIEMPO EN SALA SCD EGAÑA</h1>
@@ -62,24 +62,24 @@
   <div class="dato"><span class="et"></span><span>TRIO LADIES, LA MAQUINA DEL TIEMPO EN SALA SCD EGAÑA // PortalTickets.cl Sitio en mantención TRIO LADIES, LA MAQUINA DEL TIEMPO EN SALA SCD EGAÑA Jueves 13 de agosto 2026, 20:30…</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../index.html#/e/bbf28dbf716b6b38">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../mapa.html#/e/bbf28dbf716b6b38">Ver en el mapa</a></p>
 
   <div class="pie-fuente">Información publicada por <b>PortalTickets (PortalDisc)</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js"></script>
+<script src="../loica.js?v=4"></script>
 <script>
-  pintarBarra("index.html");
+  pintarBarra("mapa.html", "../");
   const EV = {"id": "bbf28dbf716b6b38", "titulo": "TRIO LADIES, LA MAQUINA DEL TIEMPO EN SALA SCD EGAÑA", "inicio": "2026-08-13T20:30:00", "fin": null, "lugar": "PortalTickets (PortalDisc)", "direccion": "", "comuna": "La Reina", "lat": -33.4437, "lon": -70.5405, "precision": "comuna", "gratis": false, "precio": 10000, "precio_texto": "S: Entrada General: $10.000 + Cargo Comprar o Regalar Fecha:", "categoria": "musica", "publico": "todos", "descripcion": "TRIO LADIES, LA MAQUINA DEL TIEMPO EN SALA SCD EGAÑA // PortalTickets.cl Sitio en mantención TRIO LADIES, LA MAQUINA DEL TIEMPO EN SALA SCD EGAÑA Jueves 13 de agosto 2026, 20:30…", "imagen": "https://images.portaldisc.com/l/eventos/360/20755.jpg", "fuente": "PortalTickets (PortalDisc)", "url": "https://www.portaldisc.com/evento/trioladies"};
   document.getElementById("etiqueta-cat").innerHTML =
-    mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 18) + " " + cat(EV.categoria)[IDIOMA];
+    carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));
   const caja = document.getElementById("foto");
   const ponerMascota = () => {
     if(!caja.querySelector("img") && !caja.querySelector("svg"))
-      caja.innerHTML = mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 78);
+      caja.innerHTML = cuerpo(cat(EV.categoria).mascota, cat(EV.categoria).hex, 96);
   };
   ponerMascota();
   new MutationObserver(ponerMascota).observe(caja, {childList:true});

@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css">
+<link rel="stylesheet" href="../loica.css?v=4">
 <style>
   body{min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -44,7 +44,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../index.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
   <div class="foto" id="foto"><img src="https://www.udp.cl/cms/wp-content/uploads/2026/08/260730_DoctoradosUDP_Psicologia_Charla-Informativa_Pantalla-scaled-1-768x432.jpg" alt="" onerror="this.remove();document.getElementById('foto').classList.add('sin-foto')"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Charla informativa: Open House, Doctorado en Psicología UDP</h1>
@@ -62,24 +62,24 @@
   <div class="dato"><span class="et"></span><span>El Programa de Doctorado en Psicología invita a participar de la charla informaiva online “Open House, Doctorado en Psicología UDP”. La actividad se transmitirá vía Zoom.</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../index.html#/e/87af1ca340344352">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../mapa.html#/e/87af1ca340344352">Ver en el mapa</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Universidad Diego Portales (extension)</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js"></script>
+<script src="../loica.js?v=4"></script>
 <script>
-  pintarBarra("index.html");
+  pintarBarra("mapa.html", "../");
   const EV = {"id": "87af1ca340344352", "titulo": "Charla informativa: Open House, Doctorado en Psicología UDP", "inicio": "2026-08-11T00:00:00", "fin": null, "lugar": "Universidad Diego Portales (extension)", "direccion": "", "comuna": "Santiago", "lat": -33.446, "lon": -70.652, "precision": "recinto", "gratis": false, "precio": null, "precio_texto": "", "categoria": "charla", "publico": "todos", "descripcion": "El Programa de Doctorado en Psicología invita a participar de la charla informaiva online “Open House, Doctorado en Psicología UDP”. La actividad se transmitirá vía Zoom.", "imagen": "https://www.udp.cl/cms/wp-content/uploads/2026/08/260730_DoctoradosUDP_Psicologia_Charla-Informativa_Pantalla-scaled-1-768x432.jpg", "fuente": "Universidad Diego Portales (extension)", "url": "https://www.udp.cl/agenda/charla-informativa-open-house-doctorado-en-psicologia-udp/"};
   document.getElementById("etiqueta-cat").innerHTML =
-    mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 18) + " " + cat(EV.categoria)[IDIOMA];
+    carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));
   const caja = document.getElementById("foto");
   const ponerMascota = () => {
     if(!caja.querySelector("img") && !caja.querySelector("svg"))
-      caja.innerHTML = mascota(cat(EV.categoria).mascota, cat(EV.categoria).hex, 78);
+      caja.innerHTML = cuerpo(cat(EV.categoria).mascota, cat(EV.categoria).hex, 96);
   };
   ponerMascota();
   new MutationObserver(ponerMascota).observe(caja, {childList:true});
