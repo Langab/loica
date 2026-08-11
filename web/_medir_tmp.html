@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/loica.css">
+<style>body{margin:0}#caja{width:375px;overflow:hidden}pre{font:12px monospace;white-space:pre-wrap}</style>
+</head><body>
+<div id="caja"><div class="filtros" id="filtros"></div></div>
+<pre id="salida">midiendo…</pre>
+<script src="/loica.js"></script>
+<script>
+const ETIQUETAS = ["Gratis","Hoy","Este finde","Aire libre","Arte","Charlas","Cine","Clases","Familia","Fiestas","Música","Otros","Teatro"];
+const CONICONO = {"Gratis":"pudu","Aire libre":"pudu","Arte":"chinchilla","Charlas":"chinchilla","Cine":"chinchilla","Clases":"chincol","Familia":"pudu","Fiestas":"culpeo","Música":"condor","Otros":"loica","Teatro":"chinchilla"};
+const cont = document.getElementById("filtros");
+ETIQUETAS.forEach(e=>{
+  const b=document.createElement("button");
+  b.className="chip"; b.setAttribute("aria-pressed","false");
+  b.innerHTML = (CONICONO[e]?mascota(CONICONO[e],"#2E7D5B",19)+" ":"")+e;
+  cont.appendChild(b);
+});
+document.fonts.ready.then(()=>{
+  setTimeout(()=>{
+    const chips=[...cont.children];
+    const cajaCont=cont.getBoundingClientRect();
+    let out=[];
+    let visibles=0, parcial=null;
+    chips.forEach((c,i)=>{
+      const r=c.getBoundingClientRect();
+      const derecha=r.right-cajaCont.left;
+      const dentro = derecha<=375;
+      if(dentro) visibles++;
+      else if(r.left-cajaCont.left<375 && parcial===null) parcial=ETIQUETAS[i]+" ("+Math.round(375-(r.left-cajaCont.left))+"px de "+Math.round(r.width)+"px visibles)";
+      out.push(ETIQUETAS[i].padEnd(12)+" ancho "+r.width.toFixed(1).padStart(6)+"  borde-derecho a "+derecha.toFixed(0).padStart(5)+"px");
+    });
+    const total=cont.scrollWidth;
+    out.push("");
+    out.push("scrollWidth total = "+total+"px  |  viewport 375px");
+    out.push("chips completamente visibles = "+visibles+" de "+chips.length);
+    out.push("chip parcial = "+parcial);
+    out.push("oculto = "+(total-375)+"px  ("+((total-375)/total*100).toFixed(1)+"% del riel)");
+    out.push("pantallas de scroll necesarias = "+(total/375).toFixed(2));
+    const ult=chips[chips.length-1].getBoundingClientRect();
+    out.push("el ultimo chip ('Teatro') empieza a "+(ult.left-cajaCont.left).toFixed(0)+"px del borde izquierdo");
+    out.push("altura de la fila = "+chips[0].getBoundingClientRect().height.toFixed(1)+"px");
+    document.getElementById("salida").textContent=out.join("\n");
+  },400);
+});
+</script>
+</body></html>

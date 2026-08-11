@@ -35,6 +35,8 @@
     transition:height var(--medio);touch-action:none;
   }
   .panel-lista.arrastrando{transition:none}
+  /* Cuando se abre un evento, la lista se va: antes quedaban encimadas */
+  .panel-lista.oculto{transform:translateY(104%);pointer-events:none}
   .tirador{padding:9px var(--e-4) 6px;cursor:grab;flex:none;touch-action:none}
   .tirador:active{cursor:grabbing}
   .barra-tirador{width:44px;height:4.5px;background:var(--borde-fuerte);border-radius:3px;margin:0 auto}
@@ -186,7 +188,15 @@ mapa.on("error", e => {
 });
 
 cargarEventos()
-  .then(evs => { EVENTOS = evs; pintarFiltros(); refrescar(); })
+  .then(evs => {
+    EVENTOS = evs; pintarFiltros(); refrescar();
+    // Si llegaste desde un link compartido, se abre ese evento
+    const enlace = location.hash.match(/^#\/e\/(.+)$/);
+    if(enlace){
+      const ev = EVENTOS.find(e => e.id === enlace[1]);
+      if(ev) abrirFicha(ev);
+    }
+  })
   .catch(() => {
     document.getElementById("lista").innerHTML =
       `<div class="vacio">${mascota("loica","var(--tinta-tenue)",70)}
@@ -302,13 +312,19 @@ function abrirFicha(ev){
         <span class="precio${ev.gratis ? " libre" : ""}">${ev.gratis ? t("libre") : textoPrecio(ev)}</span></div>
       ${ev.descripcion ? `<div class="dato"><span class="et"></span>
         <span>${escapar(ev.descripcion)}</span></div>` : ""}
+      <div id="compartir-ficha" style="margin-top:var(--e-4)"></div>
       <div class="fuente-pie">${t("fuente")} <b>${escapar(ev.fuente)}</b></div>
     </div>`;
   document.getElementById("ficha").classList.add("visible");
+  document.getElementById("panel").classList.add("oculto");
+  history.replaceState(null, "", "#/e/" + ev.id);
+  document.getElementById("compartir-ficha").appendChild(botonesCompartir(ev));
   if(ev.lat != null) mapa.flyTo({center:[ev.lon, ev.lat], zoom:15, offset:[0,-90], speed:1.5});
 }
 function cerrarFicha(){
   document.getElementById("ficha").classList.remove("visible");
+  document.getElementById("panel").classList.remove("oculto");
+  if(location.hash.startsWith("#/e/")) history.replaceState(null, "", location.pathname);
   seleccionado = null;
 }
 

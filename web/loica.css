@@ -256,6 +256,21 @@ img{max-width:100%;display:block}
 .campo.error input,.campo.error textarea,.campo.error select{border-color:var(--acento)}
 .campo .mensaje-error{color:var(--acento);font-size:var(--t-xs);margin-top:4px;font-weight:600}
 
+/* ---------- 7b. COMPARTIR ---------- */
+.compartir{display:flex;align-items:center;gap:var(--e-3);flex-wrap:wrap}
+.compartir-titulo{
+  font-size:var(--t-xs);font-weight:700;color:var(--tinta-tenue);
+  text-transform:uppercase;letter-spacing:.06em;
+}
+.compartir-botones{display:flex;gap:var(--e-2);flex-wrap:wrap}
+.red{
+  width:42px;height:42px;border-radius:var(--r-full);cursor:pointer;
+  border:1.5px solid var(--borde);background:var(--fondo-elevado);color:var(--tinta-suave);
+  display:grid;place-items:center;transition:var(--rapido);
+}
+.red:hover{background:var(--red);border-color:var(--red);color:#fff;transform:translateY(-2px)}
+.red.copiado{background:var(--gratis);border-color:var(--gratis);color:#fff}
+
 /* ---------- 8. CONTENEDORES ---------- */
 .contenido{max-width:760px;margin:0 auto;padding:var(--e-8) var(--e-5) var(--e-12)}
 .panel{background:var(--fondo-elevado);border:1px solid var(--borde);border-radius:var(--r-lg);

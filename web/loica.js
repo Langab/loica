@@ -260,6 +260,111 @@ function textoPrecio(ev){
 const mismaFecha = (a,b) => a.toDateString() === b.toDateString();
 const claveDia = f => `${f.getFullYear()}-${String(f.getMonth()+1).padStart(2,"0")}-${String(f.getDate()).padStart(2,"0")}`;
 
+/* ---------- COMPARTIR ----------
+   El link que viaja SIEMPRE apunta a la ficha del evento en Loica, no a la
+   fuente. Así el que recibe el mensaje por WhatsApp llega acá, ve la foto y la
+   fecha en la vista previa, y desde acá decide ir a comprar. Es la única forma
+   de que el tráfico compartido vuelva al proyecto. */
+const SITIO = location.origin + location.pathname.replace(/\/(e\/)?[^/]*$/, "");
+
+function urlDeEvento(ev){
+  return `${SITIO}/e/${ev.id}.html`;
+}
+
+function textoCompartir(ev){
+  const f = new Date(ev.inicio);
+  const dia = f.toLocaleDateString(localeDe(), {weekday:"long", day:"numeric", month:"long"});
+  const hora = (f.getHours() || f.getMinutes())
+    ? " a las " + f.toLocaleTimeString(localeDe(), {hour:"2-digit", minute:"2-digit", hour12:false})
+    : "";
+  const precio = ev.gratis ? " · Gratis" : (ev.precio ? ` · $${ev.precio.toLocaleString("es-CL")}` : "");
+  return `${ev.titulo}\n${dia}${hora} · ${ev.lugar}${precio}`;
+}
+
+const REDES = {
+  whatsapp:{
+    nombre:"WhatsApp", color:"#25D366",
+    icono:`<path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm5.8 14.1c-.24.68-1.42 1.31-1.95 1.36-.5.05-1.13.07-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.8-4.17-4.94-4.36-.15-.19-1.19-1.58-1.19-3.02s.76-2.14 1.03-2.44c.27-.29.58-.37.78-.37h.56c.18 0 .42-.07.66.5.24.59.83 2.03.9 2.18.07.15.12.32.02.51-.1.19-.15.31-.3.48l-.44.51c-.15.15-.3.31-.13.61.17.29.76 1.25 1.63 2.03 1.12 1 2.06 1.31 2.35 1.46.29.15.46.12.63-.07.17-.2.73-.85.92-1.14.19-.29.39-.24.66-.15.27.1 1.7.8 1.99.95.29.15.49.22.56.34.07.12.07.71-.17 1.39z" fill="currentColor"/>`,
+    url:(u,t)=>`https://wa.me/?text=${encodeURIComponent(t + "\n\n" + u)}`,
+  },
+  facebook:{
+    nombre:"Facebook", color:"#1877F2",
+    icono:`<path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.52 1.5-3.91 3.77-3.91 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.44 2.9h-2.34V22c4.78-.76 8.44-4.92 8.44-9.94z" fill="currentColor"/>`,
+    url:(u)=>`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(u)}`,
+  },
+  x:{
+    nombre:"X", color:"#111",
+    icono:`<path d="M17.53 3h3.02l-6.6 7.54L21.75 21h-6.08l-4.76-6.22L5.46 21H2.44l7.06-8.07L2.25 3h6.23l4.3 5.69L17.53 3zm-1.06 16.2h1.67L7.6 4.7H5.81l10.66 14.5z" fill="currentColor"/>`,
+    url:(u,t)=>`https://twitter.com/intent/tweet?text=${encodeURIComponent(t)}&url=${encodeURIComponent(u)}`,
+  },
+};
+
+function botonesCompartir(ev){
+  const url = urlDeEvento(ev);
+  const texto = textoCompartir(ev);
+  const caja = document.createElement("div");
+  caja.className = "compartir";
+
+  const etiqueta = {es:"Compartir", en:"Share", pt:"Compartilhar"}[IDIOMA];
+  caja.innerHTML = `<span class="compartir-titulo">${etiqueta}</span><div class="compartir-botones"></div>`;
+  const fila = caja.querySelector(".compartir-botones");
+
+  const boton = (clase, nombre, color, icono, alPulsar) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "red " + clase;
+    b.style.setProperty("--red", color);
+    b.setAttribute("aria-label", `${etiqueta} — ${nombre}`);
+    b.title = nombre;
+    b.innerHTML = `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">${icono}</svg>`;
+    b.onclick = alPulsar;
+    fila.appendChild(b);
+    return b;
+  };
+
+  for(const [clave, red] of Object.entries(REDES)){
+    boton(clave, red.nombre, red.color, red.icono,
+          () => window.open(red.url(url, texto), "_blank", "noopener,width=620,height=560"));
+  }
+
+  // Instagram no permite compartir un link desde la web: no existe una URL de
+  // "compartir en Instagram". Lo honesto es abrir el menú del teléfono, que sí
+  // lo incluye; y si el navegador no lo tiene, copiar el link.
+  const iconoIg = `<rect x="3" y="3" width="18" height="18" rx="5.4" fill="none" stroke="currentColor" stroke-width="1.9"/>
+    <circle cx="12" cy="12" r="4.1" fill="none" stroke="currentColor" stroke-width="1.9"/>
+    <circle cx="17.2" cy="6.8" r="1.25" fill="currentColor"/>`;
+  if(navigator.share){
+    boton("instagram", "Instagram / " + etiqueta, "#E1306C", iconoIg,
+          () => navigator.share({title: ev.titulo, text: texto, url}).catch(() => {}));
+  } else {
+    boton("instagram", "Instagram — " + {es:"copiar link", en:"copy link", pt:"copiar link"}[IDIOMA],
+          "#E1306C", iconoIg, e => copiarLink(url, e.currentTarget));
+  }
+
+  boton("copiar", {es:"Copiar link", en:"Copy link", pt:"Copiar link"}[IDIOMA],
+        "var(--tinta-suave)",
+        `<path d="M9.5 14.5l5-5M8 12l-2 2a3.5 3.5 0 105 5l2-2M16 12l2-2a3.5 3.5 0 10-5-5l-2 2"
+          fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>`,
+        e => copiarLink(url, e.currentTarget));
+
+  return caja;
+}
+
+function copiarLink(url, boton){
+  const listo = () => {
+    boton.classList.add("copiado");
+    const antes = boton.title;
+    boton.title = {es:"¡Copiado!", en:"Copied!", pt:"Copiado!"}[IDIOMA];
+    setTimeout(() => { boton.classList.remove("copiado"); boton.title = antes; }, 1800);
+  };
+  if(navigator.clipboard) navigator.clipboard.writeText(url).then(listo).catch(() => {});
+  else {
+    const campo = document.createElement("textarea");
+    campo.value = url; document.body.appendChild(campo);
+    campo.select(); document.execCommand("copy"); campo.remove(); listo();
+  }
+}
+
 /* Cuándo es, dicho como lo diría una persona */
 function etiquetaDia(fecha){
   const hoy = new Date();
