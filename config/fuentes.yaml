@@ -618,6 +618,7 @@ fuentes:
   - evento
   patron_url: /eventos/
   tope_fichas: 45
+  requiere_comuna: true
 - id: uahurtado
   nombre: Universidad Alberto Hurtado - Agenda de eventos
   url_base: https://www.uahurtado.cl
@@ -1132,3 +1133,20 @@ fuentes:
   activa: false
   notas: 'robots.txt con Allow: / y sitemap.xml valido. Home con JSON-LD (FAQPage, ItemList). Util para
     poblar el CATALOGO DE RECINTOS (nombre, direccion, comuna) y geocodificar, NO para horarios de t'
+- id: portaltickets
+  nombre: PortalTickets (PortalDisc)
+  url_base: https://www.portaldisc.com
+  url_agenda: https://www.portaldisc.com/portaltickets
+  tipo_adaptador: sitemap
+  origen: listado
+  endpoint: /portaltickets
+  patron_url: /evento/
+  tope_fichas: 60
+  comuna: ''
+  crawl_delay_seg: 5
+  activa: true
+  notas: 'Ticketera chilena de musica en vivo y eventos independientes. Su sitemap no lista eventos: se
+    leen del listado /portaltickets y se abre cada ficha. Publica fecha, hora, precios e imagen. OJO:
+    su robots.txt bloquea explicitamente a ClaudeBot, GPTBot, CCBot y anthropic-ai; el grupo generico
+    (*) si permite /evento/. Conviene pedirles permiso por escrito, igual que a Passline.'
+  requiere_comuna: true

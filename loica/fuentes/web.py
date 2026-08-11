@@ -201,39 +201,72 @@ def extraer_html(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
     return eventos_desde_html(respuesta.text, fuente)
 
 
-def extraer_sitemap_fichas(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
-    """Descubre eventos por sitemap y saca los datos de cada ficha.
+def _urls_desde_listado(fuente: dict, cliente: ClienteEducado) -> list[tuple[str, str]]:
+    """Saca los links de evento de una página de listado HTML.
 
-    Es el patrón más común en sitios modernos: el sitemap lista las URLs pero
-    no dice nada del evento; la fecha, el lugar y el precio están en la ficha,
-    casi siempre como JSON-LD (schema.org/Event).
+    Para sitios que no publican sus eventos en el sitemap (PortalTickets, por
+    ejemplo, tiene un sitemap de 6 URLs y toda su cartelera en una sola página).
     """
     base = fuente["url_base"].rstrip("/")
-    url_mapa = fuente.get("url_agenda") or (base + fuente.get("endpoint", "/sitemap.xml"))
-
-    respuesta = cliente.obtener(url_mapa, max_edad_cache_seg=6 * 3600)
+    url = fuente.get("url_agenda") or (base + fuente.get("endpoint", "/"))
+    respuesta = cliente.obtener(url, max_edad_cache_seg=3 * 3600)
     if respuesta is None or not respuesta.ok:
-        log.warning("%s: no pude leer el sitemap", fuente.get("nombre"))
+        log.warning("%s: no pude leer el listado", fuente.get("nombre"))
         return []
-
-    try:
-        raiz = ElementTree.fromstring(respuesta.content)
-    except ElementTree.ParseError:
-        log.warning("%s: sitemap ilegible", fuente.get("nombre"))
-        return []
-
-    espacios = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
-    entradas = []
-    for nodo in raiz.findall(".//s:url", espacios) or raiz.findall(".//url"):
-        loc = nodo.find("s:loc", espacios) if nodo.find("s:loc", espacios) is not None else nodo.find("loc")
-        if loc is None or not loc.text:
-            continue
-        mod = nodo.find("s:lastmod", espacios) if nodo.find("s:lastmod", espacios) is not None else nodo.find("lastmod")
-        entradas.append((loc.text.strip(), (mod.text or "") if mod is not None else ""))
 
     patron = fuente.get("patron_url", "")
-    if patron:
-        entradas = [e for e in entradas if patron in e[0]]
+    sopa = BeautifulSoup(respuesta.text, "html.parser")
+    vistas: dict[str, str] = {}
+    for enlace in sopa.find_all("a", href=True):
+        href = enlace["href"]
+        if patron and patron not in href:
+            continue
+        if href.startswith("/"):
+            href = base + href
+        elif not href.startswith("http"):
+            continue
+        vistas.setdefault(href.split("?")[0], "")
+    return list(vistas.items())
+
+
+def extraer_sitemap_fichas(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
+    """Descubre las URLs de los eventos y saca los datos de cada ficha.
+
+    Es el patrón más común en sitios modernos: el listado (sitemap o página)
+    solo entrega links; la fecha, el lugar y el precio están en la ficha,
+    a veces como JSON-LD (schema.org/Event) y a veces solo en el texto.
+
+    `origen: listado` en la configuración cambia el sitemap por una página HTML.
+    """
+    base = fuente["url_base"].rstrip("/")
+
+    if fuente.get("origen") == "listado":
+        entradas = _urls_desde_listado(fuente, cliente)
+    else:
+        url_mapa = fuente.get("url_agenda") or (base + fuente.get("endpoint", "/sitemap.xml"))
+        respuesta = cliente.obtener(url_mapa, max_edad_cache_seg=6 * 3600)
+        if respuesta is None or not respuesta.ok:
+            log.warning("%s: no pude leer el sitemap", fuente.get("nombre"))
+            return []
+
+        try:
+            raiz = ElementTree.fromstring(respuesta.content)
+        except ElementTree.ParseError:
+            log.warning("%s: sitemap ilegible", fuente.get("nombre"))
+            return []
+
+        espacios = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+        entradas = []
+        for nodo in raiz.findall(".//s:url", espacios) or raiz.findall(".//url"):
+            loc = nodo.find("s:loc", espacios) if nodo.find("s:loc", espacios) is not None else nodo.find("loc")
+            if loc is None or not loc.text:
+                continue
+            mod = nodo.find("s:lastmod", espacios) if nodo.find("s:lastmod", espacios) is not None else nodo.find("lastmod")
+            entradas.append((loc.text.strip(), (mod.text or "") if mod is not None else ""))
+
+        patron = fuente.get("patron_url", "")
+        if patron:
+            entradas = [e for e in entradas if patron in e[0]]
 
     # Lo más recientemente modificado primero: son los eventos vivos
     entradas.sort(key=lambda e: e[1], reverse=True)

@@ -197,8 +197,15 @@ def main() -> int:
             # Una exposición de un mes llega como 30 entradas iguales: se unen
             eventos = colapsar_multidia(eventos)
 
+            # Las ticketeras nacionales traen eventos de todo Chile. Sin comuna
+            # de la Región Metropolitana no se puede afirmar que sean de
+            # Santiago, y esta app es de Santiago.
+            exige_comuna = bool(fuente.get("requiere_comuna"))
+
             for evento in eventos:
                 valido, motivo = evento.es_valido()
+                if valido and exige_comuna and not evento.comuna:
+                    valido, motivo = False, "sin comuna de Santiago"
                 if not valido:
                     conteo["descartados"] += 1
                     log.debug("descartado (%s): %s", motivo, evento.titulo[:60])
