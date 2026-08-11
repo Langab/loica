@@ -23,6 +23,23 @@
   main{flex:1;position:relative;min-height:0}
   #mapa{position:absolute;inset:0;background:var(--fondo-hundido)}
 
+  /* --- Los dos rieles de filtros ---
+     Fila 1: gratis, cuándo y para quién. Fila 2: la categoría, que es la
+     pregunta que viene después. La segunda va más chica a propósito: sin esa
+     diferencia las dos filas compiten y ninguna se lee como la principal. */
+  header .filtros{padding-bottom:var(--e-2);border-bottom:0}
+  header .filtros-tipo{
+    padding-top:0;padding-bottom:var(--e-3);
+    border-bottom:2.5px solid var(--contorno);
+  }
+  header .filtros-tipo .chip{
+    padding:6px 12px 6px 8px;gap:5px;font-size:var(--t-xs);
+    border-width:2px;box-shadow:0 2px 0 var(--contorno);
+  }
+  header .filtros-tipo .chip svg{width:18px;height:18px}
+  header .filtros-tipo .chip:active,
+  header .filtros-tipo .chip[aria-pressed="true"]{transform:translateY(2px);box-shadow:none}
+
   /* Pin: gota con la mascota adentro. Verde = gratis, el filtro estrella. */
   .pin{width:36px;height:36px;cursor:pointer;transition:transform var(--rapido)}
   .pin:hover,.pin.activo{transform:scale(1.18) translateY(-2px);z-index:9}
@@ -62,10 +79,8 @@
   .tirador:active{cursor:grabbing}
   .barra-tirador{width:44px;height:4.5px;background:var(--borde-fuerte);border-radius:3px;margin:0 auto}
   .conteo{display:flex;align-items:baseline;gap:7px;font-size:var(--t-sm);color:var(--tinta-suave);
-    padding:0 var(--e-4) var(--e-2)}
+    padding:var(--e-1) var(--e-4) var(--e-2)}
   .conteo b{font-family:var(--fuente-marca);font-size:var(--t-lg);color:var(--tinta)}
-  .panel-lista .filtros{border-bottom:1px solid var(--borde);border-top:1px solid var(--borde);
-    background:transparent;padding:var(--e-2) var(--e-4)}
   .lista{overflow-y:auto;overscroll-behavior:contain;flex:1;min-height:0}
 
   .ficha{
@@ -103,12 +118,14 @@
   @media(max-width:879px){
     .panel-lista{bottom:calc(52px + env(safe-area-inset-bottom))}
     .ficha{bottom:calc(52px + env(safe-area-inset-bottom))}
+    /* Dos filas de chips le quitan alto al mapa: en celular van apretadas */
+    header .filtros{padding:var(--e-2) var(--e-3) 6px}
+    header .filtros-tipo{padding:0 var(--e-3) var(--e-2)}
   }
   @media(min-width:880px){
     .panel-lista{left:auto;right:var(--e-4);top:var(--e-4);bottom:var(--e-4);width:400px;
       height:auto!important;border-radius:var(--r-lg);max-height:none;transition:none}
     .tirador{display:none}
-    .panel-lista .filtros{border-top:0;border-radius:var(--r-lg) var(--r-lg) 0 0}
     .conteo{padding-top:var(--e-3)}
     .ficha{left:auto;right:var(--e-4);bottom:var(--e-4);width:400px;
       border-radius:var(--r-lg);max-height:78%}
@@ -118,7 +135,14 @@
 </head>
 <body>
 <div id="app">
-  <header><div class="barra" id="barra"></div></header>
+  <header>
+    <div class="barra" id="barra"></div>
+    <!-- Dos rieles, igual que el calendario: arriba lo transversal (precio,
+         cuándo, para quién), abajo el qué. Antes vivían dentro del panel,
+         donde a 400px de ancho se veían tres de dieciocho. -->
+    <div class="filtros" id="filtros" role="group"></div>
+    <div class="filtros filtros-tipo" id="filtros-tipo" role="group"></div>
+  </header>
 
   <main>
     <div id="mapa"></div>
@@ -128,7 +152,6 @@
     <section class="panel-lista" id="panel" aria-label="Lista de eventos">
       <div class="tirador" id="tirador" role="button" tabindex="0"
            aria-label="Arrastra para ver más eventos"><div class="barra-tirador"></div></div>
-      <div class="filtros" id="filtros"></div>
       <div class="conteo"><b id="conteo">0</b> <span id="conteo-txt">eventos</span></div>
       <div class="lista" id="lista"></div>
     </section>
@@ -247,9 +270,13 @@ const visibles = () => EVENTOS.filter(ev =>
   (cuando === "todo" || (cuando === "hoy" ? esHoy(ev) : esFinde(ev))));
 
 function pintarFiltros(){
-  const cont = document.getElementById("filtros");
-  cont.innerHTML = "";
-  const agregar = (contenido, activo, alPulsar, clase="") => {
+  const generales = document.getElementById("filtros");
+  const tipos = document.getElementById("filtros-tipo");
+  generales.innerHTML = ""; tipos.innerHTML = "";
+  generales.setAttribute("aria-label", t("filtrosRapidos"));
+  tipos.setAttribute("aria-label", t("filtrosTipo"));
+
+  const agregar = (cont, contenido, activo, alPulsar, clase="") => {
     const b = document.createElement("button");
     b.className = "chip " + clase;
     b.innerHTML = contenido;
@@ -258,25 +285,29 @@ function pintarFiltros(){
     cont.appendChild(b);
   };
 
+  /* --- Fila 1: los transversales --- */
   // El Pudú es la mascota de lo gratis: el filtro estrella tiene cara propia
-  agregar(`${mascota("pudu", soloGratis ? "#fff" : "#2E7D5B", 19)} ${t("gratis")}`,
+  agregar(generales, `${mascota("pudu", soloGratis ? "#fff" : "#2E7D5B", 19)} ${t("gratis")}`,
           soloGratis, () => soloGratis = !soloGratis, "es-gratis");
-  agregar(t("hoy"), cuando === "hoy", () => cuando = cuando === "hoy" ? "todo" : "hoy");
-  agregar(t("finde"), cuando === "finde", () => cuando = cuando === "finde" ? "todo" : "finde");
+  agregar(generales, t("hoy"), cuando === "hoy",
+          () => cuando = cuando === "hoy" ? "todo" : "hoy");
+  agregar(generales, t("finde"), cuando === "finde",
+          () => cuando = cuando === "finde" ? "todo" : "finde");
 
   // Público: responde "¿puedo llevar a mi hijo?" y "¿es de mayores?"
-  agregar(`${mascota("pudu", publicoFiltro === "ninos" ? "#fff" : "#2E7D5B", 22)} ${t("ninos")}`,
+  agregar(generales, `${mascota("pudu", publicoFiltro === "ninos" ? "#fff" : "#2E7D5B", 22)} ${t("ninos")}`,
           publicoFiltro === "ninos",
           () => publicoFiltro = publicoFiltro === "ninos" ? null : "ninos");
-  agregar(`${mascota("culpeo", publicoFiltro === "adultos" ? "#fff" : "#7A4FCF", 22)} ${t("mas18")}`,
+  agregar(generales, `${mascota("culpeo", publicoFiltro === "adultos" ? "#fff" : "#7A4FCF", 22)} ${t("mas18")}`,
           publicoFiltro === "adultos",
           () => publicoFiltro = publicoFiltro === "adultos" ? null : "adultos");
 
+  /* --- Fila 2: qué tipo de panorama --- */
   [...new Set(EVENTOS.map(e => e.categoria))]
     .sort((a,b) => cat(a)[IDIOMA].localeCompare(cat(b)[IDIOMA]))
     .forEach(c => {
       const info = cat(c);
-      agregar(`${mascota(info.mascota, filtroCat === c ? "#fff" : info.hex, 19)} ${info[IDIOMA]}`,
+      agregar(tipos, `${mascota(info.mascota, filtroCat === c ? "#fff" : info.hex, 19)} ${info[IDIOMA]}`,
               filtroCat === c, () => filtroCat = filtroCat === c ? null : c);
     });
 }
