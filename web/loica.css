@@ -147,11 +147,12 @@
   --c-clases:#F08800;  --c-clases-tinta:#8A5000;
   --c-libre:#0E8757;   --c-libre-tinta:#0A6141;
   --c-deporte:#0C8B9B; --c-deporte-tinta:#065C66;   /* el Chungungo */
+  --c-charla:#C42B67;  --c-charla-tinta:#8F1C4A;    /* el Pingüino */
   --c-otros:#FFB61F;   --c-otros-tinta:#7E5900;     /* el rojo queda para acción y marca */
   --c-fiesta-suave:var(--morado-200); --c-musica-suave:var(--rojo-200);
   --c-cultura-suave:var(--lapis-200); --c-clases-suave:var(--naranjo-200);
   --c-libre-suave:var(--verde-200);   --c-otros-suave:var(--amarillo-200);
-  --c-deporte-suave:#BFE6EA;
+  --c-deporte-suave:#BFE6EA;          --c-charla-suave:#F7CBDC;
 }
 /* En oscuro la tinta se invierte: sobre azul-950 el que falla es el oscuro.
    Se usa el relleno fuerte, que ahí sí pasa de sobra. */
@@ -159,13 +160,13 @@
   :root:not([data-tema="claro"]){
     --c-fiesta-tinta:#A893E7; --c-musica-tinta:#F47662; --c-cultura-tinta:#7DA5D5;
     --c-clases-tinta:#F6B65E; --c-libre-tinta:#5FC79B; --c-deporte-tinta:#5FC8D6;
-    --c-otros-tinta:#FAD391;
+    --c-charla-tinta:#EE8FB4; --c-otros-tinta:#FAD391;
   }
 }
 :root[data-tema="oscuro"]{
   --c-fiesta-tinta:#A893E7; --c-musica-tinta:#F47662; --c-cultura-tinta:#7DA5D5;
   --c-clases-tinta:#F6B65E; --c-libre-tinta:#5FC79B; --c-deporte-tinta:#5FC8D6;
-  --c-otros-tinta:#FAD391;
+  --c-charla-tinta:#EE8FB4; --c-otros-tinta:#FAD391;
 }
 
 /* ---------- 2. BASE ---------- */

@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="loica.css?v=4">
+<link rel="stylesheet" href="loica.css?v=5">
 <style>
   html,body{height:100%;overflow:hidden}
   #app{display:flex;flex-direction:column;height:100dvh}
@@ -167,24 +167,6 @@
     display:flex;align-items:center;gap:7px;max-width:calc(100% - var(--e-8));
   }
 
-  /* Marcador de grupo: los pines encimados del centro pasan a ser una sola
-     burbuja con el número. Es DOM y no capa del mapa porque son pocos
-     (nunca más de 20 en pantalla) y así el número usa la tipografía real. */
-  /* El grupo lleva la carita de la familia que manda adentro, no solo el
-     número: si al alejarte todo se vuelve un círculo rojo, la señalética de
-     mascotas —que es la marca— desaparece justo cuando más se necesita. */
-  .grupo{
-    display:flex;align-items:center;gap:3px;cursor:pointer;
-    padding:4px 10px 4px 5px;border-radius:var(--r-pill);
-    background:var(--tono,var(--acento-solido));color:#fff;
-    border:2.5px solid var(--contorno);box-shadow:var(--repisa-2);
-    font:800 var(--t-sm)/1 var(--fuente-marca);font-variant-numeric:tabular-nums;
-    transition:transform var(--rapido);
-  }
-  .grupo svg{width:var(--dm,24px);height:var(--dm,24px);flex:none}
-  .grupo.claro{color:var(--azul-900)}
-  .grupo:hover{transform:scale(1.09)}
-
   /* En celular la cabecera compite con el mapa por cada píxel: tres bandas
      de controles se comían el 21% de la pantalla. Acá se aprieta todo lo que
      se puede sin bajar de 44px de área táctil en los chips. */
@@ -241,7 +223,7 @@
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-<script src="loica.js?v=4"></script>
+<script src="loica.js?v=5"></script>
 <script>
 let EVENTOS = [], filtroCat = null, soloGratis = false, cuando = "todo", publicoFiltro = null;
 let listaActual = [], seleccionado = null, mapa = null, hayMapa = false;
@@ -323,13 +305,18 @@ function avisar(texto, quien = "loica"){
 }
 
 /* ============================================================
-   PINES: capa de símbolos con agrupación, no 288 divs
+   PINES: capa de símbolos, un pin-animal por evento, no 288 divs
    ------------------------------------------------------------
    Antes cada evento era un <div> con un SVG adentro. 288 marcadores DOM
    sobre un canvas WebGL significan 288 elementos reposicionados en cada
    cuadro mientras arrastras: en celular el mapa se movía a tirones. Ahora
-   los pines viven dentro del motor del mapa y se agrupan solos, que además
-   arregla que el centro de Santiago fuera una masa de gotas encimadas.
+   los pines viven dentro del motor del mapa.
+
+   Sin agrupación, a propósito: cada evento es SIEMPRE su propio pin,
+   aunque en el centro se encimen (icon-allow-overlap). Al filtrar,
+   refrescar() manda la lista nueva con setData() y los pines filtrados
+   desaparecen. Para que el traslape de lejos moleste menos, el pin crece
+   con el zoom, y los gratis se dibujan encima del resto.
 
    Los íconos se dibujan a canvas la primera vez que el mapa los pide
    (`styleimagemissing`), así que solo se generan los que de verdad se ven.
@@ -367,37 +354,29 @@ function svgPin(clave, gratis){
   </svg>`;
 }
 
-// Las siete familias de mascota, para saber cuál manda dentro de cada grupo
-const FAMILIAS = [...new Set(Object.values(CATEGORIAS).map(c => c.mascota))];
-const COLOR_FAMILIA = Object.fromEntries(
-  FAMILIAS.map(f => [f, Object.values(CATEGORIAS).find(c => c.mascota === f).hex]));
-
 function datosGeo(lista){
   return {type:"FeatureCollection", features: lista
     .filter(ev => ev.lat != null)
     .map(ev => ({type:"Feature",
       geometry:{type:"Point", coordinates:[ev.lon, ev.lat]},
       properties:{id:ev.id, cat:CATEGORIAS[ev.categoria] ? ev.categoria : "otros",
-                  masc:cat(ev.categoria).mascota, gratis:!!ev.gratis}}))};
+                  gratis:!!ev.gratis}}))};
 }
 
 function montarCapas(){
   if(!hayMapa || mapa.getSource("eventos")) return;
-  mapa.addSource("eventos", {
-    type:"geojson", data:datosGeo(listaActual),
-    cluster:true, clusterRadius:52, clusterMaxZoom:14,
-    // El motor va sumando cuántos hay de cada familia dentro del grupo; con
-    // eso el marcador sabe qué carita ponerse sin pedir los puntos de vuelta
-    clusterProperties: Object.fromEntries(FAMILIAS.map(f =>
-      [f, ["+", ["case", ["==", ["get","masc"], f], 1, 0]]]).concat(
-      [["gratis", ["+", ["case", ["get","gratis"], 1, 0]]]])),
-  });
+  mapa.addSource("eventos", {type:"geojson", data:datosGeo(listaActual)});
   mapa.addLayer({
-    id:"pines", type:"symbol", source:"eventos", filter:["!",["has","point_count"]],
+    id:"pines", type:"symbol", source:"eventos",
     layout:{
       "icon-image":["concat","pin-",["get","cat"],["case",["get","gratis"],"-g",""]],
-      "icon-size":.5, "icon-anchor":"bottom",
+      // Más chico de lejos, tamaño pleno de cerca: el traslape del centro
+      // molesta menos sin esconder a nadie
+      "icon-size":["interpolate",["linear"],["zoom"],11,.4,15,.55],
+      "icon-anchor":"bottom",
       "icon-allow-overlap":true, "icon-ignore-placement":true,
+      // Con allow-overlap, la clave más alta se dibuja encima: gratis gana
+      "symbol-sort-key":["case",["get","gratis"],1,0],
     },
   });
   mapa.on("click", "pines", e => {
@@ -406,10 +385,6 @@ function montarCapas(){
   });
   mapa.on("mouseenter", "pines", () => mapa.getCanvas().style.cursor = "pointer");
   mapa.on("mouseleave", "pines", () => mapa.getCanvas().style.cursor = "");
-  mapa.on("data", e => { if(e.sourceId === "eventos" && e.isSourceLoaded) pintarGrupos(); });
-  // moveend y no move: recalcular los grupos en cada cuadro del arrastre era
-  // volver a tener el problema que este cambio vino a arreglar.
-  mapa.on("moveend", pintarGrupos);
 }
 
 if(hayMapa){
@@ -424,52 +399,6 @@ if(hayMapa){
   mapa.on("styledata", () => { if(!mapa.getSource("eventos")) montarCapas(); });
   new MutationObserver(() => mapa.setStyle(estiloMapa()))
     .observe(document.documentElement, {attributes:true, attributeFilter:["data-tema"]});
-}
-
-/* Los grupos van en DOM: nunca hay más de veinte en pantalla y así el número
-   usa la tipografía de la marca en vez de depender de un servidor de glifos
-   que este estilo de mapa (puro ráster) no tiene. */
-const marcadoresGrupo = new Map();   // cluster_id → Marker
-function pintarGrupos(){
-  if(!hayMapa || !mapa.getSource("eventos")) return;
-  const caja = mapa.getBounds();
-  const vivos = new Set();
-
-  for(const g of mapa.querySourceFeatures("eventos", {filter:["has","point_count"]})){
-    const id = g.properties.cluster_id;
-    // querySourceFeatures devuelve lo de todas las teselas cargadas, también
-    // las de fuera de pantalla, y el mismo grupo repetido en los bordes
-    if(vivos.has(id) || !caja.contains(g.geometry.coordinates)) continue;
-    vivos.add(id);
-    if(marcadoresGrupo.has(id)) continue;   // ya está puesto: no lo toco
-
-    const n = g.properties.point_count;
-    // La familia que más aparece adentro le presta la cara y el color al grupo
-    const manda = FAMILIAS.reduce((a,f) =>
-      (g.properties[f] || 0) > (g.properties[a] || 0) ? f : a, FAMILIAS[0]);
-    const tono = COLOR_FAMILIA[manda];
-    const el = document.createElement("div");
-    el.className = "grupo" + (manda === "loica" || manda === "chincol" ? " claro" : "");
-    el.style.setProperty("--tono", tono);
-    el.style.setProperty("--dm", (n < 10 ? 24 : n < 50 ? 28 : 32) + "px");
-    el.style.fontSize = (n < 10 ? 14 : n < 50 ? 16 : 19) + "px";
-    // Cara crema con tinta azul, igual que el disco del pin: sobre los siete
-    // colores de familia funciona la misma combinación
-    el.innerHTML = `${carita(manda, "#FAF3E7", 32, {tinta:TINTA_PIN})}
-                    <span>${n < 1000 ? n : "999+"}</span>`;
-    el.setAttribute("role","button");
-    el.setAttribute("aria-label", `${n} ${t("eventos")}`);
-    el.onclick = () => mapa.getSource("eventos")
-      .getClusterExpansionZoom(id)
-      .then(z => mapa.easeTo({center:g.geometry.coordinates, zoom:z + .25, duration:420}))
-      .catch(() => {});
-    marcadoresGrupo.set(id,
-      new maplibregl.Marker({element:el}).setLngLat(g.geometry.coordinates).addTo(mapa));
-  }
-  // Solo se van los que dejaron de existir: reconstruir la lista entera en
-  // cada paso hacía parpadear todos los números al arrastrar.
-  for(const [id, m] of marcadoresGrupo)
-    if(!vivos.has(id)){ m.remove(); marcadoresGrupo.delete(id); }
 }
 
 /* ---------- FILTROS ---------- */

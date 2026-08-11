@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=4">
+<link rel="stylesheet" href="loica.css?v=5">
 <style>
   body{overflow-x:hidden}
   .contenido-blog{max-width:760px;margin:0 auto;padding:var(--e-6) var(--e-4) var(--e-12)}
@@ -217,7 +217,7 @@
 <main class="contenido-blog" id="vista"></main>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="loica.js?v=4"></script>
+<script src="loica.js?v=5"></script>
 <script>
 /* ============================================================
    BLOG — índice + vista de post, ruteado por hash (#/p/<slug>).
@@ -327,12 +327,18 @@ function actualizarMetaDescripcion(texto){
 }
 // Se usa tanto en el índice como en la vista de un post: un link compartido
 // suele caer directo en un post, así que el aviso tiene que vivir en los dos.
-function avisoIdiomaHtml(){
+// Un post puede declarar su idioma ("idioma": "pt"): si coincide con el del
+// lector, avisar que "el blog está en español" sería mentirle en la cara.
+function avisoIdiomaHtml(post){
+  if(post && post.idioma === IDIOMA) return "";
   return AVISO_IDIOMA[IDIOMA]
     ? `<div class="aviso-linea">${mascota("loica","var(--tinta-tenue)",22)}
         <span>${escapar(AVISO_IDIOMA[IDIOMA])}</span></div>`
     : "";
 }
+// El lang del cuerpo sale del post; es lo que hace que el corrector y el
+// lector de pantalla pronuncien bien el portugués.
+const langDe = post => (post && post.idioma) || "es";
 
 /* ---------- índice del blog ---------- */
 function pintarIndice(noEncontrado){
@@ -456,9 +462,9 @@ function pintarPost(post){
 
   vista.innerHTML = `
     <a class="volver" href="#/">← Volver al blog</a>
-    ${avisoIdiomaHtml()}
+    ${avisoIdiomaHtml(post)}
     <article class="post">
-      <header class="post-cabecera" style="--tono:${pal.tono};--tono-tinta:${pal.tinta}" lang="es">
+      <header class="post-cabecera" style="--tono:${pal.tono};--tono-tinta:${pal.tinta}" lang="${langDe(post)}">
         <span class="etiqueta-formato">${mascota(post.mascota || pal.animal, pal.tinta, 22)} ${escapar(f.etiqueta)}</span>
         <h1>${escapar(post.titulo)}</h1>
         <p class="post-bajada">${escapar(post.bajada)}</p>
@@ -468,10 +474,10 @@ function pintarPost(post){
 
       ${banner}
 
-      <div class="post-cuerpo" lang="es">${pintarCuerpo(post.cuerpo || [])}</div>
+      <div class="post-cuerpo" lang="${langDe(post)}">${pintarCuerpo(post.cuerpo || [])}</div>
 
       ${tieneEventos ? `
-        <section class="eventos-post" lang="es">
+        <section class="eventos-post" lang="${langDe(post)}">
           <h2>Los panoramas, uno por uno</h2>
           <div class="lista-eventos-post">${eventosHtml}</div>
         </section>

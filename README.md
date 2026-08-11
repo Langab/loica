@@ -52,14 +52,14 @@ Las páginas son:
 | Archivo | Qué es |
 |---|---|
 | `web/index.html` | La **portada**: hero con el elenco de animales, panoramas de hoy y los cuatro destinos |
-| `web/mapa.html` | El **mapa**: pines agrupados por cercanía, filtros de fecha (Hoy / Mañana / 7 días / Finde), precio, público y categoría, lista lateral y ficha con anterior/siguiente |
+| `web/mapa.html` | El **mapa**: un pin-animal por evento (sin agrupar, a propósito), filtros de fecha (Hoy / Mañana / 7 días / Finde), precio, público y categoría, lista lateral y ficha con anterior/siguiente |
 | `web/calendario.html` | Mes a mes |
 | `web/blog.html` | Las ediciones del blog |
 | `web/agrega.html` | Formulario para publicar |
 | `web/nosotros.html` | Quién hace esto y el elenco explicado |
 | `web/e/<id>.html` | Una ficha por evento, para que el link compartido tenga vista previa |
 
-Todas comparten `loica.css` (tokens y componentes) y `loica.js` (las siete
+Todas comparten `loica.css` (tokens y componentes) y `loica.js` (las ocho
 mascotas en SVG, categorías, traducciones es/en/pt y utilidades). Los enlaces
 a esos dos archivos llevan `?v=N`: el sitio es estático y sin build, así que
 ese número es lo único que obliga al navegador a soltar la versión vieja
@@ -100,9 +100,42 @@ Conviene probarla sola antes de sumarla a la corrida diaria:
 | `rss` | El sitio publica RSS o `sitemap.rss`. |
 | `html` | Hay que leer el HTML. Intenta primero JSON-LD (`schema.org/Event`) y si no, usa los selectores CSS de la configuración. |
 | `sitemap` | El listado solo entrega links y los datos viven en cada ficha. |
+| `carteleras` | Dos niveles: índice de locales → cartelera de cada local. |
 | `tabla` | Tablas de talleres municipales, con el recinto y su dirección en las filas sobre el encabezado. |
 | `json` | API JSON propia, con el mapeo de campos declarado en el YAML. |
 | `ticketmaster` | Ticketmaster Discovery (API oficial con permiso explícito). |
+| `manual` | Ingesta asistida desde `datos/manual/*.yaml`. No hace peticiones. |
+
+### El circuito under: `carteleras`
+
+Las ticketeras independientes publican un listado general corto pero enlazan la
+cartelera completa de cada local. Leer solo el listado general deja fuera casi
+todo: de los 17 eventos publicados de Bar de René, el listado general de
+PortalTickets mostraba **uno**.
+
+El adaptador baja un nivel y recorre cada local. La tarjeta de la cartelera ya
+trae título, fecha y "Local, Comuna", así que no hay que abrir la ficha de cada
+evento: una corrida son 1 + 23 peticiones, no 200.
+
+Ahí vive el circuito de tocatas que ninguna municipalidad publica: Bar de René,
+Bar Raíces en Yungay, Kahuin, Mesón Nerudiano, Sala Master, Sala SCD Egaña.
+
+Los eventos que quedan sin comuna **no son un error**: PortalDisc es nacional y
+esas tarjetas son de regiones (Teatro Mauri en Valparaíso, MagBar en Chillán,
+Bandera 1001 en Concepción). `requiere_comuna` los descarta, que es lo correcto.
+
+### Lo que no se puede rastrear: `manual`
+
+Passline responde 403 a cualquier cliente automático —probado con user-agent
+vacío, de Chrome y neutro—, así que no es el filtro por la palabra "bot" que
+tiene chilecultura sino bloqueo por IP o huella TLS. Instagram, por su parte,
+no permite leer cuentas ajenas por API.
+
+En esos casos el descubrimiento lo hace una persona navegando normal, y el
+pipeline aporta lo de siempre: normaliza, deduplica contra lo ya guardado,
+geocodifica y lo deja en revisión con su link de origen. Se escriben en
+`datos/manual/*.yaml` (ver `_plantilla.yaml`) y entran con las mismas reglas
+que el resto — sin `fuente_url` no se guarda.
 
 > El tipo `api` ya no existe. Antes apuntaba fijo a Ticketmaster, así que
 > cualquier otra fuente declarada como `api` consultaba Ticketmaster en

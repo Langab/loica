@@ -858,11 +858,38 @@ fuentes:
   url_agenda: https://teatromori.com/cartelera
   tipo_adaptador: html
   endpoint: /cartelera
-  comuna: multiple
   crawl_delay_seg: 3
-  activa: false
+  activa: true
+  selectores:
+    tarjeta: .proyecto-item
+    titulo: h3.Title
+    fecha: p.Hover-Fecha
+    salas_por_clase:
+      sala-1:
+        lugar: Mori Parque Arauco
+        comuna: Las Condes
+      sala-2:
+        lugar: Mori Bellavista
+        comuna: Providencia
+      sala-3:
+        lugar: Mori Vitacura
+        comuna: Vitacura
+      sala-5:
+        lugar: Mori Recoleta
+        comuna: Recoleta
   notas: 'App PHP propia. NO tiene robots.txt (302 a home) y devuelve 200 con HTML de la home en cualquier
-    ruta: validar Content-Type y cuerpo, nunca solo el status. /cartelera es server-rendered y fi'
+    ruta: validar Content-Type y cuerpo, nunca solo el status. /cartelera es server-rendered.
+
+    Tarjeta .proyecto-item con h3.Title y p.Hover-Fecha ("Del 15 al 28 de agosto"): se toma la fecha
+    de INICIO de la temporada, que es lo que hace parsear_fecha con los rangos.
+
+    La SALA va en la clase de la tarjeta (sala-1 a sala-5), no en el texto: sin salas_por_clase las
+    cuatro salas quedarian con la misma comuna. Cubre MORI RECOLETA, de los pocos teatros de barrio
+    con web rastreable.
+
+    OJO: los links vienen sin esquema (//teatromori.com/obra/...), no como ruta absoluta.
+
+    '
 - id: espacio_matta_la_granja
   nombre: Centro Cultural Espacio Matta (Cultura La Granja)
   url_base: https://culturalagranja.cl
@@ -1310,6 +1337,105 @@ fuentes:
     su robots.txt bloquea explicitamente a ClaudeBot, GPTBot, CCBot y anthropic-ai; el grupo generico
     (*) si permite /evento/. Conviene pedirles permiso por escrito, igual que a Passline.'
   requiere_comuna: true
+- id: teatro_aleph
+  nombre: Teatro Aleph (La Cisterna)
+  url_base: https://www.teatroaleph.cl
+  url_agenda: https://www.teatroaleph.cl/
+  tipo_adaptador: wordpress
+  comuna: La Cisterna
+  crawl_delay_seg: 3
+  activa: false
+  notas: 'Teatro social historico en La Cisterna (Sala Julieta, Eulogio Altamirano 7425). SIN robots.txt
+    (no declara restricciones). wp-json abierto y CON The Events Calendar instalado: los post types
+    tribe_events, tribe_venue y tribe_organizer existen y responden 200.
+
+    APAGADA PORQUE SU CALENDARIO ESTA VACIO, no por dificultad tecnica: /wp-json/tribe/events/v1/events
+    devuelve total 0 y /wp/v2/tribe_events devuelve lista vacia (verificado 11-08-2026). En cuanto
+    publiquen su temporada, encenderla es cambiar este activa a true, sin tocar nada mas.
+
+    '
+- id: ingesta_manual
+  nombre: Ingesta asistida (Passline, Instagram, afiches)
+  url_base: https://loica.cl
+  tipo_adaptador: manual
+  crawl_delay_seg: 0
+  activa: true
+  notas: 'No hace ninguna peticion de red: lee datos/manual/*.yaml.
+
+    Es la via para lo que no se puede rastrear. Passline responde 403 a cualquier cliente automatico
+    (probado con user-agent vacio, de Chrome y neutro): no es el filtro por la palabra "bot" que tiene
+    chilecultura sino bloqueo por IP o huella TLS, y saltarlo seria evadir un control de acceso. Lo
+    mismo con Instagram, cuya API no permite leer cuentas ajenas.
+
+    En esos casos el descubrimiento lo hace una persona navegando normal y el pipeline aporta lo de
+    siempre: normalizar, deduplicar contra lo ya guardado, geocodificar y dejarlo en revision con su
+    link de origen. Ver datos/manual/_plantilla.yaml.
+
+    '
+- id: puntoticket
+  nombre: Puntoticket (deportes, musica y familia)
+  url_base: https://www.puntoticket.com
+  url_agenda: https://www.puntoticket.com/todos
+  tipo_adaptador: sitemap
+  origen: listado
+  endpoint: /todos
+  excluir_url:
+  - /account/
+  - /paginas/
+  - /info/
+  - /giftcard
+  - /estacionamientos
+  - /login
+  - /signin
+  - /registro
+  - /deportes
+  - /musica
+  - /teatro
+  - /familia
+  - /todos
+  - /nuevos
+  - /destacados
+  - /especiales
+  tope_fichas: 60
+  crawl_delay_seg: 3
+  requiere_comuna: true
+  activa: true
+  notas: 'robots.txt permite el rastreo (solo bloquea Pago/Compra/Login/Categoria) y declara sitemap.xml,
+    pero ese sitemap es un muñon de 14 URLs de secciones: los eventos se leen del listado /todos.
+
+    Cada ficha trae JSON-LD schema.org/Event completo (name, startDate, image, offers.lowPrice), que
+    es el mejor dato posible de un HTML.
+
+    Es la via para el FUTBOL DE PRIMERA DIVISION: /deportes lista Colo-Colo, Universidad de Chile,
+    Estadio Nacional, Monumental, Santa Laura y Claro Arena, cada uno con su link de compra.
+
+    Los eventos no tienen prefijo de URL comun (/cumbre-guachaca-2026 convive con /login), por eso
+    se filtra con excluir_url en vez de patron_url.
+
+    '
+- id: portaltickets_locales
+  nombre: PortalTickets — carteleras por local (circuito under)
+  url_base: https://www.portaldisc.com
+  url_agenda: https://www.portaldisc.com/portaltickets
+  tipo_adaptador: carteleras
+  patron_indice: /cartelera/
+  patron_url: /evento/
+  tope_locales: 40
+  crawl_delay_seg: 5
+  requiere_comuna: true
+  activa: true
+  notas: 'Complementa a la fuente portaltickets, que lee el listado general. Ese listado muestra solo
+    50 eventos de toda la plataforma, pero enlaza la cartelera COMPLETA de cada local: de los 12
+    eventos publicados de Bar de Rene, el listado general mostraba 1.
+
+    Aca vive el circuito de tocatas que ninguna municipalidad publica: Bar de Rene (Santa Isabel 0369,
+    Providencia), Bar Raices (Cueto 816, Barrio Yungay), Kahuin, Meson Nerudiano, El Clan, Mi Bar,
+    Mag Bar, Sala Master, SCD Egana, Teatro Municipal de La Florida.
+
+    La tarjeta de cada evento ya trae titulo, fecha y "Local, Comuna", asi que NO hay que abrir la
+    ficha: una corrida son 1 + 21 peticiones, no 200.
+
+    '
 - id: disfrutasantiago
   nombre: Disfruta Santiago
   url_base: https://disfrutasantiago.cl

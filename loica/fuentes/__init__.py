@@ -12,7 +12,9 @@ una fuente trayendo los datos de otra.
 """
 
 from .apis import extraer_ticketmaster
+from .carteleras import extraer_carteleras
 from .json_api import extraer_json
+from .manual import extraer_manual
 from .tablas import extraer_tabla
 from .web import extraer_html, extraer_rss, extraer_sitemap_fichas
 from .wordpress import extraer as extraer_wordpress
@@ -24,8 +26,10 @@ ADAPTADORES = {
     "rss": extraer_rss,
     "html": extraer_html,
     "sitemap": extraer_sitemap_fichas,
+    "carteleras": extraer_carteleras,
     "tabla": extraer_tabla,
     "json": extraer_json,
+    "manual": extraer_manual,
     "ticketmaster": extraer_ticketmaster,
 }
 

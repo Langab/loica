@@ -99,6 +99,27 @@ def parsear_fecha(texto: str, anio_por_defecto: int | None = None,
 
     patron_meses = "|".join(sorted(MESES, key=len, reverse=True))
 
+    # Fin de un rango que cruza de mes. Sirve para no mandar al año siguiente
+    # una temporada que está EN CURSO: "del 2 de julio al 5 de septiembre",
+    # leído un 11 de agosto, empieza el 2 de julio de ESTE año, no del próximo.
+    fin_del_rango = None
+
+    # Rango entre meses distintos: "del 2 de julio al 5 de septiembre"
+    if fecha is None:
+        m = re.search(rf"\b(?:del?\s+|desde\s+el\s+)?(\d{{1,2}})\s*(?:de\s+)?({patron_meses})"
+                      rf"\s+al?\s+(\d{{1,2}})\s*(?:de\s+)?({patron_meses})\b"
+                      rf"(?:\s*(?:de|del)?\s*(\d{{4}}))?", plano)
+        if m:
+            anio = int(m.group(5)) if m.group(5) else anio_defecto
+            try:
+                fecha = datetime(anio, MESES[m.group(2)], int(m.group(1)))
+                fin = datetime(anio, MESES[m.group(4)], int(m.group(3)))
+                # Una temporada que termina antes de empezar cruza el año nuevo
+                fin_del_rango = fin if fin >= fecha else fin.replace(year=anio + 1)
+                posicion = m.end()
+            except ValueError:
+                fecha = fin_del_rango = None
+
     # Rango "del 3 al 28 de febrero": interesa el DÍA DE INICIO, no el final
     if fecha is None:
         m = re.search(rf"\b(?:del\s+|desde\s+el\s+)?(\d{{1,2}})\s+al\s+\d{{1,2}}"
@@ -128,9 +149,14 @@ def parsear_fecha(texto: str, anio_por_defecto: int | None = None,
     # Sin año explícito hay que decidir de qué año habla el aviso.
     if fecha is not None and not re.search(r"\b(19|20)\d{2}\b", plano[:posicion or 200]):
         referencia = publicado or hoy
+        # Una temporada en curso no se manda al año siguiente: si el rango
+        # TERMINA en el futuro, la obra se está dando ahora aunque haya
+        # empezado hace meses. Sin esto, "del 2 de julio al 5 de septiembre"
+        # leído en agosto quedaba como julio del año que viene.
+        en_curso = fin_del_rango is not None and fin_del_rango.date() >= hoy.date()
         # Un aviso no anuncia algo que ya pasó: si la fecha quedó antes de la
         # publicación, habla del año siguiente (posts de diciembre sobre enero).
-        if fecha.date() < referencia.date() - timedelta(days=30):
+        if not en_curso and fecha.date() < referencia.date() - timedelta(days=30):
             fecha = fecha.replace(year=fecha.year + 1)
 
     if fecha is None:

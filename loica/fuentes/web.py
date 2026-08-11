@@ -151,7 +151,11 @@ def eventos_desde_html(html: str, fuente: dict, tipo: str = "html") -> list[Even
         enlace = (tarjeta.select_one(selectores["link"]) if selectores.get("link")
                   else tarjeta.find("a", href=True))
         url = enlace.get("href", "") if enlace else ""
-        if url.startswith("/"):
+        # "//teatromori.com/obra/..." es una URL sin esquema, no una ruta: si se
+        # le pega el dominio delante queda https://teatromori.com//teatromori.com/...
+        if url.startswith("//"):
+            url = "https:" + url
+        elif url.startswith("/"):
             url = base + url
 
         # Fecha: atributo del HTML > selector configurado > texto de la tarjeta
@@ -174,13 +178,27 @@ def eventos_desde_html(html: str, fuente: dict, tipo: str = "html") -> list[Even
 
         precio, gratis, texto_precio = parsear_precio(texto)
 
+        # Un mismo sitio puede cubrir varias salas y distinguirlas solo por una
+        # clase CSS de la tarjeta (Teatro Mori marca sala-1 … sala-5, y la
+        # comuna cambia entre Las Condes, Providencia, Vitacura y Recoleta).
+        lugar = fuente.get("nombre", "")
+        comuna_tarjeta = ""
+        mapa_salas = selectores.get("salas_por_clase") or {}
+        if mapa_salas:
+            for clase in (tarjeta.get("class") or []):
+                if clase in mapa_salas:
+                    sala = mapa_salas[clase] or {}
+                    lugar = sala.get("lugar", lugar)
+                    comuna_tarjeta = sala.get("comuna", "")
+                    break
+
         eventos.append(Evento(
             titulo=titulo,
             categoria=categoria,
             descripcion_corta=resumir(texto, 150),
             inicio=inicio,
-            lugar_nombre=fuente.get("nombre", ""),
-            comuna=detectar_comuna(texto, fuente.get("comuna", "")),
+            lugar_nombre=lugar,
+            comuna=detectar_comuna(comuna_tarjeta, texto, fuente.get("comuna", "")),
             precio_clp=precio,
             es_gratis=gratis,
             precio_texto=texto_precio,
@@ -215,6 +233,11 @@ def _urls_desde_listado(fuente: dict, cliente: ClienteEducado) -> list[tuple[str
         return []
 
     patron = fuente.get("patron_url", "")
+    # Algunos sitios no tienen un prefijo común para sus eventos: Puntoticket
+    # publica /cumbre-guachaca-2026 al mismo nivel que /login y /giftcard. Ahí
+    # el filtro útil es por descarte, no por patrón.
+    excluir = [e.lower() for e in (fuente.get("excluir_url") or [])]
+
     sopa = BeautifulSoup(respuesta.text, "html.parser")
     vistas: dict[str, str] = {}
     for enlace in sopa.find_all("a", href=True):
@@ -225,7 +248,13 @@ def _urls_desde_listado(fuente: dict, cliente: ClienteEducado) -> list[tuple[str
             href = base + href
         elif not href.startswith("http"):
             continue
-        vistas.setdefault(href.split("?")[0], "")
+        limpia = href.split("?")[0].rstrip("/")
+        if any(trozo in limpia.lower() for trozo in excluir):
+            continue
+        # Solo fichas: la home y las secciones no son eventos.
+        if limpia == base or limpia.count("/") < 3:
+            continue
+        vistas.setdefault(limpia, "")
     return list(vistas.items())
 
 
