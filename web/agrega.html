@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Agrega tu evento — Loica</title>
+<meta name="description" content="Publica gratis tu evento, taller o clase en el mapa de Santiago.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="loica.css">
+<style>
+  .hero{text-align:center;padding:var(--e-8) var(--e-5) var(--e-6);max-width:660px;margin:0 auto}
+  .hero svg{margin:0 auto var(--e-4)}
+  .hero p{color:var(--tinta-suave);font-size:var(--t-md);margin:var(--e-3) 0 0}
+  .promesas{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:var(--e-3);max-width:760px;margin:0 auto var(--e-6);padding:0 var(--e-5);
+  }
+  .promesa{background:var(--fondo-elevado);border:1px solid var(--borde);
+    border-radius:var(--r-md);padding:var(--e-4)}
+  .promesa b{display:block;font-size:var(--t-sm);margin-bottom:3px}
+  .promesa span{font-size:var(--t-sm);color:var(--tinta-suave)}
+  .doble{display:grid;grid-template-columns:1fr 1fr;gap:var(--e-3)}
+  @media(max-width:520px){.doble{grid-template-columns:1fr}}
+  .opciones-cat{display:flex;flex-wrap:wrap;gap:var(--e-2)}
+  .opcion-cat{
+    display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--borde);
+    background:var(--fondo);border-radius:var(--r-full);padding:7px 13px 7px 9px;
+    cursor:pointer;font-size:var(--t-sm);font-weight:600;transition:var(--rapido);
+  }
+  .opcion-cat:hover{border-color:var(--borde-fuerte)}
+  .opcion-cat input{position:absolute;opacity:0;width:0;height:0}
+  .opcion-cat:has(input:checked){background:var(--tinta);color:var(--fondo-elevado);border-color:var(--tinta)}
+  .opcion-cat:has(input:focus-visible){outline:2.5px solid var(--acento);outline-offset:2px}
+  .gratis-fila{display:flex;align-items:center;gap:var(--e-2);margin-bottom:var(--e-3)}
+  .gratis-fila input{width:19px;height:19px;accent-color:var(--verde-cerro)}
+  .exito{
+    background:var(--gratis-fondo);border:1.5px solid var(--gratis);border-radius:var(--r-lg);
+    padding:var(--e-6);text-align:center;
+  }
+  .exito h2{color:var(--gratis);margin-bottom:var(--e-2)}
+</style>
+</head>
+<body class="con-nav-inferior">
+<div class="barra" id="barra"></div>
+
+<div class="hero">
+  <div id="mascota-hero"></div>
+  <h1 id="tit"></h1>
+  <p id="baj"></p>
+</div>
+
+<div class="promesas" id="promesas"></div>
+
+<div class="contenido" style="padding-top:0">
+  <form class="panel" id="form" novalidate>
+    <div class="campo">
+      <label for="titulo" data-l="lTitulo"></label>
+      <input id="titulo" name="titulo" required maxlength="120">
+      <div class="mensaje-error" hidden data-l="eTitulo"></div>
+    </div>
+
+    <div class="campo">
+      <label data-l="lCategoria"></label>
+      <div class="opciones-cat" id="opciones-cat"></div>
+    </div>
+
+    <div class="doble">
+      <div class="campo">
+        <label for="fecha" data-l="lFecha"></label>
+        <input type="date" id="fecha" name="fecha" required>
+        <div class="mensaje-error" hidden data-l="eFecha"></div>
+      </div>
+      <div class="campo">
+        <label for="hora" data-l="lHora"></label>
+        <input type="time" id="hora" name="hora">
+      </div>
+    </div>
+
+    <div class="doble">
+      <div class="campo">
+        <label for="lugar" data-l="lLugar"></label>
+        <input id="lugar" name="lugar" required maxlength="120">
+        <div class="mensaje-error" hidden data-l="eLugar"></div>
+      </div>
+      <div class="campo">
+        <label for="comuna" data-l="lComuna"></label>
+        <select id="comuna" name="comuna"></select>
+      </div>
+    </div>
+
+    <div class="campo">
+      <label data-l="lPrecio"></label>
+      <div class="gratis-fila">
+        <input type="checkbox" id="es-gratis" name="es-gratis">
+        <label for="es-gratis" style="margin:0;font-weight:600" data-l="lEsGratis"></label>
+      </div>
+      <input id="precio" name="precio" inputmode="numeric" placeholder="5000">
+      <div class="ayuda" data-l="aPrecio"></div>
+    </div>
+
+    <div class="campo">
+      <label for="enlace" data-l="lEnlace"></label>
+      <input type="url" id="enlace" name="enlace" placeholder="https://instagram.com/tu_evento">
+      <div class="ayuda" data-l="aEnlace"></div>
+    </div>
+
+    <div class="campo">
+      <label for="descripcion" data-l="lDescripcion"></label>
+      <textarea id="descripcion" name="descripcion" maxlength="600"></textarea>
+    </div>
+
+    <div class="doble">
+      <div class="campo">
+        <label for="contacto-nombre" data-l="lTuNombre"></label>
+        <input id="contacto-nombre" name="contacto-nombre" required>
+        <div class="mensaje-error" hidden data-l="eNombre"></div>
+      </div>
+      <div class="campo">
+        <label for="contacto" data-l="lTuContacto"></label>
+        <input id="contacto" name="contacto" required placeholder="hola@correo.cl / @instagram">
+        <div class="mensaje-error" hidden data-l="eContacto"></div>
+      </div>
+    </div>
+
+    <button class="boton bloque" type="submit" data-l="enviar"></button>
+    <p class="ayuda" style="text-align:center;margin-top:var(--e-3)" data-l="aviso"></p>
+  </form>
+
+  <div id="listo" hidden class="exito">
+    <div id="mascota-listo"></div>
+    <h2 data-l="okTitulo"></h2>
+    <p data-l="okTexto"></p>
+    <a class="boton secundario" href="index.html" data-l="okVolver"></a>
+  </div>
+</div>
+
+<nav class="nav-inferior" id="nav-inferior" aria-label="Navegacion principal"></nav>
+
+<script src="loica.js"></script>
+<script>
+const CORREO = "hola@loica.cl";   // cambiar por el correo real del proyecto
+
+const TX = {
+  es:{
+    tit:"Publica tu evento, gratis",
+    baj:"Si haces una clase en la plaza, una tocata, una obra o un taller de barrio, esta app es para que la gente te encuentre. No cobramos por publicar.",
+    p1t:"Gratis siempre", p1d:"Publicar no cuesta. Y los eventos gratuitos son gratis para siempre.",
+    p2t:"Lo revisa una persona", p2d:"Nada se publica automáticamente. Revisamos cada evento a mano.",
+    p3t:"Te mandamos gente", p3d:"Tu ficha lleva un link directo a tu sitio o Instagram. El tráfico es tuyo.",
+    lTitulo:"Nombre del evento", eTitulo:"Ponle un nombre a tu evento",
+    lCategoria:"¿Qué tipo de panorama es?",
+    lFecha:"Fecha", eFecha:"Falta la fecha", lHora:"Hora (opcional)",
+    lLugar:"Lugar", eLugar:"¿Dónde es?", lComuna:"Comuna",
+    lPrecio:"Precio", lEsGratis:"Es gratis / entrada liberada",
+    aPrecio:"En pesos, sin puntos. Déjalo vacío si aún no lo defines.",
+    lEnlace:"Link del evento", aEnlace:"Instagram, sitio web o venta de entradas. Es a donde mandamos a la gente.",
+    lDescripcion:"Cuéntanos de qué se trata (opcional)",
+    lTuNombre:"Tu nombre", eNombre:"¿Cómo te llamas?",
+    lTuContacto:"Tu contacto", eContacto:"Déjanos cómo contactarte",
+    enviar:"Enviar evento",
+    aviso:"Al enviar se abre tu correo con los datos listos. Todavía no tenemos formulario automático: lo recibimos y lo subimos a mano.",
+    okTitulo:"¡Gracias!", okTexto:"Revisa que tu correo se haya enviado. Te respondemos dentro de 48 horas.",
+    okVolver:"Volver al mapa",
+  },
+  en:{
+    tit:"Post your event, free",
+    baj:"If you run a class in the park, a gig, a play or a neighbourhood workshop, this app exists so people can find you. Posting is free.",
+    p1t:"Always free", p1d:"Posting costs nothing. And free events stay free forever.",
+    p2t:"A human reviews it", p2d:"Nothing is published automatically. We check every event by hand.",
+    p3t:"We send you people", p3d:"Your listing links straight to your site or Instagram. The traffic is yours.",
+    lTitulo:"Event name", eTitulo:"Give your event a name",
+    lCategoria:"What kind of event is it?",
+    lFecha:"Date", eFecha:"Date is missing", lHora:"Time (optional)",
+    lLugar:"Venue", eLugar:"Where is it?", lComuna:"District",
+    lPrecio:"Price", lEsGratis:"Free entry",
+    aPrecio:"In Chilean pesos, no dots. Leave empty if undecided.",
+    lEnlace:"Event link", aEnlace:"Instagram, website or ticket page. This is where we send people.",
+    lDescripcion:"Tell us what it's about (optional)",
+    lTuNombre:"Your name", eNombre:"What's your name?",
+    lTuContacto:"Your contact", eContacto:"Let us know how to reach you",
+    enviar:"Send event",
+    aviso:"Submitting opens your email client with everything filled in. We don't have an automatic form yet: we receive it and upload it by hand.",
+    okTitulo:"Thank you!", okTexto:"Check that your email was sent. We reply within 48 hours.",
+    okVolver:"Back to the map",
+  },
+  pt:{
+    tit:"Publique seu evento, grátis",
+    baj:"Se você dá uma aula na praça, toca, faz uma peça ou uma oficina de bairro, este app existe para que as pessoas te encontrem. Publicar é grátis.",
+    p1t:"Sempre grátis", p1d:"Publicar não custa nada. E eventos gratuitos são grátis para sempre.",
+    p2t:"Uma pessoa revisa", p2d:"Nada é publicado automaticamente. Revisamos cada evento à mão.",
+    p3t:"Mandamos gente", p3d:"Sua ficha leva direto ao seu site ou Instagram. O tráfego é seu.",
+    lTitulo:"Nome do evento", eTitulo:"Dê um nome ao seu evento",
+    lCategoria:"Que tipo de evento é?",
+    lFecha:"Data", eFecha:"Falta a data", lHora:"Hora (opcional)",
+    lLugar:"Local", eLugar:"Onde é?", lComuna:"Comuna",
+    lPrecio:"Preço", lEsGratis:"Entrada gratuita",
+    aPrecio:"Em pesos chilenos, sem pontos. Deixe vazio se ainda não definiu.",
+    lEnlace:"Link do evento", aEnlace:"Instagram, site ou venda de ingressos. É para lá que mandamos as pessoas.",
+    lDescripcion:"Conte do que se trata (opcional)",
+    lTuNombre:"Seu nome", eNombre:"Como você se chama?",
+    lTuContacto:"Seu contato", eContacto:"Diga como falar com você",
+    enviar:"Enviar evento",
+    aviso:"Ao enviar abre seu e-mail com os dados prontos. Ainda não temos formulário automático: recebemos e subimos à mão.",
+    okTitulo:"Obrigado!", okTexto:"Confirme que seu e-mail foi enviado. Respondemos em até 48 horas.",
+    okVolver:"Voltar ao mapa",
+  },
+};
+const x = k => TX[IDIOMA][k];
+
+const COMUNAS = ["Santiago","Providencia","Ñuñoa","Las Condes","Vitacura","Lo Barnechea",
+  "La Reina","Macul","Peñalolén","La Florida","Recoleta","Independencia","Estación Central",
+  "Quinta Normal","Maipú","San Miguel","Huechuraba","Renca","Conchalí","Otra"];
+
+pintarBarra("agrega.html");
+
+function pintarTextos(){
+  document.getElementById("mascota-hero").innerHTML = mascota("chincol","var(--amarillo-micro)",84);
+  document.getElementById("mascota-listo").innerHTML = mascota("loica","var(--gratis)",70);
+  document.getElementById("tit").textContent = x("tit");
+  document.getElementById("baj").textContent = x("baj");
+  document.getElementById("promesas").innerHTML = [1,2,3].map(n =>
+    `<div class="promesa"><b>${x("p"+n+"t")}</b><span>${x("p"+n+"d")}</span></div>`).join("");
+  document.querySelectorAll("[data-l]").forEach(el => el.textContent = x(el.dataset.l));
+
+  document.getElementById("opciones-cat").innerHTML =
+    ["fiesta","musica","teatro","arte","cine","clases","idiomas","familia","aire_libre","charla","otros"]
+    .map((c,i) => {
+      const info = cat(c);
+      return `<label class="opcion-cat">
+        <input type="radio" name="categoria" value="${c}" ${i===0?"":""}>
+        ${mascota(info.mascota, info.hex, 18)} ${info[IDIOMA]}</label>`;
+    }).join("");
+
+  document.getElementById("comuna").innerHTML =
+    COMUNAS.map(c => `<option value="${c}">${c}</option>`).join("");
+}
+pintarTextos();
+window.addEventListener("loica:idioma", pintarTextos);
+
+// El precio no aplica si el evento es gratis
+document.getElementById("es-gratis").onchange = e => {
+  const precio = document.getElementById("precio");
+  precio.disabled = e.target.checked;
+  if(e.target.checked) precio.value = "";
+};
+
+document.getElementById("form").onsubmit = e => {
+  e.preventDefault();
+  const datos = new FormData(e.target);
+  const obligatorios = {titulo:"eTitulo", fecha:"eFecha", lugar:"eLugar",
+                        "contacto-nombre":"eNombre", contacto:"eContacto"};
+  let valido = true;
+
+  for(const [campo, claveError] of Object.entries(obligatorios)){
+    const entrada = document.getElementById(campo === "contacto-nombre" ? "contacto-nombre" : campo);
+    const caja = entrada.closest(".campo");
+    const error = caja.querySelector(".mensaje-error");
+    const vacio = !String(datos.get(campo) || "").trim();
+    caja.classList.toggle("error", vacio);
+    if(error) error.hidden = !vacio;
+    if(vacio && valido){ entrada.focus(); valido = false; }
+  }
+  if(!valido) return;
+
+  const categoria = datos.get("categoria") || "otros";
+  const gratis = datos.get("es-gratis") ? "SÍ (entrada liberada)" : (datos.get("precio") || "sin definir");
+  const cuerpo = [
+    `Evento: ${datos.get("titulo")}`,
+    `Categoría: ${cat(categoria).es}`,
+    `Fecha: ${datos.get("fecha")} ${datos.get("hora") || ""}`.trim(),
+    `Lugar: ${datos.get("lugar")}, ${datos.get("comuna")}`,
+    `Precio: ${gratis}`,
+    `Link: ${datos.get("enlace") || "—"}`,
+    "",
+    `Descripción: ${datos.get("descripcion") || "—"}`,
+    "",
+    `Contacto: ${datos.get("contacto-nombre")} — ${datos.get("contacto")}`,
+  ].join("\n");
+
+  location.href = `mailto:${CORREO}?subject=${encodeURIComponent("Nuevo evento: " + datos.get("titulo"))}`
+                + `&body=${encodeURIComponent(cuerpo)}`;
+
+  document.getElementById("form").hidden = true;
+  document.getElementById("listo").hidden = false;
+  window.scrollTo({top:0, behavior:"smooth"});
+};
+</script>
+</body>
+</html>

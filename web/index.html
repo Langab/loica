@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Loica — ¿Qué hay hoy en Santiago?</title>
+<meta name="description" content="Todos los panoramas de Santiago en un mapa. Filtra por gratis, hoy o este finde.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="loica.css">
+<style>
+  html,body{height:100%;overflow:hidden}
+  #app{display:flex;flex-direction:column;height:100dvh}
+  header{flex:none;z-index:6}
+  main{flex:1;position:relative;min-height:0}
+  #mapa{position:absolute;inset:0;background:var(--fondo-hundido)}
+
+  /* Pin: gota con la mascota adentro. Verde = gratis, el filtro estrella. */
+  .pin{
+    width:34px;height:34px;cursor:pointer;transition:transform var(--rapido);
+    filter:drop-shadow(0 3px 5px rgba(30,42,74,.32));
+  }
+  .pin:hover,.pin.activo{transform:scale(1.18) translateY(-2px);z-index:9}
+  .pin .gota{fill:var(--tono)}
+  .pin.gratis .gota{fill:var(--verde-cerro)}
+
+  /* --- Panel inferior: tres alturas y arrastre real --- */
+  .panel-lista{
+    position:absolute;left:0;right:0;bottom:0;background:var(--fondo-elevado);
+    border-radius:var(--r-xl) var(--r-xl) 0 0;box-shadow:var(--sombra-3);
+    display:flex;flex-direction:column;z-index:4;
+    height:var(--alto-panel,268px);max-height:88%;
+    transition:height var(--medio);touch-action:none;
+  }
+  .panel-lista.arrastrando{transition:none}
+  .tirador{padding:9px var(--e-4) 6px;cursor:grab;flex:none;touch-action:none}
+  .tirador:active{cursor:grabbing}
+  .barra-tirador{width:44px;height:4.5px;background:var(--borde-fuerte);border-radius:3px;margin:0 auto}
+  .conteo{display:flex;align-items:baseline;gap:7px;font-size:var(--t-sm);color:var(--tinta-suave);
+    padding:0 var(--e-4) var(--e-2)}
+  .conteo b{font-family:var(--fuente-marca);font-size:var(--t-lg);color:var(--tinta)}
+  .panel-lista .filtros{border-bottom:1px solid var(--borde);border-top:1px solid var(--borde);
+    background:transparent;padding:var(--e-2) var(--e-4)}
+  .lista{overflow-y:auto;overscroll-behavior:contain;flex:1;min-height:0}
+
+  .ficha{
+    position:absolute;inset:auto 0 0 0;background:var(--fondo-elevado);z-index:8;
+    border-radius:var(--r-xl) var(--r-xl) 0 0;box-shadow:var(--sombra-3);
+    transform:translateY(103%);transition:transform var(--medio);
+    max-height:88%;overflow-y:auto;
+  }
+  .ficha.visible{transform:translateY(0)}
+  /* Banda de foto solo si hay foto: si no, robaba 150px y empujaba el botón
+     principal fuera de pantalla en casi todos los eventos. */
+  .ficha-foto{height:158px;background:var(--fondo-hundido);position:relative;
+    border-radius:var(--r-xl) var(--r-xl) 0 0;overflow:hidden}
+  .ficha-foto img{width:100%;height:100%;object-fit:cover}
+  .ficha-cuerpo{padding:var(--e-4) var(--e-5) var(--e-5)}
+  .cerrar{
+    position:absolute;top:10px;right:10px;border:0;background:rgba(250,243,231,.94);
+    width:38px;height:38px;border-radius:50%;font-size:20px;cursor:pointer;
+    color:var(--azul-cordillera);line-height:1;box-shadow:var(--sombra-1);z-index:2;
+  }
+  .ficha h2{margin:var(--e-1) 0 var(--e-3);padding-right:var(--e-8)}
+  .dato{display:flex;gap:var(--e-3);padding:9px 0;border-top:1px solid var(--borde);font-size:var(--t-base)}
+  .dato .et{color:var(--tinta-tenue);width:82px;flex:none;font-size:var(--t-sm);font-weight:600}
+  .aprox{font-size:var(--t-xs);color:var(--tinta-tenue);font-style:italic}
+  .fuente-pie{margin-top:var(--e-3);font-size:var(--t-xs);color:var(--tinta-tenue);text-align:center}
+
+  .aviso{
+    position:absolute;top:var(--e-3);left:50%;transform:translateX(-50%);z-index:7;
+    background:var(--fondo-elevado);border:1px solid var(--borde);border-radius:var(--r-full);
+    padding:8px var(--e-4);font-size:var(--t-sm);font-weight:600;box-shadow:var(--sombra-2);
+    display:flex;align-items:center;gap:7px;max-width:calc(100% - var(--e-8));
+  }
+
+  @media(max-width:879px){
+    .panel-lista{bottom:calc(52px + env(safe-area-inset-bottom))}
+    .ficha{bottom:calc(52px + env(safe-area-inset-bottom))}
+  }
+  @media(min-width:880px){
+    .panel-lista{left:auto;right:var(--e-4);top:var(--e-4);bottom:var(--e-4);width:400px;
+      height:auto!important;border-radius:var(--r-lg);max-height:none;transition:none}
+    .tirador{display:none}
+    .panel-lista .filtros{border-top:0;border-radius:var(--r-lg) var(--r-lg) 0 0}
+    .conteo{padding-top:var(--e-3)}
+    .ficha{left:auto;right:var(--e-4);bottom:var(--e-4);width:400px;
+      border-radius:var(--r-lg);max-height:78%}
+    .ficha-foto{border-radius:var(--r-lg) var(--r-lg) 0 0}
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <header><div class="barra" id="barra"></div></header>
+
+  <main>
+    <div id="mapa"></div>
+    <div class="aviso" id="aviso" hidden></div>
+
+    <section class="panel-lista" id="panel" aria-label="Lista de eventos">
+      <div class="tirador" id="tirador" role="button" tabindex="0"
+           aria-label="Arrastra para ver más eventos"><div class="barra-tirador"></div></div>
+      <div class="filtros" id="filtros"></div>
+      <div class="conteo"><b id="conteo">0</b> <span id="conteo-txt">eventos</span></div>
+      <div class="lista" id="lista"></div>
+    </section>
+
+    <article class="ficha" id="ficha" aria-live="polite"></article>
+  </main>
+</div>
+<nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="loica.js"></script>
+<script>
+let EVENTOS = [], filtroCat = null, soloGratis = false, cuando = "todo";
+let marcadores = [], seleccionado = null;
+
+pintarBarra("index.html");
+
+/* Teselas CARTO en vez de OpenStreetMap crudo: el estilo por defecto de OSM
+   mete más de 25 íconos propios en pantalla y el producto pierde contra su
+   propio fondo. Además hay versión oscura, y la marca dice que el modo oscuro
+   es de primera clase porque la app se usa de noche. */
+const TESELAS = {
+  claro:"https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png",
+  claroEtiquetas:"https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
+  oscuro:"https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png",
+  oscuroEtiquetas:"https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png",
+};
+const esOscuro = () => document.documentElement.dataset.tema === "oscuro"
+  || (!document.documentElement.dataset.tema && matchMedia("(prefers-color-scheme: dark)").matches);
+
+const urlesTeselas = clave => ["a","b","c"].map(s =>
+  TESELAS[clave].replace("{s}", s).replace("{r}", devicePixelRatio > 1.5 ? "@2x" : ""));
+
+function estiloMapa(){
+  const t = esOscuro() ? ["oscuro","oscuroEtiquetas"] : ["claro","claroEtiquetas"];
+  return {version:8,
+    sources:{
+      base:{type:"raster", tiles:urlesTeselas(t[0]), tileSize:256,
+            attribution:'© OpenStreetMap © CARTO'},
+      etiquetas:{type:"raster", tiles:urlesTeselas(t[1]), tileSize:256},
+    },
+    layers:[{id:"base",type:"raster",source:"base"},
+            {id:"etiquetas",type:"raster",source:"etiquetas"}]};
+}
+
+const mapa = new maplibregl.Map({
+  container:"mapa", style:estiloMapa(),
+  center:[-70.645,-33.437], zoom:12.5, attributionControl:{compact:true}
+});
+mapa.addControl(new maplibregl.NavigationControl({showCompass:false}), "top-left");
+
+// El botón de tema vive en la barra compartida: el mapa lo sigue
+new MutationObserver(() => mapa.setStyle(estiloMapa()))
+  .observe(document.documentElement, {attributes:true, attributeFilter:["data-tema"]});
+
+// El mapa nace antes de que su caja tenga tamaño final. Se compara el tamaño
+// anterior porque redimensionar vuelve a disparar al observador.
+(() => {
+  const caja = document.getElementById("mapa");
+  let ancho = 0, alto = 0;
+  new ResizeObserver(() => {
+    if(caja.clientWidth === ancho && caja.clientHeight === alto) return;
+    ancho = caja.clientWidth; alto = caja.clientHeight;
+    mapa.resize();
+  }).observe(caja);
+})();
+
+function avisar(texto, mascotaNombre = "loica"){
+  const caja = document.getElementById("aviso");
+  caja.innerHTML = `${mascota(mascotaNombre,"var(--acento)",18)} <span>${escapar(texto)}</span>`;
+  caja.hidden = false;
+}
+// Sin señal el mapa quedaba en blanco sin explicar nada: pasa justo en la
+// calle, que es donde se usa la app.
+mapa.on("error", e => {
+  if(String(e.error?.message || "").match(/tile|fetch|network/i))
+    avisar(IDIOMA === "en" ? "Map is loading slowly — the list still works"
+         : IDIOMA === "pt" ? "O mapa está lento — a lista continua funcionando"
+         : "El mapa va lento — la lista igual funciona");
+});
+
+cargarEventos()
+  .then(evs => { EVENTOS = evs; pintarFiltros(); refrescar(); })
+  .catch(() => {
+    document.getElementById("lista").innerHTML =
+      `<div class="vacio">${mascota("loica","var(--tinta-tenue)",70)}
+       <p><b>${IDIOMA === "en" ? "Couldn't load events" :
+               IDIOMA === "pt" ? "Não consegui carregar os eventos" :
+               "No pude cargar los eventos"}</b><br>
+       <button class="boton secundario" style="margin-top:12px"
+         onclick="location.reload()">${IDIOMA === "en" ? "Try again" :
+           IDIOMA === "pt" ? "Tentar de novo" : "Reintentar"}</button></p></div>`;
+  });
+
+window.addEventListener("loica:idioma", () => {
+  pintarFiltros(); refrescar(); if(seleccionado) abrirFicha(seleccionado);
+});
+
+const esHoy = ev => mismaFecha(ev.fecha, new Date());
+const esFinde = ev => {
+  const dias = (ev.fecha - new Date()) / 86400000;
+  return dias <= 7 && [5,6,0].includes(ev.fecha.getDay());
+};
+const visibles = () => EVENTOS.filter(ev =>
+  (!soloGratis || ev.gratis) &&
+  (!filtroCat || ev.categoria === filtroCat) &&
+  (cuando === "todo" || (cuando === "hoy" ? esHoy(ev) : esFinde(ev))));
+
+function pintarFiltros(){
+  const cont = document.getElementById("filtros");
+  cont.innerHTML = "";
+  const agregar = (contenido, activo, alPulsar, clase="") => {
+    const b = document.createElement("button");
+    b.className = "chip " + clase;
+    b.innerHTML = contenido;
+    b.setAttribute("aria-pressed", activo);
+    b.onclick = () => { alPulsar(); pintarFiltros(); refrescar(); };
+    cont.appendChild(b);
+  };
+
+  // El Pudú es la mascota de lo gratis: el filtro estrella tiene cara propia
+  agregar(`${mascota("pudu", soloGratis ? "#fff" : "#2E7D5B", 19)} ${t("gratis")}`,
+          soloGratis, () => soloGratis = !soloGratis, "es-gratis");
+  agregar(t("hoy"), cuando === "hoy", () => cuando = cuando === "hoy" ? "todo" : "hoy");
+  agregar(t("finde"), cuando === "finde", () => cuando = cuando === "finde" ? "todo" : "finde");
+
+  [...new Set(EVENTOS.map(e => e.categoria))]
+    .sort((a,b) => cat(a)[IDIOMA].localeCompare(cat(b)[IDIOMA]))
+    .forEach(c => {
+      const info = cat(c);
+      agregar(`${mascota(info.mascota, filtroCat === c ? "#fff" : info.hex, 19)} ${info[IDIOMA]}`,
+              filtroCat === c, () => filtroCat = filtroCat === c ? null : c);
+    });
+}
+
+function refrescar(){
+  const lista = visibles();
+  document.getElementById("conteo").textContent = lista.length;
+  document.getElementById("conteo-txt").textContent =
+    lista.length === 1 ? t("evento") : t("eventos");
+
+  marcadores.forEach(m => m.remove());
+  // Los eventos sin coordenadas salen en la lista pero no llevan pin
+  marcadores = lista.filter(ev => ev.lat != null).map(ev => {
+    const info = cat(ev.categoria);
+    const el = document.createElement("div");
+    el.className = "pin" + (ev.gratis ? " gratis" : "");
+    el.style.setProperty("--tono", info.hex);
+    el.setAttribute("role","button");
+    el.setAttribute("aria-label", ev.titulo);
+    el.innerHTML = `<svg viewBox="0 0 34 40" width="34" height="40">
+        <path class="gota" d="M17 0C8.7 0 2 6.7 2 15c0 10.5 12.6 23 14.1 24.4.5.5 1.3.5 1.8 0C19.4 38 32 25.5 32 15 32 6.7 25.3 0 17 0z"/>
+        <circle cx="17" cy="14.6" r="11" fill="#FAF3E7"/>
+        <g transform="translate(5.5,3.1) scale(.96)">${MASCOTAS[info.mascota](info.hex)}</g>
+      </svg>`;
+    el.onclick = e => { e.stopPropagation(); abrirFicha(ev); };
+    return new maplibregl.Marker({element:el, anchor:"bottom"})
+             .setLngLat([ev.lon, ev.lat]).addTo(mapa);
+  });
+
+  const cont = document.getElementById("lista");
+  cont.innerHTML = "";
+  if(!lista.length){
+    cont.innerHTML = `<div class="vacio">${mascota("loica","var(--tinta-tenue)",78)}
+      <p><b>${t("vacio")}</b><br>${t("vaciopista")}</p></div>`;
+    return;
+  }
+  lista.forEach(ev => cont.appendChild(tarjetaEvento(ev, abrirFicha)));
+}
+
+function abrirFicha(ev){
+  seleccionado = ev;
+  const info = cat(ev.categoria);
+  const fecha = ev.fecha.toLocaleDateString(localeDe(),
+                  {weekday:"long", day:"numeric", month:"long"});
+  const hora = (ev.fecha.getHours() || ev.fecha.getMinutes())
+    ? ev.fecha.toLocaleTimeString(localeDe(),{hour:"2-digit",minute:"2-digit"}) : "";
+
+  document.getElementById("ficha").innerHTML = `
+    ${ev.imagen ? `<div class="ficha-foto">
+        <img src="${escapar(ev.imagen)}" alt="" onerror="this.parentElement.remove()">
+      </div>` : ""}
+    <button class="cerrar" onclick="cerrarFicha()" aria-label="${t("cerrar")}">×</button>
+    <div class="ficha-cuerpo">
+      <span class="mascota-nombre">${mascota(info.mascota, info.hex, 16)} ${info[IDIOMA]}</span>
+      <h2>${escapar(ev.titulo)}</h2>
+      <a class="boton bloque" href="${escapar(ev.url)}"
+         target="_blank" rel="noopener">${t("ir")} ↗</a>
+      <div class="dato" style="margin-top:var(--e-4)"><span class="et">${t("cuando")}</span>
+        <span>${fecha}${hora ? " · " + hora : ""}</span></div>
+      <div class="dato"><span class="et">${t("donde")}</span>
+        <span>${escapar(ev.lugar)}${ev.comuna ? ", " + escapar(ev.comuna) : ""}
+        ${ev.precision === "comuna" ? `<br><span class="aprox">${t("aprox")}</span>` : ""}
+        ${ev.precision === "sin_ubicar" ? `<br><span class="aprox">${t("sinUbicar")}</span>` : ""}</span></div>
+      <div class="dato"><span class="et">${t("precio")}</span>
+        <span class="precio${ev.gratis ? " libre" : ""}">${ev.gratis ? t("libre") : textoPrecio(ev)}</span></div>
+      ${ev.descripcion ? `<div class="dato"><span class="et"></span>
+        <span>${escapar(ev.descripcion)}</span></div>` : ""}
+      <div class="fuente-pie">${t("fuente")} <b>${escapar(ev.fuente)}</b></div>
+    </div>`;
+  document.getElementById("ficha").classList.add("visible");
+  if(ev.lat != null) mapa.flyTo({center:[ev.lon, ev.lat], zoom:15, offset:[0,-90], speed:1.5});
+}
+function cerrarFicha(){
+  document.getElementById("ficha").classList.remove("visible");
+  seleccionado = null;
+}
+
+/* --- Arrastre del panel: tres alturas, con gesto de verdad ---
+   Antes el tirador era solo un clic con dos estados: mostraba media tarjeta
+   cortada, o tapaba el mapa entero. */
+(() => {
+  const panel = document.getElementById("panel");
+  const tirador = document.getElementById("tirador");
+  const alturas = () => {
+    const disponible = panel.parentElement.clientHeight;
+    return [268, Math.round(disponible * .58), Math.round(disponible * .88)];
+  };
+  let indice = 0, arrastrando = false, inicioY = 0, inicioAlto = 0;
+
+  const fijar = i => {
+    indice = Math.max(0, Math.min(2, i));
+    panel.style.setProperty("--alto-panel", alturas()[indice] + "px");
+  };
+  fijar(0);
+
+  tirador.addEventListener("pointerdown", e => {
+    arrastrando = true; inicioY = e.clientY; inicioAlto = panel.clientHeight;
+    panel.classList.add("arrastrando");
+    tirador.setPointerCapture(e.pointerId);
+  });
+  tirador.addEventListener("pointermove", e => {
+    if(!arrastrando) return;
+    const alto = Math.min(panel.parentElement.clientHeight * .88,
+                          Math.max(120, inicioAlto - (e.clientY - inicioY)));
+    panel.style.setProperty("--alto-panel", alto + "px");
+  });
+  const soltar = () => {
+    if(!arrastrando) return;
+    arrastrando = false;
+    panel.classList.remove("arrastrando");
+    // Se queda en la altura más cercana de las tres
+    const actual = panel.clientHeight;
+    const opciones = alturas();
+    fijar(opciones.indexOf(opciones.reduce((a,b) =>
+      Math.abs(b - actual) < Math.abs(a - actual) ? b : a)));
+  };
+  tirador.addEventListener("pointerup", soltar);
+  tirador.addEventListener("pointercancel", soltar);
+  tirador.addEventListener("click", () => { if(!arrastrando) fijar(indice === 2 ? 0 : indice + 1); });
+  tirador.addEventListener("keydown", e => {
+    if(e.key === "ArrowUp"){ e.preventDefault(); fijar(indice + 1); }
+    if(e.key === "ArrowDown"){ e.preventDefault(); fijar(indice - 1); }
+    if(e.key === "Enter" || e.key === " "){ e.preventDefault(); fijar(indice === 2 ? 0 : indice + 1); }
+  });
+  addEventListener("resize", () => fijar(indice));
+})();
+
+mapa.on("click", cerrarFicha);
+addEventListener("keydown", e => { if(e.key === "Escape") cerrarFicha(); });
+</script>
+</body>
+</html>

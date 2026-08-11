@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nosotros — Loica</title>
+<meta name="description" content="Una ciudad se usa o se pierde. Por qué hacemos Loica.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="loica.css">
+<style>
+  body{overflow-x:hidden}
+  .portada{
+    position:relative;padding:var(--e-12) var(--e-5) var(--e-10);text-align:center;overflow:hidden;
+    background:linear-gradient(170deg,var(--fondo-hundido) 0%,var(--fondo) 62%);
+  }
+  .portada .cerros{position:absolute;inset:auto 0 0 0;width:100%;height:130px;opacity:.5}
+  .portada-interior{position:relative;max-width:700px;margin:0 auto}
+  .portada h1{font-size:clamp(30px,7vw,var(--t-3xl));margin-bottom:var(--e-4)}
+  .portada .entrada{font-size:var(--t-md);color:var(--tinta-suave);line-height:1.62}
+  .volando{margin:0 auto var(--e-5);animation:volar 5s ease-in-out infinite}
+  @keyframes volar{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+
+  section{max-width:780px;margin:0 auto;padding:var(--e-10) var(--e-5)}
+  section > h2{margin-bottom:var(--e-2)}
+  section > .sub{color:var(--tinta-suave);margin:0 0 var(--e-6);font-size:var(--t-md)}
+
+  .creencias{display:grid;gap:var(--e-4)}
+  .creencia{
+    background:var(--fondo-elevado);border:1px solid var(--borde);border-radius:var(--r-lg);
+    padding:var(--e-5);border-left:5px solid var(--tono,var(--acento));
+  }
+  .creencia h3{margin-bottom:var(--e-2);font-family:var(--fuente-ui);font-size:var(--t-md);font-weight:800}
+  .creencia p{margin:0;color:var(--tinta-suave);line-height:1.62}
+
+  .pasos{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:var(--e-4)}
+  .paso{text-align:center;padding:var(--e-4)}
+  .paso .num{
+    width:42px;height:42px;border-radius:50%;background:var(--acento);color:#fff;
+    display:grid;place-items:center;margin:0 auto var(--e-3);
+    font:800 var(--t-md)/1 var(--fuente-marca);
+  }
+  .paso b{display:block;margin-bottom:5px}
+  .paso span{color:var(--tinta-suave);font-size:var(--t-sm)}
+
+  .elenco{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:var(--e-3)}
+  .bicho{
+    background:var(--fondo-elevado);border:1px solid var(--borde);border-radius:var(--r-lg);
+    padding:var(--e-5) var(--e-4);text-align:center;transition:var(--rapido);
+  }
+  .bicho:hover{transform:translateY(-3px);box-shadow:var(--sombra-2);border-color:var(--borde-fuerte)}
+  .bicho svg{margin:0 auto var(--e-2)}
+  .bicho b{display:block;font-family:var(--fuente-marca);font-size:var(--t-md)}
+  .bicho .rol{font-size:var(--t-sm);font-weight:700;color:var(--tono);margin-bottom:5px}
+  .bicho span{font-size:var(--t-sm);color:var(--tinta-suave);line-height:1.5}
+
+  .cierre{
+    background:var(--azul-cordillera);color:#F3EDE1;text-align:center;
+    padding:var(--e-10) var(--e-5);margin-top:var(--e-8);
+  }
+  .cierre h2{color:#fff;margin-bottom:var(--e-3)}
+  .cierre p{max-width:520px;margin:0 auto var(--e-6);opacity:.86;line-height:1.62}
+  .cierre .boton.secundario{color:#F3EDE1;border-color:rgba(243,237,225,.4)}
+  .cierre .boton.secundario:hover{background:rgba(243,237,225,.1)}
+  .botones{display:flex;gap:var(--e-3);justify-content:center;flex-wrap:wrap}
+  .pie{text-align:center;padding:var(--e-6) var(--e-5);color:var(--tinta-tenue);font-size:var(--t-xs)}
+</style>
+</head>
+<body class="con-nav-inferior">
+<div class="barra" id="barra"></div>
+
+<header class="portada">
+  <svg class="cerros" viewBox="0 0 1200 130" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 130 L150 54 L245 92 L380 24 L520 96 L660 44 L790 100 L930 40 L1060 88 L1200 30 L1200 130 Z"
+          fill="var(--azul-cordillera)" opacity=".2"/>
+    <path d="M0 130 L120 88 L260 112 L420 70 L560 116 L700 82 L860 120 L1010 78 L1200 110 L1200 130 Z"
+          fill="var(--azul-cordillera)" opacity=".3"/>
+  </svg>
+  <div class="portada-interior">
+    <div class="volando" id="loica-grande"></div>
+    <h1 id="tit"></h1>
+    <p class="entrada" id="entrada"></p>
+  </div>
+</header>
+
+<section>
+  <h2 id="t-creencias"></h2>
+  <p class="sub" id="s-creencias"></p>
+  <div class="creencias" id="creencias"></div>
+</section>
+
+<section>
+  <h2 id="t-como"></h2>
+  <p class="sub" id="s-como"></p>
+  <div class="pasos" id="pasos"></div>
+</section>
+
+<section>
+  <h2 id="t-elenco"></h2>
+  <p class="sub" id="s-elenco"></p>
+  <div class="elenco" id="elenco"></div>
+</section>
+
+<div class="cierre">
+  <h2 id="t-cierre"></h2>
+  <p id="s-cierre"></p>
+  <div class="botones">
+    <a class="boton" href="agrega.html" id="cta1"></a>
+    <a class="boton secundario" href="index.html" id="cta2"></a>
+  </div>
+</div>
+
+<p class="pie" id="pie"></p>
+
+<nav class="nav-inferior" id="nav-inferior" aria-label="Navegacion principal"></nav>
+
+<script src="loica.js"></script>
+<script>
+const TX = {
+  es:{
+    tit:"Una ciudad se usa o se pierde",
+    entrada:"Santiago tiene algo pasando a cada hora: una clase de acondicionamiento físico en una plaza de Ñuñoa, una tocata en una librería de Lastarria, una obra en un galpón de Yungay. El problema nunca fue que no hubiera nada que hacer. El problema es que te enteras al día siguiente.",
+    tCre:"En qué creemos", sCre:"Tres convicciones que explican cada decisión de esta app.",
+    cre:[
+      ["El espacio público es de quien lo usa","Una plaza con gente es una plaza segura. Un barrio que se camina de noche es un barrio que se cuida solo. Cada persona que sale a un panorama no solo se entretiene: sostiene el lugar donde va. Por eso mostramos la ciudad como un mapa y no como un catálogo — queremos que salgas, no que scrollees.","var(--verde-cerro)"],
+      ["Lo gratis no es lo de segunda","En casi todas las plataformas de eventos existe lo que se vende. Lo demás es invisible. Acá el filtro de panoramas gratuitos es el primero de la lista, y los organizadores de eventos gratuitos no pagan nunca. Es una decisión de producto y también una decisión política.","var(--rojo-loica)"],
+      ["No queremos ser dueños de tu público","No vendemos entradas ni nos quedamos con tu audiencia. Cada evento lleva un link directo a la fuente original: tu Instagram, tu sitio, tu ticketera. Somos el índice de la ciudad, no su intermediario.","var(--amarillo-micro)"],
+    ],
+    tCom:"Cómo funciona", sCom:"Sin misterio: mitad programa, mitad trabajo a mano.",
+    pasos:[
+      ["Buscamos","Todos los días, temprano, un programa recorre agendas municipales, centros culturales, teatros y universidades de Santiago."],
+      ["Revisamos","Una persona revisa lo encontrado. Nada se publica solo: si no entendemos de qué se trata, no va."],
+      ["Te llevamos","Cada ficha tiene fecha, lugar, precio y un botón que te manda a quien organiza. Ahí termina nuestro trabajo y empieza tu panorama."],
+    ],
+    tEle:"Los animales que te guían", sEle:"Cada tipo de panorama tiene su animal chileno. En el mapa reconoces la categoría antes de leer una palabra — útil si andas apurado, y más útil todavía si no hablas español.",
+    ele:[
+      ["loica","La Loica","Tu guía","El pájaro de pecho rojo que le da el nombre a la app. Su pecho es, literalmente, el pin del mapa."],
+      ["culpeo","El Culpeo","Fiestas y noche","El zorro chileno: nocturno, astuto, conoce los atajos y los rincones que no salen en las guías."],
+      ["pudu","El Pudú","Gratis y aire libre","El ciervo más chico del mundo, y 100% chileno. Cuida los panoramas gratis, que son los que más se comparten."],
+      ["chincol","El Chincol","Clases y talleres","El pajarito que canta en las plazas de Santiago, justo donde pasan las clases de barrio."],
+      ["condor","El Cóndor","Conciertos grandes","Vuela alto y ve lo masivo. Se hace cargo de los estadios y los festivales."],
+      ["chinchilla","La Chinchilla","Cultura","De rincones y bibliotecas: teatro, cine, exposiciones y librerías."],
+    ],
+    tCie:"¿Organizas algo?", sCie:"Si haces una clase, una tocata, una obra o un taller de barrio, publicarlo acá es gratis y siempre lo será. Nos demoramos menos de 48 horas en revisarlo.",
+    cta1:"Publica tu evento", cta2:"Ver el mapa",
+    pie:"Loica es un proyecto independiente hecho en Santiago de Chile.",
+  },
+  en:{
+    tit:"A city is used, or it is lost",
+    entrada:"Something is happening in Santiago every hour: a fitness class in a Ñuñoa square, a gig in a Lastarria bookshop, a play in a Yungay warehouse. The problem was never that there's nothing to do. The problem is that you find out the next day.",
+    tCre:"What we believe", sCre:"Three convictions behind every decision in this app.",
+    cre:[
+      ["Public space belongs to whoever uses it","A square with people in it is a safe square. A neighbourhood that gets walked at night looks after itself. Everyone who goes out to something isn't just having fun — they're holding up the place they go to. That's why we show the city as a map, not a catalogue: we want you out there, not scrolling.","var(--verde-cerro)"],
+      ["Free is not second class","On almost every events platform, what sells exists and everything else is invisible. Here the free filter comes first, and organisers of free events never pay. That's a product decision and also a political one.","var(--rojo-loica)"],
+      ["We don't want to own your audience","We don't sell tickets and we don't keep your public. Every event links straight to the original source: your Instagram, your site, your ticket seller. We're the city's index, not its middleman.","var(--amarillo-micro)"],
+    ],
+    tCom:"How it works", sCom:"No mystery: half software, half handwork.",
+    pasos:[
+      ["We search","Every morning a program goes through the agendas of Santiago's councils, cultural centres, theatres and universities."],
+      ["We check","A person reviews what turned up. Nothing publishes itself: if we can't tell what it is, it doesn't go up."],
+      ["We take you there","Each listing has date, place, price and a button that sends you to the organiser. That's where our job ends and your night begins."],
+    ],
+    tEle:"The animals that guide you", sEle:"Every kind of event has its Chilean animal. On the map you recognise the category before reading a word — handy when you're in a hurry, and handier still if you don't speak Spanish.",
+    ele:[
+      ["loica","The Loica","Your guide","The red-breasted bird the app is named after. Its chest is, quite literally, the map pin."],
+      ["culpeo","The Culpeo","Parties and nightlife","The Chilean fox: nocturnal, clever, knows the shortcuts and the corners no guidebook lists."],
+      ["pudu","The Pudú","Free and outdoors","The world's smallest deer, and entirely Chilean. It looks after free events — the ones people share most."],
+      ["chincol","The Chincol","Classes and workshops","The little bird that sings in Santiago's squares, exactly where neighbourhood classes happen."],
+      ["condor","The Cóndor","Big concerts","Flies high and sees the crowds. Takes care of stadiums and festivals."],
+      ["chinchilla","The Chinchilla","Culture","Of quiet corners and libraries: theatre, film, exhibitions and bookshops."],
+    ],
+    tCie:"Running something?", sCie:"If you teach a class, play a gig, stage a play or run a neighbourhood workshop, posting it here is free and always will be. We review it in under 48 hours.",
+    cta1:"Post your event", cta2:"See the map",
+    pie:"Loica is an independent project made in Santiago, Chile.",
+  },
+  pt:{
+    tit:"Uma cidade se usa ou se perde",
+    entrada:"Santiago tem algo acontecendo a cada hora: uma aula de ginástica numa praça de Ñuñoa, um show numa livraria de Lastarria, uma peça num galpão de Yungay. O problema nunca foi não ter o que fazer. O problema é você descobrir no dia seguinte.",
+    tCre:"No que acreditamos", sCre:"Três convicções por trás de cada decisão deste app.",
+    cre:[
+      ["O espaço público é de quem o usa","Uma praça com gente é uma praça segura. Um bairro que se caminha à noite se cuida sozinho. Quem sai para um evento não só se diverte: sustenta o lugar aonde vai. Por isso mostramos a cidade como mapa e não como catálogo — queremos você na rua, não rolando a tela.","var(--verde-cerro)"],
+      ["Grátis não é de segunda","Em quase toda plataforma de eventos existe o que se vende. O resto é invisível. Aqui o filtro de eventos gratuitos vem primeiro, e quem organiza evento gratuito nunca paga. É uma decisão de produto e também política.","var(--rojo-loica)"],
+      ["Não queremos ser donos do seu público","Não vendemos ingressos nem ficamos com a sua audiência. Cada evento leva direto à fonte original: seu Instagram, seu site, sua bilheteria. Somos o índice da cidade, não o intermediário.","var(--amarillo-micro)"],
+    ],
+    tCom:"Como funciona", sCom:"Sem mistério: metade programa, metade trabalho à mão.",
+    pasos:[
+      ["Buscamos","Todos os dias, cedo, um programa percorre as agendas das prefeituras, centros culturais, teatros e universidades de Santiago."],
+      ["Revisamos","Uma pessoa revisa o que apareceu. Nada é publicado sozinho: se não entendemos do que se trata, não entra."],
+      ["Levamos você","Cada ficha tem data, lugar, preço e um botão que leva a quem organiza. Aí termina nosso trabalho e começa o seu programa."],
+    ],
+    tEle:"Os animais que te guiam", sEle:"Cada tipo de evento tem seu animal chileno. No mapa você reconhece a categoria antes de ler uma palavra — útil na pressa, e mais ainda se você não fala espanhol.",
+    ele:[
+      ["loica","A Loica","Seu guia","O pássaro de peito vermelho que dá nome ao app. Seu peito é, literalmente, o pin do mapa."],
+      ["culpeo","O Culpeo","Festas e noite","A raposa chilena: noturna, esperta, conhece os atalhos e os cantos que não saem nos guias."],
+      ["pudu","O Pudú","Grátis e ar livre","O menor cervo do mundo, e 100% chileno. Cuida dos eventos gratuitos, os mais compartilhados."],
+      ["chincol","O Chincol","Aulas e oficinas","O passarinho que canta nas praças de Santiago, bem onde acontecem as aulas de bairro."],
+      ["condor","O Cóndor","Grandes shows","Voa alto e vê as multidões. Cuida dos estádios e festivais."],
+      ["chinchilla","A Chinchilla","Cultura","De cantos e bibliotecas: teatro, cinema, exposições e livrarias."],
+    ],
+    tCie:"Organiza alguma coisa?", sCie:"Se você dá aula, toca, faz uma peça ou uma oficina de bairro, publicar aqui é grátis e sempre será. Revisamos em menos de 48 horas.",
+    cta1:"Publique seu evento", cta2:"Ver o mapa",
+    pie:"Loica é um projeto independente feito em Santiago do Chile.",
+  },
+};
+const x = k => TX[IDIOMA][k];
+
+pintarBarra("nosotros.html");
+
+function pintar(){
+  document.getElementById("loica-grande").innerHTML = mascota("loica","var(--tinta)",96);
+  document.getElementById("tit").textContent = x("tit");
+  document.getElementById("entrada").textContent = x("entrada");
+
+  document.getElementById("t-creencias").textContent = x("tCre");
+  document.getElementById("s-creencias").textContent = x("sCre");
+  document.getElementById("creencias").innerHTML = x("cre").map(([t,d,color]) =>
+    `<article class="creencia" style="--tono:${color}"><h3>${t}</h3><p>${d}</p></article>`).join("");
+
+  document.getElementById("t-como").textContent = x("tCom");
+  document.getElementById("s-como").textContent = x("sCom");
+  document.getElementById("pasos").innerHTML = x("pasos").map(([t,d],i) =>
+    `<div class="paso"><div class="num">${i+1}</div><b>${t}</b><span>${d}</span></div>`).join("");
+
+  document.getElementById("t-elenco").textContent = x("tEle");
+  document.getElementById("s-elenco").textContent = x("sEle");
+  document.getElementById("elenco").innerHTML = x("ele").map(([bicho,nombre,rol,desc]) => {
+    const color = {loica:"#E8442E", culpeo:"#7A4FCF", pudu:"#2E7D5B",
+                   chincol:"#E08A1E", condor:"#E8442E", chinchilla:"#2F6FB5"}[bicho];
+    return `<article class="bicho" style="--tono:${color}">
+      ${mascota(bicho, color, 62)}
+      <b>${nombre}</b><div class="rol">${rol}</div><span>${desc}</span></article>`;
+  }).join("");
+
+  document.getElementById("t-cierre").textContent = x("tCie");
+  document.getElementById("s-cierre").textContent = x("sCie");
+  document.getElementById("cta1").textContent = x("cta1");
+  document.getElementById("cta2").textContent = x("cta2");
+  document.getElementById("pie").textContent = x("pie");
+}
+pintar();
+window.addEventListener("loica:idioma", pintar);
+</script>
+</body>
+</html>

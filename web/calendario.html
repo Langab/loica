@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Calendario — Loica</title>
+<meta name="description" content="Los panoramas de Santiago mes a mes, para planificar con tiempo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="loica.css">
+<style>
+  html,body{height:100%;overflow:hidden}
+  #app{display:flex;flex-direction:column;height:100dvh}
+  header{flex:none;z-index:6}
+  main{flex:1;display:flex;min-height:0}
+
+  /* min-height:0 es obligatorio: sin él la rejilla empuja el panel de la
+     agenda fuera de la pantalla y su fondo queda inalcanzable en celular. */
+  .calendario{flex:1;display:flex;flex-direction:column;min-width:0;min-height:0;
+    padding:var(--e-4);gap:var(--e-3)}
+  .mes-barra{display:flex;align-items:center;gap:var(--e-3)}
+  /* Solo la primera letra: `capitalize` daría "9 De Agosto" */
+  .mes-titulo{font-family:var(--fuente-marca);font-size:var(--t-xl);font-weight:800;
+    letter-spacing:-.02em;min-width:0}
+  .mes-titulo::first-letter,.agenda-cabecera h2::first-letter{text-transform:uppercase}
+  .mes-nav{display:flex;gap:var(--e-1);margin-left:auto}
+  .mes-nav button{
+    width:38px;height:38px;border-radius:var(--r-sm);border:1.5px solid var(--borde);
+    background:var(--fondo-elevado);color:var(--tinta);cursor:pointer;font-size:15px;
+    transition:var(--rapido);
+  }
+  .mes-nav button:hover{background:var(--fondo-hundido);border-color:var(--borde-fuerte)}
+  .mes-nav .hoy{width:auto;padding:0 var(--e-4);font:700 var(--t-sm)/1 var(--fuente-ui)}
+
+  .rejilla{
+    flex:1;display:grid;grid-template-columns:repeat(7,1fr);grid-auto-rows:1fr;
+    gap:5px;min-height:0;
+  }
+  .encabezado-dias{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;flex:none}
+  .encabezado-dias span{
+    text-align:center;font-size:var(--t-xs);font-weight:700;color:var(--tinta-tenue);
+    text-transform:uppercase;letter-spacing:.06em;padding-bottom:2px;
+  }
+
+  .dia{
+    background:var(--fondo-elevado);border:1.5px solid var(--borde);border-radius:var(--r-md);
+    padding:5px 6px;display:flex;flex-direction:column;gap:3px;overflow:hidden;
+    cursor:pointer;transition:var(--rapido);text-align:left;font-family:inherit;color:inherit;
+  }
+  .dia:hover{border-color:var(--borde-fuerte);box-shadow:var(--sombra-1)}
+  .dia.fuera{opacity:.4}
+  .dia.hoy{border-color:var(--acento);border-width:2px}
+  .dia.elegido{background:var(--fondo-hundido);border-color:var(--tinta)}
+  .dia-num{font-size:var(--t-sm);font-weight:700;font-variant-numeric:tabular-nums}
+  .dia.hoy .dia-num{color:var(--acento)}
+  .marca-ev{
+    display:flex;align-items:center;gap:4px;font-size:10.5px;font-weight:600;
+    background:var(--tono-suave);color:var(--tono);border-radius:5px;padding:2px 4px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.35;
+  }
+  .marca-ev.libre{background:var(--gratis-fondo);color:var(--gratis)}
+  .marca-ev i{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+  .mas{font-size:10px;color:var(--tinta-tenue);font-weight:600;padding-left:3px}
+
+  .agenda{
+    width:370px;flex:none;border-left:1px solid var(--borde);background:var(--fondo-elevado);
+    display:flex;flex-direction:column;
+  }
+  .agenda-cabecera{padding:var(--e-4);border-bottom:1px solid var(--borde)}
+  .agenda-cabecera h2{font-size:var(--t-lg)}
+  .agenda-cabecera p{margin:3px 0 0;color:var(--tinta-suave);font-size:var(--t-sm)}
+  .agenda-lista{overflow-y:auto;flex:1}
+
+  @media(max-width:879px){
+    main{flex-direction:column;padding-bottom:calc(52px + env(safe-area-inset-bottom))}
+    .agenda{width:auto;border-left:0;border-top:1px solid var(--borde);
+      max-height:46%;min-height:150px}
+    .calendario{padding:var(--e-3)}
+    .marca-ev{display:none}
+    .rejilla{grid-auto-rows:minmax(44px,1fr)}
+    .dia{align-items:center;justify-content:center;gap:4px}
+    .puntos{display:flex;gap:2px;flex-wrap:wrap;justify-content:center}
+    .puntos i{width:5px;height:5px;border-radius:50%;background:var(--tono)}
+  }
+  @media(min-width:901px){.puntos{display:none}}
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="barra" id="barra"></div>
+    <div class="filtros" id="filtros"></div>
+  </header>
+
+  <main>
+    <section class="calendario">
+      <div class="mes-barra">
+        <div class="mes-titulo" id="mes-titulo"></div>
+        <div class="mes-nav">
+          <button id="ant" aria-label="Mes anterior">‹</button>
+          <button class="hoy" id="btn-hoy">Hoy</button>
+          <button id="sig" aria-label="Mes siguiente">›</button>
+        </div>
+      </div>
+      <div class="encabezado-dias" id="encabezado-dias"></div>
+      <div class="rejilla" id="rejilla"></div>
+    </section>
+
+    <aside class="agenda">
+      <div class="agenda-cabecera">
+        <h2 id="agenda-titulo"></h2>
+        <p id="agenda-sub"></p>
+      </div>
+      <div class="agenda-lista" id="agenda-lista"></div>
+    </aside>
+  </main>
+</div>
+
+<nav class="nav-inferior" id="nav-inferior" aria-label="Navegacion principal"></nav>
+
+<script src="loica.js"></script>
+<script>
+let EVENTOS = [], filtroCat = null, soloGratis = false;
+let mesVisible = new Date(), diaElegido = new Date();
+
+pintarBarra("calendario.html");
+
+cargarEventos().then(evs => {
+  EVENTOS = evs;
+  // Arranca en el mes del primer evento disponible, no en uno vacío
+  if(evs.length && evs[0].fecha > new Date()) mesVisible = new Date(evs[0].fecha);
+  pintarFiltros(); pintarMes(); mostrarDia(diaElegido);
+});
+window.addEventListener("loica:idioma", () => {
+  pintarFiltros(); pintarMes(); mostrarDia(diaElegido);
+});
+
+const visibles = () => EVENTOS.filter(ev =>
+  (!soloGratis || ev.gratis) && (!filtroCat || ev.categoria === filtroCat));
+
+function pintarFiltros(){
+  const cont = document.getElementById("filtros");
+  cont.innerHTML = "";
+  const agregar = (contenido, activo, alPulsar, clase="") => {
+    const b = document.createElement("button");
+    b.className = "chip " + clase; b.innerHTML = contenido;
+    b.setAttribute("aria-pressed", activo);
+    b.onclick = () => { alPulsar(); pintarFiltros(); pintarMes(); mostrarDia(diaElegido); };
+    cont.appendChild(b);
+  };
+  agregar(`${mascota("pudu", soloGratis ? "#fff" : "#2E7D5B", 19)} ${t("gratis")}`,
+          soloGratis, () => soloGratis = !soloGratis, "es-gratis");
+  [...new Set(EVENTOS.map(e => e.categoria))]
+    .sort((a,b) => cat(a)[IDIOMA].localeCompare(cat(b)[IDIOMA]))
+    .forEach(c => {
+      const info = cat(c);
+      agregar(`${mascota(info.mascota, filtroCat === c ? "#fff" : info.hex, 19)} ${info[IDIOMA]}`,
+              filtroCat === c, () => filtroCat = filtroCat === c ? null : c);
+    });
+}
+
+function porDia(){
+  const mapa = {};
+  visibles().forEach(ev => (mapa[claveDia(ev.fecha)] ||= []).push(ev));
+  return mapa;
+}
+
+function pintarMes(){
+  document.getElementById("mes-titulo").textContent =
+    `${t("meses")[mesVisible.getMonth()]} ${mesVisible.getFullYear()}`;
+  document.getElementById("encabezado-dias").innerHTML =
+    t("dias").map(d => `<span>${d}</span>`).join("");
+  document.getElementById("btn-hoy").textContent = t("hoyBoton");
+
+  const agenda = porDia();
+  const primero = new Date(mesVisible.getFullYear(), mesVisible.getMonth(), 1);
+  // La semana parte el lunes (getDay: 0=domingo)
+  const desplazamiento = (primero.getDay() + 6) % 7;
+  const inicio = new Date(primero);
+  inicio.setDate(1 - desplazamiento);
+
+  const rejilla = document.getElementById("rejilla");
+  rejilla.innerHTML = "";
+  const hoy = new Date();
+
+  for(let i = 0; i < 42; i++){
+    const dia = new Date(inicio);
+    dia.setDate(inicio.getDate() + i);
+    if(i >= 35 && dia.getMonth() !== mesVisible.getMonth()) break;
+
+    const delDia = agenda[claveDia(dia)] || [];
+    const celda = document.createElement("button");
+    celda.type = "button";
+    celda.className = "dia"
+      + (dia.getMonth() !== mesVisible.getMonth() ? " fuera" : "")
+      + (mismaFecha(dia, hoy) ? " hoy" : "")
+      + (mismaFecha(dia, diaElegido) ? " elegido" : "");
+    celda.setAttribute("aria-label",
+      `${dia.getDate()} ${t("meses")[dia.getMonth()]}, ${delDia.length} ${t("eventos")}`);
+
+    const marcas = delDia.slice(0,3).map(ev => {
+      const info = cat(ev.categoria);
+      return `<span class="marca-ev${ev.gratis ? " libre" : ""}"
+        style="--tono:${info.hex};--tono-suave:${info.hex}1f">
+        <i></i>${escapar(ev.titulo)}</span>`;
+    }).join("");
+    const puntos = delDia.slice(0,4).map(ev =>
+      `<i style="--tono:${ev.gratis ? "var(--gratis)" : cat(ev.categoria).hex}"></i>`).join("");
+
+    celda.innerHTML = `<span class="dia-num">${dia.getDate()}</span>
+      ${marcas}
+      ${delDia.length > 3 ? `<span class="mas">+${delDia.length - 3}</span>` : ""}
+      <span class="puntos">${puntos}</span>`;
+    celda.onclick = () => { diaElegido = dia; pintarMes(); mostrarDia(dia); };
+    rejilla.appendChild(celda);
+  }
+}
+
+function mostrarDia(dia){
+  const delDia = (porDia()[claveDia(dia)] || []).sort((a,b) => a.fecha - b.fecha);
+  document.getElementById("agenda-titulo").textContent =
+    dia.toLocaleDateString(localeDe(), {weekday:"long", day:"numeric", month:"long"});
+  document.getElementById("agenda-sub").textContent =
+    `${delDia.length} ${delDia.length === 1 ? t("evento") : t("eventos")}`;
+
+  const cont = document.getElementById("agenda-lista");
+  cont.innerHTML = "";
+  if(!delDia.length){
+    cont.innerHTML = `<div class="vacio">${mascota("chincol","var(--tinta-tenue)",70)}
+      <p>${t("vacio")}</p></div>`;
+    return;
+  }
+  delDia.forEach(ev => cont.appendChild(
+    tarjetaEvento(ev, e => window.open(e.url, "_blank", "noopener"))));
+}
+
+document.getElementById("ant").onclick = () => {
+  mesVisible = new Date(mesVisible.getFullYear(), mesVisible.getMonth() - 1, 1); pintarMes();
+};
+document.getElementById("sig").onclick = () => {
+  mesVisible = new Date(mesVisible.getFullYear(), mesVisible.getMonth() + 1, 1); pintarMes();
+};
+document.getElementById("btn-hoy").onclick = () => {
+  mesVisible = new Date(); diaElegido = new Date(); pintarMes(); mostrarDia(diaElegido);
+};
+addEventListener("keydown", e => {
+  if(e.key === "ArrowLeft") document.getElementById("ant").click();
+  if(e.key === "ArrowRight") document.getElementById("sig").click();
+});
+</script>
+</body>
+</html>

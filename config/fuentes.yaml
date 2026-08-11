@@ -1,0 +1,1134 @@
+# Registro de fuentes del pipeline.
+# tipo_adaptador: wordpress | eventon | rss | html | sitemap | api
+
+fuentes:
+- id: ceina
+  nombre: CEINA
+  url_base: https://ceina.cl
+  url_agenda: https://ceina.cl/cartelera/
+  tipo_adaptador: wordpress
+  tipos_post:
+  - cartelera
+  - taller
+  - proximamente
+  comuna: Santiago
+  crawl_delay_seg: 2
+  buscar_detalle: true
+  tope_detalle: 40
+  activa: true
+  notas: 'WordPress con API REST abierta y tipos de contenido propios. No expone la fecha del evento en
+    la API: los que lleguen sin fecha quedan marcados ''revisar_fecha'' para completarlos a mano.
+
+    '
+- id: matucana100
+  nombre: Matucana 100
+  url_base: https://www.m100.cl
+  url_agenda: https://www.m100.cl/programacion/
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: Estación Central
+  crawl_delay_seg: 2
+  buscar_detalle: true
+  tope_detalle: 40
+  activa: true
+  notas: WordPress con API REST abierta. Venta deriva a Ticketplus.
+- id: agenda_las_condes
+  nombre: Agenda Cultural Las Condes
+  url_base: https://agendacultural.culturallascondes.cl
+  url_agenda: https://agendacultural.culturallascondes.cl/
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: Las Condes
+  crawl_delay_seg: 10
+  buscar_detalle: true
+  tope_detalle: 12
+  activa: true
+  notas: 'WordPress con API REST abierta. El crawl-delay de 10 s la hace lenta, no difícil. Buena parte
+    de sus entradas son lugares permanentes (Centro Artesanal Los Dominicos), no eventos con fecha.
+
+    '
+- id: santiago_cultura
+  nombre: Santiago Cultura (Municipalidad de Santiago)
+  url_base: https://www.santiagocultura.cl
+  url_agenda: https://www.santiagocultura.cl/agenda-cultural/
+  tipo_adaptador: wordpress
+  tipos_post:
+  - ajde_events
+  comuna: Santiago
+  crawl_delay_seg: 3
+  activa: true
+  notas: 'El calendario EventON no responde por admin-ajax, pero su tipo de post ajde_events sí está abierto
+    en la API REST. La fecha viene dentro del texto ("domingo 5 de julio"), la interpreta normalizar.py.
+
+    '
+- id: gam
+  nombre: GAM (Centro Cultural Gabriela Mistral)
+  url_base: https://gam.cl
+  url_agenda: https://gam.cl/calendario/
+  tipo_adaptador: html
+  endpoint: /calendario/
+  comuna: Santiago
+  crawl_delay_seg: 3
+  activa: true
+  selectores:
+    tarjeta: '[data-date]'
+    atributo_fecha: data-date
+    titulo: .tool-titulo
+    link: .tool-link a
+    categoria: small
+  notas: 'CMS a medida; robots.txt permite todo. El calendario está en el HTML con la fecha en data-date
+    (ISO), así que no hace falta JavaScript.
+
+    '
+- id: cultura_providencia
+  nombre: Cultura Providencia
+  url_base: https://culturaprovidencia.cl
+  url_agenda: https://culturaprovidencia.cl/sitemap.rss
+  tipo_adaptador: rss
+  endpoint: /sitemap.rss
+  comuna: Providencia
+  crawl_delay_seg: 3
+  activa: true
+  notas: API REST cerrada (401). Se usa el sitemap RSS que publican.
+- id: ticketmaster
+  nombre: Ticketmaster Chile
+  url_base: https://app.ticketmaster.com
+  tipo_adaptador: api
+  ciudad: Santiago
+  crawl_delay_seg: 1
+  activa: true
+  notas: 'Requiere TICKETMASTER_API_KEY en el entorno (gratis en developer.ticketmaster.com). Sin la key,
+    la fuente se salta sola.
+
+    '
+- id: cclm
+  nombre: Centro Cultural La Moneda
+  url_base: https://www.cclm.cl
+  url_agenda: https://www.cclm.cl/wp-json/wp/v2/actividad
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/actividad
+  comuna: Santiago
+  crawl_delay_seg: 2
+  buscar_detalle: true
+  tope_detalle: 25
+  activa: true
+  notas: 'La mejor fuente nueva del catalogo. API REST de WordPress abierta con post types dedicados:
+    ''actividad'' (974 registros), ''exposicion'' (248), ''festival'', ''especial'', ''cineteca_nacional''.
+    Taxonomias utiles: ''sala'' y ''tipo_'
+- id: parquemet
+  nombre: Parquemet (Cerro San Cristobal y parques urbanos)
+  url_base: https://parquemet.cl
+  url_agenda: https://parquemet.cl/wp-json/wp/v2/mec-events
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/mec-events
+  comuna: Varias
+  crawl_delay_seg: 2
+  buscar_detalle: true
+  tope_detalle: 25
+  activa: true
+  notas: 'Inventario gratuito diferenciador. Usa Modern Events Calendar y el post type mec-events esta
+    abierto en REST (19 registros vigentes), mas ''talleres_bosque_sant'' (6) y ''programas_educativos''
+    (12). LO MEJOR: las paginas de'
+- id: ecentral_cultura
+  nombre: Corporacion Cultural de Estacion Central
+  url_base: https://www.ecentral.cl
+  url_agenda: https://www.ecentral.cl/wp-json/wp/v2/tm_taller
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/tm_taller
+  comuna: Estacion Central
+  crawl_delay_seg: 3
+  buscar_detalle: true
+  tope_detalle: 25
+  activa: true
+  notas: 'Inventario gratuito diferenciador. Post type ''tm_taller'' abierto en REST con 97 talleres (Zumba,
+    danza, deporte, oficios) y cuatro taxonomias que son oro para la app: tm_categoria, tm_sector_tax,
+    tm_rango_etario_tax y tm'
+- id: teatro_municipal
+  nombre: Teatro Municipal de Santiago
+  url_base: https://municipal.cl
+  url_agenda: https://municipal.cl/wp-json/wp/v2/shows
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/shows
+  comuna: Santiago
+  crawl_delay_seg: 2
+  buscar_detalle: true
+  tope_detalle: 25
+  activa: true
+  notas: API REST abierta con post type 'shows' (403 registros) y taxonomias 'category_show' y 'sala_show'.
+    Tambien tiene 'tour', 'education' y 'tickets'. El post type ajde_events (EventON) esta registrado
+    pero devuelve lista vac
+- id: teatro_uc
+  nombre: Teatro UC
+  url_base: https://teatrouc.uc.cl
+  url_agenda: https://teatrouc.uc.cl/wp-json/tribe/events/v1/events
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/tribe/events/v1/events
+  comuna: Nunoa
+  crawl_delay_seg: 2
+  buscar_detalle: true
+  tope_detalle: 25
+  activa: true
+  notas: 'La fuente con MEJOR calidad de datos de todo el catalogo. Usa el plugin The Events Calendar
+    y expone su API nativa: cada evento trae start_date y end_date con hora exacta, all_day, url, cost,
+    website, categories y un obj'
+- id: udp
+  nombre: Universidad Diego Portales (extension)
+  url_base: https://www.udp.cl
+  url_agenda: https://www.udp.cl/wp-json/wp/v2/agenda
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/agenda
+  comuna: Santiago
+  crawl_delay_seg: 2
+  buscar_detalle: true
+  tope_detalle: 25
+  activa: true
+  notas: Post type 'agenda' abierto en REST con 3.689 registros (seminarios, charlas, lanzamientos, muchos
+    gratuitos y abiertos al publico) y otro post type 'calendario' con hitos academicos que NO sirven
+    (fechas de pruebas, matr
+- id: vitacura_cultura
+  nombre: Corporacion Cultural de Vitacura
+  url_base: https://vitacuracultura.cl
+  url_agenda: https://vitacuracultura.cl/wp-json/wp/v2/exposicion
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/exposicion
+  comuna: Vitacura
+  crawl_delay_seg: 2
+  buscar_detalle: true
+  tope_detalle: 25
+  activa: true
+  notas: API REST abierta con post types 'exposicion' (82), 'curso' (0 registros hoy, se llena en periodos
+    de inscripcion), 'espacio' y 'recomendado'. Taxonomias 'categoria-programa' y 'categoria-lugares'.
+    robots.txt con Disallow
+- id: mavi_uc
+  nombre: MAVI UC (Museo de Artes Visuales)
+  url_base: https://mavi.uc.cl
+  url_agenda: https://mavi.uc.cl/wp-json/wp/v2/exposiciones
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/exposiciones
+  comuna: Santiago
+  crawl_delay_seg: 2
+  buscar_detalle: true
+  tope_detalle: 25
+  activa: true
+  notas: 'API REST abierta con post types ''exposiciones'' (8 vigentes), ''exposiciones-pasadas'', ''premio-mavi-uc''
+    y ''coleccion-mavi-uc''. robots.txt estandar de WordPress; el sitemap canonico es https://www.mavi.cl/sitemap_index.xml '
+- id: mac_uchile
+  nombre: MAC - Museo de Arte Contemporaneo U. de Chile
+  url_base: https://mac.uchile.cl
+  url_agenda: https://mac.uchile.cl/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: Santiago
+  crawl_delay_seg: 2
+  buscar_detalle: true
+  tope_detalle: 25
+  activa: false
+  notas: 'API REST de WordPress abierta, 237 posts, sin post types de eventos: exposiciones y actividades
+    publicadas como posts, hay que filtrar por categoria. robots.txt estandar + wp-sitemap.xml + /feed/
+    RSS activo (59 KB). Dos '
+- id: planetario_usach
+  nombre: Planetario USACH
+  url_base: https://www.planetariochile.cl
+  url_agenda: https://www.planetariochile.cl/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: Estacion Central
+  crawl_delay_seg: 2
+  buscar_detalle: true
+  tope_detalle: 25
+  activa: true
+  notas: 'API REST abierta, 1.320 posts, sin post type de eventos (funciones y shows como posts + paginas).
+    robots.txt gestionado por Cloudflare: Allow: / general, pero con Content-Signal search=yes, ai-train=no,
+    use=reference y b'
+- id: balmaceda_arte_joven
+  nombre: Balmaceda Arte Joven
+  url_base: https://www.balmacedartejoven.cl
+  url_agenda: https://www.balmacedartejoven.cl/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: Santiago
+  crawl_delay_seg: 3
+  buscar_detalle: true
+  tope_detalle: 25
+  activa: true
+  notas: 'API REST abierta (solo post y page). OJO CON EL ROBOTS: bloquea explicitamente todas las vistas
+    del plugin All-in-One Event Calendar (/calendar/action~agenda/, ~month/, ~week/, ~oneday/, ~poster/,
+    etc.) y el exportador a'
+- id: recoleta
+  nombre: Municipalidad de Recoleta
+  url_base: https://www.recoleta.cl
+  url_agenda: https://www.recoleta.cl/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: Recoleta
+  crawl_delay_seg: 5
+  buscar_detalle: true
+  tope_detalle: 25
+  activa: false
+  notas: 'API REST de WordPress abierta con 2.532 posts. Sin post type de eventos: la agenda cultural
+    viene mezclada con noticias municipales, requiere filtro por categoria y curaduria. robots.txt estandar
+    (bloquea wp-admin, wp-in'
+- id: independencia
+  nombre: Municipalidad de Independencia
+  url_base: https://www.independencia.cl
+  url_agenda: https://www.independencia.cl/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: Independencia
+  crawl_delay_seg: 5
+  buscar_detalle: true
+  tope_detalle: 25
+  activa: false
+  notas: 'API REST abierta con 1.786 posts. Sin post type de eventos: noticias y actividades mezcladas.
+    robots.txt estandar de WordPress + wp-sitemap.xml + /feed/ RSS. Mismo patron que Recoleta: valor medio,
+    dificultad baja, mucho'
+- id: la_reina
+  nombre: Municipalidad de La Reina
+  url_base: https://lareina.cl
+  url_agenda: https://lareina.cl/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: La Reina
+  crawl_delay_seg: 5
+  buscar_detalle: true
+  tope_detalle: 25
+  activa: false
+  notas: 'API REST abierta con 1.064 posts. robots.txt estandar + wp-sitemap.xml. El /feed/ devuelve 403,
+    asi que la via es la API REST. Sin post type de eventos: filtrar por categoria.'
+- id: penalolen
+  nombre: Municipalidad de Penalolen
+  url_base: https://www.penalolen.cl
+  url_agenda: https://www.penalolen.cl/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: Penalolen
+  crawl_delay_seg: 5
+  buscar_detalle: true
+  tope_detalle: 25
+  activa: false
+  notas: 'API REST abierta pero solo 35 posts: el sitio publica poco por esta via. robots.txt con Disallow
+    vacio (Yoast) + sitemap_index.xml + /feed/ RSS de 43 KB. Baja prioridad por volumen, aunque tecnicamente
+    es de las mas faci'
+- id: la_florida
+  nombre: Municipalidad de La Florida
+  url_base: https://www.laflorida.cl
+  url_agenda: https://www.laflorida.cl/sitio/wp-json/wp/v2/noticias_florida
+  tipo_adaptador: wordpress
+  endpoint: /sitio/wp-json/wp/v2/noticias_florida
+  comuna: La Florida
+  crawl_delay_seg: 5
+  buscar_detalle: true
+  tope_detalle: 25
+  activa: false
+  notas: 'WordPress instalado en la subruta /sitio/. Post type propio ''noticias_florida'' con 853 registros,
+    abierto en REST. OJO: robots.txt devuelve 404 (nginx), o sea el sitio no declara ninguna restriccion;
+    aplicar por defecto '
+- id: san_miguel
+  nombre: Municipalidad de San Miguel
+  url_base: https://web.sanmiguel.cl
+  url_agenda: https://web.sanmiguel.cl/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: San Miguel
+  crawl_delay_seg: 5
+  buscar_detalle: true
+  tope_detalle: 25
+  activa: false
+  notas: El dominio bueno es web.sanmiguel.cl (sanmiguel.cl y munisanmiguel.cl estan vacios o son un index
+    de directorio). API REST abierta con 1.505 posts; existe la categoria /category/cultura/. robots.txt
+    heredado de una insta
+- id: macul
+  nombre: Municipalidad de Macul
+  url_base: https://www.munimacul.cl
+  url_agenda: https://www.munimacul.cl/portalnv/index.php/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /portalnv/index.php/wp-json/wp/v2/posts
+  comuna: Macul
+  crawl_delay_seg: 5
+  buscar_detalle: true
+  tope_detalle: 25
+  activa: false
+  notas: 'www.macul.cl es una fachada; el WordPress real vive en www.munimacul.cl/portalnv/ y su REST
+    responde en /portalnv/index.php/wp-json/. Solo 56 posts. robots.txt devuelve 404 en ambos dominios:
+    no declara restricciones. Vo'
+- id: cce_santiago
+  nombre: Centro Cultural de Espana en Chile
+  url_base: https://ccesantiago.cl
+  url_agenda: https://ccesantiago.cl/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: Providencia
+  crawl_delay_seg: 3
+  buscar_detalle: true
+  tope_detalle: 25
+  activa: false
+  notas: 'API REST abierta pero solo 1 post y solo cuatro post types (attachment, page, post, wp_block):
+    la programacion vive en paginas, no en posts. Tiene sitemap_index.xml y /feed/ RSS (3,5 KB) que si
+    funcionan. Extraccion real'
+- id: teatro_oriente
+  nombre: Teatro Oriente
+  url_base: https://teatrooriente.cl
+  url_agenda: https://teatrooriente.cl/sitemap.rss
+  tipo_adaptador: rss
+  endpoint: /sitemap.rss
+  comuna: Providencia
+  crawl_delay_seg: 3
+  buscar_detalle: false
+  tope_detalle: 25
+  activa: true
+  notas: 'Mismo patron exacto que Cultura Providencia (probablemente el mismo proveedor): WordPress con
+    REST cerrada (401), robots.txt que declara /sitemap.xml y /sitemap.rss, y /feed/ con 35 KB de RSS
+    real. Adaptador RSS reutiliz'
+- id: nunoa
+  nombre: Municipalidad de Nunoa
+  url_base: https://www.nunoa.cl
+  url_agenda: https://www.nunoa.cl/feed/
+  tipo_adaptador: rss
+  endpoint: /feed/
+  comuna: Nunoa
+  crawl_delay_seg: 5
+  buscar_detalle: false
+  tope_detalle: 25
+  activa: true
+  notas: 'API REST cerrada (401 en todo /wp-json/). robots.txt permite todo (bloque Yoast con Disallow
+    vacio) y declara sitemap_index.xml. El /feed/ RSS trae 80 KB de contenido real: es la mejor puerta.
+    La cultura se publica como '
+- id: nave
+  nombre: NAVE Centro de Creacion y Residencia
+  url_base: https://nave.io
+  url_agenda: https://nave.io/feed/
+  tipo_adaptador: rss
+  endpoint: /feed/
+  comuna: Santiago
+  crawl_delay_seg: 3
+  buscar_detalle: false
+  tope_detalle: 25
+  activa: true
+  notas: API REST cerrada (401). robots.txt de una linea con 'Disallow:' vacio = permite todo. sitemap_index.xml
+    (3,3 KB) y /feed/ (11 KB) funcionan. Volumen bajo pero programacion de danza y artes escenicas contemporaneas
+    que no
+- id: lo_barnechea
+  nombre: Municipalidad de Lo Barnechea
+  url_base: https://lobarnechea.cl
+  url_agenda: https://lobarnechea.cl/event-sitemap.xml
+  tipo_adaptador: rss
+  endpoint: /event-sitemap.xml
+  comuna: Lo Barnechea
+  crawl_delay_seg: 5
+  buscar_detalle: false
+  tope_detalle: 25
+  activa: false
+  notas: 'Caso curioso: la API REST esta abierta pero /wp-json/wp/v2/posts devuelve 0 registros y el post
+    type de eventos NO esta expuesto en REST (/wp-json/wp/v2/event da 404). En cambio el sitemap SI lo
+    publica: https://lobarnec'
+- id: teatro_a_mil
+  nombre: Fundacion Teatro a Mil
+  url_base: https://teatroamil.cl
+  url_agenda: https://teatroamil.cl/sitemap.xml
+  tipo_adaptador: rss
+  endpoint: /sitemap.xml
+  comuna: Varias
+  crawl_delay_seg: 3
+  buscar_detalle: false
+  tope_detalle: 25
+  activa: false
+  notas: 'El dominio correcto es teatroamil.cl (fundacionteatroamil.cl devuelve 404 en todo). No es WordPress.
+    robots.txt dice Allow: / y declara sitemap.xml, que responde 200 con 36 KB de URLs. Estacionalidad
+    fuerte: en enero (fe'
+- id: vitacura_muni
+  nombre: Municipalidad de Vitacura
+  url_base: https://vitacura.cl
+  url_agenda: https://vitacura.cl/wp-sitemap.xml
+  tipo_adaptador: rss
+  endpoint: /wp-sitemap.xml
+  comuna: Vitacura
+  crawl_delay_seg: 5
+  buscar_detalle: false
+  tope_detalle: 25
+  activa: false
+  notas: API REST cerrada (401). robots.txt permisivo (solo bloquea /wp/wp-admin/) y declara wp-sitemap.xml,
+    que responde 200. Tiene un post type 'actividad' visible en las URLs (/actividad/<slug>/) y un listado
+    en /actividades/,
+- id: las_condes_muni
+  nombre: Municipalidad de Las Condes
+  url_base: https://www.lascondes.cl
+  url_agenda: https://www.lascondes.cl/sitemap_index.xml
+  tipo_adaptador: rss
+  endpoint: /sitemap_index.xml
+  comuna: Las Condes
+  crawl_delay_seg: 5
+  buscar_detalle: false
+  tope_detalle: 25
+  activa: false
+  notas: 'ATENCION: su robots.txt PROHIBE EXPLICITAMENTE /wp-json/ y /?rest_route= aunque el servidor
+    tambien responde 403 ahi. No usar la API REST bajo ninguna circunstancia: seria violar una instruccion
+    explicita del sitio. Lo q'
+- id: mnba
+  nombre: Museo Nacional de Bellas Artes
+  url_base: https://www.mnba.gob.cl
+  url_agenda: https://www.mnba.gob.cl/sitemap.xml
+  tipo_adaptador: rss
+  endpoint: /sitemap.xml
+  comuna: Santiago
+  crawl_delay_seg: 5
+  buscar_detalle: false
+  tope_detalle: 25
+  activa: false
+  notas: 'Drupal, no WordPress (robots.txt clasico de Drupal: bloquea /core/ y /profiles/, permite el
+    resto). sitemap.xml generado por el modulo Simple XML Sitemap responde 200. Sin API publica ni RSS.
+    Extraccion: sitemap + HTML. '
+- id: mnhn
+  nombre: Museo Nacional de Historia Natural
+  url_base: https://www.mnhn.gob.cl
+  url_agenda: https://www.mnhn.gob.cl/sitemap.xml
+  tipo_adaptador: rss
+  endpoint: /sitemap.xml
+  comuna: Santiago
+  crawl_delay_seg: 5
+  buscar_detalle: false
+  tope_detalle: 25
+  activa: false
+  notas: 'Identico al MNBA: mismo Drupal del Servicio Nacional del Patrimonio, mismo robots.txt, mismo
+    sitemap del modulo Simple XML Sitemap. Un solo adaptador Drupal sirve para MNBA, MNHN, Biblioteca
+    Nacional y Biblioteca de Sant'
+- id: biblioteca_nacional
+  nombre: Biblioteca Nacional de Chile
+  url_base: https://www.bibliotecanacional.gob.cl
+  url_agenda: https://www.bibliotecanacional.gob.cl/sitemap.xml
+  tipo_adaptador: rss
+  endpoint: /sitemap.xml
+  comuna: Santiago
+  crawl_delay_seg: 5
+  buscar_detalle: false
+  tope_detalle: 25
+  activa: false
+  notas: Mismo Drupal del Patrimonio que MNBA y MNHN. robots.txt permisivo, sitemap.xml 200. Charlas,
+    lanzamientos de libros y exposiciones, casi todo gratuito. Reutiliza el adaptador Drupal.
+- id: biblioteca_santiago
+  nombre: Biblioteca de Santiago
+  url_base: https://www.bibliotecasantiago.gob.cl
+  url_agenda: https://www.bibliotecasantiago.gob.cl/sitemap.xml
+  tipo_adaptador: rss
+  endpoint: /sitemap.xml
+  comuna: Santiago
+  crawl_delay_seg: 5
+  buscar_detalle: false
+  tope_detalle: 25
+  activa: false
+  notas: 'El dominio canonico es bibliotecasantiago.gob.cl (bibliotecasantiago.cl redirige ahi). Mismo
+    Drupal del Patrimonio. Es de las fuentes mas ricas en actividades gratuitas y familiares recurrentes
+    (cuentacuentos, talleres, '
+- id: mmdh
+  nombre: Museo de la Memoria y los Derechos Humanos
+  url_base: https://mmdh.cl
+  url_agenda: https://mmdh.cl/
+  tipo_adaptador: html
+  endpoint: /
+  comuna: Santiago
+  crawl_delay_seg: 5
+  buscar_detalle: false
+  tope_detalle: 25
+  activa: false
+  notas: 'robots.txt limpio y explicito: User-agent: * / Allow: / (permite todo). Pero no es WordPress,
+    no tiene sitemap.xml (404) ni RSS ni API. Solo HTML. El dominio antiguo ww3.museodelamemoria.cl ya
+    no resuelve. Programacion g'
+- id: mim
+  nombre: MIM - Museo Interactivo Mirador
+  url_base: https://www.mim.cl
+  url_agenda: https://www.mim.cl/
+  tipo_adaptador: html
+  endpoint: /
+  comuna: La Granja
+  crawl_delay_seg: 5
+  buscar_detalle: false
+  tope_detalle: 25
+  activa: false
+  notas: Aplicacion Next.js sin robots.txt real (la ruta /robots.txt devuelve el HTML de la SPA, igual
+    que /sitemap.xml). /wp-json/ responde 403. Sin JSON-LD. No declara restricciones, pero tampoco ofrece
+    ninguna puerta estructur
+- id: providencia_muni
+  nombre: Municipalidad de Providencia
+  url_base: https://providencia.cl
+  url_agenda: https://providencia.cl/provi/explora/actividades/
+  tipo_adaptador: html
+  endpoint: /provi/explora/actividades/
+  comuna: Providencia
+  crawl_delay_seg: 5
+  buscar_detalle: false
+  tope_detalle: 25
+  activa: false
+  notas: 'CMS legado de gobierno (rutas tipo /provi/site/edic/base/port/ y /provi/explora/). SIN robots.txt
+    (404) y SIN sitemap.xml (404): no declara restricciones ni ofrece indice. Publica muchas actividades
+    gratuitas (mas de 100'
+- id: maipu
+  nombre: Municipalidad de Maipu
+  url_base: https://www.maipu.cl
+  url_agenda: https://www.maipu.cl/api/categorias
+  tipo_adaptador: html
+  endpoint: /api/categorias
+  comuna: Maipu
+  crawl_delay_seg: 5
+  buscar_detalle: false
+  tope_detalle: 25
+  activa: false
+  notas: 'SPA en Vue: todas las rutas desconocidas (incluido /robots.txt y /sitemap.xml) devuelven el
+    mismo HTML de la aplicacion, o sea no hay robots.txt real. SI existe una API JSON parcial: /api/categorias
+    responde 200 con JSON'
+- id: ticketplus
+  nombre: Ticketplus
+  url_base: https://ticketplus.cl
+  url_agenda: https://ticketplus.cl/sitemap.xml
+  tipo_adaptador: rss
+  endpoint: /sitemap.xml
+  comuna: Varias
+  crawl_delay_seg: 10
+  buscar_detalle: false
+  tope_detalle: 25
+  activa: false
+  notas: TECNICAMENTE ACCESIBLE PERO NO LA USAMOS POR DECISION ESTRATEGICA. Su robots.txt bloquea /api/*,
+    /eventos/*, /cuenta/*, /compras/*, y todas las rutas de carrito, venta y cortesias, pero NO bloquea
+    /events/*, y publica si
+- id: deporte_municipal
+  nombre: Deporte Municipal (directorio privado)
+  url_base: https://deportemunicipal.cl
+  url_agenda: https://deportemunicipal.cl/sitemap.xml
+  tipo_adaptador: rss
+  endpoint: /sitemap.xml
+  comuna: Varias
+  crawl_delay_seg: 5
+  buscar_detalle: false
+  tope_detalle: 25
+  activa: false
+  notas: 'No es una fuente oficial sino un directorio privado de gimnasios y programas deportivos municipales
+    de todo Chile, con paginas por comuna y un buscador en /actividades/buscar/. robots.txt Allow: / +
+    sitemap.xml (50 KB) +'
+- id: toliv
+  nombre: Toliv (eventos under, fiestas y musica emergente)
+  url_base: https://www.toliv.com
+  url_agenda: https://www.toliv.com/sitemap-events.xml
+  tipo_adaptador: sitemap
+  endpoint: /sitemap-events.xml
+  comuna: Varias
+  crawl_delay_seg: 3
+  activa: true
+  notas: LA MEJOR FUENTE NUEVA DE ESTE LOTE. Es toliv.com, NO toliv.cl. Plataforma chilena de tickets
+    con QR; cubre el circuito nocturno/under que ninguna municipalidad publica (61% del inventario RM
+    es catego
+  tipos_post:
+  - evento
+  patron_url: /eventos/
+  tope_fichas: 45
+- id: uahurtado
+  nombre: Universidad Alberto Hurtado - Agenda de eventos
+  url_base: https://www.uahurtado.cl
+  url_agenda: https://www.uahurtado.cl/wp-json/tribe/events/v1/events
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/tribe/events/v1/events
+  comuna: Santiago
+  crawl_delay_seg: 2
+  activa: true
+  notas: 'WordPress 6.2.2 + The Events Calendar con API Tribe abierta. Verificado de forma independiente:
+    HTTP 200, total 26 eventos futuros (ej. ''Academia sabatina Elijo ser Docente UAH'', start_date 2026-08-08'
+  tipos_post:
+  - tribe_events
+- id: finis_terrae
+  nombre: Universidad Finis Terrae - Agenda
+  url_base: https://finis.cl
+  url_agenda: https://finis.cl/wp-json/tribe/events/v1/events
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/tribe/events/v1/events
+  comuna: Providencia
+  crawl_delay_seg: 2
+  activa: true
+  notas: 'MISMO ESQUEMA QUE UAH: un solo parser sirve para ambas (~52 eventos vivos entre las dos). WordPress
+    + The Events Calendar + Yoast. Verificado de forma independiente: HTTP 200, total 26 eventos (ej.
+    ''D'
+  tipos_post:
+  - tribe_events
+- id: uai
+  nombre: Universidad Adolfo Ibanez - Eventos
+  url_base: https://www.uai.cl
+  url_agenda: https://www.uai.cl/eventos
+  tipo_adaptador: html
+  endpoint: /eventos
+  comuna: Penalolen
+  crawl_delay_seg: 3
+  activa: false
+  notas: 'NO es WordPress: es Next.js App Router (RSC streaming, sin __NEXT_DATA__) tras Cloudflare. Todos
+    los endpoints wp-json, /feed/ y /sitemap_index.xml dan 404 - verificado. robots.txt totalmente abierto:'
+  tipos_post:
+  - evento
+- id: usach_extension
+  nombre: USACH - Departamento de Extension (agenda cultural)
+  url_base: https://extension.usach.cl
+  url_agenda: https://extension.usach.cl/events/feed/
+  tipo_adaptador: rss
+  endpoint: /events/feed/
+  comuna: Estacion Central
+  crawl_delay_seg: 2
+  activa: true
+  notas: 'LA MEJOR FUENTE UNIVERSITARIA DEL LOTE. WordPress + Modern Events Calendar (MEC) de Webnus +
+    Divi. Verificado de forma independiente: el RSS /events/feed/ responde 200 con 10 items y trae los
+    datos de'
+  tipos_post:
+  - mec-events
+- id: unab_cultura
+  nombre: Universidad Andres Bello - Cultura UNAB
+  url_base: https://cultura.unab.cl
+  url_agenda: https://cultura.unab.cl/wp-json/wp/v2/evento
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/evento
+  comuna: Las Condes
+  crawl_delay_seg: 3
+  activa: true
+  notas: 'WordPress con Bedrock (rutas /app/uploads/ y /wp/wp-admin/), custom post type ''evento'' + taxonomia
+    ''tipo-evento''. Verificado de forma independiente: /wp-json/wp/v2/evento responde 200 con items reales'
+  tipos_post:
+  - evento
+  buscar_detalle: true
+- id: uchile_agenda
+  nombre: Universidad de Chile - Agenda
+  url_base: https://www.uchile.cl
+  url_agenda: https://www.uchile.cl/agenda
+  tipo_adaptador: html
+  endpoint: /agenda
+  comuna: Varias
+  crawl_delay_seg: 3
+  activa: true
+  notas: 'NO es WordPress: es Adobe Experience Manager (AEM), confirmado por rutas de imagen /dam/jcr:<hash>/.
+    Todos los wp-json, /feed/, /agenda/feed/, /sitemap.xml, /sitemap_index.xml y /agenda.model.json dan'
+  tipos_post:
+  - evento
+- id: spanglish_party
+  nombre: Spanglish Party - Intercambio de idiomas
+  url_base: https://www.meetup.com
+  url_agenda: https://www.meetup.com/spanglish-party/events/
+  tipo_adaptador: html
+  endpoint: /spanglish-party/events/
+  comuna: Providencia
+  crawl_delay_seg: 3
+  activa: false
+  notas: 'APAGADA: se organiza en Meetup, que arma la pagina con JavaScript. No se scrapea: van como eventos
+    recurrentes cargados a mano tras hablar con el organizador.'
+  tipos_post:
+  - meetup_event
+- id: vivethink
+  nombre: Vivethink - Santiago Language Exchange
+  url_base: https://www.meetup.com
+  url_agenda: https://www.meetup.com/santiago-language-exchange-intercambio-de-idiomas-vivethink/events/
+  tipo_adaptador: html
+  endpoint: /santiago-language-exchange-intercambio-de-idiomas-vivethink/events/
+  comuna: Providencia
+  crawl_delay_seg: 3
+  activa: false
+  notas: 'APAGADA: se organiza en Meetup, que arma la pagina con JavaScript. No se scrapea: van como eventos
+    recurrentes cargados a mano tras hablar con el organizador.'
+  tipos_post:
+  - meetup_event
+- id: santiago_social_eventbrite
+  nombre: Santiago Social - Language Exchange (Eventbrite)
+  url_base: https://www.eventbrite.com
+  url_agenda: https://www.eventbrite.com/d/chile--santiago/language-exchange/
+  tipo_adaptador: html
+  endpoint: /d/chile--santiago/language-exchange/
+  comuna: Santiago
+  crawl_delay_seg: 3
+  activa: false
+  notas: 'TERCERA opcion de intercambio de idiomas, pero DE PAGO ($3.000 CLP, solo online, sin venta en
+    puerta) - marcar el precio en la app, no venderlo como gratis. Verificado: ''Santiago Social and Language
+    E'
+  tipos_post:
+  - eventbrite_event
+- id: red_salas_de_teatro
+  nombre: Red Salas de Teatro (agregador de salas RM)
+  url_base: https://redsalasdeteatro.cl
+  url_agenda: https://redsalasdeteatro.cl/wp-json/wp/v2/mec-events
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/mec-events
+  comuna: multiple
+  crawl_delay_seg: 3
+  activa: true
+  notas: 'Modern Events Calendar con API abierta. Verificado 200 JSON con eventos reales. Agrega decenas
+    de salas de la RM (incluye Sidarte, del Puente, DETUCH, Finis Terrae, Nescafe). PRIORIDAD 1: un'
+  tipos_post:
+  - mec-events
+  buscar_detalle: true
+- id: teatro_finis_terrae
+  nombre: Teatro Finis Terrae
+  url_base: https://teatrofinisterrae.cl
+  url_agenda: https://teatrofinisterrae.cl/wp-json/tribe/events/v1/events
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/tribe/events/v1/events
+  comuna: Providencia
+  crawl_delay_seg: 3
+  activa: true
+  notas: 'The Events Calendar con REST API abierta. Verificado 200 JSON. ATENCION AL MODELADO: entrega
+    la temporada completa como UN evento con all_day=true (ej. start 2026-08-27 / end 2026-09-13); lo'
+  tipos_post:
+  - tribe_events
+  buscar_detalle: true
+- id: teatro_san_gines
+  nombre: Teatro San Gines
+  url_base: https://www.sangines.cl
+  url_agenda: https://www.sangines.cl/wp-json/wp/v2/mec-events
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/mec-events
+  comuna: Providencia
+  crawl_delay_seg: 3
+  activa: true
+  notas: Modern Events Calendar. Verificado 200 JSON con eventos reales (ej. slug felices-los-3). Fichas
+    bajo /evento/. robots.txt solo bloquea /wp-admin/.
+  tipos_post:
+  - mec-events
+  buscar_detalle: true
+- id: teatro_zoco
+  nombre: Centro para las artes Zoco (Teatro Zoco)
+  url_base: https://teatrozoco.cl
+  url_agenda: https://teatrozoco.cl/wp-json/wp/v2/evento
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/evento
+  comuna: Lo Barnechea
+  crawl_delay_seg: 3
+  activa: true
+  notas: Custom post type propio 'evento' (no usa plugin de eventos). Verificado 200 JSON. Fichas bajo
+    /evento/. Av. La Dehesa 1500, Lo Barnechea.
+  tipos_post:
+  - evento
+  buscar_detalle: true
+- id: tm_las_condes
+  nombre: Teatro Municipal de Las Condes
+  url_base: https://www.tmlascondes.cl
+  url_agenda: https://www.tmlascondes.cl/estrenos/
+  tipo_adaptador: html
+  endpoint: /estrenos/
+  comuna: Las Condes
+  crawl_delay_seg: 3
+  activa: false
+  notas: 'Sin CPT de eventos, pero la cartelera trae JSON-LD con @type Event (ademas de TheaterGroup,
+    Place, PostalAddress). Extraer via JSON-LD, no via DOM. sitemap_index.xml valido. wp-json abierto '
+- id: teatro_camilo_henriquez
+  nombre: Teatro Camilo Henriquez
+  url_base: https://teatroch.cl
+  url_agenda: https://teatroch.cl/wp-json/wp/v2/pages
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/pages
+  comuna: Santiago
+  crawl_delay_seg: 3
+  activa: false
+  notas: wp-json abierto pero SIN custom post type de eventos. Cartelera en /cartelera/ como paginas.
+    El sitemap_index.xml que declara robots.txt devolvio 404 al verificar; usar rastreo directo. Amun
+  tipos_post:
+  - post
+  - page
+  buscar_detalle: true
+- id: teatro_sidarte
+  nombre: Teatro Sidarte (Fundacion Sidarte)
+  url_base: https://teatrosidarte.cl
+  url_agenda: https://teatrosidarte.cl/wp-json/wp/v2/pages
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/pages
+  comuna: Providencia
+  crawl_delay_seg: 3
+  activa: false
+  notas: 'wp-json abierto; CPT existentes son ''podcast'' y ''elementor_library'' (no hay eventos). Cartelera
+    en /cartelera/. OJO: el Sitemap declarado en robots.txt apunta erroneamente a namadomain.com ('
+  tipos_post:
+  - post
+  - page
+  buscar_detalle: true
+- id: teatro_del_puente
+  nombre: Teatro del Puente
+  url_base: https://teatrodelpuente.cl
+  url_agenda: https://teatrodelpuente.cl/wp-json/wp/v2/pages
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/pages
+  comuna: Santiago
+  crawl_delay_seg: 3
+  activa: false
+  notas: WordPress instalado en subcarpeta /wp4 (la home del wp-json declara url https://teatrodelpuente.cl/wp4).
+    Sin CPT de eventos. Cartelera en /cartelera/. /wp-sitemap.xml valido. Parque Forestal
+  tipos_post:
+  - post
+  - page
+  buscar_detalle: true
+- id: teatro_mori
+  nombre: Teatro Mori (Parque Arauco, Bellavista, Vitacura, Recoleta)
+  url_base: https://teatromori.com
+  url_agenda: https://teatromori.com/cartelera
+  tipo_adaptador: html
+  endpoint: /cartelera
+  comuna: multiple
+  crawl_delay_seg: 3
+  activa: false
+  notas: 'App PHP propia. NO tiene robots.txt (302 a home) y devuelve 200 con HTML de la home en cualquier
+    ruta: validar Content-Type y cuerpo, nunca solo el status. /cartelera es server-rendered y fi'
+- id: espacio_matta_la_granja
+  nombre: Centro Cultural Espacio Matta (Cultura La Granja)
+  url_base: https://culturalagranja.cl
+  url_agenda: https://culturalagranja.cl/
+  tipo_adaptador: html
+  endpoint: /
+  comuna: La Granja
+  crawl_delay_seg: 3
+  activa: false
+  notas: 'Crawl-delay: 2 DECLARADO en robots.txt (por user-agent nombrado: Googlebot, Baiduspider, YandexBot,
+    ichiro, sogou). Sin API JSON valida, sin sitemap XML. Solo HTML. Av. Santa Rosa 9014, La G'
+- id: nunoa_deportes_talleres
+  nombre: Corporacion Municipal de Deportes de Nunoa - Talleres
+  url_base: https://talleres.nunoadeportes.cl
+  url_agenda: https://talleres.nunoadeportes.clhttps://oboynogo6f.execute-api.sa-east-1.amazonaws.com/production/talleres
+  tipo_adaptador: api
+  endpoint: https://oboynogo6f.execute-api.sa-east-1.amazonaws.com/production/talleres
+  comuna: Nunoa
+  crawl_delay_seg: 5
+  activa: false
+  notas: 'SPA React sobre API Gateway (AWS). robots.txt del sitio permite todo (Disallow vacio). Devuelve
+    200 JSON con recurrencia TOTALMENTE ESTRUCTURADA: horarios[].bloques[] con dias[] + inicio + f'
+- id: corp_cultural_las_condes
+  nombre: Corporacion Cultural de Las Condes
+  url_base: https://culturallascondes.cl
+  url_agenda: https://culturallascondes.cl/wp-json/wp/v2/curso
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/curso
+  comuna: Las Condes
+  crawl_delay_seg: 10
+  activa: false
+  notas: 'Crawl-delay: 10 DECLARADO en robots.txt. wp-json abierto con custom post type propio ''curso''.
+    El endpoint responde 200 JSON valido pero al verificar devolvio arreglo vacio (sin ciclo publica'
+  tipos_post:
+  - curso
+  - portfolio
+  buscar_detalle: true
+- id: munistgo_talleres_deportivos
+  nombre: Municipalidad de Santiago - Talleres Deportivos
+  url_base: https://www.munistgo.cl
+  url_agenda: https://www.munistgo.cl/talleres-deportivos/
+  tipo_adaptador: html
+  endpoint: /talleres-deportivos/
+  comuna: Santiago
+  crawl_delay_seg: 50
+  activa: false
+  notas: 'Crawl-delay: 50 DECLARADO en robots.txt (muy alto: 1 peticion cada 50 s en este host; considerar
+    pedir excepcion al municipio). 4 tablas HTML con encabezado RECINTO|BARRIO|DISCIPLINA|DIAS|HO'
+- id: huechuraba_talleres_deportivos
+  nombre: Municipalidad de Huechuraba - Actividades y Talleres Deportivos
+  url_base: https://huechuraba.cl
+  url_agenda: https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026
+  tipo_adaptador: html
+  endpoint: /deporte/actividades-y-talleres-deportivos-2026
+  comuna: Huechuraba
+  crawl_delay_seg: 3
+  activa: false
+  notas: robots.txt con Disallow vacio (todo permitido). 6 tablas HTML, una por recinto, con encabezado
+    DISCIPLINA|DIA(S)|HORARIO|EDAD|INICIO y cabecera de recinto con direccion y telefono. Ejemplo r
+- id: corp_huechuraba
+  nombre: Corporacion de Huechuraba
+  url_base: https://corporaciondehuechuraba.cl
+  url_agenda: https://corporaciondehuechuraba.cl/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: Huechuraba
+  crawl_delay_seg: 3
+  activa: false
+  notas: WordPress + WooCommerce con wp-json abierto (incluye wc/store/v1). /wp-sitemap.xml valido. Publica
+    deportes y talleres como posts; algunos talleres pagados aparecen como productos WooCommerc
+  tipos_post:
+  - post
+  - page
+  - product
+  buscar_detalle: true
+- id: penalolen_deportes
+  nombre: Corp. Municipal de Deportes y Recreacion de Penalolen
+  url_base: https://deportespenalolen.cl
+  url_agenda: https://deportespenalolen.cl/sitemap_index.xml
+  tipo_adaptador: html
+  endpoint: /sitemap_index.xml
+  comuna: Penalolen
+  crawl_delay_seg: 3
+  activa: false
+  notas: 'robots.txt Yoast con Disallow vacio, pero wp-json responde 403: usar sitemap + HTML. Una pagina
+    por disciplina (/yoga/, /zumba/, /pilates/, /spinning/...). OJO: parte del contenido va dentro'
+- id: penalolen_municipio
+  nombre: Municipalidad de Penalolen
+  url_base: https://www.penalolen.cl
+  url_agenda: https://www.penalolen.cl/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: Penalolen
+  crawl_delay_seg: 3
+  activa: false
+  notas: 'robots.txt Yoast con Disallow vacio. wp-json abierto y sitemaps Yoast validos. Los talleres
+    se publican como noticias: filtrar por palabras clave (taller, escuela deportiva, inscripcion) y e'
+  tipos_post:
+  - post
+  - page
+  buscar_detalle: true
+- id: recoleta_municipio
+  nombre: Municipalidad de Recoleta
+  url_base: https://www.recoleta.cl
+  url_agenda: https://www.recoleta.cl/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: Recoleta
+  crawl_delay_seg: 3
+  activa: false
+  notas: wp-json abierto, probado con ?search=taller (200 JSON). robots.txt bloquea /wp-admin/, /wp-includes/,
+    /wp-content/plugins/ y /xmlrpc.php. El Sitemap esta COMENTADO en robots (#Sitemap:), per
+  tipos_post:
+  - post
+  - page
+  buscar_detalle: true
+- id: independencia_municipio
+  nombre: Municipalidad de Independencia
+  url_base: https://www.independencia.cl
+  url_agenda: https://www.independencia.cl/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: Independencia
+  crawl_delay_seg: 3
+  activa: false
+  notas: wp-json abierto; robots.txt solo bloquea /wp-admin/. /wp-sitemap.xml valido. Talleres publicados
+    como noticias.
+  tipos_post:
+  - post
+  - page
+  buscar_detalle: true
+- id: la_reina_municipio
+  nombre: Municipalidad de La Reina
+  url_base: https://www.lareina.cl
+  url_agenda: https://www.lareina.cl/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: La Reina
+  crawl_delay_seg: 3
+  activa: false
+  notas: 'wp-json abierto (nombre del sitio: Municipalidad de La Reina); robots.txt solo bloquea /wp-admin/.
+    /wp-sitemap.xml valido. Talleres en el espacio Kaleidoscopio (arte, creatividad, naturaleza'
+  tipos_post:
+  - post
+  - page
+  buscar_detalle: true
+- id: conchali_municipio
+  nombre: Municipalidad de Conchali
+  url_base: https://www.conchali.cl
+  url_agenda: https://www.conchali.cl/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: Conchali
+  crawl_delay_seg: 3
+  activa: false
+  notas: 'wp-json abierto (WordPress + Astra/Elementor). robots.txt con Allow: / y 5 sitemaps declarados.
+    Recintos: Centro Cultural Leganes, Polideportivo de Conchali, Piscina y Gimnasio Municipal.'
+  tipos_post:
+  - post
+  - page
+  buscar_detalle: true
+- id: la_florida_municipio
+  nombre: Municipalidad de La Florida
+  url_base: https://www.laflorida.cl
+  url_agenda: https://www.laflorida.cl/wp-json/wp/v2/noticias_florida
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/noticias_florida
+  comuna: La Florida
+  crawl_delay_seg: 3
+  activa: false
+  notas: 'wp-json abierto con CPTs propios noticias_florida y floridano. NO tiene robots.txt: no hay restriccion
+    declarada, pero autolimitarse por cortesia. /wp-sitemap.xml valido.'
+  tipos_post:
+  - post
+  - page
+  - noticias_florida
+  - floridano
+  buscar_detalle: true
+- id: renca_municipio
+  nombre: Ilustre Municipalidad de Renca
+  url_base: https://www.renca.cl
+  url_agenda: https://www.renca.cl/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: Renca
+  crawl_delay_seg: 3
+  activa: false
+  notas: 'wp-json abierto; robots.txt con Allow: / y sitemap valido. Programa Renca Activa (mas de 180
+    talleres gratuitos). La INSCRIPCION vive fuera, en la SaaS talleres.meetcard.cl (SPA, sin fichas '
+  tipos_post:
+  - post
+  - page
+  buscar_detalle: true
+- id: las_condes_municipio
+  nombre: Municipalidad de Las Condes (talleres)
+  url_base: https://www.lascondes.cl
+  url_agenda: https://www.lascondes.cl/sitemap_index.xml
+  tipo_adaptador: html
+  endpoint: /sitemap_index.xml
+  comuna: Las Condes
+  crawl_delay_seg: 3
+  activa: false
+  notas: 'IMPORTANTE: robots.txt PROHIBE explicitamente /wp-json/ y /?rest_route= (y la API responde 403).
+    Usar solo sitemap_index.xml + HTML. Paginas relevantes: /talleres-portada/talleres-presencial'
+- id: vitacura_municipio
+  nombre: Municipalidad de Vitacura
+  url_base: https://www.vitacura.cl
+  url_agenda: https://www.vitacura.cl/wp-sitemap.xml
+  tipo_adaptador: html
+  endpoint: /wp-sitemap.xml
+  comuna: Vitacura
+  crawl_delay_seg: 3
+  activa: false
+  notas: 'robots.txt permite todo salvo /wp/wp-admin/, pero wp-json responde 401: usar sitemap + HTML.
+    /wp-sitemap.xml valido. Publica mas de 400 talleres por ciclo semestral como noticias bajo /notic'
+- id: nunoa_municipio
+  nombre: Municipalidad de Nunoa
+  url_base: https://www.nunoa.cl
+  url_agenda: https://www.nunoa.cl/sitemap_index.xml
+  tipo_adaptador: html
+  endpoint: /sitemap_index.xml
+  comuna: Nunoa
+  crawl_delay_seg: 3
+  activa: false
+  notas: 'robots.txt Yoast permite rastreo, pero wp-json responde 401: usar sitemap_index.xml + HTML.
+    Complementa a talleres.nunoadeportes.cl (deporte) y ccn.cl (cultura). Festival Late Nunoa y Casa d'
+- id: estacion_central_municipio
+  nombre: Municipalidad de Estacion Central
+  url_base: https://www.estacioncentral.cl
+  url_agenda: https://www.estacioncentral.cl/
+  tipo_adaptador: html
+  endpoint: /
+  comuna: Estacion Central
+  crawl_delay_seg: 3
+  activa: false
+  notas: 'Crawl-delay: 2 DECLARADO en robots.txt (mismo template que culturalagranja.cl: reglas por user-agent
+    nombrado y Disallow /*? y /munin*). OJO: Disallow /*? bloquea URLs con querystring para l'
+- id: ccn_nunoa_cultura
+  nombre: Corporacion Cultural de Nunoa (plataforma Ligup)
+  url_base: https://www.ccn.cl
+  url_agenda: https://www.ccn.cl/sitemap.xml
+  tipo_adaptador: html
+  endpoint: /sitemap.xml
+  comuna: Nunoa
+  crawl_delay_seg: 3
+  activa: false
+  notas: 'Plataforma Ligup. robots.txt PROHIBE /api/ (y /admin/): NO consultar la API aunque sea la que
+    tiene los datos limpios. sitemap.xml valido con 159 URLs y fichas tipo /actividades/clases-de-cu'
+- id: quinta_normal_municipio
+  nombre: Municipalidad de Quinta Normal (plataforma Ligup)
+  url_base: https://www.quintanormal.cl
+  url_agenda: https://www.quintanormal.cl/sitemap.xml
+  tipo_adaptador: html
+  endpoint: /sitemap.xml
+  comuna: Quinta Normal
+  crawl_delay_seg: 3
+  activa: false
+  notas: 'Plataforma Ligup confirmada por dos senales: robots.txt identico al de ccn.cl (Disallow /admin/
+    + Disallow /api/) y assets alojados en ligup-v2.s3.sa-east-1.amazonaws.com/quintanormal/. API '
+- id: deporte_municipal_directorio
+  nombre: Deporte Municipal (directorio de gimnasios y recintos por comuna)
+  url_base: https://deportemunicipal.cl
+  url_agenda: https://deportemunicipal.cl/sitemap.xml
+  tipo_adaptador: html
+  endpoint: /sitemap.xml
+  comuna: multiple
+  crawl_delay_seg: 3
+  activa: false
+  notas: 'robots.txt con Allow: / y sitemap.xml valido. Home con JSON-LD (FAQPage, ItemList). Util para
+    poblar el CATALOGO DE RECINTOS (nombre, direccion, comuna) y geocodificar, NO para horarios de t'
