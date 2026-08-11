@@ -27,6 +27,7 @@ import yaml
 
 from loica.agrupar import colapsar_multidia
 from loica.almacen import Almacen
+from loica.filtros import motivo_de_descarte
 from loica.fuentes import ADAPTADORES
 from loica.red import ClienteEducado
 
@@ -206,6 +207,13 @@ def main() -> int:
                 valido, motivo = evento.es_valido()
                 if valido and exige_comuna and not evento.comuna:
                     valido, motivo = False, "sin comuna de Santiago"
+                # Las municipalidades publican talleres y ferias mezclados con
+                # licitaciones y cuentas públicas: el filtro por palabras es lo
+                # que hace usable esa fuente sin un adaptador por comuna.
+                if valido:
+                    descarte = motivo_de_descarte(evento, fuente)
+                    if descarte:
+                        valido, motivo = False, descarte
                 if not valido:
                     conteo["descartados"] += 1
                     log.debug("descartado (%s): %s", motivo, evento.titulo[:60])

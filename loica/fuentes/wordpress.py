@@ -262,17 +262,40 @@ def extraer(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
         log.info("%s: %d eventos vía The Events Calendar", fuente["nombre"], len(eventos))
         return eventos
 
+    # Las municipalidades publican las actividades mezcladas con miles de
+    # noticias. Traer los 50 posts más recientes y filtrar después no sirve:
+    # los últimos 50 de Recoleta son licitaciones y cuentas públicas, y los
+    # talleres quedan enterrados entre 2.532 registros. Con `buscar_terminos`
+    # se le pregunta al sitio por cada palabra (?search=taller), que es lo que
+    # recorre el archivo completo en vez de la portada.
+    terminos = list(fuente.get("buscar_terminos") or [])
+    vistos: set[str] = set()
+
     def cosechar(endpoint: str) -> list[Evento]:
         # _embed trae la imagen destacada en la misma petición: sin esto
         # WordPress solo entrega el id de la imagen y no su URL.
-        datos = cliente.json(f"{base}{endpoint}",
-                             params={"per_page": 50, "orderby": "date",
-                                     "_embed": "wp:featuredmedia"})
-        if not isinstance(datos, list) or not datos:
-            return []
-        encontrados = [e for e in (_desde_post(i, fuente) for i in datos) if e]
+        base_params = {"per_page": 50, "orderby": "date",
+                       "_embed": "wp:featuredmedia"}
+        consultas = ([{**base_params, "search": t} for t in terminos]
+                     if terminos else [base_params])
+
+        encontrados: list[Evento] = []
+        for params in consultas:
+            datos = cliente.json(f"{base}{endpoint}", params=params)
+            if not isinstance(datos, list) or not datos:
+                continue
+            for item in datos:
+                clave = f"{endpoint}:{item.get('id')}"
+                if clave in vistos:
+                    continue
+                vistos.add(clave)
+                evento = _desde_post(item, fuente)
+                if evento:
+                    encontrados.append(evento)
+
         if encontrados:
-            log.info("%s: %d eventos vía %s", fuente["nombre"], len(encontrados), endpoint)
+            log.info("%s: %d eventos vía %s%s", fuente["nombre"], len(encontrados),
+                     endpoint, f" ({len(terminos)} búsquedas)" if terminos else "")
         return encontrados
 
     # 2. Tipos propios del sitio: los de la configuración más los que el propio
@@ -302,7 +325,14 @@ def extraer(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
     #    fuente lo pide en la configuración.
     if fuente.get("buscar_detalle"):
         tope = int(fuente.get("tope_detalle", 40))
-        pendientes = [e for e in eventos if e.necesita_fecha][:tope]
+        # El filtro por palabras se aplica ANTES de abrir fichas: en una fuente
+        # municipal la mayoría de los posts son licitaciones y cuentas públicas,
+        # y abrirles la ficha para buscarles fecha es gastar la cuota del sitio
+        # en cosas que se van a descartar igual.
+        from ..filtros import motivo_de_descarte
+        candidatos = [e for e in eventos
+                      if e.necesita_fecha and not motivo_de_descarte(e, fuente)]
+        pendientes = candidatos[:tope]
         recuperados = sum(1 for e in pendientes if _completar_desde_ficha(e, cliente))
         if pendientes:
             log.info("%s: %d/%d fechas recuperadas abriendo la ficha",

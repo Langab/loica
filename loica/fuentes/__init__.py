@@ -2,9 +2,18 @@
 
 Para sumar una fuente nueva no se toca código: se agrega una entrada en
 config/fuentes.yaml con su tipo_adaptador.
+
+OJO con `api`: antes ese nombre apuntaba fijo a Ticketmaster, así que cualquier
+otra fuente declarada como `api` terminaba consultando Ticketmaster en silencio.
+Ahora cada API tiene su nombre propio (`ticketmaster`) y las APIs JSON genéricas
+usan `json`, que se configura por YAML. Un tipo_adaptador desconocido falla
+fuerte en run_diario.py, que es lo que uno quiere: mejor una fuente caída que
+una fuente trayendo los datos de otra.
 """
 
 from .apis import extraer_ticketmaster
+from .json_api import extraer_json
+from .tablas import extraer_tabla
 from .web import extraer_html, extraer_rss, extraer_sitemap_fichas
 from .wordpress import extraer as extraer_wordpress
 from .wordpress import extraer_eventon
@@ -15,7 +24,9 @@ ADAPTADORES = {
     "rss": extraer_rss,
     "html": extraer_html,
     "sitemap": extraer_sitemap_fichas,
-    "api": extraer_ticketmaster,
+    "tabla": extraer_tabla,
+    "json": extraer_json,
+    "ticketmaster": extraer_ticketmaster,
 }
 
 __all__ = ["ADAPTADORES"]

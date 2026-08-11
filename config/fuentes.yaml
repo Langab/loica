@@ -93,7 +93,7 @@ fuentes:
 - id: ticketmaster
   nombre: Ticketmaster Chile
   url_base: https://app.ticketmaster.com
-  tipo_adaptador: api
+  tipo_adaptador: ticketmaster
   ciudad: Santiago
   crawl_delay_seg: 1
   activa: true
@@ -877,14 +877,53 @@ fuentes:
 - id: nunoa_deportes_talleres
   nombre: Corporacion Municipal de Deportes de Nunoa - Talleres
   url_base: https://talleres.nunoadeportes.cl
-  url_agenda: https://talleres.nunoadeportes.clhttps://oboynogo6f.execute-api.sa-east-1.amazonaws.com/production/talleres
-  tipo_adaptador: api
+  url_agenda: https://talleres.nunoadeportes.cl/
+  tipo_adaptador: json
   endpoint: https://oboynogo6f.execute-api.sa-east-1.amazonaws.com/production/talleres
-  comuna: Nunoa
+  comuna: Ñuñoa
   crawl_delay_seg: 5
-  activa: false
-  notas: 'SPA React sobre API Gateway (AWS). robots.txt del sitio permite todo (Disallow vacio). Devuelve
-    200 JSON con recurrencia TOTALMENTE ESTRUCTURADA: horarios[].bloques[] con dias[] + inicio + f'
+  horizonte_dias: 30
+  activa: true
+  json:
+    lista: talleres
+    plantilla_url: https://talleres.nunoadeportes.cl/talleres/{_id}
+    paginacion:
+      parametro: page
+      desde: 1
+      parametro_limite: limit
+      limite: 100
+      campo_total_paginas: totalPages
+      max_paginas: 10
+    campos:
+      titulo: nombre
+      descripcion_corta: descripcion
+      categoria: tipoActividad
+      lugar_nombre: recinto.nombre
+      lugar_direccion: recinto.direccion
+      comuna: recinto.comuna
+      imagen_url: imagen.url
+      id_externo: _id
+      inicio: actividadesInicio
+      fin: actividadesFin
+      es_gratis: esGratuito
+    recurrencia:
+      bloques: horarios[].bloques
+      dias: dias
+      hora_inicio: inicio
+      hora_fin: fin
+    filtros:
+      estado: activo
+      enCicloActivo: true
+  notas: 'SPA React sobre API Gateway (AWS). robots.txt del sitio permite todo (Disallow vacio).
+
+    329 talleres, de los cuales 113 marcados esGratuito. Recurrencia TOTALMENTE ESTRUCTURADA en
+    horarios[].bloques[] con dias[] + inicio + fin, y recinto con direccion y comuna. Es el mejor
+    dato municipal del pipeline.
+
+    La API vive en amazonaws pero la ficha publica es /talleres/<_id> (confirmado en el router del
+    bundle React), y de ahi sale la atribucion.
+
+    '
 - id: corp_cultural_las_condes
   nombre: Corporacion Cultural de Las Condes
   url_base: https://culturallascondes.cl
@@ -904,24 +943,42 @@ fuentes:
   nombre: Municipalidad de Santiago - Talleres Deportivos
   url_base: https://www.munistgo.cl
   url_agenda: https://www.munistgo.cl/talleres-deportivos/
-  tipo_adaptador: html
+  tipo_adaptador: tabla
   endpoint: /talleres-deportivos/
   comuna: Santiago
   crawl_delay_seg: 50
-  activa: false
+  horizonte_dias: 30
+  categoria_por_defecto: deporte
+  activa: true
   notas: 'Crawl-delay: 50 DECLARADO en robots.txt (muy alto: 1 peticion cada 50 s en este host; considerar
-    pedir excepcion al municipio). 4 tablas HTML con encabezado RECINTO|BARRIO|DISCIPLINA|DIAS|HO'
+    pedir excepcion al municipio). Como es UNA sola pagina, la corrida diaria hace una sola peticion
+    y el crawl-delay no molesta.
+
+    4 tablas HTML con encabezado RECINTO|BARRIO|DISCIPLINA|DIAS|HORARIO: aca el recinto viene como
+    COLUMNA, no como cabecera de tabla, y el adaptador de tablas lo toma de ahi.
+
+    '
 - id: huechuraba_talleres_deportivos
   nombre: Municipalidad de Huechuraba - Actividades y Talleres Deportivos
   url_base: https://huechuraba.cl
   url_agenda: https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026
-  tipo_adaptador: html
+  tipo_adaptador: tabla
   endpoint: /deporte/actividades-y-talleres-deportivos-2026
   comuna: Huechuraba
   crawl_delay_seg: 3
-  activa: false
-  notas: robots.txt con Disallow vacio (todo permitido). 6 tablas HTML, una por recinto, con encabezado
-    DISCIPLINA|DIA(S)|HORARIO|EDAD|INICIO y cabecera de recinto con direccion y telefono. Ejemplo r
+  horizonte_dias: 30
+  categoria_por_defecto: deporte
+  activa: true
+  notas: 'robots.txt con Disallow vacio (todo permitido). 6 tablas HTML, una por recinto, con encabezado
+    DISCIPLINA|DIA(S)|HORARIO|EDAD|INICIO y el nombre del recinto y su direccion en las filas de ARRIBA
+    del encabezado.
+
+    La columna INICIO dice "Marzo" porque son programas anuales ya empezados: el adaptador de tablas
+    ignora esa columna y emite las proximas sesiones segun DIA(S) + HORARIO.
+
+    La pagina no declara precio, asi que los talleres quedan SIN precio, no marcados gratis.
+
+    '
 - id: corp_huechuraba
   nombre: Corporacion de Huechuraba
   url_base: https://corporaciondehuechuraba.cl
@@ -972,13 +1029,100 @@ fuentes:
   endpoint: /wp-json/wp/v2/posts
   comuna: Recoleta
   crawl_delay_seg: 3
-  activa: false
-  notas: wp-json abierto, probado con ?search=taller (200 JSON). robots.txt bloquea /wp-admin/, /wp-includes/,
-    /wp-content/plugins/ y /xmlrpc.php. El Sitemap esta COMENTADO en robots (#Sitemap:), per
+  activa: true
+  notas: 'wp-json abierto, probado con ?search=taller (200 JSON). robots.txt bloquea /wp-admin/, /wp-includes/,
+    /wp-content/plugins/ y /xmlrpc.php. El Sitemap esta COMENTADO en robots (#Sitemap:).
+
+    2.532 posts con las actividades MEZCLADAS con noticias municipales: sin filtro_palabras esta fuente
+    inunda la curaduria de licitaciones y cuentas publicas. Con filtro se vuelve usable.
+
+    '
   tipos_post:
   - post
-  - page
   buscar_detalle: true
+  tope_detalle: 25
+  buscar_terminos: &terminos_actividades
+  - taller
+  - feria
+  - festival
+  - carnaval
+  - concierto
+  - exposicion
+  - cicletada
+  - cine
+  filtro_palabras: &actividades_municipales
+  - taller
+  - talleres
+  - feria
+  - festival
+  - carnaval
+  - concierto
+  - exposicion
+  - exposición
+  - muestra
+  - funcion
+  - función
+  - obra de teatro
+  - cicletada
+  - corrida
+  - campeonato
+  - torneo
+  - cuentacuentos
+  - cine
+  - recital
+  - gala
+  - celebracion
+  - celebración
+  - aniversario
+  - inauguracion
+  - inauguración
+  - conversatorio
+  - capacitacion
+  - capacitación
+  descartar_palabras: &ruido_municipal
+  - licitacion
+  - licitación
+  - ordenanza
+  - decreto
+  - concejo municipal
+  - cuenta publica
+  - cuenta pública
+  - sumario
+  - bases administrativas
+  - permiso de circulacion
+  - permiso de circulación
+  - patente comercial
+  - corte de agua
+  - corte de suministro
+  - llamado a concurso
+  - concurso publico
+  - concurso público
+  # Las municipalidades publican sobre todo CRONICAS de lo que ya pasó, no
+  # anuncios de lo que viene. Sin estos marcadores de pasado, "Feria del libro
+  # fue visitada por 80 mil personas" entra como si fuera un evento futuro.
+  - disfrutaron
+  - disfruto
+  - disfrutó
+  - fue visitada
+  - fue visitado
+  - se realizo
+  - se realizó
+  - se llevo a cabo
+  - se llevó a cabo
+  - culmino
+  - culminó
+  - finalizo
+  - finalizó
+  - conmemoro
+  - conmemoró
+  - celebro
+  - celebró
+  - participaron
+  - vivieron
+  - recibio a
+  - recibió a
+  - asi fue
+  - así fue
 - id: independencia_municipio
   nombre: Municipalidad de Independencia
   url_base: https://www.independencia.cl
@@ -987,9 +1131,17 @@ fuentes:
   endpoint: /wp-json/wp/v2/posts
   comuna: Independencia
   crawl_delay_seg: 3
-  activa: false
-  notas: wp-json abierto; robots.txt solo bloquea /wp-admin/. /wp-sitemap.xml valido. Talleres publicados
-    como noticias.
+  activa: true
+  buscar_detalle: true
+  tope_detalle: 25
+  buscar_terminos: *terminos_actividades
+  filtro_palabras: *actividades_municipales
+  descartar_palabras: *ruido_municipal
+  notas: 'wp-json abierto; robots.txt solo bloquea /wp-admin/. /wp-sitemap.xml valido. Talleres
+    publicados como noticias, mezclados con 1.786 posts municipales: depende de buscar_terminos
+    y filtro_palabras para ser usable.
+
+    '
   tipos_post:
   - post
   - page
@@ -1049,9 +1201,17 @@ fuentes:
   endpoint: /wp-json/wp/v2/posts
   comuna: Renca
   crawl_delay_seg: 3
-  activa: false
-  notas: 'wp-json abierto; robots.txt con Allow: / y sitemap valido. Programa Renca Activa (mas de 180
-    talleres gratuitos). La INSCRIPCION vive fuera, en la SaaS talleres.meetcard.cl (SPA, sin fichas '
+  activa: true
+  buscar_detalle: true
+  tope_detalle: 25
+  buscar_terminos: *terminos_actividades
+  filtro_palabras: *actividades_municipales
+  descartar_palabras: *ruido_municipal
+  notas: 'wp-json abierto; robots.txt con Allow: / y sitemap valido. Programa Renca Activa (mas de
+    180 talleres gratuitos). La INSCRIPCION vive fuera, en la SaaS talleres.meetcard.cl (SPA, sin
+    fichas indexables): el sitio municipal solo anuncia, no lista los talleres uno por uno.
+
+    '
   tipos_post:
   - post
   - page
