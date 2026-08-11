@@ -240,7 +240,24 @@ def extraer_sitemap_fichas(fuente: dict, cliente: ClienteEducado) -> list[Evento
     """
     base = fuente["url_base"].rstrip("/")
 
-    if fuente.get("origen") == "listado":
+    if fuente.get("origen") == "rss":
+        # El feed entrega los links pero no los datos: la fecha vive en la ficha
+        # (Feria Friki es el caso: describe "Fecha / Horario / Dirección" ahí).
+        url_feed = fuente.get("url_agenda") or (base + fuente.get("endpoint", "/feed/"))
+        respuesta = cliente.obtener(url_feed, max_edad_cache_seg=3 * 3600)
+        entradas = []
+        if respuesta is not None and respuesta.ok:
+            try:
+                raiz = ElementTree.fromstring(respuesta.content)
+                for item in raiz.findall(".//item"):
+                    enlace = item.find("link")
+                    fecha = item.find("pubDate")
+                    if enlace is not None and enlace.text:
+                        entradas.append((enlace.text.strip(),
+                                         (fecha.text or "") if fecha is not None else ""))
+            except ElementTree.ParseError:
+                log.warning("%s: feed ilegible", fuente.get("nombre"))
+    elif fuente.get("origen") == "listado":
         entradas = _urls_desde_listado(fuente, cliente)
     else:
         url_mapa = fuente.get("url_agenda") or (base + fuente.get("endpoint", "/sitemap.xml"))

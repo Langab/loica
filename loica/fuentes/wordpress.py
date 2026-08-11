@@ -10,6 +10,7 @@ Estrategia en cascada, de mejor a peor dato:
 from __future__ import annotations
 
 import logging
+from datetime import datetime
 
 from ..modelo import Evento
 from ..normalizar import (detectar_comuna, limpiar_html, parsear_fecha,
@@ -109,6 +110,34 @@ def _imagen_de(item: dict) -> str:
     return ""
 
 
+def _desde_meta(item: dict, fuente: dict) -> tuple[datetime | None, str]:
+    """Lee fecha y link desde los campos meta que declare la configuración.
+
+    Algunos sitios (Club Chocolate) publican la fecha como timestamp Unix y el
+    link de la ticketera en `meta`, no en el cuerpo. Es dato estructurado y
+    fiable: mejor que adivinar del HTML.
+    """
+    campos = fuente.get("campos_meta") or {}
+    meta = item.get("meta") or {}
+    if not isinstance(meta, dict):
+        return None, ""
+
+    fecha = None
+    clave_fecha = campos.get("fecha")
+    if clave_fecha and meta.get(clave_fecha):
+        crudo = meta[clave_fecha]
+        try:
+            fecha = datetime.fromtimestamp(int(crudo))
+        except (TypeError, ValueError, OSError):
+            fecha = parsear_fecha(str(crudo))
+
+    enlace = ""
+    clave_link = campos.get("link")
+    if clave_link and isinstance(meta.get(clave_link), str):
+        enlace = meta[clave_link].strip()
+    return fecha, enlace
+
+
 def _desde_post(item: dict, fuente: dict) -> Evento | None:
     """Post genérico de WordPress: hay que deducir la fecha del evento del texto."""
     titulo = _texto(item.get("title"))
@@ -123,7 +152,9 @@ def _desde_post(item: dict, fuente: dict) -> Evento | None:
     # siguiente). Si no aparece, el evento igual se guarda marcado para que el
     # curador le ponga la fecha a mano.
     publicado = parsear_fecha(item.get("date") or "")
-    inicio = parsear_fecha(texto_completo, publicado=publicado)
+    # Los campos meta mandan sobre el texto: son dato estructurado del sitio.
+    fecha_meta, link_meta = _desde_meta(item, fuente)
+    inicio = fecha_meta or parsear_fecha(texto_completo, publicado=publicado)
 
     precio, gratis, texto_precio = parsear_precio(texto_completo)
 
@@ -139,6 +170,7 @@ def _desde_post(item: dict, fuente: dict) -> Evento | None:
         fuente_tipo="wordpress",
         fuente_nombre=fuente.get("nombre", ""),
         fuente_url=item.get("link", ""),
+        link_entradas=link_meta,
         imagen_url=_imagen_de(item),
         id_externo=str(item.get("id", "")),
         fecha_publicacion=publicado,

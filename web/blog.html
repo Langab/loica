@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Blog — Loica</title>
+<meta name="description" content="El finde, lo gratis y las rutas de barrio en Santiago, revisados uno por uno y con precio real. La versión larga de Los datos del finde.">
+<meta name="robots" content="index,follow" id="meta-robots">
+<link rel="canonical" href="https://langab.github.io/loica/blog.html">
+
+<!-- Open Graph básico: esto es lo que se ve al pegar el link en WhatsApp -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Loica">
+<meta property="og:locale" content="es_CL">
+<meta property="og:title" content="Blog — Loica">
+<meta property="og:description" content="El finde, lo gratis y las rutas de barrio en Santiago, revisados uno por uno y con precio real.">
+<meta property="og:url" content="https://langab.github.io/loica/blog.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="loica.css">
+<style>
+  body{overflow-x:hidden}
+  .contenido-blog{max-width:760px;margin:0 auto;padding:var(--e-6) var(--e-4) var(--e-12)}
+
+  /* Mascota que "vuela" en la cabecera — mismo truco que nosotros.html */
+  .volando{animation:volar 5s ease-in-out infinite}
+  @keyframes volar{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+  /* Aviso en línea: idioma, post no encontrado, etc. */
+  .aviso-linea{
+    display:flex;align-items:center;gap:var(--e-2);
+    background:var(--fondo-elevado);border:1px solid var(--borde);border-radius:var(--r-md);
+    padding:var(--e-3) var(--e-4);margin-bottom:var(--e-5);font-size:var(--t-sm);color:var(--tinta-suave);
+  }
+  .aviso-linea svg{flex:none}
+
+  /* Cabecera del índice */
+  .blog-cabecera{text-align:center;padding:var(--e-6) 0 var(--e-4)}
+  .blog-cabecera h1{margin:var(--e-3) 0 var(--e-2)}
+  .blog-cabecera p{max-width:540px;margin:0 auto;color:var(--tinta-suave);line-height:1.62;font-size:var(--t-md)}
+  .blog-actualizado{display:block;margin-top:var(--e-3);font-size:var(--t-xs);color:var(--tinta-tenue);font-weight:600}
+
+  /* Los tres formatos */
+  .formatos-legend{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--e-3);
+    margin:var(--e-6) 0;
+  }
+  .formato-chip{
+    display:flex;align-items:center;gap:var(--e-3);
+    background:var(--fondo-elevado);border:1px solid var(--borde);border-left:4px solid var(--tono,var(--acento));
+    border-radius:var(--r-md);padding:var(--e-3);
+  }
+  .formato-chip .icono{flex:none;width:38px;height:38px;border-radius:50%;
+    background:var(--fondo-hundido);display:grid;place-items:center}
+  .formato-chip b{display:block;font-family:var(--fuente-marca);font-size:var(--t-base)}
+  .formato-chip span{display:block;font-size:var(--t-xs);color:var(--tinta-tenue);margin-top:1px}
+
+  /* Lista de posts */
+  .lista-posts{display:flex;flex-direction:column;gap:var(--e-4);margin-top:var(--e-6)}
+  .entrada-post{
+    display:flex;gap:var(--e-4);text-decoration:none;color:inherit;align-items:flex-start;
+    background:var(--fondo-elevado);border:1px solid var(--borde);border-radius:var(--r-lg);
+    padding:var(--e-5);transition:var(--rapido);
+  }
+  .entrada-post:hover{border-color:var(--tono,var(--acento));box-shadow:var(--sombra-2);transform:translateY(-2px)}
+  .entrada-post.destacado{border-width:1.5px;border-color:var(--tono,var(--acento))}
+  .entrada-post-mascota{flex:none;width:46px;height:46px;border-radius:50%;
+    background:var(--fondo-hundido);display:grid;place-items:center}
+  .entrada-post-cuerpo{min-width:0}
+  .entrada-post-meta{display:flex;gap:8px;align-items:center;margin-bottom:6px;flex-wrap:wrap}
+  .etiqueta-formato{
+    display:inline-flex;align-items:center;gap:5px;font-size:var(--t-xs);font-weight:800;
+    color:var(--tono,var(--acento));text-transform:uppercase;letter-spacing:.04em;
+  }
+  .etiqueta-destacado,.etiqueta-evergreen{
+    font-size:11px;font-weight:700;padding:2px 8px;border-radius:var(--r-full);
+    background:var(--fondo-hundido);color:var(--tinta-suave);
+  }
+  .entrada-post h2{font-size:var(--t-lg);margin-bottom:4px;line-height:1.25}
+  .entrada-post p{color:var(--tinta-suave);font-size:var(--t-sm);line-height:1.55;margin:0 0 8px}
+  .entrada-post-fecha{font-size:var(--t-xs);color:var(--tinta-tenue);font-weight:600}
+
+  /* Vista de un post */
+  .volver{display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:var(--tinta-suave);
+    font-weight:600;font-size:var(--t-sm);margin:var(--e-5) 0 var(--e-4)}
+  .volver:hover{color:var(--tinta)}
+  .post-cabecera{padding-bottom:var(--e-5);border-bottom:1px solid var(--borde);margin-bottom:var(--e-5)}
+  .post-cabecera .etiqueta-formato{margin-bottom:var(--e-2);font-size:var(--t-sm)}
+  .post-cabecera h1{margin-bottom:var(--e-3)}
+  .post-bajada{font-size:var(--t-md);color:var(--tinta-suave);line-height:1.6;margin:0 0 var(--e-3)}
+  .post-meta{font-size:var(--t-sm);color:var(--tinta-tenue)}
+
+  .banner-vencido{
+    display:flex;gap:var(--e-3);align-items:flex-start;padding:var(--e-3) var(--e-4);
+    border-radius:var(--r-md);margin-bottom:var(--e-5);font-size:var(--t-sm);line-height:1.55;
+  }
+  .banner-vencido.caducado{background:var(--fondo-hundido);color:var(--tinta-suave);border:1px solid var(--borde)}
+  .banner-vencido.evergreen{background:var(--gratis-fondo);color:var(--tinta)}
+  .banner-vencido a{color:inherit;font-weight:700;text-decoration:underline}
+
+  .post-cuerpo{font-size:var(--t-md);line-height:1.72}
+  .post-cuerpo h2{margin:var(--e-6) 0 var(--e-3);font-size:var(--t-lg)}
+  .post-cuerpo p{margin:0 0 var(--e-4)}
+  .post-cuerpo strong{color:var(--tinta)}
+
+  /* Eventos dentro del post */
+  .eventos-post{margin-top:var(--e-8)}
+  .eventos-post h2{margin-bottom:var(--e-4);font-size:var(--t-lg)}
+  .lista-eventos-post{display:flex;flex-direction:column;gap:var(--e-3)}
+  .tarjeta-post{
+    display:flex;gap:var(--e-4);background:var(--fondo-elevado);border:1px solid var(--borde);
+    border-radius:var(--r-lg);padding:var(--e-4);
+  }
+  .tarjeta-post .miniatura{width:66px;height:66px;flex:none}
+  .tarjeta-post-cuerpo{min-width:0;flex:1}
+  .tarjeta-post-cuerpo h3{font-size:var(--t-md);margin:2px 0 4px;font-family:var(--fuente-ui);font-weight:700;line-height:1.28}
+  .tarjeta-post-cuerpo h3 a{text-decoration:none;color:var(--tinta)}
+  .tarjeta-post-cuerpo h3 a:hover{text-decoration:underline}
+  .tarjeta-post .tarjeta-meta{margin-bottom:6px}
+  .tarjeta-post .tarjeta-meta .precio{margin-left:auto;padding-top:0}
+  .bandera{
+    display:inline-flex;align-items:center;font-size:11px;font-weight:700;
+    padding:3px 9px;border-radius:var(--r-full);background:var(--fondo-hundido);
+    color:var(--tinta-suave);border:1px solid var(--borde-fuerte);margin-bottom:8px;
+  }
+  .bandera.bandera-agotado{background:rgba(232,68,46,.12);color:var(--acento);border-color:transparent}
+  .nota-editor{
+    font-size:var(--t-sm);color:var(--tinta-suave);font-style:italic;line-height:1.5;
+    margin:2px 0 var(--e-3);padding-left:var(--e-3);border-left:2.5px solid var(--borde-fuerte);
+  }
+  .tarjeta-post-botones{display:flex;gap:8px;flex-wrap:wrap}
+  .tarjeta-post-botones .boton{padding:8px 14px;font-size:var(--t-sm)}
+  .tarjeta-post-rota{opacity:.72}
+  .tarjeta-post-rota-msg{display:flex;align-items:center;gap:8px;font-size:var(--t-sm);color:var(--tinta-tenue);margin:0 0 6px}
+
+  @media(max-width:600px){
+    .entrada-post{flex-direction:column}
+    .tarjeta-post{flex-direction:column}
+    .tarjeta-post .miniatura{width:100%;height:140px}
+  }
+</style>
+</head>
+<body class="con-nav-inferior">
+<div class="barra" id="barra"></div>
+
+<main class="contenido-blog" id="vista"></main>
+
+<nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
+<script src="loica.js"></script>
+<script>
+/* ============================================================
+   BLOG — índice + vista de post, ruteado por hash (#/p/<slug>).
+   Consume blog.json y eventos.json. No modifica loica.js/loica.css,
+   solo los usa (mascota, cat, t, escapar, pintarBarra, REDES, etc.)
+   ============================================================ */
+
+let BLOG = null, EVENTOS = [];
+const vista = document.getElementById("vista");
+
+const DESCRIPCION_DEFECTO = "El finde, lo gratis y las rutas de barrio en Santiago, revisados uno por uno y con precio real. La versión larga de Los datos del finde.";
+
+// Aviso simple si el idioma global no es español. El blog no se traduce
+// todavía (ver _blog_plan.md §5.5) pero las tarjetas de evento sí, porque
+// esas ya son multi-idioma en todo el sitio vía cat()/t().
+const AVISO_IDIOMA = {
+  en: "This blog is written in Spanish for now.",
+  pt: "Este blog está escrito em espanhol por enquanto.",
+};
+
+pintarBarra("blog.html");
+mostrarCargando();
+
+Promise.all([
+  fetch("blog.json").then(r => { if(!r.ok) throw new Error("blog.json"); return r.json(); }),
+  cargarEventos(),
+]).then(([blog, eventos]) => {
+  BLOG = blog;
+  EVENTOS = eventos;
+  enrutar();
+}).catch(() => mostrarError());
+
+window.addEventListener("hashchange", enrutar);
+window.addEventListener("loica:idioma", () => { if(BLOG) enrutar(); });
+
+/* ---------- estados de carga y error ---------- */
+function mostrarCargando(){
+  vista.innerHTML = `<div class="vacio">${mascota("loica","var(--tinta-tenue)",70)}
+    <p>Cargando el blog…</p></div>`;
+}
+function mostrarError(){
+  vista.innerHTML = `<div class="vacio">${mascota("loica","var(--tinta-tenue)",70)}
+    <p><b>No pude cargar el blog</b><br>
+    <button class="boton secundario" style="margin-top:12px"
+      onclick="location.reload()">Reintentar</button></p></div>`;
+}
+
+/* ---------- router ---------- */
+function enrutar(){
+  if(!BLOG) return;
+  const m = location.hash.match(/^#\/p\/([^/?]+)/);
+  if(m){
+    const post = BLOG.posts.find(p => p.slug === decodeURIComponent(m[1]));
+    if(post){ pintarPost(post); window.scrollTo(0,0); return; }
+  }
+  pintarIndice(!!m);
+  window.scrollTo(0,0);
+}
+
+/* ---------- utilidades de fecha ---------- */
+// "T12:00:00" evita que una fecha sin hora (YYYY-MM-DD) se lea como UTC
+// medianoche y aparezca un día antes en huso horario de Chile.
+const fechaISOaDate = iso => new Date(iso + "T12:00:00");
+const fechaLarga = iso => fechaISOaDate(iso).toLocaleDateString("es-CL",
+  {weekday:"long", day:"numeric", month:"long", year:"numeric"});
+const fechaCorta = iso => fechaISOaDate(iso).toLocaleDateString("es-CL",
+  {day:"numeric", month:"short", year:"numeric"});
+
+function vencido(post){
+  return new Date() > new Date(post.vence + "T23:59:59");
+}
+function formatoDe(post){
+  const f = BLOG.formatos && BLOG.formatos[post.formato];
+  return f || {etiqueta: post.formato, mascota:"loica", color:"var(--acento)", cadencia:""};
+}
+function fijarRobots(indexar){
+  const meta = document.getElementById("meta-robots");
+  if(meta) meta.setAttribute("content", indexar ? "index,follow" : "noindex");
+}
+function actualizarMetaDescripcion(texto){
+  const meta = document.querySelector('meta[name="description"]');
+  if(meta) meta.setAttribute("content", texto);
+}
+// Se usa tanto en el índice como en la vista de un post: un link compartido
+// suele caer directo en un post, así que el aviso tiene que vivir en los dos.
+function avisoIdiomaHtml(){
+  return AVISO_IDIOMA[IDIOMA]
+    ? `<div class="aviso-linea">${mascota("loica","var(--tinta-tenue)",22)}
+        <span>${escapar(AVISO_IDIOMA[IDIOMA])}</span></div>`
+    : "";
+}
+
+/* ---------- índice del blog ---------- */
+function pintarIndice(noEncontrado){
+  document.title = "Blog — Loica";
+  actualizarMetaDescripcion(DESCRIPCION_DEFECTO);
+  fijarRobots(true);
+
+  const visibles = BLOG.posts.filter(p => !vencido(p) || p.evergreen);
+  const orden = [...visibles].sort((a,b) => {
+    if(!!a.destacado !== !!b.destacado) return a.destacado ? -1 : 1;
+    return fechaISOaDate(b.publicado) - fechaISOaDate(a.publicado);
+  });
+
+  const avisoNoEncontrado = noEncontrado
+    ? `<div class="aviso-linea">${mascota("loica","var(--tinta-tenue)",22)}
+        <span>No encontramos esa entrada del blog. Acá está todo lo que sí está publicado.</span></div>`
+    : "";
+
+  const avisoIdioma = avisoIdiomaHtml();
+
+  const legend = Object.values(BLOG.formatos || {}).map(f => `
+    <div class="formato-chip" style="--tono:${f.color}">
+      <div class="icono">${mascota(f.mascota, f.color, 22)}</div>
+      <div><b>${escapar(f.etiqueta)}</b><span>${escapar(f.cadencia)}</span></div>
+    </div>`).join("");
+
+  const lista = orden.length
+    ? orden.map(pintarTarjetaIndice).join("")
+    : `<div class="vacio">${mascota("loica","var(--tinta-tenue)",64)}
+        <p><b>No hay ediciones vigentes ahora mismo</b><br>
+        Vuelve pronto — El finde se publica todos los jueves.</p></div>`;
+
+  vista.innerHTML = `
+    ${avisoNoEncontrado}
+    ${avisoIdioma}
+    <header class="blog-cabecera" lang="es">
+      <div class="volando">${mascota("loica","var(--acento)",56)}</div>
+      <h1>El blog</h1>
+      <p>La capa humana sobre el mapa: alguien abre cada link, descarta lo que no sirve
+        y le pone un motivo. Es la versión larga de <em>Los datos del finde</em>.</p>
+      ${BLOG.actualizado ? `<span class="blog-actualizado">Actualizado el ${fechaLarga(BLOG.actualizado)}</span>` : ""}
+    </header>
+    <div class="formatos-legend">${legend}</div>
+    <div class="lista-posts">${lista}</div>`;
+}
+
+function pintarTarjetaIndice(post){
+  const f = formatoDe(post);
+  const vencidoPost = vencido(post);
+  return `
+    <a class="entrada-post${post.destacado ? " destacado" : ""}" style="--tono:${f.color}"
+       href="#/p/${encodeURIComponent(post.slug)}">
+      <div class="entrada-post-mascota">${mascota(post.mascota || f.mascota, f.color, 28)}</div>
+      <div class="entrada-post-cuerpo" lang="es">
+        <div class="entrada-post-meta">
+          <span class="etiqueta-formato">${escapar(f.etiqueta)}</span>
+          ${post.destacado ? `<span class="etiqueta-destacado">Destacado</span>` : ""}
+          ${vencidoPost && post.evergreen ? `<span class="etiqueta-evergreen">Guía vigente</span>` : ""}
+        </div>
+        <h2>${escapar(post.titulo)}</h2>
+        <p>${escapar(post.bajada)}</p>
+        <span class="entrada-post-fecha">${fechaCorta(post.publicado)}</span>
+      </div>
+    </a>`;
+}
+
+/* ---------- vista de un post ---------- */
+function pintarPost(post){
+  const f = formatoDe(post);
+  const seo = post.seo || {};
+  // seo.titulo ya viene listo para usar como <title> tal cual (algunos posts
+  // incluyen "| Loica" y otros no, es criterio editorial) — no se le agrega
+  // sufijo. Solo post.titulo (que nunca trae marca) necesita el " — Loica".
+  document.title = seo.titulo || (post.titulo + " — Loica");
+  actualizarMetaDescripcion(seo.descripcion || post.bajada);
+
+  const vencidoPost = vencido(post);
+  const expirado = vencidoPost && !post.evergreen;
+  fijarRobots(!expirado);
+
+  let banner = "";
+  if(expirado){
+    banner = `<div class="banner-vencido caducado">
+      ${mascota("loica","var(--tinta-tenue)",22)}
+      <span><b>Esta edición ya pasó.</b> Se publicó el ${fechaLarga(post.publicado)}
+      y venció el ${fechaLarga(post.vence)}. Mira
+      <a href="#/">las ediciones vigentes del blog</a> o <a href="index.html">el mapa</a>.</span>
+    </div>`;
+  } else if(vencidoPost && post.evergreen){
+    const destino = post.barrio
+      ? `qué hay ahora en <a href="index.html">${escapar(post.barrio)}, en el mapa</a>`
+      : `<a href="index.html">qué hay ahora en el mapa</a>`;
+    banner = `<div class="banner-vencido evergreen">
+      ${mascota(post.mascota || f.mascota, f.color, 22)}
+      <span>Los lugares siguen ahí; los eventos de esta lista pueden haber cambiado. Mira ${destino}.</span>
+    </div>`;
+  }
+
+  const tieneEventos = Array.isArray(post.eventos) && post.eventos.length > 0;
+  const eventosHtml = tieneEventos ? post.eventos.map(tarjetaEventoPost).join("") : "";
+  const primerId = tieneEventos ? post.eventos[0].id : null;
+
+  vista.innerHTML = `
+    <a class="volver" href="#/">← Volver al blog</a>
+    ${avisoIdiomaHtml()}
+    <article class="post">
+      <header class="post-cabecera" style="--tono:${f.color}" lang="es">
+        <span class="etiqueta-formato">${mascota(post.mascota || f.mascota, f.color, 20)} ${escapar(f.etiqueta)}</span>
+        <h1>${escapar(post.titulo)}</h1>
+        <p class="post-bajada">${escapar(post.bajada)}</p>
+        <div class="post-meta">Por <b>${escapar(post.autor)}</b> — ${fechaLarga(post.publicado)}
+          ${post.barrio ? ` · ${escapar(post.barrio)}` : ""}</div>
+      </header>
+
+      ${banner}
+
+      <div class="post-cuerpo" lang="es">${pintarCuerpo(post.cuerpo || [])}</div>
+
+      ${tieneEventos ? `
+        <section class="eventos-post" lang="es">
+          <h2>Los panoramas de este post</h2>
+          <div class="lista-eventos-post">${eventosHtml}</div>
+        </section>
+        <a class="boton bloque" style="margin-top:var(--e-5)"
+           href="index.html#/e/${encodeURIComponent(primerId)}">
+           Ver ${post.eventos.length === 1 ? "este panorama" : "los " + post.eventos.length + " panoramas"} en el mapa</a>
+      ` : ""}
+
+      <div id="compartir-post" style="margin-top:var(--e-6)"></div>
+    </article>`;
+
+  document.getElementById("compartir-post").appendChild(compartirPost(post));
+}
+
+/* Un string por párrafo. "## " al inicio = subtítulo. *cursiva* y **negrita**,
+   nada más — igual que dice el esquema en _blog_plan.md §2.2. */
+function formatearParrafo(texto){
+  let s = escapar(texto);
+  s = s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  s = s.replace(/\*(.+?)\*/g, "<em>$1</em>");
+  return s;
+}
+function pintarCuerpo(cuerpo){
+  return cuerpo.map(parrafo =>
+    parrafo.startsWith("## ")
+      ? `<h2>${formatearParrafo(parrafo.slice(3))}</h2>`
+      : `<p>${formatearParrafo(parrafo)}</p>`
+  ).join("");
+}
+
+/* Tarjeta de un evento referenciado por el post: busca el evento real en
+   eventos.json (fecha, lugar, precio, foto) y le suma la nota del editor y
+   la bandera de honestidad, que son lo único que no sale de eventos.json. */
+function tarjetaEventoPost(ref){
+  const ev = EVENTOS.find(e => e.id === ref.id);
+  if(!ev){
+    // Defensivo: si algún día un id queda huérfano, no se rompe la página
+    // (ver _blog_plan.md §2.4, chequeo 1 — esto no debería pasar nunca).
+    return `<article class="tarjeta-post tarjeta-post-rota">
+      <div class="tarjeta-post-cuerpo">
+        <p class="tarjeta-post-rota-msg">${mascota("loica","var(--tinta-tenue)",20)}
+          Este panorama ya no está en la base de datos.</p>
+        ${ref.nota ? `<p class="nota-editor">${escapar(ref.nota)}</p>` : ""}
+      </div>
+    </article>`;
+  }
+
+  const info = cat(ev.categoria);
+  const dia = etiquetaDia(ev.fecha);
+  const hora = (ev.fecha.getHours() || ev.fecha.getMinutes()) ? horaDe(ev.fecha) : "";
+  const precio = ev.gratis ? t("gratis") : (ev.precio ? "$" + ev.precio.toLocaleString("es-CL") : "—");
+  const banderaTexto = ref.bandera && BLOG.banderas && BLOG.banderas[ref.bandera];
+
+  return `
+    <article class="tarjeta-post">
+      <div class="miniatura">
+        ${mascota(info.mascota, info.hex, 32)}
+        ${ev.imagen ? `<img src="${escapar(ev.imagen)}" alt="" loading="lazy" onerror="this.remove()">` : ""}
+        <span class="dia${dia.pronto ? " pronto" : ""}">${dia.texto}</span>
+      </div>
+      <div class="tarjeta-post-cuerpo">
+        ${hora ? `<div class="hora">${hora}</div>` : ""}
+        <h3><a href="e/${encodeURIComponent(ev.id)}.html">${escapar(ev.titulo)}</a></h3>
+        <div class="tarjeta-meta">
+          <span>${escapar(ev.lugar)}</span>
+          ${ev.comuna ? `<span>· ${escapar(ev.comuna)}</span>` : ""}
+          <span class="precio${ev.gratis ? " libre" : ""}">${precio}</span>
+        </div>
+        ${banderaTexto ? `<span class="bandera${ref.bandera === "agotado" ? " bandera-agotado" : ""}">${escapar(banderaTexto)}</span>` : ""}
+        ${ref.nota ? `<p class="nota-editor" lang="es">${escapar(ref.nota)}</p>` : ""}
+        <div class="tarjeta-post-botones">
+          <a class="boton secundario" href="index.html#/e/${encodeURIComponent(ev.id)}">${t("verMapa")}</a>
+          <a class="boton secundario" href="${escapar(ev.url)}" target="_blank" rel="noopener">${t("ir")} ↗</a>
+        </div>
+      </div>
+    </article>`;
+}
+
+/* ---------- compartir un post ----------
+   Paralelo a botonesCompartir(ev) de loica.js (que asume forma de evento,
+   no de post). Reutiliza REDES y copiarLink tal cual — solo cambia el texto
+   y la URL, como pide _blog_plan.md §4.3. */
+function compartirPost(post){
+  const url = `${SITIO}/blog.html#/p/${post.slug}`;
+  const texto = `${post.titulo}\n${post.bajada}`;
+  const etiqueta = {es:"Compartir", en:"Share", pt:"Compartilhar"}[IDIOMA];
+
+  const caja = document.createElement("div");
+  caja.className = "compartir";
+  caja.innerHTML = `<span class="compartir-titulo">${etiqueta}</span><div class="compartir-botones"></div>`;
+  const fila = caja.querySelector(".compartir-botones");
+
+  const boton = (clase, nombre, color, icono, alPulsar) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "red " + clase;
+    b.style.setProperty("--red", color);
+    b.setAttribute("aria-label", `${etiqueta} — ${nombre}`);
+    b.title = nombre;
+    b.innerHTML = `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">${icono}</svg>`;
+    b.onclick = alPulsar;
+    fila.appendChild(b);
+    return b;
+  };
+
+  for(const [clave, red] of Object.entries(REDES)){
+    boton(clave, red.nombre, red.color, red.icono,
+          () => window.open(red.url(url, texto), "_blank", "noopener,width=620,height=560"));
+  }
+
+  const iconoIg = `<rect x="3" y="3" width="18" height="18" rx="5.4" fill="none" stroke="currentColor" stroke-width="1.9"/>
+    <circle cx="12" cy="12" r="4.1" fill="none" stroke="currentColor" stroke-width="1.9"/>
+    <circle cx="17.2" cy="6.8" r="1.25" fill="currentColor"/>`;
+  if(navigator.share){
+    boton("instagram", "Instagram / " + etiqueta, "#E1306C", iconoIg,
+          () => navigator.share({title: post.titulo, text: texto, url}).catch(() => {}));
+  } else {
+    boton("instagram", "Instagram — " + {es:"copiar link", en:"copy link", pt:"copiar link"}[IDIOMA],
+          "#E1306C", iconoIg, e => copiarLink(url, e.currentTarget));
+  }
+
+  boton("copiar", {es:"Copiar link", en:"Copy link", pt:"Copiar link"}[IDIOMA],
+        "var(--tinta-suave)",
+        `<path d="M9.5 14.5l5-5M8 12l-2 2a3.5 3.5 0 105 5l2-2M16 12l2-2a3.5 3.5 0 10-5-5l-2 2"
+          fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>`,
+        e => copiarLink(url, e.currentTarget));
+
+  return caja;
+}
+</script>
+</body>
+</html>

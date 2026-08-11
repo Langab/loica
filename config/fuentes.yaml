@@ -1150,3 +1150,116 @@ fuentes:
     su robots.txt bloquea explicitamente a ClaudeBot, GPTBot, CCBot y anthropic-ai; el grupo generico
     (*) si permite /evento/. Conviene pedirles permiso por escrito, igual que a Passline.'
   requiere_comuna: true
+- id: disfrutasantiago
+  nombre: Disfruta Santiago
+  url_base: https://disfrutasantiago.cl
+  url_agenda: https://disfrutasantiago.cl/eventos/
+  tipo_adaptador: wordpress
+  tipos_post:
+  - mec-events
+  comuna: ''
+  crawl_delay_seg: 3
+  activa: true
+  buscar_detalle: true
+  tope_detalle: 25
+  notas: Agregador de panoramas de Santiago. Modern Events Calendar por REST (991 eventos) y JSON-LD schema.org/Event
+    en cada ficha. La fuente mas facil y de mayor cobertura del lote de ferias.
+- id: feriafriki
+  nombre: Feria Friki
+  url_base: https://www.feriafriki.cl
+  url_agenda: https://www.feriafriki.cl/eventos/feed/
+  tipo_adaptador: sitemap
+  endpoint: /eventos/feed/
+  comuna: ''
+  crawl_delay_seg: 3
+  activa: true
+  notas: 'LA respuesta a la pregunta por las ferias de plaza: ferias otaku/friki GRATIS en plazas y parques
+    casi todos los fines de semana (Parque Gomez Rojas, La Pintana, Pueblito Las Vizcachas, Cerrillos).
+    RSS vivo con 20 eventos.'
+  origen: rss
+  patron_url: ''
+  tope_fichas: 40
+- id: estacion_mapocho
+  nombre: Centro Cultural Estacion Mapocho
+  url_base: https://www.estacionmapocho.cl
+  url_agenda: https://www.estacionmapocho.cl/
+  tipo_adaptador: wordpress
+  endpoint: /index.php?rest_route=/wp/v2/evngrnpb-api
+  comuna: Santiago
+  crawl_delay_seg: 3
+  activa: true
+  buscar_detalle: true
+  tope_detalle: 20
+  notas: 'El recinto-hub del nicho friki (Expogame, One Piece Championships, Trading Fest, FIL). Parecia
+    no scrapeable (404 en /wp-json) pero usa permalinks planos: la cartelera esta en index.php?rest_route=/wp/v2/evngrnpb-api.'
+- id: mut
+  nombre: MUT — Mercado Urbano Tobalaba
+  url_base: https://mut.cl
+  url_agenda: https://mut.cl/eventos/
+  tipo_adaptador: wordpress
+  tipos_post:
+  - evento
+  comuna: Providencia
+  crawl_delay_seg: 3
+  activa: true
+  buscar_detalle: true
+  tope_detalle: 20
+  notas: Ferias de diseno y mercados de emprendedores (Mercado Roman). CPT 'evento' abierto en REST y
+    schema.org/Event con startDate en las fichas.
+- id: club_chocolate
+  nombre: Club Chocolate
+  url_base: https://clubchocolate.cl
+  url_agenda: https://clubchocolate.cl/eventos/
+  tipo_adaptador: wordpress
+  tipos_post:
+  - eventos
+  - fiestas
+  comuna: Santiago
+  crawl_delay_seg: 3
+  activa: true
+  campos_meta:
+    fecha: fecha_evento
+    link: link
+  notas: 'LA PUERTA LATERAL A PASSLINE. Passline esta tras un Cloudflare Managed Challenge y no se puede
+    (ni se debe) scrapear, pero el recinto publica los mismos eventos con el link de Passline en un campo
+    meta estructurado. 13 de 15 eventos apuntan a Passline. OJO: content.rendered viene vacio, asi que
+    no hay descripcion ni precio: dejarlos sin dato.'
+- id: ed_feria
+  nombre: ED — Ferias y Bazar ED
+  url_base: https://www.ed.cl
+  url_agenda: https://www.ed.cl/eventos/
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/tribe/events/v1/events
+  comuna: ''
+  crawl_delay_seg: 4
+  activa: true
+  notas: The Events Calendar abierto con categoria 'Feria'. Bazar ED es la feria de diseno grande del
+    ano (nov, Parque Bicentenario).
+- id: torneostcg
+  nombre: Torneos TCG Chile
+  url_base: https://www.torneostcg.cl
+  url_agenda: https://www.torneostcg.cl/sitemap.xml
+  tipo_adaptador: sitemap
+  endpoint: /sitemap.xml
+  patron_url: /torneo
+  tope_fichas: 30
+  comuna: ''
+  crawl_delay_seg: 4
+  activa: false
+  requiere_comuna: true
+  notas: 'APAGADA hasta revisar: agregador nacional de torneos TCG (Magic, Pokemon, One Piece). Next.js
+    server-rendered, robots Allow. Es nacional: exige comuna para no traer regiones.'
+- id: chilecultura
+  nombre: ChileCultura (Ministerio de las Culturas)
+  url_base: https://chilecultura.gob.cl
+  url_agenda: https://chilecultura.gob.cl/api/v1.0/eventos/search
+  tipo_adaptador: html
+  endpoint: /api/v1.0/eventos/search
+  comuna: ''
+  crawl_delay_seg: 5
+  activa: false
+  notas: APAGADA — DECISION DEL FUNDADOR. Tiene API JSON publica con ~494 eventos vigentes (fecha, comuna,
+    gratuidad, permalink) y seria la mejor fuente de cultura gratis del pais. Pero su WAF responde 403
+    a cualquier user-agent que contenga la palabra 'bot' y 200 al resto. Cambiar nuestro UA para esquivar
+    ese filtro es exactamente lo que el proyecto prohibe. La via correcta es el convenio que ya esta en
+    tareas_manuales.md.
