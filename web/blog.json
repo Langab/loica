@@ -1,0 +1,276 @@
+{
+ "actualizado": "2026-08-10",
+ "sitio": "https://langab.github.io/loica",
+ "formatos": {
+  "finde": {
+   "etiqueta": "El finde",
+   "mascota": "loica",
+   "color": "var(--rojo-loica)",
+   "cadencia": "semanal, jueves 18:00",
+   "url": "blog/este-finde.html"
+  },
+  "gratis": {
+   "etiqueta": "Gratis",
+   "mascota": "pudu",
+   "color": "var(--verde-cerro)",
+   "cadencia": "mensual, día 1",
+   "url": "blog/panoramas-gratis-santiago.html"
+  },
+  "ruta": {
+   "etiqueta": "La ruta",
+   "mascota": "culpeo",
+   "color": "var(--amarillo-micro)",
+   "cadencia": "quincenal, un barrio por vez",
+   "url": "blog/bellavista.html"
+  }
+ },
+ "banderas": {
+  "agotado": "Agotado",
+  "online": "Es online",
+  "inscripcion": "Necesita inscripción previa",
+  "sin_hora": "La fuente no publica la hora",
+  "hora_dudosa": "La fuente da dos horas distintas",
+  "precio_no_publicado": "La fuente no publica el precio",
+  "sala_por_confirmar": "La fuente no dice en qué sala es"
+ },
+ "posts": [
+  {
+   "slug": "este-finde",
+   "formato": "finde",
+   "titulo": "El finde del 14 al 16: dos musicales, un Municipal a oscuras y fiestas de $3.000",
+   "bajada": "Camila Moreno cierra el domingo, el Teatro Municipal abre de noche y hay ocho cosas más entre medio. Con los precios reales, no con los de la foto.",
+   "autor": "Benjamín",
+   "publicado": "2026-08-13",
+   "vence": "2026-08-17",
+   "evergreen": false,
+   "destacado": true,
+   "mascota": "loica",
+   "barrio": "",
+   "cuerpo": [
+    "Agosto en Santiago tiene una ventaja: hace frío, entonces todo pasa adentro y todo tiene hora fija. Este finde no hay mucho que improvisar.",
+    "## Viernes 14",
+    "Si vas a gastar en una sola cosa, gástala en Bellavista. *Las cosas extraordinarias* está en el Teatro San Ginés a $12.000: una obra sobre una hija que arma una lista de razones para que su mamá no se rinda. En la misma sala, *El tipo que odiaba los musicales* cuesta $23.000 y es exactamente lo contrario, un pueblo entero contagiado de canto.",
+    "Si el plan es de noche y no de butaca: Club 1, en Bombero Núñez 1, abre a las 23:00 con Audiotonics toda la noche. $5.000, mayores de 21, y adentro no se sacan fotos. En Ñuñoa, Club Roma hace su fiesta Semáforo desde las 21:00 hasta las 04:30 en Vicuña Mackenna 1895, metro Ñuble, a $3.000. Es fiesta de casa, no local.",
+    "## Sábado 15",
+    "A las 12 del día, en el Centro Cultural La Moneda, *Norteña. Memorias del comienzo*, con Julieta Venegas. Es gratis, es en el nivel -2 y tiene cupos limitados con inscripción previa. O sea: no es llegar no más.",
+    "A las 17:00 y a las 18:00 el Teatro Municipal abre para su visita guiada nocturna, *Historias y misterios*. Una hora por dentro del edificio, $11.500. De lo poco de esta lista que funciona igual con los papás, con el pololo o solo.",
+    "Con cabros chicos, la misma mañana: *La liebre y la tortuga* a las 12:00, $5.000, o $12.000 si puedes pagar la entrada solidaria. Ojo con este: la sala no viene en la ficha, así que revisa el link antes de subirte a la micro.",
+    "De noche, Mamisonga se instala en Sala Metrónomo, Ernesto Pinto Lagarrigue 179, con Lewis Somes. $5.000.",
+    "## Domingo 16",
+    "Camila Moreno presenta *La primera luz* en CEINA a las 19:00. El precio todavía no está publicado en la fuente, así que confírmalo antes de salir.",
+    "Y si prefieres reírte de nosotros mismos: *Fe de Ratas*, la comedia negra de Alexis Moreno sobre hipocresía institucional chilena, en Matucana 100. $8.000, o $5.000 si eres estudiante o tercera edad."
+   ],
+   "eventos": [
+    {
+     "id": "d12a12acd1bc7ce1",
+     "nota": "La más intensa de la lista. No vayas si andas bajoneado.",
+     "bandera": "sin_hora"
+    },
+    {
+     "id": "4cb7d104cf9440bc",
+     "nota": "El antídoto exacto de la anterior, en la misma sala.",
+     "bandera": "sin_hora"
+    },
+    {
+     "id": "0f33f8f59f3676d7",
+     "nota": "Mayores de 21, teléfono guardado. Audiotonics toda la noche."
+    },
+    {
+     "id": "2a811911867fa9de",
+     "nota": "Fiesta de casa, no local. Metro Ñuble."
+    },
+    {
+     "id": "b50e4d284b336592",
+     "nota": "Gratis, pero con inscripción previa y cupos limitados: anda al link, no al lugar.",
+     "bandera": "inscripcion"
+    },
+    {
+     "id": "4a3299bb72e711a2",
+     "nota": "Dos horarios, 17:00 y 18:00. Una hora por dentro del Municipal."
+    },
+    {
+     "id": "7093f7c8723385c4",
+     "nota": "Para cabros chicos. La fuente no dice en qué sala es: confírmala antes de salir.",
+     "bandera": "sala_por_confirmar"
+    },
+    {
+     "id": "e3730c640ced4828",
+     "nota": "Lewis Somes. La segunda fecha de Mamisonga del finde."
+    },
+    {
+     "id": "310c6f1286b46e0f",
+     "nota": "El cierre del domingo. La fuente aún no publica precio.",
+     "bandera": "precio_no_publicado"
+    },
+    {
+     "id": "528a7542b2b85ac6",
+     "nota": "Comedia negra de Alexis Moreno. $5.000 con carnet de estudiante.",
+     "bandera": "hora_dudosa"
+    }
+   ],
+   "seo": {
+    "titulo": "Qué hacer en Santiago este fin de semana — 14, 15 y 16 de agosto 2026",
+    "descripcion": "Diez panoramas revisados uno por uno para el fin de semana en Santiago: teatro en Bellavista, visita nocturna al Teatro Municipal, Camila Moreno en CEINA y fiestas desde $3.000.",
+    "permalink": "blog/2026-08-14-el-finde.html"
+   }
+  },
+  {
+   "slug": "panoramas-gratis-santiago",
+   "formato": "gratis",
+   "titulo": "Gratis de verdad: lo que no cuesta nada en Santiago hasta el 31 de agosto",
+   "bajada": "Siete panoramas que abrí uno por uno, y dos que se cayeron de la lista con nombre y apellido. Acá gratis significa gratis.",
+   "autor": "Benjamín",
+   "publicado": "2026-08-11",
+   "vence": "2026-09-01",
+   "evergreen": true,
+   "destacado": false,
+   "mascota": "pudu",
+   "barrio": "",
+   "cuerpo": [
+    "Tengo un problema con la palabra gratis. La usan para todo: gratis-con-inscripción, gratis-pero-agotado, gratis-solo-si-eres-alumno-de-esa-universidad. Así que antes de publicar esta lista abrí los links uno por uno. Estas siete pasaron. Dos no.",
+    "## Para ver algo",
+    "*Malditas* abre el 27 de agosto en la Galería Concreta de Matucana 100: dibujo y cine cruzados con grabado, cómic, muralismo y cine slasher. Entrada liberada, de 16 a 20 horas, todo espectador. Es la que más ganas tengo de ver.",
+    "En Las Condes, *Historias en femenino* está en su último mes. Es la muestra sobre las primeras pintoras chilenas y parte con Agustina Gutiérrez. Entrada liberada.",
+    "Y en Fernández Concha 700, campus de la UNAB, hay una exposición por los 160 años de Kandinsky. Gratuita.",
+    "## Para escuchar algo",
+    "Viernes 28, *Relaciones entre música y archivo*, en la Microsala de Matucana 100: charla y concierto sobre sampling y arte-archivo, con la obra *Prelude* de Andrés Quezada. 19:30, una hora, gratuito.",
+    "El miércoles 12, taller de live looping en la megatienda de Audiomúsica, en Ñuñoa. Ticket gratuito, 18:00. Si tocas algo y nunca has loopeado, ándate.",
+    "## Para no salir de la casa",
+    "El Teatro Municipal dejó *El rey que quería ser músico* en su plataforma Municipal Delivery hasta el 31 de agosto. Es online y es gratuito con donación voluntaria. Cuenta como panorama solo si de verdad no querías salir, pero cuenta.",
+    "## El que tiene letra chica",
+    "Sábado 15 a las 12:00, *Norteña. Memorias del comienzo*, con Julieta Venegas, en el Centro Cultural La Moneda. Gratis, nivel -2, cupos limitados, inscripción previa. Anda temprano al link, no al lugar.",
+    "## Las dos que se cayeron",
+    "La Orquesta USACH tocaba Mahler gratis el miércoles 12 en el Aula Magna: agotada. Y el Pariente Fest del domingo 30 en Peñalolén tiene entrada gratuita y también está agotado, incluso el ticket de menores de 10.",
+    "Ese es el trato. Si acá dice gratis, es gratis. Y si se agotó, te lo digo igual."
+   ],
+   "eventos": [
+    {
+     "id": "12621fc7551e5a21",
+     "nota": "Galería Concreta, de 16 a 20 horas. Entrada liberada, todo espectador.",
+     "bandera": "sin_hora"
+    },
+    {
+     "id": "af5c1cb68ccbd080",
+     "nota": "Último mes. Las primeras pintoras chilenas."
+    },
+    {
+     "id": "71917655fc5f03fd",
+     "nota": "Fernández Concha 700, campus UNAB Las Condes.",
+     "bandera": "sin_hora"
+    },
+    {
+     "id": "a577579b6858420f",
+     "nota": "Charla y concierto en la Microsala. 60 minutos."
+    },
+    {
+     "id": "af4d79762d6c6602",
+     "nota": "Taller, no concierto. Ticket gratuito por PortalTickets."
+    },
+    {
+     "id": "ef8779344f74bc2a",
+     "nota": "Es online, en la plataforma del Municipal. Gratuito con donación voluntaria.",
+     "bandera": "online"
+    },
+    {
+     "id": "b50e4d284b336592",
+     "nota": "Cupos limitados con inscripción previa. No basta con llegar.",
+     "bandera": "inscripcion"
+    },
+    {
+     "id": "b9813d06d9e08fca",
+     "nota": "Era gratis y está agotada. La dejo acá para que la próxima vez llegues antes.",
+     "bandera": "agotado"
+    },
+    {
+     "id": "55b6265d9e3927df",
+     "nota": "Entrada gratuita, agotada. Además es en Peñalolén, no en Santiago centro.",
+     "bandera": "agotado"
+    }
+   ],
+   "seo": {
+    "titulo": "Panoramas gratis en Santiago — agosto 2026 | Loica",
+    "descripcion": "Exposiciones, talleres y conciertos gratis en Santiago durante agosto de 2026. Verificados uno por uno: si dice gratis es gratis, y si se agotó también lo decimos.",
+    "permalink": "blog/2026-08-panoramas-gratis-santiago.html"
+   }
+  },
+  {
+   "slug": "bellavista",
+   "formato": "ruta",
+   "titulo": "Bellavista en cinco cuadras: dónde entrar un viernes según cuánta plata tengas",
+   "bajada": "Del Teatro San Ginés a Bombero Núñez hay diez minutos caminando y una diferencia de $20.000. La ruta completa del barrio, con lo que hay esta semana.",
+   "autor": "Benjamín",
+   "publicado": "2026-08-11",
+   "vence": "2026-08-16",
+   "evergreen": true,
+   "destacado": false,
+   "mascota": "culpeo",
+   "barrio": "Bellavista",
+   "cuerpo": [
+    "Bellavista tiene un problema de fama: la gente cree que Bellavista es Pío Nono y para de contar. Pío Nono es la puerta. Si caminas cinco cuadras hacia adentro, el mismo viernes te ofrece cuatro noches distintas que no se parecen en nada.",
+    "## Lo caro: $12.000 a $23.000",
+    "El Teatro San Ginés es el ancla del barrio. El jueves 13 tiene *Pretty Woman – El Musical* a $18.000 y *Crónica de la mujer menos mujer* a $12.000. El viernes 14 cambia entero: *Las cosas extraordinarias* a $12.000 y *El tipo que odiaba los musicales* a $23.000. Programa casi todos los días, y por eso es el primer lugar donde mirar si llegas a Bellavista sin plan.",
+    "## Lo justo: $5.000 a $7.000",
+    "Sala SCD Bellavista es lo que menos aparece en las listas de panoramas y lo que más vale la pena si te gusta la música chilena. El miércoles 12 Danyro lanza su EP *Katharsis*, $5.000. El jueves 13 toca Patricio Alvarado con Los Rubíes Robados, $7.000. Precio de entrada de cine, músico a tres metros.",
+    "## Lo barato: $3.000 a $6.000",
+    "Acá empieza lo que no sale en ninguna cartelera oficial. Club 1, en Bombero Núñez 1, abre viernes y sábado a las 23:00 por $5.000, y este jueves 13 también. Es solo para mayores de 21 y adentro no se pueden sacar fotos ni videos, una regla que explica bastante bien el ambiente.",
+    "En Antonia López de Bello 34, The Hive tiene Mamisonga el viernes 14, $6.000. Y en Ernesto Pinto Lagarrigue, en la misma cuadra larga, hay dos: Club M&M Casona en el 90, $3.000, de 21:00 a 04:00, fiesta de casa y no local; y Sala Metrónomo en el 179, donde Mamisonga vuelve el sábado 15 con Lewis Somes, $5.000.",
+    "Todo lo anterior cabe en un cuadrado de diez cuadras. El plan honesto es este: obra a las 20:00, sales caminando, y a las 23:00 estás en otra cosa sin haber tomado un auto. No hay otro barrio en Santiago donde eso se pueda hacer."
+   ],
+   "eventos": [
+    {
+     "id": "628c35f567717769",
+     "nota": "Jueves 13 en San Ginés. El musical más comercial de la cuadra.",
+     "bandera": "sin_hora"
+    },
+    {
+     "id": "32a4dd0be84f2124",
+     "nota": "Jueves 13, misma sala, mitad de precio.",
+     "bandera": "sin_hora"
+    },
+    {
+     "id": "d12a12acd1bc7ce1",
+     "nota": "Viernes 14. Si solo vas a una obra del barrio, que sea esta.",
+     "bandera": "sin_hora"
+    },
+    {
+     "id": "4cb7d104cf9440bc",
+     "nota": "Viernes 14. La entrada más cara de la ruta.",
+     "bandera": "sin_hora"
+    },
+    {
+     "id": "03437d42d9aced0a",
+     "nota": "Miércoles 12, 20:00. Lanzamiento de EP en Sala SCD Bellavista."
+    },
+    {
+     "id": "022e9729a173b885",
+     "nota": "Jueves 13, 20:00. Misma sala, $7.000."
+    },
+    {
+     "id": "0f33f8f59f3676d7",
+     "nota": "Viernes 14, 23:00. Mayores de 21, sin fotos."
+    },
+    {
+     "id": "30a2e81be0633669",
+     "nota": "Sábado 15, 23:00. Cristoned, Das es y Don Nessuno."
+    },
+    {
+     "id": "b3d7b3617f54757a",
+     "nota": "Viernes 14 en Antonia López de Bello 34."
+    },
+    {
+     "id": "285aefe40fa3c61a",
+     "nota": "Sábado 15, de 21:00 a 04:00. Ernesto Pinto Lagarrigue 90."
+    },
+    {
+     "id": "e3730c640ced4828",
+     "nota": "Sábado 15. Ernesto Pinto Lagarrigue 179, media cuadra más allá."
+    }
+   ],
+   "seo": {
+    "titulo": "Qué hacer en Bellavista, Santiago: teatro, tocatas y fiestas | Loica",
+    "descripcion": "La ruta de Bellavista de punta a punta: Teatro San Ginés, Sala SCD Bellavista, Club 1 en Bombero Núñez, The Hive y Sala Metrónomo. Precios reales, de $3.000 a $23.000.",
+    "permalink": "blog/bellavista.html"
+   }
+  }
+ ]
+}

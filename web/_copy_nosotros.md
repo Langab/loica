@@ -61,7 +61,7 @@ El actual — "Una ciudad se usa o se pierde" — es el que más delata IA: sent
     ],
     tCom:"Cómo se llena esto", sCom:"No hay redacción ni equipo. Hay un programa que busca y estoy yo revisando.",
     pasos:[
-      ["A las seis de la mañana","Un programa que escribí revisa 31 agendas: municipios, centros culturales, teatros, universidades y un par de ticketeras chicas. No entra a Instagram ni a los sitios que piden por escrito que no los rastreen, aunque sean la puerta más fácil."],
+      ["A las seis de la mañana","Un programa que escribí revisa 31 agendas: municipios, centros culturales, teatros, universidades y tres ticketeras. No entra a Instagram ni a los sitios que piden por escrito que no los rastreen, aunque sean la puerta más fácil."],
       ["Después, a mano","Nada se publica solo. Todo entra como borrador y lo miro yo. Hay fuentes que publican sus talleres sin fecha — el CEINA es la clásica — y esos quedan en una lista aparte que completo uno por uno, abriendo la página."],
       ["Y te mando a la fuente","Cada ficha guarda el link de donde salió. Si Loica se equivocó en la hora, ahí está el original para confirmarlo. Es el mismo botón que aprieto yo cuando dudo."],
     ],
@@ -98,7 +98,7 @@ No es traducción literal: se cambió lo que en inglés sonaría raro ("panorama
     ],
     tCom:"How the map gets filled", sCom:"No newsroom, no team. There is a program that searches and there is me, checking.",
     pasos:[
-      ["Six in the morning","A program I wrote goes through 31 listings: councils, cultural centres, theatres, universities and a couple of small ticket sites. It does not touch Instagram, and it stays away from sites whose rules ask crawlers not to come in, even when that is the easy door."],
+      ["Six in the morning","A program I wrote goes through 31 listings: councils, cultural centres, theatres, universities and three ticket sites. It does not touch Instagram, and it stays away from sites whose rules ask crawlers not to come in, even when that is the easy door."],
       ["Then by hand","Nothing publishes itself. Everything arrives as a draft and I look at it. Some places post their workshops with no date at all — CEINA does this every time — and those go into a separate pile I fill in one by one, opening each page."],
       ["Then I send you to the source","Every listing keeps the link it came from. If Loica got the time wrong, the original is right there to check. It is the same button I press myself when I am not sure."],
     ],
@@ -135,7 +135,7 @@ Portugués de Brasil, no traducción del español. "Panorama" no existe en pt-BR
     ],
     tCom:"Como isso se enche", sCom:"Não tem redação nem equipe. Tem um programa que busca e tem eu, conferindo.",
     pasos:[
-      ["Às seis da manhã","Um programa que eu escrevi passa por 31 agendas: prefeituras, centros culturais, teatros, universidades e umas bilheterias pequenas. Não entra no Instagram nem nos sites que pedem por escrito para não serem rastreados, mesmo quando essa seria a porta mais fácil."],
+      ["Às seis da manhã","Um programa que eu escrevi passa por 31 agendas: prefeituras, centros culturais, teatros, universidades e três bilheterias. Não entra no Instagram nem nos sites que pedem por escrito para não serem rastreados, mesmo quando essa seria a porta mais fácil."],
       ["Depois, na mão","Nada é publicado sozinho. Tudo entra como rascunho e eu olho. Tem lugar que publica as oficinas sem data nenhuma — o CEINA é o clássico — e esses vão para uma lista à parte que eu completo um por um, abrindo cada página."],
       ["E te mando para a fonte","Cada ficha guarda o link de onde saiu. Se a Loica errou o horário, o original está ali para conferir. É o mesmo botão que eu aperto quando fico na dúvida."],
     ],
@@ -218,6 +218,7 @@ Los números son lo que hace que el texto suene a persona y no a marca, pero env
 | Dato en el copy | Valor hoy (10-ago-2026) | De dónde sale |
 |---|---|---|
 | "31 agendas" | 31 fuentes con `activa: true` (de 84 registradas) | `config/fuentes.yaml` |
+| "tres ticketeras" | Ticketmaster Chile, PortalTickets (PortalDisc) y Toliv | `config/fuentes.yaml` |
 | "casi un tercio ... no cuesta nada" | 86 gratis de 271 (32%) | `web/eventos.json` |
 | "más de cien panoramas en 'otros'" | 102 de 271 | `web/eventos.json` |
 | "seis o siete comunas" | Santiago 116, Providencia 49, Las Condes 18, Estación Central 13, Recoleta 13, Ñuñoa 10 | `web/eventos.json` |

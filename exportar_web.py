@@ -9,6 +9,7 @@ Deja web/eventos.json con los eventos futuros listos para dibujar.
 from __future__ import annotations
 
 import json
+import re
 import logging
 import sys
 from datetime import datetime
@@ -27,10 +28,45 @@ SITIO = "https://langab.github.io/loica"
 # Taxonomía provisional: mapea lo que dicen las fuentes a las categorías del
 # producto. La definitiva está en definicion_producto_mvp.md.
 CATEGORIAS = {
+    # Ferias va primero: "feria de diseño" tiene que ganarle a "diseño" (arte)
+    # y "mercado de las pulgas" a cualquier otra coincidencia.
+    "feria": [
+        "feria de diseño", "feria de diseno", "feria de emprendedores",
+        "feria artesanal", "feria costumbrista", "feria navideña", "feria navidena",
+        "feria del libro", "feria vintage", "feria de vinilos", "feria de antigüedades",
+        "feria de antiguedades", "feria de las pulgas", "feria itinerante",
+        "feria gastronómica", "feria gastronomica", "feria de barrio",
+        "mercado de diseño", "mercado de diseno", "mercado de pulgas",
+        "mercado navideño", "mercado navideno", "mercadito", "persa",
+        "bazar", "garage sale", "ropa usada", "segunda mano", "trueque",
+        "expo diseño", "expo diseno", "expoventa", "feria expo",
+        # Nicho friki/otaku: casi siempre son ferias con stands
+        "otaku", "anime", "manga", "cosplay", "comic con", "cómic con",
+        "friki", "frikimarket", "kpop", "k-pop", "coleccionismo",
+        "cartas pokémon", "cartas pokemon", "magic the gathering",
+    ],
+    # Deportes: desde un partido en el Monumental hasta la Ciclorecreovía
+    # del domingo. Va antes que "clases" para que "clase de yoga" no se coma
+    # "torneo de yoga" ni al revés.
+    "deporte": [
+        "fútbol", "futbol", "estadio nacional", "estadio monumental",
+        "colo-colo", "colo colo", "campeonato", "torneo anfp", "copa chile",
+        "básquetbol", "basquetbol", "vóleibol", "voleibol",
+        "rugby", "hockey", "atp santiago", "pádel", "padel",
+        "maratón", "maraton", "corrida familiar", "running", "trail running",
+        "10k", "21k", "42k", "cicletada", "ciclorecreovía", "ciclorecreovia",
+        "ciclismo", "atletismo", "patinaje", "hipódromo", "hipodromo", "rodeo",
+        "yoga en el parque", "zumba", "acondicionamiento físico",
+        "acondicionamiento fisico", "entrenamiento funcional", "crossfit",
+    ],
     "idiomas": ["intercambio de idioma", "language exchange", "conversation club",
                 "club de conversación", "mundo lingo", "intercambio linguístico"],
-    "musica": ["música", "musica", "concierto", "tocata", "recital", "banda"],
-    "teatro": ["teatro", "obra", "dramaturgia", "títeres", "titeres"],
+    "musica": ["música", "musica", "concierto", "tocata", "recital", "banda",
+               "orquesta", "sinfónica", "sinfonica", "coro", "cantante", "en vivo",
+               "dj set", "tributo", "gira", "álbum", "album", "vinilo", "jazz",
+               "rock", "cumbia", "reggaetón", "reggaeton", "electrónica", "electronica"],
+    "teatro": ["teatro", "obra de teatro", "dramaturgia", "títeres", "titeres",
+               "monólogo", "monologo", "stand up", "danza", "circo"],
     "arte": ["exposición", "exposicion", "muestra", "galería", "galeria", "arte",
              "fotografía", "fotografia", "pintura"],
     "clases": ["taller", "clase", "curso", "workshop", "entrenamiento", "laboratorio"],
@@ -53,6 +89,11 @@ NO_ES_PANORAMA = [
     "concurso publico", "se busca ", "vacante", "bases del concurso",
     "requisitos de postulación", "cartas de apoyo", "fondos de cultura",
     "matrícula", "matricula ", "proceso de admisión", "calendario académico",
+    # "Feria" en una universidad casi nunca es un panorama: son ferias
+    # laborales y vocacionales para sus propios alumnos.
+    "feria laboral", "feria vocacional", "feria de proyectos",
+    "feria de empleo", "feria de postgrados", "feria de universidades",
+    "feria científica", "feria cientifica",
 ]
 
 
@@ -65,10 +106,64 @@ def es_panorama(titulo: str, descripcion: str) -> tuple[bool, str]:
     return True, ""
 
 
-def clasificar(titulo: str, categoria_fuente: str, descripcion: str) -> str:
-    texto = f"{categoria_fuente} {titulo} {descripcion}".lower()
-    for categoria, palabras in CATEGORIAS.items():
-        if any(palabra in texto for palabra in palabras):
+# Palabras que en Chile significan otra cosa según el contexto. Solo valen si
+# están en el TÍTULO: en una descripción, "el clásico cuento" no es un partido,
+# "una copa de vino" no es un campeonato y "arte" aparece en cualquier reseña.
+AMBIGUAS = {
+    "encuentro", "club", "arte", "obra", "muestra", "banda", "ruta",
+    "naturaleza", "cerro", "parque", "lanzamiento", "party", "bazar", "persa",
+    "manga", "anime", "gira", "en vivo", "rock", "teatro",
+}
+
+# Buscar la palabra suelta, no como pedazo de otra: sin esto "obliga" activaba
+# "liga " y una obra de teatro terminaba clasificada como deporte.
+def _patron(palabras):
+    return re.compile("|".join(
+        rf"(?<![a-záéíóúñ]){re.escape(p)}(?![a-záéíóúñ])" for p in palabras),
+        re.IGNORECASE)
+
+_PATRONES_TITULO = {c: _patron(p) for c, p in CATEGORIAS.items()}
+_PATRONES_TEXTO = {
+    c: _patron([p for p in palabras if p not in AMBIGUAS])
+    for c, palabras in CATEGORIAS.items()
+    if any(p not in AMBIGUAS for p in palabras)
+}
+
+
+# El recinto dice mucho: si no se pudo clasificar por el texto, dónde ocurre
+# el evento es la mejor pista que queda. Un evento en un club es un carrete.
+POR_RECINTO = [
+    ("fiesta", ["club ", "discoteca", "bar ", "pub", "sala metrónomo", "blondie",
+                "roxbury", "cocina clandestina"]),
+    ("teatro", ["teatro", "sala agustín", "sala ana gonzález", "sidarte",
+                "san ginés", "san gines"]),
+    ("arte", ["museo", "galería", "galeria", "mavi", "bellas artes"]),
+    ("musica", ["sala scd", "auditorio", "anfiteatro", "estudio rockaxis"]),
+    ("charla", ["universidad", "facultad", "campus", "biblioteca"]),
+    ("aire_libre", ["parque", "cerro", "plaza"]),
+    ("cine", ["cineteca", "cine "]),
+]
+_PATRONES_RECINTO = [(c, _patron(p)) for c, p in POR_RECINTO]
+
+
+def clasificar(titulo: str, categoria_fuente: str, descripcion: str,
+               lugar: str = "") -> str:
+    # Primero el título, que es donde el organizador dice qué es la cosa.
+    cabecera = f"{categoria_fuente} {titulo}".lower()
+    for categoria, patron in _PATRONES_TITULO.items():
+        if patron.search(cabecera):
+            return categoria
+
+    # Después la descripción, y solo con las palabras inequívocas.
+    texto = descripcion.lower()
+    for categoria, patron in _PATRONES_TEXTO.items():
+        if patron.search(texto):
+            return categoria
+
+    # Último recurso: el recinto.
+    nombre_lugar = (lugar or "").lower()
+    for categoria, patron in _PATRONES_RECINTO:
+        if patron.search(nombre_lugar):
             return categoria
     return "otros"
 
@@ -292,7 +387,8 @@ def main() -> int:
             "precio": fila["precio_clp"],
             "precio_texto": fila["precio_texto"] or "",
             "categoria": clasificar(fila["titulo"], fila["categoria"] or "",
-                                    fila["descripcion_corta"] or ""),
+                                    fila["descripcion_corta"] or "",
+                                    fila["lugar_nombre"] or ""),
             "descripcion": fila["descripcion_corta"] or "",
             "imagen": fila["imagen_url"] or "",
             "fuente": fila["fuente_nombre"],

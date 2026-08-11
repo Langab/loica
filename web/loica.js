@@ -93,6 +93,8 @@ const CATEGORIAS = {
   cine:      {mascota:"chinchilla", color:"var(--c-cultura)", hex:"#2F6FB5", es:"Cine",      en:"Film",     pt:"Cinema"},
   charla:    {mascota:"chinchilla", color:"var(--c-cultura)", hex:"#2F6FB5", es:"Charlas",   en:"Talks",    pt:"Palestras"},
   clases:    {mascota:"chincol",    color:"var(--c-clases)",  hex:"#E08A1E", es:"Clases",    en:"Classes",  pt:"Aulas"},
+  feria:     {mascota:"chincol",    color:"var(--c-clases)",  hex:"#E08A1E", es:"Ferias",    en:"Markets",  pt:"Feiras"},
+  deporte:   {mascota:"condor",     color:"var(--c-musica)",  hex:"#C9331F", es:"Deporte",   en:"Sports",   pt:"Esporte"},
   idiomas:   {mascota:"chincol",    color:"var(--c-clases)",  hex:"#E08A1E", es:"Idiomas",   en:"Languages",pt:"Idiomas"},
   familia:   {mascota:"pudu",       color:"var(--c-libre)",   hex:"#2E7D5B", es:"Familia",   en:"Family",   pt:"Família"},
   aire_libre:{mascota:"pudu",       color:"var(--c-libre)",   hex:"#2E7D5B", es:"Aire libre",en:"Outdoors", pt:"Ar livre"},
