@@ -284,6 +284,9 @@
    ------------------------------------------------------------------ */
 let DATOS = {descuentos:[], comunas:[], generado:""};
 let dia = "hoy", bancoFiltro = null, comunaFiltro = "", rubroFiltro = "", cocinaFiltro = "";
+// Umbral mínimo de descuento, no valor exacto: quien filtra quiere "al menos
+// 30%", no "exactamente 30%". 0 = sin filtro.
+let minimoFiltro = 0;
 let mostrando = 80;   // la lista completa son 700 botones; se sirve de a poco
 
 // Cuatro rubros y nada más: el pipeline homologa el vocabulario de los cinco
@@ -342,7 +345,10 @@ function visibles(){
     (!bancoFiltro || d.banco_id === bancoFiltro) &&
     (!comunaFiltro || d.comuna === comunaFiltro) &&
     (!rubroFiltro || d.categoria === rubroFiltro) &&
-    (!cocinaFiltro || d.cocina === cocinaFiltro));
+    (!cocinaFiltro || d.cocina === cocinaFiltro) &&
+    // Un 2x1 o un combo no tienen porcentaje: con umbral puesto quedan
+    // fuera, que es lo correcto — no se puede afirmar que lleguen al 30%.
+    (!minimoFiltro || (d.porcentaje || 0) >= minimoFiltro));
 }
 
 function pintarTodo(){
@@ -422,13 +428,28 @@ function pintarFiltros(){
       cocinaFiltro, v => { cocinaFiltro = v; mostrando = 80; pintarTodo(); }));
   }
 
-  if(bancoFiltro || comunaFiltro || rubroFiltro || cocinaFiltro){
+  // Sólo se ofrecen los tramos que tienen algo detrás. "50% o más" son ocho
+  // descuentos y el tramo vale la pena; si un día no queda ninguno, ofrecerlo
+  // sería mandar a la persona a una lista vacía.
+  const desde = {es:"Desde", en:"From", pt:"A partir de"}[IDIOMA];
+  const masTexto = {es:"o más", en:"or more", pt:"ou mais"}[IDIOMA];
+  const tramos = [10, 20, 30, 40, 50]
+    .filter(u => DATOS.descuentos.some(d => (d.porcentaje || 0) >= u))
+    .map(u => [String(u), u === 50 ? `50% ${masTexto}` : `${desde} ${u}%`]);
+  if(tramos.length){
+    cont.appendChild(desplegable({es:"Descuento",en:"Discount",pt:"Desconto"}[IDIOMA],
+      tramos, String(minimoFiltro || ""),
+      v => { minimoFiltro = Number(v) || 0; mostrando = 80; pintarTodo(); }));
+  }
+
+  if(bancoFiltro || comunaFiltro || rubroFiltro || cocinaFiltro || minimoFiltro){
     const limpiar = document.createElement("button");
     limpiar.type = "button";
     limpiar.className = "chip";
     limpiar.textContent = "✕ " + t("dLimpiar");
     limpiar.onclick = () => {
-      bancoFiltro = null; comunaFiltro = ""; rubroFiltro = ""; cocinaFiltro = ""; mostrando = 80; pintarTodo();
+      bancoFiltro = null; comunaFiltro = ""; rubroFiltro = ""; cocinaFiltro = "";
+      minimoFiltro = 0; mostrando = 80; pintarTodo();
     };
     cont.appendChild(limpiar);
   }
