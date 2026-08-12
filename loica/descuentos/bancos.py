@@ -15,14 +15,19 @@ entre peticiones y con qué URL se arma el link de vuelta a la fuente.
 
 from __future__ import annotations
 
+import json
 import logging
+import re
 from datetime import date, datetime
+from pathlib import Path
+
+import yaml
 
 from ..normalizar import limpiar_html
 from ..red import ClienteEducado
 from .modelo import Descuento
-from .texto import (dias_en, lugar_en, modalidad_en, oferta_en,
-                    porcentaje_en, tope_en, vigencia_en)
+from .texto import (datos_bci, dias_en, lugar_en, modalidad_en, oferta_en,
+                    porcentaje_en, sucursales_bch, tope_en, url_normal, vigencia_en)
 
 log = logging.getLogger("loica.descuentos")
 
@@ -51,19 +56,26 @@ def _bancochile(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
                 continue
 
             etiquetas = meta.get("tags") or []
-            comuna, region = lugar_en(etiquetas)
             condiciones = limpiar_html(campos.get("Condiciones Comerciales") or "")
             descripcion = limpiar_html(campos.get("Descripcion") or "")
             extracto = campos.get("Extracto") or ""
             vigencia_txt = campos.get("Vigencia") or ""
 
-            recogidos.append(Descuento(
+            # Una fila por sucursal. Un restaurante con local en Ñuñoa y otro en
+            # Concepción son dos datos distintos, y aplastarlos en uno obliga a
+            # elegir una dirección y mentir en la otra. Además así el filtro de
+            # Región Metropolitana trabaja sobre la dirección declarada por el
+            # banco y no sobre una etiqueta deducida.
+            locales = sucursales_bch(campos.get("Sucursales") or "")
+            if not locales:
+                comuna, region = lugar_en(etiquetas)
+                locales = [{"direccion": "", "comuna": comuna, "region": region}]
+
+            base = dict(
                 banco_id=banco["id"],
                 banco=banco["nombre"],
                 comercio=(campos.get("Titulo") or meta.get("name") or "").strip(),
                 categoria=meta.get("category_slug") or "restaurantes",
-                comuna=comuna,
-                region=region,
                 # El % no tiene campo propio: sale del titular y de la letra chica
                 porcentaje=porcentaje_en(campos.get("Titulo"), descripcion, condiciones),
                 oferta=oferta_en(extracto, condiciones),
@@ -77,8 +89,12 @@ def _bancochile(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
                 segmentado="segmentado" in [str(e).lower() for e in etiquetas],
                 condiciones=condiciones,
                 url=plantilla.format(slug=meta.get("slug", "")),
+                sitio_web=url_normal(campos.get("Sitio web")),
+                telefono=(campos.get("Telefono") or "").strip(),
                 logo=((campos.get("Logo") or {}).get("url") or ""),
-            ))
+            )
+            for local in locales:
+                recogidos.append(Descuento(**base, **local))
         pagina += 1
 
     return recogidos
@@ -105,10 +121,15 @@ def _bci(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
             for promo in datos.get("promotions") or []:
                 # El HTML de la promoción trae el titular ("Hasta un 40% dcto"),
                 # la dirección y el teléfono. Se limpia y se lee como texto.
-                descripcion = limpiar_html(promo.get("description") or "")
+                bruto = promo.get("description") or ""
+                descripcion = limpiar_html(bruto)
                 condiciones = limpiar_html((promo.get("options") or {}).get("conditions") or "")
                 etiquetas = promo.get("tags") or []
                 comuna, region = lugar_en(etiquetas)
+                # La comuna del HTML manda sobre la de las etiquetas: viene de
+                # la dirección del local, no de una lista de palabras sueltas.
+                local = datos_bci(bruto)
+                comuna = local["comuna"] or comuna
 
                 recogidos.append(Descuento(
                     banco_id=banco["id"],
@@ -129,6 +150,9 @@ def _bci(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
                     modalidad=modalidad_en(descripcion, condiciones),
                     condiciones=condiciones,
                     url=promo.get("url") or "",
+                    direccion=local["direccion"],
+                    telefono=local["telefono"],
+                    sitio_web=url_normal(local["sitio_web"]),
                     logo=(promo.get("covers") or [""])[0],
                 ))
             pagina += 1
@@ -216,6 +240,7 @@ def _falabella(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
                 tarjetas=[str(m).lower() for m in (campos.get("paymentMethodBenefit") or [])],
                 modalidad=modalidad_en(texto),
                 condiciones=texto.strip(" ·"),
+                sitio_web=url_normal(campos.get("urlV2")),
                 url=plantilla.format(slug=campos.get("permalink", "")),
                 logo="",
             ))
@@ -275,8 +300,137 @@ def _region_falabella(regiones: list) -> str:
     return " · ".join(limpias)
 
 
+# --------------------------------------------------------------------------
+# Santander — captura manual
+# --------------------------------------------------------------------------
+def _santander(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
+    """Lee la foto que hay en datos/manual/, no la web del banco.
+
+    Santander tiene el mejor catálogo del mercado —83 restaurantes, casi todos
+    con día declarado— y es el único que no se puede automatizar: su WAF
+    bloquea todo lo que no sea un navegador, incluido /robots.txt. Rodearlo
+    sería evadir un control puesto a propósito, así que el archivo se llena a
+    mano y acá solo se lee.
+
+    El precio de eso es que envejece, y por eso cada fila viaja con la fecha
+    de captura hasta la ficha en la página. Un descuento que dice "capturado
+    hace tres meses" es honesto; uno que se hace pasar por fresco, no.
+    """
+    ruta = Path(__file__).resolve().parents[2] / banco["archivo"]
+    if not ruta.exists():
+        log.warning("Santander: falta %s — se omite", ruta)
+        return []
+
+    doc = yaml.safe_load(ruta.read_text(encoding="utf-8")) or {}
+    capturado = str(doc.get("capturado") or "")
+    fuente = doc.get("fuente") or ""
+    recogidos = []
+
+    for fila in doc.get("descuentos") or []:
+        comercio = str(fila.get("comercio") or "").strip()
+        if not comercio:
+            continue
+        regiones = [r.strip() for r in str(fila.get("region") or "").split(",") if r.strip()]
+        tarjeta = str(fila.get("tarjeta") or "").strip()
+        recogidos.append(Descuento(
+            banco_id=banco["id"],
+            banco=banco["nombre"],
+            comercio=comercio,
+            categoria="restaurantes",
+            # Santander declara región, nunca comuna ni dirección
+            region=" · ".join(regiones) if len(regiones) <= 3 else "Todo Chile",
+            porcentaje=porcentaje_en(fila.get("monto")),
+            dias=dias_en(fila.get("cuando")),
+            modalidad=modalidad_en(fila.get("cuando")),
+            # "Limited" y "Amex" son tarjetas de gama alta: el descuento no es
+            # para cualquier cliente y decirlo importa.
+            tarjetas=[tarjeta.lower()] if tarjeta else [],
+            segmentado=bool(tarjeta),
+            condiciones=str(fila.get("cuando") or "").strip(),
+            url=fuente,
+            capturado=capturado,
+        ))
+    log.info("Santander: %d descuentos de la captura del %s", len(recogidos), capturado or "?")
+    return recogidos
+
+
+# --------------------------------------------------------------------------
+# Tarjeta Cencosud Scotiabank
+# --------------------------------------------------------------------------
+def _cencosud(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
+    """El catálogo va incrustado en la página como `window.CardsAPI`.
+
+    No hay endpoint aparte: es un GET normal a la landing y un JSON adentro de
+    una etiqueta <script>. Aporta poco —de 83 beneficios solo la categoría
+    "comida" sirve, y ahí adentro hay cine y viajes— pero es otro emisor, es
+    abierto y sale barato.
+
+    El nombre del local está dentro del título ("40% dcto. en Burger King"),
+    así que se corta por el " en ".
+    """
+    respuesta = cliente.obtener(banco["url_agenda"])
+    if respuesta is None or not respuesta.ok:
+        log.warning("Cencosud: no respondió")
+        return []
+
+    bloque = re.search(r"window\.CardsAPI\s*=\s*\{.*?return\s*(\[.*?\]);",
+                       respuesta.text, re.S)
+    if not bloque:
+        log.warning("Cencosud: no encontré window.CardsAPI (¿cambiaron la página?)")
+        return []
+    try:
+        tarjetas = json.loads(bloque.group(1))
+    except ValueError as e:
+        log.warning("Cencosud: el JSON incrustado no parsea (%s)", e)
+        return []
+
+    categorias = {c.lower() for c in (banco.get("categorias") or [])}
+    recogidos = []
+    for item in tarjetas:
+        if not item.get("is_active", True):
+            continue
+        suyas = {str(c).lower() for c in (item.get("categories") or [])}
+        if categorias and not (categorias & suyas):
+            continue
+
+        titulo = str(item.get("title") or "").strip()
+        corta = str(item.get("short_description") or "")
+        legal = limpiar_html(item.get("legal_text") or "")
+        dias = dias_en(titulo, corta)
+        if not dias and not porcentaje_en(titulo):
+            continue        # sin día ni monto no queda nada que mostrar
+
+        recogidos.append(Descuento(
+            banco_id=banco["id"],
+            banco=banco["nombre"],
+            comercio=_comercio_cencosud(titulo),
+            categoria="restaurantes",
+            region="Todo Chile",
+            porcentaje=porcentaje_en(titulo, corta),
+            oferta=oferta_en(titulo, corta),
+            dias=dias,
+            vigencia_hasta=vigencia_en(legal),
+            tarjetas=["cencosud"],
+            modalidad=modalidad_en(titulo, corta),
+            condiciones=corta.strip() or legal[:300],
+            url=str(item.get("url") or banco["url_agenda"]),
+        ))
+    return recogidos
+
+
+def _comercio_cencosud(titulo: str) -> str:
+    """"40% dcto. en Burger King" → "Burger King"."""
+    corte = re.split(r"\s+en\s+", titulo, maxsplit=1)
+    nombre = corte[1] if len(corte) > 1 else titulo
+    # Se les cuela el día pegado al nombre: "PedidosYa todos los viernes"
+    nombre = re.split(r"\s+todos los\s+", nombre, maxsplit=1)[0]
+    return nombre.strip(" .,")
+
+
 ADAPTADORES = {
     "bancochile": _bancochile,
     "bci": _bci,
     "falabella": _falabella,
+    "santander": _santander,
+    "cencosud": _cencosud,
 }

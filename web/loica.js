@@ -425,6 +425,9 @@ const TEXTOS = {
     dVerBanco:"Ver en la página del banco",
     dVacio:"No hay descuentos con esos filtros", dVaciopista:"Prueba sacando alguno",
     dOjo:"El descuento lo pone el banco, no Loica. Confirma la vigencia antes de ir.",
+    dVerLocal:"Ir al sitio del local",
+    dCapturado:"Anotado a mano el",
+    dCapturadoPista:"Santander bloquea la lectura automática, así que esta ficha no se actualiza sola: revísala en el banco.",
     diasLargos:["lunes","martes","miércoles","jueves","viernes","sábado","domingo"],
   },
   en:{
@@ -474,6 +477,9 @@ const TEXTOS = {
     dVerBanco:"See it on the bank's page",
     dVacio:"No discounts match these filters", dVaciopista:"Try removing one",
     dOjo:"The discount is the bank's, not Loica's. Check it is still live before you go.",
+    dVerLocal:"Go to the venue's site",
+    dCapturado:"Written down by hand on",
+    dCapturadoPista:"Santander blocks automated reading, so this one does not refresh on its own: check it with the bank.",
     diasLargos:["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
   },
   pt:{
@@ -523,6 +529,9 @@ const TEXTOS = {
     dVerBanco:"Ver na página do banco",
     dVacio:"Nenhum desconto com esses filtros", dVaciopista:"Tente tirar algum",
     dOjo:"O desconto é do banco, não da Loica. Confirme se está em vigor antes de ir.",
+    dVerLocal:"Ir ao site do local",
+    dCapturado:"Anotado à mão em",
+    dCapturadoPista:"O Santander bloqueia a leitura automática, então esta ficha não se atualiza sozinha: confira no banco.",
     diasLargos:["segunda","terça","quarta","quinta","sexta","sábado","domingo"],
   },
 };
@@ -874,6 +883,8 @@ const BANCOS = {
   bancochile:{color:"#1B6FD1", tinta:"var(--c-cultura-tinta)"},
   bci:       {color:"#7A3FE0", tinta:"var(--c-fiesta-tinta)"},
   falabella: {color:"#0E8757", tinta:"var(--c-libre-tinta)"},
+  santander: {color:"#C42B67", tinta:"var(--c-charla-tinta)"},
+  cencosud:  {color:"#0C8B9B", tinta:"var(--c-deporte-tinta)"},
 };
 const banco = id => BANCOS[id] || {color:"#95521C", tinta:"var(--c-descuento-tinta)"};
 
@@ -928,7 +939,8 @@ function tarjetaDescuento(d, alPulsar){
       <div class="hora banco-nombre">${escapar(d.banco)}</div>
       <h3>${escapar(d.comercio)}</h3>
       <div class="tarjeta-meta">
-        ${d.comuna ? `<span>${escapar(d.comuna)}</span>`
+        ${d.direccion ? `<span>${escapar(d.direccion)}</span>` : ""}
+        ${d.comuna ? `<span>${d.direccion ? "· " : ""}${escapar(d.comuna)}</span>`
                    : d.region ? `<span>${escapar(d.region)}</span>` : ""}
         ${d.segmentado ? `<span class="aviso" title="${escapar(t("dSegmentado"))}">·&nbsp;${
           IDIOMA === "en" ? "segmented" : "segmentado"}</span>` : ""}

@@ -29,6 +29,15 @@ class Descuento:
     categoria: str = "restaurantes"     # restaurantes | cafeterias | gourmet
     comuna: str = ""
     region: str = ""
+    # La calle y el número. Es el dato que convierte "hay 40% en Boga" en
+    # "puedo ir caminando": sin dirección hay que salir de la página a buscarla.
+    direccion: str = ""
+    telefono: str = ""
+    # OJO: son dos links distintos y los dos importan.
+    #   url        → la ficha del banco. Es la fuente y la que manda si hay
+    #                discusión sobre las condiciones.
+    #   sitio_web  → la página del local. Es donde se reserva o se pide.
+    sitio_web: str = ""
 
     # Qué tan bueno es
     porcentaje: int | None = None
@@ -55,6 +64,9 @@ class Descuento:
     condiciones: str = ""
     url: str = ""
     logo: str = ""
+    # Fecha de captura, solo para las fuentes que no se pueden automatizar.
+    # Vacío = lo trajo la corrida de hoy.
+    capturado: str = ""
 
     @property
     def id(self) -> str:

@@ -83,3 +83,40 @@ bancos:
     ISO real (`fechaTerminoV2`), así que no hay que parsear prosa para saber si sigue viva.
 
     '
+
+- id: santander
+  nombre: Santander
+  emisor: Banco Santander
+  # NO se rastrea. banco.santander.cl responde 403 a todo lo que no sea un
+  # navegador y bloquea hasta /robots.txt, así que ni siquiera se puede leer
+  # qué permite. Rodear eso sería evadir un control puesto a propósito.
+  # El catálogo se anota a mano en el archivo de abajo, con su fecha.
+  adaptador: santander
+  archivo: datos/manual/descuentos_santander.yaml
+  # Días desde la captura a partir de los cuales la corrida avisa que hay que
+  # rehacerla. Santander arma campañas mensuales: 45 días ya es viejo.
+  avisar_dias: 45
+  activo: true
+  notas: 'El mejor catálogo del mercado y el único que no se puede automatizar. 83 restaurantes,
+    casi todos con día declarado, pero sin dirección ni link por local: Santander solo publica
+    región y tipo de tarjeta (Amex y Limited son de gama alta, así que van marcados como
+    segmentados).
+
+    '
+
+- id: cencosud
+  nombre: Cencosud
+  emisor: Cencosud Scotiabank
+  adaptador: cencosud
+  url_base: https://www.tarjetacencosud.cl
+  url_agenda: https://www.tarjetacencosud.cl/publico/beneficios/landing/la-ruta-del-sabor
+  # `categories` del JSON incrustado. "comida" es la única gastronómica.
+  categorias:
+  - comida
+  crawl_delay_seg: 2
+  activo: true
+  notas: 'El catálogo va incrustado en la página como `window.CardsAPI`: no hay endpoint aparte,
+    es un GET normal y un JSON dentro de un <script>. Aporta poco (de 83 beneficios, la categoría
+    comida son 14 y ahí adentro hay cine y viajes) pero es abierto y sale barato.
+
+    '

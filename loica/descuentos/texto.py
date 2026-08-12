@@ -293,3 +293,139 @@ def es_gastronomico(*textos: str) -> bool:
     return bool(re.search(
         r"restaurant|restaurante|sabores|gastronom|cafeteria|cafe|bar\b|pizzer|"
         r"sushi|comida|cocina|antojos|brunch|heladeria|pasteler|panaderia", texto))
+
+# Las 52 comunas de la Región Metropolitana. La app es de Santiago: un 40% en
+# Puerto Natales es un dato correcto y completamente inútil para quien la usa.
+COMUNAS_RM = {
+    "Santiago", "Cerrillos", "Cerro Navia", "Conchalí", "El Bosque",
+    "Estación Central", "Huechuraba", "Independencia", "La Cisterna",
+    "La Florida", "La Granja", "La Pintana", "La Reina", "Las Condes",
+    "Lo Barnechea", "Lo Espejo", "Lo Prado", "Macul", "Maipú", "Ñuñoa",
+    "Pedro Aguirre Cerda", "Peñalolén", "Providencia", "Pudahuel", "Quilicura",
+    "Quinta Normal", "Recoleta", "Renca", "San Joaquín", "San Miguel",
+    "San Ramón", "Vitacura", "Puente Alto", "Pirque", "San José de Maipo",
+    "Colina", "Lampa", "Tiltil", "San Bernardo", "Buin", "Calera de Tango",
+    "Paine", "Melipilla", "Alhué", "Curacaví", "María Pinto", "San Pedro",
+    "Talagante", "El Monte", "Isla de Maipo", "Padre Hurtado", "Peñaflor",
+}
+
+
+def es_metropolitana(comuna: str, region: str) -> bool:
+    """¿Este descuento sirve en Santiago?
+
+    Vale por comuna de la RM, o por región metropolitana cuando el banco no
+    baja a comuna (las cadenas y el delivery se publican así). Lo que declara
+    otra región se descarta; lo que no declara nada se deja pasar, porque son
+    en su mayoría cadenas nacionales que sí tienen local en Santiago.
+    """
+    if comuna:
+        return comuna in COMUNAS_RM
+    plana = plano(region)
+    if not plana:
+        return True
+    return "metropolitana" in plana or "todo chile" in plana or "santiago" in plana
+
+
+def sucursales_bch(html: str) -> list[dict]:
+    """Banco de Chile publica los locales como campos separados por punto y coma.
+
+        <ul><li>VACIO;IRARRAZAVAL #3313;Región Metropolitana;ÑUÑOA;VACIO</li></ul>
+                     └ dirección      └ región            └ comuna
+
+    Es mejor dato que las etiquetas: acá la comuna viene declarada por el
+    banco, no deducida de una lista plana donde "valparaiso" puede ser la
+    región o la ciudad. Un local por <li>; las cadenas traen varios.
+
+    "VACIO" es literalmente lo que escriben cuando el campo va en blanco.
+    """
+    locales = []
+    for fila in re.findall(r"<li[^>]*>(.*?)</li>", html or "", re.S):
+        partes = [p.strip() for p in re.sub(r"<[^>]+>", " ", fila).split(";")]
+        partes = ["" if p.upper() == "VACIO" else p for p in partes]
+        if len(partes) < 4:
+            continue
+        direccion, region, comuna = partes[1], partes[2], partes[3]
+        if not (direccion or comuna):
+            continue
+        locales.append({
+            "direccion": " ".join(direccion.split()),
+            "region": region_normal(region),
+            "comuna": COMUNAS.get(plano(comuna), comuna.strip().title()),
+        })
+    return locales
+
+
+def region_normal(crudo: str) -> str:
+    """Nombre de región canónico a partir de como lo escriba cada banco.
+
+    En los datos reales aparecen "Región Metropolitana", "RM" y
+    "Región Metropolotana" —el typo es de ellos— para la misma región. Sin
+    unificarlas, la misma comuna sale con tres regiones distintas y el filtro
+    de Santiago deja fuera locales que sí están en Santiago.
+    """
+    limpio = plano(crudo).replace("region de ", "").replace("region del ", "")
+    limpio = limpio.replace("region ", "").strip()
+    if not limpio:
+        return ""
+    # El typo y la abreviatura entran por acá, antes del diccionario exacto.
+    # El prefijo corta en "metropol" y no en "metropolit" porque el typo real
+    # que publica Banco de Chile es "Metropolotana", con o.
+    if limpio in ("rm", "r.m.", "r m") or limpio.startswith("metropol"):
+        return "Metropolitana"
+    return REGIONES.get(limpio, str(crudo).strip())
+
+
+def datos_bci(html: str) -> dict:
+    """Bci entierra dirección, teléfono y sitio del local en el HTML de la promo.
+
+        <li class="direccion"><i></i> Callao 3123<br>Las Condes</li>
+        <li class="telefono">+56 2 2757 2000</li>
+        <li class="web"><a href="https://...">...</a></li>
+
+    Las clases son estables (están en las 27 de restaurantes sin excepción),
+    así que esto es leer un formato, no adivinar. El <br> separa la calle de
+    la comuna: es el único lugar donde Bci declara la comuna de verdad.
+    """
+    salida = {"direccion": "", "comuna": "", "telefono": "", "sitio_web": ""}
+    if not html:
+        return salida
+
+    bloque = re.search(r'class="direccion"[^>]*>(.*?)</li>', html, re.S)
+    if bloque:
+        crudo = re.sub(r"<i[^>]*>.*?</i>", " ", bloque.group(1), flags=re.S)
+        trozos = [" ".join(t.split()) for t in re.split(r"<br\s*/?>", crudo)]
+        trozos = [" ".join(re.sub(r"<[^>]+>", " ", t).split()) for t in trozos if t.strip()]
+        if trozos:
+            salida["direccion"] = trozos[0]
+        # El último trozo suele ser la comuna; solo se acepta si está en la lista
+        for t in reversed(trozos[1:]):
+            if plano(t) in COMUNAS:
+                salida["comuna"] = COMUNAS[plano(t)]
+                break
+
+    tel = re.search(r'class="telefono"[^>]*>(.*?)</li>', html, re.S)
+    if tel:
+        salida["telefono"] = " ".join(re.sub(r"<[^>]+>", " ", tel.group(1)).split())
+
+    web = re.search(r'class="web"[^>]*>\s*<a[^>]*href="([^"]+)"', html, re.S)
+    if web:
+        salida["sitio_web"] = web.group(1).strip()
+    return salida
+
+
+def url_normal(crudo: str) -> str:
+    """Banco de Chile publica el sitio del local como "www.quotidien.cl".
+
+    Sin esquema el navegador lo resuelve relativo al sitio y el link termina
+    apuntando a loica.cl/www.quotidien.cl, que es un 404 con nuestra cara.
+    """
+    limpio = str(crudo or "").strip().strip('"\'')
+    if not limpio or limpio.lower() in ("vacio", "n/a", "-"):
+        return ""
+    if limpio.startswith(("http://", "https://")):
+        return limpio
+    if limpio.startswith("//"):
+        return "https:" + limpio
+    if "." not in limpio.split("/")[0]:
+        return ""            # no parece un dominio
+    return "https://" + limpio

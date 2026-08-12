@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=7">
+<link rel="stylesheet" href="loica.css?v=8">
 <style>
   html,body{height:100%;overflow:hidden}
   #app{display:flex;flex-direction:column;height:100dvh}
@@ -152,7 +152,11 @@
   .pastilla.hoy{background:var(--acento-solido);color:var(--acento-contraste);border-color:var(--contorno)}
   .letra-chica{font-size:var(--t-xs);color:var(--tinta-suave);line-height:1.55}
   .sin-fecha{color:var(--tinta-tenue);font-style:italic}
-  .ficha .boton{width:100%;margin-top:var(--e-5)}
+  .ficha .boton{width:100%;margin-top:var(--e-4)}
+  .enlace-lugar{color:var(--c-descuento-tinta);font-weight:700;text-decoration:none}
+  .enlace-lugar:hover{text-decoration:underline}
+  .dato a{color:var(--tinta);text-decoration:none;font-weight:600}
+  .dato a:hover{text-decoration:underline}
 
   @media(max-width:879px){
     main{padding-bottom:calc(52px + env(safe-area-inset-bottom))}
@@ -197,7 +201,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
-<script src="loica.js?v=7"></script>
+<script src="loica.js?v=8"></script>
 <script>
 /* ------------------------------------------------------------------
    Estado. Tres filtros y ninguno depende del otro: el día es de una
@@ -390,15 +394,26 @@ function abrirFicha(d){
         escapar(t("diasLargos")[DIAS_CLAVE.indexOf(k)])}</span>`).join("")
     : `<span class="pastilla hoy">${escapar(t("dTodosDias"))}</span>`;
 
+  /* La dirección va primero y como link a mapas: la pregunta que sigue a
+     "hay 40%" es "¿dónde queda?", y responderla dentro de la ficha evita que
+     la persona se vaya a buscarla a otra pestaña y no vuelva. */
+  const lugar = [d.direccion, d.comuna].filter(Boolean).join(", ");
   const filas = [
     [t("dDia"), `<div class="pastillas">${dias}</div>`],
-    [t("donde"), escapar([d.comuna, d.region].filter(Boolean).join(" · ")) || "—"],
+    [t("donde"), lugar
+      ? `<a class="enlace-lugar" target="_blank" rel="noopener"
+           href="https://www.google.com/maps/search/?api=1&query=${
+             encodeURIComponent(d.comercio + " " + lugar + " Santiago Chile")}">
+           ${escapar(lugar)} ↗</a>`
+      : (escapar(d.region) || "—")],
     [{es:"Rubro",en:"Type",pt:"Tipo"}[IDIOMA], escapar(rubro(d.categoria))],
     [t("dHasta"), d.vigencia_hasta
       ? escapar(new Date(d.vigencia_hasta + "T12:00").toLocaleDateString(localeDe(),
           {day:"numeric", month:"long", year:"numeric"}))
       : `<span class="sin-fecha">${escapar(t("dSinFecha"))}</span>`],
   ];
+  if(d.telefono) filas.push([{es:"Teléfono",en:"Phone",pt:"Telefone"}[IDIOMA],
+    `<a href="tel:${escapar(d.telefono.replace(/[^+\d]/g, ""))}">${escapar(d.telefono)}</a>`]);
   if(d.tope) filas.push([t("dTope"), "$" + d.tope.toLocaleString("es-CL")]);
   if(d.modalidad === "online") filas.push(["", `<b>${escapar(t("dSoloOnline"))}</b>`]);
   if(d.modalidad === "presencial") filas.push(["", `<b>${escapar(t("dSoloPresencial"))}</b>`]);
@@ -414,8 +429,13 @@ function abrirFicha(d){
       `<div class="dato"><dt>${escapar(k)}</dt><dd>${v}</dd></div>`).join("")}</dl>
     ${d.condiciones ? `<p class="letra-chica" style="margin-top:var(--e-4)">
         ${escapar(d.condiciones.slice(0, 420))}${d.condiciones.length > 420 ? "…" : ""}</p>` : ""}
+    ${d.capturado ? `<p class="letra-chica sin-fecha">${escapar(t("dCapturado"))} ${
+        escapar(new Date(d.capturado + "T12:00").toLocaleDateString(localeDe(),
+          {day:"numeric", month:"long"}))}. ${escapar(t("dCapturadoPista"))}</p>` : ""}
     <a class="boton" href="${escapar(d.url)}" target="_blank" rel="noopener nofollow">
-      ${escapar(t("dVerBanco"))} →</a>`;
+      ${escapar(t("dVerBanco"))} →</a>
+    ${d.sitio_web ? `<a class="boton secundario" href="${escapar(d.sitio_web)}"
+        target="_blank" rel="noopener nofollow">${escapar(t("dVerLocal"))} →</a>` : ""}`;
 
   ficha.classList.add("visible");
   ficha.setAttribute("aria-hidden", "false");

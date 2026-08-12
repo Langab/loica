@@ -29,6 +29,8 @@ proyecto deja de ser un índice y pasa a ser una copia.
 
 from __future__ import annotations
 
+import csv
+import html
 import logging
 from datetime import date, datetime
 from pathlib import Path
@@ -109,6 +111,85 @@ def _desde_dict(crudo: dict, fuente: dict, origen: str) -> Evento | None:
     )
 
 
+# Mapeo por defecto de un CSV exportado desde Passline. Se puede cambiar por
+# fuente con `csv_columnas`, para cuando la exportación venga de otro lado.
+COLUMNAS_CSV = {
+    "titulo": "nombre",
+    "categoria": "categoria",
+    "inicio": "fecha_inicio",
+    "hora_inicio": "hora_inicio",
+    "fin": "fecha_termino",
+    "lugar_nombre": "lugar",
+    "comuna": "comuna",
+    "precio_clp": "precio_min",
+    "fuente_url": "link_evento",
+    "imagen_url": "imagen_recorte",
+    "id_externo": "id",
+}
+
+
+def _desde_fila(fila: dict, mapa: dict, fuente: dict, origen: str) -> dict | None:
+    """Traduce una fila de CSV al mismo diccionario que se lee de un YAML.
+
+    Así el CSV y el YAML entran por la misma puerta y valen las mismas reglas,
+    incluida la de que sin link no se guarda.
+    """
+    def col(campo: str) -> str:
+        nombre = mapa.get(campo)
+        return html.unescape(str(fila.get(nombre, "") or "").strip()) if nombre else ""
+
+    titulo = col("titulo")
+    if not titulo:
+        return None
+
+    # "2026-08-21" + "21:00:00" → una sola fecha con hora. Sin la hora, todos
+    # los eventos quedarían a medianoche.
+    inicio = col("inicio")
+    hora = col("hora_inicio")
+    if inicio and hora:
+        inicio = f"{inicio} {hora[:5]}"
+
+    # El precio viene como "7000.00": el modelo guarda pesos enteros.
+    precio = None
+    crudo = col("precio_clp")
+    if crudo:
+        try:
+            valor = int(float(crudo))
+            precio = valor if 0 < valor <= 2_000_000 else None
+        except ValueError:
+            precio = None
+
+    return {
+        "titulo": titulo,
+        "categoria": col("categoria"),
+        "inicio": inicio,
+        "fin": col("fin"),
+        "lugar_nombre": col("lugar_nombre"),
+        "comuna": col("comuna"),
+        "precio_clp": precio,
+        "es_gratis": True if precio == 0 else None,
+        "fuente_url": col("fuente_url"),
+        "link_entradas": col("fuente_url"),
+        "imagen_url": col("imagen_url"),
+        "id_externo": col("id_externo"),
+        "fuente_nombre": fuente.get("nombre_csv") or Path(origen).stem.replace("_", " ").title(),
+    }
+
+
+def _leer_csv(ruta: Path, fuente: dict) -> list[dict]:
+    mapa = {**COLUMNAS_CSV, **(fuente.get("csv_columnas") or {})}
+    try:
+        # utf-8-sig porque Excel y varios exportadores dejan BOM al inicio.
+        with ruta.open(encoding="utf-8-sig", newline="") as f:
+            filas = list(csv.DictReader(f))
+    except (OSError, csv.Error) as e:
+        log.error("%s: no pude leer el CSV (%s)", ruta.name, e)
+        return []
+
+    crudos = [_desde_fila(fila, mapa, fuente, ruta.name) for fila in filas]
+    return [c for c in crudos if c]
+
+
 def extraer_manual(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
     """Lee todos los YAML de datos/manual/. No hace ninguna petición de red."""
     carpeta = Path(fuente.get("carpeta") or DIR_MANUAL)
@@ -117,19 +198,28 @@ def extraer_manual(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
         return []
 
     eventos: list[Evento] = []
-    archivos = sorted(p for p in carpeta.glob("*.yaml") if not p.name.startswith("_"))
+    archivos = sorted(p for p in carpeta.iterdir()
+                      if p.suffix.lower() in (".yaml", ".yml", ".csv")
+                      and not p.name.startswith("_"))
 
     for ruta in archivos:
-        try:
-            contenido = yaml.safe_load(ruta.read_text(encoding="utf-8")) or {}
-        except yaml.YAMLError as e:
-            log.error("%s: YAML inválido (%s)", ruta.name, e)
-            continue
+        if ruta.suffix.lower() == ".csv":
+            crudos = _leer_csv(ruta, fuente)
+        else:
+            try:
+                contenido = yaml.safe_load(ruta.read_text(encoding="utf-8")) or {}
+            except yaml.YAMLError as e:
+                log.error("%s: YAML inválido (%s)", ruta.name, e)
+                continue
 
-        crudos = contenido.get("eventos") if isinstance(contenido, dict) else contenido
-        if not isinstance(crudos, list):
-            log.warning("%s: se esperaba una lista bajo 'eventos'", ruta.name)
-            continue
+            crudos = contenido.get("eventos") if isinstance(contenido, dict) else contenido
+            if not isinstance(crudos, list):
+                # La carpeta la comparten otros catastros (los descuentos de
+                # banco, por ejemplo). Un YAML sin 'eventos' no es un error:
+                # simplemente no es para nosotros.
+                log.debug("%s: sin lista 'eventos' — no es un archivo de eventos",
+                          ruta.name)
+                continue
 
         for crudo in crudos:
             evento = _desde_dict(crudo, fuente, ruta.name)

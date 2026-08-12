@@ -20,6 +20,7 @@ from datetime import date
 from ..red import ClienteEducado
 from .bancos import ADAPTADORES
 from .modelo import Descuento
+from .texto import es_metropolitana
 
 log = logging.getLogger("loica.descuentos")
 
@@ -51,18 +52,24 @@ def recolectar(bancos: list[dict], usar_cache: bool = True) -> tuple[list[Descue
         vigentes = [d for d in crudos
                     if _sigue_viva(d) and d.comercio
                     and d.comercio.strip().lower() not in excluidos]
-        todos.extend(vigentes)
+        # Loica es de Santiago. Un 40% en Puerto Natales es un dato correcto y
+        # completamente inútil para quien abre la página, y además ensucia el
+        # filtro de comuna con noventa nombres que nadie va a elegir.
+        santiago = [d for d in vigentes if es_metropolitana(d.comuna, d.region)]
+        todos.extend(santiago)
         estadisticas.append({
             "banco": banco["nombre"],
             "crudos": len(crudos),
-            "vigentes": len(vigentes),
-            "con_dia": sum(1 for d in vigentes if d.dias),
+            "vigentes": len(santiago),
+            "con_dia": sum(1 for d in santiago if d.dias),
             "vencidos": sum(1 for d in crudos if not _sigue_viva(d)),
+            "fuera_rm": len(vigentes) - len(santiago),
             "error": "",
         })
-        log.info("%-16s %3d vigentes de %3d (%d con día)",
-                 banco["nombre"], len(vigentes), len(crudos),
-                 sum(1 for d in vigentes if d.dias))
+        _avisar_si_vieja(banco, santiago)
+        log.info("%-26s %3d en la RM de %3d (%d con día)",
+                 banco["nombre"], len(santiago), len(crudos),
+                 sum(1 for d in santiago if d.dias))
 
     return _sin_repetidos(todos), estadisticas
 
@@ -105,3 +112,24 @@ def _sin_repetidos(descuentos: list[Descuento]) -> list[Descuento]:
 def _riqueza(d: Descuento) -> int:
     return ((len(d.dias) > 0) * 4 + (d.porcentaje is not None) * 2
             + bool(d.oferta) + (d.vigencia_hasta is not None))
+
+
+def _avisar_si_vieja(banco: dict, descuentos: list[Descuento]) -> None:
+    """Las fuentes de captura manual envejecen en silencio si nadie mira.
+
+    Este aviso es el único mecanismo que tiene Santander para no volverse una
+    mentira: nada lo refresca solo, así que la corrida tiene que gritarlo.
+    """
+    limite = banco.get("avisar_dias")
+    if not limite or not descuentos:
+        return
+    capturado = descuentos[0].capturado
+    if not capturado:
+        return
+    try:
+        dias = (date.today() - date.fromisoformat(capturado)).days
+    except ValueError:
+        return
+    if dias > int(limite):
+        log.warning("%s: la captura es del %s (%d días). Toca rehacerla: %s",
+                    banco["nombre"], capturado, dias, banco.get("archivo", ""))

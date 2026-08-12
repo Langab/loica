@@ -105,7 +105,7 @@ Conviene probarla sola antes de sumarla a la corrida diaria:
 | `tabla` | Tablas de talleres municipales, con el recinto y su dirección en las filas sobre el encabezado. |
 | `json` | API JSON propia, con el mapeo de campos declarado en el YAML. |
 | `ticketmaster` | Ticketmaster Discovery (API oficial con permiso explícito). |
-| `manual` | Ingesta asistida desde `datos/manual/*.yaml`. No hace peticiones. |
+| `manual` | Ingesta asistida desde `datos/manual/*.yaml` y `*.csv`. No hace peticiones. |
 
 ### El circuito under: `carteleras`
 
@@ -148,8 +148,22 @@ no permite leer cuentas ajenas por API.
 En esos casos el descubrimiento lo hace una persona navegando normal, y el
 pipeline aporta lo de siempre: normaliza, deduplica contra lo ya guardado,
 geocodifica y lo deja en revisión con su link de origen. Se escriben en
-`datos/manual/*.yaml` (ver `_plantilla.yaml`) y entran con las mismas reglas
-que el resto — sin `fuente_url` no se guarda.
+`datos/manual/` y entran con las mismas reglas que el resto — sin `fuente_url`
+no se guarda.
+
+Acepta dos formatos:
+
+- **`.yaml`** escrito a mano (ver `_plantilla.yaml`), para el dato suelto.
+- **`.csv`** exportado, para volúmenes. El mapeo de columnas por defecto es el
+  de una exportación de Passline y se cambia con `csv_columnas`. El nombre del
+  archivo pasa a ser la fuente: `passline.csv` → "Passline".
+
+El CSV es la vía que hoy trae Passline: su API está tras un Cloudflare Managed
+Challenge que responde 403 a cualquier cliente automático —probado con nuestro
+user-agent, con `Mozilla/5.0` y con uno que dice "bot"—, incluso desde la
+máquina donde corre el pipeline. No es el filtro por la palabra "bot" que tiene
+chilecultura: es puntaje de IP y huella TLS, y un navegador de verdad sí pasa.
+Así que la extracción la hace una persona con su navegador y el CSV entra acá.
 
 > El tipo `api` ya no existe. Antes apuntaba fijo a Ticketmaster, así que
 > cualquier otra fuente declarada como `api` consultaba Ticketmaster en
@@ -268,16 +282,49 @@ Corre solo todos los días con GitHub Actions
 despierto. Si un banco se cae y el catastro baja de 100 descuentos, el workflow
 falla a propósito en vez de publicar una página vacía.
 
-| Banco | Cómo se lee | Día de la semana | Vigencia |
-|---|---|---|---|
-| **Banco de Chile** (+ Edwards) | CMS propio, API abierta | ✅ en las etiquetas (99%) | ✅ declarada |
-| **Bci** | `vivirconbeneficios.cl`, JSON de Rails | ❌ son convenios permanentes | ❌ nunca la declara |
-| **Banco Falabella** | Contentful, token público de lectura | ✅ campo propio (100%) | ✅ fecha ISO |
+| Banco | Cómo se lee | Día | Dirección | Link al local |
+|---|---|---|---|---|
+| **Banco de Chile** (+ Edwards) | CMS propio, API abierta | ✅ 99% | ✅ 94% | ✅ 51% |
+| **Bci** | `vivirconbeneficios.cl`, JSON de Rails | ❌ convenios permanentes | ✅ 100% | ✅ 99% |
+| **Banco Falabella** | Contentful, token público de lectura | ✅ 100% | ❌ solo región | ✅ 100% |
+| **Santander** | ⚠️ **captura manual**, ver abajo | ✅ 88% | ❌ solo región | ❌ |
+| **Cencosud Scotiabank** | JSON incrustado en la landing | ✅ 55% | ❌ | ❌ |
 
-Santander tiene el mejor catálogo del mercado y quedó fuera: responde 403 en
-todo el dominio y publica su calendario en un PDF con UUID que cambia cada mes.
-El sondeo completo de los quince emisores está en
-[`notas/catastro_descuentos_bancos.md`](notas/catastro_descuentos_bancos.md).
+De Banco de Chile sale **una fila por sucursal**: un restaurante con local en
+Ñuñoa y otro en Concepción son dos datos distintos, y aplastarlos en uno obliga
+a elegir una dirección y mentir en la otra.
+
+Cada descuento lleva **dos links y no uno**, porque no son lo mismo: `url` es la
+ficha del banco —la fuente, y la que manda si hay discusión sobre las
+condiciones— y `sitio_web` es la página del local, que es donde se reserva.
+
+### Santander no se rastrea, se anota a mano
+
+`banco.santander.cl` responde 403 a cualquier petición que no venga de un
+navegador, y bloquea **incluso `/robots.txt`**: no se puede leer ni siquiera qué
+permite y qué no. Con cabeceras completas de navegador devuelve un desafío de
+4 KB en vez del contenido. Eso es mitigación de bots activa, y rodearla sería
+evadir un control que el banco puso a propósito. Este proyecto pide permiso
+antes de leer (`loica/red.py`); no va a hacer la excepción justo acá.
+
+Así que su catálogo —83 restaurantes, el mejor del mercado— se anota a mano en
+[`datos/manual/descuentos_santander.yaml`](datos/manual/descuentos_santander.yaml),
+igual que los eventos que no se pueden rastrear. Como es una foto y no un flujo,
+**envejece**: la corrida avisa a los 45 días y cada ficha muestra en la página
+la fecha en que se anotó. Para actualizar, se abre la fuente y se rehace la lista.
+
+Scotiabank (tras login), Itaú, BancoEstado, BICE, Security, Ripley, Consorcio,
+Coopeuch y Tenpo quedaron fuera por ahora. El sondeo de los quince emisores está
+en [`notas/catastro_descuentos_bancos.md`](notas/catastro_descuentos_bancos.md).
+
+### Solo Región Metropolitana
+
+Loica es de Santiago, así que la corrida descarta lo que declara otra región:
+un 40% en Puerto Natales es un dato correcto y completamente inútil para quien
+abre la página, y además llenaba el filtro de comuna con noventa nombres que
+nadie iba a elegir. De 1.075 descuentos vigentes en todo Chile quedan 652 en la
+RM, repartidos en 32 comunas. Lo que no declara comuna ni región se deja pasar:
+son en su mayoría cadenas nacionales que sí tienen local en Santiago.
 
 **Dos cosas que hay que saber para leer el dato:**
 

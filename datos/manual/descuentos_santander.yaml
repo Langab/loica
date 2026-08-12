@@ -1,0 +1,439 @@
+# Descuentos de restaurantes de Banco Santander — captura MANUAL.
+#
+# Por qué no está en la corrida automática:
+# banco.santander.cl responde 403 a cualquier petición que no venga de un
+# navegador, y bloquea incluso /robots.txt — o sea, ni siquiera se puede leer
+# qué permite y qué no. Con cabeceras completas de navegador devuelve un
+# desafío de 4 KB en vez del contenido. Eso es mitigación de bots activa, y
+# rodearla sería evadir un control que el banco puso a propósito. Este
+# proyecto pide permiso antes de leer (ver loica/red.py); no va a hacer la
+# excepción justo acá.
+#
+# Entonces esto es lo que haría una persona: abrir la página, mirarla y
+# anotar lo que dice. Mismo criterio que datos/manual/ para los eventos que
+# no se pueden rastrear.
+#
+# Como es una foto y no un flujo, ENVEJECE. Santander arma su calendario por
+# campaña mensual, así que esto dura semanas, no meses. `run_descuentos.py`
+# avisa cuando la captura pasa de 45 días y la página muestra la fecha en
+# cada ficha. Para actualizar: abrir la fuente de abajo y rehacer la lista.
+
+banco: Santander
+capturado: '2026-08-12'
+fuente: https://banco.santander.cl/beneficios/descuentos-restaurantes
+descuentos:
+- comercio: Helados Timaukel
+  monto: 40% dcto.
+  cuando: todos los miércoles
+  region: ''
+  tarjeta: ''
+- comercio: Casa Mar Sushi
+  monto: 30% dcto.
+  cuando: todos los miércoles
+  region: ''
+  tarjeta: ''
+- comercio: Holy Moly
+  monto: 40% dcto.
+  cuando: todos los sábados.
+  region: ''
+  tarjeta: ''
+- comercio: El Dorado
+  monto: 40% dcto.
+  cuando: todos los domingos
+  region: ''
+  tarjeta: ''
+- comercio: La Barra CCU
+  monto: 20% dcto.
+  cuando: todos los jueves
+  region: ''
+  tarjeta: ''
+- comercio: De Costa a Costa
+  monto: 40% dcto.
+  cuando: todos los miércoles
+  region: ''
+  tarjeta: ''
+- comercio: Rubaiyat
+  monto: 30% dcto.
+  cuando: en exclusiva experiencia gastronómica Rubaiyat
+  region: ''
+  tarjeta: Limited
+- comercio: Corrales del Sur
+  monto: 20% dcto.
+  cuando: todos los lunes.
+  region: ''
+  tarjeta: ''
+- comercio: Punta del Sol
+  monto: 50% dcto.
+  cuando: todos los lunes
+  region: ''
+  tarjeta: Amex
+- comercio: Gaia Restaurante
+  monto: 40% dcto.
+  cuando: todos los miércoles
+  region: ''
+  tarjeta: ''
+- comercio: Pettra
+  monto: 40% de dcto.
+  cuando: todos los martes
+  region: ''
+  tarjeta: Limited
+- comercio: Majka
+  monto: 40% dcto.
+  cuando: todos los jueves
+  region: ''
+  tarjeta: ''
+- comercio: Lumiere Bistró
+  monto: 40% dcto.
+  cuando: todos los sábados
+  region: ''
+  tarjeta: ''
+- comercio: Cosenza
+  monto: 50% dcto.
+  cuando: todos los jueves
+  region: Metropolitana
+  tarjeta: Amex
+- comercio: Vicenzo Cucina
+  monto: 40% dcto.
+  cuando: todos los jueves
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Ruta 41
+  monto: 40% dcto.
+  cuando: todos los viernes.
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Toro Bayo
+  monto: 40% dcto.
+  cuando: todos los miércoles
+  region: Maule
+  tarjeta: ''
+- comercio: Riccione
+  monto: 40% dcto.
+  cuando: todos los jueves
+  region: La Araucanía
+  tarjeta: ''
+- comercio: Gatopardo Bistró
+  monto: 40% de dcto.
+  cuando: todos los viernes
+  region: Metropolitana
+  tarjeta: Limited
+- comercio: La Parrilla del Guatón Jeréz
+  monto: 40% de dcto.
+  cuando: todos los miércoles
+  region: Metropolitana
+  tarjeta: Limited
+- comercio: Kevin Bacon
+  monto: 40% dcto.
+  cuando: todos los lunes.
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Jeronimo
+  monto: 40%. dcto.
+  cuando: todos los jueves
+  region: ''
+  tarjeta: ''
+- comercio: Miscelaneo
+  monto: 40%. dcto.
+  cuando: todos los viernes
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Vapiano
+  monto: 40% dcto.
+  cuando: todos los martes y jueves
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Cascade Bistró
+  monto: 40%. dcto.
+  cuando: todos los jueves
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Chilis
+  monto: 40% dcto.
+  cuando: todos los miércoles
+  region: ''
+  tarjeta: ''
+- comercio: Santa Brasa
+  monto: 40% dcto.
+  cuando: todos los jueves
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Pizzería Capri
+  monto: 40% dcto.
+  cuando: todos los lunes
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Exò Nuit
+  monto: 30%. dcto.
+  cuando: todos los miércoles.
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Delivery Gourmet
+  monto: 30% dcto.
+  cuando: todos los miércoles
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Curry
+  monto: 30% dcto.
+  cuando: todos los miércoles
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Rocoto
+  monto: 30% dcto.
+  cuando: todos los miércoles
+  region: Metropolitana
+  tarjeta: ''
+- comercio: La Maestranza
+  monto: 40% dcto.
+  cuando: todos los sábados
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Social Bar
+  monto: 40% dcto.
+  cuando: todos los lunes
+  region: Metropolitana
+  tarjeta: ''
+- comercio: La Yunta
+  monto: 40% dcto.
+  cuando: todos los domingos
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Streat Burger
+  monto: 40% dcto.
+  cuando: todos los miércoles.
+  region: Metropolitana, O'Higgins, Ñuble, Valparaíso
+  tarjeta: ''
+- comercio: Expendio Montt
+  monto: 30% dcto.
+  cuando: todos los miércoles.
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Bar Porfirio
+  monto: 30% dcto.
+  cuando: todos los miércoles.
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Kento Sushi
+  monto: 30% dcto.
+  cuando: todos los miércoles.
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Hijo del Inca
+  monto: 30% dcto.
+  cuando: todos los miércoles
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Siete Olas
+  monto: 50%. dcto.
+  cuando: todos los miércoles
+  region: Valparaíso
+  tarjeta: Amex
+- comercio: Dagan
+  monto: 40%. dcto.
+  cuando: todos los miércoles.
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Le Vice Chocolat
+  monto: 40% dcto.
+  cuando: todos los jueves.
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Sushi Nikkei 17
+  monto: 40% dcto.
+  cuando: todos los martes
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Berlin Döner Kebab
+  monto: 30% dcto.
+  cuando: todos los miércoles
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Chicken Love You
+  monto: 40% dcto.
+  cuando: todos los miércoles
+  region: Metropolitana,Valparaíso
+  tarjeta: ''
+- comercio: Juan Esparraguito
+  monto: 30% dcto.
+  cuando: todos los miércoles.
+  region: Metropolitana
+  tarjeta: Limited
+- comercio: Vinolia
+  monto: 50% de dcto.
+  cuando: todos los lunes.
+  region: Metropolitana
+  tarjeta: Amex
+- comercio: Maillard
+  monto: 40% dcto.
+  cuando: todos los martes
+  region: Metropolitana
+  tarjeta: Limited
+- comercio: El Mundo del Vino
+  monto: 40% dcto.
+  cuando: todos los lunes.
+  region: Metropolitana
+  tarjeta: Limited
+- comercio: Bozzo
+  monto: 40% dcto.
+  cuando: todos los martes.
+  region: Metropolitana
+  tarjeta: ''
+- comercio: El Taller
+  monto: 40% dcto.
+  cuando: todos los martes
+  region: Metropolitana
+  tarjeta: ''
+- comercio: La Caperucita y el Lobo
+  monto: 40% dcto.
+  cuando: todos los jueves
+  region: Valparaíso
+  tarjeta: Limited
+- comercio: Jardín Mallinkrodt
+  monto: 40% dcto.
+  cuando: todos los martes
+  region: Metropolitana
+  tarjeta: ''
+- comercio: 99 Restaurante
+  monto: 50%. dcto.
+  cuando: todos los sábados
+  region: Metropolitana
+  tarjeta: Amex
+- comercio: Rústico restobar
+  monto: 40% dcto.
+  cuando: todos los miércoles
+  region: Magallanes
+  tarjeta: ''
+- comercio: Ari Nikkei
+  monto: 30%. dcto.
+  cuando: todos los viernes
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Raidho
+  monto: 40% dcto.
+  cuando: Todos los viernes.
+  region: Maule
+  tarjeta: Limited
+- comercio: Sumoku
+  monto: 50%. dcto.
+  cuando: todos los martes
+  region: Valparaíso
+  tarjeta: Amex
+- comercio: Demencia
+  monto: 40%. dcto.
+  cuando: todos los martes
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Carmine
+  monto: 50% dcto.
+  cuando: todos los jueves
+  region: Valparaíso
+  tarjeta: Amex
+- comercio: Roberta Pizzas
+  monto: 40% dcto.
+  cuando: todos los miércoles.
+  region: Valparaíso
+  tarjeta: ''
+- comercio: Cosecha del Mar
+  monto: 40% dcto.
+  cuando: todos los viernes
+  region: ''
+  tarjeta: Limited
+- comercio: De Pura Madre
+  monto: 40% dcto
+  cuando: todos los viernes
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Naoki
+  monto: 50%. dcto.
+  cuando: todos los miércoles
+  region: Metropolitana
+  tarjeta: Amex
+- comercio: Don Carlos
+  monto: 40% dcto.
+  cuando: todos los domingos
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Caoba Bar
+  monto: 40% dcto.
+  cuando: todos los lunes
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Hijo del Sol
+  monto: 40% dcto.
+  cuando: todos los miércoles.
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Pescados Capitales
+  monto: 50% dcto.
+  cuando: todos los viernes
+  region: Metropolitana
+  tarjeta: Amex
+- comercio: La Cabrera
+  monto: 40% dcto.
+  cuando: todos los lunes
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Kobo Sushi
+  monto: 40% dcto.
+  cuando: todos los miércoles
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Fork
+  monto: 40% dcto.
+  cuando: todos los viernes.
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Work/Café
+  monto: 40% dcto.
+  cuando: todos los lunes
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Winecaina
+  monto: 40% dcto.
+  cuando: todos los miércoles
+  region: Valparaíso
+  tarjeta: ''
+- comercio: eCook
+  monto: 40% dcto.
+  cuando: todos los martes y jueves.
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Dominó
+  monto: 40% dcto.
+  cuando: todos los martes.
+  region: Metropolitana, Valparaíso, Los Lagos, Antofagasta, Bío-Bío
+  tarjeta: ''
+- comercio: CuracaRibs
+  monto: 40% dcto.
+  cuando: todos los lunes online.
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Sakura
+  monto: 40% dcto.
+  cuando: todos los viernes.
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Corrales del Sur
+  monto: 30% dcto.
+  cuando: todos los jueves.
+  region: Metropolitana, Los Lagos
+  tarjeta: Limited
+- comercio: Burger King
+  monto: 40% dcto.
+  cuando: todos los jueves.
+  region: Metropolitana
+  tarjeta: ''
+- comercio: Melt Pizzas
+  monto: 40% dcto.
+  cuando: todos los martes.
+  region: Metropolitana, Maule, O'Higgins, Bío-Bío, Antofagasta, Valparaíso, La Araucanía
+  tarjeta: ''
+- comercio: Aquality
+  monto: 40% dcto.
+  cuando: todos los martes.​
+  region: Metropolitana
+  tarjeta: Limited
+- comercio: Al Pesto
+  monto: 30% dcto.
+  cuando: todos los viernes.
+  region: Metropolitana
+  tarjeta: ''
