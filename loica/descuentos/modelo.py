@@ -48,6 +48,9 @@ class Descuento:
     # fuente | calle | comuna | sin_ubicar. La página atenúa el pin cuando es
     # aproximado: no es lo mismo "en esta esquina" que "en algún lugar de Maipú".
     precision: str = ""
+    # Cuando la dirección vino de OTRO banco que publica el mismo local. Se
+    # guarda de cuál: es un dato prestado y la ficha tiene que poder decirlo.
+    direccion_prestada_de: str = ""
     # OJO: son dos links distintos y los dos importan.
     #   url        → la ficha del banco. Es la fuente y la que manda si hay
     #                discusión sobre las condiciones.

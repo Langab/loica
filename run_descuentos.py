@@ -21,8 +21,10 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import re
 import sys
 import time
+import unicodedata
 from collections import Counter
 from datetime import datetime
 from pathlib import Path
@@ -63,6 +65,44 @@ def cargar_bancos(solo: str | None = None) -> list[dict]:
     return bancos
 
 
+def prestar_direcciones(descuentos) -> int:
+    """El mismo restaurante en dos bancos: el que sabe dónde queda se lo dice al otro.
+
+    Banco de Chile y Bci publican la dirección de casi todos sus locales;
+    Santander, Falabella y Cencosud no publican ninguna. Pero son en buena
+    medida los mismos restaurantes: Pescados Capitales está en los dos lados,
+    y en uno de ellos con calle y comuna.
+
+    Se copia la dirección SOLO cuando el nombre normalizado calza exacto. Un
+    match parcial pondría a "Sushi Home" en la dirección de "Sushi Home Ñuñoa",
+    que es otro local, y un pin equivocado es peor que ninguno.
+    """
+    def clave(nombre: str) -> str:
+        plano = unicodedata.normalize("NFD", (nombre or "").lower())
+        plano = "".join(c for c in plano if unicodedata.category(c) != "Mn")
+        return " ".join(re.sub(r"[^a-z0-9 ]", " ", plano).split())
+
+    conocidas: dict[str, object] = {}
+    for d in descuentos:
+        if d.direccion and d.comuna:
+            conocidas.setdefault(clave(d.comercio), d)
+
+    prestadas = 0
+    for d in descuentos:
+        if d.direccion:
+            continue
+        origen = conocidas.get(clave(d.comercio))
+        if origen is None:
+            continue
+        d.direccion, d.comuna = origen.direccion, origen.comuna
+        if d.lat is None:
+            d.lat, d.lon = origen.lat, origen.lon
+        # Queda dicho de dónde salió: es un dato de otro banco, no del suyo.
+        d.direccion_prestada_de = origen.banco
+        prestadas += 1
+    return prestadas
+
+
 def ubicar(descuentos) -> Counter:
     """Le pone coordenadas a cada descuento para que caiga en el mapa.
 
@@ -73,6 +113,11 @@ def ubicar(descuentos) -> Counter:
     Un pin aproximado se muestra atenuado: mandar a alguien a una esquina donde
     no hay nada es peor que decirle "está en Ñuñoa, mira la dirección".
     """
+    prestadas = prestar_direcciones(descuentos)
+    if prestadas:
+        logging.getLogger("loica").info(
+            "%d direcciones prestadas entre bancos", prestadas)
+
     from loica.geo import Geocodificador
     # Se reusa la misma caché de coordenadas que los eventos: muchos de estos
     # restaurantes ya están resueltos de otra corrida y no se vuelve a
