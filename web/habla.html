@@ -18,49 +18,139 @@
 <style>
   /* ============================================================
      HABLA CON LA LOICA
-     La Loica recibe, pregunta lo básico y PASA EL TURNO al animal que
-     sabe de eso. El relevo no es adorno: es la misma regla del mapa
-     (`estrategia_marca.md`) llevada a una conversación — la mascota es la
-     señalética, así que quien te habla te dice de qué se trata antes de
-     que leas una palabra.
+     La Loica recibe, pregunta lo básico y PASA EL TURNO al animal que sabe
+     de eso. El relevo no es adorno: es la regla del mapa
+     (`estrategia_marca.md`) llevada a una conversación — quien te habla te
+     dice de qué se trata antes de que leas una palabra.
 
-     Todo lo visual sale de loica.css. Acá va solo lo que no existía:
-     la burbuja, el relevo y la grilla de opciones.
+     El hero es el mismo de la portada (cordillera + desfile), con una
+     diferencia importante: acá los nueve animales SON BOTONES. Tocar al
+     Cóndor arranca la conversación en música. Es el atajo para el que ya
+     sabe lo que quiere y no tiene por qué contestar tres preguntas.
      ============================================================ */
+  body{overflow-x:hidden}
 
+  /* ---------- HERO ---------- */
+  .hero{position:relative;overflow:hidden;background:var(--fondo-elevado);
+    border-bottom:2.5px solid var(--contorno)}
+  .hero .mancha{position:absolute;border-radius:50%;opacity:.16;pointer-events:none}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-tema="claro"]) .hero .mancha{mix-blend-mode:screen;opacity:.26}
+    :root:not([data-tema="claro"]) .hero .m2{background:var(--c-charla)}
+  }
+  :root[data-tema="oscuro"] .hero .mancha{mix-blend-mode:screen;opacity:.26}
+  :root[data-tema="oscuro"] .hero .m2{background:var(--c-charla)}
+  .hero .m1{width:320px;height:320px;background:var(--c-charla);top:-120px;left:-80px}
+  .hero .m2{width:260px;height:260px;background:var(--c-otros);top:-50px;right:-70px}
+  .hero .m3{width:200px;height:200px;background:var(--c-libre);bottom:110px;right:14%}
+
+  .hero-interior{position:relative;max-width:960px;margin:0 auto;
+    padding:var(--e-8) var(--e-5) 0;z-index:2;text-align:left;
+    display:grid;grid-template-columns:1fr auto;gap:var(--e-2) var(--e-8);align-items:center}
+  .hero h1{font-size:clamp(30px,7.4vw,52px);line-height:1.05;margin-bottom:var(--e-3)}
+  .hero .bajada{color:var(--tinta-suave);font-size:var(--t-md);line-height:1.6;
+    margin:0 0 var(--e-5);max-width:48ch}
+
+  /* La anfitriona llega volando, se posa y recién ahí habla. Una sola Loica
+     en escena: es la guía, no un enjambre. */
+  .hero-guia{display:flex;flex-direction:column;align-items:center;gap:var(--e-3);
+    padding-bottom:var(--e-2)}
+  #loica-guia{animation:loica-llega 1.15s cubic-bezier(.25,0,.35,1) .25s both}
+  #loica-guia svg{width:clamp(132px,17vw,196px);height:auto;display:block}
+  #loica-guia.posada{animation:loica-flota 4.4s ease-in-out .2s infinite}
+  @keyframes loica-llega{from{transform:translate(-52vw,70px) rotate(-10deg)}to{transform:none}}
+  @keyframes loica-flota{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  .globo{
+    position:relative;background:var(--fondo-elevado);border:2.5px solid var(--contorno);
+    border-radius:var(--r-lg);padding:9px 14px;box-shadow:var(--repisa-2);
+    font:700 var(--t-sm)/1.35 var(--fuente-marca);max-width:230px;text-align:center;
+    opacity:0;transform:translateY(8px) scale(.92);
+    transition:opacity var(--medio),transform var(--rebote);
+  }
+  .globo.visible{opacity:1;transform:none}
+
+  /* ---------- EL PASEO: los nueve, y son botones ---------- */
+  .paseo{position:relative;height:136px;margin-top:var(--e-5)}
+  .cerros{position:absolute;inset:auto 0 0 0;width:100%;height:136px}
+  .desfile{position:absolute;inset:auto 0 18px 0;display:flex;align-items:flex-end;
+    justify-content:center;gap:clamp(2px,2.2vw,20px);padding:0 var(--e-3)}
+  .bicho-hero{
+    display:block;background:none;border:0;padding:0;cursor:pointer;position:relative;
+    animation:pasear 3.2s ease-in-out infinite;transform-origin:bottom center;
+    transition:transform var(--rebote);
+  }
+  .bicho-hero:hover,.bicho-hero:focus-visible{transform:translateY(-12px) scale(1.1)}
+  .bicho-hero svg{width:clamp(33px,9vw,74px);height:auto}
+  @keyframes pasear{0%,100%{transform:translateY(0) rotate(-1.5deg)}
+                    50%{transform:translateY(-7px) rotate(1.5deg)}}
+  /* El nombre asoma al pasar el mouse: sin esto el desfile se lee como
+     decoración y nadie descubre que cada bicho es un atajo. */
+  .bicho-hero .rotulo{
+    position:absolute;inset:auto 50% calc(100% + 6px) auto;transform:translateX(50%);
+    background:var(--tono);color:var(--rotulo-tinta,var(--arena-50));
+    border:2px solid var(--contorno);border-radius:var(--r-pill);
+    padding:3px 10px;font:800 11px/1 var(--fuente-marca);white-space:nowrap;
+    opacity:0;transition:opacity var(--rapido);pointer-events:none;box-shadow:var(--repisa-1);
+  }
+  .bicho-hero:hover .rotulo,.bicho-hero:focus-visible .rotulo{opacity:1}
+
+  .atajo-pista{
+    position:relative;z-index:2;max-width:960px;margin:0 auto;
+    padding:0 var(--e-5) var(--e-4);font-size:var(--t-xs);color:var(--tinta-tenue);
+  }
+
+  @media(max-width:760px){
+    .hero-interior{padding:var(--e-6) var(--e-4) 0;grid-template-columns:1fr;
+      justify-items:center;text-align:center}
+    .hero .bajada{margin-left:auto;margin-right:auto}
+    .hero-guia{order:-1;padding-bottom:0}
+    #loica-guia svg{width:118px}
+    .paseo,.cerros{height:104px}
+    .atajo-pista{text-align:center}
+    /* En una columna las manchas caen justo detrás del título y del globo, y
+       a ese tamaño dejan de leerse como color de fondo y empiezan a competir
+       con el texto. Se achican y se apagan: el hero ya tiene los cerros. */
+    .hero .mancha{opacity:.09}
+    .hero .m1{width:190px;height:190px;top:-70px;left:-60px}
+    .hero .m2{width:160px;height:160px;top:-40px;right:-50px}
+    .hero .m3{width:130px;height:130px;bottom:132px;right:4%}
+    /* Nueve animales a 375px van pegados al filo: el respiro evita que el
+       primero y el último se lean cortados. */
+    .desfile{padding:0 var(--e-4)}
+  }
+  @media(max-width:760px) and (prefers-color-scheme: dark){
+    :root:not([data-tema="claro"]) .hero .mancha{opacity:.15}
+  }
+  @media(max-width:760px){
+    :root[data-tema="oscuro"] .hero .mancha{opacity:.15}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .bicho-hero{animation:none}
+    #loica-guia,#loica-guia.posada{animation:none}
+  }
+
+  /* ---------- CONVERSACIÓN ---------- */
   .conversa{max-width:720px;margin:0 auto;padding:var(--e-6) var(--e-5) var(--e-10)}
-  .intro{margin-bottom:var(--e-6)}
-  .intro h1{font-size:clamp(30px,7vw,46px);line-height:1.06;margin-bottom:var(--e-3)}
-  .intro p{color:var(--tinta-suave);font-size:var(--t-md);line-height:1.6;margin:0;max-width:56ch}
 
-  /* --- Turnos ---
-     Quien habla va a la izquierda con su cara; tú a la derecha sin avatar.
-     La esquina cuadrada de la burbuja apunta a quien habla. */
   .turno{display:flex;gap:var(--e-3);margin-bottom:var(--e-3);align-items:flex-end}
   .turno.mia{flex-direction:row-reverse}
   .turno + .relevo{margin-top:var(--e-5)}
 
-  .avatar{
-    flex:none;width:46px;height:46px;border-radius:var(--r-pill);
+  .avatar{flex:none;width:46px;height:46px;border-radius:var(--r-pill);
     background:var(--fondo-elevado);border:2.5px solid var(--contorno);
-    display:grid;place-items:center;box-shadow:var(--repisa-1);
-  }
+    display:grid;place-items:center;box-shadow:var(--repisa-1)}
   .avatar svg{width:32px;height:32px}
 
   .burbuja{
     max-width:min(84%,52ch);padding:var(--e-3) var(--e-4);
     border:2.5px solid var(--contorno);border-radius:var(--r-lg);
     background:var(--fondo-elevado);box-shadow:var(--repisa-2);
-    border-bottom-left-radius:var(--e-1);
-    font-size:var(--t-base);line-height:1.5;
+    border-bottom-left-radius:var(--e-1);font-size:var(--t-base);line-height:1.5;
   }
-  /* El nombre de quien habla, en su color. Solo aparece en el primer turno
-     de cada animal: repetirlo en cada burbuja es ruido. */
-  .quien{
-    display:block;font:800 var(--t-xs)/1 var(--fuente-marca);
+  /* El nombre solo en el primer turno de cada animal: repetirlo es ruido. */
+  .quien{display:block;font:800 var(--t-xs)/1 var(--fuente-marca);
     letter-spacing:.04em;text-transform:uppercase;
-    color:var(--voz,var(--acento));margin-bottom:5px;
-  }
+    color:var(--voz,var(--acento));margin-bottom:5px}
   .turno.mia .burbuja{
     background:var(--tinta);color:var(--fondo-elevado);
     border-bottom-left-radius:var(--r-lg);border-bottom-right-radius:var(--e-1);
@@ -76,11 +166,7 @@
   .entra{animation:burbuja-entra var(--rebote) backwards}
   @keyframes burbuja-entra{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
 
-  /* --- El relevo: "ahora te atiende el Culpeo" --- */
-  .relevo{
-    display:flex;align-items:center;gap:var(--e-3);
-    margin:var(--e-5) 0 var(--e-4);
-  }
+  .relevo{display:flex;align-items:center;gap:var(--e-3);margin:var(--e-5) 0 var(--e-4)}
   .relevo::before,.relevo::after{content:"";flex:1;height:2px;background:var(--borde)}
   .relevo span{
     display:inline-flex;align-items:center;gap:7px;flex:none;
@@ -90,7 +176,6 @@
   }
   .relevo svg{width:22px;height:22px}
 
-  /* --- "Está escribiendo" --- */
   .puntos{display:flex;gap:5px;padding:var(--e-1) var(--e-2)}
   .puntos i{width:8px;height:8px;border-radius:50%;background:var(--tinta-tenue);
     animation:latir 1.1s infinite ease-in-out}
@@ -98,9 +183,8 @@
   .puntos i:nth-child(3){animation-delay:.32s}
   @keyframes latir{0%,60%,100%{opacity:.28;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
 
-  /* --- Opciones ---
-     Grilla, no scroll horizontal: acá hay que VER las ocho para elegir, no
-     descubrirlas deslizando (que es justo el problema anotado en
+  /* Grilla, no scroll horizontal: acá hay que VER las nueve opciones para
+     elegir, no descubrirlas deslizando (el problema anotado en
      `_critica_diseno.md` para la barra de filtros). */
   .opciones{
     display:grid;gap:var(--e-2);margin:0 0 var(--e-5) calc(46px + var(--e-3));
@@ -123,8 +207,14 @@
   .opcion svg{flex:none;width:30px;height:30px}
   .opcion small{display:block;font-family:var(--fuente-ui);font-weight:500;
     font-size:var(--t-xs);color:var(--tinta-tenue);margin-top:2px}
+  /* Cuántos panoramas hay detrás de cada opción. Es el dato que convierte una
+     elección a ciegas en una decisión: nadie quiere tocar el camino vacío. */
+  .opcion .cuantos{
+    margin-left:auto;flex:none;font:800 11px/1 var(--fuente-ui);
+    color:var(--tinta-tenue);font-variant-numeric:tabular-nums;
+  }
+  .opcion[data-vacio="1"]{opacity:.5}
 
-  /* --- Resultados: la misma caja de la portada --- */
   .resultados{
     margin:0 0 var(--e-4) calc(46px + var(--e-3));
     background:var(--fondo-elevado);border:2.5px solid var(--contorno);
@@ -138,9 +228,8 @@
   @media(max-width:540px){.acciones{margin-left:0}}
   .acciones .boton{font-size:var(--t-base);padding:11px var(--e-5)}
 
-  /* Aviso de maqueta. Se borra cuando esto deje de ser prueba. */
   .aviso{display:flex;gap:var(--e-3);align-items:flex-start;max-width:720px;
-    margin:0 auto;padding:var(--e-3) var(--e-5) 0;
+    margin:0 auto;padding:var(--e-4) var(--e-5) 0;
     font-size:var(--t-xs);color:var(--tinta-tenue);line-height:1.5}
   .aviso b{color:var(--tinta-suave)}
 </style>
@@ -149,18 +238,41 @@
 
 <header class="barra" id="barra"></header>
 
+<header class="hero">
+  <span class="mancha m1" aria-hidden="true"></span>
+  <span class="mancha m2" aria-hidden="true"></span>
+  <span class="mancha m3" aria-hidden="true"></span>
+  <div class="hero-interior">
+    <div class="hero-texto">
+      <h1 data-bot="titulo"></h1>
+      <p class="bajada" data-bot="bajada"></p>
+    </div>
+    <div class="hero-guia">
+      <div class="globo" id="loica-globo" role="note"></div>
+      <div id="loica-guia" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <div class="paseo">
+    <svg class="cerros" viewBox="0 0 1200 150" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 150 L150 62 L245 104 L380 28 L520 108 L660 50 L790 112 L930 46 L1060 100 L1200 34 L1200 150 Z"
+            fill="var(--c-charla)" opacity=".2"/>
+      <path d="M0 150 L120 100 L260 126 L420 80 L560 130 L700 92 L860 134 L1010 88 L1200 122 L1200 150 Z"
+            fill="var(--c-cultura)" opacity=".34"/>
+    </svg>
+    <div class="desfile" id="desfile"></div>
+  </div>
+  <p class="atajo-pista" data-bot="atajo"></p>
+</header>
+
 <div class="aviso">
   <span>🐦</span>
   <span><b>Maqueta.</b> Corre entera en el navegador sobre
-  <code>eventos.json</code>. Sin servidor, sin modelo de lenguaje y sin costo
-  por conversación.</span>
+  <code>eventos.json</code> y <code>descuentos.json</code>. Sin servidor, sin
+  modelo de lenguaje y sin costo por conversación.</span>
 </div>
 
 <main class="conversa">
-  <div class="intro">
-    <h1 data-bot="titulo"></h1>
-    <p data-bot="bajada"></p>
-  </div>
   <div id="hilo" aria-live="polite"></div>
 </main>
 
@@ -171,9 +283,9 @@
 /* ============================================================
    1. EL ELENCO COMO GUÍAS
    Los nombres salen de ELENCO (loica.js) para no tener dos listas que se
-   desincronicen. Acá solo se agrega el color de voz de cada uno.
-   `claro` marca a los que llevan tinta azul encima en vez de crema: el
-   amarillo y el naranjo fuertes con texto blanco no pasan contraste.
+   desincronicen. Acá se agrega el color de voz. `claro` marca a los que
+   llevan tinta azul encima: el naranjo y el amarillo fuertes con texto
+   blanco no pasan contraste.
    ============================================================ */
 const GUIAS = {
   loica:     {tono:"var(--acento)",      claro:false, art:{es:"la ", pt:"a "}},
@@ -184,107 +296,200 @@ const GUIAS = {
   chincol:   {tono:"var(--c-clases)",    claro:true,  art:{es:"el ", pt:"o "}},
   chungungo: {tono:"var(--c-deporte)",   claro:false, art:{es:"el ", pt:"o "}},
   pinguino:  {tono:"var(--c-charla)",    claro:false, art:{es:"el ", pt:"o "}},
+  degu:      {tono:"var(--c-descuento)", claro:false, art:{es:"el ", pt:"o "}},
 };
-const nombreGuia = clave => (ELENCO.find(e => e.clave === clave) || ELENCO[0])[IDIOMA][0];
+const nombreGuia = c => (ELENCO.find(e => e.clave === c) || ELENCO[0])[IDIOMA][0];
 /* "Te atiende el Culpeo", no "Te atiende Culpeo". El inglés no lleva artículo
    y el género cambia por animal, así que cada uno se trae el suyo. */
-const nombreConArt = clave =>
-  ((GUIAS[clave] || GUIAS.loica).art?.[IDIOMA] || "") + nombreGuia(clave);
+const nombreConArt = c => ((GUIAS[c] || GUIAS.loica).art?.[IDIOMA] || "") + nombreGuia(c);
 
 /* ============================================================
-   2. COPY
-   Registro del hero: primera persona, cálida, corta. Cada animal tiene
-   una voz distinta y la mantiene — el Cóndor habla poco, el Chincol habla
-   mucho, el Pingüino habla formal.
+   2. COPY — registro del hero: primera persona, cálida, corta.
+   Cada animal tiene una voz y la mantiene: el Cóndor habla poco, el
+   Chincol habla mucho, el Pingüino habla formal, el Degú habla de plata.
    ============================================================ */
 const BOT = {
   es:{
     titulo:"Habla con la Loica",
     bajada:"Cuéntame qué andas buscando. Yo te recibo y, según lo que me digas, te paso con el del elenco que sabe de eso.",
+    atajo:"¿Ya sabes lo que quieres? Toca a cualquiera de los nueve y partimos directo por lo suyo.",
+    saludoGlobo:"¡Hola! ¿Vemos qué hacer?",
     hola:"¡Hola! Soy la Loica, la anfitriona de esto. Vivo mirando lo que pasa en Santiago.",
     q1:"Partamos por lo práctico: ¿cuándo quieres salir?",
     q2:"Ya. ¿Y qué se te antoja? Según lo que elijas te paso con quien sabe.",
-    cuando:{hoy:"Hoy mismo", manana:"Mañana", finde:"Este finde", semana:"En estos días"},
-    cuandoDicho:{hoy:"hoy", manana:"mañana", finde:"este finde", semana:"estos días"},
+    atajoTomado:"Perfecto, eso lo maneja alguien del equipo. Antes de pasarte: ¿cuándo quieres salir?",
+    cuando:{hoy:"Hoy", noche:"Esta noche", manana:"Mañana", finde:"Este finde", semana:"En estos días", todo:"Cuando sea"},
+    cuandoSub:{hoy:"Lo que queda del día", noche:"De las 6 en adelante", manana:"Todo el día", finde:"Vie, sáb y dom", semana:"Los próximos 7", todo:"Sin apuro de fecha"},
+    cuandoDicho:{hoy:"hoy", noche:"esta noche", manana:"mañana", finde:"este finde", semana:"estos días", todo:"cualquier día"},
     relevo:"Te atiende",
+    /* Sector — solo aparece cuando sobran candidatos */
+    qSector:"Tengo {n} que calzan, que son demasiados para elegir bien. ¿Por dónde te queda cómodo?",
+    sector:{centro:"El centro", oriente:"El oriente", norte:"El norte", sur:"El sur y poniente", todo:"Por cualquier lado"},
+    sectorSub:{centro:"Santiago, Recoleta, Estación Central", oriente:"Providencia, Ñuñoa, Las Condes", norte:"Huechuraba, Conchalí, Quilicura", sur:"La Florida, Maipú, Puente Alto", todo:"Me muevo por toda la ciudad"},
+    sectorDicho:{centro:"en el centro", oriente:"en el oriente", norte:"en el norte", sur:"en el sur", todo:""},
+    /* Plata — es del Pudú */
     qPlata:"Antes de que partan: ¿cuánto quieres gastar? Es mi tema.",
     puduSePresenta:"Soy el Pudú. Me hago cargo de lo que no cuesta nada, que acá va primero.",
-    plata:{gratis:"Nada, cero peso", igual:"Da lo mismo"},
-    plataSub:{gratis:"Solo lo liberado", igual:"Gratis y pagado"},
-    plataDicho:{gratis:"sin gastar un peso", igual:""},
+    plata:{gratis:"Nada, cero peso", barato:"Algo baratito", igual:"Da lo mismo"},
+    plataSub:{gratis:"Solo lo liberado", barato:"Hasta $10.000", igual:"Gratis y pagado"},
+    plataDicho:{gratis:"sin gastar un peso", barato:"barato", igual:""},
     pensando:"Buscando…",
+    /* Resultado */
     listo:"Para {cuando}, esto es lo que tengo:",
     listoUno:"Para {cuando} tengo uno solo que valga la pena. Es este:",
+    cuantos:"Encontré {n} que calzan. Estos son los tres que más me convencen:",
     poco:"Para {cuando} no hay nada de eso. No te voy a inventar un panorama, así que abrí la búsqueda a los próximos días:",
     nada:"No tengo nada que calce, ni ampliando las fechas. Prefiero decírtelo antes que recomendarte cualquier cosa.",
     masTitulo:"Te muestro tres más:",
-    cierre:"Si no te convence ninguno, vuelve y probamos con otra cosa. Para eso estoy.",
+    seAcabaron:"Con esos se me acabaron los que calzan de verdad. El mapa tiene el resto.",
+    /* El Degú, de yapa */
+    deguCoda:"Un dato antes de que se vayan: si van a comer cerca, hoy hay esto.",
+    deguSePresenta:"Degú. Junto, guardo y me sé de memoria qué día conviene salir a comer.",
+    qComer:"¿Qué se te antoja comer?",
+    comer:{restaurante:"Un restaurante", cafe:"Un café", rapida:"Algo rápido", gourmet:"Algo gourmet"},
+    comerSub:{restaurante:"Almuerzo o cena sentado", cafe:"Café y algo dulce", rapida:"Sin ceremonia", gourmet:"Para darse el gusto"},
+    deguListo:"Estos son los descuentos que corren {cuando}:",
+    deguNada:"Para eso no encontré descuentos vigentes. Mejor te lo digo.",
+    deguTarjeta:"Ojo: hay que pagar con la tarjeta del banco que dice cada uno.",
+    /* Botones */
     bMas:"Muéstrame tres más", bOtra:"Probemos otra cosa", bMapa:"Ver todo en el mapa",
+    bDctos:"Ver todos los descuentos",
+    cierre:"Si no te convence ninguno, vuelve y probamos con otra cosa. Para eso estoy.",
     error:"Se me enredó el mapa y no pude cargar los panoramas. Recarga la página en un rato.",
   },
   en:{
     titulo:"Talk to the Loica",
     bajada:"Tell me what you're after. I'll greet you and then hand you over to whoever on the cast knows about it.",
+    atajo:"Already know what you want? Tap any of the nine and we'll go straight to their thing.",
+    saludoGlobo:"Hi! Shall we find something?",
     hola:"Hi! I'm the Loica, the host here. I spend my days watching what happens in Santiago.",
     q1:"Let's start with the practical bit: when do you want to go out?",
     q2:"Right. What are you in the mood for? I'll hand you to whoever knows best.",
-    cuando:{hoy:"Today", manana:"Tomorrow", finde:"This weekend", semana:"Sometime this week"},
-    cuandoDicho:{hoy:"today", manana:"tomorrow", finde:"this weekend", semana:"this week"},
+    atajoTomado:"Good, someone on the team handles that. Before I hand you over: when do you want to go out?",
+    cuando:{hoy:"Today", noche:"Tonight", manana:"Tomorrow", finde:"This weekend", semana:"This week", todo:"Any time"},
+    cuandoSub:{hoy:"What's left of today", noche:"From 6pm on", manana:"All day", finde:"Fri, Sat and Sun", semana:"Next 7 days", todo:"No date pressure"},
+    cuandoDicho:{hoy:"today", noche:"tonight", manana:"tomorrow", finde:"this weekend", semana:"this week", todo:"any day"},
     relevo:"Now with",
+    qSector:"I've got {n} that fit, which is too many to choose well. Which part of town suits you?",
+    sector:{centro:"Downtown", oriente:"The east", norte:"The north", sur:"South and west", todo:"Anywhere"},
+    sectorSub:{centro:"Santiago, Recoleta, Estación Central", oriente:"Providencia, Ñuñoa, Las Condes", norte:"Huechuraba, Conchalí, Quilicura", sur:"La Florida, Maipú, Puente Alto", todo:"I get around"},
+    sectorDicho:{centro:"downtown", oriente:"in the east", norte:"in the north", sur:"in the south", todo:""},
     qPlata:"Before you go: how much do you want to spend? That's my department.",
     puduSePresenta:"I'm the Pudú. I look after everything that costs nothing, which around here comes first.",
-    plata:{gratis:"Nothing at all", igual:"Doesn't matter"},
-    plataSub:{gratis:"Free entry only", igual:"Free and paid"},
-    plataDicho:{gratis:"without spending a peso", igual:""},
+    plata:{gratis:"Nothing at all", barato:"Something cheap", igual:"Doesn't matter"},
+    plataSub:{gratis:"Free entry only", barato:"Under $10,000", igual:"Free and paid"},
+    plataDicho:{gratis:"without spending a peso", barato:"on the cheap", igual:""},
     pensando:"Looking…",
     listo:"For {cuando}, here's what I've got:",
     listoUno:"For {cuando} I've only got one worth your time. This one:",
+    cuantos:"I found {n} that fit. These are the three I'd back:",
     poco:"There's nothing like that for {cuando}. I won't invent an event, so I widened the search to the coming days:",
     nada:"I've got nothing that fits, even with a wider date range. I'd rather tell you than recommend something random.",
     masTitulo:"Three more:",
-    cierre:"If none of them land, come back and we'll try something else. That's what I'm here for.",
+    seAcabaron:"That's the end of the ones that genuinely fit. The map has the rest.",
+    deguCoda:"One tip before you go: if you're eating nearby, here's what's on today.",
+    deguSePresenta:"Degú. I hoard, I save, and I know by heart which day is worth eating out.",
+    qComer:"What do you feel like eating?",
+    comer:{restaurante:"A restaurant", cafe:"A café", rapida:"Something quick", gourmet:"Something fancy"},
+    comerSub:{restaurante:"Sit-down lunch or dinner", cafe:"Coffee and something sweet", rapida:"No ceremony", gourmet:"A proper treat"},
+    deguListo:"These are the deals running {cuando}:",
+    deguNada:"I found no live deals for that. Better to say so.",
+    deguTarjeta:"Note: you have to pay with the card of the bank listed on each one.",
     bMas:"Show me three more", bOtra:"Let's try something else", bMapa:"See everything on the map",
+    bDctos:"See all the deals",
+    cierre:"If none of them land, come back and we'll try something else. That's what I'm here for.",
     error:"I've tangled up the map and couldn't load the events. Reload the page in a moment.",
   },
   pt:{
     titulo:"Fale com a Loica",
     bajada:"Me conte o que você procura. Eu te recebo e, pelo que você disser, te passo para quem do elenco entende disso.",
+    atajo:"Já sabe o que quer? Toque em qualquer um dos nove e vamos direto ao assunto dele.",
+    saludoGlobo:"Oi! Vamos achar algo?",
     hola:"Oi! Sou a Loica, a anfitriã disto. Vivo olhando o que acontece em Santiago.",
     q1:"Vamos ao prático: quando você quer sair?",
     q2:"Beleza. E o que te apetece? Pelo que escolher, te passo para quem entende.",
-    cuando:{hoy:"Hoje mesmo", manana:"Amanhã", finde:"Neste fim de semana", semana:"Nestes dias"},
-    cuandoDicho:{hoy:"hoje", manana:"amanhã", finde:"este fim de semana", semana:"estes dias"},
+    atajoTomado:"Ótimo, isso é com alguém da equipe. Antes de te passar: quando você quer sair?",
+    cuando:{hoy:"Hoje", noche:"Hoje à noite", manana:"Amanhã", finde:"Fim de semana", semana:"Nestes dias", todo:"Quando for"},
+    cuandoSub:{hoy:"O que resta do dia", noche:"Das 18h em diante", manana:"O dia todo", finde:"Sex, sáb e dom", semana:"Os próximos 7", todo:"Sem pressa de data"},
+    cuandoDicho:{hoy:"hoje", noche:"hoje à noite", manana:"amanhã", finde:"este fim de semana", semana:"estes dias", todo:"qualquer dia"},
     relevo:"Agora com",
+    qSector:"Tenho {n} que combinam, o que é demais para escolher bem. Que lado te fica melhor?",
+    sector:{centro:"O centro", oriente:"O leste", norte:"O norte", sur:"Sul e oeste", todo:"Por qualquer lado"},
+    sectorSub:{centro:"Santiago, Recoleta, Estación Central", oriente:"Providencia, Ñuñoa, Las Condes", norte:"Huechuraba, Conchalí, Quilicura", sur:"La Florida, Maipú, Puente Alto", todo:"Circulo pela cidade toda"},
+    sectorDicho:{centro:"no centro", oriente:"no leste", norte:"no norte", sur:"no sul", todo:""},
     qPlata:"Antes de saírem: quanto você quer gastar? Esse é o meu assunto.",
     puduSePresenta:"Sou o Pudu. Cuido do que não custa nada, que aqui vem primeiro.",
-    plata:{gratis:"Nada, zero", igual:"Tanto faz"},
-    plataSub:{gratis:"Só o gratuito", igual:"Grátis e pago"},
-    plataDicho:{gratis:"sem gastar nada", igual:""},
+    plata:{gratis:"Nada, zero", barato:"Algo baratinho", igual:"Tanto faz"},
+    plataSub:{gratis:"Só o gratuito", barato:"Até $10.000", igual:"Grátis e pago"},
+    plataDicho:{gratis:"sem gastar nada", barato:"barato", igual:""},
     pensando:"Procurando…",
     listo:"Para {cuando}, é isto que eu tenho:",
     listoUno:"Para {cuando} eu tenho só um que vale a pena. É este:",
+    cuantos:"Achei {n} que combinam. Estes são os três que mais me convencem:",
     poco:"Para {cuando} não tem nada disso. Não vou inventar um programa, então abri a busca para os próximos dias:",
     nada:"Não tenho nada que combine, nem ampliando as datas. Prefiro te dizer a recomendar qualquer coisa.",
     masTitulo:"Mais três:",
-    cierre:"Se nenhum te convencer, volte que a gente tenta outra coisa. É para isso que eu estou aqui.",
+    seAcabaron:"Com esses acabaram os que combinam de verdade. O mapa tem o resto.",
+    deguCoda:"Uma dica antes de irem: se forem comer por perto, hoje tem isto.",
+    deguSePresenta:"Degu. Junto, guardo e sei de cor que dia compensa sair para comer.",
+    qComer:"O que você quer comer?",
+    comer:{restaurante:"Um restaurante", cafe:"Um café", rapida:"Algo rápido", gourmet:"Algo gourmet"},
+    comerSub:{restaurante:"Almoço ou jantar sentado", cafe:"Café e algo doce", rapida:"Sem cerimônia", gourmet:"Para se dar um gosto"},
+    deguListo:"Estes são os descontos que valem {cuando}:",
+    deguNada:"Para isso não achei descontos vigentes. Melhor te avisar.",
+    deguTarjeta:"Atenção: é preciso pagar com o cartão do banco indicado em cada um.",
     bMas:"Mostre mais três", bOtra:"Vamos tentar outra coisa", bMapa:"Ver tudo no mapa",
+    bDctos:"Ver todos os descontos",
+    cierre:"Se nenhum te convencer, volte que a gente tenta outra coisa. É para isso que eu estou aqui.",
     error:"Me enrolei com o mapa e não consegui carregar os programas. Recarregue a página daqui a pouco.",
   },
 };
-const b = clave => BOT[IDIOMA][clave];
+const b = c => BOT[IDIOMA][c];
 
 /* ============================================================
-   3. LAS SITUACIONES
+   3. RANGOS Y SECTORES
+
+   Los rangos de loica.js llegan hasta "7 días". Acá se agregan los dos
+   extremos que faltaban: "esta noche", que es la pregunta real de un jueves
+   a las seis, y "cuando sea", que abre los 1.800 eventos completos en vez de
+   dejar el 80% del catálogo inalcanzable.
+   ============================================================ */
+const RANGOS_BOT = {
+  hoy:    f => mismaFecha(f, new Date()),
+  /* "Esta noche" es hoy con preferencia horaria, no un filtro por hora: la
+     mayoría de las fuentes no publica hora y quedaría fuera medio catálogo.
+     La franja nocturna se aplica después, en el puntaje. */
+  noche:  f => mismaFecha(f, new Date()),
+  manana: f => RANGOS.manana(f),
+  finde:  f => RANGOS.finde(f),
+  semana: f => RANGOS.semana(f),
+  todo:   f => f >= empiezaDia(new Date()),
+};
+const ORDEN_CUANDO = ["hoy","noche","manana","finde","semana","todo"];
+
+/* Los sectores agrupan las comunas que el pipeline realmente entrega.
+   "sin comuna" no entra en ninguno: un evento sin dirección no se puede
+   prometer en un sector. */
+const SECTORES = {
+  centro: ["Santiago","Estación Central","Recoleta","Independencia","Quinta Normal","Cerrillos","Pedro Aguirre Cerda"],
+  oriente:["Providencia","Ñuñoa","Las Condes","Vitacura","Lo Barnechea","La Reina","Peñalolén","Macul"],
+  norte:  ["Huechuraba","Conchalí","Quilicura","Renca","Colina","Lampa","Cerro Navia"],
+  sur:    ["La Florida","Puente Alto","Maipú","La Pintana","San Miguel","La Granja","El Bosque","Pudahuel","San Bernardo","Lo Espejo","San Joaquín"],
+};
+const enSector = (ev, s) => s === "todo" || (SECTORES[s] || []).includes(ev.comuna);
+
+/* ============================================================
+   4. LAS SITUACIONES
    El usuario no elige una categoría: elige una situación de su vida, y cada
    situación reparte puntaje entre varias categorías. Es a propósito. "Ando
-   con niños" no es `categoria == familia` — hay 4 eventos de familia en toda
-   la base — es familia + aire libre + feria + teatro + cine ordenados por
-   qué tan bien calzan. Un filtro duro devuelve pantalla vacía; el puntaje
-   devuelve siempre lo mejor que hay, y si es poco lo dice.
+   con niños" no es `categoria == familia` — son 65 de 1.863 — es familia +
+   aire libre + feria + teatro + cine ordenados por qué tan bien calzan. Un
+   filtro duro devuelve pantalla vacía; el puntaje devuelve lo mejor que hay,
+   y si es poco lo dice.
 
    Cada situación se lleva UNA mascota, y esa mascota toma el mando: se
-   presenta, hace su propia repregunta y entrega el resultado. Las ocho del
-   elenco están acá y ninguna se repite.
+   presenta, hace su repregunta y entrega el resultado. Los nueve del elenco
+   están acá y ninguno se repite.
    ============================================================ */
 const SITUACIONES = [
   {
@@ -293,10 +498,9 @@ const SITUACIONES = [
     en:["I've got kids with me","Something they'll enjoy"],
     pt:["Estou com crianças","Que aguentem e se divirtam"],
     dicho:{es:"con niños", en:"with kids", pt:"com crianças"},
-    saludo:{
-      es:"Los cabros chicos son lo mío: si algo no les aguanta media hora, no te lo recomiendo.",
-      en:"Kids are my thing: if something won't hold them for half an hour, I won't recommend it.",
-      pt:"Criança é comigo: se algo não segura elas por meia hora, eu não recomendo."},
+    saludo:{es:"Los cabros chicos son lo mío: si algo no les aguanta media hora, no te lo recomiendo.",
+            en:"Kids are my thing: if something won't hold them for half an hour, I won't recommend it.",
+            pt:"Criança é comigo: se algo não segura elas por meia hora, eu não recomendo."},
     pregunta:{es:"¿De qué porte son?", en:"How old are they?", pt:"De que idade são?"},
     opciones:[
       /* Bajo los 7 los talleres y las charlas se descartan de plano: casi
@@ -305,16 +509,15 @@ const SITUACIONES = [
       {id:"chicos", es:"Chicos, menos de 7", en:"Little ones, under 7", pt:"Pequenos, menos de 7",
        efecto:{pesos:{familia:6, teatro:2, clases:-6, charla:-9, arte:-3}, horaIdeal:[10,17]}},
       {id:"medianos", es:"Entre 7 y 12", en:"Between 7 and 12", pt:"Entre 7 e 12",
-       efecto:{pesos:{clases:4, feria:3, charla:-6}}},
+       efecto:{pesos:{clases:4, feria:3, charla:-6, deporte:3}}},
       {id:"grandes", es:"Ya están grandes", en:"They're older", pt:"Já estão grandes",
-       efecto:{pesos:{cine:5, musica:4, arte:3}, horaIdeal:[12,21]}},
+       efecto:{pesos:{cine:5, musica:4, arte:3, deporte:3}, horaIdeal:[12,21]}},
     ],
-    pesos:{familia:12, aire_libre:10, feria:8, teatro:6, cine:6, clases:5, arte:4, musica:2},
+    pesos:{familia:12, aire_libre:10, feria:8, teatro:6, cine:6, clases:5, arte:4, deporte:4, musica:2},
     publicoBueno:["ninos"], publicoMalo:["adultos"], horaIdeal:[10,19], bonoGratis:3,
-    /* Salir con niños es caro por definición: se multiplica por cabeza. Sobre
-       este techo el panorama deja de ser recomendable aunque la categoría
-       calce — así se cuela, por ejemplo, un entrenamiento profesional de
-       audiciones de danza a $40.000 clasificado como teatro. */
+    /* Salir con niños se multiplica por cabeza: sobre este techo el panorama
+       deja de ser recomendable aunque la categoría calce. Así se colaba un
+       entrenamiento profesional de audiciones a $40.000 clasificado teatro. */
     techoPrecio:15000,
   },
   {
@@ -323,16 +526,15 @@ const SITUACIONES = [
     en:["A night out","Party, drinks, music"],
     pt:["Sair à noite","Balada, drinks, música"],
     dicho:{es:"de noche", en:"for a night out", pt:"à noite"},
-    saludo:{
-      es:"Yo salgo cuando el resto se acuesta. La noche la manejo yo.",
-      en:"I come out when everyone else goes to bed. The night is mine.",
-      pt:"Eu saio quando o resto vai dormir. A noite é comigo."},
+    saludo:{es:"Yo salgo cuando el resto se acuesta. La noche la manejo yo.",
+            en:"I come out when everyone else goes to bed. The night is mine.",
+            pt:"Eu saio quando o resto vai dormir. A noite é comigo."},
     pregunta:{es:"¿Hasta qué hora estás dispuesto?", en:"How late are you willing to go?", pt:"Até que horas você aguenta?"},
     opciones:[
       {id:"temprano", es:"Después de comida no más", en:"Just after dinner", pt:"Só depois do jantar",
-       efecto:{horaIdeal:[19,23], pesos:{musica:4, teatro:3}}},
+       efecto:{horaIdeal:[19,23], pesos:{musica:4, teatro:3, cine:3}}},
       {id:"tarde", es:"Hasta que cierren", en:"Until they close", pt:"Até fecharem",
-       efecto:{horaIdeal:[21,4], pesos:{fiesta:6}}},
+       efecto:{horaIdeal:[21,4], pesos:{fiesta:6, cine:-4}}},
     ],
     pesos:{fiesta:12, musica:9, cine:4, teatro:3},
     publicoBueno:["adultos"], publicoMalo:["ninos"], horaIdeal:[20,3], bonoGratis:0,
@@ -343,14 +545,13 @@ const SITUACIONES = [
     en:["Live music","Gigs and concerts"],
     pt:["Música ao vivo","Shows e concertos"],
     dicho:{es:"con música en vivo", en:"with live music", pt:"com música ao vivo"},
-    saludo:{
-      es:"Cóndor. Yo cargo con lo que suena fuerte.",
-      en:"Condor. I carry the loud stuff.",
-      pt:"Condor. Eu carrego o que soa alto."},
+    saludo:{es:"Cóndor. Yo cargo con lo que suena fuerte.",
+            en:"Condor. I carry the loud stuff.",
+            pt:"Condor. Eu carrego o que soa alto."},
     pregunta:{es:"¿Qué tan fuerte?", en:"How loud?", pt:"Quão alto?"},
     opciones:[
       {id:"suave", es:"Algo suave", en:"Something gentle", pt:"Algo suave",
-       efecto:{pesos:{musica:5, teatro:4, fiesta:-6}, horaIdeal:[17,23]}},
+       efecto:{pesos:{musica:5, teatro:4, fiesta:-8}, horaIdeal:[17,23]}},
       {id:"fuerte", es:"Que suene fuerte", en:"Loud", pt:"Bem alto",
        efecto:{pesos:{musica:6, fiesta:6}, horaIdeal:[19,3]}},
     ],
@@ -362,16 +563,15 @@ const SITUACIONES = [
     en:["Something quiet","No noise, no rush"],
     pt:["Algo tranquilo","Sem barulho e sem pressa"],
     dicho:{es:"tranquilo", en:"quiet", pt:"tranquilo"},
-    saludo:{
-      es:"Chinchilla. Escucho más de lo que hablo, así que voy a ser breve.",
-      en:"Chinchilla. I listen more than I talk, so I'll be brief.",
-      pt:"Chinchila. Escuto mais do que falo, então vou ser breve."},
+    saludo:{es:"Chinchilla. Escucho más de lo que hablo, así que voy a ser breve.",
+            en:"Chinchilla. I listen more than I talk, so I'll be brief.",
+            pt:"Chinchila. Escuto mais do que falo, então vou ser breve."},
     pregunta:{es:"¿Prefieres mirar o que te cuenten algo?", en:"Would you rather look, or be told a story?", pt:"Prefere olhar ou que te contem algo?"},
     opciones:[
       {id:"mirar", es:"Mirar", en:"Look", pt:"Olhar",
-       efecto:{pesos:{arte:6, cine:5, teatro:-3}}},
+       efecto:{pesos:{arte:6, cine:5, teatro:-4}}},
       {id:"escuchar", es:"Que me cuenten", en:"Be told", pt:"Que me contem",
-       efecto:{pesos:{teatro:6, charla:5, arte:-3}}},
+       efecto:{pesos:{teatro:6, charla:5, arte:-4}}},
     ],
     pesos:{arte:12, cine:11, teatro:10, charla:6, clases:3},
     evitar:["fiesta"], horaIdeal:[11,21], bonoGratis:2,
@@ -382,18 +582,20 @@ const SITUACIONES = [
     en:["Learn something","Talks and people who know"],
     pt:["Aprender algo","Palestras e gente que sabe"],
     dicho:{es:"para aprender algo", en:"to learn something", pt:"para aprender algo"},
-    saludo:{
-      es:"Pingüino, de Humboldt y de punta en blanco. Las charlas y los seminarios son mi departamento.",
-      en:"Penguin, Humboldt and in black tie. Talks and seminars are my department.",
-      pt:"Pinguim, de Humboldt e de gala. Palestras e seminários são o meu departamento."},
+    saludo:{es:"Pingüino, de Humboldt y de punta en blanco. Las charlas y los seminarios son mi departamento.",
+            en:"Penguin, Humboldt and in black tie. Talks and seminars are my department.",
+            pt:"Pinguim, de Humboldt e de gala. Palestras e seminários são o meu departamento."},
     pregunta:{es:"¿Escuchar o meter las manos?", en:"Listen, or get your hands dirty?", pt:"Escutar ou meter a mão?"},
     opciones:[
       {id:"escuchar", es:"Que me cuenten", en:"Just listen", pt:"Que me contem",
-       efecto:{pesos:{charla:7, clases:-3}}},
+       efecto:{pesos:{charla:7, clases:-4}}},
       {id:"hacer", es:"Hacer algo con las manos", en:"Hands on", pt:"Fazer com as mãos",
-       efecto:{pesos:{clases:7, idiomas:4, charla:-3}}},
+       efecto:{pesos:{clases:7, idiomas:4, charla:-4}}},
     ],
     pesos:{charla:12, clases:11, idiomas:10, arte:4, cine:3}, horaIdeal:[9,21], bonoGratis:2,
+    // Un taller que se repite todas las semanas es exactamente lo que busca
+    // alguien que quiere aprender: acá suman en vez de restar.
+    recurrente:3,
   },
   {
     id:"barrio", guia:"chincol",
@@ -401,14 +603,13 @@ const SITUACIONES = [
     en:["Markets and local stuff","Stalls, workshops, the square"],
     pt:["Feiras e bairro","Barracas, oficinas, praça"],
     dicho:{es:"de barrio", en:"local", pt:"de bairro"},
-    saludo:{
-      es:"Chincol, el pájaro más de barrio que hay. Ferias, talleres y plaza: eso lo conozco de memoria.",
-      en:"Chincol, the most local bird there is. Markets, workshops and the square: I know them by heart.",
-      pt:"Chincol, o pássaro mais de bairro que existe. Feiras, oficinas e praça: conheço de cor."},
+    saludo:{es:"Chincol, el pájaro más de barrio que hay. Ferias, talleres y plaza: eso lo conozco de memoria.",
+            en:"Chincol, the most local bird there is. Markets, workshops and the square: I know them by heart.",
+            pt:"Chincol, o pássaro mais de bairro que existe. Feiras, oficinas e praça: conheço de cor."},
     pregunta:{es:"¿Vas a comprar o a pasear?", en:"Are you buying or just wandering?", pt:"Vai comprar ou passear?"},
     opciones:[
       {id:"comprar", es:"A comprar", en:"Buying", pt:"Comprar",
-       efecto:{pesos:{feria:7, clases:-3}}},
+       efecto:{pesos:{feria:7, clases:-4}}},
       {id:"pasear", es:"Solo a pasear", en:"Just wandering", pt:"Só passear",
        efecto:{pesos:{aire_libre:7, familia:4, feria:2}}},
     ],
@@ -420,18 +621,42 @@ const SITUACIONES = [
     en:["Get moving","Sport and the outdoors"],
     pt:["Me mexer um pouco","Esporte e ar livre"],
     dicho:{es:"para moverte", en:"to get moving", pt:"para se mexer"},
-    saludo:{
-      es:"Chungungo, la nutria del Mapocho. Me muevo, me mojo y no paro nunca.",
-      en:"Chungungo, the Mapocho river otter. Always moving, always wet, never still.",
-      pt:"Chungungo, a lontra do Mapocho. Me mexo, me molho e não paro nunca."},
+    saludo:{es:"Chungungo, la nutria del Mapocho. Me muevo, me mojo y no paro nunca.",
+            en:"Chungungo, the Mapocho river otter. Always moving, always wet, never still.",
+            pt:"Chungungo, a lontra do Mapocho. Me mexo, me molho e não paro nunca."},
     pregunta:{es:"¿Suave o de verdad?", en:"Easy or for real?", pt:"Leve ou pra valer?"},
     opciones:[
       {id:"suave", es:"Caminar no más", en:"Just a walk", pt:"Só caminhar",
-       efecto:{pesos:{aire_libre:6, familia:3, deporte:-2}}},
+       efecto:{pesos:{aire_libre:6, familia:3, deporte:-3}}},
       {id:"fuerte", es:"Transpirar", en:"Break a sweat", pt:"Suar",
        efecto:{pesos:{deporte:7, clases:3}}},
     ],
     pesos:{deporte:12, aire_libre:11, clases:6, familia:4, feria:3}, horaIdeal:[8,19], bonoGratis:3,
+    // Los talleres deportivos municipales son el corazón de esta situación.
+    recurrente:3,
+  },
+  {
+    /* El Degú no recomienda eventos: recomienda descuentos. Es el único
+       camino que sale de descuentos.json, y por eso tiene su propio motor. */
+    id:"comer", guia:"degu", dominio:"descuentos",
+    es:["Salir a comer","Con descuento de banco"],
+    en:["Eating out","With a bank discount"],
+    pt:["Sair para comer","Com desconto de banco"],
+    dicho:{es:"para comer", en:"to eat out", pt:"para comer"},
+    saludo:{es:"Degú. Junto, guardo y me sé de memoria qué día conviene salir a comer.",
+            en:"Degú. I hoard, I save, and I know by heart which day is worth eating out.",
+            pt:"Degu. Junto, guardo e sei de cor que dia compensa sair para comer."},
+    pregunta:{es:"¿Qué se te antoja comer?", en:"What do you feel like eating?", pt:"O que você quer comer?"},
+    opciones:[
+      {id:"restaurante", es:"Un restaurante", en:"A restaurant", pt:"Um restaurante",
+       cats:["restaurantes","restaurantes-y-bares"]},
+      {id:"cafe", es:"Un café", en:"A café", pt:"Um café",
+       cats:["cafeterias","cafeteria"]},
+      {id:"rapida", es:"Algo rápido", en:"Something quick", pt:"Algo rápido",
+       cats:["comida-rapida","antojos"]},
+      {id:"gourmet", es:"Algo gourmet", en:"Something fancy", pt:"Algo gourmet",
+       cats:["sabores-gourmet","gourmet-y-delicatessen","40-de-descuento-visa"]},
+    ],
   },
   {
     id:"sorpresa", guia:"loica",
@@ -439,10 +664,9 @@ const SITUACIONES = [
     en:["Surprise me","I trust you"],
     pt:["Me surpreenda","Confio em você"],
     dicho:{es:"", en:"", pt:""},
-    saludo:{
-      es:"Entonces me quedo yo. Para eso soy la anfitriona.",
-      en:"Then I'll stay on. That's what being the host is for.",
-      pt:"Então eu fico. É para isso que sou a anfitriã."},
+    saludo:{es:"Entonces me quedo yo. Para eso soy la anfitriona.",
+            en:"Then I'll stay on. That's what being the host is for.",
+            pt:"Então eu fico. É para isso que sou a anfitriã."},
     pregunta:{es:"¿Te llevo a lo seguro o a algo raro?", en:"Shall I play it safe or take you somewhere odd?", pt:"Te levo no seguro ou em algo estranho?"},
     opciones:[
       {id:"seguro", es:"A lo seguro", en:"Play it safe", pt:"No seguro",
@@ -456,26 +680,70 @@ const SITUACIONES = [
   },
 ];
 const situacionPorId = id => SITUACIONES.find(s => s.id === id);
+const situacionPorGuia = g => SITUACIONES.find(s => s.guia === g);
+
+/* ---- Talleres recurrentes ----
+   715 de los 2.483 eventos son la misma clase municipal repetida semana a
+   semana: "Geronto motricidad" aparece 60 veces, "Yoga" 30, "Fútbol
+   infantil" 20. No son panoramas, son horarios de un taller — y 241 de ellos
+   vienen clasificados como `arte`, que es como un Hapkido de las 20:00
+   terminó recomendado para una tarde tranquila mirando algo.
+
+   La señal no está en ningún campo, está en el título, y son DOS señales
+   distintas que hay que cruzar:
+
+     1. El título normalizado se repite. "Yoga" sale 61 veces, "Pilates" 48.
+        Hay que sacarle antes los días y la hora, porque el mismo taller
+        viene como "Yoga Lu-Mi 09:00" y "Yoga Ma-Ju 19:30" y sin normalizar
+        cuentan como dos cosas distintas.
+     2. El título TRAE un patrón de días abreviados. "Hapkido Lu-Mi-Vi 20:00"
+        aparece una sola vez en todo el catálogo, así que la repetición nunca
+        lo iba a pillar — pero un título que dice en qué días se dicta es un
+        horario de taller, no el nombre de un panorama.
+
+   Se marcan una vez al cargar y después cada situación decide si los quiere:
+   el Pingüino y el Chungungo sí, los demás no. */
+const claveTitulo = t => (t || "").toLowerCase().replace(/\s+/g, " ").trim();
+const PATRON_DIAS = /\b(lu|ma|mi|ju|vi|sa|do)(-(lu|ma|mi|ju|vi|sa|do))+\b/i;
+const tituloBase = t => claveTitulo(t)
+  .replace(PATRON_DIAS, "")
+  .replace(/\d{1,2}[:.]\d{2}\s*(h|hrs?|horas?)?\.?/g, "")
+  .replace(/[\s\-–—]+/g, " ")
+  .replace(/^[\s.\-]+|[\s.\-]+$/g, "");   // trim() de JS no acepta caracteres
+
+function marcarRecurrentes(evs){
+  const cuenta = new Map();
+  evs.forEach(e => {
+    const k = tituloBase(e.titulo);
+    cuenta.set(k, (cuenta.get(k) || 0) + 1);
+  });
+  evs.forEach(e => e.recurrente =
+    (cuenta.get(tituloBase(e.titulo)) || 0) > 3 || PATRON_DIAS.test(e.titulo || ""));
+}
 
 /* ============================================================
-   4. EL PUNTAJE
+   5. EL PUNTAJE
    Deliberadamente legible: si mañana hay que explicar por qué salió tal
    evento, se lee esta función y se entiende.
    ============================================================ */
-function puntuar(ev, sit, soloGratis, ajuste){
+function puntuar(ev, sit, filtros){
+  const {soloGratis, techoPlata, sector, ajuste} = filtros;
   if(soloGratis && !ev.gratis) return -1;
+  if(techoPlata && !ev.gratis && ev.precio && ev.precio > techoPlata) return -1;
   if(sit.evitar && sit.evitar.includes(ev.categoria)) return -1;
+  if(sector && sector !== "todo" && !enSector(ev, sector)) return -1;
 
-  const pesos = {...sit.pesos, ...(ajuste.pesos || {})};
-  // La repregunta suma o resta sobre el peso base, no lo reemplaza.
-  for(const k in (ajuste.pesos || {})) pesos[k] = (sit.pesos[k] ?? (sit.base ?? 0)) + ajuste.pesos[k];
+  // La repregunta suma o resta SOBRE el peso base, no lo reemplaza.
+  const pesos = {...sit.pesos};
+  for(const k in (ajuste.pesos || {}))
+    pesos[k] = (sit.pesos[k] ?? (sit.base ?? 0)) + ajuste.pesos[k];
 
-  /* Piso de pertinencia. Los bonos de abajo (foto, horario, cercanía) suman
-     hasta 9 puntos, así que sin este corte un evento que NO calza con la
-     situación se cuela igual por estar bien presentado — así apareció un
-     taller de audiciones de $40.000 recomendado para niños de 5 años. Si la
-     categoría no está en la tabla de la situación, o la repregunta la dejó
-     en cero, no es una recomendación: es relleno. */
+  /* Piso de pertinencia. Los bonos de abajo suman hasta 9 puntos, así que sin
+     este corte un evento que NO calza se cuela igual por estar bien
+     presentado — así apareció un taller de audiciones de $40.000 recomendado
+     para niños de 5 años. Si la categoría no está en la tabla de la
+     situación, o la repregunta la dejó en cero, no es recomendación: es
+     relleno. */
   const peso = pesos[ev.categoria] ?? sit.base;
   if(peso === undefined || peso <= 0) return -1;
   let p = peso;
@@ -483,19 +751,21 @@ function puntuar(ev, sit, soloGratis, ajuste){
   // Lo gratis va primero: es la promesa del proyecto, no un detalle.
   if(ev.gratis) p += (sit.bonoGratis ?? 2);
   if(sit.techoPrecio && ev.precio > sit.techoPrecio) p -= 6;
+  // Un taller semanal sirve si viniste a aprender o a moverte; como panorama
+  // de un sábado, no. Cada situación fija su postura, el resto los castiga.
+  if(ev.recurrente) p += (sit.recurrente ?? -7);
 
   if(sit.publicoBueno && sit.publicoBueno.includes(ev.publico)) p += 4;
   if(sit.publicoMalo  && sit.publicoMalo.includes(ev.publico))  p -= 6;
 
-  // Horario. Muchos eventos vienen a las 00:00 porque la fuente no publicó
-  // hora: a esos no se les premia ni castiga, quedan neutros.
+  /* Horario. Muchos eventos vienen a las 00:00 porque la fuente no publicó
+     hora: a esos no se les premia ni castiga, quedan neutros. */
   const h = ev.fecha.getHours();
   const tieneHora = h !== 0 || ev.fecha.getMinutes() !== 0;
   const franja = ajuste.horaIdeal || sit.horaIdeal;
   if(tieneHora && franja){
     const [d, a] = franja;
-    const dentro = d <= a ? (h >= d && h <= a) : (h >= d || h <= a);
-    p += dentro ? 3 : -2;
+    p += (d <= a ? (h >= d && h <= a) : (h >= d || h <= a)) ? 3 : -2;
   }
 
   // Presentable: con foto y con descripción se recomienda mucho mejor.
@@ -503,6 +773,7 @@ function puntuar(ev, sit, soloGratis, ajuste){
   if((ev.descripcion || "").length > 60) p += 1;
   // Un evento sin dirección confirmada es peor recomendación.
   if(ev.precision === "sin_ubicar") p -= 2;
+  else if(ev.precision === "recinto") p += 1;
 
   // A igualdad de puntaje, primero lo que ocurre antes.
   p += Math.max(0, 3 - ((ev.fecha - Date.now()) / 86400000) * 0.12);
@@ -511,46 +782,60 @@ function puntuar(ev, sit, soloGratis, ajuste){
 
 /* Ordena y evita que las tres recomendaciones salgan del mismo lugar: tres
    funciones del mismo teatro no son tres panoramas, son uno. */
-function rankear(eventos, sit, soloGratis, ajuste){
+function rankear(eventos, sit, filtros){
   const puntuados = eventos
-    .map(ev => ({ev, p: puntuar(ev, sit, soloGratis, ajuste)}))
+    .map(ev => ({ev, p: puntuar(ev, sit, filtros)}))
     .filter(x => x.p > 0)
     .sort((a, z) => z.p - a.p);
 
-  const fuentes = new Set(), familias = new Set(), primera = [], resto = [];
+  const fuentes = new Set(), familias = new Set(), titulos = new Set();
+  const primera = [], resto = [];
   for(const {ev} of puntuados){
     const fuente = ev.fuente || ev.lugar || ev.id;
     const fam = cat(ev.categoria).mascota;
-    if(fuentes.has(fuente) || (sit.variedad && familias.has(fam))){ resto.push(ev); continue; }
-    fuentes.add(fuente); familias.add(fam);
+    // El título va aparte de la fuente: "Yoga" aparece 30 veces y no siempre
+    // desde el mismo recinto, así que sin este corte salían tres yogas.
+    if(fuentes.has(fuente) || titulos.has(tituloBase(ev.titulo))
+       || (sit.variedad && familias.has(fam))){ resto.push(ev); continue; }
+    fuentes.add(fuente); familias.add(fam); titulos.add(tituloBase(ev.titulo));
     primera.push(ev);
   }
   // Los descartados por repetición no se botan: van al final, para "ver más".
   return primera.concat(resto);
 }
 
+/* ---- El motor del Degú: descuentos, no eventos ---- */
+function rankearDescuentos(lista, cats, sector, soloHoy){
+  const vistos = new Set();
+  return lista
+    .filter(d => cats.includes(d.categoria))
+    .filter(d => !soloHoy || correHoy(d))
+    .filter(d => sector === "todo" || !d.comuna || enSector({comuna:d.comuna}, sector))
+    .sort((a, z) => (z.porcentaje || 0) - (a.porcentaje || 0))
+    .filter(d => {              // un comercio, una vez
+      const k = d.comercio + "|" + d.banco_id;
+      if(vistos.has(k)) return false;
+      vistos.add(k); return true;
+    });
+}
+
 /* ============================================================
-   5. LA CONVERSACIÓN
+   6. ESTADO Y NODOS
    El historial se guarda como lista de turnos repintables para poder
    redibujar todo al cambiar de idioma. Sin esto, apretar "EN" dejaba media
    conversación en español — justo el detalle que delata una maqueta.
    ============================================================ */
-let EVENTOS = [];
-let turnos = [];
-let respuestas = {};
-let ajuste = {};
-let ranking = [], mostrados = 0, ultimaVoz = null;
+let EVENTOS = [], DESCUENTOS = [];
+let turnos = [], respuestas = {}, ajuste = {};
+let ranking = [], mostrados = 0, ultimaVoz = null, codaPuesta = false;
 
 const hilo = () => document.getElementById("hilo");
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-/* "Movimiento reducido" significa no animar, no responder al instante. Si las
-   opciones aparecen en 0 ms caen bajo el dedo que acaba de tocar la opción
-   anterior y el usuario contesta sin querer la pregunta siguiente. Se deja un
-   piso de pausa para que eso no ocurra. */
+/* "Movimiento reducido" es no animar, no responder al instante: si las
+   opciones aparecen en 0 ms caen bajo el dedo que acaba de tocar la anterior
+   y el usuario contesta sin querer la pregunta siguiente. */
 const esperar = ms => new Promise(r => setTimeout(r, reduce() ? Math.min(ms, 260) : ms));
 
-/* --- Nodos --- */
 function nodoDice(guia, html, conNombre, animar){
   const g = GUIAS[guia] || GUIAS.loica;
   const d = document.createElement("div");
@@ -574,7 +859,7 @@ function nodoRelevo(guia){
   d.style.setProperty("--tono", g.tono);
   if(g.claro) d.style.setProperty("--tono-tinta", "var(--azul-900)");
   /* La pastilla siempre es color saturado, así que el contorno del animal se
-     fija a tinta azul en vez de heredar `var(--contorno)`: en modo oscuro ese
+     fija a tinta azul en vez de heredar `var(--contorno)`: en oscuro ese
      contorno es crema y el bicho quedaba sin borde sobre su propio color. */
   d.innerHTML = `<span>${carita(guia, "var(--arena-50)", 22, {tinta:"#1E2A4A"})}
     ${escapar(b("relevo"))} ${escapar(nombreConArt(guia))}</span>`;
@@ -590,33 +875,28 @@ function nodoEscribiendo(guia){
   return d;
 }
 
-/* --- Emisores. Cada uno deja su receta en `turnos` para el repintado. --- */
 function agregar(turno){
   turnos.push(turno);
   hilo().appendChild(turno.render(true));
   bajar();
 }
-
 async function dice(guia, fabricar, pausa = 480){
-  // El nombre solo en el primer turno de cada animal: repetirlo es ruido.
-  const conNombre = guia !== ultimaVoz;
+  const conNombre = guia !== ultimaVoz;   // el nombre solo al tomar la palabra
   ultimaVoz = guia;
-  agregar({render: animar => nodoDice(guia, fabricar(), conNombre, animar)});
+  agregar({render: a => nodoDice(guia, fabricar(), conNombre, a)});
   await esperar(pausa);
 }
 const diceClave = (guia, clave, pausa) => dice(guia, () => escapar(b(clave)), pausa);
 
 function responde(fabricar){
   ultimaVoz = null;   // después de que hablas tú, el animal se vuelve a presentar
-  agregar({render: animar => nodoMio(fabricar(), animar)});
+  agregar({render: a => nodoMio(fabricar(), a)});
 }
-
 async function relevo(guia){
   agregar({render: () => nodoRelevo(guia)});
   ultimaVoz = null;
   await esperar(420);
 }
-
 async function escribiendo(guia, ms = 700){
   const nodo = nodoEscribiendo(guia);
   hilo().appendChild(nodo);
@@ -625,10 +905,9 @@ async function escribiendo(guia, ms = 700){
   nodo.remove();
 }
 
-/* Las opciones son el único turno que se BORRA al usarse: una vez que
-   respondiste, la pregunta contestada no debe volver a ofrecerse — ni
-   siquiera al cambiar de idioma y repintar. */
-function preguntar(guia, opciones, corta, alElegir){
+/* Las opciones son el único turno que se BORRA al usarse: una pregunta
+   contestada no debe volver a ofrecerse, ni siquiera al repintar por idioma. */
+function preguntar(opciones, corta, alElegir){
   const construir = () => {
     const c = document.createElement("div");
     c.className = "opciones" + (corta ? " corta" : "");
@@ -636,10 +915,11 @@ function preguntar(guia, opciones, corta, alElegir){
       const bt = document.createElement("button");
       bt.type = "button";
       bt.className = "opcion";
-      bt.innerHTML = (o.mascota
-          ? carita(o.mascota, GUIAS[o.mascota] ? GUIAS[o.mascota].tono : "var(--acento)", 30)
-          : "")
-        + `<span>${escapar(o.titulo)}${o.sub ? `<small>${escapar(o.sub)}</small>` : ""}</span>`;
+      if(o.cuantos === 0) bt.dataset.vacio = "1";
+      bt.innerHTML =
+        (o.mascota ? carita(o.mascota, (GUIAS[o.mascota] || GUIAS.loica).tono, 30) : "")
+        + `<span>${escapar(o.titulo)}${o.sub ? `<small>${escapar(o.sub)}</small>` : ""}</span>`
+        + (o.cuantos !== undefined ? `<b class="cuantos">${o.cuantos}</b>` : "");
       bt.onclick = () => {
         turnos = turnos.filter(x => x !== turno);
         document.querySelectorAll(".opciones").forEach(n => n.remove());
@@ -654,44 +934,70 @@ function preguntar(guia, opciones, corta, alElegir){
 }
 
 function bajar(){
-  const ult = hilo().lastElementChild;
-  if(ult) ult.scrollIntoView({behavior: reduce() ? "auto" : "smooth", block:"nearest"});
+  const u = hilo().lastElementChild;
+  if(u) u.scrollIntoView({behavior: reduce() ? "auto" : "smooth", block:"nearest"});
 }
-
 function repintar(){
   ultimaVoz = null;
-  const h = hilo();
-  h.innerHTML = "";
-  turnos.forEach(tn => h.appendChild(tn.render(false)));
-  document.querySelectorAll("[data-bot]").forEach(el => el.textContent = b(el.dataset.bot));
+  hilo().innerHTML = "";
+  turnos.forEach(tn => hilo().appendChild(tn.render(false)));
+  pintarHero();
   document.title = b("titulo") + " — Loica";
 }
 
 /* ============================================================
-   6. EL GUIÓN
+   7. EL GUIÓN
    ============================================================ */
-async function arrancar(){
+async function arrancar(atajo){
   await diceClave("loica", "hola", 520);
-  await preguntarCuando();
+  if(atajo){
+    respuestas.situacion = atajo;
+    responde(() => situacionPorId(atajo)[IDIOMA][0]);
+    await esperar(320);
+    await diceClave("loica", "atajoTomado");
+  } else {
+    await diceClave("loica", "q1");
+  }
+  preguntarCuando(atajo);
 }
 
-async function preguntarCuando(){
-  await diceClave("loica", "q1");
-  preguntar("loica",
-    () => ["hoy","manana","finde","semana"].map(id => ({id, titulo: b("cuando")[id]})),
-    true,
+/* Cuántos eventos hay realmente detrás de cada rango. Se calcula antes de
+   preguntar para poder mostrarlo: elegir "Hoy" a ciegas y caer en cero es la
+   peor primera impresión posible. */
+function conteoPorRango(){
+  const vig = EVENTOS.filter(ev => ev.fecha >= empiezaDia(new Date()));
+  const n = {};
+  ORDEN_CUANDO.forEach(k => n[k] = vig.filter(ev => RANGOS_BOT[k](ev.fecha)).length);
+  /* "Esta noche" comparte el filtro de fecha con "Hoy" — la hora se aplica
+     después, en el puntaje — así que el conteo saldría idéntico y dos
+     opciones con el mismo número se leen como un error. Acá sí se cuenta por
+     hora: los de las 18 en adelante, más los que no publicaron hora, que
+     bien pueden ser de noche y no hay cómo descartarlos. */
+  n.noche = vig.filter(ev => RANGOS_BOT.hoy(ev.fecha)
+    && (ev.fecha.getHours() >= 18 || (!ev.fecha.getHours() && !ev.fecha.getMinutes()))).length;
+  return n;
+}
+
+function preguntarCuando(atajo){
+  const n = conteoPorRango();
+  preguntar(
+    () => ORDEN_CUANDO.map(id => ({
+      id, titulo:b("cuando")[id], sub:b("cuandoSub")[id], cuantos:n[id],
+    })),
+    false,
     async o => {
       respuestas.cuando = o.id;
       responde(() => b("cuando")[respuestas.cuando]);
       await esperar(320);
-      preguntarSituacion();
+      if(atajo) tomaElMando();
+      else preguntarSituacion();
     });
 }
 
 async function preguntarSituacion(){
   await escribiendo("loica", 600);
   await diceClave("loica", "q2");
-  preguntar("loica",
+  preguntar(
     () => SITUACIONES.map(s => ({
       id:s.id, mascota:s.guia, titulo:s[IDIOMA][0], sub:s[IDIOMA][1],
     })),
@@ -711,31 +1017,91 @@ async function tomaElMando(){
   await escribiendo(sit.guia, 620);
   await dice(sit.guia, () => escapar(sit.saludo[IDIOMA]), 520);
   await dice(sit.guia, () => escapar(sit.pregunta[IDIOMA]), 320);
-  preguntar(sit.guia,
+  preguntar(
     () => sit.opciones.map(o => ({id:o.id, titulo:o[IDIOMA]})),
     false,
     async o => {
       respuestas.detalle = o.id;
-      ajuste = sit.opciones.find(x => x.id === o.id).efecto || {};
+      const elegida = sit.opciones.find(x => x.id === o.id);
+      ajuste = elegida.efecto || {};
+      respuestas.cats = elegida.cats;
       responde(() => sit.opciones.find(x => x.id === respuestas.detalle)[IDIOMA]);
+      await esperar(340);
+      if(sit.dominio === "descuentos") preguntarSectorDcto();
+      else preguntarSectorSiSobra();
+    });
+}
+
+/* La pregunta de sector aparece SOLO cuando sobran candidatos. Preguntar por
+   comuna cuando hay seis resultados es burocracia; preguntarlo cuando hay
+   ciento veinte es lo que hace la recomendación buena. */
+const UMBRAL_SECTOR = 25;
+
+async function preguntarSectorSiSobra(){
+  const sit = situacionPorId(respuestas.situacion);
+  const base = candidatos(sit, {soloGratis:false, sector:"todo"});
+  if(base.length < UMBRAL_SECTOR){ preguntarPlata(); return; }
+
+  await escribiendo(sit.guia, 520);
+  await dice(sit.guia, () => escapar(b("qSector").replace("{n}", base.length)), 320);
+  const n = {};
+  ["centro","oriente","norte","sur"].forEach(s =>
+    n[s] = base.filter(ev => enSector(ev, s)).length);
+  n.todo = base.length;
+  preguntar(
+    () => ["centro","oriente","norte","sur","todo"].map(id => ({
+      id, titulo:b("sector")[id], sub:b("sectorSub")[id], cuantos:n[id],
+    })),
+    false,
+    async o => {
+      respuestas.sector = o.id;
+      responde(() => b("sector")[respuestas.sector]);
       await esperar(340);
       preguntarPlata();
     });
 }
 
-/* El Pudú siempre entra para la plata: lo gratis es su trabajo y por eso es
-   el único que aparece en todas las conversaciones, sea cual sea el tema. */
+async function preguntarSectorDcto(){
+  const sit = situacionPorId(respuestas.situacion);
+  await escribiendo("degu", 520);
+  await dice("degu", () => escapar(b("qSector").replace("{n}",
+    rankearDescuentos(DESCUENTOS, respuestas.cats, "todo", false).length)), 320);
+  const n = {};
+  ["centro","oriente","norte","sur"].forEach(s =>
+    n[s] = rankearDescuentos(DESCUENTOS, respuestas.cats, s, false).length);
+  n.todo = rankearDescuentos(DESCUENTOS, respuestas.cats, "todo", false).length;
+  preguntar(
+    () => ["centro","oriente","norte","sur","todo"].map(id => ({
+      id, titulo:b("sector")[id], sub:b("sectorSub")[id], cuantos:n[id],
+    })),
+    false,
+    async o => {
+      respuestas.sector = o.id;
+      responde(() => b("sector")[respuestas.sector]);
+      await esperar(340);
+      recomendarDescuentos();
+    });
+}
+
+/* El Pudú siempre entra para la plata: lo gratis es su trabajo, y por eso es
+   el único que aparece en todas las conversaciones de eventos. */
 async function preguntarPlata(){
   const sit = situacionPorId(respuestas.situacion);
   if(sit.guia !== "pudu") await relevo("pudu");
   await escribiendo("pudu", 560);
   if(sit.guia !== "pudu") await diceClave("pudu", "puduSePresenta", 460);
   await diceClave("pudu", "qPlata", 300);
-  preguntar("pudu",
-    () => [
-      {id:"gratis", mascota:"pudu",  titulo:b("plata").gratis, sub:b("plataSub").gratis},
-      {id:"igual",  mascota:"loica", titulo:b("plata").igual,  sub:b("plataSub").igual},
-    ],
+  const base = candidatos(sit, {soloGratis:false, sector:respuestas.sector || "todo"});
+  const n = {
+    gratis: base.filter(ev => ev.gratis).length,
+    barato: base.filter(ev => ev.gratis || (ev.precio && ev.precio <= 10000)).length,
+    igual:  base.length,
+  };
+  preguntar(
+    () => ["gratis","barato","igual"].map(id => ({
+      id, mascota: id === "gratis" ? "pudu" : id === "barato" ? "degu" : "loica",
+      titulo:b("plata")[id], sub:b("plataSub")[id], cuantos:n[id],
+    })),
     false,
     async o => {
       respuestas.plata = o.id;
@@ -745,23 +1111,43 @@ async function preguntarPlata(){
     });
 }
 
-/* --- El resultado, en boca del animal que lleva el tema --- */
+/* ---- Candidatos: el mismo cálculo que usan los conteos y el resultado ---- */
+function filtrosDe(extra = {}){
+  return {
+    soloGratis: extra.soloGratis !== undefined ? extra.soloGratis : respuestas.plata === "gratis",
+    techoPlata: (extra.plata || respuestas.plata) === "barato" ? 10000 : null,
+    sector: extra.sector || respuestas.sector || "todo",
+    ajuste,
+  };
+}
+function candidatos(sit, extra){
+  const rango = RANGOS_BOT[respuestas.cuando] || RANGOS_BOT.todo;
+  const vig = EVENTOS.filter(ev => ev.fecha >= empiezaDia(new Date()) && rango(ev.fecha));
+  return rankear(vig, sit, filtrosDe(extra));
+}
+
+/* ---- El resultado, en boca del animal que lleva el tema ---- */
 async function recomendar(){
   const sit = situacionPorId(respuestas.situacion);
   if(sit.guia !== "pudu") await relevo(sit.guia);
   await escribiendo(sit.guia, 900);
 
-  const soloGratis = respuestas.plata === "gratis";
-  const vigentes = EVENTOS.filter(ev => ev.fecha >= empiezaDia(new Date()));
+  /* "Esta noche" no filtra por hora — medio catálogo no publica hora — sino
+     que empuja la franja nocturna en el puntaje. */
+  if(respuestas.cuando === "noche" && !ajuste.horaIdeal)
+    ajuste = {...ajuste, horaIdeal:[18,4]};
 
-  ranking = rankear(vigentes.filter(ev => enRango(ev.fecha, respuestas.cuando)), sit, soloGratis, ajuste);
+  ranking = candidatos(sit, {});
   let amplio = false;
 
-  // Si la ventana elegida no da para tres, se abre a la semana ANTES de decir
-  // que no hay nada. Y se avisa: la Loica no finge que encontró.
-  if(ranking.length < 3 && respuestas.cuando !== "semana"){
-    const otro = rankear(vigentes.filter(ev => enRango(ev.fecha, "semana")), sit, soloGratis, ajuste);
+  // Si la ventana elegida no da para tres, se abre ANTES de decir que no hay
+  // nada. Y se avisa: la Loica no finge que encontró.
+  if(ranking.length < 3 && respuestas.cuando !== "todo"){
+    const guardado = respuestas.cuando;
+    respuestas.cuando = "semana";
+    const otro = candidatos(sit, {});
     if(otro.length > ranking.length){ ranking = otro; amplio = true; }
+    else respuestas.cuando = guardado;
   }
 
   if(!ranking.length){
@@ -770,17 +1156,26 @@ async function recomendar(){
     return;
   }
 
-  if(amplio) await dice(sit.guia, () => escapar(b("poco").replace("{cuando}", frase())), 420);
-  else       await dice(sit.guia, () => escapar(b(ranking.length === 1 ? "listoUno" : "listo").replace("{cuando}", frase())), 420);
+  if(amplio)
+    await dice(sit.guia, () => escapar(b("poco").replace("{cuando}", frase())), 420);
+  else if(ranking.length > 6)
+    await dice(sit.guia, () => escapar(b("cuantos").replace("{n}", ranking.length)), 420);
+  else
+    await dice(sit.guia, () => escapar(
+      b(ranking.length === 1 ? "listoUno" : "listo").replace("{cuando}", frase())), 420);
 
-  mostrados = 0;
+  mostrados = 0; codaPuesta = false;
   pintarLote();
 }
 
-/* "este finde, de noche y sin gastar un peso" */
+/* "este finde, de noche, en el oriente y sin gastar un peso" */
 function frase(){
   const sit = situacionPorId(respuestas.situacion);
-  const partes = [b("cuandoDicho")[respuestas.cuando], sit.dicho[IDIOMA]].filter(Boolean);
+  const partes = [
+    b("cuandoDicho")[respuestas.cuando],
+    sit.dicho[IDIOMA],
+    b("sectorDicho")[respuestas.sector || "todo"],
+  ].filter(Boolean);
   const plata = b("plataDicho")[respuestas.plata];
   const y = IDIOMA === "es" ? " y " : IDIOMA === "pt" ? " e " : " and ";
   return partes.join(", ") + (plata ? y + plata : "");
@@ -789,7 +1184,6 @@ function frase(){
 function pintarLote(){
   const lote = ranking.slice(mostrados, mostrados + 3);
   mostrados += lote.length;
-
   const construir = () => {
     const c = document.createElement("div");
     c.className = "resultados";
@@ -799,12 +1193,68 @@ function pintarLote(){
   };
   agregar({render: construir});
   pintarAcciones({sinMas: mostrados >= ranking.length});
+  codaDelDegu();
 }
 
-function pintarAcciones({sinMas}){
+/* ---- La yapa del Degú ----
+   Solo si el plan se paga y solo una vez por conversación. Es el cruce que
+   justifica tener las dos bases en la misma página: te recomendé un panorama
+   pagado, y de paso te digo dónde comer barato cerca ese mismo día. */
+async function codaDelDegu(){
+  if(codaPuesta || respuestas.plata === "gratis") return;
+  if(situacionPorId(respuestas.situacion).dominio === "descuentos") return;
+  const comida = ["restaurantes","restaurantes-y-bares","cafeterias","comida-rapida"];
+  const cerca = rankearDescuentos(DESCUENTOS, comida, respuestas.sector || "todo", true);
+  if(!cerca.length) return;
+  codaPuesta = true;
+
+  await esperar(700);
+  await relevo("degu");
+  await diceClave("degu", "deguSePresenta", 420);
+  await diceClave("degu", "deguCoda", 360);
+  const uno = cerca[0];
+  agregar({render: () => {
+    const c = document.createElement("div");
+    c.className = "resultados";
+    c.appendChild(tarjetaDescuento(uno, () => location.href = "descuentos.html"));
+    return c;
+  }});
+  await diceClave("degu", "deguTarjeta", 200);
+}
+
+/* ---- El camino propio del Degú ---- */
+async function recomendarDescuentos(){
+  await escribiendo("degu", 900);
+  const lista = rankearDescuentos(DESCUENTOS, respuestas.cats, respuestas.sector, false);
+  if(!lista.length){
+    await diceClave("degu", "deguNada");
+    pintarAcciones({sinMas:true, dctos:true});
+    return;
+  }
+  ranking = lista;
+  await dice("degu", () => escapar(
+    b("cuantos").replace("{n}", lista.length)), 420);
+  mostrados = 0; codaPuesta = true;
+  pintarLoteDctos();
+}
+
+function pintarLoteDctos(){
+  const lote = ranking.slice(mostrados, mostrados + 3);
+  mostrados += lote.length;
+  const construir = () => {
+    const c = document.createElement("div");
+    c.className = "resultados";
+    lote.forEach(d => c.appendChild(
+      tarjetaDescuento(d, () => location.href = "descuentos.html")));
+    return c;
+  };
+  agregar({render: construir});
+  pintarAcciones({sinMas: mostrados >= ranking.length, dctos:true});
+}
+
+function pintarAcciones({sinMas, dctos}){
   turnos = turnos.filter(tn => !tn.esAccion);
   document.querySelectorAll(".acciones").forEach(n => n.remove());
-
   const construir = () => {
     const c = document.createElement("div");
     c.className = "acciones";
@@ -816,45 +1266,102 @@ function pintarAcciones({sinMas}){
         turnos = turnos.filter(tn => !tn.esAccion);
         c.remove();
         responde(() => b("bMas"));
-        const sit = situacionPorId(respuestas.situacion);
-        await escribiendo(sit.guia, 600);
-        await diceClave(sit.guia, "masTitulo");
-        pintarLote();
+        const guia = dctos ? "degu" : situacionPorId(respuestas.situacion).guia;
+        await escribiendo(guia, 600);
+        await diceClave(guia, "masTitulo");
+        dctos ? pintarLoteDctos() : pintarLote();
       };
       c.appendChild(mas);
     }
     const otra = document.createElement("button");
     otra.className = "boton secundario"; otra.type = "button";
     otra.textContent = b("bOtra");
-    otra.onclick = reiniciar;
+    otra.onclick = () => reiniciar();
     c.appendChild(otra);
 
-    const mapa = document.createElement("a");
-    mapa.className = "boton secundario";
-    mapa.href = "mapa.html";
-    mapa.textContent = b("bMapa");
-    c.appendChild(mapa);
+    const ir = document.createElement("a");
+    ir.className = "boton secundario";
+    ir.href = dctos ? "descuentos.html" : "mapa.html";
+    ir.textContent = dctos ? b("bDctos") : b("bMapa");
+    c.appendChild(ir);
     return c;
   };
   agregar({render: construir, esAccion: true});
 }
 
-async function reiniciar(){
-  turnos = []; respuestas = {}; ajuste = {}; ranking = []; mostrados = 0; ultimaVoz = null;
+async function reiniciar(atajo){
+  turnos = []; respuestas = {}; ajuste = {}; ranking = [];
+  mostrados = 0; ultimaVoz = null; codaPuesta = false;
   hilo().innerHTML = "";
-  await arrancar();
+  await arrancar(atajo);
 }
 
 /* ============================================================
-   7. ARRANQUE
+   8. EL HERO
+   Los nueve animales del desfile son atajos: tocar al Cóndor arranca la
+   conversación en música sin pasar por la pregunta de "¿qué se te antoja?".
+   ============================================================ */
+function pintarHero(){
+  document.querySelectorAll("[data-bot]").forEach(el => el.textContent = b(el.dataset.bot));
+  const globo = document.getElementById("loica-globo");
+  globo.textContent = b("saludoGlobo");
+
+  const guia = document.getElementById("loica-guia");
+  const posarse = () => {
+    guia.innerHTML = cuerpo("loica", "var(--acento)", 196);
+    guia.classList.add("posada");
+    globo.classList.add("visible");
+  };
+  if(!guia.dataset.lista){
+    guia.dataset.lista = "1";
+    if(reduce()) posarse();
+    else{
+      guia.innerHTML = cuerpo("loica", "var(--acento)", 196, {pose:"volando"});
+      guia.addEventListener("animationend", posarse, {once:true});
+    }
+  }
+
+  /* Cada bicho con su fase, para que no marchen todos igual. Solo entran los
+     que tienen una situación asignada: un animal que no lleva a ninguna parte
+     no debería invitar a tocarlo. */
+  document.getElementById("desfile").innerHTML = ELENCO
+    .filter(a => situacionPorGuia(a.clave))
+    .map((a, i) => {
+      const sit = situacionPorGuia(a.clave);
+      const g = GUIAS[a.clave];
+      return `<button class="bicho-hero" data-sit="${sit.id}"
+          style="animation-delay:${(i * .27).toFixed(2)}s;--tono:${g.tono}${
+            g.claro ? ";--rotulo-tinta:var(--azul-900)" : ""}"
+          aria-label="${escapar(a[IDIOMA][0])} — ${escapar(sit[IDIOMA][0])}">
+          ${cuerpo(a.clave, a.hex, 74)}
+          <span class="rotulo">${escapar(sit[IDIOMA][0])}</span></button>`;
+    }).join("");
+
+  document.querySelectorAll(".bicho-hero").forEach(bt => bt.onclick = () => {
+    document.querySelector(".conversa").scrollIntoView({
+      behavior: reduce() ? "auto" : "smooth", block:"start"});
+    reiniciar(bt.dataset.sit);
+  });
+}
+
+/* ============================================================
+   9. ARRANQUE
    ============================================================ */
 pintarBarra("habla.html", "");
-document.querySelectorAll("[data-bot]").forEach(el => el.textContent = b(el.dataset.bot));
+pintarHero();
 
 /* El .catch importa: sin él, si eventos.json falla el usuario se queda con
-   una Loica muda para siempre. Es el mismo hoyo anotado en _critica_diseno.md. */
-cargarEventos()
-  .then(evs => { EVENTOS = evs; arrancar(); })
+   una Loica muda para siempre. Es el hoyo anotado en _critica_diseno.md.
+   Los descuentos son opcionales: si fallan, el Degú simplemente no aparece. */
+Promise.all([
+  cargarEventos(),
+  cargarDescuentos().then(d => d.descuentos).catch(() => []),
+])
+  .then(([evs, dctos]) => {
+    marcarRecurrentes(evs);
+    EVENTOS = evs; DESCUENTOS = dctos;
+    arrancar();
+  })
   .catch(() => agregar({render: a => nodoDice("loica", escapar(b("error")), true, a)}));
 
 window.addEventListener("loica:idioma", repintar);
