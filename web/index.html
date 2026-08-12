@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=12">
+<link rel="stylesheet" href="loica.css?v=13">
 <style>
   body{overflow-x:hidden}
 
@@ -184,12 +184,89 @@
      etiqueta que dice de qué se hace cargo cada animal quedaba ilegible. El
      animal de arriba sí lleva el color fuerte, así que la tarjeta no pierde
      nada de fuerza. */
-  .bicho .rol{
+  .bicho .rol,.fb-cuerpo .rol{
     display:inline-block;font-size:var(--t-xs);font-weight:800;text-transform:uppercase;
     letter-spacing:.06em;color:#fff;background:var(--tono-tinta);border:2px solid var(--contorno);
     border-radius:var(--r-pill);padding:3px 10px;margin:5px 0 var(--e-2);
   }
   .bicho p{margin:0;font-size:var(--t-sm);color:var(--tinta-suave);line-height:1.5}
+  /* Ahora son botones: heredan lo de arriba pero el navegador les pone su
+     propio tipo y alineación, así que se los devolvemos. */
+  button.bicho{width:100%;font:inherit;color:inherit;cursor:pointer;display:block}
+  .bicho .lupa{
+    display:block;margin-top:var(--e-3);font-size:var(--t-xs);font-weight:800;
+    text-transform:uppercase;letter-spacing:.05em;color:var(--tono-tinta);opacity:0;
+    transform:translateY(4px);transition:opacity var(--rapido),transform var(--rapido);
+  }
+  .bicho:hover .lupa,.bicho:focus-visible .lupa{opacity:1;transform:none}
+  .pista-elenco{
+    margin:calc(var(--e-4) * -1) 0 var(--e-6);font-size:var(--t-sm);
+    color:var(--tinta-tenue);font-weight:600;
+  }
+
+  /* --- La ficha del animal ---
+     Telón oscuro y tarjeta con la misma repisa dura del resto. Se abre desde
+     la tarjeta chica y cuenta de dónde salió el bicho. */
+  .telon{
+    position:fixed;inset:0;z-index:60;background:rgba(10,14,26,.62);
+    display:grid;place-items:center;padding:var(--e-4);
+    animation:telon-entra .16s ease-out;
+  }
+  @keyframes telon-entra{from{opacity:0}to{opacity:1}}
+  .ficha-bicho{
+    position:relative;width:min(480px,100%);max-height:88vh;overflow:hidden;
+    display:flex;flex-direction:column;
+    background:var(--fondo-elevado);border:3px solid var(--contorno);
+    border-radius:var(--r-xl);box-shadow:var(--repisa-4);
+    animation:ficha-entra .28s cubic-bezier(.34,1.56,.64,1);
+  }
+  @keyframes ficha-entra{from{transform:translateY(18px) scale(.94);opacity:0}
+                         to{transform:none;opacity:1}}
+  /* La cabeza toma el color de la familia del animal, como el pin del mapa */
+  .fb-cabeza{
+    background:var(--tono);border-bottom:3px solid var(--contorno);
+    padding:var(--e-6) var(--e-5) var(--e-4);display:grid;place-items:center;
+  }
+  .fb-cabeza svg{width:132px;height:auto}
+  .fb-cerrar{
+    position:absolute;top:var(--e-3);right:var(--e-3);z-index:1;
+    width:38px;height:38px;border-radius:var(--r-pill);cursor:pointer;
+    background:var(--fondo-elevado);border:2.5px solid var(--contorno);
+    box-shadow:var(--repisa-1);font-size:0;
+  }
+  /* La X se dibuja con dos trazos: un carácter "×" cambia de forma con cada
+     tipografía y quedaba descentrado. */
+  .fb-cerrar::before,.fb-cerrar::after{
+    content:"";position:absolute;top:50%;left:50%;width:15px;height:2.5px;
+    background:var(--contorno);border-radius:2px;
+  }
+  .fb-cerrar::before{transform:translate(-50%,-50%) rotate(45deg)}
+  .fb-cerrar::after{transform:translate(-50%,-50%) rotate(-45deg)}
+  .fb-cerrar:hover{background:var(--fondo-hundido)}
+  /* Scrollea el cuerpo, no la tarjeta entera: si scrollea la tarjeta, la X
+     —que está posicionada contra ella— se va de vista en pantallas chicas. */
+  .fb-cabeza{flex:none}
+  .fb-cuerpo{padding:var(--e-5);overflow-y:auto}
+  .fb-cuerpo h3{font-size:var(--t-2xl);line-height:1.1;margin:var(--e-2) 0}
+  .fb-oficio{margin:0 0 var(--e-5);color:var(--tinta-suave);line-height:1.6;
+    font-size:var(--t-md)}
+  .fb-cuerpo h4{
+    font-family:var(--fuente-ui);font-size:var(--t-xs);font-weight:800;
+    text-transform:uppercase;letter-spacing:.07em;color:var(--tinta-tenue);
+    margin:0 0 var(--e-2);
+  }
+  /* La historia es lo que se vino a leer: va más grande que la bajada y con
+     más interlínea, sobre un fondo hundido que la separa del resto. */
+  .fb-historia{
+    margin:0 0 var(--e-5);font-size:var(--t-md);line-height:1.72;
+    background:var(--fondo-hundido);border-radius:var(--r-md);
+    padding:var(--e-4);border-left:5px solid var(--tono);
+  }
+  @media(max-width:600px){
+    .ficha-bicho{max-height:92vh}
+    .fb-cabeza svg{width:104px}
+    .fb-cuerpo h3{font-size:var(--t-xl)}
+  }
 
   /* --- Cierre ---
      El fondo va en azul-900 fijo y NO en var(--tinta): la tinta se invierte a
@@ -290,8 +367,25 @@
 <section>
   <div class="titulo-seccion"><h2 id="s-elenco-t"></h2></div>
   <p class="sub" id="s-elenco-d"></p>
+  <p class="pista-elenco" id="s-elenco-pista"></p>
   <div class="elenco" id="elenco"></div>
 </section>
+
+<!-- La ficha del animal. Vive vacía hasta que alguien toca una tarjeta. -->
+<div class="telon" id="telon" hidden>
+  <div class="ficha-bicho" role="dialog" aria-modal="true" aria-labelledby="fb-nombre" id="ficha-bicho">
+    <button class="fb-cerrar" id="fb-cerrar" type="button"></button>
+    <div class="fb-cabeza" id="fb-cabeza"></div>
+    <div class="fb-cuerpo">
+      <span class="rol" id="fb-rol"></span>
+      <h3 id="fb-nombre"></h3>
+      <p class="fb-oficio" id="fb-oficio"></p>
+      <h4 id="fb-historia-t"></h4>
+      <p class="fb-historia" id="fb-historia"></p>
+      <a class="boton bloque" id="fb-ir"></a>
+    </div>
+  </div>
+</div>
 
 <div class="cierre">
   <h2 id="s-cierre-t"></h2>
@@ -305,7 +399,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
-<script src="loica.js?v=12"></script>
+<script src="loica.js?v=13"></script>
 <script>
 /* La raíz del sitio era el mapa hasta este cambio, así que hay links dando
    vueltas por WhatsApp con la forma `.../#/e/<id>`. Se reenvían al mapa en vez
@@ -368,9 +462,11 @@ function pintarPortada(){
              data-ir="${a.clave}" title="${escapar(a[IDIOMA][0])}"
              aria-label="${escapar(a[IDIOMA][0])} — ${escapar(a[IDIOMA][1])}">
        ${cuerpo(a.clave, a.hex, 74)}</button>`).join("");
-  document.querySelectorAll(".bicho-hero").forEach(b => b.onclick = () => {
-    document.getElementById("elenco").scrollIntoView({behavior:"smooth", block:"center"});
-  });
+  // Antes solo bajaban la página hasta el elenco. Ahora abren la ficha del
+  // animal directamente: es el mismo gesto y responde la pregunta que uno se
+  // hace al ver la fila de bichos, que es "¿y este quién es?".
+  document.querySelectorAll(".bicho-hero").forEach(b =>
+    b.onclick = () => abrirBicho(b.dataset.ir));
 
   /* --- Secciones --- */
   document.getElementById("s-hoy-t").textContent = T("pHoyTitulo");
@@ -391,14 +487,77 @@ function pintarPortada(){
        <span class="asoma" aria-hidden="true">${cuerpo(d.masc, "#fff", 118, {tinta:"#fff"})}</span>
      </a>`).join("");
 
+  document.getElementById("s-elenco-pista").textContent = T("pHistoriaPista");
   document.getElementById("elenco").innerHTML = ELENCO.map(a =>
-    `<div class="bicho" style="--tono:${a.hex};--tono-tinta:${a.tinta}">
+    `<button class="bicho" type="button" data-bicho="${a.clave}"
+             style="--tono:${a.hex};--tono-tinta:${a.tinta}">
        ${cuerpo(a.clave, a.hex, 96)}
        <b>${escapar(a[IDIOMA][0])}</b>
        <span class="rol">${escapar(a[IDIOMA][1])}</span>
        <p>${escapar(a[IDIOMA][2])}</p>
-     </div>`).join("");
+       <span class="lupa">${escapar(T("pHistoriaT"))} →</span>
+     </button>`).join("");
+  document.querySelectorAll("[data-bicho]").forEach(b =>
+    b.onclick = () => abrirBicho(b.dataset.bicho));
 }
+
+/* ---------- LA FICHA DEL ANIMAL ----------
+   Cada uno cuenta cómo llegó a hacerse cargo de lo suyo. Es una humorada, pero
+   cumple un trabajo: la señalética se aprende antes si el animal tiene motivo
+   de estar ahí. El Quiltro no es "el de comer", es el que lleva veinte años
+   parado en la puerta de los locales. */
+
+// A dónde manda el botón del pie. El mapa todavía no filtra por categoría
+// desde la URL, así que los que viven en él llevan al mapa entero y no a un
+// filtro inventado; los dos que tienen página propia llevan a la suya.
+const CASA_DEL_BICHO = {degu:"descuentos.html", quiltro:"comer.html"};
+
+let bichoPrevio = null;   // a quién devolverle el foco al cerrar
+
+function abrirBicho(clave){
+  const a = ELENCO.find(x => x.clave === clave);
+  if(!a) return;
+  const [nombre, rol, oficio, historia] = a[IDIOMA];
+
+  bichoPrevio = document.activeElement;
+  const ficha = document.getElementById("ficha-bicho");
+  ficha.style.setProperty("--tono", a.hex);
+  ficha.style.setProperty("--tono-tinta", a.tinta);
+  // El animal grande va en tinta fija: la cabecera es de color pleno y en modo
+  // oscuro el contorno crema sobre el color se perdía.
+  document.getElementById("fb-cabeza").innerHTML =
+    cuerpo(clave, a.hex, 132, {tinta:"#1E2A4A", pose:"celebrando"});
+  document.getElementById("fb-rol").textContent = rol;
+  document.getElementById("fb-nombre").textContent = nombre;
+  document.getElementById("fb-oficio").textContent = oficio;
+  document.getElementById("fb-historia-t").textContent = t("pHistoriaT");
+  document.getElementById("fb-historia").textContent = historia;
+  const ir = document.getElementById("fb-ir");
+  ir.href = CASA_DEL_BICHO[clave] || "mapa.html";
+  ir.textContent = t("pHistoriaVer");
+  const cerrar = document.getElementById("fb-cerrar");
+  cerrar.setAttribute("aria-label", t("pHistoriaCerrar"));
+
+  document.getElementById("telon").hidden = false;
+  document.body.style.overflow = "hidden";
+  cerrar.focus();
+}
+
+function cerrarBicho(){
+  document.getElementById("telon").hidden = true;
+  document.body.style.overflow = "";
+  if(bichoPrevio && bichoPrevio.focus) bichoPrevio.focus();
+  bichoPrevio = null;
+}
+
+document.getElementById("fb-cerrar").onclick = cerrarBicho;
+// Solo el telón cierra al tocar fuera; un clic dentro de la tarjeta no.
+document.getElementById("telon").addEventListener("click", e => {
+  if(e.target.id === "telon") cerrarBicho();
+});
+document.addEventListener("keydown", e => {
+  if(e.key === "Escape" && !document.getElementById("telon").hidden) cerrarBicho();
+});
 
 /* --- Datos en vivo: las cifras y los panoramas de hoy ---
    Números escritos a mano se vuelven mentira en una semana. Estos salen del
