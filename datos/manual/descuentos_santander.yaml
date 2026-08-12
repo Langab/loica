@@ -17,6 +17,24 @@
 # campaña mensual, así que esto dura semanas, no meses. `run_descuentos.py`
 # avisa cuando la captura pasa de 45 días y la página muestra la fecha en
 # cada ficha. Para actualizar: abrir la fuente de abajo y rehacer la lista.
+#
+# CAMPOS POR FILA
+#   comercio   (obligatorio) nombre del local
+#   monto      "40% dcto."  — de ahí sale el porcentaje
+#   cuando     "todos los miércoles" — de ahí salen los días y la modalidad
+#   region     "Metropolitana"
+#   tarjeta    "Amex" o "Limited" si el descuento es solo para esas
+#
+# OPCIONALES, y los que más valen la pena si la página los muestra:
+#   direccion  "Av. Providencia 1234"  → sin esto el descuento no se puede
+#              ubicar en el mapa ni filtrar por comuna, y en la página queda
+#              como "Metropolitana" a secas, que no le sirve a nadie
+#   comuna     "Providencia"
+#   sitio_web  la página del local (distinta de la ficha del banco)
+#   categoria  restaurantes | cafeterias | gourmet | comida_rapida
+#
+# El tipo de cocina (japonesa, italiana...) NO se escribe: lo deduce el
+# pipeline del nombre del local.
 
 banco: Santander
 capturado: '2026-08-12'
