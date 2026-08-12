@@ -1,4 +1,8 @@
-datos/
+datos/*
+# La ingesta asistida SÍ va al repositorio: es contenido curado a mano
+# (eventos de Passline, Instagram o un afiche), no dato generado como la
+# caché, los logs o la base.
+!datos/manual/
 informes/
 __pycache__/
 *.pyc

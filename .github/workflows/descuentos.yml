@@ -1,0 +1,64 @@
+name: Catastro diario de descuentos
+
+# El pipeline de eventos corre en el Mac con launchd, y un Mac apagado no corre
+# nada. Este corre en GitHub, así que no depende de que el computador esté
+# despierto. Es Python leyendo JSON público: no llama a ningún modelo de
+# lenguaje, no consume tokens y no cuesta nada.
+on:
+  schedule:
+    # 07:15 en Chile continental. GitHub usa UTC y no sabe de horario de
+    # verano, así que se programan las dos: en invierno (UTC-3) corre la de
+    # las 10:15 y en verano (UTC-4) la de las 11:15. La otra encuentra el
+    # JSON idéntico y no commitea nada.
+    - cron: "15 10 * * *"
+    - cron: "15 11 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: descuentos
+  cancel-in-progress: false
+
+jobs:
+  catastrar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      # Sin caché: en el runner la carpeta datos/cache viene vacía igual, y
+      # dejarlo explícito evita que un día alguien la cachee y publiquemos
+      # descuentos de la semana pasada.
+      - name: Revisar los bancos
+        run: python3 run_descuentos.py --sin-cache
+
+      # Si un banco se cae, el JSON queda con menos descuentos pero no vacío.
+      # Publicar una página vacía es peor que publicar la de ayer.
+      - name: No publicar si quedó vacío
+        run: |
+          total=$(python3 -c "import json;print(json.load(open('web/descuentos.json'))['total'])")
+          echo "Descuentos vigentes: $total"
+          if [ "$total" -lt 100 ]; then
+            echo "::error::Solo $total descuentos. Algo se cayó — no se publica."
+            exit 1
+          fi
+
+      - name: Publicar
+        run: |
+          git config user.name  "loica-bot"
+          git config user.email "bot@loica.cl"
+          git add web/descuentos.json informes/
+          if git diff --staged --quiet; then
+            echo "Sin cambios."
+          else
+            git commit -m "Descuentos al $(date -u +%Y-%m-%d)"
+            git push
+          fi

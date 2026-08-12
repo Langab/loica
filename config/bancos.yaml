@@ -1,0 +1,79 @@
+# Registro de bancos del catastro de descuentos.
+# El sondeo completo (qué banco sirve, cuál está tras WAF y por qué) está en
+# notas/catastro_descuentos_bancos.md
+#
+# adaptador: bancochile | bci | falabella
+# Los tres endpoints son públicos y no piden credencial de usuario. Ninguno
+# usa modelo de lenguaje: es Python leyendo JSON.
+
+bancos:
+- id: bancochile
+  nombre: Banco de Chile
+  # Edwards emite con la misma plataforma y los descuentos son los mismos
+  emisor: Banco de Chile y Banco Edwards
+  adaptador: bancochile
+  url_base: https://sitiospublicos.bancochile.cl
+  endpoint: /api/content/spaces/personas/types/beneficios/entries
+  url_detalle: https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/{slug}
+  por_pagina: 100
+  # El CMS entrega las 829 entradas de beneficios; nos quedamos con las de
+  # comer. El resto (salud, belleza, deportes) es otro producto.
+  categorias:
+  - beneficios/sabores/restaurantes-y-bares
+  - beneficios/sabores/sabores-gourmet
+  - beneficios/sabores/cafeterias
+  - beneficios/sabores/40-de-descuento-visa
+  crawl_delay_seg: 1.5
+  activo: true
+  notas: 'La mejor fuente del catastro. 250 restaurantes y bares, 247 con el día de la semana en
+    las etiquetas, y `Tarjetas Permitidas` como lista de slugs limpios. Sin token y sin WAF.
+
+    '
+
+- id: bci
+  nombre: Bci
+  emisor: Bci
+  adaptador: bci
+  # bci.cl/beneficios responde 403 (WAF). El portal de contenidos es abierto.
+  url_base: https://www.vivirconbeneficios.cl
+  endpoint: /descuentos/{categoria}/promotions.json
+  por_pagina: 100
+  categorias:
+  - sabores/restaurantes
+  - sabores/cafeteria
+  - sabores/comida-rapida
+  - sabores/gourmet-y-delicatessen
+  crawl_delay_seg: 2
+  activo: true
+  notas: 'Mucho volumen (2.296 promociones en total) pero ni el día ni el porcentaje son campos:
+    hay que sacarlos del HTML de `description` y `options.conditions`. Ese HTML es regular —usa
+    clases `direccion` y `telefono`—, así que se parsea con selectores estables. Publica
+    promociones sin tocar desde 2021: el filtro de vigencia acá no es opcional.
+
+    '
+
+- id: falabella
+  nombre: Banco Falabella
+  emisor: Banco Falabella · CMR
+  adaptador: falabella
+  # Contentful. El token es el Content Delivery de solo lectura que el propio
+  # sitio trae incrustado en su bundle de JavaScript: es público por diseño.
+  # Si algún día deja de responder, se saca de nuevo del bundle de /beneficios.
+  url_base: https://cdn.contentful.com
+  espacio: p6eyia4djstu
+  entorno: master
+  tipo_contenido: descuentos
+  token_lectura: 560c0ddde9630e43122ef3e7879d69013844ee3d48c566d4ba93125924f080dd
+  url_detalle: https://www.bancofalabella.cl/descuentos/detalle/{slug}
+  por_pagina: 100
+  # `categoriaV2` es la clasificación del banco. Antojos y Restaurantes son las
+  # dos gastronómicas.
+  categorias:
+  - Restaurantes
+  - Antojos
+  crawl_delay_seg: 1.5
+  activo: true
+  notas: 'El único que trae el día como campo propio (`diasDescuento`) y la vigencia como fecha
+    ISO real (`fechaTerminoV2`), así que no hay que parsear prosa para saber si sigue viva.
+
+    '

@@ -21,6 +21,7 @@ evento. Una corrida cuesta 1 petición del índice más 1 por local, no 200.
 from __future__ import annotations
 
 import logging
+import re
 
 from bs4 import BeautifulSoup
 
@@ -90,6 +91,14 @@ def extraer_carteleras(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
     tope = int(fuente.get("tope_locales", 40))
 
     locales = _links(respuesta.text, base, patron_indice)[:tope]
+
+    # El índice no lista todos los locales: Teatro Fábrica y Teatro Fiebre
+    # tienen cartelera propia y no aparecen ahí. Se agregan por configuración.
+    for extra in fuente.get("carteleras_extra") or []:
+        url_extra = extra if extra.startswith("http") else f"{base}{patron_indice}{extra}"
+        if url_extra.rstrip("/") not in locales:
+            locales.append(url_extra.rstrip("/"))
+
     if not locales:
         log.warning("%s: el índice no enlaza ningún local (patrón %s)",
                     fuente.get("nombre"), patron_indice)
@@ -107,6 +116,17 @@ def extraer_carteleras(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
             continue
 
         sopa = BeautifulSoup(pagina.text, "html.parser")
+
+        # PortalDisc responde 200 a CUALQUIER slug, aunque el local no exista:
+        # devuelve una página con el título "EVENTOS EN " vacío y un evento
+        # genérico de la plataforma. Sin este guardia, un slug mal escrito mete
+        # esa preventa de vinilo como si fuera del local.
+        titulo_pagina = sopa.title.get_text(" ", strip=True) if sopa.title else ""
+        if re.search(r"eventos\s+en\s*$", titulo_pagina, re.IGNORECASE):
+            log.warning("%s: %s no tiene local asociado — se omite",
+                        fuente.get("nombre"), url_local.rsplit("/", 1)[-1])
+            continue
+
         antes = len(eventos)
 
         for ancla in sopa.find_all("a", href=True):

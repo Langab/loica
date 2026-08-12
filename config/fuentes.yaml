@@ -1337,6 +1337,90 @@ fuentes:
     su robots.txt bloquea explicitamente a ClaudeBot, GPTBot, CCBot y anthropic-ai; el grupo generico
     (*) si permite /evento/. Conviene pedirles permiso por escrito, igual que a Passline.'
   requiere_comuna: true
+- id: passline
+  nombre: Passline (cartelera nacional, filtrada a la RM)
+  url_base: https://api.passline.com
+  url_agenda: https://www.passline.com/
+  endpoint: https://api.passline.com/v1/event/GetCountryByBillboardHome
+  tipo_adaptador: json
+  crawl_delay_seg: 5
+  requiere_comuna: true
+  activa: true
+  json:
+    metodo: post
+    cuerpo:
+      country: chile
+    lista: BillboardByCountry
+    campos:
+      titulo: nombre
+      categoria: category_name
+      lugar_nombre: lugar
+      comuna: nombre_communa
+      inicio: fecha_inicio
+      hora_inicio: hora_inicio
+      fin: fecha_termino
+      link: url
+    filtros:
+      region: '13'
+  notas: 'OJO — PUEDE NO FUNCIONAR: probado el 11-08-2026 desde este equipo devuelve 403 con el header
+    "cf-mitigated: challenge", que es un Cloudflare Managed Challenge. Se probó con nuestro user-agent
+    identificado, con uno de navegador y con uno que dice "bot": los tres dan 403, o sea NO es un filtro
+    por user-agent como el de chilecultura, es puntaje de IP/huella TLS.
+
+    Se deja configurada igual, SIN ninguna evasión, porque Cloudflare puntúa distinto cada red: desde
+    la casa del curador puede pasar. Si el challenge responde, la fuente registra el error como
+    cualquier otra y la corrida sigue. Lo que NO se hace es disfrazar el user-agent ni resolver el
+    desafío: seria evadir un control de acceso explicito.
+
+    Si queda bloqueada de forma permanente, las vias son dos: pedirle acceso a Passline (como
+    intermediario les llevamos compradores a su checkout) o cargar eventos puntuales por
+    datos/manual/*.yaml. Ademas varios recintos que venden por Passline publican el link en su propio
+    sitio: club_chocolate ya aporta 13 links de compra de Passline por esa via.
+
+    '
+- id: normandie
+  nombre: Cine Arte Normandie
+  url_base: https://normandie.cl
+  url_agenda: https://normandie.cl/cartelera/
+  tipo_adaptador: cine
+  endpoint: /cartelera/
+  comuna: Santiago
+  direccion: Tarapaca 1181, Santiago
+  categoria_por_defecto: cine
+  crawl_delay_seg: 3
+  colapsar: false
+  activa: true
+  notas: 'WordPress con robots.txt permisivo (solo bloquea wp-admin) y wp-sitemap.xml valido. La API
+    REST esta abierta pero solo tiene post y page: cada pelicula es un post con ficha (director, pais,
+    ano, duracion), SIN la fecha de funcion.
+
+    Los horarios viven en /cartelera/, una seccion por dia (section.jueves, section.viernes...) con
+    las funciones como "15:00 hrs." seguido del titulo en <strong>. La fecha completa no esta escrita
+    en ninguna parte: el adaptador la deduce cruzando el dia de la semana con el numero del dia.
+
+    Programa cine arte y reestrenos: comparte varios titulos con Centro Arte Alameda.
+
+    '
+- id: centro_arte_alameda
+  nombre: Centro Arte Alameda - Sala Ceina
+  url_base: https://centroartealameda.cl
+  url_agenda: https://centroartealameda.cl/
+  tipo_adaptador: cine
+  comuna: Santiago
+  crawl_delay_seg: 3
+  activa: false
+  notas: 'APAGADA: CLOUDFLARE. Devuelve 403 con "cf-mitigated: challenge" en TODAS las rutas, incluida
+    la home y wp-json (verificado 11-08-2026). Es el mismo Managed Challenge que protege a Passline,
+    no un filtro por user-agent como el de chilecultura: no hay user-agent que lo pase y saltarlo
+    seria evadir un control de acceso.
+
+    Aparece mas veces que ningun otro recinto en las extracciones manuales, asi que vale la pena
+    igual: la via es pedirles acceso, o cargar sus funciones por datos/manual/*.yaml.
+
+    Buena parte de su programacion (La Odisea, La Invitacion, Backrooms, Obsesion) tambien la da el
+    Normandie, que si es rastreable.
+
+    '
 - id: teatro_aleph
   nombre: Teatro Aleph (La Cisterna)
   url_base: https://www.teatroaleph.cl
@@ -1421,6 +1505,12 @@ fuentes:
   patron_indice: /cartelera/
   patron_url: /evento/
   tope_locales: 40
+  # El indice general no lista estos dos, pero tienen cartelera propia y son
+  # justo el circuito chico: Teatro Fabrica (Bustamante, Providencia) y Teatro
+  # Fiebre, que programan tocatas, teatro y stand up.
+  carteleras_extra:
+  - teatrofabrica
+  - teatrofiebre
   crawl_delay_seg: 5
   requiere_comuna: true
   activa: true

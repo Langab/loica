@@ -104,8 +104,15 @@ class ClienteEducado:
     # -- petición -----------------------------------------------------------
     def obtener(self, url: str, params: dict | None = None,
                 max_edad_cache_seg: int = 6 * 3600,
-                reintentos: int = 2) -> requests.Response | None:
-        """GET respetuoso. Devuelve None si robots lo prohíbe o si falla."""
+                reintentos: int = 2, json_cuerpo: dict | None = None
+                ) -> requests.Response | None:
+        """GET respetuoso, o POST si se le pasa `json_cuerpo`.
+
+        Algunas APIs reciben los filtros en el cuerpo y no en la query
+        (Passline pide {"country": "chile"} por POST). Se sigue pasando por
+        robots.txt, crawl-delay y caché igual que un GET: el método cambia,
+        las reglas de buena ciudadanía no.
+        """
         if not self.permitido(url):
             log.warning("robots.txt prohíbe %s — se omite", url)
             return None
@@ -114,6 +121,10 @@ class ClienteEducado:
         if params:
             pedido = requests.Request("GET", url, params=params).prepare()
             url_completa = pedido.url
+        if json_cuerpo is not None:
+            # El cuerpo forma parte de la identidad del recurso para la caché:
+            # dos POST distintos al mismo endpoint no son la misma respuesta.
+            url_completa = f"{url_completa}#{json.dumps(json_cuerpo, sort_keys=True)}"
 
         if self.usar_cache:
             cacheado = self._leer_cache(url_completa, max_edad_cache_seg)
@@ -134,7 +145,11 @@ class ClienteEducado:
 
         for intento in range(reintentos + 1):
             try:
-                respuesta = self.sesion.get(url, params=params, timeout=self.timeout)
+                if json_cuerpo is not None:
+                    respuesta = self.sesion.post(url, params=params, json=json_cuerpo,
+                                                 timeout=self.timeout)
+                else:
+                    respuesta = self.sesion.get(url, params=params, timeout=self.timeout)
                 self._ultima_peticion[dominio] = time.time()
 
                 if respuesta.status_code == 429 or respuesta.status_code >= 500:

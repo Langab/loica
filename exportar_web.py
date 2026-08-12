@@ -17,6 +17,7 @@ from pathlib import Path
 
 from loica.almacen import Almacen
 from loica.geo import Geocodificador
+from loica.modelo import es_enlace_de_maquina
 
 RAIZ = Path(__file__).resolve().parent
 SALIDA = RAIZ / "web" / "eventos.json"
@@ -246,6 +247,14 @@ def main() -> int:
         panorama, senal = es_panorama(fila["titulo"], fila["descripcion_corta"] or "")
         if not panorama:
             descartados.append(f'{fila["titulo"][:52]} (por "{senal}")')
+            continue
+
+        # Puerta de publicación: la app promete dejarte en la fuente original.
+        # Un link a un sitemap o a una API deja al usuario mirando XML crudo, así
+        # que ese evento no sale al sitio. La fila queda en la base para el
+        # curador; lo que se cierra es la puerta de salida, no el dato.
+        if es_enlace_de_maquina(fila["fuente_url"] or ""):
+            descartados.append(f'{fila["titulo"][:52]} (link roto: {fila["fuente_url"]})')
             continue
 
         # Si la fuente ya entregó coordenadas, mandan ellas

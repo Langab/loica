@@ -1,0 +1,30 @@
+# Plantilla de ingesta asistida. Copia este archivo con otro nombre
+# (sin guion bajo al inicio: los que empiezan con _ se ignoran) y edítalo.
+#
+#   datos/manual/passline.yaml
+#   datos/manual/instagram.yaml
+#
+# Para qué sirve: sitios que bloquean el rastreo automático (Passline responde
+# 403), Instagram, y el dato que llega por WhatsApp o por un afiche. El
+# descubrimiento lo hace una persona; el pipeline normaliza, deduplica contra
+# lo ya guardado, geocodifica y lo deja en revisión.
+#
+# Obligatorios: titulo y fuente_url. Sin link a la fuente NO se guarda, porque
+# sin atribución el proyecto deja de ser un índice y pasa a ser una copia.
+#
+# Todo entra como borrador, igual que el resto.
+
+eventos:
+  - titulo: Nombre del evento tal como lo publica el organizador
+    inicio: 2026-08-30 21:00        # o solo 2026-08-30
+    fin:                            # opcional
+    lugar_nombre: Bar de René
+    lugar_direccion: Av. Santa Isabel 0369
+    comuna: Providencia             # si se omite, se deduce de la dirección
+    precio_texto: desde $6.000      # o "gratis"
+    categoria:                      # opcional, el clasificador la deduce
+    descripcion_corta:
+    fuente_url: https://www.passline.com/eventos/el-evento
+    fuente_nombre: Passline         # de dónde salió el dato
+    link_entradas: https://www.passline.com/eventos/el-evento
+    imagen_url:

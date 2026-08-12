@@ -122,6 +122,29 @@ const CARITAS = {
     ${ojos(9, 15, 12.2, 1.75, p)}
     <ellipse cx="12" cy="15.7" rx="1.25" ry="1" fill="${OJO}"/>`,
 
+  /* El Degú: el roedor del matorral de Santiago, el que uno ve en el San
+     Cristóbal. Es el que más se parece a la chinchilla, así que las tres señas
+     que lo separan van todas puestas: orejas OVALADAS y medianas (las de la
+     chinchilla son círculos enormes), el anillo claro alrededor del ojo, y los
+     dientes anaranjados asomando bajo la nariz.
+
+     El anillo no es adorno: el degú va en café oscuro y los ojos son azul
+     tinta, que sobre café da 1,9:1 y desaparece. Puestos sobre el anillo crema
+     pasan de sobra. La seña real del animal es también la que lo hace legible
+     a 22px, que es cuando algo del sistema está bien resuelto. */
+  degu: (c, k, p) => `
+    <ellipse cx="6.1" cy="6.2" rx="2.8" ry="3.4" transform="rotate(-24 6.1 6.2)" fill="${c}" stroke="${k}" stroke-width="1.5"/>
+    <ellipse cx="17.9" cy="6.2" rx="2.8" ry="3.4" transform="rotate(24 17.9 6.2)" fill="${c}" stroke="${k}" stroke-width="1.5"/>
+    <ellipse cx="6.2" cy="6.4" rx="1.35" ry="1.75" transform="rotate(-24 6.2 6.4)" fill="#F2778C" opacity=".6"/>
+    <ellipse cx="17.8" cy="6.4" rx="1.35" ry="1.75" transform="rotate(24 17.8 6.4)" fill="#F2778C" opacity=".6"/>
+    <circle cx="12" cy="13" r="8.1" fill="${c}" stroke="${k}" stroke-width="1.6"/>
+    <circle cx="8.7" cy="11.7" r="2.95" fill="#FAF3E7"/>
+    <circle cx="15.3" cy="11.7" r="2.95" fill="#FAF3E7"/>
+    <ellipse cx="12" cy="17.5" rx="3.7" ry="3" fill="#FAF3E7"/>
+    ${ojos(8.7, 15.3, 11.7, 1.8, p)}
+    <ellipse cx="12" cy="15.9" rx="1.6" ry="1.2" fill="${OJO}"/>
+    <path d="M10.9 17.4h2.2v1.5a1.1 1.1 0 0 1-2.2 0z" fill="#E8B23A" stroke="${k}" stroke-width="1"/>`,
+
   /* El Chungungo: nutria. Cabeza ANCHA y plana (más ancha que alta), orejas
      mínimas, hocico claro grande con nariz grande y bigotes gruesos — los
      bigotes y la cabeza chata son lo que lo separa de la chinchilla. */
@@ -202,6 +225,11 @@ const COLAS = {
   pudu:       (c, k) => `<path d="M39.6 27.6c1.5-2.7 3.9-3.2 4.9-1.6 1 1.7-.1 3.9-2.3 4.6z"
                           fill="${c}" stroke="${k}" stroke-width="1.8" stroke-linejoin="round"/>`,
   chinchilla: (c, k) => cola("M36.6 30.2c-.9-4.4.7-8.6 4-10.4.8-.5 1.6-.7 2.4-.6", c, k, 7.5),
+  /* La del degú es delgada y termina en un PINCEL oscuro. Es la seña que lo
+     separa de la chinchilla vista de lejos: la de ella es tupida entera. */
+  degu:       (c, k) => cola("M37.2 30.6c3.4-1.2 5.4-4 5.8-8", c, k, 4.8) +
+                        `<ellipse cx="43.6" cy="20.6" rx="2.1" ry="3.3" transform="rotate(14 43.6 20.6)"
+                           fill="${OJO}" stroke="${k}" stroke-width="1.4"/>`,
   chungungo:  (c, k) => `<path d="M38.2 29.2c4.2-.2 7.6 2.5 8.8 6.6.3 1-.8 1.9-1.7 1.3-3.3-2-5.9-4.7-7.1-7.9z"
                           fill="${c}" stroke="${k}" stroke-width="1.8" stroke-linejoin="round"/>`,
 };
@@ -217,6 +245,10 @@ const CUADRUPEDOS = {
                patas:"M21.8 38.2v6.4M27.4 38.6v6M33.6 38.4v6.2M38.6 37.4v7.2", extra:""},
   chinchilla: {cuerpo:[28.4, 31.4, 10.8, 9.6], grosor:3.2, cabeza:"2.5 3.4",
                patas:"M22.6 39.8v4.4M27.8 40.2v4M33.4 39.8v4.4M37.6 38.8v5.2", extra:""},
+  /* Más largo y más bajo que la chinchilla: el degú trota, no salta. */
+  degu:       {cuerpo:[28.6, 31.8, 11.4, 8.4], grosor:3, cabeza:"2.5 3.4",
+               patas:"M22.2 39.4v5M27.6 39.8v4.6M33.4 39.4v5M38 38.6v5.6",
+               extra:`<ellipse cx="26.8" cy="35.6" rx="6.4" ry="3.4" fill="#FAF3E7" opacity=".9"/>`},
   chungungo:  {cuerpo:[28.6, 33, 13.8, 7.4], grosor:3.2, cabeza:"3 8.2",
                patas:"M20.8 39.4v4.8M26.6 39.8v4.4M33.2 39.6v4.6M38.2 38.6v5.4", extra:""},
 };
@@ -333,6 +365,9 @@ const ELENCO = [
   {clave:"pudu",       hex:"#0E8757", tinta:"#0A6141", es:["Pudú","Gratis","El ciervo más chico del mundo cuida lo que no cuesta nada."],
                                                        en:["Pudú","Free","The world's smallest deer looks after everything that costs nothing."],
                                                        pt:["Pudu","Grátis","O menor cervo do mundo cuida do que não custa nada."]},
+  {clave:"degu",       hex:"#95521C", tinta:"#6B3813", es:["Degú","Descuentos","Junta, guarda y se sabe de memoria qué día conviene salir a comer."],
+                                                       en:["Degu","Discounts","Hoards, saves, and knows by heart which day is the cheap one to eat out."],
+                                                       pt:["Degu","Descontos","Junta, guarda e sabe de cor qual dia compensa sair para comer."]},
   {clave:"chungungo",  hex:"#0C8B9B", tinta:"#065C66", es:["Chungungo","Deporte","La nutria del Mapocho. Se mueve, se moja y no para nunca."],
                                                        en:["Chungungo","Sport","The Mapocho river otter. Always moving, always wet, never still."],
                                                        pt:["Chungungo","Esporte","A lontra do Mapocho. Se mexe, se molha e não para nunca."]},
@@ -345,7 +380,7 @@ const ELENCO = [
 const TEXTOS = {
   es:{
     lema:"Santiago está pasando",
-    mapa:"Mapa", blog:"Blog", ninos:"Niños", mas18:"+18", calendario:"Calendario", agregar:"Agrega tu evento", nosotros:"Quién hace esto",
+    mapa:"Mapa", habla:"Habla con la Loica", blog:"Blog", ninos:"Niños", mas18:"+18", calendario:"Calendario", agregar:"Agrega tu evento", nosotros:"Quién hace esto",
     eventos:"eventos", evento:"evento", gratis:"Gratis",
     hoy:"Hoy", manana:"Mañana", semana:"7 días", finde:"Finde",
     cuandoLargo:{hoy:"Hoy", manana:"Mañana", semana:"En estos 7 días", finde:"Este fin de semana", todo:"Todos"},
@@ -375,10 +410,26 @@ const TEXTOS = {
     pGratisT:"gratis", pGratisD:"panoramas que no cuestan nada",
     pTotalD:"panoramas vigentes", pFuentesD:"fuentes revisadas cada mañana",
     pCierreT:"¿Organizas algo?", pCierreD:"Si tu evento es abierto y pasa en Santiago, cabe acá. No cobramos por aparecer.",
+    pDctoT:"Los descuentos", pDctoD:"Dónde comer más barato hoy, según tu tarjeta.",
+    pDctoCifra:"descuentos de banco vigentes",
+    /* Descuentos */
+    descuentos:"Descuentos",
+    dTitulo:"¿Dónde como hoy?",
+    dBajada:"Descuentos de restaurantes con tarjetas de banco. Los revisa un robot todas las mañanas en la página de cada banco y te deja en ella.",
+    dCuantos:"descuentos", dCuantos1:"descuento",
+    dBanco:"Banco", dComuna:"Comuna", dDia:"Día", dTodos:"Todos", dLimpiar:"Limpiar",
+    dTodosDias:"Todos los días", dHoyEs:"Hoy es",
+    dSinFecha:"Sin fecha declarada por el banco", dHasta:"Hasta el",
+    dTope:"Tope", dSegmentado:"No es para todos los clientes del banco",
+    dSoloOnline:"Solo online", dSoloPresencial:"Solo presencial",
+    dVerBanco:"Ver en la página del banco",
+    dVacio:"No hay descuentos con esos filtros", dVaciopista:"Prueba sacando alguno",
+    dOjo:"El descuento lo pone el banco, no Loica. Confirma la vigencia antes de ir.",
+    diasLargos:["lunes","martes","miércoles","jueves","viernes","sábado","domingo"],
   },
   en:{
     lema:"Santiago is happening",
-    mapa:"Map", blog:"Blog", ninos:"Kids", mas18:"18+", calendario:"Calendar", agregar:"Add your event", nosotros:"Who makes this",
+    mapa:"Map", habla:"Talk to the Loica", blog:"Blog", ninos:"Kids", mas18:"18+", calendario:"Calendar", agregar:"Add your event", nosotros:"Who makes this",
     eventos:"events", evento:"event", gratis:"Free",
     hoy:"Today", manana:"Tomorrow", semana:"7 days", finde:"Weekend",
     cuandoLargo:{hoy:"Today", manana:"Tomorrow", semana:"Within 7 days", finde:"This weekend", todo:"All"},
@@ -408,10 +459,26 @@ const TEXTOS = {
     pGratisT:"free", pGratisD:"events that cost nothing",
     pTotalD:"events on right now", pFuentesD:"sources checked every morning",
     pCierreT:"Running something?", pCierreD:"If your event is open to the public and happens in Santiago, it belongs here. We don't charge for it.",
+    pDctoT:"The discounts", pDctoD:"Where to eat cheaper today, depending on your card.",
+    pDctoCifra:"live bank discounts",
+    /* Descuentos */
+    descuentos:"Discounts",
+    dTitulo:"Where do I eat today?",
+    dBajada:"Restaurant discounts with Chilean bank cards. A robot checks each bank's own page every morning and always sends you back to it.",
+    dCuantos:"discounts", dCuantos1:"discount",
+    dBanco:"Bank", dComuna:"District", dDia:"Day", dTodos:"All", dLimpiar:"Clear",
+    dTodosDias:"Every day", dHoyEs:"Today is",
+    dSinFecha:"No end date published by the bank", dHasta:"Until",
+    dTope:"Cap", dSegmentado:"Not available to every customer of the bank",
+    dSoloOnline:"Online only", dSoloPresencial:"In person only",
+    dVerBanco:"See it on the bank's page",
+    dVacio:"No discounts match these filters", dVaciopista:"Try removing one",
+    dOjo:"The discount is the bank's, not Loica's. Check it is still live before you go.",
+    diasLargos:["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
   },
   pt:{
     lema:"Santiago está acontecendo",
-    mapa:"Mapa", blog:"Blog", ninos:"Crianças", mas18:"+18", calendario:"Calendário", agregar:"Adicione seu evento", nosotros:"Quem faz isso",
+    mapa:"Mapa", habla:"Fale com a Loica", blog:"Blog", ninos:"Crianças", mas18:"+18", calendario:"Calendário", agregar:"Adicione seu evento", nosotros:"Quem faz isso",
     eventos:"eventos", evento:"evento", gratis:"Grátis",
     hoy:"Hoje", manana:"Amanhã", semana:"7 dias", finde:"Fim de semana",
     cuandoLargo:{hoy:"Hoje", manana:"Amanhã", semana:"Nestes 7 dias", finde:"Neste fim de semana", todo:"Todos"},
@@ -441,6 +508,22 @@ const TEXTOS = {
     pGratisT:"grátis", pGratisD:"programas que não custam nada",
     pTotalD:"programas em cartaz", pFuentesD:"fontes revisadas toda manhã",
     pCierreT:"Organiza algo?", pCierreD:"Se o seu evento é aberto e acontece em Santiago, cabe aqui. Não cobramos para aparecer.",
+    pDctoT:"Os descontos", pDctoD:"Onde comer mais barato hoje, conforme o seu cartão.",
+    pDctoCifra:"descontos de banco em vigor",
+    /* Descuentos */
+    descuentos:"Descontos",
+    dTitulo:"Onde eu como hoje?",
+    dBajada:"Descontos de restaurantes com cartões de bancos chilenos. Um robô revisa a página de cada banco toda manhã e sempre te leva de volta a ela.",
+    dCuantos:"descontos", dCuantos1:"desconto",
+    dBanco:"Banco", dComuna:"Comuna", dDia:"Dia", dTodos:"Todos", dLimpiar:"Limpar",
+    dTodosDias:"Todos os dias", dHoyEs:"Hoje é",
+    dSinFecha:"Sem data de término declarada pelo banco", dHasta:"Até",
+    dTope:"Limite", dSegmentado:"Não vale para todos os clientes do banco",
+    dSoloOnline:"Só online", dSoloPresencial:"Só presencial",
+    dVerBanco:"Ver na página do banco",
+    dVacio:"Nenhum desconto com esses filtros", dVaciopista:"Tente tirar algum",
+    dOjo:"O desconto é do banco, não da Loica. Confirme se está em vigor antes de ir.",
+    diasLargos:["segunda","terça","quarta","quinta","sexta","sábado","domingo"],
   },
 };
 
@@ -488,17 +571,36 @@ const ICONOS_NAV = {
   nosotros:`<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
         <path d="M12 10.8v5.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
         <circle cx="12" cy="7.9" r="1.15" fill="currentColor"/>`,
+  // Globo de diálogo con la colita abajo a la izquierda: es el único ícono
+  // que promete conversación y no navegación.
+  habla:`<path d="M4 5.6h16a1.6 1.6 0 0 1 1.6 1.6v8.4a1.6 1.6 0 0 1-1.6 1.6H9.6L5.4 20.6v-3.4H4a1.6 1.6 0 0 1-1.6-1.6V7.2A1.6 1.6 0 0 1 4 5.6z"
+        fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+        <circle cx="8.6" cy="11.4" r="1.15" fill="currentColor"/>
+        <circle cx="12" cy="11.4" r="1.15" fill="currentColor"/>
+        <circle cx="15.4" cy="11.4" r="1.15" fill="currentColor"/>`,
+  // Etiqueta de precio con su ojal. Se eligió por descarte: una tarjeta de
+  // crédito es otro rectángulo con una línea adentro, y a 23px se confundía
+  // con el calendario, que ya es un rectángulo con una línea adentro.
+  descuentos:`<path d="M20.4 12.6 12.6 20.4a2.4 2.4 0 0 1-3.4 0l-6-6A2.4 2.4 0 0 1 3 12.7V5.4A2.4 2.4 0 0 1 5.4 3h7.3c.6 0 1.2.3 1.7.7l6 6c.9 1 .9 2.5 0 3.4z"
+        fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+        <circle cx="8.2" cy="8.2" r="1.5" fill="currentColor"/>`,
 };
 /* index.html es la PORTADA y no está en esta lista a propósito: se llega a
    ella por el logo. Seis destinos no caben en la barra inferior de un
    celular sin que las etiquetas se corten. */
-const PAGINAS = [["mapa.html","mapa"],["calendario.html","calendario"],
-                 ["blog.html","blog"],["agrega.html","agregar"],["nosotros.html","nosotros"]];
-// En la barra inferior el espacio es de 4 columnas: etiquetas de una palabra
+const PAGINAS = [["mapa.html","mapa"],["habla.html","habla"],["calendario.html","calendario"],
+                 ["descuentos.html","descuentos"],["blog.html","blog"],
+                 ["agrega.html","agregar"],["nosotros.html","nosotros"]];
+// En la barra inferior el espacio manda: con SIETE destinos cada celda baja a
+// 53 px en un teléfono de 375, así que las etiquetas son de UNA palabra corta
+// y ninguna pasa de seis letras. "Calendario" ya no cabía con seis y pasó a
+// "Agenda"; "Descuentos" tampoco cabe y va como "Dctos", que es como se
+// escribe en cualquier vitrina de Chile. Siete es el techo: un destino más no
+// entra sin bajar de los 44 px de área táctil.
 const CORTOS = {
-  es:{mapa:"Mapa", calendario:"Calendario", blog:"Blog", agregar:"Publicar", nosotros:"Quién"},
-  en:{mapa:"Map", calendario:"Calendar", blog:"Blog", agregar:"Post", nosotros:"Who"},
-  pt:{mapa:"Mapa", calendario:"Agenda", blog:"Blog", agregar:"Publicar", nosotros:"Quem"},
+  es:{mapa:"Mapa", habla:"Habla", calendario:"Agenda", descuentos:"Dctos", blog:"Blog", agregar:"Publicar", nosotros:"Quién"},
+  en:{mapa:"Map", habla:"Talk", calendario:"Agenda", descuentos:"Deals", blog:"Blog", agregar:"Post", nosotros:"Who"},
+  pt:{mapa:"Mapa", habla:"Fale", calendario:"Agenda", descuentos:"Dctos", blog:"Blog", agregar:"Publicar", nosotros:"Quem"},
 };
 
 /* `raiz` es el prefijo hacia la raíz del sitio. Las fichas de `e/` viven un
@@ -551,7 +653,10 @@ function pintarBarra(paginaActual, raiz = ""){
 
 /* ---------- DATOS ---------- */
 async function cargarEventos(){
-  const r = await fetch("eventos.json");
+  // El `?v=N` de loica.css/js no sirve acá: este archivo lo reescribe el robot
+  // todas las mañanas y nadie sube un número por eso. Sin esto, quien ya visitó
+  // el sitio sigue viendo la cartelera del día que entró por primera vez.
+  const r = await fetch("eventos.json", {cache: "no-cache"});
   const d = await r.json();
   return d.eventos.map(ev => ({...ev, fecha: new Date(ev.inicio)}));
 }
@@ -750,5 +855,84 @@ function tarjetaEvento(ev, alPulsar){
     <div class="precio${ev.gratis ? " libre" : precio ? "" : " sin-dato"}">${precio || "—"}</div>`;
 
   boton.onclick = () => alPulsar(ev);
+  return boton;
+}
+
+/* ---------- DESCUENTOS DE BANCO ----------
+   Otro tipo de dato y por eso otra tarjeta. Un evento pasa una vez y lo que
+   manda es la fecha; un descuento se repite todas las semanas y lo que manda
+   es el DÍA y el banco. La rejilla es la misma que la de eventos (58px, 1fr,
+   auto) para que las dos listas se lean como el mismo sistema, pero lo que va
+   en cada celda cambia: donde el evento pone la hora, el descuento pone el
+   banco, y donde el evento pone el precio, el descuento pone cuánto rebaja. */
+
+/* Un color por banco. No son los colores corporativos a propósito: Loica no
+   es el banco y no conviene que lo parezca. Son tres tonos del sistema, bien
+   separados entre sí, y el nombre del banco va escrito en la tarjeta igual —
+   el color ayuda a barrer la lista, no es el único dato. */
+const BANCOS = {
+  bancochile:{color:"#1B6FD1", tinta:"var(--c-cultura-tinta)"},
+  bci:       {color:"#7A3FE0", tinta:"var(--c-fiesta-tinta)"},
+  falabella: {color:"#0E8757", tinta:"var(--c-libre-tinta)"},
+};
+const banco = id => BANCOS[id] || {color:"#95521C", tinta:"var(--c-descuento-tinta)"};
+
+/* El pipeline numera los días de lunes a domingo; getDay() de domingo a
+   sábado. Este es el único lugar donde se cruzan las dos escalas. */
+const DIAS_CLAVE = ["lunes","martes","miercoles","jueves","viernes","sabado","domingo"];
+const hoyClave = () => DIAS_CLAVE[(new Date().getDay() + 6) % 7];
+
+/* Lista de días VACÍA significa "sin restricción", no "no se pudo leer" —
+   está explicado en loica/descuentos/modelo.py. Los convenios permanentes de
+   Bci son así, y dejarlos fuera del filtro de Hoy sería esconder 229
+   descuentos que hoy sirven. */
+const correHoy = d => !d.dias.length || d.dias.includes(hoyClave());
+
+const montoDescuento = d => d.porcentaje ? d.porcentaje + "%" : (d.oferta || "");
+
+async function cargarDescuentos(){
+  const r = await fetch("descuentos.json");
+  return await r.json();
+}
+
+/* La cinta del día sobre la miniatura. Es el dato por el que se entra a esta
+   página, así que va donde la tarjeta de evento pone la fecha. */
+function cintaDia(d){
+  if(!d.dias.length) return {texto: t("dTodosDias").toUpperCase(), hoy: true};
+  if(d.dias.includes(hoyClave())) return {texto: t("hoy").toUpperCase(), hoy: true};
+  if(d.dias.length > 3) return {texto: `${d.dias.length} ${{es:"DÍAS", en:"DAYS", pt:"DIAS"}[IDIOMA]}`, hoy: false};
+  const cortos = d.dias.map(x => t("dias")[DIAS_CLAVE.indexOf(x)].toUpperCase());
+  return {texto: cortos.join(" "), hoy: false};
+}
+
+function tarjetaDescuento(d, alPulsar){
+  const b = banco(d.banco_id);
+  const dia = cintaDia(d);
+  const monto = montoDescuento(d);
+
+  const boton = document.createElement("button");
+  boton.className = "tarjeta tarjeta-dcto";
+  boton.type = "button";
+  boton.style.setProperty("--banco", b.color);
+  boton.innerHTML = `
+    <div class="miniatura">
+      ${carita("degu", b.color, 44)}
+      ${d.logo ? `<img src="${escapar(d.logo)}" alt="" loading="lazy"
+                    onerror="this.remove()">` : ""}
+      <span class="dia${dia.hoy ? " pronto" : ""}">${escapar(dia.texto)}</span>
+    </div>
+    <div class="tarjeta-cuerpo">
+      <div class="hora banco-nombre">${escapar(d.banco)}</div>
+      <h3>${escapar(d.comercio)}</h3>
+      <div class="tarjeta-meta">
+        ${d.comuna ? `<span>${escapar(d.comuna)}</span>`
+                   : d.region ? `<span>${escapar(d.region)}</span>` : ""}
+        ${d.segmentado ? `<span class="aviso" title="${escapar(t("dSegmentado"))}">·&nbsp;${
+          IDIOMA === "en" ? "segmented" : "segmentado"}</span>` : ""}
+      </div>
+    </div>
+    <div class="precio${monto ? " dcto" : " sin-dato"}">${escapar(monto) || "—"}</div>`;
+
+  boton.onclick = () => alPulsar(d);
   return boton;
 }

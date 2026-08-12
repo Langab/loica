@@ -21,6 +21,22 @@ def _sin_tildes(texto: str) -> str:
     return "".join(c for c in normalizado if unicodedata.category(c) != "Mn")
 
 
+# Los endpoints por donde el pipeline descubre eventos (sitemaps, feeds, APIs)
+# NO son links para una persona: quien los abre ve un XML crudo, no el evento.
+# Como la promesa del proyecto es dejar al usuario en la fuente original, un
+# enlace así vale lo mismo que no tener enlace.
+_ENDPOINTS_DE_MAQUINA = re.compile(
+    r"(sitemap[^/]*\.xml|\.xml$|\.rss$|/feed/?$|/wp-json/|/admin-ajax\.php|"
+    r"/api/|\.json($|\?)|[?&](f|format|formato)=json)",
+    re.IGNORECASE,
+)
+
+
+def es_enlace_de_maquina(url: str) -> bool:
+    """¿Este link lleva a datos para un programa en vez de a una página?"""
+    return bool(url) and bool(_ENDPOINTS_DE_MAQUINA.search(url))
+
+
 def clave_dedup(titulo: str, inicio: date | datetime | None, lugar: str) -> str:
     """Huella para detectar el mismo evento llegando por varias fuentes.
 
@@ -102,6 +118,8 @@ class Evento:
             return False, "sin título"
         if not self.fuente_url:
             return False, "sin link a la fuente (rompe la atribución)"
+        if es_enlace_de_maquina(self.fuente_url):
+            return False, f"el link es un endpoint, no una página: {self.fuente_url}"
         if self.inicio is not None and self.inicio.date() < date.today():
             return False, "evento pasado"
         return True, ""

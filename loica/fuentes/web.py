@@ -13,7 +13,7 @@ from xml.etree import ElementTree
 
 from bs4 import BeautifulSoup
 
-from ..modelo import Evento
+from ..modelo import Evento, es_enlace_de_maquina
 from ..normalizar import (detectar_comuna, limpiar_html, parsear_fecha,
                           parsear_precio, resumir)
 from ..red import ClienteEducado
@@ -91,6 +91,16 @@ def _desde_jsonld(sopa: BeautifulSoup, fuente: dict) -> list[Evento]:
             if isinstance(imagen, list):
                 imagen = imagen[0] if imagen else ""
 
+            # El link sale SOLO del JSON-LD, y puede venir relativo. Si el sitio
+            # no lo declara (Toliv no lo hace) se deja vacío a propósito: quien
+            # llama sabe de qué página salió el evento y pone esa. Rellenar acá
+            # con `url_agenda` mandaba a todos los eventos al sitemap.
+            enlace = str(item.get("url", "")).strip()
+            if enlace.startswith("//"):
+                enlace = "https:" + enlace
+            elif enlace.startswith("/"):
+                enlace = fuente["url_base"].rstrip("/") + enlace
+
             eventos.append(Evento(
                 titulo=limpiar_html(str(item.get("name", ""))),
                 descripcion_corta=resumir(str(item.get("description", ""))),
@@ -105,7 +115,7 @@ def _desde_jsonld(sopa: BeautifulSoup, fuente: dict) -> list[Evento]:
                 precio_texto=texto_precio,
                 fuente_tipo="html",
                 fuente_nombre=fuente.get("nombre", ""),
-                fuente_url=str(item.get("url", "")) or fuente.get("url_agenda", ""),
+                fuente_url=enlace,
                 imagen_url=str(imagen or ""),
             ))
     return eventos
@@ -117,6 +127,13 @@ def eventos_desde_html(html: str, fuente: dict, tipo: str = "html") -> list[Even
 
     eventos = _desde_jsonld(sopa, fuente)
     if eventos:
+        # Acá el evento se leyó de la agenda misma, así que cuando el JSON-LD no
+        # trae link propio, mandar a la agenda es honesto: es una página que la
+        # persona puede leer. (No así un sitemap: para eso está el guardia.)
+        agenda = fuente.get("url_agenda", "")
+        if agenda and not es_enlace_de_maquina(agenda):
+            for e in eventos:
+                e.fuente_url = e.fuente_url or agenda
         log.info("%s: %d eventos vía JSON-LD", fuente.get("nombre"), len(eventos))
         return eventos
 

@@ -25,7 +25,7 @@ from __future__ import annotations
 import logging
 import re
 
-from ..modelo import Evento
+from ..modelo import Evento, es_enlace_de_maquina
 from ..normalizar import detectar_comuna, limpiar_html, parsear_fecha, resumir
 from ..recurrencia import (frase_cadencia, parsear_dias, parsear_hora,
                            sesiones_futuras)
@@ -85,6 +85,11 @@ def _paginas(fuente: dict, cliente: ClienteEducado, url: str) -> list[dict]:
     campo_total = pag.get("campo_total_paginas", "totalPages")
 
     extra = dict(fuente.get("parametros") or {})
+    # Algunas APIs reciben los filtros en el cuerpo por POST en vez de la query.
+    cuerpo = config.get("cuerpo")
+    if cuerpo is None and str(config.get("metodo", "")).lower() == "post":
+        cuerpo = {}
+
     recolectados: list[dict] = []
     pagina = primera
 
@@ -95,7 +100,8 @@ def _paginas(fuente: dict, cliente: ClienteEducado, url: str) -> list[dict]:
             if pag.get("parametro_limite"):
                 params[pag["parametro_limite"]] = limite
 
-        datos = cliente.json(url, params=params, max_edad_cache_seg=6 * 3600)
+        datos = cliente.json(url, params=params, max_edad_cache_seg=6 * 3600,
+                             json_cuerpo=cuerpo)
         if datos is None:
             break
 
@@ -142,6 +148,14 @@ def _sesiones_del_taller(item: dict, config: dict, horizonte: int) -> tuple:
     campos = config.get("campos") or {}
     desde = parsear_fecha(_texto(item, campos.get("inicio", "")))
     hasta = parsear_fecha(_texto(item, campos.get("fin", "")))
+
+    # Varias APIs parten la fecha y la hora en dos campos (Passline manda
+    # fecha_inicio + hora_inicio). Sin esto todos los eventos quedan a las 00:00
+    # y el filtro "esta noche" no sirve.
+    if desde is not None and campos.get("hora_inicio"):
+        hora = parsear_hora(_texto(item, campos["hora_inicio"]))
+        if hora is not None:
+            desde = desde.replace(hour=hora.hour, minute=hora.minute)
 
     rec = config.get("recurrencia") or {}
     if not rec or not desde:
@@ -214,13 +228,22 @@ def extraer_json(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
 
         # La URL pública se arma con la plantilla: la API vive en otro dominio
         # y sin link a la ficha se rompe la atribución (y el evento se descarta).
-        enlace = ""
-        if plantilla:
+        # Cuando la API ya trae el link armado (Passline lo pone en `url`),
+        # `campos.link` lo toma directo y la plantilla no hace falta.
+        enlace = _texto(item, campos.get("link", "")) if campos.get("link") else ""
+        if enlace.startswith("//"):
+            enlace = "https:" + enlace
+        if not enlace and plantilla:
             enlace = re.sub(r"\{([^}]+)\}",
                             lambda m: _texto(item, m.group(1)) or "", plantilla)
             if enlace.endswith("/") or "{" in enlace:
                 enlace = ""
-        enlace = enlace or fuente.get("url_agenda", "")
+        # Ojo: en una fuente `json` la agenda ES la API. Caer ahí le deja al
+        # usuario un JSON crudo en la cara, así que solo sirve de respaldo
+        # cuando el YAML apunta a una página de verdad.
+        respaldo = fuente.get("url_agenda", "")
+        if not enlace and respaldo and not es_enlace_de_maquina(respaldo):
+            enlace = respaldo
 
         gratis = None
         if campos.get("es_gratis"):

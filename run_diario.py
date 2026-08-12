@@ -195,8 +195,11 @@ def main() -> int:
             )
             eventos = adaptador(fuente, cliente)
             conteo["encontrados"] = len(eventos)
-            # Una exposición de un mes llega como 30 entradas iguales: se unen
-            eventos = colapsar_multidia(eventos)
+            # Una exposición de un mes llega como 30 entradas iguales: se unen.
+            # Los cines son la excepción: cada función es el dato que importa,
+            # y fusionar la del jueves con la del domingo borra los horarios.
+            if fuente.get("colapsar", True):
+                eventos = colapsar_multidia(eventos)
 
             # Las ticketeras nacionales traen eventos de todo Chile. Sin comuna
             # de la Región Metropolitana no se puede afirmar que sean de

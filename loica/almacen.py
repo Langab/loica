@@ -86,19 +86,24 @@ class Almacen:
             self.con.execute(
                 # COALESCE en lat/lon: si la corrida nueva no trae coordenadas,
                 # no se borran las que ya teníamos.
+                #
+                # fuente_url SÍ se refresca: es el link que sostiene la
+                # atribución, y cuando un adaptador se arregla (o el sitio
+                # cambia de rutas) el link viejo tiene que corregirse solo en la
+                # siguiente corrida. Lo que llega acá ya pasó `es_valido()`.
                 """UPDATE eventos SET
                        titulo = ?, categoria = ?, descripcion_corta = ?,
                        inicio = ?, fin = ?, lugar_nombre = ?, lugar_direccion = ?,
                        comuna = ?, lat = COALESCE(?, lat), lon = COALESCE(?, lon),
                        precio_clp = ?, es_gratis = ?, precio_texto = ?,
-                       link_entradas = ?, imagen_url = ?,
+                       fuente_url = ?, link_entradas = ?, imagen_url = ?,
                        fecha_ultima_verificacion = ?, visto_por_ultima_vez = ?
                    WHERE hash_dedup = ?""",
                 (d["titulo"], d["categoria"], d["descripcion_corta"],
                  d["inicio"], d["fin"], d["lugar_nombre"], d["lugar_direccion"],
                  d["comuna"], d["lat"], d["lon"], d["precio_clp"],
                  None if d["es_gratis"] is None else int(d["es_gratis"]),
-                 d["precio_texto"], d["link_entradas"], d["imagen_url"],
+                 d["precio_texto"], d["fuente_url"], d["link_entradas"], d["imagen_url"],
                  ahora, ahora, d["hash_dedup"]),
             )
             self.con.commit()

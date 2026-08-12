@@ -101,6 +101,7 @@ Conviene probarla sola antes de sumarla a la corrida diaria:
 | `html` | Hay que leer el HTML. Intenta primero JSON-LD (`schema.org/Event`) y si no, usa los selectores CSS de la configuración. |
 | `sitemap` | El listado solo entrega links y los datos viven en cada ficha. |
 | `carteleras` | Dos niveles: índice de locales → cartelera de cada local. |
+| `cine` | Cartelera semanal de cine: una sección por día, funciones con hora. |
 | `tabla` | Tablas de talleres municipales, con el recinto y su dirección en las filas sobre el encabezado. |
 | `json` | API JSON propia, con el mapeo de campos declarado en el YAML. |
 | `ticketmaster` | Ticketmaster Discovery (API oficial con permiso explícito). |
@@ -123,6 +124,19 @@ Bar Raíces en Yungay, Kahuin, Mesón Nerudiano, Sala Master, Sala SCD Egaña.
 Los eventos que quedan sin comuna **no son un error**: PortalDisc es nacional y
 esas tarjetas son de regiones (Teatro Mauri en Valparaíso, MagBar en Chillán,
 Bandera 1001 en Concepción). `requiere_comuna` los descarta, que es lo correcto.
+
+### Cine: `cine` y la excepción a colapsar
+
+Los cines de barrio no publican eventos, publican la semana: una sección por
+día con las funciones y su hora. La fecha completa no está escrita en ninguna
+parte —la sección dice "Jueves 13" y el mes vive en otro titular—, así que el
+adaptador busca la única fecha cercana a hoy que calce con ese día de la semana
+Y ese número. Cruza fin de mes y fin de año solo.
+
+Los cines son además la única fuente que se salta `colapsar_multidia`, con
+`colapsar: false`. Para una exposición, fusionar 30 días idénticos es correcto;
+para un cine, fusionar la función del jueves con la del domingo borra los
+horarios, que son justamente el dato que la gente busca.
 
 ### Lo que no se puede rastrear: `manual`
 

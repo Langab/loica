@@ -13,6 +13,7 @@ una fuente trayendo los datos de otra.
 
 from .apis import extraer_ticketmaster
 from .carteleras import extraer_carteleras
+from .cine import extraer_cine
 from .json_api import extraer_json
 from .manual import extraer_manual
 from .tablas import extraer_tabla
@@ -27,6 +28,7 @@ ADAPTADORES = {
     "html": extraer_html,
     "sitemap": extraer_sitemap_fichas,
     "carteleras": extraer_carteleras,
+    "cine": extraer_cine,
     "tabla": extraer_tabla,
     "json": extraer_json,
     "manual": extraer_manual,
