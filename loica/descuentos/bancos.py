@@ -197,10 +197,25 @@ def _falabella(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
             "limit": por_pagina,
             "skip": saltar,
             "access_token": banco["token_lectura"],
+            # Sin `include`, Contentful manda el logo como un puntero
+            # ({"sys": {"linkType": "Asset", "id": "..."}}) en vez del archivo,
+            # y los 108 descuentos salían sin imagen. Con include=1 vienen los
+            # assets resueltos en la misma respuesta, sin peticiones extra.
+            "include": 1,
         })
         if not isinstance(datos, dict) or "items" not in datos:
             log.warning("Falabella: Contentful no devolvió items (skip=%s)", saltar)
             break
+
+        assets = {a["sys"]["id"]: a
+                  for a in ((datos.get("includes") or {}).get("Asset") or [])}
+
+        def _logo(campos: dict) -> str:
+            enlace = (campos.get("imageApp") or {}).get("sys") or {}
+            archivo = ((assets.get(enlace.get("id")) or {})
+                       .get("fields", {}).get("file", {}).get("url", ""))
+            # Contentful devuelve la URL sin esquema: //images.ctfassets.net/...
+            return ("https:" + archivo) if archivo.startswith("//") else archivo
 
         total = datos.get("total", 0)
         for item in datos["items"]:
@@ -242,7 +257,7 @@ def _falabella(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
                 condiciones=texto.strip(" ·"),
                 sitio_web=url_normal(campos.get("urlV2")),
                 url=plantilla.format(slug=campos.get("permalink", "")),
-                logo="",
+                logo=_logo(campos),
             ))
         saltar += por_pagina
 

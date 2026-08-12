@@ -147,13 +147,21 @@ def main() -> int:
     log.info("%d descuentos vigentes · %d con día · %.1fs",
              len(descuentos), con_dia, duracion)
 
-    if args.probar:
+    # `--banco` es para depurar UN banco, así que lo que trae no es el catastro
+    # completo: escribir el JSON con eso borraría a los otros cuatro. Pasó de
+    # verdad — una corrida con --banco falabella dejó el sitio con 108
+    # descuentos en vez de 652, y el archivo se publica sin que nadie lo mire.
+    if args.probar or args.banco:
         for d in descuentos[:25]:
             log.info("  %-16s %-34s %-14s %s%s",
                      d.banco, d.comercio[:34], d.comuna or "—",
                      f"{d.porcentaje}% " if d.porcentaje else "",
                      ", ".join(d.dias) or "sin día")
         log.info("  … (%d más)", max(len(descuentos) - 25, 0))
+        if args.banco and not args.probar:
+            log.warning("Con --banco NO se escribe %s: tendría sólo este banco. "
+                        "Corré sin --banco para actualizar el sitio.",
+                        RUTA_SALIDA.relative_to(RAIZ))
         return 0
 
     salida = escribir_json(descuentos, estadisticas)
