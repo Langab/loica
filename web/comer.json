@@ -1,0 +1,398 @@
+{
+  "_nota": "Recomendaciones escritas a mano. Esto NO lo llena el robot: se edita acá y listo. Campos por local: slug (va en la URL, no cambiarlo una vez publicado), nombre, tipo (texto libre que se ve en la tarjeta), cocina (define el filtro de arriba), comuna, barrio, direccion, precio ($ / $$ / $$$), foto (URL del sitio del propio local, o una ruta a web/fotos/comer/ si prefieres una foto tuya; vacío o roto muestra al Quiltro sobre el pastel oliva, que es un estado valido de la tarjeta), bajada (una línea, es lo que se lee en el cuadrado), pedir (lista corta: esto es lo que hay que pedir), cuando (a qué hora o qué día conviene ir), cuerpo (un string por párrafo, admite **negrita** y *cursiva*), ojo (el pero honesto, puede ir vacío), sitio (web propia del local, vacío si no tiene), instagram (cuenta oficial, vacío si no se pudo confirmar), mapa. Todo local tiene que quedar con al menos uno de los dos links.",
+  "actualizado": "2026-08-12",
+  "cocinas": {
+    "italiana": "Italiana",
+    "chilena": "Chilena y de barrio",
+    "asiatica": "Asiática",
+    "vinos": "Vinos",
+    "hamburguesas": "Hamburguesas",
+    "bistro": "Bistró"
+  },
+  "precios": {
+    "$": "Barato: se come por menos de diez mil",
+    "$$": "Medio: entre diez y veinticinco mil",
+    "$$$": "Caro: sobre veinticinco mil por persona"
+  },
+  "locales": [
+    {
+      "slug": "alleria",
+      "nombre": "Alleria",
+      "tipo": "Pizza napolitana",
+      "cocina": "italiana",
+      "comuna": "Providencia",
+      "barrio": "Barrio Italia",
+      "direccion": "Av. Italia 1350",
+      "precio": "$$",
+      "foto": "",
+      "destacado": true,
+      "bajada": "La mejor pizza napolitana de Chile, con la fila que eso implica.",
+      "pedir": [
+        "Una margherita, antes que cualquier otra cosa",
+        "La marinara, si se quiere entender la masa sin queso encima"
+      ],
+      "cuando": "Llegando a la hora en que abre. Después es cola.",
+      "cuerpo": [
+        "Michele Puzio abrió esto en junio de 2022 en Malaquías Concha y se cambió después a Avenida Italia. *Alleria* es una palabra napolitana para la alegría sin más; el nombre no es marketing, es lo que dice la puerta.",
+        "La masa lleva entre 48 y 72 horas de fermentación y sale en el formato napolitano de 33 centímetros, con el borde inflado y manchado. Dos años seguidos elegida la número uno de Chile por 50 Top Pizza y tercera de Sudamérica. Pasan cerca de cuatrocientas personas al día.",
+        "Por eso la recomendación real acá no es qué pedir sino **cuándo llegar**: con la cocina así de sola, una margherita basta para saber si el resto de la carta vale la pena. Vale."
+      ],
+      "ojo": "La espera puede pasar la hora. No es un lugar para llegar con hambre y apuro al mismo tiempo.",
+      "sitio": "",
+      "mapa": "https://www.google.com/maps/search/?api=1&query=Alleria+Av.+Italia+1350+Providencia+Santiago",
+      "instagram": "https://www.instagram.com/alleria_pizza/"
+    },
+    {
+      "slug": "bocanariz",
+      "nombre": "Bocanáriz",
+      "tipo": "Bar de vinos chilenos",
+      "cocina": "vinos",
+      "comuna": "Santiago Centro",
+      "barrio": "Lastarria",
+      "direccion": "José Victorino Lastarria 276",
+      "precio": "$$$",
+      "foto": "https://www.tienda.bocanariz.cl/cdn/shop/files/social_1200x1200.jpg?v=1613797487",
+      "destacado": true,
+      "bajada": "El primer bar de vinos de Chile: se viene a tomar por copa y a preguntar.",
+      "pedir": [
+        "Una degustación temática: tres copas alrededor de una idea",
+        "El tiradito de pescado con manzana verde",
+        "El bao de lengua"
+      ],
+      "cuando": "Temprano en la noche, cuando el sommelier todavía tiene tiempo de conversar.",
+      "cuerpo": [
+        "Abrió en 2012 en pleno Lastarria y fue el primer wine bar del país. La carta es solo vino chileno —más de trescientas etiquetas por botella y del orden de treinta y seis por copa— y lleva diez años seguidos entre las mejores del mundo según Wine Spectator.",
+        "Lo que hace distinto a este lugar no es la bodega sino el mesón: atiende un equipo de sommeliers jóvenes que cuentan de dónde sale cada copa. Se puede entrar sin saber nada de vino y salir sabiendo algo, que es bastante más de lo que ofrece la mayoría de las cartas caras de Santiago.",
+        "La cocina está pensada desde el vino y cambia con la temporada, así que la carta de platos de este mes no es la del próximo. **Las degustaciones temáticas son el mejor negocio de la casa**: por el precio de una copa buena salen tres, y ahí está el punto entero del lugar."
+      ],
+      "ojo": "Es caro y es turístico. Los dos datos son ciertos y ninguno de los dos le quita lo bueno.",
+      "sitio": "https://bocanariz.cl/",
+      "mapa": "https://www.google.com/maps/search/?api=1&query=Bocanariz+Lastarria+276+Santiago",
+      "instagram": "https://www.instagram.com/bocanariz_lastarria/"
+    },
+    {
+      "slug": "baco",
+      "nombre": "Baco",
+      "tipo": "Bistró francés",
+      "cocina": "vinos",
+      "comuna": "Providencia",
+      "barrio": "Nueva de Lyon",
+      "direccion": "Nueva de Lyon 113",
+      "precio": "$$$",
+      "foto": "https://er-s3-prod.s3.fr-par.scw.cloud/Baco_cover_optimized_d163d50772.jpg",
+      "bajada": "Bistró francés con pizarra de vinos por copa. El almuerzo largo de Providencia.",
+      "pedir": [
+        "El steak tartare",
+        "El pato",
+        "Crème brûlée para cerrar",
+        "Vino por copa: casi toda la carta se sirve así"
+      ],
+      "cuando": "Almuerzo de día de semana, o después de la pega: cierra pasada la medianoche.",
+      "cuerpo": [
+        "Baco abrió en 2010 a media cuadra del metro Los Leones y hace lo que hace un bistró: mesas juntas, mantel de papel, carta corta y una pizarra con los vinos del día.",
+        "La gracia del lugar es que **casi todas las etiquetas se sirven por copa**, así que se puede probar en serio sin comprometerse con la botella. Eso lo convierte en uno de los pocos lugares del barrio donde una comida de dos personas puede pasar por cuatro vinos distintos sin volverse una locura.",
+        "Abre de lunes a sábado hasta las 00:30 y los domingos hasta las 23:30, que en este barrio no es poco."
+      ],
+      "ojo": "Es angosto y suena fuerte cuando se llena. Para conversar cosas serias, mejor a la hora de almuerzo.",
+      "sitio": "https://baco.elbaco.cl/",
+      "mapa": "https://www.google.com/maps/search/?api=1&query=Baco+Nueva+de+Lyon+113+Providencia+Santiago",
+      "instagram": "https://www.instagram.com/bacovinobistro/"
+    },
+    {
+      "slug": "fuente-alemana",
+      "nombre": "La Fuente Alemana",
+      "tipo": "Sanguchería",
+      "cocina": "chilena",
+      "comuna": "Providencia",
+      "barrio": "Pedro de Valdivia",
+      "direccion": "Av. Pedro de Valdivia 210",
+      "precio": "$$",
+      "foto": "https://fuentealemana.cl/wp-content/uploads/2020/11/home-foto1.jpg",
+      "destacado": true,
+      "bajada": "El lomito italiano contra el que se miden todos los demás. Desde 1954.",
+      "pedir": [
+        "Lomito italiano: tomate, palta y mayo",
+        "Churrasco italiano, si el lomito parece mucho",
+        "Chacarero, para el que quiere verde"
+      ],
+      "cuando": "Fuera del peak de almuerzo. Cerrado los domingos.",
+      "cuerpo": [
+        "Partió en 1954 al lado del Hospital San Borja, frente a una pileta que había donado la colonia alemana, y de ahí salió el nombre. El local de Pedro de Valdivia abrió en 1995 y es el que la mayoría tiene en la cabeza.",
+        "El lomito se cocina por horas y llega desarmándose; el italiano es la versión con tomate, palta y mayonesa. **Se come en el mesón, con servilleta de papel y las manos**, y hay que asumir que algo se va a caer al plato. Esa es la experiencia completa.",
+        "Es de las pocas instituciones de Santiago que no ha cambiado de idea sobre lo que hace. Abre de lunes a viernes desde las 10 y los sábados desde las 10:30, hasta las 21:45."
+      ],
+      "ojo": "Domingo cerrado, y a las dos de la tarde hay fila. Ir a las 12 o a las 4.",
+      "sitio": "https://fuentealemana.cl/",
+      "mapa": "https://www.google.com/maps/search/?api=1&query=Fuente+Alemana+Pedro+de+Valdivia+210+Providencia",
+      "instagram": "https://www.instagram.com/lafuentealemana/"
+    },
+    {
+      "slug": "ramen-kintaro",
+      "nombre": "Ramen Kintaro",
+      "tipo": "Ramen japonés",
+      "cocina": "asiatica",
+      "comuna": "Santiago Centro",
+      "barrio": "Bellas Artes",
+      "direccion": "Monjitas 460",
+      "precio": "$$",
+      "foto": "",
+      "bajada": "El primer ramen de Chile. Sigue siendo la vara.",
+      "pedir": [
+        "Tonkotsu, si ese día hay: preguntar apenas se entra",
+        "Si no, el paitán o el tantanmen",
+        "Gyozas de entrada, siempre"
+      ],
+      "cuando": "Temprano. El local es chico y el caldo se acaba.",
+      "cuerpo": [
+        "Lo abrió Nobuyuki Noda, de Kurume, en Fukuoka —que es justamente la zona del tonkotsu— y fue el primer local de ramen del país. El lema pintado en la pared es *No ramen, no life* y no está puesto de adorno.",
+        "La carta tiene siete ramen fijos: miso, shoyu, paitán y tantanmen entre ellos. **El tonkotsu es aparte y hay que preguntar si queda**, porque el caldo toma horas y cuando se acaba se acabó. Aparte del ramen hay gyozas, tofu y pollo frito.",
+        "Hay un segundo local en Alonso de Córdova 4134, en Vitacura, para el que le queda más cerca el otro lado de la ciudad."
+      ],
+      "ojo": "Es chico y no toma reservas. A la hora de almuerzo se espera en la vereda.",
+      "sitio": "",
+      "mapa": "https://www.google.com/maps/search/?api=1&query=Ramen+Kintaro+Monjitas+460+Santiago",
+      "instagram": "https://www.instagram.com/ramenkintaro/"
+    },
+    {
+      "slug": "holy-moly",
+      "nombre": "Holy Moly",
+      "tipo": "Hamburguesas",
+      "cocina": "hamburguesas",
+      "comuna": "Santiago Centro",
+      "barrio": "Lastarria",
+      "direccion": "Merced 318",
+      "precio": "$$",
+      "foto": "https://tofuu.getjusto.com/orioneat-local/resized2/GyeLCX6ecg2ndw5pP-800-x.webp",
+      "bajada": "Hamburguesas sin trucos en Lastarria, y tacos cuando el hambre es otra.",
+      "pedir": [
+        "Una hamburguesa de carne simple: el lema de la casa es *back to the basic* y conviene tomarlo en serio",
+        "Los tacos, que entraron después a la carta y se quedaron"
+      ],
+      "cuando": "De noche, y con tiempo: es zona de sobremesa.",
+      "cuerpo": [
+        "Está en Merced, a pasos del Parque Forestal, en la parte de Lastarria donde todavía se puede comer sin reservar con semanas. Empezó como hamburguesería y con los años sumó tacos y una carta más ancha.",
+        "El lema es **back to the basic** y funciona como instrucción de uso: la versión más simple de cada cosa es la que está mejor resuelta. Hay opciones vegetarianas y veganas de verdad, no la ensalada de consuelo.",
+        "Hay un segundo local en Hernando de Aguirre 129, por Tobalaba."
+      ],
+      "ojo": "En fin de semana Lastarria se llena entero y esto lo sufre igual que sus vecinos.",
+      "sitio": "https://holymoly.cl/",
+      "mapa": "https://www.google.com/maps/search/?api=1&query=Holy+Moly+Merced+318+Santiago",
+      "instagram": "https://www.instagram.com/holymoly.cl/"
+    },
+    {
+      "slug": "golfo-di-napoli",
+      "nombre": "Golfo di Napoli",
+      "tipo": "Trattoria y pizzería",
+      "cocina": "italiana",
+      "comuna": "Ñuñoa",
+      "barrio": "Dublé Almeyda",
+      "direccion": "Dublé Almeyda 2435",
+      "precio": "$$",
+      "foto": "https://golfodinapoli.cl/wp-content/uploads/2020/08/pizza-fiorentina-goldo-di-napoli.jpg",
+      "bajada": "Picada napolitana en Ñuñoa, atendida por su dueño. Nada de pretensiones.",
+      "pedir": [
+        "Cannelloni di carne",
+        "Ravioli ai quattro formaggi",
+        "Gnocchi puttanesca",
+        "Pizza fiorentina o porchetta"
+      ],
+      "cuando": "Martes a domingo. Lunes cerrado y la cocina para a las diez.",
+      "cuerpo": [
+        "Lo atiende Vincenzo Guarino, napolitano y campeón mundial de pizza, y la definición que usan ellos mismos —*un pequeño pedazo de Italia en Santiago*— describe bien el tamaño y el tono del lugar.",
+        "Es una trattoria de barrio: comida casera, porciones grandes y una carta que no intenta impresionar a nadie. **Venden también pasta fresca para llevar** —spaghetti alla chitarra, ravioli de espinaca y ricota— que es la mejor manera de que la cena del martes en la casa se arregle sola.",
+        "Abre de martes a sábado y los domingos hasta las cinco. Lunes cerrado."
+      ],
+      "ojo": "El despacho a domicilio está suspendido. Hay que ir o pasar a buscar.",
+      "sitio": "https://golfodinapoli.cl/",
+      "mapa": "https://www.google.com/maps/search/?api=1&query=Golfo+di+Napoli+Duble+Almeyda+2435+Nunoa",
+      "instagram": "https://www.instagram.com/golfodinapoli.cl/"
+    },
+    {
+      "slug": "trattoria-da-noi",
+      "nombre": "Trattoria Da Noi",
+      "tipo": "Pastas frescas",
+      "cocina": "italiana",
+      "comuna": "Providencia",
+      "barrio": "Barrio Italia",
+      "direccion": "Av. Italia 1791",
+      "precio": "$$",
+      "foto": "https://er-s3-prod.s3.fr-par.scw.cloud/danoi_cover_85dcd6490b.jpg",
+      "bajada": "La trattoria más vieja del Barrio Italia, y sigue haciendo la pasta en casa.",
+      "pedir": [
+        "Ravioles de ricota",
+        "Lasaña",
+        "Fettuccine, con la salsa que recomienden ese día"
+      ],
+      "cuando": "Almuerzo de fin de semana con mesa afuera. El domingo cierra a las cuatro y media.",
+      "cuerpo": [
+        "Lleva más de veinticinco años en Avenida Italia, lo que la hace anterior a casi todo lo que hoy se entiende por Barrio Italia. Es familiar, sin vuelta: las pastas y las salsas se hacen en la casa.",
+        "La carta es la que uno espera —lasaña, fettuccine, ravioles de ricota— y está bien hecha, que en este rubro es todo. **El punto de comparación no es la pizzería de moda de la cuadra siguiente sino el almuerzo de domingo**, y en eso gana.",
+        "Tiene mesas adentro y afuera, y aguanta bien un grupo grande. De lunes a sábado hasta las 23:00; el domingo, solo hasta las 16:30."
+      ],
+      "ojo": "En Barrio Italia el estacionamiento es un deporte. Mejor llegar caminando desde Santa Isabel.",
+      "sitio": "",
+      "mapa": "https://www.google.com/maps/search/?api=1&query=Trattoria+Da+Noi+Av.+Italia+1791+Providencia",
+      "instagram": "https://www.instagram.com/trattoriadanoi/"
+    },
+    {
+      "slug": "sole-mio",
+      "nombre": "Sole Mío",
+      "tipo": "Ristorante italiano",
+      "cocina": "italiana",
+      "comuna": "Santiago Centro",
+      "barrio": "Moneda",
+      "direccion": "Moneda 1816",
+      "precio": "$$",
+      "foto": "https://ristorantesolemio.cl/wp-content/uploads/2025/01/Slider25.jpg",
+      "bajada": "Italiano de mantel largo en el Santiago viejo, funcionando desde 2004.",
+      "pedir": [
+        "Canelones de jaiba y loco: es el plato de la casa",
+        "Risotto Sole Mío",
+        "Fettuccine tinta de calamar",
+        "Tiramisú"
+      ],
+      "cuando": "Cena entre semana, cuando el centro se vacía y el barrio queda tranquilo.",
+      "cuerpo": [
+        "Está en Moneda, en la parte del centro que todavía tiene fachadas de las de antes, y lleva funcionando desde 2004. Es italiano de los formales: mantel, copa y servicio de mesa, no de tabla y pizarra.",
+        "La carta mezcla lo italiano con producto chileno, y de ahí sale el plato que lo distingue: **los canelones de jaiba y loco**, que no existen en Italia y no deberían funcionar tan bien. También hay machas parmesana y un ceviche que se pide harto.",
+        "Abre de lunes a sábado de 12:30 a 23:00 y los domingos hasta las 17:00."
+      ],
+      "ojo": "El sector de noche es tranquilo, pero conviene llegar y volver por Moneda, no por las calles laterales.",
+      "sitio": "https://ristorantesolemio.cl/",
+      "mapa": "https://www.google.com/maps/search/?api=1&query=Sole+Mio+Moneda+1816+Santiago",
+      "instagram": "https://www.instagram.com/ristorantesolemio/"
+    },
+    {
+      "slug": "rishtedar",
+      "nombre": "Rishtedar Providencia",
+      "tipo": "India",
+      "cocina": "asiatica",
+      "comuna": "Providencia",
+      "barrio": "Holanda",
+      "direccion": "Av. Holanda 160",
+      "precio": "$$$",
+      "foto": "https://rishtedar.cl/images/locales/feature-banner.webp",
+      "bajada": "La comida india que instaló el rubro en Santiago. La casa de Holanda es la buena.",
+      "pedir": [
+        "Malai kofta",
+        "Los camarones apanados en sésamo con salsa tikka",
+        "Champiñones en salsa blanca con castañas de cajú y cardamomo",
+        "Helado de pistacho, hecho en la casa"
+      ],
+      "cuando": "Cena con tiempo. La carta se pide para compartir al centro.",
+      "cuerpo": [
+        "Rishtedar fue de los primeros en convencer a Santiago de que la comida india era algo más que un curry picante, y la casa de Avenida Holanda es la que mejor sostiene esa idea: casona, patio y servicio de mesa.",
+        "La carta está ordenada por proteína —pollo, verduras, mariscos— y funciona mejor **pidiendo tres o cuatro platos al centro** que uno por persona. Los vegetarianos acá no van al rincón de las sobras: el malai kofta y los champiñones al cardamomo son de lo mejor de la carta.",
+        "Los helados son caseros: almendra, pistacho y mango."
+      ],
+      "ojo": "Es de los caros de esta lista. Para probar sin gastar tanto, ir a la hora de almuerzo.",
+      "sitio": "https://rishtedar.cl/rishtedar-providencia/",
+      "mapa": "https://www.google.com/maps/search/?api=1&query=Rishtedar+Av.+Holanda+160+Providencia",
+      "instagram": "https://www.instagram.com/rishtedar_restaurant/"
+    },
+    {
+      "slug": "siam-thai",
+      "nombre": "Siam Thai",
+      "tipo": "Tailandesa",
+      "cocina": "asiatica",
+      "comuna": "Providencia",
+      "barrio": "Barrio Italia",
+      "direccion": "Av. Italia 1139",
+      "precio": "$$",
+      "foto": "https://static.wixstatic.com/media/6940f2_845db8c27f2d4b0ebd3ba76b09cc1027~mv2.png/v1/fill/w_1200,h_1200,al_c,q_80/6940f2_845db8c27f2d4b0ebd3ba76b09cc1027~mv2.jpg",
+      "bajada": "Tailandesa de casa y terraza en Barrio Italia, con coctelería propia.",
+      "pedir": [
+        "Una tabla para partir y repartir",
+        "Los cócteles de la casa, que están cruzados con sabores tailandeses"
+      ],
+      "cuando": "De lunes a jueves abre solo de noche, desde las 18:30. El viernes y el sábado también almuerza.",
+      "cuerpo": [
+        "Es comida tailandesa casera en una casa del Barrio Italia, con terrazas y patio. La carta está en español, inglés y portugués, que en esta parte de la ciudad es un dato práctico y no un detalle.",
+        "El formato es de tablas y platos para compartir, y **la coctelería está pensada como parte de la comida** y no como el trago de antes. Es pet friendly.",
+        "El horario es lo más importante de saber: de lunes a jueves abre recién a las 18:30, el viernes desde la 13:30 hasta pasada la una de la mañana, el sábado desde la una, y el domingo solo entre la una y las cinco."
+      ],
+      "ojo": "Ir a almorzar un martes es viaje perdido: hasta el jueves solo abre de noche.",
+      "sitio": "https://www.siamthai.cl/",
+      "mapa": "https://www.google.com/maps/search/?api=1&query=Siam+Thai+Av.+Italia+1139+Providencia",
+      "instagram": "https://www.instagram.com/siamthaichile/"
+    },
+    {
+      "slug": "margo",
+      "nombre": "Margó",
+      "tipo": "Bistró",
+      "cocina": "bistro",
+      "comuna": "Providencia",
+      "barrio": "Costanera Center",
+      "direccion": "Av. Andrés Bello 2447, Costanera Center",
+      "precio": "$$$",
+      "foto": "",
+      "bajada": "Bistró de carta ancha: cocina chilena pasada por Francia e Italia.",
+      "pedir": [
+        "Los sorrentinos",
+        "El ceviche",
+        "Atún, cuando esté en la carta"
+      ],
+      "cuando": "Almuerzo de día hábil o cena temprano, antes de que llegue el after office.",
+      "cuerpo": [
+        "Margó es un bistró de carta ancha —cocina chilena con mano francesa e italiana— y de los pocos de su tipo que resuelve bien tanto un almuerzo de trabajo como una comida sin apuro.",
+        "Lo que sostiene la carta son las pastas rellenas y los crudos: **sorrentinos y ceviche son la entrada más segura** para saber si el lugar es para uno.",
+        "Tiene varias casas repartidas por el oriente de la ciudad: Costanera Center, Parque Arauco, Isidora Goyenechea y La Dehesa."
+      ],
+      "ojo": "Está dentro de un mall, con todo lo que eso implica de ruido y de gente a la hora peak.",
+      "sitio": "https://www.margo.cl/",
+      "mapa": "https://www.google.com/maps/search/?api=1&query=Margo+Costanera+Center+Providencia+Santiago",
+      "instagram": ""
+    },
+    {
+      "slug": "costa-bright",
+      "nombre": "Costa Bright",
+      "tipo": "Fuente de soda y bar",
+      "cocina": "chilena",
+      "comuna": "Santiago Centro",
+      "barrio": "Alameda",
+      "direccion": "Av. Libertador Bernardo O'Higgins 248",
+      "precio": "$",
+      "foto": "",
+      "bajada": "Fuente de soda ochentera que aguanta hasta las tres de la mañana.",
+      "pedir": [
+        "Las papas fritas, que son de las de verdad",
+        "Schop de litro"
+      ],
+      "cuando": "Tarde y noche. Cierra a las tres.",
+      "cuerpo": [
+        "Es una fuente de soda de las de siempre que se actualizó sin cambiarse de piel: neón, formica y una carta corta de fritura. Abre a las diez de la mañana y cierra a las tres.",
+        "Con los años se volvió punto de encuentro de público joven y de la escena disidente del centro, y **es de los pocos lugares de esa cuadra donde se puede tomar barato hasta tarde sin que nadie apure la mesa**. Hay música en vivo.",
+        "Es más bar que restaurante y conviene entrar sabiendo eso: se viene por la fritura, el schop de litro y la hora que sea."
+      ],
+      "ojo": "Es ruidoso, es barato y a esa hora la Alameda es la Alameda. Vale la pena saber cómo se vuelve.",
+      "sitio": "",
+      "mapa": "https://www.google.com/maps/search/?api=1&query=Costa+Bright+Alameda+248+Santiago",
+      "instagram": "https://www.instagram.com/costa_bright/"
+    },
+    {
+      "slug": "bar-de-rene",
+      "nombre": "Bar de René",
+      "tipo": "Bar de rock",
+      "cocina": "chilena",
+      "comuna": "Providencia",
+      "barrio": "Santa Isabel",
+      "direccion": "Santa Isabel 0369",
+      "precio": "$",
+      "foto": "",
+      "bajada": "Bar de rock sin concesiones, a una cuadra del Barrio Italia.",
+      "pedir": [
+        "Cerveza y algo para picar: acá el pedido es simple a propósito"
+      ],
+      "cuando": "De noche. No es lugar de almuerzo.",
+      "cuerpo": [
+        "Está en Santa Isabel, a una cuadra del Barrio Italia y a un mundo de distancia de sus terrazas. El sitio del bar se presenta como *manifiesto del rock* y eso es literalmente lo que hay: afiches, discos y volumen.",
+        "Es un bar antes que un lugar para comer, y **el mérito es que no ha intentado convertirse en otra cosa** mientras el barrio de al lado se llenaba de cafés de especialidad. Se viene por la cerveza, la música y la conversación a gritos.",
+        "Underground es la palabra que más se repite en las reseñas, a favor y en contra."
+      ],
+      "ojo": "Si se busca comer bien, este no es el dato. Si se busca terminar la noche, sí.",
+      "sitio": "https://barderene.cl/",
+      "mapa": "https://www.google.com/maps/search/?api=1&query=Bar+de+Rene+Santa+Isabel+0369+Providencia",
+      "instagram": "https://www.instagram.com/bardereneoficial/"
+    }
+  ]
+}

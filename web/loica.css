@@ -77,6 +77,15 @@
   --repisa-4:0 6px 0 var(--contorno);
   --sombra-1:var(--repisa-1); --sombra-2:var(--repisa-2); --sombra-3:var(--repisa-4);
 
+  /* Alto de la barra inferior. Es UN token y no un 52 escrito a mano en cada
+     página porque el número se usa en seis lugares distintos (el relleno del
+     body, el panel del mapa, la ficha, el calendario, la lista de descuentos)
+     y basta que uno quede desfasado para que la última línea de la página
+     viva debajo de la barra. `--hueco-nav` ya trae el notch sumado.
+     En escritorio la barra no existe, así que el hueco es cero. */
+  --alto-nav:58px;
+  --hueco-nav:0px;
+
   /* Movimiento */
   --rapido:.12s cubic-bezier(.4,0,.2,1);
   --medio:.22s cubic-bezier(.2,0,0,1);
@@ -155,11 +164,18 @@
      no se eligió un verde —que era el hueco obvio del círculo cromático— para
      no dejar dos verdes hablando de plata: el del Pudú ya dice "gratis". */
   --c-descuento:#95521C; --c-descuento-tinta:#6B3813;
+  /* La Bandurria. Es el único OLIVA del sistema y el único hueco que quedaba
+     libre en la rueda: los diez rellenos anteriores se apiñan en el rojo, el
+     naranjo y el azul, y entre el verde del Pudú (H156, esmeralda) y el
+     naranjo de clases (H34) no había nada. Este cae en H77 y no se confunde
+     con ninguno. Que además sea el color del aceite de oliva y de las hierbas
+     es la razón por la que se prefirió al lila, que era el otro hueco. */
+  --c-comer:#5C7A1E;     --c-comer-tinta:#47600F;
   --c-fiesta-suave:var(--morado-200); --c-musica-suave:var(--rojo-200);
   --c-cultura-suave:var(--lapis-200); --c-clases-suave:var(--naranjo-200);
   --c-libre-suave:var(--verde-200);   --c-otros-suave:var(--amarillo-200);
   --c-deporte-suave:#BFE6EA;          --c-charla-suave:#F7CBDC;
-  --c-descuento-suave:#F0D8BE;
+  --c-descuento-suave:#F0D8BE;        --c-comer-suave:#D9E6A8;
 }
 /* En oscuro la tinta se invierte: sobre azul-950 el que falla es el oscuro.
    Se usa el relleno fuerte, que ahí sí pasa de sobra. */
@@ -168,14 +184,14 @@
     --c-fiesta-tinta:#A893E7; --c-musica-tinta:#F47662; --c-cultura-tinta:#7DA5D5;
     --c-clases-tinta:#F6B65E; --c-libre-tinta:#5FC79B; --c-deporte-tinta:#5FC8D6;
     --c-charla-tinta:#EE8FB4; --c-otros-tinta:#FAD391;
-    --c-descuento-tinta:#E0A063;
+    --c-descuento-tinta:#E0A063; --c-comer-tinta:#A8C64F;
   }
 }
 :root[data-tema="oscuro"]{
   --c-fiesta-tinta:#A893E7; --c-musica-tinta:#F47662; --c-cultura-tinta:#7DA5D5;
   --c-clases-tinta:#F6B65E; --c-libre-tinta:#5FC79B; --c-deporte-tinta:#5FC8D6;
   --c-charla-tinta:#EE8FB4; --c-otros-tinta:#FAD391;
-  --c-descuento-tinta:#E0A063;
+  --c-descuento-tinta:#E0A063; --c-comer-tinta:#A8C64F;
 }
 
 /* ---------- 2. BASE ---------- */
@@ -223,33 +239,58 @@ img{max-width:100%;display:block}
 .nav-inferior{display:none}
 @media(max-width:879px){
   .barra .nav{display:none}
+  /* Los tres `env()`: el de abajo es la barra de gestos y los de los costados
+     son el notch, que en un teléfono ACOSTADO se come una franja lateral. Sin
+     ellos —y con viewport-fit=cover, que es lo que traen las ocho páginas— el
+     primer y el último destino quedan debajo de la muesca. */
   .nav-inferior{
     display:flex;position:fixed;inset:auto 0 0 0;z-index:20;
     background:var(--fondo-elevado);border-top:2.5px solid var(--contorno);
     padding-bottom:env(safe-area-inset-bottom);
+    padding-left:env(safe-area-inset-left);
+    padding-right:env(safe-area-inset-right);
+    /* El alto es EXPLÍCITO y con box-sizing:border-box incluye el borde de
+       2.5px. Si se dejara crecer con el contenido, --alto-nav describiría los
+       enlaces y no la barra, el borde quedaría fuera de la cuenta y el hueco
+       reservado abajo saldría corto por esos 2.5px. */
+    height:calc(var(--alto-nav) + env(safe-area-inset-bottom));
+    box-sizing:border-box;
   }
-  /* Siete destinos: a 375px cada celda queda en 53px, así que el texto baja
-     a 9.5px y el ícono a 21. El alto de 52px se respeta igual — es el área
-     táctil y esa no se negocia. La etiqueta no envuelve nunca: prefiero que
-     se corte a que la barra crezca a dos líneas. */
+  /* Ocho destinos: a 375px cada celda queda en 47px, así que el texto baja
+     a 9.5px y el ícono a 21. El alto se respeta igual — es el área táctil y
+     esa no se negocia. La etiqueta no envuelve nunca: prefiero que se corte
+     a que la barra crezca a dos líneas.
+
+     Es una REJILLA y no una columna flex por una razón concreta: el ícono de
+     la página activa lleva pastilla y mide 30px contra los 21 de los demás.
+     En flex ese ícono estiraba la fila entera, la barra pasaba de 54 a 65px
+     y las seis reservas de espacio calculadas sobre 52 quedaban cortas: la
+     última línea de cada página terminaba debajo de la barra. Con la primera
+     fila fijada en 30px la altura es la misma haya pastilla o no. */
   .nav-inferior a{
-    flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px;
-    padding:8px 2px 7px;text-decoration:none;color:var(--tinta-tenue);
-    font-size:9.5px;font-weight:700;min-height:52px;justify-content:center;
-    letter-spacing:-.01em;
+    flex:1;min-width:0;position:relative;
+    display:grid;grid-template-rows:30px auto;gap:2px;
+    justify-items:center;align-content:center;
+    height:100%;padding:0 2px;
+    text-decoration:none;color:var(--tinta-tenue);
+    font-size:9.5px;font-weight:700;letter-spacing:-.01em;
   }
   .nav-inferior a span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .nav-inferior a svg{width:21px;height:21px;transition:var(--rapido)}
+  .nav-inferior a svg{width:21px;height:21px;align-self:center;transition:var(--rapido)}
   .nav-inferior a[aria-current="page"]{color:var(--tinta)}
-  /* La pastilla de color tras el ícono: los colores de la Loica en la nav */
+  /* La pastilla de color tras el ícono: los colores de la Loica en la nav.
+     20 de alto + 3+3 de relleno + 2+2 de contorno = los 30px de la fila.
+     El relleno lateral era de 9px cuando había siete destinos; con ocho la
+     celda bajó a 47px y la pastilla (21+18+4 = 43) quedaba a dos píxeles de
+     tocar a la vecina. A 6px vuelve a respirar sin dejar de leerse pastilla. */
   .nav-inferior a[aria-current="page"] svg{
     background:var(--nav-color,var(--acento));color:var(--nav-tinta,var(--arena-50));
     border:2px solid var(--contorno);border-radius:var(--r-pill);
-    padding:3px 9px;width:auto;height:22px;box-sizing:content-box;
+    padding:3px 6px;width:auto;height:20px;box-sizing:content-box;
   }
   .nav-inferior a[aria-current="page"] .punto{display:none}
-  .nav-inferior a{position:relative}
-  body.con-nav-inferior{padding-bottom:calc(52px + env(safe-area-inset-bottom))}
+  :root{--hueco-nav:calc(var(--alto-nav) + env(safe-area-inset-bottom))}
+  body.con-nav-inferior{padding-bottom:var(--hueco-nav)}
 }
 
 /* Un color por destino; cada color viaja con su tinta (el naranjo y el
@@ -263,6 +304,9 @@ img{max-width:100%;display:block}
 :root[data-pagina="agregar"]    {--nav-color:var(--c-clases); --nav-tinta:var(--azul-900)}
 :root[data-pagina="nosotros"]   {--nav-color:var(--c-libre);  --nav-tinta:var(--arena-50)}
 :root[data-pagina="descuentos"] {--nav-color:var(--c-descuento);--nav-tinta:var(--arena-50)}
+/* Comer se lleva el oliva de la Bandurria. Al lado de los descuentos —que son
+   café— se distinguen: uno es la tarjeta del banco, el otro es la mesa. */
+:root[data-pagina="comer"]      {--nav-color:var(--c-comer);  --nav-tinta:var(--arena-50)}
 
 .idiomas{display:flex;gap:2px}
 .idiomas button, .tema{
@@ -272,6 +316,23 @@ img{max-width:100%;display:block}
 }
 .idiomas button[aria-pressed="true"]{background:var(--tinta);color:var(--fondo-elevado);border-color:var(--tinta)}
 .tema{padding:5px 9px;font-size:14px;line-height:1}
+
+/* Con el dedo, estos botones miden 33x29 —y el logo 83x32, que es el único
+   camino de vuelta a la portada desde las siete páginas— contra los 44 que
+   pide el pulgar. Se agranda el ÁREA y no la caja: la barra del mapa pelea
+   por cada píxel de alto, así que un pseudo-elemento transparente estira el
+   blanco hacia el relleno que la barra ya tenía. El ancho no se toca en los
+   idiomas —hay 2px entre ES, EN y PT y agrandarlos los haría solaparse, que
+   es peor que uno chico. */
+@media (pointer:coarse){
+  .idiomas button,.tema,.logo{position:relative}
+  .idiomas button::after,.tema::after,.logo::after{
+    content:"";position:absolute;left:0;right:0;top:50%;
+    height:44px;transform:translateY(-50%);
+  }
+  /* El de tema sí está solo: puede crecer hacia los lados hasta el hueco. */
+  .tema::after{left:-4px;right:-4px}
+}
 
 /* ---------- 4. CHIPS DE FILTRO ---------- */
 .filtros{display:flex;gap:var(--e-2);overflow-x:auto;padding:var(--e-3) var(--e-4);scrollbar-width:none;
@@ -286,6 +347,17 @@ img{max-width:100%;display:block}
 }
 .chip:hover{transform:translateY(-1px)}
 .chip:active{transform:translateY(3px);box-shadow:none}
+/* Los chips del mapa y de descuentos se aprietan a 36-38px de alto para no
+   comerse la pantalla. Con el dedo eso queda corto, así que se estira el área
+   —no la caja— hacia el relleno del riel. Solo a lo alto: los chips van a 8px
+   uno de otro y ensancharlos los haría pisarse, que es peor que uno chico. */
+@media (pointer:coarse){
+  .chip,.segmentado button{position:relative}
+  .chip::before,.segmentado button::before{
+    content:"";position:absolute;left:0;right:0;top:50%;
+    height:44px;transform:translateY(-50%);
+  }
+}
 .chip svg{width:22px;height:22px;flex:none}
 .chip[aria-pressed="true"]{
   background:var(--tinta);color:var(--fondo-elevado);
@@ -394,11 +466,27 @@ img{max-width:100%;display:block}
 .campo{margin-bottom:var(--e-4)}
 .campo label{display:block;font-weight:700;font-size:var(--t-sm);margin-bottom:6px}
 .campo .ayuda{font-size:var(--t-xs);color:var(--tinta-tenue);margin-top:4px}
+/* 16px NO es un capricho de tamaño: bajo esa cifra Safari de iOS hace zoom
+   solo al enfocar el campo, deja la página corrida y el visitante tiene que
+   pellizcar para volver. Con --t-base (15px) el formulario de publicar hacía
+   eso en sus veintidós campos, uno por uno. La diferencia de un píxel no se
+   nota; el zoom sí. */
 .campo input,.campo select,.campo textarea{
   width:100%;padding:11px var(--e-3);border:2px solid var(--contorno-suave);
   border-radius:var(--r-sm);background:var(--fondo);color:var(--tinta);
-  font:var(--t-base)/1.4 var(--fuente-ui);transition:var(--rapido);
+  font:16px/1.4 var(--fuente-ui);transition:var(--rapido);
 }
+/* Los nativos de iOS y Android dibujan `date` y `time` con su propio alto y
+   quedan más bajos que el resto. Se listan los tipos uno por uno a propósito:
+   un `.campo input` a secas también le pondría 46px de alto a los radios que
+   agrega.html esconde con height:0 para dibujar sus propias pastillas, y los
+   haría reaparecer. */
+.campo input:not([type]),.campo input[type="text"],.campo input[type="url"],
+.campo input[type="email"],.campo input[type="tel"],.campo input[type="number"],
+.campo input[type="date"],.campo input[type="time"],.campo select{min-height:46px}
+/* La casilla de "es gratis" medía 19px. Es el único control del formulario
+   que se toca sin apuntar a un texto, así que necesita área propia. */
+.campo input[type="checkbox"]{width:24px;height:24px;accent-color:var(--acento);flex:none}
 .campo input:focus,.campo select:focus,.campo textarea:focus{
   border-color:var(--acento);outline:none;box-shadow:0 0 0 3px rgba(232,68,46,.14)
 }
@@ -423,10 +511,19 @@ img{max-width:100%;display:block}
 .red.copiado{background:var(--gratis);border-color:var(--gratis);color:#fff}
 
 /* ---------- 8. CONTENEDORES ---------- */
-.contenido{max-width:760px;margin:0 auto;padding:var(--e-8) var(--e-5) var(--e-12)}
+/* El `max()` de los costados es para el teléfono acostado: si el notch pide
+   más que los 20px de siempre, manda el notch; si no, no pasa nada. */
+.contenido{
+  max-width:760px;margin:0 auto;
+  padding:var(--e-8) max(var(--e-5),env(safe-area-inset-right))
+          var(--e-12) max(var(--e-5),env(safe-area-inset-left));
+}
 .panel{background:var(--fondo-elevado);border:2.5px solid var(--contorno);border-radius:var(--r-lg);
   padding:var(--e-6);box-shadow:var(--repisa-2)}
 .vacio{padding:var(--e-10) var(--e-5);text-align:center;color:var(--tinta-suave)}
+/* Los enlaces sueltos dentro de un párrafo de pie quedaban en 17px de alto.
+   `inline-block` con relleno vertical les da área sin correr la línea. */
+.pie a{display:inline-block;padding:12px 4px;margin:-12px 0}
 .vacio svg{width:78px;height:78px;opacity:.5;margin:0 auto var(--e-3)}
 
 /* Etiqueta de mascota */

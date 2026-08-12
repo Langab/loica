@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=9">
+<link rel="stylesheet" href="loica.css?v=11">
 <style>
   body{overflow-x:hidden}
 
@@ -229,6 +229,18 @@
     .destino{min-height:auto}
     .destino span{max-width:100%}
   }
+  /* Cada animal del desfile es un botón que lleva a su categoría, y con el
+     dedo medían 34x37. Nueve celdas de 44 no caben en 375px, así que se
+     reparte el ancho entero entre los nueve sin huecos: quedan pegados y en
+     ~41px cada uno, que es todo lo que da la pantalla. El dibujo sigue igual;
+     crece la caja. */
+  @media(max-width:600px) and (pointer:coarse){
+    .desfile{gap:0;padding:0 var(--e-2)}
+    .desfile .bicho-hero{
+      flex:1;min-width:0;min-height:48px;
+      display:flex;align-items:flex-end;justify-content:center;
+    }
+  }
   @media(prefers-reduced-motion:reduce){
     .desfile .bicho-hero{animation:none}
     #loica-guia,#loica-guia.posada{animation:none}
@@ -302,7 +314,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
-<script src="loica.js?v=9"></script>
+<script src="loica.js?v=11"></script>
 <script>
 /* La raíz del sitio era el mapa hasta este cambio, así que hay links dando
    vueltas por WhatsApp con la forma `.../#/e/<id>`. Se reenvían al mapa en vez
@@ -318,6 +330,7 @@ const DESTINOS = [
   {url:"mapa.html",       tono:"--c-musica",  claro:true,  masc:"condor",     t:"pMapaT",  d:"pMapaD"},
   {url:"calendario.html", tono:"--c-cultura", claro:true,  masc:"chinchilla", t:"pCalT",   d:"pCalD"},
   {url:"descuentos.html", tono:"--c-descuento", claro:true, masc:"degu",     t:"pDctoT",  d:"pDctoD"},
+  {url:"comer.html",      tono:"--c-comer",   claro:true,  masc:"quiltro",  t:"pComerT", d:"pComerD"},
   {url:"blog.html",       tono:"--c-fiesta",  claro:true,  masc:"culpeo",     t:"pBlogT",  d:"pBlogD"},
   {url:"nosotros.html",   tono:"--c-libre",   claro:true,  masc:"pudu",       t:"pQuienT", d:"pQuienD"},
 ];

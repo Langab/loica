@@ -8,10 +8,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=9">
+<link rel="stylesheet" href="loica.css?v=11">
 <style>
   html,body{height:100%;overflow:hidden}
-  #app{display:flex;flex-direction:column;height:100dvh}
+  /* Los dos altos van en este orden a proposito: `dvh` no existe en
+     Safari de iOS anterior a 15.4 ni en Chrome anterior a 108, y ahi la
+     declaracion se descarta entera. Sin el 100vh de respaldo el alto
+     quedaba en `auto` y la pagina —que es una app de alto fijo con
+     scroll interno— se desarmaba: la lista crecia sin fin y la barra de
+     abajo se iba de la pantalla. */
+  #app{display:flex;flex-direction:column;height:100vh;height:100dvh}
   header{flex:none;z-index:6}
   main{flex:1;display:flex;min-height:0}
 
@@ -73,13 +79,18 @@
   .agenda-lista{overflow-y:auto;flex:1}
 
   @media(max-width:879px){
-    main{flex-direction:column;padding-bottom:calc(52px + env(safe-area-inset-bottom))}
+    main{flex-direction:column;padding-bottom:var(--hueco-nav)}
     .agenda{width:auto;border-left:0;border-top:1px solid var(--borde);
       max-height:46%;min-height:150px}
     .calendario{padding:var(--e-3)}
     .marca-ev{display:none}
     .rejilla{grid-auto-rows:minmax(44px,1fr)}
     .dia{align-items:center;justify-content:center;gap:4px}
+    /* Cambiar de mes es LA acción de esta página y las flechas median 38x38.
+       Acá sí se agranda la caja y no solo el área: la barra del mes tiene
+       espacio de sobra y son botones que se aprietan varias veces seguidas. */
+    .mes-nav button{width:44px;height:44px}
+    .mes-nav .hoy{width:auto}
     .puntos{display:flex;gap:2px;flex-wrap:wrap;justify-content:center}
     .puntos i{width:5px;height:5px;border-radius:50%;background:var(--tono)}
     .marca-ev i{background:var(--punto,var(--tono))}
@@ -120,7 +131,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegacion principal"></nav>
 
-<script src="loica.js?v=9"></script>
+<script src="loica.js?v=11"></script>
 <script>
 let EVENTOS = [], filtroCat = null, soloGratis = false;
 let mesVisible = new Date(), diaElegido = new Date();

@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=9">
+<link rel="stylesheet" href="loica.css?v=11">
 <style>
   /* ============================================================
      HABLA CON LA LOICA
@@ -181,6 +181,20 @@
     /* Nueve animales a 375px van pegados al filo: el respiro evita que el
        primero y el último se lean cortados. */
     .desfile{padding:0 var(--e-4)}
+  }
+  /* Los nueve animales son los atajos principales de esta página y con el
+     dedo medían 34x37. A 375px no caben nueve celdas de 44 (serían 396 más
+     los huecos), así que se reparte el ancho completo entre los nueve y se
+     borran los huecos: cada botón queda en ~41px pegado al siguiente, que es
+     lo más cerca de 44 que permite la pantalla, y hacia arriba sí llega a 48
+     porque el cerro tiene sitio de sobra. El dibujo no cambia de tamaño: lo
+     que crece es la caja que lo rodea. */
+  @media(max-width:760px) and (pointer:coarse){
+    .desfile{gap:0;padding:0 var(--e-2)}
+    .bicho-hero{
+      flex:1;min-width:0;min-height:48px;
+      display:flex;align-items:flex-end;justify-content:center;
+    }
   }
   @media(max-width:760px) and (prefers-color-scheme: dark){
     :root:not([data-tema="claro"]) .hero .mancha{opacity:.15}
@@ -372,7 +386,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
-<script src="loica.js?v=9"></script>
+<script src="loica.js?v=11"></script>
 <script>
 /* ============================================================
    1. EL ELENCO COMO GUÍAS

@@ -85,7 +85,9 @@ Las páginas son:
 |---|---|
 | `web/index.html` | La **portada**: hero con el elenco de animales, panoramas de hoy y los cuatro destinos |
 | `web/mapa.html` | El **mapa**: un pin-animal por evento (sin agrupar, a propósito), filtros de fecha (Hoy / Mañana / 7 días / Finde), precio, público y categoría, lista lateral y ficha con anterior/siguiente |
+| `web/habla.html` | **Habla con la Loica**: el elenco recomienda por turnos, sin tokens ni servidor |
 | `web/calendario.html` | Mes a mes |
+| `web/descuentos.html` | Los **descuentos** de restaurante por banco, día y comuna |
 | `web/blog.html` | Las ediciones del blog |
 | `web/agrega.html` | Formulario para publicar |
 | `web/nosotros.html` | Quién hace esto y el elenco explicado |
@@ -96,7 +98,25 @@ mascotas en SVG, categorías, traducciones es/en/pt y utilidades). Los enlaces
 a esos dos archivos llevan `?v=N`: el sitio es estático y sin build, así que
 ese número es lo único que obliga al navegador a soltar la versión vieja
 después de un cambio de estilos. **Si tocas `loica.css` o `loica.js`, sube el
-número en las seis páginas y en la plantilla de `exportar_web.py`.**
+número en las ocho páginas y en la plantilla de `exportar_web.py`.** Van todos
+juntos: la plantilla se había quedado en `v=5` mientras el resto iba en `v=9`,
+y las 2.486 fichas servían CSS viejo a quien ya hubiera entrado antes.
+
+```bash
+# sube el cache-buster en todo el sitio de una vez
+sed -i '' 's/?v=10/?v=11/g' web/*.html exportar_web.py && python3 exportar_web.py
+```
+
+### El alto de la barra inferior es un token
+
+`--alto-nav` en `loica.css` define cuánto mide la barra de destinos del
+celular, y `--hueco-nav` es ese alto más el notch. **Ese hueco se reserva con
+la variable, nunca con un número escrito a mano.** El sitio tenía `52px`
+copiado en cinco archivos mientras la barra medía 65 —el ícono de la página
+activa lleva pastilla y estiraba la fila—, así que la última línea de cada
+página vivía debajo de la barra: en las fichas de evento, la que dice de qué
+fuente salió el panorama. En escritorio la barra no existe y `--hueco-nav`
+vale cero solo.
 
 Es un **prototipo para ver la idea funcionando**, no la app de producción: usa
 MapLibre con mosaicos de OpenStreetMap (sin API key) y lee un archivo JSON en

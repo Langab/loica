@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dónde comer — Loica</title>
+<meta name="description" content="Los locales de Santiago a los que sí se vuelve, elegidos a dedo y con lo que hay que pedir en cada uno. Sin robot, sin ranking y sin canje.">
+<meta name="robots" content="index,follow" id="meta-robots">
+<link rel="canonical" href="https://langab.github.io/loica/comer.html">
+
+<!-- Open Graph básico: esto es lo que se ve al pegar el link en WhatsApp -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Loica">
+<meta property="og:locale" content="es_CL">
+<meta property="og:title" content="Dónde comer — Loica">
+<meta property="og:description" content="Los locales de Santiago a los que sí se vuelve, y lo que hay que pedir en cada uno.">
+<meta property="og:url" content="https://langab.github.io/loica/comer.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="loica.css?v=11">
+<style>
+  body{overflow-x:hidden}
+  .contenido-comer{max-width:940px;margin:0 auto;padding:var(--e-6) var(--e-4) var(--e-12)}
+
+  /* El Quiltro de la cabecera no vuela como la Loica: mueve la cola. Es la
+     única animación del sitio que se lee como un perro contento. */
+  .caminando{animation:caminar 2.6s ease-in-out infinite}
+  @keyframes caminar{
+    0%,100%{transform:translateY(0) rotate(-2.5deg)}
+    50%{transform:translateY(-4px) rotate(2.5deg)}
+  }
+  @media (prefers-reduced-motion:reduce){.caminando{animation:none}}
+
+  .aviso-linea{
+    display:flex;align-items:center;gap:var(--e-2);
+    background:var(--fondo-elevado);border:1px solid var(--borde);border-radius:var(--r-md);
+    padding:var(--e-3) var(--e-4);margin-bottom:var(--e-5);font-size:var(--t-sm);color:var(--tinta-suave);
+  }
+  .aviso-linea svg{flex:none}
+
+  .comer-cabecera{text-align:center;padding:var(--e-6) 0 var(--e-2)}
+  .comer-cabecera h1{margin:var(--e-3) 0 var(--e-2)}
+  .comer-cabecera p{max-width:560px;margin:0 auto;color:var(--tinta-suave);line-height:1.62;font-size:var(--t-md)}
+  .comer-actualizado{display:block;margin-top:var(--e-3);font-size:var(--t-xs);color:var(--tinta-tenue);font-weight:600}
+
+  /* ---------- Filtros ----------
+     Con catorce locales una barra de búsqueda sobra; lo que sí se pregunta
+     uno es "¿qué se me antoja?", y eso son seis chips. */
+  .filtros{
+    display:flex;flex-wrap:wrap;gap:var(--e-2);justify-content:center;
+    margin:var(--e-6) 0 var(--e-2);
+  }
+  .filtros button{
+    display:inline-flex;align-items:center;gap:7px;min-height:38px;
+    background:var(--fondo-elevado);color:var(--tinta-suave);
+    border:2px solid var(--borde-fuerte);border-radius:var(--r-pill);
+    padding:0 var(--e-4);font:800 var(--t-sm)/1 var(--fuente-ui);cursor:pointer;
+    transition:var(--rapido);
+  }
+  .filtros button:hover{border-color:var(--contorno);color:var(--tinta)}
+  .filtros button[aria-pressed="true"]{
+    background:var(--c-comer);color:var(--arena-50);
+    border-color:var(--contorno);box-shadow:var(--repisa-1);
+  }
+  .cuenta{text-align:center;font-size:var(--t-sm);color:var(--tinta-tenue);font-weight:700;margin-bottom:var(--e-5)}
+
+  /* ---------- La grilla ----------
+     Cuadrados chicos a propósito: acá se elige con el ojo y catorce fotos
+     grandes serían catorce scrolls. El nombre va ENCIMA de la foto, no debajo,
+     porque a este tamaño una tarjeta con foto arriba y texto abajo deja las
+     dos cosas chicas; y el Quiltro va encima de todo, en su medalla, que es lo
+     que hace que la grilla se lea Loica y no un directorio de restaurantes.
+
+     La foto se enlaza al servidor del local, igual que las de los eventos se
+     enlazan a las del organizador: acá no se copian fotos ajenas. Si el local
+     no tiene uno o lo bloquea, `onerror` la saca y queda el pastel oliva con
+     el Quiltro, que es un estado válido de la tarjeta y no un hueco roto. */
+  .locales{display:grid;grid-template-columns:repeat(auto-fill,minmax(172px,1fr));gap:var(--e-4)}
+  .local{
+    position:relative;display:block;aspect-ratio:1/1;overflow:hidden;
+    text-decoration:none;color:inherit;
+    background:var(--c-comer-suave);border:3px solid var(--contorno);border-radius:var(--r-lg);
+    box-shadow:var(--repisa-3);transition:var(--rapido);
+  }
+  .local:hover{transform:translateY(-3px);box-shadow:var(--repisa-4)}
+  .local:active{transform:translateY(4px);box-shadow:none}
+  /* El Quiltro de respaldo va sobre el tercio alto y no al centro: abajo vive
+     el nombre, y centrado quedaba con las patas detrás del texto. */
+  .local > svg{
+    position:absolute;left:50%;top:43%;transform:translate(-50%,-50%);
+    width:58%;height:auto;opacity:.92;
+  }
+  .local img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+  /* El velo. Sin él el nombre en blanco cae sobre lo que haya salido en la
+     foto y a veces es un mantel blanco. Va de abajo hacia arriba y solo cubre
+     la mitad baja, para que la foto siga siendo la foto. */
+  .local-velo{
+    position:absolute;inset:0;z-index:1;
+    background:linear-gradient(to top,rgba(12,18,34,.92) 0%,rgba(12,18,34,.72) 28%,
+               rgba(12,18,34,.16) 55%,rgba(12,18,34,0) 78%);
+  }
+  .local-texto{
+    position:absolute;inset:auto 0 0 0;z-index:2;padding:var(--e-3) var(--e-4) var(--e-4);
+    display:flex;flex-direction:column;gap:2px;color:#FFFBF5;
+  }
+  .local-texto h2{
+    font-size:var(--t-md);line-height:1.1;color:#FFFBF5;
+    text-shadow:0 1px 3px rgba(0,0,0,.55);
+  }
+  .local-donde{
+    font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+    color:#D9E6A8;text-shadow:0 1px 3px rgba(0,0,0,.55);
+  }
+  .local-tipo{
+    font-size:var(--t-xs);font-weight:700;color:rgba(255,251,245,.92);
+    text-shadow:0 1px 3px rgba(0,0,0,.55);
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+
+  /* La medalla del Quiltro: la misma bolita crema con contorno que usa la
+     etiqueta de categoría en el blog, acá arriba a la izquierda. */
+  .local-medalla{
+    position:absolute;top:8px;left:8px;z-index:2;width:34px;height:34px;
+    border-radius:var(--r-pill);background:#FFFBF5;
+    border:2.5px solid var(--contorno);box-shadow:var(--repisa-1);
+    display:grid;place-items:center;
+  }
+  .local-precio{
+    position:absolute;top:8px;right:8px;z-index:2;background:var(--azul-900);color:#FFFBF5;
+    border:2px solid var(--contorno);border-radius:var(--r-pill);padding:1px 9px;
+    font:800 var(--t-xs)/1.7 var(--fuente-ui);letter-spacing:.06em;
+  }
+  .estrella{
+    position:absolute;top:47px;left:8px;z-index:2;background:var(--amarillo-300);color:var(--azul-900);
+    border:2px solid var(--contorno);border-radius:var(--r-pill);padding:1px 9px;
+    font:800 11px/1.7 var(--fuente-ui);
+  }
+
+  /* ---------- Ficha de un local ---------- */
+  .volver{display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:var(--tinta-suave);
+    font-weight:600;font-size:var(--t-sm);min-height:44px;margin-bottom:var(--e-2)}
+  .volver:hover{color:var(--tinta)}
+  .ficha{max-width:680px;margin:0 auto}
+  .ficha-foto{
+    position:relative;aspect-ratio:16/9;background:var(--c-comer-suave);
+    border:3px solid var(--contorno);border-radius:var(--r-xl);overflow:hidden;
+    display:grid;place-items:center;box-shadow:var(--repisa-4);margin-bottom:var(--e-5);
+  }
+  .ficha-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .ficha-etiqueta{
+    display:inline-flex;align-items:center;gap:7px;font-size:var(--t-sm);font-weight:800;
+    color:var(--c-comer-tinta);text-transform:uppercase;letter-spacing:.04em;margin-bottom:var(--e-2);
+  }
+  .ficha h1{margin-bottom:var(--e-3)}
+  .ficha-bajada{font-size:var(--t-md);color:var(--tinta-suave);line-height:1.6;margin:0 0 var(--e-4)}
+
+  /* Los datos duros van juntos y arriba: dirección, precio y tipo son lo que
+     se mira antes de decidir, y no tienen por qué estar en un párrafo. */
+  .datos{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--e-3);
+    margin-bottom:var(--e-5);
+  }
+  .dato{
+    background:var(--fondo-elevado);border:2.5px solid var(--contorno);border-radius:var(--r-md);
+    box-shadow:var(--repisa-1);padding:var(--e-3) var(--e-4);
+  }
+  .dato b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.06em;
+    color:var(--tinta-tenue);margin-bottom:2px}
+  .dato span{font-size:var(--t-sm);font-weight:700;line-height:1.4}
+
+  /* El bloque de "qué pedir" es el corazón de la página, así que va en color
+     pleno con el Quiltro al lado, como las notas del blog. */
+  .pedir{
+    position:relative;background:var(--c-comer-suave);color:var(--azul-900);
+    border:3px solid var(--contorno);border-radius:var(--r-xl);
+    box-shadow:var(--repisa-3);padding:var(--e-5);margin:var(--e-6) 0;
+  }
+  .pedir-titulo{
+    display:flex;align-items:center;gap:var(--e-3);margin-bottom:var(--e-3);
+  }
+  .pedir-titulo .quien{
+    flex:none;width:46px;height:46px;border-radius:var(--r-pill);background:var(--c-comer);
+    border:2.5px solid var(--contorno);display:grid;place-items:center;
+  }
+  .pedir-titulo h2{font-size:var(--t-lg);color:var(--azul-900)}
+  .pedir ul{margin:0;padding-left:var(--e-5);display:grid;gap:7px}
+  .pedir li{line-height:1.55;font-weight:600}
+  .pedir li::marker{color:var(--c-comer-tinta)}
+  .pedir .cuando{
+    display:flex;gap:8px;align-items:flex-start;margin:var(--e-4) 0 0;padding-top:var(--e-3);
+    border-top:2px dashed rgba(30,42,74,.28);font-size:var(--t-sm);line-height:1.5;color:#2C3A5C;
+  }
+  .pedir .cuando b{font-weight:800}
+
+  .ficha-cuerpo{font-size:var(--t-md);line-height:1.72}
+  .ficha-cuerpo p{margin:0 0 var(--e-4)}
+  .ficha-cuerpo strong{color:var(--tinta)}
+
+  /* El "ojo" es el pero. Va apagado y con borde punteado, igual que la
+     sección honesta de Quién hace esto: no es vitrina. */
+  .ojo{
+    display:flex;gap:var(--e-3);align-items:flex-start;
+    background:var(--fondo-elevado);border:2px dashed var(--borde-fuerte);
+    border-left:6px solid var(--amarillo-300);border-radius:var(--r-lg);
+    padding:var(--e-4) var(--e-5);margin:var(--e-5) 0;
+  }
+  .ojo p{margin:0;font-size:var(--t-sm);line-height:1.6;color:var(--tinta-suave)}
+  .ojo b{color:var(--tinta)}
+
+  .ficha-botones{display:flex;gap:10px;flex-wrap:wrap;margin-top:var(--e-5)}
+  .ficha-botones .boton{box-shadow:var(--repisa-2)}
+  .ficha-botones .boton:active{transform:translateY(4px);box-shadow:none}
+  .ficha-botones .con-icono{display:inline-flex;align-items:center;gap:7px}
+  .ficha-botones .con-icono svg{flex:none}
+
+  /* Pie de honestidad: quién eligió esto y con qué plata. */
+  .declaracion{
+    margin-top:var(--e-10);padding:var(--e-5);text-align:center;
+    background:var(--fondo-hundido);border-radius:var(--r-xl);
+    font-size:var(--t-sm);color:var(--tinta-suave);line-height:1.62;
+  }
+  .declaracion b{color:var(--tinta)}
+
+  @media(max-width:600px){
+    .locales{grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:var(--e-3)}
+    .local-texto{padding:var(--e-2) var(--e-3) var(--e-3)}
+    .local-texto h2{font-size:var(--t-base)}
+    .local-medalla{width:30px;height:30px}
+    .estrella{top:42px}
+  }
+</style>
+</head>
+<body class="con-nav-inferior">
+<div class="barra" id="barra"></div>
+
+<main class="contenido-comer" id="vista"></main>
+
+<nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
+<script src="loica.js?v=11"></script>
+<script>
+/* ============================================================
+   DÓNDE COMER — índice + ficha de un local, ruteado por hash
+   (#/l/<slug>). Consume comer.json y nada más: acá no entra el
+   robot. Reutiliza loica.js (mascota, escapar, REDES, pintarBarra).
+   ============================================================ */
+
+let DATOS = null, FILTRO = "todas";
+const vista = document.getElementById("vista");
+
+const DESCRIPCION_DEFECTO = "Los locales de Santiago a los que sí se vuelve, elegidos a dedo y con lo que hay que pedir en cada uno. Sin robot, sin ranking y sin canje.";
+
+// La página está escrita en español. El resto del sitio se traduce solo, esto
+// no: son textos de una persona y traducirlos a máquina sería publicar algo
+// que nadie leyó. Mismo criterio que el blog.
+const AVISO_IDIOMA = {
+  en: "This page is written in Spanish for now.",
+  pt: "Esta página está escrita em espanhol por enquanto.",
+};
+
+/* Sobre pastel y sobre relleno fuerte —que no cambian con el tema— el
+   contorno de la mascota hay que fijarlo, o de noche se queda sin borde. */
+const TINTA_FIJA = {tinta:"#1E2A4A"};
+const OLIVA = "var(--c-comer)";
+
+pintarBarra("comer.html");
+mostrarCargando();
+
+fetch("comer.json", {cache:"no-cache"})
+  .then(r => { if(!r.ok) throw new Error("comer.json"); return r.json(); })
+  .then(d => { DATOS = d; enrutar(); })
+  .catch(mostrarError);
+
+window.addEventListener("hashchange", enrutar);
+window.addEventListener("loica:idioma", () => { if(DATOS) enrutar(); });
+
+/* ---------- estados ---------- */
+function mostrarCargando(){
+  vista.innerHTML = `<div class="vacio">${mascota("quiltro","var(--tinta-tenue)",70)}
+    <p>Cargando…</p></div>`;
+}
+function mostrarError(){
+  vista.innerHTML = `<div class="vacio">${mascota("quiltro","var(--tinta-tenue)",70)}
+    <p><b>No pude cargar las recomendaciones</b><br>
+    <button class="boton secundario" style="margin-top:12px"
+      onclick="location.reload()">Reintentar</button></p></div>`;
+}
+
+/* ---------- router ---------- */
+function enrutar(){
+  if(!DATOS) return;
+  const m = location.hash.match(/^#\/l\/([^/?]+)/);
+  if(m){
+    const local = DATOS.locales.find(l => l.slug === decodeURIComponent(m[1]));
+    if(local){ pintarFicha(local); window.scrollTo(0,0); return; }
+  }
+  pintarIndice(!!m);
+  window.scrollTo(0,0);
+}
+
+function fijarRobots(indexar){
+  const meta = document.getElementById("meta-robots");
+  if(meta) meta.setAttribute("content", indexar ? "index,follow" : "noindex");
+}
+function actualizarMetaDescripcion(texto){
+  const meta = document.querySelector('meta[name="description"]');
+  if(meta) meta.setAttribute("content", texto);
+}
+function avisoIdiomaHtml(){
+  return AVISO_IDIOMA[IDIOMA]
+    ? `<div class="aviso-linea">${mascota("quiltro","var(--tinta-tenue)",22)}
+        <span>${escapar(AVISO_IDIOMA[IDIOMA])}</span></div>`
+    : "";
+}
+const fechaLarga = iso => new Date(iso + "T12:00:00")
+  .toLocaleDateString("es-CL", {day:"numeric", month:"long", year:"numeric"});
+
+/* La foto se enlaza al servidor del propio local —igual que las de los eventos
+   se enlazan a las del organizador, nunca se copian— así que puede no cargar:
+   el servidor puede bloquear la lectura desde otro dominio o el local puede
+   cambiar de sitio. Cuando eso pasa, `onerror` la saca y abajo queda el
+   Quiltro sobre el pastel oliva, que es un estado válido de la tarjeta.
+
+   Para reemplazarla por una foto propia basta apuntar `foto` a un archivo de
+   web/fotos/comer/ en comer.json. Ahí está el LEEME con los nombres. */
+const fotoHtml = local => local.foto
+  ? `<img src="${escapar(local.foto)}" alt="" loading="lazy" decoding="async" onerror="this.remove()">`
+  : "";
+
+/* ---------- índice ---------- */
+function pintarIndice(noEncontrado){
+  document.title = "Dónde comer — Loica";
+  actualizarMetaDescripcion(DESCRIPCION_DEFECTO);
+  fijarRobots(true);
+
+  const chips = [["todas","Todo"]].concat(Object.entries(DATOS.cocinas || {}));
+  const filtros = chips.map(([clave, etiqueta]) => `
+    <button type="button" data-cocina="${escapar(clave)}" aria-pressed="${clave === FILTRO}">
+      ${escapar(etiqueta)}
+    </button>`).join("");
+
+  const visibles = DATOS.locales.filter(l => FILTRO === "todas" || l.cocina === FILTRO);
+  const orden = [...visibles].sort((a,b) =>
+    (!!b.destacado - !!a.destacado) || a.nombre.localeCompare(b.nombre, "es"));
+
+  const lista = orden.length
+    ? orden.map(tarjeta).join("")
+    : `<div class="vacio" style="grid-column:1/-1">${mascota("quiltro","var(--tinta-tenue)",64)}
+        <p>Todavía no hay nada de esa cocina en la lista.</p></div>`;
+
+  const avisoNoEncontrado = noEncontrado
+    ? `<div class="aviso-linea">${mascota("quiltro","var(--tinta-tenue)",22)}
+        <span>No encontramos ese local. Acá está la lista completa.</span></div>`
+    : "";
+
+  vista.innerHTML = `
+    ${avisoNoEncontrado}
+    ${avisoIdiomaHtml()}
+    <header class="comer-cabecera" lang="es">
+      <div class="caminando">${mascota("quiltro",OLIVA,64)}</div>
+      <h1>Dónde comer</h1>
+      <p>El resto del sitio lo llena un robot. Esta página no: son los locales de
+        Santiago a los que se vuelve, uno por uno, con lo que hay que pedir en cada
+        uno y a qué hora conviene llegar.</p>
+      ${DATOS.actualizado ? `<span class="comer-actualizado">Actualizado el ${fechaLarga(DATOS.actualizado)}</span>` : ""}
+    </header>
+    <div class="filtros" role="group" aria-label="Filtrar por cocina">${filtros}</div>
+    <p class="cuenta">${orden.length} ${orden.length === 1 ? "local" : "locales"}</p>
+    <div class="locales">${lista}</div>
+    <div class="declaracion" lang="es">
+      <b>Nadie pagó por estar acá.</b> No hay canje, ni ranking, ni publicidad:
+      es una lista de locales que le gustan a quien hace esto, con sus peros escritos.
+      Si un lugar cambió de manos, de carta o de horario,
+      <a href="habla.html">avísame y lo corrijo</a>.
+    </div>`;
+
+  document.querySelectorAll(".filtros button").forEach(b => b.onclick = () => {
+    FILTRO = b.dataset.cocina;
+    pintarIndice(false);
+  });
+}
+
+function tarjeta(local){
+  return `
+    <a class="local" href="#/l/${encodeURIComponent(local.slug)}"
+       aria-label="${escapar(local.nombre)} — ${escapar(local.tipo)}, ${escapar(local.comuna)}">
+      ${mascota("quiltro", OLIVA, 96, TINTA_FIJA)}
+      ${fotoHtml(local)}
+      <span class="local-velo" aria-hidden="true"></span>
+      <span class="local-medalla" aria-hidden="true">${mascota("quiltro", OLIVA, 24, TINTA_FIJA)}</span>
+      <span class="local-precio">${escapar(local.precio || "")}</span>
+      ${local.destacado ? `<span class="estrella">Imperdible</span>` : ""}
+      <span class="local-texto" lang="es">
+        <span class="local-donde">${escapar(local.comuna)}</span>
+        <h2>${escapar(local.nombre)}</h2>
+        <span class="local-tipo">${escapar(local.tipo)}</span>
+      </span>
+    </a>`;
+}
+
+/* ---------- ficha de un local ---------- */
+function pintarFicha(local){
+  document.title = `${local.nombre} — Dónde comer en Santiago | Loica`;
+  actualizarMetaDescripcion(`${local.nombre}, ${local.tipo} en ${local.comuna}. ${local.bajada}`);
+  fijarRobots(true);
+
+  const pedir = (local.pedir || []).map(p => `<li>${formatear(p)}</li>`).join("");
+  const direccion = [local.direccion, local.barrio, local.comuna].filter(Boolean).join(", ");
+
+  vista.innerHTML = `
+    <a class="volver" href="#/">← Volver a dónde comer</a>
+    ${avisoIdiomaHtml()}
+    <article class="ficha" lang="es">
+      <div class="ficha-foto">
+        ${mascota("quiltro", OLIVA, 96, TINTA_FIJA)}
+        ${fotoHtml(local)}
+      </div>
+
+      <span class="ficha-etiqueta">
+        ${mascota("quiltro","var(--c-comer-tinta)",22)} ${escapar(local.tipo)}
+      </span>
+      <h1>${escapar(local.nombre)}</h1>
+      <p class="ficha-bajada">${escapar(local.bajada)}</p>
+
+      <div class="datos">
+        <div class="dato"><b>Dónde</b><span>${escapar(direccion)}</span></div>
+        <div class="dato"><b>Precio</b><span>${escapar(leyendaPrecio(local.precio))}</span></div>
+        <div class="dato"><b>Cocina</b><span>${escapar((DATOS.cocinas || {})[local.cocina] || local.tipo)}</span></div>
+      </div>
+
+      ${pedir ? `
+      <section class="pedir">
+        <div class="pedir-titulo">
+          <span class="quien">${mascota("quiltro","#FFFBF5",32,TINTA_FIJA)}</span>
+          <h2>Qué hay que pedir</h2>
+        </div>
+        <ul>${pedir}</ul>
+        ${local.cuando ? `<p class="cuando"><b>Cuándo ir:</b> ${escapar(local.cuando)}</p>` : ""}
+      </section>` : ""}
+
+      <div class="ficha-cuerpo">${(local.cuerpo || []).map(p => `<p>${formatear(p)}</p>`).join("")}</div>
+
+      ${local.ojo ? `<div class="ojo"><p><b>El pero.</b> ${escapar(local.ojo)}</p></div>` : ""}
+
+      <div class="ficha-botones">
+        ${local.mapa ? `<a class="boton" href="${escapar(local.mapa)}" target="_blank" rel="noopener">Cómo llegar ↗</a>` : ""}
+        ${local.sitio ? `<a class="boton secundario" href="${escapar(local.sitio)}" target="_blank" rel="noopener">Su sitio ↗</a>` : ""}
+        ${local.instagram ? `<a class="boton secundario con-icono" href="${escapar(local.instagram)}" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">${ICONO_IG}</svg>
+            ${escapar(arrobaDe(local.instagram))} ↗</a>` : ""}
+      </div>
+
+      <div id="compartir-local" style="margin-top:var(--e-6)"></div>
+    </article>`;
+
+  document.getElementById("compartir-local").appendChild(compartirLocal(local));
+}
+
+const ICONO_IG = `<rect x="3" y="3" width="18" height="18" rx="5.4" fill="none" stroke="currentColor" stroke-width="1.9"/>
+  <circle cx="12" cy="12" r="4.1" fill="none" stroke="currentColor" stroke-width="1.9"/>
+  <circle cx="17.2" cy="6.8" r="1.25" fill="currentColor"/>`;
+
+/* El botón muestra el @ y no "Instagram": el arroba es lo que se busca después
+   en el teléfono, y de paso deja claro que el link va a la cuenta del local y
+   no a un perfil de Loica. */
+const arrobaDe = url => "@" + url.replace(/\/+$/, "").split("/").pop();
+
+/* *cursiva* y **negrita**, nada más — igual que el cuerpo de un post del blog. */
+function formatear(texto){
+  return escapar(texto)
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\*(.+?)\*/g, "<em>$1</em>");
+}
+function leyendaPrecio(p){
+  return `${p} · ${(DATOS.precios || {})[p] || ""}`.replace(/ · $/, "");
+}
+
+/* Paralelo a compartirPost() del blog: mismos botones, otra URL. */
+function compartirLocal(local){
+  const url = `${SITIO}/comer.html#/l/${local.slug}`;
+  const texto = `${local.nombre} — ${local.tipo}, ${local.comuna}\n${local.bajada}`;
+  const etiqueta = {es:"Compartir", en:"Share", pt:"Compartilhar"}[IDIOMA];
+
+  const caja = document.createElement("div");
+  caja.className = "compartir";
+  caja.innerHTML = `<span class="compartir-titulo">${etiqueta}</span><div class="compartir-botones"></div>`;
+  const fila = caja.querySelector(".compartir-botones");
+
+  const boton = (clase, nombre, color, icono, alPulsar) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "red " + clase;
+    b.style.setProperty("--red", color);
+    b.setAttribute("aria-label", `${etiqueta} — ${nombre}`);
+    b.title = nombre;
+    b.innerHTML = `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">${icono}</svg>`;
+    b.onclick = alPulsar;
+    fila.appendChild(b);
+    return b;
+  };
+
+  for(const [clave, red] of Object.entries(REDES)){
+    boton(clave, red.nombre, red.color, red.icono,
+          () => window.open(red.url(url, texto), "_blank", "noopener,width=620,height=560"));
+  }
+
+  boton("copiar", {es:"Copiar link", en:"Copy link", pt:"Copiar link"}[IDIOMA],
+        "var(--tinta-suave)",
+        `<path d="M9.5 14.5l5-5M8 12l-2 2a3.5 3.5 0 105 5l2-2M16 12l2-2a3.5 3.5 0 10-5-5l-2 2"
+          fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>`,
+        e => copiarLink(url, e.currentTarget));
+
+  return caja;
+}
+</script>
+</body>
+</html>

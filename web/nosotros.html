@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=9">
+<link rel="stylesheet" href="loica.css?v=11">
 <style>
   body{overflow-x:hidden}
 
@@ -187,7 +187,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegacion principal"></nav>
 
-<script src="loica.js?v=9"></script>
+<script src="loica.js?v=11"></script>
 <script>
 const TX = {
   es:{
@@ -222,6 +222,7 @@ const TX = {
       ["degu","El Degú","Descuentos","El roedor del matorral de Santiago, el que anda por el San Cristóbal a pleno sol. Junta comida y la guarda para después, y por eso le tocaron los descuentos de los bancos: qué día conviene salir a comer y con qué tarjeta."],
       ["chungungo","El Chungungo","Deporte","Nutria chica de costa rocosa que igual aparece nadando en el Mapocho. Le tocó el deporte: correr, pedalear, subir cerro."],
       ["pinguino","El Pingüino","Charlas","De Humboldt, de esta costa, y siempre de terno. Le tocaron las charlas, los seminarios y la gente que sabe."],
+      ["quiltro","El Quiltro","Comer","El perro callejero chileno, sin raza y con dueño de todo el pasaje. Guatón porque en el barrio se lo alimentan entre varios, y siempre está echado en la puerta del local antes de que uno llegue. Le tocaron los lugares donde se come: no los descuentos, sino la mesa a la que se vuelve."],
     ],
     tCie:"¿Organizas algo?", sCie:"Si haces clases en una plaza, tocas, montas una obra, armas una feria o convocas una corrida, súbelo. Es gratis y va a seguir siendo gratis. Lo revisa una persona, así que demora entre dos y cuatro días. Si pasa una semana y no aparece, insiste: se me pasó.",
     cta1:"Subir un panorama", cta2:"Ir al mapa",
@@ -260,6 +261,7 @@ const TX = {
       ["degu","The Degu","Discounts","The rodent of the Santiago scrubland, the one you see on Cerro San Cristóbal in broad daylight. It hoards food for later, so it got the bank discounts: which day is worth eating out, and with which card."],
       ["chungungo","The Chungungo","Sport","A small otter from the rocky coast that still turns up swimming in the Mapocho. It got sport: running, cycling, climbing the hills."],
       ["pinguino","The Penguin","Talks","A Humboldt, from this coast, and always in black tie. It got the talks, the seminars and the people who know."],
+      ["quiltro","The Quiltro","Eating out","The Chilean street dog: no breed, and owned by the whole block. Potbellied because half the neighbourhood feeds it, and always lying at the door of the place before you get there. It got the spots where you eat: not the discounts, but the table you come back to."],
     ],
     tCie:"Running something?", sCie:"If you teach a class in a square, play a gig, put on a play, set up a street fair or call a race, put it up. It is free and it will stay free. A person reviews every submission, so it takes between two and four days. If a week goes by and nothing shows up, nudge me: I missed it.",
     cta1:"Post an event", cta2:"Open the map",
@@ -298,6 +300,7 @@ const TX = {
       ["degu","O Degu","Descontos","O roedor do matagal de Santiago, aquele que anda pelo Cerro San Cristóbal em pleno sol. Junta comida e guarda para depois, e por isso ficou com os descontos dos bancos: que dia compensa sair para comer e com qual cartão."],
       ["chungungo","O Chungungo","Esporte","Lontra pequena de costa rochosa que mesmo assim aparece nadando no Mapocho. Ficou com o esporte: correr, pedalar, subir morro."],
       ["pinguino","O Pinguim","Palestras","Um Humboldt, desta costa, e sempre de gala. Ficou com as palestras, os seminários e a gente que sabe."],
+      ["quiltro","O Vira-lata","Comer","O cachorro de rua chileno: sem raça e com dono na vila inteira. Barrigudo porque metade do bairro dá comida, e sempre deitado na porta do lugar antes de você chegar. Ficou com os lugares de comer: não os descontos, mas a mesa à qual se volta."],
     ],
     tCie:"Organiza alguma coisa?", sCie:"Se você dá aula numa praça, toca, monta uma peça, faz uma feira ou convoca uma corrida, sobe aqui. É de graça e vai continuar sendo. Quem revisa é uma pessoa, então demora entre dois e quatro dias. Se passar uma semana e não aparecer, insista: passou batido.",
     cta1:"Publicar um rolê", cta2:"Abrir o mapa",
@@ -318,6 +321,7 @@ const PALETA = {
   chungungo: {tono:"var(--c-deporte)",  suave:"var(--c-deporte-suave)"},
   pinguino:  {tono:"var(--c-charla)",   suave:"var(--c-charla-suave)"},
   degu:      {tono:"var(--c-descuento)",suave:"var(--c-descuento-suave)"},
+  quiltro:   {tono:"var(--c-comer)",    suave:"var(--c-comer-suave)"},
 };
 /* Qué animal acompaña a cada principio: el pudú cuida lo gratis, la loica es
    la casa y el chungungo no para quieto. Mismo criterio que en el mapa. */

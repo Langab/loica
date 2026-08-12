@@ -159,6 +159,29 @@ const CARITAS = {
     ${ojos(8.5, 15.5, 10.4, 1.7, p)}
     <ellipse cx="12" cy="13.3" rx="1.9" ry="1.4" fill="${OJO}"/>`,
 
+  /* El Quiltro: el perro callejero chileno, y guatón, que es como se le dice
+     al que anda bien comido. Es el animal que ya está afuera de la fuente de
+     soda antes que uno, así que le tocaba esta página y no otra.
+
+     Tres señas y ninguna es de raza, porque el quiltro justamente no tiene.
+     UNA OREJA PARADA Y LA OTRA CAÍDA, que es lo que lo separa del culpeo —el
+     otro cánido del elenco— que lleva las dos en punta y simétricas. El hocico
+     corto y ancho con la nariz grande, contra el hocico afilado del zorro. Y
+     LA LENGUA AFUERA: ningún otro de los diez saca la lengua, así que a 22px
+     esa mancha rosada bajo la cara solo puede ser un perro. */
+  quiltro: (c, k, p) => `
+    <path d="M4.8 12.4 5.4 3.6 11.4 7.8z" fill="${c}" stroke="${k}" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M6.7 9.8 7.1 5.8 9.7 7.6z" fill="#F2778C" opacity=".75"/>
+    <path d="M17.4 5.2c3-.4 5.2 1.6 5 4.6-.2 3-2.2 5.4-4.6 6-1.8.4-3-.8-2.8-2.8.2-3 1-5.6 2.4-7.8z"
+          fill="${c}" stroke="${k}" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M18.1 7.6c1.6-.2 2.6.8 2.5 2.4-.1 1.6-1.1 2.8-2.4 3.1z" fill="#F2778C" opacity=".7"/>
+    <circle cx="12" cy="12.4" r="8.3" fill="${c}" stroke="${k}" stroke-width="1.6"/>
+    <ellipse cx="12" cy="16.6" rx="5.4" ry="4" fill="#FAF3E7"/>
+    ${ojos(8.7, 15.3, 10.8, 1.8, p)}
+    <ellipse cx="12" cy="15.4" rx="2" ry="1.5" fill="${OJO}"/>
+    <path d="M10.8 18.9h2.4v2.5a1.2 1.2 0 0 1-2.4 0z"
+          fill="#F2778C" stroke="${k}" stroke-width="1.1" stroke-linejoin="round"/>`,
+
   /* El Pingüino de Humboldt: la herradura BLANCA que parte sobre cada ojo y
      rodea las mejillas hasta juntarse bajo el mentón, y la base ROSADA
      carnosa del pico — las dos señas del Humboldt. Va de terno a las
@@ -232,6 +255,10 @@ const COLAS = {
                            fill="${OJO}" stroke="${k}" stroke-width="1.4"/>`,
   chungungo:  (c, k) => `<path d="M38.2 29.2c4.2-.2 7.6 2.5 8.8 6.6.3 1-.8 1.9-1.7 1.3-3.3-2-5.9-4.7-7.1-7.9z"
                           fill="${c}" stroke="${k}" stroke-width="1.8" stroke-linejoin="round"/>`,
+  /* La del quiltro sube y se ENROSCA hacia adelante, que es como la lleva un
+     perro contento y es media silueta del animal. La de la chinchilla también
+     sube pero se queda en arco; esta cierra el gancho arriba. */
+  quiltro:    (c, k) => cola("M37.6 29c4-1.2 6.4-4.2 6.6-8 .1-2.1-1.3-3.4-3-3-1.6.4-2.5 1.9-2.3 3.6", c, k, 5),
 };
 
 /* Silueta por especie: cuerpo (cx, cy, rx, ry), patas con su grosor, algún
@@ -251,6 +278,12 @@ const CUADRUPEDOS = {
                extra:`<ellipse cx="27.4" cy="37.4" rx="5.4" ry="2.3" fill="#FAF3E7" opacity=".85"/>`},
   chungungo:  {cuerpo:[28.6, 33, 13.8, 7.4], grosor:3.2, cabeza:"3 8.2",
                patas:"M20.8 39.4v4.8M26.6 39.8v4.4M33.2 39.6v4.6M38.2 38.6v5.4", extra:""},
+  /* Guatón, literal: el cuerpo es el más ancho de los cinco cuadrúpedos y las
+     patas las más cortas. La panza clara que cuelga es mitad chiste y mitad
+     anatomía de perro de barrio bien alimentado por todo el pasaje. */
+  quiltro:    {cuerpo:[28.4, 31.6, 12.4, 8.8], grosor:3.5, cabeza:"2.5 3.4",
+               patas:"M21.8 39.2v5.2M27.6 39.6v4.8M33.8 39.2v5.2M38.4 38.4v6",
+               extra:`<ellipse cx="28.4" cy="37.4" rx="8.2" ry="3.4" fill="#FAF3E7" opacity=".92"/>`},
 };
 
 /* Los bigotes de la chinchilla van acá y no en la carita (regla del 1/15). */
@@ -374,13 +407,16 @@ const ELENCO = [
   {clave:"pinguino",   hex:"#C42B67", tinta:"#8F1C4A", es:["Pingüino","Charlas","De Humboldt y de punta en blanco. Charlas, seminarios y gente que sabe."],
                                                        en:["Penguin","Talks","A Humboldt in black tie. Talks, seminars and people who know."],
                                                        pt:["Pinguim","Palestras","Um Humboldt de gala. Palestras, seminários e gente que sabe."]},
+  {clave:"quiltro",    hex:"#5C7A1E", tinta:"#47600F", es:["Quiltro","Comer","Guatón y de nadie. Ya estaba afuera del local antes que tú."],
+                                                       en:["Quiltro","Eating out","A potbellied street mutt. It was outside the place before you got there."],
+                                                       pt:["Vira-lata","Comer","Barrigudo e de ninguém. Já estava na porta antes de você."]},
 ];
 
 /* ---------- TRADUCCIONES ---------- */
 const TEXTOS = {
   es:{
     lema:"Santiago está pasando",
-    mapa:"Mapa", habla:"Habla", blog:"Blog", ninos:"Niños", mas18:"+18", calendario:"Calendario", agregar:"Agrega tu evento", nosotros:"Quién hace esto",
+    mapa:"Mapa", habla:"Habla", blog:"Blog", comer:"Dónde comer", ninos:"Niños", mas18:"+18", calendario:"Calendario", agregar:"Agrega tu evento", nosotros:"Quién hace esto",
     eventos:"eventos", evento:"evento", gratis:"Gratis",
     hoy:"Hoy", manana:"Mañana", semana:"7 días", finde:"Finde",
     cuandoLargo:{hoy:"Hoy", manana:"Mañana", semana:"En estos 7 días", finde:"Este fin de semana", todo:"Todos"},
@@ -406,12 +442,13 @@ const TEXTOS = {
     pBlogT:"El blog", pBlogD:"Rutas y recomendaciones escritas a mano.",
     pQuienT:"Quién hace esto", pQuienD:"Una persona, en Santiago, después de la pega.",
     pElencoT:"Los que te acompañan",
-    pElencoD:"Nueve animales chilenos hacen de señalética: cada uno se hace cargo de un tipo de panorama en el mapa y el calendario, y el Degú de los descuentos.",
+    pElencoD:"Diez animales chilenos hacen de señalética: cada uno se hace cargo de un tipo de panorama en el mapa y el calendario, el Degú de los descuentos y el Quiltro de dónde comer.",
     pGratisT:"gratis", pGratisD:"panoramas que no cuestan nada",
     pTotalD:"panoramas vigentes", pFuentesD:"fuentes revisadas cada mañana",
     pCierreT:"¿Organizas algo?", pCierreD:"Si tu evento es abierto y pasa en Santiago, cabe acá. No cobramos por aparecer.",
     pDctoT:"Los descuentos", pDctoD:"Dónde comer más barato hoy, según tu tarjeta.",
     pDctoCifra:"descuentos de banco vigentes",
+    pComerT:"Dónde comer", pComerD:"Los locales de siempre, elegidos a dedo y con lo que hay que pedir.",
     /* Descuentos */
     descuentos:"Descuentos",
     dTitulo:"¿Dónde como hoy?",
@@ -432,7 +469,7 @@ const TEXTOS = {
   },
   en:{
     lema:"Santiago is happening",
-    mapa:"Map", habla:"Talk", blog:"Blog", ninos:"Kids", mas18:"18+", calendario:"Calendar", agregar:"Add your event", nosotros:"Who makes this",
+    mapa:"Map", habla:"Talk", blog:"Blog", comer:"Where to eat", ninos:"Kids", mas18:"18+", calendario:"Calendar", agregar:"Add your event", nosotros:"Who makes this",
     eventos:"events", evento:"event", gratis:"Free",
     hoy:"Today", manana:"Tomorrow", semana:"7 days", finde:"Weekend",
     cuandoLargo:{hoy:"Today", manana:"Tomorrow", semana:"Within 7 days", finde:"This weekend", todo:"All"},
@@ -458,12 +495,13 @@ const TEXTOS = {
     pBlogT:"The blog", pBlogD:"Routes and picks written by hand.",
     pQuienT:"Who makes this", pQuienD:"One person, in Santiago, after work.",
     pElencoT:"Your guides",
-    pElencoD:"Nine Chilean animals work as signage: each one looks after a type of event on the map and the calendar, and the Degu looks after the discounts.",
+    pElencoD:"Ten Chilean animals work as signage: each one looks after a type of event on the map and the calendar, the Degu looks after the discounts and the Quiltro after where to eat.",
     pGratisT:"free", pGratisD:"events that cost nothing",
     pTotalD:"events on right now", pFuentesD:"sources checked every morning",
     pCierreT:"Running something?", pCierreD:"If your event is open to the public and happens in Santiago, it belongs here. We don't charge for it.",
     pDctoT:"The discounts", pDctoD:"Where to eat cheaper today, depending on your card.",
     pDctoCifra:"live bank discounts",
+    pComerT:"Where to eat", pComerD:"The regulars, hand-picked, and what to order at each one.",
     /* Descuentos */
     descuentos:"Discounts",
     dTitulo:"Where do I eat today?",
@@ -484,7 +522,7 @@ const TEXTOS = {
   },
   pt:{
     lema:"Santiago está acontecendo",
-    mapa:"Mapa", habla:"Fale", blog:"Blog", ninos:"Crianças", mas18:"+18", calendario:"Calendário", agregar:"Adicione seu evento", nosotros:"Quem faz isso",
+    mapa:"Mapa", habla:"Fale", blog:"Blog", comer:"Onde comer", ninos:"Crianças", mas18:"+18", calendario:"Calendário", agregar:"Adicione seu evento", nosotros:"Quem faz isso",
     eventos:"eventos", evento:"evento", gratis:"Grátis",
     hoy:"Hoje", manana:"Amanhã", semana:"7 dias", finde:"Fim de semana",
     cuandoLargo:{hoy:"Hoje", manana:"Amanhã", semana:"Nestes 7 dias", finde:"Neste fim de semana", todo:"Todos"},
@@ -510,12 +548,13 @@ const TEXTOS = {
     pBlogT:"O blog", pBlogD:"Roteiros e recomendações escritos à mão.",
     pQuienT:"Quem faz isso", pQuienD:"Uma pessoa, em Santiago, depois do trabalho.",
     pElencoT:"Quem te acompanha",
-    pElencoD:"Nove animais chilenos servem de sinalização: cada um cuida de um tipo de programa no mapa e no calendário, e o Degu cuida dos descontos.",
+    pElencoD:"Dez animais chilenos servem de sinalização: cada um cuida de um tipo de programa no mapa e no calendário, o Degu cuida dos descontos e o Vira-lata cuida de onde comer.",
     pGratisT:"grátis", pGratisD:"programas que não custam nada",
     pTotalD:"programas em cartaz", pFuentesD:"fontes revisadas toda manhã",
     pCierreT:"Organiza algo?", pCierreD:"Se o seu evento é aberto e acontece em Santiago, cabe aqui. Não cobramos para aparecer.",
     pDctoT:"Os descontos", pDctoD:"Onde comer mais barato hoje, conforme o seu cartão.",
     pDctoCifra:"descontos de banco em vigor",
+    pComerT:"Onde comer", pComerD:"Os lugares de sempre, escolhidos a dedo e com o que pedir.",
     /* Descuentos */
     descuentos:"Descontos",
     dTitulo:"Onde eu como hoje?",
@@ -593,23 +632,36 @@ const ICONOS_NAV = {
   descuentos:`<path d="M20.4 12.6 12.6 20.4a2.4 2.4 0 0 1-3.4 0l-6-6A2.4 2.4 0 0 1 3 12.7V5.4A2.4 2.4 0 0 1 5.4 3h7.3c.6 0 1.2.3 1.7.7l6 6c.9 1 .9 2.5 0 3.4z"
         fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
         <circle cx="8.2" cy="8.2" r="1.5" fill="currentColor"/>`,
+  // Tenedor y cuchillo, sin plato: a 21px el plato es un círculo que se come
+  // los cubiertos y deja el ícono igual al del "agrega". Los descuentos ya
+  // hablan de comer, pero van con etiqueta de precio: acá el gesto es la mesa.
+  comer:`<path d="M6 3v4.8a2.7 2.7 0 0 0 5.4 0V3M8.7 3v4.8M8.7 10.5V21"
+        fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M17 3c1.8 1.9 2.7 4.3 2.7 6.7 0 1.9-.9 3.1-2.7 3.5z"
+        fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M17 13.2V21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>`,
 };
 /* index.html es la PORTADA y no está en esta lista a propósito: se llega a
    ella por el logo. Seis destinos no caben en la barra inferior de un
    celular sin que las etiquetas se corten. */
 const PAGINAS = [["mapa.html","mapa"],["habla.html","habla"],["calendario.html","calendario"],
-                 ["descuentos.html","descuentos"],["blog.html","blog"],
+                 ["descuentos.html","descuentos"],["comer.html","comer"],["blog.html","blog"],
                  ["agrega.html","agregar"],["nosotros.html","nosotros"]];
-// En la barra inferior el espacio manda: con SIETE destinos cada celda baja a
-// 53 px en un teléfono de 375, así que las etiquetas son de UNA palabra corta
+// En la barra inferior el espacio manda: con OCHO destinos cada celda baja a
+// 47 px en un teléfono de 375, así que las etiquetas son de UNA palabra corta
 // y ninguna pasa de seis letras. "Calendario" ya no cabía con seis y pasó a
 // "Agenda"; "Descuentos" tampoco cabe y va como "Dctos", que es como se
-// escribe en cualquier vitrina de Chile. Siete es el techo: un destino más no
-// entra sin bajar de los 44 px de área táctil.
+// escribe en cualquier vitrina de Chile; y "Publicar" —que con siete todavía
+// entraba— se cortaba con ocho y pasó a "Subir".
+//
+// Ocho es el techo de verdad. A 375 px la celda mide 47 y el área táctil
+// sigue sobre los 44; en un teléfono de 320 px baja a 40 y queda bajo la
+// recomendación, que es el precio conocido de este destino. Un noveno destino
+// deja de caber en cualquier teléfono y tendría que vivir en otra parte.
 const CORTOS = {
-  es:{mapa:"Mapa", habla:"Habla", calendario:"Agenda", descuentos:"Dctos", blog:"Blog", agregar:"Publicar", nosotros:"Quién"},
-  en:{mapa:"Map", habla:"Talk", calendario:"Agenda", descuentos:"Deals", blog:"Blog", agregar:"Post", nosotros:"Who"},
-  pt:{mapa:"Mapa", habla:"Fale", calendario:"Agenda", descuentos:"Dctos", blog:"Blog", agregar:"Publicar", nosotros:"Quem"},
+  es:{mapa:"Mapa", habla:"Habla", calendario:"Agenda", descuentos:"Dctos", comer:"Comer", blog:"Blog", agregar:"Subir", nosotros:"Quién"},
+  en:{mapa:"Map", habla:"Talk", calendario:"Agenda", descuentos:"Deals", comer:"Eat", blog:"Blog", agregar:"Post", nosotros:"Who"},
+  pt:{mapa:"Mapa", habla:"Fale", calendario:"Agenda", descuentos:"Dctos", comer:"Comer", blog:"Blog", agregar:"Subir", nosotros:"Quem"},
 };
 
 /* `raiz` es el prefijo hacia la raíz del sitio. Las fichas de `e/` viven un

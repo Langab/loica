@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=9">
+<link rel="stylesheet" href="loica.css?v=11">
 <style>
   .hero{text-align:center;padding:var(--e-8) var(--e-5) var(--e-6);max-width:660px;margin:0 auto}
   .hero svg{margin:0 auto var(--e-4)}
@@ -33,8 +33,13 @@
   .opcion-cat input{position:absolute;opacity:0;width:0;height:0}
   .opcion-cat:has(input:checked){background:var(--tinta);color:var(--fondo-elevado);border-color:var(--tinta)}
   .opcion-cat:has(input:focus-visible){outline:2.5px solid var(--acento);outline-offset:2px}
-  .gratis-fila{display:flex;align-items:center;gap:var(--e-2);margin-bottom:var(--e-3)}
-  .gratis-fila input{width:19px;height:19px;accent-color:var(--verde-cerro)}
+  /* La fila entera es el área que se toca —casilla y etiqueta— y llega a los
+     44px. Antes la casilla medía 19px y era el blanco más chico del
+     formulario. */
+  .gratis-fila{display:flex;align-items:center;gap:var(--e-2);margin-bottom:var(--e-3);
+    min-height:44px}
+  .gratis-fila input{accent-color:var(--verde-cerro)}
+  .gratis-fila label{display:flex;align-items:center;min-height:44px;cursor:pointer}
   .exito{
     background:var(--gratis-fondo);border:1.5px solid var(--gratis);border-radius:var(--r-lg);
     padding:var(--e-6);text-align:center;
@@ -102,7 +107,10 @@
 
     <div class="campo">
       <label for="enlace" data-l="lEnlace"></label>
-      <input type="url" id="enlace" name="enlace" placeholder="https://instagram.com/tu_evento">
+      <!-- inputmode=url le pide al teléfono el teclado con "/" y ".cl" a mano;
+           el autocorrector le mete mayúscula al dominio si no se apaga. -->
+      <input type="url" id="enlace" name="enlace" placeholder="https://instagram.com/tu_evento"
+             inputmode="url" autocapitalize="off" autocorrect="off" spellcheck="false">
       <div class="ayuda" data-l="aEnlace"></div>
     </div>
 
@@ -114,12 +122,18 @@
     <div class="doble">
       <div class="campo">
         <label for="contacto-nombre" data-l="lTuNombre"></label>
-        <input id="contacto-nombre" name="contacto-nombre" required>
+        <input id="contacto-nombre" name="contacto-nombre" required
+               autocomplete="name" autocapitalize="words">
         <div class="mensaje-error" hidden data-l="eNombre"></div>
       </div>
       <div class="campo">
         <label for="contacto" data-l="lTuContacto"></label>
-        <input id="contacto" name="contacto" required placeholder="hola@correo.cl / @instagram">
+        <!-- Acepta correo o @instagram, así que el teclado no puede ser el de
+             email (mete un @ pero esconde las letras del arroba en algunos
+             Android). Se deja el de texto sin autocorrector ni mayúscula
+             inicial, que en un correo estorban. -->
+        <input id="contacto" name="contacto" required placeholder="hola@correo.cl / @instagram"
+               autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false">
         <div class="mensaje-error" hidden data-l="eContacto"></div>
       </div>
     </div>
@@ -138,7 +152,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegacion principal"></nav>
 
-<script src="loica.js?v=9"></script>
+<script src="loica.js?v=11"></script>
 <script>
 const CORREO = "hola@loica.cl";   // cambiar por el correo real del proyecto
 

@@ -15,13 +15,44 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="loica.css?v=9">
+<link rel="stylesheet" href="loica.css?v=11">
 <style>
   html,body{height:100%;overflow:hidden}
-  #app{display:flex;flex-direction:column;height:100dvh}
+  /* Los dos altos van en este orden a proposito: `dvh` no existe en
+     Safari de iOS anterior a 15.4 ni en Chrome anterior a 108, y ahi la
+     declaracion se descarta entera. Sin el 100vh de respaldo el alto
+     quedaba en `auto` y la pagina —que es una app de alto fijo con
+     scroll interno— se desarmaba: la lista crecia sin fin y la barra de
+     abajo se iba de la pantalla. */
+  #app{display:flex;flex-direction:column;height:100vh;height:100dvh}
   header{flex:none;z-index:6}
   main{flex:1;position:relative;min-height:0}
   #mapa{position:absolute;inset:0;background:var(--fondo-hundido)}
+
+  /* Los botones de zoom de MapLibre vienen en 29px. Con el dedo eso es la
+     mitad de lo que pide el pulgar, y acercar el mapa es de las tres cosas
+     que más se hacen en esta página. El `no-repeat` no es adorno: el ícono
+     es una imagen de fondo y sin él `background-size` la MOSAICA — quedaban
+     cuatro lupas apiladas en cada botón. */
+  @media (pointer:coarse){
+    .maplibregl-ctrl-group button{width:44px;height:44px}
+    .maplibregl-ctrl-group button .maplibregl-ctrl-icon{
+      background-size:22px 22px;background-repeat:no-repeat;background-position:center;
+    }
+  }
+
+  /* La atribución de OSM y CARTO sube al borde superior en celular.
+     MapLibre la deja abajo a la derecha, que es justo donde viven el panel
+     de la lista y la barra de destinos: el crédito quedaba dibujado a 778px
+     de una pantalla de 812, con las dos capas encima. No se mostraba nunca,
+     y las dos licencias lo piden a la vista.
+     Se mueve el RINCÓN y no se crea otro control: el control interno es el
+     único que recibe el `styledata` de arranque y por lo tanto el único que
+     llega a saber qué dicen las fuentes del estilo. */
+  @media(max-width:879px){
+    .maplibregl-ctrl-bottom-right{top:0;bottom:auto}
+    .maplibregl-ctrl-bottom-right .maplibregl-ctrl{margin:8px 8px 0 0}
+  }
 
   /* --- Cabecera: dos rieles y no tres ---
      La fecha es una pregunta de una sola respuesta, así que va en un control
@@ -126,9 +157,12 @@
     padding:var(--e-2) var(--e-3);background:var(--fondo-elevado);
     border-bottom:2px solid var(--borde);border-radius:var(--r-xl) var(--r-xl) 0 0;
   }
+  /* 44 y no 40: anterior, siguiente y cerrar son los tres botones que más se
+     aprietan seguidos en la ficha, y acá el alto no le quita nada al mapa
+     —la ficha es una capa encima. */
   .nav-ev{
     display:inline-flex;align-items:center;justify-content:center;gap:5px;
-    min-height:40px;padding:0 var(--e-3);border-radius:var(--r-pill);
+    min-height:44px;padding:0 var(--e-3);border-radius:var(--r-pill);
     border:2px solid var(--contorno);background:var(--fondo-elevado);color:var(--tinta);
     font:800 var(--t-sm)/1 var(--fuente-marca);cursor:pointer;box-shadow:0 2px 0 var(--contorno);
     transition:var(--rapido);
@@ -142,7 +176,7 @@
     color:var(--tinta-tenue);font-variant-numeric:tabular-nums;
   }
   .cerrar-ficha{
-    flex:none;width:40px;height:40px;border-radius:var(--r-pill);
+    flex:none;width:44px;height:44px;border-radius:var(--r-pill);
     border:2px solid var(--contorno);background:var(--fondo-elevado);color:var(--tinta);
     font-size:19px;line-height:1;cursor:pointer;box-shadow:0 2px 0 var(--contorno);
   }
@@ -171,8 +205,8 @@
      de controles se comían el 21% de la pantalla. Acá se aprieta todo lo que
      se puede sin bajar de 44px de área táctil en los chips. */
   @media(max-width:879px){
-    .panel-lista{bottom:calc(52px + env(safe-area-inset-bottom))}
-    .ficha{bottom:calc(52px + env(safe-area-inset-bottom))}
+    .panel-lista{bottom:var(--hueco-nav)}
+    .ficha{bottom:var(--hueco-nav)}
     .barra{padding:7px var(--e-3)}
     .logo svg{width:30px;height:30px}
     .logo b{font-size:19px}
@@ -182,6 +216,45 @@
     header .filtros{padding:5px var(--e-3) 7px}
     header .filtros .chip{min-height:36px}
     .cuenta-rango{display:none}
+  }
+  /* Teléfono acostado. Los 150px de cabecera que en vertical son el 18% de la
+     pantalla acá son el 40%, y entre eso, el panel y la barra de abajo no
+     quedaba un solo píxel de mapa. Se aprieta todo lo que se puede sin bajar
+     de 32px de área táctil, que con el pulgar de lado alcanza. */
+  @media(max-width:879px) and (max-height:460px){
+    .barra{padding:3px var(--e-3)}
+    .logo svg{width:24px;height:24px}
+    .logo b{font-size:16px}
+    .riel-fecha{padding:3px var(--e-3)}
+    .segmentado{padding:2px}
+    .segmentado button{min-height:30px;font-size:var(--t-xs)}
+    header .filtros{padding:3px var(--e-3) 4px}
+    header .filtros .chip{min-height:32px}
+    header .filtros .chip svg{width:18px;height:18px}
+
+    /* Acostado el panel se va AL COSTADO, que es lo que ya hace el escritorio.
+       Apretar la cabecera no alcanzaba: entre ella, el panel y la barra de
+       abajo el mapa quedaba en 55px de alto. De lado sobra ancho (667) y
+       falta alto (375), así que la lista se lleva una columna y el mapa se
+       queda con los otros dos tercios, enteros y de arriba abajo. */
+    .panel-lista{
+      left:auto;right:0;top:0;bottom:var(--hueco-nav);width:44%;max-width:320px;
+      height:auto;max-height:none;border-radius:var(--r-xl) 0 0 0;
+      border-right:0;transition:none;
+    }
+    .tirador{display:none}
+    .conteo{padding-top:var(--e-3)}
+    .ficha{
+      left:auto;right:0;top:0;bottom:var(--hueco-nav);width:44%;max-width:320px;
+      max-height:none;border-radius:var(--r-xl) 0 0 0;border-right:0;
+    }
+    .ficha-nav{border-radius:var(--r-xl) 0 0 0}
+    /* En columna la lista y la ficha entran y salen POR EL COSTADO. Con el
+       translateY de vertical se iban hacia abajo, que en esta disposición se
+       lee como que la lista se cae de la pantalla. */
+    .panel-lista.oculto{transform:translateX(104%)}
+    .ficha{transform:translateX(103%)}
+    .ficha.visible{transform:translateX(0)}
   }
   @media(min-width:880px){
     .panel-lista{left:auto;right:var(--e-4);top:var(--e-4);bottom:var(--e-4);width:410px;
@@ -223,7 +296,7 @@
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-<script src="loica.js?v=9"></script>
+<script src="loica.js?v=11"></script>
 <script>
 let EVENTOS = [], filtroCat = null, soloGratis = false, cuando = "todo", publicoFiltro = null;
 let listaActual = [], seleccionado = null, mapa = null, hayMapa = false;
@@ -659,9 +732,18 @@ function cerrarFicha(){
 (() => {
   const panel = document.getElementById("panel");
   const tirador = document.getElementById("tirador");
+  /* El reposo era 268px fijos, y 268 significa cosas muy distintas según el
+     teléfono: en uno de 812 dejaba medio mapa a la vista, en uno de 667 lo
+     dejaba en 249px, y acostado —donde el alto útil baja a ~225— el panel
+     era MÁS ALTO que el espacio disponible y el mapa desaparecía entero.
+     Ahora el reposo es una fracción del espacio real, con tope arriba (no
+     crece más que los 268 de antes en pantallas grandes) y piso abajo (nunca
+     baja de un asomo de dos tarjetas). La regla que sostiene todo esto: en
+     reposo el mapa se queda con la mayoría de la pantalla, siempre. */
   const alturas = () => {
     const disponible = panel.parentElement.clientHeight;
-    return [268, Math.round(disponible * .58), Math.round(disponible * .88)];
+    const reposo = Math.round(Math.min(268, Math.max(132, disponible * .40)));
+    return [reposo, Math.round(disponible * .62), Math.round(disponible * .88)];
   };
   let indice = 0, arrastrando = false, inicioY = 0, inicioAlto = 0;
 
