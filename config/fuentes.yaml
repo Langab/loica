@@ -1421,6 +1421,18 @@ fuentes:
     Normandie, que si es rastreable.
 
     '
+- id: sala_k_maipu
+  nombre: Sala K (Cultura Maipú)
+  url_base: https://salak.cl
+  url_agenda: https://salak.cl/cartelera/
+  tipo_adaptador: wordpress
+  comuna: Maipú
+  crawl_delay_seg: 3
+  activa: true
+  notas: 'Sala K, la programación cultural de Maipú frente a Plaza Maipú (metro Plaza Maipú). WordPress
+    con The Events Calendar y wp-json abierto: /wp-json/tribe/events/v1/events devuelve 23 eventos con
+    recinto y costo (Gratis/Pagado). robots.txt vacío. La mejor —y por ahora única— fuente rastreable
+    de Maipú: culturalaflorida.cl y teatrolaflorida.cl responden 403 hasta con user-agent de navegador.'
 - id: teatro_aleph
   nombre: Teatro Aleph (La Cisterna)
   url_base: https://www.teatroaleph.cl
