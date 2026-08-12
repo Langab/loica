@@ -1,6 +1,6 @@
 {
- "generado": "2026-08-12T02:41:14",
- "total": 1854,
+ "generado": "2026-08-12T12:03:30",
+ "total": 1863,
  "eventos": [
   {
    "id": "8fad9b86ac7f5e99",
@@ -1743,7 +1743,7 @@
    "descripcion": "El orden y el desorden de los libros evidencian el vínculo indisoluble entre los objetos y sus lectores. Reconstruir los criterios de los bibliotecarios a través de la catalogación permite comprender…",
    "imagen": "https://finis.cl/wp-content/uploads/2026/06/Agenda-web-2026-06-18T154258.973.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
-   "url": "https://finis.cl/agenda/seminario-cidoc-el-desorden-de-los-libros-en-el-convento-la-historia-de-la-recoleta-dominica-de-santiago-de-chile/"
+   "url": "https://finis.cl/agenda/cidoc/seminario-cidoc-el-desorden-de-los-libros-en-el-convento-la-historia-de-la-recoleta-dominica-de-santiago-de-chile/"
   },
   {
    "id": "fd4fc72b589581e3",
@@ -3697,6 +3697,27 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026"
+  },
+  {
+   "id": "ede5a539ddf94f5f",
+   "titulo": "ACCESO · PEPO FERNÁNDEZ+PARALELO 86 SESIÓN ESPECIAL 69 EN VRAVA CENTRO PARQUE",
+   "inicio": "2026-08-12T19:00:00",
+   "fin": null,
+   "lugar": "PortalTickets (PortalDisc)",
+   "direccion": "",
+   "comuna": "Las Condes",
+   "lat": -33.4088,
+   "lon": -70.5673,
+   "precision": "comuna",
+   "gratis": false,
+   "precio": 40000,
+   "precio_texto": "LES: Ticket Acceso: $40.000 + Cargo AGOTADA Fecha: Miércoles",
+   "categoria": "aire_libre",
+   "publico": "todos",
+   "descripcion": "ACCESO · PEPO FERNÁNDEZ+PARALELO 86 SESIÓN ESPECIAL 69 EN VRAVA CENTRO PARQUE // PortalTickets.cl Sitio en mantención ACCESO · PEPO FERNÁNDEZ+PARALELO 86 SESIÓN ESPECIAL 69 EN…",
+   "imagen": "https://images.portaldisc.com/l/eventos/360/21565.jpg",
+   "fuente": "PortalTickets (PortalDisc)",
+   "url": "https://www.portaldisc.com/evento/eventomiercoleselectronicos69"
   },
   {
    "id": "dbda7174bf2c4cfc",
@@ -6174,7 +6195,7 @@
    "descripcion": "La Vicerrectoría de Investigación, Creación Artística e Innovación invita a una nueva sesión de En clave femenina , ciclo que, junto con visibilizar perspectivas y experiencias de mujeres, busca…",
    "imagen": "https://finis.cl/wp-content/uploads/2026/07/En-clave-femenina-Agosto.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
-   "url": "https://finis.cl/agenda/en-clave-femenina-masculinidades-imagenes-afectos-y-transformaciones/"
+   "url": "https://finis.cl/agenda/creacion-artistica/en-clave-femenina-masculinidades-imagenes-afectos-y-transformaciones/"
   },
   {
    "id": "314a1faaabf0e745",
@@ -6384,7 +6405,7 @@
    "descripcion": "La Escuela de Literatura tiene el agrado de invitar a la charla del profesor Ignacio Aguiló (Universidad de Mánchester) sobre la obra del poeta argentino César González. Esta actividad se enmarca en…",
    "imagen": "https://finis.cl/wp-content/uploads/2026/08/Agenda-web-2026-08-03T133505.087.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
-   "url": "https://finis.cl/agenda/charla-esteticas-de-la-exclusion-en-la-obra-del-autor-argentino-cesar-gonzalez/"
+   "url": "https://finis.cl/agenda/comunidad-finis-terrae/charla-esteticas-de-la-exclusion-en-la-obra-del-autor-argentino-cesar-gonzalez/"
   },
   {
    "id": "3d1373aa6845bcbe",
@@ -6531,7 +6552,7 @@
    "descripcion": "Fecha: Jueves 13 agosto 2026 Horario: 15:00 a 16:30 h. Modalidad: Online vía Zoom Conoce el impacto del trabajo interdisciplinario en la atención del paciente crítico en este webinar del Diplomado en…",
    "imagen": "https://finis.cl/wp-content/uploads/2026/07/imagen-destacada_diplo-kine-paciente-critico_light.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
-   "url": "https://finis.cl/agenda/webinar-equipo-de-cuidado-critico-mas-alla-del-monitor-el-criterio-del-equipo-como-eje-central-del-cuidado/"
+   "url": "https://finis.cl/agenda/postgrado-y-educacion-continua/webinar-equipo-de-cuidado-critico-mas-alla-del-monitor-el-criterio-del-equipo-como-eje-central-del-cuidado/"
   },
   {
    "id": "a1e3f9ebe52acae5",
@@ -6636,7 +6657,7 @@
    "descripcion": "Presentar una investigación, defender un proyecto o desenvolverse frente a una audiencia requiere mucho más que manejar contenidos. La voz y el cuerpo con que se transmite una idea también influyen…",
    "imagen": "https://finis.cl/wp-content/uploads/2026/08/Agenda-web-2026-08-03T172448.677.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
-   "url": "https://finis.cl/agenda/taller-de-habilidades-comunicativas/"
+   "url": "https://finis.cl/agenda/comunidad-finis-terrae/taller-de-habilidades-comunicativas/"
   },
   {
    "id": "efa8670c0c0c4dbe",
@@ -11526,7 +11547,7 @@
    "precio_texto": "",
    "categoria": "feria",
    "publico": "todos",
-   "descripcion": "Feria Friki Pueblito Las Vizcachas – FeriaFriki Jojobet Giriş grandpashabet casibom casibom betcio betjolly giriş JOJOBET GİRİŞLERİ Casibom Fecha Sábado 15 de Agosto Horario 11:00…",
+   "descripcion": "Feria Friki Pueblito Las Vizcachas – FeriaFriki Jojobet Giriş cratosroyalbet casibom iptv satın al betcio acerbet giriş JOJOBET GİRİŞLERİ casibom Grandpashabet Fecha Sábado 15 de…",
    "imagen": "",
    "fuente": "Feria Friki",
    "url": "https://www.feriafriki.cl/eventos/feria-friki-pueblito-las-vizcachas-2/"
@@ -12387,7 +12408,7 @@
    "precio_texto": "",
    "categoria": "otros",
    "publico": "todos",
-   "descripcion": "El próximo 15 y 16 de agosto, el Centro Cultural Estación Mapocho One Piece Card Game Championships 26-27 Finals Santiago , uno de los eventos competitivos más importantes del circuito oficial de ONE…",
+   "descripcion": "La apasionante comunidad de One Piece en Chile y Latinoamérica vivirá su momento más importante. Los días 15 y 16 de agosto de 2026, el Centro Cultural Estación Mapocho recibirá el One Piece Card…",
    "imagen": "https://www.estacionmapocho.cl/wp-content/uploads/2026/02/DSC_0273-768x512.jpg",
    "fuente": "Centro Cultural Estacion Mapocho",
    "url": "https://www.estacionmapocho.cl/?evngrnpb=one-piece-card-game-championships-26-27-finals"
@@ -12723,7 +12744,7 @@
    "precio_texto": "",
    "categoria": "feria",
    "publico": "todos",
-   "descripcion": "Feria Friki La Pintana – FeriaFriki Jojobet Giriş grandpashabet casibom casibom betcio betador giriş JOJOBET GİRİŞLERİ Casibom Fecha Domingo 16 de Agosto Horario 11:00 a 18:00 h…",
+   "descripcion": "Feria Friki La Pintana – FeriaFriki Jojobet Giriş cratosroyalbet casibom iptv satın al betcio acerbet giriş JOJOBET GİRİŞLERİ casibom Grandpashabet Fecha Domingo 16 de Agosto…",
    "imagen": "",
    "fuente": "Feria Friki",
    "url": "https://www.feriafriki.cl/eventos/feria-friki-la-pintana/"
@@ -12915,7 +12936,7 @@
    "descripcion": "Semana de la Solidaridad 17 al 22 de agosto Ver Programa Salgamos al encuentro La Semana de la Solidaridad 2026 es una invitación a salir al encuentro de las personas, porque es en ese gesto donde la…",
    "imagen": "https://finis.cl/wp-content/uploads/2026/07/Agenda-web-2026-07-28T155107.710.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
-   "url": "https://finis.cl/agenda/semana-solidaridad-2026/"
+   "url": "https://finis.cl/agenda/institucional/semana-solidaridad-2026/"
   },
   {
    "id": "1c09c2ec8f82309f",
@@ -13206,7 +13227,7 @@
    "precio_texto": "",
    "categoria": "feria",
    "publico": "todos",
-   "descripcion": "FERIA FRIKI LA PINTANA AGOSTO 2025 – FeriaFriki Jojobet Giriş grandpashabet casibom casibom betcio baywin giriş JOJOBET GİRİŞLERİ Casibom Fecha Domingo 17 de Agosto Horario 12:00…",
+   "descripcion": "FERIA FRIKI LA PINTANA AGOSTO 2025 – FeriaFriki Jojobet Giriş cratosroyalbet casibom iptv satın al betcio bankobet giriş JOJOBET GİRİŞLERİ casibom Grandpashabet Fecha Domingo 17…",
    "imagen": "",
    "fuente": "Feria Friki",
    "url": "https://www.feriafriki.cl/eventos/feria-friki-la-pintana-agosto-2025/"
@@ -13294,6 +13315,27 @@
    "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1767612916278-51179038.webp",
    "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
    "url": "https://talleres.nunoadeportes.cl/talleres/69320c6a694fb821d4e099d3"
+  },
+  {
+   "id": "da7c013b42d5c726",
+   "titulo": "Seminario académico de economía | Presenta: Diana MacDonald, Banco de México",
+   "inicio": "2026-08-17T14:30:00",
+   "fin": "2026-08-17T16:00:00",
+   "lugar": "Sala A57",
+   "direccion": "Alameda 1825, Santiago",
+   "comuna": "Santiago",
+   "lat": -33.4425,
+   "lon": -70.6505,
+   "precision": "comuna",
+   "gratis": true,
+   "precio": 0,
+   "precio_texto": "",
+   "categoria": "charla",
+   "publico": "todos",
+   "descripcion": "La Facultad de Economía y Negocios de la Universidad Alberto Hurtado, tiene el agrado de invitarte a un nuevo Seminario Académico de Economía 2026 . En esta ocasión Diana MacDonald , Economista de la…",
+   "imagen": "https://www.uahurtado.cl/wp-content/uploads/2026/08/Seminario-academico-de-economia_17-agosto.png",
+   "fuente": "Universidad Alberto Hurtado - Agenda de eventos",
+   "url": "https://www.uahurtado.cl/event/seminario-academico-de-economia-presenta-diana-macdonald-banco-de-mexico/"
   },
   {
    "id": "95728f68dd8f7b96",
@@ -15498,7 +15540,7 @@
    "descripcion": "En el marco de la celebración de los cinco años de Revista Realidad Educativa, tenemos el agrado de invitar a la conferencia “Los desafíos actuales de la educación”, dictada por el destacado…",
    "imagen": "https://finis.cl/wp-content/uploads/2026/07/Agenda-web-2026-08-04T152752.320.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
-   "url": "https://finis.cl/agenda/celebracion-5-anos-de-la-revista-realidad-educativa-conferencia-los-desafios-actuales-de-la-educacion/"
+   "url": "https://finis.cl/agenda/comunidad-finis-terrae/celebracion-5-anos-de-la-revista-realidad-educativa-conferencia-los-desafios-actuales-de-la-educacion/"
   },
   {
    "id": "25a6f39f84cf6ff0",
@@ -15750,7 +15792,7 @@
    "descripcion": "¿Sientes que hay algo más? A veces todos nos hacemos preguntas como: ¿Qué sentido tiene mi vida? ¿Quién es realmente Jesús? ¿Vale la pena creer hoy? Si alguna vez has tenido inquietudes sobre la fe,…",
    "imagen": "https://finis.cl/wp-content/uploads/2026/08/Alpha-Agenda.webp",
    "fuente": "Universidad Finis Terrae - Agenda",
-   "url": "https://finis.cl/agenda/alpha-5/"
+   "url": "https://finis.cl/agenda/comunidad-finis-terrae/alpha-5/"
   },
   {
    "id": "e8329f3c3050e7ad",
@@ -16149,7 +16191,7 @@
    "descripcion": "La transformación digital está modificando profundamente la forma en que se ejerce la profesión jurídica. La incorporación de herramientas de inteligencia artificial, plataformas LegalTech y nuevos…",
    "imagen": "https://finis.cl/wp-content/uploads/2026/08/Webinar-la-nueva-practica-juridica-legaltech-IA-y-derecho-privado.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
-   "url": "https://finis.cl/agenda/seminario-la-nueva-practica-juridica-legaltech-inteligencia-artificial-y-derecho-privado/"
+   "url": "https://finis.cl/agenda/comunidad-finis-terrae/seminario-la-nueva-practica-juridica-legaltech-inteligencia-artificial-y-derecho-privado/"
   },
   {
    "id": "01a5b66d22b9aacd",
@@ -18501,7 +18543,7 @@
    "descripcion": "Te invitamos a ser parte del apostolado en la cárcel “Más allá de los Muros”, donde compartimos una vez al mes junto a personas privadas de libertad. A través de actividades, conversación y compañía,…",
    "imagen": "https://finis.cl/wp-content/uploads/2026/08/Apostolado-de-la-carcel-Agenda.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
-   "url": "https://finis.cl/agenda/apostolado-en-la-carcel-mas-alla-de-los-muros/"
+   "url": "https://finis.cl/agenda/comunidad-finis-terrae/apostolado-en-la-carcel-mas-alla-de-los-muros/"
   },
   {
    "id": "1785bc28a5f3c367",
@@ -18585,7 +18627,7 @@
    "descripcion": "La Escuela de Historia de la Universidad Finis Terrae, en conjunto con la Comunidad de Estudios Medievales y las XXXV Jornadas de Historiografía del Departamento de Historia y Geografía de la…",
    "imagen": "https://finis.cl/wp-content/uploads/2026/07/Agenda-web-2026-07-28T171005.995.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
-   "url": "https://finis.cl/agenda/ix-mesa-redonda-de-historia-medieval-nuestra-edad-media-usos-y-abusos-de-la-idea-medieval/"
+   "url": "https://finis.cl/agenda/comunidad-finis-terrae/ix-mesa-redonda-de-historia-medieval-nuestra-edad-media-usos-y-abusos-de-la-idea-medieval/"
   },
   {
    "id": "bc651ba571d067dc",
@@ -18945,6 +18987,27 @@
    "url": "https://www.portaldisc.com/evento/cotyxcamila"
   },
   {
+   "id": "729064879b5ea324",
+   "titulo": "COTY + CAMILA BARAHONA EN CASA EN EL AIRE",
+   "inicio": "2026-08-19T20:00:00",
+   "fin": null,
+   "lugar": "La Casa en el Aire",
+   "direccion": "",
+   "comuna": "Providencia",
+   "lat": -33.4256,
+   "lon": -70.6096,
+   "precision": "comuna",
+   "gratis": false,
+   "precio": null,
+   "precio_texto": "",
+   "categoria": "musica",
+   "publico": "todos",
+   "descripcion": "",
+   "imagen": "",
+   "fuente": "PortalTickets — carteleras por local (circuito under)",
+   "url": "https://www.portaldisc.com/evento/cotyxcamila"
+  },
+  {
    "id": "8bb80e246e29a6ca",
    "titulo": "ISLA SORNA: LANZAMIENTO MONSTRUO VOL 1. EN BAR DE RENÉ",
    "inicio": "2026-08-19T21:00:00",
@@ -19071,6 +19134,27 @@
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026"
   },
   {
+   "id": "1d13a46ccb2c071c",
+   "titulo": "Seminario: “A 10 años de la gratuidad universitaria: balance y proyecciones”",
+   "inicio": "2026-08-20T10:30:00",
+   "fin": "2026-08-20T12:00:00",
+   "lugar": "Auditorio Manuel Larraín E11 (Avenida Bernardo O’Higgins #1825, metro Los Héroes)",
+   "direccion": "",
+   "comuna": "Santiago",
+   "lat": -33.4425,
+   "lon": -70.6505,
+   "precision": "comuna",
+   "gratis": true,
+   "precio": 0,
+   "precio_texto": "",
+   "categoria": "cine",
+   "publico": "todos",
+   "descripcion": "En el contexto de las Jornadas de Economía, el rector de la Universidad Alberto Hurtado, Cristián del Campo SJ, tiene el agrado de invitar al seminario «A 10 años de la gratuidad universitaria:…",
+   "imagen": "https://www.uahurtado.cl/wp-content/uploads/2026/08/fotos-web-uah.png",
+   "fuente": "Universidad Alberto Hurtado - Agenda de eventos",
+   "url": "https://www.uahurtado.cl/event/seminario-a-10-anos-de-la-gratuidad-universitaria-balance-y-proyecciones/"
+  },
+  {
    "id": "9d939cef83f4b23f",
    "titulo": "Futsal Ju 17:30 h. / Vi 17:00 h. / Sa 12:00 h. / Club Ñuñoa.",
    "inicio": "2026-08-20T12:00:00",
@@ -19194,7 +19278,7 @@
    "descripcion": "Fecha: Jueves 20 agosto 2026 Horario: 19:00 h. (Chile) Modalidad: Online vía Zoom El ejercicio físico constituye una de las intervenciones no farmacológicas con mayor impacto sobre el metabolismo y…",
    "imagen": "https://finis.cl/wp-content/uploads/2026/08/webinar_fisiologia_ejercicio_1920x1080_optimizada.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
-   "url": "https://finis.cl/agenda/webinar-ejercicio-como-regulador-metabolico-en-la-enfermedad-que-nos-dice-hoy-la-fisiologia-clinica-del-ejercicio/"
+   "url": "https://finis.cl/agenda/postgrado-y-educacion-continua/webinar-ejercicio-como-regulador-metabolico-en-la-enfermedad-que-nos-dice-hoy-la-fisiologia-clinica-del-ejercicio/"
   },
   {
    "id": "ae4c9b6305c63c22",
@@ -19593,7 +19677,7 @@
    "descripcion": "Con tu entrada a un musical inmersivo de Planetario, gana una botella con diseño de constelaciones de Elige Vidrio. Disfruta de un viaje por el Universo con la música de Pink Floyd, Los Beatles, Los…",
    "imagen": "https://planetariochile.cl/wp-content/uploads/2026/07/musicales_promo-botella-03-300x208.jpg",
    "fuente": "Planetario USACH",
-   "url": "https://planetariochile.cl/con-tu-entrada-a-un-musical-de-planetario-gana-una-botella-con-diseno-de-constelaciones-de-elige-vidrio/"
+   "url": "https://planetariochile.cl/con-tu-entrada-a-un-musical-de-planetario-gana-una-botella-con-diseno-de-constelaciones-de-elige-vidrio-2/"
   },
   {
    "id": "a4ba2594e4fb3f9f",
@@ -20055,7 +20139,7 @@
    "descripcion": "Los invitamos a ser parte de esta instancia en donde, en conjunto a los vecinos de la comuna de Independencia, pintamos los hogares aportando al embellecimiento del barrio y compartiendo un tiempo de…",
    "imagen": "https://finis.cl/wp-content/uploads/2026/08/Pinta-tu-independencia-3.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
-   "url": "https://finis.cl/agenda/pinta-tu-independencia-5/"
+   "url": "https://finis.cl/agenda/comunidad-finis-terrae/pinta-tu-independencia-5/"
   },
   {
    "id": "e6f0b6a1f977ee25",
@@ -20898,6 +20982,27 @@
    "url": "https://www.portaldisc.com/evento/carnada-paralisis-del-sueno-bar-rene"
   },
   {
+   "id": "84e6d601790f11e4",
+   "titulo": "CARNADA + PARÁLISIS DEL SUEÑO EN BAR DE RENÉ",
+   "inicio": "2026-08-22T20:00:00",
+   "fin": null,
+   "lugar": "Bar de René",
+   "direccion": "",
+   "comuna": "Providencia",
+   "lat": -33.4256,
+   "lon": -70.6096,
+   "precision": "comuna",
+   "gratis": false,
+   "precio": null,
+   "precio_texto": "",
+   "categoria": "musica",
+   "publico": "todos",
+   "descripcion": "",
+   "imagen": "",
+   "fuente": "PortalTickets — carteleras por local (circuito under)",
+   "url": "https://www.portaldisc.com/evento/carnada-paralisis-del-sueno-bar-rene"
+  },
+  {
    "id": "2346093781762761",
    "titulo": "BRITANIA + TRASH EN VIVO EN LA PUERTA AMARILLA",
    "inicio": "2026-08-22T21:00:00",
@@ -21045,6 +21150,27 @@
    "url": "https://www.puntoticket.com/evento/toly-fu-teatro-caupolican-ago-2026?utm_medium=organic&utm_source=microformat"
   },
   {
+   "id": "7d2e081c9a07d77a",
+   "titulo": "Universidad de Chile vs. Colo-Colo en Estadio Nacional",
+   "inicio": "2026-08-23T00:00:00",
+   "fin": null,
+   "lugar": "Estadio Nacional",
+   "direccion": "Av. Grecia 2001, Ñuñoa",
+   "comuna": "Ñuñoa",
+   "lat": -33.4646263,
+   "lon": -70.61068,
+   "precision": "fuente",
+   "gratis": false,
+   "precio": 7500,
+   "precio_texto": "desde $7.500",
+   "categoria": "deporte",
+   "publico": "todos",
+   "descripcion": "VENTAS DE ENTRADAS Preventas Bullangueras Lite y Plus: Desde el Miércoles 12/08 a las 10:00Venta Exclusiva: Desde el Miércoles 12/08 a las 14:00Venta General: Desde el Miércoles 12/08 a las…",
+   "imagen": "https://static.ptocdn.net/images/eventos/uch286_rs.jpg",
+   "fuente": "Puntoticket (deportes, musica y familia)",
+   "url": "https://www.puntoticket.com/evento/universidad-de-chile-vs-colo-colo-ligaprimera-2026?utm_medium=organic&utm_source=microformat"
+  },
+  {
    "id": "ec706dc4500e452e",
    "titulo": "FATUM: secret session VOL.01",
    "inicio": "2026-08-23T00:21:00",
@@ -21061,7 +21187,7 @@
    "categoria": "musica",
    "publico": "todos",
    "descripcion": "En este primer volumen de Secret Sessions, reducimos la escala para transformar el espacio en una atmósfera cercana, envolvente y de conexión pura. Una curaduría musical diseñada minuciosamente como…",
-   "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/static/images/event_logo_empty.jpeg",
+   "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/c809429db88fbe5e600328173bc78c69cfe24e3d5abbb02259b67395078ff780.jpg",
    "fuente": "Toliv (eventos under, fiestas y musica emergente)",
    "url": "https://www.toliv.com/eventos/chile/santiago-centro/fatum-secret-session-vol01-26001"
   },
@@ -21606,7 +21732,7 @@
    "precio_texto": "",
    "categoria": "feria",
    "publico": "todos",
-   "descripcion": "FERIA FRIKI PAC AGOSTO 2025 – FeriaFriki Jojobet Giriş grandpashabet casibom casibom betcio vbettr giriş JOJOBET GİRİŞLERİ Casibom casibom Fecha Domingo 24 de Agosto Horario 12:00…",
+   "descripcion": "FERIA FRIKI PAC AGOSTO 2025 – FeriaFriki Jojobet Giriş grandpashabet casibom iptv satın al betcio zbahis giriş JOJOBET GİRİŞLERİ Casibom casibom Fecha Domingo 24 de Agosto Horario…",
    "imagen": "",
    "fuente": "Feria Friki",
    "url": "https://www.feriafriki.cl/eventos/feria-friki-pac-agosto-2025/"
@@ -21756,7 +21882,7 @@
    "descripcion": "La Escuela de Historia de la Universidad Finis Terrae tiene a la conferencia del Dr. Federico Javier Asiss González, (U. de San Juan, Argentina), una jornada dedicada a la investigación sobre la…",
    "imagen": "https://finis.cl/wp-content/uploads/2026/08/Agenda-web-2026-08-07T100443.715.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
-   "url": "https://finis.cl/agenda/clase-abierta-ficciones-que-gobiernan-el-discurso-politico-medieval-y-sus-ecos-en-el-presente/"
+   "url": "https://finis.cl/agenda/comunidad-finis-terrae/clase-abierta-ficciones-que-gobiernan-el-discurso-politico-medieval-y-sus-ecos-en-el-presente/"
   },
   {
    "id": "ec9b52ad26131d7e",
@@ -25371,6 +25497,27 @@
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026"
   },
   {
+   "id": "045c686feba9b92a",
+   "titulo": "Lanzamiento del libro: “Cartografía Social de Chile, 2025. Reconstruir el vínculo y la convivencia”",
+   "inicio": "2026-08-25T18:30:00",
+   "fin": "2026-08-25T20:00:00",
+   "lugar": "Auditorio Manuel Larraín E11 (Avenida Bernardo O’Higgins #1825, metro Los Héroes)",
+   "direccion": "",
+   "comuna": "Santiago",
+   "lat": -33.4425,
+   "lon": -70.6505,
+   "precision": "comuna",
+   "gratis": true,
+   "precio": 0,
+   "precio_texto": "",
+   "categoria": "charla",
+   "publico": "todos",
+   "descripcion": "Las obras sociales de la Compañía de Jesús y el Centro Vives UAH invitan al lanzamiento del libro “ Cartografía Social de Chile 2025. Reconstruir el vínculo y la convivencia” , publicado por…",
+   "imagen": "https://www.uahurtado.cl/wp-content/uploads/2026/08/cartoinvitaagenda.png",
+   "fuente": "Universidad Alberto Hurtado - Agenda de eventos",
+   "url": "https://www.uahurtado.cl/event/lanzamiento-del-libro-cartografia-social-de-chile-2025-reconstruir-el-vinculo-y-la-convivencia/"
+  },
+  {
    "id": "0e93698cfeafcdc9",
    "titulo": "Aerobike Ma-Ju 19:00 h.",
    "inicio": "2026-08-25T19:00:00",
@@ -26670,7 +26817,7 @@
    "descripcion": "La Escuela de Historia de la Universidad Finis Terrae tiene a la conferencia del Dr. Federico Javier Asiss González, (U. de San Juan, Argentina) “Ficción, memética y discurso histórico”. En la…",
    "imagen": "https://finis.cl/wp-content/uploads/2026/08/Agenda-web-2026-08-07T102122.981.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
-   "url": "https://finis.cl/agenda/clase-abierta-ficcion-memetica-y-discurso-historico/"
+   "url": "https://finis.cl/agenda/comunidad-finis-terrae/clase-abierta-ficcion-memetica-y-discurso-historico/"
   },
   {
    "id": "97b60c46b1675733",
@@ -26691,7 +26838,7 @@
    "descripcion": "reCREA 2026 continúa su programación durante el segundo semestre con un taller práctico para estudiantes, que propone una aproximación a la cestería como una tradición artesanal viva mediante el…",
    "imagen": "https://finis.cl/wp-content/uploads/2026/08/Agenda-web-2026-08-03T172855.721.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
-   "url": "https://finis.cl/agenda/taller-de-cesteria-contemporanea-tejer-ideas/"
+   "url": "https://finis.cl/agenda/comunidad-finis-terrae/taller-de-cesteria-contemporanea-tejer-ideas/"
   },
   {
    "id": "157bf69e6970f3f0",
@@ -27133,6 +27280,27 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026"
+  },
+  {
+   "id": "14a567d409e118de",
+   "titulo": "Lanzamiento del libro digital y documental “Sonrisas Reconstruidas”",
+   "inicio": "2026-08-27T11:00:00",
+   "fin": "2026-08-27T12:00:00",
+   "lugar": "Sala OS-201",
+   "direccion": "",
+   "comuna": "Providencia",
+   "lat": -33.4256,
+   "lon": -70.6096,
+   "precision": "comuna",
+   "gratis": true,
+   "precio": 0,
+   "precio_texto": "",
+   "categoria": "cine",
+   "publico": "todos",
+   "descripcion": "El próximo jueves 27 de agosto a las 11:00 hrs. (Sala OS-201, Edificio de Odontología) se presentará el hito de cierre de “Sonrisas Reconstruidas: intersecciones entre el arte, la odontología y lo…",
+   "imagen": "https://finis.cl/wp-content/uploads/2026/08/Agenda-web-2026-08-12T094855.129.jpg",
+   "fuente": "Universidad Finis Terrae - Agenda",
+   "url": "https://finis.cl/agenda/comunidad-finis-terrae/lanzamiento-del-libro-digital-y-documental-sonrisas-reconstruidas/"
   },
   {
    "id": "049d65fec29797e2",
@@ -29529,6 +29697,27 @@
    "url": "https://www.portaldisc.com/evento/teatro30agosto"
   },
   {
+   "id": "e565a07f8240f976",
+   "titulo": "DOMINGO DE POPURRÍ: 2 OBRAS - 1 DÍA EN TEATRO FÁBRICA",
+   "inicio": "2026-08-30T18:00:00",
+   "fin": null,
+   "lugar": "Teatro Fábrica",
+   "direccion": "",
+   "comuna": "Providencia",
+   "lat": -33.4256,
+   "lon": -70.6096,
+   "precision": "comuna",
+   "gratis": false,
+   "precio": null,
+   "precio_texto": "",
+   "categoria": "teatro",
+   "publico": "todos",
+   "descripcion": "",
+   "imagen": "",
+   "fuente": "PortalTickets — carteleras por local (circuito under)",
+   "url": "https://www.portaldisc.com/evento/teatro30agosto"
+  },
+  {
    "id": "64cfe9e2c7e6d1f2",
    "titulo": "La Naturaleza de las Cosas Invisibles",
    "inicio": "2026-08-30T20:00:00",
@@ -29652,7 +29841,7 @@
    "descripcion": "La Vida en Rounds es un taller de boxeo diferente. A través del deporte y la conversación, descubrirás herramientas para enfrentar los desafíos de la vida con fortaleza, propósito y resiliencia. No…",
    "imagen": "https://finis.cl/wp-content/uploads/2026/08/Taller-de-boxeo-Agenda-1.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
-   "url": "https://finis.cl/agenda/taller-de-boxeo-la-vida-en-rounds-3/"
+   "url": "https://finis.cl/agenda/comunidad-finis-terrae/taller-de-boxeo-la-vida-en-rounds-3/"
   },
   {
    "id": "7135e0b7ce2063ed",
@@ -29943,7 +30132,7 @@
    "precio_texto": "",
    "categoria": "feria",
    "publico": "todos",
-   "descripcion": "Feria Friki La Florida – FeriaFriki Jojobet Giriş grandpashabet casibom casibom betcio vbettr giriş JOJOBET GİRİŞLERİ Casibom casibom Fecha Domingo 31 de Agosto Horario 12:00 a…",
+   "descripcion": "Feria Friki La Florida – FeriaFriki Jojobet Giriş cratosroyalbet casibom iptv satın al betcio bankobet giriş JOJOBET GİRİŞLERİ casibom Grandpashabet Fecha Domingo 31 de Agosto…",
    "imagen": "",
    "fuente": "Feria Friki",
    "url": "https://www.feriafriki.cl/eventos/feria-friki-la-florida/"
@@ -30639,7 +30828,7 @@
    "descripcion": "Curso introductorio de cuatro clases, abierto al público general, estudiantes y profesionales interesados en comprender a Ucrania y su lugar en la historia europea. A lo largo de las sesiones se…",
    "imagen": "https://finis.cl/wp-content/uploads/2026/07/BANNER-AGENDA-SITIO.webp",
    "fuente": "Universidad Finis Terrae - Agenda",
-   "url": "https://finis.cl/agenda/curso-online-introduccion-a-ucrania-historia-cultura-y-realidad-contemporanea/"
+   "url": "https://finis.cl/agenda/comunidad-finis-terrae/curso-online-introduccion-a-ucrania-historia-cultura-y-realidad-contemporanea/"
   },
   {
    "id": "8b2c3f2a69ab0fe0",
@@ -32890,7 +33079,7 @@
   },
   {
    "id": "977c209ff43dc7b9",
-   "titulo": "PERDIDOS EN EL ESPACIO, EN SUS 31 1/50 AÑOS , PRESENTA A JAVIER DINAMARCA",
+   "titulo": "PERDIDOS EN EL ESPACIO: EN SUS 31 1/50 AÑOS, PRESENTA A JAVIER DINAMARCA EN SALA MASTER",
    "inicio": "2026-09-03T19:30:00",
    "fin": null,
    "lugar": "Sala Master",
@@ -33646,7 +33835,7 @@
   },
   {
    "id": "ab8053b2ea405283",
-   "titulo": "LASAVIA & TEFIRET EN MIBAR",
+   "titulo": "LASAVIA + TEFIRET EN MIBAR",
    "inicio": "2026-09-05T21:00:00",
    "fin": null,
    "lugar": "MiBar",
@@ -33831,7 +34020,7 @@
    "descripcion": "El Programa de Idiomas invita a todos los funcionarios y académicos con contrato vigente a inscribirse al CURSO DE INGLÉS básico. Este se impartirá a partir del lunes 7 de septiembre del 2026 y…",
    "imagen": "https://finis.cl/wp-content/uploads/2026/08/Agenda-web-2026-08-04T163538.940.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
-   "url": "https://finis.cl/agenda/cursos-de-ingles-para-funcionarios-y-academicos-5/"
+   "url": "https://finis.cl/agenda/comunidad-finis-terrae/cursos-de-ingles-para-funcionarios-y-academicos-5/"
   },
   {
    "id": "b87b6a1ddc5f092a",
@@ -34017,7 +34206,7 @@
    "precio_texto": "",
    "categoria": "feria",
    "publico": "todos",
-   "descripcion": "FERIA FRIKI MALLPLAZA NORTE – FeriaFriki Jojobet Giriş grandpashabet casibom casibom betcio vbettr giriş JOJOBET GİRİŞLERİ Casibom casibom Fecha Domingo 7 de Septiembre Horario…",
+   "descripcion": "FERIA FRIKI MALLPLAZA NORTE – FeriaFriki Jojobet Giriş cratosroyalbet casibom iptv satın al betcio bankobet giriş JOJOBET GİRİŞLERİ casibom Grandpashabet Fecha Domingo 7 de…",
    "imagen": "",
    "fuente": "Feria Friki",
    "url": "https://www.feriafriki.cl/eventos/feria-friki-mallplaza-norte/"
@@ -36474,7 +36663,7 @@
    "precio_texto": "",
    "categoria": "feria",
    "publico": "todos",
-   "descripcion": "MEGA FERIA FRIKI PARQUE BICENTENARIO DE CERRILLOS – FeriaFriki Jojobet Giriş grandpashabet casibom casibom betcio vbettr giriş JOJOBET GİRİŞLERİ Casibom casibom Fecha Domingo 14…",
+   "descripcion": "MEGA FERIA FRIKI PARQUE BICENTENARIO DE CERRILLOS – FeriaFriki Jojobet Giriş cratosroyalbet casibom iptv satın al betcio bankobet giriş JOJOBET GİRİŞLERİ casibom Grandpashabet…",
    "imagen": "",
    "fuente": "Feria Friki",
    "url": "https://www.feriafriki.cl/eventos/mega-feria-friki-parque-bicentenario-de-cerrillos/"
@@ -36981,7 +37170,7 @@
    "descripcion": "El uso de tecnologías digitales forma parte de la vida cotidiana de niños, niñas y adolescentes, planteando nuevos desafíos para su desarrollo y salud mental. Este programa entrega herramientas…",
    "imagen": "https://finis.cl/wp-content/uploads/2026/06/Agenda-web-2026-06-26T122917.834.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
-   "url": "https://finis.cl/agenda/curso-tecnologia-en-la-infancia-y-adolescencia-herramientas-clinicas-para-enfrentar-su-uso/"
+   "url": "https://finis.cl/agenda/comunidad-finis-terrae/curso-tecnologia-en-la-infancia-y-adolescencia-herramientas-clinicas-para-enfrentar-su-uso/"
   },
   {
    "id": "a3d42b0e256801d7",
@@ -37044,7 +37233,7 @@
    "descripcion": "Fecha: viernes 2 y sábado 3 de octubre de 2026 Horario: 8:00 a 18:00 h (Chile) – Actualiza tus conocimientos junto a destacados especialistas en un encuentro académico diseñado para abordar los…",
    "imagen": "https://finis.cl/wp-content/uploads/2026/07/congreso-patologias-maxilofacial.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
-   "url": "https://finis.cl/agenda/1er-congreso-nacional-de-patologia-y-cirugia-oral-y-maxilofacial-bases-actuales-para-el-clinico-en-ejercicio/"
+   "url": "https://finis.cl/agenda/postgrado-y-educacion-continua/1er-congreso-nacional-de-patologia-y-cirugia-oral-y-maxilofacial-bases-actuales-para-el-clinico-en-ejercicio/"
   },
   {
    "id": "798cc43c11c9ae50",
@@ -37506,7 +37695,7 @@
    "descripcion": "La Universidad Finis Terrae será sede de la I Jornada de Ciencia Ficción Chilena, un encuentro que conmemorará el centenario de Elena Aldunate y Hugo Correa, dos figuras fundamentales en el…",
    "imagen": "https://finis.cl/wp-content/uploads/2026/07/Agenda-web-2026-07-13T161945.058.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
-   "url": "https://finis.cl/agenda/i-jornada-de-ciencia-ficcion-chilena-centenario-de-elena-aldunate-y-hugo-correa/"
+   "url": "https://finis.cl/agenda/estudiantes/i-jornada-de-ciencia-ficcion-chilena-centenario-de-elena-aldunate-y-hugo-correa/"
   },
   {
    "id": "4a63bcd83c742b5a",
@@ -37611,7 +37800,7 @@
    "descripcion": "La Escuela de Psicología de la Universidad Finis Terrae, en colaboración con la Facultad de Psicología y Humanidades de la Universidad San Sebastián y la Asociación de Psicología Integral de la…",
    "imagen": "https://finis.cl/wp-content/uploads/2026/06/Agenda-web-2026-06-30T173910.335.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
-   "url": "https://finis.cl/agenda/vi-congreso-internacional-de-psicologia-integral-de-la-persona-del-modelo-a-la-practica-relectura-de-la-tecnica-psicologica-desde-una-mirada-integral-de-la-persona-2/"
+   "url": "https://finis.cl/agenda/comunidad-finis-terrae/vi-congreso-internacional-de-psicologia-integral-de-la-persona-del-modelo-a-la-practica-relectura-de-la-tecnica-psicologica-desde-una-mirada-integral-de-la-persona-2/"
   },
   {
    "id": "16d10e9fcdcf945f",
@@ -37926,7 +38115,7 @@
    "descripcion": "La Escuela de Literatura y la Facultad de Humanidades y Comunicaciones de la Universidad Finis Terrae convoca a estudiantes y académicos a enviar sus propuestas para la quinta versión del coloquio…",
    "imagen": "https://finis.cl/wp-content/uploads/2026/08/Agenda-web-2026-08-05T115020.243.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
-   "url": "https://finis.cl/agenda/quinto-coloquio-vitrinas-esteticas-y-retoricas-a-traves-del-cristal/"
+   "url": "https://finis.cl/agenda/general/quinto-coloquio-vitrinas-esteticas-y-retoricas-a-traves-del-cristal/"
   },
   {
    "id": "3adfa085aa33fd41",
@@ -38679,7 +38868,7 @@
    "precio_texto": "",
    "categoria": "feria",
    "publico": "todos",
-   "descripcion": "Feria Friki Est. Central – FeriaFriki Jojobet Giriş grandpashabet casibom casibom betcio vbettr giriş JOJOBET GİRİŞLERİ Casibom casibom Fecha Domingo 22 de Marzo Horario 12:00 a…",
+   "descripcion": "Feria Friki Est. Central – FeriaFriki Jojobet Giriş cratosroyalbet casibom iptv satın al betcio bankobet giriş JOJOBET GİRİŞLERİ casibom Grandpashabet Fecha Domingo 22 de Marzo…",
    "imagen": "",
    "fuente": "Feria Friki",
    "url": "https://www.feriafriki.cl/eventos/feria-friki-est-central/"
@@ -38784,7 +38973,7 @@
    "precio_texto": "",
    "categoria": "otros",
    "publico": "todos",
-   "descripcion": "Mallplaza Tobalaba – FeriaFriki Jojobet Giriş grandpashabet casibom casibom betcio betoffice giriş JOJOBET GİRİŞLERİ Casibom casibom Fecha Domingo 3 de Mayo Horario de 12:00 a…",
+   "descripcion": "Mallplaza Tobalaba – FeriaFriki Jojobet Giriş cratosroyalbet casibom iptv satın al betcio bankobet giriş JOJOBET GİRİŞLERİ casibom Grandpashabet Fecha Domingo 3 de Mayo Horario de…",
    "imagen": "",
    "fuente": "Feria Friki",
    "url": "https://www.feriafriki.cl/eventos/mallplaza-tobalaba/"
@@ -38868,7 +39057,7 @@
    "precio_texto": "",
    "categoria": "feria",
    "publico": "todos",
-   "descripcion": "Feria Friki Pueblito Las Vizcachas – FeriaFriki Jojobet Giriş grandpashabet casibom casibom betcio vbettr giriş JOJOBET GİRİŞLERİ Casibom casibom Fecha Domingo 8 de Junio Horario…",
+   "descripcion": "Feria Friki Pueblito Las Vizcachas – FeriaFriki Jojobet Giriş cratosroyalbet casibom iptv satın al betcio bankobet giriş JOJOBET GİRİŞLERİ casibom Grandpashabet Fecha Domingo 8 de…",
    "imagen": "",
    "fuente": "Feria Friki",
    "url": "https://www.feriafriki.cl/eventos/feria-friki-pueblito-las-vizcachas/"
@@ -38931,7 +39120,7 @@
    "precio_texto": "",
    "categoria": "feria",
    "publico": "todos",
-   "descripcion": "Feria Friki Lilo y Stitch – FeriaFriki Jojobet Giriş grandpashabet casibom casibom betcio vbettr giriş JOJOBET GİRİŞLERİ Casibom casibom Fecha Domingo 22 de Junio Horario 12:00 a…",
+   "descripcion": "Feria Friki Lilo y Stitch – FeriaFriki Jojobet Giriş cratosroyalbet casibom iptv satın al betcio bankobet giriş JOJOBET GİRİŞLERİ casibom Grandpashabet Fecha Domingo 22 de Junio…",
    "imagen": "",
    "fuente": "Feria Friki",
    "url": "https://www.feriafriki.cl/eventos/feria-friki-lilo-y-stitch/"
