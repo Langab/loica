@@ -24,9 +24,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=5">
+<link rel="stylesheet" href="../loica.css?v=11">
 <style>
-  body{min-height:100dvh}
+  body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
   .foto{border-radius:var(--r-lg);overflow:hidden;background:var(--fondo-hundido);
     aspect-ratio:16/9;display:grid;place-items:center;margin-bottom:var(--e-5)}
@@ -35,12 +35,18 @@
   .foto svg{width:78px;height:78px;opacity:.75}
   .dato{display:flex;gap:var(--e-3);padding:11px 0;border-top:1px solid var(--borde)}
   .dato .et{color:var(--tinta-tenue);width:86px;flex:none;font-size:var(--t-sm);font-weight:600}
+  /* Era un enlace de 20px de alto y es el único camino de vuelta desde una
+     ficha compartida por WhatsApp: se le da área de dedo. */
   .volver{display:inline-flex;align-items:center;gap:7px;text-decoration:none;
-    color:var(--tinta-suave);font-weight:600;font-size:var(--t-sm);margin-bottom:var(--e-4)}
+    color:var(--tinta-suave);font-weight:600;font-size:var(--t-sm);
+    min-height:44px;margin-bottom:var(--e-1)}
   .pie-fuente{margin-top:var(--e-5);font-size:var(--t-xs);color:var(--tinta-tenue);text-align:center}
 </style>
 </head>
-<body>
+<!-- con-nav-inferior reserva el alto de la barra de abajo. Sin esto la línea
+     que dice de qué fuente salió el evento —que es el motivo de existir de la
+     ficha— queda debajo de la barra y no se lee. -->
+<body class="con-nav-inferior">
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
@@ -69,7 +75,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=5"></script>
+<script src="../loica.js?v=11"></script>
 <script>
   pintarBarra("mapa.html", "../");
   const EV = {"id": "b03cb369d088b190", "titulo": "TR/ST en Blondie", "inicio": "2026-11-05T21:00:00", "fin": "2026-11-05T00:00:00", "lugar": "Blondie", "direccion": "", "comuna": "Santiago", "lat": -33.447, "lon": -70.662, "precision": "recinto", "gratis": false, "precio": 35000, "precio_texto": "", "categoria": "musica", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/trst-en-blondie-523741-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/trst-en-blondie"};

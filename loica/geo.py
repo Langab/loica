@@ -43,6 +43,42 @@ COMUNAS = {
     "La Granja": (-33.5400, -70.6250),
     "San Joaquín": (-33.4950, -70.6270),
     "Puente Alto": (-33.6110, -70.5760),
+    # El diccionario tenía 19 de las 52 comunas de la Región Metropolitana, y
+    # una comuna que falta acá no es un pin aproximado sino NINGÚN pin: el
+    # evento sale solo en la lista. Eran 441 eventos y 53 descuentos, y 411 de
+    # esos eventos son los talleres deportivos de Huechuraba.
+    "Huechuraba": (-33.3706, -70.6408),
+    "Conchalí": (-33.3830, -70.6750),
+    "Renca": (-33.4040, -70.7290),
+    "Quilicura": (-33.3670, -70.7290),
+    "Cerro Navia": (-33.4230, -70.7400),
+    "Lo Prado": (-33.4450, -70.7250),
+    "Pudahuel": (-33.4406, -70.7530),
+    "Cerrillos": (-33.4967, -70.7161),
+    "Pedro Aguirre Cerda": (-33.4870, -70.6720),
+    "Lo Espejo": (-33.5230, -70.6890),
+    "San Ramón": (-33.5390, -70.6440),
+    "La Cisterna": (-33.5378, -70.6636),
+    "El Bosque": (-33.5620, -70.6750),
+    "La Pintana": (-33.5830, -70.6330),
+    "San Bernardo": (-33.5921, -70.6994),
+    # Provincias vecinas: aparecen poco pero aparecen, y sin ellas el evento
+    # de Colina o de Buin no cae en ninguna parte.
+    "Colina": (-33.2019, -70.6747),
+    "Lampa": (-33.2833, -70.8778),
+    "Til Til": (-33.0870, -70.9280),
+    "Buin": (-33.7333, -70.7417),
+    "Paine": (-33.8083, -70.7411),
+    "Pirque": (-33.6403, -70.5544),
+    "San José de Maipo": (-33.6400, -70.3520),
+    "Talagante": (-33.6640, -70.9280),
+    "Peñaflor": (-33.6090, -70.8770),
+    "Padre Hurtado": (-33.5730, -70.8130),
+    "El Monte": (-33.6790, -71.0130),
+    "Isla de Maipo": (-33.7500, -70.8990),
+    "Curacaví": (-33.4033, -71.1447),
+    "Melipilla": (-33.6880, -71.2150),
+    "Calera de Tango": (-33.6280, -70.7810),
 }
 
 # Recintos culturales de Santiago con coordenadas verificadas. Cubrir los
