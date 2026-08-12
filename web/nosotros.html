@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=11">
+<link rel="stylesheet" href="loica.css?v=12">
 <style>
   body{overflow-x:hidden}
 
@@ -17,7 +17,6 @@
     position:relative;padding:var(--e-12) var(--e-5) var(--e-10);text-align:center;overflow:hidden;
     background:linear-gradient(170deg,var(--fondo-hundido) 0%,var(--fondo) 62%);
   }
-  .portada .cerros{position:absolute;inset:auto 0 0 0;width:100%;height:130px;opacity:.5}
   .portada-interior{position:relative;max-width:700px;margin:0 auto}
   .portada h1{font-size:clamp(30px,7vw,var(--t-3xl));margin-bottom:var(--e-4)}
   .portada .entrada{font-size:var(--t-md);color:var(--tinta-suave);line-height:1.62}
@@ -136,12 +135,7 @@
 <div class="barra" id="barra"></div>
 
 <header class="portada">
-  <svg class="cerros" viewBox="0 0 1200 130" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0 130 L150 54 L245 92 L380 24 L520 96 L660 44 L790 100 L930 40 L1060 88 L1200 30 L1200 130 Z"
-          fill="var(--azul-cordillera)" opacity=".2"/>
-    <path d="M0 130 L120 88 L260 112 L420 70 L560 116 L700 82 L860 120 L1010 78 L1200 110 L1200 130 Z"
-          fill="var(--azul-cordillera)" opacity=".3"/>
-  </svg>
+  <div id="cordillera"></div>
   <div class="portada-interior">
     <div class="volando" id="loica-grande"></div>
     <h1 id="tit"></h1>
@@ -187,7 +181,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegacion principal"></nav>
 
-<script src="loica.js?v=11"></script>
+<script src="loica.js?v=12"></script>
 <script>
 const TX = {
   es:{
@@ -338,6 +332,8 @@ function pintar(){
   document.getElementById("loica-grande").innerHTML = mascota("loica","var(--rojo-500)",96);
   document.getElementById("tit").textContent = x("tit");
   document.getElementById("entrada").textContent = x("entrada");
+
+  document.getElementById("cordillera").innerHTML = cordillera();
 
   document.getElementById("desfile").innerHTML = ELENCO.map(a =>
     `<span style="--suave:${PALETA[a.clave].suave}">${mascota(a.clave,a.hex,30,TINTA_FIJA)}</span>`).join("");

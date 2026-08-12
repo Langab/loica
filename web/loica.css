@@ -532,6 +532,19 @@ img{max-width:100%;display:block}
   font-weight:700;color:var(--tinta-tenue);text-transform:uppercase;letter-spacing:.05em;
 }
 
+/* ---------- LA CORDILLERA ----------
+   El SVG lo arma `cordillera()` en loica.js; acá va solo cómo se para en la
+   página, para que todas la posicionen igual y ninguna la redefina. */
+.cerros{position:absolute;inset:auto 0 0 0;width:100%;height:132px;pointer-events:none}
+/* Cuando el contenedor YA es la franja (el paseo del hero, el remate) la
+   cordillera lo llena entero; si no, es una banda al pie y el texto respira. */
+.paseo .cerros,.remate .cerros{height:100%}
+/* Banda de cierre: las páginas que no tienen hero igual terminan en cordillera,
+   que es lo que las hace parecer del mismo sitio. */
+.remate{position:relative;height:96px;margin-top:var(--e-10);overflow:hidden}
+.remate .cerros{height:96px}
+@media(max-width:600px){ .remate,.remate .cerros{height:74px} }
+
 @media (prefers-reduced-motion: reduce){
   *{transition:none!important;animation:none!important}
 }

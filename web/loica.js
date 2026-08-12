@@ -431,7 +431,7 @@ const TEXTOS = {
     dias:["lun","mar","mié","jue","vie","sáb","dom"], mesesCortos:["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"],
     hoyBoton:"Hoy", anterior:"Mes anterior", siguiente:"Mes siguiente",
     /* Portada */
-    pTitulo:"¿Qué hacemos hoy?",
+    pTitulo:"¿Qué hacemos hoy", pTituloAcento:"por Santiago?",
     pBajada:"Todo lo que está pasando en Santiago, en un solo lugar. Lo junta un robot todas las mañanas y siempre te deja en la fuente original.",
     pSaludo:"¡Hola! Soy la Loica. ¿Te muestro Santiago?",
     pVerMapa:"Ver el mapa", pVerHoy:"Panoramas de hoy",
@@ -484,7 +484,7 @@ const TEXTOS = {
     dias:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"], mesesCortos:["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"],
     hoyBoton:"Today", anterior:"Previous month", siguiente:"Next month",
     /* Portada */
-    pTitulo:"What are we doing today?",
+    pTitulo:"What's on today", pTituloAcento:"around Santiago?",
     pBajada:"Everything happening in Santiago, in one place. A robot gathers it every morning and always sends you to the original source.",
     pSaludo:"Hi! I'm the Loica. Shall I show you Santiago?",
     pVerMapa:"Open the map", pVerHoy:"What's on today",
@@ -537,7 +537,7 @@ const TEXTOS = {
     dias:["seg","ter","qua","qui","sex","sáb","dom"], mesesCortos:["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"],
     hoyBoton:"Hoje", anterior:"Mês anterior", siguiente:"Próximo mês",
     /* Portada */
-    pTitulo:"O que a gente faz hoje?",
+    pTitulo:"O que a gente faz hoje", pTituloAcento:"por Santiago?",
     pBajada:"Tudo o que está acontecendo em Santiago, num só lugar. Um robô junta tudo toda manhã e sempre te leva à fonte original.",
     pSaludo:"Oi! Eu sou a Loica. Te mostro Santiago?",
     pVerMapa:"Abrir o mapa", pVerHoy:"Programas de hoje",
@@ -877,6 +877,60 @@ function copiarLink(url, boton){
   }
 }
 
+/* ---------- LA CORDILLERA ----------
+   Era un zigzag genérico copiado a mano en tres archivos: servía de decoración
+   pero podía ser la sierra de cualquier ciudad del mundo. Esta es Santiago y se
+   nota, que es justo lo que pide el sistema (color pleno, contorno, nada
+   genérico). De atrás hacia adelante:
+
+     1. Los Andes, con NIEVE en las cumbres altas. La nieve es la mitad de la
+        postal: sin ella el filo se lee como un cerro pelado cualquiera.
+     2. La precordillera, con el Manquehue — el cono que todo el mundo ubica
+        aunque no sepa el nombre.
+     3. La ciudad: el San Cristóbal con su cruz, el Santa Lucía y el Costanera.
+        Tres siluetas y ya sabes en qué ciudad estás.
+
+   Va acá y no en cada página para que sea LA MISMA en todas. `tono` deja que
+   habla.html la tiña con el color del guía de turno; el resto usa el default. */
+function cordillera({tono = "var(--c-fiesta)"} = {}){
+  // Nieve: parches irregulares colgando de las cuatro cumbres altas. Van en
+  // crema FIJA, nunca var(--contorno): la nieve es blanca de día y de noche.
+  const nieve = [[190,18],[450,14],[730,22],[1010,28]]
+    .map(([x,y]) => `M${x} ${y} L${x-22} ${y+21} L${x-9} ${y+16} L${x+3} ${y+24}
+                     L${x+14} ${y+15} L${x+24} ${y+20} Z`).join("");
+
+  return `
+  <svg class="cerros" viewBox="0 0 1200 150" preserveAspectRatio="none" aria-hidden="true">
+    <!-- 1. Los Andes. Los animales caminan sobre el tercio de abajo, así que
+            todo lo que tenga que leerse vive sobre la línea y≈78. -->
+    <path fill="var(--c-cultura)" opacity=".3" d="M0 150 L0 78 L70 40 L120 62 L190 18
+      L250 50 L310 30 L380 58 L450 14 L520 54 L590 34 L660 66 L730 22 L800 56
+      L870 36 L940 70 L1010 28 L1080 60 L1140 42 L1200 68 L1200 150 Z"/>
+    <path fill="#FAF3E7" opacity=".62" d="${nieve}"/>
+
+    <!-- 2. La precordillera. El cono de 560 es el Manquehue. -->
+    <path fill="${tono}" opacity=".34" style="transition:fill .4s" d="M0 150 L0 104
+      L90 84 L170 98 L260 76 L340 92 L420 70 L500 88 L560 58 L620 88 L700 74
+      L790 96 L880 72 L960 94 L1050 78 L1130 96 L1200 84 L1200 150 Z"/>
+
+    <!-- 3. La ciudad. Azul cordillera fijo y opaco: lo que está adelante tiene
+            que ser MÁS OSCURO que lo de atrás o deja de leerse como silueta.
+            Probado con crema y quedaba como neblina, sin cerro ni torre. -->
+    <!-- Los hitos van en los HUECOS entre cumbres nevadas (190, 450, 730, 1010):
+         pegados a una, la torre y la nieve se fundían en un solo palo claro.
+         Y nada que deba verse baja de y≈76, que es la línea del lomo de los
+         animales: más abajo queda tapado. -->
+    <path fill="var(--azul-cordillera)" opacity=".72" d="M0 150 L0 140 L110 140
+      L110 127 L150 127 L150 140 L230 140 Q302 62 375 140 L520 140 L520 121
+      L560 121 L560 140 L598 140 L600 46 L622 41 L622 140 L700 140 L700 126
+      L740 126 L740 140 L830 140 Q880 74 930 140 L1010 140 L1010 123 L1055 123
+      L1055 140 L1200 140 L1200 150 Z"/>
+    <!-- La cruz del San Cristóbal: dos trazos que ubican la ciudad entera -->
+    <path stroke="var(--azul-cordillera)" stroke-width="3" opacity=".72" fill="none"
+          d="M302 62 L302 48 M295 53 L309 53"/>
+  </svg>`;
+}
+
 /* Cuándo es, dicho como lo diría una persona */
 function etiquetaDia(fecha){
   const hoy = new Date();
@@ -1003,3 +1057,14 @@ function tarjetaDescuento(d, alPulsar){
   boton.onclick = () => alPulsar(d);
   return boton;
 }
+
+/* Auto-montaje de la cordillera: cualquier página que ponga un #cordillera
+   vacío la recibe sin cablear nada. Las que la quieren con opciones (la portada
+   y habla, que la tiñe con el guía) la pintan ellas y esto no las pisa. */
+function montarCordillera(){
+  const caja = document.getElementById("cordillera");
+  if(caja && !caja.childElementCount) caja.innerHTML = cordillera();
+}
+if(document.readyState === "loading")
+  document.addEventListener("DOMContentLoaded", montarCordillera);
+else montarCordillera();

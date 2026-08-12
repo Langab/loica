@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=11">
+<link rel="stylesheet" href="loica.css?v=12">
 <style>
   /* ============================================================
      HABLA CON LA LOICA
@@ -103,8 +103,7 @@
 
   /* ---------- EL PASEO: los nueve, y son botones ---------- */
   .paseo{position:relative;height:136px;margin-top:var(--e-5)}
-  .cerros{position:absolute;inset:auto 0 0 0;width:100%;height:136px}
-  .desfile{position:absolute;inset:auto 0 18px 0;display:flex;align-items:flex-end;
+    .desfile{position:absolute;inset:auto 0 18px 0;display:flex;align-items:flex-end;
     justify-content:center;gap:clamp(2px,2.2vw,20px);padding:0 var(--e-3)}
   .bicho-hero{
     display:block;background:none;border:0;padding:0;cursor:pointer;position:relative;
@@ -366,14 +365,7 @@
   </div>
 
   <div class="paseo">
-    <svg class="cerros" viewBox="0 0 1200 150" preserveAspectRatio="none" aria-hidden="true">
-      <!-- El filo de atrás sigue al guía y el de adelante se queda fijo: si
-           los dos cambiaran, el relevo se leería como que cambió la página. -->
-      <path d="M0 150 L150 62 L245 104 L380 28 L520 108 L660 50 L790 112 L930 46 L1060 100 L1200 34 L1200 150 Z"
-            fill="var(--guia)" opacity=".32" style="transition:fill .4s"/>
-      <path d="M0 150 L120 100 L260 126 L420 80 L560 130 L700 92 L860 134 L1010 88 L1200 122 L1200 150 Z"
-            fill="var(--c-cultura)" opacity=".34"/>
-    </svg>
+    <div id="cordillera"></div>
     <div class="desfile" id="desfile"></div>
   </div>
   <p class="atajo-pista" data-bot="atajo"></p>
@@ -386,7 +378,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
-<script src="loica.js?v=11"></script>
+<script src="loica.js?v=12"></script>
 <script>
 /* ============================================================
    1. EL ELENCO COMO GUÍAS
@@ -1430,6 +1422,8 @@ async function reiniciar(atajo){
    ============================================================ */
 function pintarHero(){
   document.querySelectorAll("[data-bot]").forEach(el => el.textContent = b(el.dataset.bot));
+  // El filo del medio sigue el color del guía de turno: el relevo se ve en el paisaje
+  document.getElementById("cordillera").innerHTML = cordillera({tono:"var(--guia)"});
   const globo = document.getElementById("loica-globo");
   globo.textContent = b("saludoGlobo");
 

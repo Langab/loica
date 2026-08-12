@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=11">
+<link rel="stylesheet" href="loica.css?v=12">
 <style>
   body{overflow-x:hidden}
 
@@ -84,9 +84,8 @@
   }
 
   /* --- El paseo --- */
-  .paseo{position:relative;height:132px;margin-top:var(--e-6)}
-  .cerros{position:absolute;inset:auto 0 0 0;width:100%;height:132px}
-  .desfile{
+  .paseo{position:relative;height:196px;margin-top:var(--e-6)}
+    .desfile{
     position:absolute;inset:auto 0 18px 0;display:flex;align-items:flex-end;
     justify-content:center;gap:clamp(2px,2.4vw,22px);padding:0 var(--e-3);
   }
@@ -221,8 +220,7 @@
     .hero .bajada{font-size:var(--t-base);margin-inline:auto}
     .hero-botones{gap:var(--e-2);margin-bottom:var(--e-5);justify-content:center}
     .hero-botones .boton{flex:1;min-width:150px;padding:12px var(--e-4);font-size:var(--t-base)}
-    .paseo{height:104px;margin-top:var(--e-5)}
-    .cerros{height:104px}
+    .paseo{height:150px;margin-top:var(--e-5)}
     .desfile{bottom:10px;gap:1px}
     section{padding:var(--e-8) var(--e-4)}
     .titulo-seccion h2{font-size:var(--t-xl)}
@@ -271,14 +269,7 @@
   </div>
 
   <div class="paseo">
-    <!-- Dos filos de cordillera en color, no en gris: el gris era lo que hacía
-         que el hero se viera apagado justo donde tiene que invitar. -->
-    <svg class="cerros" viewBox="0 0 1200 150" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0 150 L150 62 L245 104 L380 28 L520 108 L660 50 L790 112 L930 46 L1060 100 L1200 34 L1200 150 Z"
-            fill="var(--c-fiesta)" opacity=".2"/>
-      <path d="M0 150 L120 100 L260 126 L420 80 L560 130 L700 92 L860 134 L1010 88 L1200 122 L1200 150 Z"
-            fill="var(--c-cultura)" opacity=".34"/>
-    </svg>
+    <div id="cordillera"></div>
     <div class="desfile" id="desfile"></div>
   </div>
 </header>
@@ -314,7 +305,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
-<script src="loica.js?v=11"></script>
+<script src="loica.js?v=12"></script>
 <script>
 /* La raíz del sitio era el mapa hasta este cambio, así que hay links dando
    vueltas por WhatsApp con la forma `.../#/e/<id>`. Se reenvían al mapa en vez
@@ -339,14 +330,15 @@ function pintarPortada(){
   const T = (k) => t(k);
 
   /* --- Hero --- */
-  // La última palabra del título va subrayada a mano y en rojo
-  const titulo = T("pTitulo");
-  const corte = titulo.lastIndexOf(" ");
+  // El acento va aparte y no como "la última palabra": el subrayado tiene que
+  // caer entero sobre "por Santiago", que es lo que amarra la frase con la
+  // cordillera dibujada justo debajo.
   document.getElementById("h-titulo").innerHTML =
-    `${escapar(titulo.slice(0, corte))} <span class="subrayado">${escapar(titulo.slice(corte + 1))}
+    `${escapar(T("pTitulo"))} <span class="subrayado">${escapar(T("pTituloAcento"))}
        <svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true">
          <path d="M4 13c46-8 104-10 192-4" fill="none" stroke="var(--acento)"
                stroke-width="7" stroke-linecap="round"/></svg></span>`;
+  document.getElementById("cordillera").innerHTML = cordillera();
   document.getElementById("h-bajada").textContent = T("pBajada");
   document.getElementById("h-cta").textContent = T("pVerMapa");
   document.getElementById("h-cta2").textContent = T("pVerHoy");
