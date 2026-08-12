@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=8">
+<link rel="stylesheet" href="loica.css?v=9">
 <style>
   /* ============================================================
      HABLA CON LA LOICA
@@ -23,26 +23,58 @@
      (`estrategia_marca.md`) llevada a una conversación — quien te habla te
      dice de qué se trata antes de que leas una palabra.
 
-     El hero es el mismo de la portada (cordillera + desfile), con una
-     diferencia importante: acá los nueve animales SON BOTONES. Tocar al
-     Cóndor arranca la conversación en música. Es el atajo para el que ya
-     sabe lo que quiere y no tiene por qué contestar tres preguntas.
+     El hero es el mismo de la portada (cordillera + desfile), con dos
+     diferencias: los nueve animales SON BOTONES —tocar al Cóndor arranca la
+     conversación en música, el atajo para el que ya sabe— y el hero no
+     termina donde empieza el chat.
+
+     LA IDEA QUE UNE LAS DOS MITADES
+     Esto no es una portada con un chat abajo: es una sola superficie que
+     cambia de color según quién te esté atendiendo. `--guia` es el color del
+     animal que tiene la palabra, y de él cuelgan la cordillera, el ambiente y
+     el hilo que recorre la conversación. Cuando el Culpeo toma el turno, la
+     página entera se pone morada. No es decoración: es la regla de la marca
+     —la mascota es la señalética— aplicada a la superficie completa, así que
+     el color te dice quién habla antes de que leas el nombre.
+
+     Y el hero no desaparece cuando arranca la conversación: se COMPACTA
+     (`body.conversando`). Pasa de invitación a encabezado sin cortar nunca,
+     que es lo que hace que se lea como un producto y no como dos pantallas
+     pegadas.
      ============================================================ */
   body{overflow-x:hidden}
 
-  /* ---------- HERO ---------- */
-  .hero{position:relative;overflow:hidden;background:var(--fondo-elevado);
-    border-bottom:2.5px solid var(--contorno)}
-  .hero .mancha{position:absolute;border-radius:50%;opacity:.16;pointer-events:none}
+  /* El color del que tiene la palabra. Arranca en el rojo de la Loica porque
+     es ella la que recibe, y lo cambia el JS en cada relevo. */
+  :root{--guia:var(--acento); --guia-suave:var(--rojo-200)}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-tema="claro"]){--guia-suave:var(--azul-800)}
+  }
+  :root[data-tema="oscuro"]{--guia-suave:var(--azul-800)}
+
+  /* ---------- HERO ----------
+     Sin borde inferior: la cordillera ES la transición hacia la conversación,
+     y una línea de tinta ahí lo partía en dos productos. */
+  .hero{position:relative;overflow:hidden;background:var(--fondo-elevado)}
+  .hero .mancha{position:absolute;border-radius:50%;opacity:.16;pointer-events:none;
+    transition:background var(--lento),opacity var(--lento)}
+  /* En oscuro las manchas se mezclan con `screen`, y ahí el tono suave deja de
+     leerse como color y pasa a leerse como suciedad — es la misma trampa que
+     `_direccion_visual.md` documenta para el amarillo sobre azul-950. Sobre
+     fondo oscuro las dos manchas usan el color saturado del guía. */
   @media (prefers-color-scheme: dark){
     :root:not([data-tema="claro"]) .hero .mancha{mix-blend-mode:screen;opacity:.26}
-    :root:not([data-tema="claro"]) .hero .m2{background:var(--c-charla)}
+    :root:not([data-tema="claro"]) .hero .m2{background:var(--guia)}
   }
   :root[data-tema="oscuro"] .hero .mancha{mix-blend-mode:screen;opacity:.26}
-  :root[data-tema="oscuro"] .hero .m2{background:var(--c-charla)}
-  .hero .m1{width:320px;height:320px;background:var(--c-charla);top:-120px;left:-80px}
-  .hero .m2{width:260px;height:260px;background:var(--c-otros);top:-50px;right:-70px}
-  .hero .m3{width:200px;height:200px;background:var(--c-libre);bottom:110px;right:14%}
+  :root[data-tema="oscuro"] .hero .m2{background:var(--guia)}
+  /* Las dos primeras siguen al guía; la tercera queda fija en el amarillo de
+     la casa para que el ambiente no se vuelva monocromo. */
+  .hero .m1{width:320px;height:320px;background:var(--guia);top:-120px;left:-80px}
+  /* Bien corrida hacia la esquina: centrada quedaba justo detrás de la Loica y
+     el círculo se leía como un halo mal recortado en vez de ambiente. */
+  .hero .m2{width:260px;height:260px;background:var(--guia-suave);top:-140px;right:-120px}
+  .hero .m3{width:200px;height:200px;background:var(--c-otros);bottom:110px;right:14%}
 
   .hero-interior{position:relative;max-width:960px;margin:0 auto;
     padding:var(--e-8) var(--e-5) 0;z-index:2;text-align:left;
@@ -99,6 +131,35 @@
     padding:0 var(--e-5) var(--e-4);font-size:var(--t-xs);color:var(--tinta-tenue);
   }
 
+  /* ---------- EL HERO COMPACTADO ----------
+     Apenas contestas la primera pregunta el hero deja de ser una invitación y
+     pasa a ser el encabezado de la herramienta: la Loica se achica, la bajada
+     y la pista de atajos se van, y la cordillera baja a una franja. Nada se
+     desmonta ni salta — todo son transiciones sobre las mismas piezas, que es
+     lo que hace que se lea como un solo producto y no como dos pantallas.
+
+     El desfile SE QUEDA: es el cambiador de guía, y ahí sigue sirviendo. */
+  .hero-texto,.hero-guia,.paseo,.cerros,#loica-guia svg,.hero h1,
+  .bicho-hero svg,.atajo-pista{
+    transition:all var(--lento);
+  }
+  body.conversando .hero h1{font-size:clamp(21px,3.6vw,27px);margin-bottom:0}
+  body.conversando .hero .bajada,
+  body.conversando .atajo-pista{
+    opacity:0;max-height:0;margin:0;padding-top:0;padding-bottom:0;overflow:hidden;
+  }
+  body.conversando .hero-interior{padding-top:var(--e-4);padding-bottom:0}
+  body.conversando #loica-guia svg{width:clamp(64px,8vw,84px)}
+  body.conversando .globo{opacity:0;max-height:0;padding:0;border-width:0;margin:0}
+  body.conversando .paseo,body.conversando .cerros{height:78px}
+  body.conversando .desfile{bottom:10px}
+  body.conversando .bicho-hero svg{width:clamp(26px,5.2vw,42px)}
+  body.conversando .hero .mancha{opacity:.1}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-tema="claro"]) body.conversando .hero .mancha{opacity:.18}
+  }
+  :root[data-tema="oscuro"] body.conversando .hero .mancha{opacity:.18}
+
   @media(max-width:760px){
     .hero-interior{padding:var(--e-6) var(--e-4) 0;grid-template-columns:1fr;
       justify-items:center;text-align:center}
@@ -112,7 +173,10 @@
        con el texto. Se achican y se apagan: el hero ya tiene los cerros. */
     .hero .mancha{opacity:.09}
     .hero .m1{width:190px;height:190px;top:-70px;left:-60px}
-    .hero .m2{width:160px;height:160px;top:-40px;right:-50px}
+    /* La segunda mancha se va en pantalla chica. En una columna quedaba justo
+       detrás del título, y en oscuro —mezclada con `screen`— se leía como una
+       mancha gris y no como color. Con una basta para dar ambiente. */
+    .hero .m2{display:none}
     .hero .m3{width:130px;height:130px;bottom:132px;right:4%}
     /* Nueve animales a 375px van pegados al filo: el respiro evita que el
        primero y el último se lean cortados. */
@@ -132,13 +196,44 @@
   /* ---------- CONVERSACIÓN ---------- */
   .conversa{max-width:720px;margin:0 auto;padding:var(--e-6) var(--e-5) var(--e-10)}
 
-  .turno{display:flex;gap:var(--e-3);margin-bottom:var(--e-3);align-items:flex-end}
+  /* --- EL HILO ---
+     La firma de la página. Una línea baja por la columna de los avatares y se
+     tiñe del color de quien tenía la palabra en cada tramo, así que al llegar
+     abajo la conversación deja un registro visible de por cuántas manos
+     pasaste: rojo de la Loica, morado del Culpeo, verde del Pudú, café del
+     Degú. Es lo que convierte una pila de burbujas en UNA conversación.
+
+     El hilo se dibuja turno por turno y no como una línea de fondo continua:
+     así existe donde hay conversación y no cuelga en el vacío ni antes de la
+     primera burbuja ni al costado de las opciones. Cada tramo sube hasta el
+     avatar anterior, de modo que dos turnos seguidos quedan cosidos. */
+  #hilo{position:relative}
+  .turno{display:flex;gap:var(--e-3);margin-bottom:var(--e-3);
+    align-items:flex-end;position:relative}
   .turno.mia{flex-direction:row-reverse}
   .turno + .relevo{margin-top:var(--e-5)}
+  /* El tramo va desde el avatar del turno anterior hasta el de este, por eso
+     empieza un `gap` más arriba de su propia caja. */
+  .turno::before{
+    content:"";position:absolute;left:21.5px;top:calc(-1 * var(--e-3));
+    height:calc(100% - 23px + var(--e-3));width:3px;border-radius:2px;
+    background:var(--voz,var(--guia));opacity:.45;
+  }
+  /* En mis turnos no hay avatar, pero el hilo tiene que seguir: toma el color
+     del guía actual para no dejar el tramo mudo. */
+  /* Sin el gap de más: si el tramo se estira bajo el último turno queda un
+     cabo suelto colgando justo antes del relevo. El turno siguiente ya cose
+     el hueco con su propio tramo hacia arriba. */
+  .turno.mia::before{height:100%;background:var(--guia);opacity:.22}
+  /* El primero no tiene a quién coserse hacia arriba, y el que sigue a un
+     relevo tampoco: ahí la línea saltaría por encima de la pastilla. */
+  #hilo > .turno:first-child::before,
+  .relevo + .turno::before{top:auto;bottom:23px;height:calc(100% - 46px)}
 
   .avatar{flex:none;width:46px;height:46px;border-radius:var(--r-pill);
     background:var(--fondo-elevado);border:2.5px solid var(--contorno);
-    display:grid;place-items:center;box-shadow:var(--repisa-1)}
+    display:grid;place-items:center;box-shadow:var(--repisa-1);
+    position:relative;z-index:1}
   .avatar svg{width:32px;height:32px}
 
   .burbuja{
@@ -228,10 +323,13 @@
   @media(max-width:540px){.acciones{margin-left:0}}
   .acciones .boton{font-size:var(--t-base);padding:11px var(--e-5)}
 
-  .aviso{display:flex;gap:var(--e-3);align-items:flex-start;max-width:720px;
-    margin:0 auto;padding:var(--e-4) var(--e-5) 0;
-    font-size:var(--t-xs);color:var(--tinta-tenue);line-height:1.5}
-  .aviso b{color:var(--tinta-suave)}
+  /* En celular las opciones y los resultados usan todo el ancho y pasan por
+     encima de la columna de avatares, así que el hilo se retira: ahí ya no
+     ordena nada, estorba. */
+  @media(max-width:540px){
+    #hilo::before,.turno::before{display:none}
+  }
+
 </style>
 </head>
 <body class="con-nav-inferior">
@@ -255,8 +353,10 @@
 
   <div class="paseo">
     <svg class="cerros" viewBox="0 0 1200 150" preserveAspectRatio="none" aria-hidden="true">
+      <!-- El filo de atrás sigue al guía y el de adelante se queda fijo: si
+           los dos cambiaran, el relevo se leería como que cambió la página. -->
       <path d="M0 150 L150 62 L245 104 L380 28 L520 108 L660 50 L790 112 L930 46 L1060 100 L1200 34 L1200 150 Z"
-            fill="var(--c-charla)" opacity=".2"/>
+            fill="var(--guia)" opacity=".32" style="transition:fill .4s"/>
       <path d="M0 150 L120 100 L260 126 L420 80 L560 130 L700 92 L860 134 L1010 88 L1200 122 L1200 150 Z"
             fill="var(--c-cultura)" opacity=".34"/>
     </svg>
@@ -265,12 +365,6 @@
   <p class="atajo-pista" data-bot="atajo"></p>
 </header>
 
-<div class="aviso">
-  <span>🐦</span>
-  <span><b>Maqueta.</b> Corre entera en el navegador sobre
-  <code>eventos.json</code> y <code>descuentos.json</code>. Sin servidor, sin
-  modelo de lenguaje y sin costo por conversación.</span>
-</div>
 
 <main class="conversa">
   <div id="hilo" aria-live="polite"></div>
@@ -278,7 +372,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
-<script src="loica.js?v=8"></script>
+<script src="loica.js?v=9"></script>
 <script>
 /* ============================================================
    1. EL ELENCO COMO GUÍAS
@@ -288,16 +382,25 @@
    blanco no pasan contraste.
    ============================================================ */
 const GUIAS = {
-  loica:     {tono:"var(--acento)",      claro:false, art:{es:"la ", pt:"a "}},
-  pudu:      {tono:"var(--c-libre)",     claro:false, art:{es:"el ", pt:"o "}},
-  culpeo:    {tono:"var(--c-fiesta)",    claro:false, art:{es:"el ", pt:"o "}},
-  condor:    {tono:"var(--c-musica)",    claro:false, art:{es:"el ", pt:"o "}},
-  chinchilla:{tono:"var(--c-cultura)",   claro:false, art:{es:"la ", pt:"a "}},
-  chincol:   {tono:"var(--c-clases)",    claro:true,  art:{es:"el ", pt:"o "}},
-  chungungo: {tono:"var(--c-deporte)",   claro:false, art:{es:"el ", pt:"o "}},
-  pinguino:  {tono:"var(--c-charla)",    claro:false, art:{es:"el ", pt:"o "}},
-  degu:      {tono:"var(--c-descuento)", claro:false, art:{es:"el ", pt:"o "}},
+  loica:     {tono:"var(--acento)",      suave:"var(--rojo-200)",           claro:false, art:{es:"la ", pt:"a "}},
+  pudu:      {tono:"var(--c-libre)",     suave:"var(--c-libre-suave)",      claro:false, art:{es:"el ", pt:"o "}},
+  culpeo:    {tono:"var(--c-fiesta)",    suave:"var(--c-fiesta-suave)",     claro:false, art:{es:"el ", pt:"o "}},
+  condor:    {tono:"var(--c-musica)",    suave:"var(--c-musica-suave)",     claro:false, art:{es:"el ", pt:"o "}},
+  chinchilla:{tono:"var(--c-cultura)",   suave:"var(--c-cultura-suave)",    claro:false, art:{es:"la ", pt:"a "}},
+  chincol:   {tono:"var(--c-clases)",    suave:"var(--c-clases-suave)",     claro:true,  art:{es:"el ", pt:"o "}},
+  chungungo: {tono:"var(--c-deporte)",   suave:"var(--c-deporte-suave)",    claro:false, art:{es:"el ", pt:"o "}},
+  pinguino:  {tono:"var(--c-charla)",    suave:"var(--c-charla-suave)",     claro:false, art:{es:"el ", pt:"o "}},
+  degu:      {tono:"var(--c-descuento)", suave:"var(--c-descuento-suave)",  claro:false, art:{es:"el ", pt:"o "}},
 };
+
+/* Pasarle el color a la página entera. Con esto la cordillera, el ambiente y
+   el hilo quedan del color del que tiene la palabra, y el relevo se ve en
+   toda la superficie y no sólo en la pastilla. */
+function mandaLaVoz(guia){
+  const g = GUIAS[guia] || GUIAS.loica;
+  document.documentElement.style.setProperty("--guia", g.tono);
+  document.documentElement.style.setProperty("--guia-suave", g.suave);
+}
 const nombreGuia = c => (ELENCO.find(e => e.clave === c) || ELENCO[0])[IDIOMA][0];
 /* "Te atiende el Culpeo", no "Te atiende Culpeo". El inglés no lleva artículo
    y el género cambia por animal, así que cada uno se trae el suyo. */
@@ -883,6 +986,7 @@ function agregar(turno){
 async function dice(guia, fabricar, pausa = 480){
   const conNombre = guia !== ultimaVoz;   // el nombre solo al tomar la palabra
   ultimaVoz = guia;
+  mandaLaVoz(guia);
   agregar({render: a => nodoDice(guia, fabricar(), conNombre, a)});
   await esperar(pausa);
 }
@@ -890,9 +994,13 @@ const diceClave = (guia, clave, pausa) => dice(guia, () => escapar(b(clave)), pa
 
 function responde(fabricar){
   ultimaVoz = null;   // después de que hablas tú, el animal se vuelve a presentar
+  /* La primera respuesta es la que convierte la portada en herramienta: el
+     hero se compacta y no vuelve a expandirse hasta que se empieza de nuevo. */
+  document.body.classList.add("conversando");
   agregar({render: a => nodoMio(fabricar(), a)});
 }
 async function relevo(guia){
+  mandaLaVoz(guia);
   agregar({render: () => nodoRelevo(guia)});
   ultimaVoz = null;
   await esperar(420);
@@ -1293,6 +1401,11 @@ async function reiniciar(atajo){
   turnos = []; respuestas = {}; ajuste = {}; ranking = [];
   mostrados = 0; ultimaVoz = null; codaPuesta = false;
   hilo().innerHTML = "";
+  /* Volver a empezar devuelve el hero a su tamaño y la página al rojo de la
+     anfitriona — salvo que vengas por un atajo, donde la conversación ya
+     arrancó y expandir el hero sería un salto para atrás. */
+  mandaLaVoz("loica");
+  if(!atajo) document.body.classList.remove("conversando");
   await arrancar(atajo);
 }
 

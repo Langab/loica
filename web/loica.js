@@ -380,7 +380,7 @@ const ELENCO = [
 const TEXTOS = {
   es:{
     lema:"Santiago está pasando",
-    mapa:"Mapa", habla:"Habla con la Loica", blog:"Blog", ninos:"Niños", mas18:"+18", calendario:"Calendario", agregar:"Agrega tu evento", nosotros:"Quién hace esto",
+    mapa:"Mapa", habla:"Habla", blog:"Blog", ninos:"Niños", mas18:"+18", calendario:"Calendario", agregar:"Agrega tu evento", nosotros:"Quién hace esto",
     eventos:"eventos", evento:"evento", gratis:"Gratis",
     hoy:"Hoy", manana:"Mañana", semana:"7 días", finde:"Finde",
     cuandoLargo:{hoy:"Hoy", manana:"Mañana", semana:"En estos 7 días", finde:"Este fin de semana", todo:"Todos"},
@@ -432,7 +432,7 @@ const TEXTOS = {
   },
   en:{
     lema:"Santiago is happening",
-    mapa:"Map", habla:"Talk to the Loica", blog:"Blog", ninos:"Kids", mas18:"18+", calendario:"Calendar", agregar:"Add your event", nosotros:"Who makes this",
+    mapa:"Map", habla:"Talk", blog:"Blog", ninos:"Kids", mas18:"18+", calendario:"Calendar", agregar:"Add your event", nosotros:"Who makes this",
     eventos:"events", evento:"event", gratis:"Free",
     hoy:"Today", manana:"Tomorrow", semana:"7 days", finde:"Weekend",
     cuandoLargo:{hoy:"Today", manana:"Tomorrow", semana:"Within 7 days", finde:"This weekend", todo:"All"},
@@ -484,7 +484,7 @@ const TEXTOS = {
   },
   pt:{
     lema:"Santiago está acontecendo",
-    mapa:"Mapa", habla:"Fale com a Loica", blog:"Blog", ninos:"Crianças", mas18:"+18", calendario:"Calendário", agregar:"Adicione seu evento", nosotros:"Quem faz isso",
+    mapa:"Mapa", habla:"Fale", blog:"Blog", ninos:"Crianças", mas18:"+18", calendario:"Calendário", agregar:"Adicione seu evento", nosotros:"Quem faz isso",
     eventos:"eventos", evento:"evento", gratis:"Grátis",
     hoy:"Hoje", manana:"Amanhã", semana:"7 dias", finde:"Fim de semana",
     cuandoLargo:{hoy:"Hoje", manana:"Amanhã", semana:"Nestes 7 dias", finde:"Neste fim de semana", todo:"Todos"},

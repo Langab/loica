@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=8">
+<link rel="stylesheet" href="loica.css?v=9">
 <style>
   html,body{height:100%;overflow:hidden}
   #app{display:flex;flex-direction:column;height:100dvh}
@@ -201,31 +201,50 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
-<script src="loica.js?v=8"></script>
+<script src="loica.js?v=9"></script>
 <script>
 /* ------------------------------------------------------------------
    Estado. Tres filtros y ninguno depende del otro: el día es de una
    respuesta, el banco y la comuna se combinan.
    ------------------------------------------------------------------ */
 let DATOS = {descuentos:[], comunas:[], generado:""};
-let dia = "hoy", bancoFiltro = null, comunaFiltro = "", rubroFiltro = "";
+let dia = "hoy", bancoFiltro = null, comunaFiltro = "", rubroFiltro = "", cocinaFiltro = "";
 let mostrando = 80;   // la lista completa son 700 botones; se sirve de a poco
 
+// Cuatro rubros y nada más: el pipeline homologa el vocabulario de los cinco
+// bancos antes de exportar (ver loica/descuentos/categorias.py). Antes acá
+// había nueve claves y dos pares distintos apuntaban a la misma etiqueta, así
+// que el filtro mostraba "Cafeterías" y "Gourmet" repetidos.
 const RUBROS = {
-  es:{restaurantes:"Restaurantes", "restaurantes-y-bares":"Restaurantes y bares",
-      cafeteria:"Cafeterías", cafeterias:"Cafeterías", "comida-rapida":"Comida rápida",
-      "gourmet-y-delicatessen":"Gourmet", "sabores-gourmet":"Gourmet",
-      "40-de-descuento-visa":"40% Visa", antojos:"Antojos"},
-  en:{restaurantes:"Restaurants", "restaurantes-y-bares":"Restaurants and bars",
-      cafeteria:"Cafés", cafeterias:"Cafés", "comida-rapida":"Fast food",
-      "gourmet-y-delicatessen":"Gourmet", "sabores-gourmet":"Gourmet",
-      "40-de-descuento-visa":"40% Visa", antojos:"Treats"},
-  pt:{restaurantes:"Restaurantes", "restaurantes-y-bares":"Restaurantes e bares",
-      cafeteria:"Cafeterias", cafeterias:"Cafeterias", "comida-rapida":"Fast food",
-      "gourmet-y-delicatessen":"Gourmet", "sabores-gourmet":"Gourmet",
-      "40-de-descuento-visa":"40% Visa", antojos:"Antojos"},
+  es:{restaurantes:"Restaurantes", cafeterias:"Cafeterías",
+      gourmet:"Gourmet", comida_rapida:"Comida rápida"},
+  en:{restaurantes:"Restaurants", cafeterias:"Cafés",
+      gourmet:"Gourmet", comida_rapida:"Fast food"},
+  pt:{restaurantes:"Restaurantes", cafeterias:"Cafeterias",
+      gourmet:"Gourmet", comida_rapida:"Fast food"},
 };
-const rubro = clave => (RUBROS[IDIOMA][clave] || clave.replace(/-/g, " "));
+const rubro = clave => (RUBROS[IDIOMA][clave] || clave.replace(/[-_]/g, " "));
+
+// Tipo de cocina, deducido del nombre del local. Es filtro aparte del rubro:
+// "japonesa" y "restaurantes" son dos preguntas distintas.
+const COCINAS = {
+  es:{japonesa:"Japonesa", peruana:"Peruana", italiana:"Italiana",
+      mexicana:"Mexicana", parrilla:"Parrilla", mariscos:"Mariscos",
+      asiatica:"Asiática", hamburguesas:"Hamburguesas", pollo:"Pollo",
+      vegetariana:"Vegetariana", panaderia:"Panadería y dulces",
+      cafe:"Café", bar:"Bar", chilena:"Chilena", comida_rapida:"Comida rápida"},
+  en:{japonesa:"Japanese", peruana:"Peruvian", italiana:"Italian",
+      mexicana:"Mexican", parrilla:"Grill", mariscos:"Seafood",
+      asiatica:"Asian", hamburguesas:"Burgers", pollo:"Chicken",
+      vegetariana:"Vegetarian", panaderia:"Bakery", cafe:"Coffee",
+      bar:"Bar", chilena:"Chilean", comida_rapida:"Fast food"},
+  pt:{japonesa:"Japonesa", peruana:"Peruana", italiana:"Italiana",
+      mexicana:"Mexicana", parrilla:"Churrasco", mariscos:"Frutos do mar",
+      asiatica:"Asiática", hamburguesas:"Hambúrgueres", pollo:"Frango",
+      vegetariana:"Vegetariana", panaderia:"Padaria", cafe:"Café",
+      bar:"Bar", chilena:"Chilena", comida_rapida:"Fast food"},
+};
+const cocina = clave => (COCINAS[IDIOMA][clave] || clave.replace(/[-_]/g, " "));
 
 pintarBarra("descuentos.html");
 
@@ -247,7 +266,8 @@ function visibles(){
                                       : (!d.dias.length || d.dias.includes(dia)))) &&
     (!bancoFiltro || d.banco_id === bancoFiltro) &&
     (!comunaFiltro || d.comuna === comunaFiltro) &&
-    (!rubroFiltro || d.categoria === rubroFiltro));
+    (!rubroFiltro || d.categoria === rubroFiltro) &&
+    (!cocinaFiltro || d.cocina === cocinaFiltro));
 }
 
 function pintarTodo(){
@@ -312,13 +332,24 @@ function pintarFiltros(){
     rubros.map(r => [r, rubro(r)]),
     rubroFiltro, v => { rubroFiltro = v; mostrando = 80; pintarTodo(); }));
 
-  if(bancoFiltro || comunaFiltro || rubroFiltro){
+  // "¿Qué como?" es otra pregunta que "¿en qué rubro lo puso el banco?".
+  // Solo se listan las cocinas que de verdad tienen locales: los que no dieron
+  // señal quedan fuera del filtro en vez de aparecer como "sin tipo".
+  const cocinas = [...new Set(DATOS.descuentos.map(d => d.cocina).filter(Boolean))]
+    .sort((a, b) => cocina(a).localeCompare(cocina(b)));
+  if(cocinas.length){
+    cont.appendChild(desplegable({es:"Cocina",en:"Cuisine",pt:"Cozinha"}[IDIOMA],
+      cocinas.map(c => [c, cocina(c)]),
+      cocinaFiltro, v => { cocinaFiltro = v; mostrando = 80; pintarTodo(); }));
+  }
+
+  if(bancoFiltro || comunaFiltro || rubroFiltro || cocinaFiltro){
     const limpiar = document.createElement("button");
     limpiar.type = "button";
     limpiar.className = "chip";
     limpiar.textContent = "✕ " + t("dLimpiar");
     limpiar.onclick = () => {
-      bancoFiltro = null; comunaFiltro = ""; rubroFiltro = ""; mostrando = 80; pintarTodo();
+      bancoFiltro = null; comunaFiltro = ""; rubroFiltro = ""; cocinaFiltro = ""; mostrando = 80; pintarTodo();
     };
     cont.appendChild(limpiar);
   }

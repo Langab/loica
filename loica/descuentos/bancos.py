@@ -336,8 +336,15 @@ def _santander(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
             banco_id=banco["id"],
             banco=banco["nombre"],
             comercio=comercio,
-            categoria="restaurantes",
-            # Santander declara región, nunca comuna ni dirección
+            categoria=str(fila.get("categoria") or "restaurantes"),
+            # La captura mínima trae solo región, y así el descuento no se
+            # puede filtrar por comuna ni ubicar en el mapa: en la página queda
+            # como "Metropolitana" a secas. Si la captura incluye dirección,
+            # comuna o sitio del local, se usan. Están opcionales a propósito
+            # para que una captura vieja siga funcionando sin tocar nada.
+            direccion=str(fila.get("direccion") or "").strip(),
+            comuna=str(fila.get("comuna") or "").strip(),
+            sitio_web=str(fila.get("sitio_web") or "").strip(),
             region=" · ".join(regiones) if len(regiones) <= 3 else "Todo Chile",
             porcentaje=porcentaje_en(fila.get("monto")),
             dias=dias_en(fila.get("cuando")),

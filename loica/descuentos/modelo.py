@@ -26,7 +26,14 @@ class Descuento:
 
     # Dónde se usa
     comercio: str
-    categoria: str = "restaurantes"     # restaurantes | cafeterias | gourmet
+    # Rubro homologado entre bancos. Cada uno lo nombra distinto y acá se
+    # traduce a un vocabulario único (ver categorias.py): restaurantes,
+    # cafeterias, gourmet o comida_rapida. La traducción ocurre sola en
+    # __post_init__, así que ningún adaptador puede colar un slug crudo.
+    categoria: str = "restaurantes"
+    # Tipo de cocina deducido del nombre del local: japonesa, italiana,
+    # peruana, parrilla... Vacío cuando no hay señal, nunca inventado.
+    cocina: str = ""
     comuna: str = ""
     region: str = ""
     # La calle y el número. Es el dato que convierte "hay 40% en Boga" en
@@ -67,6 +74,20 @@ class Descuento:
     # Fecha de captura, solo para las fuentes que no se pueden automatizar.
     # Vacío = lo trajo la corrida de hoy.
     capturado: str = ""
+
+    def __post_init__(self) -> None:
+        """Homologa el rubro y deduce la cocina apenas se crea el descuento.
+
+        Va acá y no en cada adaptador a propósito: son cinco bancos y cada uno
+        nombra los rubros a su manera. Si la traducción viviera en el adaptador,
+        el sexto banco entraría con su vocabulario propio y la página volvería
+        a mostrar dos filtros que dicen lo mismo.
+        """
+        from .categorias import cocina_de, homologar
+        cruda = self.categoria
+        self.categoria = homologar(cruda)
+        if not self.cocina:
+            self.cocina = cocina_de(self.comercio, cruda)
 
     @property
     def id(self) -> str:
