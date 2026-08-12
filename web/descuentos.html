@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=6">
+<link rel="stylesheet" href="loica.css?v=7">
 <style>
   html,body{height:100%;overflow:hidden}
   #app{display:flex;flex-direction:column;height:100dvh}
@@ -161,7 +161,12 @@
     .ficha{max-height:86%}
   }
   @media(min-width:880px){
-    .lista{max-width:820px;width:100%;margin:0 auto}
+    /* En pantalla ancha la lista es una columna de 820px. Sin los filos de
+       tinta a los lados quedaba flotando sobre el fondo y las tarjetas se
+       leían sueltas; con ellos es una sola pieza, como la caja de la portada. */
+    main{background:var(--fondo-hundido)}
+    .lista{max-width:820px;width:100%;margin:0 auto;background:var(--fondo-elevado);
+      border-inline:2.5px solid var(--contorno)}
     .aviso-banco{justify-content:center}
     .ficha{left:auto;right:0;width:min(480px,100%);border-radius:var(--r-xl) 0 0 0;
       max-height:100%;top:0;border-bottom:2.5px solid var(--contorno)}
@@ -192,7 +197,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
-<script src="loica.js?v=6"></script>
+<script src="loica.js?v=7"></script>
 <script>
 /* ------------------------------------------------------------------
    Estado. Tres filtros y ninguno depende del otro: el día es de una

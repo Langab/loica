@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=6">
+<link rel="stylesheet" href="loica.css?v=7">
 <style>
   body{overflow-x:hidden}
 
@@ -187,7 +187,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegacion principal"></nav>
 
-<script src="loica.js?v=6"></script>
+<script src="loica.js?v=7"></script>
 <script>
 const TX = {
   es:{
@@ -219,7 +219,9 @@ const TX = {
       ["chinchilla","La Chinchilla","Cultura","Chilena, nocturna y en peligro; tiene el pelaje más denso de los mamíferos terrestres, decenas de pelos saliendo de un mismo folículo. Le tocó el teatro, el cine, el arte y las charlas."],
       ["chincol","El Chincol","Barrio","Canta en cualquier plaza de Santiago a las siete de la mañana, se lo hayas pedido o no. Anda justo donde pasan las clases, los talleres y las ferias."],
       ["pudu","El Pudú","Gratis","El ciervo más chico del mundo: no llega al medio metro. Cuida los panoramas que no cuestan nada."],
+      ["degu","El Degú","Descuentos","El roedor del matorral de Santiago, el que anda por el San Cristóbal a pleno sol. Junta comida y la guarda para después, y por eso le tocaron los descuentos de los bancos: qué día conviene salir a comer y con qué tarjeta."],
       ["chungungo","El Chungungo","Deporte","Nutria chica de costa rocosa que igual aparece nadando en el Mapocho. Le tocó el deporte: correr, pedalear, subir cerro."],
+      ["pinguino","El Pingüino","Charlas","De Humboldt, de esta costa, y siempre de terno. Le tocaron las charlas, los seminarios y la gente que sabe."],
     ],
     tCie:"¿Organizas algo?", sCie:"Si haces clases en una plaza, tocas, montas una obra, armas una feria o convocas una corrida, súbelo. Es gratis y va a seguir siendo gratis. Lo revisa una persona, así que demora entre dos y cuatro días. Si pasa una semana y no aparece, insiste: se me pasó.",
     cta1:"Subir un panorama", cta2:"Ir al mapa",
@@ -255,7 +257,9 @@ const TX = {
       ["chinchilla","The Chinchilla","Culture","Chilean, nocturnal and endangered; it has the densest fur of any land mammal, dozens of hairs growing from a single follicle. It got theatre, film, art and talks."],
       ["chincol","The Chincol","Neighbourhood","Sings in every square in Santiago at seven in the morning, whether you asked for it or not. Which is exactly where the classes, workshops and street fairs happen."],
       ["pudu","The Pudú","Free","The smallest deer in the world, under half a metre tall. It looks after everything that costs nothing."],
+      ["degu","The Degu","Discounts","The rodent of the Santiago scrubland, the one you see on Cerro San Cristóbal in broad daylight. It hoards food for later, so it got the bank discounts: which day is worth eating out, and with which card."],
       ["chungungo","The Chungungo","Sport","A small otter from the rocky coast that still turns up swimming in the Mapocho. It got sport: running, cycling, climbing the hills."],
+      ["pinguino","The Penguin","Talks","A Humboldt, from this coast, and always in black tie. It got the talks, the seminars and the people who know."],
     ],
     tCie:"Running something?", sCie:"If you teach a class in a square, play a gig, put on a play, set up a street fair or call a race, put it up. It is free and it will stay free. A person reviews every submission, so it takes between two and four days. If a week goes by and nothing shows up, nudge me: I missed it.",
     cta1:"Post an event", cta2:"Open the map",
@@ -291,7 +295,9 @@ const TX = {
       ["chinchilla","A Chinchilla","Cultura","Chilena, noturna e ameaçada; tem a pelagem mais densa entre os mamíferos terrestres, dezenas de pelos saindo de um mesmo folículo. Ficou com o teatro, o cinema, a arte e as palestras."],
       ["chincol","O Chincol","Bairro","Canta em qualquer praça de Santiago às sete da manhã, você tendo pedido ou não. Bem onde acontecem as aulas, as oficinas e as feiras."],
       ["pudu","O Pudú","De graça","O menor cervo do mundo: não chega a meio metro. Cuida do que não custa nada."],
+      ["degu","O Degu","Descontos","O roedor do matagal de Santiago, aquele que anda pelo Cerro San Cristóbal em pleno sol. Junta comida e guarda para depois, e por isso ficou com os descontos dos bancos: que dia compensa sair para comer e com qual cartão."],
       ["chungungo","O Chungungo","Esporte","Lontra pequena de costa rochosa que mesmo assim aparece nadando no Mapocho. Ficou com o esporte: correr, pedalar, subir morro."],
+      ["pinguino","O Pinguim","Palestras","Um Humboldt, desta costa, e sempre de gala. Ficou com as palestras, os seminários e a gente que sabe."],
     ],
     tCie:"Organiza alguma coisa?", sCie:"Se você dá aula numa praça, toca, monta uma peça, faz uma feira ou convoca uma corrida, sobe aqui. É de graça e vai continuar sendo. Quem revisa é uma pessoa, então demora entre dois e quatro dias. Se passar uma semana e não aparecer, insista: passou batido.",
     cta1:"Publicar um rolê", cta2:"Abrir o mapa",
@@ -311,6 +317,7 @@ const PALETA = {
   pudu:      {tono:"var(--c-libre)",    suave:"var(--c-libre-suave)"},
   chungungo: {tono:"var(--c-deporte)",  suave:"var(--c-deporte-suave)"},
   pinguino:  {tono:"var(--c-charla)",   suave:"var(--c-charla-suave)"},
+  degu:      {tono:"var(--c-descuento)",suave:"var(--c-descuento-suave)"},
 };
 /* Qué animal acompaña a cada principio: el pudú cuida lo gratis, la loica es
    la casa y el chungungo no para quieto. Mismo criterio que en el mapa. */

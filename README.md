@@ -248,6 +248,54 @@ fecha), MAVI y Vitacura. El informe diario las marca solo.
 Ticketmaster sigue apagado: falta `TICKETMASTER_API_KEY` (gratis en
 developer.ticketmaster.com).
 
+## El otro catastro: descuentos bancarios
+
+Un segundo pipeline, independiente del de eventos, que arma la tabla de
+"qué restaurante tiene descuento, qué día y con qué tarjeta".
+
+```bash
+python3 run_descuentos.py                    # corrida completa
+python3 run_descuentos.py --banco bancochile # un solo banco, para depurar
+python3 run_descuentos.py --probar           # muestra sin escribir el JSON
+```
+
+Deja `web/descuentos.json` y un informe en `informes/AAAA-MM-DD_descuentos.md`.
+Igual que el de eventos: **no llama a ningún modelo de lenguaje**, es Python
+leyendo JSON público, y ninguna de las tres fuentes pide credencial de usuario.
+
+Corre solo todos los días con GitHub Actions
+(`.github/workflows/descuentos.yml`), así que no depende de que el Mac esté
+despierto. Si un banco se cae y el catastro baja de 100 descuentos, el workflow
+falla a propósito en vez de publicar una página vacía.
+
+| Banco | Cómo se lee | Día de la semana | Vigencia |
+|---|---|---|---|
+| **Banco de Chile** (+ Edwards) | CMS propio, API abierta | ✅ en las etiquetas (99%) | ✅ declarada |
+| **Bci** | `vivirconbeneficios.cl`, JSON de Rails | ❌ son convenios permanentes | ❌ nunca la declara |
+| **Banco Falabella** | Contentful, token público de lectura | ✅ campo propio (100%) | ✅ fecha ISO |
+
+Santander tiene el mejor catálogo del mercado y quedó fuera: responde 403 en
+todo el dominio y publica su calendario en un PDF con UUID que cambia cada mes.
+El sondeo completo de los quince emisores está en
+[`notas/catastro_descuentos_bancos.md`](notas/catastro_descuentos_bancos.md).
+
+**Dos cosas que hay que saber para leer el dato:**
+
+*La lista de días vacía significa "sin restricción", no "no se pudo leer".* Los
+convenios de Bci son de 10-25% cualquier día, y dejarlos fuera del filtro de Hoy
+sería esconder 229 descuentos que hoy sirven.
+
+*La frescura es el riesgo real.* Bci todavía publica promociones sin tocar desde
+2021. Todo lo que declara vigencia vencida se descarta en la corrida; lo que no
+declara ninguna pasa, pero va marcado en la página como "sin fecha declarada" en
+vez de darse por bueno. Mandar a alguien a un restaurante con un descuento
+muerto quema la confianza mucho más rápido que un evento pasado en la agenda:
+allá se perdió un panorama, acá se paga la cuenta completa delante de la mesa.
+
+Para agregar un banco se edita `config/bancos.yaml`, pero a diferencia de las
+fuentes de eventos **sí hay que escribir un adaptador**: los tres publican
+formas distintas del mismo hecho y esa diferencia no se puede esconder en YAML.
+
 ## Estructura
 
 ```
@@ -258,8 +306,10 @@ loica/
   agrupar.py     Colapsa eventos de varios días
   almacen.py     Base SQLite y estados de curaduría
   fuentes/       Un adaptador por tipo de fuente
-run_diario.py    Punto de entrada
-config/          Registro de fuentes (esto es lo que se edita a diario)
+  descuentos/    El catastro bancario: modelo, parseo y un adaptador por banco
+run_diario.py    Punto de entrada de los eventos
+run_descuentos.py Punto de entrada de los descuentos
+config/          Registro de fuentes y de bancos (esto es lo que se edita)
 datos/           Base de datos, caché y logs (no se versiona)
 informes/        Un informe por corrida
 ```

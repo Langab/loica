@@ -14,14 +14,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=6">
+<link rel="stylesheet" href="loica.css?v=7">
 <style>
   body{overflow-x:hidden}
 
   /* ============================================================
      HERO — la cordillera con el elenco parado encima
      La promesa de la marca es "un paseo por Santiago", así que la primera
-     pantalla es literalmente eso: los cerros, los ocho animales haciendo de
+     pantalla es literalmente eso: los cerros, los nueve animales haciendo de
      señalética y la Loica cruzando por arriba. Cero foto de stock.
      ============================================================ */
   .hero{position:relative;overflow:hidden;background:var(--fondo-elevado);
@@ -64,7 +64,10 @@
     margin-bottom:var(--e-6)}
 
   /* Los números en vivo: salen del JSON, no están escritos a mano */
-  .cifras{display:flex;justify-content:flex-start;gap:var(--e-6);flex-wrap:wrap}
+  /* Cuatro cifras en dos filas de dos. En una sola fila no caben dentro de la
+     columna del hero, y envueltas 3+1 la cuarta parecía pegada después. */
+  .cifras{display:grid;grid-template-columns:repeat(2,1fr);
+    gap:var(--e-4) var(--e-5);max-width:470px}
   .cifra{display:flex;align-items:center;gap:var(--e-2);text-align:left}
   .cifra b{font-family:var(--fuente-marca);font-size:var(--t-xl);line-height:1;
     display:block;color:var(--tono,var(--tinta));font-variant-numeric:tabular-nums}
@@ -73,7 +76,7 @@
   /* En celular las tres cifras van en una sola fila apretada: envueltas se
      leían como tres párrafos sueltos flotando sobre las manchas. */
   @media(max-width:600px){
-    .cifras{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--e-2)}
+    .cifras{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--e-3) var(--e-2)}
     .cifra{flex-direction:column;gap:2px;text-align:center;align-items:center}
     .cifra svg{width:28px;height:28px}
     .cifra b{font-size:var(--t-lg)}
@@ -93,7 +96,9 @@
     transition:transform var(--rebote);
   }
   .desfile .bicho-hero:hover{transform:translateY(-10px) scale(1.08)}
-  .desfile .bicho-hero svg{width:clamp(40px,10.5vw,74px);height:auto}
+  /* Nueve animales: a 375px, nueve por 40px más los espacios se pasaban del
+     ancho de la pantalla y el último quedaba cortado por la mitad. */
+  .desfile .bicho-hero svg{width:clamp(33px,9vw,74px);height:auto}
   @keyframes pasear{0%,100%{transform:translateY(0) rotate(-1.5deg)}
                     50%{transform:translateY(-7px) rotate(1.5deg)}}
 
@@ -297,7 +302,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
-<script src="loica.js?v=6"></script>
+<script src="loica.js?v=7"></script>
 <script>
 /* La raíz del sitio era el mapa hasta este cambio, así que hay links dando
    vueltas por WhatsApp con la forma `.../#/e/<id>`. Se reenvían al mapa en vez
@@ -312,6 +317,7 @@ pintarBarra("index.html");
 const DESTINOS = [
   {url:"mapa.html",       tono:"--c-musica",  claro:true,  masc:"condor",     t:"pMapaT",  d:"pMapaD"},
   {url:"calendario.html", tono:"--c-cultura", claro:true,  masc:"chinchilla", t:"pCalT",   d:"pCalD"},
+  {url:"descuentos.html", tono:"--c-descuento", claro:true, masc:"degu",     t:"pDctoT",  d:"pDctoD"},
   {url:"blog.html",       tono:"--c-fiesta",  claro:true,  masc:"culpeo",     t:"pBlogT",  d:"pBlogD"},
   {url:"nosotros.html",   tono:"--c-libre",   claro:true,  masc:"pudu",       t:"pQuienT", d:"pQuienD"},
 ];
@@ -397,15 +403,23 @@ function pintarDatos(evs){
   const gratis = evs.filter(ev => ev.gratis);
   const fuentes = new Set(evs.map(ev => ev.fuente)).size;
 
+  const cifra = ([n, txt, tono, masc]) =>
+    `<div class="cifra" style="--tono:${tono}">
+       ${carita(masc, tono, 34)}
+       <span><b>${n}</b>${escapar(txt)}</span>
+     </div>`;
   document.getElementById("cifras").innerHTML = [
     [evs.length, t("pTotalD"), "var(--acento)", "loica"],
     [gratis.length, t("pGratisD"), "var(--c-libre)", "pudu"],
     [fuentes, t("pFuentesD"), "var(--c-cultura)", "chinchilla"],
-  ].map(([n, txt, tono, masc]) =>
-    `<div class="cifra" style="--tono:${tono}">
-       ${carita(masc, tono, 34)}
-       <span><b>${n}</b>${escapar(txt)}</span>
-     </div>`).join("");
+  ].map(cifra).join("");
+
+  /* La cuarta cifra vive en otro archivo y se pide aparte a propósito: si el
+     catastro de bancos falla, la portada se pinta igual con tres. */
+  cargarDescuentos().then(d => {
+    document.getElementById("cifras").insertAdjacentHTML("beforeend",
+      cifra([d.total, t("pDctoCifra"), "var(--c-descuento-tinta)", "degu"]));
+  }).catch(() => {});
 
   const caja = document.getElementById("hoy-caja");
   caja.innerHTML = "";

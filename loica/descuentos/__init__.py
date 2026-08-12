@@ -47,7 +47,10 @@ def recolectar(bancos: list[dict], usar_cache: bool = True) -> tuple[list[Descue
                                  "con_dia": 0, "error": str(e)})
             continue
 
-        vigentes = [d for d in crudos if _sigue_viva(d) and d.comercio]
+        excluidos = {str(x).strip().lower() for x in (banco.get("excluir_comercios") or [])}
+        vigentes = [d for d in crudos
+                    if _sigue_viva(d) and d.comercio
+                    and d.comercio.strip().lower() not in excluidos]
         todos.extend(vigentes)
         estadisticas.append({
             "banco": banco["nombre"],
@@ -91,8 +94,12 @@ def _sin_repetidos(descuentos: list[Descuento]) -> list[Descuento]:
         previo = mejores.get(d.id)
         if previo is None or _riqueza(d) > _riqueza(previo):
             mejores[d.id] = d
+    # Por valor y no por banco. Agrupada por banco, la lista abría con las
+    # 137 de Falabella una tras otra y parecía que ese era el único banco;
+    # ordenada por cuánto rebaja, arriba queda lo que conviene y los tres
+    # bancos se mezclan solos.
     return sorted(mejores.values(),
-                  key=lambda d: (d.banco, -(d.porcentaje or 0), d.comercio.lower()))
+                  key=lambda d: (-(d.porcentaje or 0), d.comercio.lower(), d.banco))
 
 
 def _riqueza(d: Descuento) -> int:

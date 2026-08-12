@@ -55,7 +55,9 @@ jobs:
         run: |
           git config user.name  "loica-bot"
           git config user.email "bot@loica.cl"
-          git add web/descuentos.json informes/
+          # Solo el JSON: `informes/` está en .gitignore y el log de la corrida
+          # ya queda en la pestaña de Actions.
+          git add web/descuentos.json
           if git diff --staged --quiet; then
             echo "Sin cambios."
           else

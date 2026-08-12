@@ -73,6 +73,12 @@ bancos:
   - Antojos
   crawl_delay_seg: 1.5
   activo: true
+  # No son locales: son la portada de una cuponera. Colados entre los
+  # restaurantes y con 50% encima, la lista abría prometiendo un lugar donde
+  # comer que no existe.
+  excluir_comercios:
+  - Cuponera Generica
+  - Cuponera Gastronómica
   notas: 'El único que trae el día como campo propio (`diasDescuento`) y la vigencia como fecha
     ISO real (`fechaTerminoV2`), así que no hay que parsear prosa para saber si sigue viva.
 

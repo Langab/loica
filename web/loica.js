@@ -4,7 +4,7 @@
    ============================================================ */
 
 /* ---------- MASCOTAS ----------
-   Ocho animales chilenos, dibujados en DOS niveles. Un solo SVG no puede
+   Nueve animales chilenos, dibujados en DOS niveles. Un solo SVG no puede
    servir a 22px en un chip y a 200px en la portada: los detalles de r=".4"
    que se veían lindos grandes, chicos no existen (0,3px). Por eso:
 
@@ -248,7 +248,7 @@ const CUADRUPEDOS = {
   /* Más largo y más bajo que la chinchilla: el degú trota, no salta. */
   degu:       {cuerpo:[28.6, 31.8, 11.4, 8.4], grosor:3, cabeza:"2.5 3.4",
                patas:"M22.2 39.4v5M27.6 39.8v4.6M33.4 39.4v5M38 38.6v5.6",
-               extra:`<ellipse cx="26.8" cy="35.6" rx="6.4" ry="3.4" fill="#FAF3E7" opacity=".9"/>`},
+               extra:`<ellipse cx="27.4" cy="37.4" rx="5.4" ry="2.3" fill="#FAF3E7" opacity=".85"/>`},
   chungungo:  {cuerpo:[28.6, 33, 13.8, 7.4], grosor:3.2, cabeza:"3 8.2",
                patas:"M20.8 39.4v4.8M26.6 39.8v4.4M33.2 39.6v4.6M38.2 38.6v5.4", extra:""},
 };
@@ -406,7 +406,7 @@ const TEXTOS = {
     pBlogT:"El blog", pBlogD:"Rutas y recomendaciones escritas a mano.",
     pQuienT:"Quién hace esto", pQuienD:"Una persona, en Santiago, después de la pega.",
     pElencoT:"Los que te acompañan",
-    pElencoD:"Ocho animales chilenos hacen de señalética: cada uno se hace cargo de un tipo de panorama, en el mapa y en el calendario.",
+    pElencoD:"Nueve animales chilenos hacen de señalética: cada uno se hace cargo de un tipo de panorama en el mapa y el calendario, y el Degú de los descuentos.",
     pGratisT:"gratis", pGratisD:"panoramas que no cuestan nada",
     pTotalD:"panoramas vigentes", pFuentesD:"fuentes revisadas cada mañana",
     pCierreT:"¿Organizas algo?", pCierreD:"Si tu evento es abierto y pasa en Santiago, cabe acá. No cobramos por aparecer.",
@@ -455,7 +455,7 @@ const TEXTOS = {
     pBlogT:"The blog", pBlogD:"Routes and picks written by hand.",
     pQuienT:"Who makes this", pQuienD:"One person, in Santiago, after work.",
     pElencoT:"Your guides",
-    pElencoD:"Eight Chilean animals work as signage: each one looks after a type of event, on the map and on the calendar.",
+    pElencoD:"Nine Chilean animals work as signage: each one looks after a type of event on the map and the calendar, and the Degu looks after the discounts.",
     pGratisT:"free", pGratisD:"events that cost nothing",
     pTotalD:"events on right now", pFuentesD:"sources checked every morning",
     pCierreT:"Running something?", pCierreD:"If your event is open to the public and happens in Santiago, it belongs here. We don't charge for it.",
@@ -504,7 +504,7 @@ const TEXTOS = {
     pBlogT:"O blog", pBlogD:"Roteiros e recomendações escritos à mão.",
     pQuienT:"Quem faz isso", pQuienD:"Uma pessoa, em Santiago, depois do trabalho.",
     pElencoT:"Quem te acompanha",
-    pElencoD:"Oito animais chilenos servem de sinalização: cada um cuida de um tipo de programa, no mapa e no calendário.",
+    pElencoD:"Nove animais chilenos servem de sinalização: cada um cuida de um tipo de programa no mapa e no calendário, e o Degu cuida dos descontos.",
     pGratisT:"grátis", pGratisD:"programas que não custam nada",
     pTotalD:"programas em cartaz", pFuentesD:"fontes revisadas toda manhã",
     pCierreT:"Organiza algo?", pCierreD:"Se o seu evento é aberto e acontece em Santiago, cabe aqui. Não cobramos para aparecer.",
@@ -898,11 +898,10 @@ async function cargarDescuentos(){
 /* La cinta del día sobre la miniatura. Es el dato por el que se entra a esta
    página, así que va donde la tarjeta de evento pone la fecha. */
 function cintaDia(d){
-  if(!d.dias.length) return {texto: t("dTodosDias").toUpperCase(), hoy: true};
-  if(d.dias.includes(hoyClave())) return {texto: t("hoy").toUpperCase(), hoy: true};
-  if(d.dias.length > 3) return {texto: `${d.dias.length} ${{es:"DÍAS", en:"DAYS", pt:"DIAS"}[IDIOMA]}`, hoy: false};
-  const cortos = d.dias.map(x => t("dias")[DIAS_CLAVE.indexOf(x)].toUpperCase());
-  return {texto: cortos.join(" "), hoy: false};
+  const hoy = !d.dias.length || d.dias.includes(hoyClave());
+  if(!d.dias.length) return {texto: {es:"TODOS", en:"EVERY DAY", pt:"TODOS"}[IDIOMA], hoy};
+  if(d.dias.length > 2) return {texto: `${d.dias.length} ${{es:"DÍAS", en:"DAYS", pt:"DIAS"}[IDIOMA]}`, hoy};
+  return {texto: d.dias.map(x => t("dias")[DIAS_CLAVE.indexOf(x)].toUpperCase()).join(" "), hoy};
 }
 
 function tarjetaDescuento(d, alPulsar){
@@ -914,11 +913,15 @@ function tarjetaDescuento(d, alPulsar){
   boton.className = "tarjeta tarjeta-dcto";
   boton.type = "button";
   boton.style.setProperty("--banco", b.color);
+  /* Sin el logo del comercio, a diferencia de la tarjeta de evento. No es un
+     olvido: los logos viven en el CDN del banco y una lista son ochenta
+     imágenes pedidas a assets.bancochile.cl cada vez que alguien hace scroll.
+     Este proyecto respeta crawl-delay y robots.txt para leer; gastarle el
+     ancho de banda al mismo servidor para decorar sería incoherente. El logo
+     sí va en la ficha, que es UNA imagen y solo cuando alguien la pide. */
   boton.innerHTML = `
     <div class="miniatura">
       ${carita("degu", b.color, 44)}
-      ${d.logo ? `<img src="${escapar(d.logo)}" alt="" loading="lazy"
-                    onerror="this.remove()">` : ""}
       <span class="dia${dia.hoy ? " pronto" : ""}">${escapar(dia.texto)}</span>
     </div>
     <div class="tarjeta-cuerpo">
