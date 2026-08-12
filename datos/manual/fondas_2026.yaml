@@ -1,0 +1,60 @@
+# Fondas de Fiestas Patrias 2026 que NO llegan por ninguna ticketera.
+#
+# Salieron de un artículo de chileestuyo.cl, que es un sitio editorial y no un
+# calendario: un post agrupa nueve fondas. El adaptador de WordPress lo habría
+# guardado como UN evento llamado "Fondas en Santiago: conoce las mejores",
+# que no le sirve a nadie. Separarlas es el trabajo que hay que hacer a mano.
+#
+# IMPORTANTE — se auditó contra lo que ya tenemos antes de escribir esto.
+# El CSV de Passline ya trae Las Vizcachas, Tío Vortex y la Fiesta de la
+# Chilenidad de Melipilla, y las trae MEJOR: una entrada por día y con link de
+# compra. Esas se sacaron de acá. Quedan solo las cuatro que ninguna ticketera
+# publica, que son las grandes fondas de acceso masivo.
+#
+# Las fechas son las que declara el artículo, sin completar ni suponer. Cuando
+# una fonda anuncia dos tandas, se toma el rango principal y las fechas
+# exactas quedan en la descripción.
+
+eventos:
+  - titulo: Fonda Doña Florinda
+    inicio: 2026-09-18 12:00
+    fin: 2026-09-20
+    lugar_nombre: Fonda Doña Florinda
+    comuna: La Florida
+    descripcion_corta: >-
+      Tres días con juegos típicos, puestos de comida y cuecódromo. Chico
+      Trujillo, Amar Azul, Damas Gratis, Ráfaga y Zúmbale Primo. También
+      con fecha el 13 de septiembre.
+    fuente_url: https://chileestuyo.cl/fondas-en-santiago-conoce-las-mejores-para-celebrar-fiestas-patrias/
+    fuente_nombre: Chile es Tuyo
+
+  - titulo: La Gran Fonda de Chile
+    inicio: 2026-09-17 12:00
+    fin: 2026-09-20
+    lugar_nombre: Parque O'Higgins
+    comuna: Santiago
+    descripcion_corta: 17, 18, 19 y 20 de septiembre en el Parque O'Higgins.
+    fuente_url: https://chileestuyo.cl/fondas-en-santiago-conoce-las-mejores-para-celebrar-fiestas-patrias/
+    fuente_nombre: Chile es Tuyo
+
+  - titulo: Semana de la Chilenidad
+    inicio: 2026-09-12 12:00
+    fin: 2026-09-20
+    lugar_nombre: Parque Padre Hurtado
+    comuna: La Reina
+    descripcion_corta: >-
+      Uno de los eventos dieciocheros más grandes. 12, 13, 16, 17, 18, 19 y
+      20 de septiembre.
+    fuente_url: https://chileestuyo.cl/fondas-en-santiago-conoce-las-mejores-para-celebrar-fiestas-patrias/
+    fuente_nombre: Chile es Tuyo
+
+  - titulo: Fonda Doña Rosa
+    inicio: 2026-09-18 12:00
+    fin: 2026-09-20
+    lugar_nombre: Hipódromo Chile
+    comuna: Independencia
+    descripcion_corta: >-
+      18, 19 y 20 de septiembre en el Hipódromo Chile. También con fecha el
+      13 de septiembre.
+    fuente_url: https://chileestuyo.cl/fondas-en-santiago-conoce-las-mejores-para-celebrar-fiestas-patrias/
+    fuente_nombre: Chile es Tuyo
