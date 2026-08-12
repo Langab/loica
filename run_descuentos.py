@@ -63,6 +63,38 @@ def cargar_bancos(solo: str | None = None) -> list[dict]:
     return bancos
 
 
+def ubicar(descuentos) -> Counter:
+    """Le pone coordenadas a cada descuento para que caiga en el mapa.
+
+    Tres precisiones, y la página las distingue porque no son lo mismo:
+      fuente   → el banco publicó latitud y longitud (Bci, en el 91% de los suyos)
+      calle    → se resolvió desde la dirección
+      comuna   → solo se sabe la comuna, así que el pin es el centro de ella
+    Un pin aproximado se muestra atenuado: mandar a alguien a una esquina donde
+    no hay nada es peor que decirle "está en Ñuñoa, mira la dirección".
+    """
+    from loica.geo import Geocodificador
+    # Se reusa la misma caché de coordenadas que los eventos: muchos de estos
+    # restaurantes ya están resueltos de otra corrida y no se vuelve a
+    # preguntar. Nominatim queda apagado acá porque su robots.txt lo prohíbe;
+    # la caché y los centros de comuna alcanzan.
+    geocodificador = Geocodificador(usar_nominatim=False)
+    precisiones = Counter()
+
+    for d in descuentos:
+        if d.lat is not None:
+            d.precision = "fuente"
+            precisiones["fuente"] += 1
+            continue
+        lat, lon, precision = geocodificador.ubicar("", d.direccion or "", d.comuna or "")
+        d.lat, d.lon = lat, lon
+        d.precision = precision if lat is not None else "sin_ubicar"
+        precisiones[d.precision] += 1
+
+    geocodificador.guardar()
+    return precisiones
+
+
 def escribir_json(descuentos, estadisticas) -> Path:
     """El JSON que lee la página. Trae los índices ya calculados para que el
     navegador no tenga que recorrer la lista entera solo para pintar chips."""
@@ -163,6 +195,12 @@ def main() -> int:
                         "Corré sin --banco para actualizar el sitio.",
                         RUTA_SALIDA.relative_to(RAIZ))
         return 0
+
+    precisiones = ubicar(descuentos)
+    con_pin = sum(n for p, n in precisiones.items() if p != "sin_ubicar")
+    log.info("%d con pin en el mapa (%d exactos) · %d solo en la lista",
+             con_pin, precisiones.get("fuente", 0) + precisiones.get("calle", 0),
+             precisiones.get("sin_ubicar", 0))
 
     salida = escribir_json(descuentos, estadisticas)
     informe = escribir_informe(descuentos, estadisticas, duracion)

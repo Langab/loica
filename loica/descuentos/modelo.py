@@ -40,6 +40,14 @@ class Descuento:
     # "puedo ir caminando": sin dirección hay que salir de la página a buscarla.
     direccion: str = ""
     telefono: str = ""
+    # Coordenadas del local. Bci las publica por promoción, así que ese local
+    # cae en el mapa sin geocodificar nada. Los demás bancos dan la dirección
+    # y las coordenadas se buscan después.
+    lat: float | None = None
+    lon: float | None = None
+    # fuente | calle | comuna | sin_ubicar. La página atenúa el pin cuando es
+    # aproximado: no es lo mismo "en esta esquina" que "en algún lugar de Maipú".
+    precision: str = ""
     # OJO: son dos links distintos y los dos importan.
     #   url        → la ficha del banco. Es la fuente y la que manda si hay
     #                discusión sobre las condiciones.

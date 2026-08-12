@@ -103,6 +103,20 @@ def _bancochile(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
 # --------------------------------------------------------------------------
 # Bci
 # --------------------------------------------------------------------------
+def _coord(valor) -> float | None:
+    """Coordenada solo si cae dentro de Chile continental.
+
+    Una promoción con la latitud en cero mandaría el pin al golfo de Guinea, y
+    un pin en el lugar equivocado es peor que ningún pin: el usuario llega a
+    una esquina donde no hay nada.
+    """
+    try:
+        numero = float(valor)
+    except (TypeError, ValueError):
+        return None
+    return numero if -56.0 < numero < -17.0 or -76.0 < numero < -66.0 else None
+
+
 def _bci(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
     recogidos: list[Descuento] = []
 
@@ -138,7 +152,14 @@ def _bci(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
                     categoria=(promo.get("category") or categoria).split("/")[-1],
                     comuna=comuna,
                     region=region,
-                    porcentaje=porcentaje_en(promo.get("title"), descripcion, condiciones),
+                    # `discount` es el porcentaje como número. Leerlo del
+                    # titular en prosa dejaba 66 de 147 con porcentaje; el
+                    # campo lo trae casi siempre y no hay que adivinar.
+                    porcentaje=(int(promo["discount"])
+                                if str(promo.get("discount") or "").isdigit()
+                                and 0 < int(promo["discount"]) <= 100
+                                else porcentaje_en(promo.get("title"), descripcion,
+                                                   condiciones)),
                     oferta=oferta_en(descripcion, condiciones),
                     tope=tope_en(condiciones),
                     # Acá está la diferencia con los otros dos: no hay campo de
@@ -150,10 +171,19 @@ def _bci(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
                     modalidad=modalidad_en(descripcion, condiciones),
                     condiciones=condiciones,
                     url=promo.get("url") or "",
-                    direccion=local["direccion"],
+                    # `location_street` es la dirección tal como la cargó el
+                    # local; la del HTML sale de parsear prosa. Se prefiere el
+                    # campo y el HTML queda de respaldo.
+                    direccion=(str(promo.get("location_street") or "").strip()
+                               or local["direccion"]),
                     telefono=local["telefono"],
                     sitio_web=url_normal(local["sitio_web"]),
                     logo=(promo.get("covers") or [""])[0],
+                    # Bci es el único banco que publica coordenadas por
+                    # promoción: 97% las trae. Ese local va al mapa exacto,
+                    # sin geocodificar ni aproximar por comuna.
+                    lat=_coord(promo.get("latitude")),
+                    lon=_coord(promo.get("longitude")),
                 ))
             pagina += 1
 
@@ -361,14 +391,31 @@ def _santander(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
             comuna=str(fila.get("comuna") or "").strip(),
             sitio_web=str(fila.get("sitio_web") or "").strip(),
             region=" · ".join(regiones) if len(regiones) <= 3 else "Todo Chile",
+            # El logo del local. La ficha de Santander lo muestra grande y es
+            # media página de la tentación: un nombre en texto plano no invita
+            # a ir a ninguna parte.
+            logo=str(fila.get("logo") or "").strip(),
             porcentaje=porcentaje_en(fila.get("monto")),
+            # "Descuento máximo por pedido de $40.000" sale en las condiciones
+            # de la ficha. Si la captura lo trae aparte se usa tal cual; si no,
+            # se busca en el texto como en los otros bancos.
+            tope=(int(fila["tope"]) if str(fila.get("tope") or "").isdigit()
+                  else tope_en(str(fila.get("condiciones") or fila.get("cuando") or ""))),
+            # "Hasta el 31 de agosto de 2026" — el mismo parser que usan los
+            # otros bancos para la letra chica.
+            vigencia_hasta=vigencia_en(str(fila.get("vigencia") or ""),
+                                       str(fila.get("condiciones") or "")),
             dias=dias_en(fila.get("cuando")),
             modalidad=modalidad_en(fila.get("cuando")),
             # "Limited" y "Amex" son tarjetas de gama alta: el descuento no es
             # para cualquier cliente y decirlo importa.
             tarjetas=[tarjeta.lower()] if tarjeta else [],
             segmentado=bool(tarjeta),
-            condiciones=str(fila.get("cuando") or "").strip(),
+            # La ficha del banco lista la letra chica en viñetas ("No acumulable
+            # con otras promociones", "Válido en local"). Si la captura las
+            # trae, valen más que repetir el "cuándo".
+            condiciones=(str(fila.get("condiciones") or "").strip()
+                         or str(fila.get("cuando") or "").strip()),
             url=fuente,
             capturado=capturado,
         ))

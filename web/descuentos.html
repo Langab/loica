@@ -14,10 +14,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=9">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="loica.css?v=11">
 <style>
   html,body{height:100%;overflow:hidden}
-  #app{display:flex;flex-direction:column;height:100dvh}
+  /* Los dos altos van en este orden a proposito: `dvh` no existe en
+     Safari de iOS anterior a 15.4 ni en Chrome anterior a 108, y ahi la
+     declaracion se descarta entera. Sin el 100vh de respaldo el alto
+     quedaba en `auto` y la pagina —que es una app de alto fijo con
+     scroll interno— se desarmaba: la lista crecia sin fin y la barra de
+     abajo se iba de la pantalla. */
+  #app{display:flex;flex-direction:column;height:100vh;height:100dvh}
   header{flex:none;z-index:6}
   main{flex:1;position:relative;min-height:0;display:flex;flex-direction:column}
 
@@ -74,18 +81,73 @@
     border:2px solid var(--contorno);background:var(--fondo-elevado);
     border-radius:var(--r-pill);box-shadow:0 2px 0 var(--contorno);min-height:38px;
   }
+  /* El texto lo dibuja el <b> y el <select> va invisible ENCIMA de todo el
+     chip. Suena rebuscado y no lo es: un select con letra de menos de 16px
+     hace que Safari de iOS le aplique zoom a la página entera al tocarlo, y
+     estos tres iban a 12px. Así el chip conserva su tamaño de chip, la letra
+     su tamaño de chip, el área que se toca es el chip completo, y el select
+     —que nadie ve— cumple los 16px que pide iOS. De paso sigue abriendo el
+     selector nativo del teléfono, que es lo mejor que hay para elegir comuna. */
+  .chip-select b{
+    font:700 var(--t-xs)/1 var(--fuente-marca);padding:0 26px 0 13px;
+    max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+  /* El select invisible es lo que se toca, así que se estira a 44px de alto
+     —el chip visible mide 38 y el borde de 2px ni siquiera entraba— centrado
+     sobre el chip. A lo ancho no se pasa: los tres desplegables van seguidos
+     en el riel y solaparlos haría que uno abriera el de al lado. */
   .chip-select select{
-    appearance:none;border:0;background:transparent;color:var(--tinta);cursor:pointer;
-    font:700 var(--t-xs)/1 var(--fuente-marca);padding:0 26px 0 13px;min-height:34px;
-    max-width:150px;text-overflow:ellipsis;
+    position:absolute;left:0;right:0;top:50%;width:100%;height:44px;
+    transform:translateY(-50%);
+    appearance:none;border:0;background:transparent;color:transparent;
+    opacity:0;cursor:pointer;font-size:16px;
   }
   .chip-select::after{
     content:"▾";position:absolute;right:10px;pointer-events:none;
     font-size:11px;color:var(--tinta-suave);
   }
   .chip-select:has(select:not([data-vacio="1"])){background:var(--tinta);box-shadow:none;transform:translateY(2px)}
-  .chip-select:has(select:not([data-vacio="1"])) select{color:var(--fondo-elevado)}
+  .chip-select:has(select:not([data-vacio="1"])) b{color:var(--fondo-elevado)}
   .chip-select:has(select:not([data-vacio="1"]))::after{color:var(--fondo-elevado)}
+  /* El foco del teclado lo tiene el select invisible, así que el anillo hay
+     que dibujarlo en el chip o no se ve dónde está uno al tabular. */
+  .chip-select:has(select:focus-visible){box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno)}
+
+  /* --- El botón del mapa, al lado de los días --- */
+  .boton-mapa{
+    flex:none;display:inline-flex;align-items:center;gap:6px;cursor:pointer;
+    padding:0 var(--e-4);min-height:38px;margin-left:var(--e-2);
+    border:2.5px solid var(--contorno);border-radius:var(--r-pill);
+    background:var(--fondo-elevado);color:var(--tinta);
+    font:800 var(--t-sm)/1 var(--fuente-marca);box-shadow:var(--repisa-1);
+    transition:var(--rapido);white-space:nowrap;
+  }
+  .boton-mapa::before{content:"◉";font-size:13px;color:var(--c-descuento)}
+  .boton-mapa:active,
+  .boton-mapa[aria-pressed="true"]{transform:translateY(2px);box-shadow:none}
+  .boton-mapa[aria-pressed="true"]{background:var(--c-descuento);color:var(--arena-50)}
+  .boton-mapa[aria-pressed="true"]::before{color:var(--arena-50)}
+
+  .panel-mapa{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--fondo-hundido)}
+  /* `display:flex` le gana al atributo `hidden`, que solo vale `display:none`
+     por hoja de estilos del navegador. Sin esta línea el panel tapaba la lista
+     entera aunque estuviera "oculto". */
+  .panel-mapa[hidden]{display:none}
+  #mapa-descuentos{flex:1;min-height:0}
+  .nota-mapa{
+    flex:none;padding:var(--e-2) var(--e-4);background:var(--fondo-elevado);
+    border-top:2px solid var(--contorno);font-size:var(--t-xs);
+    color:var(--tinta-tenue);line-height:1.4;
+  }
+  /* El pin aproximado se ve distinto del exacto a propósito: uno dice "en esta
+     esquina" y el otro "en algún lugar de esta comuna". */
+  .pin-dcto{
+    width:34px;height:34px;border-radius:50%;cursor:pointer;
+    border:2.5px solid var(--contorno);background:var(--fondo-elevado);
+    display:grid;place-items:center;box-shadow:var(--repisa-1);
+    font:800 11px/1 var(--fuente-marca);color:var(--tinta);
+  }
+  .pin-dcto.aprox{border-style:dashed;opacity:.72}
 
   /* --- La lista --- */
   .aviso-banco{
@@ -123,7 +185,7 @@
   .ficha-cabeza h2{font-size:var(--t-xl);line-height:1.14}
   .ficha-banco{font:800 var(--t-sm)/1.3 var(--fuente-ui);color:var(--banco)}
   .cerrar{
-    margin-left:auto;flex:none;width:38px;height:38px;border-radius:var(--r-pill);
+    margin-left:auto;flex:none;width:44px;height:44px;border-radius:var(--r-pill);
     border:2px solid var(--contorno);background:var(--fondo-elevado);color:var(--tinta);
     cursor:pointer;font-size:17px;line-height:1;box-shadow:var(--repisa-1);
   }
@@ -159,7 +221,7 @@
   .dato a:hover{text-decoration:underline}
 
   @media(max-width:879px){
-    main{padding-bottom:calc(52px + env(safe-area-inset-bottom))}
+    main{padding-bottom:var(--hueco-nav)}
     header .filtros{padding:5px var(--e-3) 7px}
     .riel-fecha{padding:var(--e-2) var(--e-3)}
     .ficha{max-height:86%}
@@ -183,6 +245,11 @@
     <div class="barra" id="barra"></div>
     <div class="riel-fecha">
       <div class="segmentado" id="dias" role="group"></div>
+      <!-- El mapa vive en esta misma página, no en otra: cambiar de página
+           pierde el día y los filtros que la persona acaba de elegir. -->
+      <button type="button" id="ver-mapa" class="boton-mapa" aria-pressed="false">
+        <span id="ver-mapa-txt">Mapa</span>
+      </button>
       <div class="cuenta-rango" id="cuenta"></div>
     </div>
     <div class="filtros" id="filtros" role="group"></div>
@@ -191,6 +258,13 @@
   <main>
     <div class="aviso-banco" id="aviso"></div>
     <div class="lista" id="lista"></div>
+    <!-- Ocupa el mismo hueco que la lista y se turna con ella. Los filtros de
+         arriba siguen mandando: el mapa muestra exactamente lo mismo que la
+         lista, no un universo aparte. -->
+    <div class="panel-mapa" id="panel-mapa" hidden>
+      <div id="mapa-descuentos"></div>
+      <p class="nota-mapa" id="nota-mapa"></p>
+    </div>
 
     <aside class="ficha" id="ficha" aria-hidden="true" aria-labelledby="ficha-titulo">
       <div class="ficha-cabeza" id="ficha-cabeza"></div>
@@ -201,7 +275,8 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
-<script src="loica.js?v=9"></script>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="loica.js?v=11"></script>
 <script>
 /* ------------------------------------------------------------------
    Estado. Tres filtros y ninguno depende del otro: el día es de una
@@ -272,6 +347,10 @@ function visibles(){
 
 function pintarTodo(){
   pintarDias(); pintarFiltros(); pintarLista(); pintarAviso();
+  // El mapa se turna con la lista pero obedece los mismos filtros, así que se
+  // repinta con ella. Sin esto el contador decía 147 y el mapa seguía con los
+  // 267 pines de antes: dos respuestas distintas a la misma pregunta.
+  if(mapaAbierto) pintarMapa();
 }
 
 function pintarAviso(){
@@ -358,7 +437,10 @@ function pintarFiltros(){
 function desplegable(etiqueta, opciones, valor, alCambiar){
   const caja = document.createElement("span");
   caja.className = "chip-select";
-  caja.innerHTML = `<select aria-label="${escapar(etiqueta)}" data-vacio="${valor ? "0" : "1"}">
+  // El <b> es lo que se lee; el <select> va invisible encima (ver el CSS).
+  const elegida = opciones.find(([v]) => v === valor);
+  caja.innerHTML = `<b>${escapar(elegida ? elegida[1] : etiqueta)}</b>
+    <select aria-label="${escapar(etiqueta)}" data-vacio="${valor ? "0" : "1"}">
       <option value="">${escapar(etiqueta)}</option>
       ${opciones.map(([v, txt]) =>
         `<option value="${escapar(v)}" ${v === valor ? "selected" : ""}>${escapar(txt)}</option>`).join("")}
@@ -488,6 +570,89 @@ function nombreTarjeta(slug){
       credito:"Crédito", debito:"Débito", fan:"FAN"}[p] || p.charAt(0).toUpperCase() + p.slice(1))
   ).join(" ");
 }
+
+/* ---------------------------------------------------------------------------
+   El mapa, en esta misma página
+   Se turna con la lista y obedece los mismos filtros: lo que el mapa muestra
+   es exactamente lo que la lista muestra, no un universo aparte. Se crea
+   recién la primera vez que alguien lo abre — MapLibre pesa, y la mayoría
+   entra a "¿dónde como hoy?" y se queda en la lista.
+--------------------------------------------------------------------------- */
+let mapa = null, mapaAbierto = false, pines = [];
+
+const TESELAS = ["a","b","c"].map(s =>
+  `https://${s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`);
+
+function abrirMapa(abrir){
+  mapaAbierto = abrir;
+  document.getElementById("panel-mapa").hidden = !abrir;
+  document.getElementById("lista").style.display = abrir ? "none" : "";
+  const boton = document.getElementById("ver-mapa");
+  boton.setAttribute("aria-pressed", abrir);
+  document.getElementById("ver-mapa-txt").textContent =
+    abrir ? {es:"Lista",en:"List",pt:"Lista"}[IDIOMA] : {es:"Mapa",en:"Map",pt:"Mapa"}[IDIOMA];
+  if(!abrir) return;
+
+  if(!mapa){
+    mapa = new maplibregl.Map({
+      container:"mapa-descuentos",
+      style:{version:8, sources:{base:{type:"raster", tiles:TESELAS, tileSize:256,
+             attribution:'© OpenStreetMap · © CARTO'}},
+             layers:[{id:"base", type:"raster", source:"base"}]},
+      center:[-70.62,-33.44], zoom:11.4, attributionControl:{compact:true},
+    });
+    mapa.addControl(new maplibregl.NavigationControl({showCompass:false}), "top-left");
+    // `idle` y no `load`: load puede dispararse con el estilo todavía a medio
+    // aplicar y pintarMapa se salía por su propia guarda, dejando el mapa sin
+    // un solo pin. `idle` sólo llega cuando no queda nada pendiente de dibujar.
+    pintarMapa();
+    return;
+  }
+  // El contenedor estaba oculto cuando el mapa se creó, así que hay que
+  // avisarle que ya tiene tamaño o se dibuja de 0px de alto.
+  mapa.resize();
+  pintarMapa();
+}
+
+function pintarMapa(){
+  // Sin `isStyleLoaded()` a propósito: los marcadores son elementos del DOM
+  // encima del lienzo, no capas del estilo, así que se pueden poner antes de
+  // que carguen las teselas. Con esa guarda el mapa quedaba sin un solo pin
+  // cada vez que el CDN de teselas tardaba.
+  if(!mapa) return;
+  pines.forEach(p => p.remove());
+  pines = [];
+
+  // `visibles()` es la MISMA función que alimenta la lista: si el mapa
+  // filtrara por su cuenta, mostrar y listar dejarían de coincidir.
+  const enPantalla = visibles();
+  const conPin = enPantalla.filter(d => d.lat && d.lon);
+
+  conPin.forEach(d => {
+    const el = document.createElement("div");
+    el.className = "pin-dcto" + (d.precision === "comuna" ? " aprox" : "");
+    el.style.setProperty("--banco", banco(d.banco_id).color);
+    el.style.borderColor = banco(d.banco_id).color;
+    el.textContent = d.porcentaje ? d.porcentaje + "%" : "•";
+    el.title = d.comercio;
+    el.onclick = () => abrirFicha(d);
+    pines.push(new maplibregl.Marker({element:el}).setLngLat([d.lon, d.lat]).addTo(mapa));
+  });
+
+  const exactos = conPin.filter(d => d.precision !== "comuna").length;
+  const fuera = enPantalla.length - conPin.length;
+  const partes = [];
+  partes.push(`${conPin.length} en el mapa`);
+  if(exactos) partes.push(`${exactos} en su dirección exacta`);
+  if(fuera) partes.push(`${fuera} sin dirección, solo en la lista`);
+  // El pin punteado no se explica solo: hay que decir qué significa.
+  document.getElementById("nota-mapa").textContent =
+    partes.join(" · ") + (conPin.length > exactos
+      ? ". Los pines punteados son aproximados al centro de la comuna." : ".");
+}
+
+document.getElementById("ver-mapa").onclick = () => abrirMapa(!mapaAbierto);
+
 </script>
 </body>
 </html>

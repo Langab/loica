@@ -25,13 +25,20 @@
 #   region     "Metropolitana"
 #   tarjeta    "Amex" o "Limited" si el descuento es solo para esas
 #
-# OPCIONALES, y los que más valen la pena si la página los muestra:
-#   direccion  "Av. Providencia 1234"  → sin esto el descuento no se puede
-#              ubicar en el mapa ni filtrar por comuna, y en la página queda
-#              como "Metropolitana" a secas, que no le sirve a nadie
-#   comuna     "Providencia"
-#   sitio_web  la página del local (distinta de la ficha del banco)
-#   categoria  restaurantes | cafeterias | gourmet | comida_rapida
+# OPCIONALES. Todos salen de la ficha que se abre al hacer clic en el local,
+# y son los que hacen la diferencia entre una lista y algo que da ganas de ir:
+#   direccion    "Av. Blanca Estela 1927, Concón"  → sin esto el descuento no
+#                se puede ubicar en el mapa ni filtrar por comuna, y en la
+#                página queda como "Metropolitana" a secas. OJO: el catálogo
+#                mezcla regiones, así que la dirección es lo único que separa
+#                un local de Providencia de uno de Concón.
+#   comuna       "Providencia"
+#   logo         URL del logo del local. La ficha lo muestra grande.
+#   tope         40000  (de "Descuento máximo por pedido de $40.000")
+#   vigencia     "Hasta el 31 de agosto de 2026"
+#   condiciones  la letra chica en viñetas, tal como la lista la ficha
+#   sitio_web    la página del local (distinta de la ficha del banco)
+#   categoria    restaurantes | cafeterias | gourmet | comida_rapida
 #
 # El tipo de cocina (japonesa, italiana...) NO se escribe: lo deduce el
 # pipeline del nombre del local.
