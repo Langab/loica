@@ -1,6 +1,6 @@
 {
- "generado": "2026-08-12T12:34:47",
- "total": 2483,
+ "generado": "2026-08-12T12:45:24",
+ "total": 2486,
  "eventos": [
   {
    "id": "8fad9b86ac7f5e99",
@@ -1135,6 +1135,27 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/"
+  },
+  {
+   "id": "64518fc76c57ec51",
+   "titulo": "“Antipresencia” de Kenny Pérez llega a Las Condes",
+   "inicio": "2026-08-12T10:30:00",
+   "fin": "2026-08-30T19:00:00",
+   "lugar": "Centro Cultural Las Condes",
+   "direccion": "Avenida Apoquindo 6570, Las Condes, Santiago",
+   "comuna": "Santiago",
+   "lat": -33.4425,
+   "lon": -70.6505,
+   "precision": "comuna",
+   "gratis": true,
+   "precio": 0,
+   "precio_texto": "",
+   "categoria": "arte",
+   "publico": "todos",
+   "descripcion": "La memoria, el desarraigo y las formas de habitar un lugar atraviesan Antipresencia , exposición del artista plástico venezolano Kenny Pérez que se presenta en el Centro Cultural Las Condes . Abierta…",
+   "imagen": "https://www.ed.cl/wp-content/uploads/2026/08/kenny.jpg",
+   "fuente": "ED — Ferias y Bazar ED",
+   "url": "https://www.ed.cl/event/antipresencia-de-kenny-perez-llega-a-las-condes/"
   },
   {
    "id": "425c0799a92e0ba9",
@@ -30957,6 +30978,27 @@
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026"
   },
   {
+   "id": "7e8ed50aea4b1e22",
+   "titulo": "Lo Matta dedica un recital lírico a Mozart, Verdi y Rossini",
+   "inicio": "2026-08-25T19:00:00",
+   "fin": "2026-08-25T20:00:00",
+   "lugar": "Casas Lo Matta",
+   "direccion": "Av. Pdte. Kennedy 9350, Vitacura, Santiago",
+   "comuna": "Santiago",
+   "lat": -33.4425,
+   "lon": -70.6505,
+   "precision": "comuna",
+   "gratis": true,
+   "precio": 0,
+   "precio_texto": "con <strong>entrada liberada</strong>.</p> <p class=\"isSelec",
+   "categoria": "musica",
+   "publico": "todos",
+   "descripcion": "La ópera italiana será el eje de una nueva fecha del IX Festival de Música de Cámara de Lo Matta Cultural , que el martes 25 de agosto a las 19:00 horas reunirá a los cantantes Ramiro Maturana y…",
+   "imagen": "https://www.ed.cl/wp-content/uploads/2026/08/musica.jpg",
+   "fuente": "ED — Ferias y Bazar ED",
+   "url": "https://www.ed.cl/event/lo-matta-dedica-un-recital-lirico-a-mozart-verdi-y-rossini/"
+  },
+  {
    "id": "4b1752c6a8d11e9a",
    "titulo": "CURSOS Y TALLERES SEGUNDO SEMESTRE",
    "inicio": "2026-08-25T19:30:00",
@@ -34168,6 +34210,27 @@
    "imagen": "https://static.ptocdn.net/images/eventos/cco100_rs.jpg",
    "fuente": "Puntoticket (deportes, musica y familia)",
    "url": "https://www.puntoticket.com/evento/rata-blanca-teatro-coliseo-ago-2026?utm_medium=organic&utm_source=microformat"
+  },
+  {
+   "id": "98d69b11cf730dd1",
+   "titulo": "Pan Comido MUT reúne a más de 50 panaderías y bakeries",
+   "inicio": "2026-08-29T00:00:00",
+   "fin": "2026-08-30T23:59:00",
+   "lugar": "Mercado Urbano Tobalaba (MUT)",
+   "direccion": "Av. Apoquindo 2730, Las Condes, Santiago",
+   "comuna": "Santiago",
+   "lat": -33.4425,
+   "lon": -70.6505,
+   "precision": "comuna",
+   "gratis": true,
+   "precio": 0,
+   "precio_texto": "",
+   "categoria": "otros",
+   "publico": "todos",
+   "descripcion": "El pan vuelve a ocupar el centro de la mesa con una nueva edición de Pan Comido MUT , encuentro dedicado a la cultura panadera, la bollería y los oficios que rodean a uno de los alimentos más…",
+   "imagen": "https://www.ed.cl/wp-content/uploads/2026/08/pan.jpg",
+   "fuente": "ED — Ferias y Bazar ED",
+   "url": "https://www.ed.cl/event/pan-comido-mut-reune-a-mas-de-50-panaderias-y-bakeries/"
   },
   {
    "id": "32c35462c60ade00",
@@ -40422,7 +40485,7 @@
    "precio_texto": "",
    "categoria": "charla",
    "publico": "todos",
-   "descripcion": "Congreso 10° Congreso Internacional de Derechos Humanos Ver más Artes Visuales y Mediales La Veta Ver más Artes Visuales y Mediales Colección…",
+   "descripcion": "Congreso 10° Congreso Internacional de Derechos Humanos Ver más Artes Visuales y Mediales La Veta Ver más Artes Visuales y Mediales Lo cotidiano al…",
    "imagen": "",
    "fuente": "GAM (Centro Cultural Gabriela Mistral)",
    "url": "https://gam.cl/es/que-hacer-en-gam/ideasypensamiento/10-congreso-internacional-de-derechos-humanos/"
@@ -40989,7 +41052,7 @@
    "precio_texto": "",
    "categoria": "arte",
    "publico": "todos",
-   "descripcion": "Artes Visuales y Mediales La Veta Ver más Artes Visuales y Mediales Colección abierta: CCU en el Arte Ver más Actividades El sonido de los…",
+   "descripcion": "Artes Visuales y Mediales La Veta Ver más Artes Visuales y Mediales Lo cotidiano al descubierto Ver más Actividades El sonido de los polinizadores…",
    "imagen": "",
    "fuente": "GAM (Centro Cultural Gabriela Mistral)",
    "url": "https://gam.cl/es/que-hacer-en-gam/artesvisuales/la-veta/"
