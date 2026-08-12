@@ -11,12 +11,44 @@ del proyecto.
 
 ## Cómo se usa
 
+Un solo comando hace todo: extrae eventos, extrae descuentos, arma el sitio y
+lo publica.
+
 ```bash
-python3 run_diario.py                  # corrida completa
-python3 run_diario.py --fuente gam     # una sola fuente, para depurar
+python3 run_todo.py                  # todo, de punta a punta
+python3 run_todo.py --sin-publicar   # deja el sitio listo, no toca git
+python3 run_todo.py --solo-publicar  # sin extraer: exporta lo que ya hay
+python3 run_todo.py --sin-descuentos # sólo eventos
+```
+
+Después del push, GitHub Actions publica `web/` en Pages solo.
+
+Los pasos sueltos siguen sirviendo para depurar:
+
+```bash
+python3 run_diario.py --fuente gam     # una sola fuente
 python3 run_diario.py --probar         # muestra lo que encontraría, sin guardar
 python3 run_diario.py --sin-cache -v   # ignora la caché y muestra el detalle
+python3 run_descuentos.py --banco bci  # un solo banco
 ```
+
+### Dos cosas que `run_todo.py` hace a propósito
+
+**Comitea sólo su propia salida.** Corre a las 06:00 sin nadie mirando, así que
+nunca hace `git add -A`: si a esa hora hay un archivo a medio editar, un
+`add -A` se lo llevaría al repositorio. Agrega únicamente `web/eventos.json`,
+`web/descuentos.json`, `web/e/` y `datos/manual/`.
+
+**Resuelve solo los choques en archivos generados.** Los dos catastros
+regeneran su JSON todos los días, así que dos corridas seguidas chocan siempre
+aunque nadie haya editado nada. En un archivo derivado no hay nada que
+fusionar: gana la regeneración más nueva. Si el choque toca código o
+configuración, aborta y decide una persona.
+
+Si la extracción de eventos falla entera, no se publica nada: mejor un sitio
+con datos de ayer que uno vacío. Los descuentos, en cambio, no abortan la
+corrida — que Bci cambie su JSON no es razón para dejar sin actualizar la
+agenda, que es el corazón del proyecto.
 
 Después de cada corrida queda un informe en `informes/AAAA-MM-DD_corrida.md`
 con los eventos nuevos agrupados por comuna, listos para revisar.

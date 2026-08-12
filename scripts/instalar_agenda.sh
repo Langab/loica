@@ -35,10 +35,12 @@ cat > "$PLIST" <<PLIST_EOF
     <key>Label</key>
     <string>${ETIQUETA}</string>
 
+    <!-- run_todo.py, no run_diario.py: encadena extraer + exportar + publicar.
+         Programar solo run_diario dejaba la base al día y el sitio viejo. -->
     <key>ProgramArguments</key>
     <array>
         <string>${PYTHON}</string>
-        <string>${PROYECTO}/run_diario.py</string>
+        <string>${PROYECTO}/run_todo.py</string>
     </array>
 
     <key>WorkingDirectory</key>
