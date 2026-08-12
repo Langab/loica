@@ -1511,6 +1511,14 @@ fuentes:
   carteleras_extra:
   - teatrofabrica
   - teatrofiebre
+  # Verificados uno por uno: PortalDisc responde 200 a cualquier slug, así que
+  # solo van los que tienen página de local de verdad (titulo "EVENTOS EN
+  # <NOMBRE>"). Teatro Palermo está en Puente Alto y ya trae eventos; Club de
+  # San Miguel y Club de Jazz existen pero hoy sin cartelera — entran solos
+  # cuando publiquen.
+  - teatropalermo
+  - clubdesanmiguel
+  - clubdejazz
   crawl_delay_seg: 5
   requiere_comuna: true
   activa: true
