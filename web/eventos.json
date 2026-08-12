@@ -1,6 +1,6 @@
 {
- "generado": "2026-08-12T15:12:55",
- "total": 2486,
+ "generado": "2026-08-12T16:37:39",
+ "total": 2491,
  "eventos": [
   {
    "id": "8fad9b86ac7f5e99",
@@ -10482,6 +10482,27 @@
    "url": "https://www.passline.com/eventos/rennan-da-penha"
   },
   {
+   "id": "152846ca273b4d01",
+   "titulo": "JOSEFINA EN EL MESÓN NERUDIAN",
+   "inicio": "2026-08-13T21:00:00",
+   "fin": null,
+   "lugar": "PortalTickets (PortalDisc)",
+   "direccion": "",
+   "comuna": "Recoleta",
+   "lat": -33.41,
+   "lon": -70.64,
+   "precision": "comuna",
+   "gratis": false,
+   "precio": 5000,
+   "precio_texto": "SPONIBLES: General: $5.000 + Cargo Comprar o Regalar Fecha:",
+   "categoria": "musica",
+   "publico": "todos",
+   "descripcion": "JOSEFINA EN EL MESÓN NERUDIAN // PortalTickets.cl Sitio en mantención JOSEFINA EN EL MESÓN NERUDIAN Jueves 13 de agosto 2026, 21:00 TICKETS DISPONIBLES: General: $5.000 + Cargo…",
+   "imagen": "https://images.portaldisc.com/l/eventos/360/21244.jpg?t=1785638574",
+   "fuente": "PortalTickets (PortalDisc)",
+   "url": "https://www.portaldisc.com/evento/josefinamesonnerudiano"
+  },
+  {
    "id": "7d236e642285b326",
    "titulo": "Andres de Leon Mystic Valley",
    "inicio": "2026-08-13T22:00:00",
@@ -10879,6 +10900,27 @@
    "imagen": "https://static.ptocdn.net/images/eventos/cta001_rs.jpg",
    "fuente": "Puntoticket (deportes, musica y familia)",
    "url": "https://www.puntoticket.com/evento/paloma-salas-teatro-caupolican-ago-2026?utm_medium=organic&utm_source=microformat"
+  },
+  {
+   "id": "00e00e76e5fd2247",
+   "titulo": "Swallow The Sun en Epicentro",
+   "inicio": "2026-08-14T00:00:00",
+   "fin": null,
+   "lugar": "Epicentro",
+   "direccion": "Huerfanos 786, Santiago Centro",
+   "comuna": "Santiago",
+   "lat": -33.4425,
+   "lon": -70.6505,
+   "precision": "comuna",
+   "gratis": false,
+   "precio": 42550,
+   "precio_texto": "desde $42.550",
+   "categoria": "fiesta",
+   "publico": "todos",
+   "descripcion": "Swallow The Sun regresa a Chile para presentar su más reciente álbum \"Shining\" junto a un repaso por toda su discografía, el próximo Viernes 14 de Agosto de 2026 en Blondie Club",
+   "imagen": "https://static.ptocdn.net/images/eventos/hvp014_rs.jpg",
+   "fuente": "Puntoticket (deportes, musica y familia)",
+   "url": "https://www.puntoticket.com/evento/swallow-the-sun-en-chile-epicentro-ago-2026?utm_medium=organic&utm_source=microformat"
   },
   {
    "id": "d5471b68cc1c1274",
@@ -13630,6 +13672,27 @@
    "imagen": "https://imagenes.passline.com/eventos/taller-general-mercedes-sayut-afrotimba-sabado-15-de-agosto-1440hrs-542327-rec.jpg",
    "fuente": "Passline",
    "url": "https://www.passline.com/eventos/taller-general-mercedes-sayut-afrotimba-sabado-15-de-agosto-1440hrs"
+  },
+  {
+   "id": "843f0bb16783d558",
+   "titulo": "TERCER FESTIVAL COMPETITIVO DANZA Y FOLCLORE NATTIVOS 2026 EN TEATRO PALERMO",
+   "inicio": "2026-08-15T14:30:00",
+   "fin": null,
+   "lugar": "Teatro Palermo",
+   "direccion": "",
+   "comuna": "Puente Alto",
+   "lat": -33.611,
+   "lon": -70.576,
+   "precision": "comuna",
+   "gratis": false,
+   "precio": null,
+   "precio_texto": "",
+   "categoria": "teatro",
+   "publico": "todos",
+   "descripcion": "",
+   "imagen": "",
+   "fuente": "PortalTickets — carteleras por local (circuito under)",
+   "url": "https://www.portaldisc.com/evento/festivalnattivos2026"
   },
   {
    "id": "e9b626eb7769433a",
@@ -41751,6 +41814,27 @@
    "url": "https://www.passline.com/eventos/cabaresque-543671"
   },
   {
+   "id": "9f5b19b8c397c1ad",
+   "titulo": "MAGDALENA MATTHEY + ELIZABETH MORRIS EN TEATRO PALERMO, PUENTE ALTO",
+   "inicio": "2026-09-05T20:00:00",
+   "fin": null,
+   "lugar": "Teatro Palermo",
+   "direccion": "",
+   "comuna": "Puente Alto",
+   "lat": -33.611,
+   "lon": -70.576,
+   "precision": "comuna",
+   "gratis": false,
+   "precio": null,
+   "precio_texto": "",
+   "categoria": "teatro",
+   "publico": "todos",
+   "descripcion": "",
+   "imagen": "",
+   "fuente": "PortalTickets — carteleras por local (circuito under)",
+   "url": "https://www.portaldisc.com/evento/magdalenamattheyelizabethmorrisenpuentealto"
+  },
+  {
    "id": "f70b589a9bb052b0",
    "titulo": "primer año de comedia",
    "inicio": "2026-09-05T20:30:00",
@@ -48028,6 +48112,27 @@
    "imagen": "https://imagenes.passline.com/eventos/-733947-rec.jpg",
    "fuente": "Passline",
    "url": "https://www.passline.com/eventos/coda-one-night-stand"
+  },
+  {
+   "id": "2b3e272142bc582c",
+   "titulo": "CERATI XPERIENCE: AHI VAMOS TOUR EN TEATRO PALERMO",
+   "inicio": "2026-10-10T20:30:00",
+   "fin": null,
+   "lugar": "Teatro Palermo",
+   "direccion": "",
+   "comuna": "Puente Alto",
+   "lat": -33.611,
+   "lon": -70.576,
+   "precision": "comuna",
+   "gratis": false,
+   "precio": null,
+   "precio_texto": "",
+   "categoria": "teatro",
+   "publico": "todos",
+   "descripcion": "",
+   "imagen": "",
+   "fuente": "PortalTickets — carteleras por local (circuito under)",
+   "url": "https://www.portaldisc.com/evento/ahivamospa"
   },
   {
    "id": "17483d8983705536",
