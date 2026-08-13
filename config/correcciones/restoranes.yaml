@@ -32,6 +32,15 @@
 # "La Maestranza", con seis candidatos).
 
 restoranes:
+  99 Restaurante:
+    nota: sitio desde la ficha de Google Maps (2026-08-13)
+    sitio_web: https://99restaurante.com/
+  Bar Porfirio:
+    nota: sitio desde la ficha de Google Maps (2026-08-13)
+    sitio_web: https://barporfirio.com/
+  Caoba Bar:
+    nota: sitio desde la ficha de Google Maps (2026-08-13)
+    sitio_web: https://caobabar.cl/
   Cascade Bistró:
     comuna: Vitacura
     direccion: Costanera Sur S.J.E. de Balaguer 6400, local 8
@@ -46,6 +55,9 @@ restoranes:
     lon: -70.59851
     nota: Google Maps, ficha única (2026-08-13)
     sitio_web: http://www.cosenza.cl/
+  Dagan:
+    nota: sitio desde la ficha de Google Maps (2026-08-13)
+    sitio_web: http://www.daganresto.com/
   Danés:
     comuna: Vitacura
     direccion: Avenida Vitacura 4607
@@ -150,6 +162,9 @@ restoranes:
     lon: -70.59662
     nota: calce único con dirección en el catastro OSM (restaurant)
     sitio_web: https://lacabrerachile.cl/
+  La Maestranza:
+    nota: sitio desde la ficha de Google Maps (2026-08-13)
+    sitio_web: http://lamaestranzarestaurant.cl/
   La Parrilla del Guatón Jeréz:
     comuna: Vitacura
     direccion: Gerónimo de Alderete 1097
@@ -175,12 +190,18 @@ restoranes:
     lat: -33.39964
     lon: -70.79538
     nota: calce único con dirección en el catastro OSM (cafe)
+  Lumiere Bistró:
+    nota: sitio desde la ficha de Google Maps (2026-08-13)
+    sitio_web: http://lumierebistro.cl/
   Majestic:
     comuna: Las Condes
     direccion: Avenida Presidente Kennedy 9001
     lat: -33.39006
     lon: -70.54739
     nota: calce único con dirección en el catastro OSM (restaurant)
+  Majka:
+    nota: sitio desde la ficha de Google Maps (2026-08-13)
+    sitio_web: http://www.majka.bistro.cl/
   Meson del marinero:
     comuna: Las Condes
     direccion: Avenida Presidente Kennedy 5601
@@ -225,6 +246,9 @@ restoranes:
     lat: -33.42103
     lon: -70.60805
     nota: calce único con dirección en el catastro OSM (cafe)
+  Pizzería Capri:
+    nota: sitio desde la ficha de Google Maps (2026-08-13)
+    sitio_web: http://www.pizzeriacapri.cl/
   Rubaiyat:
     comuna: Vitacura
     direccion: Avenida Nueva Costanera 4031
@@ -232,12 +256,18 @@ restoranes:
     lon: -70.59717
     nota: calce único con dirección en el catastro OSM (restaurant)
     sitio_web: https://gruporubaiyat.com/es/
+  Santa Brasa:
+    nota: sitio desde la ficha de Google Maps (2026-08-13)
+    sitio_web: http://www.santabrasa.cl/
   Siete cortes:
     comuna: Las Condes
     direccion: Avenida Presidente Kennedy 5601
     lat: -33.40091
     lon: -70.57572
     nota: calce único con dirección en el catastro OSM (restaurant)
+  Sushi Nikkei 17:
+    nota: sitio desde la ficha de Google Maps (2026-08-13)
+    sitio_web: https://snk17.mesa247.la/
   THAI EXPRESS:
     comuna: Santiago
     direccion: Merced 483
@@ -250,6 +280,9 @@ restoranes:
     lat: -33.36481
     lon: -70.67824
     nota: calce único con dirección en el catastro OSM (restaurant)
+  Vicenzo Cucina:
+    nota: sitio desde la ficha de Google Maps (2026-08-13)
+    sitio_web: https://www.instagram.com/vicenzo.cucina/
   Vinolia:
     comuna: Vitacura
     direccion: Alonso de Monroy 2869

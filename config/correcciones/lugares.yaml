@@ -296,6 +296,55 @@ lugares:
     lon: -70.66998
     nota: 'Rustiko Restaurant & Pub; la fuente lo escribe "Rustiko Huehuraba", con la comuna mal tipeada (2026-08-13)'
 
+  # --- Circo: las escuelas de Santiago (2026-08-13) ---
+  # Sus sitios venden matrícula permanente, no eventos con fecha (Elevarte los
+  # publica como productos de tienda y El Circo del Mundo solo tiene páginas),
+  # así que no sirven como fuente de extracción. Pero cuando alguna publique
+  # una función, una muestra o una clase abierta —por ticketera o por la
+  # agenda de su municipio— ya va a caer en su lugar en vez de en el centro de
+  # la comuna. Todas verificadas en Google Maps y ubicadas con el catastro OSM.
+  Elevarte:
+    direccion: Isabel La Católica 6434
+    comuna: Las Condes
+    lat: -33.42435
+    lon: -70.56172
+    nota: Elevarte Circo Yoga, elevartecircoyoga.cl; Maps + catastro OSM a 30 m (2026-08-13)
+
+  El Circo del Mundo:
+    direccion: Av. General Óscar Bonilla 6100-B
+    comuna: Lo Prado
+    lat: -33.45644
+    lon: -70.72080
+    nota: elcircodelmundo.com; la escuela de circo social más antigua del país (2026-08-13)
+
+  Casa Bufo:
+    direccion: Av. Manuel Antonio Matta 363
+    comuna: Santiago
+    lat: -33.45611
+    lon: -70.63495
+    nota: Maps + catastro OSM coinciden a 40 m (2026-08-13)
+
+  Circo Social La Chimba:
+    direccion: Av. Recoleta 3005
+    comuna: Recoleta
+    lat: -33.39928
+    lon: -70.64150
+    nota: instagram.com/circolachimba; Maps + catastro OSM (2026-08-13)
+
+  Acrobacia Libre:
+    direccion: Tegualda 1549
+    comuna: Ñuñoa
+    lat: -33.44914
+    lon: -70.62285
+    nota: instagram.com/acrobacialibre; Maps + catastro OSM (2026-08-13)
+
+  Escuela de Circo Infantil Chaltumay:
+    direccion: Santiaguillo 1378
+    comuna: Santiago
+    lat: -33.46121
+    lon: -70.65219
+    nota: Maps + catastro OSM (2026-08-13)
+
   Club Subterraneo:
     direccion: Paseo Orrego Luco 46
     comuna: Providencia
