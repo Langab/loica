@@ -89,7 +89,7 @@
 <script src="../loica.js?v=15"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "fbf2926952a482f9", "titulo": "Zumba 5", "inicio": "2026-08-17T21:00:00", "fin": "2026-08-19T21:00:00", "lugar": "JJ. VV. Villa Conchalí República de Noruega # 5603", "direccion": "", "comuna": "Huechuraba", "lat": -33.3706, "lon": -70.6408, "precision": "comuna", "gratis": false, "precio": null, "precio_texto": "", "categoria": "deporte", "publico": "todos", "descripcion": "todos los lunes y miércoles a las 21:00, 16+", "imagen": "", "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos", "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026"};
+  const EV = {"id": "fbf2926952a482f9", "titulo": "Zumba 5", "inicio": "2026-08-17T21:00:00", "fin": "2026-08-19T21:00:00", "lugar": "JJ. VV. Villa Conchalí República de Noruega # 5603", "direccion": "República de Noruega 5603", "comuna": "Huechuraba", "lat": -33.37567, "lon": -70.63068, "precision": "correccion", "gratis": false, "precio": null, "precio_texto": "", "categoria": "deporte", "publico": "todos", "descripcion": "todos los lunes y miércoles a las 21:00, 16+", "imagen": "", "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos", "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));
