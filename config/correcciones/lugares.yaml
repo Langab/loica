@@ -233,6 +233,25 @@ lugares:
   # Locales de fiesta y música en vivo. Toliv y las ticketeras publican
   # coordenadas propias geocodificadas a la rápida —Club 1 aparecía a 2,7 km
   # de su dirección real— y estas entradas les ganan.
+  # Homónimo, no es el club: un snack bar de Barrio Brasil que se llama igual.
+  # Va anotado aunque hoy no tenga eventos, porque el match de las
+  # correcciones es por contención y "Blondie Snack Bar" habría heredado las
+  # coordenadas del club de la Alameda, a 1,1 km. Una entrada exacta gana
+  # sobre la contención, así que esto lo desactiva de antemano.
+  Blondie Snack Bar:
+    direccion: Av. Brasil 171
+    comuna: Santiago
+    lat: -33.44250
+    lon: -70.66491
+    nota: negocio distinto del club Blondie; Google Maps y catastro OSM coinciden (2026-08-13)
+
+  Club Hipico:
+    direccion: Av. Almirante Blanco Encalada 2540
+    comuna: Santiago
+    lat: -33.46306
+    lon: -70.66664
+    nota: 'Club Hípico de Santiago; ahí se hace el Open Blondie de Halloween, que no es en el club de la Alameda. Catastro OSM (2026-08-13)'
+
   Bar Oxido:
     direccion: Purísima 284, Barrio Bellavista
     comuna: Recoleta
