@@ -214,12 +214,32 @@ class Correcciones:
         return tocados
 
     def aplicar_a_descuento(self, d) -> list[str]:
-        """Corrige un Descuento (objeto, no dict) antes de geocodificar."""
+        """Corrige un Descuento (objeto, no dict) antes de geocodificar.
+
+        La corrección RELLENA lo que falta; no pisa la dirección que el banco
+        sí publicó. La distinción importa porque estas fichas se guardan por
+        nombre y hay locales con varias sucursales: Holy Moly tiene una en
+        Hernando de Aguirre y otra en Merced, y al sobrescribir las dos con la
+        misma ficha quedaban como un descuento duplicado en la misma esquina.
+        Cuando el banco da la dirección, ella manda y se geocodifica sola.
+        """
         arreglo = self.restoran(d.comercio)
         if not arreglo:
             return []
         tocados: list[str] = []
-        for campo in ("cocina", "categoria", "direccion", "comuna"):
+
+        # La cocina y el rubro sí se corrigen siempre: son una clasificación
+        # nuestra, no un dato del banco.
+        for campo in ("cocina", "categoria"):
+            valor = arreglo.get(campo)
+            if valor and getattr(d, campo) != valor:
+                setattr(d, campo, valor)
+                tocados.append(campo)
+
+        if d.direccion:
+            return tocados
+
+        for campo in ("direccion", "comuna"):
             valor = arreglo.get(campo)
             if valor and getattr(d, campo) != valor:
                 setattr(d, campo, valor)
