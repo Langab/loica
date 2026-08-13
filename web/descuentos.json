@@ -1,6 +1,6 @@
 {
- "generado": "2026-08-12T18:07:37",
- "total": 651,
+ "generado": "2026-08-13T11:13:05",
+ "total": 653,
  "bancos": [
   [
    "bancochile",
@@ -58,13 +58,13 @@
   "Ñuñoa"
  ],
  "por_dia": {
-  "miercoles": 247,
-  "jueves": 161,
-  "viernes": 156,
-  "lunes": 249,
-  "martes": 258,
-  "sabado": 114,
-  "domingo": 95
+  "miercoles": 248,
+  "jueves": 162,
+  "viernes": 157,
+  "lunes": 250,
+  "martes": 259,
+  "sabado": 115,
+  "domingo": 96
  },
  "descuentos": [
   {
@@ -22441,15 +22441,15 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
-   "comercio": "China Wok Recoleta",
+   "comercio": "China Wok Parque Arauco",
    "categoria": "comida_rapida",
    "cocina": "asiatica",
-   "comuna": "Recoleta",
+   "comuna": "Las Condes",
    "region": "Metropolitana",
-   "direccion": "Eusebio Lillo 440-446 Loc. 10 -1er Nivel Patronato",
-   "telefono": "2-25123800",
-   "lat": -33.42871616,
-   "lon": -70.6444889,
+   "direccion": "Av. Kennedy 5413 Loc 604 (Parque Arauco)",
+   "telefono": "2-25845312",
+   "lat": -33.4019756,
+   "lon": -70.5805178,
    "precision": "fuente",
    "direccion_prestada_de": "",
    "sitio_web": "http://www.chinawok.cl",
@@ -22462,10 +22462,10 @@
    "modalidad": "",
    "segmentado": false,
    "condiciones": "2 woky pack mongoliana a $6180 (2 woky pack de carne mongoliana con arroz chaunfa + 2 bebidas regulares) o 2 woki pack chapsui de ave a $5790 (2 woky pack chapsui de ave con arroz chaunfa + 2 bebidas regulares) Sólo en tiendas.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/china-wok-18",
-   "logo": "https://bci-cdn.azureedge.net/uploads/acecfccc-0aed-4d9a-98f3-96f85ec8a569/R320x240/chinawok.png",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/china-wok-16",
+   "logo": "https://bci-cdn.azureedge.net/uploads/68e2d8e2-5026-48e2-bcec-b6c3f56c405f/R320x240/chinawok.png",
    "capturado": "",
-   "id": "f891e94285ef"
+   "id": "1672010722ce"
   },
   {
    "banco_id": "falabella",
@@ -23128,6 +23128,35 @@
    "logo": "https://bci-cdn.azureedge.net/uploads/609e22c2-8551-4345-89d7-1e5d66e4bd81/original/imagen.jpg",
    "capturado": "",
    "id": "a9e25098f4f8"
+  },
+  {
+   "banco_id": "bci",
+   "banco": "Bci",
+   "comercio": "PizzaPizza Peñalolén",
+   "categoria": "comida_rapida",
+   "cocina": "italiana",
+   "comuna": "Peñalolén",
+   "region": "Metropolitana",
+   "direccion": "Los Presidentes 7640",
+   "telefono": "2 2758 1212",
+   "lat": -33.486479,
+   "lon": -70.5572526,
+   "precision": "fuente",
+   "direccion_prestada_de": "",
+   "sitio_web": "http://www.pizzapizza.cl/",
+   "porcentaje": null,
+   "oferta": "",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-14",
+   "logo": "https://bci-cdn.azureedge.net/uploads/19a27e67-d4c2-4a79-92a2-a07610882369/original/imagen.jpg",
+   "capturado": "",
+   "id": "e1b84c427b3c"
   },
   {
    "banco_id": "bci",
@@ -24921,6 +24950,45 @@
    "logo": "https://bci-cdn.azureedge.net/uploads/f90c4a43-ead4-4671-b0ce-d8e67fc658c3/R320x240/Imagen_Telepizza.jpg",
    "capturado": "",
    "id": "49f067e6ea3c"
+  },
+  {
+   "banco_id": "cencosud",
+   "banco": "Cencosud",
+   "comercio": "Todos los días con tu Mastercard y la app Copec",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "comuna": "",
+   "region": "Todo Chile",
+   "direccion": "",
+   "telefono": "",
+   "lat": null,
+   "lon": null,
+   "precision": "sin_ubicar",
+   "direccion_prestada_de": "",
+   "sitio_web": "",
+   "porcentaje": null,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "lunes",
+    "martes",
+    "miercoles",
+    "jueves",
+    "viernes",
+    "sabado",
+    "domingo"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "cencosud"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Beneficios todos los días con tu Tarjeta Cencosud Scotiabank Mastercard y tu app Copec",
+   "url": "https://www.tarjetacencosud.cl/publico/beneficios/landing/app-copec",
+   "logo": "",
+   "capturado": "",
+   "id": "adbd16e83af1"
   },
   {
    "banco_id": "bancochile",
