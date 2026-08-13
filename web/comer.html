@@ -3,6 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyeccion es
+     que todo lo que se pinta pase por escapar() y urlSegura(); esto es lo que
+     queda en pie si algun dia se escapa uno. Notas:
+     - `img-src https:` va abierto a proposito: las fotos son de los
+       organizadores y viven en cientos de dominios que no se pueden listar.
+     - `'unsafe-inline'` en script-src es obligatorio mientras las paginas
+       tengan su logica en un <script> inline. Aun asi la CSP sirve: bloquea
+       cargar un script de OTRO dominio y bloquea que algo inyectado mande los
+       datos afuera (connect-src 'self').
+     - `frame-ancestors` NO va: en un <meta> el navegador lo ignora, solo
+       funciona como cabecera HTTP y GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Dónde comer — Loica</title>
 <meta name="description" content="Los locales de Santiago a los que sí se vuelve, elegidos a dedo y con lo que hay que pedir en cada uno. Sin robot, sin ranking y sin canje.">
 <meta name="robots" content="index,follow" id="meta-robots">
@@ -19,7 +33,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=14">
+<link rel="stylesheet" href="loica.css?v=15">
 <style>
   body{overflow-x:hidden}
   .contenido-comer{max-width:940px;margin:0 auto;padding:var(--e-6) var(--e-4) var(--e-12)}
@@ -241,7 +255,7 @@
 <div class="remate" id="cordillera" aria-hidden="true"></div>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="loica.js?v=14"></script>
+<script src="loica.js?v=15"></script>
 <script>
 /* ============================================================
    DÓNDE COMER — índice + ficha de un local, ruteado por hash
@@ -327,8 +341,8 @@ const fechaLarga = iso => new Date(iso + "T12:00:00")
 
    Para reemplazarla por una foto propia basta apuntar `foto` a un archivo de
    web/fotos/comer/ en comer.json. Ahí está el LEEME con los nombres. */
-const fotoHtml = local => local.foto
-  ? `<img src="${escapar(local.foto)}" alt="" loading="lazy" decoding="async" onerror="this.remove()">`
+const fotoHtml = local => urlSegura(local.foto)
+  ? `<img src="${escapar(urlSegura(local.foto))}" alt="" loading="lazy" decoding="async" onerror="this.remove()">`
   : "";
 
 /* ---------- índice ---------- */
@@ -447,9 +461,9 @@ function pintarFicha(local){
       ${local.ojo ? `<div class="ojo"><p><b>El pero.</b> ${escapar(local.ojo)}</p></div>` : ""}
 
       <div class="ficha-botones">
-        ${local.mapa ? `<a class="boton" href="${escapar(local.mapa)}" target="_blank" rel="noopener">Cómo llegar ↗</a>` : ""}
-        ${local.sitio ? `<a class="boton secundario" href="${escapar(local.sitio)}" target="_blank" rel="noopener">Su sitio ↗</a>` : ""}
-        ${local.instagram ? `<a class="boton secundario con-icono" href="${escapar(local.instagram)}" target="_blank" rel="noopener">
+        ${urlSegura(local.mapa) ? `<a class="boton" href="${escapar(urlSegura(local.mapa))}" target="_blank" rel="noopener">Cómo llegar ↗</a>` : ""}
+        ${urlSegura(local.sitio) ? `<a class="boton secundario" href="${escapar(urlSegura(local.sitio))}" target="_blank" rel="noopener">Su sitio ↗</a>` : ""}
+        ${urlSegura(local.instagram) ? `<a class="boton secundario con-icono" href="${escapar(urlSegura(local.instagram))}" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">${ICONO_IG}</svg>
             ${escapar(arrobaDe(local.instagram))} ↗</a>` : ""}
       </div>

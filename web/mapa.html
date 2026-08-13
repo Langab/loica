@@ -3,6 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyeccion es
+     que todo lo que se pinta pase por escapar() y urlSegura(); esto es lo que
+     queda en pie si algun dia se escapa uno. Notas:
+     - `img-src https:` va abierto a proposito: las fotos son de los
+       organizadores y viven en cientos de dominios que no se pueden listar.
+     - `'unsafe-inline'` en script-src es obligatorio mientras las paginas
+       tengan su logica en un <script> inline. Aun asi la CSP sirve: bloquea
+       cargar un script de OTRO dominio y bloquea que algo inyectado mande los
+       datos afuera (connect-src 'self').
+     - `frame-ancestors` NO va: en un <meta> el navegador lo ignora, solo
+       funciona como cabecera HTTP y GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; worker-src blob:; connect-src 'self' https://*.basemaps.cartocdn.com; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Mapa — ¿Qué hay hoy en Santiago?</title>
 <meta name="description" content="Todos los panoramas de Santiago en un mapa. Filtra por gratis, hoy, mañana o este fin de semana.">
 <meta property="og:title" content="Loica — ¿Qué hay hoy en Santiago?">
@@ -14,8 +28,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="loica.css?v=14">
+<!-- `integrity` no es adorno: unpkg sirve lo que el paquete tenga publicado, y
+     una versión republicada o un unpkg comprometido inyectaría JavaScript en
+     la página con todo el dominio a su disposición. Con el hash, el navegador
+     compara antes de ejecutar y si no calza no carga nada. -->
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
+      integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V"
+      crossorigin="anonymous">
+<link rel="stylesheet" href="loica.css?v=15">
 <style>
   html,body{height:100%;overflow:hidden}
   /* Los dos altos van en este orden a proposito: `dvh` no existe en
@@ -295,8 +315,10 @@
 </div>
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
-<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-<script src="loica.js?v=14"></script>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
+        integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
+        crossorigin="anonymous"></script>
+<script src="loica.js?v=15"></script>
 <script>
 let EVENTOS = [], filtroCat = null, soloGratis = false, cuando = "todo", publicoFiltro = null;
 let listaActual = [], seleccionado = null, mapa = null, hayMapa = false;
@@ -479,7 +501,7 @@ const visibles = () => EVENTOS.filter(ev =>
   (!soloGratis || ev.gratis) &&
   (!filtroCat || ev.categoria === filtroCat) &&
   (!publicoFiltro || ev.publico === publicoFiltro) &&
-  enRango(ev.fecha, cuando));
+  sesionEnRango(ev, cuando));
 
 function pintarFiltros(){
   /* --- Riel 1: cuándo. Una sola respuesta, por eso es segmentado ---
@@ -648,15 +670,15 @@ function abrirFicha(ev, direccion = 0){
       <button class="cerrar-ficha" id="ev-cerrar" aria-label="${t("cerrar")}">×</button>
     </div>
     <div class="ficha-scroll">
-      ${ev.imagen ? `<div class="ficha-foto">
-          <img src="${escapar(ev.imagen)}" alt="" onerror="this.parentElement.remove()">
+      ${urlSegura(ev.imagen) ? `<div class="ficha-foto">
+          <img src="${escapar(urlSegura(ev.imagen))}" alt="" onerror="this.parentElement.remove()">
         </div>` : ""}
       <div class="ficha-cuerpo">
         <span class="mascota-nombre" style="color:${info.tintaVar}">
           ${carita(info.mascota, info.hex, 20)} ${info[IDIOMA]}</span>
         <h2>${escapar(ev.titulo)}</h2>
-        <a class="boton bloque" href="${escapar(ev.url)}"
-           target="_blank" rel="noopener">${t("ir")} ↗</a>
+        ${urlSegura(ev.url) ? `<a class="boton bloque" href="${escapar(urlSegura(ev.url))}"
+           target="_blank" rel="noopener nofollow">${t("ir")} ↗</a>` : ""}
         <div class="dato" style="margin-top:var(--e-4)"><span class="et">${t("cuando")}</span>
           <span>${fecha}${hora ? " · " + hora : ""}</span></div>
         <div class="dato"><span class="et">${t("donde")}</span>

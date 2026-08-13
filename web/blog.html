@@ -3,6 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyeccion es
+     que todo lo que se pinta pase por escapar() y urlSegura(); esto es lo que
+     queda en pie si algun dia se escapa uno. Notas:
+     - `img-src https:` va abierto a proposito: las fotos son de los
+       organizadores y viven en cientos de dominios que no se pueden listar.
+     - `'unsafe-inline'` en script-src es obligatorio mientras las paginas
+       tengan su logica en un <script> inline. Aun asi la CSP sirve: bloquea
+       cargar un script de OTRO dominio y bloquea que algo inyectado mande los
+       datos afuera (connect-src 'self').
+     - `frame-ancestors` NO va: en un <meta> el navegador lo ignora, solo
+       funciona como cabecera HTTP y GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Blog — Loica</title>
 <meta name="description" content="El finde, lo gratis y las rutas de barrio en Santiago, revisados uno por uno y con precio real. La versión larga de Los datos del finde.">
 <meta name="robots" content="index,follow" id="meta-robots">
@@ -19,7 +33,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=14">
+<link rel="stylesheet" href="loica.css?v=15">
 <style>
   body{overflow-x:hidden}
   .contenido-blog{max-width:760px;margin:0 auto;padding:var(--e-6) var(--e-4) var(--e-12)}
@@ -219,7 +233,7 @@
 <div class="remate" id="cordillera" aria-hidden="true"></div>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="loica.js?v=14"></script>
+<script src="loica.js?v=15"></script>
 <script>
 /* ============================================================
    BLOG — índice + vista de post, ruteado por hash (#/p/<slug>).
@@ -404,7 +418,7 @@ function pintarTarjetaIndice(post){
        href="#/p/${encodeURIComponent(post.slug)}">
       <div class="post-tapa">
         ${mascota(animal, p.tono, 84, TINTA_FIJA)}
-        ${foto ? `<img src="${escapar(foto)}" alt="" loading="lazy" onerror="this.remove()">` : ""}
+        ${urlSegura(foto) ? `<img src="${escapar(urlSegura(foto))}" alt="" loading="lazy" onerror="this.remove()">` : ""}
         <span class="post-formato">
           <span class="bolita">${mascota(animal, p.tono, 22, TINTA_FIJA)}</span>
           ${escapar(f.etiqueta)}
@@ -537,7 +551,7 @@ function tarjetaEventoPost(ref, pal, animalNota){
     <article class="reco" style="--tono:${pal.tono};--suave:${pal.suave};--cat:${info.hex};--cat-tinta:${info.tinta}">
       <div class="reco-foto" style="--suave:${info.hex}22">
         ${mascota(info.mascota, info.hex, 76, TINTA_FIJA)}
-        ${ev.imagen ? `<img src="${escapar(ev.imagen)}" alt="" loading="lazy" onerror="this.remove()">` : ""}
+        ${urlSegura(ev.imagen) ? `<img src="${escapar(urlSegura(ev.imagen))}" alt="" loading="lazy" onerror="this.remove()">` : ""}
         <span class="reco-dia${dia.pronto ? " pronto" : ""}">${dia.texto}</span>
         <span class="reco-cat">
           <span class="bolita">${mascota(info.mascota, info.hex, 19, TINTA_FIJA)}</span>
@@ -558,7 +572,7 @@ function tarjetaEventoPost(ref, pal, animalNota){
         </div>` : ""}
         <div class="reco-botones">
           <a class="boton secundario" href="index.html#/e/${encodeURIComponent(ev.id)}">${t("verMapa")}</a>
-          <a class="boton secundario" href="${escapar(ev.url)}" target="_blank" rel="noopener">${t("ir")} ↗</a>
+          ${urlSegura(ev.url) ? `<a class="boton secundario" href="${escapar(urlSegura(ev.url))}" target="_blank" rel="noopener nofollow">${t("ir")} ↗</a>` : ""}
         </div>
       </div>
     </article>`;

@@ -80,6 +80,82 @@ def _plano_simple(texto: str) -> str:
     return "".join(c for c in plano if unicodedata.category(c) != "Mn").strip()
 
 
+# "Nado Libre Ma-Ju 06:00 h." — la municipalidad mete el horario en el nombre
+# porque es su única forma de distinguir una clase de otra en una planilla.
+# En una tarjeta que ya muestra los días y la hora aparte, ese código sobra y
+# hace la lista ilegible.
+_CODIGO_HORARIO = re.compile(
+    r"\s*[/·-]?\s*\b(?:lu|ma|mi|ju|vi|sa|do)\b(?:\s*[-y/]\s*\b(?:lu|ma|mi|ju|vi|sa|do)\b)*"
+    r"\.?\s*\d{1,2}[:.]\d{2}\s*(?:h|hrs?)?\.?", re.IGNORECASE)
+
+
+def _titulo_sin_horario(titulo: str) -> str:
+    """Saca el código de horario del título; deja el nombre de la actividad."""
+    limpio = _CODIGO_HORARIO.sub(" ", titulo)
+    limpio = re.sub(r"\s*[/·]\s*$", "", " ".join(limpio.split())).strip(" .-/·")
+    # Si al sacar el código no queda nombre, se devuelve el original: vale más
+    # un título feo que una tarjeta sin título.
+    return limpio if len(limpio) >= 3 else titulo
+
+
+def colapsar_series(eventos: list[dict]) -> tuple[list[dict], int]:
+    """Junta las sesiones repetidas de un mismo taller en UNA tarjeta.
+
+    Un yoga de martes y jueves que corre tres meses llegaba como veinte
+    tarjetas idénticas en el mismo punto: la mitad del catastro eran sesiones
+    repetidas de 320 talleres, y en el mapa se veían como pilas de cuatrocientos
+    pines encima del mismo polideportivo. Para quien abre la app a preguntar
+    "¿qué hago hoy?", eso entierra los conciertos y las obras.
+
+    La tarjeta que queda dice cuándo es la próxima sesión y en qué días se
+    repite. Los días van en `dias_semana` (0=lunes) y hasta cuándo en `fin`,
+    para que los filtros de fecha sigan encontrándola: un taller de sábados
+    tiene que seguir apareciendo en "este fin de semana" aunque su próxima
+    sesión sea dentro de dos días.
+
+    Solo se colapsa lo que de verdad es una serie: mismo título, mismo lugar y
+    misma hora, tres sesiones o más. Dos funciones de una obra no son un
+    taller, y fusionarlas escondería una.
+    """
+    grupos: dict[tuple, list[dict]] = {}
+    for ev in eventos:
+        if not ev.get("inicio"):
+            grupos.setdefault(("sin-fecha", id(ev)), []).append(ev)
+            continue
+        hora = ev["inicio"][11:16]
+        # Se agrupa por el título YA limpio de su código de horario: la fuente
+        # escribe la misma clase como "Fútbol 5 Ju 16:45 h. / Villa Olímpica"
+        # y "Fútbol 5 Ju 16:45 h. / Villa Olímpica." —con punto y sin punto— y
+        # agrupando por el texto crudo quedaban dos tarjetas gemelas.
+        clave = _titulo_sin_horario(ev["titulo"]).strip().lower()
+        grupos.setdefault((clave, ev["lugar"], hora), []).append(ev)
+
+    salida: list[dict] = []
+    colapsados = 0
+    for sesiones in grupos.values():
+        if len(sesiones) < 3:
+            salida.extend(sesiones)
+            continue
+        sesiones.sort(key=lambda e: e["inicio"])
+        # Si ya trae `fin`, es una temporada continua (una exposición de un
+        # mes), no una serie de sesiones sueltas: eso ya lo colapsó agrupar.py.
+        if any(s.get("fin") for s in sesiones):
+            salida.extend(sesiones)
+            continue
+        dias = sorted({datetime.fromisoformat(s["inicio"]).weekday()
+                       for s in sesiones})
+        tarjeta = dict(sesiones[0])
+        tarjeta["fin"] = sesiones[-1]["inicio"]
+        tarjeta["dias_semana"] = dias
+        tarjeta["sesiones"] = len(sesiones)
+        tarjeta["titulo"] = _titulo_sin_horario(tarjeta["titulo"])
+        salida.append(tarjeta)
+        colapsados += len(sesiones) - 1
+
+    salida.sort(key=lambda e: e.get("inicio") or "9999")
+    return salida, colapsados
+
+
 def _lejos(lat1, lon1, lat2, lon2, km: float) -> bool:
     """True si los dos puntos están a más de `km` de distancia."""
     return ((lat1 - lat2) * 111) ** 2 + ((lon1 - lon2) * 92) ** 2 > km ** 2
@@ -130,7 +206,7 @@ PLANTILLA_FICHA = """<!doctype html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=14">
+<link rel="stylesheet" href="../loica.css?v=15">
 <style>
   body{{min-height:100vh;min-height:100dvh}}
   .ficha-sola{{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}}
@@ -180,7 +256,7 @@ PLANTILLA_FICHA = """<!doctype html>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=14"></script>
+<script src="../loica.js?v=15"></script>
 <script>
   pintarBarra("mapa.html", "../");
   const EV = {evento_json};
@@ -458,6 +534,8 @@ def main() -> int:
     # reconoce, y el mapa lo dibujaba como pin exacto. Se degrada a
     # aproximado, que es lo que de verdad es: la página lo atenúa y el lugar
     # entra a la cola de corrección en vez de mentir con precisión.
+    eventos, sesiones_juntadas = colapsar_series(eventos)
+
     por_punto: dict[tuple, set] = {}
     for ev in eventos:
         if ev["precision"] == "fuente" and ev["lat"] is not None:
@@ -498,6 +576,8 @@ def main() -> int:
     if degradados:
         log.info("Pines degradados a aproximados por compartir coordenada "
                  "entre lugares distintos: %d", degradados)
+    if sesiones_juntadas:
+        log.info("Sesiones repetidas juntadas en su taller: %d", sesiones_juntadas)
     if sin_ubicar:
         log.info("Sin pin en el mapa (salen solo en la lista): %d", sin_ubicar)
     if descartados:

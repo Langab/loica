@@ -3,6 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyeccion es
+     que todo lo que se pinta pase por escapar() y urlSegura(); esto es lo que
+     queda en pie si algun dia se escapa uno. Notas:
+     - `img-src https:` va abierto a proposito: las fotos son de los
+       organizadores y viven en cientos de dominios que no se pueden listar.
+     - `'unsafe-inline'` en script-src es obligatorio mientras las paginas
+       tengan su logica en un <script> inline. Aun asi la CSP sirve: bloquea
+       cargar un script de OTRO dominio y bloquea que algo inyectado mande los
+       datos afuera (connect-src 'self').
+     - `frame-ancestors` NO va: en un <meta> el navegador lo ignora, solo
+       funciona como cabecera HTTP y GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; worker-src blob:; connect-src 'self' https://*.basemaps.cartocdn.com; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Descuentos — ¿Dónde como hoy en Santiago?</title>
 <meta name="description" content="Descuentos de restaurantes con tarjetas de bancos chilenos, filtrados por día, banco y comuna. Banco de Chile, Bci y Banco Falabella.">
 <meta property="og:title" content="Loica — ¿Dónde como hoy?">
@@ -14,8 +28,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="loica.css?v=14">
+<!-- Ver la nota de mapa.html: el hash impide que un unpkg comprometido o una
+     versión republicada metan JavaScript ajeno en el dominio. -->
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
+      integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V"
+      crossorigin="anonymous">
+<link rel="stylesheet" href="loica.css?v=15">
 <style>
   html,body{height:100%;overflow:hidden}
   /* Los dos altos van en este orden a proposito: `dvh` no existe en
@@ -275,8 +293,10 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
-<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-<script src="loica.js?v=14"></script>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
+        integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
+        crossorigin="anonymous"></script>
+<script src="loica.js?v=15"></script>
 <script>
 /* ------------------------------------------------------------------
    Estado. Tres filtros y ninguno depende del otro: el día es de una
@@ -514,7 +534,7 @@ function abrirFicha(d){
 
   document.getElementById("ficha-cabeza").innerHTML = `
     <span class="avatar">${carita("degu", b.color, 44)}
-      ${d.logo ? `<img src="${escapar(d.logo)}" alt="" onerror="this.remove()">` : ""}</span>
+      ${urlSegura(d.logo) ? `<img src="${escapar(urlSegura(d.logo))}" alt="" onerror="this.remove()">` : ""}</span>
     <span style="--banco:${b.color};min-width:0">
       <span class="ficha-banco">${escapar(d.banco)}</span>
       <h2 id="ficha-titulo">${escapar(d.comercio)}</h2>
@@ -566,9 +586,9 @@ function abrirFicha(d){
     ${d.capturado ? `<p class="letra-chica sin-fecha">${escapar(t("dCapturado"))} ${
         escapar(new Date(d.capturado + "T12:00").toLocaleDateString(localeDe(),
           {day:"numeric", month:"long"}))}. ${escapar(t("dCapturadoPista"))}</p>` : ""}
-    <a class="boton" href="${escapar(d.url)}" target="_blank" rel="noopener nofollow">
-      ${escapar(t("dVerBanco"))} →</a>
-    ${d.sitio_web ? `<a class="boton secundario" href="${escapar(d.sitio_web)}"
+    ${urlSegura(d.url) ? `<a class="boton" href="${escapar(urlSegura(d.url))}" target="_blank" rel="noopener nofollow">
+      ${escapar(t("dVerBanco"))} →</a>` : ""}
+    ${urlSegura(d.sitio_web) ? `<a class="boton secundario" href="${escapar(urlSegura(d.sitio_web))}"
         target="_blank" rel="noopener nofollow">${escapar(t("dVerLocal"))} →</a>` : ""}`;
 
   ficha.classList.add("visible");

@@ -3,12 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyeccion es
+     que todo lo que se pinta pase por escapar() y urlSegura(); esto es lo que
+     queda en pie si algun dia se escapa uno. Notas:
+     - `img-src https:` va abierto a proposito: las fotos son de los
+       organizadores y viven en cientos de dominios que no se pueden listar.
+     - `'unsafe-inline'` en script-src es obligatorio mientras las paginas
+       tengan su logica en un <script> inline. Aun asi la CSP sirve: bloquea
+       cargar un script de OTRO dominio y bloquea que algo inyectado mande los
+       datos afuera (connect-src 'self').
+     - `frame-ancestors` NO va: en un <meta> el navegador lo ignora, solo
+       funciona como cabecera HTTP y GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Agrega tu evento — Loica</title>
 <meta name="description" content="Publica gratis tu evento, taller o clase en el mapa de Santiago.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=14">
+<link rel="stylesheet" href="loica.css?v=15">
 <style>
   .hero{text-align:center;padding:var(--e-8) var(--e-5) var(--e-6);max-width:660px;margin:0 auto}
   .hero svg{margin:0 auto var(--e-4)}
@@ -154,7 +168,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegacion principal"></nav>
 
-<script src="loica.js?v=14"></script>
+<script src="loica.js?v=15"></script>
 <script>
 const CORREO = "hola@loica.cl";   // cambiar por el correo real del proyecto
 

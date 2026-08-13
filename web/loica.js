@@ -759,8 +759,34 @@ async function cargarEventos(){
 }
 
 /* ---------- UTILIDADES ---------- */
-const escapar = s => String(s ?? "").replace(/[&<>"]/g, c =>
-  ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const escapar = s => String(s ?? "").replace(/[&<>"']/g, c =>
+  ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+/* `escapar` NO alcanza para un href.
+   Casi todos los links que pinta esta app —el del evento, el del banco, el
+   sitio del local— vienen de sitios de terceros que raspa el robot. Escapar
+   sirve contra un `"` que se sale del atributo, pero `javascript:alert(1)` no
+   lleva comillas ni signos raros: pasa intacto por `escapar` y el navegador lo
+   ejecuta al primer clic, en el dominio de Loica y con la sesión de quien
+   pinchó. La única defensa es mirar el ESQUEMA y aceptar solo los dos que esta
+   app necesita.
+
+   Devuelve "" cuando no le gusta lo que ve. Quien la use decide qué hacer con
+   el vacío: acá casi siempre significa "no dibujes el botón". */
+function urlSegura(u){
+  if(!u) return "";
+  // Los espacios y tabs DENTRO del esquema los ignora el navegador —
+  // `java\tscript:` se ejecuta igual—, así que se limpian antes de mirar.
+  const limpia = String(u).replace(/[\u0000-\u0020]/g, "").toLowerCase();
+  if(limpia.startsWith("//")) return "";        // hereda el protocolo, pero es otro sitio
+  const dosPuntos = limpia.indexOf(":");
+  if(dosPuntos === -1) return u;                // relativa: es nuestra, pasa
+  // Una barra antes de los dos puntos significa que no era un esquema sino un
+  // path con dos puntos adentro ("fotos/a:b.jpg"). También es relativa.
+  const barra = limpia.indexOf("/");
+  if(barra !== -1 && barra < dosPuntos) return u;
+  return ["http:", "https:", "mailto:", "tel:"].includes(limpia.slice(0, dosPuntos + 1)) ? u : "";
+}
 
 const localeDe = () => IDIOMA === "es" ? "es-CL" : IDIOMA === "pt" ? "pt-BR" : "en-GB";
 
@@ -806,6 +832,43 @@ const RANGOS = {
   finde:  f => { const [d,h] = ventanaFinde(); return f >= d && f <= h; },
 };
 const enRango = (fecha, rango) => (RANGOS[rango] || RANGOS.todo)(fecha);
+
+/* Los talleres que se repiten llegan como UNA tarjeta con `dias_semana`
+   (0=lunes) y `fin`: un yoga de martes y jueves hasta noviembre es una sola
+   tarjeta, no cuarenta. Pero entonces el filtro no puede mirar solo `inicio`,
+   porque un taller de sábados tiene que seguir apareciendo en "este fin de
+   semana" aunque su próxima sesión sea el martes. Acá se pregunta lo correcto:
+   ¿tiene alguna sesión dentro del rango? */
+function sesionEnRango(ev, rango){
+  const ini = new Date(ev.inicio);
+  if(!ev.dias_semana || !ev.dias_semana.length) return enRango(ini, rango);
+  const prueba = RANGOS[rango] || RANGOS.todo;
+  if(rango === "todo") return true;
+  const fin = ev.fin ? new Date(ev.fin) : ini;
+  /* Se recorren los días entre hoy y el final de la serie, con tope de 60:
+     más allá ningún filtro de la página mira (el más largo son 7 días). */
+  const d = new Date(); d.setHours(0,0,0,0);
+  for(let i = 0; i < 60; i++){
+    if(d > fin) break;
+    if(d >= empiezaDia(ini) && ev.dias_semana.includes((d.getDay() + 6) % 7)){
+      const conHora = new Date(d);
+      conHora.setHours(ini.getHours(), ini.getMinutes(), 0, 0);
+      if(prueba(conHora)) return true;
+    }
+    d.setDate(d.getDate() + 1);
+  }
+  return false;
+}
+
+/* "todos los martes y jueves" — lo que la tarjeta muestra en vez de repetirse. */
+const NOMBRE_DIA = ["lunes","martes","miércoles","jueves","viernes","sábado","domingo"];
+function cadencia(ev){
+  if(!ev.dias_semana || !ev.dias_semana.length) return "";
+  const n = ev.dias_semana.map(i => NOMBRE_DIA[i]);
+  const lista = n.length === 1 ? n[0]
+    : n.slice(0,-1).join(", ") + " y " + n[n.length-1];
+  return (n.length === 1 ? "todos los " : "") + lista;
+}
 const claveDia = f => `${f.getFullYear()}-${String(f.getMonth()+1).padStart(2,"0")}-${String(f.getDate()).padStart(2,"0")}`;
 
 /* ---------- COMPARTIR ----------
@@ -991,7 +1054,7 @@ function tarjetaEvento(ev, alPulsar){
   boton.innerHTML = `
     <div class="miniatura">
       ${carita(info.mascota, info.hex, 44)}
-      ${ev.imagen ? `<img src="${escapar(ev.imagen)}" alt="" loading="lazy"
+      ${urlSegura(ev.imagen) ? `<img src="${escapar(urlSegura(ev.imagen))}" alt="" loading="lazy"
                        onerror="this.remove()">` : ""}
       <span class="dia${dia.pronto ? " pronto" : ""}">${dia.texto}</span>
     </div>
@@ -1002,6 +1065,7 @@ function tarjetaEvento(ev, alPulsar){
         <span>${escapar(ev.lugar)}</span>
         ${ev.comuna ? `<span>· ${escapar(ev.comuna)}</span>` : ""}
       </div>
+      ${cadencia(ev) ? `<div class="tarjeta-meta cadencia">↻ ${escapar(cadencia(ev))}</div>` : ""}
     </div>
     <div class="precio${ev.gratis ? " libre" : precio ? "" : " sin-dato"}">${precio || "—"}</div>`;
 

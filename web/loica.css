@@ -445,6 +445,13 @@ img{max-width:100%;display:block}
 }
 .tarjeta-meta .aviso{color:var(--tinta-tenue);font-style:italic}
 
+/* Los talleres que se repiten son UNA tarjeta que dice su cadencia: "↻ martes
+   y jueves". Va más apagado que el lugar porque responde una pregunta
+   distinta —cuándo vuelve, no dónde es— y no debe competir con el título. */
+.tarjeta-meta.cadencia{
+  color:var(--tinta-tenue);font-size:var(--t-xs);margin-top:1px;
+}
+
 /* ---------- 6. BOTONES ---------- */
 .boton{
   display:inline-flex;align-items:center;justify-content:center;gap:var(--e-2);
