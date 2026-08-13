@@ -26,7 +26,32 @@
 # Las cadenas quedan fuera a propósito — la corrección se guarda por nombre y
 # una sola ficha de "Starbucks" mandaría sus 135 locales a la misma esquina.
 
+# Resueltos en Google Maps con el navegador, uno por uno. Se acepta solo
+# cuando Maps devuelve UNA ficha de lugar con su dirección; si devuelve una
+# lista de resultados el nombre es ambiguo y se deja sin pin (le pasó a
+# "La Maestranza", con seis candidatos).
 restoranes:
+  Cosenza:
+    direccion: Av. Nueva Costanera 3900, Casa Costanera
+    comuna: Vitacura
+    lat: -33.39871
+    lon: -70.59851
+    nota: Google Maps, ficha única (2026-08-13)
+
+  Kechua:
+    direccion: Alcaldesa Balbina Vera 3561, local 102
+    comuna: Ñuñoa
+    lat: -33.45385
+    lon: -70.59371
+    nota: 'Google Maps, ficha única. El banco publica "Diecinueve de Abril 3526", a una cuadra: manda la dirección vigente de Maps (2026-08-13)'
+
+  Exò Nuit:
+    direccion: Candelaria Goyenechea 3868
+    comuna: Vitacura
+    lat: -33.39983
+    lon: -70.59336
+    nota: Google Maps, ficha única (2026-08-13)
+
   Danés:
     direccion: Avenida Vitacura 4607
     comuna: Vitacura

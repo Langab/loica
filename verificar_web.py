@@ -172,6 +172,28 @@ def verificar_descuentos(errores: list[str], avisos: list[str]) -> None:
             errores.append(f"{donde}: lat/lon a medias ({lat}, {lon})")
 
 
+def verificar_correcciones(errores: list[str]) -> None:
+    """La memoria de correcciones tiene que parsear.
+
+    Un YAML roto no bota la corrida —`loica/correcciones.py` avisa y sigue—
+    pero deja el sitio sin NINGUNA corrección, y eso es invisible: los pines
+    vuelven al centro de la comuna sin que nada falle. Pasó con una clave que
+    llevaba `#` en el nombre, porque en YAML ese carácter abre un comentario.
+    """
+    import yaml
+    directorio = RAIZ / "config" / "correcciones"
+    for ruta in sorted(directorio.glob("*.yaml")):
+        try:
+            crudo = yaml.safe_load(ruta.read_text(encoding="utf-8"))
+        except (yaml.YAMLError, UnicodeDecodeError, OSError) as e:
+            errores.append(f"config/correcciones/{ruta.name} no parsea "
+                           f"({str(e).splitlines()[0]}): el sitio saldría sin "
+                           "esas correcciones y nadie se enteraría.")
+            continue
+        if not isinstance(crudo, dict) or not crudo:
+            errores.append(f"config/correcciones/{ruta.name}: falta la clave raíz.")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Doble check antes del push")
     parser.add_argument("--forzar", action="store_true",
@@ -180,6 +202,7 @@ def main() -> int:
 
     errores: list[str] = []
     avisos: list[str] = []
+    verificar_correcciones(errores)
     verificar_eventos(errores, avisos, args.forzar)
     verificar_descuentos(errores, avisos)
 

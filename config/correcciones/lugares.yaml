@@ -254,10 +254,64 @@ lugares:
     lon: -70.55378
     nota: web + catastro OSM a 27 m (2026-08-13)
 
-  # MiBar queda sin pin a propósito: la investigación lo sitúa en Santa Isabel
-  # 0350 y el catastro pone ese número a 900 m. El cero inicial marca otro
-  # tramo de la calle y el índice no lo distingue, así que ninguna de las dos
-  # coordenadas es confiable todavía.
+  # Resueltos en Google Maps con el navegador, uno por uno. Es la vía para lo
+  # que ningún catastro conoce: se acepta solo cuando Maps devuelve UNA ficha
+  # de lugar (con su dirección), no una lista de resultados.
+  MiBar:
+    direccion: Av. Santa Isabel 0350
+    comuna: Providencia
+    lat: -33.44634
+    lon: -70.62640
+    nota: 'el cero inicial dejaba fuera al índice OSM; Google Maps lo confirma a 17 m de la investigación web (2026-08-13)'
+
+  'Colegio Saint Joseph Av. Guanaco # 1270':
+    direccion: Av. Guanaco Norte 1270
+    comuna: Huechuraba
+    lat: -33.35335
+    lon: -70.66669
+    nota: Google Maps, ficha única del colegio (2026-08-13)
+
+  Centro parque:
+    direccion: Presidente Riesco 5330
+    comuna: Las Condes
+    lat: -33.40337
+    lon: -70.57515
+    nota: Google Maps, ficha única de CentroParque (2026-08-13)
+
+  Parque Ramón Cruz:
+    direccion: Av. Irarrázaval con Ramón Cruz Montt
+    comuna: Ñuñoa
+    lat: -33.45536
+    lon: -70.58080
+    nota: Google Maps, ficha única del parque (2026-08-13)
+
+  Teatro Alicia:
+    direccion: Av. Raúl Labbé 14998
+    comuna: Lo Barnechea
+    lat: -33.36203
+    lon: -70.49356
+    nota: Google Maps, ficha única (2026-08-13)
+
+  Universidad Finis Terrae:
+    direccion: Av. Pedro de Valdivia 1509
+    comuna: Providencia
+    lat: -33.43669
+    lon: -70.60840
+    nota: Google Maps, ficha única (2026-08-13)
+
+  Mystic Valley:
+    direccion: La Montaña Sur 1957
+    comuna: Lampa
+    lat: -33.32471
+    lon: -70.74095
+    nota: Google Maps, ficha única; queda en Lampa, fuera del Gran Santiago (2026-08-13)
+
+  Bosque Luz:
+    direccion: Av. del Parque 420
+    comuna: Huechuraba
+    lat: -33.39050
+    lon: -70.61852
+    nota: Google Maps, ficha única (2026-08-13)
 
   # Todavía no aparece en la base: sus fiestas llegan por Passline, que se
   # ingesta a mano. La ficha queda escrita para que el día que entre ya tenga
@@ -278,10 +332,10 @@ lugares:
 
   Blondie:
     direccion: Av. Libertador Bernardo O'Higgins 2879
-    comuna: Estación Central
+    comuna: Santiago
     lat: -33.44923
     lon: -70.67381
-    nota: coinciden el nodo de OSM, la dirección de Passline y las coordenadas de Puntoticket (2026-08-13)
+    nota: 'Alameda 2879, según su propio sitio. La comuna es Santiago y no Estación Central: el deslinde corre por Matucana-Exposición, que cortan la Alameda recién en el 3250, y el vecindario completo (Alameda 2831-2899, Unión Americana, Rodulfo Philippi) está en Santiago. Coordenadas confirmadas por el nodo de OSM, Passline y Puntoticket (2026-08-13)'
 
   Multicancha Los Libertadores Andacollo con Mejillones:
     direccion: Andacollo con Mejillones

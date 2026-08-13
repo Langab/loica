@@ -132,7 +132,7 @@ RECINTOS = {
     "movistar arena": (-33.4470, -70.6650),
     "teatro caupolican": (-33.4560, -70.6540),
     "club chocolate": (-33.4330, -70.6350),
-    # Alameda 2879, Estación Central. Estaba anotado 1,1 km al oriente, en
+    # Alameda 2879, comuna de Santiago. Estaba anotado 1,1 km al oriente, en
     # pleno centro. Lo confirman tres fuentes que coinciden: el nodo de OSM,
     # la dirección que publica Passline y las coordenadas de Puntoticket.
     "blondie": (-33.4492, -70.6738),
@@ -159,7 +159,16 @@ def normalizar_osm(texto: str) -> str:
     plano = re.sub(r"[^a-z0-9ñ ]", " ", plano)
     palabras = {"av": "avenida", "avda": "avenida", "gral": "general",
                 "pje": "pasaje", "sta": "santa", "sto": "santo",
-                "pdte": "presidente"}
+                "pdte": "presidente",
+                # Santiago está lleno de calles con fecha, y el catastro las
+                # escribe con dígitos mientras las fuentes las escriben con
+                # letras: "Diecinueve de Abril" es "19 de abril" en OSM.
+                "uno": "1", "dos": "2", "tres": "3", "cuatro": "4",
+                "cinco": "5", "seis": "6", "siete": "7", "ocho": "8",
+                "nueve": "9", "diez": "10", "once": "11", "doce": "12",
+                "trece": "13", "catorce": "14", "quince": "15",
+                "dieciseis": "16", "diecisiete": "17", "dieciocho": "18",
+                "diecinueve": "19", "veinte": "20", "veintiuno": "21"}
     partes = [palabras.get(p, p) for p in plano.split()]
     return " ".join(partes)
 
@@ -211,11 +220,17 @@ class IndiceLocal:
         # dentro de la RM. 111 y 92 km por grado a esta latitud.
         return ((lat1 - lat2) * 111) ** 2 + ((lon1 - lon2) * 92) ** 2
 
-    def _elegir(self, filas: list, comuna: str) -> list | None:
+    def _elegir(self, filas: list, comuna: str, radio: float = 8) -> list | None:
         """Entre varios candidatos: el de la comuna pedida; si la fila no trae
         ciudad, el más cercano al centro de esa comuna. Sin comuna, solo se
         acepta si los candidatos están juntos (si no, es un nombre ambiguo y
-        un pin equivocado es peor que ninguno)."""
+        un pin equivocado es peor que ninguno).
+
+        `radio` es cuánto se tolera que el candidato se aleje del centro de la
+        comuna. Los calces difusos —nombre recortado o número aproximado—
+        piden un radio más corto: "19 de Abril 3526" de Ñuñoa calzaba con una
+        calle homónima a 7,6 km, dentro del radio ancho pero en otra comuna.
+        """
         if not filas:
             return None
         comuna_norm = normalizar_osm(comuna)
@@ -227,7 +242,7 @@ class IndiceLocal:
             if centro:
                 mejor = min(filas, key=lambda f: self._distancia_km2(
                     f[1], f[2], centro[0], centro[1]))
-                if self._distancia_km2(mejor[1], mejor[2], *centro) < 8 ** 2:
+                if self._distancia_km2(mejor[1], mejor[2], *centro) < radio ** 2:
                     return [mejor[1], mejor[2]]
                 return None
         lats = [f[1] for f in filas]
@@ -330,22 +345,31 @@ class IndiceLocal:
                     """SELECT ciudad, lat, lon FROM direcciones
                        WHERE calle GLOB ? AND numero = ? LIMIT 12""",
                     (patron, numero))
-                elegida = self._elegir(aproximadas, comuna)
+                elegida = self._elegir(aproximadas, comuna, radio=4.5)
                 if elegida:
                     return elegida
 
         # Sin el número exacto: el más cercano en la misma calle, si está a
         # menos de ~2 cuadras de numeración. Mejor la cuadra que el centroide.
+        # Va con los mismos tres patrones que arriba —nombre exacto, recortado
+        # por delante y por detrás—: mirar solo el nombre exacto dejaba fuera
+        # "Vicuña Mackenna 7110", que el catastro guarda como "avenida vicuna
+        # mackenna" y sin ese número puntual.
         for corte in range(len(palabras)):
             candidata = " ".join(palabras[corte:])
-            cercanas = self._consultar(
-                """SELECT ciudad, lat, lon FROM direcciones
-                   WHERE calle = ? AND ABS(numero - ?) < 250
-                   ORDER BY ABS(numero - ?) LIMIT 8""",
-                (candidata, numero, numero))
-            elegida = self._elegir(cercanas, comuna)
-            if elegida:
-                return elegida
+            patrones = [("calle = ?", candidata)]
+            if len(candidata) >= 6:
+                patrones += [("calle GLOB ?", f"{candidata} *"),
+                             ("calle GLOB ?", f"* {candidata}")]
+            for condicion, valor in patrones:
+                cercanas = self._consultar(
+                    f"""SELECT ciudad, lat, lon FROM direcciones
+                        WHERE {condicion} AND ABS(numero - ?) < 250
+                        ORDER BY ABS(numero - ?) LIMIT 8""",
+                    (valor, numero, numero))
+                elegida = self._elegir(cercanas, comuna, radio=4.5)
+                if elegida:
+                    return elegida
         return None
 
     def local(self, nombre: str, comuna: str = "") -> list | None:
