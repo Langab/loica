@@ -121,6 +121,24 @@ FALSOS = {
 }
 
 
+# De la cocina deducida al rubro que muestra el filtro. Solo las cocinas que
+# implican un rubro sin ambigüedad: una parrilla o una cevichería son
+# restaurantes, pero una hamburguesería es comida rápida y una pastelería es
+# cafetería, y ahí el filtro se equivocaba.
+RUBRO_DE_COCINA = {
+    "hamburguesas": "comida_rapida",
+    "comida_rapida": "comida_rapida",
+    "pollo": "comida_rapida",
+    "cafe": "cafeterias",
+    "panaderia": "cafeterias",
+}
+
+
+def rubro_desde_cocina(cocina: str) -> str:
+    """El rubro que implica una cocina, o "" si no implica ninguno."""
+    return RUBRO_DE_COCINA.get(cocina, "")
+
+
 def cocina_de(comercio: str, categoria: str = "") -> str:
     """Deduce el tipo de cocina desde el nombre del local.
 

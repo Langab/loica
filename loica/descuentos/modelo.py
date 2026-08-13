@@ -94,11 +94,21 @@ class Descuento:
         el sexto banco entraría con su vocabulario propio y la página volvería
         a mostrar dos filtros que dicen lo mismo.
         """
-        from .categorias import cocina_de, homologar
+        from .categorias import cocina_de, homologar, rubro_desde_cocina
         cruda = self.categoria
         self.categoria = homologar(cruda)
         if not self.cocina:
             self.cocina = cocina_de(self.comercio, cruda)
+
+        # "restaurantes" es el cajón grande: es lo que queda cuando el banco no
+        # declara rubro (Santander) o cuando declara uno tan genérico como
+        # "comida" (Cencosud). Ninguna de las dos cosas es una afirmación sobre
+        # el local. Si el nombre ya delató una cocina que implica rubro sin
+        # ambigüedad —una hamburguesería es comida rápida y una pastelería es
+        # cafetería, la liste quien la liste— manda ella. Sin esto Burger King
+        # quedaba escondido entre los restaurantes y fuera de su filtro.
+        if self.categoria == "restaurantes":
+            self.categoria = rubro_desde_cocina(self.cocina) or self.categoria
 
         # Media coordenada no es una coordenada. Bci publicó "China Wok
         # Arauco Maipú" con latitud y sin longitud, y esa mitad viajaba hasta

@@ -400,7 +400,12 @@ def _santander(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
             banco_id=banco["id"],
             banco=banco["nombre"],
             comercio=comercio,
-            categoria=str(fila.get("categoria") or "restaurantes"),
+            # Vacío y no "restaurantes": Santander NO publica rubro, y poner
+            # el valor por defecto acá es afirmar algo que el banco no dijo.
+            # Vacío deja que el modelo lo deduzca del nombre del local, que es
+            # cómo Burger King entra al filtro de comida rápida en vez de
+            # quedar escondido entre los restaurantes.
+            categoria=str(fila.get("categoria") or ""),
             # La captura mínima trae solo región, y así el descuento no se
             # puede filtrar por comuna ni ubicar en el mapa: en la página queda
             # como "Metropolitana" a secas. Si la captura incluye dirección,
