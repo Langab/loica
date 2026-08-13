@@ -1,5 +1,5 @@
 {
- "generado": "2026-08-13T13:06:31",
+ "generado": "2026-08-13T13:49:21",
  "total": 653,
  "bancos": [
   [
@@ -59,12 +59,12 @@
  ],
  "por_dia": {
   "miercoles": 248,
+  "sabado": 141,
   "jueves": 162,
   "viernes": 157,
   "lunes": 250,
   "martes": 259,
-  "sabado": 136,
-  "domingo": 117
+  "domingo": 121
  },
  "descuentos": [
   {
@@ -129,7 +129,9 @@
    "porcentaje": 50,
    "oferta": "",
    "tope": null,
-   "dias": [],
+   "dias": [
+    "sabado"
+   ],
    "vigencia_hasta": null,
    "tarjetas": [
     "amex"
@@ -3089,7 +3091,9 @@
    "porcentaje": 40,
    "oferta": "",
    "tope": null,
-   "dias": [],
+   "dias": [
+    "domingo"
+   ],
    "vigencia_hasta": null,
    "tarjetas": [],
    "modalidad": "",
@@ -3264,7 +3268,9 @@
    "porcentaje": 40,
    "oferta": "",
    "tope": null,
-   "dias": [],
+   "dias": [
+    "domingo"
+   ],
    "vigencia_hasta": null,
    "tarjetas": [],
    "modalidad": "",
@@ -3898,7 +3904,9 @@
    "porcentaje": 40,
    "oferta": "",
    "tope": null,
-   "dias": [],
+   "dias": [
+    "sabado"
+   ],
    "vigencia_hasta": null,
    "tarjetas": [],
    "modalidad": "",
@@ -4681,7 +4689,9 @@
    "porcentaje": 40,
    "oferta": "",
    "tope": null,
-   "dias": [],
+   "dias": [
+    "sabado"
+   ],
    "vigencia_hasta": null,
    "tarjetas": [],
    "modalidad": "",
@@ -4997,7 +5007,9 @@
    "porcentaje": 40,
    "oferta": "",
    "tope": null,
-   "dias": [],
+   "dias": [
+    "domingo"
+   ],
    "vigencia_hasta": null,
    "tarjetas": [],
    "modalidad": "",
@@ -5447,7 +5459,9 @@
    "porcentaje": 40,
    "oferta": "",
    "tope": null,
-   "dias": [],
+   "dias": [
+    "sabado"
+   ],
    "vigencia_hasta": null,
    "tarjetas": [],
    "modalidad": "",
@@ -9159,6 +9173,7 @@
     "miercoles",
     "jueves",
     "viernes",
+    "sabado",
     "domingo"
    ],
    "vigencia_hasta": "2026-12-31",
@@ -12888,7 +12903,9 @@
    "porcentaje": 25,
    "oferta": "",
    "tope": null,
-   "dias": [],
+   "dias": [
+    "domingo"
+   ],
    "vigencia_hasta": null,
    "tarjetas": [
     "cencosud"
