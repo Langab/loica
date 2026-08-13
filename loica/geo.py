@@ -340,7 +340,11 @@ class IndiceLocal:
             candidata = " ".join(palabras[corte:])
             if len(candidata) < 6:
                 break
-            for patron in (f"{candidata} *", f"* {candidata}"):
+            # El tercer patrón es el nombre EN MEDIO: el catastro guarda
+            # "avenida 10 de julio huamachuco" —con prefijo y con apellido— y
+            # la fuente escribe "10 de Julio 760". Sin esto no calzaba por
+            # ningún lado, aunque el número exacto estuviera a 1,3 km.
+            for patron in (f"{candidata} *", f"* {candidata}", f"* {candidata} *"):
                 aproximadas = self._consultar(
                     """SELECT ciudad, lat, lon FROM direcciones
                        WHERE calle GLOB ? AND numero = ? LIMIT 12""",
@@ -360,7 +364,8 @@ class IndiceLocal:
             patrones = [("calle = ?", candidata)]
             if len(candidata) >= 6:
                 patrones += [("calle GLOB ?", f"{candidata} *"),
-                             ("calle GLOB ?", f"* {candidata}")]
+                             ("calle GLOB ?", f"* {candidata}"),
+                             ("calle GLOB ?", f"* {candidata} *")]
             for condicion, valor in patrones:
                 cercanas = self._consultar(
                     f"""SELECT ciudad, lat, lon FROM direcciones

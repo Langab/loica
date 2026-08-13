@@ -49,7 +49,7 @@ CAMPOS_EVENTO = {"categoria", "publico", "lugar", "direccion", "comuna",
                  "lat", "lon", "descartar", "nota"}
 CAMPOS_LUGAR = {"direccion", "comuna", "lat", "lon", "nota"}
 CAMPOS_RESTORAN = {"cocina", "categoria", "direccion", "comuna",
-                   "lat", "lon", "nota"}
+                   "lat", "lon", "sitio_web", "nota"}
 
 
 def normalizar_clave(texto: str) -> str:
@@ -229,12 +229,16 @@ class Correcciones:
         tocados: list[str] = []
 
         # La cocina y el rubro sí se corrigen siempre: son una clasificación
-        # nuestra, no un dato del banco.
+        # nuestra, no un dato del banco. El sitio del local se rellena cuando
+        # falta —Santander no publica ninguno— y no se pisa si el banco lo dio.
         for campo in ("cocina", "categoria"):
             valor = arreglo.get(campo)
             if valor and getattr(d, campo) != valor:
                 setattr(d, campo, valor)
                 tocados.append(campo)
+        if arreglo.get("sitio_web") and not d.sitio_web:
+            d.sitio_web = arreglo["sitio_web"]
+            tocados.append("sitio_web")
 
         if d.direccion:
             return tocados
