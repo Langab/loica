@@ -233,6 +233,32 @@ lugares:
   # Locales de fiesta y música en vivo. Toliv y las ticketeras publican
   # coordenadas propias geocodificadas a la rápida —Club 1 aparecía a 2,7 km
   # de su dirección real— y estas entradas les ganan.
+  Bar Oxido:
+    direccion: Purísima 284, Barrio Bellavista
+    comuna: Recoleta
+    lat: -33.43060
+    lon: -70.63824
+    nota: web + catastro OSM coinciden exacto (2026-08-13)
+
+  Discoteca La Fama:
+    direccion: Av. México 609
+    comuna: Recoleta
+    lat: -33.40823
+    lon: -70.64389
+    nota: web + catastro OSM a 201 m (2026-08-13)
+
+  Bar La Puerta Amarilla:
+    direccion: Av. Alcalde Fernando Castillo Velasco 7150
+    comuna: La Reina
+    lat: -33.45130
+    lon: -70.55378
+    nota: web + catastro OSM a 27 m (2026-08-13)
+
+  # MiBar queda sin pin a propósito: la investigación lo sitúa en Santa Isabel
+  # 0350 y el catastro pone ese número a 900 m. El cero inicial marca otro
+  # tramo de la calle y el índice no lo distingue, así que ninguna de las dos
+  # coordenadas es confiable todavía.
+
   # Todavía no aparece en la base: sus fiestas llegan por Passline, que se
   # ingesta a mano. La ficha queda escrita para que el día que entre ya tenga
   # su pin, en vez de caer al centro de Santiago.

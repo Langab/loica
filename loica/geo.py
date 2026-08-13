@@ -252,6 +252,13 @@ class IndiceLocal:
         plano = re.sub(r"\b(n|no|numero)\s+(\d)", r"\2", plano)
         cortes = []
         for m in re.finditer(r"\b(\d{1,5})\b", plano):
+            # El cero inicial NO es decorativo: en Providencia, Ñuñoa y Las
+            # Condes "Santa Isabel 0350" es un tramo distinto de la calle que
+            # "Santa Isabel 350", y quedan a 900 m. El índice guarda el número
+            # como entero, así que esa diferencia se perdió al construirlo:
+            # mejor no resolver que resolver a la cuadra equivocada.
+            if m.group(1).startswith("0") and len(m.group(1)) > 1:
+                continue
             antes = plano[:m.start()].strip()
             if antes:
                 cortes.append((antes, int(m.group(1)), m.end() == len(plano)))
