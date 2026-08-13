@@ -1,5 +1,6 @@
 # Registro de fuentes del pipeline.
-# tipo_adaptador: wordpress | eventon | rss | html | sitemap | api
+# tipo_adaptador: wordpress | eventon | rss | html | sitemap | carteleras |
+#                 cine | tabla | json | ticketmaster | manual
 
 fuentes:
 - id: ceina
@@ -467,7 +468,7 @@ fuentes:
   nombre: Museo Nacional de Bellas Artes
   url_base: https://www.mnba.gob.cl
   url_agenda: https://www.mnba.gob.cl/sitemap.xml
-  tipo_adaptador: rss
+  tipo_adaptador: sitemap
   endpoint: /sitemap.xml
   comuna: Santiago
   crawl_delay_seg: 5
@@ -481,7 +482,7 @@ fuentes:
   nombre: Museo Nacional de Historia Natural
   url_base: https://www.mnhn.gob.cl
   url_agenda: https://www.mnhn.gob.cl/sitemap.xml
-  tipo_adaptador: rss
+  tipo_adaptador: sitemap
   endpoint: /sitemap.xml
   comuna: Santiago
   crawl_delay_seg: 5
@@ -495,7 +496,7 @@ fuentes:
   nombre: Biblioteca Nacional de Chile
   url_base: https://www.bibliotecanacional.gob.cl
   url_agenda: https://www.bibliotecanacional.gob.cl/sitemap.xml
-  tipo_adaptador: rss
+  tipo_adaptador: sitemap
   endpoint: /sitemap.xml
   comuna: Santiago
   crawl_delay_seg: 5
@@ -508,7 +509,7 @@ fuentes:
   nombre: Biblioteca de Santiago
   url_base: https://www.bibliotecasantiago.gob.cl
   url_agenda: https://www.bibliotecasantiago.gob.cl/sitemap.xml
-  tipo_adaptador: rss
+  tipo_adaptador: sitemap
   endpoint: /sitemap.xml
   comuna: Santiago
   crawl_delay_seg: 5

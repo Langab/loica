@@ -1,0 +1,30 @@
+# Correcciones de RESTORANES con descuento: un local → cocina, rubro,
+# dirección, comuna y coordenadas.
+#
+# Los bancos publican el nombre del local y poco más. Acá se completa lo que
+# ellos no dicen: qué tipo de cocina es (cuando el nombre no lo delata) y
+# dónde queda (cuando ningún banco da la dirección). Aplica al mismo local en
+# TODOS los bancos que lo publiquen.
+#
+# La clave es el nombre del comercio en minúsculas y sin tildes, y el match es
+# EXACTO a propósito: "sushi home" no corrige a "Sushi Home Ñuñoa", que es
+# otro local. Si la cadena tiene varios locales, una entrada por local tal
+# como lo escribe el banco.
+#
+# Cocinas que entiende la página: japonesa, peruana, italiana, mexicana,
+# parrilla, mariscos, asiatica, hamburguesas, pollo, vegetariana, panaderia,
+# cafe, bar, chilena, comida_rapida.
+# Rubros: restaurantes, cafeterias, gourmet, comida_rapida.
+#
+# Ejemplo:
+#
+# restoranes:
+#   la burguesia:
+#     cocina: hamburguesas
+#     comuna: Providencia
+#     direccion: Av. Providencia 1234
+#     lat: -33.4263
+#     lon: -70.6178
+#     nota: ningún banco publica la dirección; verificada en su Instagram
+
+restoranes: {}

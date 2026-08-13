@@ -5,8 +5,17 @@
 #   bash scripts/instalar_agenda.sh          # instalar / actualizar
 #   bash scripts/instalar_agenda.sh --quitar # desinstalar
 #
-# La corrida queda a las 06:00. Si el Mac está apagado o durmiendo a esa hora,
-# launchd la ejecuta apenas despierta (no se pierde el día).
+# La corrida queda a las 11:00. Qué necesita el Mac para que funcione:
+#
+#   - PRENDIDO (o durmiendo): si está durmiendo a las 11:00, launchd corre la
+#     corrida apenas despierte — el día no se pierde, solo se corre más tarde.
+#   - APAGADO no corre nada: launchd no existe con el equipo apagado, y esa
+#     corrida no se recupera al encenderlo al día siguiente (la de ese día sí).
+#   - Sesión iniciada del usuario (es un LaunchAgent de usuario, no un demonio).
+#   - Red, y credenciales de git que no pidan clave (el push es desatendido).
+#
+# Para que despierte solo antes de la corrida (opcional, pide contraseña):
+#   sudo pmset repeat wakeorpoweron MTWRFSU 10:55:00
 
 set -euo pipefail
 
@@ -14,7 +23,7 @@ ETIQUETA="cl.loica.pipeline"
 PLIST="$HOME/Library/LaunchAgents/${ETIQUETA}.plist"
 PROYECTO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PYTHON="$(command -v python3)"
-HORA=${HORA:-6}
+HORA=${HORA:-11}
 MINUTO=${MINUTO:-0}
 
 if [[ "${1:-}" == "--quitar" ]]; then

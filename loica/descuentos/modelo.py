@@ -100,6 +100,13 @@ class Descuento:
         if not self.cocina:
             self.cocina = cocina_de(self.comercio, cruda)
 
+        # Media coordenada no es una coordenada. Bci publicó "China Wok
+        # Arauco Maipú" con latitud y sin longitud, y esa mitad viajaba hasta
+        # el JSON como si fuera un pin bueno. Se descarta acá para que el
+        # local caiga en la geocodificación normal y salga con su dirección.
+        if (self.lat is None) != (self.lon is None):
+            self.lat = self.lon = None
+
     @property
     def id(self) -> str:
         """Huella estable: el mismo comercio del mismo banco no se duplica.

@@ -1044,7 +1044,9 @@ const correHoy = d => !d.dias.length || d.dias.includes(hoyClave());
 const montoDescuento = d => d.porcentaje ? d.porcentaje + "%" : (d.oferta || "");
 
 async function cargarDescuentos(){
-  const r = await fetch("descuentos.json");
+  // no-cache igual que eventos.json: sin esto, quien ya visitó la página
+  // sigue viendo los descuentos de ayer aunque la corrida diaria publique.
+  const r = await fetch("descuentos.json", {cache: "no-cache"});
   return await r.json();
 }
 

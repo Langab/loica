@@ -34,6 +34,33 @@ FALSOS_INFANTILES = ["ninos del cerro", "la nina de la mochila azul",
 PATRONES_CATEGORIA = [
     ("idiomas", r"\b(intercambio de idiomas?|language exchange|conversation club"
                 r"|club de conversacion|mundo lingo|intercambio linguistico)"),
+    # Deporte va ANTES que familia a propósito: "Natación para niños" es
+    # deporte (la edad ya la captura `publico`), no un panorama familiar
+    # genérico. Y antes que música, porque la descripción de un taller de
+    # aerobike dice "al ritmo de la música" y mandaba 18 clases de bicicleta
+    # estática a conciertos.
+    ("deporte", r"\b(futbol\w*|estadio nacional|estadio monumental|colo colo"
+                r"|campeonato|torneo anfp|copa chile|basquet\w*|voleibol|voley"
+                r"|rugby|hockey|atp|padel|maraton|corrida|running|trail"
+                r"|10k|21k|42k|cicletada|ciclorecreovia|ciclismo|atletismo"
+                r"|patin\w*|hipodromo|rodeo|zumba|crossfit"
+                r"|acondicionamiento fisico|entrenamiento funcional"
+                # Talleres municipales de actividad física. La categoría de la
+                # fuente suele declararlo ("Actividad Física y Salud") aunque
+                # el título sea solo "Aerobike Ma-Ju 08:30", y ese texto entra
+                # junto al título en la búsqueda.
+                r"|actividad fisica|habilitacion fisica|recuperacion fisica"
+                r"|aerobike|aerobox|aerobic\w*|cardio ?box|cardio|fitness"
+                r"|calistenia|gap|pilates|yoga|tai ?chi|gimnasia|hidrogimnasia"
+                r"|natacion|matronatacion|nado|aquagym|aguas abiertas"
+                r"|karate|taekwondo|judo|jiu ?jitsu|kung ?fu|boxeo|kickboxing"
+                r"|muay ?thai|defensa personal|esgrima|tenis|ping ?pong"
+                r"|badminton|handbol|balonmano|futsal|skate\w*|parkour"
+                # "vs" a secas NO va: "JUEVES LATINO VS POP" es una fiesta.
+                # Los partidos se pescan por el estadio o la disciplina.
+                r"|escalada|halterofilia|powerlifting|estadio municipal"
+                r"|estadio bicentenario|estadio santa laura|claro arena"
+                r"|fight house|ufc|mma|clasificatorio|mountain ?bike|mtb)\b"),
     ("familia", r"\b(publico infantil|teatro infantil|infantil(es)?|para nin[oa]s"
                 r"|cuenta ?cuentos|titeres|marionetas|panorama familiar"
                 r"|para toda la familia|publico familiar|primera infancia|parvul)"),
@@ -46,16 +73,10 @@ PATRONES_CATEGORIA = [
                 r"|persa|bazar|garage sale|segunda mano|trueque|expoventa"
                 r"|otaku|anime|manga|cosplay|comic con|frikimarket|friki"
                 r"|kpop|k-pop|coleccionismo|pokemon|magic the gathering)"),
-    ("deporte", r"\b(futbol|estadio nacional|estadio monumental|colo colo"
-                r"|campeonato|torneo anfp|copa chile|basquetbol|voleibol"
-                r"|rugby|hockey|atp|padel|maraton|corrida|running|trail"
-                r"|10k|21k|42k|cicletada|ciclorecreovia|ciclismo|atletismo"
-                r"|patinaje|hipodromo|rodeo|zumba|crossfit"
-                r"|acondicionamiento fisico|entrenamiento funcional"
-                r"|yoga en el parque)"),
     ("fiesta",  r"\b(fiesta|party|carrete|rave|after ?party|tocata|djs?\b"
                 r"|club\b|discoteca|sesion(es)? electronica|reggaeton|techno"
-                r"|cumbia bailable)"),
+                r"|cumbia bailable|fonda\w*|ramada\w*|fiestas patrias"
+                r"|chilenidad|dieciochera)"),
     ("cine",    r"\b(cine(teca|club)?|pelicula|documental|cortometraje"
                 r"|largometraje|audiovisual|proyeccion)"),
     ("teatro",  r"\b(teatr|obra|dramaturg|escenic|monologo|danza|circo"
@@ -82,10 +103,16 @@ NO_ES_FIESTA = re.compile(r"club de (lectura|conversacion|libro|cine)")
 # Prior por fuente/recinto. Solo se aplica si el texto no dijo NADA.
 # Precisión medida a mano sobre los 73 casos que caen acá: ~85%.
 PRIOR_FUENTE = [
-    (r"red salas de teatro|teatro (san gines|municipal|uc|finis terrae|zoco)"
+    # Una corporación de deportes solo publica deporte: si el título no dijo
+    # nada ("Nivelación 2 Ma-Ju"), esto evita que caiga a "otros".
+    (r"corporaci\w+ (municipal )?de deportes|talleres deportivos", "deporte"),
+    (r"red salas de teatro|teatro (san gines|municipal|uc|finis terrae|zoco|mori)"
      r"|sala ana gonzalez", "teatro"),
     (r"toliv", "fiesta"),
     (r"portaltickets|portaldisc", "musica"),
+    # Recintos que viven de conciertos: un título sin señal ahí es música.
+    (r"movistar arena|teatro caupolican|club chocolate|blondie|club amanda",
+     "musica"),
     (r"planetario", "familia"),
     (r"balmaceda arte joven|matucana 100|nave centro"
      r"|centro cultural la moneda|\bgam\b", "arte"),

@@ -9,19 +9,80 @@ reemplaza a la fuente: la indexa y deriva el tráfico hacia ella. Eso es lo que
 mantiene el rol de "tablón de anuncios" descrito en `04_negocio_y_legal/legal_chile.md`
 del proyecto.
 
-## Cómo se usa
+## El proceso, de punta a punta
 
-Un solo comando hace todo: extrae eventos, extrae descuentos, arma el sitio y
-lo publica.
+El pipeline implementa este circuito, y cada paso tiene su comando:
+
+| # | Paso | Dónde vive |
+|---|---|---|
+| 1 | **Identificación de fuentes** | `config/fuentes.yaml` (100 fuentes catastradas, ~50 activas) y `config/bancos.yaml` |
+| 2 | **Metodología según la fuente** | `tipo_adaptador` por fuente: API (wordpress/eventon/json/ticketmaster), scraping educado (html/rss/sitemap/carteleras/cine/tabla) o captura asistida (`manual`, para lo que bloquea bots) |
+| 3 | **Extracción** | `run_diario.py` (eventos → SQLite) y `run_descuentos.py` (bancos → JSON) |
+| 4 | **Consolidación** | todo converge a `datos/eventos.db` deduplicado por título+fecha+lugar; el export arma `web/eventos.json` |
+| 5 | **Revisión + memoria de correcciones** | `revisar_extraccion.py` produce el informe y las colas; los arreglos viven en `config/correcciones/` y se aplican solos en cada corrida (ver abajo) |
+| 6 | **Doble check** | `verificar_web.py`: si el sitio quedó roto, vacío o cayó a la mitad, **no hay push** |
+| 7 | **Publicación** | `run_todo.py` comitea solo su salida y pushea; GitHub Actions deja `web/` en Pages |
+| 8 | **Corrida diaria a las 11:00** | launchd (`scripts/instalar_agenda.sh`); el Mac tiene que estar prendido o durmiendo |
+
+Un solo comando encadena los pasos 3 a 7:
 
 ```bash
 python3 run_todo.py                  # todo, de punta a punta
 python3 run_todo.py --sin-publicar   # deja el sitio listo, no toca git
 python3 run_todo.py --solo-publicar  # sin extraer: exporta lo que ya hay
 python3 run_todo.py --sin-descuentos # sólo eventos
+python3 run_todo.py --forzar         # publica aunque el volumen haya caído
 ```
 
 Después del push, GitHub Actions publica `web/` en Pages solo.
+
+## La memoria de correcciones (paso 5, el corazón de la calidad)
+
+La extracción se equivoca siempre en los mismos lugares: un lugar que ningún
+geocodificador encuentra, un taller de aerobike que cae en "música", un
+restaurante sin comuna. La regla acá es que **cada error se corrige UNA vez**
+y queda en la memoria:
+
+- `config/correcciones/lugares.yaml` — un lugar → dirección, comuna y
+  coordenadas. Arregla todos sus eventos, presentes y futuros.
+- `config/correcciones/eventos.yaml` — un evento puntual (por id) → categoría,
+  ubicación o `descartar: true`. Es el bisturí.
+- `config/correcciones/restoranes.yaml` — un local con descuento → cocina,
+  rubro y ubicación. Aplica en todos los bancos que lo publiquen.
+
+El ciclo diario: `revisar_extraccion.py` deja el informe en
+`informes/AAAA-MM-DD_revision.md` y las **colas priorizadas** en
+`datos/revision/pendientes_*.yaml` (esqueleto listo para completar). Una
+persona —o una sesión de Claude— verifica los datos, los pega en
+`config/correcciones/` y comitea. La corrida siguiente los aplica sola.
+Si el mismo error se repite en eventos nuevos, el arreglo va en el código
+(`loica/clasificar.py`), no en la memoria.
+
+### El índice local de OSM
+
+Los robots.txt de Nominatim, Photon y Overpass prohíben consultarlos con un
+cliente automático, y este proyecto no evade esos controles. En su lugar, la
+georreferenciación usa una **copia local de OpenStreetMap**: 
+
+```bash
+python3 scripts/construir_indice_osm.py   # baja el extracto de Chile UNA vez
+```
+
+Eso deja `datos/indice_osm.db` (301.472 direcciones con número y 11.900
+locales con nombre de toda la RM), y `loica/geo.py` lo consulta en SQLite sin
+tocar la red. Datos © colaboradores de OpenStreetMap (ODbL), la misma licencia
+de los mosaicos del mapa. Se reconstruye un par de veces al año.
+
+El buscador de direcciones está hecho para lo que de verdad escriben las
+fuentes municipales, no para direcciones limpias: acepta el número al final o
+al medio del texto (`Guanaco Norte # 1250 Capilla Santa Inés`), ignora la
+basura anterior a la calle (`JJ. VV. Simón Bolívar Av. Las Torres 840`),
+tolera que el nombre venga recortado por cualquiera de los dos lados
+(`Juan Moya` por *Juan Moya Morales*, `Guanaco Norte` por *Avenida El Guanaco
+Norte*) y, si no hay comuna, la rescata del propio texto después de la coma.
+Todo candidato tiene que caer cerca de la comuna declarada: cuando el mismo
+nombre de calle existe en media región, se prefiere no poner pin antes que
+ponerlo mal. Con eso la ubicación exacta pasó de 31% a 61% de los eventos.
 
 Los pasos sueltos siguen sirviendo para depurar:
 
@@ -34,7 +95,7 @@ python3 run_descuentos.py --banco bci  # un solo banco
 
 ### Dos cosas que `run_todo.py` hace a propósito
 
-**Comitea sólo su propia salida.** Corre a las 06:00 sin nadie mirando, así que
+**Comitea sólo su propia salida.** Corre a las 11:00 sin nadie mirando, así que
 nunca hace `git add -A`: si a esa hora hay un archivo a medio editar, un
 `add -A` se lo llevaría al repositorio. Agrega únicamente `web/eventos.json`,
 `web/descuentos.json`, `web/e/` y `datos/manual/`.
@@ -59,14 +120,27 @@ con los eventos nuevos agrupados por comuna, listos para revisar.
 bash scripts/instalar_agenda.sh
 ```
 
-Queda programado a las 06:00 con launchd (el equivalente a cron en macOS). Si
-el Mac está durmiendo a esa hora, la corrida se ejecuta al despertar. Para
-cambiar el horario: `HORA=22 MINUTO=30 bash scripts/instalar_agenda.sh`.
-
+Queda programado **a las 11:00** con launchd (el equivalente a cron en macOS).
+Para cambiar el horario: `HORA=22 MINUTO=30 bash scripts/instalar_agenda.sh`.
 Para desinstalarlo: `bash scripts/instalar_agenda.sh --quitar`.
 
-> Un Mac apagado no corre nada. Cuando el proyecto tenga servidor o repositorio
-> en GitHub, esto se mueve a GitHub Actions (gratis) y corre en la nube.
+**Qué necesita el Mac para que la corrida de las 11:00 salga:**
+
+- **Prendido o durmiendo.** Si a las 11:00 está durmiendo, launchd corre la
+  corrida apenas despierte: el día no se pierde, solo sale más tarde.
+- **Apagado no corre nada**, y esa corrida no se recupera al encenderlo (la
+  del día siguiente sí sale normal).
+- Sesión iniciada (es un agente de usuario, no un demonio del sistema).
+- Red, y credenciales de git que no pidan clave: el push es desatendido.
+- Para que despierte solo justo antes (opcional, pide contraseña de admin):
+  `sudo pmset repeat wakeorpoweron MTWRFSU 10:55:00`.
+
+Se puede verificar con `launchctl list | grep cl.loica.pipeline` y probar al
+tiro con `launchctl kickstart gui/$(id -u)/cl.loica.pipeline`.
+
+> Los descuentos además corren solos en GitHub Actions (~07:15), así que esa
+> parte no depende del Mac. La corrida de eventos sí: varias fuentes bloquean
+> IPs de datacenter, por eso vive en esta máquina y no en la nube.
 
 ## El prototipo del mapa
 
@@ -283,7 +357,12 @@ Viven en `loica/red.py` y se aplican a todas las fuentes sin excepción:
    30 entradas idénticas y se guarda como una sola con fecha de inicio y fin.
 3. **Deduplica** por título + fecha + lugar normalizados, así el mismo evento
    que llega por dos fuentes no se duplica.
-4. **Guarda como borrador**. Nada se publica sin que una persona lo revise.
+4. **Publica con red de seguridad, no con curador previo.** El sitio se arma
+   solo todos los días; lo que protege la calidad es el trío de filtros del
+   export (no-panoramas, links de máquina, correcciones con `descartar`), el
+   doble check que frena publicaciones rotas, y la revisión diaria que
+   alimenta la memoria de correcciones. Revisar 2.500 borradores a mano cada
+   día no era verdad ayer ni va a serlo mañana.
 5. **Caduca** solo los eventos cuya fecha ya pasó.
 
 ## Estado (corrida del 9 de agosto de 2026)
@@ -416,6 +495,9 @@ informes/        Un informe por corrida
 ## Pendientes conocidos
 
 - Cultura Providencia necesita otro adaptador (su RSS no trae fechas).
-- Falta la API key de Ticketmaster.
-- Falta geocodificar direcciones a coordenadas para el mapa.
+- Falta la API key de Ticketmaster (y exportarla antes de correr
+  `instalar_agenda.sh` para que quede en el plist).
+- El registro tiene ~7 pares de fuentes duplicadas de la misma institución
+  (`recoleta`/`recoleta_municipio`, etc.), todas inactivas: depurar antes de
+  encenderlas.
 - La subida a Supabase todavía no está: hoy el destino es SQLite local.

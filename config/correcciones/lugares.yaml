@@ -1,0 +1,142 @@
+# Correcciones de LUGARES: un lugar → su dirección, comuna y coordenadas.
+#
+# Es la memoria de arreglos de georreferenciación. El circuito:
+# revisar_extraccion.py lista los lugares que concentran eventos sin ubicación
+# exacta → una persona o una sesión de Claude verifica las coordenadas → se
+# anotan acá UNA vez → aplican solas en todas las corridas futuras
+# (exportar_web.py las lee antes de geocodificar).
+#
+# OJO: estas entradas MANDAN sobre el índice local de OSM (datos/indice_osm.db),
+# así que solo se anota lo verificado. Si el índice ya resuelve la dirección
+# del lugar, la entrada sirve igual para completar dirección/comuna que la
+# fuente no publica — pero las coordenadas tienen que salir verificadas
+# (Google Maps o el propio índice), no estimadas a ojo.
+#
+# La clave es el nombre del lugar (se normaliza sola: minúsculas, sin tildes)
+# y matchea por contención: "sala master" le pega a "Sala Master — Radio U.
+# de Chile". Las coordenadas deben caer en la RM (lat -34.05 a -33.00,
+# lon -71.30 a -70.30). Cada entrada lleva `nota` con el origen del dato.
+
+lugares:
+  Polideportivo de Ñuñoa:
+    direccion: Juan Moya Morales 1370
+    comuna: Ñuñoa
+    lat: -33.4670
+    lon: -70.5882
+    nota: complejo deportivo municipal; verificada contra el índice OSM local 2026-08-13
+
+  Piscina Polideportivo:
+    direccion: Juan Moya Morales 1370
+    comuna: Ñuñoa
+    lat: -33.4670
+    lon: -70.5882
+    nota: mismo complejo que el Polideportivo de Ñuñoa; índice OSM 2026-08-13
+
+  Academias Deportivas:
+    direccion: Juan Moya Morales 1370
+    comuna: Ñuñoa
+    lat: -33.4670
+    lon: -70.5882
+    nota: programa de la Corp. de Deportes de Ñuñoa en el polideportivo; OJO nombre genérico — si otra comuna publica "Academias Deportivas", revisar este match
+
+  Cine Arte Normandie:
+    direccion: Tarapacá 1181
+    comuna: Santiago
+    lat: -33.4474
+    lon: -70.6521
+    nota: índice OSM 2026-08-13
+
+  Teatro Cariola:
+    direccion: San Diego 246
+    comuna: Santiago
+    lat: -33.4482
+    lon: -70.6506
+    nota: índice OSM 2026-08-13
+
+  Sala Master:
+    direccion: Miguel Claro 509
+    comuna: Providencia
+    lat: -33.4327
+    lon: -70.6203
+    nota: Radio Universidad de Chile; OSM no tiene el número, revisión AI 2026-08-13 a nivel de cuadra
+
+  Centro Arte Alameda:
+    direccion: Arturo Prat 33 (Sala CEINA)
+    comuna: Santiago
+    lat: -33.4453
+    lon: -70.6502
+    nota: desde el incendio de 2019 funciona en la Sala CEINA; índice OSM 2026-08-13
+
+  Sala SCD Egaña:
+    direccion: Av. Larraín 5862, Mall Plaza Egaña
+    comuna: La Reina
+    lat: -33.4528
+    lon: -70.5695
+    nota: junto al metro Plaza Egaña; índice OSM 2026-08-13
+
+  Club Amanda:
+    direccion: Embajador Doussinague 1767
+    comuna: Vitacura
+    lat: -33.3877
+    lon: -70.5688
+    nota: índice OSM 2026-08-13
+
+  El Mesón Nerudiano:
+    direccion: Dominica 35
+    comuna: Recoleta
+    lat: -33.4305
+    lon: -70.6366
+    nota: Barrio Bellavista; índice OSM 2026-08-13
+
+  Sala Metrónomo:
+    direccion: Santa Filomena 110
+    comuna: Recoleta
+    lat: -33.4303
+    lon: -70.6384
+    nota: Barrio Bellavista; índice OSM 2026-08-13 (la dirección manda sobre el nodo del local, que estaba corrido)
+
+  Campus El Claustro, Universidad Mayor:
+    direccion: Marín 321
+    comuna: Santiago
+    lat: -33.4461
+    lon: -70.6364
+    nota: índice OSM 2026-08-13
+
+  Polideportivo José Manuel López:
+    direccion: Santa Elena 1675
+    comuna: Santiago
+    lat: -33.4645
+    lon: -70.6288
+    nota: índice OSM 2026-08-13
+
+  Centro Comunitario Matta Sur:
+    direccion: Chiloé 1799
+    comuna: Santiago
+    lat: -33.4687
+    lon: -70.6454
+    nota: índice OSM 2026-08-13
+
+  # Los tres de abajo no tienen calle+número, sino un cruce de calles. Las
+  # coordenadas salen de buscar en el índice OSM el punto más cercano entre
+  # las dos calles; la nota deja dicho cuánto se separan ahí, que es el margen
+  # de error real del pin.
+  Club Ñuñoa:
+    direccion: Ortúzar esquina Simón Bolívar (Sportlife)
+    comuna: Ñuñoa
+    lat: -33.4482
+    lon: -70.5838
+    nota: cruce Ortúzar x Simón Bolívar en el índice OSM 2026-08-13; las calles se juntan a 11 m
+
+  ENTRENAMIENTO FUNCIONAL BÚNKER FIT:
+    direccion: Bandejón Av. Pedro Fontova a la altura de Camino El Roble
+    comuna: Huechuraba
+    lat: -33.3494
+    lon: -70.6692
+    nota: cruce Pedro Fontova x Camino El Roble en el índice OSM 2026-08-13; margen ~180 m, es un bandejón sin número
+
+  Multicancha Los Libertadores Andacollo con Mejillones:
+    direccion: Andacollo con Mejillones
+    comuna: Huechuraba
+    lat: -33.3585
+    lon: -70.6892
+    nota: cruce Andacollo x Mejillones en el índice OSM 2026-08-13; las calles se juntan a 45 m

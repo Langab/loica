@@ -113,6 +113,18 @@ def ubicar(descuentos) -> Counter:
     Un pin aproximado se muestra atenuado: mandar a alguien a una esquina donde
     no hay nada es peor que decirle "está en Ñuñoa, mira la dirección".
     """
+    # Primero la memoria de arreglos (config/correcciones/restoranes.yaml):
+    # cocina, rubro, dirección o coordenadas que la revisión ya corrigió una
+    # vez. Va ANTES del préstamo entre bancos a propósito: una dirección
+    # corregida a mano también se les presta a los otros bancos que publican
+    # el mismo local.
+    from loica.correcciones import Correcciones
+    corr = Correcciones()
+    corregidos = sum(1 for d in descuentos if corr.aplicar_a_descuento(d))
+    if corregidos:
+        logging.getLogger("loica").info(
+            "%d descuentos con correcciones de la memoria", corregidos)
+
     prestadas = prestar_direcciones(descuentos)
     if prestadas:
         logging.getLogger("loica").info(
@@ -127,7 +139,11 @@ def ubicar(descuentos) -> Counter:
     precisiones = Counter()
 
     for d in descuentos:
-        if d.lat is not None:
+        if d.precision == "correccion":
+            # Coordenadas puestas a mano en la memoria: mandan ellas.
+            precisiones["correccion"] += 1
+            continue
+        if d.lat is not None and d.lon is not None:
             d.precision = "fuente"
             precisiones["fuente"] += 1
             continue
@@ -244,7 +260,8 @@ def main() -> int:
     precisiones = ubicar(descuentos)
     con_pin = sum(n for p, n in precisiones.items() if p != "sin_ubicar")
     log.info("%d con pin en el mapa (%d exactos) · %d solo en la lista",
-             con_pin, precisiones.get("fuente", 0) + precisiones.get("calle", 0),
+             con_pin, precisiones.get("fuente", 0) + precisiones.get("calle", 0)
+             + precisiones.get("correccion", 0),
              precisiones.get("sin_ubicar", 0))
 
     salida = escribir_json(descuentos, estadisticas)

@@ -1,0 +1,40 @@
+# Correcciones de EVENTOS puntuales: un evento (por su id) → lo que haya que
+# arreglarle. Es el bisturí; para arreglar un LUGAR completo usa lugares.yaml,
+# que corrige todos sus eventos de una vez.
+#
+# La clave es el id del evento (hash_dedup, el mismo que aparece en
+# web/eventos.json y en la revisión diaria). OJO: el id nace de
+# título+fecha+lugar, así que si el organizador cambia la fecha, el evento
+# vuelve con OTRO id y la corrección queda huérfana — por eso el bisturí es
+# el último recurso y lo general va en lugares.yaml.
+#
+# Campos: categoria (idiomas, familia, feria, deporte, fiesta, cine, teatro,
+# musica, arte, clases, aire_libre, charla, otros), publico (ninos,
+# adolescentes, adultos, todos), lugar, direccion, comuna, lat, lon,
+# descartar (true = no es un panorama, no se exporta), nota.
+
+eventos:
+  # Eventos de PRUEBA que Passline dejó publicados y entraron por el CSV de la
+  # ingesta asistida. Tienen fechas 2028-2030, así que sin esto quedan años en
+  # el sitio. Detectados en la revisión del 13-08-2026.
+  87fa6b5cbbb9efe9:
+    descartar: true
+    nota: '"Evento Boletería POS prueba" — dato de prueba de Passline, no un evento real'
+  0fbdecda218173ba:
+    descartar: true
+    nota: '"Prueba de evento abc" — dato de prueba de Passline'
+  abdd601ab9d5bc79:
+    descartar: true
+    nota: '"cuarto 2028" — dato de prueba de Passline'
+  4e5013bf5a1ee971:
+    descartar: true
+    nota: '"mesas erika dvm clonado" — dato de prueba de Passline'
+  a26c98daa69610aa:
+    descartar: true
+    nota: '"quinto 2028" — dato de prueba de Passline'
+  a34487d455597fba:
+    descartar: true
+    nota: '"sexto-2028" — dato de prueba de Passline'
+  a1d823c4739d32a3:
+    descartar: true
+    nota: '"tercer 2028 2d" — dato de prueba de Passline'

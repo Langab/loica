@@ -1,3 +1,6 @@
 requests>=2.31
 beautifulsoup4>=4.12
 PyYAML>=6.0
+# Solo para scripts/construir_indice_osm.py (el índice local de direcciones);
+# la corrida diaria no lo necesita.
+osmium>=3.6

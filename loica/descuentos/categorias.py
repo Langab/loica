@@ -74,14 +74,17 @@ def homologar(categoria: str) -> str:
 # japonesa aunque también diga "bar", y una "Pizzería Napolitana" es italiana
 # aunque pizza también sea comida rápida.
 PATRONES_COCINA = [
-    ("japonesa", r"\b(sushi|sushie|nikkei|ramen|izakaya|teriyaki|yakiniku|sake"
+    ("japonesa", r"\b(sushi\w*|nikkei|ramen|izakaya|teriyaki|yakiniku|sake"
                  r"|tempura|wasabi|sakura|tokyo|osaka|kyoto|niu|maki|donburi"
-                 r"|japon\w*|nippon|samurai|katana|hanzo|ichiban)\b"),
+                 r"|japon\w*|nippon|samurai|katana|hanzo|ichiban|naoki|kaiseki"
+                 r"|edo\b|hokkaido|shibuya|ginza|umi\b)\b"),
     ("peruana", r"\b(ceviche|cebiche|cevicheria|peruan\w*|lima|inka|inca"
-                r"|anticucho|causa|pisco sour|chifa|astrid|gaston)\b"),
+                r"|anticucho|causa|pisco sour|chifa|astrid|gaston"
+                r"|chalac\w*|limena|barranco|miraflores|machu)\b"),
     ("italiana", r"\b(pizz\w*|pasta|paste|trattoria|ristorante|osteria"
                  r"|napol\w*|italian\w*|gnocchi|risotto|focaccia|lasagna"
-                 r"|spaghetti|capric\w*|bella|dolce|vitto|mamma)\b"),
+                 r"|spaghetti|capric\w*|bella|dolce|vitto|mamma|fagotto"
+                 r"|cosenza|capri|toscan\w*|romana|milano|siciliana)\b"),
     ("mexicana", r"\b(taco|tacos|taqueria|mexican\w*|burrito|cantina|guacamole"
                  r"|azteca|maya|jalapeno|nachos|tequila)\b"),
     ("parrilla", r"\b(parrilla|parrillada|grill|asado|steak|steakhouse|carnes"
@@ -97,11 +100,15 @@ PATRONES_COCINA = [
     ("vegetariana", r"\b(vegan\w*|vegetarian\w*|veggie|plant based|verde"
                     r"|ensalad\w*|salad)\b"),
     ("panaderia", r"\b(panader\w*|pasteler\w*|bakery|bread|pan\b|masas|kuchen"
-                  r"|reposter\w*|dulcer\w*|heladeria|helados|gelato|postres)\b"),
+                  r"|reposter\w*|dulcer\w*|heladeria|helados|gelato|postres"
+                  # Cadenas de dulcería y heladería que se repiten entre bancos.
+                  r"|chocolat\w*|bombon\w*|coppelia|oakberry|acai|mamut"
+                  r"|churro\w*|waffle\w*|crepe\w*|donut\w*|dona\w*|frozen"
+                  r"|yogur\w*|bozzo|dulce\w*)\b"),
     ("cafe", r"\b(cafe|cafeteria|coffee|espresso|barista|starbucks|juan valdez"
-             r"|tostador\w*|te\b|tea)\b"),
+             r"|tostador\w*|te\b|tea|brunch|desayun\w*)\b"),
     ("bar", r"\b(bar\b|pub|cerveceria|brewery|taproom|cocteler\w*|gin\b|whisky"
-            r"|vinoteca|wine|bodega)\b"),
+            r"|vinoteca|wine|bodega|cocktail|vina|vinos|tapas|pisquer\w*)\b"),
     ("chilena", r"\b(chilena|chileno|picada|empanada\w*|cazuela|pastel de choclo"
                 r"|curanto|criolla|fuente de soda|schop)\b"),
 ]

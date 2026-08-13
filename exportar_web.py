@@ -16,6 +16,7 @@ from datetime import datetime
 from pathlib import Path
 
 from loica.almacen import Almacen
+from loica.correcciones import Correcciones
 from loica.geo import Geocodificador
 from loica.modelo import es_enlace_de_maquina
 
@@ -39,6 +40,7 @@ NO_ES_PANORAMA = [
     "practica profesional", "oferta laboral", "postula a ", "postulaciones",
     "convocatoria laboral", "llamado a concurso", "concurso público",
     "concurso publico", "se busca ", "vacante", "bases del concurso",
+    "postula para",
     "requisitos de postulación", "cartas de apoyo", "fondos de cultura",
     "matrícula", "matricula ", "proceso de admisión", "calendario académico",
     "feria laboral", "feria vocacional", "feria de proyectos",
@@ -81,7 +83,7 @@ PLANTILLA_FICHA = """<!doctype html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=13">
+<link rel="stylesheet" href="../loica.css?v=14">
 <style>
   body{{min-height:100vh;min-height:100dvh}}
   .ficha-sola{{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}}
@@ -132,7 +134,7 @@ PLANTILLA_FICHA = """<!doctype html>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=13"></script>
+<script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
   const EV = {evento_json};
@@ -245,8 +247,14 @@ def main() -> int:
     ).fetchall()
 
     geo = Geocodificador()
+    # La memoria de arreglos (config/correcciones/): lo que la revisión ya
+    # corrigió una vez se aplica solo acá, en cada corrida, ANTES de
+    # geocodificar — una dirección corregida mejora la búsqueda y unas
+    # coordenadas corregidas se la ahorran completa.
+    corr = Correcciones()
     eventos = []
     sin_ubicar = 0
+    corregidos = 0
     descartados = []
 
     for fila in filas:
@@ -263,7 +271,6 @@ def main() -> int:
             descartados.append(f'{fila["titulo"][:52]} (link roto: {fila["fuente_url"]})')
             continue
 
-        # Si la fuente ya entregó coordenadas, mandan ellas
         categoria, _ = _clasificar(fila["titulo"], fila["categoria"] or "",
                                    fila["descripcion_corta"] or "",
                                    fila["lugar_nombre"] or "", fila["fuente_nombre"] or "")
@@ -271,17 +278,8 @@ def main() -> int:
                                         categoria, fila["lugar_nombre"] or "",
                                         fila["fuente_nombre"] or "")
 
-        lat, lon, precision = fila["lat"], fila["lon"], "fuente"
-        if lat is None:
-            lat, lon, precision = geo.ubicar(
-                fila["lugar_nombre"] or "", fila["lugar_direccion"] or "", fila["comuna"] or "")
-        if lat is None:
-            # No se descarta: sale en la lista sin pin. Botar 42 eventos reales
-            # (entre ellos 20 obras de teatro) es peor que mostrarlos sin mapa.
-            sin_ubicar += 1
-            precision = "sin_ubicar"
-
-        eventos.append({
+        # Si la fuente ya entregó coordenadas, mandan ellas
+        ev = {
             "id": fila["hash_dedup"],
             "titulo": fila["titulo"],
             "inicio": fila["inicio"],
@@ -289,9 +287,9 @@ def main() -> int:
             "lugar": fila["lugar_nombre"] or fila["fuente_nombre"],
             "direccion": fila["lugar_direccion"] or "",
             "comuna": fila["comuna"] or "",
-            "lat": lat,
-            "lon": lon,
-            "precision": precision,
+            "lat": fila["lat"],
+            "lon": fila["lon"],
+            "precision": "fuente" if fila["lat"] is not None else "",
             "gratis": bool(fila["es_gratis"]),
             "precio": fila["precio_clp"],
             "precio_texto": fila["precio_texto"] or "",
@@ -301,7 +299,30 @@ def main() -> int:
             "imagen": fila["imagen_url"] or "",
             "fuente": fila["fuente_nombre"],
             "url": fila["fuente_url"],
-        })
+        }
+
+        # La memoria de arreglos pisa lo extraído: si la revisión ya dijo que
+        # este lugar queda en otra parte o que este evento es de otra
+        # categoría, eso vale más que lo que dijo la fuente o el clasificador.
+        tocados = corr.aplicar_a_evento(ev)
+        if ev.pop("descartar", False):
+            descartados.append(f'{ev["titulo"][:52]} (corrección: descartado)')
+            continue
+        if tocados:
+            corregidos += 1
+
+        if ev["lat"] is None:
+            lat, lon, precision = geo.ubicar(ev["lugar"], ev["direccion"], ev["comuna"])
+            ev["lat"], ev["lon"] = lat, lon
+            ev["precision"] = precision
+            if lat is None:
+                # No se descarta: sale en la lista sin pin. Botar 42 eventos
+                # reales (entre ellos 20 obras de teatro) es peor que
+                # mostrarlos sin mapa.
+                sin_ubicar += 1
+                ev["precision"] = "sin_ubicar"
+
+        eventos.append(ev)
 
     geo.guardar()
     almacen.cerrar()
@@ -319,9 +340,11 @@ def main() -> int:
     log.info("Fichas individuales para compartir: %d en web/e/", fichas)
 
     con_imagen = sum(1 for e in eventos if e["imagen"])
-    exactos += sum(1 for e in eventos if e["precision"] == "fuente")
+    exactos += sum(1 for e in eventos if e["precision"] in ("fuente", "correccion", "calle"))
     log.info("Exportados %d eventos (%d gratis, %d con ubicación exacta, %d con imagen)",
              len(eventos), gratis, exactos, con_imagen)
+    if corregidos:
+        log.info("Con correcciones de la memoria aplicadas: %d", corregidos)
     if sin_ubicar:
         log.info("Sin pin en el mapa (salen solo en la lista): %d", sin_ubicar)
     if descartados:

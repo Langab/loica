@@ -15,13 +15,19 @@ pisaban entre ellos. Acá van en la misma corrida y en el mismo commit.
     python3 run_todo.py --solo-publicar  # sin extraer: exporta lo que ya hay
     python3 run_todo.py --sin-descuentos # sólo eventos
     python3 run_todo.py --fuente gam     # una sola fuente (se pasa a run_diario)
+    python3 run_todo.py --forzar         # publica aunque caiga el volumen
+
+La corrida completa son seis pasos: extraer eventos, extraer descuentos,
+exportar el sitio, revisar la extracción (informe + colas de corrección en
+datos/revision/, no bloquea), doble check (verificar_web.py, SÍ bloquea) y
+publicar.
 
 Después del push, GitHub Actions publica `web/` en Pages: no hay que hacer
 nada más.
 
 REGLA IMPORTANTE — sólo se comitea lo que produce el pipeline
 =============================================================
-Corre sin nadie mirando a las 06:00, así que NUNCA hace `git add -A`: si en
+Corre sin nadie mirando a las 11:00, así que NUNCA hace `git add -A`: si en
 ese momento hay un archivo a medio editar, un `add -A` se lo llevaría al
 repositorio. Se agregan únicamente las rutas de RUTAS_PUBLICABLES.
 """
@@ -57,7 +63,7 @@ def _git(*args: str, capturar: bool = True) -> subprocess.CompletedProcess:
 
 
 def paso_extraer(extra: list[str]) -> bool:
-    return _correr([sys.executable, "run_diario.py", *extra], "1/4  Eventos")
+    return _correr([sys.executable, "run_diario.py", *extra], "1/6  Eventos")
 
 
 def paso_descuentos(extra: list[str]) -> bool:
@@ -66,13 +72,28 @@ def paso_descuentos(extra: list[str]) -> bool:
     Son un catastro aparte: que Bci cambie su JSON no es razón para dejar sin
     actualizar la agenda de eventos, que es el corazón del proyecto.
     """
-    if not _correr([sys.executable, "run_descuentos.py", *extra], "2/4  Descuentos"):
+    if not _correr([sys.executable, "run_descuentos.py", *extra], "2/6  Descuentos"):
         print("    Se sigue igual: los eventos no dependen de esto.")
     return True
 
 
 def paso_exportar() -> bool:
-    return _correr([sys.executable, "exportar_web.py"], "3/4  Exportar el sitio")
+    return _correr([sys.executable, "exportar_web.py"], "3/6  Exportar el sitio")
+
+
+def paso_revisar() -> bool:
+    """La revisión del estado de extracción NO bloquea: es el insumo de
+    curaduría (informe + colas de corrección en datos/revision/)."""
+    if not _correr([sys.executable, "revisar_extraccion.py"], "4/6  Revisión"):
+        print("    Se sigue igual: la revisión informa, no bloquea.")
+    return True
+
+
+def paso_verificar(forzar: bool) -> bool:
+    """El doble check SÍ bloquea: si el sitio está roto o vacío, no hay push."""
+    extra = ["--forzar"] if forzar else []
+    return _correr([sys.executable, "verificar_web.py", *extra],
+                   "5/6  Doble check")
 
 
 def _resolver_generados() -> bool:
@@ -118,7 +139,7 @@ def _resolver_generados() -> bool:
 
 def paso_publicar() -> bool:
     """Comitea y sube SOLO la salida del pipeline."""
-    print(f"\n{'=' * 62}\n  4/4  Publicar\n{'=' * 62}", flush=True)
+    print(f"\n{'=' * 62}\n  6/6  Publicar\n{'=' * 62}", flush=True)
 
     existentes = [r for r in RUTAS_PUBLICABLES if (RAIZ / r).exists()]
     if not existentes:
@@ -179,6 +200,8 @@ def main() -> int:
     parser.add_argument("--sin-descuentos", action="store_true",
                         help="salta el catastro de descuentos de banco")
     parser.add_argument("--fuente", help="correr solo esta fuente")
+    parser.add_argument("--forzar", action="store_true",
+                        help="publica aunque el doble check acuse caída de volumen")
     parser.add_argument("--sin-cache", action="store_true")
     parser.add_argument("-v", "--verboso", action="store_true")
     args, _ = parser.parse_known_args()
@@ -205,6 +228,17 @@ def main() -> int:
 
     if not paso_exportar():
         print("\n✗ El export falló — no se publica nada.")
+        return 1
+
+    paso_revisar()
+
+    if not paso_verificar(args.forzar):
+        if args.sin_publicar:
+            print("\n✗ El doble check falló. Igual no se iba a publicar "
+                  "(--sin-publicar); el detalle quedó arriba.")
+            return 1
+        print("\n✗ El doble check falló — no se publica nada. El sitio "
+              "anterior sigue en pie; el detalle quedó arriba.")
         return 1
 
     if args.sin_publicar:

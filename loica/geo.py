@@ -1,15 +1,33 @@
 """Convierte nombres de lugares en coordenadas para poder ponerlos en el mapa.
 
-Estrategia en tres pasos, de más barato a más caro:
+Estrategia, de más barato a más caro:
   1. Tabla de recintos conocidos de Santiago (instantáneo y exacto).
-  2. Caché en disco de lo ya consultado.
-  3. Nominatim de OpenStreetMap (gratis, 1 consulta por segundo como máximo).
+  2. Caché en disco de lo ya resuelto.
+  3. Índice LOCAL de OpenStreetMap (datos/indice_osm.db): direcciones con
+     número y locales con nombre de toda la RM, consultados en SQLite sin
+     tocar la red. Se construye con scripts/construir_indice_osm.py.
+  4. Centro de la comuna como último recurso (aproximado, y la página lo dice).
+
+La geocodificación remota está APAGADA por defecto, y no por pereza: el
+robots.txt de Nominatim prohíbe `/search` y el de Photon prohíbe todo, así que
+el cliente educado (red.py) no les puede preguntar — la caché quedó con 453
+consultas en null porque cada una murió en el robots. Este proyecto respeta
+robots.txt sin excepción; por eso la precisión del mapa sale de dos fuentes
+que no le preguntan nada a nadie en cada corrida:
+
+  - la memoria de correcciones (config/correcciones/lugares.yaml), curada por
+    la revisión diaria, que siempre manda; y
+  - el índice local de OSM, una copia de datos distribuida para esto (ODbL,
+    la misma licencia de los mosaicos del mapa), que resuelve las direcciones
+    con número y los locales con nombre.
 """
 
 from __future__ import annotations
 
 import json
 import logging
+import re
+import sqlite3
 import time
 import unicodedata
 from pathlib import Path
@@ -19,6 +37,7 @@ from .red import ClienteEducado
 log = logging.getLogger("loica.geo")
 
 RUTA_CACHE = Path(__file__).resolve().parent.parent / "datos" / "coordenadas.json"
+RUTA_INDICE = Path(__file__).resolve().parent.parent / "datos" / "indice_osm.db"
 
 # Centro aproximado de cada comuna, como último recurso: es mejor mostrar el
 # evento en su comuna que no mostrarlo. En la app se marca como "ubicación
@@ -88,7 +107,8 @@ RECINTOS = {
     "centro cultural gabriela mistral": (-33.4372, -70.6403),
     "matucana 100": (-33.4436, -70.6836),
     "m100": (-33.4436, -70.6836),
-    "ceina": (-33.4487, -70.6497),
+    # Arturo Prat 33: verificada contra el índice OSM (estaba 380 m corrida).
+    "ceina": (-33.4453, -70.6502),
     "centro cultural la moneda": (-33.4429, -70.6539),
     "cclm": (-33.4429, -70.6539),
     "teatro municipal de santiago": (-33.4407, -70.6480),
@@ -124,8 +144,206 @@ def _plano(texto: str) -> str:
     return " ".join(limpio.lower().split())
 
 
+def normalizar_osm(texto: str) -> str:
+    """Normalización compartida entre el índice OSM y sus consultas.
+
+    La usa también scripts/construir_indice_osm.py: si el índice y la consulta
+    normalizan distinto, nada calza. Minúsculas, sin tildes, sin puntuación,
+    abreviaturas comunes expandidas ("av." → "avenida").
+    """
+    plano = unicodedata.normalize("NFD", (texto or "").lower())
+    plano = "".join(c for c in plano if unicodedata.category(c) != "Mn")
+    plano = re.sub(r"[^a-z0-9ñ ]", " ", plano)
+    palabras = {"av": "avenida", "avda": "avenida", "gral": "general",
+                "pje": "pasaje", "sta": "santa", "sto": "santo",
+                "pdte": "presidente"}
+    partes = [palabras.get(p, p) for p in plano.split()]
+    return " ".join(partes)
+
+
+class IndiceLocal:
+    """Consulta el índice SQLite construido desde el extracto de OSM.
+
+    Dos preguntas: "¿dónde queda Guillermo Subiabre 1015?" (tabla direcciones)
+    y "¿dónde queda el Bar de René?" (tabla locales). Todo local, sin red.
+    Si el índice no existe (no se ha corrido scripts/construir_indice_osm.py),
+    el geocodificador sigue funcionando sin este escalón.
+    """
+
+    def __init__(self, ruta: Path = RUTA_INDICE):
+        self.con = None
+        if not ruta.exists():
+            return
+        try:
+            self.con = sqlite3.connect(f"file:{ruta}?mode=ro", uri=True)
+            # connect() en SQLite es perezoso: no toca el archivo hasta la
+            # primera consulta. Se hace una acá para que un índice a medio
+            # construir (0 bytes, o un build interrumpido) se descarte ahora
+            # y no reviente a mitad del export.
+            self.con.execute("SELECT 1 FROM direcciones LIMIT 1").fetchone()
+        except sqlite3.Error as e:
+            log.warning("El índice OSM no está utilizable (%s); sigo sin él. "
+                        "Reconstruilo con scripts/construir_indice_osm.py", e)
+            self.con = None
+
+    def _consultar(self, sql: str, args: tuple) -> list:
+        """Consulta el índice tolerando que se haya vuelto ilegible.
+
+        El archivo puede desaparecer o corromperse mientras corre el export
+        (una reconstrucción en paralelo, por ejemplo). Una falla del índice
+        degrada la precisión del pin; no puede botar la corrida diaria.
+        """
+        if not self.con:
+            return []
+        try:
+            return self.con.execute(sql, args).fetchall()
+        except sqlite3.Error as e:
+            log.warning("El índice OSM falló (%s); sigo sin él en esta corrida", e)
+            self.con = None
+            return []
+
+    @staticmethod
+    def _distancia_km2(lat1, lon1, lat2, lon2) -> float:
+        # Distancia aproximada al cuadrado, suficiente para comparar cercanías
+        # dentro de la RM. 111 y 92 km por grado a esta latitud.
+        return ((lat1 - lat2) * 111) ** 2 + ((lon1 - lon2) * 92) ** 2
+
+    def _elegir(self, filas: list, comuna: str) -> list | None:
+        """Entre varios candidatos: el de la comuna pedida; si la fila no trae
+        ciudad, el más cercano al centro de esa comuna. Sin comuna, solo se
+        acepta si los candidatos están juntos (si no, es un nombre ambiguo y
+        un pin equivocado es peor que ninguno)."""
+        if not filas:
+            return None
+        comuna_norm = normalizar_osm(comuna)
+        if comuna_norm:
+            de_comuna = [f for f in filas if f[0] == comuna_norm]
+            if de_comuna:
+                return [de_comuna[0][1], de_comuna[0][2]]
+            centro = COMUNAS.get(comuna)
+            if centro:
+                mejor = min(filas, key=lambda f: self._distancia_km2(
+                    f[1], f[2], centro[0], centro[1]))
+                if self._distancia_km2(mejor[1], mejor[2], *centro) < 8 ** 2:
+                    return [mejor[1], mejor[2]]
+                return None
+        lats = [f[1] for f in filas]
+        lons = [f[2] for f in filas]
+        if (max(lats) - min(lats)) * 111 < 2 and (max(lons) - min(lons)) * 92 < 2:
+            return [filas[0][1], filas[0][2]]
+        return None
+
+    @staticmethod
+    def _candidatos(texto: str) -> list[tuple[str, int]]:
+        """Saca los pares (calle, número) plausibles de un texto libre.
+
+        Las fuentes municipales escriben de todo: "Juan Moya 1370", "JJ. VV.
+        Simón Bolívar Av. Las Torres # 840" (basura por delante) y
+        "Guanaco Norte # 1250 Capilla Santa Inés" (el número al medio y el
+        recinto después). En vez de adivinar el formato se proponen todos los
+        cortes y decide el índice: el que exista en el catastro y caiga en la
+        comuna es el bueno. Primero el número que cierra el texto, que es el
+        formato más común; después los del medio, de derecha a izquierda.
+        """
+        plano = normalizar_osm(texto.split(",")[0])
+        plano = re.sub(r"\b(n|no|numero)\s+(\d)", r"\2", plano)
+        cortes = []
+        for m in re.finditer(r"\b(\d{1,5})\b", plano):
+            antes = plano[:m.start()].strip()
+            if antes:
+                cortes.append((antes, int(m.group(1)), m.end() == len(plano)))
+        cortes.sort(key=lambda c: (not c[2], -len(c[0])))
+        return [(calle, numero) for calle, numero, _ in cortes]
+
+    def direccion(self, direccion: str, comuna: str = "") -> list | None:
+        """Resuelve "Calle 1234" contra las direcciones con número de OSM."""
+        if not self.con or not direccion:
+            return None
+        # Sin comuna, un nombre de calle repetido en media región se resuelve
+        # a ciegas: "Av. Bernardo O'Higgins 2900" apareció a 55 km de donde
+        # correspondía. La comuna suele venir en la misma dirección después
+        # de la coma, que antes se botaba: se rescata como pista.
+        if not comuna:
+            resto = normalizar_osm(" ".join(direccion.split(",")[1:]))
+            for nombre in COMUNAS:
+                if normalizar_osm(nombre) in resto:
+                    comuna = nombre
+                    break
+        for calle, numero in self._candidatos(direccion)[:4]:
+            encontrada = self._buscar(calle, numero, comuna)
+            if encontrada:
+                return encontrada
+        return None
+
+    def _buscar(self, calle: str, numero: int, comuna: str) -> list | None:
+        """Busca una calle en el índice aflojando de a poco la exigencia.
+
+        El texto trae basura antes de la calle ("JJ. VV. Simón Bolívar
+        Av. Las Torres 840"): se prueba desde el nombre completo hacia
+        sufijos cada vez más cortos hasta que uno exista en el índice.
+        """
+        palabras = calle.split()
+        for corte in range(len(palabras)):
+            candidata = " ".join(palabras[corte:])
+            exactas = self._consultar(
+                "SELECT ciudad, lat, lon FROM direcciones WHERE calle=? AND numero=?",
+                (candidata, numero))
+            elegida = self._elegir(exactas, comuna)
+            if elegida:
+                return elegida
+
+        # La fuente suele acortar el nombre de la calle: escribe "Juan Moya
+        # 1370" donde el catastro dice "Juan Moya Morales". Se prueba como
+        # prefijo, exigiendo que la calle empiece igual para no confundir
+        # "Los Alerces" con "Los Alerces Sur" de otra comuna — de eso se
+        # encarga _elegir, que descarta candidatos dispersos.
+        # Y también lo omite por delante: escribe "Guanaco Norte 1250" donde
+        # el catastro dice "Avenida El Guanaco Norte". Los dos lados, porque
+        # las fuentes municipales recortan por donde se les ocurre.
+        for corte in range(len(palabras)):
+            candidata = " ".join(palabras[corte:])
+            if len(candidata) < 6:
+                break
+            for patron in (f"{candidata} *", f"* {candidata}"):
+                aproximadas = self._consultar(
+                    """SELECT ciudad, lat, lon FROM direcciones
+                       WHERE calle GLOB ? AND numero = ? LIMIT 12""",
+                    (patron, numero))
+                elegida = self._elegir(aproximadas, comuna)
+                if elegida:
+                    return elegida
+
+        # Sin el número exacto: el más cercano en la misma calle, si está a
+        # menos de ~2 cuadras de numeración. Mejor la cuadra que el centroide.
+        for corte in range(len(palabras)):
+            candidata = " ".join(palabras[corte:])
+            cercanas = self._consultar(
+                """SELECT ciudad, lat, lon FROM direcciones
+                   WHERE calle = ? AND ABS(numero - ?) < 250
+                   ORDER BY ABS(numero - ?) LIMIT 8""",
+                (candidata, numero, numero))
+            elegida = self._elegir(cercanas, comuna)
+            if elegida:
+                return elegida
+        return None
+
+    def local(self, nombre: str, comuna: str = "") -> list | None:
+        """Resuelve un local por su nombre exacto (bares, salas, teatros)."""
+        if not self.con:
+            return None
+        clave = normalizar_osm(nombre)
+        # Nombres cortos o de una palabra chocan con homónimos por toda la
+        # ciudad ("kafe", "lounge"): se exige algo más de sustancia.
+        if len(clave) < 6 or len(clave.split()) < 2:
+            return None
+        filas = self._consultar(
+            "SELECT '' AS ciudad, lat, lon FROM locales WHERE nombre=? LIMIT 12",
+            (clave,))
+        return self._elegir(filas, comuna)
+
+
 class Geocodificador:
-    def __init__(self, usar_nominatim: bool = True):
+    def __init__(self, usar_nominatim: bool = False):
         self.usar_nominatim = usar_nominatim
         self.cache: dict[str, list | None] = {}
         if RUTA_CACHE.exists():
@@ -133,8 +351,18 @@ class Geocodificador:
                 self.cache = json.loads(RUTA_CACHE.read_text(encoding="utf-8"))
             except (json.JSONDecodeError, OSError):
                 self.cache = {}
+        # Los null de la caché son consultas que murieron en el robots.txt de
+        # Nominatim, no lugares inexistentes. Se purgan al cargar: si algún día
+        # la geocodificación remota vuelve (con permiso), que reintente; y
+        # mientras tanto no ensucian el archivo.
+        nulos = [k for k, v in self.cache.items() if v is None]
+        for k in nulos:
+            del self.cache[k]
+        if nulos:
+            log.info("Caché de coordenadas: purgadas %d entradas null heredadas", len(nulos))
         self.cliente = ClienteEducado(crawl_delay_seg=1.1, usar_cache=False)
         self._ultima_consulta = 0.0
+        self.indice = IndiceLocal()
 
     def guardar(self) -> None:
         try:
@@ -145,13 +373,28 @@ class Geocodificador:
 
     def ubicar(self, lugar: str, direccion: str = "",
                comuna: str = "") -> tuple[float | None, float | None, str]:
-        """Devuelve (lat, lon, precisión). Precisión: recinto | direccion | comuna."""
+        """Devuelve (lat, lon, precisión). Precisión: recinto | calle | comuna.
+
+        OJO con el vocabulario: acá se dice "calle" y no "direccion" porque es
+        lo que esperan run_descuentos.py, el modelo de descuentos y la página
+        — tres lugares contaban pines "calle" que este módulo nunca emitía.
+        """
         clave_lugar = _plano(lugar)
 
-        # 1. Recintos conocidos, por coincidencia parcial del nombre
+        # 1. Recintos conocidos, por coincidencia parcial del nombre.
+        #    El match es por contención, así que un nombre genérico se lleva
+        #    puesto a su homónimo de otra comuna: "Teatro Municipal de La
+        #    Florida" calzaba con "teatro municipal" y quedaba a 10 km, en el
+        #    Teatro Municipal de Santiago. Si la comuna declarada contradice
+        #    al recinto, el recinto no manda.
+        centro = COMUNAS.get(comuna)
         for nombre, (lat, lon) in RECINTOS.items():
-            if nombre and (nombre in clave_lugar or clave_lugar.startswith(nombre)):
-                return lat, lon, "recinto"
+            if not nombre or not (nombre in clave_lugar or clave_lugar.startswith(nombre)):
+                continue
+            if centro and ((lat - centro[0]) * 111) ** 2 + ((lon - centro[1]) * 92) ** 2 > 8 ** 2:
+                log.debug("Recinto %r descartado: contradice la comuna %s", nombre, comuna)
+                continue
+            return lat, lon, "recinto"
 
         # 2. Caché de consultas anteriores
         consulta = ", ".join(p for p in (direccion or lugar, comuna, "Santiago, Chile") if p)
@@ -159,14 +402,29 @@ class Geocodificador:
         if clave in self.cache:
             guardado = self.cache[clave]
             if guardado:
-                return guardado[0], guardado[1], "direccion"
+                return guardado[0], guardado[1], "calle"
         elif self.usar_nominatim and (direccion or lugar):
             coords = self._preguntar_nominatim(consulta)
             self.cache[clave] = coords
             if coords:
-                return coords[0], coords[1], "direccion"
+                return coords[0], coords[1], "calle"
 
-        # 3. Centro de la comuna: aproximado, pero mejor que no aparecer
+        # 3. Índice local de OSM: primero la dirección con número (lo más
+        #    confiable), después el nombre del local. No se cachea: es una
+        #    consulta SQLite local y así los rebuilds del índice rigen al tiro.
+        coords = self.indice.direccion(direccion, comuna)
+        if coords:
+            return coords[0], coords[1], "calle"
+        # A veces la dirección viene pegada en el nombre del lugar
+        # ("JJ. VV. Simón Bolívar Av. Las Torres # 840").
+        coords = self.indice.direccion(lugar, comuna)
+        if coords:
+            return coords[0], coords[1], "calle"
+        coords = self.indice.local(lugar, comuna)
+        if coords:
+            return coords[0], coords[1], "recinto"
+
+        # 4. Centro de la comuna: aproximado, pero mejor que no aparecer
         if comuna in COMUNAS:
             lat, lon = COMUNAS[comuna]
             return lat, lon, "comuna"
@@ -192,8 +450,11 @@ class Geocodificador:
         except (KeyError, TypeError, ValueError):
             return None
 
-        # Santiago cabe holgadamente en este recuadro; fuera de él es un error
-        if not (-33.75 < lat < -33.20 and -70.90 < lon < -70.40):
-            log.debug("Nominatim devolvió algo fuera de Santiago para %r", consulta)
+        # La Región Metropolitana cabe en este recuadro; fuera de él es un
+        # error. El recuadro viejo (-33.75..-33.20 / -70.90..-70.40) era solo
+        # el Gran Santiago y rechazaba comunas reales del catálogo: Melipilla,
+        # Til Til, Curacaví y San José de Maipo quedaban fuera.
+        if not (-34.05 < lat < -33.00 and -71.30 < lon < -70.30):
+            log.debug("El geocodificador devolvió algo fuera de la RM para %r", consulta)
             return None
         return [lat, lon]
