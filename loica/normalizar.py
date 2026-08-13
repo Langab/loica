@@ -73,8 +73,11 @@ def parsear_fecha(texto: str, anio_por_defecto: int | None = None,
 
     posicion = 0  # dónde apareció la fecha, para buscar la hora al lado
 
-    # ISO: 2027-03-15 (con o sin hora)
-    for m in re.finditer(r"(\d{4})-(\d{2})-(\d{2})(?:[T ](\d{1,2}):(\d{2}))?", plano):
+    # ISO: 2027-03-15 (con o sin hora). La T va en minúscula además de
+    # mayúscula porque el texto ya pasó por _plano(), que lo bajó todo: con
+    # solo [T ] la hora NUNCA calzaba y todo evento con JSON-LD quedaba a las
+    # 00:00. Para un club eso no es un detalle, es el dato.
+    for m in re.finditer(r"(\d{4})-(\d{2})-(\d{2})(?:[Tt ](\d{1,2}):(\d{2}))?", plano):
         try:
             fecha = datetime(int(m.group(1)), int(m.group(2)), int(m.group(3)),
                              int(m.group(4) or 0), int(m.group(5) or 0))

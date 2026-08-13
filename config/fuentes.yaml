@@ -1,7 +1,3 @@
-# Registro de fuentes del pipeline.
-# tipo_adaptador: wordpress | eventon | rss | html | sitemap | carteleras |
-#                 cine | tabla | json | ticketmaster | manual
-
 fuentes:
 - id: ceina
   nombre: CEINA
@@ -881,12 +877,11 @@ fuentes:
   notas: 'App PHP propia. NO tiene robots.txt (302 a home) y devuelve 200 con HTML de la home en cualquier
     ruta: validar Content-Type y cuerpo, nunca solo el status. /cartelera es server-rendered.
 
-    Tarjeta .proyecto-item con h3.Title y p.Hover-Fecha ("Del 15 al 28 de agosto"): se toma la fecha
-    de INICIO de la temporada, que es lo que hace parsear_fecha con los rangos.
+    Tarjeta .proyecto-item con h3.Title y p.Hover-Fecha ("Del 15 al 28 de agosto"): se toma la fecha de
+    INICIO de la temporada, que es lo que hace parsear_fecha con los rangos.
 
-    La SALA va en la clase de la tarjeta (sala-1 a sala-5), no en el texto: sin salas_por_clase las
-    cuatro salas quedarian con la misma comuna. Cubre MORI RECOLETA, de los pocos teatros de barrio
-    con web rastreable.
+    La SALA va en la clase de la tarjeta (sala-1 a sala-5), no en el texto: sin salas_por_clase las cuatro
+    salas quedarian con la misma comuna. Cubre MORI RECOLETA, de los pocos teatros de barrio con web rastreable.
 
     OJO: los links vienen sin esquema (//teatromori.com/obra/...), no como ruta absoluta.
 
@@ -944,12 +939,11 @@ fuentes:
       enCicloActivo: true
   notas: 'SPA React sobre API Gateway (AWS). robots.txt del sitio permite todo (Disallow vacio).
 
-    329 talleres, de los cuales 113 marcados esGratuito. Recurrencia TOTALMENTE ESTRUCTURADA en
-    horarios[].bloques[] con dias[] + inicio + fin, y recinto con direccion y comuna. Es el mejor
-    dato municipal del pipeline.
+    329 talleres, de los cuales 113 marcados esGratuito. Recurrencia TOTALMENTE ESTRUCTURADA en horarios[].bloques[]
+    con dias[] + inicio + fin, y recinto con direccion y comuna. Es el mejor dato municipal del pipeline.
 
-    La API vive en amazonaws pero la ficha publica es /talleres/<_id> (confirmado en el router del
-    bundle React), y de ahi sale la atribucion.
+    La API vive en amazonaws pero la ficha publica es /talleres/<_id> (confirmado en el router del bundle
+    React), y de ahi sale la atribucion.
 
     '
 - id: corp_cultural_las_condes
@@ -979,11 +973,11 @@ fuentes:
   categoria_por_defecto: deporte
   activa: true
   notas: 'Crawl-delay: 50 DECLARADO en robots.txt (muy alto: 1 peticion cada 50 s en este host; considerar
-    pedir excepcion al municipio). Como es UNA sola pagina, la corrida diaria hace una sola peticion
-    y el crawl-delay no molesta.
+    pedir excepcion al municipio). Como es UNA sola pagina, la corrida diaria hace una sola peticion y
+    el crawl-delay no molesta.
 
-    4 tablas HTML con encabezado RECINTO|BARRIO|DISCIPLINA|DIAS|HORARIO: aca el recinto viene como
-    COLUMNA, no como cabecera de tabla, y el adaptador de tablas lo toma de ahi.
+    4 tablas HTML con encabezado RECINTO|BARRIO|DISCIPLINA|DIAS|HORARIO: aca el recinto viene como COLUMNA,
+    no como cabecera de tabla, y el adaptador de tablas lo toma de ahi.
 
     '
 - id: huechuraba_talleres_deportivos
@@ -1001,8 +995,8 @@ fuentes:
     DISCIPLINA|DIA(S)|HORARIO|EDAD|INICIO y el nombre del recinto y su direccion en las filas de ARRIBA
     del encabezado.
 
-    La columna INICIO dice "Marzo" porque son programas anuales ya empezados: el adaptador de tablas
-    ignora esa columna y emite las proximas sesiones segun DIA(S) + HORARIO.
+    La columna INICIO dice "Marzo" porque son programas anuales ya empezados: el adaptador de tablas ignora
+    esa columna y emite las proximas sesiones segun DIA(S) + HORARIO.
 
     La pagina no declara precio, asi que los talleres quedan SIN precio, no marcados gratis.
 
@@ -1069,7 +1063,7 @@ fuentes:
   - post
   buscar_detalle: true
   tope_detalle: 25
-  buscar_terminos: &terminos_actividades
+  buscar_terminos: &id001
   - taller
   - feria
   - festival
@@ -1078,7 +1072,7 @@ fuentes:
   - exposicion
   - cicletada
   - cine
-  filtro_palabras: &actividades_municipales
+  filtro_palabras: &id002
   - taller
   - talleres
   - feria
@@ -1107,7 +1101,7 @@ fuentes:
   - conversatorio
   - capacitacion
   - capacitación
-  descartar_palabras: &ruido_municipal
+  descartar_palabras: &id003
   - licitacion
   - licitación
   - ordenanza
@@ -1125,9 +1119,6 @@ fuentes:
   - llamado a concurso
   - concurso publico
   - concurso público
-  # Las municipalidades publican sobre todo CRONICAS de lo que ya pasó, no
-  # anuncios de lo que viene. Sin estos marcadores de pasado, "Feria del libro
-  # fue visitada por 80 mil personas" entra como si fuera un evento futuro.
   - disfrutaron
   - disfruto
   - disfrutó
@@ -1162,18 +1153,17 @@ fuentes:
   activa: true
   buscar_detalle: true
   tope_detalle: 25
-  buscar_terminos: *terminos_actividades
-  filtro_palabras: *actividades_municipales
-  descartar_palabras: *ruido_municipal
-  notas: 'wp-json abierto; robots.txt solo bloquea /wp-admin/. /wp-sitemap.xml valido. Talleres
-    publicados como noticias, mezclados con 1.786 posts municipales: depende de buscar_terminos
-    y filtro_palabras para ser usable.
+  buscar_terminos: *id001
+  filtro_palabras: *id002
+  descartar_palabras: *id003
+  notas: 'wp-json abierto; robots.txt solo bloquea /wp-admin/. /wp-sitemap.xml valido. Talleres publicados
+    como noticias, mezclados con 1.786 posts municipales: depende de buscar_terminos y filtro_palabras
+    para ser usable.
 
     '
   tipos_post:
   - post
   - page
-  buscar_detalle: true
 - id: la_reina_municipio
   nombre: Municipalidad de La Reina
   url_base: https://www.lareina.cl
@@ -1232,18 +1222,17 @@ fuentes:
   activa: true
   buscar_detalle: true
   tope_detalle: 25
-  buscar_terminos: *terminos_actividades
-  filtro_palabras: *actividades_municipales
-  descartar_palabras: *ruido_municipal
-  notas: 'wp-json abierto; robots.txt con Allow: / y sitemap valido. Programa Renca Activa (mas de
-    180 talleres gratuitos). La INSCRIPCION vive fuera, en la SaaS talleres.meetcard.cl (SPA, sin
-    fichas indexables): el sitio municipal solo anuncia, no lista los talleres uno por uno.
+  buscar_terminos: *id001
+  filtro_palabras: *id002
+  descartar_palabras: *id003
+  notas: 'wp-json abierto; robots.txt con Allow: / y sitemap valido. Programa Renca Activa (mas de 180
+    talleres gratuitos). La INSCRIPCION vive fuera, en la SaaS talleres.meetcard.cl (SPA, sin fichas indexables):
+    el sitio municipal solo anuncia, no lista los talleres uno por uno.
 
     '
   tipos_post:
   - post
   - page
-  buscar_detalle: true
 - id: las_condes_municipio
   nombre: Municipalidad de Las Condes (talleres)
   url_base: https://www.lascondes.cl
@@ -1369,14 +1358,14 @@ fuentes:
     por user-agent como el de chilecultura, es puntaje de IP/huella TLS.
 
     Se deja configurada igual, SIN ninguna evasión, porque Cloudflare puntúa distinto cada red: desde
-    la casa del curador puede pasar. Si el challenge responde, la fuente registra el error como
-    cualquier otra y la corrida sigue. Lo que NO se hace es disfrazar el user-agent ni resolver el
-    desafío: seria evadir un control de acceso explicito.
+    la casa del curador puede pasar. Si el challenge responde, la fuente registra el error como cualquier
+    otra y la corrida sigue. Lo que NO se hace es disfrazar el user-agent ni resolver el desafío: seria
+    evadir un control de acceso explicito.
 
-    Si queda bloqueada de forma permanente, las vias son dos: pedirle acceso a Passline (como
-    intermediario les llevamos compradores a su checkout) o cargar eventos puntuales por
-    datos/manual/*.yaml. Ademas varios recintos que venden por Passline publican el link en su propio
-    sitio: club_chocolate ya aporta 13 links de compra de Passline por esa via.
+    Si queda bloqueada de forma permanente, las vias son dos: pedirle acceso a Passline (como intermediario
+    les llevamos compradores a su checkout) o cargar eventos puntuales por datos/manual/*.yaml. Ademas
+    varios recintos que venden por Passline publican el link en su propio sitio: club_chocolate ya aporta
+    13 links de compra de Passline por esa via.
 
     '
 - id: normandie
@@ -1391,13 +1380,13 @@ fuentes:
   crawl_delay_seg: 3
   colapsar: false
   activa: true
-  notas: 'WordPress con robots.txt permisivo (solo bloquea wp-admin) y wp-sitemap.xml valido. La API
-    REST esta abierta pero solo tiene post y page: cada pelicula es un post con ficha (director, pais,
-    ano, duracion), SIN la fecha de funcion.
+  notas: 'WordPress con robots.txt permisivo (solo bloquea wp-admin) y wp-sitemap.xml valido. La API REST
+    esta abierta pero solo tiene post y page: cada pelicula es un post con ficha (director, pais, ano,
+    duracion), SIN la fecha de funcion.
 
-    Los horarios viven en /cartelera/, una seccion por dia (section.jueves, section.viernes...) con
-    las funciones como "15:00 hrs." seguido del titulo en <strong>. La fecha completa no esta escrita
-    en ninguna parte: el adaptador la deduce cruzando el dia de la semana con el numero del dia.
+    Los horarios viven en /cartelera/, una seccion por dia (section.jueves, section.viernes...) con las
+    funciones como "15:00 hrs." seguido del titulo en <strong>. La fecha completa no esta escrita en ninguna
+    parte: el adaptador la deduce cruzando el dia de la semana con el numero del dia.
 
     Programa cine arte y reestrenos: comparte varios titulos con Centro Arte Alameda.
 
@@ -1411,15 +1400,15 @@ fuentes:
   crawl_delay_seg: 3
   activa: false
   notas: 'APAGADA: CLOUDFLARE. Devuelve 403 con "cf-mitigated: challenge" en TODAS las rutas, incluida
-    la home y wp-json (verificado 11-08-2026). Es el mismo Managed Challenge que protege a Passline,
-    no un filtro por user-agent como el de chilecultura: no hay user-agent que lo pase y saltarlo
-    seria evadir un control de acceso.
+    la home y wp-json (verificado 11-08-2026). Es el mismo Managed Challenge que protege a Passline, no
+    un filtro por user-agent como el de chilecultura: no hay user-agent que lo pase y saltarlo seria evadir
+    un control de acceso.
 
-    Aparece mas veces que ningun otro recinto en las extracciones manuales, asi que vale la pena
-    igual: la via es pedirles acceso, o cargar sus funciones por datos/manual/*.yaml.
+    Aparece mas veces que ningun otro recinto en las extracciones manuales, asi que vale la pena igual:
+    la via es pedirles acceso, o cargar sus funciones por datos/manual/*.yaml.
 
-    Buena parte de su programacion (La Odisea, La Invitacion, Backrooms, Obsesion) tambien la da el
-    Normandie, que si es rastreable.
+    Buena parte de su programacion (La Odisea, La Invitacion, Backrooms, Obsesion) tambien la da el Normandie,
+    que si es rastreable.
 
     '
 - id: sala_k_maipu
@@ -1443,12 +1432,12 @@ fuentes:
   crawl_delay_seg: 3
   activa: false
   notas: 'Teatro social historico en La Cisterna (Sala Julieta, Eulogio Altamirano 7425). SIN robots.txt
-    (no declara restricciones). wp-json abierto y CON The Events Calendar instalado: los post types
-    tribe_events, tribe_venue y tribe_organizer existen y responden 200.
+    (no declara restricciones). wp-json abierto y CON The Events Calendar instalado: los post types tribe_events,
+    tribe_venue y tribe_organizer existen y responden 200.
 
     APAGADA PORQUE SU CALENDARIO ESTA VACIO, no por dificultad tecnica: /wp-json/tribe/events/v1/events
-    devuelve total 0 y /wp/v2/tribe_events devuelve lista vacia (verificado 11-08-2026). En cuanto
-    publiquen su temporada, encenderla es cambiar este activa a true, sin tocar nada mas.
+    devuelve total 0 y /wp/v2/tribe_events devuelve lista vacia (verificado 11-08-2026). En cuanto publiquen
+    su temporada, encenderla es cambiar este activa a true, sin tocar nada mas.
 
     '
 - id: ingesta_manual
@@ -1459,14 +1448,14 @@ fuentes:
   activa: true
   notas: 'No hace ninguna peticion de red: lee datos/manual/*.yaml.
 
-    Es la via para lo que no se puede rastrear. Passline responde 403 a cualquier cliente automatico
-    (probado con user-agent vacio, de Chrome y neutro): no es el filtro por la palabra "bot" que tiene
-    chilecultura sino bloqueo por IP o huella TLS, y saltarlo seria evadir un control de acceso. Lo
-    mismo con Instagram, cuya API no permite leer cuentas ajenas.
+    Es la via para lo que no se puede rastrear. Passline responde 403 a cualquier cliente automatico (probado
+    con user-agent vacio, de Chrome y neutro): no es el filtro por la palabra "bot" que tiene chilecultura
+    sino bloqueo por IP o huella TLS, y saltarlo seria evadir un control de acceso. Lo mismo con Instagram,
+    cuya API no permite leer cuentas ajenas.
 
-    En esos casos el descubrimiento lo hace una persona navegando normal y el pipeline aporta lo de
-    siempre: normalizar, deduplicar contra lo ya guardado, geocodificar y dejarlo en revision con su
-    link de origen. Ver datos/manual/_plantilla.yaml.
+    En esos casos el descubrimiento lo hace una persona navegando normal y el pipeline aporta lo de siempre:
+    normalizar, deduplicar contra lo ya guardado, geocodificar y dejarlo en revision con su link de origen.
+    Ver datos/manual/_plantilla.yaml.
 
     '
 - id: puntoticket
@@ -1500,14 +1489,14 @@ fuentes:
   notas: 'robots.txt permite el rastreo (solo bloquea Pago/Compra/Login/Categoria) y declara sitemap.xml,
     pero ese sitemap es un muñon de 14 URLs de secciones: los eventos se leen del listado /todos.
 
-    Cada ficha trae JSON-LD schema.org/Event completo (name, startDate, image, offers.lowPrice), que
-    es el mejor dato posible de un HTML.
+    Cada ficha trae JSON-LD schema.org/Event completo (name, startDate, image, offers.lowPrice), que es
+    el mejor dato posible de un HTML.
 
-    Es la via para el FUTBOL DE PRIMERA DIVISION: /deportes lista Colo-Colo, Universidad de Chile,
-    Estadio Nacional, Monumental, Santa Laura y Claro Arena, cada uno con su link de compra.
+    Es la via para el FUTBOL DE PRIMERA DIVISION: /deportes lista Colo-Colo, Universidad de Chile, Estadio
+    Nacional, Monumental, Santa Laura y Claro Arena, cada uno con su link de compra.
 
-    Los eventos no tienen prefijo de URL comun (/cumbre-guachaca-2026 convive con /login), por eso
-    se filtra con excluir_url en vez de patron_url.
+    Los eventos no tienen prefijo de URL comun (/cumbre-guachaca-2026 convive con /login), por eso se
+    filtra con excluir_url en vez de patron_url.
 
     '
 - id: portaltickets_locales
@@ -1518,17 +1507,9 @@ fuentes:
   patron_indice: /cartelera/
   patron_url: /evento/
   tope_locales: 40
-  # El indice general no lista estos dos, pero tienen cartelera propia y son
-  # justo el circuito chico: Teatro Fabrica (Bustamante, Providencia) y Teatro
-  # Fiebre, que programan tocatas, teatro y stand up.
   carteleras_extra:
   - teatrofabrica
   - teatrofiebre
-  # Verificados uno por uno: PortalDisc responde 200 a cualquier slug, así que
-  # solo van los que tienen página de local de verdad (titulo "EVENTOS EN
-  # <NOMBRE>"). Teatro Palermo está en Puente Alto y ya trae eventos; Club de
-  # San Miguel y Club de Jazz existen pero hoy sin cartelera — entran solos
-  # cuando publiquen.
   - teatropalermo
   - clubdesanmiguel
   - clubdejazz
@@ -1536,15 +1517,15 @@ fuentes:
   requiere_comuna: true
   activa: true
   notas: 'Complementa a la fuente portaltickets, que lee el listado general. Ese listado muestra solo
-    50 eventos de toda la plataforma, pero enlaza la cartelera COMPLETA de cada local: de los 12
-    eventos publicados de Bar de Rene, el listado general mostraba 1.
+    50 eventos de toda la plataforma, pero enlaza la cartelera COMPLETA de cada local: de los 12 eventos
+    publicados de Bar de Rene, el listado general mostraba 1.
 
     Aca vive el circuito de tocatas que ninguna municipalidad publica: Bar de Rene (Santa Isabel 0369,
-    Providencia), Bar Raices (Cueto 816, Barrio Yungay), Kahuin, Meson Nerudiano, El Clan, Mi Bar,
-    Mag Bar, Sala Master, SCD Egana, Teatro Municipal de La Florida.
+    Providencia), Bar Raices (Cueto 816, Barrio Yungay), Kahuin, Meson Nerudiano, El Clan, Mi Bar, Mag
+    Bar, Sala Master, SCD Egana, Teatro Municipal de La Florida.
 
-    La tarjeta de cada evento ya trae titulo, fecha y "Local, Comuna", asi que NO hay que abrir la
-    ficha: una corrida son 1 + 21 peticiones, no 200.
+    La tarjeta de cada evento ya trae titulo, fecha y "Local, Comuna", asi que NO hay que abrir la ficha:
+    una corrida son 1 + 21 peticiones, no 200.
 
     '
 - id: disfrutasantiago
@@ -1660,3 +1641,21 @@ fuentes:
     a cualquier user-agent que contenga la palabra 'bot' y 200 al resto. Cambiar nuestro UA para esquivar
     ese filtro es exactamente lo que el proyecto prohibe. La via correcta es el convenio que ya esta en
     tareas_manuales.md.
+- id: ticketplus_subterraneo
+  nombre: Club Subterráneo (Ticketplus)
+  url_base: https://ticketplus.cl
+  url_agenda: https://ticketplus.cl/companies/club-subterraneo
+  tipo_adaptador: sitemap
+  origen: listado
+  endpoint: /companies/club-subterraneo
+  patron_url: /events/
+  tope_fichas: 45
+  comuna: Providencia
+  crawl_delay_seg: 3
+  activa: true
+  notas: 'Club Subterraneo, Paseo Orrego Luco 46, Providencia: 22 anos de programacion en vivo, jazz y
+    ultrabailables. Su sitio propio (subterraneo.cl) redirige a Facebook, asi que la cartelera se lee
+    de su pagina de local en Ticketplus, que publica cada ficha con schema.org/Event completo: fecha,
+    hora, lugar y comuna. El robots.txt de ticketplus.cl permite /companies/ y /events/ (solo veda admin,
+    api y cuentas) y el servidor responde 200 a nuestro cliente. Es la puerta a mas locales: Ticketplus
+    aloja otros recintos con la misma estructura.'

@@ -28,7 +28,12 @@ def _desde_jsonld(sopa: BeautifulSoup, fuente: dict) -> list[Evento]:
     eventos: list[Evento] = []
     for etiqueta in sopa.find_all("script", type="application/ld+json"):
         try:
-            datos = json.loads(etiqueta.string or "")
+            # strict=False tolera saltos de línea crudos dentro de un string,
+            # que el JSON estricto prohíbe. No es un detalle: Ticketplus mete
+            # la descripción del evento con sus saltos tal cual, y su bloque
+            # schema.org/Event —el único con fecha y lugar— se descartaba
+            # entero mientras el bloque Product de al lado sí parseaba.
+            datos = json.loads(etiqueta.string or "", strict=False)
         except (ValueError, TypeError):
             continue
 

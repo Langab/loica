@@ -245,6 +245,20 @@ lugares:
     lon: -70.66491
     nota: negocio distinto del club Blondie; Google Maps y catastro OSM coinciden (2026-08-13)
 
+  Club Subterraneo:
+    direccion: Paseo Orrego Luco 46
+    comuna: Providencia
+    lat: -33.42340
+    lon: -70.61112
+    nota: Google Maps, ficha única; 22 años de programación en vivo (2026-08-13)
+
+  Parque Araucano:
+    direccion: Av. Presidente Riesco 5877
+    comuna: Las Condes
+    lat: -33.40220
+    lon: -70.57249
+    nota: Google Maps, ficha única; ahí van las fondas de Las Condes y el Festival de Cine (2026-08-13)
+
   Club Hipico:
     direccion: Av. Almirante Blanco Encalada 2540
     comuna: Santiago

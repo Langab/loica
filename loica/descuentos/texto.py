@@ -127,6 +127,18 @@ def _tiene(texto: str, palabra: str) -> bool:
     return bool(re.search(rf"(?<![a-z0-9]){re.escape(palabra)}(?![a-z0-9])", texto))
 
 
+def _tiene_dia(texto: str, dia: str) -> bool:
+    """Como _tiene, pero acepta el plural del día.
+
+    De los siete días, solo sábado y domingo cambian en plural — lunes a
+    viernes son invariables. Por eso el error pasaba desapercibido: "todos los
+    martes" se leía bien y "todos los sábados" no, y quedaba con la lista de
+    días VACÍA, que en este modelo significa "sin restricción". Un descuento
+    de sábado terminaba anunciado como de todos los días.
+    """
+    return bool(re.search(rf"(?<![a-z0-9]){re.escape(dia)}s?(?![a-z0-9])", texto))
+
+
 def dias_en(*textos: str) -> list[str]:
     """Días de la semana mencionados, en orden de lunes a domingo.
 
@@ -149,14 +161,16 @@ def dias_en(*textos: str) -> list[str]:
 
     encontrados: set[str] = set()
 
-    # Rangos primero: "de lunes a jueves". El "de" es opcional.
-    for desde, hasta in re.findall(rf"({'|'.join(DIAS)})\s+a\s+({'|'.join(DIAS)})", texto):
+    # Rangos primero: "de lunes a jueves". El "de" es opcional, y el plural
+    # también ("de sábados a lunes" lo escribe más de un banco).
+    for desde, hasta in re.findall(
+            rf"({'|'.join(DIAS)})s?\s+a\s+({'|'.join(DIAS)})s?", texto):
         i, f = _INDICE_DIA[desde], _INDICE_DIA[hasta]
         largo = (f - i) % 7
         encontrados.update(DIAS[(i + paso) % 7] for paso in range(largo + 1))
 
     for dia in DIAS:
-        if _tiene(texto, dia):
+        if _tiene_dia(texto, dia):
             encontrados.add(dia)
 
     # En Chile "el finde" es sábado y domingo; el viernes se dice aparte.

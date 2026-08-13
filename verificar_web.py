@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import subprocess
 import sys
 from datetime import datetime, timedelta
@@ -158,12 +159,36 @@ def verificar_descuentos(errores: list[str], avisos: list[str]) -> None:
     if len(descuentos) < MIN_DESCUENTOS:
         errores.append(f"Solo {len(descuentos)} descuentos (mínimo {MIN_DESCUENTOS}).")
 
+    # Un descuento sin días declarados se muestra como "todos los días" y entra
+    # al filtro de Hoy cualquier día. Eso es correcto para los convenios
+    # permanentes de Bci, y es MENTIRA cuando la fuente sí dijo un día y no
+    # supimos leerlo. Pasó de verdad: "Holy Moly, todos los sábados" salió
+    # publicado como todos los días porque el lector no reconocía el plural, y
+    # alguien fue un día que no era y pagó la cuenta completa.
+    #
+    # Acá se cierra el agujero: si el texto de la fuente nombra un día de la
+    # semana y la lista quedó vacía, es un fallo de lectura, no un convenio
+    # sin restricción. Y un dato así no se publica.
+    dia_en_texto = re.compile(
+        r"\b(lunes|martes|mi[eé]rcoles|jueves|viernes|s[áa]bados?|domingos?"
+        r"|fin de semana|finde)\b", re.IGNORECASE)
+
     for i, d in enumerate(descuentos):
         donde = f"descuento {i} ({str(d.get('comercio'))[:40]!r})"
         # `dias` que no sea lista revienta descuentos.html con TypeError: la
         # página hace .includes() sobre él sin mirar el tipo.
         if not isinstance(d.get("dias"), list):
             errores.append(f"{donde}: 'dias' no es una lista: {d.get('dias')!r}")
+        elif not d["dias"]:
+            texto = " ".join(str(d.get(c) or "") for c in
+                             ("condiciones", "oferta", "descripcion"))
+            hallado = dia_en_texto.search(texto)
+            if hallado:
+                errores.append(
+                    f"{donde}: la fuente dice {hallado.group(0)!r} pero quedó sin "
+                    "días, así que se publicaría como 'todos los días'. Es un "
+                    "fallo de lectura en loica/descuentos/texto.py, no un "
+                    "convenio sin restricción.")
         for campo in ("comercio", "banco", "id"):
             if not d.get(campo):
                 errores.append(f"{donde}: sin {campo}")

@@ -37,6 +37,37 @@ def es_enlace_de_maquina(url: str) -> bool:
     return bool(url) and bool(_ENDPOINTS_DE_MAQUINA.search(url))
 
 
+# Lo único que puede terminar en un href o un src de la web. Todo lo que sale
+# publicado viene de sitios de terceros que no controlamos: si mañana una
+# cartelera municipal queda con un `javascript:...` en el campo del link —por
+# un defacement, un CMS mal saneado o una broma— ese texto viaja intacto por
+# el pipeline hasta el atributo href de la ficha, y ahí se ejecuta en el
+# dominio de Loica. Escapar el HTML no salva de eso: `javascript:` es un
+# esquema válido y no lleva ni comillas ni signos que escapar.
+#
+# Se validan solo http y https a propósito. `mailto:` y `tel:` son inofensivos
+# pero tampoco son "la fuente original del evento", así que no tienen por qué
+# pasar; y dejar la lista corta significa que el día que aparezca un esquema
+# nuevo raro, la respuesta por defecto sea "no".
+ESQUEMAS_PUBLICABLES = ("http", "https")
+
+
+def es_url_publica(url: str) -> bool:
+    """¿Se puede poner esta URL en un href o un src sin regalar el dominio?"""
+    if not url or not isinstance(url, str):
+        return False
+    # Los navegadores ignoran espacios, tabs y saltos de línea DENTRO del
+    # esquema: `java\tscript:alert(1)` se ejecuta igual. Se limpian antes de
+    # mirar, si no la validación se esquiva con un tabulador.
+    limpia = re.sub(r"[\x00-\x20]", "", url).lower()
+    if limpia.startswith("//"):
+        return False  # protocolo relativo: hereda el nuestro pero es otro sitio
+    esquema = limpia.split(":", 1)[0] if ":" in limpia else ""
+    if not esquema:
+        return False  # relativa: acá siempre esperamos el link absoluto a la fuente
+    return esquema in ESQUEMAS_PUBLICABLES
+
+
 def clave_dedup(titulo: str, inicio: date | datetime | None, lugar: str) -> str:
     """Huella para detectar el mismo evento llegando por varias fuentes.
 
@@ -118,6 +149,8 @@ class Evento:
             return False, "sin título"
         if not self.fuente_url:
             return False, "sin link a la fuente (rompe la atribución)"
+        if not es_url_publica(self.fuente_url):
+            return False, f"el link no es http(s): {self.fuente_url[:80]}"
         if es_enlace_de_maquina(self.fuente_url):
             return False, f"el link es un endpoint, no una página: {self.fuente_url}"
         if self.inicio is not None and self.inicio.date() < date.today():
