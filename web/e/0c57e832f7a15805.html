@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>«La pérgola de las flores” vuelve al GAM — Loica</title>
 <meta name="description" content="viernes 28 de agosto · Centro GAM, Santiago · Entrada liberada — Una de las obras más emblemáticas del teatro chileno vuelve a escena con la aclamada versión de Héctor Noguera">
 <link rel="canonical" href="https://langab.github.io/loica/e/0c57e832f7a15805.html">
@@ -55,7 +66,7 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">«La pérgola de las flores” vuelve al GAM</h1>
 
-  <a class="boton bloque" href="https://www.ed.cl/event/la-pergola-de-las-flores-vuelve-a-gam-con-hector-noguera/" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://www.ed.cl/event/la-pergola-de-las-flores-vuelve-a-gam-con-hector-noguera/" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>
@@ -78,7 +89,7 @@
 <script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "0c57e832f7a15805", "titulo": "«La pérgola de las flores” vuelve al GAM", "inicio": "2026-08-28T00:00:00", "fin": "2026-09-13T23:59:00", "lugar": "Centro GAM", "direccion": "Av. Libertador Bernardo O'Higgins 227, Santiago, Santiago", "comuna": "Santiago", "lat": -33.4372, "lon": -70.6403, "precision": "recinto", "gratis": true, "precio": 0, "precio_texto": "", "categoria": "teatro", "publico": "todos", "descripcion": "Una de las obras más emblemáticas del teatro chileno vuelve a escena con la aclamada versión de Héctor Noguera de La pérgola de las flores . El montaje se presentará en GAM entre el 28 de agosto y el…", "imagen": "https://www.ed.cl/wp-content/uploads/2026/08/pergola.jpg", "fuente": "ED — Ferias y Bazar ED", "url": "https://www.ed.cl/event/la-pergola-de-las-flores-vuelve-a-gam-con-hector-noguera/"};
+  const EV = {"id": "0c57e832f7a15805", "titulo": "«La pérgola de las flores” vuelve al GAM", "inicio": "2026-08-28T00:00:00", "fin": "2026-09-13T23:59:00", "lugar": "Centro GAM", "direccion": "Av. Libertador Bernardo O'Higgins 227, Santiago, Santiago", "comuna": "Santiago", "lat": -33.43893434583333, "lon": -70.63941524166668, "precision": "calle", "gratis": true, "precio": 0, "precio_texto": "", "categoria": "teatro", "publico": "todos", "descripcion": "Una de las obras más emblemáticas del teatro chileno vuelve a escena con la aclamada versión de Héctor Noguera de La pérgola de las flores . El montaje se presentará en GAM entre el 28 de agosto y el…", "imagen": "https://www.ed.cl/wp-content/uploads/2026/08/pergola.jpg", "fuente": "ED — Ferias y Bazar ED", "url": "https://www.ed.cl/event/la-pergola-de-las-flores-vuelve-a-gam-con-hector-noguera/"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

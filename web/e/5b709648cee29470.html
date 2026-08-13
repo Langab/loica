@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>SKALDIK &amp; MANIFIESTO SKAJAZZ IN CONCERT — Loica</title>
 <meta name="description" content="viernes 14 de agosto, 21:00 · Estudio Oculto, Ñuñoa · $5.000">
 <link rel="canonical" href="https://langab.github.io/loica/e/5b709648cee29470.html">
@@ -19,7 +30,7 @@
 <meta name="twitter:title" content="SKALDIK &amp; MANIFIESTO SKAJAZZ IN CONCERT">
 <meta name="twitter:description" content="viernes 14 de agosto, 21:00 · Estudio Oculto, Ñuñoa · $5.000">
 
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "SKALDIK & MANIFIESTO SKAJAZZ IN CONCERT", "startDate": "2026-08-14T21:00:00", "eventStatus": "https://schema.org/EventScheduled", "location": {"@type": "Place", "name": "Estudio Oculto", "address": {"@type": "PostalAddress", "addressLocality": "Ñuñoa", "addressCountry": "CL"}}, "url": "https://langab.github.io/loica/e/5b709648cee29470.html", "image": "https://imagenes.passline.com/eventos/skaldik-manifiesto-skajazz-in-concert-543419-rec.jpg", "offers": {"@type": "Offer", "price": 5000, "priceCurrency": "CLP", "url": "https://www.passline.com/eventos/skaldik-manifiesto-skajazz-in-concert"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "SKALDIK \u0026 MANIFIESTO SKAJAZZ IN CONCERT", "startDate": "2026-08-14T21:00:00", "eventStatus": "https://schema.org/EventScheduled", "location": {"@type": "Place", "name": "Estudio Oculto", "address": {"@type": "PostalAddress", "addressLocality": "Ñuñoa", "addressCountry": "CL"}}, "url": "https://langab.github.io/loica/e/5b709648cee29470.html", "image": "https://imagenes.passline.com/eventos/skaldik-manifiesto-skajazz-in-concert-543419-rec.jpg", "offers": {"@type": "Offer", "price": 5000, "priceCurrency": "CLP", "url": "https://www.passline.com/eventos/skaldik-manifiesto-skajazz-in-concert"}}</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,7 +66,7 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">SKALDIK &amp; MANIFIESTO SKAJAZZ IN CONCERT</h1>
 
-  <a class="boton bloque" href="https://www.passline.com/eventos/skaldik-manifiesto-skajazz-in-concert" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://www.passline.com/eventos/skaldik-manifiesto-skajazz-in-concert" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>
@@ -78,7 +89,7 @@
 <script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "5b709648cee29470", "titulo": "SKALDIK & MANIFIESTO SKAJAZZ IN CONCERT", "inicio": "2026-08-14T21:00:00", "fin": "2026-08-15T00:00:00", "lugar": "Estudio Oculto", "direccion": "", "comuna": "Ñuñoa", "lat": -33.4569, "lon": -70.5975, "precision": "comuna", "gratis": false, "precio": 5000, "precio_texto": "", "categoria": "musica", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/skaldik-manifiesto-skajazz-in-concert-543419-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/skaldik-manifiesto-skajazz-in-concert"};
+  const EV = {"id": "5b709648cee29470", "titulo": "SKALDIK \u0026 MANIFIESTO SKAJAZZ IN CONCERT", "inicio": "2026-08-14T21:00:00", "fin": "2026-08-15T00:00:00", "lugar": "Estudio Oculto", "direccion": "", "comuna": "Ñuñoa", "lat": -33.4569, "lon": -70.5975, "precision": "comuna", "gratis": false, "precio": 5000, "precio_texto": "", "categoria": "musica", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/skaldik-manifiesto-skajazz-in-concert-543419-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/skaldik-manifiesto-skajazz-in-concert"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

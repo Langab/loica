@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>Mortiis en Sala RBX — Loica</title>
 <meta name="description" content="domingo 18 de octubre, 20:00 · Sala RBX, Ñuñoa · $28.000">
 <link rel="canonical" href="https://langab.github.io/loica/e/4e4bd8d1cdc80508.html">
@@ -55,7 +66,7 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Mortiis en Sala RBX</h1>
 
-  <a class="boton bloque" href="https://www.passline.com/eventos/mortiis-en-sala-rbx" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://www.passline.com/eventos/mortiis-en-sala-rbx" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>
@@ -78,7 +89,7 @@
 <script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "4e4bd8d1cdc80508", "titulo": "Mortiis en Sala RBX", "inicio": "2026-10-18T20:00:00", "fin": "2026-10-18T00:00:00", "lugar": "Sala RBX", "direccion": "", "comuna": "Ñuñoa", "lat": -33.4569, "lon": -70.5975, "precision": "comuna", "gratis": false, "precio": 28000, "precio_texto": "", "categoria": "musica", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/mortiis-en-sala-rbx-541965-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/mortiis-en-sala-rbx"};
+  const EV = {"id": "4e4bd8d1cdc80508", "titulo": "Mortiis en Sala RBX", "inicio": "2026-10-18T20:00:00", "fin": "2026-10-18T00:00:00", "lugar": "Sala RBX", "direccion": "Av. Vicuña Mackenna 1220", "comuna": "Ñuñoa", "lat": -33.45691, "lon": -70.62916, "precision": "correccion", "gratis": false, "precio": 28000, "precio_texto": "", "categoria": "musica", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/mortiis-en-sala-rbx-541965-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/mortiis-en-sala-rbx"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

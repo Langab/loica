@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>PLANET ASIA &amp; EL BRUTO CHR — Loica</title>
 <meta name="description" content="sábado 15 de agosto · Bar Los Gatos · Entrada liberada — +FIESTA">
 <link rel="canonical" href="https://langab.github.io/loica/e/be95ffd080a5af78.html">
@@ -19,7 +30,7 @@
 <meta name="twitter:title" content="PLANET ASIA &amp; EL BRUTO CHR">
 <meta name="twitter:description" content="sábado 15 de agosto · Bar Los Gatos · Entrada liberada — +FIESTA">
 
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "PLANET ASIA & EL BRUTO CHR", "startDate": "2026-08-15T00:00:00", "eventStatus": "https://schema.org/EventScheduled", "location": {"@type": "Place", "name": "Bar Los Gatos", "address": {"@type": "PostalAddress", "addressLocality": "Santiago", "addressCountry": "CL"}}, "url": "https://langab.github.io/loica/e/be95ffd080a5af78.html", "image": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/492eef109cfb15867c257ff083b82f624806ec9134e42510d7686144287098b1.jpg", "offers": {"@type": "Offer", "price": 0, "priceCurrency": "CLP", "url": "https://www.toliv.com/eventos/chile/rancagua/planet-asia-el-bruto-chr-25971"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "PLANET ASIA \u0026 EL BRUTO CHR", "startDate": "2026-08-15T00:00:00", "eventStatus": "https://schema.org/EventScheduled", "location": {"@type": "Place", "name": "Bar Los Gatos", "address": {"@type": "PostalAddress", "addressLocality": "Santiago", "addressCountry": "CL"}}, "url": "https://langab.github.io/loica/e/be95ffd080a5af78.html", "image": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/492eef109cfb15867c257ff083b82f624806ec9134e42510d7686144287098b1.jpg", "offers": {"@type": "Offer", "price": 0, "priceCurrency": "CLP", "url": "https://www.toliv.com/eventos/chile/rancagua/planet-asia-el-bruto-chr-25971"}}</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,7 +66,7 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">PLANET ASIA &amp; EL BRUTO CHR</h1>
 
-  <a class="boton bloque" href="https://www.toliv.com/eventos/chile/rancagua/planet-asia-el-bruto-chr-25971" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://www.toliv.com/eventos/chile/rancagua/planet-asia-el-bruto-chr-25971" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>
@@ -78,7 +89,7 @@
 <script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "be95ffd080a5af78", "titulo": "PLANET ASIA & EL BRUTO CHR", "inicio": "2026-08-15T00:00:00", "fin": "2026-08-15T00:00:00", "lugar": "Bar Los Gatos", "direccion": "Rubio #331, Rancagua", "comuna": "", "lat": null, "lon": null, "precision": "sin_ubicar", "gratis": true, "precio": 0, "precio_texto": "", "categoria": "fiesta", "publico": "adultos", "descripcion": "+FIESTA", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/492eef109cfb15867c257ff083b82f624806ec9134e42510d7686144287098b1.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/rancagua/planet-asia-el-bruto-chr-25971"};
+  const EV = {"id": "be95ffd080a5af78", "titulo": "PLANET ASIA \u0026 EL BRUTO CHR", "inicio": "2026-08-15T00:00:00", "fin": "2026-08-15T00:00:00", "lugar": "Bar Los Gatos", "direccion": "Rubio #331, Rancagua", "comuna": "", "lat": null, "lon": null, "precision": "sin_ubicar", "gratis": true, "precio": 0, "precio_texto": "", "categoria": "fiesta", "publico": "adultos", "descripcion": "+FIESTA", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/492eef109cfb15867c257ff083b82f624806ec9134e42510d7686144287098b1.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/rancagua/planet-asia-el-bruto-chr-25971"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

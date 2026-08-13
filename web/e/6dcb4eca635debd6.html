@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>Roxbury 16-08-2026 — Loica</title>
 <meta name="description" content="lunes 17 de agosto, 03:00 · Roxbury 16-08-2026, Santiago · $5.000 — ¡Este domingo nos volvemos a encontrar para vivir una noche intensa, poderosa y cargada de energía en la pista">
 <link rel="canonical" href="https://langab.github.io/loica/e/6dcb4eca635debd6.html">
@@ -55,7 +66,7 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Roxbury 16-08-2026</h1>
 
-  <a class="boton bloque" href="https://www.toliv.com/eventos/chile/santiago-centro/roxbury-16-08-2026-26030" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://www.toliv.com/eventos/chile/santiago-centro/roxbury-16-08-2026-26030" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>
@@ -78,7 +89,7 @@
 <script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "6dcb4eca635debd6", "titulo": "Roxbury 16-08-2026", "inicio": "2026-08-17T03:00:00", "fin": "2026-08-17T00:07:00", "lugar": "Roxbury 16-08-2026", "direccion": " #, Santiago", "comuna": "Santiago", "lat": -33.4691199, "lon": -70.641997, "precision": "fuente", "gratis": false, "precio": 5000, "precio_texto": "desde $5.000", "categoria": "fiesta", "publico": "adultos", "descripcion": "¡Este domingo nos volvemos a encontrar para vivir una noche intensa, poderosa y cargada de energía en la pista! Prepárate para una experiencia sonora dominada por el hard techno, la vibra groovera y…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/907cfb404e4e0a3370c062c3e40ca013124f89b3a7c67a7c3f82b2e79a4a7fbb.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/santiago-centro/roxbury-16-08-2026-26030"};
+  const EV = {"id": "6dcb4eca635debd6", "titulo": "Roxbury 16-08-2026", "inicio": "2026-08-17T03:00:00", "fin": "2026-08-17T00:07:00", "lugar": "Roxbury 16-08-2026", "direccion": " #, Santiago", "comuna": "Santiago", "lat": -33.4691199, "lon": -70.641997, "precision": "comuna", "gratis": false, "precio": 5000, "precio_texto": "desde $5.000", "categoria": "fiesta", "publico": "adultos", "descripcion": "¡Este domingo nos volvemos a encontrar para vivir una noche intensa, poderosa y cargada de energía en la pista! Prepárate para una experiencia sonora dominada por el hard techno, la vibra groovera y…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/907cfb404e4e0a3370c062c3e40ca013124f89b3a7c67a7c3f82b2e79a4a7fbb.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/santiago-centro/roxbury-16-08-2026-26030"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>Cata de Whiskey glenmorangie — Loica</title>
 <meta name="description" content="sábado 15 de agosto, 00:21 · Bar Don Carlos, Las Condes · $60.000 — Maridaje y Whiskey">
 <link rel="canonical" href="https://langab.github.io/loica/e/8866475bc5529941.html">
@@ -55,7 +66,7 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Cata de Whiskey glenmorangie</h1>
 
-  <a class="boton bloque" href="https://www.toliv.com/eventos/chile/las-condes/cata-de-whiskey-glenmorangie-25983" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://www.toliv.com/eventos/chile/las-condes/cata-de-whiskey-glenmorangie-25983" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>
@@ -78,7 +89,7 @@
 <script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "8866475bc5529941", "titulo": "Cata de Whiskey glenmorangie", "inicio": "2026-08-15T00:21:00", "fin": "2026-08-15T00:00:00", "lugar": "Bar Don Carlos", "direccion": "Isidora Goyenechea #2896, Las Condes", "comuna": "Las Condes", "lat": -33.398981, "lon": -70.557312, "precision": "fuente", "gratis": false, "precio": 60000, "precio_texto": "desde $60.000", "categoria": "fiesta", "publico": "adultos", "descripcion": "Maridaje y Whiskey", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/8248b8086da1b92ef21e51549f92e43eb3bd0bdf621f8b22ce372356533e5ab5.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/las-condes/cata-de-whiskey-glenmorangie-25983"};
+  const EV = {"id": "8866475bc5529941", "titulo": "Cata de Whiskey glenmorangie", "inicio": "2026-08-15T00:21:00", "fin": "2026-08-15T00:00:00", "lugar": "Bar Don Carlos", "direccion": "Isidora Goyenechea #2896, Las Condes", "comuna": "Las Condes", "lat": -33.41414668, "lon": -70.60180109999999, "precision": "calle", "gratis": false, "precio": 60000, "precio_texto": "desde $60.000", "categoria": "fiesta", "publico": "adultos", "descripcion": "Maridaje y Whiskey", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/8248b8086da1b92ef21e51549f92e43eb3bd0bdf621f8b22ce372356533e5ab5.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/las-condes/cata-de-whiskey-glenmorangie-25983"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

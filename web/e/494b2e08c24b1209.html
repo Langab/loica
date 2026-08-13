@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>KUARZO: NOCHE DE ROCK EN KAHUIN — Loica</title>
 <meta name="description" content="viernes 14 de agosto, 21:30 · Kahuin, Peñalolén · Sin información">
 <link rel="canonical" href="https://langab.github.io/loica/e/494b2e08c24b1209.html">
@@ -55,7 +66,7 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">KUARZO: NOCHE DE ROCK EN KAHUIN</h1>
 
-  <a class="boton bloque" href="https://www.portaldisc.com/evento/kahuin14agosto" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://www.portaldisc.com/evento/kahuin14agosto" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>
@@ -78,7 +89,7 @@
 <script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "494b2e08c24b1209", "titulo": "KUARZO: NOCHE DE ROCK EN KAHUIN", "inicio": "2026-08-14T21:30:00", "fin": null, "lugar": "Kahuin", "direccion": "", "comuna": "Peñalolén", "lat": -33.4849, "lon": -70.5423, "precision": "comuna", "gratis": false, "precio": null, "precio_texto": "", "categoria": "musica", "publico": "todos", "descripcion": "", "imagen": "", "fuente": "PortalTickets — carteleras por local (circuito under)", "url": "https://www.portaldisc.com/evento/kahuin14agosto"};
+  const EV = {"id": "494b2e08c24b1209", "titulo": "KUARZO: NOCHE DE ROCK EN KAHUIN", "inicio": "2026-08-14T21:30:00", "fin": null, "lugar": "Kahuin", "direccion": "Antupirén 9301, Patio La Rosa", "comuna": "Peñalolén", "lat": -33.48326, "lon": -70.53597, "precision": "correccion", "gratis": false, "precio": null, "precio_texto": "", "categoria": "musica", "publico": "todos", "descripcion": "", "imagen": "", "fuente": "PortalTickets — carteleras por local (circuito under)", "url": "https://www.portaldisc.com/evento/kahuin14agosto"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

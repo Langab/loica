@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>Maná en Estadio Monumental — Loica</title>
 <meta name="description" content="sábado 5 de diciembre · Estadio Monumental, Macul · $46.000 — Compra tus entradas para Maná en PuntoTicket.com">
 <link rel="canonical" href="https://langab.github.io/loica/e/1e84ae8d46b98295.html">
@@ -19,7 +30,7 @@
 <meta name="twitter:title" content="Maná en Estadio Monumental">
 <meta name="twitter:description" content="sábado 5 de diciembre · Estadio Monumental, Macul · $46.000 — Compra tus entradas para Maná en PuntoTicket.com">
 
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "Maná en Estadio Monumental", "startDate": "2026-12-05T00:00:00", "eventStatus": "https://schema.org/EventScheduled", "location": {"@type": "Place", "name": "Estadio Monumental", "address": {"@type": "PostalAddress", "addressLocality": "Macul", "addressCountry": "CL"}}, "url": "https://langab.github.io/loica/e/1e84ae8d46b98295.html", "image": "https://static.ptocdn.net/images/eventos/biz383_rs.jpg", "offers": {"@type": "Offer", "price": 46000, "priceCurrency": "CLP", "url": "https://www.puntoticket.com/evento/mana-estadio-monumental-dic-2026?utm_medium=organic&utm_source=microformat"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "Maná en Estadio Monumental", "startDate": "2026-12-05T00:00:00", "eventStatus": "https://schema.org/EventScheduled", "location": {"@type": "Place", "name": "Estadio Monumental", "address": {"@type": "PostalAddress", "addressLocality": "Macul", "addressCountry": "CL"}}, "url": "https://langab.github.io/loica/e/1e84ae8d46b98295.html", "image": "https://static.ptocdn.net/images/eventos/biz383_rs.jpg", "offers": {"@type": "Offer", "price": 46000, "priceCurrency": "CLP", "url": "https://www.puntoticket.com/evento/mana-estadio-monumental-dic-2026?utm_medium=organic\u0026utm_source=microformat"}}</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,7 +66,7 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Maná en Estadio Monumental</h1>
 
-  <a class="boton bloque" href="https://www.puntoticket.com/evento/mana-estadio-monumental-dic-2026?utm_medium=organic&amp;utm_source=microformat" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://www.puntoticket.com/evento/mana-estadio-monumental-dic-2026?utm_medium=organic&amp;utm_source=microformat" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>
@@ -78,7 +89,7 @@
 <script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "1e84ae8d46b98295", "titulo": "Maná en Estadio Monumental", "inicio": "2026-12-05T00:00:00", "fin": null, "lugar": "Estadio Monumental", "direccion": "Marathon 5300, Macul", "comuna": "Macul", "lat": -33.505, "lon": -70.6067352, "precision": "fuente", "gratis": false, "precio": 46000, "precio_texto": "desde $46.000", "categoria": "deporte", "publico": "todos", "descripcion": "Compra tus entradas para Maná en PuntoTicket.com", "imagen": "https://static.ptocdn.net/images/eventos/biz383_rs.jpg", "fuente": "Puntoticket (deportes, musica y familia)", "url": "https://www.puntoticket.com/evento/mana-estadio-monumental-dic-2026?utm_medium=organic&utm_source=microformat"};
+  const EV = {"id": "1e84ae8d46b98295", "titulo": "Maná en Estadio Monumental", "inicio": "2026-12-05T00:00:00", "fin": null, "lugar": "Estadio Monumental", "direccion": "Marathon 5300, Macul", "comuna": "Macul", "lat": -33.505, "lon": -70.6067352, "precision": "fuente", "gratis": false, "precio": 46000, "precio_texto": "desde $46.000", "categoria": "deporte", "publico": "todos", "descripcion": "Compra tus entradas para Maná en PuntoTicket.com", "imagen": "https://static.ptocdn.net/images/eventos/biz383_rs.jpg", "fuente": "Puntoticket (deportes, musica y familia)", "url": "https://www.puntoticket.com/evento/mana-estadio-monumental-dic-2026?utm_medium=organic\u0026utm_source=microformat"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

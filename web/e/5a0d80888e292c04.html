@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>MEDIEVAL PARTY HALLOWEEN FEST 2026 — Loica</title>
 <meta name="description" content="sábado 17 de octubre, 12:00 · Aldea Encuentro, La Reina · $4.000">
 <link rel="canonical" href="https://langab.github.io/loica/e/5a0d80888e292c04.html">
@@ -55,7 +66,7 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">MEDIEVAL PARTY HALLOWEEN FEST 2026</h1>
 
-  <a class="boton bloque" href="https://www.passline.com/eventos/medieval-party-halloween-fest-2026" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://www.passline.com/eventos/medieval-party-halloween-fest-2026" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>
@@ -78,7 +89,7 @@
 <script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "5a0d80888e292c04", "titulo": "MEDIEVAL PARTY HALLOWEEN FEST 2026", "inicio": "2026-10-17T12:00:00", "fin": "2026-10-18T00:00:00", "lugar": "Aldea Encuentro", "direccion": "", "comuna": "La Reina", "lat": -33.4437, "lon": -70.5405, "precision": "comuna", "gratis": false, "precio": 4000, "precio_texto": "", "categoria": "fiesta", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/-775193-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/medieval-party-halloween-fest-2026"};
+  const EV = {"id": "5a0d80888e292c04", "titulo": "MEDIEVAL PARTY HALLOWEEN FEST 2026", "inicio": "2026-10-17T12:00:00", "fin": "2026-10-18T00:00:00", "lugar": "Aldea Encuentro", "direccion": "Av. Alcalde Fernando Castillo Velasco 9750", "comuna": "La Reina", "lat": -33.45174, "lon": -70.53093, "precision": "correccion", "gratis": false, "precio": 4000, "precio_texto": "", "categoria": "fiesta", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/-775193-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/medieval-party-halloween-fest-2026"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

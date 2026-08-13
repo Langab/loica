@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>Expo Renta Corta y Vacacional — Loica</title>
 <meta name="description" content="sábado 29 de agosto · Centro Cultural Estacion Mapocho, Santiago · Entrada liberada — Los días viernes 28 y sábado 29 de agosto, el Centro Cultural Estación Mapocho será sede de Ex">
 <link rel="canonical" href="https://langab.github.io/loica/e/4c76bf4fc95a788a.html">
@@ -55,7 +66,7 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Expo Renta Corta y Vacacional</h1>
 
-  <a class="boton bloque" href="https://www.estacionmapocho.cl/?evngrnpb=expo-renta-corta-y-vacacional" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://www.estacionmapocho.cl/?evngrnpb=expo-renta-corta-y-vacacional" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>
@@ -78,7 +89,7 @@
 <script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "4c76bf4fc95a788a", "titulo": "Expo Renta Corta y Vacacional", "inicio": "2026-08-29T00:00:00", "fin": null, "lugar": "Centro Cultural Estacion Mapocho", "direccion": "", "comuna": "Santiago", "lat": -33.43224675116278, "lon": -70.65444861395348, "precision": "recinto", "gratis": true, "precio": 0, "precio_texto": "neral a la feria es gratuita mediante registro previo en el", "categoria": "otros", "publico": "todos", "descripcion": "Los días viernes 28 y sábado 29 de agosto, el Centro Cultural Estación Mapocho será sede de Expo Renta Corta y Vacacional 2026, el principal encuentro de la industria del arriendo de corta estadía…", "imagen": "https://www.estacionmapocho.cl/wp-content/uploads/2026/08/foto5-1-1-768x429.jpeg", "fuente": "Centro Cultural Estacion Mapocho", "url": "https://www.estacionmapocho.cl/?evngrnpb=expo-renta-corta-y-vacacional"};
+  const EV = {"id": "4c76bf4fc95a788a", "titulo": "Expo Renta Corta y Vacacional", "inicio": "2026-08-29T00:00:00", "fin": null, "lugar": "Centro Cultural Estacion Mapocho", "direccion": "Plaza de la Cultura s/n, ex Estación Mapocho", "comuna": "Santiago", "lat": -33.43225, "lon": -70.65445, "precision": "correccion", "gratis": true, "precio": 0, "precio_texto": "neral a la feria es gratuita mediante registro previo en el", "categoria": "otros", "publico": "todos", "descripcion": "Los días viernes 28 y sábado 29 de agosto, el Centro Cultural Estación Mapocho será sede de Expo Renta Corta y Vacacional 2026, el principal encuentro de la industria del arriendo de corta estadía…", "imagen": "https://www.estacionmapocho.cl/wp-content/uploads/2026/08/foto5-1-1-768x429.jpeg", "fuente": "Centro Cultural Estacion Mapocho", "url": "https://www.estacionmapocho.cl/?evngrnpb=expo-renta-corta-y-vacacional"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

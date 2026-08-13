@@ -3,8 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>Fútbol 5 Ma 18:00 h. / Villa Olímpica. — Loica</title>
-<meta name="description" content="martes 1 de septiembre, 18:00 · Fútbol, Ñuñoa · Entrada liberada — todos los martes de 18:00 a 19:45. El Fútbol 5 es una modalidad moderna y dinámica del fútbol tradicional, dis">
+<meta name="description" content="martes 1 de septiembre, 18:00 · Villa Olímpica, Ñuñoa · Entrada liberada — todos los martes de 18:00 a 19:45. El Fútbol 5 es una modalidad moderna y dinámica del fútbol tradicional">
 <link rel="canonical" href="https://langab.github.io/loica/e/b90d7f23c2648fc9.html">
 
 <!-- Open Graph: esto es lo que se ve al pegar el link en WhatsApp -->
@@ -12,14 +23,14 @@
 <meta property="og:site_name" content="Loica">
 <meta property="og:locale" content="es_CL">
 <meta property="og:title" content="Fútbol 5 Ma 18:00 h. / Villa Olímpica.">
-<meta property="og:description" content="martes 1 de septiembre, 18:00 · Fútbol, Ñuñoa · Entrada liberada — todos los martes de 18:00 a 19:45. El Fútbol 5 es una modalidad moderna y dinámica del fútbol tradicional, dis">
+<meta property="og:description" content="martes 1 de septiembre, 18:00 · Villa Olímpica, Ñuñoa · Entrada liberada — todos los martes de 18:00 a 19:45. El Fútbol 5 es una modalidad moderna y dinámica del fútbol tradicional">
 <meta property="og:url" content="https://langab.github.io/loica/e/b90d7f23c2648fc9.html">
 <meta property="og:image" content="https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1765453608249-346247572.webp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Fútbol 5 Ma 18:00 h. / Villa Olímpica.">
-<meta name="twitter:description" content="martes 1 de septiembre, 18:00 · Fútbol, Ñuñoa · Entrada liberada — todos los martes de 18:00 a 19:45. El Fútbol 5 es una modalidad moderna y dinámica del fútbol tradicional, dis">
+<meta name="twitter:description" content="martes 1 de septiembre, 18:00 · Villa Olímpica, Ñuñoa · Entrada liberada — todos los martes de 18:00 a 19:45. El Fútbol 5 es una modalidad moderna y dinámica del fútbol tradicional">
 
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "Fútbol 5 Ma 18:00 h. / Villa Olímpica.", "startDate": "2026-09-01T18:00:00", "eventStatus": "https://schema.org/EventScheduled", "location": {"@type": "Place", "name": "Fútbol", "address": {"@type": "PostalAddress", "addressLocality": "Ñuñoa", "addressCountry": "CL"}}, "url": "https://langab.github.io/loica/e/b90d7f23c2648fc9.html", "image": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1765453608249-346247572.webp", "offers": {"@type": "Offer", "price": 0, "priceCurrency": "CLP", "url": "https://talleres.nunoadeportes.cl/talleres/6939b67077610669702541b5"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "Fútbol 5 Ma 18:00 h. / Villa Olímpica.", "startDate": "2026-09-01T18:00:00", "eventStatus": "https://schema.org/EventScheduled", "location": {"@type": "Place", "name": "Villa Olímpica", "address": {"@type": "PostalAddress", "addressLocality": "Ñuñoa", "addressCountry": "CL"}}, "url": "https://langab.github.io/loica/e/b90d7f23c2648fc9.html", "image": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1765453608249-346247572.webp", "offers": {"@type": "Offer", "price": 0, "priceCurrency": "CLP", "url": "https://talleres.nunoadeportes.cl/talleres/6939b67077610669702541b5"}}</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,14 +66,14 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Fútbol 5 Ma 18:00 h. / Villa Olímpica.</h1>
 
-  <a class="boton bloque" href="https://talleres.nunoadeportes.cl/talleres/6939b67077610669702541b5" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://talleres.nunoadeportes.cl/talleres/6939b67077610669702541b5" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>
 
   <div class="dato" style="margin-top:var(--e-4)">
     <span class="et">Cuándo</span><span>martes 1 de septiembre, 18:00</span></div>
-  <div class="dato"><span class="et">Dónde</span><span>Fútbol, Ñuñoa</span></div>
+  <div class="dato"><span class="et">Dónde</span><span>Villa Olímpica, Ñuñoa</span></div>
   <div class="dato"><span class="et">Precio</span>
     <span class="precio libre">Entrada liberada</span></div>
   <div class="dato"><span class="et"></span><span>todos los martes de 18:00 a 19:45. El Fútbol 5 es una modalidad moderna y dinámica del fútbol tradicional, diseñada para espacios reducidos.</span></div>
@@ -78,7 +89,7 @@
 <script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "b90d7f23c2648fc9", "titulo": "Fútbol 5 Ma 18:00 h. / Villa Olímpica.", "inicio": "2026-09-01T18:00:00", "fin": null, "lugar": "Fútbol", "direccion": "Corporación Municipal de Deportes de Ñuñoa", "comuna": "Ñuñoa", "lat": -33.4569, "lon": -70.5975, "precision": "comuna", "gratis": true, "precio": null, "precio_texto": "Gratis", "categoria": "deporte", "publico": "todos", "descripcion": "todos los martes de 18:00 a 19:45. El Fútbol 5 es una modalidad moderna y dinámica del fútbol tradicional, diseñada para espacios reducidos.", "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1765453608249-346247572.webp", "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres", "url": "https://talleres.nunoadeportes.cl/talleres/6939b67077610669702541b5"};
+  const EV = {"id": "b90d7f23c2648fc9", "titulo": "Fútbol 5 Ma 18:00 h. / Villa Olímpica.", "inicio": "2026-09-01T18:00:00", "fin": null, "lugar": "Villa Olímpica", "direccion": "Corporación Municipal de Deportes de Ñuñoa", "comuna": "Ñuñoa", "lat": -33.4569, "lon": -70.5975, "precision": "comuna", "gratis": true, "precio": null, "precio_texto": "Gratis", "categoria": "deporte", "publico": "todos", "descripcion": "todos los martes de 18:00 a 19:45. El Fútbol 5 es una modalidad moderna y dinámica del fútbol tradicional, diseñada para espacios reducidos.", "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1765453608249-346247572.webp", "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres", "url": "https://talleres.nunoadeportes.cl/talleres/6939b67077610669702541b5"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>Fauna Primavera 2026: tres días de música y experiencias al aire libre en Santiago — Loica</title>
 <meta name="description" content="sábado 28 de noviembre · Disfruta Santiago, Santiago · Entrada liberada — Santiago volverá a ser el punto de encuentro de la música alternativa con una nueva edición de Fauna Prima">
 <link rel="canonical" href="https://langab.github.io/loica/e/e19c00de54c4f2e0.html">
@@ -55,7 +66,7 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Fauna Primavera 2026: tres días de música y experiencias al aire libre en Santiago</h1>
 
-  <a class="boton bloque" href="https://disfrutasantiago.cl/events/fauna-primavera-2026-tres-dias-de-musica-y-experiencias-al-aire-libre-en-santiago/" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://disfrutasantiago.cl/events/fauna-primavera-2026-tres-dias-de-musica-y-experiencias-al-aire-libre-en-santiago/" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>

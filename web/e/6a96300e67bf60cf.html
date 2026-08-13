@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>Escalada Escolar Lu-Mi-Vi 18:00 h. — Loica</title>
 <meta name="description" content="viernes 14 de agosto, 18:00 · Polideportivo de Ñuñoa, Ñuñoa · Sin información — todos los lunes, miércoles y viernes de 18:00 a 19:00. La escalada es un entrenamiento físico y técn">
 <link rel="canonical" href="https://langab.github.io/loica/e/6a96300e67bf60cf.html">
@@ -55,7 +66,7 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Escalada Escolar Lu-Mi-Vi 18:00 h.</h1>
 
-  <a class="boton bloque" href="https://talleres.nunoadeportes.cl/talleres/69493f9298f025edecfe89bc" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://talleres.nunoadeportes.cl/talleres/69493f9298f025edecfe89bc" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>

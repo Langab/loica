@@ -3,8 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>Patinaje Lu-Mi 16:30 h. / Plaza Ñuñoa Sur. — Loica</title>
-<meta name="description" content="lunes 31 de agosto, 16:30 · Deporte Vecinal, Ñuñoa · Entrada liberada — todos los lunes y miércoles de 16:30 a 17:30. El patinaje es una actividad física y deportiva que enseña hab">
+<meta name="description" content="lunes 31 de agosto, 16:30 · Plaza Ñuñoa Sur, Ñuñoa · Entrada liberada — todos los lunes y miércoles de 16:30 a 17:30. El patinaje es una actividad física y deportiva que enseña hab">
 <link rel="canonical" href="https://langab.github.io/loica/e/1bff219179470688.html">
 
 <!-- Open Graph: esto es lo que se ve al pegar el link en WhatsApp -->
@@ -12,14 +23,14 @@
 <meta property="og:site_name" content="Loica">
 <meta property="og:locale" content="es_CL">
 <meta property="og:title" content="Patinaje Lu-Mi 16:30 h. / Plaza Ñuñoa Sur.">
-<meta property="og:description" content="lunes 31 de agosto, 16:30 · Deporte Vecinal, Ñuñoa · Entrada liberada — todos los lunes y miércoles de 16:30 a 17:30. El patinaje es una actividad física y deportiva que enseña hab">
+<meta property="og:description" content="lunes 31 de agosto, 16:30 · Plaza Ñuñoa Sur, Ñuñoa · Entrada liberada — todos los lunes y miércoles de 16:30 a 17:30. El patinaje es una actividad física y deportiva que enseña hab">
 <meta property="og:url" content="https://langab.github.io/loica/e/1bff219179470688.html">
 <meta property="og:image" content="https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1765366413502-847678516.webp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Patinaje Lu-Mi 16:30 h. / Plaza Ñuñoa Sur.">
-<meta name="twitter:description" content="lunes 31 de agosto, 16:30 · Deporte Vecinal, Ñuñoa · Entrada liberada — todos los lunes y miércoles de 16:30 a 17:30. El patinaje es una actividad física y deportiva que enseña hab">
+<meta name="twitter:description" content="lunes 31 de agosto, 16:30 · Plaza Ñuñoa Sur, Ñuñoa · Entrada liberada — todos los lunes y miércoles de 16:30 a 17:30. El patinaje es una actividad física y deportiva que enseña hab">
 
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "Patinaje Lu-Mi 16:30 h. / Plaza Ñuñoa Sur.", "startDate": "2026-08-31T16:30:00", "eventStatus": "https://schema.org/EventScheduled", "location": {"@type": "Place", "name": "Deporte Vecinal", "address": {"@type": "PostalAddress", "addressLocality": "Ñuñoa", "addressCountry": "CL"}}, "url": "https://langab.github.io/loica/e/1bff219179470688.html", "image": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1765366413502-847678516.webp", "offers": {"@type": "Offer", "price": 0, "priceCurrency": "CLP", "url": "https://talleres.nunoadeportes.cl/talleres/69382a1505e34566713f2814"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "Patinaje Lu-Mi 16:30 h. / Plaza Ñuñoa Sur.", "startDate": "2026-08-31T16:30:00", "eventStatus": "https://schema.org/EventScheduled", "location": {"@type": "Place", "name": "Plaza Ñuñoa Sur", "address": {"@type": "PostalAddress", "addressLocality": "Ñuñoa", "addressCountry": "CL"}}, "url": "https://langab.github.io/loica/e/1bff219179470688.html", "image": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1765366413502-847678516.webp", "offers": {"@type": "Offer", "price": 0, "priceCurrency": "CLP", "url": "https://talleres.nunoadeportes.cl/talleres/69382a1505e34566713f2814"}}</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,14 +66,14 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Patinaje Lu-Mi 16:30 h. / Plaza Ñuñoa Sur.</h1>
 
-  <a class="boton bloque" href="https://talleres.nunoadeportes.cl/talleres/69382a1505e34566713f2814" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://talleres.nunoadeportes.cl/talleres/69382a1505e34566713f2814" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>
 
   <div class="dato" style="margin-top:var(--e-4)">
     <span class="et">Cuándo</span><span>lunes 31 de agosto, 16:30</span></div>
-  <div class="dato"><span class="et">Dónde</span><span>Deporte Vecinal, Ñuñoa</span></div>
+  <div class="dato"><span class="et">Dónde</span><span>Plaza Ñuñoa Sur, Ñuñoa</span></div>
   <div class="dato"><span class="et">Precio</span>
     <span class="precio libre">Entrada liberada</span></div>
   <div class="dato"><span class="et"></span><span>todos los lunes y miércoles de 16:30 a 17:30. El patinaje es una actividad física y deportiva que enseña habilidades básicas de equilibrio, coordinación y control sobre patines, combinando elementos…</span></div>
@@ -78,7 +89,7 @@
 <script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "1bff219179470688", "titulo": "Patinaje Lu-Mi 16:30 h. / Plaza Ñuñoa Sur.", "inicio": "2026-08-31T16:30:00", "fin": null, "lugar": "Deporte Vecinal", "direccion": "Corporación Municipal de Deportes Ñuñoa", "comuna": "Ñuñoa", "lat": -33.4569, "lon": -70.5975, "precision": "comuna", "gratis": true, "precio": null, "precio_texto": "Gratis", "categoria": "deporte", "publico": "todos", "descripcion": "todos los lunes y miércoles de 16:30 a 17:30. El patinaje es una actividad física y deportiva que enseña habilidades básicas de equilibrio, coordinación y control sobre patines, combinando elementos…", "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1765366413502-847678516.webp", "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres", "url": "https://talleres.nunoadeportes.cl/talleres/69382a1505e34566713f2814"};
+  const EV = {"id": "1bff219179470688", "titulo": "Patinaje Lu-Mi 16:30 h. / Plaza Ñuñoa Sur.", "inicio": "2026-08-31T16:30:00", "fin": null, "lugar": "Plaza Ñuñoa Sur", "direccion": "Corporación Municipal de Deportes Ñuñoa", "comuna": "Ñuñoa", "lat": -33.4569, "lon": -70.5975, "precision": "comuna", "gratis": true, "precio": null, "precio_texto": "Gratis", "categoria": "deporte", "publico": "todos", "descripcion": "todos los lunes y miércoles de 16:30 a 17:30. El patinaje es una actividad física y deportiva que enseña habilidades básicas de equilibrio, coordinación y control sobre patines, combinando elementos…", "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1765366413502-847678516.webp", "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres", "url": "https://talleres.nunoadeportes.cl/talleres/69382a1505e34566713f2814"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>VI Congreso Internacional de Psicología Integral de la Persona “Del modelo a la práctica: Relectura de la técnica psicológica desde una mirada integral de la persona” — Loica</title>
 <meta name="description" content="viernes 23 de octubre, 08:30 · Universidad Finis Terrae, Providencia · Entrada liberada — La Escuela de Psicología de la Universidad Finis Terrae, en colaboración con la Facultad d">
 <link rel="canonical" href="https://langab.github.io/loica/e/91167a506dbb4940.html">
@@ -55,7 +66,7 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">VI Congreso Internacional de Psicología Integral de la Persona “Del modelo a la práctica: Relectura de la técnica psicológica desde una mirada integral de la persona”</h1>
 
-  <a class="boton bloque" href="https://finis.cl/agenda/comunidad-finis-terrae/vi-congreso-internacional-de-psicologia-integral-de-la-persona-del-modelo-a-la-practica-relectura-de-la-tecnica-psicologica-desde-una-mirada-integral-de-la-persona-2/" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://finis.cl/agenda/comunidad-finis-terrae/vi-congreso-internacional-de-psicologia-integral-de-la-persona-del-modelo-a-la-practica-relectura-de-la-tecnica-psicologica-desde-una-mirada-integral-de-la-persona-2/" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>

@@ -3,8 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>Exposición concurso “Las formas de la luz” — Loica</title>
-<meta name="description" content="viernes 26 de marzo · MUT — Mercado Urbano Tobalaba, Providencia · Sin información — ¡Les presentamos a los ganadores de nuestro concurso de fotografía!.Queremos felicitar a quiene">
+<meta name="description" content="viernes 26 de marzo · MUT — Mercado Urbano Tobalaba, Las Condes · Sin información — ¡Les presentamos a los ganadores de nuestro concurso de fotografía!.Queremos felicitar a quienes">
 <link rel="canonical" href="https://langab.github.io/loica/e/716cbb3e4a5457f2.html">
 
 <!-- Open Graph: esto es lo que se ve al pegar el link en WhatsApp -->
@@ -12,14 +23,14 @@
 <meta property="og:site_name" content="Loica">
 <meta property="og:locale" content="es_CL">
 <meta property="og:title" content="Exposición concurso “Las formas de la luz”">
-<meta property="og:description" content="viernes 26 de marzo · MUT — Mercado Urbano Tobalaba, Providencia · Sin información — ¡Les presentamos a los ganadores de nuestro concurso de fotografía!.Queremos felicitar a quiene">
+<meta property="og:description" content="viernes 26 de marzo · MUT — Mercado Urbano Tobalaba, Las Condes · Sin información — ¡Les presentamos a los ganadores de nuestro concurso de fotografía!.Queremos felicitar a quienes">
 <meta property="og:url" content="https://langab.github.io/loica/e/716cbb3e4a5457f2.html">
 <meta property="og:image" content="https://mut.cl/cms/wp-content/uploads/2026/06/Invitacion-general-expo-fotos-scaled-2-768x960.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Exposición concurso “Las formas de la luz”">
-<meta name="twitter:description" content="viernes 26 de marzo · MUT — Mercado Urbano Tobalaba, Providencia · Sin información — ¡Les presentamos a los ganadores de nuestro concurso de fotografía!.Queremos felicitar a quiene">
+<meta name="twitter:description" content="viernes 26 de marzo · MUT — Mercado Urbano Tobalaba, Las Condes · Sin información — ¡Les presentamos a los ganadores de nuestro concurso de fotografía!.Queremos felicitar a quienes">
 
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "Exposición concurso “Las formas de la luz”", "startDate": "2027-03-26T00:00:00", "eventStatus": "https://schema.org/EventScheduled", "location": {"@type": "Place", "name": "MUT — Mercado Urbano Tobalaba", "address": {"@type": "PostalAddress", "addressLocality": "Providencia", "addressCountry": "CL"}}, "url": "https://langab.github.io/loica/e/716cbb3e4a5457f2.html", "image": "https://mut.cl/cms/wp-content/uploads/2026/06/Invitacion-general-expo-fotos-scaled-2-768x960.png"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "Exposición concurso “Las formas de la luz”", "startDate": "2027-03-26T00:00:00", "eventStatus": "https://schema.org/EventScheduled", "location": {"@type": "Place", "name": "MUT — Mercado Urbano Tobalaba", "address": {"@type": "PostalAddress", "addressLocality": "Las Condes", "addressCountry": "CL"}}, "url": "https://langab.github.io/loica/e/716cbb3e4a5457f2.html", "image": "https://mut.cl/cms/wp-content/uploads/2026/06/Invitacion-general-expo-fotos-scaled-2-768x960.png"}</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,14 +66,14 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Exposición concurso “Las formas de la luz”</h1>
 
-  <a class="boton bloque" href="https://mut.cl/es/evento/exposicion-concurso-las-formas-de-la-luz/" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://mut.cl/es/evento/exposicion-concurso-las-formas-de-la-luz/" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>
 
   <div class="dato" style="margin-top:var(--e-4)">
     <span class="et">Cuándo</span><span>viernes 26 de marzo</span></div>
-  <div class="dato"><span class="et">Dónde</span><span>MUT — Mercado Urbano Tobalaba, Providencia</span></div>
+  <div class="dato"><span class="et">Dónde</span><span>MUT — Mercado Urbano Tobalaba, Las Condes</span></div>
   <div class="dato"><span class="et">Precio</span>
     <span class="precio">Sin información</span></div>
   <div class="dato"><span class="et"></span><span>¡Les presentamos a los ganadores de nuestro concurso de fotografía!.Queremos felicitar a quienes lograron capturar momentos donde la luz fue protagonista en todas sus expresiones: los contrastes,…</span></div>
@@ -78,7 +89,7 @@
 <script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "716cbb3e4a5457f2", "titulo": "Exposición concurso “Las formas de la luz”", "inicio": "2027-03-26T00:00:00", "fin": null, "lugar": "MUT — Mercado Urbano Tobalaba", "direccion": "", "comuna": "Providencia", "lat": -33.4256, "lon": -70.6096, "precision": "comuna", "gratis": false, "precio": null, "precio_texto": "", "categoria": "arte", "publico": "todos", "descripcion": "¡Les presentamos a los ganadores de nuestro concurso de fotografía!.Queremos felicitar a quienes lograron capturar momentos donde la luz fue protagonista en todas sus expresiones: los contrastes,…", "imagen": "https://mut.cl/cms/wp-content/uploads/2026/06/Invitacion-general-expo-fotos-scaled-2-768x960.png", "fuente": "MUT — Mercado Urbano Tobalaba", "url": "https://mut.cl/es/evento/exposicion-concurso-las-formas-de-la-luz/"};
+  const EV = {"id": "716cbb3e4a5457f2", "titulo": "Exposición concurso “Las formas de la luz”", "inicio": "2027-03-26T00:00:00", "fin": null, "lugar": "MUT — Mercado Urbano Tobalaba", "direccion": "Av. Apoquindo 2730", "comuna": "Las Condes", "lat": -33.41746, "lon": -70.60115, "precision": "correccion", "gratis": false, "precio": null, "precio_texto": "", "categoria": "arte", "publico": "todos", "descripcion": "¡Les presentamos a los ganadores de nuestro concurso de fotografía!.Queremos felicitar a quienes lograron capturar momentos donde la luz fue protagonista en todas sus expresiones: los contrastes,…", "imagen": "https://mut.cl/cms/wp-content/uploads/2026/06/Invitacion-general-expo-fotos-scaled-2-768x960.png", "fuente": "MUT — Mercado Urbano Tobalaba", "url": "https://mut.cl/es/evento/exposicion-concurso-las-formas-de-la-luz/"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

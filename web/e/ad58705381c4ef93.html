@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>FINAL “AMIGAS &amp; RIVALES “ 20 AÑOS — Loica</title>
 <meta name="description" content="domingo 30 de agosto, 20:00 · TEATRO CARIOLA, Santiago · $30.000">
 <link rel="canonical" href="https://langab.github.io/loica/e/ad58705381c4ef93.html">
@@ -19,7 +30,7 @@
 <meta name="twitter:title" content="FINAL “AMIGAS &amp; RIVALES “ 20 AÑOS">
 <meta name="twitter:description" content="domingo 30 de agosto, 20:00 · TEATRO CARIOLA, Santiago · $30.000">
 
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "FINAL “AMIGAS & RIVALES “ 20 AÑOS", "startDate": "2026-08-30T20:00:00", "eventStatus": "https://schema.org/EventScheduled", "location": {"@type": "Place", "name": "TEATRO CARIOLA", "address": {"@type": "PostalAddress", "addressLocality": "Santiago", "addressCountry": "CL"}}, "url": "https://langab.github.io/loica/e/ad58705381c4ef93.html", "image": "https://imagenes.passline.com/eventos/-747784-rec.jpg", "offers": {"@type": "Offer", "price": 30000, "priceCurrency": "CLP", "url": "https://www.passline.com/eventos/final-amigas-rivales-20-anos"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "FINAL “AMIGAS \u0026 RIVALES “ 20 AÑOS", "startDate": "2026-08-30T20:00:00", "eventStatus": "https://schema.org/EventScheduled", "location": {"@type": "Place", "name": "TEATRO CARIOLA", "address": {"@type": "PostalAddress", "addressLocality": "Santiago", "addressCountry": "CL"}}, "url": "https://langab.github.io/loica/e/ad58705381c4ef93.html", "image": "https://imagenes.passline.com/eventos/-747784-rec.jpg", "offers": {"@type": "Offer", "price": 30000, "priceCurrency": "CLP", "url": "https://www.passline.com/eventos/final-amigas-rivales-20-anos"}}</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,7 +66,7 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">FINAL “AMIGAS &amp; RIVALES “ 20 AÑOS</h1>
 
-  <a class="boton bloque" href="https://www.passline.com/eventos/final-amigas-rivales-20-anos" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://www.passline.com/eventos/final-amigas-rivales-20-anos" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>
@@ -78,7 +89,7 @@
 <script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "ad58705381c4ef93", "titulo": "FINAL “AMIGAS & RIVALES “ 20 AÑOS", "inicio": "2026-08-30T20:00:00", "fin": "2026-08-30T00:00:00", "lugar": "TEATRO CARIOLA", "direccion": "San Diego 246", "comuna": "Santiago", "lat": -33.4482, "lon": -70.6506, "precision": "correccion", "gratis": false, "precio": 30000, "precio_texto": "", "categoria": "teatro", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/-747784-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/final-amigas-rivales-20-anos"};
+  const EV = {"id": "ad58705381c4ef93", "titulo": "FINAL “AMIGAS \u0026 RIVALES “ 20 AÑOS", "inicio": "2026-08-30T20:00:00", "fin": "2026-08-30T00:00:00", "lugar": "TEATRO CARIOLA", "direccion": "San Diego 246", "comuna": "Santiago", "lat": -33.4482, "lon": -70.6506, "precision": "correccion", "gratis": false, "precio": 30000, "precio_texto": "", "categoria": "teatro", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/-747784-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/final-amigas-rivales-20-anos"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

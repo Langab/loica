@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>Conversatorio y premiación del 5° Concurso de Cuentos para jóvenes — Loica</title>
 <meta name="description" content="miércoles 7 de octubre, 07:00 · Universidad Andres Bello - Cultura UNAB, Las Condes · Entrada liberada">
 <link rel="canonical" href="https://langab.github.io/loica/e/cd414e0f59724c2a.html">
@@ -55,7 +66,7 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Conversatorio y premiación del 5° Concurso de Cuentos para jóvenes</h1>
 
-  <a class="boton bloque" href="https://cultura.unab.cl/evento/conversatorio-y-premiacion-del-5-concurso-de-cuentos-para-jovenes/" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://cultura.unab.cl/evento/conversatorio-y-premiacion-del-5-concurso-de-cuentos-para-jovenes/" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>
@@ -78,7 +89,7 @@
 <script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "cd414e0f59724c2a", "titulo": "Conversatorio y premiación del 5° Concurso de Cuentos para jóvenes", "inicio": "2026-10-07T07:00:00", "fin": null, "lugar": "Universidad Andres Bello - Cultura UNAB", "direccion": "", "comuna": "Las Condes", "lat": -33.4088, "lon": -70.5673, "precision": "comuna", "gratis": true, "precio": 0, "precio_texto": "escritura nacional Gratuito Campus Casona de Las Condes mié", "categoria": "charla", "publico": "adolescentes", "descripcion": "", "imagen": "https://cultura.unab.cl/app/uploads/2026/08/rrss-concurso-de-cuentos-para-jovenes7-768x323.jpg", "fuente": "Universidad Andres Bello - Cultura UNAB", "url": "https://cultura.unab.cl/evento/conversatorio-y-premiacion-del-5-concurso-de-cuentos-para-jovenes/"};
+  const EV = {"id": "cd414e0f59724c2a", "titulo": "Conversatorio y premiación del 5° Concurso de Cuentos para jóvenes", "inicio": "2026-10-07T07:00:00", "fin": null, "lugar": "Universidad Andres Bello - Cultura UNAB", "direccion": "Fernández Concha 700, Campus Casona de Las Condes", "comuna": "Las Condes", "lat": -33.37584, "lon": -70.50565, "precision": "correccion", "gratis": true, "precio": 0, "precio_texto": "escritura nacional Gratuito Campus Casona de Las Condes mié", "categoria": "charla", "publico": "adolescentes", "descripcion": "", "imagen": "https://cultura.unab.cl/app/uploads/2026/08/rrss-concurso-de-cuentos-para-jovenes7-768x323.jpg", "fuente": "Universidad Andres Bello - Cultura UNAB", "url": "https://cultura.unab.cl/evento/conversatorio-y-premiacion-del-5-concurso-de-cuentos-para-jovenes/"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>One Piece Card Game Championships 26-27 Finals — Loica</title>
 <meta name="description" content="domingo 16 de agosto · Centro Cultural Estacion Mapocho, Santiago · Sin información — La apasionante comunidad de One Piece en Chile y Latinoamérica vivirá su momento más important">
 <link rel="canonical" href="https://langab.github.io/loica/e/73e7c395cced5b15.html">
@@ -55,7 +66,7 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">One Piece Card Game Championships 26-27 Finals</h1>
 
-  <a class="boton bloque" href="https://www.estacionmapocho.cl/?evngrnpb=one-piece-card-game-championships-26-27-finals" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://www.estacionmapocho.cl/?evngrnpb=one-piece-card-game-championships-26-27-finals" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>
@@ -78,7 +89,7 @@
 <script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "73e7c395cced5b15", "titulo": "One Piece Card Game Championships 26-27 Finals", "inicio": "2026-08-16T00:00:00", "fin": null, "lugar": "Centro Cultural Estacion Mapocho", "direccion": "", "comuna": "Santiago", "lat": -33.43224675116278, "lon": -70.65444861395348, "precision": "recinto", "gratis": false, "precio": null, "precio_texto": "", "categoria": "otros", "publico": "todos", "descripcion": "La apasionante comunidad de One Piece en Chile y Latinoamérica vivirá su momento más importante. Los días 15 y 16 de agosto de 2026, el Centro Cultural Estación Mapocho recibirá el One Piece Card…", "imagen": "https://www.estacionmapocho.cl/wp-content/uploads/2026/02/DSC_0273-768x512.jpg", "fuente": "Centro Cultural Estacion Mapocho", "url": "https://www.estacionmapocho.cl/?evngrnpb=one-piece-card-game-championships-26-27-finals"};
+  const EV = {"id": "73e7c395cced5b15", "titulo": "One Piece Card Game Championships 26-27 Finals", "inicio": "2026-08-16T00:00:00", "fin": null, "lugar": "Centro Cultural Estacion Mapocho", "direccion": "Plaza de la Cultura s/n, ex Estación Mapocho", "comuna": "Santiago", "lat": -33.43225, "lon": -70.65445, "precision": "correccion", "gratis": false, "precio": null, "precio_texto": "", "categoria": "otros", "publico": "todos", "descripcion": "La apasionante comunidad de One Piece en Chile y Latinoamérica vivirá su momento más importante. Los días 15 y 16 de agosto de 2026, el Centro Cultural Estación Mapocho recibirá el One Piece Card…", "imagen": "https://www.estacionmapocho.cl/wp-content/uploads/2026/02/DSC_0273-768x512.jpg", "fuente": "Centro Cultural Estacion Mapocho", "url": "https://www.estacionmapocho.cl/?evngrnpb=one-piece-card-game-championships-26-27-finals"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

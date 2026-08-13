@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>Pedropiedra y Masquemusica llegan al Festival de Montaña — Loica</title>
 <meta name="description" content="sábado 15 de agosto, 19:00 · ED — Ferias y Bazar ED · Entrada liberada — La música llega a Farellones a 2.400 metros de altura con la cuarta edición del Festival de Montaña , conci">
 <link rel="canonical" href="https://langab.github.io/loica/e/b37f81b002a0eee0.html">
@@ -55,7 +66,7 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Pedropiedra y Masquemusica llegan al Festival de Montaña</h1>
 
-  <a class="boton bloque" href="https://www.ed.cl/event/pedropiedra-y-masquemusica-llegan-al-festival-de-montana/" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://www.ed.cl/event/pedropiedra-y-masquemusica-llegan-al-festival-de-montana/" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>
@@ -78,7 +89,7 @@
 <script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "b37f81b002a0eee0", "titulo": "Pedropiedra y Masquemusica llegan al Festival de Montaña", "inicio": "2026-08-15T19:00:00", "fin": "2026-08-15T22:00:00", "lugar": "ED — Ferias y Bazar ED", "direccion": "", "comuna": "", "lat": null, "lon": null, "precision": "sin_ubicar", "gratis": true, "precio": 0, "precio_texto": "trong>, con entrada liberada.</p> <p class=\"isSelectedEnd\">L", "categoria": "musica", "publico": "todos", "descripcion": "La música llega a Farellones a 2.400 metros de altura con la cuarta edición del Festival de Montaña , concierto al aire libre que este año reunirá a Pedropiedra y Masquemusica en una jornada abierta…", "imagen": "https://www.ed.cl/wp-content/uploads/2026/07/pp.jpg", "fuente": "ED — Ferias y Bazar ED", "url": "https://www.ed.cl/event/pedropiedra-y-masquemusica-llegan-al-festival-de-montana/"};
+  const EV = {"id": "b37f81b002a0eee0", "titulo": "Pedropiedra y Masquemusica llegan al Festival de Montaña", "inicio": "2026-08-15T19:00:00", "fin": "2026-08-15T22:00:00", "lugar": "ED — Ferias y Bazar ED", "direccion": "", "comuna": "", "lat": null, "lon": null, "precision": "sin_ubicar", "gratis": true, "precio": 0, "precio_texto": "trong\u003e, con entrada liberada.\u003c/p\u003e \u003cp class=\"isSelectedEnd\"\u003eL", "categoria": "musica", "publico": "todos", "descripcion": "La música llega a Farellones a 2.400 metros de altura con la cuarta edición del Festival de Montaña , concierto al aire libre que este año reunirá a Pedropiedra y Masquemusica en una jornada abierta…", "imagen": "https://www.ed.cl/wp-content/uploads/2026/07/pp.jpg", "fuente": "ED — Ferias y Bazar ED", "url": "https://www.ed.cl/event/pedropiedra-y-masquemusica-llegan-al-festival-de-montana/"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

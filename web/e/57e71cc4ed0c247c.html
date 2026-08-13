@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>Bienvenida Primavera Fest en Hipódromo Chile — Loica</title>
 <meta name="description" content="domingo 30 de agosto · Hipódromo Chile, Independencia · $17.250 — Festival Bienvenida a la Primavera 2026El festival familiar más grande del año llega al Hipódromo Chile con un">
 <link rel="canonical" href="https://langab.github.io/loica/e/57e71cc4ed0c247c.html">
@@ -19,7 +30,7 @@
 <meta name="twitter:title" content="Bienvenida Primavera Fest en Hipódromo Chile">
 <meta name="twitter:description" content="domingo 30 de agosto · Hipódromo Chile, Independencia · $17.250 — Festival Bienvenida a la Primavera 2026El festival familiar más grande del año llega al Hipódromo Chile con un">
 
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "Bienvenida Primavera Fest en Hipódromo Chile", "startDate": "2026-08-30T00:00:00", "eventStatus": "https://schema.org/EventScheduled", "location": {"@type": "Place", "name": "Hipódromo Chile", "address": {"@type": "PostalAddress", "addressLocality": "Independencia", "addressCountry": "CL"}}, "url": "https://langab.github.io/loica/e/57e71cc4ed0c247c.html", "image": "https://static.ptocdn.net/images/eventos/psk001_rs.jpg", "offers": {"@type": "Offer", "price": 17250, "priceCurrency": "CLP", "url": "https://www.puntoticket.com/evento/bienvenida-primavera-fest-arena-hipodromo-ago-2026?utm_medium=organic&utm_source=microformat"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "Bienvenida Primavera Fest en Hipódromo Chile", "startDate": "2026-08-30T00:00:00", "eventStatus": "https://schema.org/EventScheduled", "location": {"@type": "Place", "name": "Hipódromo Chile", "address": {"@type": "PostalAddress", "addressLocality": "Independencia", "addressCountry": "CL"}}, "url": "https://langab.github.io/loica/e/57e71cc4ed0c247c.html", "image": "https://static.ptocdn.net/images/eventos/psk001_rs.jpg", "offers": {"@type": "Offer", "price": 17250, "priceCurrency": "CLP", "url": "https://www.puntoticket.com/evento/bienvenida-primavera-fest-arena-hipodromo-ago-2026?utm_medium=organic\u0026utm_source=microformat"}}</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,7 +66,7 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Bienvenida Primavera Fest en Hipódromo Chile</h1>
 
-  <a class="boton bloque" href="https://www.puntoticket.com/evento/bienvenida-primavera-fest-arena-hipodromo-ago-2026?utm_medium=organic&amp;utm_source=microformat" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://www.puntoticket.com/evento/bienvenida-primavera-fest-arena-hipodromo-ago-2026?utm_medium=organic&amp;utm_source=microformat" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>
@@ -78,7 +89,7 @@
 <script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "57e71cc4ed0c247c", "titulo": "Bienvenida Primavera Fest en Hipódromo Chile", "inicio": "2026-08-30T00:00:00", "fin": null, "lugar": "Hipódromo Chile", "direccion": "Av. Hipodromo Chile 1715, Independencia", "comuna": "Independencia", "lat": -33.403887374074074, "lon": -70.66715052777776, "precision": "calle", "gratis": false, "precio": 17250, "precio_texto": "desde $17.250", "categoria": "deporte", "publico": "todos", "descripcion": "Festival Bienvenida a la Primavera 2026El festival familiar más grande del año llega al Hipódromo Chile con un line-up estelar", "imagen": "https://static.ptocdn.net/images/eventos/psk001_rs.jpg", "fuente": "Puntoticket (deportes, musica y familia)", "url": "https://www.puntoticket.com/evento/bienvenida-primavera-fest-arena-hipodromo-ago-2026?utm_medium=organic&utm_source=microformat"};
+  const EV = {"id": "57e71cc4ed0c247c", "titulo": "Bienvenida Primavera Fest en Hipódromo Chile", "inicio": "2026-08-30T00:00:00", "fin": null, "lugar": "Hipódromo Chile", "direccion": "Av. Hipodromo Chile 1715, Independencia", "comuna": "Independencia", "lat": -33.403887374074074, "lon": -70.66715052777776, "precision": "calle", "gratis": false, "precio": 17250, "precio_texto": "desde $17.250", "categoria": "deporte", "publico": "todos", "descripcion": "Festival Bienvenida a la Primavera 2026El festival familiar más grande del año llega al Hipódromo Chile con un line-up estelar", "imagen": "https://static.ptocdn.net/images/eventos/psk001_rs.jpg", "fuente": "Puntoticket (deportes, musica y familia)", "url": "https://www.puntoticket.com/evento/bienvenida-primavera-fest-arena-hipodromo-ago-2026?utm_medium=organic\u0026utm_source=microformat"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

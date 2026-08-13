@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>FIESTA EUFORIA🪩✨ — Loica</title>
 <meta name="description" content="sábado 29 de agosto · Ernesto Pinto Lagarrigue 90, Recoleta · $3.000 — EUPHORIA💜 🪩✨ 💮 FIESTA PRIVADA 💮 ❕No somos un local, fiestas privadas estilo casa❕ ¿Dónde? Ernesto Pinto Laga">
 <link rel="canonical" href="https://langab.github.io/loica/e/8f05340c8db10dc6.html">
@@ -55,7 +66,7 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">FIESTA EUFORIA🪩✨</h1>
 
-  <a class="boton bloque" href="https://www.toliv.com/eventos/chile/recoleta/fiesta-euforia-26007" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://www.toliv.com/eventos/chile/recoleta/fiesta-euforia-26007" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>
@@ -78,7 +89,7 @@
 <script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "8f05340c8db10dc6", "titulo": "FIESTA EUFORIA🪩✨", "inicio": "2026-08-29T00:00:00", "fin": "2026-08-30T00:00:00", "lugar": "Ernesto Pinto Lagarrigue 90", "direccion": "Ernesto Pinto Lagarrigue  #90, Recoleta", "comuna": "Recoleta", "lat": -33.40203, "lon": -70.64345, "precision": "fuente", "gratis": false, "precio": 3000, "precio_texto": "desde $3.000", "categoria": "fiesta", "publico": "adultos", "descripcion": "EUPHORIA💜 🪩✨ 💮 FIESTA PRIVADA 💮 ❕No somos un local, fiestas privadas estilo casa❕ ¿Dónde? Ernesto Pinto Lagarrigue 90 ¿Cuándo? 28 de agosto ¿Hora? desde las 21:00-04:00 📍Metro Baquedano 🚇…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/b2203c5757cf55ee8eb7ab23781f40a98720f6507c4c7c2d76107f4947460e98.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/recoleta/fiesta-euforia-26007"};
+  const EV = {"id": "8f05340c8db10dc6", "titulo": "FIESTA EUFORIA🪩✨", "inicio": "2026-08-29T00:00:00", "fin": "2026-08-30T00:00:00", "lugar": "Ernesto Pinto Lagarrigue 90", "direccion": "Ernesto Pinto Lagarrigue  #90, Recoleta", "comuna": "Recoleta", "lat": -33.4328772, "lon": -70.6371068, "precision": "calle", "gratis": false, "precio": 3000, "precio_texto": "desde $3.000", "categoria": "fiesta", "publico": "adultos", "descripcion": "EUPHORIA💜 🪩✨ 💮 FIESTA PRIVADA 💮 ❕No somos un local, fiestas privadas estilo casa❕ ¿Dónde? Ernesto Pinto Lagarrigue 90 ¿Cuándo? 28 de agosto ¿Hora? desde las 21:00-04:00 📍Metro Baquedano 🚇…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/b2203c5757cf55ee8eb7ab23781f40a98720f6507c4c7c2d76107f4947460e98.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/recoleta/fiesta-euforia-26007"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

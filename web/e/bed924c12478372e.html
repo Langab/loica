@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>Club 1 - Beneficio 🇨🇴 Jueves 20 de Agosto — Loica</title>
 <meta name="description" content="viernes 21 de agosto · Club 1, Recoleta · $4.000 — Evento Solidario 🇨🇴 Nos toca ayudar! El 100% de la recaudación por tickets y la utilidad de la barra serán don">
 <link rel="canonical" href="https://langab.github.io/loica/e/bed924c12478372e.html">
@@ -55,7 +66,7 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Club 1 - Beneficio 🇨🇴 Jueves 20 de Agosto</h1>
 
-  <a class="boton bloque" href="https://www.toliv.com/eventos/chile/recoleta/club-1-beneficio-jueves-20-de-agosto-26020" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://www.toliv.com/eventos/chile/recoleta/club-1-beneficio-jueves-20-de-agosto-26020" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>
@@ -78,7 +89,7 @@
 <script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "bed924c12478372e", "titulo": "Club 1 - Beneficio 🇨🇴 Jueves 20 de Agosto", "inicio": "2026-08-21T00:00:00", "fin": "2026-08-21T00:00:00", "lugar": "Club 1", "direccion": "Bombero Nuñez #1, Recoleta", "comuna": "Recoleta", "lat": -33.40203, "lon": -70.64345, "precision": "fuente", "gratis": false, "precio": 4000, "precio_texto": "desde $4.000", "categoria": "fiesta", "publico": "adultos", "descripcion": "Evento Solidario 🇨🇴 Nos toca ayudar! El 100% de la recaudación por tickets y la utilidad de la barra serán donadas íntegramente a la familia de nuestra amiga Marcela Salazar. Su familia vive en la…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/bf9956a100ee1e5e8b112c822751e4b6aacc440900f6de10e04f2c835b020325.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/recoleta/club-1-beneficio-jueves-20-de-agosto-26020"};
+  const EV = {"id": "bed924c12478372e", "titulo": "Club 1 - Beneficio 🇨🇴 Jueves 20 de Agosto", "inicio": "2026-08-21T00:00:00", "fin": "2026-08-21T00:00:00", "lugar": "Club 1", "direccion": "Bombero Núñez 1", "comuna": "Recoleta", "lat": -33.43252, "lon": -70.63964, "precision": "correccion", "gratis": false, "precio": 4000, "precio_texto": "desde $4.000", "categoria": "fiesta", "publico": "adultos", "descripcion": "Evento Solidario 🇨🇴 Nos toca ayudar! El 100% de la recaudación por tickets y la utilidad de la barra serán donadas íntegramente a la familia de nuestra amiga Marcela Salazar. Su familia vive en la…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/bf9956a100ee1e5e8b112c822751e4b6aacc440900f6de10e04f2c835b020325.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/recoleta/club-1-beneficio-jueves-20-de-agosto-26020"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

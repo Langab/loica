@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>Bienvenido Weones — Loica</title>
 <meta name="description" content="jueves 13 de agosto, 03:00 · Bienvenido Weones, Recoleta · Entrada liberada — 🇨🇱🎓 BIENVENIDOS WEEEEONES 🎓🇨🇱 Se acabaron las vacaciones, se acabó el descanso… pero la fiesta recién ">
 <link rel="canonical" href="https://langab.github.io/loica/e/ad24dc1ba35c98f0.html">
@@ -55,7 +66,7 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Bienvenido Weones</h1>
 
-  <a class="boton bloque" href="https://www.toliv.com/eventos/chile/recoleta/bienvenido-weones-25982" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://www.toliv.com/eventos/chile/recoleta/bienvenido-weones-25982" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>
@@ -78,7 +89,7 @@
 <script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "ad24dc1ba35c98f0", "titulo": "Bienvenido Weones", "inicio": "2026-08-13T03:00:00", "fin": "2026-08-13T03:00:00", "lugar": "Bienvenido Weones", "direccion": "Seúl #426, Recoleta", "comuna": "Recoleta", "lat": -33.40203, "lon": -70.64345, "precision": "fuente", "gratis": true, "precio": 0, "precio_texto": "", "categoria": "fiesta", "publico": "adultos", "descripcion": "🇨🇱🎓 BIENVENIDOS WEEEEONES 🎓🇨🇱 Se acabaron las vacaciones, se acabó el descanso… pero la fiesta recién comienza 👀🔥 Este miércoles volvemos con todo para darle la bienvenida al SEGUNDO SEMESTRE como…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/a703c38fb440516ec3eaa4807d5a058409e0300d1022f64bfc71da1098d896dd.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/recoleta/bienvenido-weones-25982"};
+  const EV = {"id": "ad24dc1ba35c98f0", "titulo": "Bienvenido Weones", "inicio": "2026-08-13T03:00:00", "fin": "2026-08-13T03:00:00", "lugar": "Bienvenido Weones", "direccion": "Seúl #426, Recoleta", "comuna": "Recoleta", "lat": -33.4309646, "lon": -70.6421532, "precision": "calle", "gratis": true, "precio": 0, "precio_texto": "", "categoria": "fiesta", "publico": "adultos", "descripcion": "🇨🇱🎓 BIENVENIDOS WEEEEONES 🎓🇨🇱 Se acabaron las vacaciones, se acabó el descanso… pero la fiesta recién comienza 👀🔥 Este miércoles volvemos con todo para darle la bienvenida al SEGUNDO SEMESTRE como…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/a703c38fb440516ec3eaa4807d5a058409e0300d1022f64bfc71da1098d896dd.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/recoleta/bienvenido-weones-25982"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

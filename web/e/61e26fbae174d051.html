@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>La Pergola de las Flores en Aula Magna Manuel de Salas — Loica</title>
 <meta name="description" content="sábado 22 de agosto · Aula Magna Manuel de Salas, Ñuñoa · $17.550 — La Pérgola de Las Flores A 65 años del estreno del clásico de Isidora Aguirre, musicalizado por Francisco Flor">
 <link rel="canonical" href="https://langab.github.io/loica/e/61e26fbae174d051.html">
@@ -19,7 +30,7 @@
 <meta name="twitter:title" content="La Pergola de las Flores en Aula Magna Manuel de Salas">
 <meta name="twitter:description" content="sábado 22 de agosto · Aula Magna Manuel de Salas, Ñuñoa · $17.550 — La Pérgola de Las Flores A 65 años del estreno del clásico de Isidora Aguirre, musicalizado por Francisco Flor">
 
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "La Pergola de las Flores en Aula Magna Manuel de Salas", "startDate": "2026-08-22T00:00:00", "eventStatus": "https://schema.org/EventScheduled", "location": {"@type": "Place", "name": "Aula Magna Manuel de Salas", "address": {"@type": "PostalAddress", "addressLocality": "Ñuñoa", "addressCountry": "CL"}}, "url": "https://langab.github.io/loica/e/61e26fbae174d051.html", "image": "https://static.ptocdn.net/images/eventos/ppr039_rs.jpg", "offers": {"@type": "Offer", "price": 17550, "priceCurrency": "CLP", "url": "https://www.puntoticket.com/evento/la-pergola-de-las-flores-2026?utm_medium=organic&utm_source=microformat"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "La Pergola de las Flores en Aula Magna Manuel de Salas", "startDate": "2026-08-22T00:00:00", "eventStatus": "https://schema.org/EventScheduled", "location": {"@type": "Place", "name": "Aula Magna Manuel de Salas", "address": {"@type": "PostalAddress", "addressLocality": "Ñuñoa", "addressCountry": "CL"}}, "url": "https://langab.github.io/loica/e/61e26fbae174d051.html", "image": "https://static.ptocdn.net/images/eventos/ppr039_rs.jpg", "offers": {"@type": "Offer", "price": 17550, "priceCurrency": "CLP", "url": "https://www.puntoticket.com/evento/la-pergola-de-las-flores-2026?utm_medium=organic\u0026utm_source=microformat"}}</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,7 +66,7 @@
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">La Pergola de las Flores en Aula Magna Manuel de Salas</h1>
 
-  <a class="boton bloque" href="https://www.puntoticket.com/evento/la-pergola-de-las-flores-2026?utm_medium=organic&amp;utm_source=microformat" target="_blank" rel="noopener">
+  <a class="boton bloque" href="https://www.puntoticket.com/evento/la-pergola-de-las-flores-2026?utm_medium=organic&amp;utm_source=microformat" target="_blank" rel="noopener nofollow">
     Ver en la fuente original ↗</a>
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>
@@ -78,7 +89,7 @@
 <script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "61e26fbae174d051", "titulo": "La Pergola de las Flores en Aula Magna Manuel de Salas", "inicio": "2026-08-22T00:00:00", "fin": null, "lugar": "Aula Magna Manuel de Salas", "direccion": "Av. Irarrázaval 3780, Ñuñoa", "comuna": "Ñuñoa", "lat": -33.45522939999999, "lon": -70.59005654, "precision": "calle", "gratis": false, "precio": 17550, "precio_texto": "desde $17.550", "categoria": "teatro", "publico": "todos", "descripcion": "La Pérgola de Las Flores A 65 años del estreno del clásico de Isidora Aguirre, musicalizado por Francisco Flores del Campo, El Actor, musico y director teatral Gustavo Becerra junto al Kolectivo…", "imagen": "https://static.ptocdn.net/images/eventos/ppr039_rs.jpg", "fuente": "Puntoticket (deportes, musica y familia)", "url": "https://www.puntoticket.com/evento/la-pergola-de-las-flores-2026?utm_medium=organic&utm_source=microformat"};
+  const EV = {"id": "61e26fbae174d051", "titulo": "La Pergola de las Flores en Aula Magna Manuel de Salas", "inicio": "2026-08-22T00:00:00", "fin": null, "lugar": "Aula Magna Manuel de Salas", "direccion": "Av. Irarrázaval 3780, Ñuñoa", "comuna": "Ñuñoa", "lat": -33.45522939999999, "lon": -70.59005654, "precision": "calle", "gratis": false, "precio": 17550, "precio_texto": "desde $17.550", "categoria": "teatro", "publico": "todos", "descripcion": "La Pérgola de Las Flores A 65 años del estreno del clásico de Isidora Aguirre, musicalizado por Francisco Flores del Campo, El Actor, musico y director teatral Gustavo Becerra junto al Kolectivo…", "imagen": "https://static.ptocdn.net/images/eventos/ppr039_rs.jpg", "fuente": "Puntoticket (deportes, musica y familia)", "url": "https://www.puntoticket.com/evento/la-pergola-de-las-flores-2026?utm_medium=organic\u0026utm_source=microformat"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));
