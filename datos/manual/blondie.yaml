@@ -1,0 +1,24 @@
+# Fiestas de Blondie que la exportación CSV de Passline no alcanzó a traer.
+#
+# blondieticket.cl es la marca propia de Blondie sobre Passline: el dominio
+# redirige a passline.com/sitio/30119-blondie-eventos-ltda. Su robots.txt SÍ
+# permite leer /sitio/, pero el servidor responde 403 a cualquier cliente
+# automático (Cloudflare), así que el descubrimiento lo hace una persona con
+# su navegador, igual que el resto de Passline.
+#
+# El CSV de datos/manual/passline.csv se capturó el 12-08-2026 y no traía los
+# eventos publicados después. Esta lista los completa; cuando se vuelva a
+# exportar el CSV, la deduplicación por título+fecha+lugar los fusiona sola.
+#
+# Revisado contra la cartelera del local el 13-08-2026.
+
+eventos:
+  - titulo: 'Goes To The Disco - 4 Pistas de Baile'
+    inicio: 2026-08-29 23:30
+    lugar_nombre: Blondie
+    lugar_direccion: Av. Libertador Bernardo O'Higgins 2879
+    comuna: Santiago
+    descripcion_corta: Fiesta con cuatro pistas de baile en Blondie.
+    fuente_url: https://www.passline.com/sitio-evento/goes-to-the-disco-4-pistas-de-baile_
+    fuente_nombre: Passline
+    link_entradas: https://www.passline.com/sitio-evento/goes-to-the-disco-4-pistas-de-baile_
