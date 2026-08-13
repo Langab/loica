@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=12">
+<link rel="stylesheet" href="../loica.css?v=14">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -75,10 +75,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=12"></script>
+<script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "008e2979392830f3", "titulo": "Volver a La Ley - Sesiones 88/90 en Ruta 78", "inicio": "2026-09-03T22:00:00", "fin": "2026-09-03T00:00:00", "lugar": "BAR RUTA 78", "direccion": "", "comuna": "Puente Alto", "lat": -33.611, "lon": -70.576, "precision": "comuna", "gratis": false, "precio": 20000, "precio_texto": "", "categoria": "aire_libre", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/-769606-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/volver-a-la-ley-sesiones-8890-en-ruta-78"};
+  const EV = {"id": "008e2979392830f3", "titulo": "Volver a La Ley - Sesiones 88/90 en Ruta 78", "inicio": "2026-09-03T22:00:00", "fin": "2026-09-03T00:00:00", "lugar": "BAR RUTA 78", "direccion": "", "comuna": "Puente Alto", "lat": -33.6005797, "lon": -70.5787203, "precision": "recinto", "gratis": false, "precio": 20000, "precio_texto": "", "categoria": "aire_libre", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/-769606-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/volver-a-la-ley-sesiones-8890-en-ruta-78"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

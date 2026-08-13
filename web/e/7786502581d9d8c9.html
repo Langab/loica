@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=12">
+<link rel="stylesheet" href="../loica.css?v=14">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -75,10 +75,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=12"></script>
+<script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "7786502581d9d8c9", "titulo": "Paranoid Park / Centro Arte Alameda", "inicio": "2026-08-28T19:00:00", "fin": "2026-08-28T00:00:00", "lugar": "Centro Arte Alameda", "direccion": "", "comuna": "Santiago", "lat": -33.4425, "lon": -70.6505, "precision": "comuna", "gratis": false, "precio": 2500, "precio_texto": "", "categoria": "cine", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/paranoid-park-centro-arte-alameda-540559-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/paranoid-park-centro-arte-alameda"};
+  const EV = {"id": "7786502581d9d8c9", "titulo": "Paranoid Park / Centro Arte Alameda", "inicio": "2026-08-28T19:00:00", "fin": "2026-08-28T00:00:00", "lugar": "Centro Arte Alameda", "direccion": "Arturo Prat 33 (Sala CEINA)", "comuna": "Santiago", "lat": -33.4453, "lon": -70.6502, "precision": "correccion", "gratis": false, "precio": 2500, "precio_texto": "", "categoria": "cine", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/paranoid-park-centro-arte-alameda-540559-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/paranoid-park-centro-arte-alameda"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

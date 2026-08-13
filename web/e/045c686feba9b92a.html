@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=12">
+<link rel="stylesheet" href="../loica.css?v=14">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -75,10 +75,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=12"></script>
+<script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "045c686feba9b92a", "titulo": "Lanzamiento del libro: “Cartografía Social de Chile, 2025. Reconstruir el vínculo y la convivencia”", "inicio": "2026-08-25T18:30:00", "fin": "2026-08-25T20:00:00", "lugar": "Auditorio Manuel Larraín E11 (Avenida Bernardo O’Higgins #1825, metro Los Héroes)", "direccion": "", "comuna": "Santiago", "lat": -33.4425, "lon": -70.6505, "precision": "comuna", "gratis": true, "precio": 0, "precio_texto": "", "categoria": "charla", "publico": "todos", "descripcion": "Las obras sociales de la Compañía de Jesús y el Centro Vives UAH invitan al lanzamiento del libro “ Cartografía Social de Chile 2025. Reconstruir el vínculo y la convivencia” , publicado por…", "imagen": "https://www.uahurtado.cl/wp-content/uploads/2026/08/cartoinvitaagenda.png", "fuente": "Universidad Alberto Hurtado - Agenda de eventos", "url": "https://www.uahurtado.cl/event/lanzamiento-del-libro-cartografia-social-de-chile-2025-reconstruir-el-vinculo-y-la-convivencia/"};
+  const EV = {"id": "045c686feba9b92a", "titulo": "Lanzamiento del libro: “Cartografía Social de Chile, 2025. Reconstruir el vínculo y la convivencia”", "inicio": "2026-08-25T18:30:00", "fin": "2026-08-25T20:00:00", "lugar": "Auditorio Manuel Larraín E11 (Avenida Bernardo O’Higgins #1825, metro Los Héroes)", "direccion": "", "comuna": "Santiago", "lat": -33.44589814285714, "lon": -70.66189820714285, "precision": "calle", "gratis": true, "precio": 0, "precio_texto": "", "categoria": "charla", "publico": "todos", "descripcion": "Las obras sociales de la Compañía de Jesús y el Centro Vives UAH invitan al lanzamiento del libro “ Cartografía Social de Chile 2025. Reconstruir el vínculo y la convivencia” , publicado por…", "imagen": "https://www.uahurtado.cl/wp-content/uploads/2026/08/cartoinvitaagenda.png", "fuente": "Universidad Alberto Hurtado - Agenda de eventos", "url": "https://www.uahurtado.cl/event/lanzamiento-del-libro-cartografia-social-de-chile-2025-reconstruir-el-vinculo-y-la-convivencia/"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

@@ -5,7 +5,7 @@ con la extensión de Claude en tu Chrome. Diez minutos, una vez por semana.
 
 ## Por qué existe este archivo
 
-El pipeline automático cubre 43 fuentes y corre solo a las 06:00. Lo que queda
+El pipeline automático cubre ~50 fuentes y corre solo a las 11:00. Lo que queda
 fuera son sitios que mantienen un desafío activo contra clientes automatizados
 (Passline, Itaú, Centro Arte Alameda) o que exigen sesión (Instagram).
 
@@ -13,7 +13,7 @@ Esos sitios **sí** cargan en un navegador de verdad. La diferencia no es
 técnica sino de naturaleza:
 
 - **Vos pidiéndomelo, puntual, en tu navegador** → es navegar con ayuda. Se hace.
-- **Un cron a las 06:00 haciendo lo mismo solo** → es un bot desatendido
+- **Un cron a las 11:00 haciendo lo mismo solo** → es un bot desatendido
   entrando donde el sitio puso un control para impedirlo. No se hace.
 
 Por eso esto es un runbook y no un script.

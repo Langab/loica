@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=12">
+<link rel="stylesheet" href="../loica.css?v=14">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -75,10 +75,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=12"></script>
+<script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "57e71cc4ed0c247c", "titulo": "Bienvenida Primavera Fest en Hipódromo Chile", "inicio": "2026-08-30T00:00:00", "fin": null, "lugar": "Hipódromo Chile", "direccion": "Av. Hipodromo Chile 1715, Independencia", "comuna": "Independencia", "lat": -33.415, "lon": -70.665, "precision": "comuna", "gratis": false, "precio": 17250, "precio_texto": "desde $17.250", "categoria": "deporte", "publico": "todos", "descripcion": "Festival Bienvenida a la Primavera 2026El festival familiar más grande del año llega al Hipódromo Chile con un line-up estelar", "imagen": "https://static.ptocdn.net/images/eventos/psk001_rs.jpg", "fuente": "Puntoticket (deportes, musica y familia)", "url": "https://www.puntoticket.com/evento/bienvenida-primavera-fest-arena-hipodromo-ago-2026?utm_medium=organic&utm_source=microformat"};
+  const EV = {"id": "57e71cc4ed0c247c", "titulo": "Bienvenida Primavera Fest en Hipódromo Chile", "inicio": "2026-08-30T00:00:00", "fin": null, "lugar": "Hipódromo Chile", "direccion": "Av. Hipodromo Chile 1715, Independencia", "comuna": "Independencia", "lat": -33.403887374074074, "lon": -70.66715052777776, "precision": "calle", "gratis": false, "precio": 17250, "precio_texto": "desde $17.250", "categoria": "deporte", "publico": "todos", "descripcion": "Festival Bienvenida a la Primavera 2026El festival familiar más grande del año llega al Hipódromo Chile con un line-up estelar", "imagen": "https://static.ptocdn.net/images/eventos/psk001_rs.jpg", "fuente": "Puntoticket (deportes, musica y familia)", "url": "https://www.puntoticket.com/evento/bienvenida-primavera-fest-arena-hipodromo-ago-2026?utm_medium=organic&utm_source=microformat"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

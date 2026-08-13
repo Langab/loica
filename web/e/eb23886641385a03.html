@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=12">
+<link rel="stylesheet" href="../loica.css?v=14">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -75,10 +75,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=12"></script>
+<script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "eb23886641385a03", "titulo": "PLANET ASIA & EL BRUTO CHR", "inicio": "2026-08-15T00:38:00", "fin": "2026-08-16T00:38:00", "lugar": "BARS", "direccion": "Salvador Donoso #1498, Valparaíso", "comuna": "", "lat": null, "lon": null, "precision": "sin_ubicar", "gratis": true, "precio": 0, "precio_texto": "", "categoria": "fiesta", "publico": "adultos", "descripcion": "", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/3b3f78e9f2b13f3b9aec37bfff8f32d0bb21e07afb2e39741fbd0363e150c104.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/rancagua/planet-asia-el-bruto-chr-25971"};
+  const EV = {"id": "eb23886641385a03", "titulo": "PLANET ASIA & EL BRUTO CHR", "inicio": "2026-08-15T00:38:00", "fin": "2026-08-16T00:38:00", "lugar": "BARS", "direccion": "Salvador Donoso #1498, Valparaíso", "comuna": "", "lat": -33.0452176, "lon": -71.6213141, "precision": "calle", "gratis": true, "precio": 0, "precio_texto": "", "categoria": "fiesta", "publico": "adultos", "descripcion": "", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/3b3f78e9f2b13f3b9aec37bfff8f32d0bb21e07afb2e39741fbd0363e150c104.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/rancagua/planet-asia-el-bruto-chr-25971"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

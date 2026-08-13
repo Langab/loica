@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=12">
+<link rel="stylesheet" href="../loica.css?v=14">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -75,10 +75,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=12"></script>
+<script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "e7e7542d76853d06", "titulo": "Habilitación Física Ma-Ju 12:00 h.", "inicio": "2026-08-18T12:00:00", "fin": "2026-08-20T12:00:00", "lugar": "Personas Mayores", "direccion": "Juan Moya 1370", "comuna": "Ñuñoa", "lat": -33.4569, "lon": -70.5975, "precision": "comuna", "gratis": true, "precio": null, "precio_texto": "Gratis", "categoria": "otros", "publico": "todos", "descripcion": "todos los martes y jueves de 12:00 a 13:00. La habilitación física es un proceso terapéutico integral, liderado por un equipo multidisciplinario (médicos fisiatras, kinesiólogos, terapeutas…", "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1767485883699-881422852.webp", "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres", "url": "https://talleres.nunoadeportes.cl/talleres/6942c884a7279f91cb9f8790"};
+  const EV = {"id": "e7e7542d76853d06", "titulo": "Habilitación Física Ma-Ju 12:00 h.", "inicio": "2026-08-18T12:00:00", "fin": "2026-08-20T12:00:00", "lugar": "Personas Mayores", "direccion": "Juan Moya 1370", "comuna": "Ñuñoa", "lat": -33.467022699999994, "lon": -70.58821282857143, "precision": "calle", "gratis": true, "precio": null, "precio_texto": "Gratis", "categoria": "deporte", "publico": "todos", "descripcion": "todos los martes y jueves de 12:00 a 13:00. La habilitación física es un proceso terapéutico integral, liderado por un equipo multidisciplinario (médicos fisiatras, kinesiólogos, terapeutas…", "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1767485883699-881422852.webp", "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres", "url": "https://talleres.nunoadeportes.cl/talleres/6942c884a7279f91cb9f8790"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

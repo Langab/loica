@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=12">
+<link rel="stylesheet" href="../loica.css?v=14">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -75,10 +75,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=12"></script>
+<script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "d19092b1633f86f8", "titulo": "Yoga", "inicio": "2026-08-25T18:00:00", "fin": "2026-08-27T18:00:00", "lugar": "JJ. VV. Villa Conchalí República de Noruega # 5603", "direccion": "", "comuna": "Huechuraba", "lat": -33.3706, "lon": -70.6408, "precision": "comuna", "gratis": false, "precio": null, "precio_texto": "", "categoria": "arte", "publico": "todos", "descripcion": "todos los martes y jueves a las 18:00, 16+", "imagen": "", "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos", "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026"};
+  const EV = {"id": "d19092b1633f86f8", "titulo": "Yoga", "inicio": "2026-08-25T18:00:00", "fin": "2026-08-27T18:00:00", "lugar": "JJ. VV. Villa Conchalí República de Noruega # 5603", "direccion": "", "comuna": "Huechuraba", "lat": -33.3706, "lon": -70.6408, "precision": "comuna", "gratis": false, "precio": null, "precio_texto": "", "categoria": "deporte", "publico": "todos", "descripcion": "todos los martes y jueves a las 18:00, 16+", "imagen": "", "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos", "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

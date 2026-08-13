@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=12">
+<link rel="stylesheet" href="../loica.css?v=14">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -75,10 +75,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=12"></script>
+<script src="../loica.js?v=14"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "459e7db9701addc3", "titulo": "Carrera", "inicio": "2026-08-27T00:00:00", "fin": "2026-09-13T23:59:00", "lugar": "Teatro Finis Terrae", "direccion": "Pocuro 1935, Santiago", "comuna": "Santiago", "lat": -33.4425, "lon": -70.6505, "precision": "comuna", "gratis": true, "precio": 0, "precio_texto": "", "categoria": "teatro", "publico": "todos", "descripcion": "Con humor y dinamismo, los dramaturgos, directores y actores Sebastián Vila y Francisco Sánchez relatan las aventuras, exilios, batallas y contradicciones del polémico José Miguel Carrera, desde su…", "imagen": "https://teatrofinisterrae.cl/wp-content/uploads/2026/03/Carrera_FOTO-DANIEL-CORVILLON-34894.jpg", "fuente": "Teatro Finis Terrae", "url": "https://teatrofinisterrae.cl/evento/carrera-2/"};
+  const EV = {"id": "459e7db9701addc3", "titulo": "Carrera", "inicio": "2026-08-27T00:00:00", "fin": "2026-09-13T23:59:00", "lugar": "Teatro Finis Terrae", "direccion": "Pocuro 1935, Santiago", "comuna": "Santiago", "lat": -33.436672, "lon": -70.6088985, "precision": "recinto", "gratis": true, "precio": 0, "precio_texto": "", "categoria": "teatro", "publico": "todos", "descripcion": "Con humor y dinamismo, los dramaturgos, directores y actores Sebastián Vila y Francisco Sánchez relatan las aventuras, exilios, batallas y contradicciones del polémico José Miguel Carrera, desde su…", "imagen": "https://teatrofinisterrae.cl/wp-content/uploads/2026/03/Carrera_FOTO-DANIEL-CORVILLON-34894.jpg", "fuente": "Teatro Finis Terrae", "url": "https://teatrofinisterrae.cl/evento/carrera-2/"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));
