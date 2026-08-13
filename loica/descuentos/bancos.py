@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import re
 from datetime import date, datetime
 from pathlib import Path
@@ -28,6 +29,24 @@ from ..red import ClienteEducado
 from .modelo import Descuento
 from .texto import (datos_bci, dias_en, lugar_en, modalidad_en, oferta_en,
                     porcentaje_en, sucursales_bch, tope_en, url_normal, vigencia_en)
+
+
+def token_de(banco: dict) -> str:
+    """El token de lectura del banco; manda la variable de entorno si existe.
+
+    El que está en `config/bancos.yaml` es el Content Delivery de solo lectura
+    que Falabella trae incrustado en su propio bundle de JavaScript: es público
+    por diseño, no es un secreto nuestro, y por eso puede vivir versionado.
+
+    Aun así la puerta queda abierta. Un token dentro de un archivo del
+    repositorio es una costumbre que se pega sola, y el día que un banco pida
+    uno que sí sea secreto conviene que el lugar donde ponerlo ya exista y no
+    haya que tocar código con el apuro encima:
+
+        export LOICA_TOKEN_FALABELLA=...
+    """
+    return os.environ.get(f"LOICA_TOKEN_{banco['id'].upper()}", "") or banco.get("token_lectura", "")
+
 
 log = logging.getLogger("loica.descuentos")
 
@@ -226,7 +245,7 @@ def _falabella(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
             "content_type": banco["tipo_contenido"],
             "limit": por_pagina,
             "skip": saltar,
-            "access_token": banco["token_lectura"],
+            "access_token": token_de(banco),
             # Sin `include`, Contentful manda el logo como un puntero
             # ({"sys": {"linkType": "Asset", "id": "..."}}) en vez del archivo,
             # y los 108 descuentos salían sin imagen. Con include=1 vienen los
@@ -309,7 +328,7 @@ def _montos_falabella(banco: dict, cliente: ClienteEducado, url: str) -> dict[st
             "content_type": "newBenefits",
             "limit": 100,
             "skip": saltar,
-            "access_token": banco["token_lectura"],
+            "access_token": token_de(banco),
         })
         if not isinstance(datos, dict) or "items" not in datos:
             break

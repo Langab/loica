@@ -18,13 +18,193 @@
 #
 # Ejemplo:
 #
-# restoranes:
-#   la burguesia:
-#     cocina: hamburguesas
-#     comuna: Providencia
-#     direccion: Av. Providencia 1234
-#     lat: -33.4263
-#     lon: -70.6178
-#     nota: ningún banco publica la dirección; verificada en su Instagram
+#
 
-restoranes: {}
+# Las entradas de abajo las propuso scripts/mapear_restoranes.py cruzando el
+# nombre del local contra el catastro local de OSM, y entraron por tener un
+# calce único CON dirección: un negocio realmente mapeado, no un punto suelto.
+# Las cadenas quedan fuera a propósito — la corrección se guarda por nombre y
+# una sola ficha de "Starbucks" mandaría sus 135 locales a la misma esquina.
+
+restoranes:
+  Danés:
+    direccion: Avenida Vitacura 4607
+    comuna: Vitacura
+    lat: -33.39865
+    lon: -70.58651
+    nota: calce único con dirección en el catastro OSM (restaurant)
+
+  El mesón de la Patagonia:
+    direccion: Avenida Lo Barnechea 503
+    comuna: Lo Barnechea
+    lat: -33.36112
+    lon: -70.50521
+    nota: calce único con dirección en el catastro OSM (restaurant)
+
+  Estación Tropera:
+    direccion: Avenida Vitacura 3285
+    comuna: Providencia
+    lat: -33.40653
+    lon: -70.59863
+    nota: calce único con dirección en el catastro OSM (restaurant)
+
+  Expendio Montt:
+    direccion: Avenida Manuel Montt 727
+    comuna: Providencia
+    lat: -33.43478
+    lon: -70.61682
+    nota: calce único con dirección en el catastro OSM (restaurant)
+
+  Fuente Suiza:
+    direccion: Avenida Irarrázaval 3361
+    comuna: Ñuñoa
+    lat: -33.4553
+    lon: -70.59597
+    nota: calce único con dirección en el catastro OSM (restaurant)
+
+  Holy Moly:
+    direccion: Hernando de Aguirre 129
+    comuna: Providencia
+    lat: -33.41949
+    lon: -70.60135
+    nota: calce único con dirección en el catastro OSM (restaurant)
+
+  Jackie Guiloff:
+    direccion: Avenida José Alcalde Délano 10682
+    comuna: Lo Barnechea
+    lat: -33.35499
+    lon: -70.53714
+    nota: calce único con dirección en el catastro OSM (restaurant)
+
+  Juan Valdez:
+    direccion: Avenida Vitacura 9019
+    comuna: Vitacura
+    lat: -33.38352
+    lon: -70.54973
+    nota: calce único con dirección en el catastro OSM (cafe)
+
+  La Birrería:
+    direccion: Avenida Pedro Fontova 7280
+    comuna: Huechuraba
+    lat: -33.35576
+    lon: -70.67083
+    nota: calce único con dirección en el catastro OSM (bar)
+
+  La Cabrera:
+    direccion: Isidora Goyenechea 3275
+    comuna: Las Condes
+    lat: -33.41468
+    lon: -70.59662
+    nota: calce único con dirección en el catastro OSM (restaurant)
+
+  La Parrilla del Guatón Jeréz:
+    direccion: Gerónimo de Alderete 1097
+    comuna: Vitacura
+    lat: -33.39353
+    lon: -70.56194
+    nota: calce único con dirección en el catastro OSM (restaurant)
+
+  La Tabla:
+    direccion: Costanera Sur San Josemaría Escrivá de Balaguer 6400
+    comuna: Vitacura
+    lat: -33.38181
+    lon: -70.5798
+    nota: calce único con dirección en el catastro OSM (restaurant)
+
+  La Yunta:
+    direccion: Avenida Manuel Montt 748
+    comuna: Providencia
+    lat: -33.43497
+    lon: -70.61638
+    nota: calce único con dirección en el catastro OSM (cafe)
+
+  Lady Focaccia:
+    direccion: Jean Mermoz 2150
+    comuna: Pudahuel
+    lat: -33.39964
+    lon: -70.79538
+    nota: calce único con dirección en el catastro OSM (cafe)
+
+  Majestic:
+    direccion: Avenida Presidente Kennedy 9001
+    comuna: Las Condes
+    lat: -33.39006
+    lon: -70.54739
+    nota: calce único con dirección en el catastro OSM (restaurant)
+
+  Meson del marinero:
+    direccion: Avenida Presidente Kennedy 5601
+    comuna: Las Condes
+    lat: -33.40065
+    lon: -70.57591
+    nota: calce único con dirección en el catastro OSM (restaurant)
+
+  Mr pretzels:
+    direccion: Avenida Presidente Kennedy 5413
+    comuna: Las Condes
+    lat: -33.4028
+    lon: -70.57808
+    nota: calce único con dirección en el catastro OSM (fast_food)
+
+  Naoki:
+    direccion: Avenida Vitacura
+    comuna: Vitacura
+    lat: -33.40066
+    lon: -70.59236
+    nota: calce único con dirección en el catastro OSM (restaurant)
+
+  Nelí:
+    direccion: Avenida Presidente Kennedy 5413
+    comuna: Las Condes
+    lat: -33.40188
+    lon: -70.57907
+    nota: calce único con dirección en el catastro OSM (restaurant)
+
+  Panchita:
+    direccion: Avenida Nueva Costanera 3979
+    comuna: Vitacura
+    lat: -33.39751
+    lon: -70.59729
+    nota: calce único con dirección en el catastro OSM (restaurant)
+
+  Petit:
+    direccion: Avenida Suecia 9
+    comuna: Providencia
+    lat: -33.42103
+    lon: -70.60805
+    nota: calce único con dirección en el catastro OSM (cafe)
+
+  Rubaiyat:
+    direccion: Avenida Nueva Costanera 4031
+    comuna: Vitacura
+    lat: -33.39638
+    lon: -70.59717
+    nota: calce único con dirección en el catastro OSM (restaurant)
+
+  Siete cortes:
+    direccion: Avenida Presidente Kennedy 5601
+    comuna: Las Condes
+    lat: -33.40091
+    lon: -70.57572
+    nota: calce único con dirección en el catastro OSM (restaurant)
+
+  THAI EXPRESS:
+    direccion: Merced 483
+    comuna: Santiago
+    lat: -33.43767
+    lon: -70.64395
+    nota: calce único con dirección en el catastro OSM (fast_food)
+
+  Tigre Bravo:
+    direccion: Avenida Américo Vespucio 1737
+    comuna: Huechuraba
+    lat: -33.36481
+    lon: -70.67824
+    nota: calce único con dirección en el catastro OSM (restaurant)
+
+  Vinolia:
+    direccion: Alonso de Monroy 2869
+    comuna: Vitacura
+    lat: -33.4021
+    lon: -70.59757
+    nota: calce único con dirección en el catastro OSM (restaurant)

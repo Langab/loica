@@ -134,6 +134,119 @@ lugares:
     lon: -70.6692
     nota: cruce Pedro Fontova x Camino El Roble en el índice OSM 2026-08-13; margen ~180 m, es un bandejón sin número
 
+  # Investigados en la web y contrastados contra el catastro OSM: las
+  # coordenadas de la investigación y las del catastro coinciden dentro de
+  # 42 m en los cuatro casos que el catastro conocía.
+  Universidad Andres Bello - Cultura UNAB:
+    direccion: Fernández Concha 700, Campus Casona de Las Condes
+    comuna: Las Condes
+    lat: -33.37584
+    lon: -70.50565
+    nota: investigación web + catastro OSM coinciden a 1 m (2026-08-13)
+
+  Patio Central UAH:
+    direccion: Almirante Barroso 10, Campus Patrimonial U. Alberto Hurtado
+    comuna: Santiago
+    lat: -33.44555
+    lon: -70.66182
+    nota: investigación web + catastro OSM coinciden a 42 m (2026-08-13)
+
+  MUT — Mercado Urbano Tobalaba:
+    direccion: Av. Apoquindo 2730
+    comuna: Las Condes
+    lat: -33.41746
+    lon: -70.60115
+    nota: la fuente lo declaraba en Providencia pero está en Las Condes; web + catastro OSM a 39 m (2026-08-13)
+
+  La Feria:
+    direccion: Constitución 275, Barrio Bellavista
+    comuna: Providencia
+    lat: -33.43087
+    lon: -70.63504
+    nota: investigación web + catastro OSM coinciden a 17 m (2026-08-13)
+
+  Aldea Encuentro:
+    direccion: Av. Alcalde Fernando Castillo Velasco 9750
+    comuna: La Reina
+    lat: -33.45174
+    lon: -70.53093
+    nota: investigación web verificada de forma adversarial (2026-08-13)
+
+  Estación Mapocho:
+    direccion: Plaza de la Cultura s/n, ex Estación Mapocho
+    comuna: Santiago
+    lat: -33.43225
+    lon: -70.65445
+    nota: investigación web verificada de forma adversarial (2026-08-13)
+
+  # Salas y locales investigados en la web; los siete calzan contra el
+  # catastro OSM dentro de 96 m, la mayoría bajo 50.
+  Sala RBX:
+    direccion: Av. Vicuña Mackenna 1220
+    comuna: Ñuñoa
+    lat: -33.45691
+    lon: -70.62916
+    nota: hoy opera como Amsterdam Club; web + catastro OSM a 25 m (2026-08-13)
+
+  Teatro Fábrica:
+    direccion: Av. General Bustamante 530
+    comuna: Providencia
+    lat: -33.44754
+    lon: -70.62989
+    nota: web + catastro OSM a 12 m (2026-08-13)
+
+  Kahuin:
+    direccion: Antupirén 9301, Patio La Rosa
+    comuna: Peñalolén
+    lat: -33.48326
+    lon: -70.53597
+    nota: web + catastro OSM coinciden exacto (2026-08-13)
+
+  Epicentro:
+    direccion: Paseo Huérfanos 786
+    comuna: Santiago
+    lat: -33.43944
+    lon: -70.64785
+    nota: web + catastro OSM a 46 m (2026-08-13)
+
+  Peluquería Francesa:
+    direccion: Compañía de Jesús 2799, Boulevard Lavaud
+    comuna: Santiago
+    lat: -33.44086
+    lon: -70.67404
+    nota: web + catastro OSM coinciden exacto (2026-08-13)
+
+  Teatro fiebre:
+    direccion: Dardignac 0163, Barrio Bellavista
+    comuna: Providencia
+    lat: -33.43318
+    lon: -70.63378
+    nota: web + catastro OSM a 96 m (2026-08-13)
+
+  Alto San Francisco:
+    direccion: San Francisco 75, piso 9
+    comuna: Santiago
+    lat: -33.44497
+    lon: -70.64718
+    nota: web + catastro OSM a 17 m (2026-08-13)
+
+  # Locales de fiesta y música en vivo. Toliv y las ticketeras publican
+  # coordenadas propias geocodificadas a la rápida —Club 1 aparecía a 2,7 km
+  # de su dirección real— y estas entradas les ganan.
+  Club 1:
+    direccion: Bombero Núñez 1
+    comuna: Recoleta
+    lat: -33.43252
+    lon: -70.63964
+    nota: Barrio Bellavista; la ficha de Toliv da la dirección y el catastro OSM la ubica (2026-08-13)
+
+  Blondie:
+    direccion: Av. Libertador Bernardo O'Higgins 2879
+    comuna: Estación Central
+    lat: -33.44923
+    lon: -70.67381
+    nota: coinciden el nodo de OSM, la dirección de Passline y las coordenadas de Puntoticket (2026-08-13)
+
   Multicancha Los Libertadores Andacollo con Mejillones:
     direccion: Andacollo con Mejillones
     comuna: Huechuraba

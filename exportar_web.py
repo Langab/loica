@@ -18,7 +18,9 @@ from pathlib import Path
 from loica.almacen import Almacen
 from loica.correcciones import Correcciones
 from loica.geo import Geocodificador
-from loica.modelo import es_enlace_de_maquina
+from loica.modelo import es_enlace_de_maquina, es_url_publica
+
+log_urls = logging.getLogger("exportar.urls")
 
 RAIZ = Path(__file__).resolve().parent
 SALIDA = RAIZ / "web" / "eventos.json"
@@ -49,6 +51,40 @@ NO_ES_PANORAMA = [
 ]
 
 
+# Nombres de PROGRAMA que las municipalidades ponen donde va el lugar.
+# "Deporte Vecinal" no es una dirección: es un programa que ocurre en la sede
+# de cada junta de vecinos, y el pipeline apilaba 224 eventos en un solo pin
+# con ese nombre. La sede de verdad viene en el título después de la barra
+# ("Yoga Ma-Ju 09:45 h. / JJVV Villa Frei"), así que se rescata de ahí.
+PROGRAMAS_NO_SON_LUGAR = {
+    "deporte vecinal", "futbol", "fútbol", "escuelas abiertas",
+    "academias deportivas", "personas mayores", "actividad fisica y salud",
+    "talleres deportivos", "deportes",
+}
+
+
+def sede_del_titulo(titulo: str, lugar: str) -> str:
+    """Devuelve la sede real si el lugar es un programa y el título la trae."""
+    if _plano_simple(lugar) not in PROGRAMAS_NO_SON_LUGAR or " / " not in titulo:
+        return ""
+    sede = titulo.split(" / ")[-1].strip().rstrip(". ")
+    # Una sede tiene nombre; un resto de horario ("Sa 09:00") no sirve.
+    if len(sede) < 4 or re.match(r"^[LMXJVSD][auiaeo]?[- ]", sede):
+        return ""
+    return sede
+
+
+def _plano_simple(texto: str) -> str:
+    import unicodedata
+    plano = unicodedata.normalize("NFD", (texto or "").lower())
+    return "".join(c for c in plano if unicodedata.category(c) != "Mn").strip()
+
+
+def _lejos(lat1, lon1, lat2, lon2, km: float) -> bool:
+    """True si los dos puntos están a más de `km` de distancia."""
+    return ((lat1 - lat2) * 111) ** 2 + ((lon1 - lon2) * 92) ** 2 > km ** 2
+
+
 def es_panorama(titulo: str, descripcion: str) -> tuple[bool, str]:
     texto = f"{titulo} {descripcion}".lower()
     for senal in NO_ES_PANORAMA:
@@ -62,6 +98,17 @@ PLANTILLA_FICHA = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyección
+     es que el título y el link ya vengan escapados y filtrados desde Python;
+     esto es lo que queda en pie si algún día se escapa uno. `img-src https:`
+     va abierto a propósito: las fotos son de los organizadores y viven en
+     cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
+     en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
+     GitHub Pages no deja poner cabeceras. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>{titulo_html} — Loica</title>
 <meta name="description" content="{descripcion_meta}">
 <link rel="canonical" href="{url_ficha}">
@@ -114,8 +161,7 @@ PLANTILLA_FICHA = """<!doctype html>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">{titulo_html}</h1>
 
-  <a class="boton bloque" href="{url_fuente}" target="_blank" rel="noopener">
-    Ver en la fuente original ↗</a>
+  {bloque_fuente}
 
   <div id="compartir" style="margin-top:var(--e-4)"></div>
 
@@ -155,8 +201,51 @@ PLANTILLA_FICHA = """<!doctype html>
 
 
 def _escapar(texto: str) -> str:
+    # La comilla simple también: hoy todos los atributos de la plantilla usan
+    # comillas dobles, pero basta que alguien escriba un atributo con simples
+    # para que un título con apóstrofo —"Rock 'n' Roll"— se salga del atributo.
     return (str(texto or "").replace("&", "&amp;").replace("<", "&lt;")
-            .replace(">", "&gt;").replace('"', "&quot;"))
+            .replace(">", "&gt;").replace('"', "&quot;").replace("'", "&#39;"))
+
+
+def _json_en_script(dato) -> str:
+    """Serializa un dato para incrustarlo DENTRO de una etiqueta <script>.
+
+    `json.dumps` a secas no sirve acá. El parser de HTML no entiende de JSON:
+    apenas ve la secuencia `</script` cierra el bloque, sin importar que vaya
+    dentro de un string. Un evento cuyo título sea
+
+        Concierto </script><img src=x onerror=...> gratis
+
+    —y los títulos los escriben terceros, no nosotros— parte la etiqueta en dos
+    y lo que sigue se interpreta como HTML en el dominio de Loica. Escapando
+    `<` y `>` como \\u003c y \\u003e el JSON sigue siendo el mismo string (los
+    lee JSON.parse y el motor de JS igual), pero deja de existir la secuencia
+    que el parser de HTML reconoce.
+
+    U+2028 y U+2029 van por otro motivo: son saltos de línea legales en JSON
+    pero ilegales dentro de un literal de JavaScript, y rompen el script entero
+    con un error de sintaxis.
+    """
+    crudo = json.dumps(dato, ensure_ascii=False)
+    return (crudo.replace("<", "\\u003c").replace(">", "\\u003e")
+            .replace("&", "\\u0026")
+            .replace("\u2028", "\\u2028").replace("\u2029", "\\u2029"))
+
+
+def _url_publicable(url: str) -> str:
+    """La URL si se puede publicar; string vacío si no.
+
+    Segunda barrera. La primera está en `Evento.es_valido()`, en la puerta de
+    entrada, pero la base ya tiene filas guardadas antes de que esa validación
+    existiera y este archivo lee de la base, no del extractor. Un `href` es el
+    último lugar donde conviene confiar.
+    """
+    if not es_url_publica(url or ""):
+        if url:
+            log_urls.warning("URL descartada por esquema no publicable: %.80s", url)
+        return ""
+    return url
 
 
 def escribir_fichas(eventos: list[dict]) -> int:
@@ -189,6 +278,14 @@ def escribir_fichas(eventos: list[dict]) -> int:
         if ev["descripcion"]:
             resumen += f" — {ev['descripcion'][:110]}"
 
+        # Las dos URLs que salen del pipeline y terminan en un atributo del
+        # navegador. Se filtran acá, una sola vez, y de acá en adelante se usan
+        # las versiones limpias — incluida la copia que viaja en el JSON de la
+        # página, que el JS de compartir vuelve a leer.
+        url_fuente = _url_publicable(ev["url"])
+        imagen = _url_publicable(ev["imagen"])
+        ev = {**ev, "url": url_fuente, "imagen": imagen}
+
         jsonld = {
             "@context": "https://schema.org", "@type": "Event",
             "name": ev["titulo"], "startDate": ev["inicio"],
@@ -199,36 +296,41 @@ def escribir_fichas(eventos: list[dict]) -> int:
                                      "addressCountry": "CL"}},
             "url": f"{SITIO}/e/{ev['id']}.html",
         }
-        if ev["imagen"]:
-            jsonld["image"] = ev["imagen"]
+        if imagen:
+            jsonld["image"] = imagen
         if ev["gratis"] or ev["precio"]:
             jsonld["offers"] = {"@type": "Offer", "price": ev["precio"] or 0,
-                                "priceCurrency": "CLP", "url": ev["url"]}
+                                "priceCurrency": "CLP", "url": url_fuente}
 
         html = PLANTILLA_FICHA.format(
             titulo_html=_escapar(ev["titulo"]),
             descripcion_meta=_escapar(resumen[:180]),
             url_ficha=f"{SITIO}/e/{ev['id']}.html",
-            og_imagen=(f'<meta property="og:image" content="{_escapar(ev["imagen"])}">'
-                       if ev["imagen"] else
+            og_imagen=(f'<meta property="og:image" content="{_escapar(imagen)}">'
+                       if imagen else
                        f'<meta property="og:image" content="{SITIO}/og-default.png">'),
             tipo_tarjeta="summary_large_image",
-            jsonld=json.dumps(jsonld, ensure_ascii=False),
+            jsonld=_json_en_script(jsonld),
             # Las fotos son del organizador y se enlazan, no se copian. Algunos
             # servidores las bloquean desde otro dominio: si eso pasa, entra la
             # mascota de la categoría en vez de quedar un hueco roto.
-            foto=(f'<img src="{_escapar(ev["imagen"])}" alt="" '
+            foto=(f'<img src="{_escapar(imagen)}" alt="" '
                   f'onerror="this.remove();document.getElementById(\'foto\')'
-                  f'.classList.add(\'sin-foto\')">' if ev["imagen"] else ""),
-            url_fuente=_escapar(ev["url"]),
+                  f'.classList.add(\'sin-foto\')">' if imagen else ""),
+            # Sin link publicable no se dibuja el botón. Un href vacío recarga
+            # la ficha, que es peor que no ofrecer el botón: promete llevarte a
+            # la fuente y no te lleva a ninguna parte.
+            bloque_fuente=(f'<a class="boton bloque" href="{_escapar(url_fuente)}" '
+                           f'target="_blank" rel="noopener nofollow">\n'
+                           f'    Ver en la fuente original ↗</a>' if url_fuente else ""),
             cuando=_escapar(cuando), donde=_escapar(donde),
             precio=_escapar(precio),
             clase_precio=" libre" if ev["gratis"] else "",
             bloque_descripcion=(f'<div class="dato"><span class="et"></span>'
                                 f'<span>{_escapar(ev["descripcion"])}</span></div>'
                                 if ev["descripcion"] else ""),
-            id_evento=ev["id"], fuente_html=_escapar(ev["fuente"]),
-            evento_json=json.dumps(ev, ensure_ascii=False),
+            id_evento=_escapar(ev["id"]), fuente_html=_escapar(ev["fuente"]),
+            evento_json=_json_en_script(ev),
         )
         (DIR_FICHAS / f"{ev['id']}.html").write_text(html, encoding="utf-8")
 
@@ -255,6 +357,7 @@ def main() -> int:
     eventos = []
     sin_ubicar = 0
     corregidos = 0
+    discrepantes = 0
     descartados = []
 
     for fila in filas:
@@ -284,7 +387,8 @@ def main() -> int:
             "titulo": fila["titulo"],
             "inicio": fila["inicio"],
             "fin": fila["fin"],
-            "lugar": fila["lugar_nombre"] or fila["fuente_nombre"],
+            "lugar": (sede_del_titulo(fila["titulo"], fila["lugar_nombre"] or "")
+                      or fila["lugar_nombre"] or fila["fuente_nombre"]),
             "direccion": fila["lugar_direccion"] or "",
             "comuna": fila["comuna"] or "",
             "lat": fila["lat"],
@@ -311,6 +415,30 @@ def main() -> int:
         if tocados:
             corregidos += 1
 
+        # Las coordenadas de la fuente no son sagradas. Toliv publicaba Club 1
+        # en (-33.402, -70.643), norte de Recoleta, mientras su propia ficha
+        # decía "Bombero Núñez #1" — que está en Bellavista, 2,7 km al sur. Es
+        # una ticketera geocodificando a la rápida. Cuando la dirección
+        # publicada calza EXACTO en el catastro y contradice a las coordenadas
+        # por más de 700 m, gana la dirección: es el dato que una persona
+        # puede leer y verificar.
+        # Se resuelve en modo flexible: el catastro no siempre tiene el número
+        # exacto (de Bombero Núñez conoce el 22 y el 98, no el 1) y exigirlo
+        # dejaba pasar el error. La red de seguridad es doble: la dirección
+        # resuelta tiene que caer cerca de la comuna declarada —de eso se
+        # encarga _elegir— y la contradicción tiene que superar 1 km, más que
+        # el ancho de una cuadra.
+        if ev["lat"] is not None and ev["direccion"]:
+            real = geo.indice.direccion(ev["direccion"], ev["comuna"])
+            if real and _lejos(ev["lat"], ev["lon"], real[0], real[1], 1.0):
+                log.info("  %s: la fuente decía %.4f,%.4f pero su dirección (%s) "
+                         "está en %.4f,%.4f — gana la dirección",
+                         ev["lugar"][:34], ev["lat"], ev["lon"],
+                         ev["direccion"][:40], real[0], real[1])
+                ev["lat"], ev["lon"] = real[0], real[1]
+                ev["precision"] = "calle"
+                discrepantes += 1
+
         if ev["lat"] is None:
             lat, lon, precision = geo.ubicar(ev["lugar"], ev["direccion"], ev["comuna"])
             ev["lat"], ev["lon"] = lat, lon
@@ -323,6 +451,25 @@ def main() -> int:
                 ev["precision"] = "sin_ubicar"
 
         eventos.append(ev)
+
+    # Una coordenada que comparten VARIOS lugares distintos no es la ubicación
+    # de ninguno: es el punto al que la ticketera manda lo que no supo
+    # geocodificar. Toliv usa el centro de la comuna para todo lo que no
+    # reconoce, y el mapa lo dibujaba como pin exacto. Se degrada a
+    # aproximado, que es lo que de verdad es: la página lo atenúa y el lugar
+    # entra a la cola de corrección en vez de mentir con precisión.
+    por_punto: dict[tuple, set] = {}
+    for ev in eventos:
+        if ev["precision"] == "fuente" and ev["lat"] is not None:
+            por_punto.setdefault((round(ev["lat"], 4), round(ev["lon"], 4)),
+                                 set()).add(ev["lugar"])
+    compartidos = {p for p, lugares in por_punto.items() if len(lugares) > 1}
+    degradados = 0
+    for ev in eventos:
+        if (ev["precision"] == "fuente" and ev["lat"] is not None
+                and (round(ev["lat"], 4), round(ev["lon"], 4)) in compartidos):
+            ev["precision"] = "comuna"
+            degradados += 1
 
     geo.guardar()
     almacen.cerrar()
@@ -345,6 +492,12 @@ def main() -> int:
              len(eventos), gratis, exactos, con_imagen)
     if corregidos:
         log.info("Con correcciones de la memoria aplicadas: %d", corregidos)
+    if discrepantes:
+        log.info("Coordenadas de la fuente descartadas por contradecir su "
+                 "propia dirección: %d", discrepantes)
+    if degradados:
+        log.info("Pines degradados a aproximados por compartir coordenada "
+                 "entre lugares distintos: %d", degradados)
     if sin_ubicar:
         log.info("Sin pin en el mapa (salen solo en la lista): %d", sin_ubicar)
     if descartados:

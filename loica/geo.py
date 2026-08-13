@@ -132,7 +132,10 @@ RECINTOS = {
     "movistar arena": (-33.4470, -70.6650),
     "teatro caupolican": (-33.4560, -70.6540),
     "club chocolate": (-33.4330, -70.6350),
-    "blondie": (-33.4470, -70.6620),
+    # Alameda 2879, Estación Central. Estaba anotado 1,1 km al oriente, en
+    # pleno centro. Lo confirman tres fuentes que coinciden: el nodo de OSM,
+    # la dirección que publica Passline y las coordenadas de Puntoticket.
+    "blondie": (-33.4492, -70.6738),
     "corporacion cultural de vitacura": (-33.3899, -70.5817),
     "centro artesanal los dominicos": (-33.4030, -70.5350),
 }
@@ -255,8 +258,16 @@ class IndiceLocal:
         cortes.sort(key=lambda c: (not c[2], -len(c[0])))
         return [(calle, numero) for calle, numero, _ in cortes]
 
-    def direccion(self, direccion: str, comuna: str = "") -> list | None:
-        """Resuelve "Calle 1234" contra las direcciones con número de OSM."""
+    def direccion(self, direccion: str, comuna: str = "",
+                  estricta: bool = False) -> list | None:
+        """Resuelve "Calle 1234" contra las direcciones con número de OSM.
+
+        Con `estricta`, solo vale el calce exacto de calle y número: nada de
+        números cercanos ni nombres recortados. Se usa cuando el resultado va
+        a competir contra un dato ya existente (la tabla de recintos, o las
+        coordenadas que publicó la fuente), donde una aproximación no alcanza
+        para desbancar a nadie.
+        """
         if not self.con or not direccion:
             return None
         # Sin comuna, un nombre de calle repetido en media región se resuelve
@@ -270,12 +281,13 @@ class IndiceLocal:
                     comuna = nombre
                     break
         for calle, numero in self._candidatos(direccion)[:4]:
-            encontrada = self._buscar(calle, numero, comuna)
+            encontrada = self._buscar(calle, numero, comuna, estricta)
             if encontrada:
                 return encontrada
         return None
 
-    def _buscar(self, calle: str, numero: int, comuna: str) -> list | None:
+    def _buscar(self, calle: str, numero: int, comuna: str,
+                estricta: bool = False) -> list | None:
         """Busca una calle en el índice aflojando de a poco la exigencia.
 
         El texto trae basura antes de la calle ("JJ. VV. Simón Bolívar
@@ -291,6 +303,8 @@ class IndiceLocal:
             elegida = self._elegir(exactas, comuna)
             if elegida:
                 return elegida
+        if estricta:
+            return None
 
         # La fuente suele acortar el nombre de la calle: escribe "Juan Moya
         # 1370" donde el catastro dice "Juan Moya Morales". Se prueba como
@@ -380,6 +394,16 @@ class Geocodificador:
         — tres lugares contaban pines "calle" que este módulo nunca emitía.
         """
         clave_lugar = _plano(lugar)
+
+        # 0. La dirección que publica la fuente, si calza EXACTO calle+número
+        #    en el catastro. Va antes que RECINTOS porque esa tabla se escribe
+        #    a mano y envejece: Blondie estaba anotado a 1,1 km de su local de
+        #    Alameda 2879, y le ganaba a la dirección correcta que venía en el
+        #    evento. Un calce exacto con el catastro es un hecho verificable;
+        #    la tabla es una foto de cuando alguien la escribió.
+        exacta = self.indice.direccion(direccion, comuna, estricta=True)
+        if exacta:
+            return exacta[0], exacta[1], "calle"
 
         # 1. Recintos conocidos, por coincidencia parcial del nombre.
         #    El match es por contención, así que un nombre genérico se lleva

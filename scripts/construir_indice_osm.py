@@ -111,7 +111,14 @@ def construir() -> None:
                 for llave, valores in TIPOS_LOCAL.items():
                     tipo = tags.get(llave)
                     if tipo in valores:
-                        self.locales.append((normalizar(nombre), tipo, lat, lon))
+                        # La calle y la comuna del local, cuando OSM las trae:
+                        # es lo que convierte "Naoki" en "Naoki, Isidora
+                        # Goyenechea 3000, Las Condes" para la ficha.
+                        calle = tags.get("addr:street", "")
+                        numero = tags.get("addr:housenumber", "")
+                        direccion = f"{calle} {numero}".strip() if calle else ""
+                        self.locales.append((normalizar(nombre), tipo, lat, lon,
+                                             direccion, tags.get("addr:city", "")))
                         break
 
         def node(self, n):
@@ -140,11 +147,12 @@ def construir() -> None:
         CREATE TABLE direcciones (calle TEXT, numero INTEGER, ciudad TEXT,
                                   lat REAL, lon REAL);
         CREATE INDEX idx_dir ON direcciones(calle, numero);
-        CREATE TABLE locales (nombre TEXT, tipo TEXT, lat REAL, lon REAL);
+        CREATE TABLE locales (nombre TEXT, tipo TEXT, lat REAL, lon REAL,
+                              direccion TEXT, ciudad TEXT);
         CREATE INDEX idx_loc ON locales(nombre);
     """)
     con.executemany("INSERT INTO direcciones VALUES (?,?,?,?,?)", rec.direcciones)
-    con.executemany("INSERT INTO locales VALUES (?,?,?,?)", rec.locales)
+    con.executemany("INSERT INTO locales VALUES (?,?,?,?,?,?)", rec.locales)
     con.commit()
     con.close()
     print(f"Índice listo: {RUTA_DB}")
