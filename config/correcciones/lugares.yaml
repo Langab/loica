@@ -233,6 +233,16 @@ lugares:
   # Locales de fiesta y música en vivo. Toliv y las ticketeras publican
   # coordenadas propias geocodificadas a la rápida —Club 1 aparecía a 2,7 km
   # de su dirección real— y estas entradas les ganan.
+  # Todavía no aparece en la base: sus fiestas llegan por Passline, que se
+  # ingesta a mano. La ficha queda escrita para que el día que entre ya tenga
+  # su pin, en vez de caer al centro de Santiago.
+  El Túnel:
+    direccion: Santo Domingo 439, Barrio Bellas Artes
+    comuna: Santiago
+    lat: -33.43625
+    lon: -70.64392
+    nota: en el antiguo Catacumbas 2000, junto al metro Bellas Artes; dirección de su ficha de Passline y de Yelp, ubicada con el catastro OSM (2026-08-13)
+
   Club 1:
     direccion: Bombero Núñez 1
     comuna: Recoleta
