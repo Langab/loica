@@ -1,48 +1,3 @@
-# Descuentos de restaurantes de Banco Santander — captura MANUAL.
-#
-# Por qué no está en la corrida automática:
-# banco.santander.cl responde 403 a cualquier petición que no venga de un
-# navegador, y bloquea incluso /robots.txt — o sea, ni siquiera se puede leer
-# qué permite y qué no. Con cabeceras completas de navegador devuelve un
-# desafío de 4 KB en vez del contenido. Eso es mitigación de bots activa, y
-# rodearla sería evadir un control que el banco puso a propósito. Este
-# proyecto pide permiso antes de leer (ver loica/red.py); no va a hacer la
-# excepción justo acá.
-#
-# Entonces esto es lo que haría una persona: abrir la página, mirarla y
-# anotar lo que dice. Mismo criterio que datos/manual/ para los eventos que
-# no se pueden rastrear.
-#
-# Como es una foto y no un flujo, ENVEJECE. Santander arma su calendario por
-# campaña mensual, así que esto dura semanas, no meses. `run_descuentos.py`
-# avisa cuando la captura pasa de 45 días y la página muestra la fecha en
-# cada ficha. Para actualizar: abrir la fuente de abajo y rehacer la lista.
-#
-# CAMPOS POR FILA
-#   comercio   (obligatorio) nombre del local
-#   monto      "40% dcto."  — de ahí sale el porcentaje
-#   cuando     "todos los miércoles" — de ahí salen los días y la modalidad
-#   region     "Metropolitana"
-#   tarjeta    "Amex" o "Limited" si el descuento es solo para esas
-#
-# OPCIONALES. Todos salen de la ficha que se abre al hacer clic en el local,
-# y son los que hacen la diferencia entre una lista y algo que da ganas de ir:
-#   direccion    "Av. Blanca Estela 1927, Concón"  → sin esto el descuento no
-#                se puede ubicar en el mapa ni filtrar por comuna, y en la
-#                página queda como "Metropolitana" a secas. OJO: el catálogo
-#                mezcla regiones, así que la dirección es lo único que separa
-#                un local de Providencia de uno de Concón.
-#   comuna       "Providencia"
-#   logo         URL del logo del local. La ficha lo muestra grande.
-#   tope         40000  (de "Descuento máximo por pedido de $40.000")
-#   vigencia     "Hasta el 31 de agosto de 2026"
-#   condiciones  la letra chica en viñetas, tal como la lista la ficha
-#   sitio_web    la página del local (distinta de la ficha del banco)
-#   categoria    restaurantes | cafeterias | gourmet | comida_rapida
-#
-# El tipo de cocina (japonesa, italiana...) NO se escribe: lo deduce el
-# pipeline del nombre del local.
-
 banco: Santander
 capturado: '2026-08-12'
 fuente: https://banco.santander.cl/beneficios/descuentos-restaurantes
@@ -62,6 +17,15 @@ descuentos:
   cuando: todos los sábados.
   region: ''
   tarjeta: ''
+  direccion: Av hernando de aguirre 129
+  comuna: Providencia
+- comercio: Holy Moly
+  monto: 40% dcto.
+  cuando: todos los sábados.
+  region: ''
+  tarjeta: ''
+  direccion: Merced 318
+  comuna: Santiago
 - comercio: El Dorado
   monto: 40% dcto.
   cuando: todos los domingos
@@ -82,6 +46,8 @@ descuentos:
   cuando: en exclusiva experiencia gastronómica Rubaiyat
   region: ''
   tarjeta: Limited
+  direccion: Av. Nueva Costanera 4031
+  comuna: Vitacura
 - comercio: Corrales del Sur
   monto: 20% dcto.
   cuando: todos los lunes.
@@ -107,26 +73,36 @@ descuentos:
   cuando: todos los jueves
   region: ''
   tarjeta: ''
+  direccion: Principe de Gales 7102
+  comuna: La Reina
 - comercio: Lumiere Bistró
   monto: 40% dcto.
   cuando: todos los sábados
   region: ''
   tarjeta: ''
+  direccion: Puerta del Sol 19
+  comuna: Las Condes
 - comercio: Cosenza
   monto: 50% dcto.
   cuando: todos los jueves
   region: Metropolitana
   tarjeta: Amex
+  direccion: Av. Nueva Costanera 3900
+  comuna: Vitacura
 - comercio: Vicenzo Cucina
   monto: 40% dcto.
   cuando: todos los jueves
   region: Metropolitana
   tarjeta: ''
+  direccion: Av. Apoquindo 6554
+  comuna: Las Condes
 - comercio: Ruta 41
   monto: 40% dcto.
   cuando: todos los viernes.
   region: Metropolitana
   tarjeta: ''
+  direccion: Av Vitacura 3708
+  comuna: Vitacura
 - comercio: Toro Bayo
   monto: 40% dcto.
   cuando: todos los miércoles
@@ -142,26 +118,36 @@ descuentos:
   cuando: todos los viernes
   region: Metropolitana
   tarjeta: Limited
+  direccion: Alonso de Córdova 4308
+  comuna: Vitacura
 - comercio: La Parrilla del Guatón Jeréz
   monto: 40% de dcto.
   cuando: todos los miércoles
   region: Metropolitana
   tarjeta: Limited
+  direccion: Av. Padre Hurtado Nte 1460
+  comuna: Vitacura
 - comercio: Kevin Bacon
   monto: 40% dcto.
   cuando: todos los lunes.
   region: Metropolitana
   tarjeta: ''
+  direccion: Av. Pdte. Kennedy 5601
+  comuna: Las Condes
 - comercio: Jeronimo
   monto: 40%. dcto.
   cuando: todos los jueves
   region: ''
   tarjeta: ''
+  direccion: Alonso de Córdova 4355
+  comuna: Vitacura
 - comercio: Miscelaneo
   monto: 40%. dcto.
   cuando: todos los viernes
   region: Metropolitana
   tarjeta: ''
+  direccion: Santa María 5870
+  comuna: Vitacura
 - comercio: Vapiano
   monto: 40% dcto.
   cuando: todos los martes y jueves
@@ -172,56 +158,162 @@ descuentos:
   cuando: todos los jueves
   region: Metropolitana
   tarjeta: ''
+  direccion: Costanera Sur San Josemaría Escrivá de Balaguer 6400
+  comuna: Vitacura
 - comercio: Chilis
   monto: 40% dcto.
   cuando: todos los miércoles
   region: ''
   tarjeta: ''
+  direccion: Av. Italia 1484
+  comuna: Providencia
 - comercio: Santa Brasa
   monto: 40% dcto.
   cuando: todos los jueves
   region: Metropolitana
   tarjeta: ''
+  direccion: Av. Presidente Kennedy 5413
+  comuna: Las Condes
+- comercio: Santa Brasa
+  monto: 40% dcto.
+  cuando: todos los jueves
+  region: Metropolitana
+  tarjeta: ''
+  direccion: Av. Presidente Kennedy Lateral 9001
+  comuna: Las Condes
+- comercio: Santa Brasa
+  monto: 40% dcto.
+  cuando: todos los jueves
+  region: Metropolitana
+  tarjeta: ''
+  direccion: Av. Padre Hurtado Sur 785
+  comuna: Las Condes
 - comercio: Pizzería Capri
   monto: 40% dcto.
   cuando: todos los lunes
   region: Metropolitana
   tarjeta: ''
+  direccion: Av. El Rodeo 13052
+  comuna: Lo Barnechea
+- comercio: Pizzería Capri
+  monto: 40% dcto.
+  cuando: todos los lunes
+  region: Metropolitana
+  tarjeta: ''
+  direccion: Gerónimo Alderete 1423
+  comuna: Vitacura
 - comercio: Exò Nuit
   monto: 30%. dcto.
   cuando: todos los miércoles.
   region: Metropolitana
   tarjeta: ''
+  direccion: Candelaria Goyenechea 3868
+  comuna: Vitacura
 - comercio: Delivery Gourmet
   monto: 30% dcto.
   cuando: todos los miércoles
   region: Metropolitana
   tarjeta: ''
+  direccion: Partenón 1727
+  comuna: Vitacura
+- comercio: Delivery Gourmet
+  monto: 30% dcto.
+  cuando: todos los miércoles
+  region: Metropolitana
+  tarjeta: ''
+  direccion: Av. Francisco Bilbao 2752
+  comuna: Providencia
+- comercio: Delivery Gourmet
+  monto: 30% dcto.
+  cuando: todos los miércoles
+  region: Metropolitana
+  tarjeta: ''
+  direccion: Roberto Espinoza 718
+  comuna: Santiago
 - comercio: Curry
   monto: 30% dcto.
   cuando: todos los miércoles
   region: Metropolitana
   tarjeta: ''
+  direccion: Partenón 1727
+  comuna: Vitacura
+- comercio: Curry
+  monto: 30% dcto.
+  cuando: todos los miércoles
+  region: Metropolitana
+  tarjeta: ''
+  direccion: Av. Francisco Bilbao 2752
+  comuna: Providencia
+- comercio: Curry
+  monto: 30% dcto.
+  cuando: todos los miércoles
+  region: Metropolitana
+  tarjeta: ''
+  direccion: Roberto Espinoza 718
+  comuna: Santiago
 - comercio: Rocoto
   monto: 30% dcto.
   cuando: todos los miércoles
   region: Metropolitana
   tarjeta: ''
+  direccion: Partenón 1727
+  comuna: Vitacura
+- comercio: Rocoto
+  monto: 30% dcto.
+  cuando: todos los miércoles
+  region: Metropolitana
+  tarjeta: ''
+  direccion: Av. Francisco Bilbao 2752
+  comuna: Providencia
+- comercio: Rocoto
+  monto: 30% dcto.
+  cuando: todos los miércoles
+  region: Metropolitana
+  tarjeta: ''
+  direccion: Roberto Espinoza 718
+  comuna: Santiago
 - comercio: La Maestranza
   monto: 40% dcto.
   cuando: todos los sábados
   region: Metropolitana
   tarjeta: ''
+  direccion: Av. Vitacura 5468
+  comuna: Las Condes
+- comercio: La Maestranza
+  monto: 40% dcto.
+  cuando: todos los sábados
+  region: Metropolitana
+  tarjeta: ''
+  direccion: Presidente Kennedy 9001
+  comuna: Vitacura
 - comercio: Social Bar
   monto: 40% dcto.
   cuando: todos los lunes
   region: Metropolitana
   tarjeta: ''
+  direccion: Av. Vitacura 3396
+  comuna: Vitacura
 - comercio: La Yunta
   monto: 40% dcto.
   cuando: todos los domingos
   region: Metropolitana
   tarjeta: ''
+  direccion: Av. Tabancura 1344
+  comuna: Vitacura
+- comercio: La Yunta
+  monto: 40% dcto.
+  cuando: todos los domingos
+  region: Metropolitana
+  tarjeta: ''
+  direccion: Av. El Bosque Central 18
+  comuna: Las Condes
+- comercio: La Yunta
+  monto: 40% dcto.
+  cuando: todos los domingos
+  region: Metropolitana
+  tarjeta: ''
+  direccion: Av. Manuel Montt 748
+  comuna: Providencia
 - comercio: Streat Burger
   monto: 40% dcto.
   cuando: todos los miércoles.
@@ -232,21 +324,36 @@ descuentos:
   cuando: todos los miércoles.
   region: Metropolitana
   tarjeta: ''
+  direccion: Manuel Montt 727
+  comuna: Providencia
 - comercio: Bar Porfirio
   monto: 30% dcto.
   cuando: todos los miércoles.
   region: Metropolitana
   tarjeta: ''
+  direccion: Manuel Montt 697
+  comuna: Providencia
 - comercio: Kento Sushi
   monto: 30% dcto.
   cuando: todos los miércoles.
   region: Metropolitana
   tarjeta: ''
+  direccion: Av. Vitacura 5460
+  comuna: Vitacura
 - comercio: Hijo del Inca
   monto: 30% dcto.
   cuando: todos los miércoles
   region: Metropolitana
   tarjeta: ''
+  direccion: Príncipe de Gales 6992
+  comuna: La Reina
+- comercio: Hijo del Inca
+  monto: 30% dcto.
+  cuando: todos los miércoles
+  region: Metropolitana
+  tarjeta: ''
+  direccion: Santa Magdalena 168
+  comuna: Providencia
 - comercio: Siete Olas
   monto: 50%. dcto.
   cuando: todos los miércoles
@@ -257,6 +364,8 @@ descuentos:
   cuando: todos los miércoles.
   region: Metropolitana
   tarjeta: ''
+  direccion: Av. Nueva Costanera 3750
+  comuna: Vitacura
 - comercio: Le Vice Chocolat
   monto: 40% dcto.
   cuando: todos los jueves.
@@ -267,6 +376,8 @@ descuentos:
   cuando: todos los martes
   region: Metropolitana
   tarjeta: ''
+  direccion: Los Piñones 011
+  comuna: Providencia
 - comercio: Berlin Döner Kebab
   monto: 30% dcto.
   cuando: todos los miércoles
@@ -287,6 +398,8 @@ descuentos:
   cuando: todos los lunes.
   region: Metropolitana
   tarjeta: Amex
+  direccion: Alonso de Monroy 2869
+  comuna: Vitacura
 - comercio: Maillard
   monto: 40% dcto.
   cuando: todos los martes
@@ -307,6 +420,22 @@ descuentos:
   cuando: todos los martes
   region: Metropolitana
   tarjeta: ''
+  direccion: Av. Providencia 1467
+  comuna: Providencia
+- comercio: El Taller
+  monto: 40% dcto.
+  cuando: todos los martes
+  region: Metropolitana
+  tarjeta: ''
+  direccion: Av. La Dehesa 1570
+  comuna: Lo Barnechea
+- comercio: El Taller
+  monto: 40% dcto.
+  cuando: todos los martes
+  region: Metropolitana
+  tarjeta: ''
+  direccion: Av. Apoquindo 2730
+  comuna: Las Condes
 - comercio: La Caperucita y el Lobo
   monto: 40% dcto.
   cuando: todos los jueves
@@ -317,11 +446,22 @@ descuentos:
   cuando: todos los martes
   region: Metropolitana
   tarjeta: ''
+  direccion: Av. Vitacura 6780
+  comuna: Vitacura
+- comercio: Jardín Mallinkrodt
+  monto: 40% dcto.
+  cuando: todos los martes
+  region: Metropolitana
+  tarjeta: ''
+  direccion: Mallinkrodt 170
+  comuna: Providencia
 - comercio: 99 Restaurante
   monto: 50%. dcto.
   cuando: todos los sábados
   region: Metropolitana
   tarjeta: Amex
+  direccion: Alonso de Córdova 4355
+  comuna: Vitacura
 - comercio: Rústico restobar
   monto: 40% dcto.
   cuando: todos los miércoles
@@ -347,6 +487,8 @@ descuentos:
   cuando: todos los martes
   region: Metropolitana
   tarjeta: ''
+  direccion: Av. Vitacura 3520
+  comuna: Vitacura
 - comercio: Carmine
   monto: 50% dcto.
   cuando: todos los jueves
@@ -362,6 +504,8 @@ descuentos:
   cuando: todos los viernes
   region: ''
   tarjeta: Limited
+  direccion: Av. La Dehesa 2035
+  comuna: Lo Barnechea
 - comercio: De Pura Madre
   monto: 40% dcto
   cuando: todos los viernes
@@ -372,16 +516,22 @@ descuentos:
   cuando: todos los miércoles
   region: Metropolitana
   tarjeta: Amex
+  direccion: Av. Vitacura 3875
+  comuna: Vitacura
 - comercio: Don Carlos
   monto: 40% dcto.
   cuando: todos los domingos
   region: Metropolitana
   tarjeta: ''
+  direccion: Isidora Goyenechea 2895
+  comuna: Las Condes
 - comercio: Caoba Bar
   monto: 40% dcto.
   cuando: todos los lunes
   region: Metropolitana
   tarjeta: ''
+  direccion: Alonso de Córdova 4156
+  comuna: Vitacura
 - comercio: Hijo del Sol
   monto: 40% dcto.
   cuando: todos los miércoles.
@@ -392,11 +542,22 @@ descuentos:
   cuando: todos los viernes
   region: Metropolitana
   tarjeta: Amex
+  direccion: Nueva Costanera 3723
+  comuna: Vitacura
 - comercio: La Cabrera
   monto: 40% dcto.
   cuando: todos los lunes
   region: Metropolitana
   tarjeta: ''
+  direccion: Alonso de Córdova 4263
+  comuna: Vitacura
+- comercio: La Cabrera
+  monto: 40% dcto.
+  cuando: todos los lunes
+  region: Metropolitana
+  tarjeta: ''
+  direccion: Isidora Goyenechea 3275
+  comuna: Las Condes
 - comercio: Kobo Sushi
   monto: 40% dcto.
   cuando: todos los miércoles
@@ -462,3 +623,5 @@ descuentos:
   cuando: todos los viernes.
   region: Metropolitana
   tarjeta: ''
+  direccion: Av. Chicureo Km 2
+  comuna: Colina
