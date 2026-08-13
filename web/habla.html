@@ -379,6 +379,7 @@
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
 <script src="loica.js?v=13"></script>
+<script src="recomendador.js?v=13"></script>
 <script>
 /* ============================================================
    1. EL ELENCO COMO GUÍAS
@@ -425,6 +426,7 @@ const BOT = {
     saludoGlobo:"¡Hola! ¿Vemos qué hacer?",
     hola:"¡Hola! Soy la Loica, la anfitriona de esto. Vivo mirando lo que pasa en Santiago.",
     q1:"Partamos por lo práctico: ¿cuándo quieres salir?",
+    q1b:"¿Y con quién vas? Cambia harto lo que te sirve.",
     q2:"Ya. ¿Y qué se te antoja? Según lo que elijas te paso con quien sabe.",
     atajoTomado:"Perfecto, eso lo maneja alguien del equipo. Antes de pasarte: ¿cuándo quieres salir?",
     cuando:{hoy:"Hoy", noche:"Esta noche", manana:"Mañana", finde:"Este finde", semana:"En estos días", todo:"Cuando sea"},
@@ -473,6 +475,7 @@ const BOT = {
     saludoGlobo:"Hi! Shall we find something?",
     hola:"Hi! I'm the Loica, the host here. I spend my days watching what happens in Santiago.",
     q1:"Let's start with the practical bit: when do you want to go out?",
+    q1b:"And who are you going with? It changes a lot.",
     q2:"Right. What are you in the mood for? I'll hand you to whoever knows best.",
     atajoTomado:"Good, someone on the team handles that. Before I hand you over: when do you want to go out?",
     cuando:{hoy:"Today", noche:"Tonight", manana:"Tomorrow", finde:"This weekend", semana:"This week", todo:"Any time"},
@@ -516,6 +519,7 @@ const BOT = {
     saludoGlobo:"Oi! Vamos achar algo?",
     hola:"Oi! Sou a Loica, a anfitriã disto. Vivo olhando o que acontece em Santiago.",
     q1:"Vamos ao prático: quando você quer sair?",
+    q1b:"E com quem você vai? Muda bastante o que serve.",
     q2:"Beleza. E o que te apetece? Pelo que escolher, te passo para quem entende.",
     atajoTomado:"Ótimo, isso é com alguém da equipe. Antes de te passar: quando você quer sair?",
     cuando:{hoy:"Hoje", noche:"Hoje à noite", manana:"Amanhã", finde:"Fim de semana", semana:"Nestes dias", todo:"Quando for"},
@@ -556,12 +560,16 @@ const BOT = {
 const b = c => BOT[IDIOMA][c];
 
 /* ============================================================
-   3. RANGOS Y SECTORES
+   3. RANGOS DE FECHA
+   Las situaciones, las compañías y el puntaje viven en recomendador.js, que
+   corre igual acá y en Node — así `scripts/probar_roles.js` prueba los
+   perfiles de verdad contra el catálogo completo en vez de a punta de clics.
+   Lo único que se queda acá es lo que depende del reloj del usuario.
 
-   Los rangos de loica.js llegan hasta "7 días". Acá se agregan los dos
-   extremos que faltaban: "esta noche", que es la pregunta real de un jueves
-   a las seis, y "cuando sea", que abre los 1.800 eventos completos en vez de
-   dejar el 80% del catálogo inalcanzable.
+   Los rangos de loica.js llegan hasta "7 días". Se agregan los dos extremos
+   que faltaban: "esta noche", que es la pregunta real de un jueves a las
+   seis, y "cuando sea", que abre el catálogo completo en vez de dejar el 80%
+   inalcanzable.
    ============================================================ */
 const RANGOS_BOT = {
   hoy:    f => mismaFecha(f, new Date()),
@@ -575,345 +583,13 @@ const RANGOS_BOT = {
   todo:   f => f >= empiezaDia(new Date()),
 };
 const ORDEN_CUANDO = ["hoy","noche","manana","finde","semana","todo"];
+const ORDEN_COMPANIA = ["solo","pareja","amigos","ninos"];
+/* La mascota que acompaña cada opción de "¿con quién vas?". El Pudú se hace
+   cargo de los niños porque ya se hace cargo de lo gratis, que es la otra
+   pregunta que se hace quien sale con la familia. */
+const GUIA_COMPANIA = {solo:"loica", pareja:"chinchilla", amigos:"culpeo", ninos:"pudu"};
 
-/* Los sectores agrupan las comunas que el pipeline realmente entrega.
-   "sin comuna" no entra en ninguno: un evento sin dirección no se puede
-   prometer en un sector. */
-const SECTORES = {
-  centro: ["Santiago","Estación Central","Recoleta","Independencia","Quinta Normal","Cerrillos","Pedro Aguirre Cerda"],
-  oriente:["Providencia","Ñuñoa","Las Condes","Vitacura","Lo Barnechea","La Reina","Peñalolén","Macul"],
-  norte:  ["Huechuraba","Conchalí","Quilicura","Renca","Colina","Lampa","Cerro Navia"],
-  sur:    ["La Florida","Puente Alto","Maipú","La Pintana","San Miguel","La Granja","El Bosque","Pudahuel","San Bernardo","Lo Espejo","San Joaquín"],
-};
-const enSector = (ev, s) => s === "todo" || (SECTORES[s] || []).includes(ev.comuna);
 
-/* ============================================================
-   4. LAS SITUACIONES
-   El usuario no elige una categoría: elige una situación de su vida, y cada
-   situación reparte puntaje entre varias categorías. Es a propósito. "Ando
-   con niños" no es `categoria == familia` — son 65 de 1.863 — es familia +
-   aire libre + feria + teatro + cine ordenados por qué tan bien calzan. Un
-   filtro duro devuelve pantalla vacía; el puntaje devuelve lo mejor que hay,
-   y si es poco lo dice.
-
-   Cada situación se lleva UNA mascota, y esa mascota toma el mando: se
-   presenta, hace su repregunta y entrega el resultado. Los nueve del elenco
-   están acá y ninguno se repite.
-   ============================================================ */
-const SITUACIONES = [
-  {
-    id:"ninos", guia:"pudu",
-    es:["Ando con niños","Que aguanten y se rían"],
-    en:["I've got kids with me","Something they'll enjoy"],
-    pt:["Estou com crianças","Que aguentem e se divirtam"],
-    dicho:{es:"con niños", en:"with kids", pt:"com crianças"},
-    saludo:{es:"Los cabros chicos son lo mío: si algo no les aguanta media hora, no te lo recomiendo.",
-            en:"Kids are my thing: if something won't hold them for half an hour, I won't recommend it.",
-            pt:"Criança é comigo: se algo não segura elas por meia hora, eu não recomendo."},
-    pregunta:{es:"¿De qué porte son?", en:"How old are they?", pt:"De que idade são?"},
-    opciones:[
-      /* Bajo los 7 los talleres y las charlas se descartan de plano: casi
-         ninguno está pensado para esa edad y son los que más se cuelan por
-         tener foto y buena hora. */
-      {id:"chicos", es:"Chicos, menos de 7", en:"Little ones, under 7", pt:"Pequenos, menos de 7",
-       efecto:{pesos:{familia:6, teatro:2, clases:-6, charla:-9, arte:-3}, horaIdeal:[10,17]}},
-      {id:"medianos", es:"Entre 7 y 12", en:"Between 7 and 12", pt:"Entre 7 e 12",
-       efecto:{pesos:{clases:4, feria:3, charla:-6, deporte:3}}},
-      {id:"grandes", es:"Ya están grandes", en:"They're older", pt:"Já estão grandes",
-       efecto:{pesos:{cine:5, musica:4, arte:3, deporte:3}, horaIdeal:[12,21]}},
-    ],
-    pesos:{familia:12, aire_libre:10, feria:8, teatro:6, cine:6, clases:5, arte:4, deporte:4, musica:2},
-    publicoBueno:["ninos"], publicoMalo:["adultos"], horaIdeal:[10,19], bonoGratis:3,
-    /* Salir con niños se multiplica por cabeza: sobre este techo el panorama
-       deja de ser recomendable aunque la categoría calce. Así se colaba un
-       entrenamiento profesional de audiciones a $40.000 clasificado teatro. */
-    techoPrecio:15000,
-  },
-  {
-    id:"noche", guia:"culpeo",
-    es:["Salir de noche","Carrete, tragos, música"],
-    en:["A night out","Party, drinks, music"],
-    pt:["Sair à noite","Balada, drinks, música"],
-    dicho:{es:"de noche", en:"for a night out", pt:"à noite"},
-    saludo:{es:"Yo salgo cuando el resto se acuesta. La noche la manejo yo.",
-            en:"I come out when everyone else goes to bed. The night is mine.",
-            pt:"Eu saio quando o resto vai dormir. A noite é comigo."},
-    pregunta:{es:"¿Hasta qué hora estás dispuesto?", en:"How late are you willing to go?", pt:"Até que horas você aguenta?"},
-    opciones:[
-      {id:"temprano", es:"Después de comida no más", en:"Just after dinner", pt:"Só depois do jantar",
-       efecto:{horaIdeal:[19,23], pesos:{musica:4, teatro:3, cine:3}}},
-      {id:"tarde", es:"Hasta que cierren", en:"Until they close", pt:"Até fecharem",
-       efecto:{horaIdeal:[21,4], pesos:{fiesta:6, cine:-4}}},
-    ],
-    pesos:{fiesta:12, musica:9, cine:4, teatro:3},
-    publicoBueno:["adultos"], publicoMalo:["ninos"], horaIdeal:[20,3], bonoGratis:0,
-  },
-  {
-    id:"musica", guia:"condor",
-    es:["Música en vivo","Tocatas y conciertos"],
-    en:["Live music","Gigs and concerts"],
-    pt:["Música ao vivo","Shows e concertos"],
-    dicho:{es:"con música en vivo", en:"with live music", pt:"com música ao vivo"},
-    saludo:{es:"Cóndor. Yo cargo con lo que suena fuerte.",
-            en:"Condor. I carry the loud stuff.",
-            pt:"Condor. Eu carrego o que soa alto."},
-    pregunta:{es:"¿Qué tan fuerte?", en:"How loud?", pt:"Quão alto?"},
-    opciones:[
-      {id:"suave", es:"Algo suave", en:"Something gentle", pt:"Algo suave",
-       efecto:{pesos:{musica:5, teatro:4, fiesta:-8}, horaIdeal:[17,23]}},
-      {id:"fuerte", es:"Que suene fuerte", en:"Loud", pt:"Bem alto",
-       efecto:{pesos:{musica:6, fiesta:6}, horaIdeal:[19,3]}},
-    ],
-    pesos:{musica:12, fiesta:6, otros:2}, horaIdeal:[18,2], bonoGratis:1,
-  },
-  {
-    id:"tranquilo", guia:"chinchilla",
-    es:["Algo tranquilo","Sin ruido y sin apuro"],
-    en:["Something quiet","No noise, no rush"],
-    pt:["Algo tranquilo","Sem barulho e sem pressa"],
-    dicho:{es:"tranquilo", en:"quiet", pt:"tranquilo"},
-    saludo:{es:"Chinchilla. Escucho más de lo que hablo, así que voy a ser breve.",
-            en:"Chinchilla. I listen more than I talk, so I'll be brief.",
-            pt:"Chinchila. Escuto mais do que falo, então vou ser breve."},
-    pregunta:{es:"¿Prefieres mirar o que te cuenten algo?", en:"Would you rather look, or be told a story?", pt:"Prefere olhar ou que te contem algo?"},
-    opciones:[
-      {id:"mirar", es:"Mirar", en:"Look", pt:"Olhar",
-       efecto:{pesos:{arte:6, cine:5, teatro:-4}}},
-      {id:"escuchar", es:"Que me cuenten", en:"Be told", pt:"Que me contem",
-       efecto:{pesos:{teatro:6, charla:5, arte:-4}}},
-    ],
-    pesos:{arte:12, cine:11, teatro:10, charla:6, clases:3},
-    evitar:["fiesta"], horaIdeal:[11,21], bonoGratis:2,
-  },
-  {
-    id:"aprender", guia:"pinguino",
-    es:["Aprender algo","Charlas y gente que sabe"],
-    en:["Learn something","Talks and people who know"],
-    pt:["Aprender algo","Palestras e gente que sabe"],
-    dicho:{es:"para aprender algo", en:"to learn something", pt:"para aprender algo"},
-    saludo:{es:"Pingüino, de Humboldt y de punta en blanco. Las charlas y los seminarios son mi departamento.",
-            en:"Penguin, Humboldt and in black tie. Talks and seminars are my department.",
-            pt:"Pinguim, de Humboldt e de gala. Palestras e seminários são o meu departamento."},
-    pregunta:{es:"¿Escuchar o meter las manos?", en:"Listen, or get your hands dirty?", pt:"Escutar ou meter a mão?"},
-    opciones:[
-      {id:"escuchar", es:"Que me cuenten", en:"Just listen", pt:"Que me contem",
-       efecto:{pesos:{charla:7, clases:-4}}},
-      {id:"hacer", es:"Hacer algo con las manos", en:"Hands on", pt:"Fazer com as mãos",
-       efecto:{pesos:{clases:7, idiomas:4, charla:-4}}},
-    ],
-    pesos:{charla:12, clases:11, idiomas:10, arte:4, cine:3}, horaIdeal:[9,21], bonoGratis:2,
-    // Un taller que se repite todas las semanas es exactamente lo que busca
-    // alguien que quiere aprender: acá suman en vez de restar.
-    recurrente:3,
-  },
-  {
-    id:"barrio", guia:"chincol",
-    es:["Ferias y barrio","Puestos, talleres, plaza"],
-    en:["Markets and local stuff","Stalls, workshops, the square"],
-    pt:["Feiras e bairro","Barracas, oficinas, praça"],
-    dicho:{es:"de barrio", en:"local", pt:"de bairro"},
-    saludo:{es:"Chincol, el pájaro más de barrio que hay. Ferias, talleres y plaza: eso lo conozco de memoria.",
-            en:"Chincol, the most local bird there is. Markets, workshops and the square: I know them by heart.",
-            pt:"Chincol, o pássaro mais de bairro que existe. Feiras, oficinas e praça: conheço de cor."},
-    pregunta:{es:"¿Vas a comprar o a pasear?", en:"Are you buying or just wandering?", pt:"Vai comprar ou passear?"},
-    opciones:[
-      {id:"comprar", es:"A comprar", en:"Buying", pt:"Comprar",
-       efecto:{pesos:{feria:7, clases:-4}}},
-      {id:"pasear", es:"Solo a pasear", en:"Just wandering", pt:"Só passear",
-       efecto:{pesos:{aire_libre:7, familia:4, feria:2}}},
-    ],
-    pesos:{feria:12, clases:9, aire_libre:9, familia:6, musica:3}, horaIdeal:[10,19], bonoGratis:4,
-  },
-  {
-    id:"mover", guia:"chungungo",
-    es:["Moverme un poco","Deporte y aire libre"],
-    en:["Get moving","Sport and the outdoors"],
-    pt:["Me mexer um pouco","Esporte e ar livre"],
-    dicho:{es:"para moverte", en:"to get moving", pt:"para se mexer"},
-    saludo:{es:"Chungungo, la nutria del Mapocho. Me muevo, me mojo y no paro nunca.",
-            en:"Chungungo, the Mapocho river otter. Always moving, always wet, never still.",
-            pt:"Chungungo, a lontra do Mapocho. Me mexo, me molho e não paro nunca."},
-    pregunta:{es:"¿Suave o de verdad?", en:"Easy or for real?", pt:"Leve ou pra valer?"},
-    opciones:[
-      {id:"suave", es:"Caminar no más", en:"Just a walk", pt:"Só caminhar",
-       efecto:{pesos:{aire_libre:6, familia:3, deporte:-3}}},
-      {id:"fuerte", es:"Transpirar", en:"Break a sweat", pt:"Suar",
-       efecto:{pesos:{deporte:7, clases:3}}},
-    ],
-    pesos:{deporte:12, aire_libre:11, clases:6, familia:4, feria:3}, horaIdeal:[8,19], bonoGratis:3,
-    // Los talleres deportivos municipales son el corazón de esta situación.
-    recurrente:3,
-  },
-  {
-    /* El Degú no recomienda eventos: recomienda descuentos. Es el único
-       camino que sale de descuentos.json, y por eso tiene su propio motor. */
-    id:"comer", guia:"degu", dominio:"descuentos",
-    es:["Salir a comer","Con descuento de banco"],
-    en:["Eating out","With a bank discount"],
-    pt:["Sair para comer","Com desconto de banco"],
-    dicho:{es:"para comer", en:"to eat out", pt:"para comer"},
-    saludo:{es:"Degú. Junto, guardo y me sé de memoria qué día conviene salir a comer.",
-            en:"Degú. I hoard, I save, and I know by heart which day is worth eating out.",
-            pt:"Degu. Junto, guardo e sei de cor que dia compensa sair para comer."},
-    pregunta:{es:"¿Qué se te antoja comer?", en:"What do you feel like eating?", pt:"O que você quer comer?"},
-    opciones:[
-      {id:"restaurante", es:"Un restaurante", en:"A restaurant", pt:"Um restaurante",
-       cats:["restaurantes","restaurantes-y-bares"]},
-      {id:"cafe", es:"Un café", en:"A café", pt:"Um café",
-       cats:["cafeterias","cafeteria"]},
-      {id:"rapida", es:"Algo rápido", en:"Something quick", pt:"Algo rápido",
-       cats:["comida-rapida","antojos"]},
-      {id:"gourmet", es:"Algo gourmet", en:"Something fancy", pt:"Algo gourmet",
-       cats:["sabores-gourmet","gourmet-y-delicatessen","40-de-descuento-visa"]},
-    ],
-  },
-  {
-    id:"sorpresa", guia:"loica",
-    es:["Sorpréndeme","Confío en ti"],
-    en:["Surprise me","I trust you"],
-    pt:["Me surpreenda","Confio em você"],
-    dicho:{es:"", en:"", pt:""},
-    saludo:{es:"Entonces me quedo yo. Para eso soy la anfitriona.",
-            en:"Then I'll stay on. That's what being the host is for.",
-            pt:"Então eu fico. É para isso que sou a anfitriã."},
-    pregunta:{es:"¿Te llevo a lo seguro o a algo raro?", en:"Shall I play it safe or take you somewhere odd?", pt:"Te levo no seguro ou em algo estranho?"},
-    opciones:[
-      {id:"seguro", es:"A lo seguro", en:"Play it safe", pt:"No seguro",
-       efecto:{pesos:{musica:4, teatro:4, arte:3, feria:3}}},
-      {id:"raro", es:"Algo raro", en:"Somewhere odd", pt:"Algo estranho",
-       efecto:{pesos:{otros:6, charla:4, clases:3, musica:-2}}},
-    ],
-    /* Sin preferencia de categoría: gana lo mejor presentado y lo gratis, y
-       se fuerza que las tres sean de familias distintas. */
-    pesos:{}, base:6, bonoGratis:5, variedad:true,
-  },
-];
-const situacionPorId = id => SITUACIONES.find(s => s.id === id);
-const situacionPorGuia = g => SITUACIONES.find(s => s.guia === g);
-
-/* ---- Talleres recurrentes ----
-   715 de los 2.483 eventos son la misma clase municipal repetida semana a
-   semana: "Geronto motricidad" aparece 60 veces, "Yoga" 30, "Fútbol
-   infantil" 20. No son panoramas, son horarios de un taller — y 241 de ellos
-   vienen clasificados como `arte`, que es como un Hapkido de las 20:00
-   terminó recomendado para una tarde tranquila mirando algo.
-
-   La señal no está en ningún campo, está en el título, y son DOS señales
-   distintas que hay que cruzar:
-
-     1. El título normalizado se repite. "Yoga" sale 61 veces, "Pilates" 48.
-        Hay que sacarle antes los días y la hora, porque el mismo taller
-        viene como "Yoga Lu-Mi 09:00" y "Yoga Ma-Ju 19:30" y sin normalizar
-        cuentan como dos cosas distintas.
-     2. El título TRAE un patrón de días abreviados. "Hapkido Lu-Mi-Vi 20:00"
-        aparece una sola vez en todo el catálogo, así que la repetición nunca
-        lo iba a pillar — pero un título que dice en qué días se dicta es un
-        horario de taller, no el nombre de un panorama.
-
-   Se marcan una vez al cargar y después cada situación decide si los quiere:
-   el Pingüino y el Chungungo sí, los demás no. */
-const claveTitulo = t => (t || "").toLowerCase().replace(/\s+/g, " ").trim();
-const PATRON_DIAS = /\b(lu|ma|mi|ju|vi|sa|do)(-(lu|ma|mi|ju|vi|sa|do))+\b/i;
-const tituloBase = t => claveTitulo(t)
-  .replace(PATRON_DIAS, "")
-  .replace(/\d{1,2}[:.]\d{2}\s*(h|hrs?|horas?)?\.?/g, "")
-  .replace(/[\s\-–—]+/g, " ")
-  .replace(/^[\s.\-]+|[\s.\-]+$/g, "");   // trim() de JS no acepta caracteres
-
-function marcarRecurrentes(evs){
-  const cuenta = new Map();
-  evs.forEach(e => {
-    const k = tituloBase(e.titulo);
-    cuenta.set(k, (cuenta.get(k) || 0) + 1);
-  });
-  evs.forEach(e => e.recurrente =
-    (cuenta.get(tituloBase(e.titulo)) || 0) > 3 || PATRON_DIAS.test(e.titulo || ""));
-}
-
-/* ============================================================
-   5. EL PUNTAJE
-   Deliberadamente legible: si mañana hay que explicar por qué salió tal
-   evento, se lee esta función y se entiende.
-   ============================================================ */
-function puntuar(ev, sit, filtros){
-  const {soloGratis, techoPlata, sector, ajuste} = filtros;
-  if(soloGratis && !ev.gratis) return -1;
-  if(techoPlata && !ev.gratis && ev.precio && ev.precio > techoPlata) return -1;
-  if(sit.evitar && sit.evitar.includes(ev.categoria)) return -1;
-  if(sector && sector !== "todo" && !enSector(ev, sector)) return -1;
-
-  // La repregunta suma o resta SOBRE el peso base, no lo reemplaza.
-  const pesos = {...sit.pesos};
-  for(const k in (ajuste.pesos || {}))
-    pesos[k] = (sit.pesos[k] ?? (sit.base ?? 0)) + ajuste.pesos[k];
-
-  /* Piso de pertinencia. Los bonos de abajo suman hasta 9 puntos, así que sin
-     este corte un evento que NO calza se cuela igual por estar bien
-     presentado — así apareció un taller de audiciones de $40.000 recomendado
-     para niños de 5 años. Si la categoría no está en la tabla de la
-     situación, o la repregunta la dejó en cero, no es recomendación: es
-     relleno. */
-  const peso = pesos[ev.categoria] ?? sit.base;
-  if(peso === undefined || peso <= 0) return -1;
-  let p = peso;
-
-  // Lo gratis va primero: es la promesa del proyecto, no un detalle.
-  if(ev.gratis) p += (sit.bonoGratis ?? 2);
-  if(sit.techoPrecio && ev.precio > sit.techoPrecio) p -= 6;
-  // Un taller semanal sirve si viniste a aprender o a moverte; como panorama
-  // de un sábado, no. Cada situación fija su postura, el resto los castiga.
-  if(ev.recurrente) p += (sit.recurrente ?? -7);
-
-  if(sit.publicoBueno && sit.publicoBueno.includes(ev.publico)) p += 4;
-  if(sit.publicoMalo  && sit.publicoMalo.includes(ev.publico))  p -= 6;
-
-  /* Horario. Muchos eventos vienen a las 00:00 porque la fuente no publicó
-     hora: a esos no se les premia ni castiga, quedan neutros. */
-  const h = ev.fecha.getHours();
-  const tieneHora = h !== 0 || ev.fecha.getMinutes() !== 0;
-  const franja = ajuste.horaIdeal || sit.horaIdeal;
-  if(tieneHora && franja){
-    const [d, a] = franja;
-    p += (d <= a ? (h >= d && h <= a) : (h >= d || h <= a)) ? 3 : -2;
-  }
-
-  // Presentable: con foto y con descripción se recomienda mucho mejor.
-  if(ev.imagen) p += 2;
-  if((ev.descripcion || "").length > 60) p += 1;
-  // Un evento sin dirección confirmada es peor recomendación.
-  if(ev.precision === "sin_ubicar") p -= 2;
-  else if(ev.precision === "recinto") p += 1;
-
-  // A igualdad de puntaje, primero lo que ocurre antes.
-  p += Math.max(0, 3 - ((ev.fecha - Date.now()) / 86400000) * 0.12);
-  return p;
-}
-
-/* Ordena y evita que las tres recomendaciones salgan del mismo lugar: tres
-   funciones del mismo teatro no son tres panoramas, son uno. */
-function rankear(eventos, sit, filtros){
-  const puntuados = eventos
-    .map(ev => ({ev, p: puntuar(ev, sit, filtros)}))
-    .filter(x => x.p > 0)
-    .sort((a, z) => z.p - a.p);
-
-  const fuentes = new Set(), familias = new Set(), titulos = new Set();
-  const primera = [], resto = [];
-  for(const {ev} of puntuados){
-    const fuente = ev.fuente || ev.lugar || ev.id;
-    const fam = cat(ev.categoria).mascota;
-    // El título va aparte de la fuente: "Yoga" aparece 30 veces y no siempre
-    // desde el mismo recinto, así que sin este corte salían tres yogas.
-    if(fuentes.has(fuente) || titulos.has(tituloBase(ev.titulo))
-       || (sit.variedad && familias.has(fam))){ resto.push(ev); continue; }
-    fuentes.add(fuente); familias.add(fam); titulos.add(tituloBase(ev.titulo));
-    primera.push(ev);
-  }
-  // Los descartados por repetición no se botan: van al final, para "ver más".
-  return primera.concat(resto);
-}
-
-/* ---- El motor del Degú: descuentos, no eventos ---- */
 function rankearDescuentos(lista, cats, sector, soloHoy){
   const vistos = new Set();
   return lista
@@ -1064,7 +740,15 @@ function repintar(){
    ============================================================ */
 async function arrancar(atajo){
   await diceClave("loica", "hola", 520);
-  if(atajo){
+  /* El atajo del hero puede ser una situación (el Cóndor lleva a música) o
+     una compañía (el Pudú lleva a "ando con niños"), porque el Pudú no guía
+     ninguna situación: se hace cargo de con quién vas y de la plata. */
+  if(atajo && COMPANIAS[atajo]){
+    respuestas.compania = atajo;
+    responde(() => COMPANIAS[atajo][IDIOMA][0]);
+    await esperar(320);
+    await diceClave("loica", "atajoTomado");
+  } else if(atajo){
     respuestas.situacion = atajo;
     responde(() => situacionPorId(atajo)[IDIOMA][0]);
     await esperar(320);
@@ -1072,7 +756,7 @@ async function arrancar(atajo){
   } else {
     await diceClave("loica", "q1");
   }
-  preguntarCuando(atajo);
+  preguntarCuando();
 }
 
 /* Cuántos eventos hay realmente detrás de cada rango. Se calcula antes de
@@ -1103,7 +787,36 @@ function preguntarCuando(atajo){
       respuestas.cuando = o.id;
       responde(() => b("cuando")[respuestas.cuando]);
       await esperar(320);
-      if(atajo) tomaElMando();
+      if(respuestas.compania) preguntarSituacion();
+      else preguntarCompania();
+    });
+}
+
+/* ¿CON QUIÉN VAS?
+   La pregunta que faltaba, y la que más cambia una recomendación. "Teatro" no
+   significa lo mismo en una cita un viernes que para una mamá con un niño de
+   cinco: es la misma categoría y son dos panoramas distintos. Sin esto, una
+   función de terror sin marcar podía salir como plan infantil. */
+async function preguntarCompania(){
+  await escribiendo("loica", 560);
+  await diceClave("loica", "q1b");
+  const vig = EVENTOS.filter(ev => ev.fecha >= empiezaDia(new Date())
+    && (RANGOS_BOT[respuestas.cuando] || RANGOS_BOT.todo)(ev.fecha));
+  preguntar(
+    () => ORDEN_COMPANIA.map(id => ({
+      id, mascota:GUIA_COMPANIA[id],
+      titulo:COMPANIAS[id][IDIOMA][0], sub:COMPANIAS[id][IDIOMA][1],
+      /* Para niños el conteo es el de la allowlist, que es mucho más chico y
+         conviene que se vea antes de elegir: es la única forma honesta de
+         adelantar que el catálogo tiene poco para ellos. */
+      cuantos: id === "ninos" ? vig.filter(ev => ev.paraNinos).length : vig.length,
+    })),
+    false,
+    async o => {
+      respuestas.compania = o.id;
+      responde(() => COMPANIAS[respuestas.compania][IDIOMA][0]);
+      await esperar(340);
+      if(respuestas.situacion) tomaElMando();
       else preguntarSituacion();
     });
 }
@@ -1112,7 +825,10 @@ async function preguntarSituacion(){
   await escribiendo("loica", 600);
   await diceClave("loica", "q2");
   preguntar(
-    () => SITUACIONES.map(s => ({
+    /* Vetadas las que no se pueden cumplir con esa compañía: ofrecerle
+       "salir de noche" a alguien que anda con un niño de cinco es prometer
+       algo que el catálogo no tiene. */
+    () => situacionesDe(respuestas.compania).map(s => ({
       id:s.id, mascota:s.guia, titulo:s[IDIOMA][0], sub:s[IDIOMA][1],
     })),
     false,
@@ -1231,6 +947,7 @@ function filtrosDe(extra = {}){
     soloGratis: extra.soloGratis !== undefined ? extra.soloGratis : respuestas.plata === "gratis",
     techoPlata: (extra.plata || respuestas.plata) === "barato" ? 10000 : null,
     sector: extra.sector || respuestas.sector || "todo",
+    compania: extra.compania || respuestas.compania || "solo",
     ajuste,
   };
 }
@@ -1285,8 +1002,10 @@ async function recomendar(){
 /* "este finde, de noche, en el oriente y sin gastar un peso" */
 function frase(){
   const sit = situacionPorId(respuestas.situacion);
+  const comp = COMPANIAS[respuestas.compania];
   const partes = [
     b("cuandoDicho")[respuestas.cuando],
+    comp ? comp.dicho[IDIOMA] : "",
     sit.dicho[IDIOMA],
     b("sectorDicho")[respuestas.sector || "todo"],
   ].filter(Boolean);
@@ -1445,17 +1164,27 @@ function pintarHero(){
   /* Cada bicho con su fase, para que no marchen todos igual. Solo entran los
      que tienen una situación asignada: un animal que no lleva a ninguna parte
      no debería invitar a tocarlo. */
+  /* Cada bicho lleva a lo suyo: ocho a una situación y el Pudú a una
+     compañía, porque él no guía una situación — se hace cargo de con quién
+     vas y de la plata, que son las dos preguntas de quien sale con la casa. */
+  const destinoDe = clave => {
+    const porComp = Object.keys(GUIA_COMPANIA).find(k => GUIA_COMPANIA[k] === clave
+      && !situacionPorGuia(clave));
+    if(porComp) return {tipo:"compania", id:porComp, rotulo:COMPANIAS[porComp][IDIOMA][0]};
+    const sit = situacionPorGuia(clave);
+    return sit ? {tipo:"situacion", id:sit.id, rotulo:sit[IDIOMA][0]} : null;
+  };
   document.getElementById("desfile").innerHTML = ELENCO
-    .filter(a => situacionPorGuia(a.clave))
-    .map((a, i) => {
-      const sit = situacionPorGuia(a.clave);
+    .map(a => ({a, d: destinoDe(a.clave)}))
+    .filter(x => x.d)
+    .map(({a, d}, i) => {
       const g = GUIAS[a.clave];
-      return `<button class="bicho-hero" data-sit="${sit.id}"
+      return `<button class="bicho-hero" data-sit="${d.id}"
           style="animation-delay:${(i * .27).toFixed(2)}s;--tono:${g.tono}${
             g.claro ? ";--rotulo-tinta:var(--azul-900)" : ""}"
-          aria-label="${escapar(a[IDIOMA][0])} — ${escapar(sit[IDIOMA][0])}">
+          aria-label="${escapar(a[IDIOMA][0])} — ${escapar(d.rotulo)}">
           ${cuerpo(a.clave, a.hex, 74)}
-          <span class="rotulo">${escapar(sit[IDIOMA][0])}</span></button>`;
+          <span class="rotulo">${escapar(d.rotulo)}</span></button>`;
     }).join("");
 
   document.querySelectorAll(".bicho-hero").forEach(bt => bt.onclick = () => {
@@ -1479,7 +1208,7 @@ Promise.all([
   cargarDescuentos().then(d => d.descuentos).catch(() => []),
 ])
   .then(([evs, dctos]) => {
-    marcarRecurrentes(evs);
+    marcar(evs);
     EVENTOS = evs; DESCUENTOS = dctos;
     arrancar();
   })
