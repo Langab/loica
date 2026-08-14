@@ -1704,3 +1704,56 @@ fuentes:
     cada ficha publica schema.org/Event con startDate, asi que tecnicamente se puede leer. APAGADA porque
     su cartelera esta detenida: el evento mas nuevo es de junio de 2025. Encenderla cuando vuelvan a publicar.
     La fecha NO viene en la API (el meta solo trae _acf_changed), hay que abrir cada ficha por el JSON-LD.'
+- id: independencia_cultural
+  nombre: Corporación Cultural de Independencia
+  url_base: https://www.independenciacultural.cl
+  url_agenda: https://www.independenciacultural.cl/category/talleres/
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: Independencia
+  crawl_delay_seg: 3
+  buscar_detalle: true
+  tope_detalle: 30
+  buscar_terminos:
+  - taller
+  - talleres
+  - concierto
+  - obra
+  - feria
+  - muestra
+  - festival
+  filtro_palabras:
+  - taller
+  - concierto
+  - obra
+  - feria
+  - muestra
+  - festival
+  - funcion
+  - exposicion
+  - cueca
+  - danza
+  - teatro
+  - cine
+  descartar_palabras:
+  - licitacion
+  - ordenanza
+  - concurso publico
+  - bases
+  activa: true
+  notas: 'Corporacion cultural de Independencia, una de las comunas que el catastro no cubria. WordPress
+    con API REST abierta y sin tipo de contenido de eventos: los talleres y actividades van como posts,
+    asi que se buscan por termino. robots.txt permisivo. Publica talleres gratuitos de cueca, coro, tango
+    y danza, y su cartelera esta viva (agosto 2026).'
+- id: san_miguel_cultura
+  nombre: Casa de la Cultura de San Miguel
+  url_base: https://cmsm.cl
+  url_agenda: https://cmsm.cl/cartelera-cultural/
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/tribe/events/v1/events
+  comuna: San Miguel
+  crawl_delay_seg: 3
+  activa: false
+  notas: 'Zona sur. WordPress con The Events Calendar (tribe_events), que es la mejor calidad de dato
+    posible: fecha, hora y recinto estructurados. APAGADA porque su calendario esta vacio hoy (la API
+    devuelve 0 eventos). Encenderla y probar cuando vuelvan a cargar la cartelera.'

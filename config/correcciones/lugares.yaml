@@ -18,468 +18,556 @@
 # lon -71.30 a -70.30). Cada entrada lleva `nota` con el origen del dato.
 
 lugares:
-  Polideportivo de Ñuñoa:
-    direccion: Juan Moya Morales 1370
-    comuna: Ñuñoa
-    lat: -33.4670
-    lon: -70.5882
-    nota: complejo deportivo municipal; verificada contra el índice OSM local 2026-08-13
-
-  Piscina Polideportivo:
-    direccion: Juan Moya Morales 1370
-    comuna: Ñuñoa
-    lat: -33.4670
-    lon: -70.5882
-    nota: mismo complejo que el Polideportivo de Ñuñoa; índice OSM 2026-08-13
-
+  Academia Metropolitana de Arte:
+    comuna: Providencia
+    direccion: Antonio Bellet 77
+    lat: -33.42614
+    lon: -70.6172
+    nota: talleres de oficios (Pintura al óleo, acuarela, dibujo clásico y artístico, carbo); matrícula
+      permanente, sin fechas; investigado y verificado 2026-08-13
   Academias Deportivas:
+    comuna: Ñuñoa
     direccion: Juan Moya Morales 1370
-    comuna: Ñuñoa
-    lat: -33.4670
+    lat: -33.467
     lon: -70.5882
-    nota: programa de la Corp. de Deportes de Ñuñoa en el polideportivo; OJO nombre genérico — si otra comuna publica "Academias Deportivas", revisar este match
-
-  Cine Arte Normandie:
-    direccion: Tarapacá 1181
-    comuna: Santiago
-    lat: -33.4474
-    lon: -70.6521
-    nota: índice OSM 2026-08-13
-
-  Teatro Cariola:
-    direccion: San Diego 246
-    comuna: Santiago
-    lat: -33.4482
-    lon: -70.6506
-    nota: índice OSM 2026-08-13
-
-  Sala Master:
-    direccion: Miguel Claro 509
-    comuna: Providencia
-    lat: -33.4327
-    lon: -70.6203
-    nota: Radio Universidad de Chile; OSM no tiene el número, revisión AI 2026-08-13 a nivel de cuadra
-
-  Centro Arte Alameda:
-    direccion: Arturo Prat 33 (Sala CEINA)
-    comuna: Santiago
-    lat: -33.4453
-    lon: -70.6502
-    nota: desde el incendio de 2019 funciona en la Sala CEINA; índice OSM 2026-08-13
-
-  Sala SCD Egaña:
-    direccion: Av. Larraín 5862, Mall Plaza Egaña
-    comuna: La Reina
-    lat: -33.4528
-    lon: -70.5695
-    nota: junto al metro Plaza Egaña; índice OSM 2026-08-13
-
-  Club Amanda:
-    direccion: Embajador Doussinague 1767
-    comuna: Vitacura
-    lat: -33.3877
-    lon: -70.5688
-    nota: índice OSM 2026-08-13
-
-  El Mesón Nerudiano:
-    direccion: Dominica 35
-    comuna: Recoleta
-    lat: -33.4305
-    lon: -70.6366
-    nota: Barrio Bellavista; índice OSM 2026-08-13
-
-  Sala Metrónomo:
-    direccion: Santa Filomena 110
-    comuna: Recoleta
-    lat: -33.4303
-    lon: -70.6384
-    nota: Barrio Bellavista; índice OSM 2026-08-13 (la dirección manda sobre el nodo del local, que estaba corrido)
-
-  Campus El Claustro, Universidad Mayor:
-    direccion: Marín 321
-    comuna: Santiago
-    lat: -33.4461
-    lon: -70.6364
-    nota: índice OSM 2026-08-13
-
-  Polideportivo José Manuel López:
-    direccion: Santa Elena 1675
-    comuna: Santiago
-    lat: -33.4645
-    lon: -70.6288
-    nota: índice OSM 2026-08-13
-
-  Centro Comunitario Matta Sur:
-    direccion: Chiloé 1799
-    comuna: Santiago
-    lat: -33.4687
-    lon: -70.6454
-    nota: índice OSM 2026-08-13
-
-  # Los tres de abajo no tienen calle+número, sino un cruce de calles. Las
-  # coordenadas salen de buscar en el índice OSM el punto más cercano entre
-  # las dos calles; la nota deja dicho cuánto se separan ahí, que es el margen
-  # de error real del pin.
-  Club Ñuñoa:
-    direccion: Ortúzar esquina Simón Bolívar (Sportlife)
-    comuna: Ñuñoa
-    lat: -33.4482
-    lon: -70.5838
-    nota: cruce Ortúzar x Simón Bolívar en el índice OSM 2026-08-13; las calles se juntan a 11 m
-
-  ENTRENAMIENTO FUNCIONAL BÚNKER FIT:
-    direccion: Bandejón Av. Pedro Fontova a la altura de Camino El Roble
-    comuna: Huechuraba
-    lat: -33.3494
-    lon: -70.6692
-    nota: cruce Pedro Fontova x Camino El Roble en el índice OSM 2026-08-13; margen ~180 m, es un bandejón sin número
-
-  # Investigados en la web y contrastados contra el catastro OSM: las
-  # coordenadas de la investigación y las del catastro coinciden dentro de
-  # 42 m en los cuatro casos que el catastro conocía.
-  Universidad Andres Bello - Cultura UNAB:
-    direccion: Fernández Concha 700, Campus Casona de Las Condes
-    comuna: Las Condes
-    lat: -33.37584
-    lon: -70.50565
-    nota: investigación web + catastro OSM coinciden a 1 m (2026-08-13)
-
-  Patio Central UAH:
-    direccion: Almirante Barroso 10, Campus Patrimonial U. Alberto Hurtado
-    comuna: Santiago
-    lat: -33.44555
-    lon: -70.66182
-    nota: investigación web + catastro OSM coinciden a 42 m (2026-08-13)
-
-  MUT — Mercado Urbano Tobalaba:
-    direccion: Av. Apoquindo 2730
-    comuna: Las Condes
-    lat: -33.41746
-    lon: -70.60115
-    nota: la fuente lo declaraba en Providencia pero está en Las Condes; web + catastro OSM a 39 m (2026-08-13)
-
-  La Feria:
-    direccion: Constitución 275, Barrio Bellavista
-    comuna: Providencia
-    lat: -33.43087
-    lon: -70.63504
-    nota: investigación web + catastro OSM coinciden a 17 m (2026-08-13)
-
-  Aldea Encuentro:
-    direccion: Av. Alcalde Fernando Castillo Velasco 9750
-    comuna: La Reina
-    lat: -33.45174
-    lon: -70.53093
-    nota: investigación web verificada de forma adversarial (2026-08-13)
-
-  Estación Mapocho:
-    direccion: Plaza de la Cultura s/n, ex Estación Mapocho
-    comuna: Santiago
-    lat: -33.43225
-    lon: -70.65445
-    nota: investigación web verificada de forma adversarial (2026-08-13)
-
-  # Salas y locales investigados en la web; los siete calzan contra el
-  # catastro OSM dentro de 96 m, la mayoría bajo 50.
-  Sala RBX:
-    direccion: Av. Vicuña Mackenna 1220
-    comuna: Ñuñoa
-    lat: -33.45691
-    lon: -70.62916
-    nota: hoy opera como Amsterdam Club; web + catastro OSM a 25 m (2026-08-13)
-
-  Teatro Fábrica:
-    direccion: Av. General Bustamante 530
-    comuna: Providencia
-    lat: -33.44754
-    lon: -70.62989
-    nota: web + catastro OSM a 12 m (2026-08-13)
-
-  Kahuin:
-    direccion: Antupirén 9301, Patio La Rosa
-    comuna: Peñalolén
-    lat: -33.48326
-    lon: -70.53597
-    nota: web + catastro OSM coinciden exacto (2026-08-13)
-
-  Epicentro:
-    direccion: Paseo Huérfanos 786
-    comuna: Santiago
-    lat: -33.43944
-    lon: -70.64785
-    nota: web + catastro OSM a 46 m (2026-08-13)
-
-  Peluquería Francesa:
-    direccion: Compañía de Jesús 2799, Boulevard Lavaud
-    comuna: Santiago
-    lat: -33.44086
-    lon: -70.67404
-    nota: web + catastro OSM coinciden exacto (2026-08-13)
-
-  Teatro fiebre:
-    direccion: Dardignac 0163, Barrio Bellavista
-    comuna: Providencia
-    lat: -33.43318
-    lon: -70.63378
-    nota: web + catastro OSM a 96 m (2026-08-13)
-
-  Alto San Francisco:
-    direccion: San Francisco 75, piso 9
-    comuna: Santiago
-    lat: -33.44497
-    lon: -70.64718
-    nota: web + catastro OSM a 17 m (2026-08-13)
-
-  # Locales de fiesta y música en vivo. Toliv y las ticketeras publican
-  # coordenadas propias geocodificadas a la rápida —Club 1 aparecía a 2,7 km
-  # de su dirección real— y estas entradas les ganan.
-  # Homónimo, no es el club: un snack bar de Barrio Brasil que se llama igual.
-  # Va anotado aunque hoy no tenga eventos, porque el match de las
-  # correcciones es por contención y "Blondie Snack Bar" habría heredado las
-  # coordenadas del club de la Alameda, a 1,1 km. Una entrada exacta gana
-  # sobre la contención, así que esto lo desactiva de antemano.
-  Blondie Snack Bar:
-    direccion: Av. Brasil 171
-    comuna: Santiago
-    lat: -33.44250
-    lon: -70.66491
-    nota: negocio distinto del club Blondie; Google Maps y catastro OSM coinciden (2026-08-13)
-
-  # Rastreados en Google Maps a partir de la cola de datos/revision/por_ubicar.md
-  # (2026-08-13, segunda vuelta).
-  'JJ. VV. Villa Conchalí República de Noruega # 5603':
-    direccion: República de Noruega 5603
-    comuna: Huechuraba
-    lat: -33.37567
-    lon: -70.63068
-    nota: 'la calle existe en el catastro OSM pero solo la de Las Condes, a 8 km; esta es la de Huechuraba, confirmada en Maps'
-
-  Teatro Aula Magna USACH:
-    direccion: El Belloto 3735, Campus USACH
-    comuna: Estación Central
-    lat: -33.44989
-    lon: -70.68666
-    nota: Google Maps, ficha única (2026-08-13)
-
-  Parque La Araucana:
-    direccion: Walker Martínez 2295
-    comuna: La Florida
-    lat: -33.52248
-    lon: -70.56855
-    nota: Google Maps, ficha única (2026-08-13)
-
-  Club Siete:
-    direccion: Isidora Goyenechea 3000, piso 4
-    comuna: Las Condes
-    lat: -33.41385
-    lon: -70.59860
-    nota: Google Maps, ficha única (2026-08-13)
-
-  FAUSTO:
-    direccion: Av. Santa María 832
-    comuna: Providencia
-    lat: -33.42976
-    lon: -70.62536
-    nota: Fausto Discotheque; Google Maps, ficha única (2026-08-13)
-
-  Plaza Ñuñoa Sur:
-    direccion: Manuel de Salas 71, Plaza Ñuñoa
-    comuna: Ñuñoa
-    lat: -33.45608
-    lon: -70.59372
-    nota: 'la corporación de deportes usa el costado sur de la plaza; el pin es la plaza, que mide una cuadra (2026-08-13)'
-
-  Rustiko:
-    direccion: Av. Pedro Fontova 7853
-    comuna: Huechuraba
-    lat: -33.34609
-    lon: -70.66998
-    nota: 'Rustiko Restaurant & Pub; la fuente lo escribe "Rustiko Huehuraba", con la comuna mal tipeada (2026-08-13)'
-
-  Auditorio CEP:
-    direccion: Monseñor Sótero Sanz 162
-    comuna: Providencia
-    lat: -33.42386
-    lon: -70.61557
-    nota: 'donde el Centro de Estudios Públicos hace casi todos sus seminarios; la propia API lo declara en cada evento (2026-08-13)'
-
-  # --- Circo: las escuelas de Santiago (2026-08-13) ---
-  # Sus sitios venden matrícula permanente, no eventos con fecha (Elevarte los
-  # publica como productos de tienda y El Circo del Mundo solo tiene páginas),
-  # así que no sirven como fuente de extracción. Pero cuando alguna publique
-  # una función, una muestra o una clase abierta —por ticketera o por la
-  # agenda de su municipio— ya va a caer en su lugar en vez de en el centro de
-  # la comuna. Todas verificadas en Google Maps y ubicadas con el catastro OSM.
-  Elevarte:
-    direccion: Isabel La Católica 6434
-    comuna: Las Condes
-    lat: -33.42435
-    lon: -70.56172
-    nota: Elevarte Circo Yoga, elevartecircoyoga.cl; Maps + catastro OSM a 30 m (2026-08-13)
-
-  El Circo del Mundo:
-    direccion: Av. General Óscar Bonilla 6100-B
-    comuna: Lo Prado
-    lat: -33.45644
-    lon: -70.72080
-    nota: elcircodelmundo.com; la escuela de circo social más antigua del país (2026-08-13)
-
-  Casa Bufo:
-    direccion: Av. Manuel Antonio Matta 363
-    comuna: Santiago
-    lat: -33.45611
-    lon: -70.63495
-    nota: Maps + catastro OSM coinciden a 40 m (2026-08-13)
-
-  Circo Social La Chimba:
-    direccion: Av. Recoleta 3005
-    comuna: Recoleta
-    lat: -33.39928
-    lon: -70.64150
-    nota: instagram.com/circolachimba; Maps + catastro OSM (2026-08-13)
-
+    nota: programa de la Corp. de Deportes de Ñuñoa en el polideportivo; OJO nombre genérico — si otra
+      comuna publica "Academias Deportivas", revisar este match
   Acrobacia Libre:
-    direccion: Tegualda 1549
     comuna: Ñuñoa
+    direccion: Tegualda 1549
     lat: -33.44914
     lon: -70.62285
     nota: instagram.com/acrobacialibre; Maps + catastro OSM (2026-08-13)
-
-  Escuela de Circo Infantil Chaltumay:
-    direccion: Santiaguillo 1378
-    comuna: Santiago
-    lat: -33.46121
-    lon: -70.65219
-    nota: Maps + catastro OSM (2026-08-13)
-
-  Club Subterraneo:
-    direccion: Paseo Orrego Luco 46
-    comuna: Providencia
-    lat: -33.42340
-    lon: -70.61112
-    nota: Google Maps, ficha única; 22 años de programación en vivo (2026-08-13)
-
-  Parque Araucano:
-    direccion: Av. Presidente Riesco 5877
-    comuna: Las Condes
-    lat: -33.40220
-    lon: -70.57249
-    nota: Google Maps, ficha única; ahí van las fondas de Las Condes y el Festival de Cine (2026-08-13)
-
-  Club Hipico:
-    direccion: Av. Almirante Blanco Encalada 2540
-    comuna: Santiago
-    lat: -33.46306
-    lon: -70.66664
-    nota: 'Club Hípico de Santiago; ahí se hace el Open Blondie de Halloween, que no es en el club de la Alameda. Catastro OSM (2026-08-13)'
-
-  Bar Oxido:
-    direccion: Purísima 284, Barrio Bellavista
-    comuna: Recoleta
-    lat: -33.43060
-    lon: -70.63824
-    nota: web + catastro OSM coinciden exacto (2026-08-13)
-
-  Discoteca La Fama:
-    direccion: Av. México 609
-    comuna: Recoleta
-    lat: -33.40823
-    lon: -70.64389
-    nota: web + catastro OSM a 201 m (2026-08-13)
-
-  Bar La Puerta Amarilla:
-    direccion: Av. Alcalde Fernando Castillo Velasco 7150
+  Aldea Encuentro:
     comuna: La Reina
-    lat: -33.45130
+    direccion: Av. Alcalde Fernando Castillo Velasco 9750
+    lat: -33.45174
+    lon: -70.53093
+    nota: investigación web verificada de forma adversarial (2026-08-13)
+  Alma Gratta:
+    comuna: Las Condes
+    direccion: Avenida Apoquindo 5106
+    lat: -33.41096
+    lon: -70.57554
+    nota: 'talleres de oficios (cerámica: torno alfarero (niveles I y II), modelado a mano, ); publica
+      su programación con fechas; investigado y verificado 2026-08-13'
+  Alto San Francisco:
+    comuna: Santiago
+    direccion: San Francisco 75, piso 9
+    lat: -33.44497
+    lon: -70.64718
+    nota: web + catastro OSM a 17 m (2026-08-13)
+  Auditorio CEP:
+    comuna: Providencia
+    direccion: Monseñor Sótero Sanz 162
+    lat: -33.42386
+    lon: -70.61557
+    nota: donde el Centro de Estudios Públicos hace casi todos sus seminarios; la propia API lo declara
+      en cada evento (2026-08-13)
+  Balmaceda Arte Joven, Sede Metropolitana:
+    comuna: Santiago
+    direccion: Av. Presidente Balmaceda 1215
+    lat: -33.43239
+    lon: -70.65492
+    nota: talleres de oficios (serigrafía y experimentación gráfica sobre textil (por ciclo); publica
+      su programación con fechas; investigado y verificado 2026-08-13
+  Bar La Puerta Amarilla:
+    comuna: La Reina
+    direccion: Av. Alcalde Fernando Castillo Velasco 7150
+    lat: -33.4513
     lon: -70.55378
     nota: web + catastro OSM a 27 m (2026-08-13)
-
-  # Resueltos en Google Maps con el navegador, uno por uno. Es la vía para lo
-  # que ningún catastro conoce: se acepta solo cuando Maps devuelve UNA ficha
-  # de lugar (con su dirección), no una lista de resultados.
-  MiBar:
-    direccion: Av. Santa Isabel 0350
-    comuna: Providencia
-    lat: -33.44634
-    lon: -70.62640
-    nota: 'el cero inicial dejaba fuera al índice OSM; Google Maps lo confirma a 17 m de la investigación web (2026-08-13)'
-
-  'Colegio Saint Joseph Av. Guanaco # 1270':
-    direccion: Av. Guanaco Norte 1270
+  Bar Oxido:
+    comuna: Recoleta
+    direccion: Purísima 284, Barrio Bellavista
+    lat: -33.4306
+    lon: -70.63824
+    nota: web + catastro OSM coinciden exacto (2026-08-13)
+  Blondie:
+    comuna: Santiago
+    direccion: Av. Libertador Bernardo O'Higgins 2879
+    lat: -33.44923
+    lon: -70.67381
+    nota: 'Alameda 2879, según su propio sitio. La comuna es Santiago y no Estación Central: el deslinde
+      corre por Matucana-Exposición, que cortan la Alameda recién en el 3250, y el vecindario completo
+      (Alameda 2831-2899, Unión Americana, Rodulfo Philippi) está en Santiago. Coordenadas confirmadas
+      por el nodo de OSM, Passline y Puntoticket (2026-08-13)'
+  Blondie Snack Bar:
+    comuna: Santiago
+    direccion: Av. Brasil 171
+    lat: -33.4425
+    lon: -70.66491
+    nota: negocio distinto del club Blondie; Google Maps y catastro OSM coinciden (2026-08-13)
+  Bosque Luz:
     comuna: Huechuraba
-    lat: -33.35335
-    lon: -70.66669
-    nota: Google Maps, ficha única del colegio (2026-08-13)
-
-  Centro parque:
-    direccion: Presidente Riesco 5330
+    direccion: Av. del Parque 420
+    lat: -33.3905
+    lon: -70.61852
+    nota: Google Maps, ficha única (2026-08-13)
+  Campus El Claustro, Universidad Mayor:
+    comuna: Santiago
+    direccion: Marín 321
+    lat: -33.4461
+    lon: -70.6364
+    nota: índice OSM 2026-08-13
+  Casa Bufo:
+    comuna: Santiago
+    direccion: Av. Manuel Antonio Matta 363
+    lat: -33.45611
+    lon: -70.63495
+    nota: Maps + catastro OSM coinciden a 40 m (2026-08-13)
+  Casa de la Cultura de San Miguel:
+    comuna: San Miguel
+    direccion: Llano Subercaseaux 3519
+    lat: -33.48646
+    lon: -70.65129
+    nota: talleres de oficios (Talleres culturales municipales sin desglose publicado en el); publica
+      su programación con fechas; investigado y verificado 2026-08-13
+  Casa en Blanco:
+    comuna: Ñuñoa
+    direccion: Pedro Torres 916
+    lat: -33.44672
+    lon: -70.58787
+    nota: 'talleres de oficios (encuadernación artesanal: costura cruzada, costuras sin adhe); matrícula
+      permanente, sin fechas; investigado y verificado 2026-08-13'
+  Centro Arte Alameda:
+    comuna: Santiago
+    direccion: Arturo Prat 33 (Sala CEINA)
+    lat: -33.4453
+    lon: -70.6502
+    nota: desde el incendio de 2019 funciona en la Sala CEINA; índice OSM 2026-08-13
+  Centro Cerámica:
+    comuna: Recoleta
+    direccion: Puma 1180
+    lat: -33.41848
+    lon: -70.64313
+    nota: 'talleres de oficios (cerámica: torno alfarero, modelado a mano, cerámica artístic); matrícula
+      permanente, sin fechas; investigado y verificado 2026-08-13'
+  Centro Comunitario Matta Sur:
+    comuna: Santiago
+    direccion: Chiloé 1799
+    lat: -33.4687
+    lon: -70.6454
+    nota: índice OSM 2026-08-13
+  Centro Cultural Chimkowe:
+    comuna: Peñalolén
+    direccion: Av. Grecia 8787
+    lat: -33.47727
+    lon: -70.5412
+    nota: talleres de oficios (Óleo y bordados sobre tela; el resto de la parrilla es danza); matrícula
+      permanente, sin fechas; investigado y verificado 2026-08-13
+  Centro Cultural Las Condes:
     comuna: Las Condes
+    direccion: Av. Apoquindo 6570
+    lat: -33.40651
+    lon: -70.56193
+    nota: talleres de oficios (Acuarela, acuarela creativa, dibujo y pintura, pintura inici); publica
+      su programación con fechas; investigado y verificado 2026-08-13
+  Centro Cultural Montecarmelo:
+    comuna: Providencia
+    direccion: Av. Bellavista 0594
+    lat: -33.4302
+    lon: -70.62826
+    nota: talleres de oficios (Acuarela, dibujo, encuadernación, telar decorativo, fieltro,); publica
+      su programación con fechas; investigado y verificado 2026-08-13
+  Centro parque:
+    comuna: Las Condes
+    direccion: Presidente Riesco 5330
     lat: -33.40337
     lon: -70.57515
     nota: Google Maps, ficha única de CentroParque (2026-08-13)
-
-  Parque Ramón Cruz:
-    direccion: Av. Irarrázaval con Ramón Cruz Montt
+  Cerámicas Grof:
     comuna: Ñuñoa
-    lat: -33.45536
-    lon: -70.58080
-    nota: Google Maps, ficha única del parque (2026-08-13)
-
-  Teatro Alicia:
-    direccion: Av. Raúl Labbé 14998
-    comuna: Lo Barnechea
-    lat: -33.36203
-    lon: -70.49356
-    nota: Google Maps, ficha única (2026-08-13)
-
-  Universidad Finis Terrae:
-    direccion: Av. Pedro de Valdivia 1509
-    comuna: Providencia
-    lat: -33.43669
-    lon: -70.60840
-    nota: Google Maps, ficha única (2026-08-13)
-
-  Mystic Valley:
-    direccion: La Montaña Sur 1957
-    comuna: Lampa
-    lat: -33.32471
-    lon: -70.74095
-    nota: Google Maps, ficha única; queda en Lampa, fuera del Gran Santiago (2026-08-13)
-
-  Bosque Luz:
-    direccion: Av. del Parque 420
-    comuna: Huechuraba
-    lat: -33.39050
-    lon: -70.61852
-    nota: Google Maps, ficha única (2026-08-13)
-
-  # Todavía no aparece en la base: sus fiestas llegan por Passline, que se
-  # ingesta a mano. La ficha queda escrita para que el día que entre ya tenga
-  # su pin, en vez de caer al centro de Santiago.
-  El Túnel:
-    direccion: Santo Domingo 439, Barrio Bellas Artes
+    direccion: María de Iglesias 4466
+    lat: -33.44387
+    lon: -70.58361
+    nota: 'talleres de oficios (cerámica gres: modelado a mano, taller abierto, cursos espec); matrícula
+      permanente, sin fechas; investigado y verificado 2026-08-13'
+  Cine Arte Normandie:
     comuna: Santiago
-    lat: -33.43625
-    lon: -70.64392
-    nota: en el antiguo Catacumbas 2000, junto al metro Bellas Artes; dirección de su ficha de Passline y de Yelp, ubicada con el catastro OSM (2026-08-13)
-
-  Club 1:
-    direccion: Bombero Núñez 1
+    direccion: Tarapacá 1181
+    lat: -33.4474
+    lon: -70.6521
+    nota: índice OSM 2026-08-13
+  Circo Social La Chimba:
     comuna: Recoleta
+    direccion: Av. Recoleta 3005
+    lat: -33.39928
+    lon: -70.6415
+    nota: instagram.com/circolachimba; Maps + catastro OSM (2026-08-13)
+  Club 1:
+    comuna: Recoleta
+    direccion: Bombero Núñez 1
     lat: -33.43252
     lon: -70.63964
     nota: Barrio Bellavista; la ficha de Toliv da la dirección y el catastro OSM la ubica (2026-08-13)
-
-  Blondie:
-    direccion: Av. Libertador Bernardo O'Higgins 2879
+  Club Amanda:
+    comuna: Vitacura
+    direccion: Embajador Doussinague 1767
+    lat: -33.3877
+    lon: -70.5688
+    nota: índice OSM 2026-08-13
+  Club Hipico:
     comuna: Santiago
-    lat: -33.44923
-    lon: -70.67381
-    nota: 'Alameda 2879, según su propio sitio. La comuna es Santiago y no Estación Central: el deslinde corre por Matucana-Exposición, que cortan la Alameda recién en el 3250, y el vecindario completo (Alameda 2831-2899, Unión Americana, Rodulfo Philippi) está en Santiago. Coordenadas confirmadas por el nodo de OSM, Passline y Puntoticket (2026-08-13)'
-
-  Multicancha Los Libertadores Andacollo con Mejillones:
-    direccion: Andacollo con Mejillones
+    direccion: Av. Almirante Blanco Encalada 2540
+    lat: -33.46306
+    lon: -70.66664
+    nota: Club Hípico de Santiago; ahí se hace el Open Blondie de Halloween, que no es en el club de la
+      Alameda. Catastro OSM (2026-08-13)
+  Club Siete:
+    comuna: Las Condes
+    direccion: Isidora Goyenechea 3000, piso 4
+    lat: -33.41385
+    lon: -70.5986
+    nota: Google Maps, ficha única (2026-08-13)
+  Club Subterraneo:
+    comuna: Providencia
+    direccion: Paseo Orrego Luco 46
+    lat: -33.4234
+    lon: -70.61112
+    nota: Google Maps, ficha única; 22 años de programación en vivo (2026-08-13)
+  Club Ñuñoa:
+    comuna: Ñuñoa
+    direccion: Ortúzar esquina Simón Bolívar (Sportlife)
+    lat: -33.4482
+    lon: -70.5838
+    nota: cruce Ortúzar x Simón Bolívar en el índice OSM 2026-08-13; las calles se juntan a 11 m
+  'Colegio Saint Joseph Av. Guanaco # 1270':
     comuna: Huechuraba
+    direccion: Av. Guanaco Norte 1270
+    lat: -33.35335
+    lon: -70.66669
+    nota: Google Maps, ficha única del colegio (2026-08-13)
+  Corporación Cultural de Independencia:
+    comuna: Independencia
+    direccion: Profesor Alberto Zañartu 1185
+    lat: -33.41749
+    lon: -70.65591
+    nota: talleres de oficios (Pintura, encuadernación inicial, ilustración de personajes y); publica
+      su programación con fechas; investigado y verificado 2026-08-13
+  Corporación Cultural de Ñuñoa:
+    comuna: Ñuñoa
+    direccion: Ortúzar 72
+    lat: -33.45413
+    lon: -70.58427
+    nota: talleres de oficios (Dibujo y pintura, óleo, acrílico, acuarela y pastel, ilustra); publica
+      su programación con fechas; investigado y verificado 2026-08-13
+  Discoteca La Fama:
+    comuna: Recoleta
+    direccion: Av. México 609
+    lat: -33.40823
+    lon: -70.64389
+    nota: web + catastro OSM a 201 m (2026-08-13)
+  ENTRENAMIENTO FUNCIONAL BÚNKER FIT:
+    comuna: Huechuraba
+    direccion: Bandejón Av. Pedro Fontova a la altura de Camino El Roble
+    lat: -33.3494
+    lon: -70.6692
+    nota: cruce Pedro Fontova x Camino El Roble en el índice OSM 2026-08-13; margen ~180 m, es un bandejón
+      sin número
+  El Circo del Mundo:
+    comuna: Lo Prado
+    direccion: Av. General Óscar Bonilla 6100-B
+    lat: -33.45644
+    lon: -70.7208
+    nota: elcircodelmundo.com; la escuela de circo social más antigua del país (2026-08-13)
+  El Mesón Nerudiano:
+    comuna: Recoleta
+    direccion: Dominica 35
+    lat: -33.4305
+    lon: -70.6366
+    nota: Barrio Bellavista; índice OSM 2026-08-13
+  El Túnel:
+    comuna: Santiago
+    direccion: Santo Domingo 439, Barrio Bellas Artes
+    lat: -33.43625
+    lon: -70.64392
+    nota: en el antiguo Catacumbas 2000, junto al metro Bellas Artes; dirección de su ficha de Passline
+      y de Yelp, ubicada con el catastro OSM (2026-08-13)
+  Elevarte:
+    comuna: Las Condes
+    direccion: Isabel La Católica 6434
+    lat: -33.42435
+    lon: -70.56172
+    nota: Elevarte Circo Yoga, elevartecircoyoga.cl; Maps + catastro OSM a 30 m (2026-08-13)
+  Epicentro:
+    comuna: Santiago
+    direccion: Paseo Huérfanos 786
+    lat: -33.43944
+    lon: -70.64785
+    nota: web + catastro OSM a 46 m (2026-08-13)
+  Escuela de Circo Infantil Chaltumay:
+    comuna: Santiago
+    direccion: Santiaguillo 1378
+    lat: -33.46121
+    lon: -70.65219
+    nota: Maps + catastro OSM (2026-08-13)
+  Espacio Fraile:
+    comuna: Ñuñoa
+    direccion: José Domingo Cañas 1767
+    lat: -33.45636
+    lon: -70.61303
+    nota: talleres de oficios (mosaico, costura, bordado (flores bordadas, sashiko), telar ); publica
+      su programación con fechas; investigado y verificado 2026-08-13
+  Estación Mapocho:
+    comuna: Santiago
+    direccion: Plaza de la Cultura s/n, ex Estación Mapocho
+    lat: -33.43225
+    lon: -70.65445
+    nota: investigación web verificada de forma adversarial (2026-08-13)
+  FAUSTO:
+    comuna: Providencia
+    direccion: Av. Santa María 832
+    lat: -33.42976
+    lon: -70.62536
+    nota: Fausto Discotheque; Google Maps, ficha única (2026-08-13)
+  Grand Atelier Santiago:
+    comuna: Providencia
+    direccion: Darío Urzúa 2025
+    lat: -33.43057
+    lon: -70.60904
+    nota: talleres de oficios (Pintura al óleo, dibujo, dibujo con color, acuarela); publica su programación
+      con fechas; investigado y verificado 2026-08-13
+  'JJ. VV. Villa Conchalí República de Noruega # 5603':
+    comuna: Huechuraba
+    direccion: República de Noruega 5603
+    lat: -33.37567
+    lon: -70.63068
+    nota: la calle existe en el catastro OSM pero solo la de Las Condes, a 8 km; esta es la de Huechuraba,
+      confirmada en Maps
+  Kahuin:
+    comuna: Peñalolén
+    direccion: Antupirén 9301, Patio La Rosa
+    lat: -33.48326
+    lon: -70.53597
+    nota: web + catastro OSM coinciden exacto (2026-08-13)
+  Ko Costuras:
+    comuna: Santiago
+    direccion: Av. Portugal 1357 B
+    lat: -33.46072
+    lon: -70.63229
+    nota: 'talleres de oficios (costura: curso de principiantes, uso de máquina y puntadas b); publica
+      su programación con fechas; investigado y verificado 2026-08-13'
+  La Feria:
+    comuna: Providencia
+    direccion: Constitución 275, Barrio Bellavista
+    lat: -33.43087
+    lon: -70.63504
+    nota: investigación web + catastro OSM coinciden a 17 m (2026-08-13)
+  MUT — Mercado Urbano Tobalaba:
+    comuna: Las Condes
+    direccion: Av. Apoquindo 2730
+    lat: -33.41746
+    lon: -70.60115
+    nota: la fuente lo declaraba en Providencia pero está en Las Condes; web + catastro OSM a 39 m (2026-08-13)
+  MiBar:
+    comuna: Providencia
+    direccion: Av. Santa Isabel 0350
+    lat: -33.44634
+    lon: -70.6264
+    nota: el cero inicial dejaba fuera al índice OSM; Google Maps lo confirma a 17 m de la investigación
+      web (2026-08-13)
+  Multicancha Los Libertadores Andacollo con Mejillones:
+    comuna: Huechuraba
+    direccion: Andacollo con Mejillones
     lat: -33.3585
     lon: -70.6892
     nota: cruce Andacollo x Mejillones en el índice OSM 2026-08-13; las calles se juntan a 45 m
+  Museo Artequin:
+    comuna: Estación Central
+    direccion: Av. Portales 3530
+    lat: -33.44467
+    lon: -70.6841
+    nota: talleres de oficios (mosaico (técnica italiana), telar mapuche, textil (diseño fl); publica
+      su programación con fechas; investigado y verificado 2026-08-13
+  Mystic Valley:
+    comuna: Lampa
+    direccion: La Montaña Sur 1957
+    lat: -33.32471
+    lon: -70.74095
+    nota: Google Maps, ficha única; queda en Lampa, fuera del Gran Santiago (2026-08-13)
+  P! Taller Cerámica Gres:
+    comuna: Providencia
+    direccion: Cousin 0227
+    lat: -33.44393
+    lon: -70.62893
+    nota: 'talleres de oficios (cerámica gres: modelado, torno, encargos); matrícula permanente, sin fechas;
+      investigado y verificado 2026-08-13'
+  Parque Araucano:
+    comuna: Las Condes
+    direccion: Av. Presidente Riesco 5877
+    lat: -33.4022
+    lon: -70.57249
+    nota: Google Maps, ficha única; ahí van las fondas de Las Condes y el Festival de Cine (2026-08-13)
+  Parque La Araucana:
+    comuna: La Florida
+    direccion: Walker Martínez 2295
+    lat: -33.52248
+    lon: -70.56855
+    nota: Google Maps, ficha única (2026-08-13)
+  Parque Ramón Cruz:
+    comuna: Ñuñoa
+    direccion: Av. Irarrázaval con Ramón Cruz Montt
+    lat: -33.45536
+    lon: -70.5808
+    nota: Google Maps, ficha única del parque (2026-08-13)
+  Patio Central UAH:
+    comuna: Santiago
+    direccion: Almirante Barroso 10, Campus Patrimonial U. Alberto Hurtado
+    lat: -33.44555
+    lon: -70.66182
+    nota: investigación web + catastro OSM coinciden a 42 m (2026-08-13)
+  Peluquería Francesa:
+    comuna: Santiago
+    direccion: Compañía de Jesús 2799, Boulevard Lavaud
+    lat: -33.44086
+    lon: -70.67404
+    nota: web + catastro OSM coinciden exacto (2026-08-13)
+  Piscina Polideportivo:
+    comuna: Ñuñoa
+    direccion: Juan Moya Morales 1370
+    lat: -33.467
+    lon: -70.5882
+    nota: mismo complejo que el Polideportivo de Ñuñoa; índice OSM 2026-08-13
+  Plaza Ñuñoa Sur:
+    comuna: Ñuñoa
+    direccion: Manuel de Salas 71, Plaza Ñuñoa
+    lat: -33.45608
+    lon: -70.59372
+    nota: la corporación de deportes usa el costado sur de la plaza; el pin es la plaza, que mide una
+      cuadra (2026-08-13)
+  Polideportivo José Manuel López:
+    comuna: Santiago
+    direccion: Santa Elena 1675
+    lat: -33.4645
+    lon: -70.6288
+    nota: índice OSM 2026-08-13
+  Polideportivo de Ñuñoa:
+    comuna: Ñuñoa
+    direccion: Juan Moya Morales 1370
+    lat: -33.467
+    lon: -70.5882
+    nota: complejo deportivo municipal; verificada contra el índice OSM local 2026-08-13
+  Revesderecho Providencia:
+    comuna: Providencia
+    direccion: Av. Ricardo Lyon 222
+    lat: -33.42348
+    lon: -70.60888
+    nota: talleres de oficios (telar, tejido, crochet, bordado, macramé, mandalas, teñido b); publica
+      su programación con fechas; investigado y verificado 2026-08-13
+  Rustiko:
+    comuna: Huechuraba
+    direccion: Av. Pedro Fontova 7853
+    lat: -33.34609
+    lon: -70.66998
+    nota: Rustiko Restaurant & Pub; la fuente lo escribe "Rustiko Huehuraba", con la comuna mal tipeada
+      (2026-08-13)
+  SAOA - Santiago Academy of Art:
+    comuna: Las Condes
+    direccion: Evaristo Lillo 178
+    lat: -33.41455
+    lon: -70.58105
+    nota: talleres de oficios (Acuarela, pintura al óleo, dibujo académico); matrícula permanente, sin
+      fechas; investigado y verificado 2026-08-13
+  Sala Master:
+    comuna: Providencia
+    direccion: Miguel Claro 509
+    lat: -33.4327
+    lon: -70.6203
+    nota: Radio Universidad de Chile; OSM no tiene el número, revisión AI 2026-08-13 a nivel de cuadra
+  Sala Metrónomo:
+    comuna: Recoleta
+    direccion: Santa Filomena 110
+    lat: -33.4303
+    lon: -70.6384
+    nota: Barrio Bellavista; índice OSM 2026-08-13 (la dirección manda sobre el nodo del local, que estaba
+      corrido)
+  Sala RBX:
+    comuna: Ñuñoa
+    direccion: Av. Vicuña Mackenna 1220
+    lat: -33.45691
+    lon: -70.62916
+    nota: hoy opera como Amsterdam Club; web + catastro OSM a 25 m (2026-08-13)
+  Sala SCD Egaña:
+    comuna: La Reina
+    direccion: Av. Larraín 5862, Mall Plaza Egaña
+    lat: -33.4528
+    lon: -70.5695
+    nota: junto al metro Plaza Egaña; índice OSM 2026-08-13
+  Taller 0180:
+    comuna: Providencia
+    direccion: Malaquías Concha 0180
+    lat: -33.44916
+    lon: -70.62835
+    nota: talleres de oficios (Pintura óleo y acrílico, dibujo, figura humana, arte para ni); publica
+      su programación con fechas; investigado y verificado 2026-08-13
+  Taller 99:
+    comuna: Providencia
+    direccion: Zañartu 1016
+    lat: -33.43736
+    lon: -70.6168
+    nota: 'talleres de oficios (grabado: calcografía/metal, litografía, xilografía); matrícula permanente,
+      sin fechas; investigado y verificado 2026-08-13'
+  Taller Axis:
+    comuna: Santiago
+    direccion: Miraflores 538
+    lat: -33.43634
+    lon: -70.64597
+    nota: talleres de oficios (Pintura al óleo y acrílico, acuarela, dibujo, grafito, carbo); matrícula
+      permanente, sin fechas; investigado y verificado 2026-08-13
+  Taller Los Jacintos:
+    comuna: Providencia
+    direccion: Los Jacintos 2968
+    lat: -33.4305
+    lon: -70.58965
+    nota: 'talleres de oficios (cerámica gres: modelado a mano (pellizco, rollo, placa)); matrícula permanente,
+      sin fechas; investigado y verificado 2026-08-13'
+  Taller de Artes Providencia:
+    comuna: Providencia
+    direccion: Santa Beatriz 171
+    lat: -33.42629
+    lon: -70.61829
+    nota: talleres de oficios (Pintura al óleo, pintura acrílica, dibujo artístico); matrícula permanente,
+      sin fechas; investigado y verificado 2026-08-13
+  Teatro Alicia:
+    comuna: Lo Barnechea
+    direccion: Av. Raúl Labbé 14998
+    lat: -33.36203
+    lon: -70.49356
+    nota: Google Maps, ficha única (2026-08-13)
+  Teatro Aula Magna USACH:
+    comuna: Estación Central
+    direccion: El Belloto 3735, Campus USACH
+    lat: -33.44989
+    lon: -70.68666
+    nota: Google Maps, ficha única (2026-08-13)
+  Teatro Cariola:
+    comuna: Santiago
+    direccion: San Diego 246
+    lat: -33.4482
+    lon: -70.6506
+    nota: índice OSM 2026-08-13
+  Teatro Fábrica:
+    comuna: Providencia
+    direccion: Av. General Bustamante 530
+    lat: -33.44754
+    lon: -70.62989
+    nota: web + catastro OSM a 12 m (2026-08-13)
+  Teatro fiebre:
+    comuna: Providencia
+    direccion: Dardignac 0163, Barrio Bellavista
+    lat: -33.43318
+    lon: -70.63378
+    nota: web + catastro OSM a 96 m (2026-08-13)
+  Universidad Andres Bello - Cultura UNAB:
+    comuna: Las Condes
+    direccion: Fernández Concha 700, Campus Casona de Las Condes
+    lat: -33.37584
+    lon: -70.50565
+    nota: investigación web + catastro OSM coinciden a 1 m (2026-08-13)
+  Universidad Finis Terrae:
+    comuna: Providencia
+    direccion: Av. Pedro de Valdivia 1509
+    lat: -33.43669
+    lon: -70.6084
+    nota: Google Maps, ficha única (2026-08-13)
