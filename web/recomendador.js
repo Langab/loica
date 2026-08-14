@@ -311,14 +311,14 @@ const SITUACIONES = [
     bonoGratis:4, soloPuntual:true,
   },
   {
-    id:"comer", guia:"degu", dominio:"descuentos",
+    id:"comer", guia:"guaren", dominio:"descuentos",
     es:["Salir a comer","Con descuento de banco"],
     en:["Eating out","With a bank discount"],
     pt:["Sair para comer","Com desconto de banco"],
     dicho:{es:"para comer", en:"to eat out", pt:"para comer"},
-    saludo:{es:"Degú. Junto, guardo y me sé de memoria qué día conviene salir a comer.",
-            en:"Degú. I hoard, I save, and I know by heart which day is worth eating out.",
-            pt:"Degu. Junto, guardo e sei de cor que dia compensa sair para comer."},
+    saludo:{es:"Guarén. Acá te dicen rata por cuidar la plata; yo me lo tomé como cargo y me sé de memoria qué día conviene salir a comer.",
+            en:"Guarén rat. Here they call you a rat for looking after your money; I took it as a job title, and I know by heart which day is worth eating out.",
+            pt:"Guarén. No Chile chamam de rato quem cuida do dinheiro; eu levei como cargo e sei de cor que dia compensa sair para comer."},
     pregunta:{es:"¿Qué se te antoja comer?", en:"What do you feel like eating?", pt:"O que você quer comer?"},
     opciones:[
       {id:"restaurante", es:"Un restaurante", en:"A restaurant", pt:"Um restaurante",

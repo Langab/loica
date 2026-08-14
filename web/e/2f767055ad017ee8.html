@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=15">
+<link rel="stylesheet" href="../loica.css?v=16">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,10 +86,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=15"></script>
+<script src="../loica.js?v=16"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "2f767055ad017ee8", "titulo": "Douglas en La Cabra de Chicureo", "inicio": "2026-08-30T00:03:00", "fin": "2026-08-30T00:03:00", "lugar": "Douglas en La Cabra de Chicureo", "direccion": "General San Martin #14280, Colina", "comuna": "", "lat": null, "lon": null, "precision": "sin_ubicar", "gratis": false, "precio": 15000, "precio_texto": "desde $15.000", "categoria": "fiesta", "publico": "adultos", "descripcion": "Douglas el príncipe del Amor, vuelve a Chile y aterriza el sábado 29 de agosto en La Cabra de Chicureo para revivir sus grandes éxitos en un show íntimo y exclusivo, la cita es a partir de las 21…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/8e51e773067c53524f894900acbb00370d85a53adffa1527fdfde0ebc01d41ea.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/colina/douglas-en-la-cabra-de-chicureo-25976"};
+  const EV = {"id": "2f767055ad017ee8", "titulo": "Douglas en La Cabra de Chicureo", "inicio": "2026-08-30T00:03:00", "fin": "2026-08-30T00:03:00", "lugar": "Douglas en La Cabra de Chicureo", "direccion": "General San Martin #14280, Colina", "comuna": "", "lat": null, "lon": null, "precision": "sin_ubicar", "gratis": false, "precio": 15000, "precio_texto": "desde $15.000", "categoria": "fiesta", "subcategoria": "", "escala": "under", "publico": "adultos", "descripcion": "Douglas el príncipe del Amor, vuelve a Chile y aterriza el sábado 29 de agosto en La Cabra de Chicureo para revivir sus grandes éxitos en un show íntimo y exclusivo, la cita es a partir de las 21…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/8e51e773067c53524f894900acbb00370d85a53adffa1527fdfde0ebc01d41ea.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/colina/douglas-en-la-cabra-de-chicureo-25976"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

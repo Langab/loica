@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=15">
+<link rel="stylesheet" href="../loica.css?v=16">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,10 +86,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=15"></script>
+<script src="../loica.js?v=16"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "b843691016fc854a", "titulo": "Club 1 - Viernes 28 de Agosto", "inicio": "2026-08-29T00:00:00", "fin": "2026-08-29T03:00:00", "lugar": "Club 1", "direccion": "Bombero Núñez 1", "comuna": "Recoleta", "lat": -33.43252, "lon": -70.63964, "precision": "correccion", "gratis": false, "precio": 5000, "precio_texto": "desde $5.000", "categoria": "fiesta", "publico": "adultos", "descripcion": "Lineup: Joaks - Mothz - Pablo Hamel ➕Evento para mayores de 21 años. 📵 Nuestro Club es un espacio libre de fotografías y videos. 🗓️ Viernes 28 de Agosto. ⏰ 23:00 hrs. 📍 Bombero Nuñez 1. Recoleta. ⚠️…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/static/images/event_logo_empty.jpeg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/recoleta/club-1-viernes-28-de-agosto-25913"};
+  const EV = {"id": "b843691016fc854a", "titulo": "Club 1 - Viernes 28 de Agosto", "inicio": "2026-08-29T00:00:00", "fin": "2026-08-29T03:00:00", "lugar": "Club 1", "direccion": "Bombero Núñez 1", "comuna": "Recoleta", "lat": -33.43252, "lon": -70.63964, "precision": "correccion", "gratis": false, "precio": 5000, "precio_texto": "desde $5.000", "categoria": "fiesta", "subcategoria": "electronica", "escala": "under", "publico": "adultos", "descripcion": "Lineup: Joaks - Mothz - Pablo Hamel ➕Evento para mayores de 21 años. 📵 Nuestro Club es un espacio libre de fotografías y videos. 🗓️ Viernes 28 de Agosto. ⏰ 23:00 hrs. 📍 Bombero Nuñez 1. Recoleta. ⚠️…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/static/images/event_logo_empty.jpeg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/recoleta/club-1-viernes-28-de-agosto-25913"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

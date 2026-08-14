@@ -12,6 +12,23 @@
 # musica, arte, clases, aire_libre, charla, otros), publico (ninos,
 # adolescentes, adultos, todos), lugar, direccion, comuna, lat, lon,
 # descartar (true = no es un panorama, no se exporta), nota.
+#
+# Y el segundo nivel, que solo existe en cinco categorías:
+#   subcategoria  fiesta:  reggaeton electronica cumbia latina brasilera pop
+#                          rock ochentera urbano
+#                 teatro:  obra comedia danza circo performance
+#                 clases:  cocina danza manualidades musica artes_visuales
+#                          bienestar escritura tecnologia idiomas oficios
+#                 musica:  rock urbano clasica jazz folclor cumbia pop tributo
+#                          metal electronica
+#                 deporte: futbol natacion running ciclismo artes_marciales
+#                          gimnasia baile_fitness raqueta equipo
+#   escala        masivo | under
+# Los dos pueden salir vacíos del clasificador y eso es correcto. Una
+# corrección solo sirve para poner un valor, no para borrarlo: si el
+# clasificador está etiquetando de más, el arreglo va en loica/clasificar.py.
+# La escala conviene corregirla en lugares.yaml — es del recinto, no del
+# evento— y así vale para todas sus funciones.
 
 eventos:
   # Eventos de PRUEBA que Passline dejó publicados y entraron por el CSV de la

@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=15">
+<link rel="stylesheet" href="loica.css?v=16">
 <style>
   body{overflow-x:hidden}
 
@@ -275,11 +275,19 @@
     margin:0 0 var(--e-2);
   }
   /* La historia es lo que se vino a leer: va más grande que la bajada y con
-     más interlínea, sobre un fondo hundido que la separa del resto. */
+     más interlínea. El color del animal no llega como una línea al costado
+     sino como la tinta entera de la hoja, que es como imprime una serigrafía:
+     la MISMA tinta pasa dos veces, plena arriba en la cabecera y clara acá
+     abajo. Así el relato queda firmado por el bicho sin gastar un adorno.
+
+     Sobre el pastel el texto va en azul FIJO y no en var(--tinta): el pastel
+     es el mismo en los dos temas y la tinta se vuelve crema de noche, o sea
+     crema sobre crema. Es la misma trampa anotada en .cierre. */
   .fb-historia{
     margin:0 0 var(--e-5);font-size:var(--t-md);line-height:1.72;
-    background:var(--fondo-hundido);border-radius:var(--r-md);
-    padding:var(--e-4);border-left:5px solid var(--tono);
+    background:var(--tono-suave);color:#1E2A4A;
+    border:2.5px solid var(--contorno);border-radius:var(--r-md);
+    box-shadow:var(--repisa-2);padding:var(--e-4) var(--e-4) calc(var(--e-4) + 2px);
   }
   @media(max-width:600px){
     .ficha-bicho{max-height:92vh}
@@ -418,7 +426,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
-<script src="loica.js?v=15"></script>
+<script src="loica.js?v=16"></script>
 <script>
 /* La raíz del sitio era el mapa hasta este cambio, así que hay links dando
    vueltas por WhatsApp con la forma `.../#/e/<id>`. Se reenvían al mapa en vez
@@ -433,7 +441,7 @@ pintarBarra("index.html");
 const DESTINOS = [
   {url:"mapa.html",       tono:"--c-musica",  claro:true,  masc:"condor",     t:"pMapaT",  d:"pMapaD"},
   {url:"calendario.html", tono:"--c-cultura", claro:true,  masc:"chinchilla", t:"pCalT",   d:"pCalD"},
-  {url:"descuentos.html", tono:"--c-descuento", claro:true, masc:"degu",     t:"pDctoT",  d:"pDctoD"},
+  {url:"descuentos.html", tono:"--c-descuento", claro:true, masc:"guaren",   t:"pDctoT",  d:"pDctoD"},
   {url:"comer.html",      tono:"--c-comer",   claro:true,  masc:"quiltro",  t:"pComerT", d:"pComerD"},
   {url:"blog.html",       tono:"--c-fiesta",  claro:true,  masc:"culpeo",     t:"pBlogT",  d:"pBlogD"},
   {url:"nosotros.html",   tono:"--c-libre",   claro:true,  masc:"pudu",       t:"pQuienT", d:"pQuienD"},
@@ -529,7 +537,20 @@ function pintarPortada(){
 // A dónde manda el botón del pie. El mapa todavía no filtra por categoría
 // desde la URL, así que los que viven en él llevan al mapa entero y no a un
 // filtro inventado; los dos que tienen página propia llevan a la suya.
-const CASA_DEL_BICHO = {degu:"descuentos.html", quiltro:"comer.html"};
+const CASA_DEL_BICHO = {guaren:"descuentos.html", quiltro:"comer.html"};
+
+/* El pastel de cada animal: la misma familia de su relleno fuerte, un paso
+   claro. Es la segunda pasada de tinta de la ficha (ver .fb-historia). Vive
+   acá y no en ELENCO porque ELENCO es de loica.js y lo comparten nueve páginas;
+   el pastel solo lo necesita esta. */
+const SUAVE = {
+  loica:     "var(--rojo-200)",           condor:    "var(--c-musica-suave)",
+  culpeo:    "var(--c-fiesta-suave)",     chinchilla:"var(--c-cultura-suave)",
+  chincol:   "var(--c-clases-suave)",     pudu:      "var(--c-libre-suave)",
+  degu:      "var(--verde-200)",          guaren:    "var(--c-descuento-suave)",
+  chungungo: "var(--c-deporte-suave)",    pinguino:  "var(--c-charla-suave)",
+  quiltro:   "var(--c-comer-suave)",
+};
 
 let bichoPrevio = null;   // a quién devolverle el foco al cerrar
 
@@ -542,6 +563,7 @@ function abrirBicho(clave){
   const ficha = document.getElementById("ficha-bicho");
   ficha.style.setProperty("--tono", a.hex);
   ficha.style.setProperty("--tono-tinta", a.tinta);
+  ficha.style.setProperty("--tono-suave", SUAVE[clave] || "var(--fondo-hundido)");
   // El animal grande va en tinta fija: la cabecera es de color pleno y en modo
   // oscuro el contorno crema sobre el color se perdía.
   document.getElementById("fb-cabeza").innerHTML =
@@ -593,7 +615,7 @@ function pintarDatos(evs){
      </div>`;
   document.getElementById("cifras").innerHTML = [
     [evs.length, t("pTotalD"), "var(--acento)", "loica"],
-    [gratis.length, t("pGratisD"), "var(--c-libre)", "pudu"],
+    [gratis.length, t("pGratisD"), "var(--gratis)", "degu"],
     [fuentes, t("pFuentesD"), "var(--c-cultura)", "chinchilla"],
   ].map(cifra).join("");
 
@@ -601,7 +623,7 @@ function pintarDatos(evs){
      catastro de bancos falla, la portada se pinta igual con tres. */
   cargarDescuentos().then(d => {
     document.getElementById("cifras").insertAdjacentHTML("beforeend",
-      cifra([d.total, t("pDctoCifra"), "var(--c-descuento-tinta)", "degu"]));
+      cifra([d.total, t("pDctoCifra"), "var(--c-descuento-tinta)", "guaren"]));
   }).catch(() => {});
 
   const caja = document.getElementById("hoy-caja");

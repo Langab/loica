@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=15">
+<link rel="stylesheet" href="../loica.css?v=16">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,10 +86,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=15"></script>
+<script src="../loica.js?v=16"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "af5573713a8e47a5", "titulo": "Natación Lu-Mi 14:00 h.", "inicio": "2026-08-24T14:00:00", "fin": "2026-08-26T14:00:00", "lugar": "Club Ñuñoa", "direccion": "Ortúzar esquina Simón Bolívar (Sportlife)", "comuna": "Ñuñoa", "lat": -33.4482, "lon": -70.5838, "precision": "correccion", "gratis": false, "precio": null, "precio_texto": "", "categoria": "deporte", "publico": "todos", "descripcion": "todos los lunes y miércoles de 14:00 a 15:00. Actividad física que consiste en el desplazamiento de una persona en el agua, ya sea con fines recreativos, deportivos o de supervivencia, mediante el…", "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1767612916278-51179038.webp", "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres", "url": "https://talleres.nunoadeportes.cl/talleres/69320c6a694fb821d4e099d3"};
+  const EV = {"id": "af5573713a8e47a5", "titulo": "Natación Lu-Mi 14:00 h.", "inicio": "2026-08-24T14:00:00", "fin": "2026-08-26T14:00:00", "lugar": "Club Ñuñoa", "direccion": "Ortúzar esquina Simón Bolívar (Sportlife)", "comuna": "Ñuñoa", "lat": -33.4482, "lon": -70.5838, "precision": "correccion", "gratis": false, "precio": null, "precio_texto": "", "categoria": "deporte", "subcategoria": "natacion", "escala": "under", "publico": "todos", "descripcion": "todos los lunes y miércoles de 14:00 a 15:00. Actividad física que consiste en el desplazamiento de una persona en el agua, ya sea con fines recreativos, deportivos o de supervivencia, mediante el…", "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1767612916278-51179038.webp", "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres", "url": "https://talleres.nunoadeportes.cl/talleres/69320c6a694fb821d4e099d3"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

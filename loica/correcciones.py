@@ -45,9 +45,12 @@ RUTA_CORRECCIONES = Path(__file__).resolve().parent.parent / "config" / "correcc
 
 # Campos que una corrección de evento puede tocar. Cualquier otra clave en el
 # YAML es un error de tipeo y se avisa fuerte en vez de ignorarla en silencio.
-CAMPOS_EVENTO = {"categoria", "publico", "lugar", "direccion", "comuna",
-                 "lat", "lon", "descartar", "nota"}
-CAMPOS_LUGAR = {"direccion", "comuna", "lat", "lon", "nota"}
+CAMPOS_EVENTO = {"categoria", "subcategoria", "escala", "publico", "lugar",
+                 "direccion", "comuna", "lat", "lon", "descartar", "nota"}
+# La escala también se corrige por LUGAR, y ahí es donde de verdad sirve: el
+# tamaño es del recinto, no del evento, así que arreglar "Teatro X es under"
+# una vez arregla todas sus funciones de aquí en adelante.
+CAMPOS_LUGAR = {"direccion", "comuna", "lat", "lon", "escala", "nota"}
 CAMPOS_RESTORAN = {"cocina", "categoria", "direccion", "comuna",
                    "lat", "lon", "sitio_web", "nota"}
 
@@ -198,7 +201,13 @@ class Correcciones:
         for origen in (arreglo_lugar, arreglo_evento):
             if not origen:
                 continue
-            for campo in ("lugar", "direccion", "comuna", "categoria", "publico"):
+            # OJO con el `and origen[campo]`: una corrección solo puede
+            # cambiar un valor por OTRO, nunca vaciarlo. Para subcategoria y
+            # escala eso significa que "" no se puede imponer a mano —si el
+            # clasificador se pasó de listo, el arreglo va en clasificar.py,
+            # que además es la regla de la casa cuando el error se repite.
+            for campo in ("lugar", "direccion", "comuna", "categoria",
+                          "subcategoria", "escala", "publico"):
                 if campo in origen and origen[campo] and ev.get(campo) != origen[campo]:
                     ev[campo] = origen[campo]
                     tocados.append(campo)

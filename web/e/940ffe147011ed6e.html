@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=15">
+<link rel="stylesheet" href="../loica.css?v=16">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,10 +86,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=15"></script>
+<script src="../loica.js?v=16"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "940ffe147011ed6e", "titulo": "Capitán Memo en Concierto", "inicio": "2026-11-29T19:00:00", "fin": "2026-11-29T00:00:00", "lugar": "SALA METRONOMO", "direccion": "Santa Filomena 110", "comuna": "Recoleta", "lat": -33.4303, "lon": -70.6384, "precision": "correccion", "gratis": false, "precio": 20000, "precio_texto": "", "categoria": "musica", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/capitan-memo-en-concierto-507230-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/capitan-memo-en-concierto"};
+  const EV = {"id": "940ffe147011ed6e", "titulo": "Capitán Memo en Concierto", "inicio": "2026-11-29T19:00:00", "fin": "2026-11-29T00:00:00", "lugar": "SALA METRONOMO", "direccion": "Santa Filomena 110", "comuna": "Recoleta", "lat": -33.4303, "lon": -70.6384, "precision": "correccion", "gratis": false, "precio": 20000, "precio_texto": "", "categoria": "musica", "subcategoria": "rock", "escala": "under", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/capitan-memo-en-concierto-507230-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/capitan-memo-en-concierto"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

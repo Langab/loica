@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=15">
+<link rel="stylesheet" href="../loica.css?v=16">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,10 +86,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=15"></script>
+<script src="../loica.js?v=16"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "77be81e26770a942", "titulo": "H-SUR A TRIBUTE TO RUSH: LIMELIGHT", "inicio": "2026-10-08T20:00:00", "fin": "2026-10-08T00:00:00", "lugar": "CLUB AMANDA", "direccion": "Embajador Doussinague 1767", "comuna": "Vitacura", "lat": -33.3877, "lon": -70.5688, "precision": "correccion", "gratis": false, "precio": 22000, "precio_texto": "", "categoria": "musica", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/hsur-a-tribute-to-rush-limelight-531544-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/hsur-a-tribute-to-rush-limelight"};
+  const EV = {"id": "77be81e26770a942", "titulo": "H-SUR A TRIBUTE TO RUSH: LIMELIGHT", "inicio": "2026-10-08T20:00:00", "fin": "2026-10-08T00:00:00", "lugar": "CLUB AMANDA", "direccion": "Embajador Doussinague 1767", "comuna": "Vitacura", "lat": -33.3877, "lon": -70.5688, "precision": "correccion", "gratis": false, "precio": 22000, "precio_texto": "", "categoria": "musica", "subcategoria": "tributo", "escala": "under", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/hsur-a-tribute-to-rush-limelight-531544-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/hsur-a-tribute-to-rush-limelight"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

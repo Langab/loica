@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=15">
+<link rel="stylesheet" href="loica.css?v=16">
 <style>
   html,body{height:100%;overflow:hidden}
   /* Los dos altos van en este orden a proposito: `dvh` no existe en
@@ -92,6 +92,68 @@
   .agenda-cabecera p{margin:3px 0 0;color:var(--tinta-suave);font-size:var(--t-sm)}
   .agenda-lista{overflow-y:auto;flex:1}
 
+  /* --- El buscador, en la barra del mes ---
+     Esta página no tiene riel de fechas: su eje temporal es el mes, y la fila
+     que hace de riel es la del título con las flechas. El campo va ahí, que es
+     "a la misma altura" de lo que pidió el dueño en el mapa.
+     Bajo 620px la barra ya lleva el mes y tres botones, así que el campo se va
+     a su propia línea en vez de espachurrar las flechas: cambiar de mes es LA
+     acción de esta página y no puede perder área táctil. */
+  .mes-barra{flex-wrap:wrap}
+  .campo-buscar{
+    display:flex;align-items:center;gap:4px;flex:1 1 200px;min-width:0;
+    max-width:320px;height:38px;padding:0 5px 0 10px;
+    border:2px solid var(--contorno);border-radius:var(--r-pill);
+    background:var(--fondo-elevado);box-shadow:0 2px 0 var(--contorno);
+  }
+  .campo-buscar > svg{width:18px;height:18px;flex:none;color:var(--tinta-tenue)}
+  /* 16px y no --t-base: bajo 16px, Safari de iOS hace zoom solo al enfocar el
+     campo y deja la página corrida. */
+  .campo-buscar input{
+    flex:1;min-width:0;border:0;background:transparent;color:var(--tinta);
+    font:600 16px/1 var(--fuente-ui);padding:0;
+  }
+  .campo-buscar input::placeholder{color:var(--tinta-tenue);font-weight:500}
+  .campo-buscar input:focus{outline:none}
+  .campo-buscar input::-webkit-search-cancel-button{display:none}
+  /* El anillo de foco va en la CÁPSULA: el <input> no tiene borde propio y el
+     anillo quedaba dibujado por dentro, escondido bajo el contorno. */
+  .campo-buscar:focus-within{box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno)}
+  .borra-buscar{
+    flex:none;width:34px;height:34px;border-radius:var(--r-pill);border:0;
+    background:transparent;color:var(--tinta-suave);font-size:17px;line-height:1;
+    cursor:pointer;display:grid;place-items:center;
+  }
+  .borra-buscar[hidden]{display:none}
+  .borra-buscar:hover{background:var(--fondo-hundido);color:var(--tinta)}
+  @media (pointer:coarse){
+    .borra-buscar{position:relative}
+    .borra-buscar::before{
+      content:"";position:absolute;left:-5px;right:-5px;top:50%;
+      height:44px;transform:translateY(-50%);
+    }
+  }
+  @media(max-width:620px){ .campo-buscar{flex-basis:100%;max-width:none;order:3} }
+
+  /* --- Afinar: subcategorías y tamaño, dentro del panel de la agenda ---
+     Bajo la cabecera del día, que es el equivalente al "bajo el número de
+     eventos" del mapa. El panel mide 370px, así que cada fila se desplaza de
+     lado en vez de envolver: música tiene nueve géneros y apilados no queda
+     agenda. */
+  .afinar{flex:none;border-bottom:1px solid var(--borde)}
+  .afinar-fila{display:flex;align-items:center;gap:6px;
+    padding:4px var(--e-4) 6px;overflow-x:auto;scrollbar-width:none}
+  .afinar-fila::-webkit-scrollbar{display:none}
+  .afinar-et{flex:none;font-size:var(--t-xs);font-weight:800;color:var(--tinta-tenue);
+    text-transform:uppercase;letter-spacing:.05em}
+  .afinar .chip{padding:6px 12px;gap:5px;font-size:var(--t-xs);min-height:36px;
+    border-width:2px;box-shadow:0 2px 0 var(--contorno)}
+  .afinar .chip:active,
+  .afinar .chip[aria-pressed="true"]{transform:translateY(2px);box-shadow:none}
+  .afinar .cuenta{opacity:.72;font-variant-numeric:tabular-nums}
+  .afinar-nota{margin:0;padding:0 var(--e-4) 7px;font-size:var(--t-xs);
+    color:var(--tinta-tenue);font-style:italic;line-height:1.3}
+
   @media(max-width:879px){
     main{flex-direction:column;padding-bottom:var(--hueco-nav)}
     .agenda{width:auto;border-left:0;border-top:1px solid var(--borde);
@@ -128,6 +190,15 @@
           <button class="hoy" id="btn-hoy">Hoy</button>
           <button id="sig" aria-label="Mes siguiente">›</button>
         </div>
+        <!-- El buscador va en la fila que hace de riel en esta página. -->
+        <div class="campo-buscar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+               stroke-linecap="round" aria-hidden="true">
+            <circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.4 15.4 21 21"/></svg>
+          <input type="search" id="buscar" autocomplete="off"
+                 autocorrect="off" autocapitalize="off" spellcheck="false">
+          <button type="button" class="borra-buscar" id="borra-buscar" hidden>✕</button>
+        </div>
       </div>
       <div class="encabezado-dias" id="encabezado-dias"></div>
       <div class="rejilla" id="rejilla"></div>
@@ -138,6 +209,7 @@
         <h2 id="agenda-titulo"></h2>
         <p id="agenda-sub"></p>
       </div>
+      <div class="afinar" id="afinar"></div>
       <div class="agenda-lista" id="agenda-lista"></div>
     </aside>
   </main>
@@ -145,9 +217,10 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegacion principal"></nav>
 
-<script src="loica.js?v=15"></script>
+<script src="loica.js?v=16"></script>
 <script>
 let EVENTOS = [], filtroCat = null, soloGratis = false;
+let busqueda = "", filtroSub = null, filtroEscala = null;
 let mesVisible = new Date(), diaElegido = new Date();
 
 pintarBarra("calendario.html");
@@ -156,34 +229,209 @@ cargarEventos().then(evs => {
   EVENTOS = evs;
   // Arranca en el mes del primer evento disponible, no en uno vacío
   if(evs.length && evs[0].fecha > new Date()) mesVisible = new Date(evs[0].fecha);
-  pintarFiltros(); pintarMes(); mostrarDia(diaElegido);
+  montarBuscador();
+  repintar();
 });
 window.addEventListener("loica:idioma", () => {
-  pintarFiltros(); pintarMes(); mostrarDia(diaElegido);
+  sincronizarBuscador();
+  repintar();
 });
 
 const visibles = () => EVENTOS.filter(ev =>
-  (!soloGratis || ev.gratis) && (!filtroCat || ev.categoria === filtroCat));
+  (!soloGratis || ev.gratis) &&
+  (!filtroCat || ev.categoria === filtroCat) &&
+  (!filtroSub || ev.subcategoria === filtroSub) &&
+  (!filtroEscala || ev.escala === filtroEscala) &&
+  coincideBusqueda(ev, busqueda));
+
+/* Los mismos eventos ignorando UN filtro, para contar cuántos quedarían si lo
+   tocaras. Sin esto los números de los chips se cuentan sobre la base entera y
+   mienten: un "Reggaetón 40" que al tocarlo muestra 3 es peor que no ponerlo. */
+const visiblesSalvo = salvo => EVENTOS.filter(ev =>
+  (!soloGratis || ev.gratis) &&
+  (salvo === "cat" || !filtroCat || ev.categoria === filtroCat) &&
+  (salvo === "sub" || !filtroSub || ev.subcategoria === filtroSub) &&
+  (salvo === "escala" || !filtroEscala || ev.escala === filtroEscala) &&
+  coincideBusqueda(ev, busqueda));
+
+const hayFiltros = () => busqueda || filtroCat || filtroSub || filtroEscala || soloGratis;
+
+// Todo lo que repinta la página, junto: son tres cosas y olvidar una deja la
+// rejilla del mes mostrando puntos de un filtro que ya no está puesto.
+const repintar = () => { pintarFiltros(); pintarMes(); mostrarDia(diaElegido); };
 
 function pintarFiltros(){
   const cont = document.getElementById("filtros");
   cont.innerHTML = "";
+  cont.setAttribute("role", "group");
+  cont.setAttribute("aria-label", t("filtrosTipo"));
   const agregar = (contenido, activo, alPulsar, clase="") => {
     const b = document.createElement("button");
+    b.type = "button";
     b.className = "chip " + clase; b.innerHTML = contenido;
     b.setAttribute("aria-pressed", activo);
-    b.onclick = () => { alPulsar(); pintarFiltros(); pintarMes(); mostrarDia(diaElegido); };
+    b.onclick = () => { alPulsar(); repintar(); };
     cont.appendChild(b);
   };
-  agregar(`${carita("pudu", soloGratis ? "#fff" : "#0E8757", 22)} ${t("gratis")}`,
+  // El Degú es la mascota de lo gratis desde que el Guarén entró a los
+  // descuentos y el Pudú se quedó con el aire libre.
+  agregar(`${carita("degu", soloGratis ? "#fff" : "#2E7D5B", 22)} ${t("gratis")}`,
           soloGratis, () => soloGratis = !soloGratis, "es-gratis");
+  /* Ordenadas por cuántas hay y no alfabéticamente: el riel se desplaza de
+     lado y en un teléfono se ven cuatro chips, así que el orden decide qué
+     queda al alcance del pulgar. Alfabético dejaba "Aire libre" (9 eventos)
+     primero y "Deporte" (1.071) fuera de pantalla. */
+  const cuantosPorCat = {};
+  visiblesSalvo("cat").forEach(e => cuantosPorCat[e.categoria] = (cuantosPorCat[e.categoria] || 0) + 1);
   [...new Set(EVENTOS.map(e => e.categoria))]
-    .sort((a,b) => cat(a)[IDIOMA].localeCompare(cat(b)[IDIOMA]))
+    .sort((a,b) => (cuantosPorCat[b] || 0) - (cuantosPorCat[a] || 0)
+                || cat(a)[IDIOMA].localeCompare(cat(b)[IDIOMA]))
     .forEach(c => {
       const info = cat(c);
       agregar(`${carita(info.mascota, filtroCat === c ? "#fff" : info.hex, 22)} ${info[IDIOMA]}`,
-              filtroCat === c, () => filtroCat = filtroCat === c ? null : c);
+              filtroCat === c, () => {
+                // Cambiar o soltar la categoría BORRA la subcategoría: un
+                // `filtroSub` de fiestas colgado en teatro deja el mes entero
+                // sin puntos y parece que la página se rompió.
+                filtroCat = filtroCat === c ? null : c;
+                filtroSub = null;
+              });
     });
+  pintarAfinar();
+}
+
+/* ---------- AFINAR: subcategorías y tamaño, en el panel de la agenda ----------
+   Mismo criterio y mismo piso que el mapa: las opciones salen de los datos, y
+   un chip bajo tres eventos ocupa lugar sin llevar a ninguna parte. */
+const MIN_SUB = 3;
+
+function pintarAfinar(){
+  const caja = document.getElementById("afinar");
+  caja.innerHTML = "";
+
+  const fila = (etiqueta, ariaEtiqueta) => {
+    const f = document.createElement("div");
+    f.className = "afinar-fila";
+    f.setAttribute("role", "group");
+    f.setAttribute("aria-label", ariaEtiqueta);
+    if(etiqueta){
+      const et = document.createElement("span");
+      et.className = "afinar-et";
+      et.textContent = etiqueta;
+      et.setAttribute("aria-hidden", "true");
+      f.appendChild(et);
+    }
+    caja.appendChild(f);
+    return f;
+  };
+  const chip = (f, texto, cuenta, activo, alPulsar, titulo="") => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "chip";
+    b.innerHTML = escapar(texto)
+      + (cuenta === null ? "" : ` <span class="cuenta">${cuenta}</span>`);
+    b.setAttribute("aria-pressed", activo);
+    if(titulo) b.title = titulo;
+    b.onclick = () => { alPulsar(); repintar(); };
+    f.appendChild(b);
+  };
+
+  if(filtroCat){
+    const base = visiblesSalvo("sub").filter(ev => ev.categoria === filtroCat);
+    const cuantos = {};
+    base.forEach(ev => { if(ev.subcategoria) cuantos[ev.subcategoria] = (cuantos[ev.subcategoria] || 0) + 1; });
+    // El que está puesto se dibuja siempre: si su cuenta cae bajo el piso al
+    // combinarse con otro filtro y desaparece, no hay forma de soltarlo.
+    const opciones = Object.keys(cuantos)
+      .filter(s => cuantos[s] >= MIN_SUB || s === filtroSub)
+      .sort((a,b) => cuantos[b] - cuantos[a] || subcat(a).localeCompare(subcat(b)));
+    if(opciones.length >= 2){
+      const f = fila(t("filtrosAfinar"), t("filtrosAfinar"));
+      chip(f, t("afinarTodo"), base.length, !filtroSub, () => filtroSub = null);
+      opciones.forEach(s =>
+        chip(f, subcat(s), cuantos[s], filtroSub === s,
+             () => filtroSub = filtroSub === s ? null : s));
+    }
+  }
+
+  const base = visiblesSalvo("escala");
+  const cuantos = {under:0, masivo:0};
+  base.forEach(ev => { if(ev.escala in cuantos) cuantos[ev.escala]++; });
+  if(cuantos.under || cuantos.masivo){
+    const f = fila(t("filtrosEscala"), t("filtrosEscala"));
+    ["under","masivo"].forEach(e => {
+      if(!cuantos[e] && filtroEscala !== e) return;
+      // Excluyentes: elegir uno apaga el otro.
+      chip(f, ESCALAS[e][IDIOMA], cuantos[e], filtroEscala === e,
+           () => filtroEscala = filtroEscala === e ? null : e,
+           ESCALAS[e].pista[IDIOMA]);
+    });
+    /* De buena parte del catastro no sabemos el aforo del recinto, y esos
+       eventos no salen en ninguno de los dos chips. Hay que decirlo: si no,
+       parece que Santiago tiene 112 panoramas masivos y ninguno más. */
+    const sinDato = base.length - cuantos.under - cuantos.masivo;
+    if(filtroEscala && sinDato){
+      const nota = document.createElement("p");
+      nota.className = "afinar-nota";
+      nota.textContent = IDIOMA === "en"
+        ? `${sinDato} events are not shown here: we don't know the size of the venue.`
+        : IDIOMA === "pt"
+        ? `${sinDato} eventos ficam de fora: não sabemos o tamanho do local.`
+        : `${sinDato} panoramas quedan fuera: no sabemos el tamaño del recinto.`;
+      caja.appendChild(nota);
+    }
+  }
+
+  if(hayFiltros()){
+    const f = fila("", t("filtrosLimpiar"));
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "chip";
+    b.textContent = "✕ " + t("filtrosLimpiar");
+    b.onclick = () => {
+      busqueda = ""; filtroCat = null; filtroSub = null;
+      filtroEscala = null; soloGratis = false;
+      const campo = document.getElementById("buscar");
+      campo.value = "";
+      document.getElementById("borra-buscar").hidden = true;
+      repintar();
+    };
+    f.appendChild(b);
+  }
+}
+
+/* ---------- EL BUSCADOR ---------- */
+function sincronizarBuscador(){
+  const campo = document.getElementById("buscar");
+  campo.placeholder = t("buscar");
+  campo.setAttribute("aria-label", t("buscarEtiqueta"));
+  const borrar = document.getElementById("borra-buscar");
+  borrar.hidden = !campo.value;
+  borrar.setAttribute("aria-label", t("buscarBorrar"));
+}
+
+function montarBuscador(){
+  const campo = document.getElementById("buscar");
+  /* 180 ms antes de filtrar: sin esto cada tecla vuelve a armar la rejilla de
+     42 celdas y a recorrer el catastro entero. */
+  let temporizador = null;
+  campo.oninput = () => {
+    document.getElementById("borra-buscar").hidden = !campo.value;
+    clearTimeout(temporizador);
+    temporizador = setTimeout(() => { busqueda = campo.value.trim(); repintar(); }, 180);
+  };
+  campo.onkeydown = e => {
+    if(e.key === "Escape" && campo.value){
+      campo.value = "";
+      campo.dispatchEvent(new Event("input"));
+    }
+  };
+  document.getElementById("borra-buscar").onclick = () => {
+    campo.value = "";
+    campo.dispatchEvent(new Event("input"));
+    campo.focus();
+  };
+  sincronizarBuscador();
 }
 
 function porDia(){
@@ -253,8 +501,13 @@ function mostrarDia(dia){
   const cont = document.getElementById("agenda-lista");
   cont.innerHTML = "";
   if(!delDia.length){
+    /* Un día sin nada y un día que se vació por los filtros se ven igual, y no
+       lo son: del segundo se sale soltando un chip, no cambiando de día. Con
+       una palabra escrita se dice eso, que es lo que más despista. */
+    const texto = busqueda ? t("buscarSin") : hayFiltros() ? t("vacio") : t("vacio");
+    const pista = busqueda ? t("buscarSinPista") : hayFiltros() ? t("vaciopista") : "";
     cont.innerHTML = `<div class="vacio">${cuerpo("chincol","var(--tinta-tenue)",88,{pose:"durmiendo"})}
-      <p>${t("vacio")}</p></div>`;
+      <p><b>${escapar(texto)}</b>${pista ? `<br>${escapar(pista)}` : ""}</p></div>`;
     return;
   }
   delDia.forEach(ev => cont.appendChild(

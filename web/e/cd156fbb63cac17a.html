@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=15">
+<link rel="stylesheet" href="../loica.css?v=16">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,10 +86,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=15"></script>
+<script src="../loica.js?v=16"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "cd156fbb63cac17a", "titulo": "GLAM BILLY: NAZTY GUNZ + PLAN 7 EN BAR LA PUERTA AMARILLA", "inicio": "2026-08-21T21:00:00", "fin": null, "lugar": "Bar La Puerta Amarilla", "direccion": "Av. Alcalde Fernando Castillo Velasco 7150", "comuna": "La Reina", "lat": -33.4513, "lon": -70.55378, "precision": "correccion", "gratis": false, "precio": null, "precio_texto": "", "categoria": "musica", "publico": "todos", "descripcion": "", "imagen": "", "fuente": "PortalTickets — carteleras por local (circuito under)", "url": "https://www.portaldisc.com/evento/nazty-gunz-plan7-glambilly"};
+  const EV = {"id": "cd156fbb63cac17a", "titulo": "GLAM BILLY: NAZTY GUNZ + PLAN 7 EN BAR LA PUERTA AMARILLA", "inicio": "2026-08-21T21:00:00", "fin": null, "lugar": "Bar La Puerta Amarilla", "direccion": "Av. Alcalde Fernando Castillo Velasco 7150", "comuna": "La Reina", "lat": -33.4513, "lon": -70.55378, "precision": "correccion", "gratis": false, "precio": null, "precio_texto": "", "categoria": "musica", "subcategoria": "", "escala": "under", "publico": "todos", "descripcion": "", "imagen": "", "fuente": "PortalTickets — carteleras por local (circuito under)", "url": "https://www.portaldisc.com/evento/nazty-gunz-plan7-glambilly"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

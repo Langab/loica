@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=15">
+<link rel="stylesheet" href="loica.css?v=16">
 <style>
   /* ============================================================
      HABLA CON LA LOICA
@@ -228,7 +228,7 @@
      tiñe del color de quien tenía la palabra en cada tramo, así que al llegar
      abajo la conversación deja un registro visible de por cuántas manos
      pasaste: rojo de la Loica, morado del Culpeo, verde del Pudú, café del
-     Degú. Es lo que convierte una pila de burbujas en UNA conversación.
+     Guarén. Es lo que convierte una pila de burbujas en UNA conversación.
 
      El hilo se dibuja turno por turno y no como una línea de fondo continua:
      así existe donde hay conversación y no cuelga en el vacío ni antes de la
@@ -392,8 +392,8 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
-<script src="loica.js?v=15"></script>
-<script src="recomendador.js?v=15"></script>
+<script src="loica.js?v=16"></script>
+<script src="recomendador.js?v=16"></script>
 <script>
 /* ============================================================
    1. EL ELENCO COMO GUÍAS
@@ -411,7 +411,11 @@ const GUIAS = {
   chincol:   {tono:"var(--c-clases)",    suave:"var(--c-clases-suave)",     claro:true,  art:{es:"el ", pt:"o "}},
   chungungo: {tono:"var(--c-deporte)",   suave:"var(--c-deporte-suave)",    claro:false, art:{es:"el ", pt:"o "}},
   pinguino:  {tono:"var(--c-charla)",    suave:"var(--c-charla-suave)",     claro:false, art:{es:"el ", pt:"o "}},
-  degu:      {tono:"var(--c-descuento)", suave:"var(--c-descuento-suave)",  claro:false, art:{es:"el ", pt:"o "}},
+  guaren:    {tono:"var(--c-descuento)", suave:"var(--c-descuento-suave)",  claro:false, art:{es:"el ", pt:"o "}},
+  /* El Degú no habla en esta página: se hace cargo de lo gratis y por eso
+     aparece como cara de la opción "cero peso". Igual lleva color propio —
+     sin entrada acá heredaría el rojo de la Loica. */
+  degu:      {tono:"var(--c-libre)",     suave:"var(--c-libre-suave)",      claro:false, art:{es:"el ", pt:"o "}},
 };
 
 /* Pasarle el color a la página entera. Con esto la cordillera, el ambiente y
@@ -430,7 +434,7 @@ const nombreConArt = c => ((GUIAS[c] || GUIAS.loica).art?.[IDIOMA] || "") + nomb
 /* ============================================================
    2. COPY — registro del hero: primera persona, cálida, corta.
    Cada animal tiene una voz y la mantiene: el Cóndor habla poco, el
-   Chincol habla mucho, el Pingüino habla formal, el Degú habla de plata.
+   Chincol habla mucho, el Pingüino habla formal, el Guarén habla de plata.
    ============================================================ */
 const BOT = {
   es:{
@@ -454,7 +458,7 @@ const BOT = {
     sectorDicho:{centro:"en el centro", oriente:"en el oriente", norte:"en el norte", sur:"en el sur", todo:""},
     /* Plata — es del Pudú */
     qPlata:"Antes de que partan: ¿cuánto quieres gastar? Es mi tema.",
-    puduSePresenta:"Soy el Pudú. Me hago cargo de lo que no cuesta nada, que acá va primero.",
+    deguSePresenta:"Soy el Degú. Me hago cargo de lo que no cuesta nada, que acá va primero.",
     plata:{gratis:"Nada, cero peso", barato:"Algo baratito", igual:"Da lo mismo"},
     plataSub:{gratis:"Solo lo liberado", barato:"Hasta $10.000", igual:"Gratis y pagado"},
     plataDicho:{gratis:"sin gastar un peso", barato:"barato", igual:""},
@@ -467,15 +471,15 @@ const BOT = {
     nada:"No tengo nada que calce, ni ampliando las fechas. Prefiero decírtelo antes que recomendarte cualquier cosa.",
     masTitulo:"Te muestro tres más:",
     seAcabaron:"Con esos se me acabaron los que calzan de verdad. El mapa tiene el resto.",
-    /* El Degú, de yapa */
-    deguCoda:"Un dato antes de que se vayan: si van a comer cerca, hoy hay esto.",
-    deguSePresenta:"Degú. Junto, guardo y me sé de memoria qué día conviene salir a comer.",
+    /* El Guarén, de yapa */
+    guarenCoda:"Un dato antes de que se vayan: si van a comer cerca, hoy hay esto.",
+    guarenSePresenta:"Guarén. Acá te dicen rata por cuidar la plata; yo me lo tomé como cargo y me sé de memoria qué día conviene salir a comer.",
     qComer:"¿Qué se te antoja comer?",
     comer:{restaurante:"Un restaurante", cafe:"Un café", rapida:"Algo rápido", gourmet:"Algo gourmet"},
     comerSub:{restaurante:"Almuerzo o cena sentado", cafe:"Café y algo dulce", rapida:"Sin ceremonia", gourmet:"Para darse el gusto"},
-    deguListo:"Estos son los descuentos que corren {cuando}:",
-    deguNada:"Para eso no encontré descuentos vigentes. Mejor te lo digo.",
-    deguTarjeta:"Ojo: hay que pagar con la tarjeta del banco que dice cada uno.",
+    guarenListo:"Estos son los descuentos que corren {cuando}:",
+    guarenNada:"Para eso no encontré descuentos vigentes. Mejor te lo digo.",
+    guarenTarjeta:"Ojo: hay que pagar con la tarjeta del banco que dice cada uno.",
     /* Botones */
     bMas:"Muéstrame tres más", bOtra:"Probemos otra cosa", bMapa:"Ver todo en el mapa",
     bDctos:"Ver todos los descuentos",
@@ -501,7 +505,7 @@ const BOT = {
     sectorSub:{centro:"Santiago, Recoleta, Estación Central", oriente:"Providencia, Ñuñoa, Las Condes", norte:"Huechuraba, Conchalí, Quilicura", sur:"La Florida, Maipú, Puente Alto", todo:"I get around"},
     sectorDicho:{centro:"downtown", oriente:"in the east", norte:"in the north", sur:"in the south", todo:""},
     qPlata:"Before you go: how much do you want to spend? That's my department.",
-    puduSePresenta:"I'm the Pudú. I look after everything that costs nothing, which around here comes first.",
+    deguSePresenta:"I'm the Degu. I look after everything that costs nothing, which around here comes first.",
     plata:{gratis:"Nothing at all", barato:"Something cheap", igual:"Doesn't matter"},
     plataSub:{gratis:"Free entry only", barato:"Under $10,000", igual:"Free and paid"},
     plataDicho:{gratis:"without spending a peso", barato:"on the cheap", igual:""},
@@ -513,14 +517,14 @@ const BOT = {
     nada:"I've got nothing that fits, even with a wider date range. I'd rather tell you than recommend something random.",
     masTitulo:"Three more:",
     seAcabaron:"That's the end of the ones that genuinely fit. The map has the rest.",
-    deguCoda:"One tip before you go: if you're eating nearby, here's what's on today.",
-    deguSePresenta:"Degú. I hoard, I save, and I know by heart which day is worth eating out.",
+    guarenCoda:"One tip before you go: if you're eating nearby, here's what's on today.",
+    guarenSePresenta:"Guarén rat. Here they call you a rat for looking after your money; I took it as a job title, and I know by heart which day is worth eating out.",
     qComer:"What do you feel like eating?",
     comer:{restaurante:"A restaurant", cafe:"A café", rapida:"Something quick", gourmet:"Something fancy"},
     comerSub:{restaurante:"Sit-down lunch or dinner", cafe:"Coffee and something sweet", rapida:"No ceremony", gourmet:"A proper treat"},
-    deguListo:"These are the deals running {cuando}:",
-    deguNada:"I found no live deals for that. Better to say so.",
-    deguTarjeta:"Note: you have to pay with the card of the bank listed on each one.",
+    guarenListo:"These are the deals running {cuando}:",
+    guarenNada:"I found no live deals for that. Better to say so.",
+    guarenTarjeta:"Note: you have to pay with the card of the bank listed on each one.",
     bMas:"Show me three more", bOtra:"Let's try something else", bMapa:"See everything on the map",
     bDctos:"See all the deals",
     cierre:"If none of them land, come back and we'll try something else. That's what I'm here for.",
@@ -545,7 +549,7 @@ const BOT = {
     sectorSub:{centro:"Santiago, Recoleta, Estación Central", oriente:"Providencia, Ñuñoa, Las Condes", norte:"Huechuraba, Conchalí, Quilicura", sur:"La Florida, Maipú, Puente Alto", todo:"Circulo pela cidade toda"},
     sectorDicho:{centro:"no centro", oriente:"no leste", norte:"no norte", sur:"no sul", todo:""},
     qPlata:"Antes de saírem: quanto você quer gastar? Esse é o meu assunto.",
-    puduSePresenta:"Sou o Pudu. Cuido do que não custa nada, que aqui vem primeiro.",
+    deguSePresenta:"Sou o Degu. Cuido do que não custa nada, que aqui vem primeiro.",
     plata:{gratis:"Nada, zero", barato:"Algo baratinho", igual:"Tanto faz"},
     plataSub:{gratis:"Só o gratuito", barato:"Até $10.000", igual:"Grátis e pago"},
     plataDicho:{gratis:"sem gastar nada", barato:"barato", igual:""},
@@ -557,14 +561,14 @@ const BOT = {
     nada:"Não tenho nada que combine, nem ampliando as datas. Prefiro te dizer a recomendar qualquer coisa.",
     masTitulo:"Mais três:",
     seAcabaron:"Com esses acabaram os que combinam de verdade. O mapa tem o resto.",
-    deguCoda:"Uma dica antes de irem: se forem comer por perto, hoje tem isto.",
-    deguSePresenta:"Degu. Junto, guardo e sei de cor que dia compensa sair para comer.",
+    guarenCoda:"Uma dica antes de irem: se forem comer por perto, hoje tem isto.",
+    guarenSePresenta:"Guarén. No Chile chamam de rato quem cuida do dinheiro; eu levei como cargo e sei de cor que dia compensa sair para comer.",
     qComer:"O que você quer comer?",
     comer:{restaurante:"Um restaurante", cafe:"Um café", rapida:"Algo rápido", gourmet:"Algo gourmet"},
     comerSub:{restaurante:"Almoço ou jantar sentado", cafe:"Café e algo doce", rapida:"Sem cerimônia", gourmet:"Para se dar um gosto"},
-    deguListo:"Estes são os descontos que valem {cuando}:",
-    deguNada:"Para isso não achei descontos vigentes. Melhor te avisar.",
-    deguTarjeta:"Atenção: é preciso pagar com o cartão do banco indicado em cada um.",
+    guarenListo:"Estes são os descontos que valem {cuando}:",
+    guarenNada:"Para isso não achei descontos vigentes. Melhor te avisar.",
+    guarenTarjeta:"Atenção: é preciso pagar com o cartão do banco indicado em cada um.",
     bMas:"Mostre mais três", bOtra:"Vamos tentar outra coisa", bMapa:"Ver tudo no mapa",
     bDctos:"Ver todos os descontos",
     cierre:"Se nenhum te convencer, volte que a gente tenta outra coisa. É para isso que eu estou aqui.",
@@ -907,8 +911,8 @@ async function preguntarSectorSiSobra(){
 
 async function preguntarSectorDcto(){
   const sit = situacionPorId(respuestas.situacion);
-  await escribiendo("degu", 520);
-  await dice("degu", () => escapar(b("qSector").replace("{n}",
+  await escribiendo("guaren", 520);
+  await dice("guaren", () => escapar(b("qSector").replace("{n}",
     rankearDescuentos(DESCUENTOS, respuestas.cats, "todo", false).length)), 320);
   const n = {};
   ["centro","oriente","norte","sur"].forEach(s =>
@@ -927,14 +931,17 @@ async function preguntarSectorDcto(){
     });
 }
 
-/* El Pudú siempre entra para la plata: lo gratis es su trabajo, y por eso es
-   el único que aparece en todas las conversaciones de eventos. */
+/* El Degú siempre entra para la plata: lo gratis es su trabajo, y por eso es
+   el único que aparece en todas las conversaciones de eventos. Antes esto lo
+   conducía el Pudú, que ahora se hace cargo del aire libre; si se cambia el
+   animal hay que cambiar los cuatro llamados juntos, porque si no uno toma el
+   micrófono y otro se presenta. */
 async function preguntarPlata(){
   const sit = situacionPorId(respuestas.situacion);
-  if(sit.guia !== "pudu") await relevo("pudu");
-  await escribiendo("pudu", 560);
-  if(sit.guia !== "pudu") await diceClave("pudu", "puduSePresenta", 460);
-  await diceClave("pudu", "qPlata", 300);
+  if(sit.guia !== "degu") await relevo("degu");
+  await escribiendo("degu", 560);
+  if(sit.guia !== "degu") await diceClave("degu", "deguSePresenta", 460);
+  await diceClave("degu", "qPlata", 300);
   const base = candidatos(sit, {soloGratis:false, sector:respuestas.sector || "todo"});
   const n = {
     gratis: base.filter(ev => ev.gratis).length,
@@ -943,7 +950,7 @@ async function preguntarPlata(){
   };
   preguntar(
     () => ["gratis","barato","igual"].map(id => ({
-      id, mascota: id === "gratis" ? "pudu" : id === "barato" ? "degu" : "loica",
+      id, mascota: id === "gratis" ? "degu" : id === "barato" ? "guaren" : "loica",
       titulo:b("plata")[id], sub:b("plataSub")[id], cuantos:n[id],
     })),
     false,
@@ -974,7 +981,7 @@ function candidatos(sit, extra){
 /* ---- El resultado, en boca del animal que lleva el tema ---- */
 async function recomendar(){
   const sit = situacionPorId(respuestas.situacion);
-  if(sit.guia !== "pudu") await relevo(sit.guia);
+  if(sit.guia !== "degu") await relevo(sit.guia);
   await escribiendo(sit.guia, 900);
 
   /* "Esta noche" no filtra por hora — medio catálogo no publica hora — sino
@@ -1040,14 +1047,14 @@ function pintarLote(){
   };
   agregar({render: construir});
   pintarAcciones({sinMas: mostrados >= ranking.length});
-  codaDelDegu();
+  codaDelGuaren();
 }
 
-/* ---- La yapa del Degú ----
+/* ---- La yapa del Guarén ----
    Solo si el plan se paga y solo una vez por conversación. Es el cruce que
    justifica tener las dos bases en la misma página: te recomendé un panorama
    pagado, y de paso te digo dónde comer barato cerca ese mismo día. */
-async function codaDelDegu(){
+async function codaDelGuaren(){
   if(codaPuesta || respuestas.plata === "gratis") return;
   if(situacionPorId(respuestas.situacion).dominio === "descuentos") return;
   const comida = ["restaurantes","restaurantes-y-bares","cafeterias","comida-rapida"];
@@ -1056,9 +1063,9 @@ async function codaDelDegu(){
   codaPuesta = true;
 
   await esperar(700);
-  await relevo("degu");
-  await diceClave("degu", "deguSePresenta", 420);
-  await diceClave("degu", "deguCoda", 360);
+  await relevo("guaren");
+  await diceClave("guaren", "guarenSePresenta", 420);
+  await diceClave("guaren", "guarenCoda", 360);
   const uno = cerca[0];
   agregar({render: () => {
     const c = document.createElement("div");
@@ -1066,20 +1073,20 @@ async function codaDelDegu(){
     c.appendChild(tarjetaDescuento(uno, () => location.href = "descuentos.html"));
     return c;
   }});
-  await diceClave("degu", "deguTarjeta", 200);
+  await diceClave("guaren", "guarenTarjeta", 200);
 }
 
-/* ---- El camino propio del Degú ---- */
+/* ---- El camino propio del Guarén ---- */
 async function recomendarDescuentos(){
-  await escribiendo("degu", 900);
+  await escribiendo("guaren", 900);
   const lista = rankearDescuentos(DESCUENTOS, respuestas.cats, respuestas.sector, false);
   if(!lista.length){
-    await diceClave("degu", "deguNada");
+    await diceClave("guaren", "guarenNada");
     pintarAcciones({sinMas:true, dctos:true});
     return;
   }
   ranking = lista;
-  await dice("degu", () => escapar(
+  await dice("guaren", () => escapar(
     b("cuantos").replace("{n}", lista.length)), 420);
   mostrados = 0; codaPuesta = true;
   pintarLoteDctos();
@@ -1113,7 +1120,7 @@ function pintarAcciones({sinMas, dctos}){
         turnos = turnos.filter(tn => !tn.esAccion);
         c.remove();
         responde(() => b("bMas"));
-        const guia = dctos ? "degu" : situacionPorId(respuestas.situacion).guia;
+        const guia = dctos ? "guaren" : situacionPorId(respuestas.situacion).guia;
         await escribiendo(guia, 600);
         await diceClave(guia, "masTitulo");
         dctos ? pintarLoteDctos() : pintarLote();
@@ -1216,7 +1223,7 @@ pintarHero();
 
 /* El .catch importa: sin él, si eventos.json falla el usuario se queda con
    una Loica muda para siempre. Es el hoyo anotado en _critica_diseno.md.
-   Los descuentos son opcionales: si fallan, el Degú simplemente no aparece. */
+   Los descuentos son opcionales: si fallan, el Guarén simplemente no aparece. */
 Promise.all([
   cargarEventos(),
   cargarDescuentos().then(d => d.descuentos).catch(() => []),

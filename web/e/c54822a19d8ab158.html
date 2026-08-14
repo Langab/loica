@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=15">
+<link rel="stylesheet" href="../loica.css?v=16">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,10 +86,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=15"></script>
+<script src="../loica.js?v=16"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "c54822a19d8ab158", "titulo": "Confesiones con La Abu", "inicio": "2026-08-28T22:00:00", "fin": "2026-08-28T00:00:00", "lugar": "Donde La Chipi", "direccion": "", "comuna": "Santiago", "lat": -33.4425, "lon": -70.6505, "precision": "comuna", "gratis": false, "precio": 5000, "precio_texto": "", "categoria": "teatro", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/confesiones-con-la-abu-543607-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/confesiones-con-la-abu"};
+  const EV = {"id": "c54822a19d8ab158", "titulo": "Confesiones con La Abu", "inicio": "2026-08-28T22:00:00", "fin": "2026-08-28T00:00:00", "lugar": "Donde La Chipi", "direccion": "", "comuna": "Santiago", "lat": -33.4425, "lon": -70.6505, "precision": "comuna", "gratis": false, "precio": 5000, "precio_texto": "", "categoria": "teatro", "subcategoria": "comedia", "escala": "", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/confesiones-con-la-abu-543607-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/confesiones-con-la-abu"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

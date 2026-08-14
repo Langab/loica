@@ -33,7 +33,7 @@
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
       integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V"
       crossorigin="anonymous">
-<link rel="stylesheet" href="loica.css?v=15">
+<link rel="stylesheet" href="loica.css?v=16">
 <style>
   html,body{height:100%;overflow:hidden}
   /* Los dos altos van en este orden a proposito: `dvh` no existe en
@@ -296,7 +296,7 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
         integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
         crossorigin="anonymous"></script>
-<script src="loica.js?v=15"></script>
+<script src="loica.js?v=16"></script>
 <script>
 /* ------------------------------------------------------------------
    Estado. Tres filtros y ninguno depende del otro: el día es de una
@@ -351,7 +351,7 @@ cargarDescuentos().then(d => {
   pintarTodo();
 }).catch(() => {
   document.getElementById("lista").innerHTML =
-    `<div class="vacio">${cuerpo("degu","var(--tinta-tenue)",96,{pose:"durmiendo"})}
+    `<div class="vacio">${cuerpo("guaren","var(--tinta-tenue)",96,{pose:"durmiendo"})}
        <p>No pude cargar los descuentos.</p></div>`;
 });
 
@@ -384,7 +384,7 @@ function pintarAviso(){
     ? new Date(DATOS.generado).toLocaleDateString(localeDe(), {day:"numeric", month:"long"})
     : "";
   document.getElementById("aviso").innerHTML =
-    `${carita("degu","var(--c-descuento-tinta)",22)}
+    `${carita("guaren","var(--c-descuento-tinta)",22)}
      <span>${escapar(t("dOjo"))}${fecha ? ` · ${{es:"Revisado el",en:"Checked on",pt:"Revisado em"}[IDIOMA]} ${fecha}.` : ""}</span>`;
 }
 
@@ -419,7 +419,7 @@ function pintarFiltros(){
     chip.className = "chip";
     chip.style.setProperty("--banco", b.color);
     chip.setAttribute("aria-pressed", activo);
-    chip.innerHTML = `${carita("degu", activo ? "#fff" : b.color, 22)} ${escapar(nombre)}`;
+    chip.innerHTML = `${carita("guaren", activo ? "#fff" : b.color, 22)} ${escapar(nombre)}`;
     chip.onclick = () => { bancoFiltro = activo ? null : id; mostrando = 80; pintarTodo(); };
     cont.appendChild(chip);
   });
@@ -500,7 +500,7 @@ function pintarLista(){
     `<b>${lista.length}</b> ${escapar(lista.length === 1 ? t("dCuantos1") : t("dCuantos"))}`;
 
   if(!lista.length){
-    cont.innerHTML = `<div class="vacio">${cuerpo("degu","var(--tinta-tenue)",96,{pose:"durmiendo"})}
+    cont.innerHTML = `<div class="vacio">${cuerpo("guaren","var(--tinta-tenue)",96,{pose:"durmiendo"})}
       <p><b>${escapar(t("dVacio"))}</b><br>${escapar(t("dVaciopista"))}</p></div>`;
     return;
   }
@@ -533,7 +533,7 @@ function abrirFicha(d){
   const monto = montoDescuento(d);
 
   document.getElementById("ficha-cabeza").innerHTML = `
-    <span class="avatar">${carita("degu", b.color, 44)}
+    <span class="avatar">${carita("guaren", b.color, 44)}
       ${urlSegura(d.logo) ? `<img src="${escapar(urlSegura(d.logo))}" alt="" onerror="this.remove()">` : ""}</span>
     <span style="--banco:${b.color};min-width:0">
       <span class="ficha-banco">${escapar(d.banco)}</span>

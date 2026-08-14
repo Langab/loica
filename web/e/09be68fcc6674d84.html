@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=15">
+<link rel="stylesheet" href="../loica.css?v=16">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,10 +86,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=15"></script>
+<script src="../loica.js?v=16"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "09be68fcc6674d84", "titulo": "PAW Patrol en Vivo llega a Santiago con una aventura para toda la familia", "inicio": "2026-08-23T11:30:00", "fin": null, "lugar": "Disfruta Santiago", "direccion": "", "comuna": "Santiago", "lat": -33.4425, "lon": -70.6505, "precision": "comuna", "gratis": false, "precio": null, "precio_texto": "", "categoria": "familia", "publico": "ninos", "descripcion": "Los populares personajes de PAW Patrol aterrizan en Santiago con PAW Patrol en Vivo: En Busca del Tesoro , un espectáculo que invita a grandes y chicos a disfrutar de una emocionante historia llena…", "imagen": "https://disfrutasantiago.cl/wp-content/uploads/2026/08/paw-1-768x426.jpg", "fuente": "Disfruta Santiago", "url": "https://disfrutasantiago.cl/events/paw-patrol-en-vivo-llega-a-santiago-con-una-aventura-para-toda-la-familia/"};
+  const EV = {"id": "09be68fcc6674d84", "titulo": "PAW Patrol en Vivo llega a Santiago con una aventura para toda la familia", "inicio": "2026-08-23T11:30:00", "fin": null, "lugar": "Disfruta Santiago", "direccion": "", "comuna": "Santiago", "lat": -33.4425, "lon": -70.6505, "precision": "comuna", "gratis": false, "precio": null, "precio_texto": "", "categoria": "familia", "subcategoria": "", "escala": "", "publico": "ninos", "descripcion": "Los populares personajes de PAW Patrol aterrizan en Santiago con PAW Patrol en Vivo: En Busca del Tesoro , un espectáculo que invita a grandes y chicos a disfrutar de una emocionante historia llena…", "imagen": "https://disfrutasantiago.cl/wp-content/uploads/2026/08/paw-1-768x426.jpg", "fuente": "Disfruta Santiago", "url": "https://disfrutasantiago.cl/events/paw-patrol-en-vivo-llega-a-santiago-con-una-aventura-para-toda-la-familia/"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

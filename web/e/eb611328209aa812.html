@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=15">
+<link rel="stylesheet" href="../loica.css?v=16">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,10 +86,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=15"></script>
+<script src="../loica.js?v=16"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "eb611328209aa812", "titulo": "ICARUS GASOLINE junto a KURANDERA de Perú", "inicio": "2026-09-04T00:49:00", "fin": "2026-09-04T00:49:00", "lugar": "Bar de Rene", "direccion": "Avenida Santa Isabel #369, Providencia", "comuna": "Providencia", "lat": -33.4466477, "lon": -70.6261246, "precision": "calle", "gratis": false, "precio": 5000, "precio_texto": "desde $5.000", "categoria": "fiesta", "publico": "adultos", "descripcion": "Icarus Gasoline nos invita a entrar en un viaje de distorsión, sombras y psicodelia, donde el garage, el stoner y el rock pesado se mezclan hasta provocar un trance hipnótico. Junto a Kurandera,…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/020a877cfb9aa1033c17072de78fdcb38aac2c277b952ac82ab8ad36a2564145.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/providencia/icarus-gasoline-junto-a-kurandera-de-peru-25884"};
+  const EV = {"id": "eb611328209aa812", "titulo": "ICARUS GASOLINE junto a KURANDERA de Perú", "inicio": "2026-09-04T00:49:00", "fin": "2026-09-04T00:49:00", "lugar": "Bar de Rene", "direccion": "Avenida Santa Isabel #369, Providencia", "comuna": "Providencia", "lat": -33.4466477, "lon": -70.6261246, "precision": "calle", "gratis": false, "precio": 5000, "precio_texto": "desde $5.000", "categoria": "musica", "subcategoria": "electronica", "escala": "under", "publico": "adultos", "descripcion": "Icarus Gasoline nos invita a entrar en un viaje de distorsión, sombras y psicodelia, donde el garage, el stoner y el rock pesado se mezclan hasta provocar un trance hipnótico. Junto a Kurandera,…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/020a877cfb9aa1033c17072de78fdcb38aac2c277b952ac82ab8ad36a2564145.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/providencia/icarus-gasoline-junto-a-kurandera-de-peru-25884"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

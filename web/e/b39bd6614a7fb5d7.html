@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=15">
+<link rel="stylesheet" href="../loica.css?v=16">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,10 +86,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=15"></script>
+<script src="../loica.js?v=16"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "b39bd6614a7fb5d7", "titulo": "ZÄJES OF ZIVANA - MAPS FOR THE VANISHING MIND EN SALA SCD EGAÑA", "inicio": "2026-08-20T21:00:00", "fin": null, "lugar": "Sala SCD Egaña", "direccion": "Av. Larraín 5862, Mall Plaza Egaña", "comuna": "La Reina", "lat": -33.4528, "lon": -70.5695, "precision": "correccion", "gratis": false, "precio": null, "precio_texto": "", "categoria": "musica", "publico": "todos", "descripcion": "", "imagen": "", "fuente": "PortalTickets — carteleras por local (circuito under)", "url": "https://www.portaldisc.com/evento/zajesofzivana-scdegana"};
+  const EV = {"id": "b39bd6614a7fb5d7", "titulo": "ZÄJES OF ZIVANA - MAPS FOR THE VANISHING MIND EN SALA SCD EGAÑA", "inicio": "2026-08-20T21:00:00", "fin": null, "lugar": "Sala SCD Egaña", "direccion": "Av. Larraín 5862, Mall Plaza Egaña", "comuna": "La Reina", "lat": -33.4528, "lon": -70.5695, "precision": "correccion", "gratis": false, "precio": null, "precio_texto": "", "categoria": "musica", "subcategoria": "", "escala": "under", "publico": "todos", "descripcion": "", "imagen": "", "fuente": "PortalTickets — carteleras por local (circuito under)", "url": "https://www.portaldisc.com/evento/zajesofzivana-scdegana"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

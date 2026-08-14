@@ -46,6 +46,37 @@ CATEGORIAS = {"idiomas", "familia", "feria", "deporte", "fiesta", "cine",
               "otros"}
 PRECISIONES = {"recinto", "fuente", "calle", "comuna", "correccion",
                "sin_ubicar", ""}
+ESCALAS = {"under", "masivo", ""}
+
+RUTA_JS = RAIZ / "web" / "loica.js"
+
+
+def subcategorias_con_nombre() -> set[str]:
+    """Las subcategorías que la web sabe escribir, leídas de `loica.js`.
+
+    El clasificador inventa la clave (`reggaeton`, `baile_fitness`) y la web
+    tiene que tener el nombre para mostrarla en los tres idiomas. Son dos
+    archivos, dos lenguajes y nadie los edita el mismo día: cuando el
+    clasificador estrena una subcategoría y nadie escribe su nombre, el chip
+    del filtro sale con la clave cruda —"baile fitness" con la primera en
+    mayúscula— y parece un error de la página, no un pendiente.
+
+    `subcat()` en loica.js tiene ese respaldo a propósito, para que la interfaz
+    nunca quede en blanco. Esto es lo otro: avisar de que hay que escribir el
+    nombre. Por eso es aviso y no error — el sitio funciona igual.
+
+    Si el archivo cambia de forma y no se puede leer el bloque, devuelve un
+    conjunto vacío y el chequeo se salta solo: un verificador que se cae por su
+    propio parser bloquearía una publicación buena.
+    """
+    try:
+        js = RUTA_JS.read_text(encoding="utf-8")
+    except OSError:
+        return set()
+    bloque = re.search(r"const SUBCATEGORIAS = \{(.*?)\n\};", js, re.S)
+    if not bloque:
+        return set()
+    return set(re.findall(r"^\s*([a-z_]+)\s*:\s*\{", bloque.group(1), re.M))
 
 
 def _total_publicado(ruta_relativa: str) -> int | None:
@@ -116,6 +147,24 @@ def verificar_eventos(errores: list[str], avisos: list[str],
             avisos.append(f"{donde}: categoría desconocida {e.get('categoria')!r}")
         if e.get("precision") not in PRECISIONES:
             avisos.append(f"{donde}: precisión desconocida {e.get('precision')!r}")
+        # La escala sí es error y no aviso: son tres valores y la página filtra
+        # comparando el string exacto. Un cuarto valor no se muestra en ninguna
+        # parte —el evento simplemente desaparece de los dos filtros— y desde
+        # afuera eso no se distingue de "no hay eventos under esta semana".
+        if e.get("escala", "") not in ESCALAS:
+            errores.append(f"{donde}: escala desconocida {e.get('escala')!r}")
+
+    sin_nombre: dict[str, int] = {}
+    conocidas = subcategorias_con_nombre()
+    if conocidas:
+        for e in eventos:
+            sub = e.get("subcategoria") or ""
+            if sub and sub not in conocidas:
+                sin_nombre[sub] = sin_nombre.get(sub, 0) + 1
+    if sin_nombre:
+        detalle = ", ".join(f"{s} ({n})" for s, n in sorted(sin_nombre.items()))
+        avisos.append(f"Subcategorías sin nombre en web/loica.js: {detalle}. "
+                      "El filtro las muestra con la clave cruda.")
 
     if eventos and con_pin / len(eventos) < MIN_PROPORCION_PIN:
         errores.append(f"Solo {con_pin}/{len(eventos)} eventos con pin "

@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=15">
+<link rel="stylesheet" href="loica.css?v=16">
 <style>
   body{overflow-x:hidden}
 
@@ -52,7 +52,11 @@
 
   section{max-width:820px;margin:0 auto;padding:var(--e-10) var(--e-5)}
   section > h2{margin-bottom:var(--e-2)}
-  section > .sub{color:var(--tinta-suave);margin:0 0 var(--e-6);font-size:var(--t-md);max-width:62ch}
+  /* Descendiente y no hijo directo: la bajada de "Lo que todavía no funciona"
+     vive dentro de .falta-cabeza para poder poner a la Loica al lado, y con
+     `section > .sub` se quedaba sin color, sin tamaño y sin ancho de lectura.
+     Los únicos .sub de la página son estas bajadas de sección. */
+  section .sub{color:var(--tinta-suave);margin:0 0 var(--e-6);font-size:var(--t-md);max-width:62ch}
 
   /* ---------- PRINCIPIOS ----------
      Tinta plana, contorno grueso y repisa dura, como el resto de la app.
@@ -101,14 +105,55 @@
   .paso span{color:var(--tinta-suave);font-size:var(--t-sm);line-height:1.55}
 
   /* ---------- LO QUE NO FUNCIONA ----------
-     Acá el color se apaga a propósito: es la sección honesta, no la vitrina. */
+     Acá el color se apaga a propósito: es la sección honesta, no la vitrina.
+
+     Todo el resto del sitio se LEVANTA con la repisa dura. Estas fichas hacen
+     exactamente lo contrario y se HUNDEN en la página: mismo lenguaje de
+     tinta, corrido al revés. La sombra va por dentro y arriba, que es donde
+     cae cuando algo está metido en la hoja en vez de apoyado encima, y el
+     fondo es el hundido —más oscuro que la página en los dos temas—. Así el
+     bloque dice "esto todavía no está" con la misma gramática con la que el
+     resto dice "esto sí", y no con una barra de color al costado. */
   .fallas{display:grid;gap:var(--e-3)}
   .falla{
-    background:var(--fondo-elevado);border:2px dashed var(--borde-fuerte);border-radius:var(--r-lg);
-    padding:var(--e-4) var(--e-5);border-left:6px solid var(--amarillo-300);
+    background:var(--fondo-hundido);
+    border:2.5px solid var(--contorno);border-radius:var(--r-lg);
+    box-shadow:inset 0 3px 0 var(--contorno);
+    padding:var(--e-5);
   }
   .falla h3{font-family:var(--fuente-ui);font-size:var(--t-md);font-weight:800;margin-bottom:6px}
   .falla p{margin:0;color:var(--tinta-suave);line-height:1.6}
+
+  /* La cabecera de la sección lleva a la Loica dormida: la misma pose de los
+     estados vacíos, en el mismo nido contorneado del desfile. Es la lista de
+     lo que la guía todavía no alcanza a hacer, así que la guía está durmiendo
+     al lado. Un solo elemento torcido en la página, que es lo que permite la
+     dirección visual (±2°, nunca en datos). */
+  .falta-cabeza{
+    display:grid;grid-template-columns:1fr auto;gap:var(--e-5);
+    align-items:center;margin-bottom:var(--e-6);
+  }
+  .falta-cabeza h2{margin-bottom:var(--e-2)}
+  .falta-cabeza .sub{margin:0}   /* el hueco lo pone el grid, no el párrafo */
+  /* El pastel y la tinta azul del SVG NO cambian con el tema: por eso el
+     animal va con tinta fija (var(--contorno) se vuelve crema de noche y la
+     Loica se quedaría sin contorno sobre el amarillo). */
+  .dormida{
+    flex:none;width:88px;height:88px;border-radius:var(--r-pill);
+    display:grid;place-items:center;background:var(--c-otros-suave);
+    border:3px solid var(--contorno);box-shadow:var(--repisa-2);
+    transform:rotate(-2deg);
+  }
+  .dormida svg{width:60px;height:60px}
+  /* En celular NO se apila: el nido se achica y se queda al lado del título.
+     Apilada, la Loica quedaba sola en medio de dos huecos y se leía como un
+     sticker suelto; al lado del título es la guía de la sección. */
+  @media (max-width:560px){
+    .falta-cabeza{gap:var(--e-4);align-items:start}
+    .dormida{width:68px;height:68px;border-width:2.5px}
+    .dormida svg{width:46px;height:46px}
+    .falla{padding:var(--e-4)}
+  }
 
   /* ---------- ANIMALES GUÍA ---------- */
   .elenco{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:var(--e-4)}
@@ -171,8 +216,13 @@
 </section>
 
 <section>
-  <h2 id="t-falta"></h2>
-  <p class="sub" id="s-falta"></p>
+  <div class="falta-cabeza">
+    <div>
+      <h2 id="t-falta"></h2>
+      <p class="sub" id="s-falta"></p>
+    </div>
+    <span class="dormida" id="loica-dormida" aria-hidden="true"></span>
+  </div>
   <div class="fallas" id="falta"></div>
 </section>
 
@@ -195,7 +245,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegacion principal"></nav>
 
-<script src="loica.js?v=15"></script>
+<script src="loica.js?v=16"></script>
 <script>
 const TX = {
   es:{
@@ -226,8 +276,9 @@ const TX = {
       ["culpeo","El Culpeo","Fiestas","El zorro grande de Chile: sale de noche y se mueve por donde nadie está mirando. Se quedó con las fiestas."],
       ["chinchilla","La Chinchilla","Cultura","Chilena, nocturna y en peligro; tiene el pelaje más denso de los mamíferos terrestres, decenas de pelos saliendo de un mismo folículo. Le tocó el teatro, el cine, el arte y las charlas."],
       ["chincol","El Chincol","Barrio","Canta en cualquier plaza de Santiago a las siete de la mañana, se lo hayas pedido o no. Anda justo donde pasan las clases, los talleres y las ferias."],
-      ["pudu","El Pudú","Gratis","El ciervo más chico del mundo: no llega al medio metro. Cuida los panoramas que no cuestan nada."],
-      ["degu","El Degú","Descuentos","El roedor del matorral de Santiago, el que anda por el San Cristóbal a pleno sol. Junta comida y la guarda para después, y por eso le tocaron los descuentos de los bancos: qué día conviene salir a comer y con qué tarjeta."],
+      ["pudu","El Pudú","Aire libre","El ciervo más chico del mundo: no llega al medio metro y vive metido en el bosque. Cuida lo que pasa sin techo — cerros, parques, caminatas y plazas."],
+      ["degu","El Degú","Gratis","El roedor del matorral de Santiago, el que anda por el San Cristóbal a pleno sol sin pagarle la entrada a nadie. Cuida los panoramas que no cuestan nada."],
+      ["guaren","El Guarén","Descuentos","La rata de Santiago, y en Chile a alguien le dicen rata cuando cuida la plata más de lo que al resto le parece elegante. Él se lo tomó como cargo: los descuentos de los bancos, qué día conviene salir a comer y con qué tarjeta."],
       ["chungungo","El Chungungo","Deporte","Nutria chica de costa rocosa que igual aparece nadando en el Mapocho. Le tocó el deporte: correr, pedalear, subir cerro."],
       ["pinguino","El Pingüino","Charlas","De Humboldt, de esta costa, y siempre de terno. Le tocaron las charlas, los seminarios y la gente que sabe."],
       ["quiltro","El Quiltro","Comer","El perro callejero chileno, sin raza y con dueño de todo el pasaje. Guatón porque en el barrio se lo alimentan entre varios, y siempre está echado en la puerta del local antes de que uno llegue. Le tocaron los lugares donde se come: no los descuentos, sino la mesa a la que se vuelve."],
@@ -265,8 +316,9 @@ const TX = {
       ["culpeo","The Culpeo","Parties","Chile's big fox: out at night, moving through the places nobody is watching. It kept the parties."],
       ["chinchilla","The Chinchilla","Culture","Chilean, nocturnal and endangered; it has the densest fur of any land mammal, dozens of hairs growing from a single follicle. It got theatre, film, art and talks."],
       ["chincol","The Chincol","Neighbourhood","Sings in every square in Santiago at seven in the morning, whether you asked for it or not. Which is exactly where the classes, workshops and street fairs happen."],
-      ["pudu","The Pudú","Free","The smallest deer in the world, under half a metre tall. It looks after everything that costs nothing."],
-      ["degu","The Degu","Discounts","The rodent of the Santiago scrubland, the one you see on Cerro San Cristóbal in broad daylight. It hoards food for later, so it got the bank discounts: which day is worth eating out, and with which card."],
+      ["pudu","The Pudú","Outdoors","The smallest deer in the world, under half a metre tall, living deep in the forest. It looks after everything that happens without a roof — hills, parks, walks and squares."],
+      ["degu","The Degu","Free","The rodent of the Santiago scrubland, the one you see on Cerro San Cristóbal in broad daylight without paying anyone admission. It looks after everything that costs nothing."],
+      ["guaren","The Guarén","Discounts","The Santiago rat — and in Chile you get called a rat when you look after your money more closely than everyone else finds elegant. It took the name as a job title: the bank discounts, which day is worth eating out, and with which card."],
       ["chungungo","The Chungungo","Sport","A small otter from the rocky coast that still turns up swimming in the Mapocho. It got sport: running, cycling, climbing the hills."],
       ["pinguino","The Penguin","Talks","A Humboldt, from this coast, and always in black tie. It got the talks, the seminars and the people who know."],
       ["quiltro","The Quiltro","Eating out","The Chilean street dog: no breed, and owned by the whole block. Potbellied because half the neighbourhood feeds it, and always lying at the door of the place before you get there. It got the spots where you eat: not the discounts, but the table you come back to."],
@@ -304,8 +356,9 @@ const TX = {
       ["culpeo","O Culpeo","Festas","A raposa grande do Chile: sai de noite e circula por onde ninguém está olhando. Ficou com as festas."],
       ["chinchilla","A Chinchilla","Cultura","Chilena, noturna e ameaçada; tem a pelagem mais densa entre os mamíferos terrestres, dezenas de pelos saindo de um mesmo folículo. Ficou com o teatro, o cinema, a arte e as palestras."],
       ["chincol","O Chincol","Bairro","Canta em qualquer praça de Santiago às sete da manhã, você tendo pedido ou não. Bem onde acontecem as aulas, as oficinas e as feiras."],
-      ["pudu","O Pudú","De graça","O menor cervo do mundo: não chega a meio metro. Cuida do que não custa nada."],
-      ["degu","O Degu","Descontos","O roedor do matagal de Santiago, aquele que anda pelo Cerro San Cristóbal em pleno sol. Junta comida e guarda para depois, e por isso ficou com os descontos dos bancos: que dia compensa sair para comer e com qual cartão."],
+      ["pudu","O Pudú","Ar livre","O menor cervo do mundo: não chega a meio metro e vive enfiado na mata. Cuida do que acontece sem teto — morros, parques, caminhadas e praças."],
+      ["degu","O Degu","De graça","O roedor do matagal de Santiago, aquele que anda pelo Cerro San Cristóbal em pleno sol sem pagar entrada a ninguém. Cuida do que não custa nada."],
+      ["guaren","O Guarén","Descontos","O rato de Santiago, e no Chile chamam alguém de rato quando cuida do dinheiro mais do que o resto acha elegante. Ele levou como cargo: os descontos dos bancos, que dia compensa sair para comer e com qual cartão."],
       ["chungungo","O Chungungo","Esporte","Lontra pequena de costa rochosa que mesmo assim aparece nadando no Mapocho. Ficou com o esporte: correr, pedalar, subir morro."],
       ["pinguino","O Pinguim","Palestras","Um Humboldt, desta costa, e sempre de gala. Ficou com as palestras, os seminários e a gente que sabe."],
       ["quiltro","O Vira-lata","Comer","O cachorro de rua chileno: sem raça e com dono na vila inteira. Barrigudo porque metade do bairro dá comida, e sempre deitado na porta do lugar antes de você chegar. Ficou com os lugares de comer: não os descontos, mas a mesa à qual se volta."],
@@ -326,14 +379,21 @@ const PALETA = {
   chinchilla:{tono:"var(--c-cultura)",  suave:"var(--c-cultura-suave)"},
   chincol:   {tono:"var(--c-clases)",   suave:"var(--c-clases-suave)"},
   pudu:      {tono:"var(--c-libre)",    suave:"var(--c-libre-suave)"},
+  guaren:    {tono:"var(--c-descuento)",suave:"var(--c-descuento-suave)"},
   chungungo: {tono:"var(--c-deporte)",  suave:"var(--c-deporte-suave)"},
   pinguino:  {tono:"var(--c-charla)",   suave:"var(--c-charla-suave)"},
-  degu:      {tono:"var(--c-descuento)",suave:"var(--c-descuento-suave)"},
+  degu:      {tono:"var(--gratis)",     suave:"var(--verde-200)"},
   quiltro:   {tono:"var(--c-comer)",    suave:"var(--c-comer-suave)"},
 };
-/* Qué animal acompaña a cada principio: el pudú cuida lo gratis, la loica es
+/* El desfile recorre ELENCO, que vive en loica.js y lo comparten nueve páginas.
+   Cuando allá entra un animal nuevo, acá todavía no tiene color: sin este
+   respaldo `PALETA[clave].suave` revienta y la página entera queda en blanco,
+   porque pintar() muere antes de llegar al resto. Un animal sin color se ve
+   con el amarillo de "otros"; una página vacía no se ve. */
+const paleta = clave => PALETA[clave] || {tono:"var(--c-otros)", suave:"var(--c-otros-suave)"};
+/* Qué animal acompaña a cada principio: el degú cuida lo gratis, la loica es
    la casa y el chungungo no para quieto. Mismo criterio que en el mapa. */
-const ANIMAL_PRINCIPIO = ["pudu","loica","chungungo"];
+const ANIMAL_PRINCIPIO = ["degu","loica","chungungo"];
 const COLOR_PASO = ["var(--c-clases)","var(--c-cultura)","var(--c-fiesta)"];
 /* El contorno de la mascota es var(--contorno) y en oscuro se vuelve crema.
    Sobre pastel o sobre relleno fuerte —que no cambian con el tema— hay que
@@ -350,12 +410,12 @@ function pintar(){
   document.getElementById("cordillera").innerHTML = cordillera();
 
   document.getElementById("desfile").innerHTML = ELENCO.map(a =>
-    `<span style="--suave:${PALETA[a.clave].suave}">${mascota(a.clave,a.hex,30,TINTA_FIJA)}</span>`).join("");
+    `<span style="--suave:${paleta(a.clave).suave}">${mascota(a.clave,a.hex,30,TINTA_FIJA)}</span>`).join("");
 
   document.getElementById("t-creencias").textContent = x("tCre");
   document.getElementById("s-creencias").textContent = x("sCre");
   document.getElementById("creencias").innerHTML = x("cre").map(([t,d],i) => {
-    const clave = ANIMAL_PRINCIPIO[i], p = PALETA[clave];
+    const clave = ANIMAL_PRINCIPIO[i], p = paleta(clave);
     return `<article class="principio" style="--tono:${p.tono};--suave:${p.suave}">
       <div class="principio-animal">${mascota(clave,"#FFFBF5",58,TINTA_FIJA)}</div>
       <div class="principio-texto"><h3>${t}</h3><p>${d}</p></div>
@@ -369,13 +429,15 @@ function pintar(){
 
   document.getElementById("t-falta").textContent = x("tFal");
   document.getElementById("s-falta").textContent = x("sFal");
+  document.getElementById("loica-dormida").innerHTML =
+    cuerpo("loica", "var(--rojo-500)", 60, {tinta:"#1E2A4A", pose:"durmiendo"});
   document.getElementById("falta").innerHTML = x("fal").map(([t,d]) =>
     `<article class="falla"><h3>${t}</h3><p>${d}</p></article>`).join("");
 
   document.getElementById("t-elenco").textContent = x("tEle");
   document.getElementById("s-elenco").textContent = x("sEle");
   document.getElementById("elenco").innerHTML = x("ele").map(([clave,nombre,rol,desc]) => {
-    const p = PALETA[clave];
+    const p = paleta(clave);
     return `<article class="guia" style="--tono:${p.tono};--suave:${p.suave}">
       <div class="guia-cabeza">${mascota(clave, p.tono, 64, TINTA_FIJA)}</div>
       <div class="guia-cuerpo"><b>${nombre}</b><div class="rol">${rol}</div><span>${desc}</span></div>

@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=15">
+<link rel="stylesheet" href="../loica.css?v=16">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,10 +86,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=15"></script>
+<script src="../loica.js?v=16"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "089fd2d1ec9ed7da", "titulo": "POLY DÍAZ | Stand Up Comedy", "inicio": "2026-09-05T19:30:00", "fin": "2026-09-05T00:00:00", "lugar": "CLUB SAN MIGUEL", "direccion": "", "comuna": "San Miguel", "lat": -33.48726486, "lon": -70.65147968, "precision": "recinto", "gratis": false, "precio": null, "precio_texto": "", "categoria": "teatro", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/poly-diaz-stand-up-comedy-531785-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/poly-diaz-stand-up-comedy"};
+  const EV = {"id": "089fd2d1ec9ed7da", "titulo": "POLY DÍAZ | Stand Up Comedy", "inicio": "2026-09-05T19:30:00", "fin": "2026-09-05T00:00:00", "lugar": "CLUB SAN MIGUEL", "direccion": "", "comuna": "San Miguel", "lat": -33.48726486, "lon": -70.65147968, "precision": "recinto", "gratis": false, "precio": null, "precio_texto": "", "categoria": "teatro", "subcategoria": "comedia", "escala": "", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/poly-diaz-stand-up-comedy-531785-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/poly-diaz-stand-up-comedy"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

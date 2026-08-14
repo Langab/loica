@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=15">
+<link rel="stylesheet" href="../loica.css?v=16">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,10 +86,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=15"></script>
+<script src="../loica.js?v=16"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "f38217ca1c1e5b31", "titulo": "Fútbol 5 Lu-Mi 17:00 h. / Cancha Puquios.", "inicio": "2026-08-17T17:00:00", "fin": "2026-08-19T17:00:00", "lugar": "Cancha Puquios", "direccion": "Corporación Municipal de Deportes de Ñuñoa", "comuna": "Ñuñoa", "lat": -33.4569, "lon": -70.5975, "precision": "comuna", "gratis": true, "precio": null, "precio_texto": "Gratis", "categoria": "deporte", "publico": "todos", "descripcion": "todos los lunes y miércoles de 17:00 a 19:00. El Fútbol 5 es una modalidad moderna y dinámica del fútbol tradicional, diseñada para espacios reducidos.", "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1765392614735-408939609.webp", "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres", "url": "https://talleres.nunoadeportes.cl/talleres/6939ba7977610669702544bd"};
+  const EV = {"id": "f38217ca1c1e5b31", "titulo": "Fútbol 5 Lu-Mi 17:00 h. / Cancha Puquios.", "inicio": "2026-08-17T17:00:00", "fin": "2026-08-19T17:00:00", "lugar": "Cancha Puquios", "direccion": "Corporación Municipal de Deportes de Ñuñoa", "comuna": "Ñuñoa", "lat": -33.4569, "lon": -70.5975, "precision": "comuna", "gratis": true, "precio": null, "precio_texto": "Gratis", "categoria": "deporte", "subcategoria": "futbol", "escala": "under", "publico": "todos", "descripcion": "todos los lunes y miércoles de 17:00 a 19:00. El Fútbol 5 es una modalidad moderna y dinámica del fútbol tradicional, diseñada para espacios reducidos.", "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1765392614735-408939609.webp", "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres", "url": "https://talleres.nunoadeportes.cl/talleres/6939ba7977610669702544bd"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

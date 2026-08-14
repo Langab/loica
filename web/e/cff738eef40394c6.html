@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=15">
+<link rel="stylesheet" href="../loica.css?v=16">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,10 +86,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=15"></script>
+<script src="../loica.js?v=16"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "cff738eef40394c6", "titulo": "Parque Cordillera te invita a sus trekkings guiados nocturnos: Una mirada distinta a la precordillera Metropolitana", "inicio": "2026-08-15T00:00:00", "fin": null, "lugar": "Disfruta Santiago", "direccion": "", "comuna": "Santiago", "lat": -33.4425, "lon": -70.6505, "precision": "comuna", "gratis": false, "precio": null, "precio_texto": "", "categoria": "aire_libre", "publico": "todos", "descripcion": "Disfrutar la precordillera al atardecer y bajo la luz de la luna es la invitación de los trekkings nocturnos de Parque Cordillera, una experiencia que permite recorrer senderos en un ambiente…", "imagen": "https://disfrutasantiago.cl/wp-content/uploads/2026/08/01.-Parque-Aguas-de-Ramon-puente-colgante-Gentileza-Carlos-Leay-768x513.jpg", "fuente": "Disfruta Santiago", "url": "https://disfrutasantiago.cl/events/parque-cordillera-te-invita-a-sus-trekkings-guiados-nocturnos-una-mirada-distinta-a-la-precordillera-metropolitana/"};
+  const EV = {"id": "cff738eef40394c6", "titulo": "Parque Cordillera te invita a sus trekkings guiados nocturnos: Una mirada distinta a la precordillera Metropolitana", "inicio": "2026-08-15T00:00:00", "fin": null, "lugar": "Disfruta Santiago", "direccion": "", "comuna": "Santiago", "lat": -33.4425, "lon": -70.6505, "precision": "comuna", "gratis": false, "precio": null, "precio_texto": "", "categoria": "aire_libre", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "Disfrutar la precordillera al atardecer y bajo la luz de la luna es la invitación de los trekkings nocturnos de Parque Cordillera, una experiencia que permite recorrer senderos en un ambiente…", "imagen": "https://disfrutasantiago.cl/wp-content/uploads/2026/08/01.-Parque-Aguas-de-Ramon-puente-colgante-Gentileza-Carlos-Leay-768x513.jpg", "fuente": "Disfruta Santiago", "url": "https://disfrutasantiago.cl/events/parque-cordillera-te-invita-a-sus-trekkings-guiados-nocturnos-una-mirada-distinta-a-la-precordillera-metropolitana/"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

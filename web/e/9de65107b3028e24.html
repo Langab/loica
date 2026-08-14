@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=15">
+<link rel="stylesheet" href="../loica.css?v=16">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,10 +86,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=15"></script>
+<script src="../loica.js?v=16"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "9de65107b3028e24", "titulo": "Recuperación Física Ma-Ju 09:00 h.", "inicio": "2026-08-18T09:00:00", "fin": "2026-08-20T09:00:00", "lugar": "Personas Mayores", "direccion": "Juan Moya 1370", "comuna": "Ñuñoa", "lat": -33.467022699999994, "lon": -70.58821282857143, "precision": "calle", "gratis": true, "precio": null, "precio_texto": "Gratis", "categoria": "deporte", "publico": "todos", "descripcion": "todos los martes y jueves de 09:00 a 10:00. La recuperación física es el proceso integral de restaurar la función y capacidad del cuerpo tras una lesión, enfermedad o esfuerzo intenso, buscando la…", "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1767613745966-109444742.webp", "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres", "url": "https://talleres.nunoadeportes.cl/talleres/6942ca2090b14771d0d055aa"};
+  const EV = {"id": "9de65107b3028e24", "titulo": "Recuperación Física Ma-Ju 09:00 h.", "inicio": "2026-08-18T09:00:00", "fin": "2026-08-20T09:00:00", "lugar": "Personas Mayores", "direccion": "Juan Moya 1370", "comuna": "Ñuñoa", "lat": -33.467022699999994, "lon": -70.58821282857143, "precision": "calle", "gratis": true, "precio": null, "precio_texto": "Gratis", "categoria": "deporte", "subcategoria": "gimnasia", "escala": "under", "publico": "todos", "descripcion": "todos los martes y jueves de 09:00 a 10:00. La recuperación física es el proceso integral de restaurar la función y capacidad del cuerpo tras una lesión, enfermedad o esfuerzo intenso, buscando la…", "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1767613745966-109444742.webp", "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres", "url": "https://talleres.nunoadeportes.cl/talleres/6942ca2090b14771d0d055aa"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

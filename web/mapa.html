@@ -35,7 +35,7 @@
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
       integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V"
       crossorigin="anonymous">
-<link rel="stylesheet" href="loica.css?v=15">
+<link rel="stylesheet" href="loica.css?v=16">
 <style>
   html,body{height:100%;overflow:hidden}
   /* Los dos altos van en este orden a proposito: `dvh` no existe en
@@ -103,6 +103,100 @@
     font-size:var(--t-xs);font-weight:700;color:var(--tinta-tenue);white-space:nowrap;
   }
 
+  /* --- El buscador, dentro del riel de fechas ---
+     Va acá y no en una tercera banda: es donde lo pidió el dueño y además una
+     banda más convierte la cabecera en un formulario.
+
+     El problema real es el ancho. A 360px el riel deja 336px útiles y el
+     segmentado de fechas ya mide 288: el campo entero no cabe al lado. Se
+     resuelve con una lupa de 44px y el campo plegado; al tocarla, la fila
+     completa pasa a ser el campo y las fechas se esconden mientras escribes.
+
+     La lupa va PEGADA al borde derecho con `sticky` y no simplemente al final
+     del riel: el riel se desplaza de lado, así que sin eso la lupa se iba con
+     el desplazamiento y quedaba fuera de la pantalla justo cuando el riel está
+     lleno, que es exactamente cuando hace falta. */
+  .buscador{
+    position:sticky;right:0;flex:none;display:flex;align-items:center;
+    margin-left:auto;background:var(--fondo-elevado);padding-left:7px;
+  }
+  /* El filo de tinta que separa la lupa de las fechas que le pasan por debajo.
+     Mismo recurso que `.separa-chips`: línea dura, cero desenfoque. */
+  .buscador::before{
+    content:"";position:absolute;left:0;top:4px;bottom:4px;width:2px;
+    background:var(--borde-fuerte);border-radius:2px;
+  }
+  .lupa{
+    flex:none;width:44px;height:38px;display:grid;place-items:center;
+    border:2px solid var(--contorno);border-radius:var(--r-pill);
+    background:var(--fondo-elevado);color:var(--tinta);cursor:pointer;
+    box-shadow:0 2px 0 var(--contorno);transition:var(--rapido);
+  }
+  .lupa svg{width:20px;height:20px}
+  .lupa:active{transform:translateY(2px);box-shadow:none}
+  /* Con el campo plegado y una palabra escrita, la lupa queda RELLENA. Si no,
+     la búsqueda seguiría filtrando la pantalla sin nada en la cabecera que lo
+     delate, que es el mismo problema que esta auditoría vino a arreglar. */
+  .lupa.activo{
+    background:var(--tinta);color:var(--fondo-elevado);
+    transform:translateY(2px);box-shadow:none;
+  }
+  .campo-buscar{
+    display:none;align-items:center;gap:4px;flex:1;min-width:0;height:38px;
+    padding:0 5px 0 10px;border:2px solid var(--contorno);border-radius:var(--r-pill);
+    background:var(--fondo-elevado);box-shadow:0 2px 0 var(--contorno);
+  }
+  .campo-buscar > svg{width:18px;height:18px;flex:none;color:var(--tinta-tenue)}
+  /* 16px y no --t-base: bajo 16px Safari de iOS hace zoom solo al enfocar el
+     campo y deja la página corrida (la misma razón está escrita en loica.css
+     para los formularios). */
+  .campo-buscar input{
+    flex:1;min-width:0;border:0;background:transparent;color:var(--tinta);
+    font:600 16px/1 var(--fuente-ui);padding:0;
+  }
+  .campo-buscar input::placeholder{color:var(--tinta-tenue);font-weight:500}
+  .campo-buscar input:focus{outline:none}
+  /* WebKit dibuja su propia ✕ dentro de los input[type=search] y quedaban dos,
+     una al lado de la otra, haciendo cosas parecidas pero no iguales. */
+  .campo-buscar input::-webkit-search-cancel-button{display:none}
+  /* El anillo de foco se pinta en la CÁPSULA: el <input> no tiene borde propio
+     y el anillo quedaba dibujado por dentro, escondido bajo el contorno. */
+  .campo-buscar:focus-within{box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno)}
+  .borra-buscar{
+    flex:none;width:34px;height:34px;border-radius:var(--r-pill);border:0;
+    background:transparent;color:var(--tinta-suave);font-size:17px;line-height:1;
+    cursor:pointer;display:grid;place-items:center;
+  }
+  .borra-buscar[hidden]{display:none}
+  .borra-buscar:hover{background:var(--fondo-hundido);color:var(--tinta)}
+  @media (pointer:coarse){
+    .lupa,.borra-buscar{position:relative}
+    .lupa::before,.borra-buscar::before{
+      content:"";position:absolute;left:-5px;right:-5px;top:50%;
+      height:44px;transform:translateY(-50%);
+    }
+  }
+
+  /* Modo búsqueda en celular: la fila entera se la lleva el campo. Las fechas
+     vuelven al cerrar y la palabra NO se borra al cerrar — por eso la lupa
+     queda rellena: el filtro sigue puesto y tiene que verse. */
+  .riel-fecha.buscando .segmentado{display:none}
+  .riel-fecha.buscando .lupa{display:none}
+  .riel-fecha.buscando .campo-buscar{display:flex}
+  .riel-fecha.buscando .buscador{position:static;flex:1;margin-left:0;padding-left:0}
+  .riel-fecha.buscando .buscador::before{display:none}
+
+  /* Desde 560px el campo cabe siempre junto a las fechas: no hay nada que
+     plegar, así que la lupa sobra y el campo se queda abierto. */
+  @media(min-width:560px){
+    .riel-fecha .segmentado{display:inline-flex}
+    .buscador{position:static;flex:1 1 auto;max-width:330px;
+      margin-left:var(--e-3);padding-left:0}
+    .buscador::before{display:none}
+    .lupa{display:none}
+    .campo-buscar{display:flex}
+  }
+
   header .filtros{padding:var(--e-2) var(--e-4) var(--e-3);border-bottom:2.5px solid var(--contorno)}
   header .filtros .chip{padding:6px 13px 6px 8px;gap:5px;font-size:var(--t-xs);
     border-width:2px;box-shadow:0 2px 0 var(--contorno);min-height:38px}
@@ -148,9 +242,48 @@
   .tirador{padding:9px var(--e-4) 6px;cursor:grab;flex:none;touch-action:none}
   .tirador:active{cursor:grabbing}
   .barra-tirador{width:44px;height:4.5px;background:var(--borde-fuerte);border-radius:3px;margin:0 auto}
-  .conteo{display:flex;align-items:baseline;gap:7px;font-size:var(--t-sm);color:var(--tinta-suave);
-    padding:var(--e-1) var(--e-4) var(--e-2)}
+  .conteo{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;font-size:var(--t-sm);
+    color:var(--tinta-suave);padding:var(--e-1) var(--e-4) var(--e-2)}
   .conteo b{font-family:var(--fuente-marca);font-size:var(--t-lg);color:var(--tinta)}
+  /* La línea de estado: POR QUÉ ves 12 eventos.
+     Con seis filtros combinables, quien vuelve a la pestaña al otro día no
+     tiene cómo saber que quedaron puestos "Hoy + Gratis + Deporte". Va pegada
+     al número y no en la cabecera —que era donde la pedía el encargo— porque
+     la pregunta la hace el número y la respuesta tiene que estar donde está la
+     pregunta; y porque en un teléfono de 760px la cabecera ya se lleva 140 y
+     una tercera banda es justo lo que este archivo viene evitando desde
+     arriba. Se ve en los dos modos: el contador es lo primero del panel tanto
+     en la hoja de celular como en la columna de escritorio.
+     Dos líneas de tope: con todo puesto son siete etiquetas y no puede empujar
+     la lista fuera de la pantalla. */
+  .conteo-estado{
+    flex:1 1 100%;font-size:var(--t-xs);line-height:1.35;color:var(--tinta-tenue);
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  .conteo-estado:empty{display:none}
+
+  /* --- Afinar: subcategorías y tamaño, dentro del panel ---
+     Bajo el contador, que es donde los pidió el dueño y donde corresponde: la
+     cabecera ya tiene dos rieles. Cada fila se desplaza de lado en vez de
+     envolver: música tiene nueve géneros y apilados le comían al panel las dos
+     tarjetas que alcanza a mostrar en reposo. */
+  .afinar{flex:none;border-bottom:1px solid var(--borde)}
+  .afinar-fila{display:flex;align-items:center;gap:6px;
+    padding:4px var(--e-4) 6px;overflow-x:auto;scrollbar-width:none}
+  .afinar-fila::-webkit-scrollbar{display:none}
+  .afinar-et{flex:none;font-size:var(--t-xs);font-weight:800;color:var(--tinta-tenue);
+    text-transform:uppercase;letter-spacing:.05em}
+  .afinar .chip{padding:6px 12px;gap:5px;font-size:var(--t-xs);min-height:36px;
+    border-width:2px;box-shadow:0 2px 0 var(--contorno)}
+  .afinar .chip:active,
+  .afinar .chip[aria-pressed="true"]{transform:translateY(2px);box-shadow:none}
+  /* El número va más apagado que el nombre, pero no tanto como para perderse:
+     a .72 da 5,3:1 sobre el chip apagado y 7,4:1 sobre el relleno del activo,
+     en claro y en oscuro. */
+  .afinar .cuenta{opacity:.72;font-variant-numeric:tabular-nums}
+  .afinar-nota{margin:0;padding:0 var(--e-4) 7px;font-size:var(--t-xs);
+    color:var(--tinta-tenue);font-style:italic;line-height:1.3}
+
   .lista{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;flex:1;min-height:0}
   .fin-lista{padding:var(--e-4);text-align:center;color:var(--tinta-tenue);font-size:var(--t-xs)}
 
@@ -291,9 +424,23 @@
 <div id="app">
   <header>
     <div class="barra" id="barra"></div>
-    <div class="riel-fecha">
+    <div class="riel-fecha" id="riel-fecha">
       <div class="segmentado" id="fechas" role="group"></div>
       <span class="cuenta-rango" id="cuenta-rango"></span>
+      <!-- El buscador va acá, a la altura de Hoy/Mañana/7 días/Finde. En
+           celular arranca plegado en la lupa; desde 560px el campo está
+           siempre abierto (ver el bloque .buscador en el <style>). -->
+      <div class="buscador">
+        <button type="button" class="lupa" id="lupa"></button>
+        <div class="campo-buscar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+               stroke-linecap="round" aria-hidden="true">
+            <circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.4 15.4 21 21"/></svg>
+          <input type="search" id="buscar" autocomplete="off"
+                 autocorrect="off" autocapitalize="off" spellcheck="false">
+          <button type="button" class="borra-buscar" id="borra-buscar" hidden>✕</button>
+        </div>
+      </div>
     </div>
     <div class="filtros" id="filtros" role="group"></div>
   </header>
@@ -306,7 +453,9 @@
     <section class="panel-lista" id="panel" aria-label="Lista de eventos">
       <div class="tirador" id="tirador" role="button" tabindex="0"
            aria-label="Arrastra para ver más eventos"><div class="barra-tirador"></div></div>
-      <div class="conteo"><b id="conteo">0</b> <span id="conteo-txt">eventos</span></div>
+      <div class="conteo"><b id="conteo">0</b> <span id="conteo-txt">eventos</span>
+        <span class="conteo-estado" id="conteo-estado"></span></div>
+      <div class="afinar" id="afinar"></div>
       <div class="lista" id="lista"></div>
     </section>
 
@@ -318,9 +467,10 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
         integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
         crossorigin="anonymous"></script>
-<script src="loica.js?v=15"></script>
+<script src="loica.js?v=16"></script>
 <script>
 let EVENTOS = [], filtroCat = null, soloGratis = false, cuando = "todo", publicoFiltro = null;
+let busqueda = "", filtroSub = null, filtroEscala = null;
 let listaActual = [], seleccionado = null, mapa = null, hayMapa = false;
 
 pintarBarra("mapa.html");
@@ -500,8 +650,36 @@ if(hayMapa){
 const visibles = () => EVENTOS.filter(ev =>
   (!soloGratis || ev.gratis) &&
   (!filtroCat || ev.categoria === filtroCat) &&
+  (!filtroSub || ev.subcategoria === filtroSub) &&
+  (!filtroEscala || ev.escala === filtroEscala) &&
   (!publicoFiltro || ev.publico === publicoFiltro) &&
+  coincideBusqueda(ev, busqueda) &&
   sesionEnRango(ev, cuando));
+
+/* Los mismos eventos pero ignorando UN filtro, para poder contar cuántos
+   quedarían si lo tocaras. Sin esto los números de los chips se cuentan sobre
+   la base entera y mienten: un "Reggaetón 40" que al tocarlo muestra 3 es peor
+   que no poner número. */
+const visiblesSalvo = salvo => EVENTOS.filter(ev =>
+  (!soloGratis || ev.gratis) &&
+  (salvo === "cat" || !filtroCat || ev.categoria === filtroCat) &&
+  (salvo === "sub" || !filtroSub || ev.subcategoria === filtroSub) &&
+  (salvo === "escala" || !filtroEscala || ev.escala === filtroEscala) &&
+  (!publicoFiltro || ev.publico === publicoFiltro) &&
+  coincideBusqueda(ev, busqueda) &&
+  sesionEnRango(ev, cuando));
+
+const hayFiltros = () => busqueda || filtroCat || filtroSub || filtroEscala
+  || soloGratis || publicoFiltro || cuando !== "todo";
+
+function limpiarFiltros(){
+  busqueda = ""; filtroCat = null; filtroSub = null; filtroEscala = null;
+  soloGratis = false; publicoFiltro = null; cuando = "todo";
+  const campo = document.getElementById("buscar");
+  campo.value = "";
+  document.getElementById("riel-fecha").classList.remove("buscando");
+  sincronizarBuscador();
+}
 
 function pintarFiltros(){
   /* --- Riel 1: cuándo. Una sola respuesta, por eso es segmentado ---
@@ -542,8 +720,9 @@ function pintarFiltros(){
     return b;
   };
 
-  // El Pudú es la mascota de lo gratis: el filtro estrella tiene cara propia
-  agregar(`${carita("pudu", soloGratis ? "#fff" : "#0E8757", 22)} ${t("gratis")}`,
+  // El Degú es la mascota de lo gratis: el filtro estrella tiene cara propia.
+  // Era el Pudú, que se quedó con el aire libre cuando entró el Guarén.
+  agregar(`${carita("degu", soloGratis ? "#fff" : "#2E7D5B", 22)} ${t("gratis")}`,
           soloGratis, () => soloGratis = !soloGratis, "es-gratis");
   // Público: responde "¿puedo llevar a mi hijo?" y "¿es de mayores?"
   agregar(`${carita("pudu", publicoFiltro === "ninos" ? "#fff" : "#0E8757", 22)} ${t("ninos")}`,
@@ -558,13 +737,209 @@ function pintarFiltros(){
   sep.setAttribute("aria-hidden","true");
   cont.appendChild(sep);
 
+  /* Las categorías van ordenadas por CUÁNTAS HAY, de mayor a menor, y ya no
+     alfabéticamente. El orden alfabético dejaba "Aire libre" (9 eventos) de
+     primero y "Deporte" (1.071) en el sexto lugar, detrás del borde de la
+     pantalla: el riel se desplaza de lado y en un teléfono se ven cuatro chips.
+     Ordenar por volumen pone al alcance del pulgar lo que de verdad hay esta
+     semana. El desempate sigue siendo alfabético para que el orden no baile
+     entre dos categorías empatadas. */
+  const cuantosPorCat = {};
+  visiblesSalvo("cat").forEach(e => cuantosPorCat[e.categoria] = (cuantosPorCat[e.categoria] || 0) + 1);
   [...new Set(EVENTOS.map(e => e.categoria))]
-    .sort((a,b) => cat(a)[IDIOMA].localeCompare(cat(b)[IDIOMA]))
+    .sort((a,b) => (cuantosPorCat[b] || 0) - (cuantosPorCat[a] || 0)
+                || cat(a)[IDIOMA].localeCompare(cat(b)[IDIOMA]))
     .forEach(c => {
       const info = cat(c);
       agregar(`${carita(info.mascota, filtroCat === c ? "#fff" : info.hex, 22)} ${info[IDIOMA]}`,
-              filtroCat === c, () => filtroCat = filtroCat === c ? null : c);
+              filtroCat === c, () => {
+                // Soltar o cambiar de categoría BORRA la subcategoría. Sin esto,
+                // filtrar Fiestas → Reggaetón y después tocar Teatro deja un
+                // `filtroSub` colgado que no existe en teatro: la pantalla queda
+                // en cero y parece que la app se rompió.
+                filtroCat = filtroCat === c ? null : c;
+                filtroSub = null;
+              });
     });
+
+  pintarAfinar();
+  pintarEstado();
+}
+
+/* ---------- AFINAR: subcategorías y tamaño, dentro del panel ----------
+   Van bajo el contador y no en la cabecera: es donde los pidió el dueño, y la
+   cabecera ya tiene dos rieles. Las opciones salen de los DATOS y no de una
+   lista escrita a mano, así que si el clasificador estrena un género mañana
+   aparece solo. */
+
+/* Un chip por subcategoría es una elección solo si hay algo que elegir. Bajo
+   este piso el chip ocupa lugar y no lleva a ninguna parte: música tiene nueve
+   géneros y cuatro de ellos son de un evento. Se muestran los que tengan 3 o
+   más, y si eso deja menos de dos opciones no se dibuja la fila entera.
+   Tres y no dos: con dos, "Pop 2" ocupa el mismo ancho que "Rock 106" y sugiere
+   que son dos escenas comparables. */
+const MIN_SUB = 3;
+
+function pintarAfinar(){
+  const caja = document.getElementById("afinar");
+  caja.innerHTML = "";
+
+  const fila = (etiqueta, ariaEtiqueta) => {
+    const f = document.createElement("div");
+    f.className = "afinar-fila";
+    f.setAttribute("role", "group");
+    f.setAttribute("aria-label", ariaEtiqueta);
+    if(etiqueta){
+      const et = document.createElement("span");
+      et.className = "afinar-et";
+      et.textContent = etiqueta;
+      et.setAttribute("aria-hidden", "true");
+      f.appendChild(et);
+    }
+    caja.appendChild(f);
+    return f;
+  };
+  const chip = (fila, texto, cuenta, activo, alPulsar, titulo="") => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "chip";
+    b.innerHTML = escapar(texto)
+      + (cuenta === null ? "" : ` <span class="cuenta">${cuenta}</span>`);
+    b.setAttribute("aria-pressed", activo);
+    if(titulo) b.title = titulo;
+    b.onclick = e => { alPulsar(); pintarFiltros(); refrescar(); volarDesde(e.currentTarget); };
+    fila.appendChild(b);
+  };
+
+  // --- Subcategorías: solo con una categoría elegida ---
+  if(filtroCat){
+    const base = visiblesSalvo("sub").filter(ev => ev.categoria === filtroCat);
+    const cuantos = {};
+    base.forEach(ev => { if(ev.subcategoria) cuantos[ev.subcategoria] = (cuantos[ev.subcategoria] || 0) + 1; });
+    // El que está puesto se dibuja siempre, aunque su cuenta caiga bajo el
+    // piso al combinarse con otros filtros: si no, el chip que acabas de tocar
+    // desaparece y no hay forma de soltarlo.
+    const opciones = Object.keys(cuantos)
+      .filter(s => cuantos[s] >= MIN_SUB || s === filtroSub)
+      .sort((a,b) => cuantos[b] - cuantos[a] || subcat(a).localeCompare(subcat(b)));
+
+    if(opciones.length >= 2){
+      const f = fila(t("filtrosAfinar"), t("filtrosAfinar"));
+      chip(f, t("afinarTodo"), base.length, !filtroSub, () => filtroSub = null);
+      opciones.forEach(s =>
+        chip(f, subcat(s), cuantos[s], filtroSub === s,
+             () => filtroSub = filtroSub === s ? null : s));
+    }
+  }
+
+  // --- Tamaño: aplica siempre, con o sin categoría ---
+  const base = visiblesSalvo("escala");
+  const cuantos = {under:0, masivo:0};
+  base.forEach(ev => { if(ev.escala in cuantos) cuantos[ev.escala]++; });
+  if(cuantos.under || cuantos.masivo){
+    const f = fila(t("filtrosEscala"), t("filtrosEscala"));
+    ["under","masivo"].forEach(e => {
+      if(!cuantos[e] && filtroEscala !== e) return;
+      chip(f, ESCALAS[e][IDIOMA], cuantos[e], filtroEscala === e,
+           // Excluyentes: elegir uno apaga el otro, no se acumulan.
+           () => filtroEscala = filtroEscala === e ? null : e,
+           ESCALAS[e].pista[IDIOMA]);
+    });
+    /* Con el tamaño puesto hay que decir que NO se está mostrando el catastro
+       completo: de 636 eventos no sabemos el aforo del recinto y quedan fuera
+       de los dos chips. Callarlo haría parecer que Santiago tiene 112 panoramas
+       masivos y ninguno más. */
+    const sinDato = base.length - cuantos.under - cuantos.masivo;
+    if(filtroEscala && sinDato){
+      const nota = document.createElement("p");
+      nota.className = "afinar-nota";
+      nota.textContent = IDIOMA === "en"
+        ? `${sinDato} events are not shown here: we don't know the size of the venue.`
+        : IDIOMA === "pt"
+        ? `${sinDato} eventos ficam de fora: não sabemos o tamanho do local.`
+        : `${sinDato} panoramas quedan fuera: no sabemos el tamaño del recinto.`;
+      caja.appendChild(nota);
+    }
+  }
+
+  // --- Limpiar: la salida de emergencia con seis filtros combinables ---
+  if(hayFiltros()){
+    const f = fila("", t("filtrosLimpiar"));
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "chip";
+    b.textContent = "✕ " + t("filtrosLimpiar");
+    b.onclick = e => { limpiarFiltros(); pintarFiltros(); refrescar(); volarDesde(e.currentTarget); };
+    f.appendChild(b);
+  }
+}
+
+/* La línea que contesta "¿por qué veo 12 eventos?". Se arma con lo que está
+   puesto, en el orden en que se toca. */
+function pintarEstado(){
+  const partes = [];
+  if(cuando !== "todo") partes.push(t("cuandoLargo")[cuando]);
+  if(busqueda) partes.push(`“${busqueda}”`);
+  if(soloGratis) partes.push(t("gratis"));
+  if(publicoFiltro === "ninos") partes.push(t("ninos"));
+  if(publicoFiltro === "adultos") partes.push(t("mas18"));
+  if(filtroCat) partes.push(cat(filtroCat)[IDIOMA]);
+  if(filtroSub) partes.push(subcat(filtroSub));
+  if(filtroEscala) partes.push(ESCALAS[filtroEscala][IDIOMA]);
+  document.getElementById("conteo-estado").textContent = partes.join(" · ");
+}
+
+/* ---------- EL BUSCADOR ----------
+   Los filtros por animal contestan "¿qué tipo de cosa quiero hacer?". No
+   contestan "¿qué hay en el Blondie?", que es como busca quien ya sabe lo que
+   anda trucando. */
+function sincronizarBuscador(){
+  const campo = document.getElementById("buscar");
+  campo.placeholder = t("buscar");
+  campo.setAttribute("aria-label", t("buscarEtiqueta"));
+  const lupa = document.getElementById("lupa");
+  lupa.setAttribute("aria-label", t("buscarEtiqueta"));
+  lupa.classList.toggle("activo", !!busqueda);
+  lupa.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+      <circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.4 15.4 21 21"/></svg>`;
+  const borrar = document.getElementById("borra-buscar");
+  borrar.hidden = !campo.value;
+  borrar.setAttribute("aria-label", t("buscarBorrar"));
+}
+
+function montarBuscador(){
+  const campo = document.getElementById("buscar");
+  const riel = document.getElementById("riel-fecha");
+
+  /* 180 ms de espera antes de filtrar. Sin esto cada tecla vuelve a pintar la
+     lista y a mandarle 2.283 puntos al mapa: escribir "blondie" son siete
+     redibujados completos y el campo se traba en un teléfono. */
+  let temporizador = null;
+  campo.oninput = () => {
+    document.getElementById("borra-buscar").hidden = !campo.value;
+    clearTimeout(temporizador);
+    temporizador = setTimeout(() => {
+      busqueda = campo.value.trim();
+      pintarFiltros(); refrescar();
+    }, 180);
+  };
+  campo.onkeydown = e => {
+    if(e.key !== "Escape") return;
+    // Escape borra; si ya estaba vacío, cierra el campo en celular.
+    if(campo.value){ campo.value = ""; campo.dispatchEvent(new Event("input")); }
+    else riel.classList.remove("buscando");
+  };
+  document.getElementById("borra-buscar").onclick = () => {
+    campo.value = "";
+    campo.dispatchEvent(new Event("input"));
+    campo.focus();
+  };
+  document.getElementById("lupa").onclick = () => {
+    riel.classList.add("buscando");
+    campo.focus();
+  };
+  sincronizarBuscador();
 }
 
 /* ---------- LA LOICA QUE VUELA ---------- */
@@ -613,8 +988,14 @@ function refrescar(){
   observador?.disconnect();
 
   if(!listaActual.length){
+    /* Buscar una palabra que no existe y filtrar hasta quedar en cero son dos
+       callejones distintos, y la salida también: de uno se sale cambiando la
+       palabra, del otro soltando un chip. Decir "prueba sacando algún filtro"
+       a quien escribió "asdfgh" no ayuda a nadie. */
+    const porPalabra = !!busqueda;
     cont.innerHTML = `<div class="vacio">${cuerpo("loica","var(--tinta-tenue)",92,{pose:"durmiendo"})}
-      <p><b>${t("vacio")}</b><br>${t("vaciopista")}</p></div>`;
+      <p><b>${porPalabra ? t("buscarSin") : t("vacio")}</b><br>${
+        porPalabra ? t("buscarSinPista") : t("vaciopista")}</p></div>`;
     return;
   }
   cont.scrollTop = 0;
@@ -810,6 +1191,7 @@ function cerrarFicha(){
 cargarEventos()
   .then(evs => {
     EVENTOS = evs;
+    montarBuscador();
     pintarFiltros(); refrescar();
     const enlace = location.hash.match(/^#\/e\/(.+)$/);
     if(enlace){
@@ -829,6 +1211,7 @@ cargarEventos()
   });
 
 window.addEventListener("loica:idioma", () => {
+  sincronizarBuscador();
   pintarFiltros(); refrescar(); if(seleccionado) abrirFicha(seleccionado);
 });
 

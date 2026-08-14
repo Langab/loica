@@ -145,6 +145,38 @@ const CARITAS = {
     <ellipse cx="12" cy="15.9" rx="1.6" ry="1.2" fill="${OJO}"/>
     <path d="M10.9 17.4h2.2v1.5a1.1 1.1 0 0 1-2.2 0z" fill="#E8B23A" stroke="${k}" stroke-width="1"/>`,
 
+  /* El Guarén: la rata de Santiago, y en Chile "rata" es el que cuida la
+     plata. Por eso se hace cargo de los descuentos y por eso desplazó al Degú
+     de esa página: el chiste lo entiende cualquiera y no hay que explicarlo.
+
+     El elenco ya tiene tres roedores (chinchilla, degú, guarén) y un perro,
+     así que las señas están elegidas contra ELLOS, no contra un manual de
+     fauna. La cabeza es una CUÑA que se afina hasta la nariz —los otros tres
+     tienen cara redonda—, las orejas son dos círculos pelados ARRIBA de la
+     cabeza (las de la chinchilla son igual de grandes pero van a los lados, a
+     la altura de los ojos), y abajo asoman los dos incisivos, que van CREMA
+     porque los del degú son anaranjados y a 22px el color del diente es lo
+     único que los separa.
+
+     El hocico claro no es maquillaje: el guarén de verdad es oscuro arriba y
+     pálido abajo, y de paso resuelve el mismo problema que el degú tuvo con
+     su anillo. Los ojos son azul tinta y sobre el café de descuentos dan
+     2,4:1 — desaparecen. Puestos sobre la cuña crema pasan de sobra. */
+  guaren: (c, k, p) => `
+    <circle cx="6.8" cy="5.6" r="3.6" fill="${c}" stroke="${k}" stroke-width="1.5"/>
+    <circle cx="17.2" cy="5.6" r="3.6" fill="${c}" stroke="${k}" stroke-width="1.5"/>
+    <circle cx="6.9" cy="5.8" r="1.8" fill="#F2778C" opacity=".7"/>
+    <circle cx="17.1" cy="5.8" r="1.8" fill="#F2778C" opacity=".7"/>
+    <path d="M4.1 11.2a7.9 7.9 0 0 1 15.8 0c0 3.2-1.4 5.9-3.3 8-1.7 1.9-3.2 3.4-4.6 3.4s-2.9-1.5-4.6-3.4c-1.9-2.1-3.3-4.8-3.3-8z"
+          fill="${c}" stroke="${k}" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M8.5 15.2c1-.5 2.2-.8 3.5-.8s2.5.3 3.5.8c-.5 3.3-1.7 5.9-3.5 7.9-1.8-2-3-4.6-3.5-7.9z"
+          fill="#FAF3E7"/>
+    ${ojos(8.6, 15.4, 11.6, 1.8, p)}
+    <ellipse cx="12" cy="18.5" rx="1.45" ry="1.1" fill="${OJO}"/>
+    <path d="M10.9 19.5h2.2v2.2a1.1 1.1 0 0 1-2.2 0z"
+          fill="#FAF3E7" stroke="${k}" stroke-width="1.05" stroke-linejoin="round"/>
+    <path d="M12 19.8v1.9" stroke="${k}" stroke-width=".85"/>`,
+
   /* El Chungungo: nutria. Cabeza ANCHA y plana (más ancha que alta), orejas
      mínimas, hocico claro grande con nariz grande y bigotes gruesos — los
      bigotes y la cabeza chata son lo que lo separa de la chinchilla. */
@@ -255,6 +287,16 @@ const COLAS = {
                            fill="${OJO}" stroke="${k}" stroke-width="1.4"/>`,
   chungungo:  (c, k) => `<path d="M38.2 29.2c4.2-.2 7.6 2.5 8.8 6.6.3 1-.8 1.9-1.7 1.3-3.3-2-5.9-4.7-7.1-7.9z"
                           fill="${c}" stroke="${k}" stroke-width="1.8" stroke-linejoin="round"/>`,
+  /* La del guarén es la seña que lo delata de lejos, y es la única del elenco
+     que NO va del color del animal: es PELADA. Larga, delgada y color carne.
+     La del degú también es delgada pero va del color del cuerpo y termina en
+     un pincel oscuro; la de la chinchilla es tupida entera. Esta es la única
+     que se ve piel, y es más larga que cualquier otra: llega hasta el borde.
+
+     Sin anillos a propósito. Medirían 2 de las 48 unidades del lienzo y la
+     regla del 1/15 los deja fuera: a 22px no serían un dato del animal, serían
+     tierra en la pantalla. */
+  guaren:     (c, k) => cola("M37.6 32.6c5.4.4 8.8-2.6 10.2-9", "#E8C3B4", k, 4),
   /* La del quiltro sube y se ENROSCA hacia adelante, que es como la lleva un
      perro contento y es media silueta del animal. La de la chinchilla también
      sube pero se queda en arco; esta cierra el gancho arriba. */
@@ -278,6 +320,12 @@ const CUADRUPEDOS = {
                extra:`<ellipse cx="27.4" cy="37.4" rx="5.4" ry="2.3" fill="#FAF3E7" opacity=".85"/>`},
   chungungo:  {cuerpo:[28.6, 33, 13.8, 7.4], grosor:3.2, cabeza:"3 8.2",
                patas:"M20.8 39.4v4.8M26.6 39.8v4.4M33.2 39.6v4.6M38.2 38.6v5.4", extra:""},
+  /* Más largo y más bajo que el degú, y las patas más finas: el guarén corre
+     pegado a la muralla, no salta. La cabeza va 1,2 más abajo que la del resto
+     porque termina en punta: con el desplazamiento de todos, el hocico apenas
+     tocaba el lomo y el animal quedaba partido en dos piezas sueltas. */
+  guaren:     {cuerpo:[28.4, 31.8, 12, 8], grosor:2.8, cabeza:"3.2 4.6",
+               patas:"M21.8 39.2v5.4M27.4 39.6v5M33.4 39.2v5.4M38.2 38.4v6", extra:""},
   /* Guatón, literal: el cuerpo es el más ancho de los cinco cuadrúpedos y las
      patas las más cortas. La panza clara que cuelga es mitad chiste y mitad
      anatomía de perro de barrio bien alimentado por todo el pasaje. */
@@ -377,6 +425,73 @@ const CATEGORIAS = {
 };
 const cat = c => CATEGORIAS[c] || CATEGORIAS.otros;
 
+/* ---------- SUBCATEGORÍAS ----------
+   El animal responde "¿qué tipo de cosa es?". Adentro de Fiestas eso no basta:
+   202 fiestas en un chip son 202 fiestas, y a nadie le da lo mismo un techno
+   de las tres de la mañana que una noche ochentera. Lo mismo pasa con Clases
+   —cocina no es cerámica— y con Teatro, donde una obra de sala y un stand-up
+   en un bar se ven iguales hasta que llegas.
+
+   El valor lo pone el pipeline en `subcategoria` (loica/clasificar.py) y puede
+   venir vacío: de muchos eventos el título no dice el género y adivinarlo sería
+   peor que callarse. Los que vienen vacíos NO se esconden — aparecen cuando no
+   hay subfiltro puesto.
+
+   Acá viven SOLO los nombres para mostrar. Qué subfiltros se dibujan lo decide
+   la página mirando los eventos que tiene cargados, así que si el clasificador
+   inventa una subcategoría nueva mañana, la interfaz la muestra igual con el
+   nombre crudo en vez de quedar en blanco. */
+const SUBCATEGORIAS = {
+  // Fiestas — el género que suena
+  reggaeton:  {es:"Reggaetón",   en:"Reggaeton",    pt:"Reggaeton"},
+  electronica:{es:"Electrónica", en:"Electronic",   pt:"Eletrônica"},
+  cumbia:     {es:"Cumbia",      en:"Cumbia",       pt:"Cumbia"},
+  latina:     {es:"Latina",      en:"Latin",        pt:"Latina"},
+  brasilera:  {es:"Brasilera",   en:"Brazilian",    pt:"Brasileira"},
+  ochentera:  {es:"Ochentera",   en:"80s & 90s",    pt:"Anos 80"},
+  urbano:     {es:"Urbano",      en:"Hip hop",      pt:"Urbano"},
+  pop:        {es:"Pop",         en:"Pop",          pt:"Pop"},
+  rock:       {es:"Rock",        en:"Rock",         pt:"Rock"},
+  metal:      {es:"Metal",       en:"Metal",        pt:"Metal"},
+  // Música
+  clasica:    {es:"Clásica",     en:"Classical",    pt:"Clássica"},
+  jazz:       {es:"Jazz",        en:"Jazz",         pt:"Jazz"},
+  folclor:    {es:"Folclor",     en:"Folk",         pt:"Folclore"},
+  tributo:    {es:"Tributo",     en:"Tribute",      pt:"Tributo"},
+  // Teatro
+  obra:       {es:"Obra",        en:"Play",         pt:"Peça"},
+  comedia:    {es:"Comedia",     en:"Comedy",       pt:"Comédia"},
+  danza:      {es:"Danza",       en:"Dance",        pt:"Dança"},
+  circo:      {es:"Circo",       en:"Circus",       pt:"Circo"},
+  performance:{es:"Performance", en:"Performance",  pt:"Performance"},
+  // Clases y talleres
+  cocina:     {es:"Cocina",      en:"Cooking",      pt:"Cozinha"},
+  manualidades:{es:"Manualidades",en:"Crafts",      pt:"Artesanato"},
+  artes_visuales:{es:"Artes visuales",en:"Visual arts",pt:"Artes visuais"},
+  bienestar:  {es:"Bienestar",   en:"Wellbeing",    pt:"Bem-estar"},
+  escritura:  {es:"Escritura",   en:"Writing",      pt:"Escrita"},
+  tecnologia: {es:"Tecnología",  en:"Technology",   pt:"Tecnologia"},
+  idiomas:    {es:"Idiomas",     en:"Languages",    pt:"Idiomas"},
+  oficios:    {es:"Oficios",     en:"Trades",       pt:"Ofícios"},
+  musica:     {es:"Música",      en:"Music",        pt:"Música"},
+  // Deporte
+  futbol:     {es:"Fútbol",      en:"Football",     pt:"Futebol"},
+  natacion:   {es:"Natación",    en:"Swimming",     pt:"Natação"},
+  running:    {es:"Running",     en:"Running",      pt:"Corrida"},
+  ciclismo:   {es:"Ciclismo",    en:"Cycling",      pt:"Ciclismo"},
+  artes_marciales:{es:"Artes marciales",en:"Martial arts",pt:"Artes marciais"},
+  gimnasia:   {es:"Gimnasia",    en:"Gym & fitness",pt:"Ginástica"},
+  baile_fitness:{es:"Baile fitness",en:"Dance fitness",pt:"Dança fitness"},
+  raqueta:    {es:"Raqueta",     en:"Racket sports",pt:"Raquete"},
+  equipo:     {es:"Por equipos", en:"Team sports",  pt:"Por equipes"},
+};
+
+/* Si el clasificador devuelve una subcategoría que todavía no tiene nombre
+   escrito acá, se muestra la clave con la primera en mayúscula y los guiones
+   bajos como espacios. Feo, pero legible — y no deja un chip en blanco. */
+const subcat = (clave, idioma = IDIOMA) => SUBCATEGORIAS[clave]?.[idioma]
+  || String(clave || "").replace(/_/g, " ").replace(/^./, c => c.toUpperCase());
+
 /* El elenco, en el orden en que se presenta. Lo usan la portada y Nosotros:
    antes cada página repetía la lista a mano y ya iban desincronizadas. */
 const ELENCO = [
@@ -410,18 +525,24 @@ const ELENCO = [
                                                        "He has never left the neighbourhood. Not even on holiday. He knows the lady on the corner, he knows which day the street market comes, and he once took a basket-weaving workshop purely because it was at the community centre and there was free tea for everyone."],
                                                        pt:["Chincol","Bairro","Aulas, oficinas e feiras. O pássaro mais de bairro que existe.",
                                                        "Nunca saiu do bairro. Nem de férias. Conhece a senhora da esquina, sabe que dia passa a feira e uma vez fez uma oficina de cestaria só porque era na associação de moradores e tinha lanche para todo mundo."]},
-  {clave:"pudu",       hex:"#0E8757", tinta:"#0A6141", es:["Pudú","Gratis","El ciervo más chico del mundo cuida lo que no cuesta nada.",
-                                                       "Mide cuarenta centímetros, así que nunca en su vida le cobraron una entrada: pasaba por debajo del torniquete y listo. A los seis años descubrió que el resto sí pagaba y le pareció un abuso. Anda con la lista desde entonces."],
-                                                       en:["Pudú","Free","The world's smallest deer looks after everything that costs nothing.",
-                                                       "He is forty centimetres tall, so nobody has ever charged him admission: he just walked under the turnstile. At six he found out everyone else was paying and took it as an outrage. He has carried the list ever since."],
-                                                       pt:["Pudu","Grátis","O menor cervo do mundo cuida do que não custa nada.",
-                                                       "Tem quarenta centímetros, então nunca na vida pagou entrada: passava por baixo da catraca e pronto. Aos seis anos descobriu que o resto pagava e achou um abuso. Anda com a lista desde então."]},
-  {clave:"degu",       hex:"#95521C", tinta:"#6B3813", es:["Degú","Descuentos","Junta, guarda y se sabe de memoria qué día conviene salir a comer.",
-                                                       "Los degús juntan cosas: semillas, palos, lo que sea. Este juntó folletos de banco. Un día los ordenó por día de la semana y descubrió que los martes comía por la mitad. No ha vuelto a pagar precio de lista y lo cuenta en toda comida."],
-                                                       en:["Degu","Discounts","Hoards, saves, and knows by heart which day is the cheap one to eat out.",
-                                                       "Degus hoard things: seeds, sticks, whatever. This one hoarded bank leaflets. One day he sorted them by day of the week and discovered Tuesdays were half price. He has not paid full price since, and he brings it up at every meal."],
-                                                       pt:["Degu","Descontos","Junta, guarda e sabe de cor qual dia compensa sair para comer.",
-                                                       "Degus juntam coisas: sementes, gravetos, qualquer coisa. Este juntou folhetos de banco. Um dia organizou tudo por dia da semana e descobriu que na terça comia pela metade. Nunca mais pagou o preço cheio e conta isso em toda refeição."]},
+  {clave:"pudu",       hex:"#0E8757", tinta:"#0A6141", es:["Pudú","Aire libre","El ciervo más chico del mundo. Cerros, parques y todo lo que pasa sin techo.",
+                                                       "Mide cuarenta centímetros y vive metido entre los arbustos, así que conoce el cerro por abajo: dónde hay sombra, en qué parte el sendero se pone feo y a qué hora se llena. Bajó al parque un domingo por curiosidad y no se fue más. Dice que adentro de una sala no se ve nada."],
+                                                       en:["Pudú","Outdoors","The world's smallest deer. Hills, parks and everything that happens without a roof.",
+                                                       "He is forty centimetres tall and lives deep in the undergrowth, so he knows the hill from below: where the shade is, where the path turns bad, and what time it fills up. He came down to the park one Sunday out of curiosity and never left. He says you cannot see anything from inside a room."],
+                                                       pt:["Pudu","Ar livre","O menor cervo do mundo. Morros, parques e tudo o que acontece sem teto.",
+                                                       "Tem quarenta centímetros e vive enfiado no mato, então conhece o morro por baixo: onde tem sombra, em que parte a trilha piora e a que horas enche. Desceu ao parque num domingo por curiosidade e não foi mais embora. Diz que dentro de uma sala não se vê nada."]},
+  {clave:"degu",       hex:"#2E7D5B", tinta:"#1C523B", es:["Degú","Gratis","Vive en el cerro sin pagar arriendo. Se hace cargo de lo que no cuesta nada.",
+                                                       "Los degús salen a la superficie a la misma hora todos los días y no le piden permiso a nadie. Este cachó temprano que en Santiago pasan cosas buenas que no cuestan un peso, y que casi nunca están anunciadas donde uno mira. Así que las anota. La lista es lo único que junta."],
+                                                       en:["Degu","Free","He lives on the hill and pays no rent. He looks after everything that costs nothing.",
+                                                       "Degus come up to the surface at the same hour every day and ask nobody's permission. This one worked out early that good things happen in Santiago for nothing, and that they are almost never announced anywhere people look. So he writes them down. The list is the only thing he hoards."],
+                                                       pt:["Degu","Grátis","Mora no morro e não paga aluguel. Cuida de tudo o que não custa nada.",
+                                                       "Degus saem à superfície na mesma hora todo dia e não pedem licença a ninguém. Este percebeu cedo que em Santiago acontecem coisas boas que não custam nada, e que quase nunca estão anunciadas onde alguém procura. Então anota. A lista é a única coisa que ele junta."]},
+  {clave:"guaren",     hex:"#95521C", tinta:"#6B3813", es:["Guarén","Descuentos","Le dicen rata y lo anotó en el currículum. Sabe qué día conviene salir a comer.",
+                                                       "En Chile a alguien le dicen rata cuando cuida la plata más de lo que al resto le parece elegante. Él se lo tomó como cargo. Junta folletos de banco, los ordena por día de la semana y así descubrió que los martes come por la mitad. No ha vuelto a pagar precio de lista y lo cuenta en toda comida."],
+                                                       en:["Guarén rat","Discounts","They call him a rat and he put it on his CV. He knows which day is the cheap one to eat out.",
+                                                       "In Chile you get called a rat when you look after your money more closely than everyone else finds elegant. He took it as a job title. He hoards bank leaflets, sorts them by day of the week, and that is how he found out Tuesdays are half price. He has not paid full price since, and he brings it up at every meal."],
+                                                       pt:["Guarén","Descontos","Chamam ele de rato e ele pôs no currículo. Sabe qual dia compensa sair para comer.",
+                                                       "No Chile chamam alguém de rato quando cuida do dinheiro mais do que o resto acha elegante. Ele levou como cargo. Junta folhetos de banco, organiza por dia da semana e foi assim que descobriu que na terça come pela metade. Nunca mais pagou o preço cheio e conta isso em toda refeição."]},
   {clave:"chungungo",  hex:"#0C8B9B", tinta:"#065C66", es:["Chungungo","Deporte","La nutria del Mapocho. Se mueve, se moja y no para nunca.",
                                                        "Entrena en el Mapocho, que no es piscina olímpica pero forma carácter. Empezó nadando para arrancar de un perro y terminó cronometrándose. Ahora corre, nada y pedalea convencido de que tú también deberías. No insiste: solo te mira."],
                                                        en:["Chungungo","Sport","The Mapocho river otter. Always moving, always wet, never still.",
@@ -451,6 +572,10 @@ const TEXTOS = {
     hoy:"Hoy", manana:"Mañana", semana:"7 días", finde:"Finde",
     cuandoLargo:{hoy:"Hoy", manana:"Mañana", semana:"En estos 7 días", finde:"Este fin de semana", todo:"Todos"},
     filtrosCuando:"Cuándo", filtrosRapidos:"Precio y público", filtrosTipo:"Tipo de panorama",
+    buscar:"Busca un local, una fiesta, una banda…", buscarEtiqueta:"Buscar por palabra",
+    buscarBorrar:"Borrar la búsqueda", buscarSin:"Nada con esa palabra",
+    buscarSinPista:"Prueba con el nombre del local o de la comuna",
+    filtrosEscala:"Tamaño", filtrosAfinar:"Afinar", afinarTodo:"Todo", filtrosLimpiar:"Limpiar filtros",
     cuando:"Cuándo", donde:"Dónde", precio:"Precio", ir:"Ver en la fuente original",
     vacio:"No hay eventos con esos filtros", vaciopista:"Prueba sacando algún filtro",
     aprox:"Ubicación aproximada: centro de la comuna", sinUbicar:"Dirección por confirmar — revísala en la fuente", fuente:"Información publicada por",
@@ -474,7 +599,7 @@ const TEXTOS = {
     pElencoT:"Los que te acompañan",
     pHistoriaT:"Cómo llegó a esto", pHistoriaPista:"Toca a cualquiera y te cuenta su historia",
     pHistoriaCerrar:"Cerrar", pHistoriaVer:"Ver sus panoramas",
-    pElencoD:"Diez animales chilenos hacen de señalética: cada uno se hace cargo de un tipo de panorama en el mapa y el calendario, el Degú de los descuentos y el Quiltro de dónde comer.",
+    pElencoD:"Once animales chilenos hacen de señalética: cada uno se hace cargo de un tipo de panorama en el mapa y el calendario, el Degú de lo que es gratis, el Guarén de los descuentos y el Quiltro de dónde comer.",
     pGratisT:"gratis", pGratisD:"panoramas que no cuestan nada",
     pTotalD:"panoramas vigentes", pFuentesD:"fuentes revisadas cada mañana",
     pCierreT:"¿Organizas algo?", pCierreD:"Si tu evento es abierto y pasa en Santiago, cabe acá. No cobramos por aparecer.",
@@ -506,6 +631,10 @@ const TEXTOS = {
     hoy:"Today", manana:"Tomorrow", semana:"7 days", finde:"Weekend",
     cuandoLargo:{hoy:"Today", manana:"Tomorrow", semana:"Within 7 days", finde:"This weekend", todo:"All"},
     filtrosCuando:"When", filtrosRapidos:"Price and audience", filtrosTipo:"Type of event",
+    buscar:"Search a venue, a party, a band…", buscarEtiqueta:"Search by keyword",
+    buscarBorrar:"Clear the search", buscarSin:"Nothing matches that word",
+    buscarSinPista:"Try the name of the venue or the district",
+    filtrosEscala:"Size", filtrosAfinar:"Narrow down", afinarTodo:"All", filtrosLimpiar:"Clear filters",
     cuando:"When", donde:"Where", precio:"Price", ir:"View original source",
     vacio:"No events match these filters", vaciopista:"Try removing a filter",
     aprox:"Approximate location: district centre", sinUbicar:"Address to be confirmed — check the source", fuente:"Information published by",
@@ -529,7 +658,7 @@ const TEXTOS = {
     pElencoT:"Your guides",
     pHistoriaT:"How it came to this", pHistoriaPista:"Tap any of them and you get the backstory",
     pHistoriaCerrar:"Close", pHistoriaVer:"See what they cover",
-    pElencoD:"Ten Chilean animals work as signage: each one looks after a type of event on the map and the calendar, the Degu looks after the discounts and the Quiltro after where to eat.",
+    pElencoD:"Eleven Chilean animals work as signage: each one looks after a type of event on the map and the calendar, the Degu looks after what is free, the Guarén rat after the discounts and the Quiltro after where to eat.",
     pGratisT:"free", pGratisD:"events that cost nothing",
     pTotalD:"events on right now", pFuentesD:"sources checked every morning",
     pCierreT:"Running something?", pCierreD:"If your event is open to the public and happens in Santiago, it belongs here. We don't charge for it.",
@@ -561,6 +690,10 @@ const TEXTOS = {
     hoy:"Hoje", manana:"Amanhã", semana:"7 dias", finde:"Fim de semana",
     cuandoLargo:{hoy:"Hoje", manana:"Amanhã", semana:"Nestes 7 dias", finde:"Neste fim de semana", todo:"Todos"},
     filtrosCuando:"Quando", filtrosRapidos:"Preço e público", filtrosTipo:"Tipo de programa",
+    buscar:"Busque um local, uma festa, uma banda…", buscarEtiqueta:"Buscar por palavra",
+    buscarBorrar:"Limpar a busca", buscarSin:"Nada com essa palavra",
+    buscarSinPista:"Tente o nome do local ou da comuna",
+    filtrosEscala:"Tamanho", filtrosAfinar:"Refinar", afinarTodo:"Tudo", filtrosLimpiar:"Limpar filtros",
     cuando:"Quando", donde:"Onde", precio:"Preço", ir:"Ver na fonte original",
     vacio:"Nenhum evento com esses filtros", vaciopista:"Tente remover algum filtro",
     aprox:"Localização aproximada: centro da comuna", sinUbicar:"Endereço a confirmar — veja na fonte", fuente:"Informação publicada por",
@@ -584,7 +717,7 @@ const TEXTOS = {
     pElencoT:"Quem te acompanha",
     pHistoriaT:"Como chegou nisso", pHistoriaPista:"Toque em qualquer um e ele conta a história",
     pHistoriaCerrar:"Fechar", pHistoriaVer:"Ver os programas dele",
-    pElencoD:"Dez animais chilenos servem de sinalização: cada um cuida de um tipo de programa no mapa e no calendário, o Degu cuida dos descontos e o Vira-lata cuida de onde comer.",
+    pElencoD:"Onze animais chilenos servem de sinalização: cada um cuida de um tipo de programa no mapa e no calendário, o Degu cuida do que é grátis, o Guarén cuida dos descontos e o Vira-lata cuida de onde comer.",
     pGratisT:"grátis", pGratisD:"programas que não custam nada",
     pTotalD:"programas em cartaz", pFuentesD:"fontes revisadas toda manhã",
     pCierreT:"Organiza algo?", pCierreD:"Se o seu evento é aberto e acontece em Santiago, cabe aqui. Não cobramos para aparecer.",
@@ -822,43 +955,126 @@ function ventanaFinde(hoy = new Date()){
   return [desde, hasta];
 }
 
+const terminaDia = f => { const d = new Date(f); d.setHours(23,59,59,999); return d; };
+
+/* Cada rango es una VENTANA con principio y fin, no un predicado suelto.
+   Antes eran predicados sobre una fecha, y con eso solo se puede contestar
+   "¿este evento puntual cae adentro?". Falta la otra pregunta, que apareció
+   cuando el catastro empezó a publicar temporadas: "¿esta exposición que corre
+   de julio a septiembre toca la ventana en algún momento?". Un predicado sobre
+   una sola fecha no la puede contestar; dos fechas contra dos fechas, sí. */
+const VENTANAS = {
+  hoy:    () => { const d = empiezaDia(new Date()); return [d, terminaDia(d)]; },
+  manana: () => { const d = empiezaDia(new Date()); d.setDate(d.getDate() + 1);
+                  return [d, terminaDia(d)]; },
+  semana: () => { const d = empiezaDia(new Date()), h = new Date(d);
+                  h.setDate(d.getDate() + 7); return [d, terminaDia(h)]; },
+  finde:  () => ventanaFinde(),
+};
+
 const RANGOS = {
   todo:   () => true,
-  hoy:    f => mismaFecha(f, new Date()),
-  manana: f => { const m = new Date(); m.setDate(m.getDate() + 1); return mismaFecha(f, m); },
-  semana: f => { const d = empiezaDia(new Date()), h = new Date(d);
-                 h.setDate(d.getDate() + 7); h.setHours(23,59,59,999);
-                 return f >= d && f <= h; },
-  finde:  f => { const [d,h] = ventanaFinde(); return f >= d && f <= h; },
+  hoy:    f => { const [d,h] = VENTANAS.hoy();    return f >= d && f <= h; },
+  manana: f => { const [d,h] = VENTANAS.manana(); return f >= d && f <= h; },
+  semana: f => { const [d,h] = VENTANAS.semana(); return f >= d && f <= h; },
+  finde:  f => { const [d,h] = VENTANAS.finde();  return f >= d && f <= h; },
 };
 const enRango = (fecha, rango) => (RANGOS[rango] || RANGOS.todo)(fecha);
 
-/* Los talleres que se repiten llegan como UNA tarjeta con `dias_semana`
-   (0=lunes) y `fin`: un yoga de martes y jueves hasta noviembre es una sola
-   tarjeta, no cuarenta. Pero entonces el filtro no puede mirar solo `inicio`,
-   porque un taller de sábados tiene que seguir apareciendo en "este fin de
-   semana" aunque su próxima sesión sea el martes. Acá se pregunta lo correcto:
-   ¿tiene alguna sesión dentro del rango? */
+/* Un evento ocupa el calendario de tres formas distintas y el filtro de fecha
+   tiene que saber cuál es cuál:
+
+   1. PUNTUAL — un concierto el jueves. Basta con mirar `inicio`.
+   2. SERIE — un taller de martes y jueves hasta noviembre, que llega como UNA
+      tarjeta con `dias_semana` (0=lunes) y `fin`. No sirve mirar solo `inicio`:
+      un taller de sábados tiene que seguir apareciendo en "este fin de semana"
+      aunque su próxima sesión sea el martes.
+   3. TEMPORADA — una exposición que abrió el 18 de julio y cierra el 27 de
+      septiembre: `fin` en el futuro, `inicio` en el pasado y sin `dias_semana`,
+      porque está todos los días. Mirando solo `inicio` caía en el caso 1 y
+      quedaba fuera de Hoy, Mañana, 7 días y Finde — aparecía únicamente en
+      "Todos". Eran 143 eventos, y son justo los que contestan que sí a la
+      pregunta que se hace quien abre la app: "¿esto todavía se puede ver?".
+      Antes no se notaba porque estos eventos ni siquiera salían del almacén;
+      empezaron a salir cuando la vigencia pasó a medirse por fecha de término. */
 function sesionEnRango(ev, rango){
-  const ini = new Date(ev.inicio);
-  if(!ev.dias_semana || !ev.dias_semana.length) return enRango(ini, rango);
-  const prueba = RANGOS[rango] || RANGOS.todo;
   if(rango === "todo") return true;
-  const fin = ev.fin ? new Date(ev.fin) : ini;
-  /* Se recorren los días entre hoy y el final de la serie, con tope de 60:
-     más allá ningún filtro de la página mira (el más largo son 7 días). */
-  const d = new Date(); d.setHours(0,0,0,0);
-  for(let i = 0; i < 60; i++){
-    if(d > fin) break;
-    if(d >= empiezaDia(ini) && ev.dias_semana.includes((d.getDay() + 6) % 7)){
-      const conHora = new Date(d);
-      conHora.setHours(ini.getHours(), ini.getMinutes(), 0, 0);
-      if(prueba(conHora)) return true;
+  const ventana = VENTANAS[rango];
+  if(!ventana) return true;
+  const [desde, hasta] = ventana();
+  const ini = new Date(ev.inicio);
+
+  if(ev.dias_semana && ev.dias_semana.length){
+    const prueba = RANGOS[rango];
+    const fin = ev.fin ? new Date(ev.fin) : ini;
+    /* Se recorren los días entre hoy y el final de la serie, con tope de 60:
+       más allá ningún filtro de la página mira (el más largo son 7 días). */
+    const d = new Date(); d.setHours(0,0,0,0);
+    for(let i = 0; i < 60; i++){
+      if(d > fin) break;
+      if(d >= empiezaDia(ini) && ev.dias_semana.includes((d.getDay() + 6) % 7)){
+        const conHora = new Date(d);
+        conHora.setHours(ini.getHours(), ini.getMinutes(), 0, 0);
+        if(prueba(conHora)) return true;
+      }
+      d.setDate(d.getDate() + 1);
     }
-    d.setDate(d.getDate() + 1);
+    return false;
   }
-  return false;
+
+  // Temporada: se cruzan los dos tramos. Basta con que se toquen.
+  if(ev.fin){
+    const fin = new Date(ev.fin);
+    if(fin > ini) return ini <= hasta && fin >= desde;
+  }
+  return ini >= desde && ini <= hasta;
 }
+
+/* ---------- BÚSQUEDA POR PALABRA ----------
+   Los filtros por animal responden "¿qué tipo de cosa quiero hacer?". No
+   responden "¿qué hay en el Blondie?" ni "¿dónde toca Los Tres?", que es como
+   la gente busca de verdad cuando ya sabe lo que anda trucando: el nombre de
+   un local, de una fiesta, de una banda.
+
+   Se busca sobre el título, el lugar, la comuna y la fuente. La descripción
+   NO entra: son textos largos de la fuente y meterlos hace que "teatro"
+   devuelva media cartelera porque alguien escribió "teatro" en un párrafo.
+
+   Sin tildes de los dos lados. Nadie escribe "Ñuñoa" con la eñe en el
+   buscador de un celular, y "cumbia" tiene que encontrar "Cumbión". */
+const sinTildes = s => String(s ?? "").normalize("NFD")
+  .replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+/* Varias palabras = todas tienen que estar, en cualquier campo y en cualquier
+   orden. "blondie rock" encuentra la tocata de rock en el Blondie; si fuera
+   una sola cadena, no encontraría nada porque el título dice "ROCK EN BLONDIE"
+   al revés. */
+function coincideBusqueda(ev, texto){
+  const q = sinTildes(texto).trim();
+  if(!q) return true;
+  const heno = sinTildes([ev.titulo, ev.lugar, ev.comuna, ev.fuente].join(" "));
+  return q.split(/\s+/).every(palabra => heno.includes(palabra));
+}
+
+/* ---------- ESCALA: lo under contra lo multitudinario ----------
+   Un recital en el Movistar Arena y una tocata en un bar de Bellavista son la
+   misma categoría —música, el Cóndor— y no son el mismo panorama. Quien busca
+   circuito chico no quiere ver el estadio, y quien va al estadio no llegó ahí
+   navegando un mapa.
+
+   El dato lo pone el pipeline en `escala` mirando el RECINTO (loica/clasificar.py).
+   Vacío es una respuesta legítima y frecuente: de la mayoría de los lugares de
+   Santiago no sabemos el aforo, y adivinarlo sería peor que callarse. */
+const ESCALAS = {
+  under:  {es:"Under", en:"Small venues", pt:"Under",
+           pista:{es:"Salas chicas, bares, sedes de barrio",
+                  en:"Small rooms, bars, neighbourhood venues",
+                  pt:"Salas pequenas, bares, sedes de bairro"}},
+  masivo: {es:"Masivo", en:"Big venues", pt:"Massivo",
+           pista:{es:"Estadios, arenas y teatros grandes",
+                  en:"Stadiums, arenas and big theatres",
+                  pt:"Estádios, arenas e teatros grandes"}},
+};
 
 /* "todos los martes y jueves" — lo que la tarjeta muestra en vez de repetirse. */
 const NOMBRE_DIA = ["lunes","martes","miércoles","jueves","viernes","sábado","domingo"];
@@ -1140,7 +1356,7 @@ function tarjetaDescuento(d, alPulsar){
      sí va en la ficha, que es UNA imagen y solo cuando alguien la pide. */
   boton.innerHTML = `
     <div class="miniatura">
-      ${carita("degu", b.color, 44)}
+      ${carita("guaren", b.color, 44)}
       <span class="dia${dia.hoy ? " pronto" : ""}">${escapar(dia.texto)}</span>
     </div>
     <div class="tarjeta-cuerpo">

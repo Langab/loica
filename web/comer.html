@@ -33,7 +33,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=15">
+<link rel="stylesheet" href="loica.css?v=16">
 <style>
   body{overflow-x:hidden}
   .contenido-comer{max-width:940px;margin:0 auto;padding:var(--e-6) var(--e-4) var(--e-12)}
@@ -213,16 +213,31 @@
   .ficha-cuerpo p{margin:0 0 var(--e-4)}
   .ficha-cuerpo strong{color:var(--tinta)}
 
-  /* El "ojo" es el pero. Va apagado y con borde punteado, igual que la
-     sección honesta de Quién hace esto: no es vitrina. */
+  /* El "ojo" es el pero: la advertencia al pie de una recomendación.
+     Es una tarjeta de la casa —contorno de tinta y repisa dura— con la
+     advertencia colgada del borde, como la etiqueta de cartón amarrada a un
+     puesto de feria. Antes el aviso era una barra de color al costado, que no
+     dice nada; ahora la palabra ES la etiqueta y se lee antes que el texto.
+
+     El amarillo lleva tinta AZUL y no crema: el relleno fuerte sobre claro da
+     2,4:1 y como texto desaparece. --destacado/--destacado-tinta es el par que
+     ya trae ese arreglo hecho, y vale igual en los dos temas. */
   .ojo{
-    display:flex;gap:var(--e-3);align-items:flex-start;
-    background:var(--fondo-elevado);border:2px dashed var(--borde-fuerte);
-    border-left:6px solid var(--amarillo-300);border-radius:var(--r-lg);
-    padding:var(--e-4) var(--e-5);margin:var(--e-5) 0;
+    position:relative;background:var(--fondo-elevado);
+    border:2.5px solid var(--contorno);border-radius:var(--r-lg);
+    box-shadow:var(--repisa-2);
+    padding:calc(var(--e-5) + 2px) var(--e-5) var(--e-4);
+    margin:calc(var(--e-6) + 8px) 0 var(--e-6);
+  }
+  .ojo .marca{
+    position:absolute;top:-16px;left:var(--e-4);
+    padding:5px 14px;border-radius:var(--r-pill);
+    background:var(--destacado);color:var(--destacado-tinta);
+    border:2.5px solid var(--contorno);box-shadow:var(--repisa-1);
+    font:800 var(--t-sm)/1.35 var(--fuente-marca);transform:rotate(-2deg);
+    white-space:nowrap;
   }
   .ojo p{margin:0;font-size:var(--t-sm);line-height:1.6;color:var(--tinta-suave)}
-  .ojo b{color:var(--tinta)}
 
   .ficha-botones{display:flex;gap:10px;flex-wrap:wrap;margin-top:var(--e-5)}
   .ficha-botones .boton{box-shadow:var(--repisa-2)}
@@ -255,7 +270,7 @@
 <div class="remate" id="cordillera" aria-hidden="true"></div>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="loica.js?v=15"></script>
+<script src="loica.js?v=16"></script>
 <script>
 /* ============================================================
    DÓNDE COMER — índice + ficha de un local, ruteado por hash
@@ -458,7 +473,7 @@ function pintarFicha(local){
 
       <div class="ficha-cuerpo">${(local.cuerpo || []).map(p => `<p>${formatear(p)}</p>`).join("")}</div>
 
-      ${local.ojo ? `<div class="ojo"><p><b>El pero.</b> ${escapar(local.ojo)}</p></div>` : ""}
+      ${local.ojo ? `<div class="ojo"><b class="marca">El pero.</b><p>${escapar(local.ojo)}</p></div>` : ""}
 
       <div class="ficha-botones">
         ${urlSegura(local.mapa) ? `<a class="boton" href="${escapar(urlSegura(local.mapa))}" target="_blank" rel="noopener">Cómo llegar ↗</a>` : ""}

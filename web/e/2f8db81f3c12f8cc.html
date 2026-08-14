@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=15">
+<link rel="stylesheet" href="../loica.css?v=16">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,10 +86,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=15"></script>
+<script src="../loica.js?v=16"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "2f8db81f3c12f8cc", "titulo": "Tributo a MANÁ - BANDA ENERGIA POSITIVA", "inicio": "2026-08-16T00:34:00", "fin": "2026-08-16T00:00:00", "lugar": "Clandestino's Bar", "direccion": "Yungay #699, Puerto Natales", "comuna": "", "lat": -33.5234689, "lon": -70.6187138, "precision": "calle", "gratis": false, "precio": 10000, "precio_texto": "desde $10.000", "categoria": "musica", "publico": "adultos", "descripcion": "🌟BANDA ENERGIA POSITIVA EN TRIBUTO A MANÁ – EN VIVO EN PUERTO NATALES 🌟 Prepárate para una noche inolvidable donde la música, la energía y la nostalgia se unen para revivir los más grandes éxitos de…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/b9c516159f21ee18250de0713624ac81222a7ebcba2c3467a5be256b7b4c0161.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/puerto-natales/tributo-a-mana-banda-energia-positiva-25953"};
+  const EV = {"id": "2f8db81f3c12f8cc", "titulo": "Tributo a MANÁ - BANDA ENERGIA POSITIVA", "inicio": "2026-08-16T00:34:00", "fin": "2026-08-16T00:00:00", "lugar": "Clandestino's Bar", "direccion": "Yungay #699, Puerto Natales", "comuna": "", "lat": -33.5234689, "lon": -70.6187138, "precision": "calle", "gratis": false, "precio": 10000, "precio_texto": "desde $10.000", "categoria": "musica", "subcategoria": "tributo", "escala": "under", "publico": "adultos", "descripcion": "🌟BANDA ENERGIA POSITIVA EN TRIBUTO A MANÁ – EN VIVO EN PUERTO NATALES 🌟 Prepárate para una noche inolvidable donde la música, la energía y la nostalgia se unen para revivir los más grandes éxitos de…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/b9c516159f21ee18250de0713624ac81222a7ebcba2c3467a5be256b7b4c0161.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/puerto-natales/tributo-a-mana-banda-energia-positiva-25953"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=15">
+<link rel="stylesheet" href="../loica.css?v=16">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,10 +86,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=15"></script>
+<script src="../loica.js?v=16"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "1e82d1a16256e4b0", "titulo": "Fuera de Foco Fest 2000", "inicio": "2026-09-25T00:00:00", "fin": null, "lugar": "Matucana 100", "direccion": "", "comuna": "Estación Central", "lat": -33.4436, "lon": -70.6836, "precision": "recinto", "gratis": false, "precio": 10000, "precio_texto": "09 17 hrs Preventa: $10.000 General: $15.000 Explanada Los t", "categoria": "musica", "publico": "adolescentes", "descripcion": "En esta nueva edición, Fuera de Foco Fest transformará la Explanada en un festival inspirado en la cultura de los años 2000, reuniendo en un mismo lugar la música, el skate, el arte y la fotografía…", "imagen": "https://www.m100.cl/wp-content/uploads/2026/07/fuera-de-foco-fest_slidehome_1920x1488-768x595.jpg", "fuente": "Matucana 100", "url": "https://www.m100.cl/programacion/musica/fuera-de-foco-fest-2000/"};
+  const EV = {"id": "1e82d1a16256e4b0", "titulo": "Fuera de Foco Fest 2000", "inicio": "2026-09-25T00:00:00", "fin": null, "lugar": "Matucana 100", "direccion": "", "comuna": "Estación Central", "lat": -33.4436, "lon": -70.6836, "precision": "recinto", "gratis": false, "precio": 10000, "precio_texto": "09 17 hrs Preventa: $10.000 General: $15.000 Explanada Los t", "categoria": "musica", "subcategoria": "", "escala": "", "publico": "adolescentes", "descripcion": "En esta nueva edición, Fuera de Foco Fest transformará la Explanada en un festival inspirado en la cultura de los años 2000, reuniendo en un mismo lugar la música, el skate, el arte y la fotografía…", "imagen": "https://www.m100.cl/wp-content/uploads/2026/07/fuera-de-foco-fest_slidehome_1920x1488-768x595.jpg", "fuente": "Matucana 100", "url": "https://www.m100.cl/programacion/musica/fuera-de-foco-fest-2000/"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));
