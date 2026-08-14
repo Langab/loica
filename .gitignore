@@ -11,3 +11,11 @@ __pycache__/
 
 # Configuración local de Claude Code: es por máquina, no del proyecto
 .claude/settings.local.json
+
+# Estrategia comercial con precios y gestiones: el repo es público y esto no.
+# Para versionarla, moverla a un repo privado (no basta con borrar esta línea).
+propuesta-de-valor/
+
+# Estrategia comercial con precios y gestiones: el repo es público y esto no.
+# Para versionarla, moverla a un repo privado (no basta con borrar esta línea).
+propuesta-de-valor/
