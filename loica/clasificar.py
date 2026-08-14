@@ -100,6 +100,17 @@ PATRONES_CATEGORIA = [
 # "Grupo de lectura: George Canguilhem" a la categoría fiesta.
 NO_ES_FIESTA = re.compile(r"club de (lectura|conversacion|libro|cine)")
 
+# Un taller de pintura es una CLASE, no una exposición. El patrón de arte
+# nombra los medios (pintura, grabado, escultura, fotografía) y va antes que
+# el de clases, así que "Taller de pintura al óleo" caía en arte mientras
+# "Taller de cerámica" caía en clases: el mismo taller en dos animales
+# distintos según el oficio que enseñe. Cuando el título dice que se aprende
+# algo, eso manda sobre el medio.
+SE_APRENDE = re.compile(
+    r"\b(taller(es)?|curso|clase|clases|workshop|aprende|iniciacion"
+    r"|nivel (inicial|basico|intermedio|avanzado)|para principiantes"
+    r"|escuela de|academia|capacitacion|diplomado)\b")
+
 # Prior por fuente/recinto. Solo se aplica si el texto no dijo NADA.
 # Precisión medida a mano sobre los 73 casos que caen acá: ~85%.
 PRIOR_FUENTE = [
@@ -125,6 +136,10 @@ PRIOR_FUENTE = [
 def _buscar_categoria(texto):
     for categoria, patron in PATRONES_CATEGORIA:
         if categoria == "fiesta" and NO_ES_FIESTA.search(texto):
+            continue
+        # El medio no define la categoría cuando el título dice que se enseña:
+        # "Taller de grabado" es clases, "Bienal de grabado" es arte.
+        if categoria == "arte" and SE_APRENDE.search(texto):
             continue
         if re.search(patron, texto):
             return categoria

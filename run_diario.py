@@ -106,7 +106,8 @@ def escribir_informe(almacen: Almacen, estadisticas: list[dict], duracion: float
         if e["error"] or e["encontrados"] == 0:
             continue
         vigentes = almacen.con.execute(
-            "SELECT COUNT(*) FROM eventos WHERE fuente_nombre = ? AND inicio >= date('now')",
+            "SELECT COUNT(*) FROM eventos WHERE fuente_nombre = ? "
+            "AND inicio >= date('now', 'localtime')",
             (e["fuente"],),
         ).fetchone()[0]
         if vigentes == 0:

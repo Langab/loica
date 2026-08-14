@@ -420,7 +420,12 @@ def main() -> int:
     almacen = Almacen()
     filas = almacen.con.execute(
         """SELECT * FROM eventos
-           WHERE inicio >= date('now') AND estado != 'descartado'
+           -- 'localtime' NO es decorativo: SQLite responde en UTC, que a
+           -- las 20:00 de Chile ya es el día siguiente. Sin esto, cualquier
+           -- corrida de la tarde publicaba el sitio SIN los panoramas que
+           -- quedaban de hoy —308 eventos en la corrida donde se detectó—,
+           -- justo a la hora en que alguien abre la app a preguntar qué hacer.
+           WHERE inicio >= date('now', 'localtime') AND estado != 'descartado'
            ORDER BY inicio""",
     ).fetchall()
 

@@ -172,7 +172,7 @@ class Almacen:
                    SUM(CASE WHEN estado = 'borrador'  THEN 1 ELSE 0 END) AS borradores,
                    SUM(CASE WHEN estado = 'publicado' THEN 1 ELSE 0 END) AS publicados,
                    SUM(CASE WHEN es_gratis = 1 AND estado != 'caducado' THEN 1 ELSE 0 END) AS gratis,
-                   SUM(CASE WHEN inicio >= date('now') THEN 1 ELSE 0 END) AS vigentes
+                   SUM(CASE WHEN inicio >= date('now', 'localtime') THEN 1 ELSE 0 END) AS vigentes
                FROM eventos""",
         ).fetchone()
         return dict(fila)
