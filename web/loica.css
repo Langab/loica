@@ -94,30 +94,7 @@
 }
 
 /* Modo oscuro: la tinta SE INVIERTE (contorno crema). Primera clase. */
-@media (prefers-color-scheme: dark){
-  :root:not([data-tema="claro"]){
-  --fondo:var(--azul-950);
-  --fondo-elevado:#1E2740;
-  --fondo-hundido:var(--azul-975);
-  --tinta:var(--arena-100);
-  --tinta-suave:var(--arena-300);
-  --tinta-tenue:var(--arena-400);
-  --contorno:var(--arena-200);
-  --contorno-suave:var(--arena-300);
-  --borde:var(--azul-800);
-  --borde-fuerte:var(--azul-700);
-  --acento:var(--rojo-400);
-  --acento-solido:var(--rojo-400);
-  --acento-hover:var(--rojo-300);
-  --acento-contraste:var(--azul-900);
-  --gratis:var(--verde-300);
-  --gratis-fondo:var(--verde-900);
-  --gratis-contraste:var(--azul-900);
-  --destacado:var(--amarillo-300);
-  --destacado-tinta:var(--azul-900);
-  --foco:var(--amarillo-300);
-  }
-}
+  
 :root[data-tema="oscuro"]{
   --fondo:var(--azul-950);
   --fondo-elevado:#1E2740;
@@ -179,14 +156,12 @@
 }
 /* En oscuro la tinta se invierte: sobre azul-950 el que falla es el oscuro.
    Se usa el relleno fuerte, que ahí sí pasa de sobra. */
-@media (prefers-color-scheme: dark){
-  :root:not([data-tema="claro"]){
+  :root[data-tema="oscuro"]{
     --c-fiesta-tinta:#A893E7; --c-musica-tinta:#F47662; --c-cultura-tinta:#7DA5D5;
     --c-clases-tinta:#F6B65E; --c-libre-tinta:#5FC79B; --c-deporte-tinta:#5FC8D6;
     --c-charla-tinta:#EE8FB4; --c-otros-tinta:#FAD391;
     --c-descuento-tinta:#E0A063; --c-comer-tinta:#A8C64F;
   }
-}
 :root[data-tema="oscuro"]{
   --c-fiesta-tinta:#A893E7; --c-musica-tinta:#F47662; --c-cultura-tinta:#7DA5D5;
   --c-clases-tinta:#F6B65E; --c-libre-tinta:#5FC79B; --c-deporte-tinta:#5FC8D6;
@@ -195,15 +170,7 @@
 }
 
 /* ---------- 2. BASE ---------- */
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{-webkit-text-size-adjust:100%}
-body{
-  margin:0;background:var(--fondo);color:var(--tinta);
-  font:var(--t-base)/1.5 var(--fuente-ui);
-  -webkit-font-smoothing:antialiased;
-}
-h1,h2,h3{font-family:var(--fuente-marca);font-weight:800;letter-spacing:-.02em;margin:0}
-h1{font-size:var(--t-2xl);line-height:1.12}
+*{box-sizing:border-box;-webkit-tap-hi:var(--t-2xl);line-height:1.12}
 h2{font-size:var(--t-xl);line-height:1.2}
 h3{font-size:var(--t-lg);line-height:1.25}
 a{color:inherit}

@@ -744,7 +744,28 @@ const TEXTOS = {
   },
 };
 
-let IDIOMA = localStorage.getItem("loica-idioma") || "es";
+/* El idioma sale del aparato, no de un supuesto. El sitio es de Santiago pero
+   lo abren turistas y quien llegó hace poco, y arrancar todo en español los
+   obligaba a encontrar el selector antes de entender la página.
+
+   Se mira `navigator.languages` completo y no solo `navigator.language`,
+   porque un teléfono en francés con español de segunda lengua declara
+   ["fr-FR","es"] y ahí el español es la mejor respuesta que tenemos.
+
+   Lo que no está en los tres idiomas cae a INGLÉS y no a español: alguien con
+   el aparato en alemán tiene más chance de leer inglés que castellano. */
+const IDIOMAS = ["es", "en", "pt"];
+function idiomaDelAparato(){
+  const declarados = navigator.languages && navigator.languages.length
+    ? navigator.languages : [navigator.language || ""];
+  for(const etiqueta of declarados){
+    const base = String(etiqueta).toLowerCase().split("-")[0];
+    if(IDIOMAS.includes(base)) return base;
+  }
+  return "en";
+}
+let IDIOMA = localStorage.getItem("loica-idioma") || idiomaDelAparato();
+document.documentElement.lang = IDIOMA;
 const t = clave => TEXTOS[IDIOMA][clave];
 
 function fijarIdioma(nuevo){
@@ -753,20 +774,32 @@ function fijarIdioma(nuevo){
   document.documentElement.lang = nuevo;
 }
 
-/* ---------- TEMA ---------- */
+/* ---------- TEMA ----------
+   El sitio arranca CLARO siempre, tenga el aparato la configuración que tenga.
+   Antes seguía al `prefers-color-scheme` del sistema, y en Chile media ciudad
+   tiene el teléfono en oscuro por batería: entraban a un mapa nocturno sin
+   haberlo pedido y sin saber que existía un interruptor. El oscuro sigue
+   siendo de primera clase —la app se usa de noche— pero ahora es una decisión,
+   no una herencia.
+
+   Por eso en el CSS ya no hay ningún `@media (prefers-color-scheme: dark)`:
+   el oscuro entra solo por `[data-tema="oscuro"]`. Si vuelve a aparecer uno,
+   vuelve el problema, y encima con un parpadeo oscuro antes de que corra este
+   archivo. */
 function temaGuardado(){ return localStorage.getItem("loica-tema"); }
-function aplicarTema(tema){
+function aplicarTema(tema, guardar = true){
   if(tema) document.documentElement.dataset.tema = tema;
   else delete document.documentElement.dataset.tema;
-  localStorage.setItem("loica-tema", tema || "");
+  if(guardar) localStorage.setItem("loica-tema", tema || "");
 }
 function alternarTema(){
-  const actual = document.documentElement.dataset.tema
-    || (matchMedia("(prefers-color-scheme: dark)").matches ? "oscuro" : "claro");
+  const actual = document.documentElement.dataset.tema || "claro";
   aplicarTema(actual === "oscuro" ? "claro" : "oscuro");
   return document.documentElement.dataset.tema;
 }
-aplicarTema(temaGuardado() || null);
+// `false` en el arranque: se pinta claro pero NO se guarda, así que quien
+// nunca tocó el interruptor sigue sin preferencia registrada.
+aplicarTema(temaGuardado() || "claro", false);
 
 /* ---------- CABECERA COMPARTIDA ---------- */
 // Íconos de la navegación inferior. Simples a propósito: compiten con las

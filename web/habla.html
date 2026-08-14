@@ -61,9 +61,7 @@
   /* El color del que tiene la palabra. Arranca en el rojo de la Loica porque
      es ella la que recibe, y lo cambia el JS en cada relevo. */
   :root{--guia:var(--acento); --guia-suave:var(--rojo-200)}
-  @media (prefers-color-scheme: dark){
-    :root:not([data-tema="claro"]){--guia-suave:var(--azul-800)}
-  }
+
   :root[data-tema="oscuro"]{--guia-suave:var(--azul-800)}
 
   /* ---------- HERO ----------
@@ -76,10 +74,8 @@
      leerse como color y pasa a leerse como suciedad — es la misma trampa que
      `_direccion_visual.md` documenta para el amarillo sobre azul-950. Sobre
      fondo oscuro las dos manchas usan el color saturado del guía. */
-  @media (prefers-color-scheme: dark){
-    :root:not([data-tema="claro"]) .hero .mancha{mix-blend-mode:screen;opacity:.26}
-    :root:not([data-tema="claro"]) .hero .m2{background:var(--guia)}
-  }
+
+  
   :root[data-tema="oscuro"] .hero .mancha{mix-blend-mode:screen;opacity:.26}
   :root[data-tema="oscuro"] .hero .m2{background:var(--guia)}
   /* Las dos primeras siguen al guía; la tercera queda fija en el amarillo de
@@ -168,9 +164,7 @@
   body.conversando .desfile{bottom:10px}
   body.conversando .bicho-hero svg{width:clamp(26px,5.2vw,42px)}
   body.conversando .hero .mancha{opacity:.1}
-  @media (prefers-color-scheme: dark){
-    :root:not([data-tema="claro"]) body.conversando .hero .mancha{opacity:.18}
-  }
+
   :root[data-tema="oscuro"] body.conversando .hero .mancha{opacity:.18}
 
   @media(max-width:760px){
@@ -209,11 +203,10 @@
       display:flex;align-items:flex-end;justify-content:center;
     }
   }
-  @media(max-width:760px) and (prefers-color-scheme: dark){
-    :root:not([data-tema="claro"]) .hero .mancha{opacity:.15}
-  }
   @media(max-width:760px){
     :root[data-tema="oscuro"] .hero .mancha{opacity:.15}
+  }
+  @media(max-widta{opacity:.15}
   }
   @media (prefers-reduced-motion: reduce){
     .bicho-hero{animation:none}
@@ -280,9 +273,7 @@
   }
   /* En oscuro la tinta ES el crema: el contorno se perdería contra su propio
      relleno, así que la burbuja mía se contornea con el azul del sistema. */
-  @media (prefers-color-scheme: dark){
-    :root:not([data-tema="claro"]) .turno.mia .burbuja{border-color:var(--azul-800)}
-  }
+
   :root[data-tema="oscuro"] .turno.mia .burbuja{border-color:var(--azul-800)}
 
   .entra{animation:burbuja-entra var(--rebote) backwards}
@@ -384,7 +375,6 @@
   </div>
   <p class="atajo-pista" data-bot="atajo"></p>
 </header>
-
 
 <main class="conversa">
   <div id="hilo" aria-live="polite"></div>
@@ -606,7 +596,6 @@ const ORDEN_COMPANIA = ["solo","pareja","amigos","ninos"];
    cargo de los niños porque ya se hace cargo de lo gratis, que es la otra
    pregunta que se hace quien sale con la familia. */
 const GUIA_COMPANIA = {solo:"loica", pareja:"chinchilla", amigos:"culpeo", ninos:"pudu"};
-
 
 function rankearDescuentos(lista, cats, sector, soloHoy){
   const vistos = new Set();

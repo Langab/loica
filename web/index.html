@@ -46,10 +46,8 @@
   .hero .mancha{position:absolute;border-radius:50%;opacity:.16;pointer-events:none}
   /* Y el amarillo se cambia por el rojo de marca: un amarillo desaturado
      sobre azul oscuro no se lee como color, se lee como suciedad. */
-  @media (prefers-color-scheme: dark){
-    :root:not([data-tema="claro"]) .hero .mancha{mix-blend-mode:screen;opacity:.26}
-    :root:not([data-tema="claro"]) .hero .m2{background:var(--c-musica)}
-  }
+
+  
   :root[data-tema="oscuro"] .hero .mancha{mix-blend-mode:screen;opacity:.26}
   :root[data-tema="oscuro"] .hero .m2{background:var(--c-musica)}
   .hero .m1{width:340px;height:340px;background:var(--c-fiesta);top:-130px;left:-90px}

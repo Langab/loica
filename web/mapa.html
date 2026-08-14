@@ -485,8 +485,10 @@ const TESELAS = {
   oscuro:"https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png",
   oscuroEtiquetas:"https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png",
 };
-const esOscuro = () => document.documentElement.dataset.tema === "oscuro"
-  || (!document.documentElement.dataset.tema && matchMedia("(prefers-color-scheme: dark)").matches);
+// Las teselas siguen al tema elegido y NADA más. Antes miraban también el
+// `prefers-color-scheme` del aparato, y desde que el sitio arranca claro por
+// defecto eso dejaba el mapa negro dentro de una página crema.
+const esOscuro = () => document.documentElement.dataset.tema === "oscuro";
 
 const urlesTeselas = clave => ["a","b","c"].map(s =>
   TESELAS[clave].replace("{s}", s).replace("{r}", devicePixelRatio > 1.5 ? "@2x" : ""));
