@@ -167,12 +167,13 @@ Las páginas son:
 | `web/nosotros.html` | Quién hace esto y el elenco explicado |
 | `web/e/<id>.html` | Una ficha por evento, para que el link compartido tenga vista previa |
 
-Todas comparten `loica.css` (tokens y componentes) y `loica.js` (las ocho
-mascotas en SVG, categorías, traducciones es/en/pt y utilidades). Los enlaces
+Todas comparten `loica.css` (tokens y componentes) y `loica.js` (los once
+animales guía en SVG, categorías y subcategorías, traducciones es/en/pt y
+utilidades). Los enlaces
 a esos dos archivos llevan `?v=N`: el sitio es estático y sin build, así que
 ese número es lo único que obliga al navegador a soltar la versión vieja
 después de un cambio de estilos. **Si tocas `loica.css` o `loica.js`, sube el
-número en las ocho páginas y en la plantilla de `exportar_web.py`.** Van todos
+número en las nueve páginas y en la plantilla de `exportar_web.py`.** Van todos
 juntos: la plantilla se había quedado en `v=5` mientras el resto iba en `v=9`,
 y las 2.486 fichas servían CSS viejo a quien ya hubiera entrado antes.
 
@@ -316,6 +317,58 @@ cadencia se guarda como texto en la descripción ("todos los martes y jueves a
 las 19:00"). Alcanza para el mapa y para el filtro de gratis, pero un taller
 semanal ocupa varias filas en vez de una.
 
+### Los museos: una sola puerta para ocho instituciones
+
+Todos los museos y bibliotecas del **Servicio Nacional del Patrimonio Cultural**
+corren el mismo Drupal, y ese Drupal tiene **JSON:API abierto** en `/jsonapi`.
+Es el mejor dato estructurado del catálogo y se configura una vez: para sumar
+el siguiente museo del Patrimonio se copia la entrada y se cambia el dominio.
+
+```yaml
+  endpoint: /jsonapi/node/evento
+  parametros: {page[limit]: 50, sort: -field_fechas.end_value}
+  json:
+    lista: data
+    plantilla_url: https://www.mnba.gob.cl{attributes.path.alias}
+    campos:
+      inicio: attributes.field_fechas.value
+      fin: attributes.field_fechas.end_value
+      hora_inicio_segundos: attributes.field_horario.from
+      categoria: attributes.field_tipo_evento
+```
+
+Tres detalles que valen la pena:
+
+- **`sort=-field_fechas.end_value`** ordena por fecha de término descendente,
+  así la primera página son justamente las muestras que siguen abiertas. Es la
+  forma de pedir "lo vigente" sin poder escribir la fecha de hoy en un YAML
+  estático.
+- **`hora_inicio_segundos`** existe porque este Drupal guarda el horario como
+  segundos desde medianoche (`{"from": 61200}` son las 17:00). No es una hora
+  que `parsear_hora` pueda leer: es un formato de campo, y se declara aparte.
+- El tipo de contenido se llama `evento` pero cubre **exposiciones, talleres,
+  visitas guiadas y charlas**, distinguidas en `field_tipo_evento`. Eso alimenta
+  al clasificador sin adivinar.
+
+Con eso entran MNBA, MNHN, Museo Histórico Nacional, Museo Benjamín Vicuña
+Mackenna, Museo de la Educación, Archivo Nacional, Biblioteca Nacional y
+Biblioteca de Santiago.
+
+**Los que no son del Patrimonio van uno por uno.** El MAC no expone sus muestras
+por API —solo posts de prensa— pero publica el HTML más limpio del catálogo, con
+el rango de fechas y la sede en la misma tarjeta. Sus **dos sedes quedan a 4 km**
+(Parque Forestal y Quinta Normal), así que el adaptador HTML aprendió a leer el
+nombre del recinto de un selector (`selectores.lugar`): sin eso las dos caen en
+el mismo pin. Museo Violeta Parra tiene un tipo de contenido propio (`agenda`) y
+Artequin publica sus talleres como posts normales.
+
+**Los que quedaron apagados, con el motivo escrito en `notas`:** el MIM y el
+Precolombino son SPAs que arman la cartelera con JavaScript, el Museo de la
+Memoria tiene `/cartelera` pero servida igual por JavaScript, y el Museo
+Ferroviario responde 500 en todo lo que no sea su home. Las cuatro direcciones
+sí quedaron verificadas en `correcciones/lugares.yaml`, listas para cuando
+entren por `datos/manual/`.
+
 ### Fuentes ruidosas: `buscar_terminos` y `filtro_palabras`
 
 Lo que mantenía apagadas a casi todas las municipalidades no era técnico: sus
@@ -363,32 +416,82 @@ Viven en `loica/red.py` y se aplican a todas las fuentes sin excepción:
    doble check que frena publicaciones rotas, y la revisión diaria que
    alimenta la memoria de correcciones. Revisar 2.500 borradores a mano cada
    día no era verdad ayer ni va a serlo mañana.
-5. **Caduca** solo los eventos cuya fecha ya pasó.
+5. **Caduca** solo los eventos que ya **terminaron**.
 
-## Estado (corrida del 9 de agosto de 2026)
+### Vigente es lo que no ha terminado, no lo que no ha empezado
 
-**252 eventos de 16 fuentes activas, 97 con fecha futura confirmada, 22 gratis.**
+Durante meses la vigencia se midió por `inicio`, en cuatro lugares distintos:
+el filtro de entrada (`Evento.es_valido`), el caducador, el resumen y la
+consulta del export. Con esa regla, **una exposición que abre el 18 de julio y
+cierra el 27 de septiembre desaparecía del sitio el 19 de julio**, y una
+temporada de teatro desaparecía al día siguiente del estreno. Eran 189 eventos
+invisibles en el mapa, y es la forma normal de publicar de un museo: casi toda
+su cartelera es un rango, no un día. Medido sobre la misma base, la regla nueva
+**suma 189 y no pierde ninguno**.
 
-El catálogo tiene 43 fuentes verificadas; 20 están activas y el resto quedó en
-`config/fuentes.yaml` con `activa: false`, listas para encender de a poco.
+La regla vive ahora en un solo lugar, `almacen.SQL_VIGENTE`:
 
-| Fuente | Eventos futuros | Nota |
-|---|---:|---|
-| Universidad Diego Portales | 26 | Charlas y lanzamientos, casi todos gratis |
-| Matucana 100 | 19 | Con precio y hora exacta |
-| Teatro Municipal | 10 | |
-| CEINA | 10 | La fecha sale de la ficha, no de la API |
-| GAM | 8 | De 83 filas de calendario colapsadas |
-| Balmaceda Arte Joven | 7 | Gratis |
-| Agenda Cultural Las Condes | 5 | Muchas entradas son lugares permanentes |
-| Teatro UC | 3 | **Mejor calidad de dato**: The Events Calendar nativo |
-| Planetario USACH, NAVE, Ñuñoa | 7 | |
-| Centro Cultural La Moneda | 2 | 28 eventos, la mayoría sin fecha legible |
+```sql
+COALESCE(NULLIF(fin, ''), inicio) >= date('now', 'localtime')
+```
+
+Sin `fin` manda `inicio`, como siempre. `almacen.revivir_vigentes()` devuelve a
+borrador lo que la regla vieja había caducado antes de tiempo — sin eso,
+arreglar la regla no recuperaba nada de lo ya enterrado.
+
+Dos consecuencias para quien toque el sitio: un evento vigente **puede tener
+`inicio` en el pasado**, y cualquier filtro de fecha del front tiene que cruzar
+el tramo `[inicio, fin]` con la ventana del filtro en vez de mirar solo
+`inicio` (eso vive en `sesionEnRango()` de `web/loica.js`).
+
+## Estado (corrida del 14 de agosto de 2026)
+
+**2.420 eventos publicados de 65 fuentes activas, 368 gratis, 1.888 (78%) con
+ubicación exacta en el mapa.**
+
+El catálogo tiene 114 fuentes catastradas; 65 están activas y el resto quedó en
+`config/fuentes.yaml` con `activa: false` **y el motivo escrito en `notas`**,
+para no volver a investigar lo mismo.
+
+Lo que movió esta corrida:
+
+| | Antes | Ahora |
+|---|---:|---:|
+| Eventos publicados | 2.414 | 2.420 |
+| Ubicación exacta | 61% | **78%** |
+| Museos y bibliotecas | 8 eventos (solo MAVI) | **55** |
+| Correcciones de lugar | 86 | 118 |
+
+Los museos entraron con **pin exacto desde el primer día**: los 55 eventos salen
+con precisión `correccion`, porque la dirección de cada museo se verificó contra
+el catastro OSM local o contra las coordenadas que publica el propio museo antes
+de encender la fuente.
+
+Dos errores de coordenadas que encontró la auditoría y quedaron arreglados en la
+tabla `RECINTOS` de `loica/geo.py`: el **Movistar Arena** estaba 1,7 km al
+norponiente, en plena Alameda en vez de dentro del Parque O'Higgins (14 eventos),
+y la **Biblioteca Nacional**, 290 m al oriente.
+
+Los museos y bibliotecas que se encendieron en esta corrida:
+
+| Fuente | Nuevos | Puerta | Nota |
+|---|---:|---|---|
+| Museo Violeta Parra | 36 | WordPress, post type `agenda` | La fecha sale de la ficha |
+| MAC (U. de Chile) | 15 | HTML | Dos sedes, dos pines |
+| Museo Nacional de Historia Natural | 9 | JSON:API | Quinta Normal |
+| Biblioteca de Santiago | 9 | JSON:API | La más rica en actividades familiares gratuitas |
+| Museo Nacional de Bellas Artes | 8 | JSON:API | |
+| Biblioteca Nacional | 6 | JSON:API | |
+| Museo Histórico Nacional | 3 | JSON:API | |
+| Museo Artequin | 4 | WordPress | Quinta Normal |
+| Archivo Nacional | 1 | JSON:API | |
 
 Fuentes que responden bien pero **no aportan eventos futuros hoy**: Santiago
 Cultura (su agenda está detenida desde julio de 2026), Parquemet y Estación
 Central (publican *programas* permanentes con inscripción, no eventos con
-fecha), MAVI y Vitacura. El informe diario las marca solo.
+fecha), y del lado de los museos, el **Museo de la Educación** y el **Museo
+Vicuña Mackenna**, que tienen la API abierta y la cartelera vacía. El informe
+diario las marca solo, y quedan encendidas: el día que publiquen, entran.
 
 Ticketmaster sigue apagado: falta `TICKETMASTER_API_KEY` (gratis en
 developer.ticketmaster.com).

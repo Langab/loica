@@ -127,9 +127,14 @@ RECINTOS = {
     "universidad diego portales": (-33.4460, -70.6520),
     "udp": (-33.4460, -70.6520),
     "biblioteca de santiago": (-33.4400, -70.6830),
-    "biblioteca nacional": (-33.4419, -70.6448),
+    # Alameda 651. Estaba 290 m al oriente; el valor bueno lo publica la propia
+    # Biblioteca Nacional en su sitio (auditoría del 14-08-2026).
+    "biblioteca nacional": (-33.44206, -70.64792),
     "estadio nacional": (-33.4644, -70.6106),
-    "movistar arena": (-33.4470, -70.6650),
+    # Beaucheff 1204, DENTRO del Parque O'Higgins. Estaba 1,7 km al norponiente,
+    # en plena Alameda: 14 eventos con el pin en la calle equivocada. Confirmado
+    # contra el catastro OSM local (auditoría del 14-08-2026).
+    "movistar arena": (-33.46271, -70.66177),
     "teatro caupolican": (-33.4560, -70.6540),
     "club chocolate": (-33.4330, -70.6350),
     # Alameda 2879, comuna de Santiago. Estaba anotado 1,1 km al oriente, en
