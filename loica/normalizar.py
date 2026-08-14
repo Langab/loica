@@ -39,12 +39,23 @@ def _plano(texto: str) -> str:
     return "".join(c for c in sin_tildes if unicodedata.category(c) != "Mn").lower()
 
 
+# Shortcodes de WordPress que el tema deja sin renderizar en el contenido que
+# devuelve la API REST: [vc_row], [/vc_column_text], [vc_column width="1/1"].
+# No son texto, son maquetación, y además ENVENENAN la lectura de fechas: el
+# `width="1/1"` de WPBakery calza con el patrón dd/mm y Artequin publicaba
+# todos sus talleres el 1 de enero. Los temas Uncode/Visual Composer son
+# comunes en los sitios culturales chilenos, así que esto no es un parche
+# para una fuente. Solo se sacan los de nombre en minúscula, que es la
+# convención de WordPress: "[13 de septiembre]" o "[Ver más]" no se tocan.
+_SHORTCODE = re.compile(r"\[/?[a-z][a-z0-9_]*(?=[\s\]/])[^\]]*\]")
+
+
 def limpiar_html(texto: str) -> str:
-    """Quita etiquetas y decodifica entidades (&#038; → &, &nbsp; → espacio)."""
+    """Quita etiquetas, shortcodes y decodifica entidades (&#038; → &)."""
     if not texto:
         return ""
     sin_tags = re.sub(r"<[^>]+>", " ", texto)
-    return " ".join(unescape(sin_tags).split())
+    return " ".join(unescape(_SHORTCODE.sub(" ", sin_tags)).split())
 
 
 def parsear_fecha(texto: str, anio_por_defecto: int | None = None,
@@ -125,7 +136,7 @@ def parsear_fecha(texto: str, anio_por_defecto: int | None = None,
     if fecha is None:
         m = re.search(rf"\b(?:del?\s+|desde\s+el\s+)?(\d{{1,2}})\s*(?:de\s+)?({patron_meses})"
                       rf"\s+al?\s+(\d{{1,2}})\s*(?:de\s+)?({patron_meses})\b"
-                      rf"(?:\s*(?:de|del)?\s*(\d{{4}}))?", plano)
+                      rf"(?:\s*,?\s*(?:de|del)?\s*(\d{{4}}))?", plano)
         if m:
             anio = int(m.group(5)) if m.group(5) else anio_defecto
             try:
@@ -140,7 +151,7 @@ def parsear_fecha(texto: str, anio_por_defecto: int | None = None,
     # Rango "del 3 al 28 de febrero": interesa el DÍA DE INICIO, no el final
     if fecha is None:
         m = re.search(rf"\b(?:del\s+|desde\s+el\s+)?(\d{{1,2}})\s+al\s+\d{{1,2}}"
-                      rf"\s*(?:de\s+)?({patron_meses})\b(?:\s*(?:de|del)?\s*(\d{{4}}))?", plano)
+                      rf"\s*(?:de\s+)?({patron_meses})\b(?:\s*,?\s*(?:de|del)?\s*(\d{{4}}))?", plano)
         if m:
             try:
                 fecha = datetime(int(m.group(3)) if m.group(3) else anio_defecto,
@@ -149,10 +160,14 @@ def parsear_fecha(texto: str, anio_por_defecto: int | None = None,
             except ValueError:
                 fecha = None
 
-    # "15 de marzo" / "15 de marzo de 2027" / "15 marzo"
+    # "15 de marzo" / "15 de marzo de 2027" / "15 marzo" / "15 Marzo, 2027"
+    # La coma antes del año no es un adorno: el MAC escribe "11 Julio, 2026" y
+    # sin tolerarla el año se descartaba, la fecha quedaba "sin año" y la regla
+    # de más abajo la mandaba al año siguiente. Seis exposiciones en curso
+    # aparecían programadas para 2027.
     if fecha is None:
         for m in re.finditer(rf"\b(\d{{1,2}})\s*(?:de\s+)?({patron_meses})\b"
-                             rf"(?:\s*(?:de|del)?\s*(\d{{4}}))?", plano):
+                             rf"(?:\s*,?\s*(?:de|del)?\s*(\d{{4}}))?", plano):
             dia = int(m.group(1))
             mes = MESES[m.group(2)]
             anio = int(m.group(3)) if m.group(3) else anio_defecto

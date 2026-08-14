@@ -17,6 +17,9 @@ con la misma plataforma es escribir YAML, no código.
       campos:
         titulo: nombre
         lugar_direccion: recinto.direccion
+        inicio: field_fechas.value
+        fin: field_fechas.end_value          # temporada: hasta cuándo se puede ver
+        hora_inicio_segundos: field_horario.from   # 61200 = 17:00
       recurrencia: {bloques: 'horarios[].bloques', dias: dias, hora_inicio: inicio}
 """
 
@@ -139,11 +142,13 @@ def _cumple_filtros(item: dict, filtros: dict) -> bool:
 
 
 def _sesiones_del_taller(item: dict, config: dict, horizonte: int) -> tuple:
-    """Traduce rango de ciclo + bloques semanales a (sesiones, cadencia).
+    """Traduce rango de ciclo + bloques semanales a (sesiones, cadencia, fin).
 
-    Sin recurrencia declarada devuelve la fecha única que traiga la fuente. Con
-    recurrencia devuelve una sesión por fecha: `colapsar_multidia` decide
-    después si son una temporada o sesiones sueltas (ver `sesiones_futuras`).
+    Sin recurrencia declarada devuelve la fecha única que traiga la fuente, y
+    `fin` con la fecha de término si la hay. Con recurrencia devuelve una sesión
+    por fecha y `fin` en None: ahí el rango es el ciclo del taller, no una
+    temporada, y `colapsar_multidia` decide después si esas sesiones son una
+    temporada o quedan sueltas (ver `sesiones_futuras`).
     """
     campos = config.get("campos") or {}
     desde = parsear_fecha(_texto(item, campos.get("inicio", "")))
@@ -157,9 +162,22 @@ def _sesiones_del_taller(item: dict, config: dict, horizonte: int) -> tuple:
         if hora is not None:
             desde = desde.replace(hour=hora.hour, minute=hora.minute)
 
+    # El Drupal del Servicio Nacional del Patrimonio guarda el horario como
+    # segundos desde medianoche ({"from": 61200} son las 17:00), que no es una
+    # hora que parsear_hora pueda leer. Es un formato de campo, no un formato
+    # de texto, así que se declara aparte en el YAML.
+    if desde is not None and campos.get("hora_inicio_segundos"):
+        crudo = _camino(item, campos["hora_inicio_segundos"])
+        try:
+            segundos = int(crudo)
+        except (TypeError, ValueError):
+            segundos = -1
+        if 0 <= segundos < 86400:
+            desde = desde.replace(hour=segundos // 3600, minute=segundos % 3600 // 60)
+
     rec = config.get("recurrencia") or {}
     if not rec or not desde:
-        return ([desde] if desde else []), ""
+        return ([desde] if desde else []), "", hasta
 
     bloques = _camino(item, rec.get("bloques", "")) or []
     if not isinstance(bloques, list):
@@ -177,11 +195,11 @@ def _sesiones_del_taller(item: dict, config: dict, horizonte: int) -> tuple:
 
     dias = sorted(set(dias))
     if not dias:
-        return ([desde] if desde else []), ""
+        return ([desde] if desde else []), "", hasta
 
     sesiones = sesiones_futuras(dias, hora_inicio, desde.date(),
                                 hasta.date() if hasta else None, horizonte)
-    return sesiones, frase_cadencia(dias, hora_inicio, hora_fin)
+    return sesiones, frase_cadencia(dias, hora_inicio, hora_fin), None
 
 
 def extraer_json(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
@@ -216,7 +234,7 @@ def extraer_json(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
         if not titulo:
             continue
 
-        sesiones, cadencia = _sesiones_del_taller(item, config, horizonte)
+        sesiones, cadencia, fin = _sesiones_del_taller(item, config, horizonte)
         if not sesiones:
             continue
 
@@ -267,6 +285,10 @@ def extraer_json(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
                 categoria=categoria,
                 descripcion_corta=resumen,
                 inicio=sesion,
+                # Solo cuando la fuente declara una temporada de verdad: en un
+                # taller con recurrencia cada sesión es su propio evento y
+                # `fin` viene en None (ver _sesiones_del_taller).
+                fin=fin if len(sesiones) == 1 else None,
                 lugar_nombre=lugar or fuente.get("nombre", ""),
                 lugar_direccion=direccion,
                 comuna=comuna,

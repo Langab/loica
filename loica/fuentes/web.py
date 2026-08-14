@@ -182,13 +182,26 @@ def eventos_desde_html(html: str, fuente: dict, tipo: str = "html") -> list[Even
 
         # Fecha: atributo del HTML > selector configurado > texto de la tarjeta
         inicio = None
+        fin = None
         valor_atributo = tarjeta.get(atributo_fecha) if atributo_fecha else None
         if valor_atributo:
             inicio = parsear_fecha(str(valor_atributo))
         if inicio is None:
             nodo_fecha = (tarjeta.select_one(selectores["fecha"])
                           if selectores.get("fecha") else None)
-            inicio = parsear_fecha(nodo_fecha.get_text(" ", strip=True) if nodo_fecha else texto)
+            texto_fecha = nodo_fecha.get_text(" ", strip=True) if nodo_fecha else texto
+            inicio = parsear_fecha(texto_fecha)
+            # "18 Julio, 2026 - 27 Septiembre, 2026": la segunda fecha es el
+            # término. Sin ella una exposición que ya abrió no se publica nunca,
+            # porque la vigencia se mide por la fecha de término (SQL_VIGENTE).
+            # Solo se lee del selector de fecha: en el texto suelto de una
+            # tarjeta cualquier número con mes de por medio pasaría por rango.
+            if inicio is not None and nodo_fecha:
+                tramos = re.split(r"\s*[-–—]\s*|\s+al\s+|\s+hasta\s+", texto_fecha, maxsplit=1)
+                if len(tramos) == 2:
+                    posible = parsear_fecha(tramos[1])
+                    if posible and posible >= inicio:
+                        fin = posible
         if inicio is None:
             continue
 
@@ -214,11 +227,22 @@ def eventos_desde_html(html: str, fuente: dict, tipo: str = "html") -> list[Even
                     comuna_tarjeta = sala.get("comuna", "")
                     break
 
+        # Otras veces la sede no está en una clase sino escrita en la tarjeta:
+        # el MAC pone "MAC Quinta Normal - 6 y 7" o "MAC Parque Forestal - 7 y 8"
+        # en un <p>, y sus dos sedes quedan a 4 km. Con el nombre de la sede en
+        # `lugar_nombre`, la memoria de correcciones les pone su pin a cada una
+        # y detectar_comuna saca la comuna del mismo texto.
+        if selectores.get("lugar"):
+            nodo_lugar = tarjeta.select_one(selectores["lugar"])
+            if nodo_lugar:
+                lugar = limpiar_html(nodo_lugar.get_text(" ", strip=True))[:120] or lugar
+
         eventos.append(Evento(
             titulo=titulo,
             categoria=categoria,
             descripcion_corta=resumir(texto, 150),
             inicio=inicio,
+            fin=fin,
             lugar_nombre=lugar,
             comuna=detectar_comuna(comuna_tarjeta, texto, fuente.get("comuna", "")),
             precio_clp=precio,

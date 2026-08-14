@@ -210,19 +210,26 @@ fuentes:
   notas: 'API REST abierta con post types ''exposiciones'' (8 vigentes), ''exposiciones-pasadas'', ''premio-mavi-uc''
     y ''coleccion-mavi-uc''. robots.txt estandar de WordPress; el sitemap canonico es https://www.mavi.cl/sitemap_index.xml '
 - id: mac_uchile
-  nombre: MAC - Museo de Arte Contemporaneo U. de Chile
+  nombre: MAC - Museo de Arte Contemporaneo (U. de Chile)
   url_base: https://mac.uchile.cl
-  url_agenda: https://mac.uchile.cl/wp-json/wp/v2/posts
-  tipo_adaptador: wordpress
-  endpoint: /wp-json/wp/v2/posts
+  url_agenda: https://mac.uchile.cl/exposiciones/
+  tipo_adaptador: html
   comuna: Santiago
-  crawl_delay_seg: 2
-  buscar_detalle: true
-  tope_detalle: 25
-  activa: false
-  notas: 'API REST de WordPress abierta, 237 posts, sin post types de eventos: exposiciones y actividades
-    publicadas como posts, hay que filtrar por categoria. robots.txt estandar + wp-sitemap.xml + /feed/
-    RSS activo (59 KB). Dos '
+  crawl_delay_seg: 3
+  activa: true
+  selectores:
+    tarjeta: article.periodo-actuales
+    titulo: h3.entry-title
+    link: h3.entry-title a
+    fecha: p.fecha
+    lugar: p.sede-sala
+  notas: 'La API REST de WordPress esta abierta pero solo tiene posts de prensa: las muestras viven en
+    un tipo de contenido que la API no expone y se leen del HTML, que ademas es el mas limpio del catalogo.
+    Cada tarjeta trae titulo, rango de fechas (''18 Julio, 2026 - 27 Septiembre, 2026'') y la sede en
+    p.sede-sala. La clase periodo-actuales deja fuera las muestras pasadas. OJO: el MAC tiene DOS sedes
+    a 4 km — Parque Forestal (Ismael Valdes Vergara 506) y Quinta Normal (Matucana 464) — y por eso el
+    selector ''lugar'' es obligatorio aca: sin el, las dos caen en el mismo pin. La comuna la saca detectar_comuna
+    del mismo texto.'
 - id: planetario_usach
   nombre: Planetario USACH
   url_base: https://www.planetariochile.cl
@@ -463,58 +470,127 @@ fuentes:
 - id: mnba
   nombre: Museo Nacional de Bellas Artes
   url_base: https://www.mnba.gob.cl
-  url_agenda: https://www.mnba.gob.cl/sitemap.xml
-  tipo_adaptador: sitemap
-  endpoint: /sitemap.xml
+  url_agenda: https://www.mnba.gob.cl/cartelera
+  tipo_adaptador: json
+  endpoint: /jsonapi/node/evento
   comuna: Santiago
-  crawl_delay_seg: 5
-  buscar_detalle: false
-  tope_detalle: 25
-  activa: false
-  notas: 'Drupal, no WordPress (robots.txt clasico de Drupal: bloquea /core/ y /profiles/, permite el
-    resto). sitemap.xml generado por el modulo Simple XML Sitemap responde 200. Sin API publica ni RSS.
-    Extraccion: sitemap + HTML. '
+  crawl_delay_seg: 3
+  activa: true
+  parametros:
+    page[limit]: 50
+    sort: -field_fechas.end_value
+  json:
+    lista: data
+    plantilla_url: https://www.mnba.gob.cl{attributes.path.alias}
+    campos:
+      titulo: attributes.title
+      descripcion_corta: attributes.field_abstract
+      categoria: attributes.field_tipo_evento
+      inicio: attributes.field_fechas.value
+      fin: attributes.field_fechas.end_value
+      hora_inicio_segundos: attributes.field_horario.from
+      id_externo: attributes.drupal_internal__nid
+  notas: 'Drupal del Servicio Nacional del Patrimonio Cultural con JSON:API abierto en /jsonapi. Es la
+    MISMA plataforma en todos sus museos y bibliotecas, asi que esta configuracion se copia cambiando
+    el dominio y la comuna. El tipo de contenido ''evento'' trae el dato mejor estructurado del catalogo:
+    rango de fechas en field_fechas (value/end_value), horario en segundos desde medianoche (field_horario.from),
+    tipo en field_tipo_evento (exposicion, taller, visita-guiada, charla) y la URL publica en path.alias.
+    Se pide ordenado por fecha de termino descendente, asi la primera pagina son justamente las muestras
+    que siguen abiertas. robots.txt permisivo. Jose Miguel de la Barra 650, Parque Forestal.'
 - id: mnhn
   nombre: Museo Nacional de Historia Natural
   url_base: https://www.mnhn.gob.cl
-  url_agenda: https://www.mnhn.gob.cl/sitemap.xml
-  tipo_adaptador: sitemap
-  endpoint: /sitemap.xml
+  url_agenda: https://www.mnhn.gob.cl/cartelera
+  tipo_adaptador: json
+  endpoint: /jsonapi/node/evento
   comuna: Santiago
-  crawl_delay_seg: 5
-  buscar_detalle: false
-  tope_detalle: 25
-  activa: false
-  notas: 'Identico al MNBA: mismo Drupal del Servicio Nacional del Patrimonio, mismo robots.txt, mismo
-    sitemap del modulo Simple XML Sitemap. Un solo adaptador Drupal sirve para MNBA, MNHN, Biblioteca
-    Nacional y Biblioteca de Sant'
+  crawl_delay_seg: 3
+  activa: true
+  parametros:
+    page[limit]: 50
+    sort: -field_fechas.end_value
+  json:
+    lista: data
+    plantilla_url: https://www.mnhn.gob.cl{attributes.path.alias}
+    campos:
+      titulo: attributes.title
+      descripcion_corta: attributes.field_abstract
+      categoria: attributes.field_tipo_evento
+      inicio: attributes.field_fechas.value
+      fin: attributes.field_fechas.end_value
+      hora_inicio_segundos: attributes.field_horario.from
+      id_externo: attributes.drupal_internal__nid
+  notas: 'Drupal del Servicio Nacional del Patrimonio Cultural con JSON:API abierto en /jsonapi. Es la
+    MISMA plataforma en todos sus museos y bibliotecas, asi que esta configuracion se copia cambiando
+    el dominio y la comuna. El tipo de contenido ''evento'' trae el dato mejor estructurado del catalogo:
+    rango de fechas en field_fechas (value/end_value), horario en segundos desde medianoche (field_horario.from),
+    tipo en field_tipo_evento (exposicion, taller, visita-guiada, charla) y la URL publica en path.alias.
+    Se pide ordenado por fecha de termino descendente, asi la primera pagina son justamente las muestras
+    que siguen abiertas. robots.txt permisivo. Dentro del Parque Quinta Normal; el parque es de la comuna
+    de Santiago, no de Quinta Normal.'
 - id: biblioteca_nacional
   nombre: Biblioteca Nacional de Chile
   url_base: https://www.bibliotecanacional.gob.cl
-  url_agenda: https://www.bibliotecanacional.gob.cl/sitemap.xml
-  tipo_adaptador: sitemap
-  endpoint: /sitemap.xml
+  url_agenda: https://www.bibliotecanacional.gob.cl/cartelera
+  tipo_adaptador: json
+  endpoint: /jsonapi/node/evento
   comuna: Santiago
-  crawl_delay_seg: 5
-  buscar_detalle: false
-  tope_detalle: 25
-  activa: false
-  notas: Mismo Drupal del Patrimonio que MNBA y MNHN. robots.txt permisivo, sitemap.xml 200. Charlas,
-    lanzamientos de libros y exposiciones, casi todo gratuito. Reutiliza el adaptador Drupal.
+  crawl_delay_seg: 3
+  activa: true
+  parametros:
+    page[limit]: 50
+    sort: -field_fechas.end_value
+  json:
+    lista: data
+    plantilla_url: https://www.bibliotecanacional.gob.cl{attributes.path.alias}
+    campos:
+      titulo: attributes.title
+      descripcion_corta: attributes.field_abstract
+      categoria: attributes.field_tipo_evento
+      inicio: attributes.field_fechas.value
+      fin: attributes.field_fechas.end_value
+      hora_inicio_segundos: attributes.field_horario.from
+      id_externo: attributes.drupal_internal__nid
+  notas: 'Drupal del Servicio Nacional del Patrimonio Cultural con JSON:API abierto en /jsonapi. Es la
+    MISMA plataforma en todos sus museos y bibliotecas, asi que esta configuracion se copia cambiando
+    el dominio y la comuna. El tipo de contenido ''evento'' trae el dato mejor estructurado del catalogo:
+    rango de fechas en field_fechas (value/end_value), horario en segundos desde medianoche (field_horario.from),
+    tipo en field_tipo_evento (exposicion, taller, visita-guiada, charla) y la URL publica en path.alias.
+    Se pide ordenado por fecha de termino descendente, asi la primera pagina son justamente las muestras
+    que siguen abiertas. robots.txt permisivo. Libertador Bernardo O''Higgins 651. Charlas, lanzamientos
+    y exposiciones, casi todo gratuito.'
 - id: biblioteca_santiago
   nombre: Biblioteca de Santiago
   url_base: https://www.bibliotecasantiago.gob.cl
-  url_agenda: https://www.bibliotecasantiago.gob.cl/sitemap.xml
-  tipo_adaptador: sitemap
-  endpoint: /sitemap.xml
+  url_agenda: https://www.bibliotecasantiago.gob.cl/cartelera
+  tipo_adaptador: json
+  endpoint: /jsonapi/node/evento
   comuna: Santiago
-  crawl_delay_seg: 5
-  buscar_detalle: false
-  tope_detalle: 25
-  activa: false
-  notas: 'El dominio canonico es bibliotecasantiago.gob.cl (bibliotecasantiago.cl redirige ahi). Mismo
-    Drupal del Patrimonio. Es de las fuentes mas ricas en actividades gratuitas y familiares recurrentes
-    (cuentacuentos, talleres, '
+  crawl_delay_seg: 3
+  activa: true
+  parametros:
+    page[limit]: 50
+    sort: -field_fechas.end_value
+  json:
+    lista: data
+    plantilla_url: https://www.bibliotecasantiago.gob.cl{attributes.path.alias}
+    campos:
+      titulo: attributes.title
+      descripcion_corta: attributes.field_abstract
+      categoria: attributes.field_tipo_evento
+      inicio: attributes.field_fechas.value
+      fin: attributes.field_fechas.end_value
+      hora_inicio_segundos: attributes.field_horario.from
+      id_externo: attributes.drupal_internal__nid
+  notas: 'Drupal del Servicio Nacional del Patrimonio Cultural con JSON:API abierto en /jsonapi. Es la
+    MISMA plataforma en todos sus museos y bibliotecas, asi que esta configuracion se copia cambiando
+    el dominio y la comuna. El tipo de contenido ''evento'' trae el dato mejor estructurado del catalogo:
+    rango de fechas en field_fechas (value/end_value), horario en segundos desde medianoche (field_horario.from),
+    tipo en field_tipo_evento (exposicion, taller, visita-guiada, charla) y la URL publica en path.alias.
+    Se pide ordenado por fecha de termino descendente, asi la primera pagina son justamente las muestras
+    que siguen abiertas. robots.txt permisivo. Matucana 151, frente al Parque Quinta Normal. Es de las
+    fuentes mas ricas en actividades gratuitas y familiares recurrentes (cuentacuentos, talleres, lactancia,
+    juegos de mesa).'
 - id: mmdh
   nombre: Museo de la Memoria y los Derechos Humanos
   url_base: https://mmdh.cl
@@ -526,9 +602,10 @@ fuentes:
   buscar_detalle: false
   tope_detalle: 25
   activa: false
-  notas: 'robots.txt limpio y explicito: User-agent: * / Allow: / (permite todo). Pero no es WordPress,
-    no tiene sitemap.xml (404) ni RSS ni API. Solo HTML. El dominio antiguo ww3.museodelamemoria.cl ya
-    no resuelve. Programacion g'
+  notas: 'REVISADO 13-08-2026: robots.txt explicito y permisivo (Allow: /), pero sin sitemap.xml, sin
+    RSS y sin API. Tiene /cartelera y /exposiciones, y ahi las tarjetas las arma JavaScript: el HTML servido
+    trae 7 enlaces y ninguna fecha. Queda apagada. Su direccion (Matucana 501) si esta verificada en correcciones/lugares.yaml
+    para cuando entre por manual.'
 - id: mim
   nombre: MIM - Museo Interactivo Mirador
   url_base: https://www.mim.cl
@@ -540,9 +617,11 @@ fuentes:
   buscar_detalle: false
   tope_detalle: 25
   activa: false
-  notas: Aplicacion Next.js sin robots.txt real (la ruta /robots.txt devuelve el HTML de la SPA, igual
-    que /sitemap.xml). /wp-json/ responde 403. Sin JSON-LD. No declara restricciones, pero tampoco ofrece
-    ninguna puerta estructur
+  notas: 'REVISADO 13-08-2026: aplicacion Next.js sin puerta estructurada. /robots.txt, /sitemap.xml,
+    /agenda, /actividades y /panoramas devuelven todos el mismo HTML de la SPA (~49 KB) y /wp-json responde
+    403. Sin JSON-LD ni RSS. No declara restricciones, pero tampoco ofrece por donde entrar sin ejecutar
+    su JavaScript. Queda apagada hasta que publiquen algo legible; su cartelera puede entrar por datos/manual/
+    mientras tanto.'
 - id: providencia_muni
   nombre: Municipalidad de Providencia
   url_base: https://providencia.cl
@@ -1757,3 +1836,204 @@ fuentes:
   notas: 'Zona sur. WordPress con The Events Calendar (tribe_events), que es la mejor calidad de dato
     posible: fecha, hora y recinto estructurados. APAGADA porque su calendario esta vacio hoy (la API
     devuelve 0 eventos). Encenderla y probar cuando vuelvan a cargar la cartelera.'
+- id: mhn
+  nombre: Museo Historico Nacional
+  url_base: https://www.mhn.gob.cl
+  url_agenda: https://www.mhn.gob.cl/cartelera
+  tipo_adaptador: json
+  endpoint: /jsonapi/node/evento
+  comuna: Santiago
+  crawl_delay_seg: 3
+  activa: true
+  parametros:
+    page[limit]: 50
+    sort: -field_fechas.end_value
+  json:
+    lista: data
+    plantilla_url: https://www.mhn.gob.cl{attributes.path.alias}
+    campos:
+      titulo: attributes.title
+      descripcion_corta: attributes.field_abstract
+      categoria: attributes.field_tipo_evento
+      inicio: attributes.field_fechas.value
+      fin: attributes.field_fechas.end_value
+      hora_inicio_segundos: attributes.field_horario.from
+      id_externo: attributes.drupal_internal__nid
+  notas: 'Drupal del Servicio Nacional del Patrimonio Cultural con JSON:API abierto en /jsonapi. Es la
+    MISMA plataforma en todos sus museos y bibliotecas, asi que esta configuracion se copia cambiando
+    el dominio y la comuna. El tipo de contenido ''evento'' trae el dato mejor estructurado del catalogo:
+    rango de fechas en field_fechas (value/end_value), horario en segundos desde medianoche (field_horario.from),
+    tipo en field_tipo_evento (exposicion, taller, visita-guiada, charla) y la URL publica en path.alias.
+    Se pide ordenado por fecha de termino descendente, asi la primera pagina son justamente las muestras
+    que siguen abiertas. robots.txt permisivo. Plaza de Armas 951. Tiene ademas la Sala Patrimonial del
+    Metro Plaza de Armas, que aparece como espacio propio.'
+- id: museo_educacion
+  nombre: Museo de la Educacion Gabriela Mistral
+  url_base: https://www.museodelaeducacion.gob.cl
+  url_agenda: https://www.museodelaeducacion.gob.cl/cartelera
+  tipo_adaptador: json
+  endpoint: /jsonapi/node/evento
+  comuna: Santiago
+  crawl_delay_seg: 3
+  activa: true
+  parametros:
+    page[limit]: 50
+    sort: -field_fechas.end_value
+  json:
+    lista: data
+    plantilla_url: https://www.museodelaeducacion.gob.cl{attributes.path.alias}
+    campos:
+      titulo: attributes.title
+      descripcion_corta: attributes.field_abstract
+      categoria: attributes.field_tipo_evento
+      inicio: attributes.field_fechas.value
+      fin: attributes.field_fechas.end_value
+      hora_inicio_segundos: attributes.field_horario.from
+      id_externo: attributes.drupal_internal__nid
+  notas: 'Drupal del Servicio Nacional del Patrimonio Cultural con JSON:API abierto en /jsonapi. Es la
+    MISMA plataforma en todos sus museos y bibliotecas, asi que esta configuracion se copia cambiando
+    el dominio y la comuna. El tipo de contenido ''evento'' trae el dato mejor estructurado del catalogo:
+    rango de fechas en field_fechas (value/end_value), horario en segundos desde medianoche (field_horario.from),
+    tipo en field_tipo_evento (exposicion, taller, visita-guiada, charla) y la URL publica en path.alias.
+    Se pide ordenado por fecha de termino descendente, asi la primera pagina son justamente las muestras
+    que siguen abiertas. robots.txt permisivo. Chacabuco 365, al lado del Parque Quinta Normal. Su cartelera
+    va y viene: puede quedarse meses sin eventos vigentes.'
+- id: museo_vicuna_mackenna
+  nombre: Museo Benjamin Vicuna Mackenna
+  url_base: https://www.museovicunamackenna.gob.cl
+  url_agenda: https://www.museovicunamackenna.gob.cl/cartelera
+  tipo_adaptador: json
+  endpoint: /jsonapi/node/evento
+  comuna: Providencia
+  crawl_delay_seg: 3
+  activa: true
+  parametros:
+    page[limit]: 50
+    sort: -field_fechas.end_value
+  json:
+    lista: data
+    plantilla_url: https://www.museovicunamackenna.gob.cl{attributes.path.alias}
+    campos:
+      titulo: attributes.title
+      descripcion_corta: attributes.field_abstract
+      categoria: attributes.field_tipo_evento
+      inicio: attributes.field_fechas.value
+      fin: attributes.field_fechas.end_value
+      hora_inicio_segundos: attributes.field_horario.from
+      id_externo: attributes.drupal_internal__nid
+  notas: 'Drupal del Servicio Nacional del Patrimonio Cultural con JSON:API abierto en /jsonapi. Es la
+    MISMA plataforma en todos sus museos y bibliotecas, asi que esta configuracion se copia cambiando
+    el dominio y la comuna. El tipo de contenido ''evento'' trae el dato mejor estructurado del catalogo:
+    rango de fechas en field_fechas (value/end_value), horario en segundos desde medianoche (field_horario.from),
+    tipo en field_tipo_evento (exposicion, taller, visita-guiada, charla) y la URL publica en path.alias.
+    Se pide ordenado por fecha de termino descendente, asi la primera pagina son justamente las muestras
+    que siguen abiertas. robots.txt permisivo. Avenida Vicuna Mackenna 94. Agenda intermitente.'
+- id: archivo_nacional
+  nombre: Archivo Nacional de Chile
+  url_base: https://www.archivonacional.gob.cl
+  url_agenda: https://www.archivonacional.gob.cl/cartelera
+  tipo_adaptador: json
+  endpoint: /jsonapi/node/evento
+  comuna: Santiago
+  crawl_delay_seg: 3
+  activa: true
+  parametros:
+    page[limit]: 50
+    sort: -field_fechas.end_value
+  json:
+    lista: data
+    plantilla_url: https://www.archivonacional.gob.cl{attributes.path.alias}
+    campos:
+      titulo: attributes.title
+      descripcion_corta: attributes.field_abstract
+      categoria: attributes.field_tipo_evento
+      inicio: attributes.field_fechas.value
+      fin: attributes.field_fechas.end_value
+      hora_inicio_segundos: attributes.field_horario.from
+      id_externo: attributes.drupal_internal__nid
+  notas: 'Drupal del Servicio Nacional del Patrimonio Cultural con JSON:API abierto en /jsonapi. Es la
+    MISMA plataforma en todos sus museos y bibliotecas, asi que esta configuracion se copia cambiando
+    el dominio y la comuna. El tipo de contenido ''evento'' trae el dato mejor estructurado del catalogo:
+    rango de fechas en field_fechas (value/end_value), horario en segundos desde medianoche (field_horario.from),
+    tipo en field_tipo_evento (exposicion, taller, visita-guiada, charla) y la URL publica en path.alias.
+    Se pide ordenado por fecha de termino descendente, asi la primera pagina son justamente las muestras
+    que siguen abiertas. robots.txt permisivo. Miraflores 50. Lanzamientos, exposiciones documentales
+    y conversatorios, casi todo gratis.'
+- id: mac_uchile_actividades
+  nombre: MAC - Museo de Arte Contemporaneo (U. de Chile)
+  url_base: https://mac.uchile.cl
+  url_agenda: https://mac.uchile.cl/actividades/
+  tipo_adaptador: html
+  comuna: Santiago
+  crawl_delay_seg: 3
+  activa: true
+  selectores:
+    tarjeta: article.actividades
+    titulo: h3.entry-title
+    link: h3.entry-title a
+    fecha: p.fecha
+    lugar: p.sede-sala
+  notas: 'Misma plantilla que mac_uchile pero la otra pagina: el adaptador html lee una URL por fuente,
+    y las visitas guiadas, talleres y lanzamientos estan en /actividades/. Ahi las tarjetas NO llevan
+    la clase periodo-actuales que si tienen las de exposiciones, asi que el selector es article.actividades
+    y las actividades ya pasadas las descarta el pipeline por fecha. Comparte el ''nombre'' con mac_uchile
+    a proposito, para que en el sitio y en la deduplicacion sean el mismo museo.'
+- id: museo_violeta_parra
+  nombre: Museo Violeta Parra
+  url_base: https://www.museovioletaparra.cl
+  url_agenda: https://www.museovioletaparra.cl/agenda/
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/agenda
+  tipos_post:
+  - agenda
+  comuna: Santiago
+  crawl_delay_seg: 3
+  buscar_detalle: true
+  tope_detalle: 25
+  activa: true
+  notas: 'WordPress con JetEngine y un tipo de contenido propio ''agenda'' abierto en la API REST (ademas
+    de ''obras'' y ''cedoc'', que son coleccion y no cartelera). La fecha no viene en un campo: esta escrita
+    en el cuerpo, asi que se abre la ficha. Avenida Vicuna Mackenna 37, al lado del GAM.'
+- id: artequin
+  nombre: Museo Artequin
+  url_base: https://www.artequin.cl
+  url_agenda: https://www.artequin.cl/
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: Santiago
+  crawl_delay_seg: 3
+  buscar_detalle: true
+  tope_detalle: 25
+  activa: true
+  descartar_palabras:
+  - licitacion
+  - concurso publico
+  - bases del concurso
+  notas: 'Avenida Portales 3530, en el Parque Quinta Normal (comuna de Santiago). WordPress con API REST
+    abierta; publica sus actividades como posts normales y la fecha va en el titulo o el cuerpo (''Jornada
+    Patitas al Museo | 13 de septiembre''), asi que se abre la ficha. El tipo ''portfolio'' es la coleccion
+    de obras, no cartelera: no se pide.'
+- id: precolombino
+  nombre: Museo Chileno de Arte Precolombino
+  url_base: https://precolombino.cl
+  url_agenda: https://precolombino.cl/exposiciones/
+  tipo_adaptador: html
+  comuna: Santiago
+  crawl_delay_seg: 5
+  activa: false
+  notas: 'REVISADO 13-08-2026: WordPress 6.7.7 pero con la API REST cerrada (/wp-json devuelve el HTML
+    de la pagina, no JSON) y un sitemap.xml que solo declara la home. /exposiciones, /agenda, /actividades
+    y /feed devuelven TODAS el mismo documento de 96 KB: la programacion la arma JavaScript. Sin puerta
+    estructurada, queda apagada. Bandera 361, a media cuadra de la Plaza de Armas; su direccion esta verificada
+    en correcciones/lugares.yaml por si entra por datos/manual/.'
+- id: museo_ferroviario
+  nombre: Museo Ferroviario de Santiago
+  url_base: https://museoferroviario.cl
+  url_agenda: https://museoferroviario.cl/
+  tipo_adaptador: html
+  comuna: Santiago
+  crawl_delay_seg: 5
+  activa: false
+  notas: 'REVISADO 13-08-2026: el sitio responde 500 en casi todo lo que no sea la home (/feed, /wp-json,
+    /sitemap_index.xml) y su sitemap.xml declara dos URLs: la home y transparencia. No publica agenda.
+    Se deja catastrado porque esta en el Parque Quinta Normal y su direccion ya esta verificada en correcciones/lugares.yaml.'
