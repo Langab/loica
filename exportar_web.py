@@ -15,7 +15,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-from loica.almacen import Almacen
+from loica.almacen import SQL_VIGENTE, Almacen
 from loica.correcciones import Correcciones
 from loica.geo import Geocodificador
 from loica.modelo import es_enlace_de_maquina, es_url_publica
@@ -35,6 +35,10 @@ SITIO = "https://langab.github.io/loica"
 # generado desde web/_ux_filtros.md. Devuelven (valor, motivo).
 from loica.clasificar import clasificar as _clasificar
 from loica.clasificar import clasificar_publico
+# Segundo nivel: qué género de fiesta y qué tamaño de panorama. Salen del
+# mismo archivo y con la misma regla —vacío antes que inventado—, así que la
+# interfaz tiene que estar preparada para recibir "".
+from loica.clasificar import clasificar_subcategoria, clasificar_escala
 
 # Lo que NO es un panorama aunque aparezca en una agenda cultural.
 NO_ES_PANORAMA = [
@@ -206,7 +210,7 @@ PLANTILLA_FICHA = """<!doctype html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=15">
+<link rel="stylesheet" href="../loica.css?v=16">
 <style>
   body{{min-height:100vh;min-height:100dvh}}
   .ficha-sola{{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}}
@@ -256,7 +260,7 @@ PLANTILLA_FICHA = """<!doctype html>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=15"></script>
+<script src="../loica.js?v=16"></script>
 <script>
   pintarBarra("mapa.html", "../");
   const EV = {evento_json};
@@ -420,12 +424,15 @@ def main() -> int:
     almacen = Almacen()
     filas = almacen.con.execute(
         """SELECT * FROM eventos
-           -- 'localtime' NO es decorativo: SQLite responde en UTC, que a
-           -- las 20:00 de Chile ya es el día siguiente. Sin esto, cualquier
-           -- corrida de la tarde publicaba el sitio SIN los panoramas que
-           -- quedaban de hoy —308 eventos en la corrida donde se detectó—,
-           -- justo a la hora en que alguien abre la app a preguntar qué hacer.
-           WHERE inicio >= date('now', 'localtime') AND estado != 'descartado'
+           -- SQL_VIGENTE mira la fecha de TÉRMINO cuando existe: una muestra
+           -- que abrió hace un mes y cierra en septiembre sigue estando.
+           -- 'localtime' dentro de él NO es decorativo: SQLite responde en
+           -- UTC, que a las 20:00 de Chile ya es el día siguiente. Sin eso,
+           -- cualquier corrida de la tarde publicaba el sitio SIN los
+           -- panoramas que quedaban de hoy —308 eventos en la corrida donde
+           -- se detectó—, justo a la hora en que alguien abre la app a
+           -- preguntar qué hacer.
+           WHERE """ + SQL_VIGENTE + """ AND estado != 'descartado'
            ORDER BY inicio""",
     ).fetchall()
 
@@ -461,6 +468,17 @@ def main() -> int:
         publico, _ = clasificar_publico(fila["titulo"], fila["descripcion_corta"] or "",
                                         categoria, fila["lugar_nombre"] or "",
                                         fila["fuente_nombre"] or "")
+        # La subcategoría cuelga de la categoría —el género de la fiesta, el
+        # tipo de obra—, así que se calcula DESPUÉS y con la categoría ya
+        # resuelta. La escala no depende de ella: se lee del recinto.
+        subcategoria, _ = clasificar_subcategoria(
+            categoria, fila["titulo"], fila["categoria"] or "",
+            fila["descripcion_corta"] or "", fila["lugar_nombre"] or "",
+            fila["fuente_nombre"] or "")
+        escala, _ = clasificar_escala(
+            fila["titulo"], fila["lugar_nombre"] or "",
+            fila["fuente_nombre"] or "", fila["precio_clp"],
+            fila["descripcion_corta"] or "")
 
         # Si la fuente ya entregó coordenadas, mandan ellas
         ev = {
@@ -479,6 +497,11 @@ def main() -> int:
             "precio": fila["precio_clp"],
             "precio_texto": fila["precio_texto"] or "",
             "categoria": categoria,
+            # Ambos pueden venir vacíos y eso es una respuesta, no un error:
+            # una fonda no tiene género y una tocata sin recinto conocido no
+            # tiene tamaño. El filtro que los use tiene que contar con eso.
+            "subcategoria": subcategoria,
+            "escala": escala,
             "publico": publico,
             "descripcion": fila["descripcion_corta"] or "",
             "imagen": fila["imagen_url"] or "",

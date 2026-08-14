@@ -26,7 +26,7 @@ from pathlib import Path
 import yaml
 
 from loica.agrupar import colapsar_multidia
-from loica.almacen import Almacen
+from loica.almacen import SQL_VIGENTE, Almacen
 from loica.filtros import motivo_de_descarte
 from loica.fuentes import ADAPTADORES
 from loica.red import ClienteEducado
@@ -106,8 +106,7 @@ def escribir_informe(almacen: Almacen, estadisticas: list[dict], duracion: float
         if e["error"] or e["encontrados"] == 0:
             continue
         vigentes = almacen.con.execute(
-            "SELECT COUNT(*) FROM eventos WHERE fuente_nombre = ? "
-            "AND inicio >= date('now', 'localtime')",
+            "SELECT COUNT(*) FROM eventos WHERE fuente_nombre = ? AND " + SQL_VIGENTE,
             (e["fuente"],),
         ).fetchone()[0]
         if vigentes == 0:
@@ -250,6 +249,11 @@ def main() -> int:
     total = time.time() - inicio
 
     if almacen:
+        revividos = almacen.revivir_vigentes()
+        if revividos:
+            log.info("Rescatados %d eventos que seguían en cartelera y estaban "
+                     "caducados por la regla vieja (se medía por inicio, no por fin)",
+                     revividos)
         caducados = almacen.caducar_pasados()
         if caducados:
             log.info("Marcados como caducados: %d eventos pasados", caducados)

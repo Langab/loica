@@ -153,8 +153,16 @@ class Evento:
             return False, f"el link no es http(s): {self.fuente_url[:80]}"
         if es_enlace_de_maquina(self.fuente_url):
             return False, f"el link es un endpoint, no una página: {self.fuente_url}"
-        if self.inicio is not None and self.inicio.date() < date.today():
-            return False, "evento pasado"
+        # Pasado es lo que ya TERMINÓ, no lo que ya empezó. Una muestra que
+        # abrió en julio y cierra en septiembre se descartaba acá mismo, en la
+        # puerta de entrada, sin llegar nunca a la base: es la forma normal de
+        # publicar de un museo, y también la de una temporada de teatro.
+        # `fin` solo manda si es posterior al inicio (hay fuentes que los
+        # invierten); si no, se cae al comportamiento de siempre.
+        if self.inicio is not None:
+            termino = self.fin if (self.fin and self.fin >= self.inicio) else self.inicio
+            if termino.date() < date.today():
+                return False, "evento pasado"
         return True, ""
 
     def como_dict(self) -> dict:

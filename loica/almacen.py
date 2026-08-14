@@ -14,6 +14,17 @@ from .modelo import Evento
 
 RUTA_DB = Path(__file__).resolve().parent.parent / "datos" / "eventos.db"
 
+# Un evento sigue vigente mientras no haya TERMINADO. La vigencia se medía por
+# `inicio`, y con eso una exposición que abrió el 18 de julio y cierra el 27 de
+# septiembre desaparecía del sitio el 19 de julio: la pregunta del usuario es
+# "¿esto todavía se puede ver?", y esa la contesta la fecha de término. Eran 144
+# eventos ya guardados —temporadas de teatro y muestras en curso— invisibles en
+# el mapa, y es la forma normal de publicar de un museo.
+#
+# `fin` lo ponen colapsar_multidia (una serie de días seguidos) y las fuentes
+# que declaran temporada. Sin `fin`, manda `inicio` como siempre.
+SQL_VIGENTE = "COALESCE(NULLIF(fin, ''), inicio) >= date('now', 'localtime')"
+
 ESQUEMA = """
 CREATE TABLE IF NOT EXISTS eventos (
     hash_dedup                TEXT PRIMARY KEY,
@@ -143,9 +154,26 @@ class Almacen:
         self.con.commit()
 
     def caducar_pasados(self) -> int:
-        """Marca como caducados los eventos cuya fecha ya pasó."""
+        """Marca como caducados los eventos que ya terminaron (ver SQL_VIGENTE)."""
         cursor = self.con.execute(
-            "UPDATE eventos SET estado = 'caducado' WHERE inicio < ? AND estado != 'caducado'",
+            "UPDATE eventos SET estado = 'caducado' "
+            "WHERE COALESCE(NULLIF(fin, ''), inicio) < ? AND estado != 'caducado'",
+            (date.today().isoformat(),),
+        )
+        self.con.commit()
+        return cursor.rowcount
+
+    def revivir_vigentes(self) -> int:
+        """Devuelve a borrador lo que se caducó antes de tiempo.
+
+        La regla vieja caducaba por `inicio`, así que la base quedó con
+        temporadas y exposiciones marcadas 'caducado' que en realidad siguen
+        en cartelera. Sin esto, arreglar la regla no las recupera: quedan
+        enterradas hasta que la fuente las vuelva a publicar.
+        """
+        cursor = self.con.execute(
+            "UPDATE eventos SET estado = 'borrador' "
+            "WHERE estado = 'caducado' AND COALESCE(NULLIF(fin, ''), inicio) >= ?",
             (date.today().isoformat(),),
         )
         self.con.commit()
@@ -161,7 +189,8 @@ class Almacen:
 
     def pendientes_de_revision(self) -> list[sqlite3.Row]:
         return self.con.execute(
-            "SELECT * FROM eventos WHERE estado = 'borrador' AND inicio >= ? ORDER BY inicio",
+            "SELECT * FROM eventos WHERE estado = 'borrador' "
+            "AND COALESCE(NULLIF(fin, ''), inicio) >= ? ORDER BY inicio",
             (date.today().isoformat(),),
         ).fetchall()
 
@@ -172,7 +201,7 @@ class Almacen:
                    SUM(CASE WHEN estado = 'borrador'  THEN 1 ELSE 0 END) AS borradores,
                    SUM(CASE WHEN estado = 'publicado' THEN 1 ELSE 0 END) AS publicados,
                    SUM(CASE WHEN es_gratis = 1 AND estado != 'caducado' THEN 1 ELSE 0 END) AS gratis,
-                   SUM(CASE WHEN inicio >= date('now', 'localtime') THEN 1 ELSE 0 END) AS vigentes
+                   SUM(CASE WHEN """ + SQL_VIGENTE + """ THEN 1 ELSE 0 END) AS vigentes
                FROM eventos""",
         ).fetchone()
         return dict(fila)
