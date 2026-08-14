@@ -59,8 +59,22 @@
   body{overflow-x:hidden}
 
   /* El color del que tiene la palabra. Arranca en el rojo de la Loica porque
-     es ella la que recibe, y lo cambia el JS en cada relevo. */
-  :root{--guia:var(--acento); --guia-suave:var(--rojo-200)}
+     es ella la que recibe, y lo cambia el JS en cada relevo.
+
+     Son TRES tokens y cada uno tiene un trabajo, que es la misma regla que
+     loica.css ya escribió para las categorías y que esta página se estaba
+     saltando:
+       --guia        relleno fuerte. Filo de la hoja, repisa de la opción,
+                     borde del resultado. NUNCA texto encima.
+       --guia-suave  pastel. Fondo de pastilla, con tinta azul encima.
+       --guia-tinta  la única versión que puede SER texto. Ya viene invertida
+                     para oscuro desde loica.css.
+     Antes `.quien` pintaba el nombre del que habla con el relleno fuerte y
+     eso fallaba AA en 6 de los 10 animales en claro y en 7 en oscuro: el
+     naranjo del Chincol sobre crema da 2,48:1 y el café del Guarén sobre la
+     burbuja oscura da 2,47:1. Con la versión -tinta el peor caso es 4,67:1. */
+  :root{--guia:var(--acento); --guia-suave:var(--rojo-200);
+        --guia-tinta:var(--acento-solido)}
 
   :root[data-tema="oscuro"]{--guia-suave:var(--azul-800)}
 
@@ -125,15 +139,41 @@
   @keyframes pasear{0%,100%{transform:translateY(0) rotate(-1.5deg)}
                     50%{transform:translateY(-7px) rotate(1.5deg)}}
   /* El nombre asoma al pasar el mouse: sin esto el desfile se lee como
-     decoración y nadie descubre que cada bicho es un atajo. */
+     decoración y nadie descubre que cada bicho es un atajo.
+
+     El fondo es el PASTEL del animal, no su relleno fuerte. Con el relleno
+     fuerte y crema encima el rótulo del Chincol daba 2,48:1 y el del
+     Chungungo 3,93:1 — a 11px eso no se lee. El pastel no cambia entre
+     claro y oscuro, así que la tinta azul fija pasa 9-11:1 en los dos. */
   .bicho-hero .rotulo{
     position:absolute;inset:auto 50% calc(100% + 6px) auto;transform:translateX(50%);
-    background:var(--tono);color:var(--rotulo-tinta,var(--arena-50));
+    background:var(--tono-suave,var(--fondo-elevado));color:var(--azul-900);
     border:2px solid var(--contorno);border-radius:var(--r-pill);
     padding:3px 10px;font:800 11px/1 var(--fuente-marca);white-space:nowrap;
     opacity:0;transition:opacity var(--rapido);pointer-events:none;box-shadow:var(--repisa-1);
   }
   .bicho-hero:hover .rotulo,.bicho-hero:focus-visible .rotulo{opacity:1}
+
+  /* ---------- LA REPISA DEL QUE TIENE LA PALABRA ----------
+     Con el hero compactado el desfile deja de ser adorno y pasa a ser la
+     barra de "quién te está atendiendo": al animal que habla le crece una
+     repisa de su color bajo las patas. Es una BARRA y no un disco detrás
+     porque el bicho lleva contorno `var(--contorno)`, que en oscuro es
+     crema: sobre un disco pastel el animal desaparecería. Bajo las patas no
+     toca el dibujo y el color se ve entero.
+     El Degú no sale en el desfile —no guía ninguna situación— así que
+     mientras habla de plata no se enciende nadie. Es correcto: dice que él
+     no es uno de los nueve atajos.
+     La barra va a -6px de las patas y el desfile sube unos píxeles: la hoja
+     se mete 12px bajo la cordillera y ahí abajo la barra quedaba tapada. */
+  .bicho-hero::after{
+    content:"";position:absolute;left:50%;bottom:-6px;
+    width:0;height:6px;border-radius:var(--r-pill);
+    background:var(--tono);box-shadow:0 0 0 2px var(--contorno);
+    opacity:0;pointer-events:none;
+    transition:width var(--medio),left var(--medio),opacity var(--medio);
+  }
+  .bicho-hero.habla::after{left:12%;width:76%;opacity:1}
 
   .atajo-pista{
     position:relative;z-index:2;max-width:960px;margin:0 auto;
@@ -147,22 +187,38 @@
      desmonta ni salta — todo son transiciones sobre las mismas piezas, que es
      lo que hace que se lea como un solo producto y no como dos pantallas.
 
-     El desfile SE QUEDA: es el cambiador de guía, y ahí sigue sirviendo. */
+     El desfile SE QUEDA: es el cambiador de guía, y ahí sigue sirviendo.
+
+     CUÁNTO SE ENCOGE. Medido: antes el encabezado de trabajo ocupaba 290px
+     en escritorio y 190px a 360, o sea que a 360 te comía un cuarto de la
+     pantalla para repetir el nombre de la página que ya dice la barra de
+     arriba. Ahora quedan ~130 y ~112. Lo que se achicó es lo que no trabaja
+     —el título y la Loica de pie—; el desfile se achica menos que el resto
+     porque es lo único de acá que se toca y ahora además muestra quién habla. */
   .hero-texto,.hero-guia,.paseo,.cerros,#loica-guia svg,.hero h1,
   .bicho-hero svg,.atajo-pista{
     transition:all var(--lento);
   }
-  body.conversando .hero h1{font-size:clamp(21px,3.6vw,27px);margin-bottom:0}
+  body.conversando .hero h1{font-size:var(--t-md);margin-bottom:0;letter-spacing:0}
   body.conversando .hero .bajada,
   body.conversando .atajo-pista{
     opacity:0;max-height:0;margin:0;padding-top:0;padding-bottom:0;overflow:hidden;
   }
-  body.conversando .hero-interior{padding-top:var(--e-4);padding-bottom:0}
-  body.conversando #loica-guia svg{width:clamp(64px,8vw,84px)}
-  body.conversando .globo{opacity:0;max-height:0;padding:0;border-width:0;margin:0}
-  body.conversando .paseo,body.conversando .cerros{height:78px}
-  body.conversando .desfile{bottom:10px}
-  body.conversando .bicho-hero svg{width:clamp(26px,5.2vw,42px)}
+  body.conversando .hero-interior{padding-top:var(--e-3);padding-bottom:0;
+    gap:var(--e-3);align-items:center}
+  body.conversando #loica-guia svg{width:clamp(36px,4.4vw,46px)}
+  /* El `width:0` importa tanto como el `max-height:0`: el globo mide hasta
+     230px de ancho y la columna de la Loica se quedaba con ese ancho aunque
+     el globo ya no se viera. A 360px eso dejaba a la Loica flotando en el
+     medio de una columna vacía, a 90px del filo. */
+  body.conversando .globo{opacity:0;max-height:0;width:0;padding:0;border-width:0;margin:0}
+  /* El globo se va pero su `gap` no, y el aire sobre la cordillera tampoco:
+     entre los dos dejaban 32px de nada en un encabezado de 176. */
+  body.conversando .hero-guia{gap:0;padding-bottom:0}
+  body.conversando .paseo,body.conversando .cerros{height:70px}
+  body.conversando .paseo{margin-top:var(--e-2)}
+  body.conversando .desfile{bottom:22px}
+  body.conversando .bicho-hero svg{width:clamp(26px,5.2vw,40px)}
   body.conversando .hero .mancha{opacity:.1}
 
   :root[data-tema="oscuro"] body.conversando .hero .mancha{opacity:.18}
@@ -188,6 +244,20 @@
     /* Nueve animales a 375px van pegados al filo: el respiro evita que el
        primero y el último se lean cortados. */
     .desfile{padding:0 var(--e-4)}
+
+    /* Conversando, el encabezado deja de ser una columna y pasa a ser una
+       FILA: la Loica chica a la izquierda y el título al lado. Apilados
+       —que es lo que hacía el `order:-1` de arriba— el encabezado de trabajo
+       medía 190px a 360px de ancho, casi lo mismo que la primera pregunta
+       con sus opciones. En fila mide ~112 y la conversación parte a la
+       vista sin scrollear. */
+    body.conversando .hero-interior{
+      grid-template-columns:auto 1fr;justify-items:start;text-align:left;
+      padding:var(--e-3) var(--e-4) 0;
+    }
+    body.conversando .hero-guia{order:-1}
+    body.conversando #loica-guia svg{width:42px}
+    body.conversando .paseo,body.conversando .cerros{height:62px}
   }
   /* Los nueve animales son los atajos principales de esta página y con el
      dedo medían 34x37. A 375px no caben nueve celdas de 44 (serían 396 más
@@ -211,8 +281,36 @@
     #loica-guia,#loica-guia.posada{animation:none}
   }
 
-  /* ---------- CONVERSACIÓN ---------- */
-  .conversa{max-width:720px;margin:0 auto;padding:var(--e-6) var(--e-5) var(--e-10)}
+  /* ---------- CONVERSACIÓN ----------
+     LA HOJA. Antes las burbujas flotaban sueltas sobre el fondo de la página:
+     todo el sistema —contorno de tinta y repisa— estaba aplicado a cada
+     pieza menos a lo que las contiene, y por eso la conversación se leía
+     como una lista de globos y no como un lugar.
+
+     La hoja es el MISMO componente que el panel del mapa: contorno, esquinas
+     de arriba redondeadas, sin borde abajo, y se mete bajo la cordillera con
+     un margen negativo. No se inventa un contenedor nuevo, se reusa el que el
+     producto ya tiene, y por eso el hero sigue cayendo dentro de la
+     conversación en vez de quedar arriba como una portada pegada.
+
+     El fondo es `--fondo-hundido` y NO `--fondo-elevado`: las burbujas ya son
+     elevado y sobre elevado desaparecían. Queda página → hoja (hundida) →
+     burbuja (elevada), y la relación es la misma en claro y en oscuro.
+
+     El filo de arriba es de 7px en `--guia` y es la señal grande del relevo:
+     cuando el Culpeo toma el turno, la hoja entera cambia de filo. Va como
+     `inset` box-shadow y no como pseudo-elemento para que respete el radio
+     y no haya que reservarle sitio en el flujo. */
+  .conversa{
+    position:relative;max-width:720px;margin:calc(-1 * var(--e-3)) auto 0;
+    padding:calc(var(--e-6) + 7px) var(--e-5) var(--e-12);
+    min-height:calc(100vh - 150px);
+    background:var(--fondo-hundido);
+    border:2.5px solid var(--contorno);border-bottom:0;
+    border-radius:var(--r-xl) var(--r-xl) 0 0;
+    box-shadow:inset 0 7px 0 var(--guia);
+    transition:box-shadow var(--lento);
+  }
 
   /* --- EL HILO ---
      La firma de la página. Una línea baja por la columna de los avatares y se
@@ -226,17 +324,56 @@
      primera burbuja ni al costado de las opciones. Cada tramo sube hasta el
      avatar anterior, de modo que dos turnos seguidos quedan cosidos. */
   #hilo{position:relative}
+  /* `--sube` es el hueco que hay ENCIMA de este turno. Existe como variable
+     porque el tramo de hilo tiene que cruzarlo para llegar al avatar de
+     arriba, y el hueco ya no es siempre el mismo: entre dos turnos del mismo
+     animal se achica (ver `.mismo`). Si el hilo siguiera con el 12px escrito
+     a mano quedaría un corte de 8px en cada grupo. */
   .turno{display:flex;gap:var(--e-3);margin-bottom:var(--e-3);
-    align-items:flex-end;position:relative}
+    align-items:flex-end;position:relative;--sube:var(--e-3)}
   .turno.mia{flex-direction:row-reverse}
   .turno + .relevo{margin-top:var(--e-5)}
   /* El tramo va desde el avatar del turno anterior hasta el de este, por eso
      empieza un `gap` más arriba de su propia caja. */
   .turno::before{
-    content:"";position:absolute;left:21.5px;top:calc(-1 * var(--e-3));
-    height:calc(100% - 23px + var(--e-3));width:3px;border-radius:2px;
+    content:"";position:absolute;left:21.5px;top:calc(-1 * var(--sube));
+    height:calc(100% - 23px + var(--sube));width:3px;border-radius:2px;
     background:var(--voz,var(--guia));opacity:.45;
   }
+  /* ---------- TURNOS AGRUPADOS ----------
+     Cuando el mismo animal habla dos veces seguidas, el segundo turno llega
+     con `.mismo` (lo pone `nodoDice`, que ya sabía la respuesta: es el mismo
+     dato con el que decide si repite el nombre). De ahí salen tres cosas:
+
+       1. el medallón se esconde en el turno de ARRIBA, no en el de abajo.
+          Los turnos se alinean con `flex-end`, así que la cara queda al pie
+          del grupo, que es adonde apunta el pico de la burbuja;
+       2. la burbuja de arriba pierde el pico y queda redonda entera, para
+          que el grupo se lea como un bloque con una sola punta;
+       3. el hueco entre las dos baja a 4px.
+
+     Se esconde con `visibility` y no con `display`, y por eso la columna de
+     46px sigue ahí y el hilo baja recto por el grupo sin recalcular nada.
+     El `:has()` es lo que permite que esto se resuelva solo a medida que
+     entran los turnos, sin tocar el turno anterior desde el JS. */
+  .turno.mismo{--sube:var(--e-1)}
+  .turno:has(+ .turno.mismo){margin-bottom:var(--e-1)}
+  .turno:has(+ .turno.mismo) .avatar{visibility:hidden}
+  .turno:has(+ .turno.mismo) .burbuja{border-bottom-left-radius:var(--r-lg)}
+  /* Y el hilo tiene que bajar hasta el borde de la caja. Los tramos terminan
+     a la altura de la cara (23px del suelo, medio medallón), que es correcto
+     mientras la cara esté ahí; escondida, la línea quedaba colgando en el
+     aire justo antes de nada. Con `bottom:0` llega al filo y el turno
+     siguiente lo cose con el suyo. */
+  .turno:has(+ .turno.mismo)::before{bottom:0;height:auto}
+  /* Los dos turnos que ARRANCAN un hilo —el primero de la página y el que
+     viene después de una pastilla de relevo— además necesitan el `top:0`.
+     Su regla los deja en `top:auto`, y `auto` dentro de un flex alineado a
+     `flex-end` coloca la caja abajo del todo: el tramo salía de 3px en vez
+     de recorrer el grupo entero. Van con el `#hilo` y el `.relevo` adelante
+     porque las reglas que sobrescriben pesan más que una clase suelta. */
+  #hilo > .turno:first-child:has(+ .turno.mismo)::before,
+  .relevo + .turno:has(+ .turno.mismo)::before{top:0;bottom:0;height:auto}
   /* En mis turnos no hay avatar, pero el hilo tiene que seguir: toma el color
      del guía actual para no dejar el tramo mudo. */
   /* Sin el gap de más: si el tramo se estira bajo el último turno queda un
@@ -260,10 +397,13 @@
     background:var(--fondo-elevado);box-shadow:var(--repisa-2);
     border-bottom-left-radius:var(--e-1);font-size:var(--t-base);line-height:1.5;
   }
-  /* El nombre solo en el primer turno de cada animal: repetirlo es ruido. */
+  /* El nombre solo en el primer turno de cada animal: repetirlo es ruido.
+     Va en `--voz-tinta` (la versión legible del color del animal) y no en
+     `--voz` (el relleno fuerte). Con el relleno, el nombre del Chincol daba
+     2,48:1 sobre la burbuja clara y el del Guarén 2,47:1 sobre la oscura. */
   .quien{display:block;font:800 var(--t-xs)/1 var(--fuente-marca);
     letter-spacing:.04em;text-transform:uppercase;
-    color:var(--voz,var(--acento));margin-bottom:5px}
+    color:var(--voz-tinta,var(--acento-solido));margin-bottom:5px}
   .turno.mia .burbuja{
     background:var(--tinta);color:var(--fondo-elevado);
     border-bottom-left-radius:var(--r-lg);border-bottom-right-radius:var(--e-1);
@@ -277,15 +417,29 @@
   .entra{animation:burbuja-entra var(--rebote) backwards}
   @keyframes burbuja-entra{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
 
-  .relevo{display:flex;align-items:center;gap:var(--e-3);margin:var(--e-5) 0 var(--e-4)}
-  .relevo::before,.relevo::after{content:"";flex:1;height:2px;background:var(--borde)}
+  /* ---------- EL RELEVO ----------
+     Es el momento más importante de la conversación —de acá en adelante te
+     habla otro— y estaba dicho a 12px. Ahora la pastilla manda: 13px, más
+     aire y la línea de al lado en tinta en vez de en `--borde`, que sobre la
+     hoja hundida casi no se veía.
+
+     Y cambia de relleno fuerte a PASTEL con tinta azul encima. El relleno
+     fuerte con crema encima fallaba AA en cuatro de los diez animales
+     (Chincol 2,48:1, Chungungo 3,93:1, Cóndor 4,31:1, Loica 3,85:1) y el
+     pastel con tinta azul da 9-11:1 en los diez, sin depender del modo:
+     los `--c-*-suave` son los mismos de día y de noche. El color fuerte no
+     se pierde, se muda a donde no lleva texto: el filo de la hoja, la repisa
+     de las opciones y el borde del resultado. */
+  .relevo{display:flex;align-items:center;gap:var(--e-3);margin:var(--e-6) 0 var(--e-5)}
+  .relevo::before,.relevo::after{content:"";flex:1;height:2px;background:var(--contorno);
+    opacity:.28;border-radius:2px}
   .relevo span{
-    display:inline-flex;align-items:center;gap:7px;flex:none;
-    padding:5px 14px 5px 7px;border:2px solid var(--contorno);
-    border-radius:var(--r-pill);background:var(--tono);color:var(--tono-tinta,#fff);
-    font:800 var(--t-xs)/1 var(--fuente-marca);box-shadow:var(--repisa-1);
+    display:inline-flex;align-items:center;gap:8px;flex:none;
+    padding:7px 16px 7px 8px;border:2.5px solid var(--contorno);
+    border-radius:var(--r-pill);background:var(--tono-suave);color:var(--azul-900);
+    font:800 var(--t-sm)/1 var(--fuente-marca);box-shadow:var(--repisa-2);
   }
-  .relevo svg{width:22px;height:22px}
+  .relevo svg{width:24px;height:24px}
 
   .puntos{display:flex;gap:5px;padding:var(--e-1) var(--e-2)}
   .puntos i{width:8px;height:8px;border-radius:50%;background:var(--tinta-tenue);
@@ -296,48 +450,123 @@
 
   /* Grilla, no scroll horizontal: acá hay que VER las nueve opciones para
      elegir, no descubrirlas deslizando (el problema anotado en
-     `_critica_diseno.md` para la barra de filtros). */
+     `_critica_diseno.md` para la barra de filtros).
+
+     Se subió el mínimo de 160 a 240px y con eso pasa de tres columnas a dos.
+     Con 160 la tarjeta no alcanzaba a poner la carita, el título, el
+     subtítulo y el número en una línea y se partía todo: a 360px daban dos
+     columnas de 152px donde "En pareja" salía en dos renglones y "A mi
+     ritmo" en tres; y aun a 202px en escritorio "Voy solo" se cortaba en
+     dos. Descontando la carita, el número y los aires quedan unos 60px de
+     texto por tarjeta, y ninguna etiqueta de las tres lenguas cabe ahí
+     ("Fim de semana", "This weekend"). Con 240 la cuenta sale sola: 2
+     columnas en la hoja, 2 en tablet y 1 sola a 360 — una fila por opción,
+     del ancho del pulgar. Menos columnas es además lo que hace que se lean
+     como la acción principal y no como una grilla de fichas. */
   .opciones{
-    display:grid;gap:var(--e-2);margin:0 0 var(--e-5) calc(46px + var(--e-3));
-    grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+    display:grid;gap:var(--e-2);margin:var(--e-2) 0 var(--e-5) calc(46px + var(--e-3));
+    grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
   }
   .opciones.corta{grid-template-columns:repeat(auto-fill,minmax(122px,1fr))}
   @media(max-width:540px){
-    .opciones{margin-left:0;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+    .opciones{margin-left:0;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
   }
+  /* ---------- LA OPCIÓN ----------
+     Es LA acción de la página y se veía igual que cualquier caja. Tres
+     cambios y ninguno es adorno:
+
+     1. LA REPISA ES DE COLOR. Es el único sitio de la página donde la sombra
+        dura no es de tinta: cada opción se para sobre la repisa del animal
+        que la firma (`--marca`), y cuando la pregunta no tiene animal —el
+        cuándo, el sector— sobre la del guía que la está haciendo. Así la
+        grilla dice de un vistazo de quién es cada camino sin agregar una
+        sola palabra, y en oscuro además se ve mejor que la repisa de tinta,
+        que sobre azul-950 casi no existe.
+     2. CRECE. 60px de alto mínimo. El mínimo táctil son 44 y las opciones de
+        una sola línea —las repreguntas de cada animal, que no traen
+        subtítulo— medían 38.
+     3. EL NÚMERO SE VE. Cuántos panoramas hay detrás de esa opción es el dato
+        que convierte una elección a ciegas en una decisión, y estaba a 11px
+        en gris tenue, indistinguible de un identificador. Ahora es una
+        pastilla: sin necesitar una palabra que lo explique, una cifra dentro
+        de una pastilla se lee como recuento. */
   .opcion{
-    display:flex;align-items:center;gap:var(--e-2);text-align:left;
+    display:flex;align-items:center;gap:var(--e-3);text-align:left;
+    min-height:60px;
     border:2.5px solid var(--contorno);border-radius:var(--r-lg);
     background:var(--fondo-elevado);color:var(--tinta);
-    padding:11px var(--e-3);cursor:pointer;
-    font:700 var(--t-sm)/1.25 var(--fuente-marca);
-    box-shadow:var(--repisa-2);transition:var(--rapido);
+    padding:var(--e-2) var(--e-3);cursor:pointer;
+    font:700 var(--t-md)/1.2 var(--fuente-marca);
+    box-shadow:0 4px 0 var(--marca,var(--guia));
+    transition:transform var(--rapido),box-shadow var(--rapido),background-color var(--rapido);
   }
-  .opcion:hover{transform:translateY(-2px);box-shadow:var(--repisa-3);background:var(--fondo-hundido)}
+  /* Al pasar por encima sube y la repisa CRECE, no cambia de color de fondo:
+     la hoja ya es `--fondo-hundido` y la tarjeta se confundía con el papel
+     justo mientras se levantaba de él. */
+  .opcion:hover{transform:translateY(-2px);box-shadow:0 6px 0 var(--marca,var(--guia))}
   .opcion:active{transform:translateY(4px);box-shadow:none}
-  .opcion svg{flex:none;width:30px;height:30px}
+  /* El foco tiene que volver a dibujarse acá. El anillo de `loica.css` lo da
+     con `box-shadow`, y esta tarjeta también usa `box-shadow` para la
+     repisa: con la misma especificidad gana la que está más abajo, que es
+     esta, y el que navega con Tab se quedaba sin ninguna señal justo en el
+     control principal de la página. Se apilan los tres: primero la repisa,
+     después los dos anillos del sistema —el amarillo solo da 1,65:1 sobre
+     crema, por eso van dos. */
+  .opcion:focus-visible{
+    box-shadow:0 4px 0 var(--marca,var(--guia)),
+               0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+  }
+  .opcion svg{flex:none;width:34px;height:34px}
+  /* El bloque de texto se queda con lo que sobre. Sin `min-width:0` un título
+     largo sin espacios ensancha la tarjeta y descuadra la columna entera. */
+  .opcion > span{flex:1;min-width:0}
   .opcion small{display:block;font-family:var(--fuente-ui);font-weight:500;
-    font-size:var(--t-xs);color:var(--tinta-tenue);margin-top:2px}
+    font-size:var(--t-xs);color:var(--tinta-tenue);margin-top:3px;line-height:1.3}
   /* Cuántos panoramas hay detrás de cada opción. Es el dato que convierte una
      elección a ciegas en una decisión: nadie quiere tocar el camino vacío. */
   .opcion .cuantos{
-    margin-left:auto;flex:none;font:800 11px/1 var(--fuente-ui);
-    color:var(--tinta-tenue);font-variant-numeric:tabular-nums;
+    margin-left:auto;flex:none;min-width:36px;padding:4px 9px;
+    border-radius:var(--r-pill);background:var(--fondo-hundido);
+    font:800 var(--t-sm)/1.25 var(--fuente-ui);text-align:center;
+    color:var(--tinta-suave);font-variant-numeric:tabular-nums;
   }
-  .opcion[data-vacio="1"]{opacity:.5}
+  /* El camino vacío se HUNDE en vez de apagarse. Con `opacity:.5` el título
+     caía a 2,6:1 y el subtítulo a 2,4:1: la opción seguía siendo pulsable y
+     ya no se podía leer. Hundida se lee entera (5,3:1 el peor caso) y se ve
+     igual de descartada, porque pierde el color de la repisa. */
+  .opcion[data-vacio="1"]{background:var(--fondo-hundido);
+    box-shadow:0 4px 0 var(--contorno-suave)}
+  .opcion[data-vacio="1"] .cuantos{background:none;box-shadow:inset 0 0 0 2px var(--borde-fuerte)}
 
+  /* ---------- EL RESULTADO ----------
+     Es la respuesta a la que iba toda la conversación y se veía igual que
+     cualquier otro bloque del hilo. Ahora se distingue por tres cosas, todas
+     del mismo sistema y ninguna nueva:
+       - el filo de arriba de 7px en `--guia`, EL MISMO filo que tiene la
+         hoja. Ese eco es lo que dice "esto lo firma el que te está
+         atendiendo", sin una palabra;
+       - la repisa más alta de la página (`--repisa-4`, la de los paneles),
+         que lo levanta por encima de las burbujas;
+       - aire arriba, para que no venga pegado a la burbuja que lo anuncia.
+     Y NO lleva avatar ni pico: no es un turno, es lo que se encontró. */
   .resultados{
-    margin:0 0 var(--e-4) calc(46px + var(--e-3));
+    margin:var(--e-3) 0 var(--e-4) calc(46px + var(--e-3));
     background:var(--fondo-elevado);border:2.5px solid var(--contorno);
-    border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--repisa-2);
+    border-top:7px solid var(--guia);
+    border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--repisa-4);
+    transition:border-color var(--lento);
   }
   @media(max-width:540px){.resultados{margin-left:0}}
   .resultados .tarjeta:last-child{border-bottom:0}
 
+  /* Los botones del cierre son el pie del resultado, no un turno más: van
+     separados de la lista y pegados entre sí. `flex:1 1 auto` es para 360px,
+     donde tres botones sueltos dejaban uno solo y torcido en la última fila. */
   .acciones{display:flex;flex-wrap:wrap;gap:var(--e-2);
-    margin:0 0 var(--e-6) calc(46px + var(--e-3))}
+    margin:var(--e-5) 0 var(--e-6) calc(46px + var(--e-3))}
   @media(max-width:540px){.acciones{margin-left:0}}
-  .acciones .boton{font-size:var(--t-base);padding:11px var(--e-5)}
+  .acciones .boton{font-size:var(--t-base);padding:11px var(--e-5);
+    min-height:48px;flex:1 1 auto}
 
   /* En celular las opciones y los resultados usan todo el ancho y pasan por
      encima de la columna de avatares, así que el hilo se retira: ahí ya no
@@ -386,33 +615,62 @@
 /* ============================================================
    1. EL ELENCO COMO GUÍAS
    Los nombres salen de ELENCO (loica.js) para no tener dos listas que se
-   desincronicen. Acá se agrega el color de voz. `claro` marca a los que
-   llevan tinta azul encima: el naranjo y el amarillo fuertes con texto
-   blanco no pasan contraste.
+   desincronicen. Acá se agrega el color de voz, y son TRES por animal porque
+   loica.css define tres y cada uno tiene un solo trabajo:
+     tono   relleno fuerte — filos, repisas, bordes. Nunca texto encima.
+     suave  pastel — fondo de pastilla, con tinta azul encima.
+     tinta  la única versión que puede SER texto. Viene ya invertida para
+            modo oscuro desde loica.css, así que sirve en los dos modos.
+   Había un cuarto campo, `claro`, que marcaba a los animales cuyo relleno
+   fuerte no aguanta texto blanco encima. Se fue con los dos sitios que lo
+   miraban: ya no hay texto sobre relleno fuerte en ninguna parte de la
+   página, y el dato que hacía falta —qué versión del color puede ser texto—
+   lo dice `tinta`, que además está calculado para los dos modos.
    ============================================================ */
 const GUIAS = {
-  loica:     {tono:"var(--acento)",      suave:"var(--rojo-200)",           claro:false, art:{es:"la ", pt:"a "}},
-  pudu:      {tono:"var(--c-libre)",     suave:"var(--c-libre-suave)",      claro:false, art:{es:"el ", pt:"o "}},
-  culpeo:    {tono:"var(--c-fiesta)",    suave:"var(--c-fiesta-suave)",     claro:false, art:{es:"el ", pt:"o "}},
-  condor:    {tono:"var(--c-musica)",    suave:"var(--c-musica-suave)",     claro:false, art:{es:"el ", pt:"o "}},
-  chinchilla:{tono:"var(--c-cultura)",   suave:"var(--c-cultura-suave)",    claro:false, art:{es:"la ", pt:"a "}},
-  chincol:   {tono:"var(--c-clases)",    suave:"var(--c-clases-suave)",     claro:true,  art:{es:"el ", pt:"o "}},
-  chungungo: {tono:"var(--c-deporte)",   suave:"var(--c-deporte-suave)",    claro:false, art:{es:"el ", pt:"o "}},
-  pinguino:  {tono:"var(--c-charla)",    suave:"var(--c-charla-suave)",     claro:false, art:{es:"el ", pt:"o "}},
-  guaren:    {tono:"var(--c-descuento)", suave:"var(--c-descuento-suave)",  claro:false, art:{es:"el ", pt:"o "}},
+  loica:     {tono:"var(--acento)",      suave:"var(--rojo-200)",           tinta:"var(--acento-solido)",     art:{es:"la ", pt:"a "}},
+  pudu:      {tono:"var(--c-libre)",     suave:"var(--c-libre-suave)",      tinta:"var(--c-libre-tinta)",     art:{es:"el ", pt:"o "}},
+  culpeo:    {tono:"var(--c-fiesta)",    suave:"var(--c-fiesta-suave)",     tinta:"var(--c-fiesta-tinta)",    art:{es:"el ", pt:"o "}},
+  condor:    {tono:"var(--c-musica)",    suave:"var(--c-musica-suave)",     tinta:"var(--c-musica-tinta)",    art:{es:"el ", pt:"o "}},
+  chinchilla:{tono:"var(--c-cultura)",   suave:"var(--c-cultura-suave)",    tinta:"var(--c-cultura-tinta)",   art:{es:"la ", pt:"a "}},
+  chincol:   {tono:"var(--c-clases)",    suave:"var(--c-clases-suave)",     tinta:"var(--c-clases-tinta)",    art:{es:"el ", pt:"o "}},
+  chungungo: {tono:"var(--c-deporte)",   suave:"var(--c-deporte-suave)",    tinta:"var(--c-deporte-tinta)",   art:{es:"el ", pt:"o "}},
+  pinguino:  {tono:"var(--c-charla)",    suave:"var(--c-charla-suave)",     tinta:"var(--c-charla-tinta)",    art:{es:"el ", pt:"o "}},
+  guaren:    {tono:"var(--c-descuento)", suave:"var(--c-descuento-suave)",  tinta:"var(--c-descuento-tinta)", art:{es:"el ", pt:"o "}},
   /* El Degú no habla en esta página: se hace cargo de lo gratis y por eso
      aparece como cara de la opción "cero peso". Igual lleva color propio —
      sin entrada acá heredaría el rojo de la Loica. */
-  degu:      {tono:"var(--c-libre)",     suave:"var(--c-libre-suave)",      claro:false, art:{es:"el ", pt:"o "}},
+  degu:      {tono:"var(--c-libre)",     suave:"var(--c-libre-suave)",      tinta:"var(--c-libre-tinta)",     art:{es:"el ", pt:"o "}},
 };
 
-/* Pasarle el color a la página entera. Con esto la cordillera, el ambiente y
-   el hilo quedan del color del que tiene la palabra, y el relevo se ve en
-   toda la superficie y no sólo en la pastilla. */
+/* Quién tiene la palabra ahora mismo. Se guarda aparte de `ultimaVoz` porque
+   `ultimaVoz` se borra cada vez que contestas tú —así el animal se vuelve a
+   presentar— y acá hace falta el dato que sobrevive a eso: al repintar por
+   cambio de idioma, el desfile se vuelve a construir y hay que volver a
+   encender al que estaba hablando. */
+let guiaActual = "loica";
+
+/* Pasarle el color a la página entera. Con esto la cordillera, el ambiente,
+   el filo de la hoja y el hilo quedan del color del que tiene la palabra, y
+   el relevo se ve en toda la superficie y no sólo en la pastilla. */
 function mandaLaVoz(guia){
   const g = GUIAS[guia] || GUIAS.loica;
+  guiaActual = GUIAS[guia] ? guia : "loica";
   document.documentElement.style.setProperty("--guia", g.tono);
   document.documentElement.style.setProperty("--guia-suave", g.suave);
+  document.documentElement.style.setProperty("--guia-tinta", g.tinta);
+  marcarQuienHabla();
+}
+
+/* Le crece una repisa de su color al animal del desfile que tiene el turno.
+   Con el hero compactado el desfile es lo único que queda arriba, así que
+   pasa a responder "quién me está atendiendo" sin que haya que buscar la
+   última pastilla de relevo en el hilo. Se hace acá y no en CSS porque el
+   selector tendría que comparar dos atributos entre sí, cosa que CSS no
+   puede. */
+function marcarQuienHabla(){
+  document.querySelectorAll(".bicho-hero").forEach(bt =>
+    bt.classList.toggle("habla", bt.dataset.guia === guiaActual));
 }
 const nombreGuia = c => (ELENCO.find(e => e.clave === c) || ELENCO[0])[IDIOMA][0];
 /* "Te atiende el Culpeo", no "Te atiende Culpeo". El inglés no lleva artículo
@@ -629,8 +887,13 @@ const esperar = ms => new Promise(r => setTimeout(r, reduce() ? Math.min(ms, 260
 function nodoDice(guia, html, conNombre, animar){
   const g = GUIAS[guia] || GUIAS.loica;
   const d = document.createElement("div");
-  d.className = "turno";
+  /* `mismo` = este turno continúa al de arriba. Es el mismo dato con el que
+     ya se decidía si repetir el nombre, así que no hay estado nuevo: lo que
+     cambia es que ahora el CSS también lo aprovecha para esconder el
+     medallón repetido y pegar las dos burbujas. */
+  d.className = "turno" + (conNombre ? "" : " mismo");
   d.style.setProperty("--voz", g.tono);
+  d.style.setProperty("--voz-tinta", g.tinta);
   d.innerHTML = `<div class="avatar">${carita(guia, g.tono, 32)}</div>
     <div class="burbuja${animar ? " entra" : ""}">
       ${conNombre ? `<b class="quien">${escapar(nombreGuia(guia))}</b>` : ""}${html}</div>`;
@@ -647,11 +910,14 @@ function nodoRelevo(guia){
   const d = document.createElement("div");
   d.className = "relevo";
   d.style.setProperty("--tono", g.tono);
-  if(g.claro) d.style.setProperty("--tono-tinta", "var(--azul-900)");
-  /* La pastilla siempre es color saturado, así que el contorno del animal se
+  d.style.setProperty("--tono-suave", g.suave);
+  /* La pastilla es del pastel del animal, así que el contorno del dibujo se
      fija a tinta azul en vez de heredar `var(--contorno)`: en oscuro ese
-     contorno es crema y el bicho quedaba sin borde sobre su propio color. */
-  d.innerHTML = `<span>${carita(guia, "var(--arena-50)", 22, {tinta:"#1E2A4A"})}
+     contorno es crema y el bicho quedaba sin borde sobre el pastel claro.
+     Y el relleno del dibujo pasa de crema al color fuerte del animal, que es
+     el par que loica.css documenta para el pastel: crema sobre pastel era
+     una silueta sin dentro. */
+  d.innerHTML = `<span>${carita(guia, g.tono, 22, {tinta:"#1E2A4A"})}
     ${escapar(b("relevo"))} ${escapar(nombreConArt(guia))}</span>`;
   return d;
 }
@@ -710,6 +976,12 @@ function preguntar(opciones, corta, alElegir){
       const bt = document.createElement("button");
       bt.type = "button";
       bt.className = "opcion";
+      /* El color de la repisa. Si la opción trae animal —"con niños" es del
+         Pudú, "cero peso" es del Degú— se para sobre el suyo; si no —el
+         cuándo, el sector— sobre el del guía que está preguntando. Es lo que
+         hace que la grilla diga de quién es cada camino sin una palabra. */
+      bt.style.setProperty("--marca",
+        o.mascota ? (GUIAS[o.mascota] || GUIAS.loica).tono : "var(--guia)");
       if(o.cuantos === 0) bt.dataset.vacio = "1";
       bt.innerHTML =
         (o.mascota ? carita(o.mascota, (GUIAS[o.mascota] || GUIAS.loica).tono, 30) : "")
@@ -1022,12 +1294,23 @@ function frase(){
   return partes.join(", ") + (plata ? y + plata : "");
 }
 
+/* El filo de arriba del resultado lo firma quien lo encontró, y para eso hay
+   que CONGELARLE el color. `--guia` es global y sigue cambiando: cuando el
+   Guarén entraba al final con su dato de comida, la lista de panoramas que
+   había armado el Cóndor se volvía café con él. Fijado en el elemento, cada
+   resultado se queda con el color del animal que lo trajo. */
+function firmar(nodo, guia){
+  nodo.style.setProperty("--guia", (GUIAS[guia] || GUIAS.loica).tono);
+  return nodo;
+}
+
 function pintarLote(){
   const lote = ranking.slice(mostrados, mostrados + 3);
   mostrados += lote.length;
   const construir = () => {
     const c = document.createElement("div");
     c.className = "resultados";
+    firmar(c, situacionPorId(respuestas.situacion).guia);
     lote.forEach(ev => c.appendChild(
       tarjetaEvento(ev, e => location.href = `e/${e.id}.html`)));
     return c;
@@ -1057,6 +1340,7 @@ async function codaDelGuaren(){
   agregar({render: () => {
     const c = document.createElement("div");
     c.className = "resultados";
+    firmar(c, "guaren");
     c.appendChild(tarjetaDescuento(uno, () => location.href = "descuentos.html"));
     return c;
   }});
@@ -1085,6 +1369,7 @@ function pintarLoteDctos(){
   const construir = () => {
     const c = document.createElement("div");
     c.className = "resultados";
+    firmar(c, "guaren");
     lote.forEach(d => c.appendChild(
       tarjetaDescuento(d, () => location.href = "descuentos.html")));
     return c;
@@ -1187,9 +1472,10 @@ function pintarHero(){
     .filter(x => x.d)
     .map(({a, d}, i) => {
       const g = GUIAS[a.clave];
-      return `<button class="bicho-hero" data-sit="${d.id}"
-          style="animation-delay:${(i * .27).toFixed(2)}s;--tono:${g.tono}${
-            g.claro ? ";--rotulo-tinta:var(--azul-900)" : ""}"
+      /* `data-guia` es lo que deja encender al que tiene la palabra: el
+         botón sabe qué animal dibuja, no sólo a qué situación lleva. */
+      return `<button class="bicho-hero" data-sit="${d.id}" data-guia="${a.clave}"
+          style="animation-delay:${(i * .27).toFixed(2)}s;--tono:${g.tono};--tono-suave:${g.suave}"
           aria-label="${escapar(a[IDIOMA][0])} — ${escapar(d.rotulo)}">
           ${cuerpo(a.clave, a.hex, 74)}
           <span class="rotulo">${escapar(d.rotulo)}</span></button>`;
@@ -1200,6 +1486,10 @@ function pintarHero(){
       behavior: reduce() ? "auto" : "smooth", block:"start"});
     reiniciar(bt.dataset.sit);
   });
+  /* El desfile se acaba de reconstruir —al cambiar de idioma cambian los
+     rótulos— así que hay que volver a encender al que estaba hablando. Sin
+     esto, apretar "EN" a mitad de conversación apagaba el desfile entero. */
+  marcarQuienHabla();
 }
 
 /* ============================================================
