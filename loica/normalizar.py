@@ -73,6 +73,20 @@ def parsear_fecha(texto: str, anio_por_defecto: int | None = None,
 
     posicion = 0  # dónde apareció la fecha, para buscar la hora al lado
 
+    # ISO compacto: 20270315, sin separadores. Lo usan los campos ACF de
+    # WordPress —el CEP publica así la fecha de sus seminarios— y sin esto la
+    # fecha se leía como un número cualquiera y el evento quedaba sin cuándo.
+    # Va primero porque el patrón con guiones no lo reconoce, y se exige año
+    # plausible para no confundirlo con un teléfono o un monto.
+    for m in re.finditer(r"(?<!\d)(20[2-9]\d)(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])(?!\d)",
+                         plano):
+        try:
+            fecha = datetime(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+            posicion = m.end()
+            break
+        except ValueError:
+            continue
+
     # ISO: 2027-03-15 (con o sin hora). La T va en minúscula además de
     # mayúscula porque el texto ya pasó por _plano(), que lo bajó todo: con
     # solo [T ] la hora NUNCA calzaba y todo evento con JSON-LD quedaba a las

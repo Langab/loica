@@ -296,6 +296,13 @@ lugares:
     lon: -70.66998
     nota: 'Rustiko Restaurant & Pub; la fuente lo escribe "Rustiko Huehuraba", con la comuna mal tipeada (2026-08-13)'
 
+  Auditorio CEP:
+    direccion: Monseñor Sótero Sanz 162
+    comuna: Providencia
+    lat: -33.42386
+    lon: -70.61557
+    nota: 'donde el Centro de Estudios Públicos hace casi todos sus seminarios; la propia API lo declara en cada evento (2026-08-13)'
+
   # --- Circo: las escuelas de Santiago (2026-08-13) ---
   # Sus sitios venden matrícula permanente, no eventos con fecha (Elevarte los
   # publica como productos de tienda y El Circo del Mundo solo tiene páginas),

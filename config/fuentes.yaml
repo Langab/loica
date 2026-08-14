@@ -1659,3 +1659,48 @@ fuentes:
     hora, lugar y comuna. El robots.txt de ticketplus.cl permite /companies/ y /events/ (solo veda admin,
     api y cuentas) y el servidor responde 200 a nuestro cliente. Es la puerta a mas locales: Ticketplus
     aloja otros recintos con la misma estructura.'
+- id: cep
+  nombre: Centro de Estudios Públicos (CEP)
+  url_base: https://www.cepchile.cl
+  url_agenda: https://www.cepchile.cl/eventos/
+  tipo_adaptador: json
+  endpoint: /wp-json/wp/v2/events?per_page=50&orderby=date&order=desc
+  comuna: Providencia
+  crawl_delay_seg: 3
+  activa: true
+  json:
+    campos:
+      titulo: title.rendered
+      descripcion_corta: excerpt.rendered
+      fuente_url: link
+      id_externo: id
+      inicio: acf.fecha_inicio
+      hora_inicio: acf.horario
+      fin: acf.fecha_termino
+      lugar_direccion: acf.ubicacion
+      link_entradas: acf.registro.url
+  notas: 'Seminarios, lanzamientos de libro y conversatorios abiertos, casi siempre gratis y con inscripcion.
+    WordPress con un tipo de contenido propio "events" y los datos en campos ACF: fecha_inicio en formato
+    compacto AAAAMMDD, horario aparte, ubicacion en texto y el link de registro. Su robots.txt bloquea
+    explicitamente a ClaudeBot, GPTBot, CCBot y Google-Extended, pero el grupo generico (*) permite todo
+    y declara Content-Signal "search=yes, use=reference": indexar y derivar a la fuente es justo lo que
+    hace Loica, y no se usa para entrenar nada. Casi todo ocurre en el Auditorio CEP, Monsenor Sotero
+    Sanz 162.'
+- id: chile21
+  nombre: Fundación Chile 21
+  url_base: https://chile21.cl
+  url_agenda: https://chile21.cl/actividades/
+  tipo_adaptador: json
+  endpoint: /wp-json/wp/v2/event_listing?per_page=30&orderby=date&order=desc
+  comuna: Santiago
+  crawl_delay_seg: 3
+  activa: false
+  json:
+    campos:
+      titulo: title.rendered
+      fuente_url: link
+      id_externo: id
+  notas: 'Think tank progresista. WordPress con tipo de contenido "event_listing" (WP Event Manager) y
+    cada ficha publica schema.org/Event con startDate, asi que tecnicamente se puede leer. APAGADA porque
+    su cartelera esta detenida: el evento mas nuevo es de junio de 2025. Encenderla cuando vuelvan a publicar.
+    La fecha NO viene en la API (el meta solo trae _acf_changed), hay que abrir cada ficha por el JSON-LD.'

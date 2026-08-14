@@ -263,8 +263,14 @@ class IndiceLocal:
         comuna es el bueno. Primero el número que cierra el texto, que es el
         formato más común; después los del medio, de derecha a izquierda.
         """
-        plano = normalizar_osm(texto.split(",")[0])
+        # Se miran TODOS los tramos separados por coma, no solo el primero:
+        # el CEP publica "Auditorio CEP, ubicado en Monseñor Sótero Sanz 162,
+        # Providencia" y quedarse con el primero deja un nombre sin número.
+        # Se recorre de izquierda a derecha y gana el primer tramo con calle y
+        # número, que es donde vive la dirección de verdad.
+        plano = normalizar_osm(" , ".join(texto.split(",")[:3]))
         plano = re.sub(r"\b(n|no|numero)\s+(\d)", r"\2", plano)
+        plano = re.sub(r"\b(ubicad[oa] en|ubicado|direccion)\b", " ", plano)
         cortes = []
         for m in re.finditer(r"\b(\d{1,5})\b", plano):
             # El cero inicial NO es decorativo: en Providencia, Ñuñoa y Las

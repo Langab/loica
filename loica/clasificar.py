@@ -89,8 +89,12 @@ PATRONES_CATEGORIA = [
                 r"|instalacion|vernissage|bienal|artistic)"),
     ("clases",  r"\b(taller|clase|curso|workshop|laboratorio|diplomado"
                 r"|capacitacion|entrenamiento|academia|webinar|escuela de)"),
-    ("aire_libre", r"\b(parque|cerro|caminata|trekking|ruta|picnic|mirador"
-                   r"|humedal)"),
+    # "ruta" a secas no va: los seminarios hablan de "rutas del narcotráfico"
+    # y "rutas y puertos", y quedaban clasificados como panorama al aire libre.
+    # Las rutas que sí lo son vienen acompañadas.
+    ("aire_libre", r"\b(parque|cerro|caminata|trekking|picnic|mirador|humedal"
+                   r"|ruta (patrimonial|escenica|del vino|de senderismo)"
+                   r"|senderismo|excursion)"),
     ("charla",  r"\b(charla|conversatorio|seminario|coloquio|conferencia"
                 r"|congreso|simposio|panel|mesa redonda|jornada"
                 r"|presentacion de libro|lanzamiento|catedra|dialogo)"),
@@ -129,6 +133,13 @@ PRIOR_FUENTE = [
      r"|centro cultural la moneda|\bgam\b", "arte"),
     (r"universidad|\budp\b|\buah\b|\bunab\b|usach|finis terrae"
      r"|diego portales|alberto hurtado|andres bello", "charla"),
+    # Los centros de estudio publican el TEMA como título —"Territorios sin
+    # control", "Rutas y puertos"— y nunca el formato, así que 29 de los 42
+    # seminarios del CEP caían en "otros". Lo que hacen es siempre lo mismo:
+    # seminarios, conversatorios y lanzamientos de libro abiertos al público.
+    (r"centro de estudios|estudios publicos|\bcep\b|libertad y desarrollo"
+     r"|cieplan|espacio publico|fundacion sol|horizontal|chile 21"
+     r"|instituto de estudios|think tank|politicas publicas", "charla"),
     (r"agenda cultural|municipalidad|ceina", "arte"),
 ]
 
