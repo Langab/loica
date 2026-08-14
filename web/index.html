@@ -598,6 +598,71 @@ document.addEventListener("keydown", e => {
   if(e.key === "Escape" && !document.getElementById("telon").hidden) cerrarBicho();
 });
 
+/* --- Los cuatro panoramas de la portada ---
+   Solo cuatro: la portada invita, no reemplaza al mapa. Pero elegir "los
+   cuatro primeros" de una lista ordenada tenía dos defectos que se veían
+   juntos en la misma pantalla.
+
+   TODOS DEL MISMO ANIMAL. El orden era editorial —lo lúdico primero, las
+   charlas al final— y después por hora. Como teatro, ferias y fiestas
+   compartían el primer tramo y el teatro es el que más publica, las cuatro
+   tarjetas salían azules: la portada anunciaba una ciudad que solo hace
+   teatro. Ahora se toma UNA de cada categoría, así que las cuatro caritas son
+   distintas y de una mirada se ve que la ciudad hace cosas diferentes.
+
+   SIEMPRE LAS MISMAS. Al ser un orden fijo sobre datos que cambian una vez al
+   día, quien entraba dos veces veía lo mismo. Ahora la categoría que abre se
+   sortea dentro de su tramo editorial y el evento se sortea dentro de su
+   categoría: cada visita trae otra cosa sin perder el criterio de que lo
+   lúdico va antes que un seminario.
+
+   Y SE PREFIERE LO QUE EMPIEZA HOY. Las exposiciones en curso también están
+   "hoy" —corren de mayo a septiembre— y como se ordenaba por fecha de inicio
+   se tomaban las más viejas: bajo el título "Hoy en Santiago" aparecía una
+   muestra con la fecha "29 MAY", que se lee como un error. Las temporadas
+   siguen entrando, pero solo si lo que arranca hoy no alcanza para cuatro. */
+const PRIORIDAD = {feria:0, teatro:0, fiesta:0,
+                   musica:1, cine:1, arte:1, aire_libre:1, familia:1, deporte:1,
+                   otros:2, clases:2, idiomas:2,
+                   charla:3};
+
+const revolver = lista => {                     // Fisher–Yates
+  const a = lista.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+const alAzar = lista => lista[Math.floor(Math.random() * lista.length)];
+
+function cuatroDeHoy(delDia, todos){
+  const base = delDia.length ? delDia : todos;
+  const arrancaHoy = ev => mismaFecha(new Date(ev.inicio), new Date());
+  const propios = base.filter(arrancaHoy);
+  const fuente = propios.length >= 4 ? propios : base;
+
+  const porCat = {};
+  fuente.forEach(ev => (porCat[ev.categoria] ||= []).push(ev));
+
+  // Las categorías se recorren tramo por tramo y REVUELTAS dentro del tramo.
+  const cats = [0, 1, 2, 3].flatMap(tramo =>
+    revolver(Object.keys(porCat).filter(c => (PRIORIDAD[c] ?? 2) === tramo)));
+
+  const elegidos = [];
+  for(const c of cats){
+    if(elegidos.length === 4) break;
+    elegidos.push(alAzar(porCat[c]));
+  }
+  // Si hoy hay menos de cuatro categorías, se completa al azar sin repetir.
+  if(elegidos.length < 4){
+    const resto = revolver(fuente.filter(ev => !elegidos.includes(ev)));
+    elegidos.push(...resto.slice(0, 4 - elegidos.length));
+  }
+  // Se muestran en orden de hora: la lista se lee como el día que viene.
+  return elegidos.sort((a, b) => a.fecha - b.fecha);
+}
+
 /* --- Datos en vivo: las cifras y los panoramas de hoy ---
    Números escritos a mano se vuelven mentira en una semana. Estos salen del
    mismo JSON que el mapa. */
@@ -630,19 +695,8 @@ function pintarDatos(evs){
     hoy.length ? `${hoy.length} ${hoy.length === 1 ? t("evento") : t("eventos")}.`
                : t("pHoyVacio");
 
-  /* Solo cuatro: la portada invita, no reemplaza al mapa. Y el orden es
-     editorial: lo lúdico primero (ferias, teatro, fiestas) y las charlas
-     magistrales al final — acá se entra buscando un plan, no un seminario.
-     El empate lo resuelve la hora. */
-  const PRIORIDAD = {feria:0, teatro:0, fiesta:0,
-                     musica:1, cine:1, arte:1, aire_libre:1, familia:1, deporte:1,
-                     otros:2, clases:2, idiomas:2,
-                     charla:3};
-  const prio = ev => PRIORIDAD[ev.categoria] ?? 2;
-  const muestra = (hoy.length ? hoy : evs).slice()
-    .sort((a,b) => prio(a) - prio(b) || a.fecha - b.fecha).slice(0, 4);
   caja.classList.add("lista-anima");
-  muestra.forEach(ev => caja.appendChild(
+  cuatroDeHoy(hoy, evs).forEach(ev => caja.appendChild(
     tarjetaEvento(ev, e => location.href = "mapa.html#/e/" + e.id)));
 
   const pie = document.createElement("div");

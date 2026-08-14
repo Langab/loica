@@ -170,7 +170,20 @@
 }
 
 /* ---------- 2. BASE ---------- */
-*{box-sizing:border-box;-webkit-tap-hi:var(--t-2xl);line-height:1.12}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+/* El fondo del body NO es decorativo y no se puede dar por supuesto: sin
+   `background` declarado, el lienzo queda transparente y lo pinta el
+   navegador, que en un aparato configurado en oscuro lo pinta NEGRO. La
+   página quedaba con el hero crema y el resto en negro. Vale para las nueve
+   páginas porque todas heredan de acá. */
+body{
+  margin:0;background:var(--fondo);color:var(--tinta);
+  font:var(--t-base)/1.5 var(--fuente-ui);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:var(--fuente-marca);font-weight:800;letter-spacing:-.02em;margin:0}
+h1{font-size:var(--t-2xl);line-height:1.12}
 h2{font-size:var(--t-xl);line-height:1.2}
 h3{font-size:var(--t-lg);line-height:1.25}
 a{color:inherit}
