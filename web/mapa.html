@@ -35,7 +35,7 @@
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
       integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V"
       crossorigin="anonymous">
-<link rel="stylesheet" href="loica.css?v=16">
+<link rel="stylesheet" href="loica.css?v=17">
 <style>
   html,body{height:100%;overflow:hidden}
   /* Los dos altos van en este orden a proposito: `dvh` no existe en
@@ -467,10 +467,10 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
         integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
         crossorigin="anonymous"></script>
-<script src="loica.js?v=16"></script>
+<script src="loica.js?v=17"></script>
 <script>
 let EVENTOS = [], filtroCat = null, soloGratis = false, cuando = "todo", publicoFiltro = null;
-let busqueda = "", filtroSub = null, filtroEscala = null;
+let busqueda = "", filtroSub = null;
 let listaActual = [], seleccionado = null, mapa = null, hayMapa = false;
 
 pintarBarra("mapa.html");
@@ -651,7 +651,6 @@ const visibles = () => EVENTOS.filter(ev =>
   (!soloGratis || ev.gratis) &&
   (!filtroCat || ev.categoria === filtroCat) &&
   (!filtroSub || ev.subcategoria === filtroSub) &&
-  (!filtroEscala || ev.escala === filtroEscala) &&
   (!publicoFiltro || ev.publico === publicoFiltro) &&
   coincideBusqueda(ev, busqueda) &&
   sesionEnRango(ev, cuando));
@@ -664,16 +663,15 @@ const visiblesSalvo = salvo => EVENTOS.filter(ev =>
   (!soloGratis || ev.gratis) &&
   (salvo === "cat" || !filtroCat || ev.categoria === filtroCat) &&
   (salvo === "sub" || !filtroSub || ev.subcategoria === filtroSub) &&
-  (salvo === "escala" || !filtroEscala || ev.escala === filtroEscala) &&
   (!publicoFiltro || ev.publico === publicoFiltro) &&
   coincideBusqueda(ev, busqueda) &&
   sesionEnRango(ev, cuando));
 
-const hayFiltros = () => busqueda || filtroCat || filtroSub || filtroEscala
+const hayFiltros = () => busqueda || filtroCat || filtroSub
   || soloGratis || publicoFiltro || cuando !== "todo";
 
 function limpiarFiltros(){
-  busqueda = ""; filtroCat = null; filtroSub = null; filtroEscala = null;
+  busqueda = ""; filtroCat = null; filtroSub = null;
   soloGratis = false; publicoFiltro = null; cuando = "todo";
   const campo = document.getElementById("buscar");
   campo.value = "";
@@ -832,36 +830,6 @@ function pintarAfinar(){
     }
   }
 
-  // --- Tamaño: aplica siempre, con o sin categoría ---
-  const base = visiblesSalvo("escala");
-  const cuantos = {under:0, masivo:0};
-  base.forEach(ev => { if(ev.escala in cuantos) cuantos[ev.escala]++; });
-  if(cuantos.under || cuantos.masivo){
-    const f = fila(t("filtrosEscala"), t("filtrosEscala"));
-    ["under","masivo"].forEach(e => {
-      if(!cuantos[e] && filtroEscala !== e) return;
-      chip(f, ESCALAS[e][IDIOMA], cuantos[e], filtroEscala === e,
-           // Excluyentes: elegir uno apaga el otro, no se acumulan.
-           () => filtroEscala = filtroEscala === e ? null : e,
-           ESCALAS[e].pista[IDIOMA]);
-    });
-    /* Con el tamaño puesto hay que decir que NO se está mostrando el catastro
-       completo: de 636 eventos no sabemos el aforo del recinto y quedan fuera
-       de los dos chips. Callarlo haría parecer que Santiago tiene 112 panoramas
-       masivos y ninguno más. */
-    const sinDato = base.length - cuantos.under - cuantos.masivo;
-    if(filtroEscala && sinDato){
-      const nota = document.createElement("p");
-      nota.className = "afinar-nota";
-      nota.textContent = IDIOMA === "en"
-        ? `${sinDato} events are not shown here: we don't know the size of the venue.`
-        : IDIOMA === "pt"
-        ? `${sinDato} eventos ficam de fora: não sabemos o tamanho do local.`
-        : `${sinDato} panoramas quedan fuera: no sabemos el tamaño del recinto.`;
-      caja.appendChild(nota);
-    }
-  }
-
   // --- Limpiar: la salida de emergencia con seis filtros combinables ---
   if(hayFiltros()){
     const f = fila("", t("filtrosLimpiar"));
@@ -885,7 +853,6 @@ function pintarEstado(){
   if(publicoFiltro === "adultos") partes.push(t("mas18"));
   if(filtroCat) partes.push(cat(filtroCat)[IDIOMA]);
   if(filtroSub) partes.push(subcat(filtroSub));
-  if(filtroEscala) partes.push(ESCALAS[filtroEscala][IDIOMA]);
   document.getElementById("conteo-estado").textContent = partes.join(" · ");
 }
 

@@ -63,7 +63,7 @@ def _git(*args: str, capturar: bool = True) -> subprocess.CompletedProcess:
 
 
 def paso_extraer(extra: list[str]) -> bool:
-    return _correr([sys.executable, "run_diario.py", *extra], "1/6  Eventos")
+    return _correr([sys.executable, "run_diario.py", *extra], "1/7  Eventos")
 
 
 def paso_descuentos(extra: list[str]) -> bool:
@@ -72,20 +72,31 @@ def paso_descuentos(extra: list[str]) -> bool:
     Son un catastro aparte: que Bci cambie su JSON no es razón para dejar sin
     actualizar la agenda de eventos, que es el corazón del proyecto.
     """
-    if not _correr([sys.executable, "run_descuentos.py", *extra], "2/6  Descuentos"):
+    if not _correr([sys.executable, "run_descuentos.py", *extra], "2/7  Descuentos"):
         print("    Se sigue igual: los eventos no dependen de esto.")
     return True
 
 
 def paso_exportar() -> bool:
-    return _correr([sys.executable, "exportar_web.py"], "3/6  Exportar el sitio")
+    return _correr([sys.executable, "exportar_web.py"], "3/7  Exportar el sitio")
 
 
 def paso_revisar() -> bool:
     """La revisión del estado de extracción NO bloquea: es el insumo de
     curaduría (informe + colas de corrección en datos/revision/)."""
-    if not _correr([sys.executable, "revisar_extraccion.py"], "4/6  Revisión"):
+    if not _correr([sys.executable, "revisar_extraccion.py"], "4/7  Revisión"):
         print("    Se sigue igual: la revisión informa, no bloquea.")
+    return True
+
+
+def paso_diagnostico() -> bool:
+    """El Excel de diagnóstico. NO bloquea: es para mirar el proceso.
+
+    Va después de exportar porque compara contra `web/eventos.json`, y antes
+    del doble check porque cuando el doble check corta la publicación es
+    JUSTO cuando uno quiere abrir el diagnóstico a ver qué se cayó."""
+    if not _correr([sys.executable, "informe_corrida.py"], "5/7  Diagnóstico"):
+        print("    Se sigue igual: el diagnóstico informa, no bloquea.")
     return True
 
 
@@ -93,7 +104,7 @@ def paso_verificar(forzar: bool) -> bool:
     """El doble check SÍ bloquea: si el sitio está roto o vacío, no hay push."""
     extra = ["--forzar"] if forzar else []
     return _correr([sys.executable, "verificar_web.py", *extra],
-                   "5/6  Doble check")
+                   "6/7  Doble check")
 
 
 def _resolver_generados() -> bool:
@@ -139,7 +150,7 @@ def _resolver_generados() -> bool:
 
 def paso_publicar() -> bool:
     """Comitea y sube SOLO la salida del pipeline."""
-    print(f"\n{'=' * 62}\n  6/6  Publicar\n{'=' * 62}", flush=True)
+    print(f"\n{'=' * 62}\n  7/7  Publicar\n{'=' * 62}", flush=True)
 
     existentes = [r for r in RUTAS_PUBLICABLES if (RAIZ / r).exists()]
     if not existentes:
@@ -231,6 +242,7 @@ def main() -> int:
         return 1
 
     paso_revisar()
+    paso_diagnostico()
 
     if not paso_verificar(args.forzar):
         if args.sin_publicar:

@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=16">
+<link rel="stylesheet" href="loica.css?v=17">
 <style>
   html,body{height:100%;overflow:hidden}
   /* Los dos altos van en este orden a proposito: `dvh` no existe en
@@ -217,10 +217,10 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegacion principal"></nav>
 
-<script src="loica.js?v=16"></script>
+<script src="loica.js?v=17"></script>
 <script>
 let EVENTOS = [], filtroCat = null, soloGratis = false;
-let busqueda = "", filtroSub = null, filtroEscala = null;
+let busqueda = "", filtroSub = null;
 let mesVisible = new Date(), diaElegido = new Date();
 
 pintarBarra("calendario.html");
@@ -241,7 +241,6 @@ const visibles = () => EVENTOS.filter(ev =>
   (!soloGratis || ev.gratis) &&
   (!filtroCat || ev.categoria === filtroCat) &&
   (!filtroSub || ev.subcategoria === filtroSub) &&
-  (!filtroEscala || ev.escala === filtroEscala) &&
   coincideBusqueda(ev, busqueda));
 
 /* Los mismos eventos ignorando UN filtro, para contar cuántos quedarían si lo
@@ -251,10 +250,9 @@ const visiblesSalvo = salvo => EVENTOS.filter(ev =>
   (!soloGratis || ev.gratis) &&
   (salvo === "cat" || !filtroCat || ev.categoria === filtroCat) &&
   (salvo === "sub" || !filtroSub || ev.subcategoria === filtroSub) &&
-  (salvo === "escala" || !filtroEscala || ev.escala === filtroEscala) &&
   coincideBusqueda(ev, busqueda));
 
-const hayFiltros = () => busqueda || filtroCat || filtroSub || filtroEscala || soloGratis;
+const hayFiltros = () => busqueda || filtroCat || filtroSub || soloGratis;
 
 // Todo lo que repinta la página, junto: son tres cosas y olvidar una deja la
 // rejilla del mes mostrando puntos de un filtro que ya no está puesto.
@@ -354,34 +352,6 @@ function pintarAfinar(){
     }
   }
 
-  const base = visiblesSalvo("escala");
-  const cuantos = {under:0, masivo:0};
-  base.forEach(ev => { if(ev.escala in cuantos) cuantos[ev.escala]++; });
-  if(cuantos.under || cuantos.masivo){
-    const f = fila(t("filtrosEscala"), t("filtrosEscala"));
-    ["under","masivo"].forEach(e => {
-      if(!cuantos[e] && filtroEscala !== e) return;
-      // Excluyentes: elegir uno apaga el otro.
-      chip(f, ESCALAS[e][IDIOMA], cuantos[e], filtroEscala === e,
-           () => filtroEscala = filtroEscala === e ? null : e,
-           ESCALAS[e].pista[IDIOMA]);
-    });
-    /* De buena parte del catastro no sabemos el aforo del recinto, y esos
-       eventos no salen en ninguno de los dos chips. Hay que decirlo: si no,
-       parece que Santiago tiene 112 panoramas masivos y ninguno más. */
-    const sinDato = base.length - cuantos.under - cuantos.masivo;
-    if(filtroEscala && sinDato){
-      const nota = document.createElement("p");
-      nota.className = "afinar-nota";
-      nota.textContent = IDIOMA === "en"
-        ? `${sinDato} events are not shown here: we don't know the size of the venue.`
-        : IDIOMA === "pt"
-        ? `${sinDato} eventos ficam de fora: não sabemos o tamanho do local.`
-        : `${sinDato} panoramas quedan fuera: no sabemos el tamaño del recinto.`;
-      caja.appendChild(nota);
-    }
-  }
-
   if(hayFiltros()){
     const f = fila("", t("filtrosLimpiar"));
     const b = document.createElement("button");
@@ -389,8 +359,7 @@ function pintarAfinar(){
     b.className = "chip";
     b.textContent = "✕ " + t("filtrosLimpiar");
     b.onclick = () => {
-      busqueda = ""; filtroCat = null; filtroSub = null;
-      filtroEscala = null; soloGratis = false;
+      busqueda = ""; filtroCat = null; filtroSub = null; soloGratis = false;
       const campo = document.getElementById("buscar");
       campo.value = "";
       document.getElementById("borra-buscar").hidden = true;

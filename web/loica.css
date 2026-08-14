@@ -516,6 +516,19 @@ img{max-width:100%;display:block}
 .red:active{transform:translateY(3px);box-shadow:none}
 .red:hover{background:var(--red);border-color:var(--red);color:#fff;transform:translateY(-2px)}
 .red.copiado{background:var(--gratis);border-color:var(--gratis);color:#fff}
+/* El corte entre compartir y agendar: los cinco de la izquierda mandan el
+   panorama a otra persona, el de la derecha lo guarda para uno. Es la misma
+   línea dura de `.separa-chips`, sin desenfoque. */
+.compartir-corte{
+  flex:none;width:2px;align-self:stretch;margin:3px 2px;
+  background:var(--borde-fuerte);border-radius:2px;
+}
+/* Agendar es el único con texto, así que deja de ser un círculo. El alto se
+   mantiene en 44 para no romper la fila ni el área táctil. */
+.red.con-texto{
+  width:auto;gap:7px;padding:0 15px 0 12px;border-radius:var(--r-pill);
+  grid-auto-flow:column;font:800 var(--t-sm)/1 var(--fuente-ui);
+}
 
 /* ---------- 8. CONTENEDORES ---------- */
 /* El `max()` de los costados es para el teléfono acostado: si el notch pide

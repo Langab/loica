@@ -575,7 +575,7 @@ const TEXTOS = {
     buscar:"Busca un local, una fiesta, una banda…", buscarEtiqueta:"Buscar por palabra",
     buscarBorrar:"Borrar la búsqueda", buscarSin:"Nada con esa palabra",
     buscarSinPista:"Prueba con el nombre del local o de la comuna",
-    filtrosEscala:"Tamaño", filtrosAfinar:"Afinar", afinarTodo:"Todo", filtrosLimpiar:"Limpiar filtros",
+    filtrosAfinar:"Afinar", afinarTodo:"Todo", filtrosLimpiar:"Limpiar filtros",
     cuando:"Cuándo", donde:"Dónde", precio:"Precio", ir:"Ver en la fuente original",
     vacio:"No hay eventos con esos filtros", vaciopista:"Prueba sacando algún filtro",
     aprox:"Ubicación aproximada: centro de la comuna", sinUbicar:"Dirección por confirmar — revísala en la fuente", fuente:"Información publicada por",
@@ -634,7 +634,7 @@ const TEXTOS = {
     buscar:"Search a venue, a party, a band…", buscarEtiqueta:"Search by keyword",
     buscarBorrar:"Clear the search", buscarSin:"Nothing matches that word",
     buscarSinPista:"Try the name of the venue or the district",
-    filtrosEscala:"Size", filtrosAfinar:"Narrow down", afinarTodo:"All", filtrosLimpiar:"Clear filters",
+    filtrosAfinar:"Narrow down", afinarTodo:"All", filtrosLimpiar:"Clear filters",
     cuando:"When", donde:"Where", precio:"Price", ir:"View original source",
     vacio:"No events match these filters", vaciopista:"Try removing a filter",
     aprox:"Approximate location: district centre", sinUbicar:"Address to be confirmed — check the source", fuente:"Information published by",
@@ -693,7 +693,7 @@ const TEXTOS = {
     buscar:"Busque um local, uma festa, uma banda…", buscarEtiqueta:"Buscar por palavra",
     buscarBorrar:"Limpar a busca", buscarSin:"Nada com essa palavra",
     buscarSinPista:"Tente o nome do local ou da comuna",
-    filtrosEscala:"Tamanho", filtrosAfinar:"Refinar", afinarTodo:"Tudo", filtrosLimpiar:"Limpar filtros",
+    filtrosAfinar:"Refinar", afinarTodo:"Tudo", filtrosLimpiar:"Limpar filtros",
     cuando:"Quando", donde:"Onde", precio:"Preço", ir:"Ver na fonte original",
     vacio:"Nenhum evento com esses filtros", vaciopista:"Tente remover algum filtro",
     aprox:"Localização aproximada: centro da comuna", sinUbicar:"Endereço a confirmar — veja na fonte", fuente:"Informação publicada por",
@@ -1056,26 +1056,6 @@ function coincideBusqueda(ev, texto){
   return q.split(/\s+/).every(palabra => heno.includes(palabra));
 }
 
-/* ---------- ESCALA: lo under contra lo multitudinario ----------
-   Un recital en el Movistar Arena y una tocata en un bar de Bellavista son la
-   misma categoría —música, el Cóndor— y no son el mismo panorama. Quien busca
-   circuito chico no quiere ver el estadio, y quien va al estadio no llegó ahí
-   navegando un mapa.
-
-   El dato lo pone el pipeline en `escala` mirando el RECINTO (loica/clasificar.py).
-   Vacío es una respuesta legítima y frecuente: de la mayoría de los lugares de
-   Santiago no sabemos el aforo, y adivinarlo sería peor que callarse. */
-const ESCALAS = {
-  under:  {es:"Under", en:"Small venues", pt:"Under",
-           pista:{es:"Salas chicas, bares, sedes de barrio",
-                  en:"Small rooms, bars, neighbourhood venues",
-                  pt:"Salas pequenas, bares, sedes de bairro"}},
-  masivo: {es:"Masivo", en:"Big venues", pt:"Massivo",
-           pista:{es:"Estadios, arenas y teatros grandes",
-                  en:"Stadiums, arenas and big theatres",
-                  pt:"Estádios, arenas e teatros grandes"}},
-};
-
 /* "todos los martes y jueves" — lo que la tarjeta muestra en vez de repetirse. */
 const NOMBRE_DIA = ["lunes","martes","miércoles","jueves","viernes","sábado","domingo"];
 function cadencia(ev){
@@ -1126,6 +1106,86 @@ const REDES = {
   },
 };
 
+/* ---------- AGENDAR EN GOOGLE CALENDAR ----------
+   Compartir es para mandárselo a otro; esto es para uno mismo. Alguien que ve
+   un panorama el jueves y le interesa el sábado no tiene dónde ponerlo: cierra
+   la pestaña y lo olvida.
+
+   Tres decisiones que no son obvias:
+
+   DURACIÓN. Casi ningún evento del catastro declara hora de término, así que
+   se asumen dos horas. Es una convención honesta: en el calendario se ve un
+   bloque razonable y la hora de inicio —que es la que importa para llegar— es
+   la real.
+
+   LAS SERIES Y LAS TEMPORADAS NO SE VUELCAN ENTERAS. Un taller de martes y
+   jueves hasta noviembre trae `fin` en noviembre, y una exposición que cierra
+   en septiembre también. Usar ese `fin` como término del evento le mete a
+   alguien un bloque de tres meses atravesado en el calendario. Se agenda la
+   PRÓXIMA fecha con las dos horas de siempre, y la cadencia o la temporada se
+   cuentan en la descripción, que es donde sirven de dato y no estorban.
+
+   SIN HORA VA COMO EVENTO DE DÍA COMPLETO. Google acepta `YYYYMMDD/YYYYMMDD`
+   y así se evita inventar una hora: un evento a las 00:00 en el calendario
+   dice "es a medianoche", que es una afirmación falsa sobre el panorama. */
+const _fechaGoogle = (f, soloDia) => soloDia
+  ? `${f.getFullYear()}${String(f.getMonth() + 1).padStart(2,"0")}${String(f.getDate()).padStart(2,"0")}`
+  : f.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+
+function urlCalendario(ev){
+  let ini = new Date(ev.inicio);
+  if(isNaN(ini)) return "";
+
+  /* Una temporada que YA EMPEZÓ y sigue en cartelera se agenda para hoy, no
+     para su estreno. La exposición de mariposas abrió el 24 de abril de 2025 y
+     cierra el 30 de agosto: agendar abril del año pasado le deja a alguien una
+     entrada en un mes que ya pasó y que no va a mirar nunca. Lo que la persona
+     está decidiendo es ir AHORA, así que se agenda hoy como día completo y la
+     fecha de cierre se cuenta en la descripción. */
+  const cierre = ev.fin ? new Date(ev.fin) : null;
+  const arranco = new Date(); arranco.setHours(0,0,0,0);
+  const enCurso = ini < arranco && cierre && !isNaN(cierre) && cierre >= arranco
+                  && !(ev.dias_semana && ev.dias_semana.length);
+  if(enCurso) ini = arranco;
+
+  // Un evento sin hora llega como 00:00. No es "a medianoche": es "ese día".
+  const soloDia = enCurso || (!ini.getHours() && !ini.getMinutes());
+
+  let fin;
+  if(soloDia){
+    fin = new Date(ini);
+    fin.setDate(fin.getDate() + 1);          // Google pide el día siguiente
+  } else {
+    const mismoDia = cierre && !isNaN(cierre)
+      && cierre > ini && cierre.toDateString() === ini.toDateString()
+      && !(ev.dias_semana && ev.dias_semana.length);
+    fin = mismoDia ? cierre : new Date(ini.getTime() + 2 * 3600 * 1000);
+  }
+
+  const detalle = [
+    ev.descripcion || "",
+    cadencia(ev) ? `Se repite ${cadencia(ev)}.` : "",
+    // La temporada se cuenta acá justamente porque no se vuelca al bloque.
+    (!cadencia(ev) && cierre && !isNaN(cierre) && cierre.toDateString() !== ini.toDateString())
+      ? `En cartelera hasta el ${cierre.toLocaleDateString(localeDe(),
+          {day:"numeric", month:"long"})}.` : "",
+    // textoPrecio devuelve "—" cuando la fuente no publicó precio, y una línea
+    // que dice "Precio: —" no informa nada: mejor no ponerla.
+    textoPrecio(ev) !== "—" ? `Precio: ${textoPrecio(ev)}` : "",
+    `Ficha en Loica: ${urlDeEvento(ev)}`,
+    urlSegura(ev.url) ? `Fuente: ${ev.url}` : "",
+  ].filter(Boolean).join("\n");
+
+  const p = new URLSearchParams({
+    action: "TEMPLATE",
+    text: ev.titulo || "",
+    dates: `${_fechaGoogle(ini, soloDia)}/${_fechaGoogle(fin, soloDia)}`,
+    details: detalle,
+    location: [ev.lugar, ev.direccion, ev.comuna].filter(Boolean).join(", "),
+  });
+  return `https://calendar.google.com/calendar/render?${p}`;
+}
+
 function botonesCompartir(ev){
   const url = urlDeEvento(ev);
   const texto = textoCompartir(ev);
@@ -1173,6 +1233,34 @@ function botonesCompartir(ev){
         `<path d="M9.5 14.5l5-5M8 12l-2 2a3.5 3.5 0 105 5l2-2M16 12l2-2a3.5 3.5 0 10-5-5l-2 2"
           fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>`,
         e => copiarLink(url, e.currentTarget));
+
+  /* Agendar va al final y separado del resto: los otros cinco mandan el
+     panorama a otra persona y este lo guarda para uno. Sin la línea divisoria
+     se lee como "compartir en Google", que es otra cosa. */
+  const enlaceAgenda = urlCalendario(ev);
+  if(enlaceAgenda){
+    const sep = document.createElement("span");
+    sep.className = "compartir-corte";
+    sep.setAttribute("aria-hidden", "true");
+    fila.appendChild(sep);
+
+    const nombreAgenda = {es:"Agendar en Google Calendar",
+                          en:"Add to Google Calendar",
+                          pt:"Adicionar ao Google Calendar"}[IDIOMA];
+    const b = boton("agendar", nombreAgenda, "#4285F4",
+      `<rect x="3" y="4.5" width="18" height="16" rx="2.6" fill="none"
+             stroke="currentColor" stroke-width="1.9"/>
+       <path d="M3 9.5h18M8 2.5v4M16 2.5v4" fill="none" stroke="currentColor"
+             stroke-width="1.9" stroke-linecap="round"/>
+       <path d="M10 15.4l1.8 1.8 3.4-3.6" fill="none" stroke="currentColor"
+             stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>`,
+      () => window.open(enlaceAgenda, "_blank", "noopener"));
+    // El único botón de la fila que lleva texto: es una acción distinta de las
+    // demás y un ícono solo la deja adivinándose.
+    b.classList.add("con-texto");
+    b.insertAdjacentHTML("beforeend", `<span>${escapar(
+      {es:"Agendar", en:"Add to calendar", pt:"Agendar"}[IDIOMA])}</span>`);
+  }
 
   return caja;
 }

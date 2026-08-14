@@ -20,11 +20,12 @@ El pipeline implementa este circuito, y cada paso tiene su comando:
 | 3 | **Extracción** | `run_diario.py` (eventos → SQLite) y `run_descuentos.py` (bancos → JSON) |
 | 4 | **Consolidación** | todo converge a `datos/eventos.db` deduplicado por título+fecha+lugar; el export arma `web/eventos.json` |
 | 5 | **Revisión + memoria de correcciones** | `revisar_extraccion.py` produce el informe y las colas; los arreglos viven en `config/correcciones/` y se aplican solos en cada corrida (ver abajo) |
-| 6 | **Doble check** | `verificar_web.py`: si el sitio quedó roto, vacío o cayó a la mitad, **no hay push** |
-| 7 | **Publicación** | `run_todo.py` comitea solo su salida y pushea; GitHub Actions deja `web/` en Pages |
-| 8 | **Corrida diaria a las 11:00** | launchd (`scripts/instalar_agenda.sh`); el Mac tiene que estar prendido o durmiendo |
+| 6 | **Diagnóstico de la corrida** | `informe_corrida.py` deja un Excel en `informes/` para mirar el proceso, no el catastro (ver abajo) |
+| 7 | **Doble check** | `verificar_web.py`: si el sitio quedó roto, vacío o cayó a la mitad, **no hay push** |
+| 8 | **Publicación** | `run_todo.py` comitea solo su salida y pushea; GitHub Actions deja `web/` en Pages |
+| 9 | **Corrida diaria a las 11:00** | launchd (`scripts/instalar_agenda.sh`); el Mac tiene que estar prendido o durmiendo |
 
-Un solo comando encadena los pasos 3 a 7:
+Un solo comando encadena los pasos 3 a 8:
 
 ```bash
 python3 run_todo.py                  # todo, de punta a punta
@@ -93,7 +94,35 @@ python3 run_diario.py --sin-cache -v   # ignora la caché y muestra el detalle
 python3 run_descuentos.py --banco bci  # un solo banco
 ```
 
-### Dos cosas que `run_todo.py` hace a propósito
+## El diagnóstico de la corrida (paso 6)
+
+`informe_corrida.py` deja `informes/AAAA-MM-DD_diagnostico.xlsx` en cada
+corrida. **No es el catastro, es el proceso**: el sitio contesta "¿qué hago
+hoy?" y esto contesta "¿está funcionando y dónde se está rompiendo?". Por eso
+vive fuera de `web/` y fuera de git — `informes/` está en `.gitignore`.
+
+Dos hojas:
+
+- **Diagnóstico** — duración, fuentes con error, fuentes vivas que no aportan
+  ningún evento futuro, altas y bajas contra la corrida anterior, reparto de la
+  georreferenciación con el % de pines exactos, de dónde salió cada categoría
+  (leída del texto contra adivinada por el recinto), lugares que aparecen por
+  primera vez, y una fila por fuente.
+- **Para revisar** — la cola de trabajo: eventos sin pin, sin categoría, con
+  categoría adivinada o con el pin al centro de la comuna. Cada fila trae el
+  link a la fuente para resolverla en diez segundos.
+
+La comparación con "la corrida anterior" sale de `datos/historial_corridas.json`,
+que el propio script escribe. Se usa eso y no `git show HEAD:web/eventos.json`
+porque con `--sin-publicar` el HEAD no avanza y todas las corridas del día se
+comparaban contra el mismo punto. El historial guarda además una fila de
+agregados por corrida, así que a las pocas semanas muestra la tendencia.
+
+No bloquea la publicación: informa. Y va **antes** del doble check a propósito,
+porque cuando el doble check corta la publicación es justo cuando uno quiere
+abrir el diagnóstico a ver qué se cayó.
+
+## Dos cosas que `run_todo.py` hace a propósito
 
 **Comitea sólo su propia salida.** Corre a las 11:00 sin nadie mirando, así que
 nunca hace `git add -A`: si a esa hora hay un archivo a medio editar, un
