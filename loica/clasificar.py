@@ -27,6 +27,16 @@ def _tiene(texto, palabras):
 FALSOS_INFANTILES = ["ninos del cerro", "la nina de la mochila azul",
                      "pequeno circo", "los ninos rojos"]
 
+# En un museo de arte, "obra" es una pieza colgada en la pared; en cualquier
+# otra parte es una función de teatro. El clasificador leía el título antes que
+# el recinto, así que "Obras extraordinarias" del MAC salía como teatro. Se
+# neutraliza la palabra SOLO cuando el recinto es un museo de arte: es una
+# desambiguación de sentido, no una excepción para una fuente.
+MUSEOS_DE_ARTE = re.compile(
+    r"museo de arte|museo nacional de bellas artes|museo de artes visuales"
+    r"|\bmavi\b|\bmac (quinta normal|parque forestal)\b|precolombino")
+SENTIDO_DE_OBRA = re.compile(r"\bobras?\b")
+
 
 # ---------- CATEGORÍAS ----------
 # Orden = prioridad. El primero que matchea gana, así que lo específico
@@ -266,7 +276,15 @@ PRIOR_FUENTE = [
     (r"mercado urbano tobalaba|\bmut\b|estacion mapocho|feria friki", "feria"),
     (r"planetario", "familia"),
     (r"balmaceda arte joven|matucana 100|nave centro"
-     r"|centro cultural la moneda|\bgam\b", "arte"),
+     r"|centro cultural la moneda|\bgam\b"
+     # El MAC titula sus muestras como se titula el arte contemporáneo —"RAMA
+     # TORCIDA", "POÉTICA DE LAS AGUAS", "De la luz a los datos"— y ninguna de
+     # esas palabras dice qué es. Nueve de sus exposiciones caían en "otros".
+     # Los museos del Patrimonio no necesitan estar acá: su API declara
+     # field_tipo_evento ("exposicion"), y el MAC no tiene ese campo porque su
+     # cartelera se lee del HTML. Se escribe el nombre entero y no "mac" a
+     # secas: tres letras sueltas le pegan a "hamaca" y a "estomacal".
+     r"|museo de arte contemporaneo|\bmac (quinta normal|parque forestal)\b", "arte"),
     (r"universidad|\budp\b|\buah\b|\bunab\b|usach|finis terrae"
      r"|diego portales|alberto hurtado|andres bello", "charla"),
     # Los centros de estudio publican el TEMA como título —"Territorios sin
@@ -307,6 +325,9 @@ def clasificar(titulo, categoria_fuente, descripcion, lugar="", fuente=""):
     tit = _norm(f"{categoria_fuente} {titulo}")
     if _tiene(tit, FALSOS_INFANTILES):     # "Niños del Cerro" es una banda
         tit = " "
+    # "Obras extraordinarias" en el MAC es una muestra, no una función.
+    if MUSEOS_DE_ARTE.search(_norm(f"{lugar} {fuente}")):
+        tit = SENTIDO_DE_OBRA.sub(" ", tit)
 
     # 1. El título manda. Es corto y curado; la descripción trae ruido.
     categoria = _buscar_categoria(tit)

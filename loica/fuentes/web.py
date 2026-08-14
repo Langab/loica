@@ -183,14 +183,19 @@ def eventos_desde_html(html: str, fuente: dict, tipo: str = "html") -> list[Even
         # Fecha: atributo del HTML > selector configurado > texto de la tarjeta
         inicio = None
         fin = None
+        # Lo que se leyó del selector de fecha, para no repetirlo después en la
+        # descripción. Queda vacío si la fecha salió de un atributo o del texto
+        # suelto: en ese caso no hay un trozo propio que sacar.
+        texto_fecha = ""
         valor_atributo = tarjeta.get(atributo_fecha) if atributo_fecha else None
         if valor_atributo:
             inicio = parsear_fecha(str(valor_atributo))
         if inicio is None:
             nodo_fecha = (tarjeta.select_one(selectores["fecha"])
                           if selectores.get("fecha") else None)
-            texto_fecha = nodo_fecha.get_text(" ", strip=True) if nodo_fecha else texto
-            inicio = parsear_fecha(texto_fecha)
+            if nodo_fecha:
+                texto_fecha = nodo_fecha.get_text(" ", strip=True)
+            inicio = parsear_fecha(texto_fecha or texto)
             # "18 Julio, 2026 - 27 Septiembre, 2026": la segunda fecha es el
             # término. Sin ella una exposición que ya abrió no se publica nunca,
             # porque la vigencia se mide por la fecha de término (SQL_VIGENTE).
@@ -237,10 +242,25 @@ def eventos_desde_html(html: str, fuente: dict, tipo: str = "html") -> list[Even
             if nodo_lugar:
                 lugar = limpiar_html(nodo_lugar.get_text(" ", strip=True))[:120] or lugar
 
+        # La descripción es lo que queda de la tarjeta DESPUÉS de sacarle lo que
+        # ya se leyó con su propio selector. Sin esto repite el título, la fecha
+        # y la sede, que no le dicen nada a quien lee y sí confunden al
+        # clasificador: la tarjeta del MAC decía "PF Obras extraordinarias …
+        # MAC Parque Forestal - 7 y 8" y ese "parque" mandaba tres exposiciones
+        # a aire_libre. Si no queda nada, la tarjeta no traía descripción y
+        # vacío es la respuesta honesta.
+        descripcion = texto
+        for ya_leido in (titulo, lugar if selectores.get("lugar") else "", texto_fecha):
+            if ya_leido:
+                descripcion = descripcion.replace(ya_leido, " ")
+        descripcion = " ".join(descripcion.split())
+        if len(descripcion) < 25:
+            descripcion = ""
+
         eventos.append(Evento(
             titulo=titulo,
             categoria=categoria,
-            descripcion_corta=resumir(texto, 150),
+            descripcion_corta=resumir(descripcion, 150),
             inicio=inicio,
             fin=fin,
             lugar_nombre=lugar,
