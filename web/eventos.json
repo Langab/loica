@@ -1,6 +1,6 @@
 {
- "generado": "2026-08-13T21:42:05",
- "total": 2413,
+ "generado": "2026-08-13T21:59:43",
+ "total": 2414,
  "eventos": [
   {
    "id": "32a4dd0be84f2124",
@@ -33217,6 +33217,27 @@
    "url": "https://salak.cl/calendario/el-trabajo-del-actor-2/"
   },
   {
+   "id": "bf0e7e3f17cfcb8d",
+   "titulo": "Taller gratuito de cueca en Plaza Chacabuco",
+   "inicio": "2026-08-29T11:00:00",
+   "fin": null,
+   "lugar": "Corporación Cultural de Independencia",
+   "direccion": "Profesor Alberto Zañartu 1185",
+   "comuna": "Independencia",
+   "lat": -33.41749,
+   "lon": -70.65591,
+   "precision": "correccion",
+   "gratis": true,
+   "precio": 0,
+   "precio_texto": "Taller gratuito de cueca en Plaza Chacabuco. Durante agosto,",
+   "categoria": "clases",
+   "publico": "todos",
+   "descripcion": "Durante agosto, la comunidad podrá aprender los primeros pasos de nuestra danza nacional en un taller gratuito de cueca , pensado especialmente para quienes no tienen experiencia previa y quieren…",
+   "imagen": "https://www.independenciacultural.cl/wp-content/uploads/2026/08/Portada-Taller-de-Cueca-768x768.webp",
+   "fuente": "Corporación Cultural de Independencia",
+   "url": "https://www.independenciacultural.cl/2026/08/03/taller-gratuito-de-cueca-en-plaza-chacabuco/"
+  },
+  {
    "id": "98c443d52ec7663a",
    "titulo": "RAPUNZEL",
    "inicio": "2026-08-29T12:00:00",
@@ -45990,10 +46011,10 @@
    "inicio": "2026-10-10T21:00:00",
    "fin": "2026-10-11T00:00:00",
    "lugar": "Centro Parque La Araucana",
-   "direccion": "Walker Martínez 2295",
-   "comuna": "La Florida",
-   "lat": -33.52248,
-   "lon": -70.56855,
+   "direccion": "Presidente Riesco 5330",
+   "comuna": "Las Condes",
+   "lat": -33.40337,
+   "lon": -70.57515,
    "precision": "correccion",
    "gratis": false,
    "precio": 15000,
