@@ -914,14 +914,47 @@ function pintarBarra(paginaActual, raiz = ""){
   });
 }
 
-/* ---------- DATOS ---------- */
+/* ---------- DATOS ----------
+
+   SIGUE VIGENTE = todavía no ha TERMINADO. Es la misma regla que aplica el
+   pipeline en SQL (`SQL_VIGENTE` en loica/almacen.py): manda la fecha de
+   término cuando existe, y si no, la de inicio. Una exposición que abrió en
+   julio y cierra en septiembre sigue vigente; un concierto de ayer, no.
+
+   Está escrita DOS VECES a propósito, acá y en el SQL, y no es un descuido.
+   El pipeline filtra en el momento de generar `eventos.json`, pero ese archivo
+   es estático: se reescribe cuando corre la corrida de las 11:00 y no antes.
+   Si el Mac quedó apagado, si una fuente hizo fallar la corrida o si alguien
+   entra a las 9 de la mañana del día siguiente, el navegador está leyendo el
+   catastro de ayer — y sin esta segunda barrera mostraría los panoramas de
+   ayer como si todavía se pudieran ir a ver. Con ella, el sitio envejece bien
+   solo: cada visita descarta lo que ya pasó aunque el archivo tenga días.
+
+   Lo que NO se descarta es lo de hoy que ya empezó. Un recital de las 19:00
+   sigue en la lista a las 22:00, y es a propósito: a esa hora la pregunta
+   "¿qué hay hoy?" todavía se hace, media función sigue vendiendo entrada y
+   nadie mide el día en horas. La unidad de este catastro es el día. */
+const siguesVigente = (ev, hoy = new Date()) => {
+  const cuando = ev.fin || ev.inicio;
+  // Sin fecha no se bota: se muestra. `new Date(null)` no es una fecha
+  // inválida sino el 1 de enero de 1970, así que el vacío hay que atajarlo
+  // antes de parsear o el evento se cae por una fecha que nadie escribió.
+  if(!cuando) return true;
+  const termino = new Date(cuando);
+  if(isNaN(termino)) return true;
+  const corte = new Date(hoy); corte.setHours(0, 0, 0, 0);
+  return termino >= corte;
+};
+
 async function cargarEventos(){
   // El `?v=N` de loica.css/js no sirve acá: este archivo lo reescribe el robot
   // todas las mañanas y nadie sube un número por eso. Sin esto, quien ya visitó
   // el sitio sigue viendo la cartelera del día que entró por primera vez.
   const r = await fetch("eventos.json", {cache: "no-cache"});
   const d = await r.json();
-  return d.eventos.map(ev => ({...ev, fecha: new Date(ev.inicio)}));
+  return d.eventos
+    .filter(siguesVigente)
+    .map(ev => ({...ev, fecha: new Date(ev.inicio)}));
 }
 
 /* ---------- UTILIDADES ---------- */
