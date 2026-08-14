@@ -54,6 +54,21 @@ NO_ES_PANORAMA = [
     "feria científica", "feria cientifica",
 ]
 
+# Lo que el organizador dejó publicado sin querer. Los sistemas de ticketera y
+# los CMS municipales se prueban EN PRODUCCIÓN —se crea un evento falso, se
+# emite un ticket, se comprueba que la boletería imprime— y esos eventos quedan
+# publicados con nombres que gritan que no son reales. Tres "DEMO -NO REGISTRAR"
+# de una corporación municipal llegaron a la portada del sitio.
+#
+# Va aparte de NO_ES_PANORAMA y con límite de palabra porque estas señales son
+# cortas y peligrosas por contención: "demo" está dentro de "demolición" y de
+# "Demonios", "test" dentro de "testimonio", y "prueba" dentro de "a prueba de
+# balas", que es un nombre de fiesta perfectamente posible.
+NO_ES_REAL = re.compile(
+    r"(?<![a-záéíóúñ])(demo|test|testing|dummy|borrar|no registrar"
+    r"|no publicar|evento de prueba|prueba de evento|sin uso|xxx+)"
+    r"(?![a-záéíóúñ])", re.IGNORECASE)
+
 
 # Nombres de PROGRAMA que las municipalidades ponen donde va el lugar.
 # "Deporte Vecinal" no es una dirección: es un programa que ocurre en la sede
@@ -166,6 +181,14 @@ def _lejos(lat1, lon1, lat2, lon2, km: float) -> bool:
 
 
 def es_panorama(titulo: str, descripcion: str) -> tuple[bool, str]:
+    # El evento de prueba se busca SOLO en el título. En una descripción larga
+    # "demo" o "test" aparecen de sobra hablando de otra cosa —una demo de un
+    # grupo, un test de sonido— y ahí la palabra no dice nada del evento; en el
+    # título sí, porque el título es lo que el organizador escribió para
+    # nombrarlo.
+    prueba = NO_ES_REAL.search(titulo or "")
+    if prueba:
+        return False, f"evento de prueba: {prueba.group(0)}"
     texto = f"{titulo} {descripcion}".lower()
     for senal in NO_ES_PANORAMA:
         if senal in texto:

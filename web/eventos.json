@@ -1,6 +1,6 @@
 {
- "generado": "2026-08-14T12:09:31",
- "total": 2427,
+ "generado": "2026-08-14T12:13:51",
+ "total": 2424,
  "eventos": [
   {
    "id": "dfdf19b8d835aeee",
@@ -2349,29 +2349,6 @@
    "url": "https://talleres.nunoadeportes.cl/talleres/694537a4ebcfd36f8ed21a7c"
   },
   {
-   "id": "67887c4af176b428",
-   "titulo": "DEMO -NO REGISTRAR",
-   "inicio": "2026-08-12T13:00:00",
-   "fin": "2026-09-01T13:00:00",
-   "lugar": "Polideportivo de Ñuñoa",
-   "direccion": "Juan Moya Morales 1370",
-   "comuna": "Ñuñoa",
-   "lat": -33.467,
-   "lon": -70.5882,
-   "precision": "correccion",
-   "gratis": true,
-   "precio": null,
-   "precio_texto": "Gratis",
-   "categoria": "deporte",
-   "subcategoria": "gimnasia",
-   "escala": "under",
-   "publico": "todos",
-   "descripcion": "todos los lunes, martes, miércoles, jueves, viernes y sábado de 13:00 a 14:00. DEMO -NO REGISTRAR",
-   "imagen": "",
-   "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
-   "url": "https://talleres.nunoadeportes.cl/talleres/6a344835a2c6c6cb6cebe041"
-  },
-  {
    "id": "385cc599516853b8",
    "titulo": "Entrenamiento Fuerza Personas Mayores Avanzado Lu-Mi-Vi 13:15 h.",
    "inicio": "2026-08-12T13:15:00",
@@ -4532,29 +4509,6 @@
    "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1767406481579-711422677.webp",
    "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
    "url": "https://talleres.nunoadeportes.cl/talleres/69528d248152b0aadcbfe7b3"
-  },
-  {
-   "id": "4ce9adb929eab371",
-   "titulo": "DEMO -NO REGISTRAR",
-   "inicio": "2026-08-13T13:00:00",
-   "fin": "2026-09-01T13:00:00",
-   "lugar": "Polideportivo de Ñuñoa",
-   "direccion": "Juan Moya Morales 1370",
-   "comuna": "Ñuñoa",
-   "lat": -33.467,
-   "lon": -70.5882,
-   "precision": "correccion",
-   "gratis": true,
-   "precio": null,
-   "precio_texto": "Gratis",
-   "categoria": "deporte",
-   "subcategoria": "gimnasia",
-   "escala": "under",
-   "publico": "todos",
-   "descripcion": "todos los lunes, martes, miércoles, jueves, viernes y sábado de 13:00 a 14:00. DEMO -NO REGISTRAR",
-   "imagen": "",
-   "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
-   "url": "https://talleres.nunoadeportes.cl/talleres/6a344835a2c6c6cb6cebe041"
   },
   {
    "id": "fc8e765a33124340",
@@ -7043,29 +6997,6 @@
    "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1767612259691-991857519.webp",
    "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
    "url": "https://talleres.nunoadeportes.cl/talleres/694537a4ebcfd36f8ed21a7c"
-  },
-  {
-   "id": "62d30fc00f44c093",
-   "titulo": "DEMO -NO REGISTRAR",
-   "inicio": "2026-08-14T13:00:00",
-   "fin": "2026-09-01T13:00:00",
-   "lugar": "Polideportivo de Ñuñoa",
-   "direccion": "Juan Moya Morales 1370",
-   "comuna": "Ñuñoa",
-   "lat": -33.467,
-   "lon": -70.5882,
-   "precision": "correccion",
-   "gratis": true,
-   "precio": null,
-   "precio_texto": "Gratis",
-   "categoria": "deporte",
-   "subcategoria": "gimnasia",
-   "escala": "under",
-   "publico": "todos",
-   "descripcion": "todos los lunes, martes, miércoles, jueves, viernes y sábado de 13:00 a 14:00. DEMO -NO REGISTRAR",
-   "imagen": "",
-   "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
-   "url": "https://talleres.nunoadeportes.cl/talleres/6a344835a2c6c6cb6cebe041"
   },
   {
    "id": "32ad53bb97d5fc75",
