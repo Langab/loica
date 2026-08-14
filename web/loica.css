@@ -344,6 +344,17 @@ img{max-width:100%;display:block}
   transform:translateY(3px);box-shadow:none;
 }
 .chip.es-gratis[aria-pressed="true"]{background:var(--gratis);color:var(--gratis-contraste)}
+/* El anillo de foco de §2 se dibuja con `box-shadow` y el chip usa `box-shadow`
+   para su repisa. Misma especificidad y el chip va más abajo: ganaba el chip y
+   quien navega con Tab no veía nada. Se apilan a mano —repisa primero, que es
+   la que va encima, y después los dos anillos del sistema—. El chip encendido
+   ya está hundido y no tiene repisa que respetar: solo anillo. */
+.chip:focus-visible{
+  box-shadow:var(--repisa-1),0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+}
+.chip[aria-pressed="true"]:focus-visible{
+  box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+}
 
 /* ---------- 5. TARJETA DE EVENTO ----------
    Los dos datos que deciden si voy son la HORA y el PRECIO. Antes la
@@ -448,6 +459,16 @@ img{max-width:100%;display:block}
 .boton.secundario:hover{background:var(--fondo-hundido)}
 .boton.secundario:active{transform:translateY(4px);box-shadow:none}
 .boton.bloque{width:100%}
+/* Mismo choque que en el chip: el anillo de §2 y la repisa se disputan el
+   único `box-shadow`, y ganaba la repisa. El botón es el control principal de
+   media docena de páginas, así que quedaba sin señal de foco justo donde más
+   importa. Cada variante repone SU repisa, que no es la misma. */
+.boton:focus-visible{
+  box-shadow:var(--repisa-3),0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+}
+.boton.secundario:focus-visible{
+  box-shadow:var(--repisa-2),0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+}
 
 /* ---------- 7. FORMULARIOS ---------- */
 .campo{margin-bottom:var(--e-4)}

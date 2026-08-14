@@ -33,7 +33,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=18">
+<link rel="stylesheet" href="loica.css?v=19">
 <style>
   body{overflow-x:hidden}
   .contenido-blog{max-width:760px;margin:0 auto;padding:var(--e-6) var(--e-4) var(--e-12)}
@@ -215,6 +215,11 @@
   .reco-botones{display:flex;gap:8px;flex-wrap:wrap}
   .reco-botones .boton{padding:8px 14px;font-size:var(--t-sm);box-shadow:var(--repisa-1)}
   .reco-botones .boton:active{transform:translateY(3px);box-shadow:none}
+  /* Estos botones se achican y cambian de repisa, y esa repisa le gana a la
+     del anillo de foco de loica.css. Se apila de nuevo con la de acá. */
+  .reco-botones .boton:focus-visible{
+    box-shadow:var(--repisa-1),0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+  }
   .reco-rota{grid-template-columns:1fr;opacity:.75}
   .reco-rota-msg{display:flex;align-items:center;gap:8px;font-size:var(--t-sm);color:var(--tinta-tenue);margin:0 0 6px}
 
@@ -233,7 +238,7 @@
 <div class="remate" id="cordillera" aria-hidden="true"></div>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="loica.js?v=18"></script>
+<script src="loica.js?v=19"></script>
 <script>
 /* ============================================================
    BLOG — índice + vista de post, ruteado por hash (#/p/<slug>).

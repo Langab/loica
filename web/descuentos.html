@@ -33,7 +33,7 @@
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
       integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V"
       crossorigin="anonymous">
-<link rel="stylesheet" href="loica.css?v=18">
+<link rel="stylesheet" href="loica.css?v=19">
 <style>
   html,body{height:100%;overflow:hidden}
   /* Los dos altos van en este orden a proposito: `dvh` no existe en
@@ -86,6 +86,17 @@
   header .filtros .chip svg{width:22px;height:22px}
   header .filtros .chip:active,
   header .filtros .chip[aria-pressed="true"]{transform:translateY(2px);box-shadow:none}
+  /* El anillo de foco de loica.css se apila sobre la repisa, pero acá la
+     repisa se achicó a 2px con un selector más específico y volvía a tapar el
+     anillo. Se repone con la repisa de ESTA página; el chip prendido está
+     hundido y no tiene ninguna, solo anillo. */
+  header .filtros .chip:focus-visible{
+    box-shadow:0 2px 0 var(--contorno),
+               0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+  }
+  header .filtros .chip[aria-pressed="true"]:focus-visible{
+    box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+  }
   /* El chip del banco se prende con el color del banco, no con la tinta
      genérica: prendido y apagado tienen que decir lo mismo. */
   header .filtros .chip[aria-pressed="true"]{background:var(--banco,var(--tinta));color:var(--arena-50)}
@@ -296,7 +307,7 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
         integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
         crossorigin="anonymous"></script>
-<script src="loica.js?v=18"></script>
+<script src="loica.js?v=19"></script>
 <script>
 /* ------------------------------------------------------------------
    Estado. Tres filtros y ninguno depende del otro: el día es de una

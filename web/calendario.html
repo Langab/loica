@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=18">
+<link rel="stylesheet" href="loica.css?v=19">
 <style>
   html,body{height:100%;overflow:hidden}
   /* Los dos altos van en este orden a proposito: `dvh` no existe en
@@ -150,6 +150,16 @@
     border-width:2px;box-shadow:0 2px 0 var(--contorno)}
   .afinar .chip:active,
   .afinar .chip[aria-pressed="true"]{transform:translateY(2px);box-shadow:none}
+  /* La repisa de acá es de 2px y le gana a la de loica.css, así que el anillo
+     de foco se vuelve a apilar con la medida de esta página. El chip prendido
+     está hundido: solo anillo. */
+  .afinar .chip:focus-visible{
+    box-shadow:0 2px 0 var(--contorno),
+               0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+  }
+  .afinar .chip[aria-pressed="true"]:focus-visible{
+    box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+  }
   .afinar .cuenta{opacity:.72;font-variant-numeric:tabular-nums}
   .afinar-nota{margin:0;padding:0 var(--e-4) 7px;font-size:var(--t-xs);
     color:var(--tinta-tenue);font-style:italic;line-height:1.3}
@@ -217,7 +227,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegacion principal"></nav>
 
-<script src="loica.js?v=18"></script>
+<script src="loica.js?v=19"></script>
 <script>
 let EVENTOS = [], filtroCat = null, soloGratis = false;
 let busqueda = "", filtroSub = null;

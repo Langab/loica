@@ -33,7 +33,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=18">
+<link rel="stylesheet" href="loica.css?v=19">
 <style>
   body{overflow-x:hidden}
   .contenido-comer{max-width:940px;margin:0 auto;padding:var(--e-6) var(--e-4) var(--e-12)}
@@ -242,6 +242,11 @@
   .ficha-botones{display:flex;gap:10px;flex-wrap:wrap;margin-top:var(--e-5)}
   .ficha-botones .boton{box-shadow:var(--repisa-2)}
   .ficha-botones .boton:active{transform:translateY(4px);box-shadow:none}
+  /* La repisa de la ficha le gana a la del anillo de foco de loica.css: se
+     apila de nuevo con la de acá. */
+  .ficha-botones .boton:focus-visible{
+    box-shadow:var(--repisa-2),0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+  }
   .ficha-botones .con-icono{display:inline-flex;align-items:center;gap:7px}
   .ficha-botones .con-icono svg{flex:none}
 
@@ -270,7 +275,7 @@
 <div class="remate" id="cordillera" aria-hidden="true"></div>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="loica.js?v=18"></script>
+<script src="loica.js?v=19"></script>
 <script>
 /* ============================================================
    DÓNDE COMER — índice + ficha de un local, ruteado por hash
