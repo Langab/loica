@@ -104,30 +104,49 @@
   .chip-select:has(select:not([data-vacio="1"]))::after{color:var(--fondo-elevado)}
   .chip-select:has(select:focus-visible){box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno)}
 
-  /* --- El botón del mapa, al lado de los días. El mapa vive en esta misma
-     página: cambiar de página pierde el día y el tipo recién elegidos. --- */
-  .boton-mapa{
-    flex:none;display:inline-flex;align-items:center;gap:6px;cursor:pointer;
-    padding:0 var(--e-4);min-height:38px;margin-left:var(--e-2);
-    border:2.5px solid var(--contorno);border-radius:var(--r-pill);
-    background:var(--fondo-elevado);color:var(--tinta);
-    font:800 var(--t-sm)/1 var(--fuente-marca);box-shadow:var(--repisa-1);
-    transition:var(--rapido);white-space:nowrap;
+  /* --- El mapa de fondo y la lista desplegada encima ---
+     Mismo esquema que el mapa de actividades: el mapa ocupa todo y la lista
+     va en un panel que en escritorio vive desplegado a la derecha y en
+     celular es una hoja que se arrastra desde abajo. Antes había un botón
+     que TURNABA lista y mapa, y era peor: obligaba a elegir entre saber
+     dónde y saber qué. */
+  #mapa-talleres{position:absolute;inset:0}
+  .panel-lista{
+    position:absolute;left:0;right:0;bottom:0;background:var(--fondo-elevado);
+    border-radius:var(--r-xl) var(--r-xl) 0 0;
+    border:2.5px solid var(--contorno);border-bottom:0;
+    display:flex;flex-direction:column;z-index:4;
+    height:var(--alto-panel,268px);max-height:88%;
+    transition:height var(--medio);
   }
-  .boton-mapa::before{content:"◉";font-size:13px;color:var(--c-clases-tinta)}
-  .boton-mapa:active,
-  .boton-mapa[aria-pressed="true"]{transform:translateY(2px);box-shadow:none}
-  .boton-mapa[aria-pressed="true"]{background:var(--c-clases);color:var(--azul-900)}
-  .boton-mapa[aria-pressed="true"]::before{color:var(--azul-900)}
+  .panel-lista.arrastrando{transition:none}
+  /* touch-action:none va SOLO en el tirador: en el panel entero el navegador
+     cancela el gesto de scroll de la lista (la nota larga está en mapa.html). */
+  .tirador{padding:9px var(--e-4) 6px;cursor:grab;flex:none;touch-action:none}
+  .tirador:active{cursor:grabbing}
+  .barra-tirador{width:44px;height:4.5px;background:var(--borde-fuerte);border-radius:3px;margin:0 auto}
+  .conteo{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;font-size:var(--t-sm);
+    color:var(--tinta-suave);padding:var(--e-1) var(--e-4) var(--e-2)}
+  .conteo b{font-family:var(--fuente-marca);font-size:var(--t-lg);color:var(--tinta)}
+  .nota-geo{
+    flex:1 1 100%;font-size:var(--t-xs);color:var(--tinta-tenue);line-height:1.35;
+  }
+  .nota-geo:empty{display:none}
+  .lista{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;flex:1;min-height:0}
+  .fin-lista{padding:var(--e-5) var(--e-4);text-align:center}
+  .fin-lista .boton{box-shadow:var(--repisa-2)}
+  /* La burbuja del pin: tarjeta mínima con el borde de tinta de la casa. */
+  .maplibregl-popup-content{
+    font:600 var(--t-sm)/1.4 var(--fuente-ui);color:var(--azul-900);
+    border:2px solid var(--azul-900);border-radius:var(--r-md);
+    box-shadow:0 3px 0 var(--azul-900);padding:10px 12px;max-width:230px;
+  }
+  .maplibregl-popup-content a{color:var(--c-clases-tinta);font-weight:800;text-decoration:none}
+  .maplibregl-popup-content a:hover{text-decoration:underline}
 
-  .panel-mapa{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--fondo-hundido)}
-  .panel-mapa[hidden]{display:none}
-  #mapa-talleres{flex:1;min-height:0}
-  .nota-mapa{
-    flex:none;padding:var(--e-2) var(--e-4);background:var(--fondo-elevado);
-    border-top:2px solid var(--contorno);font-size:var(--t-xs);
-    color:var(--tinta-tenue);line-height:1.4;
-  }
+  .lista{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;flex:1;min-height:0}
+  .fin-lista{padding:var(--e-5) var(--e-4);text-align:center}
+  .fin-lista .boton{box-shadow:var(--repisa-2)}
   /* La burbuja del pin: tarjeta mínima con el borde de tinta de la casa. */
   .maplibregl-popup-content{
     font:600 var(--t-sm)/1.4 var(--fuente-ui);color:var(--azul-900);
@@ -145,20 +164,21 @@
     border-bottom:2px solid var(--contorno);
   }
   .aviso-taller svg{flex:none;margin-top:-2px}
-  .lista{overflow-y:auto;-webkit-overflow-scrolling:touch;flex:1;min-height:0}
-  .fin-lista{padding:var(--e-5) var(--e-4);text-align:center}
-  .fin-lista .boton{box-shadow:var(--repisa-2)}
-
   @media(max-width:879px){
-    main{padding-bottom:var(--hueco-nav)}
+    main{padding-bottom:0}
+    .panel-lista{bottom:var(--hueco-nav)}
     header .filtros{padding:5px var(--e-3) 7px}
     .riel-fecha{padding:var(--e-2) var(--e-3)}
   }
   @media(min-width:880px){
-    main{background:var(--fondo-hundido)}
-    .lista{max-width:820px;width:100%;margin:0 auto;background:var(--fondo-elevado);
-      border-inline:2.5px solid var(--contorno)}
-    .aviso-taller{justify-content:center}
+    /* En escritorio la lista vive DESPLEGADA a la derecha, como en el mapa
+       de actividades: la misma persona cruza de una página a la otra y el
+       mueble tiene que estar en el mismo lugar. */
+    .panel-lista{left:auto;right:var(--e-4);top:var(--e-4);bottom:var(--e-4);width:410px;
+      height:auto!important;border-radius:var(--r-lg);max-height:none;transition:none;
+      border-bottom:2.5px solid var(--contorno)}
+    .tirador{display:none}
+    .conteo{padding-top:var(--e-3)}
   }
 </style>
 </head>
@@ -168,23 +188,20 @@
     <div class="barra" id="barra"></div>
     <div class="riel-fecha">
       <div class="segmentado" id="dias" role="group"></div>
-      <button type="button" id="ver-mapa" class="boton-mapa" aria-pressed="false">
-        <span id="ver-mapa-txt">Mapa</span>
-      </button>
       <div class="cuenta-rango" id="cuenta"></div>
     </div>
     <div class="filtros" id="filtros" role="group"></div>
   </header>
 
   <main>
-    <div class="aviso-taller" id="aviso"></div>
-    <div class="lista" id="lista"></div>
-    <!-- Se turna con la lista y obedece los mismos filtros: el mapa muestra
-         exactamente lo mismo que la lista, no un universo aparte. -->
-    <div class="panel-mapa" id="panel-mapa" hidden>
-      <div id="mapa-talleres"></div>
-      <p class="nota-mapa" id="nota-mapa"></p>
-    </div>
+    <div id="mapa-talleres"></div>
+    <section class="panel-lista" id="panel" aria-label="Lista de talleres">
+      <div class="tirador" id="tirador" role="button" tabindex="0"
+           aria-label="Arrastra para ver más talleres"><div class="barra-tirador"></div></div>
+      <div class="conteo"><b id="conteo">0</b> <span id="conteo-txt">talleres</span>
+        <span class="nota-geo" id="nota-geo"></span></div>
+      <div class="lista" id="lista"></div>
+    </section>
   </main>
 </div>
 
@@ -207,6 +224,111 @@ let mostrando = 80;   // 1.600 tarjetas de una sola vez traban el teléfono
 
 pintarBarra("talleres.html");
 
+/* ---------- EL MAPA, SIEMPRE PRESENTE ----------
+   Círculos y no pines-animal: acá puede haber 1.600 puntos y los marcadores
+   DOM a esa escala traban el arrastre (la lección está en mapa.html). */
+let mapa = null, hayMapa = false, popup = null;
+
+const esOscuro = () => document.documentElement.dataset.tema === "oscuro";
+const TESELAS = {
+  claro:"https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png",
+  claroEtiquetas:"https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
+  oscuro:"https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png",
+  oscuroEtiquetas:"https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png",
+};
+const urlesTeselas = clave => ["a","b","c"].map(s =>
+  TESELAS[clave].replace("{s}", s).replace("{r}", devicePixelRatio > 1.5 ? "@2x" : ""));
+function estiloMapa(){
+  const t = esOscuro() ? ["oscuro","oscuroEtiquetas"] : ["claro","claroEtiquetas"];
+  return {version:8,
+    sources:{
+      base:{type:"raster", tiles:urlesTeselas(t[0]), tileSize:256,
+            attribution:'© OpenStreetMap © CARTO'},
+      etiquetas:{type:"raster", tiles:urlesTeselas(t[1]), tileSize:256},
+    },
+    layers:[{id:"base",type:"raster",source:"base"},
+            {id:"etiquetas",type:"raster",source:"etiquetas"}]};
+}
+
+try{
+  mapa = new maplibregl.Map({
+    container:"mapa-talleres", style:estiloMapa(),
+    center:[-70.645,-33.46], zoom:11.4, attributionControl:{compact:true}
+  });
+  hayMapa = true;
+}catch(e){
+  document.getElementById("mapa-talleres").innerHTML =
+    `<div class="vacio" style="padding-top:var(--e-12)">${cuerpo("chincol","var(--tinta-tenue)",88,{pose:"durmiendo"})}
+     <p><b>Este navegador no puede dibujar el mapa</b><br>La lista funciona igual.</p></div>`;
+}
+
+if(hayMapa){
+  mapa.addControl(new maplibregl.NavigationControl({showCompass:false}), "top-left");
+  // El mapa nace antes de que su caja tenga tamaño final (ver mapa.html).
+  (() => {
+    const caja = document.getElementById("mapa-talleres");
+    let ancho = 0, alto = 0;
+    new ResizeObserver(() => {
+      if(caja.clientWidth === ancho && caja.clientHeight === alto) return;
+      ancho = caja.clientWidth; alto = caja.clientHeight;
+      mapa.resize();
+    }).observe(caja);
+  })();
+  mapa.on("load", montarCapas);
+  mapa.on("styledata", () => { if(!mapa.getSource("talleres")) montarCapas(); });
+  new MutationObserver(() => mapa.setStyle(estiloMapa()))
+    .observe(document.documentElement, {attributes:true, attributeFilter:["data-tema"]});
+}
+
+function datosGeo(lista){
+  return {type:"FeatureCollection", features:lista
+    .filter(ev => ev.lat !== null && ev.lon !== null)
+    .map(ev => ({type:"Feature",
+      geometry:{type:"Point", coordinates:[ev.lon, ev.lat]},
+      properties:{id:ev.id, titulo:ev.titulo, lugar:ev.lugar,
+                  color:cat(ev.categoria).hex,
+                  aprox:ev.precision === "comuna" ? 1 : 0}}))};
+}
+
+function montarCapas(){
+  if(!hayMapa || mapa.getSource("talleres")) return;
+  mapa.addSource("talleres", {type:"geojson", data:datosGeo(visibles())});
+  mapa.addLayer({id:"talleres-pin", type:"circle", source:"talleres",
+    paint:{
+      "circle-radius":["interpolate",["linear"],["zoom"], 10, 4, 14, 9],
+      "circle-color":["get","color"],
+      "circle-stroke-width":2,
+      "circle-stroke-color":esOscuro() ? "#EDE7DE" : "#1E2A4A",
+      "circle-opacity":["case",["==",["get","aprox"],1], .45, .92],
+    }});
+  mapa.on("click", "talleres-pin", e => {
+    const p = e.features[0].properties;
+    // Título y lugar vienen del catastro (texto de terceros): van como TEXTO,
+    // nunca como HTML — la regla de la casa para dato de fuente.
+    const caja = document.createElement("div");
+    const titulo = document.createElement("b");
+    titulo.textContent = p.titulo;
+    const lugar = document.createElement("div");
+    lugar.textContent = p.lugar;
+    lugar.style.cssText = "font-weight:500;margin:2px 0 6px";
+    const enlace = document.createElement("a");
+    enlace.href = "e/" + encodeURIComponent(p.id) + ".html";
+    enlace.textContent = t("tVerFicha") + " →";
+    caja.append(titulo, lugar, enlace);
+    popup?.remove();
+    popup = new maplibregl.Popup({closeButton:false, offset:10})
+      .setLngLat(e.lngLat).setDOMContent(caja).addTo(mapa);
+  });
+  mapa.on("mouseenter", "talleres-pin", () => mapa.getCanvas().style.cursor = "pointer");
+  mapa.on("mouseleave", "talleres-pin", () => mapa.getCanvas().style.cursor = "");
+  pintarMapa();
+}
+
+function pintarMapa(){
+  if(!hayMapa || !mapa.getSource("talleres")) return;
+  mapa.getSource("talleres").setData(datosGeo(visibles()));
+}
+
 cargarTalleres().then(lista => {
   TALLERES = lista;
   return fetch("talleres.json", {cache:"no-cache"}).then(r => r.json());
@@ -227,9 +349,6 @@ const tipoDe = ev => ev.subcategoria || "cat:" + ev.categoria;
 const nombreTipo = clave => clave.startsWith("cat:")
   ? cat(clave.slice(4))[IDIOMA] : subcat(clave);
 const colorTipo = clave => {
-  // El color de la familia a la que pertenece el tipo: natación es del
-  // Chungungo, cerámica del Chincol. Se busca un taller del tipo y se le
-  // pregunta su categoría — más simple que mantener una tabla aparte.
   const ejemplo = TALLERES.find(ev => tipoDe(ev) === clave);
   return cat(ejemplo ? ejemplo.categoria : "clases");
 };
@@ -258,17 +377,7 @@ function visibles(){
 }
 
 function pintarTodo(){
-  pintarDias(); pintarFiltros(); pintarLista(); pintarAviso();
-  if(mapaAbierto) pintarMapa();
-}
-
-function pintarAviso(){
-  const fecha = generado
-    ? new Date(generado).toLocaleDateString(localeDe(), {day:"numeric", month:"long"})
-    : "";
-  document.getElementById("aviso").innerHTML =
-    `${carita("chincol","var(--c-clases-tinta)",22)}
-     <span>${escapar(t("tOjo"))}${fecha ? ` · ${{es:"Revisado el",en:"Checked on",pt:"Revisado em"}[IDIOMA]} ${fecha}.` : ""}</span>`;
+  pintarDias(); pintarFiltros(); pintarLista(); pintarMapa();
 }
 
 /* El riel del día. "Hoy" primero porque es la pregunta real; los siete días
@@ -285,6 +394,14 @@ function pintarDias(){
   cont.querySelectorAll("button").forEach(b => b.onclick = () => {
     dia = b.dataset.dia; mostrando = 80; pintarTodo();
   });
+  // La cabecera dice cuándo se revisó; el conteo vive en el panel.
+  const fecha = generado
+    ? new Date(generado).toLocaleDateString(localeDe(), {day:"numeric", month:"long"})
+    : "";
+  document.getElementById("cuenta").innerHTML = fecha
+    ? `${carita("chincol","var(--c-clases-tinta)",18)} ${escapar(
+        {es:"Revisado el",en:"Checked",pt:"Revisado em"}[IDIOMA])} ${escapar(fecha)}`
+    : "";
 }
 
 function pintarFiltros(){
@@ -298,8 +415,7 @@ function pintarFiltros(){
     .sort((a, b) => conteo[b] - conteo[a] || nombreTipo(a).localeCompare(nombreTipo(b)));
 
   /* Chips para los tipos grandes, con la carita de su animal; el resto vive
-     en el desplegable. El piso de 60 deja 5-6 chips: más es un riel infinito
-     y menos esconde la natación, que es la mitad del catálogo municipal. */
+     en el desplegable. */
   tipos.filter(k => conteo[k] >= 60).slice(0, 6).forEach(k => {
     const info = colorTipo(k), activo = tipoFiltro === k;
     const chip = document.createElement("button");
@@ -367,8 +483,17 @@ function pintarLista(){
   const cont = document.getElementById("lista");
   cont.innerHTML = "";
 
-  document.getElementById("cuenta").innerHTML =
-    `<b>${lista.length}</b> ${escapar(lista.length === 1 ? t("tCuantos1") : t("tCuantos"))}`;
+  document.getElementById("conteo").textContent = lista.length;
+  document.getElementById("conteo-txt").textContent =
+    lista.length === 1 ? t("tCuantos1") : t("tCuantos");
+
+  // La deuda de georreferenciación se dice, no se esconde.
+  const sinPin = lista.filter(ev => ev.lat === null).length;
+  document.getElementById("nota-geo").textContent = sinPin
+    ? {es:`${sinPin} sin dirección conocida salen solo en la lista`,
+       en:`${sinPin} with unknown address are list-only`,
+       pt:`${sinPin} sem endereço ficam só na lista`}[IDIOMA]
+    : "";
 
   if(!lista.length){
     cont.innerHTML = `<div class="vacio">${cuerpo("chincol","var(--tinta-tenue)",96,{pose:"durmiendo"})}
@@ -393,132 +518,66 @@ function pintarLista(){
     mas.appendChild(b);
     cont.appendChild(mas);
   } else {
+    // El pie honesto: los cupos no los maneja Loica. Va al final y no como
+    // banda arriba, porque arriba tapaba el mapa que esta página vino a mostrar.
     const sello = document.createElement("div");
     sello.className = "fin-lista";
-    sello.innerHTML = `${carita("chincol","var(--tinta-tenue)",26)}`;
+    sello.style.cssText = "font-size:var(--t-xs);color:var(--tinta-tenue);line-height:1.5";
+    const cara = document.createElement("div");
+    cara.innerHTML = carita("chincol","var(--tinta-tenue)",26);
+    const texto = document.createElement("p");
+    texto.style.margin = "6px 0 0";
+    texto.textContent = t("tOjo");
+    sello.append(cara, texto);
     cont.appendChild(sello);
   }
 }
 
-/* ---------- MAPA ----------
-   Círculos y no pines-animal: acá puede haber 1.600 puntos y los marcadores
-   DOM a esa escala traban el arrastre (la lección está documentada en
-   mapa.html). Un círculo del color de la familia con contorno de tinta sigue
-   siendo de la casa. */
-let mapa = null, mapaAbierto = false, popup = null;
-
-const esOscuro = () => document.documentElement.dataset.tema === "oscuro";
-const TESELAS = {
-  claro:"https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png",
-  claroEtiquetas:"https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
-  oscuro:"https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png",
-  oscuroEtiquetas:"https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png",
-};
-const urlesTeselas = clave => ["a","b","c"].map(s =>
-  TESELAS[clave].replace("{s}", s).replace("{r}", devicePixelRatio > 1.5 ? "@2x" : ""));
-function estiloMapa(){
-  const t = esOscuro() ? ["oscuro","oscuroEtiquetas"] : ["claro","claroEtiquetas"];
-  return {version:8,
-    sources:{
-      base:{type:"raster", tiles:urlesTeselas(t[0]), tileSize:256,
-            attribution:'© OpenStreetMap © CARTO'},
-      etiquetas:{type:"raster", tiles:urlesTeselas(t[1]), tileSize:256},
-    },
-    layers:[{id:"base",type:"raster",source:"base"},
-            {id:"etiquetas",type:"raster",source:"etiquetas"}]};
-}
-
-function datosGeo(lista){
-  return {type:"FeatureCollection", features:lista
-    .filter(ev => ev.lat !== null && ev.lon !== null)
-    .map(ev => ({type:"Feature",
-      geometry:{type:"Point", coordinates:[ev.lon, ev.lat]},
-      properties:{id:ev.id, titulo:ev.titulo, lugar:ev.lugar,
-                  color:cat(ev.categoria).hex,
-                  aprox:ev.precision === "comuna" ? 1 : 0}}))};
-}
-
-function montarCapas(){
-  if(mapa.getSource("talleres")) return;
-  mapa.addSource("talleres", {type:"geojson", data:datosGeo(visibles())});
-  mapa.addLayer({id:"talleres-pin", type:"circle", source:"talleres",
-    paint:{
-      "circle-radius":["interpolate",["linear"],["zoom"], 10, 4, 14, 9],
-      "circle-color":["get","color"],
-      "circle-stroke-width":2,
-      "circle-stroke-color":esOscuro() ? "#EDE7DE" : "#1E2A4A",
-      "circle-opacity":["case",["==",["get","aprox"],1], .45, .92],
-    }});
-  mapa.on("click", "talleres-pin", e => {
-    const p = e.features[0].properties;
-    // Título y lugar vienen del catastro (texto de terceros): van como TEXTO,
-    // nunca como HTML — la regla de la casa para dato de fuente.
-    const caja = document.createElement("div");
-    const titulo = document.createElement("b");
-    titulo.textContent = p.titulo;
-    const lugar = document.createElement("div");
-    lugar.textContent = p.lugar;
-    lugar.style.cssText = "font-weight:500;margin:2px 0 6px";
-    const enlace = document.createElement("a");
-    enlace.href = "e/" + encodeURIComponent(p.id) + ".html";
-    enlace.textContent = t("tVerFicha") + " →";
-    caja.append(titulo, lugar, enlace);
-    popup?.remove();
-    popup = new maplibregl.Popup({closeButton:false, offset:10})
-      .setLngLat(e.lngLat).setDOMContent(caja).addTo(mapa);
+/* --- Arrastre del panel: tres alturas, calcado de mapa.html --- */
+(() => {
+  const panel = document.getElementById("panel");
+  const tirador = document.getElementById("tirador");
+  const alturas = () => {
+    const disponible = panel.parentElement.clientHeight;
+    const reposo = Math.round(Math.min(268, Math.max(132, disponible * .40)));
+    return [reposo, Math.round(disponible * .62), Math.round(disponible * .88)];
+  };
+  let indice = 0, arrastrando = false, inicioY = 0, inicioAlto = 0;
+  const fijar = i => {
+    indice = Math.max(0, Math.min(2, i));
+    panel.style.setProperty("--alto-panel", alturas()[indice] + "px");
+  };
+  fijar(0);
+  tirador.addEventListener("pointerdown", e => {
+    arrastrando = true; inicioY = e.clientY; inicioAlto = panel.clientHeight;
+    panel.classList.add("arrastrando");
+    tirador.setPointerCapture(e.pointerId);
   });
-  mapa.on("mouseenter", "talleres-pin", () => mapa.getCanvas().style.cursor = "pointer");
-  mapa.on("mouseleave", "talleres-pin", () => mapa.getCanvas().style.cursor = "");
-}
-
-function abrirMapa(abrir){
-  mapaAbierto = abrir;
-  document.getElementById("panel-mapa").hidden = !abrir;
-  document.getElementById("ver-mapa").setAttribute("aria-pressed", abrir);
-  document.getElementById("ver-mapa-txt").textContent =
-    abrir ? {es:"Lista",en:"List",pt:"Lista"}[IDIOMA] : {es:"Mapa",en:"Map",pt:"Mapa"}[IDIOMA];
-  if(!abrir) return;
-  if(!mapa){
-    try{
-      mapa = new maplibregl.Map({
-        container:"mapa-talleres", style:estiloMapa(),
-        center:[-70.645,-33.437], zoom:11.6, attributionControl:{compact:true}
-      });
-    }catch(e){
-      document.getElementById("mapa-talleres").innerHTML =
-        `<div class="vacio">${cuerpo("chincol","var(--tinta-tenue)",88,{pose:"durmiendo"})}
-         <p>Este navegador no puede dibujar el mapa.<br>La lista funciona igual.</p></div>`;
-      return;
-    }
-    mapa.addControl(new maplibregl.NavigationControl({showCompass:false}), "top-left");
-    mapa.on("load", () => { montarCapas(); pintarMapa(); });
-    mapa.on("styledata", () => { if(!mapa.getSource("talleres")) montarCapas(); });
-    new MutationObserver(() => mapa.setStyle(estiloMapa()))
-      .observe(document.documentElement, {attributes:true, attributeFilter:["data-tema"]});
-    return;
-  }
-  mapa.resize();
-  pintarMapa();
-}
-
-function pintarMapa(){
-  if(!mapa || !mapa.getSource("talleres")) return;
-  const lista = visibles();
-  mapa.getSource("talleres").setData(datosGeo(lista));
-  const sinPin = lista.filter(ev => ev.lat === null).length;
-  const aprox = lista.filter(ev => ev.precision === "comuna").length;
-  const partes = [];
-  if(aprox) partes.push({es:`${aprox} con ubicación aproximada (círculo pálido)`,
-                         en:`${aprox} with approximate location (pale circle)`,
-                         pt:`${aprox} com localização aproximada (círculo pálido)`}[IDIOMA]);
-  if(sinPin) partes.push({es:`${sinPin} sin dirección conocida quedan solo en la lista`,
-                          en:`${sinPin} with unknown address are list-only`,
-                          pt:`${sinPin} sem endereço ficam só na lista`}[IDIOMA]);
-  document.getElementById("nota-mapa").textContent = partes.join(" · ");
-  document.getElementById("nota-mapa").hidden = !partes.length;
-}
-
-document.getElementById("ver-mapa").onclick = () => abrirMapa(!mapaAbierto);
+  tirador.addEventListener("pointermove", e => {
+    if(!arrastrando) return;
+    const alto = Math.min(panel.parentElement.clientHeight * .88,
+                          Math.max(120, inicioAlto - (e.clientY - inicioY)));
+    panel.style.setProperty("--alto-panel", alto + "px");
+  });
+  const soltar = () => {
+    if(!arrastrando) return;
+    arrastrando = false;
+    panel.classList.remove("arrastrando");
+    const actual = panel.clientHeight;
+    const opciones = alturas();
+    fijar(opciones.indexOf(opciones.reduce((a,b) =>
+      Math.abs(b - actual) < Math.abs(a - actual) ? b : a)));
+  };
+  tirador.addEventListener("pointerup", soltar);
+  tirador.addEventListener("pointercancel", soltar);
+  tirador.addEventListener("click", () => { if(!arrastrando) fijar(indice === 2 ? 0 : indice + 1); });
+  tirador.addEventListener("keydown", e => {
+    if(e.key === "ArrowUp"){ e.preventDefault(); fijar(indice + 1); }
+    if(e.key === "ArrowDown"){ e.preventDefault(); fijar(indice - 1); }
+    if(e.key === "Enter" || e.key === " "){ e.preventDefault(); fijar(indice === 2 ? 0 : indice + 1); }
+  });
+  addEventListener("resize", () => fijar(indice));
+})();
 </script>
 </body>
 </html>
