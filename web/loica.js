@@ -1401,6 +1401,32 @@ function cordillera({tono = "var(--c-fiesta)"} = {}){
 }
 
 /* Cuándo es, dicho como lo diría una persona */
+/* ¿Es una temporada que YA ESTÁ CORRIENDO? Abrió antes de hoy, cierra hoy o
+   después, y no es una serie de sesiones sueltas.
+
+   Importa para lo que se muestra, no para lo que se filtra. Estas entran al
+   filtro "Hoy" con toda razón —la muestra de Matta se puede ver hoy— pero la
+   tarjeta anunciaba la fecha en que ABRIÓ. Con "Hoy" apretado aparecían
+   tarjetas que decían "24 ABR", "10 JUL", "19 AGO 2025": el filtro estaba
+   bien y la tarjeta lo desmentía, que es peor que un filtro roto, porque hace
+   desconfiar de todo lo demás. En Arte eran 36 de 40. */
+const enCartelera = (ev, hoy = new Date()) => {
+  if(!ev.fin || (ev.dias_semana && ev.dias_semana.length)) return false;
+  const ini = new Date(ev.inicio), fin = new Date(ev.fin);
+  if(isNaN(ini) || isNaN(fin)) return false;
+  const corte = new Date(hoy); corte.setHours(0, 0, 0, 0);
+  return ini < corte && fin >= corte;
+};
+
+const hastaCuando = ev => {
+  const fin = new Date(ev.fin);
+  if(isNaN(fin)) return "";
+  const cuando = fin.toLocaleDateString(localeDe(), {day:"numeric", month:"long"});
+  return IDIOMA === "en" ? `On until ${cuando}`
+       : IDIOMA === "pt" ? `Em cartaz até ${cuando}`
+                         : `En cartelera hasta el ${cuando}`;
+};
+
 function etiquetaDia(fecha){
   const hoy = new Date();
   const manana = new Date(hoy); manana.setDate(hoy.getDate() + 1);
@@ -1414,7 +1440,12 @@ function etiquetaDia(fecha){
 /* Tarjeta de evento reutilizada por el mapa y el calendario */
 function tarjetaEvento(ev, alPulsar){
   const info = cat(ev.categoria);
-  const dia = etiquetaDia(ev.fecha);
+  // Una temporada en curso se anuncia por HOY y por hasta cuándo, nunca por
+  // el día que abrió: esa fecha ya pasó y no le sirve a nadie.
+  const corre = enCartelera(ev);
+  const dia = corre
+    ? {texto: IDIOMA === "en" ? "TODAY" : IDIOMA === "pt" ? "HOJE" : "HOY", pronto: true}
+    : etiquetaDia(ev.fecha);
   const hora = (ev.fecha.getHours() || ev.fecha.getMinutes()) ? horaDe(ev.fecha) : "";
   const precio = ev.gratis ? t("gratis") : (ev.precio ? "$" + ev.precio.toLocaleString("es-CL") : "");
 
@@ -1436,6 +1467,7 @@ function tarjetaEvento(ev, alPulsar){
         ${ev.comuna ? `<span>· ${escapar(ev.comuna)}</span>` : ""}
       </div>
       ${cadencia(ev) ? `<div class="tarjeta-meta cadencia">↻ ${escapar(cadencia(ev))}</div>` : ""}
+      ${corre ? `<div class="tarjeta-meta cadencia">→ ${escapar(hastaCuando(ev))}</div>` : ""}
     </div>
     <div class="precio${ev.gratis ? " libre" : precio ? "" : " sin-dato"}">${precio || "—"}</div>`;
 

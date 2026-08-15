@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=19">
+<link rel="stylesheet" href="loica.css?v=20">
 <style>
   html,body{height:100%;overflow:hidden}
   /* Los dos altos van en este orden a proposito: `dvh` no existe en
@@ -227,7 +227,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegacion principal"></nav>
 
-<script src="loica.js?v=19"></script>
+<script src="loica.js?v=20"></script>
 <script>
 let EVENTOS = [], filtroCat = null, soloGratis = false;
 let busqueda = "", filtroSub = null;
@@ -471,7 +471,11 @@ function pintarMes(){
 }
 
 function mostrarDia(dia){
-  const delDia = (porDia()[claveDia(dia)] || []).sort((a,b) => a.fecha - b.fecha);
+  /* Lo que ya está corriendo va al final: una muestra que abrió en abril tiene
+     una fecha de inicio anterior a la del concierto de esta noche, y ordenando
+     solo por fecha encabezaba la agenda del día. Mismo criterio que el mapa. */
+  const delDia = (porDia()[claveDia(dia)] || []).slice().sort((a,b) =>
+    (enCartelera(a) ? 1 : 0) - (enCartelera(b) ? 1 : 0) || a.fecha - b.fecha);
   document.getElementById("agenda-titulo").textContent =
     dia.toLocaleDateString(localeDe(), {weekday:"long", day:"numeric", month:"long"});
   document.getElementById("agenda-sub").textContent =
