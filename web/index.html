@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=20">
+<link rel="stylesheet" href="loica.css?v=21">
 <style>
   body{overflow-x:hidden}
 
@@ -424,7 +424,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
-<script src="loica.js?v=20"></script>
+<script src="loica.js?v=21"></script>
 <script>
 /* La raíz del sitio era el mapa hasta este cambio, así que hay links dando
    vueltas por WhatsApp con la forma `.../#/e/<id>`. Se reenvían al mapa en vez
@@ -439,6 +439,7 @@ pintarBarra("index.html");
 const DESTINOS = [
   {url:"mapa.html",       tono:"--c-musica",  claro:true,  masc:"condor",     t:"pMapaT",  d:"pMapaD"},
   {url:"calendario.html", tono:"--c-cultura", claro:true,  masc:"chinchilla", t:"pCalT",   d:"pCalD"},
+  {url:"talleres.html",   tono:"--c-clases",  claro:true,  masc:"chincol",    t:"pTallerT",d:"pTallerD"},
   {url:"descuentos.html", tono:"--c-descuento", claro:true, masc:"guaren",   t:"pDctoT",  d:"pDctoD"},
   {url:"comer.html",      tono:"--c-comer",   claro:true,  masc:"quiltro",  t:"pComerT", d:"pComerD"},
   {url:"blog.html",       tono:"--c-fiesta",  claro:true,  masc:"culpeo",     t:"pBlogT",  d:"pBlogD"},
@@ -535,7 +536,7 @@ function pintarPortada(){
 // A dónde manda el botón del pie. El mapa todavía no filtra por categoría
 // desde la URL, así que los que viven en él llevan al mapa entero y no a un
 // filtro inventado; los dos que tienen página propia llevan a la suya.
-const CASA_DEL_BICHO = {guaren:"descuentos.html", quiltro:"comer.html"};
+const CASA_DEL_BICHO = {guaren:"descuentos.html", quiltro:"comer.html", chincol:"talleres.html"};
 
 /* El pastel de cada animal: la misma familia de su relleno fuerte, un paso
    claro. Es la segunda pasada de tinta de la ficha (ver .fb-historia). Vive

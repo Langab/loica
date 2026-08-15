@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyeccion es
+     que todo lo que se pinta pase por escapar() y urlSegura(); esto es lo que
+     queda en pie si algun dia se escapa uno. Mismas notas que el resto de las
+     paginas: img-src abierto por las fotos de los organizadores,
+     'unsafe-inline' mientras la logica viva en un <script> inline, y
+     frame-ancestors no va porque en un <meta> el navegador lo ignora. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; worker-src blob:; connect-src 'self' https://*.basemaps.cartocdn.com; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Talleres y clases — Loica</title>
+<meta name="description" content="Los talleres y clases semanales de Santiago: natación, yoga, baile, cerámica, idiomas. Casi todo municipal y de barrio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
+      integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V" crossorigin="anonymous">
+<link rel="stylesheet" href="loica.css?v=21">
+<style>
+  html,body{height:100%;overflow:hidden}
+  /* Los dos altos van en este orden a propósito: `dvh` no existe en Safari de
+     iOS anterior a 15.4 y ahí la declaración se descarta entera (la nota larga
+     está en descuentos.html, que es de donde esta página copia el esqueleto). */
+  #app{display:flex;flex-direction:column;height:100vh;height:100dvh}
+  header{flex:none;z-index:6}
+  main{flex:1;position:relative;min-height:0;display:flex;flex-direction:column}
+
+  /* --- Cabecera: dos rieles, igual que descuentos ---
+     El día es una pregunta de una sola respuesta; el tipo, la comuna y el
+     precio se combinan y van abajo. */
+  .riel-fecha{
+    display:flex;gap:5px;padding:var(--e-2) var(--e-4);background:var(--fondo-elevado);
+    overflow-x:auto;scrollbar-width:none;align-items:center;
+  }
+  .riel-fecha::-webkit-scrollbar{display:none}
+  .segmentado{
+    display:inline-flex;gap:3px;padding:3px;flex:none;
+    background:var(--fondo-hundido);border:2.5px solid var(--contorno);
+    border-radius:var(--r-pill);box-shadow:var(--repisa-1);
+  }
+  .segmentado button{
+    flex:none;border:0;background:transparent;color:var(--tinta-suave);cursor:pointer;
+    padding:0 var(--e-3);min-height:36px;min-width:38px;border-radius:var(--r-pill);
+    font:800 var(--t-sm)/1 var(--fuente-marca);white-space:nowrap;transition:var(--rapido);
+  }
+  .segmentado button:hover{color:var(--tinta)}
+  /* El naranjo de clases con tinta azul y no con crema: el naranjo fuerte con
+     texto claro da 2,4:1 y el día elegido quedaba ilegible. */
+  .segmentado button[aria-pressed="true"]{background:var(--c-clases);color:var(--azul-900)}
+  .segmentado .destacado{padding:0 var(--e-4);border-right:2px solid var(--borde-fuerte);
+    border-radius:var(--r-pill) 0 0 var(--r-pill);margin-right:2px}
+  .cuenta-rango{
+    display:flex;align-items:center;gap:5px;flex:none;margin-left:auto;padding-left:var(--e-3);
+    font-size:var(--t-xs);font-weight:700;color:var(--tinta-tenue);white-space:nowrap;
+  }
+  .cuenta-rango b{font-family:var(--fuente-marca);font-size:var(--t-md);color:var(--tinta)}
+
+  header .filtros{padding:var(--e-2) var(--e-4) var(--e-3);border-bottom:2.5px solid var(--contorno);
+    align-items:center}
+  header .filtros .chip{padding:6px 13px 6px 8px;gap:5px;font-size:var(--t-xs);
+    border-width:2px;box-shadow:0 2px 0 var(--contorno);min-height:38px}
+  header .filtros .chip svg{width:22px;height:22px}
+  header .filtros .chip:active,
+  header .filtros .chip[aria-pressed="true"]{transform:translateY(2px);box-shadow:none}
+  header .filtros .chip:focus-visible{
+    box-shadow:0 2px 0 var(--contorno),0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+  }
+  header .filtros .chip[aria-pressed="true"]:focus-visible{
+    box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+  }
+  /* El chip del tipo se prende con el color de SU categoría (natación con el
+     teal del Chungungo, cerámica con el naranjo del Chincol): prendido y
+     apagado tienen que decir lo mismo. Tinta azul encima — ver el segmentado. */
+  header .filtros .chip[aria-pressed="true"]{background:var(--tono,var(--tinta));color:var(--azul-900)}
+  .separa-chips{flex:none;width:2px;background:var(--borde-fuerte);margin:4px 3px;border-radius:2px}
+
+  /* El desplegable vestido de chip, calcado de descuentos (la nota sobre el
+     select invisible de 16px y el zoom de Safari de iOS vive allá). */
+  .chip-select{
+    flex:none;position:relative;display:inline-flex;align-items:center;
+    border:2px solid var(--contorno);background:var(--fondo-elevado);
+    border-radius:var(--r-pill);box-shadow:0 2px 0 var(--contorno);min-height:38px;
+  }
+  .chip-select b{
+    font:700 var(--t-xs)/1 var(--fuente-marca);padding:0 26px 0 13px;
+    max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+  .chip-select select{
+    position:absolute;left:0;right:0;top:50%;width:100%;height:44px;
+    transform:translateY(-50%);
+    appearance:none;border:0;background:transparent;color:transparent;
+    opacity:0;cursor:pointer;font-size:16px;
+  }
+  .chip-select::after{
+    content:"▾";position:absolute;right:10px;pointer-events:none;
+    font-size:11px;color:var(--tinta-suave);
+  }
+  .chip-select:has(select:not([data-vacio="1"])){background:var(--tinta);box-shadow:none;transform:translateY(2px)}
+  .chip-select:has(select:not([data-vacio="1"])) b{color:var(--fondo-elevado)}
+  .chip-select:has(select:not([data-vacio="1"]))::after{color:var(--fondo-elevado)}
+  .chip-select:has(select:focus-visible){box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno)}
+
+  /* --- El botón del mapa, al lado de los días. El mapa vive en esta misma
+     página: cambiar de página pierde el día y el tipo recién elegidos. --- */
+  .boton-mapa{
+    flex:none;display:inline-flex;align-items:center;gap:6px;cursor:pointer;
+    padding:0 var(--e-4);min-height:38px;margin-left:var(--e-2);
+    border:2.5px solid var(--contorno);border-radius:var(--r-pill);
+    background:var(--fondo-elevado);color:var(--tinta);
+    font:800 var(--t-sm)/1 var(--fuente-marca);box-shadow:var(--repisa-1);
+    transition:var(--rapido);white-space:nowrap;
+  }
+  .boton-mapa::before{content:"◉";font-size:13px;color:var(--c-clases-tinta)}
+  .boton-mapa:active,
+  .boton-mapa[aria-pressed="true"]{transform:translateY(2px);box-shadow:none}
+  .boton-mapa[aria-pressed="true"]{background:var(--c-clases);color:var(--azul-900)}
+  .boton-mapa[aria-pressed="true"]::before{color:var(--azul-900)}
+
+  .panel-mapa{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--fondo-hundido)}
+  .panel-mapa[hidden]{display:none}
+  #mapa-talleres{flex:1;min-height:0}
+  .nota-mapa{
+    flex:none;padding:var(--e-2) var(--e-4);background:var(--fondo-elevado);
+    border-top:2px solid var(--contorno);font-size:var(--t-xs);
+    color:var(--tinta-tenue);line-height:1.4;
+  }
+  /* La burbuja del pin: tarjeta mínima con el borde de tinta de la casa. */
+  .maplibregl-popup-content{
+    font:600 var(--t-sm)/1.4 var(--fuente-ui);color:var(--azul-900);
+    border:2px solid var(--azul-900);border-radius:var(--r-md);
+    box-shadow:0 3px 0 var(--azul-900);padding:10px 12px;max-width:230px;
+  }
+  .maplibregl-popup-content a{color:var(--c-clases-tinta);font-weight:800;text-decoration:none}
+  .maplibregl-popup-content a:hover{text-decoration:underline}
+
+  /* --- El aviso y la lista, como en descuentos --- */
+  .aviso-taller{
+    display:flex;gap:var(--e-2);align-items:flex-start;
+    padding:var(--e-3) var(--e-4);background:var(--c-clases-suave);
+    color:var(--azul-900);font-size:var(--t-xs);line-height:1.45;
+    border-bottom:2px solid var(--contorno);
+  }
+  .aviso-taller svg{flex:none;margin-top:-2px}
+  .lista{overflow-y:auto;-webkit-overflow-scrolling:touch;flex:1;min-height:0}
+  .fin-lista{padding:var(--e-5) var(--e-4);text-align:center}
+  .fin-lista .boton{box-shadow:var(--repisa-2)}
+
+  @media(max-width:879px){
+    main{padding-bottom:var(--hueco-nav)}
+    header .filtros{padding:5px var(--e-3) 7px}
+    .riel-fecha{padding:var(--e-2) var(--e-3)}
+  }
+  @media(min-width:880px){
+    main{background:var(--fondo-hundido)}
+    .lista{max-width:820px;width:100%;margin:0 auto;background:var(--fondo-elevado);
+      border-inline:2.5px solid var(--contorno)}
+    .aviso-taller{justify-content:center}
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="barra" id="barra"></div>
+    <div class="riel-fecha">
+      <div class="segmentado" id="dias" role="group"></div>
+      <button type="button" id="ver-mapa" class="boton-mapa" aria-pressed="false">
+        <span id="ver-mapa-txt">Mapa</span>
+      </button>
+      <div class="cuenta-rango" id="cuenta"></div>
+    </div>
+    <div class="filtros" id="filtros" role="group"></div>
+  </header>
+
+  <main>
+    <div class="aviso-taller" id="aviso"></div>
+    <div class="lista" id="lista"></div>
+    <!-- Se turna con la lista y obedece los mismos filtros: el mapa muestra
+         exactamente lo mismo que la lista, no un universo aparte. -->
+    <div class="panel-mapa" id="panel-mapa" hidden>
+      <div id="mapa-talleres"></div>
+      <p class="nota-mapa" id="nota-mapa"></p>
+    </div>
+  </main>
+</div>
+
+<nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
+        integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
+        crossorigin="anonymous"></script>
+<script src="loica.js?v=21"></script>
+<script>
+/* ------------------------------------------------------------------
+   Talleres y clases: lo que se toma todas las semanas. El esqueleto es el
+   de descuentos.html —día segmentado, filtros que se combinan, lista, mapa
+   que se turna con ella— porque la pregunta es la misma con otro contenido:
+   "¿qué me queda cerca y qué día puedo?".
+   ------------------------------------------------------------------ */
+let TALLERES = [], generado = "";
+let dia = "hoy", tipoFiltro = "", comunaFiltro = "", soloGratis = false;
+let mostrando = 80;   // 1.600 tarjetas de una sola vez traban el teléfono
+
+pintarBarra("talleres.html");
+
+cargarTalleres().then(lista => {
+  TALLERES = lista;
+  return fetch("talleres.json", {cache:"no-cache"}).then(r => r.json());
+}).then(d => {
+  generado = d.generado || "";
+  pintarTodo();
+}).catch(() => {
+  document.getElementById("lista").innerHTML =
+    `<div class="vacio">${cuerpo("chincol","var(--tinta-tenue)",96,{pose:"durmiendo"})}
+       <p>No pude cargar los talleres.</p></div>`;
+});
+
+window.addEventListener("loica:idioma", pintarTodo);
+
+/* El tipo de un taller: la subcategoría cuando el clasificador la supo
+   ("natacion", "gimnasia", "manualidades") y la categoría como respaldo. */
+const tipoDe = ev => ev.subcategoria || "cat:" + ev.categoria;
+const nombreTipo = clave => clave.startsWith("cat:")
+  ? cat(clave.slice(4))[IDIOMA] : subcat(clave);
+const colorTipo = clave => {
+  // El color de la familia a la que pertenece el tipo: natación es del
+  // Chungungo, cerámica del Chincol. Se busca un taller del tipo y se le
+  // pregunta su categoría — más simple que mantener una tabla aparte.
+  const ejemplo = TALLERES.find(ev => tipoDe(ev) === clave);
+  return cat(ejemplo ? ejemplo.categoria : "clases");
+};
+
+/* Qué días corre un taller. Tres casos, y el vacío es honesto:
+   - la serie declara sus días (dias_semana, del export);
+   - la sesión única corre el día de su fecha;
+   - la temporada sin días declarados no sabemos QUÉ días corre: entra en
+     "Hoy" y en "Todos" pero no afirma correr un martes. */
+const diasDe = ev => {
+  if(ev.dias_semana && ev.dias_semana.length) return ev.dias_semana;
+  if(!ev.fin && ev.inicio) return [(new Date(ev.inicio).getDay() + 6) % 7];
+  return null;
+};
+
+/* ---------- FILTRADO ---------- */
+function visibles(){
+  const indiceDia = DIAS_CLAVE.indexOf(dia);   // -1 si es "hoy" o "todo"
+  return TALLERES.filter(ev =>
+    (dia === "todo"
+      || (dia === "hoy" ? sesionEnRango(ev, "hoy")
+                        : (diasDe(ev) || []).includes(indiceDia))) &&
+    (!tipoFiltro || tipoDe(ev) === tipoFiltro) &&
+    (!comunaFiltro || ev.comuna === comunaFiltro) &&
+    (!soloGratis || ev.gratis));
+}
+
+function pintarTodo(){
+  pintarDias(); pintarFiltros(); pintarLista(); pintarAviso();
+  if(mapaAbierto) pintarMapa();
+}
+
+function pintarAviso(){
+  const fecha = generado
+    ? new Date(generado).toLocaleDateString(localeDe(), {day:"numeric", month:"long"})
+    : "";
+  document.getElementById("aviso").innerHTML =
+    `${carita("chincol","var(--c-clases-tinta)",22)}
+     <span>${escapar(t("tOjo"))}${fecha ? ` · ${{es:"Revisado el",en:"Checked on",pt:"Revisado em"}[IDIOMA]} ${fecha}.` : ""}</span>`;
+}
+
+/* El riel del día. "Hoy" primero porque es la pregunta real; los siete días
+   para quien arma su semana: "¿qué puedo tomar los martes?". */
+function pintarDias(){
+  const cont = document.getElementById("dias");
+  cont.setAttribute("aria-label", t("tDia"));
+  const opciones = [["hoy", t("hoy"), true]]
+    .concat(DIAS_CLAVE.map((k, i) => [k, t("dias")[i], false]))
+    .concat([["todo", t("tTodos"), false]]);
+  cont.innerHTML = opciones.map(([clave, etiqueta, destacado]) =>
+    `<button type="button" data-dia="${clave}" aria-pressed="${dia === clave}"
+       class="${destacado ? "destacado" : ""}">${escapar(etiqueta)}</button>`).join("");
+  cont.querySelectorAll("button").forEach(b => b.onclick = () => {
+    dia = b.dataset.dia; mostrando = 80; pintarTodo();
+  });
+}
+
+function pintarFiltros(){
+  const cont = document.getElementById("filtros");
+  cont.innerHTML = "";
+  cont.setAttribute("aria-label", `${t("tTipo")} · ${t("tComuna")}`);
+
+  const conteo = {};
+  TALLERES.forEach(ev => { const k = tipoDe(ev); conteo[k] = (conteo[k] || 0) + 1; });
+  const tipos = Object.keys(conteo)
+    .sort((a, b) => conteo[b] - conteo[a] || nombreTipo(a).localeCompare(nombreTipo(b)));
+
+  /* Chips para los tipos grandes, con la carita de su animal; el resto vive
+     en el desplegable. El piso de 60 deja 5-6 chips: más es un riel infinito
+     y menos esconde la natación, que es la mitad del catálogo municipal. */
+  tipos.filter(k => conteo[k] >= 60).slice(0, 6).forEach(k => {
+    const info = colorTipo(k), activo = tipoFiltro === k;
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "chip";
+    chip.style.setProperty("--tono", info.hex);
+    chip.setAttribute("aria-pressed", activo);
+    chip.innerHTML = `${carita(info.mascota, activo ? "#1E2A4A" : info.hex, 22)} ${escapar(nombreTipo(k))}`;
+    chip.onclick = () => { tipoFiltro = activo ? "" : k; mostrando = 80; pintarTodo(); };
+    cont.appendChild(chip);
+  });
+
+  const sep = document.createElement("span");
+  sep.className = "separa-chips";
+  cont.appendChild(sep);
+
+  cont.appendChild(desplegable(t("tTipo"), tipos.map(k => [k, nombreTipo(k)]),
+    tipoFiltro, v => { tipoFiltro = v; mostrando = 80; pintarTodo(); }));
+
+  const comunas = [...new Set(TALLERES.map(ev => ev.comuna).filter(Boolean))]
+    .sort((a, b) => a.localeCompare(b));
+  cont.appendChild(desplegable(t("tComuna"), comunas.map(c => [c, c]),
+    comunaFiltro, v => { comunaFiltro = v; mostrando = 80; pintarTodo(); }));
+
+  // Gratis con la cara del Degú, igual que en el mapa: es su pega.
+  const gratis = document.createElement("button");
+  gratis.type = "button";
+  gratis.className = "chip";
+  gratis.style.setProperty("--tono", "var(--gratis)");
+  gratis.setAttribute("aria-pressed", soloGratis);
+  gratis.innerHTML = `${carita("degu", soloGratis ? "#1E2A4A" : "#2E7D5B", 22)} ${escapar(t("gratis"))}`;
+  gratis.onclick = () => { soloGratis = !soloGratis; mostrando = 80; pintarTodo(); };
+  cont.appendChild(gratis);
+
+  if(tipoFiltro || comunaFiltro || soloGratis){
+    const limpiar = document.createElement("button");
+    limpiar.type = "button";
+    limpiar.className = "chip";
+    limpiar.textContent = "✕ " + t("filtrosLimpiar");
+    limpiar.onclick = () => {
+      tipoFiltro = ""; comunaFiltro = ""; soloGratis = false;
+      mostrando = 80; pintarTodo();
+    };
+    cont.appendChild(limpiar);
+  }
+}
+
+function desplegable(etiqueta, opciones, valor, alCambiar){
+  const caja = document.createElement("span");
+  caja.className = "chip-select";
+  const elegida = opciones.find(([v]) => v === valor);
+  caja.innerHTML = `<b>${escapar(elegida ? elegida[1] : etiqueta)}</b>
+    <select aria-label="${escapar(etiqueta)}" data-vacio="${valor ? "0" : "1"}">
+      <option value="">${escapar(etiqueta)}</option>
+      ${opciones.map(([v, txt]) =>
+        `<option value="${escapar(v)}" ${v === valor ? "selected" : ""}>${escapar(txt)}</option>`).join("")}
+    </select>`;
+  caja.querySelector("select").onchange = e => alCambiar(e.target.value);
+  return caja;
+}
+
+/* ---------- LISTA ---------- */
+function pintarLista(){
+  const lista = visibles();
+  const cont = document.getElementById("lista");
+  cont.innerHTML = "";
+
+  document.getElementById("cuenta").innerHTML =
+    `<b>${lista.length}</b> ${escapar(lista.length === 1 ? t("tCuantos1") : t("tCuantos"))}`;
+
+  if(!lista.length){
+    cont.innerHTML = `<div class="vacio">${cuerpo("chincol","var(--tinta-tenue)",96,{pose:"durmiendo"})}
+      <p><b>${escapar(t("tVacio"))}</b><br>${escapar(t("tVaciopista"))}</p></div>`;
+    return;
+  }
+
+  // La tarjeta es LA MISMA del mapa y el calendario (tarjetaEvento): un taller
+  // no se ve distinto de un panorama, se filtra distinto. Tocarla abre su
+  // ficha, que ya sabe compartir y agendar.
+  lista.slice(0, mostrando).forEach(ev => cont.appendChild(
+    tarjetaEvento(ev, e => location.href = "e/" + encodeURIComponent(e.id) + ".html")));
+
+  if(lista.length > mostrando){
+    const mas = document.createElement("div");
+    mas.className = "fin-lista";
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "boton secundario";
+    b.textContent = `${t("verMas")} (${lista.length - mostrando})`;
+    b.onclick = () => { mostrando += 120; pintarLista(); };
+    mas.appendChild(b);
+    cont.appendChild(mas);
+  } else {
+    const sello = document.createElement("div");
+    sello.className = "fin-lista";
+    sello.innerHTML = `${carita("chincol","var(--tinta-tenue)",26)}`;
+    cont.appendChild(sello);
+  }
+}
+
+/* ---------- MAPA ----------
+   Círculos y no pines-animal: acá puede haber 1.600 puntos y los marcadores
+   DOM a esa escala traban el arrastre (la lección está documentada en
+   mapa.html). Un círculo del color de la familia con contorno de tinta sigue
+   siendo de la casa. */
+let mapa = null, mapaAbierto = false, popup = null;
+
+const esOscuro = () => document.documentElement.dataset.tema === "oscuro";
+const TESELAS = {
+  claro:"https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png",
+  claroEtiquetas:"https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
+  oscuro:"https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png",
+  oscuroEtiquetas:"https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png",
+};
+const urlesTeselas = clave => ["a","b","c"].map(s =>
+  TESELAS[clave].replace("{s}", s).replace("{r}", devicePixelRatio > 1.5 ? "@2x" : ""));
+function estiloMapa(){
+  const t = esOscuro() ? ["oscuro","oscuroEtiquetas"] : ["claro","claroEtiquetas"];
+  return {version:8,
+    sources:{
+      base:{type:"raster", tiles:urlesTeselas(t[0]), tileSize:256,
+            attribution:'© OpenStreetMap © CARTO'},
+      etiquetas:{type:"raster", tiles:urlesTeselas(t[1]), tileSize:256},
+    },
+    layers:[{id:"base",type:"raster",source:"base"},
+            {id:"etiquetas",type:"raster",source:"etiquetas"}]};
+}
+
+function datosGeo(lista){
+  return {type:"FeatureCollection", features:lista
+    .filter(ev => ev.lat !== null && ev.lon !== null)
+    .map(ev => ({type:"Feature",
+      geometry:{type:"Point", coordinates:[ev.lon, ev.lat]},
+      properties:{id:ev.id, titulo:ev.titulo, lugar:ev.lugar,
+                  color:cat(ev.categoria).hex,
+                  aprox:ev.precision === "comuna" ? 1 : 0}}))};
+}
+
+function montarCapas(){
+  if(mapa.getSource("talleres")) return;
+  mapa.addSource("talleres", {type:"geojson", data:datosGeo(visibles())});
+  mapa.addLayer({id:"talleres-pin", type:"circle", source:"talleres",
+    paint:{
+      "circle-radius":["interpolate",["linear"],["zoom"], 10, 4, 14, 9],
+      "circle-color":["get","color"],
+      "circle-stroke-width":2,
+      "circle-stroke-color":esOscuro() ? "#EDE7DE" : "#1E2A4A",
+      "circle-opacity":["case",["==",["get","aprox"],1], .45, .92],
+    }});
+  mapa.on("click", "talleres-pin", e => {
+    const p = e.features[0].properties;
+    // Título y lugar vienen del catastro (texto de terceros): van como TEXTO,
+    // nunca como HTML — la regla de la casa para dato de fuente.
+    const caja = document.createElement("div");
+    const titulo = document.createElement("b");
+    titulo.textContent = p.titulo;
+    const lugar = document.createElement("div");
+    lugar.textContent = p.lugar;
+    lugar.style.cssText = "font-weight:500;margin:2px 0 6px";
+    const enlace = document.createElement("a");
+    enlace.href = "e/" + encodeURIComponent(p.id) + ".html";
+    enlace.textContent = t("tVerFicha") + " →";
+    caja.append(titulo, lugar, enlace);
+    popup?.remove();
+    popup = new maplibregl.Popup({closeButton:false, offset:10})
+      .setLngLat(e.lngLat).setDOMContent(caja).addTo(mapa);
+  });
+  mapa.on("mouseenter", "talleres-pin", () => mapa.getCanvas().style.cursor = "pointer");
+  mapa.on("mouseleave", "talleres-pin", () => mapa.getCanvas().style.cursor = "");
+}
+
+function abrirMapa(abrir){
+  mapaAbierto = abrir;
+  document.getElementById("panel-mapa").hidden = !abrir;
+  document.getElementById("ver-mapa").setAttribute("aria-pressed", abrir);
+  document.getElementById("ver-mapa-txt").textContent =
+    abrir ? {es:"Lista",en:"List",pt:"Lista"}[IDIOMA] : {es:"Mapa",en:"Map",pt:"Mapa"}[IDIOMA];
+  if(!abrir) return;
+  if(!mapa){
+    try{
+      mapa = new maplibregl.Map({
+        container:"mapa-talleres", style:estiloMapa(),
+        center:[-70.645,-33.437], zoom:11.6, attributionControl:{compact:true}
+      });
+    }catch(e){
+      document.getElementById("mapa-talleres").innerHTML =
+        `<div class="vacio">${cuerpo("chincol","var(--tinta-tenue)",88,{pose:"durmiendo"})}
+         <p>Este navegador no puede dibujar el mapa.<br>La lista funciona igual.</p></div>`;
+      return;
+    }
+    mapa.addControl(new maplibregl.NavigationControl({showCompass:false}), "top-left");
+    mapa.on("load", () => { montarCapas(); pintarMapa(); });
+    mapa.on("styledata", () => { if(!mapa.getSource("talleres")) montarCapas(); });
+    new MutationObserver(() => mapa.setStyle(estiloMapa()))
+      .observe(document.documentElement, {attributes:true, attributeFilter:["data-tema"]});
+    return;
+  }
+  mapa.resize();
+  pintarMapa();
+}
+
+function pintarMapa(){
+  if(!mapa || !mapa.getSource("talleres")) return;
+  const lista = visibles();
+  mapa.getSource("talleres").setData(datosGeo(lista));
+  const sinPin = lista.filter(ev => ev.lat === null).length;
+  const aprox = lista.filter(ev => ev.precision === "comuna").length;
+  const partes = [];
+  if(aprox) partes.push({es:`${aprox} con ubicación aproximada (círculo pálido)`,
+                         en:`${aprox} with approximate location (pale circle)`,
+                         pt:`${aprox} com localização aproximada (círculo pálido)`}[IDIOMA]);
+  if(sinPin) partes.push({es:`${sinPin} sin dirección conocida quedan solo en la lista`,
+                          en:`${sinPin} with unknown address are list-only`,
+                          pt:`${sinPin} sem endereço ficam só na lista`}[IDIOMA]);
+  document.getElementById("nota-mapa").textContent = partes.join(" · ");
+  document.getElementById("nota-mapa").hidden = !partes.length;
+}
+
+document.getElementById("ver-mapa").onclick = () => abrirMapa(!mapaAbierto);
+</script>
+</body>
+</html>

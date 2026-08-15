@@ -18,7 +18,7 @@ El pipeline implementa este circuito, y cada paso tiene su comando:
 | 1 | **Identificación de fuentes** | `config/fuentes.yaml` (100 fuentes catastradas, ~50 activas) y `config/bancos.yaml` |
 | 2 | **Metodología según la fuente** | `tipo_adaptador` por fuente: API (wordpress/eventon/json/ticketmaster), scraping educado (html/rss/sitemap/carteleras/cine/tabla) o captura asistida (`manual`, para lo que bloquea bots) |
 | 3 | **Extracción** | `run_diario.py` (eventos → SQLite) y `run_descuentos.py` (bancos → JSON) |
-| 4 | **Consolidación** | todo converge a `datos/eventos.db` deduplicado por título+fecha+lugar; el export arma `web/eventos.json` |
+| 4 | **Consolidación** | todo converge a `datos/eventos.db` deduplicado por título+fecha+lugar; el export arma `web/eventos.json` (panoramas) y `web/talleres.json` (clases semanales) |
 | 5 | **Revisión + memoria de correcciones** | `revisar_extraccion.py` produce el informe y las colas; los arreglos viven en `config/correcciones/` y se aplican solos en cada corrida (ver abajo) |
 | 6 | **Diagnóstico de la corrida** | `informe_corrida.py` deja un Excel en `informes/` para mirar el proceso, no el catastro (ver abajo) |
 | 7 | **Doble check** | `verificar_web.py`: si el sitio quedó roto, vacío o cayó a la mitad, **no hay push** |
@@ -190,6 +190,7 @@ Las páginas son:
 | `web/mapa.html` | El **mapa**: un pin-animal por evento (sin agrupar, a propósito), filtros de fecha (Hoy / Mañana / 7 días / Finde), precio, público y categoría, lista lateral y ficha con anterior/siguiente |
 | `web/habla.html` | **Habla con la Loica**: el elenco recomienda por turnos, sin tokens ni servidor |
 | `web/calendario.html` | Mes a mes |
+| `web/talleres.html` | Los **talleres y clases** semanales (natación, yoga, cerámica), con filtro por día, tipo y comuna y su propio mapa. Salen de `web/talleres.json`, separados de los panoramas por `es_taller()` en el export: una maratón es un panorama, la clase de natación de los martes es un taller |
 | `web/descuentos.html` | Los **descuentos** de restaurante por banco, día y comuna |
 | `web/blog.html` | Las ediciones del blog |
 | `web/agrega.html` | Formulario para publicar |

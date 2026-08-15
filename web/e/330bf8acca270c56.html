@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=19">
+<link rel="stylesheet" href="../loica.css?v=21">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,10 +86,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=19"></script>
+<script src="../loica.js?v=21"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "330bf8acca270c56", "titulo": "Noches Oscuras en RBX", "inicio": "2026-12-03T21:00:00", "fin": "2026-12-04T00:00:00", "lugar": "Sala RBX", "direccion": "Av. Vicuña Mackenna 1220", "comuna": "Ñuñoa", "lat": -33.45691, "lon": -70.62916, "precision": "correccion", "gratis": false, "precio": 4000, "precio_texto": "", "categoria": "musica", "subcategoria": "rock", "escala": "under", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/noches-oscuras-en-rbx-533127-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/noches-oscuras-en-rbx"};
+  const EV = {"id": "330bf8acca270c56", "titulo": "Noches Oscuras en RBX", "inicio": "2026-12-03T21:00:00", "fin": "2026-12-04T00:00:00", "lugar": "Sala RBX", "direccion": "Av. Vicuña Mackenna 1220", "comuna": "Ñuñoa", "lat": -33.45691, "lon": -70.62916, "precision": "correccion", "gratis": false, "precio": 4000, "precio_texto": "", "categoria": "musica", "subcategoria": "rock", "escala": "under", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/noches-oscuras-en-rbx-533127-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/noches-oscuras-en-rbx", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

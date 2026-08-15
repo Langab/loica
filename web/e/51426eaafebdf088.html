@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=19">
+<link rel="stylesheet" href="../loica.css?v=21">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,10 +86,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=19"></script>
+<script src="../loica.js?v=21"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "51426eaafebdf088", "titulo": "EDO CAROE en Palermo Teatro Bar", "inicio": "2026-08-31T20:00:00", "fin": null, "lugar": "Palermo Teatro Bar", "direccion": "Avenida José Manuel Infante 1414", "comuna": "Providencia", "lat": -33.44405, "lon": -70.6196, "precision": "correccion", "gratis": false, "precio": 25080, "precio_texto": "desde $25.080", "categoria": "teatro", "subcategoria": "", "escala": "under", "publico": "todos", "descripcion": "EDO NO TIENE SHOW EN BARES: Tras de una exitosa gira nacional y su paso por el Festival de Viña del Mar, Edo Caroe regresa a los escenarios pero con un gran problema: No tiene nada para presentar", "imagen": "https://static.ptocdn.net/images/eventos/edo127_rs.jpg", "fuente": "Puntoticket (deportes, musica y familia)", "url": "https://www.puntoticket.com/evento/edocaroe-palermo-agosto?utm_medium=organic\u0026utm_source=microformat"};
+  const EV = {"id": "51426eaafebdf088", "titulo": "EDO CAROE en Palermo Teatro Bar", "inicio": "2026-08-31T20:00:00", "fin": null, "lugar": "Palermo Teatro Bar", "direccion": "Avenida José Manuel Infante 1414", "comuna": "Providencia", "lat": -33.44405, "lon": -70.6196, "precision": "correccion", "gratis": false, "precio": 25080, "precio_texto": "desde $25.080", "categoria": "teatro", "subcategoria": "", "escala": "under", "publico": "todos", "descripcion": "EDO NO TIENE SHOW EN BARES: Tras de una exitosa gira nacional y su paso por el Festival de Viña del Mar, Edo Caroe regresa a los escenarios pero con un gran problema: No tiene nada para presentar", "imagen": "https://static.ptocdn.net/images/eventos/edo127_rs.jpg", "fuente": "Puntoticket (deportes, musica y familia)", "url": "https://www.puntoticket.com/evento/edocaroe-palermo-agosto?utm_medium=organic\u0026utm_source=microformat", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

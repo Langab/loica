@@ -284,6 +284,7 @@ img{max-width:100%;display:block}
 :root[data-pagina="agregar"]    {--nav-color:var(--c-clases); --nav-tinta:var(--azul-900)}
 :root[data-pagina="nosotros"]   {--nav-color:var(--c-libre);  --nav-tinta:var(--arena-50)}
 :root[data-pagina="descuentos"] {--nav-color:var(--c-descuento);--nav-tinta:var(--arena-50)}
+:root[data-pagina="talleres"]   {--nav-color:var(--c-clases);  --nav-tinta:var(--azul-900)}
 /* Comer se lleva el oliva de la Bandurria. Al lado de los descuentos —que son
    café— se distinguen: uno es la tarjeta del banco, el otro es la mesa. */
 :root[data-pagina="comer"]      {--nav-color:var(--c-comer);  --nav-tinta:var(--arena-50)}

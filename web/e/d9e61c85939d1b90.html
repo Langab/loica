@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=19">
+<link rel="stylesheet" href="../loica.css?v=21">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -61,7 +61,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../talleres.html">← Ver todos los talleres y clases</a>
   <div class="foto" id="foto"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Acondicionamiento Físico</h1>
@@ -79,17 +79,17 @@
   <div class="dato"><span class="et"></span><span>todos los lunes y miércoles a las 19:00, 16+</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../mapa.html#/e/d9e61c85939d1b90">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../talleres.html#/e/d9e61c85939d1b90">Ver en la página de talleres</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Municipalidad de Huechuraba - Actividades y Talleres Deportivos</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=19"></script>
+<script src="../loica.js?v=21"></script>
 <script>
-  pintarBarra("mapa.html", "../");
-  const EV = {"id": "d9e61c85939d1b90", "titulo": "Acondicionamiento Físico", "inicio": "2026-08-17T19:00:00", "fin": "2026-08-19T19:00:00", "lugar": "Colegio Saint Joseph Av. Guanaco # 1270", "direccion": "Av. Guanaco Norte 1270", "comuna": "Huechuraba", "lat": -33.35335, "lon": -70.66669, "precision": "correccion", "gratis": false, "precio": null, "precio_texto": "", "categoria": "deporte", "subcategoria": "gimnasia", "escala": "under", "publico": "todos", "descripcion": "todos los lunes y miércoles a las 19:00, 16+", "imagen": "", "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos", "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026"};
+  pintarBarra("talleres.html", "../");
+  const EV = {"id": "d9e61c85939d1b90", "titulo": "Acondicionamiento Físico", "inicio": "2026-08-17T19:00:00", "fin": "2026-08-19T19:00:00", "lugar": "Colegio Saint Joseph Av. Guanaco # 1270", "direccion": "Av. Guanaco Norte 1270", "comuna": "Huechuraba", "lat": -33.35335, "lon": -70.66669, "precision": "correccion", "gratis": false, "precio": null, "precio_texto": "", "categoria": "deporte", "subcategoria": "gimnasia", "escala": "under", "publico": "todos", "descripcion": "todos los lunes y miércoles a las 19:00, 16+", "imagen": "", "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos", "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026", "formato": "taller"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

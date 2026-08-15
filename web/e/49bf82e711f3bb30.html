@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=19">
+<link rel="stylesheet" href="../loica.css?v=21">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,10 +86,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=19"></script>
+<script src="../loica.js?v=21"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "49bf82e711f3bb30", "titulo": "Cumpleyankees", "inicio": "2026-08-16T03:00:00", "fin": "2026-08-16T00:00:00", "lugar": "Spot Secreto", "direccion": "Los Carrera #330, La Unión", "comuna": "", "lat": -33.8126296, "lon": -70.7404368, "precision": "calle", "gratis": false, "precio": 2000, "precio_texto": "desde $2.000", "categoria": "fiesta", "subcategoria": "", "escala": "under", "publico": "adultos", "descripcion": "Fiesta Cumpleyankees", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/c1e79e14f4a18a8295e11ecee2631071293dc9d59b822b6aec2d661dc0366e9d.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/la-union/cumpleyankees-25937"};
+  const EV = {"id": "49bf82e711f3bb30", "titulo": "Cumpleyankees", "inicio": "2026-08-16T03:00:00", "fin": "2026-08-16T00:00:00", "lugar": "Spot Secreto", "direccion": "Los Carrera #330, La Unión", "comuna": "", "lat": -33.8126296, "lon": -70.7404368, "precision": "calle", "gratis": false, "precio": 2000, "precio_texto": "desde $2.000", "categoria": "fiesta", "subcategoria": "", "escala": "under", "publico": "adultos", "descripcion": "Fiesta Cumpleyankees", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/c1e79e14f4a18a8295e11ecee2631071293dc9d59b822b6aec2d661dc0366e9d.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/la-union/cumpleyankees-25937", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

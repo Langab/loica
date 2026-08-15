@@ -603,9 +603,19 @@ const TEXTOS = {
     pGratisT:"gratis", pGratisD:"panoramas que no cuestan nada",
     pTotalD:"panoramas vigentes", pFuentesD:"fuentes revisadas cada mañana",
     pCierreT:"¿Organizas algo?", pCierreD:"Si tu evento es abierto y pasa en Santiago, cabe acá. No cobramos por aparecer.",
+    pTallerT:"Talleres y clases", pTallerD:"Lo que se toma todas las semanas: natación, yoga, cerámica.",
     pDctoT:"Los descuentos", pDctoD:"Dónde comer más barato hoy, según tu tarjeta.",
     pDctoCifra:"descuentos de banco vigentes",
     pComerT:"Dónde comer", pComerD:"Los locales de siempre, elegidos a dedo y con lo que hay que pedir.",
+    /* Talleres */
+    talleres:"Talleres",
+    tTitulo:"Talleres y clases",
+    tBajada:"Lo que se toma todas las semanas: natación, yoga, cerámica, idiomas. Casi todo municipal y de barrio.",
+    tCuantos:"talleres", tCuantos1:"taller",
+    tTipo:"Tipo", tDia:"Día", tComuna:"Comuna", tTodos:"Todos", tHoyEs:"Hoy es",
+    tVacio:"No hay talleres con esos filtros", tVaciopista:"Prueba sacando alguno",
+    tOjo:"Los cupos y las inscripciones los maneja cada organizador. Confirma en la fuente antes de ir.",
+    tVerFicha:"Ver ficha",
     /* Descuentos */
     descuentos:"Descuentos",
     dTitulo:"¿Dónde como hoy?",
@@ -662,9 +672,19 @@ const TEXTOS = {
     pGratisT:"free", pGratisD:"events that cost nothing",
     pTotalD:"events on right now", pFuentesD:"sources checked every morning",
     pCierreT:"Running something?", pCierreD:"If your event is open to the public and happens in Santiago, it belongs here. We don't charge for it.",
+    pTallerT:"Workshops & classes", pTallerD:"The weekly stuff: swimming, yoga, pottery.",
     pDctoT:"The discounts", pDctoD:"Where to eat cheaper today, depending on your card.",
     pDctoCifra:"live bank discounts",
     pComerT:"Where to eat", pComerD:"The regulars, hand-picked, and what to order at each one.",
+    /* Talleres */
+    talleres:"Classes",
+    tTitulo:"Workshops & classes",
+    tBajada:"The weekly stuff: swimming, yoga, pottery, languages. Mostly municipal and neighbourhood-run.",
+    tCuantos:"classes", tCuantos1:"class",
+    tTipo:"Type", tDia:"Day", tComuna:"District", tTodos:"All", tHoyEs:"Today is",
+    tVacio:"No classes match these filters", tVaciopista:"Try removing one",
+    tOjo:"Spots and sign-ups are handled by each organiser. Check the source before you go.",
+    tVerFicha:"View details",
     /* Descuentos */
     descuentos:"Discounts",
     dTitulo:"Where do I eat today?",
@@ -721,9 +741,19 @@ const TEXTOS = {
     pGratisT:"grátis", pGratisD:"programas que não custam nada",
     pTotalD:"programas em cartaz", pFuentesD:"fontes revisadas toda manhã",
     pCierreT:"Organiza algo?", pCierreD:"Se o seu evento é aberto e acontece em Santiago, cabe aqui. Não cobramos para aparecer.",
+    pTallerT:"Oficinas e aulas", pTallerD:"O que se faz toda semana: natação, ioga, cerâmica.",
     pDctoT:"Os descontos", pDctoD:"Onde comer mais barato hoje, conforme o seu cartão.",
     pDctoCifra:"descontos de banco em vigor",
     pComerT:"Onde comer", pComerD:"Os lugares de sempre, escolhidos a dedo e com o que pedir.",
+    /* Talleres */
+    talleres:"Aulas",
+    tTitulo:"Oficinas e aulas",
+    tBajada:"O que se faz toda semana: natação, ioga, cerâmica, idiomas. Quase tudo municipal e de bairro.",
+    tCuantos:"aulas", tCuantos1:"aula",
+    tTipo:"Tipo", tDia:"Dia", tComuna:"Comuna", tTodos:"Todas", tHoyEs:"Hoje é",
+    tVacio:"Nenhuma aula com esses filtros", tVaciopista:"Tente tirar algum",
+    tOjo:"As vagas e inscrições são de cada organizador. Confirme na fonte antes de ir.",
+    tVerFicha:"Ver ficha",
     /* Descuentos */
     descuentos:"Descontos",
     dTitulo:"Onde eu como hoje?",
@@ -805,6 +835,12 @@ aplicarTema(temaGuardado() || "claro", false);
 // Íconos de la navegación inferior. Simples a propósito: compiten con las
 // mascotas y a 22px la mascota no se lee.
 const ICONOS_NAV = {
+  /* Talleres: dos flechas en círculo — la clase que vuelve cada semana. */
+  talleres:`<path d="M20 12a8 8 0 1 1-2.9-6.2" fill="none" stroke="currentColor"
+        stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M17.4 2.6v3.6H21" fill="none" stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="12" cy="12" r="1.6" fill="currentColor"/>`,
   mapa:`<path d="M9 3 3 5.4v15.1l6-2.4 6 2.4 6-2.4V2.9l-6 2.4L9 3z" fill="none"
         stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
         <path d="M9 3v15.1M15 5.4v15.1" stroke="currentColor" stroke-width="1.8"/>`,
@@ -847,6 +883,7 @@ const ICONOS_NAV = {
    ella por el logo. Seis destinos no caben en la barra inferior de un
    celular sin que las etiquetas se corten. */
 const PAGINAS = [["mapa.html","mapa"],["habla.html","habla"],["calendario.html","calendario"],
+                 ["talleres.html","talleres"],
                  ["descuentos.html","descuentos"],["comer.html","comer"],["blog.html","blog"],
                  ["agrega.html","agregar"],["nosotros.html","nosotros"]];
 // En la barra inferior el espacio manda: con OCHO destinos cada celda baja a
@@ -861,9 +898,9 @@ const PAGINAS = [["mapa.html","mapa"],["habla.html","habla"],["calendario.html",
 // recomendación, que es el precio conocido de este destino. Un noveno destino
 // deja de caber en cualquier teléfono y tendría que vivir en otra parte.
 const CORTOS = {
-  es:{mapa:"Mapa", habla:"Habla", calendario:"Agenda", descuentos:"Dctos", comer:"Comer", blog:"Blog", agregar:"Subir", nosotros:"Quién"},
-  en:{mapa:"Map", habla:"Talk", calendario:"Agenda", descuentos:"Deals", comer:"Eat", blog:"Blog", agregar:"Post", nosotros:"Who"},
-  pt:{mapa:"Mapa", habla:"Fale", calendario:"Agenda", descuentos:"Dctos", comer:"Comer", blog:"Blog", agregar:"Subir", nosotros:"Quem"},
+  es:{mapa:"Mapa", habla:"Habla", calendario:"Agenda", talleres:"Clases", descuentos:"Dctos", comer:"Comer", blog:"Blog", agregar:"Subir", nosotros:"Quién"},
+  en:{mapa:"Map", habla:"Talk", calendario:"Agenda", talleres:"Class", descuentos:"Deals", comer:"Eat", blog:"Blog", agregar:"Post", nosotros:"Who"},
+  pt:{mapa:"Mapa", habla:"Fale", calendario:"Agenda", talleres:"Aulas", descuentos:"Dctos", comer:"Comer", blog:"Blog", agregar:"Subir", nosotros:"Quem"},
 };
 
 /* `raiz` es el prefijo hacia la raíz del sitio. Las fichas de `e/` viven un
@@ -953,6 +990,16 @@ async function cargarEventos(){
   const r = await fetch("eventos.json", {cache: "no-cache"});
   const d = await r.json();
   return d.eventos
+    .filter(siguesVigente)
+    .map(ev => ({...ev, fecha: new Date(ev.inicio)}));
+}
+
+async function cargarTalleres(){
+  // Misma barrera que cargarEventos: lo que ya terminó no se muestra aunque
+  // el archivo tenga días (ver siguesVigente).
+  const r = await fetch("talleres.json", {cache: "no-cache"});
+  const d = await r.json();
+  return d.talleres
     .filter(siguesVigente)
     .map(ev => ({...ev, fecha: new Date(ev.inicio)}));
 }
@@ -1438,14 +1485,33 @@ function etiquetaDia(fecha){
 }
 
 /* Tarjeta de evento reutilizada por el mapa y el calendario */
+/* La próxima sesión de una serie semanal, mirando desde hoy. Una clase de
+   martes y jueves cuya temporada partió en marzo no se anuncia por marzo: se
+   anuncia por el martes que viene. Devuelve null si la serie ya terminó. */
+function proximaSesion(ev){
+  if(!ev.dias_semana || !ev.dias_semana.length) return null;
+  const ini = new Date(ev.inicio);
+  const fin = ev.fin ? new Date(ev.fin) : ini;
+  const d = new Date(); d.setHours(ini.getHours(), ini.getMinutes(), 0, 0);
+  for(let i = 0; i < 8; i++){
+    if(d > fin) return null;
+    if(d >= ini && ev.dias_semana.includes((d.getDay() + 6) % 7)) return new Date(d);
+    d.setDate(d.getDate() + 1);
+  }
+  return null;
+}
+
 function tarjetaEvento(ev, alPulsar){
   const info = cat(ev.categoria);
   // Una temporada en curso se anuncia por HOY y por hasta cuándo, nunca por
-  // el día que abrió: esa fecha ya pasó y no le sirve a nadie.
+  // el día que abrió: esa fecha ya pasó y no le sirve a nadie. Y una serie
+  // semanal se anuncia por su PRÓXIMA sesión, no por la primera de marzo.
   const corre = enCartelera(ev);
+  const proxima = proximaSesion(ev);
   const dia = corre
     ? {texto: IDIOMA === "en" ? "TODAY" : IDIOMA === "pt" ? "HOJE" : "HOY", pronto: true}
-    : etiquetaDia(ev.fecha);
+    : etiquetaDia(proxima && proxima >= new Date(new Date().setHours(0,0,0,0))
+                  ? proxima : ev.fecha);
   const hora = (ev.fecha.getHours() || ev.fecha.getMinutes()) ? horaDe(ev.fecha) : "";
   const precio = ev.gratis ? t("gratis") : (ev.precio ? "$" + ev.precio.toLocaleString("es-CL") : "");
 

@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=19">
+<link rel="stylesheet" href="../loica.css?v=21">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,10 +86,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=19"></script>
+<script src="../loica.js?v=21"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "f2f91faca008ad7f", "titulo": "Imposición de Bandas Miss Grand Chile", "inicio": "2026-08-15T18:00:00", "fin": "2026-08-15T00:00:00", "lugar": "Gran Espacio Parque", "direccion": "", "comuna": "La Florida", "lat": -33.5225, "lon": -70.599, "precision": "comuna", "gratis": false, "precio": 19900, "precio_texto": "", "categoria": "musica", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/imposicion-de-bandas-miss-grand-chile-540483-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/imposicion-de-bandas-miss-grand-chile"};
+  const EV = {"id": "f2f91faca008ad7f", "titulo": "Imposición de Bandas Miss Grand Chile", "inicio": "2026-08-15T18:00:00", "fin": "2026-08-15T00:00:00", "lugar": "Gran Espacio Parque", "direccion": "", "comuna": "La Florida", "lat": -33.5225, "lon": -70.599, "precision": "comuna", "gratis": false, "precio": 19900, "precio_texto": "", "categoria": "musica", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/imposicion-de-bandas-miss-grand-chile-540483-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/imposicion-de-bandas-miss-grand-chile", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

@@ -47,6 +47,7 @@ from loica.clasificar import clasificar
 RAIZ = Path(__file__).resolve().parent
 DIR_INFORMES = RAIZ / "informes"
 RUTA_EVENTOS = RAIZ / "web" / "eventos.json"
+RUTA_TALLERES = RAIZ / "web" / "talleres.json"
 RUTA_HISTORIAL = RAIZ / "datos" / "historial_corridas.json"
 
 # Las precisiones que significan "el pin está donde de verdad ocurre la cosa".
@@ -95,7 +96,15 @@ def corrida_de_hoy(con: sqlite3.Connection) -> list[sqlite3.Row]:
 
 
 def eventos_publicados() -> list[dict]:
-    return _cargar_json(RUTA_EVENTOS).get("eventos", [])
+    """TODO lo publicado: panoramas y talleres juntos.
+
+    El diagnóstico mira el proceso, y el proceso es uno solo — la extracción,
+    la georreferenciación y la clasificación no distinguen formato. La
+    separación en dos archivos es una decisión de las PÁGINAS, no del
+    pipeline, así que acá se vuelven a juntar.
+    """
+    return (_cargar_json(RUTA_EVENTOS).get("eventos", [])
+            + _cargar_json(RUTA_TALLERES).get("talleres", []))
 
 
 def historial() -> dict:
@@ -206,7 +215,8 @@ def hoja_diagnostico(wb: Workbook, ctx: dict) -> None:
     # ---- Qué cambió
     f = _titulo(h, f, "QUÉ CAMBIÓ DESDE LA CORRIDA ANTERIOR")
     fila_hoy, fila_antes = f, f + 1
-    f = _dato(h, f, "Publicados ahora", ctx["total_hoy"])
+    f = _dato(h, f, "Publicados ahora", ctx["total_hoy"],
+              f"{ctx['talleres_hoy']} talleres y clases, el resto panoramas")
     f = _dato(h, f, "Publicados en la corrida anterior", ctx["total_antes"],
               ctx["cuando_antes"])
     f = _dato(h, f, "Entraron (altas)", ctx["altas"], "no estaban antes", VERDE)
@@ -471,6 +481,7 @@ def armar_contexto() -> dict:
         "actualizados": sum(f["actualizados"] or 0 for f in fuentes),
         "descartados": sum(f["descartados"] or 0 for f in fuentes),
         "total_hoy": len(publicados),
+        "talleres_hoy": sum(1 for e in publicados if e.get("formato") == "taller"),
         "total_antes": hist["ultima"].get("total", 0),
         "cuando_antes": hist["ultima"].get("momento", "primera corrida registrada"),
         "altas": len(ids_hoy - ids_antes) if ids_antes else len(ids_hoy),

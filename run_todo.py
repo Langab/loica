@@ -43,8 +43,8 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent
 
 # Lo único que esta corrida tiene derecho a comitear: su propia salida.
-RUTAS_PUBLICABLES = ["web/eventos.json", "web/descuentos.json", "web/e",
-                     "datos/manual"]
+RUTAS_PUBLICABLES = ["web/eventos.json", "web/talleres.json",
+                     "web/descuentos.json", "web/e", "datos/manual"]
 
 
 def _correr(comando: list[str], titulo: str) -> bool:

@@ -807,3 +807,49 @@ def clasificar_publico(titulo, descripcion, categoria, lugar, fuente, hora=None)
         return "adolescentes", f"palabra juvenil: {palabra}"
 
     return "todos", "sin señal — se asume apto para todo público"
+
+
+# ---------- FORMATO: taller contra panorama ----------
+# Un panorama se asiste UNA vez: una maratón, un concierto, una obra. Un
+# taller se toma TODAS las semanas: la clase de natación de los martes, el
+# aerobike de las 08:30, el curso de cerámica. En el mapa convivían los dos y
+# los talleres eran el 55% del catastro: la clase de nado de las 06:00
+# enterraba a los conciertos, que es exactamente la pregunta contraria a la
+# que responde un mapa de panoramas. Ahora cada formato tiene su página.
+
+# Las fuentes que SOLO publican clases. Se midió antes de confiar: 1.594
+# eventos de estas tres fuentes y ni uno solo es una corrida, un campeonato ni
+# una fecha puntual. La corporación existe para dictar talleres.
+FUENTES_DE_TALLERES = re.compile(
+    r"corporaci\w+ (municipal )?de deportes|talleres deportivos"
+    r"|talleres municipales|actividades y talleres")
+
+# Un evento puntual de deporte se reconoce por el título: es una cita con
+# fecha, no una rutina. Va como excepción DENTRO de la fuente municipal por si
+# el día de mañana una corporación publica su corrida familiar — hoy no pasa,
+# pero la regla queda protegida contra el día en que pase.
+_EVENTO_PUNTUAL = re.compile(
+    r"\b(corrida|maraton|campeonato|torneo|copa|liguilla|cicletada"
+    r"|10k|21k|42k|vs\.?|final)\b")
+
+
+def es_taller(titulo, categoria, fuente, dias_semana=None):
+    """Devuelve (bool, razon). ¿Esto se toma semanalmente o se asiste una vez?
+
+    `dias_semana` viene del export (la serie semanal ya colapsada) y es la
+    señal más directa: si algo se repite todos los martes, es un taller por
+    definición, sea yoga o sea un club de lectura.
+    """
+    tit = _norm(titulo)
+    if _EVENTO_PUNTUAL.search(tit):
+        return False, "evento puntual en el título"
+    if dias_semana:
+        return True, "serie semanal"
+    if categoria in ("clases", "idiomas"):
+        return True, "categoría de clases"
+    if categoria == "deporte" and FUENTES_DE_TALLERES.search(_norm(fuente)):
+        return True, "fuente municipal de talleres"
+    # "Escuela de fútbol", "Taller de defensa personal": deporte que se enseña.
+    if categoria == "deporte" and SE_APRENDE.search(tit):
+        return True, "deporte que se enseña"
+    return False, ""

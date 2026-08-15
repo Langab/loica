@@ -29,6 +29,7 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent
 RUTA_EVENTOS = RAIZ / "web" / "eventos.json"
+RUTA_TALLERES = RAIZ / "web" / "talleres.json"
 RUTA_DESCUENTOS = RAIZ / "web" / "descuentos.json"
 DIR_FICHAS = RAIZ / "web" / "e"
 
@@ -36,6 +37,8 @@ DIR_FICHAS = RAIZ / "web" / "e"
 # no miden éxito, detectan catástrofe: un sitio con menos que esto es señal de
 # extracción rota, no de semana tranquila.
 MIN_EVENTOS = 100
+MIN_TALLERES = 200        # el catálogo municipal ronda los 1.600; menos que
+                          # esto es una fuente caída, no una semana tranquila
 MIN_DESCUENTOS = 100          # el mismo piso que usa .github/workflows/descuentos.yml
 MAX_CAIDA = 0.5               # publicar menos de la mitad que ayer requiere --forzar
 MIN_PROPORCION_PIN = 0.6      # al menos 60% de los eventos con pin en el mapa
@@ -89,6 +92,20 @@ def _total_publicado(ruta_relativa: str) -> int | None:
         return json.loads(salida.stdout).get("total")
     except json.JSONDecodeError:
         return None
+
+
+def _catastro_publicado() -> int | None:
+    """El catastro completo ya publicado: panoramas MÁS talleres.
+
+    La caída de volumen se mide sobre la suma porque el corte entre las dos
+    páginas puede moverse — el día que los talleres se separaron del mapa,
+    eventos.json pasó de 2.876 a 1.249 sin perder ni un evento, y comparado
+    archivo contra archivo el umbral del 50% habría frenado una publicación
+    perfectamente buena.
+    """
+    eventos = _total_publicado("web/eventos.json")
+    talleres = _total_publicado("web/talleres.json") or 0
+    return None if eventos is None else eventos + talleres
 
 
 def verificar_eventos(errores: list[str], avisos: list[str],
@@ -171,19 +188,63 @@ def verificar_eventos(errores: list[str], avisos: list[str],
                        f"({con_pin * 100 // len(eventos)}%): la georreferenciación "
                        "se cayó entera.")
 
-    # Caída de volumen contra lo ya publicado: la señal clásica de que media
-    # extracción falló en silencio y estamos por pisar un sitio bueno.
-    anterior = _total_publicado("web/eventos.json")
-    if anterior and len(eventos) < anterior * MAX_CAIDA:
-        mensaje = (f"El catastro cayó de {anterior} a {len(eventos)} eventos "
+    return ids
+
+
+def verificar_talleres(errores: list[str], avisos: list[str]) -> set:
+    """El catálogo de talleres: el archivo hermano de eventos.json.
+
+    Comparte esquema con los panoramas, así que se revisa lo mismo que importa
+    —que exista, que tenga volumen, que los ids no se repitan— sin duplicar
+    los chequeos de campo fino, que ya corrieron sobre el mismo pipeline.
+    """
+    ids: set = set()
+    if not RUTA_TALLERES.exists():
+        errores.append("No existe web/talleres.json: la página de talleres "
+                       "quedaría vacía.")
+        return ids
+    try:
+        datos = json.loads(RUTA_TALLERES.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as e:
+        errores.append(f"web/talleres.json no es JSON válido: {e}")
+        return ids
+
+    talleres = datos.get("talleres", [])
+    if len(talleres) < MIN_TALLERES:
+        errores.append(f"Solo {len(talleres)} talleres (mínimo {MIN_TALLERES}): "
+                       "las fuentes municipales vinieron caídas.")
+    for i, e in enumerate(talleres):
+        identificador = e.get("id")
+        if not identificador or not e.get("titulo"):
+            errores.append(f"taller {i}: sin id o sin título")
+        if identificador in ids:
+            errores.append(f"taller {i}: id duplicado {identificador}")
+        ids.add(identificador)
+    return ids
+
+
+def verificar_volumen_y_fichas(errores: list[str], avisos: list[str],
+                               forzar: bool, ids: set) -> None:
+    """Los chequeos que cruzan los DOS catálogos.
+
+    La caída de volumen se mide sobre la suma: el día que los talleres se
+    separaron del mapa, eventos.json bajó de 2.876 a 1.249 sin perder nada, y
+    medido archivo contra archivo el umbral habría frenado una publicación
+    buena. Y las fichas de web/e/ son una sola carpeta para ambos.
+    """
+    publicados = sum(1 for _ in ids)
+    anterior = _catastro_publicado()
+    if anterior and publicados < anterior * MAX_CAIDA:
+        mensaje = (f"El catastro cayó de {anterior} a {publicados} "
                    f"(menos del {int(MAX_CAIDA * 100)}%).")
         if forzar:
             avisos.append(mensaje + " Se publica igual por --forzar.")
         else:
             errores.append(mensaje + " Si la caída es legítima: --forzar.")
 
-    # Las fichas compartibles tienen que calzar con el JSON: una ficha huérfana
-    # es un link muerto en WhatsApp, y una que falta es un evento incompartible.
+    # Las fichas compartibles tienen que calzar con los JSON: una ficha
+    # huérfana es un link muerto en WhatsApp, y una que falta es un evento
+    # incompartible.
     if DIR_FICHAS.exists():
         fichas = {f.stem for f in DIR_FICHAS.glob("*.html")}
         sin_ficha = ids - fichas - {None}
@@ -277,7 +338,9 @@ def main() -> int:
     errores: list[str] = []
     avisos: list[str] = []
     verificar_correcciones(errores)
-    verificar_eventos(errores, avisos, args.forzar)
+    ids = verificar_eventos(errores, avisos, args.forzar) or set()
+    ids |= verificar_talleres(errores, avisos)
+    verificar_volumen_y_fichas(errores, avisos, args.forzar, ids)
     verificar_descuentos(errores, avisos)
 
     for a in avisos[:20]:

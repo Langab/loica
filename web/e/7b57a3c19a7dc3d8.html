@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=19">
+<link rel="stylesheet" href="../loica.css?v=21">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -61,7 +61,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../talleres.html">← Ver todos los talleres y clases</a>
   <div class="foto" id="foto"><img src="https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1767614006594-814347356.webp" alt="" onerror="this.remove();document.getElementById('foto').classList.add('sin-foto')"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Selección Fútbol Femenina Sub 13 Ma 18:00 h. / Ju 18:00 h. / Los Jardines</h1>
@@ -79,17 +79,17 @@
   <div class="dato"><span class="et"></span><span>todos los martes y jueves de 18:00 a 19:30. El fútbol es un deporte de equipo global donde dos conjuntos de once jugadores intentan marcar goles introduciendo un balón en la portería contraria,…</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../mapa.html#/e/7b57a3c19a7dc3d8">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../talleres.html#/e/7b57a3c19a7dc3d8">Ver en la página de talleres</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Corporacion Municipal de Deportes de Nunoa - Talleres</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=19"></script>
+<script src="../loica.js?v=21"></script>
 <script>
-  pintarBarra("mapa.html", "../");
-  const EV = {"id": "7b57a3c19a7dc3d8", "titulo": "Selección Fútbol Femenina Sub 13 Ma 18:00 h. / Ju 18:00 h. / Los Jardines", "inicio": "2026-09-01T18:00:00", "fin": "2026-09-03T18:00:00", "lugar": "Los Jardines", "direccion": "Corporación Municipal de Deportes de Ñuñoa", "comuna": "Ñuñoa", "lat": -33.4569, "lon": -70.5975, "precision": "comuna", "gratis": false, "precio": null, "precio_texto": "", "categoria": "deporte", "subcategoria": "futbol", "escala": "under", "publico": "todos", "descripcion": "todos los martes y jueves de 18:00 a 19:30. El fútbol es un deporte de equipo global donde dos conjuntos de once jugadores intentan marcar goles introduciendo un balón en la portería contraria,…", "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1767614006594-814347356.webp", "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres", "url": "https://talleres.nunoadeportes.cl/talleres/694eaa6677bd4f13454eac8f"};
+  pintarBarra("talleres.html", "../");
+  const EV = {"id": "7b57a3c19a7dc3d8", "titulo": "Selección Fútbol Femenina Sub 13 Ma 18:00 h. / Ju 18:00 h. / Los Jardines", "inicio": "2026-09-01T18:00:00", "fin": "2026-09-03T18:00:00", "lugar": "Los Jardines", "direccion": "Corporación Municipal de Deportes de Ñuñoa", "comuna": "Ñuñoa", "lat": -33.4569, "lon": -70.5975, "precision": "comuna", "gratis": false, "precio": null, "precio_texto": "", "categoria": "deporte", "subcategoria": "futbol", "escala": "under", "publico": "todos", "descripcion": "todos los martes y jueves de 18:00 a 19:30. El fútbol es un deporte de equipo global donde dos conjuntos de once jugadores intentan marcar goles introduciendo un balón en la portería contraria,…", "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1767614006594-814347356.webp", "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres", "url": "https://talleres.nunoadeportes.cl/talleres/694eaa6677bd4f13454eac8f", "formato": "taller", "dias_semana": [1, 3]};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

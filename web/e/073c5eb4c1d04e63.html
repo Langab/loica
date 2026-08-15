@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=19">
+<link rel="stylesheet" href="../loica.css?v=21">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -61,7 +61,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../talleres.html">← Ver todos los talleres y clases</a>
   <div class="foto" id="foto"><img src="https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1767404104847-428759711.webp" alt="" onerror="this.remove();document.getElementById('foto').classList.add('sin-foto')"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Aerobike Ma-Ju 18:00 h.</h1>
@@ -79,17 +79,17 @@
   <div class="dato"><span class="et"></span><span>todos los martes y jueves de 18:00 a 19:00. Aerobike es un ejercicio aeróbico de intensidad moderada a alta realizado en una bicicleta estática, combinando resistencia y música para mejorar la…</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../mapa.html#/e/073c5eb4c1d04e63">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../talleres.html#/e/073c5eb4c1d04e63">Ver en la página de talleres</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Corporacion Municipal de Deportes de Nunoa - Talleres</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=19"></script>
+<script src="../loica.js?v=21"></script>
 <script>
-  pintarBarra("mapa.html", "../");
-  const EV = {"id": "073c5eb4c1d04e63", "titulo": "Aerobike Ma-Ju 18:00 h.", "inicio": "2026-08-18T18:00:00", "fin": "2026-08-20T18:00:00", "lugar": "Polideportivo de Ñuñoa", "direccion": "Juan Moya Morales 1370", "comuna": "Ñuñoa", "lat": -33.467, "lon": -70.5882, "precision": "correccion", "gratis": false, "precio": null, "precio_texto": "", "categoria": "deporte", "subcategoria": "baile_fitness", "escala": "under", "publico": "todos", "descripcion": "todos los martes y jueves de 18:00 a 19:00. Aerobike es un ejercicio aeróbico de intensidad moderada a alta realizado en una bicicleta estática, combinando resistencia y música para mejorar la…", "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1767404104847-428759711.webp", "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres", "url": "https://talleres.nunoadeportes.cl/talleres/694008f5045fb6504509c944"};
+  pintarBarra("talleres.html", "../");
+  const EV = {"id": "073c5eb4c1d04e63", "titulo": "Aerobike Ma-Ju 18:00 h.", "inicio": "2026-08-18T18:00:00", "fin": "2026-08-20T18:00:00", "lugar": "Polideportivo de Ñuñoa", "direccion": "Juan Moya Morales 1370", "comuna": "Ñuñoa", "lat": -33.467, "lon": -70.5882, "precision": "correccion", "gratis": false, "precio": null, "precio_texto": "", "categoria": "deporte", "subcategoria": "baile_fitness", "escala": "under", "publico": "todos", "descripcion": "todos los martes y jueves de 18:00 a 19:00. Aerobike es un ejercicio aeróbico de intensidad moderada a alta realizado en una bicicleta estática, combinando resistencia y música para mejorar la…", "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1767404104847-428759711.webp", "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres", "url": "https://talleres.nunoadeportes.cl/talleres/694008f5045fb6504509c944", "formato": "taller", "dias_semana": [1, 3]};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

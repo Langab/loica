@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=19">
+<link rel="stylesheet" href="../loica.css?v=21">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,10 +86,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=19"></script>
+<script src="../loica.js?v=21"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "5f163a1d1904028c", "titulo": "FIESTAS BOSSA | CHAPTER I | CENTRO PARQUE", "inicio": "2026-09-05T22:30:00", "fin": "2026-09-06T00:00:00", "lugar": "Centro parque", "direccion": "Presidente Riesco 5330", "comuna": "Las Condes", "lat": -33.40337, "lon": -70.57515, "precision": "correccion", "gratis": false, "precio": 8000, "precio_texto": "", "categoria": "fiesta", "subcategoria": "", "escala": "masivo", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/fiestasbossa-scl-cap-1-542023-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/fiestasbossa-scl-cap-1"};
+  const EV = {"id": "5f163a1d1904028c", "titulo": "FIESTAS BOSSA | CHAPTER I | CENTRO PARQUE", "inicio": "2026-09-05T22:30:00", "fin": "2026-09-06T00:00:00", "lugar": "Centro parque", "direccion": "Presidente Riesco 5330", "comuna": "Las Condes", "lat": -33.40337, "lon": -70.57515, "precision": "correccion", "gratis": false, "precio": 8000, "precio_texto": "", "categoria": "fiesta", "subcategoria": "", "escala": "masivo", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/fiestasbossa-scl-cap-1-542023-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/fiestasbossa-scl-cap-1", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

@@ -24,6 +24,7 @@ log_urls = logging.getLogger("exportar.urls")
 
 RAIZ = Path(__file__).resolve().parent
 SALIDA = RAIZ / "web" / "eventos.json"
+SALIDA_TALLERES = RAIZ / "web" / "talleres.json"
 DIR_FICHAS = RAIZ / "web" / "e"
 
 # Dominio público: es lo que viaja en los links compartidos por WhatsApp.
@@ -39,6 +40,9 @@ from loica.clasificar import clasificar_publico
 # mismo archivo y con la misma regla —vacío antes que inventado—, así que la
 # interfaz tiene que estar preparada para recibir "".
 from loica.clasificar import clasificar_subcategoria, clasificar_escala
+# Tercer eje: qué se asiste una vez (panorama) y qué se toma todas las semanas
+# (taller). Cada formato tiene su página y su archivo.
+from loica.clasificar import es_taller
 
 # Lo que NO es un panorama aunque aparezca en una agenda cultural.
 NO_ES_PANORAMA = [
@@ -106,6 +110,42 @@ def _plano_simple(texto: str) -> str:
 _CODIGO_HORARIO = re.compile(
     r"\s*[/·-]?\s*\b(?:lu|ma|mi|ju|vi|sa|do)\b(?:\s*[-y/]\s*\b(?:lu|ma|mi|ju|vi|sa|do)\b)*"
     r"\.?\s*\d{1,2}[:.]\d{2}\s*(?:h|hrs?)?\.?", re.IGNORECASE)
+
+
+# Los días de la semana leídos del título municipal. La corporación publica
+# "Nado Libre Lu-Mi-Vi 06:00 h." como UNA temporada con fecha de término, no
+# como sesiones sueltas, así que `colapsar_series` nunca le calcula
+# `dias_semana` — y sin días, el filtro "¿qué clase puedo tomar el martes?"
+# no puede responder y el filtro "Hoy" muestra la clase de Lu-Mi-Vi un sábado.
+# El dato está escrito en el título, en el mismo código de horario que ya
+# reconoce _CODIGO_HORARIO: acá solo se traduce a números (0=lunes).
+_DIA_TOKEN = {
+    "lu": 0, "lunes": 0, "ma": 1, "martes": 1, "mi": 2, "miercoles": 2,
+    "ju": 3, "jueves": 3, "vi": 4, "viernes": 4,
+    "sa": 5, "sabado": 5, "sabados": 5, "do": 6, "domingo": 6, "domingos": 6,
+}
+_DIAS_EN_TITULO = re.compile(
+    r"\b(lunes|martes|miercoles|jueves|viernes|sabados?|domingos?"
+    r"|lu|ma|mi|ju|vi|sa|do)\b")
+_RANGO_DIAS = re.compile(r"\b(lu|ma|mi|ju|vi|sa|do)\s+a\s+(lu|ma|mi|ju|vi|sa|do)\b")
+
+
+def dias_del_titulo(titulo: str) -> list[int]:
+    """Los días (0=lunes) que el título declara; [] si no declara ninguno.
+
+    Solo se usa para talleres: en un título de concierto "vi" o "do" serían
+    ruido, pero en el catálogo municipal el código de horario es la norma.
+    """
+    plano = _plano_simple(titulo)
+    dias: set[int] = set()
+    rango = _RANGO_DIAS.search(plano)
+    if rango:
+        desde, hasta = _DIA_TOKEN[rango.group(1)], _DIA_TOKEN[rango.group(2)]
+        if desde <= hasta:
+            dias.update(range(desde, hasta + 1))
+    for token in _DIAS_EN_TITULO.findall(plano):
+        dias.add(_DIA_TOKEN[token])
+    return sorted(dias)
 
 
 def _titulo_sin_horario(titulo: str) -> str:
@@ -233,7 +273,7 @@ PLANTILLA_FICHA = """<!doctype html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=20">
+<link rel="stylesheet" href="../loica.css?v=21">
 <style>
   body{{min-height:100vh;min-height:100dvh}}
   .ficha-sola{{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}}
@@ -259,7 +299,7 @@ PLANTILLA_FICHA = """<!doctype html>
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../{pagina_madre}">← {volver_texto}</a>
   <div class="foto" id="foto">{foto}</div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">{titulo_html}</h1>
@@ -276,16 +316,16 @@ PLANTILLA_FICHA = """<!doctype html>
   {bloque_descripcion}
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../mapa.html#/e/{id_evento}">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../{pagina_madre}#/e/{id_evento}">{ver_todos_texto}</a></p>
 
   <div class="pie-fuente">Información publicada por <b>{fuente_html}</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=20"></script>
+<script src="../loica.js?v=21"></script>
 <script>
-  pintarBarra("mapa.html", "../");
+  pintarBarra("{pagina_madre}", "../");
   const EV = {evento_json};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
@@ -352,17 +392,22 @@ def _url_publicable(url: str) -> str:
 
 
 def escribir_fichas(eventos: list[dict]) -> int:
-    """Una página HTML por evento.
+    """Una página HTML por evento — panoramas Y talleres.
 
     Es lo que permite que un link compartido por WhatsApp muestre foto, título
     y fecha en vez de un link pelado — y que el tráfico vuelva a Loica en vez de
     irse directo a la fuente. Todo el plan de marketing depende de esto.
+
+    La ficha de un taller vuelve a la página de talleres, no al mapa: el botón
+    "Ver en el mapa" de una clase de natación llevaba a un mapa donde la clase
+    ya no existe, que es un link que promete y no cumple.
     """
     DIR_FICHAS.mkdir(parents=True, exist_ok=True)
     for viejo in DIR_FICHAS.glob("*.html"):
         viejo.unlink()
 
     for ev in eventos:
+        de_taller = ev.get("formato") == "taller"
         inicio = datetime.fromisoformat(ev["inicio"]) if ev["inicio"] else None
         dias = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
         meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio",
@@ -434,6 +479,11 @@ def escribir_fichas(eventos: list[dict]) -> int:
                                 if ev["descripcion"] else ""),
             id_evento=_escapar(ev["id"]), fuente_html=_escapar(ev["fuente"]),
             evento_json=_json_en_script(ev),
+            pagina_madre="talleres.html" if de_taller else "mapa.html",
+            volver_texto=("Ver todos los talleres y clases" if de_taller
+                          else "Ver todos los panoramas de Santiago"),
+            ver_todos_texto=("Ver en la página de talleres" if de_taller
+                             else "Ver en el mapa"),
         )
         (DIR_FICHAS / f"{ev['id']}.html").write_text(html, encoding="utf-8")
 
@@ -603,22 +653,48 @@ def main() -> int:
     geo.guardar()
     almacen.cerrar()
 
+    # ---- El corte entre panoramas y talleres ----
+    # Un panorama se asiste una vez; un taller se toma todas las semanas. En el
+    # mapa convivían los dos y las clases eran el 55% del catastro: el nado
+    # libre de las 06:00 enterraba a los conciertos. Cada formato va a su
+    # archivo y a su página. Se corta DESPUÉS de colapsar series, porque
+    # `dias_semana` —la serie semanal— es la señal más directa de taller.
+    talleres = []
+    panoramas = []
+    for ev in eventos:
+        de_taller, _ = es_taller(ev["titulo"], ev["categoria"], ev["fuente"],
+                                 ev.get("dias_semana"))
+        ev["formato"] = "taller" if de_taller else "panorama"
+        if de_taller and not ev.get("dias_semana"):
+            del_titulo = dias_del_titulo(ev["titulo"])
+            if del_titulo:
+                ev["dias_semana"] = del_titulo
+        (talleres if de_taller else panoramas).append(ev)
+
+    ahora = datetime.now().isoformat(timespec="seconds")
     SALIDA.parent.mkdir(parents=True, exist_ok=True)
     SALIDA.write_text(json.dumps({
-        "generado": datetime.now().isoformat(timespec="seconds"),
-        "total": len(eventos),
-        "eventos": eventos,
+        "generado": ahora,
+        "total": len(panoramas),
+        "eventos": panoramas,
+    }, ensure_ascii=False, indent=1), encoding="utf-8")
+    SALIDA_TALLERES.write_text(json.dumps({
+        "generado": ahora,
+        "total": len(talleres),
+        "talleres": talleres,
     }, ensure_ascii=False, indent=1), encoding="utf-8")
 
-    gratis = sum(1 for e in eventos if e["gratis"])
-    exactos = sum(1 for e in eventos if e["precision"] == "recinto")
-    fichas = escribir_fichas(eventos)
+    gratis = sum(1 for e in panoramas if e["gratis"])
+    exactos = sum(1 for e in panoramas if e["precision"] == "recinto")
+    fichas = escribir_fichas(panoramas + talleres)
     log.info("Fichas individuales para compartir: %d en web/e/", fichas)
 
-    con_imagen = sum(1 for e in eventos if e["imagen"])
-    exactos += sum(1 for e in eventos if e["precision"] in ("fuente", "correccion", "calle"))
-    log.info("Exportados %d eventos (%d gratis, %d con ubicación exacta, %d con imagen)",
-             len(eventos), gratis, exactos, con_imagen)
+    con_imagen = sum(1 for e in panoramas if e["imagen"])
+    exactos += sum(1 for e in panoramas if e["precision"] in ("fuente", "correccion", "calle"))
+    log.info("Exportados %d panoramas (%d gratis, %d con ubicación exacta, "
+             "%d con imagen) y %d talleres y clases",
+             len(panoramas), gratis, exactos, con_imagen, len(talleres))
+    eventos = panoramas  # los resúmenes de abajo hablan del mapa
     if corregidos:
         log.info("Con correcciones de la memoria aplicadas: %d", corregidos)
     if discrepantes:
@@ -635,7 +711,7 @@ def main() -> int:
         log.info("Descartados por no ser panoramas (%d):", len(descartados))
         for d in descartados:
             log.info("   · %s", d)
-    log.info("Archivo: %s", SALIDA)
+    log.info("Archivos: %s y %s", SALIDA, SALIDA_TALLERES)
     return 0
 
 
