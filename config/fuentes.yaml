@@ -309,10 +309,11 @@ fuentes:
   crawl_delay_seg: 5
   buscar_detalle: true
   tope_detalle: 25
-  activa: false
+  activa: true
   notas: 'API REST abierta pero solo 35 posts: el sitio publica poco por esta via. robots.txt con Disallow
     vacio (Yoast) + sitemap_index.xml + /feed/ RSS de 43 KB. Baja prioridad por volumen, aunque tecnicamente
-    es de las mas faci'
+    es de las mas faci REACTIVADA 2026-08-15: barata (35 posts) y ahora acompaña a penalolen_chimkowe,
+    que es la corporacion con la agenda de verdad.'
 - id: la_florida
   nombre: Municipalidad de La Florida
   url_base: https://www.laflorida.cl
@@ -351,10 +352,31 @@ fuentes:
   crawl_delay_seg: 5
   buscar_detalle: true
   tope_detalle: 25
-  activa: false
+  activa: true
   notas: 'www.macul.cl es una fachada; el WordPress real vive en www.munimacul.cl/portalnv/ y su REST
     responde en /portalnv/index.php/wp-json/. Solo 56 posts. robots.txt devuelve 404 en ambos dominios:
-    no declara restricciones. Vo'
+    no declara restricciones. Vo REACTIVADA 2026-08-15 con buscar_terminos: la API respondio esta sesion
+    (post del 2026-07-30) y cultura publica ahi mismo. No hay corporacion aparte.'
+  buscar_terminos:
+  - taller
+  - feria
+  - festival
+  - concierto
+  - cultural
+  filtro_palabras:
+  - taller
+  - feria
+  - festival
+  - concierto
+  - obra
+  - cultural
+  - deportiv
+  - piscina
+  descartar_palabras:
+  - licitacion
+  - ordenanza
+  - subsidio
+  - farmacia
 - id: cce_santiago
   nombre: Centro Cultural de Espana en Chile
   url_base: https://ccesantiago.cl
@@ -1266,13 +1288,34 @@ fuentes:
   endpoint: /wp-json/wp/v2/posts
   comuna: Conchali
   crawl_delay_seg: 3
-  activa: false
+  activa: true
   notas: 'wp-json abierto (WordPress + Astra/Elementor). robots.txt con Allow: / y 5 sitemaps declarados.
-    Recintos: Centro Cultural Leganes, Polideportivo de Conchali, Piscina y Gimnasio Municipal.'
+    Recintos: Centro Cultural Leganes, Polideportivo de Conchali, Piscina y Gimnasio Municipal. REACTIVADA
+    2026-08-15: wp-json respondio 200 esta sesion. Con buscar_terminos por la mezcla de noticias municipales.'
   tipos_post:
   - post
   - page
   buscar_detalle: true
+  buscar_terminos:
+  - taller
+  - feria
+  - festival
+  - concierto
+  - cultural
+  filtro_palabras:
+  - taller
+  - feria
+  - festival
+  - concierto
+  - obra
+  - cultural
+  - deportiv
+  - piscina
+  - polideportivo
+  descartar_palabras:
+  - licitacion
+  - ordenanza
+  - subsidio
 - id: la_florida_municipio
   nombre: Municipalidad de La Florida
   url_base: https://www.laflorida.cl
@@ -1592,6 +1635,7 @@ fuentes:
   - teatropalermo
   - clubdesanmiguel
   - clubdejazz
+  - municipal-sanjoaquin
   crawl_delay_seg: 5
   requiere_comuna: true
   activa: true
@@ -1604,9 +1648,9 @@ fuentes:
     Bar, Sala Master, SCD Egana, Teatro Municipal de La Florida.
 
     La tarjeta de cada evento ya trae titulo, fecha y "Local, Comuna", asi que NO hay que abrir la ficha:
-    una corrida son 1 + 21 peticiones, no 200.
-
-    '
+    una corrida son 1 + 21 peticiones, no 200. municipal-sanjoaquin agregado 2026-08-15: cartelera del
+    Teatro y Centro Cultural San Joaquin, unica via de esa comuna (su sitio propio tiene la REST vacia
+    y el municipal responde 403).'
 - id: disfrutasantiago
   nombre: Disfruta Santiago
   url_base: https://disfrutasantiago.cl
@@ -2037,3 +2081,303 @@ fuentes:
   notas: 'REVISADO 13-08-2026: el sitio responde 500 en casi todo lo que no sea la home (/feed, /wp-json,
     /sitemap_index.xml) y su sitemap.xml declara dos URLs: la home y transparencia. No publica agenda.
     Se deja catastrado porque esta en el Parque Quinta Normal y su direccion ya esta verificada en correcciones/lugares.yaml.'
+- id: penalolen_chimkowe
+  nombre: Chimkowe - Corporacion de Cultura Penalolen
+  url_base: https://chimkowe.cl
+  url_agenda: https://chimkowe.cl/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: Peñalolén
+  crawl_delay_seg: 3
+  buscar_detalle: true
+  tope_detalle: 25
+  activa: true
+  notas: 'API REST abierta, 477 posts y 8 solo en agosto 2026: casi todos son anuncios de actividades
+    con la fecha en el texto (teatro en Sala Gabriela Mistral, peñas, conciertos). Sin CPT de eventos.
+    robots.txt estandar (solo /wp-admin/). Complementa a `penalolen` (municipio, 35 posts). Verificada
+    2026-08-15.'
+- id: la_reina_cultura
+  nombre: Corporacion Cultural de La Reina
+  url_base: https://culturalareina.cl
+  url_agenda: https://culturalareina.cl/evento-sitemap.xml
+  tipo_adaptador: sitemap
+  endpoint: /evento-sitemap.xml
+  comuna: La Reina
+  crawl_delay_seg: 3
+  tope_detalle: 25
+  activa: true
+  notas: 'El CPT `evento` NO esta en la REST (404), pero Yoast publica evento-sitemap.xml con 128 URLs
+    (lastmod 2026-08-14) y la ficha trae fecha, hora, lugar y precio en texto limpio (''22 AGO 26 - 12
+    SEPT 26'', ''Actividad gratuita'', ''Casona Nemesio Antunez''). Sin JSON-LD: la fecha la lee normalizar.py.
+    Recintos: Centro Cultural Vicente Bianchi y Casona Nemesio Antunez. robots.txt estandar. Distinta
+    de las dos entradas del MUNICIPIO (la_reina, la_reina_municipio, mismo sitio lareina.cl las dos, inactivas):
+    esta es la corporacion, que es donde vive la agenda.'
+- id: lo_barnechea_cultura
+  nombre: Corporacion Cultural de Lo Barnechea (El Tranque)
+  url_base: https://corporacionculturaldelobarnechea.cl
+  url_agenda: https://corporacionculturaldelobarnechea.cl/actividades/
+  tipo_adaptador: html
+  endpoint: /actividades/
+  comuna: Lo Barnechea
+  crawl_delay_seg: 3
+  activa: true
+  selectores:
+    tarjeta: article.activity-row
+    titulo: .activity-title
+    link: .activity-title a
+    fecha: .activity-date
+  notas: 'WordPress a medida (Bedrock, WP en /cms/): la REST devuelve HTML del theme, no sirve; /actividades/
+    es server-rendered con ~22 tarjetas y fechas tipo ''del 4 de agosto al 20 de octubre''. DECISION DE
+    ROBOTS, tomada 2026-08-15: su robots.txt permite a todo agente generico (solo bloquea /cms/wp-admin/)
+    y bloquea POR NOMBRE a los bots de entrenamiento de IA (ClaudeBot, GPTBot, CCBot) con Content-Signal
+    ai-train=no, use=reference. LoicaBot no esta nombrado, no entrena nada y solo copia hechos con link
+    de vuelta: es exactamente el uso ''reference'' que el sitio declara permitido. Si el sitio nombra
+    a LoicaBot algun dia, se apaga.'
+- id: colina_municipio
+  nombre: Municipalidad de Colina
+  url_base: https://www.colina.cl
+  url_agenda: https://www.colina.cl/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: Colina
+  crawl_delay_seg: 5
+  buscar_detalle: true
+  tope_detalle: 25
+  buscar_terminos:
+  - taller
+  - feria
+  - festival
+  - concierto
+  - patrimonio
+  filtro_palabras:
+  - taller
+  - feria
+  - festival
+  - concierto
+  - obra
+  - patrimonio
+  - cultural
+  - deportiv
+  descartar_palabras:
+  - licitacion
+  - ordenanza
+  - demolicion
+  - subsidio
+  - permiso de circulacion
+  activa: true
+  notas: 'API REST abierta, 1.414 posts, ultima publicacion 2026-08-12. ?search= funciona. Sin CPT de
+    eventos y con mezcla fuerte de noticias municipales: el patron recoleta, imprescindible buscar_terminos.
+    robots.txt estandar.'
+- id: quilicura_corp_cultural
+  nombre: Corporacion Cultural Municipal de Quilicura
+  url_base: https://corpo.corpoquilicura.cl
+  url_agenda: https://corpo.corpoquilicura.cl/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: Quilicura
+  crawl_delay_seg: 3
+  buscar_detalle: true
+  tope_detalle: 15
+  activa: true
+  notas: 'La unica via extraible de Quilicura: el sitio municipal responde 403 de Cloudflare a LoicaBot
+    aunque su robots diga Allow / (el WAF manda, y no se esquiva). API REST abierta, robots estandar.
+    Ritmo mensual y varios posts son cronicas post-evento: volumen bajo pero real. Ultima publicacion
+    2026-07-30.'
+- id: padre_hurtado_deportes
+  nombre: Corporacion Municipal de Deportes de Padre Hurtado
+  url_base: https://www.cmdpadrehurtado.cl
+  url_agenda: https://www.cmdpadrehurtado.cl/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: Padre Hurtado
+  crawl_delay_seg: 5
+  buscar_detalle: true
+  tope_detalle: 10
+  activa: true
+  notas: 'API REST abierta (104 posts), robots estandar. Los titulos SON actividades (Fiesta de las Bufandas,
+    Taller de Basquetbol) pero publica poquisimo: 1 post entre abril 2025 y julio 2026 (ultimo 2026-07-22).
+    Cuesta una peticion diaria y abre una comuna sin nada; si en tres meses no aporta, apagarla.'
+- id: la_pintana_cultura
+  nombre: Corporacion Cultural de La Pintana (Teatro Municipal)
+  url_base: https://ticket.culturapintana.cl
+  url_agenda: https://ticket.culturapintana.cl/cartelera/
+  tipo_adaptador: wordpress
+  tipos_post:
+  - product
+  comuna: La Pintana
+  crawl_delay_seg: 3
+  buscar_detalle: false
+  activa: true
+  notas: 'WooCommerce/FooEvents con el CPT ''product'' abierto en wp/v2 (rareza que juega a favor): la
+    cartelera del Teatro Municipal son productos y la fecha de funcion viene en content.rendered (''Domingo,
+    23 de agosto'' + hora). 298 eventos, casi todo ENTRADA LIBERADA. robots estandar. El sitio hermano
+    culturapintana.cl es solo noticias retrospectivas: no usarlo. Verificada 2026-08-14.'
+- id: el_bosque_municipio
+  nombre: Municipalidad de El Bosque - Cartelera de Eventos
+  url_base: https://www.municipalidadelbosque.cl
+  url_agenda: https://www.municipalidadelbosque.cl/wp-json/wp/v2/posts?categories=864
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts?categories=864
+  comuna: El Bosque
+  crawl_delay_seg: 3
+  buscar_detalle: true
+  tope_detalle: 25
+  activa: true
+  notas: 'Categoria ''cartelera-de-eventos'' (id 864, 85 posts) con puros anuncios de eventos y la fecha
+    en el texto (''Fecha: Sabado 8 de agosto de 2026''). La categoria filtra sola el ruido municipal:
+    no necesita buscar_terminos. robots Allow: /. El portal culturaelbosque.cl esta muerto a nivel DNS.
+    Verificada 2026-08-14.'
+- id: lo_espejo_municipio
+  nombre: Municipalidad de Lo Espejo
+  url_base: https://www.loespejo.cl
+  url_agenda: https://www.loespejo.cl/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: Lo Espejo
+  crawl_delay_seg: 3
+  buscar_detalle: true
+  tope_detalle: 25
+  buscar_terminos: &id004
+  - taller
+  - feria
+  - festival
+  - carnaval
+  - concierto
+  - exposicion
+  - cicletada
+  - cine
+  filtro_palabras: &id005
+  - taller
+  - talleres
+  - feria
+  - festival
+  - carnaval
+  - concierto
+  - exposicion
+  - exposición
+  - muestra
+  - funcion
+  - función
+  - obra de teatro
+  - cicletada
+  - corrida
+  - campeonato
+  - torneo
+  - cuentacuentos
+  - cine
+  - recital
+  - gala
+  - celebracion
+  - celebración
+  - aniversario
+  - inauguracion
+  - inauguración
+  - conversatorio
+  - capacitacion
+  - capacitación
+  descartar_palabras: &id006
+  - licitacion
+  - licitación
+  - ordenanza
+  - decreto
+  - concejo municipal
+  - cuenta publica
+  - cuenta pública
+  - sumario
+  - bases administrativas
+  - permiso de circulacion
+  - permiso de circulación
+  - patente comercial
+  - corte de agua
+  - corte de suministro
+  - llamado a concurso
+  - concurso publico
+  - concurso público
+  - disfrutaron
+  - disfruto
+  - disfrutó
+  - fue visitada
+  - fue visitado
+  - se realizo
+  - se realizó
+  - se llevo a cabo
+  - se llevó a cabo
+  - culmino
+  - culminó
+  - finalizo
+  - finalizó
+  - conmemoro
+  - conmemoró
+  - celebro
+  - celebró
+  - participaron
+  - vivieron
+  - recibio a
+  - recibió a
+  - asi fue
+  - así fue
+  activa: true
+  notas: 'wp-json abierto, robots estandar. Publica cartelera mensual (''Cartelera Cultural de Agosto
+    2026'') y talleres con fecha de inicio, mezclados con llamados a cargos: filtros del patron renca
+    obligatorios. Verificada 2026-08-14.'
+- id: san_bernardo_municipio
+  nombre: Municipalidad de San Bernardo
+  url_base: https://www.sanbernardo.cl
+  url_agenda: https://www.sanbernardo.cl/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: San Bernardo
+  crawl_delay_seg: 3
+  buscar_detalle: true
+  tope_detalle: 25
+  buscar_terminos: *id004
+  filtro_palabras: *id005
+  descartar_palabras: *id006
+  activa: true
+  notas: 'wp-json abierto, robots estandar. Anuncios de talleres con dia y hora en el texto (''Taller
+    Intensivo de Cueca... Martes 18 y Lunes 24 de agosto, 17:00 a 18:30''). La corporacion sanbernardocultura.cl
+    es HTML estatico abandonado en 2023: descartada. Verificada 2026-08-14.'
+- id: cnac_cerrillos
+  nombre: Centro Nacional de Arte Contemporaneo Cerrillos
+  url_base: https://centronacionaldearte.cultura.gob.cl
+  url_agenda: https://centronacionaldearte.cultura.gob.cl/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  comuna: Cerrillos
+  crawl_delay_seg: 3
+  buscar_detalle: true
+  tope_detalle: 20
+  activa: true
+  notas: 'WP del Ministerio con REST abierta, robots estandar. Sin CPT de eventos: los posts anuncian
+    conversatorios/talleres/muestras con fecha en el texto. Volumen bajo (~1-2 posts/mes) pero es el unico
+    recinto cultural extraible de la comuna (Av. Pedro Aguirre Cerda 6100). Verificada 2026-08-14.'
+- id: lo_prado_cultura
+  nombre: Fundacion Centro Cultural Lo Prado (Teatro Joan Jara)
+  url_base: https://fccloprado.cl
+  url_agenda: https://fccloprado.cl/actividades-sitemap.xml
+  tipo_adaptador: sitemap
+  endpoint: /actividades-sitemap.xml
+  patron_url: /actividades/
+  comuna: Lo Prado
+  crawl_delay_seg: 3
+  tope_fichas: 25
+  activa: true
+  notas: 'WP con /wp-json bloqueado por WAF (403), pero HTML y sitemaps Yoast abiertos: actividades-sitemap.xml
+    con 87 URLs, lastmod 2026-08-14, y la ficha trae ''Dia: Miercoles 19 de agosto'', ''Horario: 19:00
+    horas'' y el recinto (Teatro Joan Jara). Sin JSON-LD: la fecha la lee normalizar.py. MISMA DECISION
+    DE ROBOTS que lo_barnechea_cultura: User-agent * permitido, bloquea por nombre solo a bots de entrenamiento
+    de IA con Content-Signal use=reference — que es exactamente lo que Loica hace (copiar hechos y enlazar).
+    Si algun dia nombra a LoicaBot, se apaga. Existe tambien taller-sitemap.xml, hoy con 1 taller vigente.'
+- id: cerro_navia_corporacion
+  nombre: Corporacion Cerro Navia
+  url_base: https://corporacion.cerronavia.cl
+  url_agenda: https://corporacion.cerronavia.cl/wp-json/tribe/events/v1/events
+  tipo_adaptador: wordpress
+  tipos_post:
+  - tribe_events
+  comuna: Cerro Navia
+  crawl_delay_seg: 3
+  activa: false
+  notas: The Events Calendar instalado con la API Tribe abierta pero VACIA (total 0, tambien en el historico;
+    verificado 2026-08-14). Posts vivos pero retrospectivos, y /talleres-y-cursos/ deriva a PDFs. Encender
+    cuando carguen el calendario, como teatro_aleph.
