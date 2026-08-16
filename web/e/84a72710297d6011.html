@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=21">
+<link rel="stylesheet" href="../loica.css?v=22">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,10 +86,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=21"></script>
+<script src="../loica.js?v=22"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "84a72710297d6011", "titulo": "Cenas de Maridaje - Casa Silva", "inicio": "2026-09-03T03:00:00", "fin": "2026-09-03T02:00:00", "lugar": "Restaurante Don Carlos", "direccion": "Isidora Goyenechea #2896, Las Condes", "comuna": "Las Condes", "lat": -33.41414668, "lon": -70.60180109999999, "precision": "calle", "gratis": false, "precio": 90000, "precio_texto": "desde $90.000", "categoria": "fiesta", "subcategoria": "", "escala": "under", "publico": "adultos", "descripcion": "Cena de 5 tiempo con la mejor selección de vinos.", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/5a5a19f7a0279b96b9e6c52b88c1eedb7afd384567261be1da23c8d7e7d18b5f.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/las-condes/cenas-de-maridaje-casa-silva-26042", "formato": "panorama"};
+  const EV = {"id": "84a72710297d6011", "titulo": "Cenas de Maridaje - Casa Silva", "inicio": "2026-09-03T03:00:00", "fin": null, "lugar": "Restaurante Don Carlos", "direccion": "Isidora Goyenechea #2896, Las Condes", "comuna": "Las Condes", "lat": -33.41414668, "lon": -70.60180109999999, "precision": "calle", "gratis": false, "precio": 90000, "precio_texto": "desde $90.000", "categoria": "fiesta", "subcategoria": "", "escala": "under", "publico": "adultos", "descripcion": "Cena de 5 tiempo con la mejor selección de vinos.", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/5a5a19f7a0279b96b9e6c52b88c1eedb7afd384567261be1da23c8d7e7d18b5f.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/las-condes/cenas-de-maridaje-casa-silva-26042", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

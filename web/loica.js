@@ -1512,7 +1512,11 @@ function tarjetaEvento(ev, alPulsar){
     ? {texto: IDIOMA === "en" ? "TODAY" : IDIOMA === "pt" ? "HOJE" : "HOY", pronto: true}
     : etiquetaDia(proxima && proxima >= new Date(new Date().setHours(0,0,0,0))
                   ? proxima : ev.fecha);
-  const hora = (ev.fecha.getHours() || ev.fecha.getMinutes()) ? horaDe(ev.fecha) : "";
+  // Una temporada en curso no tiene "hora": las 03:00 de una exposición son
+  // la hora en que el CMS guardó el registro, no una cita. Mostrarla afirmaba
+  // "Portafolio – Moda, HOY a las 03:00", que se lee como página rota.
+  const hora = (!corre && (ev.fecha.getHours() || ev.fecha.getMinutes()))
+    ? horaDe(ev.fecha) : "";
   const precio = ev.gratis ? t("gratis") : (ev.precio ? "$" + ev.precio.toLocaleString("es-CL") : "");
 
   const boton = document.createElement("button");

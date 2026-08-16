@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=21">
+<link rel="stylesheet" href="../loica.css?v=22">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,10 +86,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=21"></script>
+<script src="../loica.js?v=22"></script>
 <script>
   pintarBarra("talleres.html", "../");
-  const EV = {"id": "ee1f6b7300e1a0e7", "titulo": "Patín Urbano", "inicio": "2026-08-24T19:00:00", "fin": "2026-08-25T19:00:00", "lugar": "Skatepark Santa Marta Av. Sta. Marta de Huechuraba # 6524", "direccion": "", "comuna": "Huechuraba", "lat": -33.3637349, "lon": -70.6751988, "precision": "calle", "gratis": false, "precio": null, "precio_texto": "", "categoria": "deporte", "subcategoria": "", "escala": "under", "publico": "todos", "descripcion": "todos los lunes y martes a las 19:00, 6+", "imagen": "", "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos", "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026", "formato": "taller"};
+  const EV = {"id": "ee1f6b7300e1a0e7", "titulo": "Patín Urbano", "inicio": "2026-08-24T19:00:00", "fin": "2026-08-25T19:00:00", "lugar": "Skatepark Santa Marta Av. Sta. Marta de Huechuraba # 6524", "direccion": "", "comuna": "Huechuraba", "lat": -33.3637349, "lon": -70.6751988, "precision": "calle", "gratis": false, "precio": null, "precio_texto": "", "categoria": "deporte", "subcategoria": "", "escala": "under", "publico": "todos", "descripcion": "todos los lunes y martes a las 19:00, 6+", "imagen": "", "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos", "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026", "formato": "taller", "dias_semana": [0, 1]};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

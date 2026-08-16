@@ -19,7 +19,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
       integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V" crossorigin="anonymous">
-<link rel="stylesheet" href="loica.css?v=21">
+<link rel="stylesheet" href="loica.css?v=22">
 <style>
   html,body{height:100%;overflow:hidden}
   /* Los dos altos van en este orden a propósito: `dvh` no existe en Safari de
@@ -210,7 +210,7 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
         integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
         crossorigin="anonymous"></script>
-<script src="loica.js?v=21"></script>
+<script src="loica.js?v=22"></script>
 <script>
 /* ------------------------------------------------------------------
    Talleres y clases: lo que se toma todas las semanas. El esqueleto es el
@@ -369,7 +369,11 @@ function visibles(){
   const indiceDia = DIAS_CLAVE.indexOf(dia);   // -1 si es "hoy" o "todo"
   return TALLERES.filter(ev =>
     (dia === "todo"
-      || (dia === "hoy" ? sesionEnRango(ev, "hoy")
+      /* "Hoy" exige saber los días. Una clase sin días declarados que
+         aparece TODOS los días está afirmando "hoy también", y así fue como
+         la natación de Lu-Mi-Vi salió un sábado. Lo que no declara días vive
+         en "Todos", y la nota del panel dice cuántos son. */
+      || (dia === "hoy" ? (diasDe(ev) !== null && sesionEnRango(ev, "hoy"))
                         : (diasDe(ev) || []).includes(indiceDia))) &&
     (!tipoFiltro || tipoDe(ev) === tipoFiltro) &&
     (!comunaFiltro || ev.comuna === comunaFiltro) &&
@@ -487,13 +491,22 @@ function pintarLista(){
   document.getElementById("conteo-txt").textContent =
     lista.length === 1 ? t("tCuantos1") : t("tCuantos");
 
-  // La deuda de georreferenciación se dice, no se esconde.
+  // La deuda se dice, no se esconde: la de georreferenciación y la de días.
   const sinPin = lista.filter(ev => ev.lat === null).length;
-  document.getElementById("nota-geo").textContent = sinPin
-    ? {es:`${sinPin} sin dirección conocida salen solo en la lista`,
+  const sinDias = dia !== "todo"
+    ? TALLERES.filter(ev => diasDe(ev) === null
+        && (!tipoFiltro || tipoDe(ev) === tipoFiltro)
+        && (!comunaFiltro || ev.comuna === comunaFiltro)
+        && (!soloGratis || ev.gratis)).length
+    : 0;
+  const partes = [];
+  if(sinPin) partes.push({es:`${sinPin} sin dirección conocida salen solo en la lista`,
        en:`${sinPin} with unknown address are list-only`,
-       pt:`${sinPin} sem endereço ficam só na lista`}[IDIOMA]
-    : "";
+       pt:`${sinPin} sem endereço ficam só na lista`}[IDIOMA]);
+  if(sinDias) partes.push({es:`${sinDias} no declaran sus días y están en "Todos"`,
+       en:`${sinDias} don't state their days — see "All"`,
+       pt:`${sinDias} não declaram seus dias — veja "Todas"`}[IDIOMA]);
+  document.getElementById("nota-geo").textContent = partes.join(" · ");
 
   if(!lista.length){
     cont.innerHTML = `<div class="vacio">${cuerpo("chincol","var(--tinta-tenue)",96,{pose:"durmiendo"})}

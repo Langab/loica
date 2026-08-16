@@ -273,7 +273,7 @@ PLANTILLA_FICHA = """<!doctype html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=21">
+<link rel="stylesheet" href="../loica.css?v=22">
 <style>
   body{{min-height:100vh;min-height:100dvh}}
   .ficha-sola{{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}}
@@ -323,7 +323,7 @@ PLANTILLA_FICHA = """<!doctype html>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=21"></script>
+<script src="../loica.js?v=22"></script>
 <script>
   pintarBarra("{pagina_madre}", "../");
   const EV = {evento_json};
@@ -662,13 +662,26 @@ def main() -> int:
     talleres = []
     panoramas = []
     for ev in eventos:
+        if ev.get("fin") and ev.get("inicio") and ev["fin"] < ev["inicio"]:
+            # "hasta el 15 de agosto" se interpreta a las 00:00 y queda antes
+            # de la función de las 15:00 del mismo día: fin < inicio no
+            # significa nada y rompe los cálculos de duración río abajo.
+            ev["fin"] = None
         de_taller, _ = es_taller(ev["titulo"], ev["categoria"], ev["fuente"],
                                  ev.get("dias_semana"))
         ev["formato"] = "taller" if de_taller else "panorama"
         if de_taller and not ev.get("dias_semana"):
-            del_titulo = dias_del_titulo(ev["titulo"])
-            if del_titulo:
-                ev["dias_semana"] = del_titulo
+            # Primero el título ("Nado Libre Lu-Mi-Vi") y si calla, la
+            # descripción: Huechuraba y Santiago escriben los días AHÍ
+            # ("todos los lunes, miércoles y viernes a las 08:20"). Sin esta
+            # segunda lectura, 457 clases quedaban sin días y el filtro "Hoy"
+            # las mostraba TODOS los días — la clase de Lu-Mi-Vi apareciendo
+            # un sábado fue el reclamo que destapó esto. Con ella, 429 de las
+            # 457 recuperan sus días.
+            del_texto = (dias_del_titulo(ev["titulo"])
+                         or dias_del_titulo(ev["descripcion"] or ""))
+            if del_texto:
+                ev["dias_semana"] = del_texto
         (talleres if de_taller else panoramas).append(ev)
 
     ahora = datetime.now().isoformat(timespec="seconds")

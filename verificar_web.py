@@ -170,6 +170,9 @@ def verificar_eventos(errores: list[str], avisos: list[str],
         # afuera eso no se distingue de "no hay eventos under esta semana".
         if e.get("escala", "") not in ESCALAS:
             errores.append(f"{donde}: escala desconocida {e.get('escala')!r}")
+        if e.get("fin") and e.get("inicio") and e["fin"] < e["inicio"]:
+            errores.append(f"{donde}: fin anterior al inicio "
+                           f"({e['inicio']} → {e['fin']})")
 
     sin_nombre: dict[str, int] = {}
     conocidas = subcategorias_con_nombre()
@@ -213,6 +216,14 @@ def verificar_talleres(errores: list[str], avisos: list[str]) -> set:
     if len(talleres) < MIN_TALLERES:
         errores.append(f"Solo {len(talleres)} talleres (mínimo {MIN_TALLERES}): "
                        "las fuentes municipales vinieron caídas.")
+
+    # La auditoría de fechas y días, permanente. Nació del reclamo del
+    # 2026-08-15: la clase de Lu-Mi-Vi salía un sábado porque 457 talleres no
+    # tenían días (estaban escritos en la descripción y solo se leía el
+    # título), y once registros traían el fin ANTES del inicio por un
+    # artefacto de hora. Estas tres cosas rompen lo que el usuario VE, así
+    # que se revisan en cada corrida.
+    sin_dias = 0
     for i, e in enumerate(talleres):
         identificador = e.get("id")
         if not identificador or not e.get("titulo"):
@@ -220,6 +231,21 @@ def verificar_talleres(errores: list[str], avisos: list[str]) -> set:
         if identificador in ids:
             errores.append(f"taller {i}: id duplicado {identificador}")
         ids.add(identificador)
+
+        dias = e.get("dias_semana") or []
+        if any(not isinstance(d, int) or d < 0 or d > 6 for d in dias):
+            errores.append(f"taller {i} ({e.get('titulo','')[:40]!r}): "
+                           f"dias_semana fuera de 0..6: {dias}")
+        if e.get("fin") and e.get("inicio") and e["fin"] < e["inicio"]:
+            errores.append(f"taller {i} ({e.get('titulo','')[:40]!r}): "
+                           f"fin anterior al inicio ({e['inicio']} → {e['fin']})")
+        if not dias and e.get("fin"):
+            sin_dias += 1
+
+    if sin_dias:
+        avisos.append(f"{sin_dias} talleres de temporada sin días declarados: "
+                      "la página los muestra solo en \"Todos\". Si el número "
+                      "sube de golpe, una fuente cambió su formato de texto.")
     return ids
 
 

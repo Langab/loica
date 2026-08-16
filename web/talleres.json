@@ -1,5 +1,5 @@
 {
- "generado": "2026-08-15T19:26:57",
+ "generado": "2026-08-15T22:32:00",
  "total": 1638,
  "talleres": [
   {
@@ -48,7 +48,10 @@
    "imagen": "",
    "fuente": "Museo Nacional de Bellas Artes",
    "url": "https://www.mnba.gob.cl/cartelera/recorrido-taller-trazando-recuerdos",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    2
+   ]
   },
   {
    "id": "3ca4a85f0c3384bb",
@@ -173,7 +176,15 @@
    "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1778081438220-332453723.webp",
    "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
    "url": "https://talleres.nunoadeportes.cl/talleres/69c14a8cb278f7e97df25921",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
   },
   {
    "id": "2ed2ab61b249c64b",
@@ -638,7 +649,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "5c004bd257b4608b",
@@ -836,7 +852,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "e4bc9c1c47f2568c",
@@ -860,7 +881,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "7a904bbc69f9966a",
@@ -1668,7 +1694,13 @@
    "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1773946268268-211311697.webp",
    "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
    "url": "https://talleres.nunoadeportes.cl/talleres/69bbf66e8b3ad7e7a2e7e525",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    1,
+    2,
+    3
+   ]
   },
   {
    "id": "c7a15eb9b1cbc8fa",
@@ -2190,7 +2222,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "ed5005148ccd736d",
@@ -2214,7 +2251,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "7f393aecff067088",
@@ -2325,7 +2367,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "daf170bba7d9eea7",
@@ -2754,7 +2801,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "3a50cf85230d1537",
@@ -3271,7 +3323,13 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    1,
+    2,
+    3
+   ]
   },
   {
    "id": "f485b4728064bf42",
@@ -3295,7 +3353,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "dbda7174bf2c4cfc",
@@ -3725,7 +3788,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "5c0d87efacb316d5",
@@ -3923,7 +3991,15 @@
    "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1778081438220-332453723.webp",
    "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
    "url": "https://talleres.nunoadeportes.cl/talleres/69c14a8cb278f7e97df25921",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
   },
   {
    "id": "452980919d8b973d",
@@ -4099,7 +4175,13 @@
    "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1773946268268-211311697.webp",
    "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
    "url": "https://talleres.nunoadeportes.cl/talleres/69bbf66e8b3ad7e7a2e7e525",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    1,
+    2,
+    3
+   ]
   },
   {
    "id": "a7b8a65b002e56b4",
@@ -4302,7 +4384,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3,
+    4
+   ]
   },
   {
    "id": "a69fee5c709be643",
@@ -4385,7 +4472,13 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    1,
+    2,
+    3
+   ]
   },
   {
    "id": "3467b9c4d3b84302",
@@ -4496,7 +4589,15 @@
    "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1778081438220-332453723.webp",
    "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
    "url": "https://talleres.nunoadeportes.cl/talleres/69c14a8cb278f7e97df25921",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
   },
   {
    "id": "d22ed5d9010f3c11",
@@ -4729,7 +4830,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    4
+   ]
   },
   {
    "id": "9efb3a4e156fc339",
@@ -4985,7 +5090,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "9d0591d7fc5dd2ce",
@@ -5183,7 +5293,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "5e2e33d488037122",
@@ -5207,7 +5322,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "f10f8ce661f3615a",
@@ -5231,7 +5351,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    4,
+    5
+   ]
   },
   {
    "id": "e4f7f5d2216ea6cd",
@@ -5546,7 +5670,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    4
+   ]
   },
   {
    "id": "a0a0eb2d3f13f771",
@@ -5570,7 +5698,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    4,
+    5
+   ]
   },
   {
    "id": "52ee7a5b85b1342f",
@@ -6525,7 +6657,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "2a99ebe67eecafd9",
@@ -6549,7 +6686,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "59bdf1ef5d263d40",
@@ -6601,7 +6743,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    4
+   ]
   },
   {
    "id": "259e23dff9eed340",
@@ -6625,7 +6771,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3,
+    4
+   ]
   },
   {
    "id": "58ab535f4d39a067",
@@ -6736,7 +6887,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "148463e8190a86e9",
@@ -7137,7 +7293,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "7b01bb2b1850e2d5",
@@ -7218,7 +7379,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    4
+   ]
   },
   {
    "id": "bf7654c22ebe010e",
@@ -7648,7 +7813,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "3836d45b72501ec8",
@@ -7672,7 +7842,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    4
+   ]
   },
   {
    "id": "183ebbdcc83774d6",
@@ -8102,7 +8276,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "0f46e514141ede67",
@@ -8440,7 +8619,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    4,
+    5
+   ]
   },
   {
    "id": "5f839045413c05ab",
@@ -8687,7 +8870,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    5
+   ]
   },
   {
    "id": "f4a6a70c98ef5eb3",
@@ -8766,7 +8953,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    4,
+    5
+   ]
   },
   {
    "id": "a47abc0aba7b7c7c",
@@ -8912,7 +9103,7 @@
    "id": "0d90f313d2547a19",
    "titulo": "FULL 7 TALLERES GENERALES – DARE DANCE CHILE 2026",
    "inicio": "2026-08-15T10:00:00",
-   "fin": "2026-08-15T00:00:00",
+   "fin": null,
    "lugar": "Alto San Francisco",
    "direccion": "San Francisco 75, piso 9",
    "comuna": "Santiago",
@@ -8936,7 +9127,7 @@
    "id": "d63bf247d9dad0e8",
    "titulo": "TALLER GENERAL JUDY GARZON - SALSA ON1",
    "inicio": "2026-08-15T10:00:00",
-   "fin": "2026-08-15T00:00:00",
+   "fin": null,
    "lugar": "Alto San Francisco",
    "direccion": "San Francisco 75, piso 9",
    "comuna": "Santiago",
@@ -9128,7 +9319,7 @@
    "id": "bae92732a601ff06",
    "titulo": "TALLER GENERAL DEKLAN GUZMÁN - BACHATA FLOW",
    "inicio": "2026-08-15T11:00:00",
-   "fin": "2026-08-15T00:00:00",
+   "fin": null,
    "lugar": "Alto San Francisco",
    "direccion": "San Francisco 75, piso 9",
    "comuna": "Santiago",
@@ -9208,7 +9399,7 @@
    "id": "a437794aae7599d6",
    "titulo": "TALLER GENERAL HENRY PINZÓN - SALSA FOOTWORK ON2",
    "inicio": "2026-08-15T12:00:00",
-   "fin": "2026-08-15T00:00:00",
+   "fin": null,
    "lugar": "Alto San Francisco",
    "direccion": "San Francisco 75, piso 9",
    "comuna": "Santiago",
@@ -9232,7 +9423,7 @@
    "id": "a36e1b171315a0bc",
    "titulo": "TALLER GENERAL NATALIA VILLANUEVA - BACHATA FOOTWORK - SÁBADO 15 DE AGOSTO - 13:30HRS.",
    "inicio": "2026-08-15T13:30:00",
-   "fin": "2026-08-15T00:00:00",
+   "fin": null,
    "lugar": "Alto San Francisco",
    "direccion": "San Francisco 75, piso 9",
    "comuna": "Santiago",
@@ -9314,7 +9505,7 @@
    "id": "3972eb46e914efe2",
    "titulo": "TALLER GENERAL MERCEDES SAYUT - AFRO/TIMBA - SÁBADO 15 DE AGOSTO - 14:40HRS.",
    "inicio": "2026-08-15T14:30:00",
-   "fin": "2026-08-15T00:00:00",
+   "fin": null,
    "lugar": "Alto San Francisco",
    "direccion": "San Francisco 75, piso 9",
    "comuna": "Santiago",
@@ -9453,7 +9644,7 @@
    "id": "9627a14903cff26d",
    "titulo": "TALLER GENERAL PIPE Y KATHE - SALSA PARTNERWORK ON2 - SÁBADO 15 DE AGOSTO - 15:50HRS.",
    "inicio": "2026-08-15T16:30:00",
-   "fin": "2026-08-15T00:00:00",
+   "fin": null,
    "lugar": "Alto San Francisco",
    "direccion": "San Francisco 75, piso 9",
    "comuna": "Santiago",
@@ -9536,7 +9727,7 @@
    "id": "8e38368d3890fcd2",
    "titulo": "TALLER GENERAL GABRIELA EQUIZ - FUNDAMENTOS DE LA BACHATA - SÁBADO 15 DE AGOSTO - 17:00HRS.",
    "inicio": "2026-08-15T17:00:00",
-   "fin": "2026-08-15T00:00:00",
+   "fin": null,
    "lugar": "Alto San Francisco",
    "direccion": "San Francisco 75, piso 9",
    "comuna": "Santiago",
@@ -9968,7 +10159,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "3cb8736f6807c91e",
@@ -9992,7 +10188,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "827bd064c24c3a16",
@@ -10016,7 +10217,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "1c09c2ec8f82309f",
@@ -10040,7 +10246,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "65ae7487644314ae",
@@ -10064,7 +10274,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "2aae5db1d2f2e047",
@@ -10088,7 +10302,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "2104e4b86084621a",
@@ -10112,7 +10330,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "dd06d3c3afd13628",
@@ -10220,7 +10442,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "38ac834b29cddf9a",
@@ -10244,7 +10470,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "81f229eff24c49bd",
@@ -10268,7 +10498,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "1e1c3ced563d90e3",
@@ -10349,7 +10583,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "62a12668601a9470",
@@ -10401,7 +10639,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "c8e27fd4d2608701",
@@ -10453,7 +10695,13 @@
    "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1773946268268-211311697.webp",
    "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
    "url": "https://talleres.nunoadeportes.cl/talleres/69bbf66e8b3ad7e7a2e7e525",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    1,
+    2,
+    3
+   ]
   },
   {
    "id": "7c1dddbd846fb68e",
@@ -10619,7 +10867,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "943a866bf3e365ee",
@@ -10703,7 +10955,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "1649a2da62d0eb95",
@@ -10727,7 +10984,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "ca8a56fa7718a94e",
@@ -10779,7 +11041,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    4
+   ]
   },
   {
    "id": "d95e43c497ae6276",
@@ -10944,7 +11210,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "0eed3b2094bbbd06",
@@ -10968,7 +11238,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "915116dd20c7ff2e",
@@ -10992,7 +11266,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "31bf975b1622abab",
@@ -11016,7 +11294,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "968c682a90e162ab",
@@ -11124,7 +11407,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "2330bc08f0876cbd",
@@ -11148,7 +11435,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "30428a06663e65a2",
@@ -11202,7 +11494,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    4
+   ]
   },
   {
    "id": "c2a514496258197c",
@@ -11255,7 +11551,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "b97fe56955fc8385",
@@ -11279,7 +11579,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "8d9236934bf64b4c",
@@ -11303,7 +11607,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "9f77ee715f63f32a",
@@ -11327,7 +11635,13 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    1,
+    2,
+    3
+   ]
   },
   {
    "id": "6c70197b514b3272",
@@ -11351,7 +11665,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "ae543450a313e4fd",
@@ -11431,7 +11750,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "d9e61c85939d1b90",
@@ -11455,7 +11778,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "c5fc17fdf84ce0f8",
@@ -11479,7 +11806,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    1
+   ]
   },
   {
    "id": "2cd7ae4b7404ea05",
@@ -11503,7 +11834,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "cb1df884ee899c92",
@@ -11527,7 +11862,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "2c5158e08e75f1b3",
@@ -11551,7 +11890,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "3e69f54d40f58607",
@@ -11575,7 +11918,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2,
+    4
+   ]
   },
   {
    "id": "64670c3803534e49",
@@ -11627,7 +11975,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "d7a9e9451c218464",
@@ -11651,7 +12003,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "e68d9b43a330b78a",
@@ -11675,7 +12031,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "d7c0ce16f9730c4a",
@@ -11699,7 +12059,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "56d52d3309b2efc2",
@@ -11723,7 +12087,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "735be77ee32b866c",
@@ -11747,7 +12115,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "974d5399a6a9f5df",
@@ -11771,7 +12143,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "5e729bb212601e67",
@@ -11795,7 +12171,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "60d8cb65dc45e885",
@@ -11819,7 +12199,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "a1810893c5c9b519",
@@ -11899,7 +12283,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "78bd09cb644fc719",
@@ -11951,7 +12339,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "c547cd53ad5a5515",
@@ -12003,7 +12395,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "6d676d8ca6ce8704",
@@ -12555,7 +12951,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "44acd5a46df59d12",
@@ -12579,7 +12979,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "864544d079e35236",
@@ -12603,7 +13007,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "beb14c15947a99c0",
@@ -12627,7 +13035,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "186a9b39d67b9ee8",
@@ -12651,7 +13063,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "ec399c6bea602064",
@@ -12675,7 +13091,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "a2b46fab8748bc01",
@@ -12783,7 +13203,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    4
+   ]
   },
   {
    "id": "7a01bf147ace5657",
@@ -13031,7 +13455,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "f94966481e2c4cc9",
@@ -13055,7 +13483,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "108a9f9618ab962a",
@@ -13079,7 +13511,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "2794afcc1f7fb6c0",
@@ -13383,7 +13819,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "c1ce91d1b6c53f79",
@@ -13407,7 +13847,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "25a6f39f84cf6ff0",
@@ -13487,7 +13931,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "0bb5f8cde3827834",
@@ -13819,7 +14267,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "9af6e4f23df08455",
@@ -14011,7 +14463,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "cb9c24e3f5b60fc3",
@@ -14035,7 +14491,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "b34fdf14b1a969b5",
@@ -14143,7 +14603,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "bc543838aec73553",
@@ -14364,7 +14828,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "add26b8be5aa0262",
@@ -14388,7 +14856,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "987998b3851324dc",
@@ -14412,7 +14884,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "84215c4c4c82cbaf",
@@ -14436,7 +14912,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "a4b6f84299a5e5fd",
@@ -14460,7 +14940,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "a2cf0b037894de9d",
@@ -14484,7 +14968,12 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3,
+    4
+   ]
   },
   {
    "id": "db4d8a8c315719e1",
@@ -14508,7 +14997,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "351237339e1c18c9",
@@ -14532,7 +15025,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "819772a44699026c",
@@ -15061,7 +15558,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "949ec6501511c59f",
@@ -15085,7 +15586,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "f65dbaf15bdcd64d",
@@ -15109,7 +15614,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "0bbcdcc160325631",
@@ -15133,7 +15642,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "96b646ab2fbacf50",
@@ -15157,7 +15670,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "b59fefeb1904baf2",
@@ -15181,7 +15698,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "c51cba24be003b96",
@@ -15205,7 +15726,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "c2f32a7c0cdb0638",
@@ -15257,7 +15782,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "8405a7c42200a166",
@@ -15421,7 +15950,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "ce9b3f17dde8b217",
@@ -15501,7 +16034,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    4
+   ]
   },
   {
    "id": "3a22d154c1d7cf9c",
@@ -15833,7 +16370,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "7df2c5f74194c39d",
@@ -15857,7 +16398,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "251371a2f2920537",
@@ -15881,7 +16426,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "c04928978868a6ee",
@@ -15905,7 +16454,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "fa0e80bc6fa240d3",
@@ -15929,7 +16482,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "62536950a19d0684",
@@ -16121,7 +16678,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "0cacad1b5b122215",
@@ -16145,7 +16706,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "a3fe21df9795a839",
@@ -16477,7 +17042,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "a8ed66682a5ba898",
@@ -16501,7 +17070,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "3bfe491a65736a35",
@@ -16525,7 +17098,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "27143c76b7ba947b",
@@ -16549,7 +17126,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "ec41921dca42474d",
@@ -16573,7 +17154,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "d873d482353e09b5",
@@ -16597,7 +17182,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "53938f900c280901",
@@ -16621,7 +17210,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "4c9a19a7b1f523e5",
@@ -16645,7 +17238,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "84c09d59ce462abc",
@@ -16669,7 +17266,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "f625c50a5c920bff",
@@ -16749,7 +17350,11 @@
    "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1785242896819-622128842.webp",
    "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
    "url": "https://talleres.nunoadeportes.cl/talleres/6a68a0fe46d149a8b6031e87",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "62b7904e470c5c85",
@@ -16829,7 +17434,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "b87916752f030189",
@@ -16853,7 +17462,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "cf223a74daeeaa4a",
@@ -16877,7 +17490,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "d656c7833efc9034",
@@ -17033,7 +17650,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    2,
+    4
+   ]
   },
   {
    "id": "7065cb72fafb5b51",
@@ -17057,7 +17678,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    2,
+    4
+   ]
   },
   {
    "id": "5960c2b76b0b36d2",
@@ -17137,7 +17762,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    2,
+    4
+   ]
   },
   {
    "id": "4749f490268e5e8e",
@@ -17185,7 +17814,10 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    3
+   ]
   },
   {
    "id": "9d939cef83f4b23f",
@@ -17291,7 +17923,10 @@
    "imagen": "https://finis.cl/wp-content/uploads/2026/08/webinar_fisiologia_ejercicio_1920x1080_optimizada.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
    "url": "https://finis.cl/agenda/postgrado-y-educacion-continua/webinar-ejercicio-como-regulador-metabolico-en-la-enfermedad-que-nos-dice-hoy-la-fisiologia-clinica-del-ejercicio/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    3
+   ]
   },
   {
    "id": "89d1724e71a6bf92",
@@ -17370,7 +18005,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    4,
+    5
+   ]
   },
   {
    "id": "e9b2a6ae5ef79f33",
@@ -17394,7 +18033,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    4,
+    5
+   ]
   },
   {
    "id": "f04f65c89a1701e5",
@@ -17502,7 +18145,10 @@
    "imagen": "https://culturalareina.cl/wp-content/uploads/2026/08/Taller-de-Cueca_feed-1-819x1024.webp",
    "fuente": "Corporacion Cultural de La Reina",
    "url": "https://culturalareina.cl/evento/taller-de-cueca-en-la-casona-nemesio-antunez/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    2
+   ]
   },
   {
    "id": "d69ca0bd7d886e8c",
@@ -17662,7 +18308,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "37bff2fc13b678a5",
@@ -17686,7 +18336,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "843965896c8b7b87",
@@ -17710,7 +18364,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "a93e4770cbab0558",
@@ -17734,7 +18392,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "81ba25c4d49dc38f",
@@ -17866,7 +18528,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "3e31b2a2caa9fffd",
@@ -17890,7 +18556,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "8d8ed8fa67939028",
@@ -17914,7 +18584,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "ef3065558349b9ba",
@@ -17995,7 +18669,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "397131ce2e9dd4be",
@@ -18047,7 +18725,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "0696c2eb164f995f",
@@ -18183,7 +18865,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "56f090aba400fade",
@@ -18372,7 +19058,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "53f7f664eb03ed75",
@@ -18396,7 +19086,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "717734bc0316f2c6",
@@ -18420,7 +19114,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "d7f3ace30fc02edc",
@@ -18496,7 +19194,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "d44ee61c3ca07107",
@@ -18549,7 +19251,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "11fe580fd805a45a",
@@ -18573,7 +19279,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "55a5a7b9142481ac",
@@ -18597,7 +19307,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "b4195cdd87f31119",
@@ -18677,7 +19391,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "bd36d08126467882",
@@ -18701,7 +19419,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "ee1f6b7300e1a0e7",
@@ -18725,7 +19447,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    1
+   ]
   },
   {
    "id": "4e1b6da724419afb",
@@ -18749,7 +19475,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "b4c681f5699b8977",
@@ -18773,7 +19503,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "6b0db22c1963b812",
@@ -18797,7 +19531,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "6224862bdb641887",
@@ -18849,7 +19587,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "ffba99e974a46af5",
@@ -18873,7 +19615,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "04e13231bdf523ed",
@@ -18897,7 +19643,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "7d2de1759cb9ec68",
@@ -18921,7 +19671,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "6270f279376510e1",
@@ -18945,7 +19699,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "ba27b9276af76d9f",
@@ -18969,7 +19727,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "2aef3a16e6faf111",
@@ -18993,7 +19755,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "8839a90992cdee98",
@@ -19017,7 +19783,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "3f6c793a6f932c3f",
@@ -19041,7 +19811,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "638b55dcb80dc2b6",
@@ -19121,7 +19895,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "e4c38dbc8ec388fe",
@@ -19145,7 +19923,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "6fa40839aeee16ea",
@@ -19169,7 +19951,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "589e2b8f208658d1",
@@ -19697,7 +20483,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "286712e0b8738d6e",
@@ -19721,7 +20511,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "7f9f8f7a3445eb43",
@@ -19745,7 +20539,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "21a109a27ea6cc86",
@@ -19769,7 +20567,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "2c10dc327aedc27c",
@@ -19793,7 +20595,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "48bbf7513b1dc188",
@@ -19817,7 +20623,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "3e82bda82f971b9d",
@@ -20149,7 +20959,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "2c379e202389688c",
@@ -20173,7 +20987,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "44fcd846abdce842",
@@ -20197,7 +21015,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "feb5b5859996fbce",
@@ -20501,7 +21323,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "7802b168c5a100f6",
@@ -20525,7 +21351,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "07e49701f3cc9922",
@@ -20605,7 +21435,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "09c39473b75cc2b3",
@@ -20937,7 +21771,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "d068662eb0723067",
@@ -21129,7 +21967,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "75cd450a59106247",
@@ -21153,7 +21995,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "2d7ecbff6e7279fd",
@@ -21261,7 +22107,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "7da0654957f63e77",
@@ -21453,7 +22303,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "b3d13621a7146461",
@@ -21477,7 +22331,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "66874abfd4d6b832",
@@ -21501,7 +22359,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "8bcabe1ee0be08a9",
@@ -21525,7 +22387,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "d24717510835f1c4",
@@ -21549,7 +22415,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "7fe3150ffe32adbf",
@@ -21573,7 +22443,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "f0757131abc2a83e",
@@ -21597,7 +22471,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "7e5208674a154059",
@@ -22097,7 +22975,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "06b1b0288bbadd1a",
@@ -22121,7 +23003,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "2540944ac7bb9878",
@@ -22145,7 +23031,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "b9008e60fda32275",
@@ -22169,7 +23059,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "86143cbc8559a610",
@@ -22193,7 +23087,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "803c654edbb79b42",
@@ -22217,7 +23115,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "d19092b1633f86f8",
@@ -22241,7 +23143,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "87efa38f367331c5",
@@ -22293,7 +23199,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "002da2db71ee5e85",
@@ -22457,7 +23367,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "3bdbd74b79743506",
@@ -22845,7 +23759,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "11831eaaae50c0bd",
@@ -22869,7 +23787,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "bd49caca3bfe0b75",
@@ -22893,7 +23815,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "2a2566ecc285b887",
@@ -22917,7 +23843,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "4874643d1d424178",
@@ -22941,7 +23871,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "ee48bd5a07afe12b",
@@ -23133,7 +24067,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "4b1752c6a8d11e9a",
@@ -23181,7 +24119,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "f170fe3d6cf2eb72",
@@ -23513,7 +24455,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "4e058f12fed081bd",
@@ -23537,7 +24483,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "e272714ac9a17da0",
@@ -23561,7 +24511,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "f48dcbdd2aaf99c7",
@@ -23585,7 +24539,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "eb4c0b3667b7437b",
@@ -23609,7 +24567,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "d7ab066a584d4a6f",
@@ -23633,7 +24595,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "126e695e68ab2ef5",
@@ -23657,7 +24623,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "e09264e4bc368361",
@@ -23681,7 +24651,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "700c035e7d179e2d",
@@ -23705,7 +24679,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "050cd325f05dc71e",
@@ -23785,7 +24763,11 @@
    "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1785242896819-622128842.webp",
    "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
    "url": "https://talleres.nunoadeportes.cl/talleres/6a68a0fe46d149a8b6031e87",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "e8f9f66ad825d12a",
@@ -23865,7 +24847,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "d03e016bd0a40a3d",
@@ -23889,7 +24875,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "d6160a139b8ef3ef",
@@ -23913,7 +24903,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "e85f75254a184b28",
@@ -24037,7 +25031,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    2,
+    4
+   ]
   },
   {
    "id": "a0dd04bb4a9cf289",
@@ -24061,7 +25059,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    2,
+    4
+   ]
   },
   {
    "id": "ee4c1c640cfd90b2",
@@ -24085,7 +25087,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    2,
+    4
+   ]
   },
   {
    "id": "53ebba797afeb862",
@@ -24109,7 +25115,10 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    3
+   ]
   },
   {
    "id": "049d65fec29797e2",
@@ -24218,7 +25227,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    4,
+    5
+   ]
   },
   {
    "id": "1b1ccc316bc94aca",
@@ -24242,7 +25255,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    4,
+    5
+   ]
   },
   {
    "id": "1067308c2d8d6863",
@@ -24266,7 +25283,10 @@
    "imagen": "https://culturalareina.cl/wp-content/uploads/2026/06/CREAMUNDOS-25-JULIO-01-819x1024.webp",
    "fuente": "Corporacion Cultural de La Reina",
    "url": "https://culturalareina.cl/evento/biblioteca-publica-de-la-reina-presenta-ciclo-de-talleres-familiares-creamundos-2026/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    2
+   ]
   },
   {
    "id": "c41e370ddc2860fa",
@@ -24401,7 +25421,7 @@
    "id": "483b58a43000d772",
    "titulo": "Yoga para todas y todos: Taller de inclusiva para niñas y niños.",
    "inicio": "2026-08-29T13:00:00",
-   "fin": "2026-08-29T00:00:00",
+   "fin": null,
    "lugar": "Biblioteca de Santiago",
    "direccion": "Matucana 151",
    "comuna": "Santiago",
@@ -24522,7 +25542,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "388159fdfcc6678a",
@@ -24546,7 +25570,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "d25dfbef65dbf273",
@@ -24570,7 +25598,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "5e7b130b5e70ed31",
@@ -24594,7 +25626,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "7c494c30be4c3cd2",
@@ -24702,7 +25738,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "252acb515317df1c",
@@ -24726,7 +25766,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "12df5a2ca389cda0",
@@ -24750,7 +25794,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "5f8609ba270146a3",
@@ -24831,7 +25879,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "811fed9aab44a2ee",
@@ -24883,7 +25935,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "b5ebbbd2d60cd120",
@@ -25019,7 +26075,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "ca530ff574245383",
@@ -25184,7 +26244,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "9a6368cceb7ee29f",
@@ -25208,7 +26272,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "ff6d0d62859fe09e",
@@ -25232,7 +26300,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "9d25054dbbc6a852",
@@ -25284,7 +26356,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "fa3f15c2b7a3699b",
@@ -25337,7 +26413,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "3b880c462cae8faf",
@@ -25361,7 +26441,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "d0dc2d54f0407ba4",
@@ -25385,7 +26469,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "a0fd98b3ae5fde91",
@@ -25465,7 +26553,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "ef266bb79b498534",
@@ -25489,7 +26581,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "708f50c43c9cb2ed",
@@ -25513,7 +26609,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    1
+   ]
   },
   {
    "id": "21243552ea39d527",
@@ -25537,7 +26637,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "8b2c3f2a69ab0fe0",
@@ -25561,7 +26665,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "90583765334f198b",
@@ -25609,7 +26717,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "e5591f2458cc83b6",
@@ -25661,7 +26773,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "e8fa5420ab43dc85",
@@ -25685,7 +26801,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "61ebb121bc07badb",
@@ -25709,7 +26829,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "b6d42c294f25e360",
@@ -25733,7 +26857,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "81f9e15669e2e373",
@@ -25757,7 +26885,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "589ff5f78d07f16e",
@@ -25781,7 +26913,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "2187bb9e7c59279c",
@@ -25805,7 +26941,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "12d72c169fa81ddd",
@@ -25829,7 +26969,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "1f5eb488267f8708",
@@ -25853,7 +26997,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "26c1e2e5cb554e2a",
@@ -25933,7 +27081,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "5388e7e3cd2ae0f2",
@@ -25957,7 +27109,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "929930eae2a45136",
@@ -25981,7 +27137,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "c44d0b1867c347fc",
@@ -26057,7 +27217,15 @@
    "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1778081438220-332453723.webp",
    "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
    "url": "https://talleres.nunoadeportes.cl/talleres/69c14a8cb278f7e97df25921",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
   },
   {
    "id": "f40767423745668a",
@@ -26682,7 +27850,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "3c4bc0d9af4a490e",
@@ -26706,7 +27878,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "e2467ce8e1f22f25",
@@ -26730,7 +27906,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "b04fe9e262d5bc88",
@@ -26754,7 +27934,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "0dd3c27f3fff9977",
@@ -26864,7 +28048,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "138aa43ec0339930",
@@ -26888,7 +28076,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "f49bc7ba14475f57",
@@ -27220,7 +28412,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "4e24700d163b83b0",
@@ -27272,7 +28468,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "4962970f4a0558dc",
@@ -27296,7 +28496,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "89603980e965743d",
@@ -27600,7 +28804,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "89708df82e58caa0",
@@ -27624,7 +28832,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "eaf79a9d8f60635d",
@@ -27704,7 +28916,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "7c659c07f7f72fcc",
@@ -28008,7 +29224,13 @@
    "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1773946268268-211311697.webp",
    "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
    "url": "https://talleres.nunoadeportes.cl/talleres/69bbf66e8b3ad7e7a2e7e525",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    1,
+    2,
+    3
+   ]
   },
   {
    "id": "c870d4a2409e1fad",
@@ -28060,7 +29282,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "a2ccf4210d7cec25",
@@ -28314,7 +29540,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "d575c6c5353bac5d",
@@ -28338,7 +29568,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "b750c26832b54ef9",
@@ -28446,7 +29680,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "87d0fec2a24de4c9",
@@ -28727,7 +29965,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "35738c5198bbb2cb",
@@ -28751,7 +29993,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "05685fb03f3bbba7",
@@ -28775,7 +30021,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "9e86a45b0cc1b350",
@@ -28799,7 +30049,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "06829400c26c1fb0",
@@ -28823,7 +30077,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "460507ef8eb0ee30",
@@ -28847,7 +30105,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "09315c8950ed695a",
@@ -28871,7 +30133,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "21abd48400338d15",
@@ -29428,7 +30694,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "106027d7dae1a50d",
@@ -29452,7 +30722,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "7be5495609d7ff90",
@@ -29476,7 +30750,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "6610fe0ab321c669",
@@ -29500,7 +30778,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "80270227fe8c587c",
@@ -29524,7 +30806,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "286e7c6c8fbd108c",
@@ -29548,7 +30834,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "d26c07d1242b33f4",
@@ -29572,7 +30862,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "f935c03c6c722481",
@@ -29624,7 +30918,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "0ccf757287eac5d0",
@@ -29847,7 +31145,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "70539fb7ccb138eb",
@@ -30264,7 +31566,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "e8bc8438d369471e",
@@ -30288,7 +31594,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "1bfd16b7e4ec76b1",
@@ -30312,7 +31622,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "fdf30f42bc91622f",
@@ -30336,7 +31650,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "50c3bb66dbe7fa72",
@@ -30360,7 +31678,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "ff0c4b56100f8b5a",
@@ -30581,7 +31903,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "365d4d287f70680a",
@@ -30605,7 +31931,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "0a32404d99a35b04",
@@ -30965,7 +32295,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "75337c4ebc72f583",
@@ -30989,7 +32323,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "7c15a815ad5ba002",
@@ -31013,7 +32351,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "deac8a744104123c",
@@ -31037,7 +32379,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "b347e5d74c67793a",
@@ -31061,7 +32407,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "4fe55ef448901199",
@@ -31085,7 +32435,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "7703227c0d0039ee",
@@ -31109,7 +32463,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "2a45ec689d1f9939",
@@ -31133,7 +32491,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "88ac76f7d52a5e27",
@@ -31157,7 +32519,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "5b2f8a3f9b20bc48",
@@ -31237,7 +32603,11 @@
    "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1785242896819-622128842.webp",
    "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
    "url": "https://talleres.nunoadeportes.cl/talleres/6a68a0fe46d149a8b6031e87",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "3a82c477c865aa55",
@@ -31317,7 +32687,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "5eec3a2e5951c055",
@@ -31341,7 +32715,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "979bf6fe600f42d8",
@@ -31365,7 +32743,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "dc2c8f686aa61155",
@@ -33723,7 +35105,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    2,
+    4
+   ]
   },
   {
    "id": "37a649bd25ba753a",
@@ -34036,7 +35422,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    2,
+    4
+   ]
   },
   {
    "id": "34f4d6b82d1ebe21",
@@ -34782,7 +36172,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    2,
+    4
+   ]
   },
   {
    "id": "d1b7d84385d277df",
@@ -35383,7 +36777,10 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    3
+   ]
   },
   {
    "id": "edd1e42ff9fac61b",
@@ -35520,7 +36917,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    4,
+    5
+   ]
   },
   {
    "id": "89a9bf0b7baf1bbb",
@@ -35544,7 +36945,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    4,
+    5
+   ]
   },
   {
    "id": "c38121667c8aff28",
@@ -35837,7 +37242,10 @@
    "imagen": "https://finis.cl/wp-content/uploads/2026/08/Agenda-web-2026-08-04T163538.940.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
    "url": "https://finis.cl/agenda/comunidad-finis-terrae/cursos-de-ingles-para-funcionarios-y-academicos-5/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0
+   ]
   },
   {
    "id": "b87b6a1ddc5f092a",
@@ -35861,7 +37269,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "a8bbacfdeaa5eb5d",
@@ -35885,7 +37297,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "ba43097bb65fa0ca",
@@ -35909,7 +37325,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "dfd99854f51da6cd",
@@ -35933,7 +37353,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "9b394150b0a83d8f",
@@ -36041,7 +37465,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "ae730ae3a5060345",
@@ -36065,7 +37493,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "1cf5c7c772786ca7",
@@ -36089,7 +37521,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "93b54ad57b0e8e51",
@@ -36170,7 +37606,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "a1b265ddf8c8d5ef",
@@ -36222,7 +37662,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "9220bbd54b5fe304",
@@ -36358,7 +37802,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "87fa43c810ef5be1",
@@ -36523,7 +37971,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "489378a10fd69b45",
@@ -36547,7 +37999,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "499997b1113723e0",
@@ -36571,7 +38027,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "84f588d2ff34d9c6",
@@ -36623,7 +38083,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "8345c17597748d6a",
@@ -36676,7 +38140,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "be1860470e631b84",
@@ -36700,7 +38168,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "74968786006753c5",
@@ -36724,7 +38196,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "b4daefdf379c39b0",
@@ -36804,7 +38280,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "86bba38bcc745e8e",
@@ -36828,7 +38308,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "1ed28438a1af748a",
@@ -36852,7 +38336,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    1
+   ]
   },
   {
    "id": "bbdfec6cec72d83f",
@@ -36876,7 +38364,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "094823e8985f6535",
@@ -36900,7 +38392,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "91c3eda5c0665146",
@@ -36924,7 +38420,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "f64ca235de3a81f6",
@@ -36976,7 +38476,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "21c4542a82d3cf12",
@@ -37000,7 +38504,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "fc80a5a0f34a62ec",
@@ -37024,7 +38532,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "2bc7c87f0a2d6a3c",
@@ -37048,7 +38560,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "6eef3f7396330c4d",
@@ -37072,7 +38588,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "a372b97acf7ad3e9",
@@ -37096,7 +38616,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "3d5f2fdb102698b7",
@@ -37120,7 +38644,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "7707894b324c7a0d",
@@ -37144,7 +38672,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "f3118d684a42e589",
@@ -37168,7 +38700,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "8213ef6efd259288",
@@ -37248,7 +38784,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "8631dc6160adc822",
@@ -37272,7 +38812,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "a1ccfae988ca655b",
@@ -37296,7 +38840,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "42a1f2eea8137d43",
@@ -37824,7 +39372,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "3992676c7602194a",
@@ -37848,7 +39400,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "1e6151ccc9d66a50",
@@ -37872,7 +39428,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "a47353c3740f05ae",
@@ -37896,7 +39456,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "4ee6da170d386d53",
@@ -37976,7 +39540,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "c95c5dbeade7db19",
@@ -38000,7 +39568,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "1d8566da1897a9d3",
@@ -38332,7 +39904,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "248a90ddaa1c7be6",
@@ -38384,7 +39960,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "cafb3b128a8661c9",
@@ -38408,7 +39988,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "ad856b51de8cada9",
@@ -38712,7 +40296,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "b1420864931eacd3",
@@ -38736,7 +40324,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "2b1aa8d81833b0c1",
@@ -38816,7 +40408,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "f2480332f099a346",
@@ -39148,7 +40744,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "d46c9651cb02f87e",
@@ -39340,7 +40940,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "7d1ee6943c0c605f",
@@ -39364,7 +40968,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "e98c47c5d72c2eea",
@@ -39472,7 +41080,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "fc96b1ed2eac09cb",
@@ -39664,7 +41276,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "6d09b6e28fe50f07",
@@ -39688,7 +41304,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "8cfcad4c9fed48a9",
@@ -39712,7 +41332,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "03ffce5b353ee109",
@@ -39736,7 +41360,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "ed5d71cb2238715f",
@@ -39760,7 +41388,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "8aa86031007ba920",
@@ -39784,7 +41416,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "24f3530c783a0a58",
@@ -39808,7 +41444,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "849f3d0218aa2bab",
@@ -40308,7 +41948,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "e5a53ccf6e719847",
@@ -40332,7 +41976,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "55eba186a814669d",
@@ -40356,7 +42004,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "74b54995fc1fa7cd",
@@ -40380,7 +42032,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "04877e52710c5832",
@@ -40404,7 +42060,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "061ec0f962016a49",
@@ -40428,7 +42088,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "353b3e2cc7814c3a",
@@ -40452,7 +42116,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "a57374023eec599f",
@@ -40504,7 +42172,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "ad525b63da5e9efc",
@@ -40668,7 +42340,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "f08b5785c5aa50bc",
@@ -41056,7 +42732,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "30a8377d4084b954",
@@ -41080,7 +42760,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "323c42a9f3fcd896",
@@ -41104,7 +42788,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "36230bbc0b3b7ad4",
@@ -41128,7 +42816,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "1c9f5338b55a3dfa",
@@ -41152,7 +42844,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "e0c832c57de867bf",
@@ -41344,7 +43040,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "37f7fcab0e7763fc",
@@ -41368,7 +43068,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "b6b6c9c78b7bedd2",
@@ -41700,7 +43404,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "221176e36e02bfd3",
@@ -41724,7 +43432,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "ee77d4300b78e874",
@@ -41748,7 +43460,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "1c1cfb08d5f9d19b",
@@ -41772,7 +43488,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "01af8067f30dbaaf",
@@ -41796,7 +43516,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "07cf47bc49077f11",
@@ -41820,7 +43544,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "f3ff9b8ac530bb0b",
@@ -41844,7 +43572,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "fec3d5e2f499bd64",
@@ -41868,7 +43600,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "165d5b4d9f2479c3",
@@ -41892,7 +43628,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "1b408425df393a3d",
@@ -41972,7 +43712,11 @@
    "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1785242896819-622128842.webp",
    "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
    "url": "https://talleres.nunoadeportes.cl/talleres/6a68a0fe46d149a8b6031e87",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "7c3c1d44204feacc",
@@ -42052,7 +43796,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "68151fa6c05ecfe7",
@@ -42076,7 +43824,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "6df4350a42a8ed7d",
@@ -42100,7 +43852,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    1,
+    3
+   ]
   },
   {
    "id": "2682b5ae6882bfbf",
@@ -42124,7 +43880,10 @@
    "imagen": "https://www.balmacedartejoven.cl/site/wp-content/uploads/2026/08/1.webp",
    "fuente": "Balmaceda Arte Joven",
    "url": "https://www.balmacedartejoven.cl/noticias/escuela-de-arte-neurodivergente-expone-en-baj-biobio/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    2
+   ]
   },
   {
    "id": "1e25135dd36f9f84",
@@ -42176,7 +43935,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    2,
+    4
+   ]
   },
   {
    "id": "896c7ff8fe24b151",
@@ -42200,7 +43963,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    2,
+    4
+   ]
   },
   {
    "id": "650fea33b59e554c",
@@ -42224,7 +43991,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    2,
+    4
+   ]
   },
   {
    "id": "418947b36ebd15b6",
@@ -42248,7 +44019,10 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    3
+   ]
   },
   {
    "id": "9c661705efa5aef5",
@@ -42357,7 +44131,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    4,
+    5
+   ]
   },
   {
    "id": "d2b6a04b9235fecd",
@@ -42381,7 +44159,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    4,
+    5
+   ]
   },
   {
    "id": "f384632f575ca9a0",
@@ -42565,7 +44347,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "acccab1c62adba73",
@@ -42589,7 +44375,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "4912bd7f54887c2c",
@@ -42613,7 +44403,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "59ae53a677c33a74",
@@ -42637,7 +44431,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "b64958dbae36eddc",
@@ -42745,7 +44543,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "dca0a632427ae50e",
@@ -42769,7 +44571,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "bf50de3770a69c71",
@@ -42793,7 +44599,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "703425a702748c5f",
@@ -42874,7 +44684,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "289d01d5d0362583",
@@ -42926,7 +44740,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "839bfc4c3092cbd7",
@@ -43062,7 +44880,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "2f1efa7de50ec296",
@@ -43227,7 +45049,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "16fdd96f677bee4c",
@@ -43251,7 +45077,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "5025d82eb797663b",
@@ -43275,7 +45105,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "33a95881645d1832",
@@ -43327,7 +45161,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "f33bf57cdd916e12",
@@ -43380,7 +45218,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "b5b6e19ba8cb8bd0",
@@ -43404,7 +45246,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "a17d6901b1ce30db",
@@ -43428,7 +45274,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "a89ebbe8ea834df4",
@@ -43508,7 +45358,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "8f0072026f8121c4",
@@ -43532,7 +45386,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "2e26a1a4a5545a5e",
@@ -43556,7 +45414,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    1
+   ]
   },
   {
    "id": "e7127a4896072544",
@@ -43580,7 +45442,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "31a7b0b995b08cd4",
@@ -43604,7 +45470,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Santiago - Talleres Deportivos",
    "url": "https://www.munistgo.cl/talleres-deportivos/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "3e2c1c48c27ebf25",
@@ -43628,7 +45498,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "7482dcc8d5dda3cf",
@@ -43680,7 +45554,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "f690846dbbc586e3",
@@ -43704,7 +45582,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "b48af8fdcee83765",
@@ -43728,7 +45610,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "2ab17522ee21cf22",
@@ -43752,7 +45638,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "fd5a72021b988910",
@@ -43776,7 +45666,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "eec78b4278e8f109",
@@ -43800,7 +45694,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "b1194a44ff7a22d1",
@@ -43824,7 +45722,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "e1ca5b6c4904605c",
@@ -43848,7 +45750,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "22d6f69bbe0aa35a",
@@ -43872,7 +45778,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "41575496ba9b7226",
@@ -43952,7 +45862,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "068522ff40a81b68",
@@ -43976,7 +45890,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "34190e541ff04018",
@@ -44000,7 +45918,11 @@
    "imagen": "",
    "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos",
    "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    0,
+    2
+   ]
   },
   {
    "id": "c83a854d6c48192d",
@@ -44174,7 +46096,7 @@
    "id": "18a984584ffff454",
    "titulo": "TALLER",
    "inicio": "2026-11-07T11:00:00",
-   "fin": "2026-11-07T00:00:00",
+   "fin": null,
    "lugar": "Hotel Wyndham Pettra",
    "direccion": "",
    "comuna": "Lo Barnechea",
@@ -44198,7 +46120,7 @@
    "id": "a97e84f6d28dd1f2",
    "titulo": "Taller de Perfumería Botánica",
    "inicio": "2026-11-07T11:00:00",
-   "fin": "2026-11-07T00:00:00",
+   "fin": null,
    "lugar": "Hotel Wyndham Santiago Pettra",
    "direccion": "",
    "comuna": "Lo Barnechea",
@@ -44264,7 +46186,10 @@
    "imagen": "https://culturalareina.cl/wp-content/uploads/2026/02/IMAG-PRINCIPAL-WEB-CASONA-AHORA-SI.jpg-819x1024.webp",
    "fuente": "Corporacion Cultural de La Reina",
    "url": "https://culturalareina.cl/evento/talleres-anuales-casona-nemesio-antunez/",
-   "formato": "taller"
+   "formato": "taller",
+   "dias_semana": [
+    2
+   ]
   }
  ]
 }
