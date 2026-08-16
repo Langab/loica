@@ -1457,7 +1457,7 @@ fuentes:
   tipo_adaptador: json
   crawl_delay_seg: 5
   requiere_comuna: true
-  activa: true
+  activa: false
   json:
     metodo: post
     cuerpo:
@@ -1474,22 +1474,12 @@ fuentes:
       link: url
     filtros:
       region: '13'
-  notas: 'OJO — PUEDE NO FUNCIONAR: probado el 11-08-2026 desde este equipo devuelve 403 con el header
-    "cf-mitigated: challenge", que es un Cloudflare Managed Challenge. Se probó con nuestro user-agent
-    identificado, con uno de navegador y con uno que dice "bot": los tres dan 403, o sea NO es un filtro
-    por user-agent como el de chilecultura, es puntaje de IP/huella TLS.
-
-    Se deja configurada igual, SIN ninguna evasión, porque Cloudflare puntúa distinto cada red: desde
-    la casa del curador puede pasar. Si el challenge responde, la fuente registra el error como cualquier
-    otra y la corrida sigue. Lo que NO se hace es disfrazar el user-agent ni resolver el desafío: seria
-    evadir un control de acceso explicito.
-
-    Si queda bloqueada de forma permanente, las vias son dos: pedirle acceso a Passline (como intermediario
-    les llevamos compradores a su checkout) o cargar eventos puntuales por datos/manual/*.yaml. Ademas
-    varios recintos que venden por Passline publican el link en su propio sitio: club_chocolate ya aporta
-    13 links de compra de Passline por esa via.
-
-    '
+  notas: 'APAGADA 2026-08-16. Nunca trajo un evento: la API responde 403 a cualquier cliente automatico
+    (verificado hoy con curl: HTTP 403 en 0,1 s) y el adaptador json registraba 0 encontrados SIN error,
+    asi que la fuente se veia viva en el informe mientras pedia todos los dias para nada. No se arregla
+    cambiando el user-agent: eso seria evadir un control de acceso, y la regla del proyecto es no hacerlo.
+    La via real de Passline es `ingesta_manual`, que lee datos/manual/passline.csv — un export que una
+    persona baja del sitio navegando normal. Si algun dia abren una API publica, se reactiva.'
 - id: normandie
   nombre: Cine Arte Normandie
   url_base: https://normandie.cl

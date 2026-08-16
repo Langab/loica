@@ -210,6 +210,13 @@ def hoja_diagnostico(wb: Workbook, ctx: dict) -> None:
               "responden bien y no aportan eventos: agenda abandonada o "
               "cambio de formato" if ctx["fuentes_vacias"] else "ninguna",
               AMBAR if ctx["fuentes_vacias"] else VERDE)
+    # El fallo más silencioso de todos: la fuente que devuelve CERO sin error.
+    # Passline estuvo así, pidiendo todos los días contra un 403 que el cliente
+    # se tragaba, y en el informe se veía tan viva como las demás.
+    f = _dato(h, f, "Fuentes que trajeron cero", ctx["fuentes_en_cero"],
+              "sin error y sin eventos: es un 403 o un adaptador ciego, no "
+              "una agenda tranquila" if ctx["fuentes_en_cero"] else "ninguna",
+              ROJO if ctx["fuentes_en_cero"] else VERDE)
     f += 1
 
     # ---- Qué cambió
@@ -475,6 +482,8 @@ def armar_contexto() -> dict:
         "fuentes_total": len(fuentes),
         "fuentes_error": sum(1 for f in fuentes if f["error"]),
         "fuentes_vacias": len(nombres_vacias),
+        "fuentes_en_cero": sum(1 for f in fuentes
+                               if not f["error"] and not (f["encontrados"] or 0)),
         "nombres_vacias": nombres_vacias,
         "encontrados": sum(f["encontrados"] or 0 for f in fuentes),
         "nuevos": sum(f["nuevos"] or 0 for f in fuentes),
