@@ -81,21 +81,34 @@ fuentes:
   nombre: Cultura Providencia
   url_base: https://culturaprovidencia.cl
   url_agenda: https://culturaprovidencia.cl/sitemap.rss
-  tipo_adaptador: rss
+  tipo_adaptador: sitemap
+  origen: rss
   endpoint: /sitemap.rss
   comuna: Providencia
   crawl_delay_seg: 3
+  tope_fichas: 40
   activa: true
-  notas: API REST cerrada (401). Se usa el sitemap RSS que publican.
+  notas: 'API REST cerrada (401), y su /feed/ son noticias en pasado ("celebramos este sábado"), no cartelera.
+    Queda el sitemap.rss, que sigue vivo (All in One SEO v4.9.10) pero solo trae title y link: sin
+    description ni fecha, el adaptador rss lo leía entero y descartaba los 50 items por no encontrarles
+    cuándo. Por eso va como sitemap+fichas: la fecha está en el texto de cada ficha ("PROGRAMACIÓN:
+    sábado 22 de agosto / 13:00") y el pubDate del item dice de qué año habla.'
 - id: ticketmaster
   nombre: Ticketmaster Chile
   url_base: https://app.ticketmaster.com
   tipo_adaptador: ticketmaster
   ciudad: Santiago
   crawl_delay_seg: 1
-  activa: true
-  notas: 'Requiere TICKETMASTER_API_KEY en el entorno (gratis en developer.ticketmaster.com). Sin la key,
-    la fuente se salta sola.
+  activa: false
+  notas: 'APAGADA 2026-08-16: nunca estuvo rota, esta sin configurar. Necesita TICKETMASTER_API_KEY en
+    el entorno y sacarla exige crear cuenta en developer.ticketmaster.com, que es un tramite de una
+    persona, no del pipeline. Estuvo meses activa devolviendo cero sin registrar error, o sea contandose
+    como fuente sana en un dia sin agenda; apagada dice la verdad (no la estamos usando) y deja de
+    aparecer en fuentes_degradadas() al lado de fuentes que si se rompieron. Para encenderla: sacar la
+    key (gratis, developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/), exportarla en el
+    entorno, poner activa: true y probar con TICKETMASTER_API_KEY=... python3 run_diario.py --fuente
+    ticketmaster --probar. El adaptador (loica/fuentes/apis.py) esta escrito y respeta los limites de la
+    API (2 req/s, 5.000/dia); si falta la key ahora falla fuerte en vez de callarse.
 
     '
 - id: cclm
@@ -395,16 +408,20 @@ fuentes:
   nombre: Teatro Oriente
   url_base: https://teatrooriente.cl
   url_agenda: https://teatrooriente.cl/sitemap.rss
-  tipo_adaptador: rss
+  tipo_adaptador: sitemap
+  origen: rss
   endpoint: /sitemap.rss
+  patron_url: /evento/
   comuna: Providencia
   crawl_delay_seg: 3
-  buscar_detalle: false
-  tope_detalle: 25
+  tope_fichas: 40
   activa: true
   notas: 'Mismo patron exacto que Cultura Providencia (probablemente el mismo proveedor): WordPress con
-    REST cerrada (401), robots.txt que declara /sitemap.xml y /sitemap.rss, y /feed/ con 35 KB de RSS
-    real. Adaptador RSS reutiliz'
+    REST cerrada (401) y sitemap.rss vivo. Su /feed/ NO sirve: quedo congelado en 2022. La cartelera de
+    verdad son las 46 fichas /evento/ del sitemap.rss, y cada una trae schema.org/Event completo en
+    JSON-LD (startDate con hora, endDate, direccion y precio), que es el mejor dato posible. El
+    sitemap.rss solo entrega title y link, asi que el adaptador rss no le encontraba fecha a nada y
+    devolvia cero. patron_url deja fuera /registro/, /quienes-somos/ y /cartelera-eventos/.'
 - id: nunoa
   nombre: Municipalidad de Nunoa
   url_base: https://www.nunoa.cl
@@ -787,17 +804,27 @@ fuentes:
   buscar_detalle: true
 - id: uchile_agenda
   nombre: Universidad de Chile - Agenda
-  url_base: https://www.uchile.cl
-  url_agenda: https://www.uchile.cl/agenda
+  url_base: https://uchile.cl
+  url_agenda: https://uchile.cl/agenda
   tipo_adaptador: html
   endpoint: /agenda
   comuna: Varias
   crawl_delay_seg: 3
   activa: true
+  selectores:
+    tarjeta: article.mod-cal-result__item
+    titulo: h4.mod__item-title
+    link: h4.mod__item-title a
+    fecha: p.mod-cal-result__item-days
+    hora: span.mod-cal-result__item-hour
+    lugar: p.mod-cal-result__item-placer
   notas: 'NO es WordPress: es Adobe Experience Manager (AEM), confirmado por rutas de imagen /dam/jcr:<hash>/.
-    Todos los wp-json, /feed/, /agenda/feed/, /sitemap.xml, /sitemap_index.xml y /agenda.model.json dan'
-  tipos_post:
-  - evento
+    Todos los wp-json, /feed/, /agenda/feed/, /sitemap.xml, /sitemap_index.xml y /agenda.model.json dan
+    404. El dominio con www redirige (302) a uchile.cl pelado, asi que se apunta directo al canonico y
+    de paso los links relativos de las tarjetas dejan de nacer redirigidos. Sin selectores propios la
+    heuristica no reconocia ninguna tarjeta (no usa .evento ni .event) y la fuente devolvia cero: la
+    tarjeta es article.mod-cal-result__item, con la hora en su propio span y el lugar con direccion
+    entre parentesis, que es lo que necesita detectar_comuna.'
 - id: spanglish_party
   nombre: Spanglish Party - Intercambio de idiomas
   url_base: https://www.meetup.com

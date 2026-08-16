@@ -22,8 +22,15 @@ URL_DISCOVERY = "https://app.ticketmaster.com/discovery/v2/events.json"
 def extraer_ticketmaster(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
     api_key = os.environ.get("TICKETMASTER_API_KEY", "").strip()
     if not api_key:
-        log.warning("Ticketmaster: falta TICKETMASTER_API_KEY — fuente omitida")
-        return []
+        # Antes esto devolvía [] con un warning en el log. El resultado era una
+        # fuente activa que entregaba cero todos los días sin registrar error:
+        # en el informe se veía igual que una fuente sana en un día sin agenda,
+        # y así estuvo meses. Reventar acá la deja anotada como error en la
+        # tabla `corridas`, que es lo que mira fuentes_degradadas(). run_diario
+        # atrapa la excepción por fuente, así que la corrida no se cae.
+        raise RuntimeError(
+            "falta TICKETMASTER_API_KEY en el entorno "
+            "(se saca gratis en developer.ticketmaster.com)")
 
     eventos: list[Evento] = []
     pagina = 0

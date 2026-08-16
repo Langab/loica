@@ -9,6 +9,8 @@ from __future__ import annotations
 
 import logging
 import re
+from datetime import datetime
+from email.utils import parsedate_to_datetime
 from xml.etree import ElementTree
 
 from bs4 import BeautifulSoup
@@ -71,6 +73,15 @@ def _desde_jsonld(sopa: BeautifulSoup, fuente: dict) -> list[Evento]:
                     if ofertas.get(campo) not in (None, ""):
                         precio_crudo = str(ofertas[campo])
                         break
+            # "17.000" no son diecisiete coma cero: es el separador de miles
+            # chileno. El Teatro Oriente publica price="17.000" (y de paso lo
+            # rotula priceCurrency USD), así que float() dejaba una entrada de
+            # $17.000 marcada como $17 — mil veces más barata de lo que es, en
+            # una app cuya promesa central es el precio. Un punto seguido de
+            # exactamente tres dígitos nunca son decimales en pesos.
+            if re.fullmatch(r"\d{1,3}(?:\.\d{3})+", precio_crudo.strip()):
+                precio_crudo = precio_crudo.strip().replace(".", "")
+
             precio, gratis, texto_precio = parsear_precio(precio_crudo)
             if precio_crudo.strip() in ("0", "0.0", "0.00"):
                 precio, gratis = 0, True
@@ -210,6 +221,19 @@ def eventos_desde_html(html: str, fuente: dict, tipo: str = "html") -> list[Even
         if inicio is None:
             continue
 
+        # Algunos sitios separan la hora de la fecha en dos elementos: la
+        # agenda de la U. de Chile pone "08:00" en su propio <span> y deja en
+        # el <p> de la fecha solo "Todos los días del 01/08/2026 al
+        # 31/08/2026". parsear_fecha busca la hora al lado de la fecha, así que
+        # ahí nunca la encuentra y toda la agenda quedaba a las 00:00.
+        if selectores.get("hora") and inicio.hour == 0 and inicio.minute == 0:
+            nodo_hora = tarjeta.select_one(selectores["hora"])
+            if nodo_hora:
+                mh = re.search(r"\b([01]?\d|2[0-3])[:.h](\d{2})\b",
+                               nodo_hora.get_text(" ", strip=True))
+                if mh:
+                    inicio = inicio.replace(hour=int(mh.group(1)), minute=int(mh.group(2)))
+
         categoria = ""
         nodo_categoria = (tarjeta.select_one(selectores["categoria"])
                           if selectores.get("categoria") else tarjeta.find("small"))
@@ -324,6 +348,24 @@ def _urls_desde_listado(fuente: dict, cliente: ClienteEducado) -> list[tuple[str
     return list(vistas.items())
 
 
+def _publicado(marca: str) -> datetime | None:
+    """Fecha en que el listado dice haber publicado la ficha.
+
+    Llega en dos formatos según el origen: RFC-822 en el `pubDate` de un RSS
+    ("Wed, 05 Aug 2026 18:43:05 +0000") e ISO en el `lastmod` de un sitemap.
+    `parsear_fecha` solo entiende meses en español, así que el RFC-822 lo lee
+    email.utils. Se devuelve sin huso horario: el resto del pipeline trabaja
+    con fechas ingenuas y compararlas con una fecha con huso revienta.
+    """
+    marca = (marca or "").strip()
+    if not marca:
+        return None
+    try:
+        return parsedate_to_datetime(marca).replace(tzinfo=None)
+    except (TypeError, ValueError):
+        return parsear_fecha(marca)
+
+
 def extraer_sitemap_fichas(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
     """Descubre las URLs de los eventos y saca los datos de cada ficha.
 
@@ -376,19 +418,27 @@ def extraer_sitemap_fichas(fuente: dict, cliente: ClienteEducado) -> list[Evento
             mod = nodo.find("s:lastmod", espacios) if nodo.find("s:lastmod", espacios) is not None else nodo.find("lastmod")
             entradas.append((loc.text.strip(), (mod.text or "") if mod is not None else ""))
 
-        patron = fuente.get("patron_url", "")
-        if patron:
-            entradas = [e for e in entradas if patron in e[0]]
+    # El filtro por patrón vale para los tres orígenes, no solo para el sitemap
+    # XML. Estaba metido dentro del `else` y por eso no se aplicaba al RSS: el
+    # sitemap.rss del Teatro Oriente trae sus 46 fichas de /evento/ mezcladas
+    # con /quienes-somos/, /registro/ y /cartelera-eventos/, que no son eventos
+    # y se comían cupos del tope de fichas.
+    patron = fuente.get("patron_url", "")
+    if patron:
+        entradas = [e for e in entradas if patron in e[0]]
 
-    # Lo más recientemente modificado primero: son los eventos vivos
-    entradas.sort(key=lambda e: e[1], reverse=True)
+    # Lo más recientemente publicado primero: son los eventos vivos. Se ordena
+    # por la fecha ya interpretada y no por el texto crudo, porque el pubDate de
+    # un RSS empieza por el día de la semana ("Wed, 05 Aug 2026"): ordenado como
+    # string, el criterio real terminaba siendo el nombre del día en inglés.
+    entradas.sort(key=lambda e: _publicado(e[1]) or datetime.min, reverse=True)
     tope = int(fuente.get("tope_fichas", 40))
     entradas = entradas[:tope]
 
     log.info("%s: %d fichas a revisar desde el sitemap", fuente.get("nombre"), len(entradas))
 
     eventos: list[Evento] = []
-    for url, _ in entradas:
+    for url, marca in entradas:
         ficha = cliente.obtener(url, max_edad_cache_seg=24 * 3600)
         if ficha is None or not ficha.ok:
             continue
@@ -427,9 +477,29 @@ def extraer_sitemap_fichas(fuente: dict, cliente: ClienteEducado) -> list[Evento
         for basura in sopa.select("nav, header, footer, script, style"):
             basura.decompose()
         texto = sopa.get_text(" ", strip=True)
-        inicio = parsear_fecha(texto)
+        # La fecha de publicación de la ficha decide de qué año habla un aviso
+        # sin año, que es la regla de parsear_fecha. Sin pasarla, el ciclo de
+        # cine de Cultura Providencia —publicado el 11 de junio y programado
+        # "MIÉRCOLES 1 JULIO"— se leía contra el día de hoy, quedaba en el
+        # pasado y se reprogramaba solo a julio de 2027.
+        publicado = _publicado(marca)
+        inicio = parsear_fecha(texto, publicado=publicado)
         if inicio is None:
             continue
+
+        # "Estará abierta hasta el domingo 1 de noviembre" dice cuándo CIERRA la
+        # muestra, no cuándo abre, pero parsear_fecha toma la primera fecha que
+        # ve: la exposición de Claudia Ríos —abierta desde julio— salía
+        # empezando el 1 de noviembre. Si la única fecha de la ficha es la de
+        # cierre, va a `fin`, que es lo que mide la vigencia, y el inicio
+        # honesto pasa a ser el día en que se publicó el aviso.
+        fin = None
+        cierre = re.search(r"\bhasta\s+(?:el\s+)?([^,.;]{0,40})", texto, re.IGNORECASE)
+        if cierre and publicado:
+            fecha_cierre = parsear_fecha(cierre.group(1), publicado=publicado)
+            if fecha_cierre is not None and fecha_cierre.date() == inicio.date():
+                fin, inicio = inicio, publicado.replace(hour=0, minute=0, second=0,
+                                                        microsecond=0)
 
         precio, gratis, texto_precio = parsear_precio(texto)
         og_imagen = sopa.find("meta", property="og:image")
@@ -437,6 +507,7 @@ def extraer_sitemap_fichas(fuente: dict, cliente: ClienteEducado) -> list[Evento
             titulo=titulo.split("|")[0].split(" - ")[0].strip()[:120],
             descripcion_corta=resumir(texto, 180),
             inicio=inicio,
+            fin=fin,
             lugar_nombre=fuente.get("nombre", ""),
             comuna=detectar_comuna(texto, fuente.get("comuna", "")),
             precio_clp=precio, es_gratis=gratis, precio_texto=texto_precio,

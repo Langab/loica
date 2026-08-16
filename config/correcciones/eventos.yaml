@@ -55,3 +55,84 @@ eventos:
   a1d823c4739d32a3:
     descartar: true
     nota: '"tercer 2028 2d" — dato de prueba de Passline'
+
+  # Eventos que solo existían por un error de lectura de fecha, corregido el
+  # 2026-08-16. Cuando un aviso daba el día sin el año ("Día: 6 de agosto"),
+  # extraer_sitemap_fichas lo interpretaba contra HOY en vez de contra la fecha
+  # en que la ficha fue publicada, así que una función de 2025 se reprogramaba
+  # sola al año siguiente. El adaptador ya no lo hace (pasa `publicado` a
+  # parsear_fecha), pero estas filas quedaron guardadas con la fecha inventada.
+  # Cada una se verificó contra su ficha viva: la fecha real va en la nota y
+  # todas ya pasaron. Se descartan en vez de borrarlas para no perder el rastro.
+  d645fcbc3421fc12:
+    descartar: true
+    nota: '"Williams en concierto" — se publicó como 2027-05-12 por el error de año; la fecha real era 2026-05-12 (ya pasó)'
+  c15cd82a679d1dde:
+    descartar: true
+    nota: '"TOC TOC" — se publicó como 2027-05-15 por el error de año; la fecha real era 2026-05-15 (ya pasó)'
+  84f316566c75ee26:
+    descartar: true
+    nota: '"Los Hablantes de Iquique" — se publicó como 2027-05-14 por el error de año; la fecha real era 2026-05-14 (ya pasó)'
+  f7b8f0f119f3bb65:
+    descartar: true
+    nota: '"Concierto "Danzas sin fronteras"" — se publicó como 2027-06-10 por el error de año; la fecha real era 2026-06-10 (ya pasó)'
+  16dbff4411ef686c:
+    descartar: true
+    nota: '"Ballet Mago de Oz" — se publicó como 2027-06-13 por el error de año; la fecha real era 2026-06-13 (ya pasó)'
+  db5f7ec8eb0a305a:
+    descartar: true
+    nota: '"Aniversario Sindicato de Folcloristas" — se publicó como 2027-06-19 por el error de año; la fecha real era 2026-06-19 (ya pasó)'
+  d6fb292891b3fccd:
+    descartar: true
+    nota: '"Los Mágicos Zapatos de Cristal" — se publicó como 2027-06-27 por el error de año; la fecha real era 2026-06-27 (ya pasó)'
+  1ef502e67712342e:
+    descartar: true
+    nota: '"BAFONA en Lo Prado" — se publicó como 2027-06-24 por el error de año; la fecha real era 2026-06-24 (ya pasó)'
+  c1e2904674b2cda8:
+    descartar: true
+    nota: '"Felipe Avello" — se publicó como 2027-06-15 por el error de año; la fecha real era 2026-06-15 (ya pasó)'
+  db545082a8d20bbe:
+    descartar: true
+    nota: '"Pareidolia" — se publicó como 2027-07-02 por el error de año; la fecha real era 2026-07-02 (ya pasó)'
+  b092c45c5a0fe09d:
+    descartar: true
+    nota: '"Tito Rissoti" — se publicó como 2027-07-03 por el error de año; la fecha real era 2026-07-03 (ya pasó)'
+  353fa1c8f0bcfabf:
+    descartar: true
+    nota: '"Guerreras K-pop" — se publicó como 2027-07-04 por el error de año; la fecha real era 2026-07-04 (ya pasó)'
+  04dd2c1ca4a312d6:
+    descartar: true
+    nota: '"Desde el Borde... o la eterna lucha por hacerse aparecer" — se publicó como 2027-07-10 por el error de año; la fecha real era 2026-07-10 (ya pasó)'
+  0f9f75998e576c72:
+    descartar: true
+    nota: '"Mistero Buffo" — se publicó como 2027-07-11 por el error de año; la fecha real era 2026-07-11 (ya pasó)'
+  96861204706ee508:
+    descartar: true
+    nota: '"Confluencias" — se publicó como 2027-07-14 por el error de año; la fecha real era 2026-07-14 (ya pasó)'
+  4c996e07a4de87f9:
+    descartar: true
+    nota: '"Mallplaza Tobalaba – FeriaFriki" — se publicó como 2027-05-03 por el error de año; la fecha real era 2026-05-03 (ya pasó)'
+  38870b6490b4b45f:
+    descartar: true
+    nota: '"Feria Friki Est. Central – FeriaFriki" — se publicó como 2027-03-22 por el error de año; la fecha real era 2026-03-22 (ya pasó)'
+  52283efe5c9835fc:
+    descartar: true
+    nota: '"MEGA FERIA FRIKI PARQUE BICENTENARIO DE CERRILLOS – FeriaFri" — se publicó como 2026-09-14 por el error de año; la fecha real era 2025-09-14 (ya pasó)'
+  7d7bb0a9b852e324:
+    descartar: true
+    nota: '"FERIA FRIKI MALLPLAZA NORTE – FeriaFriki" — se publicó como 2026-09-07 por el error de año; la fecha real era 2025-09-07 (ya pasó)'
+  c6d38895f798a0ab:
+    descartar: true
+    nota: '"Feria Friki La Florida – FeriaFriki" — se publicó como 2026-08-31 por el error de año; la fecha real era 2025-08-31 (ya pasó)'
+  96e6853bb11e67e2:
+    descartar: true
+    nota: '"FERIA FRIKI PAC AGOSTO 2025 – FeriaFriki" — se publicó como 2026-08-24 por el error de año; la fecha real era 2025-08-24 (ya pasó)'
+  632466f9dcbd15b2:
+    descartar: true
+    nota: '"FERIA FRIKI LA PINTANA AGOSTO 2025 – FeriaFriki" — se publicó como 2026-08-17 por el error de año; la fecha real era 2025-08-17 (ya pasó)'
+  7cc15babaf85b52f:
+    descartar: true
+    nota: '"Feria Friki Lilo y Stitch – FeriaFriki" — se publicó como 2027-06-22 por el error de año; la fecha real era 2025-06-22 (ya pasó)'
+  e1ac14c68048b252:
+    descartar: true
+    nota: '"Feria Friki Pueblito Las Vizcachas – FeriaFriki" — se publicó como 2027-06-08 por el error de año; la fecha real era 2025-06-08 (ya pasó)'

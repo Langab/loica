@@ -97,16 +97,39 @@ def cola_restoranes(descuentos: list[dict]) -> tuple[list[dict], list[dict]]:
     return orden_pin, orden_cocina
 
 
+def nombres_activos() -> set[str] | None:
+    """Nombres de las fuentes que hoy están activas en la configuración.
+
+    Devuelve None si el archivo no se puede leer: ante la duda se informa de
+    más y no de menos.
+    """
+    try:
+        import yaml
+        with open(RAIZ / "config" / "fuentes.yaml", encoding="utf-8") as f:
+            config = yaml.safe_load(f)
+        return {x["nombre"] for x in config.get("fuentes", []) if x.get("activa", True)}
+    except Exception:
+        return None
+
+
 def fuentes_degradadas(con: sqlite3.Connection) -> list[dict]:
-    """Fuentes cuyas últimas 3 corridas vienen en error o en cero.
+    """Fuentes ACTIVAS cuyas últimas 3 corridas vienen en error o en cero.
 
     Una fuente que respondió bien durante meses y lleva tres días en cero no
     es "una fuente tranquila": o el sitio cambió y el adaptador quedó ciego,
     o de verdad no hay agenda. Las dos cosas se miran, no se adivinan.
+
+    Las apagadas no cuentan: sus corridas viejas quedan para siempre en la
+    tabla, así que sin este filtro una fuente que uno apagó justamente porque
+    no servía seguía apareciendo en la lista todos los días, al lado de las
+    que sí se rompieron, y la lista dejaba de leerse. Ticketmaster fue el caso.
     """
+    activas = nombres_activos()
     filas = con.execute(
         """SELECT fuente, encontrados, error, momento FROM corridas
            ORDER BY momento DESC""").fetchall()
+    if activas is not None:
+        filas = [f for f in filas if f["fuente"] in activas]
     ultimas: dict[str, list] = defaultdict(list)
     for f in filas:
         if len(ultimas[f["fuente"]]) < 3:
