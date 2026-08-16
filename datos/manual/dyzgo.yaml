@@ -1,0 +1,72 @@
+# Fiestas de DyzGO (app.dyzgo.com), capturadas a mano el 16-08-2026.
+#
+# POR QUÉ ESTO NO ES UNA FUENTE AUTOMÁTICA
+# ========================================
+# DyzGO es una app de fiestas cuyo catálogo vive DENTRO de la app nativa. Su
+# web no es un catálogo: app.dyzgo.com es una landing que dice "descarga la
+# app" y abajo aclara su propósito real —"¿Tienes un link de evento? Ábrelo
+# aquí y compra sin app"—, o sea que es un manejador de deep-links. No hay
+# listado que recorrer ni paginación que seguir: para abrir un evento hay que
+# tener su link de antemano.
+#
+# Lo que sí publican para máquinas es su sitemap.xml, y ahí exponen SOLO diez
+# URLs (tres eventos y siete páginas de productoras). Estos son esos tres.
+#
+# Lo verificado el 16-08-2026, para no volver a investigarlo:
+#   - robots.txt de app.dyzgo.com es permisivo: `Allow: /` y solo prohíbe las
+#     rutas de pago (select-tickets, guest-info, payment). Declara sitemap.
+#   - Toda ruta devuelve el mismo cascarón de 1.211 bytes: es una SPA de
+#     Expo/React Native. Sin JSON-LD, sin Open Graph, sin datos en el HTML.
+#   - El backend es Supabase (kovkkdhnmgavnqyjbqzd.supabase.co). Leerlo
+#     directo exige sacar la credencial del bundle de JavaScript, y eso es
+#     ir por detrás de lo que ellos publican en la web. Es la misma regla por
+#     la que se apagó la fuente automática de Passline el mismo día: el
+#     proyecto no evade controles de acceso ni usa credenciales ajenas.
+#   - No tienen API pública documentada.
+#
+# El camino bueno es pedirles acceso: Loica les manda tráfico y siempre
+# enlaza de vuelta a la fuente. Mientras tanto, esto.
+#
+# Los tres son "informativos" según la propia ficha ("No hay sistema de venta
+# ni compra de entradas asociado... Toda la información publicada es solo
+# referencial"), y la venta es EXTERNA, así que `link_entradas` no se pone:
+# apuntaría a un botón que deriva a otra parte.
+
+eventos:
+  - titulo: 'Proyecto Arce Vol. 2'
+    inicio: 2026-08-21 22:30
+    lugar_nombre: Ñuñoa
+    comuna: Ñuñoa
+    categoria: fiesta
+    descripcion_corta: >-
+      Fiesta de Arce Producciones con Dj Vish en cabina, barra variada y
+      entradas por preventa. De 22:30 a 04:00.
+    fuente_url: https://app.dyzgo.com/proyecto-arce-vol-2-2026
+    fuente_nombre: DyzGO
+
+  - titulo: 'The Anniversary Salvaje 4th — Espacio Riesco'
+    inicio: 2026-08-29 22:00
+    lugar_nombre: Espacio Riesco
+    lugar_direccion: Avenida El Salto 5000
+    comuna: Huechuraba
+    categoria: fiesta
+    descripcion_corta: >-
+      Salvaje Experience celebra sus cuatro años. Desde las 22:00 y hasta
+      cerca de las 04:30. Edad mínima +25 mujeres, +27 hombres.
+    fuente_url: https://app.dyzgo.com/the-anniversary-salvaje-4th-sabado-29-de-agosto-espacio-ries
+    fuente_nombre: DyzGO
+
+  # El horario NO está mal escrito: parte a las 03:30 y termina a las 11:00
+  # del mismo día. Es una fiesta after, de las que arrancan cuando las otras
+  # cierran, y en el circuito de Fiestas Patrias eso es lo normal.
+  - titulo: 'Friends Park en Fantasilandia — Fiestas Patrias'
+    inicio: 2026-09-17 03:30
+    lugar_nombre: Fantasilandia
+    lugar_direccion: Avenida Beauchef 938
+    comuna: Santiago
+    categoria: fiesta
+    descripcion_corta: >-
+      Fiesta after de Fiestas Patrias en Fantasilandia, de 03:30 a 11:00.
+      Edad mínima +18 mujeres, +21 hombres.
+    fuente_url: https://app.dyzgo.com/friends-park-fantasilandia-fiestas-patrias-jueves-17-septiem
+    fuente_nombre: DyzGO
