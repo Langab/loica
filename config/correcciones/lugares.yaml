@@ -306,6 +306,23 @@ lugares:
     lon: -70.58427
     nota: talleres de oficios (Dibujo y pintura, óleo, acrílico, acuarela y pastel, ilustra); publica su programación
       con fechas; investigado y verificado 2026-08-13
+  Corporacion Cultural de La Reina:
+    comuna: La Reina
+    nota: 'la comuna está en el nombre del recinto y la fuente igual lo manda a Santiago. Sin dirección publicada
+      y sin coordenadas verificadas, así que va solo la comuna: los eventos venían con el centroide de Santiago
+      (-33.4425, -70.6505), que es el fallback de geocodificación, no una ubicación (2026-08-16)'
+  Corporacion Cultural Municipal de Quilicura:
+    comuna: Quilicura
+    nota: mismo caso que La Reina — la comuna está en el nombre y los eventos traían el centroide de Santiago
+      (2026-08-16)
+  Dardignac 418:
+    comuna: Recoleta
+    direccion: Dardignac 418
+    lat: -33.43225
+    lon: -70.64483
+    nota: la fuente lo publica como "Santiago" pero Dardignac corre por Recoleta, al poniente de Pío Nono; el índice
+      OSM la da como recoleta en los números 28, 44, 485 y 537. Las coordenadas se interpolan entre el 400 y el 485
+      del mismo índice, misma cuadra (2026-08-16)
   Discoteca La Fama:
     comuna: Recoleta
     direccion: Av. México 609
@@ -354,6 +371,13 @@ lugares:
     lat: -33.43944
     lon: -70.64785
     nota: web + catastro OSM a 46 m (2026-08-13)
+  Fundación CorpArtes:
+    comuna: Las Condes
+    direccion: Rosario Norte 660, piso -2
+    lat: -33.40434
+    lon: -70.57327
+    nota: la fuente escribe "Rosario Norte 660, piso -2, Las Condes, Santiago" y el detector se queda con el
+      "Santiago" del final; el índice OSM tiene el Rosario Norte 660 exacto en las condes (2026-08-16)
   Escuela de Circo Infantil Chaltumay:
     comuna: Santiago
     direccion: Santiaguillo 1378
@@ -539,12 +563,15 @@ lugares:
     lat: -33.43887
     lon: -70.63543
     nota: al lado del GAM; catastro OSM local (datos/indice_osm.db), verificado 2026-08-14
-  MUT — Mercado Urbano Tobalaba:
+  Mercado Urbano Tobalaba:
     comuna: Las Condes
     direccion: Av. Apoquindo 2730
     lat: -33.41746
     lon: -70.60115
-    nota: la fuente lo declaraba en Providencia pero está en Las Condes; web + catastro OSM a 39 m (2026-08-13)
+    nota: 'la fuente lo declaraba en Providencia pero está en Las Condes; web + catastro OSM a 39 m (2026-08-13).
+      OJO con la clave, que el 2026-08-16 se acortó de "MUT — Mercado Urbano Tobalaba" a esto: el calce es por
+      contención y las fuentes escriben la sigla en los dos extremos —"MUT — Mercado Urbano Tobalaba" y "Mercado
+      Urbano Tobalaba (MUT)"—, así que la clave con sigla adelante solo le pegaba a la mitad'
   Mystic Valley:
     comuna: Lampa
     direccion: La Montaña Sur 1957
@@ -734,6 +761,19 @@ lugares:
     lat: -33.44754
     lon: -70.62989
     nota: web + catastro OSM a 12 m (2026-08-13)
+  Teatro Joan Jara:
+    comuna: Lo Prado
+    direccion: Paseo de las Artes 880
+    nota: es la sala de la Fundación Centro Cultural Lo Prado y la fuente le pone "Santiago" a la dirección; el
+      nombre del recinto ya dice la comuna. Va SIN coordenadas a propósito - el índice OSM no tiene el Paseo de
+      las Artes de Lo Prado (el único "paseo de las artes" que trae está en la Región de O'Higgins), así que se
+      deja geocodificar en vez de inventarle un punto (2026-08-16)
+  Teatro Oriente:
+    comuna: Providencia
+    direccion: Av. Pedro de Valdivia 099
+    nota: 'la fuente escribe "Av. Pedro de Valdivia 099, Providencia., Santiago" y gana el "Santiago" del cierre.
+      Va SIN coordenadas a propósito: el índice OSM tiene un Pedro de Valdivia 99 en providencia, pero el 099 con
+      cero adelante es OTRO tramo de la calle —la trampa de siempre— y no vale copiarle el punto al 99 (2026-08-16)'
   Teatro Mori Bellavista:
     comuna: Providencia
     direccion: Constitución 183
@@ -759,6 +799,14 @@ lugares:
     lat: -33.39884
     lon: -70.60136
     nota: catastro OSM local (datos/indice_osm.db), verificado 2026-08-14
+  Teatro San Ginés:
+    comuna: Providencia
+    direccion: Mallinkrodt 76
+    lat: -33.43343
+    lon: -70.6335
+    nota: la fuente escribe "Providencia, Barrio Bellavista" en la dirección y el detector se queda con el
+      "Santiago" de la ciudad; el índice OSM tiene el Mallinkrodt 76 exacto y la calle como providencia
+      (2026-08-16)
   Universidad Andres Bello - Cultura UNAB:
     comuna: Las Condes
     direccion: Fernández Concha 700, Campus Casona de Las Condes

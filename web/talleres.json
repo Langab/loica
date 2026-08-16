@@ -1,5 +1,5 @@
 {
- "generado": "2026-08-16T17:55:50",
+ "generado": "2026-08-16T19:05:00",
  "total": 1802,
  "talleres": [
   {
@@ -8575,11 +8575,11 @@
    "inicio": "2026-08-15T21:00:00",
    "fin": "2026-08-16T08:45:00",
    "lugar": "Dardignac 418, Recoleta",
-   "direccion": "Dardignac #418, Santiago",
-   "comuna": "Santiago",
-   "lat": -33.4320886,
-   "lon": -70.646437,
-   "precision": "calle",
+   "direccion": "Dardignac 418",
+   "comuna": "Recoleta",
+   "lat": -33.43225,
+   "lon": -70.64483,
+   "precision": "correccion",
    "gratis": false,
    "precio": 5000,
    "precio_texto": "desde $5.000",

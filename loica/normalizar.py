@@ -248,14 +248,48 @@ def parsear_precio(texto: str) -> tuple[int | None, bool | None, str]:
     return None, None, ""
 
 
+# La comuna se busca como palabra entera. Media lista son palabras corrientes
+# del castellano que viven dentro de otras: "Inmaculado Corazón de María"
+# contiene "Macul" y "la danza del oso" contiene "el bosque". Como abajo gana
+# la mención más tardía, y estos accidentes aparecen en medio de la prosa, sin
+# la frontera un concierto en la Basílica quedaba en Macul.
+_COMUNA_RE = {c: re.compile(rf"(?<![0-9a-z]){re.escape(_plano(c))}(?![0-9a-z])")
+              for c in COMUNAS_RM}
+
+
 def detectar_comuna(*textos: str) -> str:
-    """Busca una comuna del Gran Santiago en los textos entregados, por orden."""
+    """Busca una comuna del Gran Santiago en los textos entregados, por orden.
+
+    Los textos se miran en el orden en que llegan y el primero que diga algo
+    manda: los adaptadores pasan primero la dirección, después el nombre del
+    lugar y al final la comuna por defecto de la fuente.
+
+    DENTRO de un mismo texto gana la primera de `COMUNAS_RM`, y como esa lista
+    parte por "Santiago", en la práctica Santiago le gana a cualquier comuna
+    que la acompañe. Eso etiqueta mal direcciones como "Providencia, Barrio
+    Bellavista, Teatro San Ginés"... y NO se arregla dando vuelta la
+    preferencia. Se intentó el 16-08-2026 y salió empatado:
+
+      · "Que gane la comuna que no sea Santiago" arregla el San Ginés, la
+        Corporación Cultural de La Reina y un par de Las Condes —14 eventos—,
+        pero rompe otros 15: el MAC y el Museo Nacional de Historia Natural
+        están en el PARQUE Quinta Normal, que es un parque de la comuna de
+        SANTIAGO con el nombre de otra comuna. El índice OSM local lo zanja:
+        Matucana 464 → ciudad "santiago".
+
+    El texto solo no alcanza, porque "Quinta Normal" puede ser el parque o la
+    comuna y la dirección no dice cuál. Quien sí puede zanjarlo es la posición
+    —`datos/indice_osm.db` guarda la ciudad de cada dirección—, y mientras esa
+    resolución no exista, los casos puntuales se arreglan donde corresponde:
+    `config/correcciones/lugares.yaml`, que manda sobre todo esto y se
+    verifica lugar por lugar.
+    """
     for texto in textos:
         if not texto:
             continue
         plano = _plano(texto)
-        for comuna in COMUNAS_RM:
-            if _plano(comuna) in plano:
+        for comuna, patron in _COMUNA_RE.items():
+            if patron.search(plano):
                 return comuna
     return ""
 
