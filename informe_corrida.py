@@ -8,7 +8,7 @@ hago hoy?"; esto contesta "¿está funcionando esto y dónde se está rompiendo?
 Por eso vive fuera de `web/` y fuera de git (`informes/` está en .gitignore):
 es un cuaderno de trabajo, no un entregable.
 
-Dos hojas, y la división no es decorativa:
+Tres hojas, y la división no es decorativa:
 
   1. Diagnóstico — los números de la corrida y el delta contra la anterior.
      Sirve para ver de un vistazo si algo se cayó: una fuente que pasó de 200
@@ -19,6 +19,14 @@ Dos hojas, y la división no es decorativa:
      Es una cola de trabajo: cada fila es una decisión que una persona puede
      tomar en diez segundos y que después se guarda en `config/correcciones/`
      para que no vuelva a preguntarse.
+
+  3. Fuentes — el catastro: cada sitio del que se saca dato, con qué método se
+     lee y qué pasó hoy con él. Sale del ARCHIVO DE CONFIGURACIÓN y no de la
+     tabla `corridas`, porque la tabla sólo conoce a las fuentes que corrieron
+     y acá la pregunta incluye a las que no: las apagadas, con la razón por la
+     que se apagaron, y las encendidas que ni siquiera se intentaron. Cubre las
+     dos mitades del pipeline —las fuentes de eventos y los bancos de
+     descuentos— porque son sitios web ajenos igual de frágiles.
 
 La comparación con "la corrida anterior" sale de `datos/historial_corridas.json`,
 que este script escribe al final. Se usa eso y no `git show HEAD:web/eventos.json`
@@ -31,11 +39,13 @@ así que a las pocas semanas el propio archivo muestra la tendencia.
 from __future__ import annotations
 
 import json
+import re
 import sqlite3
 import sys
 from collections import Counter
 from datetime import datetime, date
 from pathlib import Path
+from urllib.parse import urlparse
 
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
@@ -43,12 +53,17 @@ from openpyxl.utils import get_column_letter
 
 from loica.almacen import RUTA_DB, SQL_VIGENTE
 from loica.clasificar import clasificar
+from loica.modelo import es_url_publica
 
 RAIZ = Path(__file__).resolve().parent
 DIR_INFORMES = RAIZ / "informes"
 RUTA_EVENTOS = RAIZ / "web" / "eventos.json"
 RUTA_TALLERES = RAIZ / "web" / "talleres.json"
 RUTA_HISTORIAL = RAIZ / "datos" / "historial_corridas.json"
+RUTA_FUENTES = RAIZ / "config" / "fuentes.yaml"
+RUTA_BANCOS = RAIZ / "config" / "bancos.yaml"
+RUTA_ESTADO_DESCUENTOS = RAIZ / "datos" / "ultima_corrida_descuentos.json"
+DIR_LOGS = RAIZ / "datos" / "logs"
 
 # Las precisiones que significan "el pin está donde de verdad ocurre la cosa".
 # `comuna` es el centro de la comuna y `sin_ubicar` es que no hay pin: las dos
@@ -153,11 +168,11 @@ def clasificar_con_origen(con: sqlite3.Connection) -> dict[str, str]:
 
 # ------------------------------------------------------------- escritura
 
-def _titulo(hoja, fila: int, texto: str) -> int:
+def _titulo(hoja, fila: int, texto: str, ancho: int = 6) -> int:
     c = hoja.cell(row=fila, column=1, value=texto)
     c.font = Font(name=FUENTE, size=12, bold=True, color=TINTA)
     c.fill = PatternFill("solid", fgColor=ARENA)
-    for col in range(2, 7):
+    for col in range(2, ancho + 1):
         hoja.cell(row=fila, column=col).fill = PatternFill("solid", fgColor=ARENA)
     return fila + 1
 
@@ -408,6 +423,404 @@ def hoja_revisar(wb: Workbook, ctx: dict) -> None:
         h.column_dimensions[col].width = ancho
 
 
+def _leer_yaml(ruta: Path, clave: str) -> list[dict]:
+    """El catálogo de fuentes tal como está escrito en config/.
+
+    Si el archivo no se puede leer se devuelve vacío en vez de reventar: el
+    diagnóstico no bloquea la corrida, y una hoja de fuentes incompleta es
+    mejor que ninguna.
+    """
+    try:
+        import yaml
+        with open(ruta, encoding="utf-8") as f:
+            return yaml.safe_load(f).get(clave) or []
+    except Exception:
+        return []
+
+
+# Cómo se saca el dato de cada tipo de fuente, dicho en castellano. El YAML
+# guarda el nombre del adaptador (`wordpress`, `sitemap`) porque es lo que el
+# código necesita; acá interesa poder contestar "¿de dónde sale esto?" sin
+# abrir el repositorio.
+METODOS_EVENTOS = {
+    "wordpress": "API REST de WordPress (/wp-json)",
+    "eventon": "Calendario EventON (admin-ajax)",
+    "rss": "Feed RSS",
+    "html": "HTML de la agenda con selectores",
+    "sitemap": "Sitemap XML + ficha de cada evento",
+    "carteleras": "Índice de carteleras + ficha por local",
+    "cine": "Cartelera de cine (una fila por función)",
+    "tabla": "Tabla HTML de la propia página",
+    "json": "API JSON, mapeo declarado en el YAML",
+    "manual": "Captura a mano (datos/manual)",
+    "ticketmaster": "API Discovery de Ticketmaster (con key)",
+}
+
+METODOS_BANCOS = {
+    "bancochile": "CMS público de beneficios (JSON)",
+    "bci": "Portal vivirconbeneficios (JSON por categoría)",
+    "falabella": "Contentful Content Delivery (JSON)",
+    "cencosud": "JSON incrustado en la página (window.CardsAPI)",
+    "santander": "Captura a mano: el sitio bloquea el rastreo",
+}
+
+# El orden en que se leen las filas. Primero lo que hay que arreglar, al final
+# lo que está bien y lo que está apagado a propósito.
+ORDEN_ESTADOS = {
+    "error": 0,
+    "no corrió": 1,
+    "trajo cero": 2,
+    "sin nada futuro": 3,
+    "extrajo": 4,
+    "apagada": 5,
+}
+COLOR_ESTADOS = {
+    "error": ROJO,
+    "no corrió": ROJO,
+    "trajo cero": ROJO,
+    "sin nada futuro": AMBAR,
+    "extrajo": VERDE,
+    "apagada": "645D51",
+}
+
+
+def _resumir_nota(texto: str, tope: int = 220) -> str:
+    """La nota del YAML resumida: sirve para saber por qué una fuente está apagada."""
+    limpio = " ".join((texto or "").split())
+    return limpio[:tope] + ("…" if len(limpio) > tope else "")
+
+
+_HORA = re.compile(r"^\d\d:\d\d:\d\d\s")
+_FALLO_RED = re.compile(
+    r"^(\d\d:\d\d:\d\d)\s+\w+\s+loica\.red\s+"
+    r"(?:Falló (\S+): (.*)|robots\.txt prohíbe (\S+).*)$")
+
+
+# Los errores de red que se repiten, dichos como los diría una persona. El
+# texto de requests es exacto y también es una pared: "HTTPSConnectionPool(
+# host='parquemet.cl', port=443): Max retries exceeded... NewConnectionError"
+# son tres capas de librería para decir que el dominio no existe. En una
+# planilla que se lee en diez segundos, eso vale menos que una frase.
+CAUSAS = (
+    ("nodename nor servname", "El dominio no resuelve en DNS: el sitio no "
+                              "existe hoy para nadie, no es cosa nuestra."),
+    ("Name or service not known", "El dominio no resuelve en DNS: el sitio no "
+                                  "existe hoy para nadie, no es cosa nuestra."),
+    ("Read timed out", "El sitio aceptó la conexión y no contestó a tiempo. "
+                       "Suele ser lentitud del servidor, no un bloqueo."),
+    ("Connection timed out", "El sitio no aceptó la conexión: cortafuegos o "
+                             "servidor caído."),
+    ("Connection refused", "El servidor rechazó la conexión."),
+    ("SSLError", "El certificado del sitio está roto o vencido."),
+    ("CertificateError", "El certificado del sitio está roto o vencido."),
+    ("robots.txt", "robots.txt lo prohíbe: no se rastrea a propósito."),
+)
+
+
+def _en_castellano(mensaje: str) -> str:
+    for marca, explicacion in CAUSAS:
+        if marca in mensaje:
+            return explicacion
+    return mensaje[:200]
+
+
+def fallos_de_red(desde: str) -> dict[str, dict]:
+    """Los errores HTTP de esta corrida, agrupados por dominio.
+
+    Existe por el fallo más caro de leer que tiene el pipeline: una fuente a la
+    que se le cayeron TODAS las peticiones no queda registrada como error.
+    `ClienteEducado.obtener` devuelve None cuando la red falla —para que una
+    URL rota no tumbe la corrida entera— y el adaptador sigue con la
+    siguiente, así que la fuente termina con `error = NULL` y `encontrados = 0`.
+    En la tabla `corridas` eso es indistinguible de una agenda vacía, y son
+    cosas opuestas: una hay que arreglarla hoy y la otra no es problema.
+
+    El motivo real sí quedó escrito, en `datos/logs/`. Acá se lee de vuelta y
+    se le devuelve a la fuente que le corresponde, cruzando por dominio.
+
+    El log guarda la hora y no la fecha, así que hay que acotar a mano qué
+    tramo es esta corrida: se recorre al revés y se corta en la primera línea
+    ANTERIOR a `desde`, que es la hora en que arrancó la primera fuente (sale
+    de `corridas.momento`, que sí trae fecha). Todo lo de más arriba es de una
+    corrida previa —de hoy más temprano o de ayer— y contarlo sería atribuirle
+    a esta corrida caídas que ya pasaron.
+
+    El corte NO puede ser "ahora": mientras se lee el archivo puede seguir
+    creciendo, y entonces las líneas más nuevas que ese instante cortarían el
+    escaneo antes de tiempo, perdiendo justo las caídas de la corrida en curso.
+    """
+    archivo = DIR_LOGS / f"{datetime.now():%Y-%m}.log"
+    try:
+        lineas = archivo.read_text(encoding="utf-8", errors="replace").splitlines()
+    except OSError:
+        return {}
+
+    por_dominio: dict[str, dict] = {}
+    for linea in reversed(lineas):
+        # El corte se mira en TODA línea con hora, no sólo en las que fallaron:
+        # si no, un mes sin caídas obliga a recorrer el archivo entero para no
+        # encontrar nada.
+        if _HORA.match(linea) and linea[:8] < desde:
+            break
+        coincidencia = _FALLO_RED.match(linea)
+        if not coincidencia:
+            continue
+        _, url_fallo, mensaje, url_robots = coincidencia.groups()
+        url = url_fallo or url_robots
+        motivo = mensaje if url_fallo else "robots.txt lo prohíbe"
+        dominio = urlparse(url).netloc.lower().removeprefix("www.")
+        if not dominio:
+            continue
+        registro = por_dominio.setdefault(dominio, {"n": 0, "motivo": ""})
+        registro["n"] += 1
+        # Se recorre al revés, así que la última que se escribe es la primera
+        # que ocurrió: la causa raíz, no la consecuencia.
+        registro["motivo"] = _en_castellano(" ".join(motivo.split()))
+    return por_dominio
+
+
+def _caida_de(fuente: dict, caidas: dict[str, dict]) -> dict | None:
+    """Los fallos de red que le tocan a esta fuente, buscados por su dominio.
+
+    Se cruza por dominio y no por URL exacta porque una fuente pide varios
+    endpoints (WordPress prueba un tipo de post tras otro) y lo que interesa
+    no es cuál falló sino que el sitio no está contestando.
+    """
+    dominio = urlparse(fuente.get("url_base") or "").netloc.lower()
+    return caidas.get(dominio.removeprefix("www.")) if dominio else None
+
+
+def catastro_fuentes(ctx: dict) -> tuple[list[dict], list[dict]]:
+    """Una fila por fuente del catálogo, corriera o no.
+
+    Se parte del ARCHIVO DE CONFIGURACIÓN y no de la tabla `corridas`, y esa
+    es toda la diferencia. La tabla sólo sabe de las fuentes que efectivamente
+    corrieron: leyéndola se ve muy bien cuál falló, y no se ve en absoluto cuál
+    ni siquiera se intentó. Para un catastro —que es la pregunta "¿qué estamos
+    mirando de la web y qué no?"— justamente las que faltan son el dato.
+    """
+    corridas = {f["fuente"]: f for f in ctx["fuentes"]}
+    en_sitio = Counter(e.get("fuente") or "" for e in ctx["publicados"])
+    # Cuándo arrancó la primera fuente: es el borde inferior del tramo de log
+    # que le pertenece a esta corrida. Si no hay corridas registradas no se
+    # acota nada y se devuelve vacío, que es mejor que atribuir mal.
+    momentos = [f["momento"] for f in ctx["fuentes"] if f["momento"]]
+    caidas = fallos_de_red(min(momentos)[11:19]) if momentos else {}
+
+    filas = []
+    for fuente in _leer_yaml(RUTA_FUENTES, "fuentes"):
+        nombre = fuente.get("nombre", "")
+        activa = bool(fuente.get("activa", True))
+        corrida = corridas.get(nombre)
+        publicados = en_sitio.get(nombre, 0)
+
+        if not activa:
+            estado, detalle = "apagada", _resumir_nota(fuente.get("notas", ""))
+            if publicados:
+                detalle = (f"Apagada, y {publicados} eventos vigentes en el "
+                           "sitio llevan su nombre: o quedaron de cuando estaba "
+                           "encendida, o entraron por la ingesta asistida, que "
+                           "conserva el nombre de la fuente original. ") + detalle
+        elif corrida is None:
+            estado = "no corrió"
+            detalle = ("Está encendida y no tiene corrida de hoy: o se corrió "
+                       "con --fuente, o la corrida se cortó antes de llegar.")
+        elif corrida["error"]:
+            estado, detalle = "error", str(corrida["error"])[:400]
+        elif not (corrida["encontrados"] or 0):
+            estado = "trajo cero"
+            caida = _caida_de(fuente, caidas)
+            detalle = (
+                f"No es una agenda vacía: se le cayeron {caida['n']} peticiones. "
+                f"{caida['motivo']}" if caida else
+                "Respondió sin error y no trajo nada. Casi siempre es un 403 "
+                "que el cliente se traga o un adaptador que quedó ciego porque "
+                "el sitio cambió de formato.")
+        elif fuente.get("tipo_adaptador") == "manual":
+            # La ingesta asistida es la única fuente que no publica bajo su
+            # propio nombre: cada evento capturado a mano conserva el de su
+            # origen (Passline, un afiche, una cuenta de Instagram), que es
+            # lo correcto para la atribución. El costo es que sus eventos
+            # nunca aparecen contados a su nombre, y sin esta excepción la
+            # fuente que más aporta salía marcada como "sin nada futuro".
+            estado = "extrajo"
+            detalle = ("Sus eventos se publican con el nombre de la fuente "
+                       "original, no con el suyo: por eso «En el sitio» va en "
+                       "cero. Se cuentan en las filas de esas fuentes.")
+        elif nombre in ctx["nombres_vacias"]:
+            estado = "sin nada futuro"
+            caida = _caida_de(fuente, caidas)
+            detalle = ("Trae eventos pero ninguno vigente: agenda abandonada o "
+                       "fechas que el pipeline no supo leer.")
+            if caida:
+                detalle += (f" Ojo: además se le cayeron {caida['n']} "
+                            f"peticiones. {caida['motivo']}")
+        else:
+            estado, detalle = "extrajo", ""
+
+        filas.append({
+            "nombre": nombre,
+            "comuna": fuente.get("comuna", ""),
+            "metodo": METODOS_EVENTOS.get(fuente.get("tipo_adaptador", ""),
+                                          fuente.get("tipo_adaptador", "")),
+            "url": fuente.get("url_agenda") or fuente.get("url_base") or "",
+            "activa": "sí" if activa else "no",
+            "estado": estado,
+            "encontrados": (corrida["encontrados"] or 0) if corrida else "",
+            "nuevos": (corrida["nuevos"] or 0) if corrida else "",
+            "actualizados": (corrida["actualizados"] or 0) if corrida else "",
+            "descartados": (corrida["descartados"] or 0) if corrida else "",
+            "en_sitio": publicados,
+            "segundos": round(corrida["duracion_seg"] or 0, 1) if corrida else "",
+            "detalle": detalle,
+        })
+
+    estado_bancos = _cargar_json(RUTA_ESTADO_DESCUENTOS)
+    corridos = {b["banco"]: b for b in (estado_bancos.get("bancos") or [])}
+
+    bancos = []
+    for banco in _leer_yaml(RUTA_BANCOS, "bancos"):
+        nombre = banco.get("nombre", "")
+        activo = bool(banco.get("activo", True))
+        c = corridos.get(nombre)
+
+        if not activo:
+            estado, detalle = "apagada", _resumir_nota(banco.get("notas", ""))
+        elif c is None:
+            estado = "no corrió"
+            detalle = ("Sin registro de la corrida de descuentos. Los descuentos "
+                       "no abortan la corrida cuando fallan: puede haberse caído "
+                       "el paso entero.")
+        elif c["error"]:
+            estado, detalle = "error", str(c["error"])[:400]
+        elif not c["crudos"]:
+            estado, detalle = "trajo cero", "Respondió sin error y no trajo nada."
+        elif not c["vigentes"]:
+            estado = "sin nada futuro"
+            detalle = (f"Trajo {c['crudos']} promociones y ninguna quedó: "
+                       f"{c['vencidos']} vencidas, {c['fuera_rm']} fuera de la RM.")
+        else:
+            estado, detalle = "extrajo", ""
+        if c and banco.get("archivo"):
+            detalle = (detalle + " Fuente de captura manual: no se rastrea, "
+                       f"se anota en {banco['archivo']}.").strip()
+
+        bancos.append({
+            "nombre": nombre,
+            "comuna": banco.get("emisor", ""),
+            "metodo": METODOS_BANCOS.get(banco.get("adaptador", ""),
+                                         banco.get("adaptador", "")),
+            "url": banco.get("url_agenda") or banco.get("url_base")
+                   or banco.get("archivo", ""),
+            "activa": "sí" if activo else "no",
+            "estado": estado,
+            "encontrados": c["crudos"] if c else "",
+            "nuevos": c["vigentes"] if c else "",
+            "actualizados": c["con_dia"] if c else "",
+            "descartados": c["vencidos"] if c else "",
+            "en_sitio": c["vigentes"] if c else "",
+            "segundos": "",
+            "detalle": detalle,
+        })
+
+    clave = lambda f: (ORDEN_ESTADOS.get(f["estado"], 9), f["nombre"].lower())
+    return sorted(filas, key=clave), sorted(bancos, key=clave)
+
+
+def hoja_fuentes(wb: Workbook, ctx: dict) -> None:
+    """El catastro: de dónde sale cada dato y qué pasó hoy con cada fuente.
+
+    La hoja 1 dice si la corrida salió bien y la hoja 2 qué hay que arreglar a
+    mano. Ésta contesta la pregunta de más atrás: qué sitios está mirando el
+    proyecto, cómo los lee, y cuáles de ellos aportaron algo hoy y cuáles no.
+    """
+    h = wb.create_sheet("Fuentes")
+    h.sheet_view.showGridLines = False
+
+    eventos, bancos = ctx["catastro"], ctx["catastro_bancos"]
+    todas = eventos + bancos
+    encendidas = [f for f in todas if f["activa"] == "sí"]
+    extrajeron = [f for f in todas if f["estado"] == "extrajo"]
+    con_problema = [f for f in encendidas if f["estado"] in
+                    ("error", "no corrió", "trajo cero", "sin nada futuro")]
+
+    c = h.cell(row=1, column=1, value="De dónde sale cada dato")
+    c.font = Font(name=FUENTE, size=15, bold=True, color=TINTA)
+    h.cell(row=2, column=1, value=(
+        "Todas las fuentes del catálogo, su método de extracción y qué pasó con "
+        "cada una en esta corrida. Las que están encendidas y no aportaron nada "
+        "van arriba de todo: ésas son las que hay que mirar. Las apagadas quedan "
+        "al final con la razón por la que se apagaron — el catastro incluye lo "
+        "que NO se está extrayendo, que es la mitad del dato."
+    )).font = Font(name=FUENTE, size=9, italic=True, color="645D51")
+    h.merge_cells(start_row=2, start_column=1, end_row=2, end_column=13)
+    h.row_dimensions[2].height = 30
+    h.cell(row=2, column=1).alignment = Alignment(wrap_text=True, vertical="top")
+
+    f = 4
+    f = _titulo(h, f, "EL CATASTRO EN UNA LÍNEA", ancho=13)
+    f = _dato(h, f, "Fuentes en el catálogo", len(todas),
+              f"{len(eventos)} de eventos y {len(bancos)} de descuentos")
+    f = _dato(h, f, "Encendidas", len(encendidas),
+              f"{len(todas) - len(encendidas)} apagadas a propósito")
+    f = _dato(h, f, "Extrajeron datos hoy", len(extrajeron),
+              "trajeron algo y tienen eventos vigentes", VERDE)
+    f = _dato(h, f, "Encendidas que no aportaron nada", len(con_problema),
+              "error, cero, o vivas sin nada futuro: la lista está abajo",
+              ROJO if con_problema else VERDE)
+    f += 1
+
+    columnas = ["Fuente", "Comuna", "Método de extracción", "URL", "Encendida",
+                "Estado", "Encontrados", "Nuevos", "Actualizados", "Descartados",
+                "En el sitio", "Segundos", "Qué pasó"]
+    f = _titulo(h, f, f"EVENTOS ({len(eventos)} fuentes)", ancho=13)
+    f = _encabezados(h, f, columnas)
+    primera_tabla = f
+    h.freeze_panes = h.cell(row=f, column=1)
+    f = _filas_fuentes(h, f, eventos)
+    f += 1
+
+    columnas_banco = ["Banco", "Emisor", "Método de extracción", "URL", "Encendido",
+                      "Estado", "Promociones", "Vigentes en la RM", "Con día",
+                      "Vencidas", "En el sitio", "", "Qué pasó"]
+    f = _titulo(h, f, f"DESCUENTOS ({len(bancos)} bancos)", ancho=13)
+    f = _encabezados(h, f, columnas_banco)
+    f = _filas_fuentes(h, f, bancos)
+
+    # El autofiltro va sobre la tabla de eventos, que es la larga: son 127 filas
+    # y la pregunta habitual ("muéstrame sólo las de WordPress que fallaron") no
+    # se contesta de otra forma.
+    h.auto_filter.ref = f"A{primera_tabla - 1}:M{primera_tabla + len(eventos) - 1}"
+    for col, ancho in zip(["A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
+                           "K", "L", "M"],
+                          (40, 20, 36, 50, 11, 16, 12, 9, 12, 12, 11, 10, 70)):
+        h.column_dimensions[col].width = ancho
+
+
+def _filas_fuentes(hoja, fila: int, filas: list[dict]) -> int:
+    for r in filas:
+        valores = [r["nombre"], r["comuna"], r["metodo"], r["url"], r["activa"],
+                   r["estado"], r["encontrados"], r["nuevos"], r["actualizados"],
+                   r["descartados"], r["en_sitio"], r["segundos"], r["detalle"]]
+        for i, v in enumerate(valores, start=1):
+            c = hoja.cell(row=fila, column=i, value=v)
+            c.font = Font(name=FUENTE, size=10, color=TINTA)
+            c.border = BORDE
+            c.alignment = Alignment(vertical="top", wrap_text=(i in (1, 3, 13)))
+        hoja.cell(row=fila, column=6).font = Font(
+            name=FUENTE, size=10, bold=True,
+            color=COLOR_ESTADOS.get(r["estado"], TINTA))
+        # La URL va como enlace sólo si es http(s): en el catálogo hay fuentes
+        # de captura manual cuyo "origen" es una ruta de archivo, y un
+        # hipervínculo a eso no lleva a ninguna parte.
+        if es_url_publica(r["url"]):
+            enlace = hoja.cell(row=fila, column=4)
+            enlace.hyperlink = r["url"]
+            enlace.font = Font(name=FUENTE, size=10, color="1B6FD1",
+                               underline="single")
+        fila += 1
+    return fila
+
 # ------------------------------------------------------------------ main
 
 def armar_contexto() -> dict:
@@ -507,7 +920,9 @@ def armar_contexto() -> dict:
         "por_categoria": Counter(e["categoria"] for e in publicados).most_common(),
         "lugares": lugares_nuevos(con),
         "revisar": revisar,
+        "publicados": publicados,
     }
+    ctx["catastro"], ctx["catastro_bancos"] = catastro_fuentes(ctx)
     con.close()
     return ctx, ids_hoy
 
@@ -544,6 +959,7 @@ def main() -> int:
     wb = Workbook()
     hoja_diagnostico(wb, ctx)
     hoja_revisar(wb, ctx)
+    hoja_fuentes(wb, ctx)
 
     DIR_INFORMES.mkdir(parents=True, exist_ok=True)
     ruta = DIR_INFORMES / f"{date.today():%Y-%m-%d}_diagnostico.xlsx"
@@ -555,6 +971,11 @@ def main() -> int:
           f"(+{ctx['altas']} / -{ctx['bajas']} desde la corrida anterior)")
     print(f"  {ctx['exactos']} con pin exacto, {ctx['sin_pin']} sin pin")
     print(f"  {len(ctx['revisar'])} eventos en la cola de revisión")
+    catastro = ctx["catastro"] + ctx["catastro_bancos"]
+    encendidas = [f for f in catastro if f["activa"] == "sí"]
+    print(f"  {sum(1 for f in encendidas if f['estado'] == 'extrajo')} de "
+          f"{len(encendidas)} fuentes encendidas extrajeron datos "
+          f"(catálogo completo: {len(catastro)})")
     return 0
 
 

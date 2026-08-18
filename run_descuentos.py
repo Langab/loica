@@ -36,6 +36,7 @@ from loica.descuentos import recolectar
 RAIZ = Path(__file__).resolve().parent
 RUTA_CONFIG = RAIZ / "config" / "bancos.yaml"
 RUTA_SALIDA = RAIZ / "web" / "descuentos.json"
+RUTA_ESTADO = RAIZ / "datos" / "ultima_corrida_descuentos.json"
 DIR_INFORMES = RAIZ / "informes"
 DIR_LOGS = RAIZ / "datos" / "logs"
 
@@ -175,6 +176,50 @@ def escribir_json(descuentos, estadisticas) -> Path:
     return RUTA_SALIDA
 
 
+def guardar_estado(bancos, estadisticas, duracion: float) -> Path:
+    """Deja por escrito qué banco corrió, cómo y con qué resultado.
+
+    Los eventos registran cada corrida en la tabla `corridas` de la base, así
+    que el diagnóstico puede reconstruir después qué pasó con cada fuente. Los
+    descuentos no tenían dónde: sus estadísticas vivían en memoria, se
+    imprimían en el informe en Markdown y se perdían. El resultado era que la
+    hoja de fuentes del Excel podía decir el estado de las 127 fuentes de
+    eventos y no el de los cinco bancos, que son fuentes web igual que las
+    otras y se rompen igual que las otras.
+
+    Va a `datos/` y no a `web/` porque es diagnóstico del proceso, no catastro:
+    a la página no le sirve saber que Cencosud demoró once segundos.
+    """
+    por_nombre = {e["banco"]: e for e in estadisticas}
+    filas = []
+    for banco in bancos:
+        e = por_nombre.get(banco["nombre"], {})
+        filas.append({
+            "id": banco["id"],
+            "banco": banco["nombre"],
+            "adaptador": banco.get("adaptador", ""),
+            # Un banco activo que no aparece en las estadísticas es uno cuyo
+            # adaptador no existe: `recolectar` lo saltó sin dejar rastro.
+            "corrio": banco["nombre"] in por_nombre,
+            "crudos": e.get("crudos", 0),
+            "vigentes": e.get("vigentes", 0),
+            "con_dia": e.get("con_dia", 0),
+            "vencidos": e.get("vencidos", 0),
+            "fuera_rm": e.get("fuera_rm", 0),
+            "error": e.get("error", "") or (
+                "" if banco["nombre"] in por_nombre
+                else f"adaptador desconocido: {banco.get('adaptador', '')}"),
+        })
+
+    RUTA_ESTADO.parent.mkdir(parents=True, exist_ok=True)
+    RUTA_ESTADO.write_text(json.dumps({
+        "momento": datetime.now().isoformat(timespec="seconds"),
+        "duracion_seg": round(duracion, 1),
+        "bancos": filas,
+    }, ensure_ascii=False, indent=1), encoding="utf-8")
+    return RUTA_ESTADO
+
+
 def escribir_informe(descuentos, estadisticas, duracion: float) -> Path:
     DIR_INFORMES.mkdir(parents=True, exist_ok=True)
     hoy = datetime.now()
@@ -266,6 +311,7 @@ def main() -> int:
 
     salida = escribir_json(descuentos, estadisticas)
     informe = escribir_informe(descuentos, estadisticas, duracion)
+    guardar_estado(bancos, estadisticas, duracion)
     log.info("JSON:    %s", salida.relative_to(RAIZ))
     log.info("Informe: %s", informe.relative_to(RAIZ))
     return 0
