@@ -104,14 +104,21 @@ class ClienteEducado:
     # -- petición -----------------------------------------------------------
     def obtener(self, url: str, params: dict | None = None,
                 max_edad_cache_seg: int = 6 * 3600,
-                reintentos: int = 2, json_cuerpo: dict | None = None
-                ) -> requests.Response | None:
-        """GET respetuoso, o POST si se le pasa `json_cuerpo`.
+                reintentos: int = 2, json_cuerpo: dict | None = None,
+                form_cuerpo: dict | None = None,
+                cabeceras: dict | None = None) -> requests.Response | None:
+        """GET respetuoso, o POST si se le pasa `json_cuerpo` o `form_cuerpo`.
 
         Algunas APIs reciben los filtros en el cuerpo y no en la query
         (Passline pide {"country": "chile"} por POST). Se sigue pasando por
         robots.txt, crawl-delay y caché igual que un GET: el método cambia,
         las reglas de buena ciudadanía no.
+
+        `form_cuerpo` y `cabeceras` existen por Banco Ripley, que enruta todo
+        su catálogo por un solo endpoint y dice QUÉ pedir en cabeceras
+        (`x-path-api`, `x-method-api`) con el cuerpo en form-urlencoded. Es
+        público y sin credencial —lo llama su propia web abierta— pero no
+        entra en el molde de GET-con-params ni en el de POST-con-JSON.
         """
         if not self.permitido(url):
             log.warning("robots.txt prohíbe %s — se omite", url)
@@ -125,6 +132,13 @@ class ClienteEducado:
             # El cuerpo forma parte de la identidad del recurso para la caché:
             # dos POST distintos al mismo endpoint no son la misma respuesta.
             url_completa = f"{url_completa}#{json.dumps(json_cuerpo, sort_keys=True)}"
+        if form_cuerpo is not None or cabeceras:
+            # Lo mismo, y acá pesa más: en Ripley TODAS las peticiones van a la
+            # misma URL y lo único que las distingue es la cabecera x-path-api.
+            # Sin esto la caché devolvería el primer catálogo para cualquier
+            # pedido posterior.
+            firma = json.dumps([form_cuerpo or {}, cabeceras or {}], sort_keys=True)
+            url_completa = f"{url_completa}#{firma}"
 
         if self.usar_cache:
             cacheado = self._leer_cache(url_completa, max_edad_cache_seg)
@@ -145,11 +159,15 @@ class ClienteEducado:
 
         for intento in range(reintentos + 1):
             try:
-                if json_cuerpo is not None:
+                if form_cuerpo is not None:
+                    respuesta = self.sesion.post(url, params=params, data=form_cuerpo,
+                                                 headers=cabeceras, timeout=self.timeout)
+                elif json_cuerpo is not None:
                     respuesta = self.sesion.post(url, params=params, json=json_cuerpo,
-                                                 timeout=self.timeout)
+                                                 headers=cabeceras, timeout=self.timeout)
                 else:
-                    respuesta = self.sesion.get(url, params=params, timeout=self.timeout)
+                    respuesta = self.sesion.get(url, params=params, headers=cabeceras,
+                                                timeout=self.timeout)
                 self._ultima_peticion[dominio] = time.time()
 
                 if respuesta.status_code == 429 or respuesta.status_code >= 500:

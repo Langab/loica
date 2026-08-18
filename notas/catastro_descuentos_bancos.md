@@ -221,6 +221,91 @@ la URL. Pendiente de sondeo dirigido.
 
 ---
 
+## Sondeo dirigido 2026-08-18 — Ripley, Entel, Mercado Pago, BICE, Scotiabank
+
+Se rehizo el sondeo sobre los seis emisores pedidos. **robots.txt de los seis
+permite todo lo que se consultó.** El método fue el de siempre: HTTP educado,
+y cuando la URL no aparecía, leer el bundle de JavaScript del propio sitio para
+ver a qué endpoint le habla. Un navegador se usó sólo para observar peticiones
+de páginas públicas, nunca para saltarse un control.
+
+### Banco Ripley — ENCENDIDO. El segundo mejor dato del catastro.
+
+La ruta que fallaba era la adivinada: no es `/beneficios` sino
+`/beneficios-y-promociones`, y ésa es una SPA de Angular que no trae el
+catálogo en el HTML. El catálogo sale de:
+
+```
+POST https://www.bancoripley.cl/api/call-sp-api
+     x-path-api: /api/sp/beneficios/get-activeBox-beneficio
+     x-method-api: POST
+     content-Type: application/x-www-form-urlencoded
+     body: idSection=restofans
+```
+
+Todo el back pasa por ese único endpoint y el recurso se pide por cabecera.
+Sin credencial, sin WAF, sin token. **73 restaurantes ("Restofans"), 40 en la
+Región Metropolitana.**
+
+Por local: `txtNameComercio`, `txtSubtitulo` (tipo de cocina, puesto por el
+banco), `txtDescuento`, `txtValidezBeneficio` (el día), `arrDireccion` (calle y
+número), `txtDetalleCard` (`R.M. (Vitacura)`), `arrHorarios`, `txtLegal` (tope).
+
+**La trampa, y es cara.** `arrVigencia` dice *"Todos los sábados de agosto"* en
+63 de los 73 locales: es la vigencia de LA CAMPAÑA, no el día de cada
+restaurante. Leerlo como día ponía a los 73 en sábado — Pastamore, que es de
+lunes, salía también el sábado. El día sale **sólo** de `txtValidezBeneficio`.
+
+Repartido real: jueves 38, martes 11, "todos los días" 10, miércoles 8, lunes 3,
+sábado 3. La campaña es mensual y el nombre de la caja lo dice ("Restofans
+Agosto 2026"): si un mes no aparece, se acabó la campaña, no se rompió nada.
+
+### Entel — ENCENDIDO. Poco volumen, día casi siempre.
+
+No es banco sino telco, pero el descuento funciona igual y la pregunta del
+usuario no distingue quién lo emite. `entel.cl/beneficios/` trae el catálogo
+como JSON incrustado en el HTML (CMS Modyo), igual que Cencosud. La sección
+`Beneficios Comida` da **28 beneficios, 19 con día**: Starbucks, Burger King,
+Domino's, Dunkin, Doggis, Juan Maestro, Rappi.
+
+Son cadenas nacionales y **no publican dirección ni comuna**. Ahí choca con el
+préstamo de direcciones entre bancos: a "Starbucks" le presta la dirección del
+Starbucks de San Sebastián 2946 y queda como si el descuento fuera sólo en ése.
+Son 9 casos. Ver "pendiente" más abajo.
+
+### Mercado Pago — SIN CATÁLOGO WEB PÚBLICO.
+
+`/beneficios`, `/promociones`, `/descuentos`, `/cuenta/beneficios` y
+`/c/promociones-bancarias` responden **200 con la página de "no existe"** (404
+disfrazado). robots.txt no lo prohíbe y no hay sitemap (403). No se encontró
+catálogo web: en Chile los beneficios de Mercado Pago parecen vivir sólo dentro
+de la app. **Queda apagado por falta de fuente, no por bloqueo.**
+
+### BICE — BLOQUEADO POR VERIFICACIÓN DE NAVEGADOR. No se rodea.
+
+`www.bice.cl/beneficios` responde **403 con "Estamos verificando su conexión —
+Enable JavaScript and cookies"**. Eso es un desafío anti-bot, no un descuido.
+`portal.bice.cl` ni siquiera conecta.
+
+Mismo criterio que Santander, y por la misma razón: rodear eso con un navegador
+automatizado sería evadir un control puesto a propósito. **No se hace.** Si el
+catálogo se quiere, va por captura a mano como Santander, o pidiéndole acceso a
+BICE.
+
+### Scotiabank — EL CATÁLOGO ESTÁ TRAS AUTENTICACIÓN.
+
+Corrige a medias el sondeo anterior: `scotiaclub.cl/scclubfront/categoria/...`
+**sí** responde 200 y sin login (405 KB), y existen rutas gastronómicas propias
+("Ruta Gourmet", "Ruta Rápida", "Ruta Dulce"). Pero eso es sólo el cascarón: los
+`.card` de la página son navegación, no comercios. El catálogo se carga después
+y detrás de `/scclubfront/auth`.
+
+Sacarlo usando la sesión iniciada de una persona significaría publicar contenido
+autenticado —posiblemente segmentado por cliente— como si fuera público.
+**Descartado**, igual que en el sondeo anterior.
+
+---
+
 ## Lo que esto implica para la app
 
 Con solo los tres del Tier 1 hay del orden de **800 descuentos gastronómicos

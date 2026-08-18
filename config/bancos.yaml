@@ -120,3 +120,46 @@ bancos:
     comida son 14 y ahí adentro hay cine y viajes) pero es abierto y sale barato.
 
     '
+
+- id: ripley
+  nombre: Banco Ripley
+  emisor: Banco Ripley · CAR S.A.
+  adaptador: ripley
+  # Todo el back de Ripley pasa por un solo endpoint y el recurso concreto se
+  # pide en la cabecera `x-path-api`. Es público y sin credencial: lo llama su
+  # propia web abierta y robots.txt no lo prohíbe.
+  url_base: https://www.bancoripley.cl
+  endpoint: /api/call-sp-api
+  ruta_api: /api/sp/beneficios/get-activeBox-beneficio
+  seccion: restofans
+  url_agenda: https://www.bancoripley.cl/beneficios-y-promociones
+  crawl_delay_seg: 2
+  activo: true
+  notas: 'Restofans. El segundo mejor dato del catastro después de Banco de Chile: 73 restaurantes
+    con día declarado en campo propio (`txtValidezBeneficio`), dirección con calle y número, tipo
+    de cocina puesto por el banco (`txtSubtitulo`) y tope en el texto legal. Todos con 40% (50%
+    para clientes Gold). La campaña es mensual y el nombre de la caja lo dice ("Restofans Agosto
+    2026"), así que si un mes deja de aparecer no es que se cayó el adaptador: se acabó la campaña.
+
+    '
+
+- id: entel
+  nombre: Entel
+  emisor: Club Entel
+  adaptador: entel
+  url_base: https://www.entel.cl
+  url_agenda: https://www.entel.cl/beneficios/
+  # Las secciones del CMS. "Beneficios Comida" es la gastronómica; el resto es
+  # ropa, viajes y entradas a eventos, que son otro producto.
+  categorias:
+  - Beneficios Comida
+  crawl_delay_seg: 2
+  activo: true
+  notas: 'No es un banco sino una telco, pero el descuento funciona igual y la pregunta del usuario
+    ("es martes, ¿dónde como?") no distingue quién lo emite. Aporta poco volumen —la sección de
+    comida son unos pocos locales— pero casi todos traen el día en el texto ("25% dcto los días
+    miércoles"). El catálogo va como JSON incrustado en el HTML (CMS Modyo), igual que Cencosud.
+    No publica dirección ni comuna: esos locales dependen del préstamo entre bancos o de la
+    memoria de correcciones para caer en el mapa.
+
+    '

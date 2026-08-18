@@ -520,10 +520,185 @@ def _comercio_cencosud(titulo: str) -> str:
     return nombre.strip(" .,")
 
 
+def _ripley(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
+    """Restofans: el catálogo de restaurantes de Banco Ripley.
+
+    Ripley enruta TODO su back por un solo endpoint (`/api/call-sp-api`) y dice
+    qué recurso quiere en cabeceras: `x-path-api` lleva la ruta real y
+    `x-method-api` el verbo. El cuerpo va en form-urlencoded. Es raro pero es
+    público, sin credencial y sin WAF — lo llama su propia web abierta, y
+    robots.txt no lo prohíbe.
+
+    Vale la pena el rodeo porque el dato es el más completo del catastro
+    después de Banco de Chile: cada local trae nombre, tipo de cocina, día,
+    dirección, comuna, vigencia y hasta el horario. La estructura es de un CMS
+    propio, con cada campo envuelto en {"nombre": ..., "value": ...}.
+    """
+    respuesta = cliente.obtener(
+        banco["url_base"] + banco["endpoint"],
+        form_cuerpo={"idSection": banco.get("seccion", "restofans")},
+        cabeceras={"content-Type": "application/x-www-form-urlencoded",
+                   "x-path-api": banco["ruta_api"], "x-method-api": "POST"})
+    if respuesta is None or not respuesta.ok:
+        log.warning("Ripley: no respondió el catálogo de %s",
+                    banco.get("seccion", "restofans"))
+        return []
+    try:
+        cajas = respuesta.json().get("data") or []
+    except ValueError as e:
+        log.warning("Ripley: la respuesta no es JSON (%s)", e)
+        return []
+
+    recogidos = []
+    for caja in cajas:
+        if not (caja.get("config") or {}).get("active", True):
+            continue
+        for item in caja.get("items") or []:
+            if not (item.get("config") or {}).get("active", True):
+                continue
+            d = _descuento_ripley(banco, item)
+            if d is not None:
+                recogidos.append(d)
+    log.info("Ripley: %d locales en %s", len(recogidos),
+             (cajas[0].get("config") or {}).get("nombre", "?") if cajas else "?")
+    return recogidos
+
+
+def _valor(params: dict, clave: str) -> str:
+    """Saca el texto de un campo del CMS de Ripley: {"value": "40% dcto"}."""
+    campo = params.get(clave)
+    if isinstance(campo, dict):
+        return str(campo.get("value") or "").strip()
+    return str(campo or "").strip()
+
+
+def _lista(detalles: dict, clave: str) -> list[str]:
+    """Los campos de lista de Ripley: {"array": [{"txtItem": {"value": ...}}]}."""
+    bloque = detalles.get(clave) or {}
+    if not (bloque.get("config") or {}).get("active", True):
+        return []
+    salidas = []
+    for fila in bloque.get("array") or []:
+        texto = _valor(fila, "txtItem")
+        if texto and texto != ".":
+            salidas.append(texto)
+    return salidas
+
+
+def _descuento_ripley(banco: dict, item: dict) -> Descuento | None:
+    params = item.get("params") or {}
+    comercio = _valor(params, "txtNameComercio")
+    if not comercio:
+        return None
+
+    detalles = params.get("details") or {}
+    direcciones = _lista(detalles, "arrDireccion")
+    vigencias = _lista(detalles, "arrVigencia")
+    legal = _valor(detalles, "txtLegal")
+
+    # "R.M. (Vitacura)" o "R.M. (La Florida / Ñuñoa / Providencia)". Cuando son
+    # varias comunas no se elige una: decir "Ñuñoa" de un local que también
+    # está en La Florida manda a la persona al lado equivocado de la ciudad.
+    # Se deja la comuna sólo si es una sola, y la dirección cuenta el resto.
+    detalle_card = _valor(params, "txtDetalleCard")
+    comunas = re.findall(r"\(([^)]*)\)", detalle_card)
+    partes = [c.strip() for c in comunas[0].split("/")] if comunas else []
+    comuna = partes[0] if len(partes) == 1 else ""
+
+    # El día sale ÚNICAMENTE de `txtValidezBeneficio`, que es el campo que el
+    # banco llama "Validez del Beneficio": Jueves, Martes, Miércoles, o "Todos
+    # los días".
+    #
+    # `arrVigencia` NO sirve para esto aunque hable de días, y confundirlos
+    # cuesta caro: dice "Todos los sábados de agosto" en 63 de los 73 locales
+    # porque es la vigencia de LA CAMPAÑA, no el día de cada restaurante.
+    # Leyéndolo, Pastamore —que es de lunes— salía además con sábado, y mandar
+    # a alguien un sábado a un local donde va a pagar la cuenta completa es
+    # justo lo que un catastro de descuentos no puede permitirse.
+    #
+    # "Todos los días" no produce ningún día y eso es correcto: en este
+    # proyecto la lista vacía significa "sin restricción de día".
+    dias = dias_en(_valor(params, "txtValidezBeneficio"))
+
+    return Descuento(
+        banco_id=banco["id"],
+        banco=banco["nombre"],
+        comercio=comercio,
+        # `txtSubtitulo` es el tipo de cocina puesto por el banco ("Italiana",
+        # "Peruana"). Es mejor que deducirlo del nombre, así que manda él y
+        # `cocina_de()` sólo actúa cuando viene vacío.
+        cocina=_valor(params, "txtSubtitulo"),
+        comuna=comuna,
+        region="Metropolitana de Santiago" if "R.M." in detalle_card else "",
+        direccion=direcciones[0] if direcciones else "",
+        sitio_web=url_normal(_valor(params, "linkComercio")),
+        porcentaje=porcentaje_en(_valor(params, "txtDescuento")),
+        oferta=oferta_en(_valor(params, "txtDescuento")),
+        tope=tope_en(legal),
+        dias=dias,
+        vigencia_hasta=vigencia_en(_valor(params, "txtVigenciaDetalle"), *vigencias, legal),
+        tarjetas=["ripley"],
+        modalidad=modalidad_en(legal, _valor(params, "txtDetalleCard")),
+        condiciones=" · ".join(vigencias + _lista(detalles, "arrHorarios"))[:300],
+        url=banco.get("url_agenda", ""),
+        logo=_valor(params, "imgLogo"),
+    )
+
+
+def _entel(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
+    """Club Entel: las tarjetas del catálogo van como JSON dentro del HTML.
+
+    Mismo patrón que Cencosud —un GET normal y un JSON incrustado— pero acá el
+    CMS es Modyo y no hay una variable global que agarrar: los bloques vienen
+    sueltos en el HTML. Se leen por su forma (href + title + text + section),
+    que es estable porque la arma el CMS y no una persona.
+
+    Aporta poco en volumen (la sección de comida son unos pocos locales) pero
+    el texto trae el día casi siempre: "25% dcto los días miércoles".
+    """
+    respuesta = cliente.obtener(banco["url_agenda"])
+    if respuesta is None or not respuesta.ok:
+        log.warning("Entel: no respondió")
+        return []
+
+    patron = re.compile(
+        r'"href":"(https://www\.entel\.cl/beneficios/descuentos/[a-z0-9-]+)"'
+        r'.*?"title":"([^"]*)","text":"([^"]*)".*?"section": "([^"]*)"', re.S)
+    secciones = {s.lower() for s in (banco.get("categorias") or [])}
+
+    vistos: dict[str, Descuento] = {}
+    for url, titulo, texto, seccion in patron.findall(respuesta.text):
+        if url in vistos or (secciones and seccion.lower() not in secciones):
+            continue
+        # El CMS marca el énfasis con **markdown**: fuera, que no es dato.
+        limpio = texto.replace("**", "").replace("&#39;", "'")
+        nombre = titulo.replace("&#39;", "'").strip()
+        if not nombre:
+            continue
+        vistos[url] = Descuento(
+            banco_id=banco["id"],
+            banco=banco["nombre"],
+            comercio=nombre,
+            region="Todo Chile",
+            porcentaje=porcentaje_en(limpio),
+            oferta=oferta_en(limpio),
+            dias=dias_en(limpio),
+            tarjetas=["entel"],
+            modalidad=modalidad_en(limpio),
+            condiciones=limpio[:300],
+            url=url,
+        )
+    log.info("Entel: %d beneficios en %s", len(vistos),
+             ", ".join(banco.get("categorias") or ["todas las secciones"]))
+    return list(vistos.values())
+
+
 ADAPTADORES = {
     "bancochile": _bancochile,
     "bci": _bci,
     "falabella": _falabella,
     "santander": _santander,
     "cencosud": _cencosud,
+    "ripley": _ripley,
+    "entel": _entel,
 }
