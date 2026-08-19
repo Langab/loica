@@ -125,6 +125,13 @@ COLUMNAS_CSV = {
     "fuente_url": "link_evento",
     "imagen_url": "imagen_recorte",
     "id_externo": "id",
+    # De qué agenda salió cada fila. No viene en la exportación de Passline
+    # —ahí todo el archivo es de Passline y el nombre del archivo alcanza—,
+    # pero sí en la extracción asistida semanal, donde un mismo CSV trae
+    # eventos de quince municipios distintos. Sin esta columna los quince
+    # quedarían atribuidos al nombre del archivo, y la atribución es la regla
+    # central del proyecto: cada evento tiene que poder decir de dónde salió.
+    "fuente_nombre": "fuente_nombre",
 }
 
 
@@ -150,14 +157,28 @@ def _desde_fila(fila: dict, mapa: dict, fuente: dict, origen: str) -> dict | Non
         inicio = f"{inicio} {hora[:5]}"
 
     # El precio viene como "7000.00": el modelo guarda pesos enteros.
+    #
+    # El CERO se trata aparte y no es un detalle: en estas exportaciones un 0
+    # significa "gratis", que es un HECHO, y no "no sé cuánto cuesta", que es
+    # la ausencia del dato. Guardarlo como precio 0 tampoco sirve —el modelo
+    # tiene un campo propio para eso— así que se traduce a es_gratis.
+    #
+    # Antes el 0 caía en el mismo saco que un precio inválido y quedaba en
+    # None, y la línea que preguntaba `precio == 0` no podía ser verdadera
+    # nunca. El efecto: 30 eventos gratis de Passline publicados sin la marca,
+    # invisibles bajo el filtro de gratis, que es de los más usados.
     precio = None
+    gratis = None
     crudo = col("precio_clp")
     if crudo:
         try:
             valor = int(float(crudo))
-            precio = valor if 0 < valor <= 2_000_000 else None
+            if valor == 0:
+                gratis = True
+            elif 0 < valor <= 2_000_000:
+                precio = valor
         except ValueError:
-            precio = None
+            pass
 
     return {
         "titulo": titulo,
@@ -167,12 +188,15 @@ def _desde_fila(fila: dict, mapa: dict, fuente: dict, origen: str) -> dict | Non
         "lugar_nombre": col("lugar_nombre"),
         "comuna": col("comuna"),
         "precio_clp": precio,
-        "es_gratis": True if precio == 0 else None,
+        "es_gratis": gratis,
         "fuente_url": col("fuente_url"),
         "link_entradas": col("fuente_url"),
         "imagen_url": col("imagen_url"),
         "id_externo": col("id_externo"),
-        "fuente_nombre": fuente.get("nombre_csv") or Path(origen).stem.replace("_", " ").title(),
+        # Manda la columna si viene; si no, el nombre del archivo. Así el CSV
+        # de Passline sigue funcionando igual que siempre sin tocarlo.
+        "fuente_nombre": (col("fuente_nombre") or fuente.get("nombre_csv")
+                          or Path(origen).stem.replace("_", " ").title()),
     }
 
 
