@@ -212,6 +212,12 @@ img{max-width:100%;display:block}
   background:var(--nav-color,var(--tinta));color:var(--nav-tinta,var(--arena-50));
   border:2px solid var(--contorno);box-shadow:var(--repisa-1);
 }
+/* La repisa del enlace activo pisaba el anillo de foco de §2 (mismo
+   box-shadow, más especificidad): quien navega con Tab no veía dónde estaba
+   justo en la página en que está. Se apilan, como en el chip. */
+.nav a[aria-current="page"]:focus-visible{
+  box-shadow:var(--repisa-1),0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+}
 .barra-fin{margin-left:auto;display:flex;align-items:center;gap:var(--e-2)}
 
 /* Navegación inferior: en celular los destinos van al alcance del pulgar.
@@ -397,12 +403,21 @@ img{max-width:100%;display:block}
    se cae, queda la mascota sin dejar un hueco negro. */
 .miniatura img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
 .miniatura > svg{width:44px;height:44px}
-.miniatura .dia{
-  position:absolute;inset:auto 0 0 0;background:rgba(30,42,74,.9);color:#fff;
-  font:700 10px/1.4 var(--fuente-ui);text-align:center;padding:2px 0;letter-spacing:.04em;
-  text-transform:uppercase;
+/* La cinta del día deja de ser una franja sobre el mentón de la carita y pasa
+   a ser una pastilla con contorno colgada de la esquina de la miniatura (§7.2
+   de la dirección visual). Vive en `.mini-caja`, FUERA de `.miniatura`, porque
+   esa caja recorta (overflow:hidden) para redondear la foto y la pastilla tiene
+   que asomar. El rojo es el sólido: blanco sobre rojo-500 daba 3,96:1 y de
+   noche 2,76; `--acento-contraste` ya trae la tinta correcta para cada tema. */
+.mini-caja{position:relative;width:58px;height:58px;flex:none}
+.mini-caja .dia{
+  position:absolute;inset:auto -6px -6px auto;z-index:1;
+  background:var(--tinta);color:var(--fondo-elevado);
+  border:2px solid var(--contorno);border-radius:var(--r-pill);
+  font:800 10.5px/1 var(--fuente-marca);letter-spacing:.04em;text-transform:uppercase;
+  padding:3px 6px;white-space:nowrap;
 }
-.miniatura .dia.pronto{background:var(--acento)}
+.mini-caja .dia.pronto{background:var(--acento-solido);color:var(--acento-contraste)}
 
 .tarjeta-cuerpo{min-width:0}
 .tarjeta .hora{
@@ -423,7 +438,9 @@ img{max-width:100%;display:block}
   font-size:var(--t-sm);white-space:nowrap;text-align:right;padding-top:1px;
 }
 .precio.libre{color:var(--gratis)}
-.precio.sin-dato{color:var(--tinta-tenue);font-weight:600}
+/* Sin dato no se pinta un guion: se dice dónde está el precio. */
+.precio.sin-dato{color:var(--tinta-tenue);font:600 var(--t-xs)/1.25 var(--fuente-ui);
+  max-width:78px;white-space:normal}
 
 /* --- La misma tarjeta, con datos de descuento ---
    Donde el evento pone la hora, el descuento pone el banco; donde pone el
@@ -443,6 +460,23 @@ img{max-width:100%;display:block}
 .tarjeta-meta.cadencia{
   color:var(--tinta-tenue);font-size:var(--t-xs);margin-top:1px;
 }
+
+/* ---------- 5b. ESQUELETO DE CARGA ----------
+   Tres filas con la forma de la tarjeta mientras llega eventos.json. La lista
+   no arranca vacía ni dice "0 eventos" durante el segundo que tarda el JSON,
+   que es justo el segundo en que uno decide si la página funciona. */
+.esqueleto{display:grid;grid-template-columns:58px 1fr auto;gap:var(--e-3);
+  padding:var(--e-3) var(--e-4);border-bottom:1px solid var(--borde);
+  animation:latir 1.2s ease-in-out infinite}
+.esqueleto i{display:block;background:var(--fondo-hundido);border-radius:var(--r-sm)}
+.esqueleto .e-mini{width:58px;height:58px;border-radius:var(--r-md)}
+.esqueleto .e-txt{display:grid;gap:7px;align-content:start;padding-top:4px}
+.esqueleto .e-txt i{height:13px}
+.esqueleto .e-txt i:first-child{width:38%}
+.esqueleto .e-txt i:nth-child(2){width:88%}
+.esqueleto .e-txt i:last-child{width:60%}
+.esqueleto .e-precio{width:44px;height:13px;margin-top:4px}
+@keyframes latir{0%,100%{opacity:1}50%{opacity:.45}}
 
 /* ---------- 6. BOTONES ---------- */
 .boton{
@@ -546,7 +580,8 @@ img{max-width:100%;display:block}
 /* Los enlaces sueltos dentro de un párrafo de pie quedaban en 17px de alto.
    `inline-block` con relleno vertical les da área sin correr la línea. */
 .pie a{display:inline-block;padding:12px 4px;margin:-12px 0}
-.vacio svg{width:78px;height:78px;opacity:.5;margin:0 auto var(--e-3)}
+/* Sin opacidad: el animal dormido ya dice "nada"; a medio tono parecía enfermo. */
+.vacio svg{width:78px;height:78px;margin:0 auto var(--e-3)}
 
 /* Etiqueta de mascota */
 .mascota-nombre{
@@ -566,6 +601,101 @@ img{max-width:100%;display:block}
 .remate{position:relative;height:96px;margin-top:var(--e-10);overflow:hidden}
 .remate .cerros{height:96px}
 @media(max-width:600px){ .remate,.remate .cerros{height:74px} }
+
+/* ---------- MASCOTAS: partes y tics ----------
+   Los dibujos de loica.js traen grupos con clase (.p-ojos, .p-oreja, .p-cola,
+   .p-ala, .p-acc…) y este bloque los mueve. Nada corre solo: los tics piden
+   {anima:true} al dibujar, y las entradas la clase `entra` en el contenedor
+   más --d (retardo) en cada animal. Cada animal tiene UN gesto sacado de su
+   historia: el Cóndor asiente al beat, la Chinchilla mueve las orejas, el
+   Chungungo trota, el Quiltro no para la cola. Ciclos de 3 a 5 segundos. */
+.masc{overflow:visible}
+.masc [class^="p-"],.masc [class*=" p-"]{transform-box:fill-box;transform-origin:50% 50%}
+/* --- Tics de reposo: solo con .anima --- */
+.masc.anima .p-ojos{animation:m-parpadeo var(--parp,5.3s) ease-in-out var(--d,0s) infinite}
+.masc.anima .p-dormido{animation:none}
+@keyframes m-parpadeo{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.08)}}
+/* Loica: ladea la cabeza, como quien escucha tu pregunta */
+.masc-loica.anima{transform-origin:50% 100%;animation:m-ladear 4.6s ease-in-out var(--d,0s) infinite}
+@keyframes m-ladear{0%,100%{transform:rotate(0)}30%{transform:rotate(-4deg)}60%{transform:rotate(3deg)}}
+/* Cóndor: asiente al beat, cuatro golpes y descansa */
+.masc-condor.anima .p-cabeza{transform-origin:50% 100%;animation:m-beat 3.6s linear var(--d,0s) infinite}
+@keyframes m-beat{0%,8%,16%,24%,32%,100%{transform:translateY(0)}4%,12%,20%,28%{transform:translateY(.9px)}}
+/* Culpeo: el destello cruza los lentes; una oreja se mueve */
+.masc-culpeo.anima .p-brillo{animation:m-destello 5.4s ease-in-out var(--d,0s) infinite}
+@keyframes m-destello{0%,80%,100%{transform:translateX(0);opacity:.9}88%{transform:translateX(1.6px);opacity:.2}}
+.masc-culpeo.anima .p-oreja-d{transform-origin:50% 100%;animation:m-oreja 5.4s ease-in-out var(--d,0s) infinite}
+/* Chinchilla: orejas que escuchan, alternadas */
+.masc-chinchilla.anima .p-oreja{transform-origin:50% 100%;animation:m-oreja 3.8s ease-in-out var(--d,0s) infinite}
+.masc-chinchilla.anima .p-oreja-d{animation-delay:calc(var(--d,0s) + 1.9s)}
+@keyframes m-oreja{0%,86%,100%{transform:rotate(0)}90%{transform:rotate(-9deg)}95%{transform:rotate(6deg)}}
+/* Chincol: dos saltitos; los chincoles saltan, no caminan */
+.masc-chincol.anima{animation:m-saltos 3.4s ease-in-out var(--d,0s) infinite}
+@keyframes m-saltos{0%,24%,100%{transform:translateY(0)}6%,18%{transform:translateY(-7%)}12%{transform:translateY(0)}}
+.masc-chincol.anima .p-lapiz{transform-origin:20% 80%;animation:m-lapiz 3.4s ease-in-out var(--d,0s) infinite}
+@keyframes m-lapiz{0%,24%,100%{transform:rotate(0)}8%{transform:rotate(-6deg)}}
+/* Pudú: sacude una oreja, mira */
+.masc-pudu.anima .p-oreja-i{transform-origin:80% 90%;animation:m-oreja 4.4s ease-in-out var(--d,0s) infinite}
+/* Degú: la etiqueta cuelga y se mece */
+.masc-degu.anima .p-etiqueta{transform-origin:30% 0%;animation:m-pendulo 2.9s ease-in-out var(--d,0s) infinite}
+@keyframes m-pendulo{0%,100%{transform:rotate(5deg)}50%{transform:rotate(-7deg)}}
+.masc-degu.anima .p-nariz{animation:m-nariz 2.9s ease-in-out var(--d,0s) infinite}
+@keyframes m-nariz{0%,70%,100%{transform:scale(1)}78%{transform:scale(1.25,.8)}86%{transform:scale(1)}}
+/* Guarén: mordisquea la tarjeta; la cola barre */
+.masc-guaren.anima .p-tarjeta{transform-origin:50% 20%;animation:m-mordisco 1.7s ease-in-out var(--d,0s) infinite}
+@keyframes m-mordisco{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(-8deg)}}
+.masc-guaren.anima .p-cola{transform-origin:0% 80%;animation:m-cola-lenta 3.2s ease-in-out var(--d,0s) infinite}
+@keyframes m-cola-lenta{0%,100%{transform:rotate(0)}50%{transform:rotate(8deg)}}
+/* Chungungo: trota en el lugar, sudando */
+.masc-chungungo.anima{animation:m-trote .36s ease-in-out var(--d,0s) infinite alternate}
+@keyframes m-trote{from{transform:translateY(0)}to{transform:translateY(-4%)}}
+.masc-chungungo.anima .p-sudor{animation:m-sudor 1.4s ease-out var(--d,0s) infinite}
+@keyframes m-sudor{0%{transform:translateY(0);opacity:0}20%{opacity:1}100%{transform:translateY(-3px);opacity:0}}
+/* Pingüino: asiente en los momentos correctos; la borla se mece */
+.masc-pinguino.anima{transform-origin:50% 100%;animation:m-asentir 5.2s ease-in-out var(--d,0s) infinite}
+@keyframes m-asentir{0%,60%,100%{transform:rotate(0)}68%{transform:rotate(6deg)}76%{transform:rotate(0)}84%{transform:rotate(5deg)}}
+.masc-pinguino.anima .p-borla{transform-origin:0% 0%;animation:m-pendulo 3.4s ease-in-out var(--d,0s) infinite}
+/* Quiltro: cola que no para, lengua que jadea */
+.masc-quiltro.anima .p-cola{transform-origin:0% 90%;animation:m-colita .32s ease-in-out var(--d,0s) infinite alternate}
+@keyframes m-colita{from{transform:rotate(-10deg)}to{transform:rotate(14deg)}}
+.masc-quiltro.anima .p-lengua{transform-origin:50% 0%;animation:m-jadeo .55s ease-in-out var(--d,0s) infinite alternate}
+@keyframes m-jadeo{from{transform:scaleY(.78)}to{transform:scaleY(1.08)}}
+/* Aves en vuelo: aleteo en dos cuadros, corte seco = dibujado, no interpolado */
+.masc.anima[data-pose="volando"] .p-ala,.masc.anima[data-pose="celebrando"] .p-ala{animation:m-aleteo .22s steps(1) var(--d,0s) infinite}
+.masc.anima .p-ala-i{transform-origin:100% 100%}.masc.anima .p-ala-d{transform-origin:0% 100%}
+@keyframes m-aleteo{0%,49%{transform:rotate(0)}50%,100%{transform:rotate(var(--aleteo,14deg))}}
+.masc.anima .p-ala-i{--aleteo:-14deg}
+/* --- Entradas: una por animal, sacada de su historia. backwards = arranca escondido --- */
+.entra .masc{animation-fill-mode:backwards}
+.entra .masc-loica{animation:m-vuelo-llega 1.1s cubic-bezier(.25,0,.35,1) var(--d,0s) backwards}
+@keyframes m-vuelo-llega{from{transform:translate(-160px,60px) rotate(-12deg)}to{transform:none}}
+.entra .masc-condor{animation:m-planeo 1.2s cubic-bezier(.2,0,.2,1) var(--d,0s) backwards}
+@keyframes m-planeo{from{transform:translate(60px,-140px) rotate(-22deg)}70%{transform:translate(4px,-6px) rotate(-4deg)}to{transform:none}}
+.entra .masc-culpeo{animation:m-noche .9s ease-out var(--d,0s) backwards}
+@keyframes m-noche{from{opacity:0;transform:scale(.86)}60%{opacity:1}to{transform:none}}
+.entra .masc-chinchilla{animation:m-tarde .5s cubic-bezier(.34,1.56,.64,1) calc(var(--d,0s) + .9s) backwards}
+@keyframes m-tarde{from{transform:scale(0) rotate(-20deg)}to{transform:none}}
+.entra .masc-chincol{animation:m-saltos-entra 1s ease-out var(--d,0s) backwards}
+@keyframes m-saltos-entra{0%{transform:translate(-110px,0)}17%{transform:translate(-90px,-22px)}34%{transform:translate(-66px,0)}51%{transform:translate(-44px,-18px)}68%{transform:translate(-22px,0)}85%{transform:translate(-8px,-10px)}100%{transform:none}}
+.entra .masc-pudu{animation:m-asoma .8s cubic-bezier(.34,1.4,.64,1) var(--d,0s) backwards}
+@keyframes m-asoma{from{transform:translateY(60%) scale(.7);opacity:0}40%{opacity:1}to{transform:none}}
+.entra .masc-degu{animation:m-tierra .7s cubic-bezier(.34,1.56,.64,1) var(--d,0s) backwards}
+@keyframes m-tierra{from{transform:translateY(70%);opacity:0}30%{opacity:1}to{transform:none}}
+.entra .masc-guaren{animation:m-muralla .55s cubic-bezier(.2,.7,.2,1) var(--d,0s) backwards}
+@keyframes m-muralla{from{transform:translate(180px,6px)}to{transform:none}}
+.entra .masc-chungungo{animation:m-trote-entra 1.1s linear var(--d,0s) backwards}
+@keyframes m-trote-entra{0%{transform:translate(-220px,0)}10%{transform:translate(-198px,-6px)}20%{transform:translate(-176px,0)}30%{transform:translate(-154px,-6px)}40%{transform:translate(-132px,0)}50%{transform:translate(-110px,-6px)}60%{transform:translate(-88px,0)}70%{transform:translate(-66px,-6px)}80%{transform:translate(-44px,0)}90%{transform:translate(-22px,-6px)}100%{transform:none}}
+.entra .masc-pinguino{animation:m-pasitos 1.3s ease-out var(--d,0s) backwards}
+@keyframes m-pasitos{0%{transform:translateX(150px) rotate(7deg)}12%{transform:translateX(132px) rotate(-7deg)}24%{transform:translateX(114px) rotate(7deg)}36%{transform:translateX(96px) rotate(-7deg)}48%{transform:translateX(78px) rotate(7deg)}60%{transform:translateX(60px) rotate(-7deg)}72%{transform:translateX(42px) rotate(7deg)}84%{transform:translateX(22px) rotate(-5deg)}100%{transform:none}}
+/* El Quiltro no entra: ya estaba. Solo se sacude cuando llegan los demás. */
+.entra .masc-quiltro{animation:m-sacudida .6s ease-in-out calc(var(--d,0s) + .2s) backwards}
+@keyframes m-sacudida{0%,100%{transform:rotate(0)}25%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}75%{transform:rotate(-3deg)}}
+/* Reacciones: celebra (un brinco con rebote) y se duerme (se hunde) */
+.masc.celebra{animation:m-celebra .6s cubic-bezier(.34,1.56,.64,1)}
+@keyframes m-celebra{0%{transform:none}40%{transform:translateY(-14%) rotate(-6deg)}70%{transform:translateY(0) rotate(4deg)}100%{transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .masc,.masc *{animation:none!important}
+}
 
 @media (prefers-reduced-motion: reduce){
   *{transition:none!important;animation:none!important}

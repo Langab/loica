@@ -4,15 +4,25 @@
    ============================================================ */
 
 /* ---------- MASCOTAS ----------
-   Nueve animales chilenos, dibujados en DOS niveles. Un solo SVG no puede
+   Once animales chilenos, dibujados en DOS niveles. Un solo SVG no puede
    servir a 22px en un chip y a 200px en la portada: los detalles de r=".4"
    que se veían lindos grandes, chicos no existen (0,3px). Por eso:
 
      carita(nombre, color)  → viewBox 24, SOLO cabeza.   Para ≤ 34px
      cuerpo(nombre, color)  → viewBox 48, cuerpo entero.  Para ≥ 38px
 
-   `mascota()` elige sola según el tamaño que le pidas, así que todas las
-   llamadas de antes siguen andando y de paso se ven mejor.
+   `mascota()` elige sola según el tamaño que le pidas.
+
+   Desde el 22-08-2026 (elenco v2) cada animal lleva además:
+     - Un ACCESORIO humano que dice su oficio a 22px sin leer la etiqueta:
+       la Chinchilla va de boina al teatro, el Pingüino con birrete y libro
+       al seminario, el Guarén con la tarjeta del banco en los dientes. Se
+       apaga con {acc:false}: el logo va limpio.
+     - PARTES con clase (.p-ojos, .p-oreja, .p-cola, .p-ala, .p-acc…) para que
+       loica.css las anime sin JavaScript: parpadeo, cola, boina. Los tics se
+       encienden con {anima:true} y las entradas con la clase `entra` en el
+       contenedor y --d en cada animal (ver "MASCOTAS: partes y tics" en
+       loica.css). Con prefers-reduced-motion no pasa nada.
 
    Reglas de la carita, que son las que la hacen legible chiquitita: cabeza
    ≥70% del alto, ojo de radio ≥1,6, contorno de tinta de 1,6, máximo tres
@@ -23,85 +33,166 @@
    pines del mapa) hay que pasarle un color concreto en `tinta`. */
 
 const TINTA_VAR = "var(--contorno)";
-const OJO = "#1E2A4A";   // los ojos van sobre color saturado: siempre azul tinta
+const OJO = "#1E2A4A", CREMA = "#FAF3E7", ROSA = "#F2778C", AMARILLO = "#F5B52E";
+const ROJO = "#E8442E", PIEL = "#E8C3B4";
 
-/* Los ojos son el rasgo que más pesa en que la cosa se lea "viva".
-   Van grandes a propósito y con brillo. Durmiendo se vuelven dos arcos. */
+/* Ojos en un grupo animable: el parpadeo es un scaleY sobre `.p-ojos`. */
 const ojos = (x1, x2, y, r = 1.75, pose = "posada") => pose === "durmiendo"
-  ? `<path d="M${x1 - r} ${y + r * .3}q${r} -${r * 1.3} ${r * 2} 0M${x2 - r} ${y + r * .3}q${r} -${r * 1.3} ${r * 2} 0"
-       fill="none" stroke="${OJO}" stroke-width="1.6" stroke-linecap="round"/>`
-  : `<circle cx="${x1}" cy="${y}" r="${r}" fill="${OJO}"/>
+  ? `<g class="p-ojos p-dormido"><path d="M${x1 - r} ${y + r * .3}q${r} -${r * 1.3} ${r * 2} 0M${x2 - r} ${y + r * .3}q${r} -${r * 1.3} ${r * 2} 0"
+       fill="none" stroke="${OJO}" stroke-width="1.6" stroke-linecap="round"/></g>`
+  : `<g class="p-ojos"><circle cx="${x1}" cy="${y}" r="${r}" fill="${OJO}"/>
      <circle cx="${x2}" cy="${y}" r="${r}" fill="${OJO}"/>
      <circle cx="${x1 + r * .32}" cy="${y - r * .38}" r="${r * .38}" fill="#fff"/>
-     <circle cx="${x2 + r * .32}" cy="${y - r * .38}" r="${r * .38}" fill="#fff"/>`;
+     <circle cx="${x2 + r * .32}" cy="${y - r * .38}" r="${r * .38}" fill="#fff"/></g>`;
 
-/* La cabeza del cóndor (pelada, con cresta y pico ganchudo) se dibuja igual
-   en la carita y en el cuerpo grande, así que vive aparte: en la carita va
-   sobre la gola chica y en cuerpoAve() sobre la gola grande, sin duplicar
-   el cuerpo de la carita encima del cuerpo de verdad. */
-const cabezaCondor = (k, p) => `
+/* ---------- ACCESORIOS (lienzo 24, se dibujan sobre la carita) ----------
+   Uno por animal. Cada uno tiene un chiste y un trabajo: decir el oficio
+   a 22px. Se pueden apagar con {acc:false} (el logo, por ejemplo). */
+const ACC = {
+  /* La anfitriona: cintillo con micrófono, como la que atiende en la puerta
+     del evento. Es la única que habla, así que es la única con micrófono. */
+  loica: k => `<g class="p-acc">
+    <path d="M4.2 11.2C4.2 5.6 7.6 2.4 12 2.4s7.8 3.2 7.8 8.8" fill="none" stroke="${k}" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M4.2 11.2C4.2 5.6 7.6 2.4 12 2.4s7.8 3.2 7.8 8.8" fill="none" stroke="${CREMA}" stroke-width=".8" stroke-linecap="round"/>
+    <rect x="2.6" y="9.6" width="3.2" height="4" rx="1.3" fill="${CREMA}" stroke="${k}" stroke-width="1.1"/>
+    <rect x="18.2" y="9.6" width="3.2" height="4" rx="1.3" fill="${CREMA}" stroke="${k}" stroke-width="1.1"/>
+    <path class="p-mic" d="M4.2 13.6c.3 2.3 1.8 3.8 4.2 4.2" fill="none" stroke="${k}" stroke-width="1.3" stroke-linecap="round"/>
+    <circle class="p-mic" cx="8.9" cy="18.2" r="1.7" fill="${OJO}" stroke="${CREMA}" stroke-width=".8"/></g>`,
+
+  /* El Cóndor baja a escuchar la prueba de sonido: audífonos sobre la
+     cabeza pelada. La cinta pasa por detrás de la cresta. */
+  condorCinta: k => `<path d="M7 7.4C7 2.9 9.1 1.3 12 1.3s5 1.6 5 6.1" fill="none" stroke="${k}" stroke-width="2.1" stroke-linecap="round"/>`,
+  condor: k => `<g class="p-acc">
+    <circle cx="6.7" cy="7.4" r="2.7" fill="${OJO}" stroke="${k}" stroke-width="1.1"/>
+    <circle cx="17.3" cy="7.4" r="2.7" fill="${OJO}" stroke="${k}" stroke-width="1.1"/>
+    <circle cx="6.7" cy="7.4" r="1" fill="${CREMA}" opacity=".7"/>
+    <circle cx="17.3" cy="7.4" r="1" fill="${CREMA}" opacity=".7"/></g>`,
+
+  /* El Culpeo sale de noche y nunca se saca los lentes. Reemplazan a los
+     ojos: a 22px se leen como 😎, que es exactamente lo que hay que leer. */
+  culpeo: k => `<g class="p-acc p-lentes">
+    <rect x="5.3" y="9" width="5.8" height="4.4" rx="2" fill="${OJO}" stroke="${k}" stroke-width="1.1"/>
+    <rect x="12.9" y="9" width="5.8" height="4.4" rx="2" fill="${OJO}" stroke="${k}" stroke-width="1.1"/>
+    <path d="M11.1 10.9h1.8" stroke="${k}" stroke-width="1.3" stroke-linecap="round"/>
+    <g class="p-brillo"><path d="M6.8 12.5l2.4-2.5M14.4 12.5l2.4-2.5" stroke="#fff" stroke-width="1.1" stroke-linecap="round" opacity=".9"/></g></g>`,
+
+  /* La Chinchilla va al teatro de boina, ladeada como corresponde. */
+  chinchilla: k => `<g class="p-acc p-boina" transform="rotate(-9 12 6.6)">
+    <path d="M5.6 7.8c.6-3.6 3.3-5.5 6.5-5.4 3.2.1 5.6 2.1 6.2 5.4-1.7-1.3-3.8-2-6.3-2s-4.7.7-6.4 2z" fill="${OJO}" stroke="${k}" stroke-width="1.2" stroke-linejoin="round"/>
+    <path d="M12.2 2.6v-1.3" stroke="${k}" stroke-width="1.5" stroke-linecap="round"/>
+    <circle cx="12.2" cy="1.2" r=".8" fill="${ROJO}"/></g>`,
+
+  /* El Chincol anda con el lápiz del taller detrás de la oreja (que no
+     tiene: licencia de dibujo animado). Se dibuja ANTES de la cabeza para
+     que asome por detrás. */
+  chincolAtras: k => `<g class="p-acc p-lapiz" transform="rotate(-46 19 8)">
+    <rect x="17.6" y="3.2" width="2.6" height="10.4" rx=".5" fill="${AMARILLO}" stroke="${k}" stroke-width="1"/>
+    <path d="M17.6 3.2h2.6L18.9.6z" fill="${CREMA}" stroke="${k}" stroke-width=".9" stroke-linejoin="round"/>
+    <path d="M18.5 1.6l.4-1l.4 1z" fill="${OJO}"/>
+    <rect x="17.6" y="12.2" width="2.6" height="1.7" fill="${ROSA}" stroke="${k}" stroke-width=".9"/></g>`,
+
+  /* El Pudú lleva pañuelo de scout: es el de los cerros y las familias. */
+  pudu: k => `<g class="p-acc">
+    <path d="M5.2 19.3c2 1.4 4.3 2.1 6.8 2.1s4.8-.7 6.8-2.1L12 23.8z" fill="${AMARILLO}" stroke="${k}" stroke-width="1.2" stroke-linejoin="round"/>
+    <circle cx="12" cy="21" r="1.5" fill="${AMARILLO}" stroke="${k}" stroke-width="1"/></g>`,
+
+  /* El Degú anota lo que no cuesta nada: etiqueta de precio colgando de
+     la oreja, y en la etiqueta un cero. Se balancea. */
+  degu: k => `<g class="p-acc p-etiqueta">
+    <path d="M19.9 3.4c.5 1 .8 2.1.8 3.3" fill="none" stroke="${k}" stroke-width=".9" stroke-linecap="round"/>
+    <g transform="rotate(-16 20.4 9)">
+      <rect x="16.8" y="6.6" width="6.8" height="4.8" rx="1" fill="${CREMA}" stroke="${k}" stroke-width="1"/>
+      <circle cx="18.1" cy="9" r=".6" fill="${k}"/>
+      <ellipse cx="21.1" cy="9" rx="1.3" ry="1.65" fill="none" stroke="${OJO}" stroke-width="1.05"/></g></g>`,
+
+  /* El Guarén no suelta la tarjeta: la lleva en los dientes, como lleva
+     todo un guarén. Va dorada porque es "la del banco". */
+  guaren: k => `<g class="p-acc p-tarjeta" transform="rotate(-12 12 21.4)">
+    <rect x="8.1" y="19.2" width="7.8" height="4.6" rx=".8" fill="${AMARILLO}" stroke="${k}" stroke-width="1"/>
+    <rect x="8.1" y="20.2" width="7.8" height="1.15" fill="${OJO}"/>
+    <rect x="9.1" y="22" width="2.4" height=".9" fill="${CREMA}" opacity=".95"/></g>`,
+
+  /* El Chungungo entrena: cintillo de toalla y dos gotas de sudor. */
+  chungungo: k => `<g class="p-acc">
+    <path d="M4.4 8.8c2.2-1.4 4.7-2.1 7.6-2.1s5.4.7 7.6 2.1" fill="none" stroke="${k}" stroke-width="3.6" stroke-linecap="round"/>
+    <path d="M4.4 8.8c2.2-1.4 4.7-2.1 7.6-2.1s5.4.7 7.6 2.1" fill="none" stroke="${CREMA}" stroke-width="2" stroke-linecap="round"/>
+    <g class="p-sudor"><path d="M2.9 5.2c-.9 1.3-.9 2.2 0 2.5.9-.3.9-1.2 0-2.5z" fill="#7DA5D5"/>
+    <path d="M21.1 5.2c-.9 1.3-.9 2.2 0 2.5.9-.3.9-1.2 0-2.5z" fill="#7DA5D5"/></g></g>`,
+
+  /* El Pingüino, que ya nació de terno, se pone el birrete para el
+     seminario. La borla cuelga a la derecha y se mece. */
+  pinguino: k => `<g class="p-acc p-birrete">
+    <path d="M8 5.4v2.3c0 1.3 1.8 2.1 4 2.1s4-.8 4-2.1V5.4" fill="${OJO}" stroke="${k}" stroke-width="1"/>
+    <path d="M3.4 4.6 12 1.2l8.6 3.4L12 8z" fill="${OJO}" stroke="${k}" stroke-width="1.1" stroke-linejoin="round"/>
+    <g class="p-borla"><path d="M12.2 1.6c2.6.5 4.9 1.7 5.8 3.4v3.1" fill="none" stroke="${AMARILLO}" stroke-width="1" stroke-linecap="round"/>
+    <circle cx="18" cy="8.9" r="1.05" fill="${AMARILLO}" stroke="${k}" stroke-width=".7"/></g></g>`,
+
+  /* El Quiltro ya tiene puesta la servilleta: estaba afuera del local
+     antes que tú. La lengua le cae encima. */
+  quiltro: k => `<g class="p-acc">
+    <path d="M5.4 19.2c1.9 1.5 4.1 2.3 6.6 2.3s4.7-.8 6.6-2.3l-1.3 4.8H6.7z" fill="${CREMA}" stroke="${k}" stroke-width="1.1" stroke-linejoin="round"/>
+    <path d="M7.4 22.6h9.2" stroke="${ROJO}" stroke-width=".9" opacity=".85"/></g>`,
+};
+
+/* ---------- CARITAS (lienzo 24, solo cabeza; para ≤ 34px) ----------
+   Las mismas señas de especie de loica.js; cambian las partes con clase
+   y el accesorio. `a` = true dibuja el accesorio. */
+const cabezaCondor = (k, p, a) => `
+  ${a ? ACC.condorCinta(k) : ""}
+  <g class="p-cabeza">
   <ellipse cx="12" cy="6.6" rx="4.9" ry="4.3" fill="#C0766B" stroke="${k}" stroke-width="1.5"/>
   <path d="M9 4.6c.4-2.2 1.5-3.3 3-3.3s2.6 1.1 3 3.3c-.9-.7-1.9-1.1-3-1.1s-2.1.4-3 1.1z"
         fill="#C0766B" stroke="${k}" stroke-width="1.2" stroke-linejoin="round"/>
   <path d="M10.5 7.9h3c.9 0 1.5.8 1.3 1.7-.4 1.9-1.3 3.5-2.8 4.5-1.5-1-2.4-2.6-2.8-4.5-.2-.9.4-1.7 1.3-1.7z"
-        fill="#FAF3E7" stroke="${k}" stroke-width="1.2" stroke-linejoin="round"/>
+        fill="${CREMA}" stroke="${k}" stroke-width="1.2" stroke-linejoin="round"/>
   <ellipse cx="12" cy="13.3" rx="1.2" ry="1" fill="${OJO}"/>
-  ${ojos(9.9, 14.1, 6.2, 1.6, p)}`;
+  ${ojos(9.9, 14.1, 6.2, 1.6, p)}
+  ${a ? ACC.condor(k) : ""}</g>`;
+
+const oreja = (lado, svg) => `<g class="p-oreja p-oreja-${lado}">${svg}</g>`;
 
 const CARITAS = {
-  /* La Loica (Leistes loyca): el pico LARGO, recto y oscuro es lo que la hace
-     loica y no gorrión — más la pechera roja de la garganta al pecho, que es
-     la marca y no cambia nunca (va contorneada para leerse incluso sobre un
-     cuerpo rojo), y la ceja clara sobre el ojo. */
-  loica: (c, k, p) => `
+  loica: (c, k, p, a) => `
     <circle cx="12" cy="12.2" r="8.6" fill="${c}" stroke="${k}" stroke-width="1.6"/>
-    <ellipse cx="12" cy="16.6" rx="5.6" ry="3.6" fill="#E8442E" stroke="${k}" stroke-width="1.2"/>
+    <ellipse cx="12" cy="16.6" rx="5.6" ry="3.6" fill="${ROJO}" stroke="${k}" stroke-width="1.2"/>
     <path d="M6.3 8.1c1.2-1.2 3-1.5 4.4-.8M17.7 8.1c-1.2-1.2-3-1.5-4.4-.8"
-          fill="none" stroke="#FAF3E7" stroke-width="1.5" stroke-linecap="round"/>
-    <path d="M10.5 12.1h3L12 20.4z" fill="${k}" stroke="${k}" stroke-width="1" stroke-linejoin="round"/>
-    ${ojos(8.7, 15.3, 10.1, 1.8, p)}`,
+          fill="none" stroke="${CREMA}" stroke-width="1.5" stroke-linecap="round"/>
+    <path class="p-pico" d="M10.5 12.1h3L12 20.4z" fill="${k}" stroke="${k}" stroke-width="1" stroke-linejoin="round"/>
+    ${ojos(8.7, 15.3, 10.1, 1.8, p)}
+    ${a ? ACC.loica(k) : ""}`,
 
-  /* El Cóndor: cabeza chica y PELADA color piel con la cresta carnosa encima,
-     pico ganchudo claro con punta oscura, y la gola blanca esponjosa que
-     separa esa cabecita del cuerpo grande. El color de categoría va al cuerpo. */
-  condor: (c, k, p) => `
+  condor: (c, k, p, a) => `
     <ellipse cx="12" cy="17.2" rx="8.7" ry="5.2" fill="${c}" stroke="${k}" stroke-width="1.6"/>
     <path d="M6.6 14.6c-.6-1.8.6-3.4 2.4-3.3.2-1.2 1.4-2 3-2s2.8.8 3 2c1.8-.1 3 1.5 2.4 3.3-.6 1.9-2.7 3-5.4 3s-4.8-1.1-5.4-3z"
-          fill="#FAF3E7" stroke="${k}" stroke-width="1.3" stroke-linejoin="round"/>
-    ${cabezaCondor(k, p)}`,
+          fill="${CREMA}" stroke="${k}" stroke-width="1.3" stroke-linejoin="round"/>
+    ${cabezaCondor(k, p, a)}`,
 
-  /* El Culpeo: zorro de verdad — orejas triangulares grandes, cabeza que se
-     afina hacia abajo y el hocico crema ALARGADO que asoma bajo el mentón,
-     con la nariz negra grande. */
-  culpeo: (c, k, p) => `
-    <path d="M5.6 11 6.6 3.1 11.6 6.9z" fill="${c}" stroke="${k}" stroke-width="1.5" stroke-linejoin="round"/>
-    <path d="M18.4 11 17.4 3.1 12.4 6.9z" fill="${c}" stroke="${k}" stroke-width="1.5" stroke-linejoin="round"/>
-    <path d="M7.2 8.8 7.7 5.4 10 7.1z" fill="#F2778C" opacity=".75"/>
-    <path d="M16.8 8.8 16.3 5.4 14 7.1z" fill="#F2778C" opacity=".75"/>
+  culpeo: (c, k, p, a) => `
+    ${oreja("i", `<path d="M5.6 11 6.6 3.1 11.6 6.9z" fill="${c}" stroke="${k}" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M7.2 8.8 7.7 5.4 10 7.1z" fill="${ROSA}" opacity=".75"/>`)}
+    ${oreja("d", `<path d="M18.4 11 17.4 3.1 12.4 6.9z" fill="${c}" stroke="${k}" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M16.8 8.8 16.3 5.4 14 7.1z" fill="${ROSA}" opacity=".75"/>`)}
     <path d="M12 5c-4.6 0-7.8 2.6-7.8 6.2 0 2.1.8 3.9 2.2 5.3 1.5 1.6 3.4 3.9 5.6 3.9s4.1-2.3 5.6-3.9c1.4-1.4 2.2-3.2 2.2-5.3 0-3.6-3.2-6.2-7.8-6.2z"
           fill="${c}" stroke="${k}" stroke-width="1.6" stroke-linejoin="round"/>
-    <ellipse cx="12" cy="17.8" rx="3" ry="3.4" fill="#FAF3E7" stroke="${k}" stroke-width="1.4"/>
-    ${ojos(8.7, 15.3, 11.2, 1.7, p)}
+    <ellipse cx="12" cy="17.8" rx="3" ry="3.4" fill="${CREMA}" stroke="${k}" stroke-width="1.4"/>
+    ${a ? ACC.culpeo(k) : ojos(8.7, 15.3, 11.2, 1.7, p)}
     <ellipse cx="12" cy="16.4" rx="1.5" ry="1.2" fill="${OJO}"/>`,
 
-  /* El Pudú: el ciervo más chico del mundo. Orejas chicas y redondeadas
-     ARRIBA (nada de orejas de vaca a los lados), dos cachitos rectos, cara
-     oval dulce y la nariz negra grande. */
-  pudu: (c, k, p) => `
+  pudu: (c, k, p, a) => `
     <path d="M9.7 5 8.9 1.7M14.3 5 15.1 1.7" stroke="${k}" stroke-width="2" stroke-linecap="round"/>
-    <ellipse cx="7" cy="6.1" rx="3" ry="2.3" transform="rotate(-38 7 6.1)" fill="${c}" stroke="${k}" stroke-width="1.5"/>
-    <ellipse cx="17" cy="6.1" rx="3" ry="2.3" transform="rotate(38 17 6.1)" fill="${c}" stroke="${k}" stroke-width="1.5"/>
-    <ellipse cx="6.9" cy="6" rx="1.5" ry="1.05" transform="rotate(-38 6.9 6)" fill="#F2778C" opacity=".65"/>
-    <ellipse cx="17.1" cy="6" rx="1.5" ry="1.05" transform="rotate(38 17.1 6)" fill="#F2778C" opacity=".65"/>
+    ${oreja("i", `<ellipse cx="7" cy="6.1" rx="3" ry="2.3" transform="rotate(-38 7 6.1)" fill="${c}" stroke="${k}" stroke-width="1.5"/>
+    <ellipse cx="6.9" cy="6" rx="1.5" ry="1.05" transform="rotate(-38 6.9 6)" fill="${ROSA}" opacity=".65"/>`)}
+    ${oreja("d", `<ellipse cx="17" cy="6.1" rx="3" ry="2.3" transform="rotate(38 17 6.1)" fill="${c}" stroke="${k}" stroke-width="1.5"/>
+    <ellipse cx="17.1" cy="6" rx="1.5" ry="1.05" transform="rotate(38 17.1 6)" fill="${ROSA}" opacity=".65"/>`)}
     <circle cx="12" cy="13" r="8" fill="${c}" stroke="${k}" stroke-width="1.6"/>
-    <ellipse cx="12" cy="17.7" rx="3.3" ry="2.9" fill="#FAF3E7"/>
+    <ellipse cx="12" cy="17.7" rx="3.3" ry="2.9" fill="${CREMA}"/>
     ${ojos(8.8, 15.2, 12.2, 1.8, p)}
-    <ellipse cx="12" cy="16.5" rx="1.7" ry="1.3" fill="${OJO}"/>`,
+    <ellipse cx="12" cy="16.5" rx="1.7" ry="1.3" fill="${OJO}"/>
+    ${a ? ACC.pudu(k) : ""}`,
 
-  /* El Chincol: el copete puntudo parado, las franjas de la corona y el
-     collar castaño en la nuca, que es fijo como la pechera de la loica. */
-  chincol: (c, k, p) => `
-    <path d="M8.4 7.4 9.4 1.8 12 5.2 14.6 1.8 15.6 7.4z" fill="${c}" stroke="${k}" stroke-width="1.5" stroke-linejoin="round"/>
+  chincol: (c, k, p, a) => `
+    ${a ? ACC.chincolAtras(k) : ""}
+    <path class="p-copete" d="M8.4 7.4 9.4 1.8 12 5.2 14.6 1.8 15.6 7.4z" fill="${c}" stroke="${k}" stroke-width="1.5" stroke-linejoin="round"/>
     <circle cx="12" cy="12.5" r="8.4" fill="${c}" stroke="${k}" stroke-width="1.6"/>
     <path d="M8.6 5.6c-1.7 1.3-2.8 3.1-3.2 5.2M15.4 5.6c1.7 1.3 2.8 3.1 3.2 5.2"
           fill="none" stroke="${k}" stroke-width="1.5" stroke-linecap="round"/>
@@ -110,140 +201,112 @@ const CARITAS = {
     <path d="M10.4 12.9h3.2L12 16.4z" fill="#E8B23A" stroke="${k}" stroke-width="1.1" stroke-linejoin="round"/>
     ${ojos(8.8, 15.2, 10.4, 1.75, p)}`,
 
-  /* La Chinchilla: orejas redondas enormes y cara muy redonda. Los bigotes
-     van solo en el cuerpo grande; acá violarían el 1/15. */
-  chinchilla: (c, k, p) => `
-    <circle cx="5.8" cy="7.6" r="3.7" fill="${c}" stroke="${k}" stroke-width="1.5"/>
-    <circle cx="18.2" cy="7.6" r="3.7" fill="${c}" stroke="${k}" stroke-width="1.5"/>
-    <circle cx="6" cy="7.9" r="1.8" fill="#F2778C" opacity=".6"/>
-    <circle cx="18" cy="7.9" r="1.8" fill="#F2778C" opacity=".6"/>
+  chinchilla: (c, k, p, a) => `
+    ${oreja("i", `<circle cx="5.8" cy="7.6" r="3.7" fill="${c}" stroke="${k}" stroke-width="1.5"/>
+    <circle cx="6" cy="7.9" r="1.8" fill="${ROSA}" opacity=".6"/>`)}
+    ${oreja("d", `<circle cx="18.2" cy="7.6" r="3.7" fill="${c}" stroke="${k}" stroke-width="1.5"/>
+    <circle cx="18" cy="7.9" r="1.8" fill="${ROSA}" opacity=".6"/>`)}
     <circle cx="12" cy="13.2" r="7.8" fill="${c}" stroke="${k}" stroke-width="1.6"/>
-    <ellipse cx="12" cy="16.9" rx="3.4" ry="2.7" fill="#FAF3E7"/>
+    <ellipse cx="12" cy="16.9" rx="3.4" ry="2.7" fill="${CREMA}"/>
     ${ojos(9, 15, 12.2, 1.75, p)}
-    <ellipse cx="12" cy="15.7" rx="1.25" ry="1" fill="${OJO}"/>`,
+    <ellipse cx="12" cy="15.7" rx="1.25" ry="1" fill="${OJO}"/>
+    ${a ? ACC.chinchilla(k) : ""}`,
 
-  /* El Degú: el roedor del matorral de Santiago, el que uno ve en el San
-     Cristóbal. Es el que más se parece a la chinchilla, así que las tres señas
-     que lo separan van todas puestas: orejas OVALADAS y medianas (las de la
-     chinchilla son círculos enormes), el anillo claro alrededor del ojo, y los
-     dientes anaranjados asomando bajo la nariz.
-
-     El anillo no es adorno: el degú va en café oscuro y los ojos son azul
-     tinta, que sobre café da 1,9:1 y desaparece. Puestos sobre el anillo crema
-     pasan de sobra. La seña real del animal es también la que lo hace legible
-     a 22px, que es cuando algo del sistema está bien resuelto. */
-  degu: (c, k, p) => `
-    <ellipse cx="6.1" cy="6.2" rx="2.8" ry="3.4" transform="rotate(-24 6.1 6.2)" fill="${c}" stroke="${k}" stroke-width="1.5"/>
-    <ellipse cx="17.9" cy="6.2" rx="2.8" ry="3.4" transform="rotate(24 17.9 6.2)" fill="${c}" stroke="${k}" stroke-width="1.5"/>
-    <ellipse cx="6.2" cy="6.4" rx="1.35" ry="1.75" transform="rotate(-24 6.2 6.4)" fill="#F2778C" opacity=".6"/>
-    <ellipse cx="17.8" cy="6.4" rx="1.35" ry="1.75" transform="rotate(24 17.8 6.4)" fill="#F2778C" opacity=".6"/>
+  degu: (c, k, p, a) => `
+    ${oreja("i", `<ellipse cx="6.1" cy="6.2" rx="2.8" ry="3.4" transform="rotate(-24 6.1 6.2)" fill="${c}" stroke="${k}" stroke-width="1.5"/>
+    <ellipse cx="6.2" cy="6.4" rx="1.35" ry="1.75" transform="rotate(-24 6.2 6.4)" fill="${ROSA}" opacity=".6"/>`)}
+    ${oreja("d", `<ellipse cx="17.9" cy="6.2" rx="2.8" ry="3.4" transform="rotate(24 17.9 6.2)" fill="${c}" stroke="${k}" stroke-width="1.5"/>
+    <ellipse cx="17.8" cy="6.4" rx="1.35" ry="1.75" transform="rotate(24 17.8 6.4)" fill="${ROSA}" opacity=".6"/>`)}
     <circle cx="12" cy="13" r="8.1" fill="${c}" stroke="${k}" stroke-width="1.6"/>
-    <circle cx="8.7" cy="11.7" r="2.95" fill="#FAF3E7"/>
-    <circle cx="15.3" cy="11.7" r="2.95" fill="#FAF3E7"/>
-    <ellipse cx="12" cy="17.5" rx="3.7" ry="3" fill="#FAF3E7"/>
+    <circle cx="8.7" cy="11.7" r="2.95" fill="${CREMA}"/>
+    <circle cx="15.3" cy="11.7" r="2.95" fill="${CREMA}"/>
+    <ellipse cx="12" cy="17.5" rx="3.7" ry="3" fill="${CREMA}"/>
     ${ojos(8.7, 15.3, 11.7, 1.8, p)}
-    <ellipse cx="12" cy="15.9" rx="1.6" ry="1.2" fill="${OJO}"/>
-    <path d="M10.9 17.4h2.2v1.5a1.1 1.1 0 0 1-2.2 0z" fill="#E8B23A" stroke="${k}" stroke-width="1"/>`,
+    <ellipse class="p-nariz" cx="12" cy="15.9" rx="1.6" ry="1.2" fill="${OJO}"/>
+    <path d="M10.9 17.4h2.2v1.5a1.1 1.1 0 0 1-2.2 0z" fill="#E8B23A" stroke="${k}" stroke-width="1"/>
+    ${a ? ACC.degu(k) : ""}`,
 
-  /* El Guarén: la rata de Santiago, y en Chile "rata" es el que cuida la
-     plata. Por eso se hace cargo de los descuentos y por eso desplazó al Degú
-     de esa página: el chiste lo entiende cualquiera y no hay que explicarlo.
-
-     El elenco ya tiene tres roedores (chinchilla, degú, guarén) y un perro,
-     así que las señas están elegidas contra ELLOS, no contra un manual de
-     fauna. La cabeza es una CUÑA que se afina hasta la nariz —los otros tres
-     tienen cara redonda—, las orejas son dos círculos pelados ARRIBA de la
-     cabeza (las de la chinchilla son igual de grandes pero van a los lados, a
-     la altura de los ojos), y abajo asoman los dos incisivos, que van CREMA
-     porque los del degú son anaranjados y a 22px el color del diente es lo
-     único que los separa.
-
-     El hocico claro no es maquillaje: el guarén de verdad es oscuro arriba y
-     pálido abajo, y de paso resuelve el mismo problema que el degú tuvo con
-     su anillo. Los ojos son azul tinta y sobre el café de descuentos dan
-     2,4:1 — desaparecen. Puestos sobre la cuña crema pasan de sobra. */
-  guaren: (c, k, p) => `
-    <circle cx="6.8" cy="5.6" r="3.6" fill="${c}" stroke="${k}" stroke-width="1.5"/>
-    <circle cx="17.2" cy="5.6" r="3.6" fill="${c}" stroke="${k}" stroke-width="1.5"/>
-    <circle cx="6.9" cy="5.8" r="1.8" fill="#F2778C" opacity=".7"/>
-    <circle cx="17.1" cy="5.8" r="1.8" fill="#F2778C" opacity=".7"/>
+  guaren: (c, k, p, a) => `
+    ${oreja("i", `<circle cx="6.8" cy="5.6" r="3.6" fill="${c}" stroke="${k}" stroke-width="1.5"/>
+    <circle cx="6.9" cy="5.8" r="1.8" fill="${ROSA}" opacity=".7"/>`)}
+    ${oreja("d", `<circle cx="17.2" cy="5.6" r="3.6" fill="${c}" stroke="${k}" stroke-width="1.5"/>
+    <circle cx="17.1" cy="5.8" r="1.8" fill="${ROSA}" opacity=".7"/>`)}
     <path d="M4.1 11.2a7.9 7.9 0 0 1 15.8 0c0 3.2-1.4 5.9-3.3 8-1.7 1.9-3.2 3.4-4.6 3.4s-2.9-1.5-4.6-3.4c-1.9-2.1-3.3-4.8-3.3-8z"
           fill="${c}" stroke="${k}" stroke-width="1.6" stroke-linejoin="round"/>
-    <path d="M8.5 15.2c1-.5 2.2-.8 3.5-.8s2.5.3 3.5.8c-.5 3.3-1.7 5.9-3.5 7.9-1.8-2-3-4.6-3.5-7.9z"
-          fill="#FAF3E7"/>
+    <path d="M8.5 15.2c1-.5 2.2-.8 3.5-.8s2.5.3 3.5.8c-.5 3.3-1.7 5.9-3.5 7.9-1.8-2-3-4.6-3.5-7.9z" fill="${CREMA}"/>
     ${ojos(8.6, 15.4, 11.6, 1.8, p)}
     <ellipse cx="12" cy="18.5" rx="1.45" ry="1.1" fill="${OJO}"/>
-    <path d="M10.9 19.5h2.2v2.2a1.1 1.1 0 0 1-2.2 0z"
-          fill="#FAF3E7" stroke="${k}" stroke-width="1.05" stroke-linejoin="round"/>
+    ${a ? ACC.guaren(k) : ""}
+    <path d="M10.9 19.5h2.2v2.2a1.1 1.1 0 0 1-2.2 0z" fill="${CREMA}" stroke="${k}" stroke-width="1.05" stroke-linejoin="round"/>
     <path d="M12 19.8v1.9" stroke="${k}" stroke-width=".85"/>`,
 
-  /* El Chungungo: nutria. Cabeza ANCHA y plana (más ancha que alta), orejas
-     mínimas, hocico claro grande con nariz grande y bigotes gruesos — los
-     bigotes y la cabeza chata son lo que lo separa de la chinchilla. */
-  chungungo: (c, k, p) => `
-    <circle cx="3.9" cy="9.8" r="1.9" fill="${c}" stroke="${k}" stroke-width="1.4"/>
-    <circle cx="20.1" cy="9.8" r="1.9" fill="${c}" stroke="${k}" stroke-width="1.4"/>
+  chungungo: (c, k, p, a) => `
+    ${oreja("i", `<circle cx="3.9" cy="9.8" r="1.9" fill="${c}" stroke="${k}" stroke-width="1.4"/>`)}
+    ${oreja("d", `<circle cx="20.1" cy="9.8" r="1.9" fill="${c}" stroke="${k}" stroke-width="1.4"/>`)}
     <path d="M12 5.6c-5.4 0-9.4 2.9-9.4 6.9 0 3.8 4 6.7 9.4 6.7s9.4-2.9 9.4-6.7c0-4-4-6.9-9.4-6.9z"
           fill="${c}" stroke="${k}" stroke-width="1.6"/>
-    <ellipse cx="12" cy="15.1" rx="5" ry="3.2" fill="#FAF3E7"/>
+    <ellipse cx="12" cy="15.1" rx="5" ry="3.2" fill="${CREMA}"/>
     <path d="M6.7 14.4 4 13.7M6.9 16.2 4.2 16.7M17.3 14.4 20 13.7M17.1 16.2 19.8 16.7"
           fill="none" stroke="${k}" stroke-width="1.5" stroke-linecap="round"/>
     ${ojos(8.5, 15.5, 10.4, 1.7, p)}
-    <ellipse cx="12" cy="13.3" rx="1.9" ry="1.4" fill="${OJO}"/>`,
+    <ellipse cx="12" cy="13.3" rx="1.9" ry="1.4" fill="${OJO}"/>
+    ${a ? ACC.chungungo(k) : ""}`,
 
-  /* El Quiltro: el perro callejero chileno, y guatón, que es como se le dice
-     al que anda bien comido. Es el animal que ya está afuera de la fuente de
-     soda antes que uno, así que le tocaba esta página y no otra.
-
-     Tres señas y ninguna es de raza, porque el quiltro justamente no tiene.
-     UNA OREJA PARADA Y LA OTRA CAÍDA, que es lo que lo separa del culpeo —el
-     otro cánido del elenco— que lleva las dos en punta y simétricas. El hocico
-     corto y ancho con la nariz grande, contra el hocico afilado del zorro. Y
-     LA LENGUA AFUERA: ningún otro de los diez saca la lengua, así que a 22px
-     esa mancha rosada bajo la cara solo puede ser un perro. */
-  quiltro: (c, k, p) => `
-    <path d="M4.8 12.4 5.4 3.6 11.4 7.8z" fill="${c}" stroke="${k}" stroke-width="1.5" stroke-linejoin="round"/>
-    <path d="M6.7 9.8 7.1 5.8 9.7 7.6z" fill="#F2778C" opacity=".75"/>
-    <path d="M17.4 5.2c3-.4 5.2 1.6 5 4.6-.2 3-2.2 5.4-4.6 6-1.8.4-3-.8-2.8-2.8.2-3 1-5.6 2.4-7.8z"
+  quiltro: (c, k, p, a) => `
+    ${oreja("i", `<path d="M4.8 12.4 5.4 3.6 11.4 7.8z" fill="${c}" stroke="${k}" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M6.7 9.8 7.1 5.8 9.7 7.6z" fill="${ROSA}" opacity=".75"/>`)}
+    ${oreja("d", `<path d="M17.4 5.2c3-.4 5.2 1.6 5 4.6-.2 3-2.2 5.4-4.6 6-1.8.4-3-.8-2.8-2.8.2-3 1-5.6 2.4-7.8z"
           fill="${c}" stroke="${k}" stroke-width="1.5" stroke-linejoin="round"/>
-    <path d="M18.1 7.6c1.6-.2 2.6.8 2.5 2.4-.1 1.6-1.1 2.8-2.4 3.1z" fill="#F2778C" opacity=".7"/>
+    <path d="M18.1 7.6c1.6-.2 2.6.8 2.5 2.4-.1 1.6-1.1 2.8-2.4 3.1z" fill="${ROSA}" opacity=".7"/>`)}
     <circle cx="12" cy="12.4" r="8.3" fill="${c}" stroke="${k}" stroke-width="1.6"/>
-    <ellipse cx="12" cy="16.6" rx="5.4" ry="4" fill="#FAF3E7"/>
+    <ellipse cx="12" cy="16.6" rx="5.4" ry="4" fill="${CREMA}"/>
     ${ojos(8.7, 15.3, 10.8, 1.8, p)}
     <ellipse cx="12" cy="15.4" rx="2" ry="1.5" fill="${OJO}"/>
-    <path d="M10.8 18.9h2.4v2.5a1.2 1.2 0 0 1-2.4 0z"
-          fill="#F2778C" stroke="${k}" stroke-width="1.1" stroke-linejoin="round"/>`,
+    ${a ? ACC.quiltro(k) : ""}
+    <path class="p-lengua" d="M10.8 18.9h2.4v2.5a1.2 1.2 0 0 1-2.4 0z"
+          fill="${ROSA}" stroke="${k}" stroke-width="1.1" stroke-linejoin="round"/>`,
 
-  /* El Pingüino de Humboldt: la herradura BLANCA que parte sobre cada ojo y
-     rodea las mejillas hasta juntarse bajo el mentón, y la base ROSADA
-     carnosa del pico — las dos señas del Humboldt. Va de terno a las
-     charlas; en Chile "pingüino" es también el escolar de uniforme. */
-  pinguino: (c, k, p) => `
+  pinguino: (c, k, p, a) => `
     <circle cx="12" cy="12.2" r="8.6" fill="${c}" stroke="${k}" stroke-width="1.6"/>
     <path d="M7 6.2c-2 1.9-2.6 4.7-1.9 7.2.8 2.9 3.5 4.9 6.9 4.9s6.1-2 6.9-4.9c.7-2.5.1-5.3-1.9-7.2"
-          fill="none" stroke="#FAF3E7" stroke-width="1.9" stroke-linecap="round"/>
-    <ellipse cx="12" cy="12.3" rx="2.6" ry="1.4" fill="#F2778C"/>
+          fill="none" stroke="${CREMA}" stroke-width="1.9" stroke-linecap="round"/>
+    <ellipse cx="12" cy="12.3" rx="2.6" ry="1.4" fill="${ROSA}"/>
     <path d="M10.6 12.1h2.8L12 16.3z" fill="${k}" stroke="${k}" stroke-width="1" stroke-linejoin="round"/>
-    ${ojos(8.6, 15.4, 10, 1.75, p)}`,
+    ${ojos(8.6, 15.4, 10, 1.75, p)}
+    ${a ? ACC.pinguino(k) : ""}`,
 };
 
-/* ---------- CUERPOS (viewBox 48) ----------
-   La cabeza es la misma carita escalada; abajo va el cuerpo. Así los ocho
-   animales se ven de la misma familia sin dibujar dieciséis SVG distintos. */
-
-// Truco de la cola: se traza dos veces, primero gruesa en tinta y encima
-// delgada en color. Sale una cola con contorno sin dibujar el contorno.
+/* ---------- CUERPOS (lienzo 48) ---------- */
 const cola = (d, c, k, grosor = 5.4) =>
   `<path d="${d}" fill="none" stroke="${k}" stroke-width="${grosor}" stroke-linecap="round"/>
    <path d="${d}" fill="none" stroke="${c}" stroke-width="${grosor - 2.4}" stroke-linecap="round"/>`;
 
 const AVES = new Set(["loica", "condor", "chincol"]);
 
-/* Mismo esqueleto para las tres aves (cola, cuerpo, ala, patas, cabeza) pero
-   con la silueta de cada una: la loica lleva la cola larga de bailarina de
-   pastizal y la pechera roja siguiendo hasta el pecho; el cóndor es más
-   macizo y en vuelo abre las primarias como dedos. */
-const cuerpoAve = (nombre, c, k, p) => {
+/* Las alas van en grupos con clase: en vuelo aletean (dos cuadros, steps).
+   El Chincol de cuerpo entero carga la bolsa de feria colgando del ala. */
+const PROPS = {
+  chincol: k => `<g class="p-prop p-bolsa" transform="translate(31 30)">
+    <path d="M-5 1.2 -3.6 12.4h9.4L7.4 1.2z" fill="#2F6FB5" stroke="${k}" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M-2.6 3.6l1.6 8.2M1.2 3.6v8.2M5 3.6l-1.6 8.2M-4 6.6h10.6M-3.4 9.6h9.4" stroke="${CREMA}" stroke-width=".9" opacity=".7"/>
+    <path d="M-2.4 1.2c0-2.2 1.5-3.6 3.6-3.6s3.6 1.4 3.6 3.6" fill="none" stroke="${k}" stroke-width="1.8"/>
+    <path d="M4.4 1.2c.6-3.4 2.4-5.8 4.6-7.2" fill="none" stroke="#2E7D5B" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M8.6-5.6l1.8-3.2M9.2-5.2l2.6-1.4" stroke="#74A68D" stroke-width="2" stroke-linecap="round"/></g>`,
+  pudu: k => `<g class="p-prop p-mochila">
+    <rect x="30.2" y="19.2" width="8.6" height="8" rx="2.6" fill="${AMARILLO}" stroke="${k}" stroke-width="1.8"/>
+    <path d="M32 23.4h5" stroke="${k}" stroke-width="1.4" stroke-linecap="round"/>
+    <rect x="32.4" y="18" width="4.2" height="2.2" rx="1" fill="${AMARILLO}" stroke="${k}" stroke-width="1.4"/></g>`,
+  chungungo: k => `<g class="p-prop p-dorsal">
+    <rect x="22.4" y="28.2" width="9.4" height="7.4" rx="1" fill="${CREMA}" stroke="${k}" stroke-width="1.5"/>
+    <path d="M25.2 30.6h3.8l-2.6 3.6" fill="none" stroke="${OJO}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="23.7" cy="29.4" r=".55" fill="${k}"/><circle cx="30.5" cy="29.4" r=".55" fill="${k}"/></g>`,
+  pinguino: k => `<g class="p-prop p-libro" transform="rotate(-8 12 32)">
+    <rect x="7.2" y="27.2" width="8.4" height="10.6" rx="1" fill="${OJO}" stroke="${k}" stroke-width="1.5"/>
+    <rect x="8.8" y="27.2" width="6.8" height="10.6" fill="${CREMA}" stroke="${k}" stroke-width="1.2"/>
+    <path d="M10.6 30.2h3.4M10.6 32.4h3.4M10.6 34.6h2.2" stroke="${OJO}" stroke-width=".9" stroke-linecap="round"/></g>`,
+};
+
+const cuerpoAve = (nombre, c, k, p, a) => {
   const alas = p === "volando" || p === "celebrando";
   const condor = nombre === "condor", esLoica = nombre === "loica";
   const alaIzq = condor ? "M24 27 5.8 11.6 3 15 7 17.4 3.4 20.2 8.4 21.2 5.8 24.8 16.4 33z"
@@ -251,148 +314,118 @@ const cuerpoAve = (nombre, c, k, p) => {
   const alaDer = condor ? "M24 27 42.2 11.6 45 15 41 17.4 44.6 20.2 39.6 21.2 42.2 24.8 31.6 33z"
                         : "M24 27 42.4 11.4 45.2 25.6 31.6 33z";
   return `
-    ${alas ? `<path d="${alaIzq}" fill="${c}" stroke="${k}" stroke-width="2" stroke-linejoin="round"/>
-              <path d="${alaDer}" fill="${c}" stroke="${k}" stroke-width="2" stroke-linejoin="round"/>` : ""}
+    ${alas ? `<g class="p-ala p-ala-i"><path d="${alaIzq}" fill="${c}" stroke="${k}" stroke-width="2" stroke-linejoin="round"/></g>
+              <g class="p-ala p-ala-d"><path d="${alaDer}" fill="${c}" stroke="${k}" stroke-width="2" stroke-linejoin="round"/></g>` : ""}
     ${p === "volando" ? "" : `<path d="M20.4 39.6v4.8M27.2 39.6v4.8M17.8 44.6h5.2M24.6 44.6h5.2"
         stroke="${k}" stroke-width="2.3" stroke-linecap="round"/>`}
-    <path d="${esLoica ? "M17 30.2 2.2 39.4 13 22.4z" : "M16.6 30.6 3 37.2 13.6 22.4z"}"
-          fill="${c}" stroke="${k}" stroke-width="2" stroke-linejoin="round"/>
+    <g class="p-cola"><path d="${esLoica ? "M17 30.2 2.2 39.4 13 22.4z" : "M16.6 30.6 3 37.2 13.6 22.4z"}"
+          fill="${c}" stroke="${k}" stroke-width="2" stroke-linejoin="round"/></g>
     <ellipse cx="24.6" cy="30.2" rx="${condor ? 12.2 : 11.4}" ry="${condor ? 10.4 : 10}"
              fill="${c}" stroke="${k}" stroke-width="2"/>
-    ${esLoica ? `<ellipse cx="24.2" cy="25.8" rx="6.4" ry="5.4" fill="#E8442E"/>` : ""}
-    ${alas || condor ? "" : `<path d="M27.8 22.6c4.4.8 7.4 4 7.6 8 .1 2.9-1 5.6-3 7.6l-1.1-2.5-1.5 2.3c-1.8-2.1-2.8-4.8-2.8-7.7 0-2.7.3-5.3.8-7.7z"
-        fill="${c}" stroke="${k}" stroke-width="1.8" stroke-linejoin="round"/>`}
+    ${esLoica ? `<ellipse cx="24.2" cy="25.8" rx="6.4" ry="5.4" fill="${ROJO}"/>` : ""}
+    ${alas || condor ? "" : `<g class="p-ala p-ala-plegada"><path d="M27.8 22.6c4.4.8 7.4 4 7.6 8 .1 2.9-1 5.6-3 7.6l-1.1-2.5-1.5 2.3c-1.8-2.1-2.8-4.8-2.8-7.7 0-2.7.3-5.3.8-7.7z"
+        fill="${c}" stroke="${k}" stroke-width="1.8" stroke-linejoin="round"/></g>`}
+    ${a && PROPS[nombre] && !alas ? PROPS[nombre](k) : ""}
     ${condor
       ? `<path d="M14.6 19.8c-1-3.2 1-6 4.2-5.8.4-2.2 2.5-3.6 5.8-3.6s5.4 1.4 5.8 3.6c3.2-.2 5.2 2.6 4.2 5.8-1 3.2-4.9 5-10 5s-9-1.8-10-5z"
-           fill="#FAF3E7" stroke="${k}" stroke-width="1.8" stroke-linejoin="round"/>
-         <g transform="translate(11.2 .4) scale(1.12)">${cabezaCondor(k, p)}</g>`
-      : `<g transform="translate(14.9 1.2) scale(.93)">${CARITAS[nombre](c, k, p)}</g>`}`;
+           fill="${CREMA}" stroke="${k}" stroke-width="1.8" stroke-linejoin="round"/>
+         <g transform="translate(11.2 .4) scale(1.12)">${cabezaCondor(k, p, a)}</g>`
+      : `<g class="p-cabeza" transform="translate(14.9 1.2) scale(.93)">${CARITAS[nombre](c, k, p, a)}</g>`}`;
 };
 
-/* Las colas son lo que distingue a los cuatro cuadrúpedos de lejos, y cada
-   una es un dato de la especie: la del culpeo es gorda y SIEMPRE termina en
-   negro, la del pudú casi no existe, la de la chinchilla es tupida y se
-   enrosca hacia arriba como ardilla, y la del chungungo es de nutria: gruesa
-   en la base y afinándose hasta la punta. */
 const COLAS = {
   culpeo:     (c, k) => cola("M37.4 32.4c3.6-1.2 5.9-4.3 6.6-8.8", c, k, 8) +
                         `<circle cx="44" cy="23.6" r="2.7" fill="${OJO}" stroke="${k}" stroke-width="1.4"/>`,
   pudu:       (c, k) => `<path d="M39.6 27.6c1.5-2.7 3.9-3.2 4.9-1.6 1 1.7-.1 3.9-2.3 4.6z"
                           fill="${c}" stroke="${k}" stroke-width="1.8" stroke-linejoin="round"/>`,
   chinchilla: (c, k) => cola("M36.6 30.2c-.9-4.4.7-8.6 4-10.4.8-.5 1.6-.7 2.4-.6", c, k, 7.5),
-  /* La del degú es delgada y termina en un PINCEL oscuro. Es la seña que lo
-     separa de la chinchilla vista de lejos: la de ella es tupida entera. */
   degu:       (c, k) => cola("M37.2 30.6c3.4-1.2 5.4-4 5.8-8", c, k, 4.8) +
                         `<ellipse cx="43.6" cy="20.6" rx="2.1" ry="3.3" transform="rotate(14 43.6 20.6)"
                            fill="${OJO}" stroke="${k}" stroke-width="1.4"/>`,
   chungungo:  (c, k) => `<path d="M38.2 29.2c4.2-.2 7.6 2.5 8.8 6.6.3 1-.8 1.9-1.7 1.3-3.3-2-5.9-4.7-7.1-7.9z"
                           fill="${c}" stroke="${k}" stroke-width="1.8" stroke-linejoin="round"/>`,
-  /* La del guarén es la seña que lo delata de lejos, y es la única del elenco
-     que NO va del color del animal: es PELADA. Larga, delgada y color carne.
-     La del degú también es delgada pero va del color del cuerpo y termina en
-     un pincel oscuro; la de la chinchilla es tupida entera. Esta es la única
-     que se ve piel, y es más larga que cualquier otra: llega hasta el borde.
-
-     Sin anillos a propósito. Medirían 2 de las 48 unidades del lienzo y la
-     regla del 1/15 los deja fuera: a 22px no serían un dato del animal, serían
-     tierra en la pantalla. */
-  guaren:     (c, k) => cola("M37.6 32.6c5.4.4 8.8-2.6 10.2-9", "#E8C3B4", k, 4),
-  /* La del quiltro sube y se ENROSCA hacia adelante, que es como la lleva un
-     perro contento y es media silueta del animal. La de la chinchilla también
-     sube pero se queda en arco; esta cierra el gancho arriba. */
+  guaren:     (c, k) => cola("M37.6 32.6c5.4.4 8.8-2.6 10.2-9", PIEL, k, 4),
   quiltro:    (c, k) => cola("M37.6 29c4-1.2 6.4-4.2 6.6-8 .1-2.1-1.3-3.4-3-3-1.6.4-2.5 1.9-2.3 3.6", c, k, 5),
 };
 
-/* Silueta por especie: cuerpo (cx, cy, rx, ry), patas con su grosor, algún
-   parche fijo bajo la cabeza y dónde se apoya la cabeza. El chungungo va más
-   abajo que el resto: nutria = cuerpo largo, bajo y pegado al suelo. */
 const CUADRUPEDOS = {
   culpeo:     {cuerpo:[29.4, 31.2, 12.2, 8.6], grosor:3.4, cabeza:"2.5 3.4",
                patas:"M21.6 38.6v5.6M28 38.8v5.4M34.4 38.4v5.8M39.4 37.6v6.4",
-               extra:`<ellipse cx="19.6" cy="27.6" rx="3.4" ry="4.2" fill="#FAF3E7"/>`},
+               extra:`<ellipse cx="19.6" cy="27.6" rx="3.4" ry="4.2" fill="${CREMA}"/>`},
   pudu:       {cuerpo:[28.8, 30.8, 11.4, 8.2], grosor:2.7, cabeza:"2.5 3.4",
                patas:"M21.8 38.2v6.4M27.4 38.6v6M33.6 38.4v6.2M38.6 37.4v7.2", extra:""},
   chinchilla: {cuerpo:[28.4, 31.4, 10.8, 9.6], grosor:3.2, cabeza:"2.5 3.4",
                patas:"M22.6 39.8v4.4M27.8 40.2v4M33.4 39.8v4.4M37.6 38.8v5.2", extra:""},
-  /* Más largo y más bajo que la chinchilla: el degú trota, no salta. */
   degu:       {cuerpo:[28.6, 31.8, 11.4, 8.4], grosor:3, cabeza:"2.5 3.4",
                patas:"M22.2 39.4v5M27.6 39.8v4.6M33.4 39.4v5M38 38.6v5.6",
-               extra:`<ellipse cx="27.4" cy="37.4" rx="5.4" ry="2.3" fill="#FAF3E7" opacity=".85"/>`},
+               extra:`<ellipse cx="27.4" cy="37.4" rx="5.4" ry="2.3" fill="${CREMA}" opacity=".85"/>`},
   chungungo:  {cuerpo:[28.6, 33, 13.8, 7.4], grosor:3.2, cabeza:"3 8.2",
                patas:"M20.8 39.4v4.8M26.6 39.8v4.4M33.2 39.6v4.6M38.2 38.6v5.4", extra:""},
-  /* Más largo y más bajo que el degú, y las patas más finas: el guarén corre
-     pegado a la muralla, no salta. La cabeza va 1,2 más abajo que la del resto
-     porque termina en punta: con el desplazamiento de todos, el hocico apenas
-     tocaba el lomo y el animal quedaba partido en dos piezas sueltas. */
   guaren:     {cuerpo:[28.4, 31.8, 12, 8], grosor:2.8, cabeza:"3.2 4.6",
                patas:"M21.8 39.2v5.4M27.4 39.6v5M33.4 39.2v5.4M38.2 38.4v6", extra:""},
-  /* Guatón, literal: el cuerpo es el más ancho de los cinco cuadrúpedos y las
-     patas las más cortas. La panza clara que cuelga es mitad chiste y mitad
-     anatomía de perro de barrio bien alimentado por todo el pasaje. */
   quiltro:    {cuerpo:[28.4, 31.6, 12.4, 8.8], grosor:3.5, cabeza:"2.5 3.4",
                patas:"M21.8 39.2v5.2M27.6 39.6v4.8M33.8 39.2v5.2M38.4 38.4v6",
-               extra:`<ellipse cx="28.4" cy="37.4" rx="8.2" ry="3.4" fill="#FAF3E7" opacity=".92"/>`},
+               extra:`<ellipse cx="28.4" cy="37.4" rx="8.2" ry="3.4" fill="${CREMA}" opacity=".92"/>`},
 };
 
-/* Los bigotes de la chinchilla van acá y no en la carita (regla del 1/15). */
 const BIGOTES_CHINCHILLA = `
   <path d="M9.2 18.6 4.6 17.2M9.4 20.4 4.8 20.8M18.6 18.6 23.2 17.2M18.4 20.4 23 20.8"
         fill="none" stroke-width="1.2" stroke-linecap="round"/>`;
 
-const cuerpoCuadrupedo = (nombre, c, k, p) => {
+/* Celebrando, el cuadrúpedo se para en dos patas: todo el cuerpo gira
+   desde las patas traseras. Antes la pose era idéntica a "posada" y el
+   carnet mostraba dos dibujos iguales uno al lado del otro. */
+const cuerpoCuadrupedo = (nombre, c, k, p, a) => {
   const q = CUADRUPEDOS[nombre], [bx, by, brx, bry] = q.cuerpo;
-  return `
-  <path d="${q.patas}" stroke="${k}" stroke-width="${q.grosor}" stroke-linecap="round"/>
-  ${COLAS[nombre](c, k)}
+  const celebra = p === "celebrando";
+  return `${celebra ? `<g transform="rotate(-16 38 44)">` : ""}
+  <path class="p-patas" d="${q.patas}" stroke="${k}" stroke-width="${q.grosor}" stroke-linecap="round"/>
+  <g class="p-cola">${COLAS[nombre](c, k)}</g>
   <ellipse cx="${bx}" cy="${by}" rx="${brx}" ry="${bry}" fill="${c}" stroke="${k}" stroke-width="2"/>
   ${q.extra}
-  <g transform="translate(${q.cabeza}) scale(.95)">${CARITAS[nombre](c, k, p)}</g>
-  ${nombre === "chinchilla" ? `<g stroke="${k}">${BIGOTES_CHINCHILLA}</g>` : ""}`;
+  ${a && PROPS[nombre] ? PROPS[nombre](k) : ""}
+  <g class="p-cabeza" transform="translate(${q.cabeza}) scale(.95)${celebra ? " rotate(10 12 14)" : ""}">${CARITAS[nombre](c, k, p, a)}</g>
+  ${nombre === "chinchilla" ? `<g stroke="${k}">${BIGOTES_CHINCHILLA}</g>` : ""}${celebra ? "</g>" : ""}`;
 };
 
-/* El pingüino no vuela ni trota: cuerpo propio, parado y guatón. La panza
-   crema con la banda oscura en herradura cruzando el pecho es la segunda
-   seña del Humboldt (la primera va en la carita). Las aletas son elipses
-   pegadas al cuerpo que rotan según la pose: "volando" acá es el saltito
-   de nado con las aletas abiertas y las patas recogidas. */
-const cuerpoPinguino = (c, k, p) => {
+const cuerpoPinguino = (c, k, p, a) => {
   const ang = p === "celebrando" ? 150 : p === "volando" ? 95 : 14;
-  const aleta = (sx, s) => `<g transform="translate(${sx} 24.4) rotate(${s * ang})">
+  const aleta = (sx, s, cl) => `<g class="p-aleta ${cl}" transform="translate(${sx} 24.4) rotate(${s * ang})">
       <ellipse cx="0" cy="5.6" rx="2.1" ry="5.8" fill="${c}" stroke="${k}" stroke-width="1.8"/></g>`;
   return `
   ${p === "volando" ? "" : `<path d="M20.4 41.2l-2.1 3.4h4.6zM27.6 41.2l-2.1 3.4h4.6z"
-        fill="#F2778C" stroke="${k}" stroke-width="1.3" stroke-linejoin="round"/>`}
+        fill="${ROSA}" stroke="${k}" stroke-width="1.3" stroke-linejoin="round"/>`}
   <ellipse cx="24" cy="30" rx="10.6" ry="12.2" fill="${c}" stroke="${k}" stroke-width="2"/>
-  <ellipse cx="24" cy="31.6" rx="6.8" ry="9.2" fill="#FAF3E7"/>
+  <ellipse cx="24" cy="31.6" rx="6.8" ry="9.2" fill="${CREMA}"/>
   <path d="M17.6 25.6c1.3 3.5 3.5 5.2 6.4 5.2s5.1-1.7 6.4-5.2"
         fill="none" stroke="${c}" stroke-width="3" stroke-linecap="round"/>
-  ${aleta(15, -1)}${aleta(33, 1)}
-  <g transform="translate(12.8 1.1) scale(.93)">${CARITAS.pinguino(c, k, p)}</g>`;
+  ${a && p === "posada" ? PROPS.pinguino(k) : ""}
+  ${aleta(15, -1, "p-aleta-i")}${aleta(33, 1, "p-aleta-d")}
+  <g class="p-cabeza" transform="translate(12.8 1.1) scale(.93)">${CARITAS.pinguino(c, k, p, a)}</g>`;
 };
 
-/* ---------- API PÚBLICA ---------- */
+/* ---------- API ---------- */
+const clases = (nombre, opc) => `masc masc-${nombre}${opc.anima ? " anima" : ""}${opc.clase ? " " + opc.clase : ""}`;
+
 function carita(nombre, color = "currentColor", tamano = 24, opc = {}){
   const dibujo = CARITAS[nombre] || CARITAS.loica;
-  return `<svg viewBox="0 0 24 24" width="${tamano}" height="${tamano}"
-            aria-hidden="true" focusable="false">
-            ${dibujo(color, opc.tinta || TINTA_VAR, opc.pose || "posada")}</svg>`;
+  return `<svg class="${clases(nombre, opc)}" viewBox="0 0 24 24" width="${tamano}" height="${tamano}"
+            aria-hidden="true" focusable="false" data-pose="${opc.pose || "posada"}">
+            ${dibujo(color, opc.tinta || TINTA_VAR, opc.pose || "posada", opc.acc !== false)}</svg>`;
 }
 
 function cuerpo(nombre, color = "currentColor", tamano = 48, opc = {}){
   const clave = CARITAS[nombre] ? nombre : "loica";
-  const k = opc.tinta || TINTA_VAR, p = opc.pose || "posada";
-  const dibujo = clave === "pinguino" ? cuerpoPinguino(color, k, p)
-               : AVES.has(clave)      ? cuerpoAve(clave, color, k, p)
-                                      : cuerpoCuadrupedo(clave, color, k, p);
-  return `<svg viewBox="0 0 48 48" width="${tamano}" height="${tamano}"
-            aria-hidden="true" focusable="false">${dibujo}</svg>`;
+  const k = opc.tinta || TINTA_VAR, p = opc.pose || "posada", a = opc.acc !== false;
+  const dibujo = clave === "pinguino" ? cuerpoPinguino(color, k, p, a)
+               : AVES.has(clave)      ? cuerpoAve(clave, color, k, p, a)
+                                      : cuerpoCuadrupedo(clave, color, k, p, a);
+  return `<svg class="${clases(clave, opc)}" viewBox="0 0 48 48" width="${tamano}" height="${tamano}"
+            aria-hidden="true" focusable="false" data-pose="${p}">${dibujo}</svg>`;
 }
 
-/* El punto de corte son 38px: bajo eso el cuerpo entero es una mancha y la
-   carita gana; sobre eso la carita sola se ve como una cabeza cortada. */
 function mascota(nombre, color, tamano = 24, opc = {}){
-  return tamano < 38 ? carita(nombre, color, tamano, opc)
-                     : cuerpo(nombre, color, tamano, opc);
+  return tamano < 38 ? carita(nombre, color, tamano, opc) : cuerpo(nombre, color, tamano, opc);
 }
 
 /* ---------- CATEGORÍAS ----------
@@ -576,7 +609,7 @@ const TEXTOS = {
     buscarBorrar:"Borrar la búsqueda", buscarSin:"Nada con esa palabra",
     buscarSinPista:"Prueba con el nombre del local o de la comuna",
     filtrosAfinar:"Afinar", afinarTodo:"Todo", filtrosLimpiar:"Limpiar filtros",
-    cuando:"Cuándo", donde:"Dónde", precio:"Precio", ir:"Ver en la fuente original",
+    cuando:"Cuándo", donde:"Dónde", precio:"Precio", sinPrecio:"Precio en la fuente", ir:"Ver en la fuente original",
     vacio:"No hay eventos con esos filtros", vaciopista:"Prueba sacando algún filtro",
     aprox:"Ubicación aproximada: centro de la comuna", sinUbicar:"Dirección por confirmar — revísala en la fuente", fuente:"Información publicada por",
     libre:"Entrada liberada", verMapa:"Ver en el mapa", cerrar:"Cerrar",
@@ -645,7 +678,7 @@ const TEXTOS = {
     buscarBorrar:"Clear the search", buscarSin:"Nothing matches that word",
     buscarSinPista:"Try the name of the venue or the district",
     filtrosAfinar:"Narrow down", afinarTodo:"All", filtrosLimpiar:"Clear filters",
-    cuando:"When", donde:"Where", precio:"Price", ir:"View original source",
+    cuando:"When", donde:"Where", precio:"Price", sinPrecio:"Price at source", ir:"View original source",
     vacio:"No events match these filters", vaciopista:"Try removing a filter",
     aprox:"Approximate location: district centre", sinUbicar:"Address to be confirmed — check the source", fuente:"Information published by",
     libre:"Free entry", verMapa:"See on the map", cerrar:"Close",
@@ -714,7 +747,7 @@ const TEXTOS = {
     buscarBorrar:"Limpar a busca", buscarSin:"Nada com essa palavra",
     buscarSinPista:"Tente o nome do local ou da comuna",
     filtrosAfinar:"Refinar", afinarTodo:"Tudo", filtrosLimpiar:"Limpar filtros",
-    cuando:"Quando", donde:"Onde", precio:"Preço", ir:"Ver na fonte original",
+    cuando:"Quando", donde:"Onde", precio:"Preço", sinPrecio:"Preço na fonte", ir:"Ver na fonte original",
     vacio:"Nenhum evento com esses filtros", vaciopista:"Tente remover algum filtro",
     aprox:"Localização aproximada: centro da comuna", sinUbicar:"Endereço a confirmar — veja na fonte", fuente:"Informação publicada por",
     libre:"Entrada gratuita", verMapa:"Ver no mapa", cerrar:"Fechar",
@@ -911,7 +944,7 @@ function pintarBarra(paginaActual, raiz = ""){
   const claveActual = (PAGINAS.find(([url]) => url === paginaActual) || [,"portada"])[1];
   document.documentElement.dataset.pagina = claveActual;
   const logo = `<a class="logo" href="${raiz}index.html" aria-label="Loica">
-      ${carita("loica", "var(--acento)", 34)}<b>loica</b></a>`;
+      ${carita("loica", "var(--acento)", 34, {acc:false})}<b>loica</b></a>`;
   const enlaces = PAGINAS
     .map(([url,clave]) => `<a href="${raiz}${url}" data-tr="${clave}"
         ${url===paginaActual?'aria-current="page"':""}>${t(clave)}</a>`).join("");
@@ -1523,10 +1556,12 @@ function tarjetaEvento(ev, alPulsar){
   boton.className = "tarjeta" + (ev.gratis ? " tarjeta-gratis" : "");
   boton.type = "button";
   boton.innerHTML = `
-    <div class="miniatura">
-      ${carita(info.mascota, info.hex, 44)}
-      ${urlSegura(ev.imagen) ? `<img src="${escapar(urlSegura(ev.imagen))}" alt="" loading="lazy"
-                       onerror="this.remove()">` : ""}
+    <div class="mini-caja">
+      <div class="miniatura">
+        ${carita(info.mascota, info.hex, 44)}
+        ${urlSegura(ev.imagen) ? `<img src="${escapar(urlSegura(ev.imagen))}" alt="" loading="lazy"
+                         onerror="this.remove()">` : ""}
+      </div>
       <span class="dia${dia.pronto ? " pronto" : ""}">${dia.texto}</span>
     </div>
     <div class="tarjeta-cuerpo">
@@ -1539,10 +1574,16 @@ function tarjetaEvento(ev, alPulsar){
       ${cadencia(ev) ? `<div class="tarjeta-meta cadencia">↻ ${escapar(cadencia(ev))}</div>` : ""}
       ${corre ? `<div class="tarjeta-meta cadencia">→ ${escapar(hastaCuando(ev))}</div>` : ""}
     </div>
-    <div class="precio${ev.gratis ? " libre" : precio ? "" : " sin-dato"}">${precio || "—"}</div>`;
+    <div class="precio${ev.gratis ? " libre" : precio ? "" : " sin-dato"}">${precio || escapar(t("sinPrecio"))}</div>`;
 
   boton.onclick = () => alPulsar(ev);
   return boton;
+}
+
+/* Las filas de carga: la forma de la tarjeta, sin datos, latiendo. */
+function esqueleto(n = 3){
+  return Array.from({length:n}, () => `<div class="esqueleto" aria-hidden="true">
+    <i class="e-mini"></i><div class="e-txt"><i></i><i></i><i></i></div><i class="e-precio"></i></div>`).join("");
 }
 
 /* ---------- DESCUENTOS DE BANCO ----------
@@ -1611,8 +1652,8 @@ function tarjetaDescuento(d, alPulsar){
      ancho de banda al mismo servidor para decorar sería incoherente. El logo
      sí va en la ficha, que es UNA imagen y solo cuando alguien la pide. */
   boton.innerHTML = `
-    <div class="miniatura">
-      ${carita("guaren", b.color, 44)}
+    <div class="mini-caja">
+      <div class="miniatura">${carita("guaren", b.color, 44)}</div>
       <span class="dia${dia.hoy ? " pronto" : ""}">${escapar(dia.texto)}</span>
     </div>
     <div class="tarjeta-cuerpo">

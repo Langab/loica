@@ -32,7 +32,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=22">
+<link rel="stylesheet" href="loica.css?v=23">
 <style>
   body{overflow-x:hidden}
 
@@ -105,17 +105,18 @@
     position:absolute;inset:auto 0 18px 0;display:flex;align-items:flex-end;
     justify-content:center;gap:clamp(2px,2.4vw,22px);padding:0 var(--e-3);
   }
+  /* Ya no marchan todos con el mismo balanceo: cada animal entra a escena
+     con su propia historia (el Degú sale de la tierra, la Chinchilla llega
+     tarde y aplaude) y después se queda con su tic. Eso vive en loica.css
+     (MASCOTAS: partes y tics); acá solo el botón. */
   .desfile .bicho-hero{
     display:block;background:none;border:0;padding:0;cursor:pointer;
-    animation:pasear 3.2s ease-in-out infinite;transform-origin:bottom center;
-    transition:transform var(--rebote);
+    transform-origin:bottom center;transition:transform var(--rebote);
   }
   .desfile .bicho-hero:hover{transform:translateY(-10px) scale(1.08)}
   /* Nueve animales: a 375px, nueve por 40px más los espacios se pasaban del
      ancho de la pantalla y el último quedaba cortado por la mitad. */
   .desfile .bicho-hero svg{width:clamp(33px,9vw,74px);height:auto}
-  @keyframes pasear{0%,100%{transform:translateY(0) rotate(-1.5deg)}
-                    50%{transform:translateY(-7px) rotate(1.5deg)}}
 
   /* La anfitriona. Llega volando desde fuera de la pantalla, aterriza al
      lado del título y el globo aparece después: primero se posa, después
@@ -428,7 +429,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
-<script src="loica.js?v=22"></script>
+<script src="loica.js?v=23"></script>
 <script>
 /* La raíz del sitio era el mapa hasta este cambio, así que hay links dando
    vueltas por WhatsApp con la forma `.../#/e/<id>`. Se reenvían al mapa en vez
@@ -473,7 +474,7 @@ function pintarPortada(){
   const globo = document.getElementById("loica-globo");
   globo.textContent = t("pSaludo");
   const posarse = () => {
-    guia.innerHTML = cuerpo("loica", "var(--acento)", 224);
+    guia.innerHTML = cuerpo("loica", "var(--acento)", 224, {anima:true});
     guia.classList.add("posada");
     globo.classList.add("visible");
   };
@@ -481,17 +482,26 @@ function pintarPortada(){
     guia.dataset.lista = "1";
     if(matchMedia("(prefers-reduced-motion: reduce)").matches) posarse();
     else{
-      guia.innerHTML = cuerpo("loica", "var(--acento)", 224, {pose:"volando"});
+      guia.innerHTML = cuerpo("loica", "var(--acento)", 224, {pose:"volando", anima:true});
       guia.addEventListener("animationend", posarse, {once:true});
     }
   }
 
-  // El desfile: los siete, cada uno con su fase para que no marchen igual
-  document.getElementById("desfile").innerHTML = ELENCO.map((a, i) =>
-    `<button class="bicho-hero" style="animation-delay:${(i * .27).toFixed(2)}s"
+  // El desfile: los once, cada uno con su retardo (--d) para que entren de a
+  // uno y no parpadeen al mismo tiempo. `entra` dispara las entradas y se va
+  // a los 4,3 s para que los tics de reposo tomen el relevo (las dos
+  // animaciones se disputan el mismo `animation` del SVG).
+  const desfile = document.getElementById("desfile");
+  desfile.innerHTML = ELENCO.map((a, i) =>
+    `<button class="bicho-hero" style="--d:${(i * .22).toFixed(2)}s"
              data-ir="${a.clave}" title="${escapar(a[IDIOMA][0])}"
              aria-label="${escapar(a[IDIOMA][0])} — ${escapar(a[IDIOMA][1])}">
-       ${cuerpo(a.clave, a.hex, 74)}</button>`).join("");
+       ${cuerpo(a.clave, a.hex, 74, {anima:true})}</button>`).join("");
+  if(!desfile.dataset.entro){
+    desfile.dataset.entro = "1";
+    desfile.classList.add("entra");
+    setTimeout(() => desfile.classList.remove("entra"), 4300);
+  }
   // Antes solo bajaban la página hasta el elenco. Ahora abren la ficha del
   // animal directamente: es el mismo gesto y responde la pregunta que uno se
   // hace al ver la fila de bichos, que es "¿y este quién es?".
@@ -521,7 +531,7 @@ function pintarPortada(){
   document.getElementById("elenco").innerHTML = ELENCO.map(a =>
     `<button class="bicho" type="button" data-bicho="${a.clave}"
              style="--tono:${a.hex};--tono-tinta:${a.tinta}">
-       ${cuerpo(a.clave, a.hex, 96)}
+       ${cuerpo(a.clave, a.hex, 96, {anima:true})}
        <b>${escapar(a[IDIOMA][0])}</b>
        <span class="rol">${escapar(a[IDIOMA][1])}</span>
        <p>${escapar(a[IDIOMA][2])}</p>
@@ -570,7 +580,7 @@ function abrirBicho(clave){
   // El animal grande va en tinta fija: la cabecera es de color pleno y en modo
   // oscuro el contorno crema sobre el color se perdía.
   document.getElementById("fb-cabeza").innerHTML =
-    cuerpo(clave, a.hex, 132, {tinta:"#1E2A4A", pose:"celebrando"});
+    cuerpo(clave, a.hex, 132, {tinta:"#1E2A4A", pose:"celebrando", anima:true});
   document.getElementById("fb-rol").textContent = rol;
   document.getElementById("fb-nombre").textContent = nombre;
   document.getElementById("fb-oficio").textContent = oficio;

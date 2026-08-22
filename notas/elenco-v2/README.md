@@ -1,5 +1,7 @@
 # Elenco v2 — prototipo (22-08-2026)
 
+**Integrado al sitio el mismo 22-08-2026** (paso 1 del plan): el bloque de mascotas de `web/loica.js` es este `v2.js`, el CSS de partes y tics está al final de `web/loica.css`, el logo va con `{acc:false}` y el desfile de la portada usa las entradas. Esta carpeta queda como referencia y banco de pruebas.
+
 Los once animales guía de `web/loica.js`, con un accesorio por animal, partes
 con clase para animarlas por CSS y una entrada por animal. La propuesta
 completa (desfile, carnets, dónde actúan, reglas, plan) está publicada como
