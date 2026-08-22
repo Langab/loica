@@ -1,6 +1,6 @@
 {
- "generado": "2026-08-21T22:19:53",
- "total": 1629,
+ "generado": "2026-08-21T22:37:11",
+ "total": 1630,
  "talleres": [
   {
    "id": "bf9b4c354e93637b",
@@ -19313,6 +19313,34 @@
    "dias_semana": [
     5
    ]
+  },
+  {
+   "id": "ecf5e32575a0a8ff",
+   "titulo": "Seminario Traspaso de Experiencias Metodológicas y Producción Artística del Teatro Musical Social",
+   "inicio": "2026-08-29T10:30:00",
+   "fin": "2026-10-03T10:30:00",
+   "lugar": "Centro Cultural Chimkowe, Av. Grecia 8787",
+   "direccion": "Av. Grecia 8787",
+   "comuna": "Peñalolén",
+   "lat": -33.47727,
+   "lon": -70.5412,
+   "precision": "correccion",
+   "gratis": false,
+   "precio": null,
+   "precio_texto": "",
+   "categoria": "teatro",
+   "subcategoria": "",
+   "escala": "",
+   "publico": "todos",
+   "descripcion": "",
+   "imagen": "",
+   "fuente": "Municipalidad de Penalolen",
+   "url": "https://chimkowe.cl/centro-cultural-chimkowe-invita-a-un-seminario-de-teatro-musical-social-junto-a-la-compania-hermanos-ibarra-roa/",
+   "dias_semana": [
+    5
+   ],
+   "sesiones": 5,
+   "formato": "taller"
   },
   {
    "id": "ab480ee99b861a5e",
