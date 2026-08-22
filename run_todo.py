@@ -27,9 +27,13 @@ nada más.
 
 REGLA IMPORTANTE — sólo se comitea lo que produce el pipeline
 =============================================================
-Corre sin nadie mirando a las 11:00, así que NUNCA hace `git add -A`: si en
-ese momento hay un archivo a medio editar, un `add -A` se lo llevaría al
-repositorio. Se agregan únicamente las rutas de RUTAS_PUBLICABLES.
+Corre sin nadie mirando, así que NUNCA hace `git add -A`: si en ese momento
+hay un archivo a medio editar, un `add -A` se lo llevaría al repositorio. Se
+agregan únicamente las rutas de RUTAS_PUBLICABLES.
+
+Dónde corre: en GitHub Actions (.github/workflows/corrida.yml), todos los
+días, sin depender de ningún computador prendido. Este mismo script sirve
+en el Mac para probar (`--sin-publicar`) o para publicar a mano.
 """
 
 from __future__ import annotations
@@ -43,8 +47,22 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent
 
 # Lo único que esta corrida tiene derecho a comitear: su propia salida.
+#
+# Desde que la corrida vive en GitHub Actions, la salida incluye el ESTADO:
+# la copia de la base (datos/eventos.jsonl), la caché de coordenadas, el
+# historial del diagnóstico y las colas de revisión. Un runner nuevo cada
+# día no recuerda nada; lo que no esté en git mañana no existe.
 RUTAS_PUBLICABLES = ["web/eventos.json", "web/talleres.json",
-                     "web/descuentos.json", "web/e", "datos/manual"]
+                     "web/descuentos.json", "web/e", "datos/manual",
+                     "datos/eventos.jsonl", "datos/coordenadas.json",
+                     "datos/historial_corridas.json", "datos/revision"]
+
+# Archivos que cada corrida regenera enteros: en un choque entre dos corridas
+# no hay nada que fusionar, gana la más nueva.
+GENERADOS = {"web/eventos.json", "web/talleres.json", "web/descuentos.json",
+             "datos/eventos.jsonl", "datos/coordenadas.json",
+             "datos/historial_corridas.json"}
+PREFIJOS_GENERADOS = ("web/e/", "datos/revision/")
 
 
 def _correr(comando: list[str], titulo: str) -> bool:
@@ -125,9 +143,8 @@ def _resolver_generados() -> bool:
     if not conflictivos:
         return False
 
-    generados = {"web/eventos.json", "web/descuentos.json"}
     ajenos = [f for f in conflictivos
-              if f not in generados and not f.startswith("web/e/")]
+              if f not in GENERADOS and not f.startswith(PREFIJOS_GENERADOS)]
     if ajenos:
         print(f"  El conflicto toca archivos que no son generados: {', '.join(ajenos[:4])}")
         return False
@@ -151,6 +168,14 @@ def _resolver_generados() -> bool:
 def paso_publicar() -> bool:
     """Comitea y sube SOLO la salida del pipeline."""
     print(f"\n{'=' * 62}\n  7/7  Publicar\n{'=' * 62}", flush=True)
+
+    # La base es local; lo que se publica es su copia. run_diario ya la
+    # volcó al terminar, pero con --solo-publicar no corrió: se vuelca acá
+    # igual, que es barato y deja la copia siempre igual a la base.
+    from loica.almacen import Almacen
+    almacen = Almacen()
+    print(f"  Estado volcado a {almacen.volcar().relative_to(RAIZ)}")
+    almacen.cerrar()
 
     existentes = [r for r in RUTAS_PUBLICABLES if (RAIZ / r).exists()]
     if not existentes:

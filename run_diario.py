@@ -259,6 +259,9 @@ def main() -> int:
             log.info("Marcados como caducados: %d eventos pasados", caducados)
         ruta = escribir_informe(almacen, estadisticas, total)
         log.info("Informe: %s", ruta)
+        # La base es local; lo que viaja en git (y lo que la nube necesita
+        # mañana) es esta copia. Se vuelca al final de cada corrida.
+        log.info("Estado volcado a %s", almacen.volcar())
         almacen.cerrar()
 
     nuevos_total = sum(e["nuevos"] for e in estadisticas)

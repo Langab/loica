@@ -1,0 +1,137 @@
+name: Corrida diaria de eventos
+
+# La corrida completa (run_todo.py) vivía en el Mac con launchd, y un Mac
+# apagado no corre nada. Acá corre en GitHub, en un runner que nace vacío cada
+# día. Todo lo que la corrida necesita recordar viaja en git —la copia de la
+# base (datos/eventos.jsonl), la caché de coordenadas, el historial del
+# diagnóstico y las colas de revisión— y el índice local de OpenStreetMap se
+# baja del release `indice-osm` del propio repositorio. Es Python puro: no
+# llama a ningún modelo de lenguaje, no consume tokens, y en un repositorio
+# público los minutos de Actions no cuestan.
+#
+# Correrla a mano: pestaña Actions → "Corrida diaria de eventos" → Run workflow,
+# eligiendo el modo. O desde la terminal:
+#     gh workflow run corrida.yml -f modo=sin-publicar
+
+on:
+  workflow_dispatch:
+    inputs:
+      modo:
+        description: "completo publica · sin-publicar deja el sitio y los informes como artefactos · probar solo lista lo que traería cada fuente"
+        type: choice
+        options: [completo, sin-publicar, probar]
+        default: completo
+  push:
+    branches: [main]
+    paths:
+      # Subir el CSV de la extracción asistida (Passline) dispara la corrida:
+      # el dato entra al sitio sin esperar a mañana ni prender ningún Mac.
+      - "datos/manual/*.csv"
+      - "datos/manual/*.yaml"
+      - "datos/manual/*.yml"
+
+permissions:
+  contents: write   # run_todo.py comitea y pushea su salida
+  actions: write    # para avisarle a pages.yml después de publicar
+
+concurrency:
+  group: corrida
+  cancel-in-progress: false
+
+env:
+  # El pipeline trabaja en hora de Chile: "hoy", vigencia, nombres de informes.
+  # El runner está en UTC y sin esto el día cambiaría a las 21:00 de Santiago.
+  TZ: America/Santiago
+  # Vacía hasta que exista la key (Settings → Secrets and variables → Actions).
+  # La fuente sigue apagada en config/fuentes.yaml mientras tanto.
+  TICKETMASTER_API_KEY: ${{ secrets.TICKETMASTER_API_KEY }}
+
+jobs:
+  corrida:
+    runs-on: ubuntu-latest
+    # Una corrida normal dura 45-60 minutos. Las 11 horas de la del 21-08-2026
+    # fueron el Mac durmiendo entre fuente y fuente, no la extracción. El tope
+    # de GitHub es 6 horas.
+    timeout-minutes: 330
+    steps:
+      # Acciones fijadas por SHA y no por etiqueta: `@v4` es móvil y quien
+      # controle el repositorio de la acción podría reapuntarla a otro commit,
+      # que correría acá con permiso de escribir en main. El comentario al lado
+      # dice qué versión es, para que actualizar siga siendo legible.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      # 24 MB que se reconstruyen un par de veces al año con
+      # scripts/construir_indice_osm.py y se suben con
+      #     gh release upload indice-osm datos/indice_osm.db --clobber
+      - name: Bajar el índice local de OpenStreetMap
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download indice-osm --pattern indice_osm.db --dir datos --clobber
+          python3 -c "import sqlite3; c = sqlite3.connect('datos/indice_osm.db'); print('direcciones en el índice:', c.execute('select count(*) from direcciones').fetchone()[0])"
+
+      - name: Identidad del commit
+        run: |
+          git config user.name  "loica-bot"
+          git config user.email "bot@loica.cl"
+
+      - name: Corrida
+        id: corrida
+        run: |
+          echo "antes=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          case "${{ inputs.modo || 'completo' }}" in
+            probar)        python3 run_diario.py --probar ;;
+            sin-publicar)  python3 run_todo.py --sin-publicar ;;
+            *)             python3 run_todo.py ;;
+          esac
+
+      # Un push hecho con el token del workflow NO dispara otros workflows (es
+      # la regla de GitHub contra los bucles), así que pages.yml no se entera
+      # del commit de la corrida y hay que pedirle que publique. Solo desde la
+      # rama principal: una corrida de prueba en otra rama no toca el sitio.
+      - name: Publicar en Pages
+        if: success() && github.ref_name == github.event.repository.default_branch && (github.event_name == 'push' || inputs.modo == 'completo')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "$(git rev-parse HEAD)" = "${{ steps.corrida.outputs.antes }}" ]; then
+            echo "La corrida no hizo commit: el sitio no cambió."
+          else
+            gh workflow run pages.yml --ref "${{ github.ref_name }}"
+            echo "Pages avisado."
+          fi
+
+      # El informe del día queda en la pestaña de la corrida, legible sin bajar nada.
+      - name: Resumen de la corrida
+        if: always()
+        run: |
+          hoy=$(date +%F)
+          {
+            echo "## Corrida del $hoy · modo ${{ inputs.modo || 'completo' }}"
+            for informe in "informes/${hoy}_corrida.md" "informes/${hoy}_revision.md"; do
+              if [ -f "$informe" ]; then echo; cat "$informe"; fi
+            done
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # Lo que en el Mac quedaba en informes/ (fuera de git) acá queda como
+      # artefacto de la corrida durante 30 días: el Excel de diagnóstico,
+      # los informes y el sitio tal como se habría publicado.
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        if: always()
+        with:
+          name: corrida-${{ github.run_number }}
+          path: |
+            informes/
+            datos/revision/
+            web/eventos.json
+            web/talleres.json
+            web/descuentos.json
+          retention-days: 30
+          if-no-files-found: ignore

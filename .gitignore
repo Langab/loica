@@ -3,6 +3,15 @@ datos/*
 # (eventos de Passline, Instagram o un afiche), no dato generado como la
 # caché, los logs o la base.
 !datos/manual/
+# El ESTADO de la corrida también va: la corrida vive en GitHub Actions, en un
+# runner que nace vacío cada día, y lo que no esté en git mañana no existe.
+# La base SQLite sigue fuera (binaria, cambia entera); viaja su copia en JSONL.
+!datos/eventos.jsonl
+!datos/coordenadas.json
+!datos/historial_corridas.json
+!datos/revision/
+datos/revision/*
+!datos/revision/pendientes_*.yaml
 informes/
 __pycache__/
 *.pyc

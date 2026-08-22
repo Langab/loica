@@ -1,0 +1,158 @@
+# Cola de EVENTOS en categoría 'otros' — revisión del 2026-08-21.
+# Ponles la categoría que corresponda (idiomas, familia, feria, deporte,
+# fiesta, cine, teatro, musica, arte, clases, aire_libre, charla) o
+# descartar: true si no son un panorama, y pégalos en
+# config/correcciones/eventos.yaml bajo `eventos:`.
+# OJO: si el error se repite (misma palabra, mismo tipo de evento), el
+# arreglo de verdad va en loica/clasificar.py, no acá.
+
+eventos:
+  # ¡Únete a la Famiglia! – Campaña de Abonados Audax Italiano | Ticketplus | 2025-06-11
+  6d683830fa12cc38:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # Taste Society | Ticketplus | 2026-05-23
+  c28579de0da6de2f:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # Abono M. Puente Alto 2026 | Ticketplus | 2026-06-25
+  331b6e311f4b8420:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # Membresía Anual Sala Nemesio | Ticketplus | 2026-07-06
+  6597146d2b3b49af:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # Liga Ex Tabancura | Ticketplus | 2026-07-08
+  729a0fa0bfad2114:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # Fondo Juventud y Acción Climática 2026 | Corporacion Cultural de Lo Bar | 2026-07-22
+  420f633920da1fe2:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # Spiderman | Ticketplus | 2026-07-25
+  d32e374f33f8f840:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # PA$$$TA(YO)BA$$$E!!!! | Ticketplus | 2026-07-31
+  7c9c10c9a6fb2002:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # “NO SÉ. BECKETT” | Ticketplus | 2026-08-05
+  ad09d91973380b9e:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # Diamanti | Ticketplus | 2026-08-06
+  e691172e5d6e4684:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # "La Misión, recuerdo de una revolución" de DETUCH | Ticketplus | 2026-08-07
+  89a9c92d53ad29d9:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # JUANA, SE PERDIÓ LA CHANCHA | Ticketplus | 2026-08-07
+  90df39fa09bb6073:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # Cornisa | Ticketplus | 2026-08-08
+  e6d4b3311be6b79c:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # Ánimas de día Claro | Ticketplus | 2026-08-14
+  c7e5458384c8152b:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # Entre Cuatro Paredes | Ticketplus | 2026-08-19
+  f4514bcac55c1078:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # La Muerte de Robin Hood | Ticketplus | 2026-08-20
+  ca39c0f7e73b233b:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # La Negociación | Ticketplus | 2026-08-20
+  a03e07399c49d78a:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # Locamente | Ticketplus | 2026-08-20
+  5772911342a2669e:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # Milonga Jueves 20 Agosto 21hrs | Ticketplus | 2026-08-20
+  ae660402ac43b9ec:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # Café con Autor: Josefina Errázuriz | Corporacion Cultural de Vitacu | 2026-08-21
+  889a1d9a8eb16532:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # Leer y jugar: Provocaciones lectoras para mi hermanita/o | Biblioteca de Santiago | 2026-08-21
+  59c340ec548d9287:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # Habitar desde el papel: Encuentro de collage con Tremendas | Museo Violeta Parra | 2026-08-21
+  c13599c22511f379:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # INNDRIVE BOTANICO - GEMINIS WINTER SESSION | Passline | 2026-08-21
+  a3faeac9a41f5343:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # Daniel Muñoz y Los Concho’ e Vino | Passline | 2026-08-21
+  54874f48b78d12bf:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # Pank en Happy People (+18) | Passline | 2026-08-21
+  ce5a228e111dac53:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # RANCHO URBANO II | Passline | 2026-08-21
+  86e440b2928bc1c8:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # Cuentos y cantos brujos: Noche campesina con curanto en olla | Ticketplus | 2026-08-21
+  5620a6a4a613b513:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # Jorge Alís-MALON - viernes 21 Agosto 20 hrs | Ticketplus | 2026-08-21
+  d7395cd07b3fd835:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # Aura ★ VIERNES 21 AGOSTO ★ (+24) | Passline | 2026-08-21
+  8610db8417639c4b:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21
+
+  # Audax Italiano vs Unión La Calera / Liga de Primera Mercado Libre / Fe | Ticketplus | 2026-08-21
+  a5eca3a1ecef972d:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-21

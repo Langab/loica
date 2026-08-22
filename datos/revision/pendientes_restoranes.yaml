@@ -1,0 +1,338 @@
+# Cola de RESTORANES con descuento — revisión del 2026-08-21.
+# Arriba los sin ubicación (completar direccion/comuna/lat/lon), abajo
+# los sin tipo de cocina (completar cocina). Pegar en
+# config/correcciones/restoranes.yaml bajo `restoranes:`.
+# El match es EXACTO por nombre: 'Sushi Home' no corrige a
+# 'Sushi Home Ñuñoa'.
+
+restoranes:
+  # 18 descuentos sin pin exacto (Banco de Chile)
+  La Fête Chocolat:
+    direccion: Local 5, Piso 1
+    comuna: Lo Barnechea
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 5 descuentos sin pin exacto (Banco de Chile)
+  Dunkin’:
+    direccion: Av. Libertador Bernardo OHiggins 3322-3350 Mall Arauco Estación, Local 0117
+    comuna: Estación Central
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 3 descuentos sin pin exacto (Cencosud, Entel, Santander)
+  Burger King:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 3 descuentos sin pin exacto (Banco de Chile)
+  Domino’s Pizza:
+    direccion: Av. Irarrazabal 2087
+    comuna: Ñuñoa
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 3 descuentos sin pin exacto (Banco de Chile)
+  Starbucks:
+    direccion: Aeropuerto Arturo Merino Benítez (Embarque Internacional, b215)
+    comuna: Pudahuel
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 3 descuentos sin pin exacto (Banco de Chile)
+  Sushiban:
+    direccion: Nueva Los Leones 0252
+    comuna: Providencia
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 3 descuentos sin pin exacto (Banco de Chile)
+  Fagotto:
+    direccion: local 6
+    comuna: Santiago
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 2 descuentos sin pin exacto (Cencosud, Entel)
+  Rappi:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 2 descuentos sin pin exacto (Banco Falabella, Entel)
+  Boost:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 2 descuentos sin pin exacto (Banco de Chile, Santander)
+  CuracaRibs:
+    direccion: Ruta 68 km 45.500 km 45,5
+    comuna: Curacaví
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 2 descuentos sin pin exacto (Banco Falabella, Entel)
+  Doggis:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 2 descuentos sin pin exacto (Banco Falabella, Entel)
+  Dunkin:
+    direccion: Av. Libertador Bernardo OHiggins 3322-3350 Mall Arauco Estación, Local 0117
+    comuna: Estación Central
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 2 descuentos sin pin exacto (Banco Falabella, Entel)
+  Juan Maestro:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 2 descuentos sin pin exacto (Banco Falabella, Entel)
+  Just Burger:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 2 descuentos sin pin exacto (Cencosud, Santander)
+  Melt Pizzas:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 2 descuentos sin pin exacto (Banco Falabella, Santander)
+  Streat Burger:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 2 descuentos sin pin exacto (Banco Falabella, Entel)
+  Tommy Beans:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 2 descuentos sin pin exacto (Banco Falabella, Santander)
+  Vapiano:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 2 descuentos sin pin exacto (Banco de Chile)
+  MARLEY COFFEE:
+    direccion: Avenida Concha y Toro 1149, 1er nivel, pasillo central
+    comuna: Maipú
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 2 descuentos sin pin exacto (Banco de Chile, Santander)
+  Al Pesto:
+    direccion: Av. Chicureo Km 2
+    comuna: Colina
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 2 descuentos sin pin exacto (Cencosud, Entel)
+  Papa Johns:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 2 descuentos sin pin exacto (Banco de Chile)
+  Pastelería Riesco:
+    direccion: Avenida Presidennte Rieesco #3471
+    comuna: Las Condes
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 2 descuentos sin pin exacto (Banco de Chile, Entel)
+  OAKBERRY:
+    direccion: Armando Cortinez Norte 11501
+    comuna: Pudahuel
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 2 descuentos sin pin exacto (Banco de Chile)
+  Europa Secreta:
+    direccion: local 2
+    comuna: Vitacura
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 1 descuentos sin pin exacto (Banco de Chile)
+  Viña Undurraga:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 1 descuentos sin pin exacto (Santander)
+  Punta del Sol:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 1 descuentos sin pin exacto (Banco Falabella)
+  Anima Cocktail Lab:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 1 descuentos sin pin exacto (Santander)
+  Aquality:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 1 descuentos sin pin exacto (Banco Falabella)
+  Badass:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 1 descuentos sin pin exacto (Banco Falabella)
+  Bar Enigma:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # ---- sin tipo de cocina ----
+  Buffet Express:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Cassis:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Kechua:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Rishtedar:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  CuracaRibs:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  El Taller:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  La Maestranza:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  La Yunta:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Delivery Gourmet:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Rocoto:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Green Lab:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Rappi:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Demencia:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Exò Nuit:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Gatopardo Bistró:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Holy Moly:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Jardín Mallinkrodt:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Jeronimo:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  La Cabrera:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Lovdo:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Majestic:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Santa Brasa:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Vapiano:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Al Pesto:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Gregoria Cocina:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Papa Johns:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  AquaChile:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  CARAMAGNOLA:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  SABOR X2:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Saki:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)

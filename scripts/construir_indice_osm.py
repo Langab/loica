@@ -157,6 +157,10 @@ def construir() -> None:
     con.close()
     print(f"Índice listo: {RUTA_DB}")
     print(f"  {len(rec.direcciones):,} direcciones y {len(rec.locales):,} locales de la RM")
+    print()
+    print("La corrida diaria corre en GitHub Actions y baja este archivo del release")
+    print("`indice-osm` del repositorio. Para que use el índice nuevo, subirlo:")
+    print("    gh release upload indice-osm datos/indice_osm.db --clobber")
 
 
 def main() -> int:

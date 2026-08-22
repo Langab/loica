@@ -6,13 +6,27 @@ pie, este mismo esquema se sube a Supabase (las columnas ya calzan).
 
 from __future__ import annotations
 
+import hashlib
+import json
+import logging
 import sqlite3
 from datetime import datetime, date
 from pathlib import Path
 
 from .modelo import Evento
 
+log = logging.getLogger("loica.almacen")
+
 RUTA_DB = Path(__file__).resolve().parent.parent / "datos" / "eventos.db"
+
+# La copia de la base que viaja en git. La SQLite es local y no se versiona
+# (es binaria y cambia entera cada día); esto es la misma tabla `eventos`, una
+# línea JSON por evento, ordenada por hash para que el diff de cada corrida
+# muestre solo lo que cambió. Es lo que permite que la corrida viva en GitHub
+# Actions, donde cada día se parte de un runner vacío: se restaura desde acá,
+# se trabaja en SQLite y al final se vuelve a volcar. En el Mac cumple el rol
+# inverso: después de `git pull`, la base local se pone al día sola.
+RUTA_ESTADO = Path(__file__).resolve().parent.parent / "datos" / "eventos.jsonl"
 
 # Un evento sigue vigente mientras no haya TERMINADO. La vigencia se medía por
 # `inicio`, y con eso una exposición que abrió el 18 de julio y cierra el 27 de
@@ -68,17 +82,103 @@ CREATE TABLE IF NOT EXISTS corridas (
     error           TEXT,
     duracion_seg    REAL
 );
+
+-- Qué copia de datos/eventos.jsonl tiene cargada esta base (ver volcar).
+CREATE TABLE IF NOT EXISTS meta (
+    clave   TEXT PRIMARY KEY,
+    valor   TEXT
+);
 """
 
 
 class Almacen:
-    def __init__(self, ruta: Path | str = RUTA_DB):
+    def __init__(self, ruta: Path | str = RUTA_DB,
+                 ruta_estado: Path | str = RUTA_ESTADO):
         self.ruta = Path(ruta)
+        self.ruta_estado = Path(ruta_estado)
         self.ruta.parent.mkdir(parents=True, exist_ok=True)
         self.con = sqlite3.connect(self.ruta)
         self.con.row_factory = sqlite3.Row
         self.con.executescript(ESQUEMA)
         self.con.commit()
+        self._restaurar_si_hace_falta()
+
+    # -- la copia que viaja en git ------------------------------------------
+    def _huella_estado(self) -> str | None:
+        if not self.ruta_estado.exists():
+            return None
+        return hashlib.sha1(self.ruta_estado.read_bytes()).hexdigest()
+
+    def _meta(self, clave: str) -> str | None:
+        fila = self.con.execute("SELECT valor FROM meta WHERE clave = ?", (clave,)).fetchone()
+        return fila[0] if fila else None
+
+    def _poner_meta(self, clave: str, valor: str) -> None:
+        self.con.execute("INSERT OR REPLACE INTO meta (clave, valor) VALUES (?, ?)",
+                         (clave, valor))
+
+    def _restaurar_si_hace_falta(self) -> None:
+        """Carga datos/eventos.jsonl cuando la base no lo tiene todavía.
+
+        Se decide por la huella del archivo y no por su fecha: `git pull` le
+        pone al archivo la hora del pull, no la del dato. Si la huella es la
+        misma que se guardó al volcar, la base ya tiene exactamente esto y no
+        se toca. Se recarga entera en dos casos: la base está vacía (un runner
+        recién clonado, o alguien borró datos/eventos.db para ponerse al día)
+        o el archivo cambió por debajo (un pull trajo la corrida de la nube).
+        """
+        huella = self._huella_estado()
+        if huella is None:
+            return
+        cuantos = self.con.execute("SELECT COUNT(*) FROM eventos").fetchone()[0]
+        if cuantos and huella == self._meta("huella_estado"):
+            return
+        cargados = self.restaurar()
+        if cargados:
+            self._poner_meta("huella_estado", huella)
+            self.con.commit()
+            log.info("Base restaurada desde %s: %d eventos (%s)", self.ruta_estado.name,
+                     cargados, "la base estaba vacía" if not cuantos
+                     else "la copia en git cambió")
+
+    def restaurar(self) -> int:
+        """Reemplaza la tabla `eventos` con lo que hay en datos/eventos.jsonl."""
+        filas = []
+        with self.ruta_estado.open(encoding="utf-8") as f:
+            for linea in f:
+                if linea.strip():
+                    filas.append(json.loads(linea))
+        if not filas:
+            # Un archivo vacío no es una base vacía: no se borra nada por él.
+            return 0
+        columnas = [c[1] for c in self.con.execute("PRAGMA table_info(eventos)")]
+        # Solo las columnas que la base conoce: si el archivo viene de una
+        # versión con una columna de más, se ignora en vez de reventar.
+        nombres = [c for c in columnas if c in filas[0]]
+        marcadores = ",".join("?" * len(nombres))
+        self.con.execute("DELETE FROM eventos")
+        self.con.executemany(
+            f"INSERT OR REPLACE INTO eventos ({','.join(nombres)}) VALUES ({marcadores})",
+            ([fila.get(c) for c in nombres] for fila in filas),
+        )
+        self.con.commit()
+        return len(filas)
+
+    def volcar(self) -> Path:
+        """Escribe datos/eventos.jsonl con la tabla completa, ordenada por hash.
+
+        Lo llaman run_diario.py al terminar y run_todo.py antes de publicar.
+        La tabla `corridas` no viaja: es el registro de cada corrida y solo la
+        lee el diagnóstico del mismo día.
+        """
+        self.ruta_estado.parent.mkdir(parents=True, exist_ok=True)
+        filas = self.con.execute("SELECT * FROM eventos ORDER BY hash_dedup").fetchall()
+        with self.ruta_estado.open("w", encoding="utf-8") as f:
+            for fila in filas:
+                f.write(json.dumps(dict(fila), ensure_ascii=False, sort_keys=True) + "\n")
+        self._poner_meta("huella_estado", self._huella_estado() or "")
+        self.con.commit()
+        return self.ruta_estado
 
     def guardar(self, evento: Evento) -> str:
         """Inserta o actualiza. Devuelve 'nuevo' | 'actualizado'.

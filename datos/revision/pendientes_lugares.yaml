@@ -1,0 +1,246 @@
+# Cola de LUGARES sin ubicación exacta — revisión del 2026-08-21.
+# Completa lat/lon (Google Maps: click derecho → copiar coordenadas),
+# borra las entradas que no puedas verificar, y pega las listas en
+# config/correcciones/lugares.yaml bajo la clave `lugares:`.
+# Ordenadas por impacto: la primera arregla más eventos que ninguna.
+
+lugares:
+  # 32 eventos sin pin exacto
+  Red Salas de Teatro (agregador de salas RM):
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 31 eventos sin pin exacto
+  Corporacion Cultural de La Reina:
+    direccion: # COMPLETAR
+    comuna: La Reina
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 22 eventos sin pin exacto
+  TEATRO CACHAFAZ:
+    direccion: # COMPLETAR
+    comuna: Ñuñoa
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 16 eventos sin pin exacto
+  Corporacion Cultural de Lo Barnechea (El Tranque):
+    direccion: # COMPLETAR
+    comuna: Lo Barnechea
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 13 eventos sin pin exacto
+  PortalTickets (PortalDisc):
+    direccion: # COMPLETAR
+    comuna: Santiago
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 12 eventos sin pin exacto
+  Sala Julieta, Teatro Aleph Chile:
+    direccion: # COMPLETAR
+    comuna: La Cisterna
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 10 eventos sin pin exacto
+  Planetario Huechuraba:
+    direccion: # COMPLETAR
+    comuna: Huechuraba
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 9 eventos sin pin exacto
+  Sala K U Mayor:
+    direccion: # COMPLETAR
+    comuna: Santiago
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 8 eventos sin pin exacto
+  Disfruta Santiago:
+    direccion: # COMPLETAR
+    comuna: Santiago
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 7 eventos sin pin exacto
+  Teatro Nacional Chileno:
+    direccion: # COMPLETAR
+    comuna: Santiago
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 7 eventos sin pin exacto
+  PortalTickets (PortalDisc):
+    direccion: # COMPLETAR
+    comuna: Providencia
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 7 eventos sin pin exacto
+  (Foyer principal) Gran Sala Sinfónica Nacional:
+    direccion: # COMPLETAR
+    comuna: Providencia
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 6 eventos sin pin exacto
+  Sala Nemesio:
+    direccion: # COMPLETAR
+    comuna: La Reina
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 5 eventos sin pin exacto
+  Teatro ICTUS:
+    direccion: # COMPLETAR
+    comuna: Santiago
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 5 eventos sin pin exacto
+  Municipalidad de Nunoa:
+    direccion: # COMPLETAR
+    comuna: Ñuñoa
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 5 eventos sin pin exacto
+  Metropolitan Santiago:
+    direccion: # COMPLETAR
+    comuna: Santiago
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 5 eventos sin pin exacto
+  Estadio Bicentenario La Florida:
+    direccion: # COMPLETAR
+    comuna: La Florida
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 5 eventos sin pin exacto
+  Disfruta Santiago:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 4 eventos sin pin exacto
+  MAC - Parque Forestal (Parque Forestal s/n frente calle Mosqueto, Metro estación Bellas Artes, Santiago, Chile):
+    direccion: # COMPLETAR
+    comuna: Santiago
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 4 eventos sin pin exacto
+  Cultura Providencia:
+    direccion: # COMPLETAR
+    comuna: Providencia
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 4 eventos sin pin exacto
+  TECHNOBUS:
+    direccion: # COMPLETAR
+    comuna: Santiago
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 4 eventos sin pin exacto
+  TECHNOBUS TECHNOBUS:
+    direccion: # COMPLETAR
+    comuna: Santiago
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 4 eventos sin pin exacto
+  Corporacion Cultural de La Pintana (Teatro Municipal):
+    direccion: # COMPLETAR
+    comuna: La Pintana
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 4 eventos sin pin exacto
+  Teatro Universidad de Chile:
+    direccion: # COMPLETAR
+    comuna: Providencia
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 4 eventos sin pin exacto
+  Parque O'Higgins:
+    direccion: # COMPLETAR
+    comuna: Santiago
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 4 eventos sin pin exacto
+  COSTADO CLUB AÉREO MELEPÍLLA:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 3 eventos sin pin exacto
+  Mori Vitacura:
+    direccion: # COMPLETAR
+    comuna: Vitacura
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 3 eventos sin pin exacto
+  Mori Parque Arauco:
+    direccion: # COMPLETAR
+    comuna: Las Condes
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 3 eventos sin pin exacto
+  TEATRO SIDARTE:
+    direccion: # COMPLETAR
+    comuna: Recoleta
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
+
+  # 3 eventos sin pin exacto
+  Centro de Extensión Artística y Cultural Universidad de Chile, Complejo Universitario VM20:
+    direccion: # COMPLETAR
+    comuna: Providencia
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-21 por # COMPLETAR
