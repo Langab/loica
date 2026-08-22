@@ -10,8 +10,10 @@
      va abierto a propósito: las fotos son de los organizadores y viven en
      cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
      en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
-     GitHub Pages no deja poner cabeceras. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+     GitHub Pages no deja poner cabeceras. Y `upgrade-insecure-requests` no
+     va: en Pages no hace nada y abierto por LAN desde el celular dejaba la
+     ficha en blanco (el detalle está en mapa.html). -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <title>Heals — Loica</title>
@@ -35,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=22">
+<link rel="stylesheet" href="../loica.css?v=23">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,7 +88,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=22"></script>
+<script src="../loica.js?v=23"></script>
 <script>
   pintarBarra("mapa.html", "../");
   const EV = {"id": "0ffbbc62dd737ba3", "titulo": "Heals", "inicio": "2026-08-22T19:30:00", "fin": "2026-08-22T21:30:00", "lugar": "Campus El Claustro, Universidad Mayor", "direccion": "Marín 321", "comuna": "Santiago", "lat": -33.4461, "lon": -70.6364, "precision": "correccion", "gratis": true, "precio": 0, "precio_texto": "Gratis", "categoria": "cine", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "", "imagen": "https://salak.cl/wp-content/uploads/2026/08/HEALS_1.webp", "fuente": "Sala K (Cultura Maipú)", "url": "https://salak.cl/calendario/heals/", "formato": "panorama"};

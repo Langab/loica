@@ -10,8 +10,10 @@
      va abierto a propósito: las fotos son de los organizadores y viven en
      cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
      en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
-     GitHub Pages no deja poner cabeceras. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+     GitHub Pages no deja poner cabeceras. Y `upgrade-insecure-requests` no
+     va: en Pages no hace nada y abierto por LAN desde el celular dejaba la
+     ficha en blanco (el detalle está en mapa.html). -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <title>¡Panorama Comunal! Vive la Experiencia del Día de los Patrimonios, la Niñez y la Adolescencia en El Bosque — Loica</title>
@@ -35,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=22">
+<link rel="stylesheet" href="../loica.css?v=23">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,7 +88,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=22"></script>
+<script src="../loica.js?v=23"></script>
 <script>
   pintarBarra("mapa.html", "../");
   const EV = {"id": "ec96d8ff0b9505e4", "titulo": "¡Panorama Comunal! Vive la Experiencia del Día de los Patrimonios, la Niñez y la Adolescencia en El Bosque", "inicio": "2026-08-22T00:00:00", "fin": null, "lugar": "Municipalidad de El Bosque - Cartelera de Eventos", "direccion": "", "comuna": "El Bosque", "lat": -33.562, "lon": -70.675, "precision": "comuna", "gratis": true, "precio": 0, "precio_texto": "ertas a una jornada gratuita llena de historia, identidad, c", "categoria": "familia", "subcategoria": "", "escala": "", "publico": "ninos", "descripcion": "Este sábado 22 de agosto, el Centro Cívico Cultural abrirá sus puertas a una jornada gratuita llena de historia, identidad, circo, cine y juegos tradicionales para toda la familia. El Alcalde Manuel…", "imagen": "https://www.municipalidadelbosque.cl/wp-content/uploads/2026/08/778972152_1068106189064942_3452366237410549837_n-768x768.jpeg", "fuente": "Municipalidad de El Bosque - Cartelera de Eventos", "url": "https://www.municipalidadelbosque.cl/cartelera-de-eventos/panorama-comunal-vive-la-experiencia-del-dia-de-los-patrimonios-la-ninez-y-la-adolescencia-en-el-bosque/", "formato": "panorama"};

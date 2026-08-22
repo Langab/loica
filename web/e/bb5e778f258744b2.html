@@ -10,8 +10,10 @@
      va abierto a propósito: las fotos son de los organizadores y viven en
      cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
      en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
-     GitHub Pages no deja poner cabeceras. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+     GitHub Pages no deja poner cabeceras. Y `upgrade-insecure-requests` no
+     va: en Pages no hace nada y abierto por LAN desde el celular dejaba la
+     ficha en blanco (el detalle está en mapa.html). -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <title>Roxbury 22-08-2026 — Loica</title>
@@ -35,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=22">
+<link rel="stylesheet" href="../loica.css?v=23">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,7 +88,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=22"></script>
+<script src="../loica.js?v=23"></script>
 <script>
   pintarBarra("mapa.html", "../");
   const EV = {"id": "bb5e778f258744b2", "titulo": "Roxbury 22-08-2026", "inicio": "2026-08-23T03:59:00", "fin": "2026-08-27T03:00:00", "lugar": "Roxbury 22-08-2026", "direccion": " #, Santiago", "comuna": "Santiago", "lat": -33.4691199, "lon": -70.641997, "precision": "comuna", "gratis": false, "precio": 5000, "precio_texto": "desde $5.000", "categoria": "fiesta", "subcategoria": "electronica", "escala": "under", "publico": "adultos", "descripcion": "¡Este sábado nos volvemos a encontrar para vivir una noche intensa, oscura y llena de energía en la pista! Prepárate para un viaje sonoro marcado por la potencia del techno, la fuerza arrolladora del…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/2ca3fd827ffd89992aaf609c73e602008de1329371f3b38cb232f9cd31b24812.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/santiago-centro/roxbury-22-08-2026-26095", "formato": "panorama"};

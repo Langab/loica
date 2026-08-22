@@ -10,8 +10,10 @@
      va abierto a propósito: las fotos son de los organizadores y viven en
      cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
      en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
-     GitHub Pages no deja poner cabeceras. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+     GitHub Pages no deja poner cabeceras. Y `upgrade-insecure-requests` no
+     va: en Pages no hace nada y abierto por LAN desde el celular dejaba la
+     ficha en blanco (el detalle está en mapa.html). -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <title>Feria Friki La Pintana – FeriaFriki — Loica</title>
@@ -35,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=22">
+<link rel="stylesheet" href="../loica.css?v=23">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -76,7 +78,7 @@
   <div class="dato"><span class="et">Dónde</span><span>Feria Friki, La Pintana</span></div>
   <div class="dato"><span class="et">Precio</span>
     <span class="precio">Sin información</span></div>
-  <div class="dato"><span class="et"></span><span>Feria Friki La Pintana – FeriaFriki Jojobet Giriş iptv satın al betcio parmabet giriş setrabet casibom giriş casibom casibom giriş casibom Fecha Sábado 5 de Septiembre Horario…</span></div>
+  <div class="dato"><span class="et"></span><span>Feria Friki La Pintana – FeriaFriki Jojobet Giriş iptv satın al betcio parmabet giriş setrabet casibom giriş casibom jojobet giriş casibom giriş casibom marsbahis giriş Fecha…</span></div>
 
   <p style="margin-top:var(--e-5)">
     <a class="boton secundario bloque" href="../mapa.html#/e/ae436490f44eae8a">Ver en el mapa</a></p>
@@ -86,10 +88,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=22"></script>
+<script src="../loica.js?v=23"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "ae436490f44eae8a", "titulo": "Feria Friki La Pintana – FeriaFriki", "inicio": "2026-09-05T11:00:00", "fin": null, "lugar": "Feria Friki", "direccion": "", "comuna": "La Pintana", "lat": -33.583, "lon": -70.633, "precision": "comuna", "gratis": false, "precio": null, "precio_texto": "", "categoria": "feria", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "Feria Friki La Pintana – FeriaFriki Jojobet Giriş iptv satın al betcio parmabet giriş setrabet casibom giriş casibom casibom giriş casibom Fecha Sábado 5 de Septiembre Horario…", "imagen": "", "fuente": "Feria Friki", "url": "https://www.feriafriki.cl/eventos/feria-friki-la-pintana/", "formato": "panorama"};
+  const EV = {"id": "ae436490f44eae8a", "titulo": "Feria Friki La Pintana – FeriaFriki", "inicio": "2026-09-05T11:00:00", "fin": null, "lugar": "Feria Friki", "direccion": "", "comuna": "La Pintana", "lat": -33.583, "lon": -70.633, "precision": "comuna", "gratis": false, "precio": null, "precio_texto": "", "categoria": "feria", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "Feria Friki La Pintana – FeriaFriki Jojobet Giriş iptv satın al betcio parmabet giriş setrabet casibom giriş casibom jojobet giriş casibom giriş casibom marsbahis giriş Fecha…", "imagen": "", "fuente": "Feria Friki", "url": "https://www.feriafriki.cl/eventos/feria-friki-la-pintana/", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

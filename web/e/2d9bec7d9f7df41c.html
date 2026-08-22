@@ -10,8 +10,10 @@
      va abierto a propósito: las fotos son de los organizadores y viven en
      cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
      en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
-     GitHub Pages no deja poner cabeceras. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+     GitHub Pages no deja poner cabeceras. Y `upgrade-insecure-requests` no
+     va: en Pages no hace nada y abierto por LAN desde el celular dejaba la
+     ficha en blanco (el detalle está en mapa.html). -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <title>Gran Encuentro Cultural en Villa 4 de Septiembre: Música, danza y servicios para la comunidad — Loica</title>
@@ -35,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=22">
+<link rel="stylesheet" href="../loica.css?v=23">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,7 +88,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=22"></script>
+<script src="../loica.js?v=23"></script>
 <script>
   pintarBarra("mapa.html", "../");
   const EV = {"id": "2d9bec7d9f7df41c", "titulo": "Gran Encuentro Cultural en Villa 4 de Septiembre: Música, danza y servicios para la comunidad", "inicio": "2026-09-04T00:00:00", "fin": null, "lugar": "Municipalidad de El Bosque - Cartelera de Eventos", "direccion": "", "comuna": "El Bosque", "lat": -33.562, "lon": -70.675, "precision": "comuna", "gratis": true, "precio": 0, "precio_texto": "carácter totalmente gratuito.", "categoria": "teatro", "subcategoria": "danza", "escala": "", "publico": "todos", "descripcion": "Este sábado 20 de junio, la Villa 4 de Septiembre será el escenario de un encuentro cultural abierto a toda la comunidad. La jornada, que se extenderá entre las 15:00 y las 21:00 horas, promete ser…", "imagen": "https://www.municipalidadelbosque.cl/wp-content/uploads/2026/06/727285979_2726425071065681_4579467792028164924_n-768x957.jpeg", "fuente": "Municipalidad de El Bosque - Cartelera de Eventos", "url": "https://www.municipalidadelbosque.cl/cartelera-de-eventos/gran-encuentro-cultural-en-villa-4-de-septiembre-musica-danza-y-servicios-para-la-comunidad/", "formato": "panorama"};

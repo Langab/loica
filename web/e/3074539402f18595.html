@@ -10,8 +10,10 @@
      va abierto a propósito: las fotos son de los organizadores y viven en
      cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
      en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
-     GitHub Pages no deja poner cabeceras. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+     GitHub Pages no deja poner cabeceras. Y `upgrade-insecure-requests` no
+     va: en Pages no hace nada y abierto por LAN desde el celular dejaba la
+     ficha en blanco (el detalle está en mapa.html). -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <title>CLUB ROMA SEMÁFORO 🚦❤️ — Loica</title>
@@ -35,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=22">
+<link rel="stylesheet" href="../loica.css?v=23">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,7 +88,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=22"></script>
+<script src="../loica.js?v=23"></script>
 <script>
   pintarBarra("mapa.html", "../");
   const EV = {"id": "3074539402f18595", "titulo": "CLUB ROMA SEMÁFORO 🚦❤️", "inicio": "2026-08-29T02:00:00", "fin": "2026-08-29T08:30:00", "lugar": "CLUB ROMA SEMÁFORO 🚦❤️", "direccion": "Pío Nono #286, Providencia", "comuna": "Providencia", "lat": -33.4310053, "lon": -70.636311, "precision": "calle", "gratis": false, "precio": 1000, "precio_texto": "desde $1.000", "categoria": "fiesta", "subcategoria": "", "escala": "under", "publico": "adultos", "descripcion": "CLUB ROMA SEMÁFORO 🚦❤️ 💮 FIESTA PRIVADA 💮 ❕No somos un local, fiestas privadas estilo casa❕ ¿Dónde? Pio nono 286 ¿Cuándo? 28 de agosto ¿Hora? desde las 22:00-04:30 📍Metro Baquedano 🚇 🍻CONTAREMOS…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/d890daeda3db3911bed3c6078a30db377ff402de66551b33f709cae626d2ce5a.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/providencia/club-roma-semaforo-26066", "formato": "panorama"};

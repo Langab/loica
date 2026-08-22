@@ -10,8 +10,10 @@
      va abierto a propósito: las fotos son de los organizadores y viven en
      cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
      en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
-     GitHub Pages no deja poner cabeceras. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+     GitHub Pages no deja poner cabeceras. Y `upgrade-insecure-requests` no
+     va: en Pages no hace nada y abierto por LAN desde el celular dejaba la
+     ficha en blanco (el detalle está en mapa.html). -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <title>GUAYPES CLUB: NUEVA ERA — Loica</title>
@@ -35,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=22">
+<link rel="stylesheet" href="../loica.css?v=23">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -86,10 +88,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=22"></script>
+<script src="../loica.js?v=23"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "b3818327cb1ac9d3", "titulo": "GUAYPES CLUB: NUEVA ERA", "inicio": "2026-08-22T12:00:00", "fin": null, "lugar": "PortalTickets (PortalDisc)", "direccion": "", "comuna": "Recoleta", "lat": -33.41, "lon": -70.64, "precision": "comuna", "gratis": false, "precio": 9000, "precio_texto": "S: Entrada General: $9.000 + Cargo ÚLTIMOS TICKETS Comprar o", "categoria": "fiesta", "subcategoria": "", "escala": "", "publico": "ninos", "descripcion": "GUAYPES CLUB: NUEVA ERA - CICLO INFANTIL: CONCIERTOS PARA CRECER EN SALA SCD BELLAVISTA // PortalTickets.cl Sitio en mantención GUAYPES CLUB: NUEVA ERA - CICLO INFANTIL:…", "imagen": "https://images.portaldisc.com/l/eventos/360/19625.jpg", "fuente": "PortalTickets (PortalDisc)", "url": "https://www.portaldisc.com/evento/guaypesclub-scdbellavista", "formato": "panorama"};
+  const EV = {"id": "b3818327cb1ac9d3", "titulo": "GUAYPES CLUB: NUEVA ERA", "inicio": "2026-08-22T12:00:00", "fin": null, "lugar": "PortalTickets (PortalDisc)", "direccion": "", "comuna": "Recoleta", "lat": -33.41, "lon": -70.64, "precision": "comuna", "gratis": false, "precio": 9000, "precio_texto": "S: Entrada General: $9.000 + Cargo ÚLTIMOS TICKETS Agregar a", "categoria": "fiesta", "subcategoria": "", "escala": "", "publico": "ninos", "descripcion": "GUAYPES CLUB: NUEVA ERA - CICLO INFANTIL: CONCIERTOS PARA CRECER EN SALA SCD BELLAVISTA // PortalTickets.cl Sitio en mantención GUAYPES CLUB: NUEVA ERA - CICLO INFANTIL:…", "imagen": "https://images.portaldisc.com/l/eventos/360/19625.jpg", "fuente": "PortalTickets (PortalDisc)", "url": "https://www.portaldisc.com/evento/guaypesclub-scdbellavista", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));
