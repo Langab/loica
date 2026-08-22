@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elenco v1 vs v2 — banco de pruebas</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../web/loica.css?v=22">
+<style>
+  body{padding:16px 20px 60px}
+  h1{font-size:22px;margin-bottom:4px}
+  .fila{display:grid;grid-template-columns:92px repeat(4,44px) 12px repeat(5,max-content) 12px 120px 120px 140px;gap:10px;align-items:end;
+    padding:10px 0;border-bottom:1px solid var(--borde)}
+  .fila.cab{font:700 11px/1.2 var(--fuente-ui);color:var(--tinta-tenue);text-transform:uppercase;letter-spacing:.05em;align-items:end}
+  .nombre{font:800 15px/1.1 var(--fuente-marca)}
+  .nombre small{display:block;font:600 11px/1.2 var(--fuente-ui);color:var(--tinta-tenue)}
+  .pastel{display:grid;place-items:center;width:120px;height:72px;border-radius:12px;border:2.5px solid var(--contorno)}
+  .pin{display:grid;place-items:center;width:120px;height:72px;border-radius:12px;background:#E8E2D6}
+  .pin span{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#FAF3E7;border:2.5px solid #1E2A4A}
+  .oscuro{display:grid;place-items:center;width:140px;height:72px;border-radius:12px;background:#141A2B;gap:4px;grid-auto-flow:column}
+  canvas{image-rendering:pixelated;image-rendering:crisp-edges;border:1px dashed var(--borde-fuerte)}
+  .celda{display:grid;place-items:center}
+  .sep{width:1px;align-self:stretch;background:var(--borde-fuerte)}
+  svg{display:block}
+</style>
+</head>
+<body>
+<h1>Elenco: v1 (hoy) contra v2 (propuesta)</h1>
+<p style="margin:0 0 12px;font-size:13px;color:var(--tinta-suave)">Los cuadros punteados son el SVG de 22px rasterizado a 1x y a 2x y agrandado 4 veces sin suavizar: es lo que de verdad ve un teléfono.</p>
+<div class="fila cab"><span></span><span>v1 22</span><span>v1 34</span><span>v1 44</span><span>v1 96→</span><span></span>
+  <span>v2 22</span><span>v2 34</span><span>v2 44</span><span>v2 96</span><span>v2 22@1x ×4 · @2x ×4</span><span></span><span>pastel 44</span><span>pin</span><span>oscuro 22/44</span></div>
+<div id="tabla" class="entra"></div>
+<script src="v1.js"></script>
+<script src="v2.js"></script>
+<script>
+const st = document.createElement("style"); st.textContent = V2.CSS; document.head.appendChild(st);
+const COLOR = {loica:"#E8442E",condor:"#DE3A1E",culpeo:"#7A3FE0",chinchilla:"#1B6FD1",chincol:"#F08800",pudu:"#0E8757",
+  degu:"#2E7D5B",guaren:"#95521C",chungungo:"#0C8B9B",pinguino:"#C42B67",quiltro:"#5C7A1E"};
+const SUAVE = {loica:"#FFC9BE",condor:"#FFC9BE",culpeo:"#DAD2FB",chinchilla:"#C7DAF1",chincol:"#F6CFAB",pudu:"#CFE3D8",
+  degu:"#CFE3D8",guaren:"#F0D8BE",chungungo:"#BFE6EA",pinguino:"#F7CBDC",quiltro:"#D9E6A8"};
+const ROL = {loica:"anfitriona",condor:"música",culpeo:"fiestas",chinchilla:"cultura",chincol:"barrio",pudu:"aire libre",
+  degu:"gratis",guaren:"descuentos",chungungo:"deporte",pinguino:"charlas",quiltro:"comer"};
+const T = "#1E2A4A";
+const tabla = document.getElementById("tabla");
+V2.NOMBRES.forEach((n, i) => {
+  const c = COLOR[n];
+  const f = document.createElement("div"); f.className = "fila";
+  f.innerHTML = `<span class="nombre">${n}<small>${ROL[n]}</small></span>
+    ${[22,34,44].map(s => `<span class="celda">${V1.carita(n,c,s,{tinta:T})}</span>`).join("")}
+    <span class="celda">${V1.cuerpo(n,c,96,{tinta:T})}</span><span class="sep"></span>
+    ${[22,34,44].map(s => `<span class="celda">${V2.carita(n,c,s,{tinta:T,anima:true})}</span>`).join("")}
+    <span class="celda" style="--d:${(i*.18).toFixed(2)}s">${V2.cuerpo(n,c,96,{tinta:T,anima:true})}</span>
+    <span class="celda" style="display:flex;gap:6px;align-items:center"><canvas data-n="${n}" data-dpr="1" width="22" height="22" style="width:88px;height:88px"></canvas><canvas data-n="${n}" data-dpr="2" width="44" height="44" style="width:88px;height:88px"></canvas></span>
+    <span class="sep"></span>
+    <span class="pastel" style="background:${SUAVE[n]}">${V2.carita(n,c,44,{tinta:T})}</span>
+    <span class="pin"><span>${V2.carita(n,c,28,{tinta:T})}</span></span>
+    <span class="oscuro">${V2.carita(n,c,22,{tinta:"#EDE7DE"})}${V2.cuerpo(n,c,44,{tinta:"#EDE7DE"})}</span>`;
+  tabla.appendChild(f);
+});
+// Rasteriza el SVG de 22px tal cual lo haría el pin del mapa
+document.querySelectorAll("canvas").forEach(cv => {
+  const n = cv.dataset.n, dpr = +cv.dataset.dpr;
+  const svg = V2.carita(n, COLOR[n], 22*dpr, {tinta:T}).replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" ');
+  const img = new Image();
+  img.onload = () => { const ctx = cv.getContext("2d"); ctx.fillStyle="#FAF3E7"; ctx.fillRect(0,0,cv.width,cv.height); ctx.drawImage(img,0,0,cv.width,cv.height); };
+  img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+});
+</script>
+</body>
+</html>

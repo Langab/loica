@@ -1,0 +1,696 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elenco Loica v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ---------- tokens: los de loica.css, en las tres formas del visor ---------- */
+:root{
+  --fondo:#FAF3E7; --elevado:#FFFBF5; --hundido:#EDE7DE;
+  --tinta:#1E2A4A; --tinta-suave:#535E79; --tinta-tenue:#645D51;
+  --contorno:#1E2A4A; --borde:#DAD3C8; --borde-fuerte:#BEB6A9;
+  --acento:#E8442E; --acento-solido:#D13B27; --acento-contraste:#fff;
+  --destacado:#F5B52E; --foco:#F5B52E; --gratis:#2E7D5B;
+  --azul-cordillera:#1E2A4A; --c-cultura:#1B6FD1; --c-fiesta:#7A3FE0;
+  --ink:#1E2A4A; --crema:#FAF3E7;
+  --fuente-marca:"Baloo 2","Nunito",system-ui,sans-serif;
+  --fuente-ui:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  --r-md:16px; --r-lg:22px; --r-xl:28px; --r-pill:999px;
+  --rebote:.34s cubic-bezier(.34,1.56,.64,1); --rapido:.12s cubic-bezier(.4,0,.2,1);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --fondo:#141A2B; --elevado:#1E2740; --hundido:#0B0F1C;
+    --tinta:#FAF3E7; --tinta-suave:#DAD3C8; --tinta-tenue:#BEB6A9;
+    --contorno:#EDE7DE; --borde:#384461; --borde-fuerte:#535E79;
+    --acento:#F47662; --acento-solido:#F47662; --acento-contraste:#1E2A4A;
+    --azul-cordillera:#0B0F1C;
+  }
+}
+:root[data-theme="dark"]{
+  --fondo:#141A2B; --elevado:#1E2740; --hundido:#0B0F1C;
+  --tinta:#FAF3E7; --tinta-suave:#DAD3C8; --tinta-tenue:#BEB6A9;
+  --contorno:#EDE7DE; --borde:#384461; --borde-fuerte:#535E79;
+  --acento:#F47662; --acento-solido:#F47662; --acento-contraste:#1E2A4A;
+  --azul-cordillera:#0B0F1C;
+}
+
+/* ---------- base ---------- */
+*{box-sizing:border-box}
+body{margin:0;background:var(--fondo);color:var(--tinta);font:16px/1.55 var(--fuente-ui);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:var(--fuente-marca);font-weight:800;letter-spacing:-.02em;margin:0;text-wrap:balance}
+h2{font-size:clamp(28px,4vw,38px);line-height:1.12}
+h3{font-size:21px;line-height:1.2}
+p{margin:0}
+a{color:inherit}
+svg{display:block}
+:focus-visible{outline:none;box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno);border-radius:6px}
+.ceja{font:800 12px/1.3 var(--fuente-ui);text-transform:uppercase;letter-spacing:.07em;color:var(--tinta-tenue)}
+.seccion{max-width:1040px;margin:0 auto;padding:64px 24px 24px}
+.seccion>.ceja{margin-bottom:10px}
+.seccion>h2{margin-bottom:14px;max-width:760px}
+.seccion>.sub{color:var(--tinta-suave);font-size:17px;max-width:640px;margin-bottom:32px;text-wrap:pretty}
+.boton{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--acento-solido);color:var(--acento-contraste);border:3px solid var(--contorno);
+  padding:12px 22px;border-radius:var(--r-pill);font:800 17px/1 var(--fuente-marca);cursor:pointer;
+  text-decoration:none;box-shadow:0 5px 0 var(--contorno);transition:var(--rapido);
+}
+.boton:hover{transform:translateY(-1px)}
+.boton:active{transform:translateY(5px);box-shadow:none}
+.boton.secundario{background:var(--elevado);color:var(--tinta);border-width:2.5px;box-shadow:0 4px 0 var(--contorno)}
+.boton:focus-visible{box-shadow:0 5px 0 var(--contorno),0 0 0 3px var(--foco),0 0 0 6px var(--contorno)}
+.chip{
+  display:inline-flex;align-items:center;gap:6px;border:2px solid var(--contorno);background:var(--elevado);color:var(--tinta);
+  padding:7px 13px 7px 9px;border-radius:var(--r-pill);font:700 13px/1 var(--fuente-marca);box-shadow:0 2px 0 var(--contorno);white-space:nowrap;
+}
+.chip.on{background:var(--tinta);color:var(--elevado);transform:translateY(2px);box-shadow:none}
+.chip svg{width:22px;height:22px}
+
+/* ---------- hero: la cordillera con el desfile ---------- */
+.hero{position:relative;overflow:hidden;background:var(--elevado);border-bottom:3px solid var(--contorno)}
+.hero-interior{position:relative;z-index:2;max-width:1040px;margin:0 auto;padding:56px 24px 0}
+.hero h1{font-size:clamp(38px,7vw,76px);line-height:1;max-width:820px;margin:10px 0 34px}
+.hero h1 .sub{position:relative;color:var(--acento);white-space:nowrap}
+.hero h1 .sub svg{position:absolute;left:0;right:0;bottom:-.22em;width:100%;height:.26em;overflow:visible}
+.hero .bajada{font-size:clamp(17px,2vw,20px);color:var(--tinta-suave);max-width:640px;line-height:1.5;text-wrap:pretty}
+.hero .acciones{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0 0}
+.paseo{position:relative;height:250px;margin-top:18px}
+.cerros{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.desfile{
+  position:absolute;inset:auto 0 22px 0;display:flex;align-items:flex-end;justify-content:center;
+  gap:clamp(2px,1.4vw,18px);padding:0 12px;
+}
+.desfile .puesto{background:none;border:0;padding:0;cursor:pointer;display:block;position:relative}
+.desfile .puesto svg{width:clamp(40px,7.6vw,96px);height:auto;transition:transform var(--rebote)}
+.desfile .puesto:hover svg{transform:translateY(-8px)}
+.desfile .puesto .nom{
+  position:absolute;left:50%;bottom:-22px;transform:translateX(-50%);
+  font:800 11px/1 var(--fuente-ui);color:var(--tinta-tenue);text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;
+  opacity:0;transition:opacity var(--rapido);
+}
+.desfile .puesto:hover .nom,.desfile .puesto:focus-visible .nom{opacity:1}
+@media(max-width:640px){
+  .paseo{height:170px}
+  .desfile{bottom:14px;gap:0}
+  .desfile .puesto svg{width:clamp(30px,8.6vw,44px)}
+  .hero-interior{padding-top:36px}
+}
+
+/* ---------- por qué ---------- */
+.tres{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:860px){.tres{grid-template-columns:1fr}}
+.razon{background:var(--elevado);border:2.5px solid var(--contorno);border-radius:var(--r-lg);padding:22px 22px 18px;box-shadow:0 4px 0 var(--contorno);display:flex;flex-direction:column;gap:12px}
+.razon h3{font-size:22px}
+.razon p{color:var(--tinta-suave);font-size:15px;text-wrap:pretty}
+.razon .evid{margin-top:auto;padding-top:6px;border-top:1px solid var(--borde);font-size:13px;color:var(--tinta-tenue)}
+.pixeles{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pixeles canvas{image-rendering:pixelated;width:44px;height:44px;border-radius:6px;background:var(--crema)}
+.pixeles .par{display:grid;grid-template-columns:44px 44px;gap:4px}
+.pixeles .par small{grid-column:1/-1;font:700 10px/1 var(--fuente-ui);color:var(--tinta-tenue);text-align:center;letter-spacing:.04em;text-transform:uppercase}
+.fila-iguales{display:flex;gap:6px;flex-wrap:wrap}
+.fila-iguales svg{width:44px;height:44px}
+.donde-hoy{display:flex;flex-wrap:wrap;gap:6px}
+.donde-hoy span{font:700 12px/1 var(--fuente-ui);padding:6px 9px;border-radius:var(--r-pill);background:var(--hundido);color:var(--tinta-suave)}
+
+/* ---------- carnets ---------- */
+.carnets{display:grid;grid-template-columns:repeat(2,1fr);gap:26px 22px;margin-top:54px}
+@media(max-width:760px){.carnets{grid-template-columns:1fr}}
+.carnet{
+  position:relative;background:var(--pastel);color:var(--ink);border:3px solid var(--ink);border-radius:var(--r-xl);
+  box-shadow:0 6px 0 var(--ink);padding:22px 22px 18px;display:grid;grid-template-columns:1fr;gap:14px;
+}
+.carnet .arriba{display:grid;grid-template-columns:auto 1fr;gap:12px 18px;align-items:end}
+.carnet .grande{margin:-56px 0 0 -6px}
+.carnet .grande svg{width:clamp(120px,15vw,164px);height:auto;overflow:visible}
+.carnet .titulo{display:flex;flex-direction:column;gap:6px;align-items:flex-start;min-width:0}
+.carnet .titulo h3{font-size:clamp(26px,3vw,34px);line-height:1}
+.carnet .rol{
+  display:inline-block;font:800 11px/1 var(--fuente-ui);text-transform:uppercase;letter-spacing:.07em;color:#fff;
+  background:var(--tinta-rol);border:2px solid var(--ink);border-radius:var(--r-pill);padding:5px 10px;
+}
+.carnet .hoy{position:absolute;top:14px;right:16px;display:grid;justify-items:center;gap:2px;opacity:.75}
+.carnet .hoy svg{width:40px;height:40px;filter:grayscale(.25)}
+.carnet .hoy small{font:800 9.5px/1 var(--fuente-ui);letter-spacing:.06em;text-transform:uppercase}
+.carnet dl{margin:0;display:grid;grid-template-columns:72px 1fr;gap:7px 12px;font-size:14.5px;line-height:1.4}
+.carnet dt{font:800 11px/1.6 var(--fuente-ui);text-transform:uppercase;letter-spacing:.06em;opacity:.72}
+.carnet dd{margin:0;text-wrap:pretty}
+.carnet .tallas{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-top:2px solid rgba(30,42,74,.18);padding-top:12px;margin-top:2px}
+.carnet .tallas .t{display:grid;justify-items:center;gap:4px;font:700 10px/1 var(--fuente-ui);letter-spacing:.05em;text-transform:uppercase;opacity:.85}
+.carnet .tallas .pin{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--crema);border:2.5px solid var(--ink)}
+.carnet .tallas .mini-pix{display:grid;grid-auto-flow:column;gap:3px}
+.carnet .tallas canvas{image-rendering:pixelated;width:44px;height:44px;border-radius:6px;background:var(--crema);border:1px solid rgba(30,42,74,.25)}
+.carnet .poses{display:flex;gap:4px;align-items:flex-end;margin-left:auto}
+.carnet .poses svg{width:52px;height:52px}
+.carnet .poses .t{opacity:.85}
+
+/* ---------- dónde actúan: maquetas ---------- */
+.maquetas{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:8px}
+@media(max-width:860px){.maquetas{grid-template-columns:1fr}}
+.maqueta{background:var(--elevado);border:2.5px solid var(--contorno);border-radius:var(--r-lg);box-shadow:0 4px 0 var(--contorno);overflow:hidden;display:flex;flex-direction:column}
+.maqueta.ancha{grid-column:1/-1}
+.maqueta .cab{display:flex;justify-content:space-between;gap:10px;align-items:baseline;padding:14px 18px 12px;border-bottom:2px solid var(--borde)}
+.maqueta .cab b{font:800 17px/1.2 var(--fuente-marca)}
+.maqueta .cab .ceja{white-space:nowrap}
+.maqueta .cuerpo{padding:18px;display:flex;flex-direction:column;gap:12px;flex:1}
+.maqueta .nota{font-size:13.5px;color:var(--tinta-suave);padding:12px 18px 14px;border-top:1px solid var(--borde);text-wrap:pretty}
+.maqueta .demo{background:var(--fondo);border:2px solid var(--borde-fuerte);border-radius:var(--r-md);padding:14px;display:flex;flex-direction:column;gap:10px}
+.atiende{display:flex;align-items:center;gap:12px}
+.atiende svg{width:52px;height:52px;flex:none}
+.atiende .linea{font-size:15px;line-height:1.3}
+.atiende .linea b{font-family:var(--fuente-marca);font-size:22px;line-height:1;display:inline-block;margin-right:2px}
+.atiende .quien{font:800 11px/1.4 var(--fuente-ui);text-transform:uppercase;letter-spacing:.06em;color:var(--tinta-tenue)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.vacio{display:grid;justify-items:center;text-align:center;gap:6px;padding:10px 0 4px;color:var(--tinta-suave)}
+.vacio svg{width:92px;height:92px}
+.vacio b{color:var(--tinta);font-size:16px}
+.vacio p{font-size:14px;max-width:300px}
+.anfitrion{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}
+.anfitrion svg{width:116px;height:116px}
+.anfitrion h3{font-size:clamp(20px,3.2vw,30px);line-height:1.05}
+@media(max-width:640px){.anfitrion{grid-template-columns:1fr}.anfitrion svg{width:92px;height:92px}}
+.anfitrion p{color:var(--tinta-suave);font-size:15px;margin-top:4px}
+.tarjeta{display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:start;background:var(--elevado);border:2px solid var(--contorno);border-radius:var(--r-md);padding:12px 14px;position:relative}
+.tarjeta .mini{width:52px;height:52px;border-radius:12px;border:2.5px solid var(--contorno);background:var(--hundido);display:grid;place-items:center}
+.tarjeta .mini svg{width:40px;height:40px}
+.tarjeta .hora{font:800 13px/1 var(--fuente-ui)}
+.tarjeta h4{font:700 16px/1.25 var(--fuente-ui);margin:3px 0 4px;letter-spacing:-.01em}
+.tarjeta .meta{font-size:13px;color:var(--tinta-suave)}
+.tarjeta .precio{font:800 13px/1 var(--fuente-ui);color:var(--gratis);padding-top:2px}
+.sello{
+  position:absolute;right:-4px;bottom:-24px;display:flex;align-items:center;gap:6px;
+  background:var(--crema);color:var(--ink);border:2.5px solid var(--ink);border-radius:var(--r-pill);
+  padding:4px 10px 4px 5px;font:800 10.5px/1.1 var(--fuente-ui);text-transform:uppercase;letter-spacing:.06em;
+  transform:rotate(-4deg);box-shadow:0 3px 0 var(--ink);
+}
+.sello svg{width:24px;height:24px}
+.razones{display:flex;gap:6px;flex-wrap:wrap}
+.razones span{font:700 12px/1 var(--fuente-ui);padding:6px 10px;border:2px solid var(--contorno);border-radius:var(--r-pill);background:var(--elevado)}
+.navbar{display:grid;grid-template-columns:repeat(8,1fr);background:var(--elevado);border:2.5px solid var(--contorno);border-radius:14px;overflow:hidden}
+.navbar span{display:grid;justify-items:center;gap:4px;padding:8px 2px 7px;font:700 9.5px/1 var(--fuente-ui);color:var(--tinta-tenue)}
+.navbar span svg{width:21px;height:21px;color:currentColor}
+.navbar span.activo{color:var(--tinta)}
+.navbar span.activo .pastilla{display:grid;place-items:center;background:var(--c-activo);border:2px solid var(--contorno);border-radius:var(--r-pill);padding:2px 7px;height:28px;margin-top:-3px}
+.navbar span.activo .pastilla svg{width:24px;height:24px}
+/* el teléfono con la Loica de bolsillo */
+.telefono{
+  width:min(300px,100%);height:540px;margin:0 auto;position:relative;border:3px solid var(--contorno);border-radius:34px;
+  background:var(--hundido);overflow:hidden;box-shadow:0 6px 0 var(--contorno);
+}
+.telefono .mapa-falso{position:absolute;inset:0;background:
+  radial-gradient(circle at 30% 30%,var(--borde) 0 2px,transparent 3px) 0 0/28px 28px,
+  linear-gradient(var(--borde-fuerte) 0 0) 50% 0/3px 100% no-repeat,
+  linear-gradient(var(--borde-fuerte) 0 0) 0 62%/100% 3px no-repeat;opacity:.8}
+.telefono .pin-falso{position:absolute;width:30px;height:30px;border-radius:50%;background:var(--crema);border:2.5px solid var(--ink);display:grid;place-items:center}
+.telefono .pin-falso svg{width:22px;height:22px}
+.telefono .nav-falsa{position:absolute;left:0;right:0;bottom:0;height:56px;background:var(--elevado);border-top:2.5px solid var(--contorno);display:grid;grid-template-columns:repeat(8,1fr);align-items:center;justify-items:center}
+.telefono .nav-falsa i{width:18px;height:18px;border-radius:5px;background:var(--borde-fuerte);display:block}
+.telefono .nav-falsa i.act{background:var(--acento)}
+.bolsillo{
+  position:absolute;right:14px;bottom:70px;width:58px;height:58px;border-radius:50%;cursor:pointer;
+  background:var(--acento-solido);border:3px solid var(--contorno);box-shadow:0 4px 0 var(--contorno);
+  display:grid;place-items:center;padding:0;transition:var(--rapido);
+}
+.bolsillo svg{width:40px;height:40px}
+.bolsillo:active{transform:translateY(4px);box-shadow:none}
+.hoja{
+  position:absolute;left:0;right:0;bottom:56px;background:var(--elevado);border-top:3px solid var(--contorno);
+  border-radius:24px 24px 0 0;padding:14px 16px 16px;transform:translateY(104%);transition:transform .26s cubic-bezier(.2,0,0,1);
+  display:flex;flex-direction:column;gap:10px;
+}
+.hoja.abierta{transform:none}
+.hoja .saluda{display:flex;gap:10px;align-items:center}
+.hoja .saluda svg{width:44px;height:44px;flex:none}
+.hoja .saluda b{font:800 17px/1.15 var(--fuente-marca)}
+.hoja .opcion{display:flex;align-items:center;gap:10px;border:2px solid var(--contorno);border-radius:14px;padding:8px 10px;background:var(--fondo);box-shadow:0 3px 0 var(--contorno);font:700 14px/1.2 var(--fuente-marca);text-align:left}
+.hoja .opcion svg{width:30px;height:30px;flex:none}
+.hoja .opcion small{display:block;font:600 11px/1.2 var(--fuente-ui);color:var(--tinta-tenue)}
+.hoja .cerrar{align-self:center;font:700 12px/1 var(--fuente-ui);color:var(--tinta-tenue);background:none;border:0;padding:6px 10px;cursor:pointer}
+
+/* ---------- reglas e implementación ---------- */
+.reglas{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 22px;margin:0;padding:0;list-style:none}
+@media(max-width:700px){.reglas{grid-template-columns:1fr}}
+.reglas li{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;font-size:15px;line-height:1.45;text-wrap:pretty;padding:8px 0;border-top:1px solid var(--borde)}
+.reglas li svg{width:28px;height:28px;margin-top:-2px}
+.reglas li b{display:block;font:800 15px/1.3 var(--fuente-marca)}
+.fases{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.fases.dos{grid-template-columns:repeat(2,1fr);margin-top:14px}
+@media(max-width:860px){.fases,.fases.dos{grid-template-columns:1fr}}
+.fase{background:var(--elevado);border:2.5px solid var(--contorno);border-radius:var(--r-lg);padding:18px 20px;box-shadow:0 4px 0 var(--contorno);display:flex;flex-direction:column;gap:8px}
+.fase .num{font:800 13px/1 var(--fuente-ui);letter-spacing:.06em;text-transform:uppercase;color:var(--acento)}
+.fase h3{font-size:21px}
+.fase p,.fase li{font-size:14.5px;color:var(--tinta-suave);line-height:1.45}
+.fase ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.fase .costo{margin-top:auto;padding-top:8px;border-top:1px solid var(--borde);font:700 13px/1.3 var(--fuente-ui);color:var(--tinta)}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px}
+code{background:var(--hundido);padding:2px 6px;border-radius:6px}
+pre{background:var(--hundido);border:2px solid var(--borde-fuerte);border-radius:var(--r-md);padding:14px 16px;overflow-x:auto;line-height:1.5;margin:14px 0 0}
+.fijo{display:grid;grid-template-columns:auto 1fr;gap:10px 18px;align-items:center;background:var(--elevado);border:2.5px solid var(--contorno);border-radius:var(--r-lg);padding:18px 20px;box-shadow:0 4px 0 var(--contorno)}
+.fijo svg{width:64px;height:64px}
+.fijo p{font-size:15px;color:var(--tinta-suave);text-wrap:pretty}
+.fijo b{color:var(--tinta)}
+.auditoria ol{margin:0;padding-left:22px;display:grid;gap:10px;font-size:15px;line-height:1.45}
+.auditoria li b{font-family:var(--fuente-marca);font-size:16px}
+.auditoria .sev{display:inline-block;font:800 10px/1 var(--fuente-ui);text-transform:uppercase;letter-spacing:.06em;padding:4px 7px;border-radius:var(--r-pill);border:2px solid var(--contorno);margin-right:6px;vertical-align:2px}
+.sev.bloquea{background:var(--acento);color:#fff}
+.sev.importante{background:var(--destacado);color:var(--ink)}
+.sev.pulido{background:var(--hundido)}
+.remate{position:relative;height:110px;margin-top:56px;overflow:hidden}
+.pie{text-align:center;padding:18px 24px 28px;font-size:12.5px;color:var(--tinta-tenue)}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+  .hoja{transition:none!important}
+}
+</style>
+
+<header class="hero">
+  <div class="hero-interior">
+    <p class="ceja">Propuesta · animales guía · agosto 2026</p>
+    <h1>Cada animal guía, <span class="sub">con su oficio puesto<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M4 13c46-8 104-10 192-4" fill="none" stroke="var(--acento)" stroke-width="7" stroke-linecap="round"/></svg></span></h1>
+    <p class="bajada">Boina, audífonos, lentes de sol, una tarjeta en los dientes. Once objetos que dicen de qué se hace cargo cada animal sin leer la etiqueta, un tic que los mantiene vivos, una entrada sacada de su propia historia y un rol en la página: que recomienden, no que decoren.</p>
+    <div class="acciones">
+      <button class="boton" id="otra-vez" type="button">Que entren otra vez</button>
+      <a class="boton secundario" href="#los-once">Ver los once</a>
+    </div>
+  </div>
+  <div class="paseo">
+    <div id="cordillera"></div>
+    <div class="desfile" id="desfile"></div>
+  </div>
+</header>
+
+<main>
+<section class="seccion" id="por-que">
+  <p class="ceja">Por qué</p>
+  <h2>Hoy son once manchas de color con cara. Se nota en tres lugares.</h2>
+  <div class="tres">
+    <div class="razon">
+      <h3>A 22 px no se distinguen</h3>
+      <p>En los chips del mapa, los pines y la barra de abajo, la carita se reduce a un círculo del color de la familia. Sin el color, el Degú y la Chinchilla son el mismo animal. Con un objeto encima —la boina, la etiqueta de precio— cada uno se reconoce antes de leer.</p>
+      <div class="pixeles" id="pixeles"></div>
+      <p class="evid">En cada par, a la izquierda la carita de hoy y a la derecha la propuesta, rasterizadas a 22 px y agrandadas 2× sin suavizar. Es lo que ve un teléfono.</p>
+    </div>
+    <div class="razon">
+      <h3>Todos se mueven igual</h3>
+      <p>El desfile de la portada balancea a los once con la misma curva y la misma cadencia. Ningún animal tiene un gesto propio: la nutria que entrena se mece igual que el pingüino que asiente. El personaje se construye con el movimiento tanto como con el dibujo.</p>
+      <div class="fila-iguales" id="iguales"></div>
+      <p class="evid">La portada hoy: una sola pose y un solo <code>@keyframes pasear</code> para todos.</p>
+    </div>
+    <div class="razon">
+      <h3>Están en todas partes y no hacen nada</h3>
+      <p>Aparecen en chips, miniaturas, pines, tarjetas y cifras, pero solo en Habla tienen voz. En el mapa, un filtro de Música muestra al Cóndor 40 veces y no dice ni una frase. La marca promete “animales que te recomiendan”; la página los usa de ícono.</p>
+      <div class="donde-hoy"><span>chips de filtro</span><span>pines</span><span>miniaturas</span><span>nav inferior</span><span>cifras del hero</span><span>marcas de agua</span><span>tarjetas de Quién</span></div>
+      <p class="evid">Donde hoy aparecen sin rol. Solo Habla y la ficha de Quién hace esto les dan una frase.</p>
+    </div>
+  </div>
+</section>
+
+<section class="seccion" id="los-once">
+  <p class="ceja">Los once</p>
+  <h2>Un objeto, un tic, una entrada y un rol por animal.</h2>
+  <p class="sub">Cada carnet muestra el animal nuevo a tamaño grande (con su tic andando), lo que lleva y por qué, cómo entra a escena y qué hace en la página. Abajo, a 22 px, como pin y en las tres poses. Arriba a la derecha, el de hoy.</p>
+  <div class="carnets" id="carnets"></div>
+</section>
+
+<section class="seccion" id="donde-actuan">
+  <p class="ceja">Dónde actúan</p>
+  <h2>El mismo elenco, con trabajo.</h2>
+  <p class="sub">Siete lugares donde el animal deja de ser ícono y pasa a recomendar. Todo sale de datos que el sitio ya tiene: cuántos eventos quedaron tras el filtro, qué día es, si algo es gratis o empieza hoy.</p>
+  <div class="maquetas">
+
+    <div class="maqueta">
+      <div class="cab"><b>El que atiende</b><span class="ceja">Mapa · panel</span></div>
+      <div class="cuerpo">
+        <div class="demo">
+          <div class="atiende">
+            <span id="mq-condor"></span>
+            <div><div class="quien">Te atiende el Cóndor</div><div class="linea"><b>14</b> tocatas para hoy. Ocho son gratis.</div></div>
+          </div>
+          <div class="chips"><span class="chip on" id="mq-chip-musica"></span><span class="chip">Rock <small>106</small></span><span class="chip">Jazz <small>12</small></span><span class="chip">Cumbia <small>9</small></span></div>
+        </div>
+      </div>
+      <p class="nota">Al apretar un chip de categoría, ese animal toma la cabecera del panel con el conteo real y una frase corta. Uno a la vez: el que habla es el del filtro puesto; sin filtro, la Loica.</p>
+    </div>
+
+    <div class="maqueta">
+      <div class="cab"><b>Cuando no hay nada</b><span class="ceja">Mapa · estado vacío</span></div>
+      <div class="cuerpo">
+        <div class="demo">
+          <div class="vacio">
+            <span id="mq-culpeo-duerme"></span>
+            <b>El Culpeo no encontró fiestas para hoy.</b>
+            <p>Es martes. Prueba con “Este finde” o suelta el filtro +18.</p>
+            <span class="chip">Ver este finde</span>
+          </div>
+        </div>
+      </div>
+      <p class="nota">El animal de la categoría duerme sobre el mensaje y la salida la dice él, con el dato que la explica (el día, el filtro). Hoy el vacío es siempre la Loica, diga lo que diga el filtro.</p>
+    </div>
+
+    <div class="maqueta ancha">
+      <div class="cab"><b>Anfitrión de sección</b><span class="ceja">Descuentos · Talleres · Dónde comer</span></div>
+      <div class="cuerpo">
+        <div class="demo">
+          <div class="anfitrion">
+            <span id="mq-guaren"></span>
+            <div>
+              <p class="ceja">Hoy es sábado</p>
+              <h3>212 locales con descuento. 38 a menos de dos kilómetros.</h3>
+              <p>El Guarén ordenó los folletos de siete bancos por día de la semana. El martes come por la mitad; el sábado, con suerte, por el 25 %.</p>
+            </div>
+          </div>
+          <div class="chips"><span class="chip on">Sábado</span><span class="chip">Bci</span><span class="chip">Santander</span><span class="chip">Scotiabank</span><span class="chip">Providencia</span></div>
+        </div>
+      </div>
+      <p class="nota">Las tres páginas con animal propio lo ponen arriba, grande y con su tic, diciendo el dato del día en su voz (el Chincol cuenta los talleres de la semana; el Quiltro, los locales abiertos a esta hora). El texto sale de los JSON, no se escribe a mano.</p>
+    </div>
+
+    <div class="maqueta">
+      <div class="cab"><b>Lo recomienda</b><span class="ceja">Tarjeta · sello</span></div>
+      <div class="cuerpo">
+        <div class="demo" style="padding-bottom:26px">
+          <div class="tarjeta">
+            <div class="mini" id="mq-mini-quiltro"></div>
+            <div><div class="hora">13:00</div><h4>Fuente Alemana, Alameda</h4><div class="meta">Lomito completo · Santiago</div></div>
+            <div class="precio">$6.900</div>
+            <span class="sello" id="mq-sello"></span>
+          </div>
+        </div>
+      </div>
+      <p class="nota">Un sello torcido con la cara del animal en las tarjetas que el sitio ya elige a mano (Dónde comer, las ediciones del blog) y en las que cumplen una regla (gratis y empieza hoy). Es uno de los dos elementos torcidos permitidos por pantalla.</p>
+    </div>
+
+    <div class="maqueta">
+      <div class="cab"><b>Te lo recomienda</b><span class="ceja">Ficha de evento · e/</span></div>
+      <div class="cuerpo">
+        <div class="demo">
+          <div class="atiende">
+            <span id="mq-chinchilla"></span>
+            <div><div class="quien">Te lo recomienda la Chinchilla</div><div class="linea">Teatro, y lo eligió por tres razones:</div></div>
+          </div>
+          <div class="razones"><span>Es gratis</span><span>Empieza hoy</span><span>A 1,2 km</span></div>
+        </div>
+      </div>
+      <p class="nota">Las 3.457 fichas compartidas por WhatsApp abren con el animal de la categoría presentando el evento y las razones que ya están en el dato: gratis, hoy, cerca, último día. La vista previa del link también las lleva.</p>
+    </div>
+
+    <div class="maqueta">
+      <div class="cab"><b>La Loica de bolsillo</b><span class="ceja">Todas las páginas</span></div>
+      <div class="cuerpo">
+        <div class="telefono" id="telefono">
+          <div class="mapa-falso"></div>
+          <span class="pin-falso" style="left:38px;top:120px" id="pf1"></span>
+          <span class="pin-falso" style="left:150px;top:200px" id="pf2"></span>
+          <span class="pin-falso" style="left:210px;top:96px" id="pf3"></span>
+          <span class="pin-falso" style="left:90px;top:300px" id="pf4"></span>
+          <button class="bolsillo" id="bolsillo" type="button" aria-label="Hablar con la Loica"></button>
+          <div class="hoja abierta" id="hoja">
+            <div class="saluda"><span id="mq-loica-hoja"></span><b>¿Qué te tinca hoy?</b></div>
+            <button class="opcion" type="button"><span id="op-degu"></span><span>Algo gratis ahora<small>Te paso con el Degú · 242 panoramas</small></span></button>
+            <button class="opcion" type="button"><span id="op-culpeo"></span><span>Salir esta noche<small>Te paso con el Culpeo · desde las 21:00</small></span></button>
+            <button class="opcion" type="button"><span id="op-pudu"></span><span>Con niños y sin techo<small>Te paso con el Pudú · 31 este finde</small></span></button>
+            <button class="cerrar" type="button" id="cerrar-hoja">Cerrar</button>
+          </div>
+          <div class="nav-falsa"><i class="act"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+      <p class="nota">Un botón fijo con la anfitriona, sobre la barra de abajo, en las nueve páginas. Abre tres atajos que salen de los datos del día y cada uno “te pasa” con el animal que corresponde. Es Habla en tres toques, sin salir de donde estás. El botón rojo la abre y la cierra.</p>
+    </div>
+
+    <div class="maqueta ancha">
+      <div class="cab"><b>La barra de abajo sabe quién te atiende</b><span class="ceja">Opcional · nav inferior</span></div>
+      <div class="cuerpo">
+        <div class="navbar" id="mq-nav"></div>
+      </div>
+      <p class="nota">Los íconos siguen siendo íconos (a 21 px ganan), pero la pastilla de la página activa muestra la cara del animal que la atiende. Quien va de Dctos a Clases ve cambiar al Guarén por el Chincol: la señalética se aprende sola.</p>
+    </div>
+  </div>
+</section>
+
+<section class="seccion" id="reglas">
+  <p class="ceja">Para que no canse</p>
+  <h2>Siete reglas antes de animar nada.</h2>
+  <ul class="reglas" id="lista-reglas"></ul>
+</section>
+
+<section class="seccion" id="implementacion">
+  <p class="ceja">Cómo se hace</p>
+  <h2>Tres pasos, el primero sin tocar ninguna página.</h2>
+  <div class="fases">
+    <div class="fase"><span class="num">Paso 1</span><h3>Cambiar el dibujo</h3>
+      <p>Reemplazar el bloque de mascotas de <code>loica.js</code> por el módulo v2 (misma API: <code>carita</code>, <code>cuerpo</code>, <code>mascota</code>) y pegar su CSS en <code>loica.css</code>. Las nueve páginas y las 3.457 fichas reciben los accesorios solas.</p>
+      <ul><li>Subir <code>?v=22</code> a <code>23</code> en las nueve páginas y en <code>exportar_web.py</code>.</li><li>El logo llama con <code>{acc:false}</code>: sigue limpio.</li><li>Los pines del mapa se regeneran solos (<code>styleimagemissing</code>).</li></ul>
+      <p class="costo">Medio día. Cero cambios de estructura.</p></div>
+    <div class="fase"><span class="num">Paso 2</span><h3>Darles un rol</h3>
+      <p>El que atiende en el panel del mapa, el vacío con el animal de la categoría, el anfitrión en Descuentos, Talleres y Dónde comer, y las razones en la ficha de evento.</p>
+      <ul><li><code>mapa.html</code>: cabecera del panel y <code>refrescar()</code>.</li><li><code>descuentos.html</code>, <code>talleres.html</code>, <code>comer.html</code>: bloque anfitrión con el dato del día.</li><li><code>exportar_web.py</code>: plantilla de <code>e/</code> con las razones.</li></ul>
+      <p class="costo">Dos a tres días. Textos en es/en/pt en <code>TEXTOS</code>.</p></div>
+    <div class="fase"><span class="num">Paso 3</span><h3>La Loica de bolsillo y los sellos</h3>
+      <p>El botón fijo con la hoja de tres atajos en <code>pintarBarra()</code>, los sellos en las tarjetas elegidas y, si convence, la cara en la pastilla de la barra inferior.</p>
+      <ul><li>Los atajos necesitan que el mapa lea filtros desde la URL (<code>#gratis</code>, <code>#cat=fiesta</code>): hoy no lo hace.</li><li>Los sellos reutilizan <code>carita()</code> a 24 px.</li></ul>
+      <p class="costo">Dos días. Medible: toques al botón y atajos elegidos.</p></div>
+  </div>
+  <pre><code>// La API no cambia; cambian tres opciones.
+mascota("chinchilla", "var(--c-cultura)", 120, {
+  anima: true,      // tics de reposo (parpadeo, orejas, boina)
+  acc:   true,      // el accesorio; false en el logo
+  pose:  "posada",  // posada | celebrando | durmiendo | volando
+});
+// Las entradas se disparan con la clase .entra en el contenedor
+// y --d en cada animal. Con prefers-reduced-motion no pasa nada.</code></pre>
+</section>
+
+<section class="seccion" id="no-cambia">
+  <p class="ceja">Lo que no cambia</p>
+  <h2>Mismos animales, mismos colores, mismo criterio.</h2>
+  <div class="fijo">
+    <span id="logo-limpio"></span>
+    <p><b>El logo sigue sin cintillo.</b> La Loica del logo y del ícono de la app se dibuja con <code>acc:false</code>. El accesorio es de la anfitriona en escena, no de la marca. Tampoco cambian los nombres, las familias de color ni la regla que eligió a cada uno: el chiste que un chileno reconoce al tiro manda sobre el manual de fauna. La boina y la tarjeta en los dientes siguen esa misma regla.</p>
+  </div>
+</section>
+
+<section class="seccion auditoria" id="auditoria">
+  <p class="ceja">Auditoría del sitio · 22 de agosto</p>
+  <h2>Diecisiete hallazgos en nueve páginas. Tres bloquean en celular.</h2>
+  <p class="sub">Nueve páginas y una ficha, en 390/768/1440, claro y oscuro, Chromium y WebKit, contra la dirección visual vigente y las críticas del 9 de agosto. Todo está medido; el informe completo con las 300 capturas citadas queda en <code>notas/_auditoria_diseno_2026-08-22.md</code> e <code>informes/auditoria-diseno-2026-08-22/</code>.</p>
+  <ol>
+    <li><span class="sev bloquea">Bloquea</span><b>Calendario en celular:</b> la rejilla mide 195 px y necesita 289; los días 24-31 quedan bajo la agenda con <code>overflow:hidden</code>. La última semana del mes no se puede tocar.</li>
+    <li><span class="sev bloquea">Bloquea</span><b>Descuentos:</b> el botón "Mapa" y el contador viven en un riel de 713 px sin aviso de scroll (x=494 y 586 en una pantalla de 390). El mapa no existe para el celular.</li>
+    <li><span class="sev bloquea">Bloquea</span><b>Descuentos:</b> la ficha y el mapa son absolutos y el hueco de la barra inferior no les aplica: "Ver en la página del banco" queda tapado. Arreglo de una línea: <code>bottom:var(--hueco-nav)</code>.</li>
+    <li><span class="sev importante">Importante</span><b>La señalética no se ve en el mapa:</b> pines de 15×19 px con carita de 11 (el contrato pide 28); talleres con círculos de 12 px sin animal; descuentos con 256 discos solapados y teselas claras de noche.</li>
+    <li><span class="sev importante">Importante</span><b>La portada pierde su tesis en celular:</b> los once animales del hero quedan bajo la barra inferior (y≈800, barra desde 786) y miden 35 px.</li>
+    <li><span class="sev importante">Importante</span><b>Banda sin teselas de ~60 px</b> sobre el mapa en cuatro de cinco cargas móviles (mapa y talleres): el header crece después de crear el mapa.</li>
+    <li><span class="sev importante">Importante</span><b>~40 pares de texto bajo 4,5:1</b> por una sola causa: cada página decide sola el texto sobre color. "HOY" 3,96, tarjeta Talleres 2,55, rol "Gratis" de noche 1,65, chips activos 2,83, bancos 2,47, hora del blog 1,97.</li>
+    <li><span class="sev importante">Importante</span><b>Vacíos sin salida:</b> el animal dormido en gris al 50 % y sin botón en mapa, talleres, descuentos y calendario; en el mapa a 390 solo se ve la cabeza de la Loica.</li>
+    <li><span class="sev importante">Importante</span><b>Habla en celular</b> arranca con el hero fuera de pantalla (salta 359 px al cargar) y el cambiador de guía son nueve animales de 27×30 px.</li>
+    <li><span class="sev importante">Importante</span><b>Los animales guía no tienen rol:</b> Chungungo ×6 igual en talleres, Chincol a 18 px fuera de pantalla, Quiltro ×30 en comer, calendario con 168 caritas y ninguna con voz, barra inferior con íconos genéricos. Es lo que esta propuesta resuelve.</li>
+    <li><span class="sev importante">Importante</span><b>Dos elencos, cuatro chips, cuatro gestos:</b> el elenco vive en portada y en Quién con biografías distintas; hay cuatro chips; la misma tarjeta hace cuatro cosas al tocarla según la página.</li>
+    <li><span class="sev importante">Importante</span><b>Blog:</b> 10 de 10 recomendaciones del post vencido son cajas "ya no está"; botones de 33 px y "← Volver" de 20.</li>
+    <li><span class="sev importante">Importante</span><b>Agrega:</b> obligatorios sin marcar, errores sin semántica, precio sin label, formulario a 817 px en celular y un "¡Gracias!" que no sabe si el correo salió.</li>
+    <li><span class="sev importante">Importante</span><b>Lo prometido el 9-ago que sigue igual:</b> precio "—" (65 de 69 talleres), "+153" en el calendario, finde sin distinguir, 1-2-3 en Quién, lema sin pantalla, sin esqueleto de carga.</li>
+    <li><span class="sev pulido">Pulido</span><b>La Loica vuela a donde el pin estaba,</b> no a donde queda tras el <code>flyTo</code> con <code>offset:[0,-90]</code>: aterriza a ~130 px del pin, a veces fuera de la pantalla.</li>
+    <li><span class="sev pulido">Pulido</span><b>La ficha compartible</b> manda a <code>talleres.html#/e/…</code> y talleres no lee el hash; su foto es la única del sitio sin contorno ni repisa; la descripción llega cortada con "…" desde el pipeline.</li>
+    <li><span class="sev pulido">Pulido</span><b><code>prefers-reduced-motion</code></b> sigue siendo el martillazo global (<code>*{animation:none!important}</code>) que el contrato pidió reemplazar: mata también la transición de alto del panel del mapa.</li>
+  </ol>
+  <h3 style="margin-top:28px">Los cuatro cambios que más aire dan con menos trabajo</h3>
+  <div class="fases dos">
+    <div class="fase"><span class="num">Uno</span><h3>Pines y badge al tamaño del contrato</h3><p>Una línea en <code>icon-size</code> (24-40 px) y diez de CSS para la pastilla "HOY" fuera de la miniatura. La señalética aparece donde está el producto; con el elenco v2, cada pin se reconoce por el accesorio.</p></div>
+    <div class="fase"><span class="num">Dos</span><h3>Un animal grande por sección y caritas en la barra</h3><p>Chincol junto a "69 talleres", Guarén en la franja de descuentos, cada destino de la nav con su animal, cordillera del color de la página. Las secciones dejan de ser la misma lista con otro color.</p></div>
+    <div class="fase"><span class="num">Tres</span><h3>Un chip y una regla de texto sobre color</h3><p><code>.chip</code> en comer y agrega; un token <code>--tono-tinta</code> por categoría y banco (crema sobre oscuro, tinta sobre claro). Cuatro componentes y ~40 contrastes de una vez.</p></div>
+    <div class="fase"><span class="num">Cuatro</span><h3>Una pantalla de portada y el hueco de la barra</h3><p>Hero que termina sobre la barra, sin la sección elenco, tres destinos; en descuentos conteo y "Mapa" en fila propia y <code>bottom:var(--hueco-nav)</code>. Más borrar que construir; destraba los tres bloquea.</p></div>
+  </div>
+  <p class="sub" style="margin-top:26px">Y el mapa en celular: en el sitio publicado funciona (Chromium y WebKit emulando iPhone 13 y Pixel 5: teselas, ~880 pines, pan, pinza, ficha, lista). Lo que se rompía era probarlo desde el teléfono contra el servidor local por la IP de la red: <code>upgrade-insecure-requests</code> subía los archivos a un https inexistente. Ya se sacó de las nueve páginas y de la plantilla de las fichas.</p>
+</section>
+</main>
+
+<footer class="remate"><div id="cordillera-pie"></div></footer>
+<p class="pie">Loica · propuesta de elenco v2 · los dibujos son SVG y corren tal cual en el sitio</p>
+
+<!-- INLINE:v1.js -->
+<!-- INLINE:v2.js -->
+<script>
+/* ---------- datos del elenco (orden de presentación de loica.js) ---------- */
+const ELENCO = [
+  {clave:"loica", nombre:"Loica", rol:"La anfitriona", hex:"#E8442E", tinta:"#AA2C1B", pastel:"#FFC9BE",
+   lleva:"Cintillo con micrófono.", porque:"Es la única que habla y la que atiende en la puerta: la confundieron con la encargada y contestó bien.",
+   tic:"Ladea la cabeza cuando le preguntas.", entra:"Volando desde fuera de la pantalla, como hoy.",
+   rolp:"Recibe en la portada, conduce Habla, vuela en el mapa y vive en el botón de bolsillo de todas las páginas."},
+  {clave:"condor", nombre:"Cóndor", rol:"Música", hex:"#DE3A1E", tinta:"#A82B12", pastel:"#FFC9BE",
+   lleva:"Audífonos sobre la cabeza pelada.", porque:"Baja de los cinco mil metros a escuchar la prueba de sonido y se queda hasta el bis.",
+   tic:"Asiente al beat: cuatro golpes y descansa.", entra:"Planeando desde arriba.",
+   rolp:"Atiende el panel del mapa con Música puesto y firma las tocatas en las fichas."},
+  {clave:"culpeo", nombre:"Culpeo", rol:"Fiestas", hex:"#7A3FE0", tinta:"#5B2BAF", pastel:"#DAD2FB",
+   lleva:"Lentes de sol, siempre puestos.", porque:"Sale de noche y amanece con ellos. A 22 px se leen como 😎, que es lo que hay que leer.",
+   tic:"Un destello cruza los lentes; mueve una oreja.", entra:"Aparece de la oscuridad.",
+   rolp:"Fiestas y el filtro +18. Cuando no hay nada, duerme sobre el vacío y dice que vuelvas el viernes."},
+  {clave:"chinchilla", nombre:"Chinchilla", rol:"Cultura", hex:"#1B6FD1", tinta:"#1A5599", pastel:"#C7DAF1",
+   lleva:"Boina ladeada.", porque:"Va al teatro desde que confirmó que el actor se equivocaba. Es la que escucha.",
+   tic:"Mueve las orejas, una y después la otra.", entra:"Tarde, y aplaude fuerte.",
+   rolp:"Teatro, arte y cine en el mapa; presenta las fichas de cultura con sus razones."},
+  {clave:"chincol", nombre:"Chincol", rol:"Barrio", hex:"#F08800", tinta:"#8A5000", pastel:"#F6CFAB",
+   lleva:"Lápiz detrás de la oreja y bolsa de feria con un puerro.", porque:"Talleres, clases y ferias: nunca se ha ido del barrio.",
+   tic:"Dos saltitos. Los chincoles saltan, no caminan.", entra:"A saltos, desde la izquierda.",
+   rolp:"Anfitrión de Talleres y las ferias del mapa. Cuenta cuántas clases quedan esta semana."},
+  {clave:"pudu", nombre:"Pudú", rol:"Aire libre", hex:"#0E8757", tinta:"#0A6141", pastel:"#CFE3D8",
+   lleva:"Pañuelo de scout y una mochila.", porque:"Conoce el cerro por abajo. Es el de los parques y el de llevar niños.",
+   tic:"Sacude una oreja.", entra:"Asoma de entre los arbustos.",
+   rolp:"Aire libre, familia y el filtro Niños. Sabe a qué hora se llena el parque."},
+  {clave:"degu", nombre:"Degú", rol:"Gratis", hex:"#2E7D5B", tinta:"#1C523B", pastel:"#CFE3D8",
+   lleva:"Una etiqueta de precio con un cero, colgando de la oreja.", porque:"Anota lo que no cuesta nada. La lista es lo único que junta.",
+   tic:"La etiqueta se mece; la nariz se arruga.", entra:"Sale de la tierra, como todos los días a la misma hora.",
+   rolp:"Es el filtro Gratis. Celebra cuando lo que encontraste no cuesta un peso."},
+  {clave:"guaren", nombre:"Guarén", rol:"Descuentos", hex:"#95521C", tinta:"#6B3813", pastel:"#F0D8BE",
+   lleva:"La tarjeta dorada del banco, en los dientes.", porque:"Le dicen rata y lo anotó en el currículum. Un guarén lleva todo en la boca.",
+   tic:"Mordisquea la tarjeta; la cola barre.", entra:"Corriendo pegado a la muralla.",
+   rolp:"Anfitrión de Descuentos. Sabe qué día es y cuánto se ahorra hoy."},
+  {clave:"chungungo", nombre:"Chungungo", rol:"Deporte", hex:"#0C8B9B", tinta:"#065C66", pastel:"#BFE6EA",
+   lleva:"Cintillo de toalla y número de corredor.", porque:"Entrena en el Mapocho y se cronometra.",
+   tic:"Trota en el lugar y suda.", entra:"Trotando, y no para al llegar.",
+   rolp:"Deporte en el mapa. En el vacío dice a qué hora abren las piscinas."},
+  {clave:"pinguino", nombre:"Pingüino", rol:"Charlas", hex:"#C42B67", tinta:"#8F1C4A", pastel:"#F7CBDC",
+   lleva:"Birrete con borla y un libro bajo el ala.", porque:"Nació de terno; con el birrete ya lo invitan a la mesa del seminario.",
+   tic:"Asiente en los momentos correctos.", entra:"A pasitos.",
+   rolp:"Charlas y seminarios. Presenta las fichas con la institución que convoca."},
+  {clave:"quiltro", nombre:"Quiltro", rol:"Comer", hex:"#5C7A1E", tinta:"#47600F", pastel:"#D9E6A8",
+   lleva:"Servilleta al cuello.", porque:"Ya estaba afuera del local antes que tú. La lengua le cae encima.",
+   tic:"Cola que no para; jadea.", entra:"No entra: ya estaba. Solo se sacude.",
+   rolp:"Anfitrión de Dónde comer y sello en los locales elegidos a mano."},
+];
+const T = "#1E2A4A";
+const porClave = Object.fromEntries(ELENCO.map(a => [a.clave, a]));
+
+/* CSS de las partes */
+const st = document.createElement("style"); st.textContent = V2.CSS; document.head.appendChild(st);
+
+/* ---------- cordillera (copiada de loica.js) ---------- */
+function cordillera({tono = "var(--c-fiesta)"} = {}){
+  const nieve = [[190,18],[450,14],[730,22],[1010,28]]
+    .map(([x,y]) => `M${x} ${y} L${x-22} ${y+21} L${x-9} ${y+16} L${x+3} ${y+24} L${x+14} ${y+15} L${x+24} ${y+20} Z`).join("");
+  return `<svg class="cerros" viewBox="0 0 1200 150" preserveAspectRatio="none" aria-hidden="true">
+    <path fill="var(--c-cultura)" opacity=".3" d="M0 150 L0 78 L70 40 L120 62 L190 18 L250 50 L310 30 L380 58 L450 14 L520 54 L590 34 L660 66 L730 22 L800 56 L870 36 L940 70 L1010 28 L1080 60 L1140 42 L1200 68 L1200 150 Z"/>
+    <path fill="#FAF3E7" opacity=".62" d="${nieve}"/>
+    <path fill="${tono}" opacity=".34" d="M0 150 L0 104 L90 84 L170 98 L260 76 L340 92 L420 70 L500 88 L560 58 L620 88 L700 74 L790 96 L880 72 L960 94 L1050 78 L1130 96 L1200 84 L1200 150 Z"/>
+    <path fill="var(--azul-cordillera)" opacity=".72" d="M0 150 L0 140 L110 140 L110 127 L150 127 L150 140 L230 140 Q302 62 375 140 L520 140 L520 121 L560 121 L560 140 L598 140 L600 46 L622 41 L622 140 L700 140 L700 126 L740 126 L740 140 L830 140 Q880 74 930 140 L1010 140 L1010 123 L1055 123 L1055 140 L1200 140 L1200 150 Z"/>
+    <path stroke="var(--azul-cordillera)" stroke-width="3" opacity=".72" fill="none" d="M302 62 L302 48 M295 53 L309 53"/></svg>`;
+}
+document.getElementById("cordillera").innerHTML = cordillera();
+document.getElementById("cordillera-pie").innerHTML = cordillera({tono:"var(--acento)"});
+
+/* ---------- el desfile ---------- */
+const desfile = document.getElementById("desfile");
+desfile.innerHTML = ELENCO.map((a, i) =>
+  `<a class="puesto" href="#carnet-${a.clave}" style="--d:${(i * .22).toFixed(2)}s" aria-label="${a.nombre} — ${a.rol}">
+     ${V2.cuerpo(a.clave, a.hex, 96, {anima:true})}<span class="nom" aria-hidden="true">${a.nombre}</span></a>`).join("");
+let temporizador = null;
+function entrar(){
+  desfile.classList.remove("entra"); void desfile.offsetWidth; desfile.classList.add("entra");
+  clearTimeout(temporizador);
+  // Cuando terminan las entradas vuelven los tics: las dos animaciones
+  // pelean por el mismo `animation` del SVG, así que se turnan.
+  temporizador = setTimeout(() => desfile.classList.remove("entra"), 4300);
+}
+entrar();
+document.getElementById("otra-vez").onclick = entrar;
+
+/* ---------- por qué: las evidencias ---------- */
+function rasterizar(cv, svg, px){
+  cv.width = px; cv.height = px;
+  const img = new Image();
+  img.onload = () => { const ctx = cv.getContext("2d"); ctx.fillStyle = "#FAF3E7"; ctx.fillRect(0,0,px,px); ctx.drawImage(img,0,0,px,px); };
+  img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg.replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" '));
+}
+const pix = document.getElementById("pixeles");
+["chinchilla","degu","pinguino","guaren","culpeo"].forEach(c => {
+  const a = porClave[c];
+  const par = document.createElement("div"); par.className = "par";
+  par.innerHTML = `<canvas data-v="1"></canvas><canvas data-v="2"></canvas><small>${a.nombre}</small>`;
+  pix.appendChild(par);
+  rasterizar(par.querySelector('[data-v="1"]'), V1.carita(c, a.hex, 22, {tinta:T}), 22);
+  rasterizar(par.querySelector('[data-v="2"]'), V2.carita(c, a.hex, 22, {tinta:T}), 22);
+});
+document.getElementById("iguales").innerHTML = ELENCO.map(a => V1.cuerpo(a.clave, a.hex, 44, {tinta:T})).join("");
+
+/* ---------- los carnets ---------- */
+document.getElementById("carnets").innerHTML = ELENCO.map((a, i) => `
+  <article class="carnet" id="carnet-${a.clave}" style="--pastel:${a.pastel};--tinta-rol:${a.tinta};--d:${(i * .37).toFixed(2)}s">
+    <div class="hoy" title="Cómo se ve hoy">${V1.cuerpo(a.clave, a.hex, 40, {tinta:T})}<small>hoy</small></div>
+    <div class="arriba">
+      <div class="grande">${V2.cuerpo(a.clave, a.hex, 164, {tinta:T, anima:true})}</div>
+      <div class="titulo"><h3>${a.nombre}</h3><span class="rol">${a.rol}</span></div>
+    </div>
+    <dl>
+      <dt>Lleva</dt><dd>${a.lleva}</dd>
+      <dt>Por qué</dt><dd>${a.porque}</dd>
+      <dt>Tic</dt><dd>${a.tic}</dd>
+      <dt>Entra</dt><dd>${a.entra}</dd>
+      <dt>Rol</dt><dd>${a.rolp}</dd>
+    </dl>
+    <div class="tallas">
+      <span class="t">${V2.carita(a.clave, a.hex, 22, {tinta:T})}22 px</span>
+      <span class="t"><span class="pin">${V2.carita(a.clave, a.hex, 28, {tinta:T})}</span>pin</span>
+      <span class="t"><span class="mini-pix"><canvas data-c="${a.clave}" data-v="1"></canvas><canvas data-c="${a.clave}" data-v="2"></canvas></span>22 px, hoy · v2</span>
+      <span class="poses">
+        <span class="t">${V2.cuerpo(a.clave, a.hex, 52, {tinta:T, pose:"celebrando"})}celebra</span>
+        <span class="t">${V2.cuerpo(a.clave, a.hex, 52, {tinta:T, pose:"durmiendo"})}duerme</span>
+      </span>
+    </div>
+  </article>`).join("");
+document.querySelectorAll(".carnet canvas").forEach(cv => {
+  const a = porClave[cv.dataset.c], mod = cv.dataset.v === "1" ? V1 : V2;
+  rasterizar(cv, mod.carita(a.clave, a.hex, 22, {tinta:T}), 22);
+});
+
+/* ---------- las maquetas ---------- */
+const pon = (id, html) => { const el = document.getElementById(id); if(el) el.innerHTML = html; };
+pon("mq-condor", V2.cuerpo("condor", porClave.condor.hex, 52, {anima:true}));
+pon("mq-chip-musica", V2.carita("condor", "#fff", 22, {tinta:"#fff"}) + " Música");
+pon("mq-culpeo-duerme", V2.cuerpo("culpeo", porClave.culpeo.hex, 92, {pose:"durmiendo"}));
+pon("mq-guaren", V2.cuerpo("guaren", porClave.guaren.hex, 116, {anima:true}));
+pon("mq-mini-quiltro", V2.carita("quiltro", porClave.quiltro.hex, 40));
+pon("mq-sello", V2.carita("quiltro", porClave.quiltro.hex, 24, {tinta:T}) + "Lo recomienda el Quiltro");
+pon("mq-chinchilla", V2.cuerpo("chinchilla", porClave.chinchilla.hex, 52, {anima:true}));
+pon("mq-loica-hoja", V2.cuerpo("loica", "var(--acento)", 44));
+pon("op-degu", V2.carita("degu", porClave.degu.hex, 30));
+pon("op-culpeo", V2.carita("culpeo", porClave.culpeo.hex, 30));
+pon("op-pudu", V2.carita("pudu", porClave.pudu.hex, 30));
+pon("bolsillo", V2.carita("loica", "#FAF3E7", 40, {tinta:T}));
+pon("pf1", V2.carita("condor", porClave.condor.hex, 22, {tinta:T}));
+pon("pf2", V2.carita("chinchilla", porClave.chinchilla.hex, 22, {tinta:T}));
+pon("pf3", V2.carita("degu", porClave.degu.hex, 22, {tinta:T}));
+pon("pf4", V2.carita("pudu", porClave.pudu.hex, 22, {tinta:T}));
+pon("logo-limpio", V2.carita("loica", "var(--acento)", 64, {acc:false}));
+
+const hoja = document.getElementById("hoja");
+document.getElementById("bolsillo").onclick = () => hoja.classList.toggle("abierta");
+document.getElementById("cerrar-hoja").onclick = () => hoja.classList.remove("abierta");
+
+/* la barra de abajo, con la cara del que atiende en la pastilla activa */
+const ICONO = d => `<svg viewBox="0 0 24 24" aria-hidden="true">${d}</svg>`;
+const ICONOS = {
+  mapa:`<path d="M9 3 3 5.4v15.1l6-2.4 6 2.4 6-2.4V2.9l-6 2.4L9 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 3v15.1M15 5.4v15.1" stroke="currentColor" stroke-width="1.8"/>`,
+  habla:`<path d="M4 5.6h16a1.6 1.6 0 0 1 1.6 1.6v8.4a1.6 1.6 0 0 1-1.6 1.6H9.6L5.4 20.6v-3.4H4a1.6 1.6 0 0 1-1.6-1.6V7.2A1.6 1.6 0 0 1 4 5.6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="8.6" cy="11.4" r="1.15" fill="currentColor"/><circle cx="12" cy="11.4" r="1.15" fill="currentColor"/><circle cx="15.4" cy="11.4" r="1.15" fill="currentColor"/>`,
+  agenda:`<rect x="3" y="4.8" width="18" height="16.2" rx="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 9.6h18M8 3v3.6M16 3v3.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>`,
+  clases:`<path d="M20 12a8 8 0 1 1-2.9-6.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M17.4 2.6v3.6H21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/>`,
+  comer:`<path d="M6 3v4.8a2.7 2.7 0 0 0 5.4 0V3M8.7 3v4.8M8.7 10.5V21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M17 3c1.8 1.9 2.7 4.3 2.7 6.7 0 1.9-.9 3.1-2.7 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M17 13.2V21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>`,
+  blog:`<path d="M5 19.5c4-1 9.2-3.4 12.2-6.4 2.4-2.4 3.3-5.8 3.3-8.6-2.8 0-6.2.9-8.6 3.3-3 3-5.4 8.2-6.4 12.2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>`,
+  subir:`<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 8.2v7.6M8.2 12h7.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>`,
+  quien:`<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.8v5.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="7.9" r="1.15" fill="currentColor"/>`,
+};
+document.getElementById("mq-nav").innerHTML = [["mapa","Mapa"],["habla","Habla"],["agenda","Agenda"],["clases","Clases"],["dctos","Dctos"],["comer","Comer"],["blog","Blog"],["subir","Subir"]]
+  .map(([k, et]) => k === "dctos"
+    ? `<span class="activo" style="--c-activo:${porClave.guaren.pastel}"><span class="pastilla">${V2.carita("guaren", porClave.guaren.hex, 24, {tinta:T})}</span>${et}</span>`
+    : `<span>${ICONO(ICONOS[k])}${et}</span>`).join("");
+
+/* ---------- reglas ---------- */
+const REGLAS = [
+  ["loica","Uno habla a la vez.","El que tiene la palabra es el del filtro puesto; sin filtro, la Loica. Nunca dos animales diciendo cosas en la misma pantalla."],
+  ["quiltro","Los tics son lentos.","Ciclos de 3 a 5 segundos y un solo gesto por animal. La cola del Quiltro es la excepción y por eso está sola en su tarjeta."],
+  ["condor","Las entradas pasan una vez.","Se guardan en localStorage por sesión. Quien vuelve a la portada no ve el desfile entrar de nuevo."],
+  ["degu","Celebrar se gasta.","La pose celebrando queda reservada para dos momentos: un evento gratis y el formulario enviado. Nada más."],
+  ["pudu","Nunca encima de un dato.","El animal vive en la cabecera, el vacío o el sello. No pasa sobre la hora, el precio ni el botón de ir a la fuente."],
+  ["pinguino","Con prefers-reduced-motion, quietos.","Los ojos abiertos, los accesorios puestos, ninguna animación. La información no depende del movimiento."],
+  ["chincol","El accesorio no reemplaza la etiqueta.","Carita, color y texto, los tres siempre: la boina es la cuarta señal, no la única."],
+];
+document.getElementById("lista-reglas").innerHTML = REGLAS.map(([c, t, d]) =>
+  `<li>${V2.carita(c, porClave[c].hex, 28)}<div><b>${t}</b>${d}</div></li>`).join("");
+</script>
