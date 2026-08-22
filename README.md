@@ -23,7 +23,7 @@ El pipeline implementa este circuito, y cada paso tiene su comando:
 | 6 | **Diagnóstico de la corrida** | `informe_corrida.py` deja un Excel en `informes/` para mirar el proceso, no el catastro (ver abajo) |
 | 7 | **Doble check** | `verificar_web.py`: si el sitio quedó roto, vacío o cayó a la mitad, **no hay push** |
 | 8 | **Publicación** | `run_todo.py` comitea solo su salida y pushea; GitHub Actions deja `web/` en Pages |
-| 9 | **Corrida diaria a las 11:00** | launchd (`scripts/instalar_agenda.sh`); el Mac tiene que estar prendido o durmiendo |
+| 9 | **Corrida diaria a las 11:00** | GitHub Actions (`.github/workflows/corrida.yml`): no depende de ningún computador prendido. El Mac queda para probar (`--sin-publicar`) |
 
 Un solo comando encadena los pasos 3 a 8:
 
@@ -124,10 +124,13 @@ abrir el diagnóstico a ver qué se cayó.
 
 ## Dos cosas que `run_todo.py` hace a propósito
 
-**Comitea sólo su propia salida.** Corre a las 11:00 sin nadie mirando, así que
-nunca hace `git add -A`: si a esa hora hay un archivo a medio editar, un
-`add -A` se lo llevaría al repositorio. Agrega únicamente `web/eventos.json`,
-`web/descuentos.json`, `web/e/` y `datos/manual/`.
+**Comitea sólo su propia salida.** Corre sin nadie mirando, así que nunca hace
+`git add -A`: si en ese momento hay un archivo a medio editar, un `add -A` se
+lo llevaría al repositorio. Agrega únicamente lo que produce: el sitio
+(`web/eventos.json`, `web/talleres.json`, `web/descuentos.json`, `web/e/`), la
+ingesta asistida (`datos/manual/`) y el estado que la corrida de mañana
+necesita (`datos/eventos.jsonl`, `datos/coordenadas.json`,
+`datos/historial_corridas.json`, `datos/revision/pendientes_*.yaml`).
 
 **Resuelve solo los choques en archivos generados.** Los dos catastros
 regeneran su JSON todos los días, así que dos corridas seguidas chocan siempre
@@ -143,33 +146,67 @@ agenda, que es el corazón del proyecto.
 Después de cada corrida queda un informe en `informes/AAAA-MM-DD_corrida.md`
 con los eventos nuevos agrupados por comuna, listos para revisar.
 
-## Cómo dejarlo corriendo solo
+## Cómo corre solo (GitHub Actions)
+
+La corrida completa vive en `.github/workflows/corrida.yml` y corre todos los
+días a las 11:00 de Chile en un runner de GitHub. **No depende de ningún
+computador prendido.** Sigue siendo Python puro —no llama a ningún modelo, no
+consume tokens— y en un repositorio público los minutos de Actions no cuestan.
+
+Un runner nace vacío cada día, así que todo lo que la corrida necesita
+recordar viaja en git:
+
+| Archivo | Qué es |
+|---|---|
+| `datos/eventos.jsonl` | La copia de la base. `datos/eventos.db` sigue fuera de git (es binaria y cambia entera cada día); esto es la misma tabla, una línea por evento ordenada por hash, para que el diff de cada corrida muestre solo lo que cambió |
+| `datos/coordenadas.json` | La caché de geocodificación |
+| `datos/historial_corridas.json` | Contra qué compara el diagnóstico ("la corrida anterior") |
+| `datos/revision/pendientes_*.yaml` | Las colas de corrección del día, listas para trabajarlas después de un `git pull` |
+
+`Almacen` restaura la base desde `datos/eventos.jsonl` cuando está vacía o
+cuando la copia cambió por debajo —lo decide por la huella del archivo, no por
+su fecha, porque `git pull` le pone al archivo la hora del pull— y
+`run_diario.py` la vuelca al terminar. En el Mac eso quiere decir que **`git
+pull` deja la base local al día**. Para rearmarla de cero: `rm datos/eventos.db`
+y la siguiente corrida la levanta desde la copia.
+
+El índice de OpenStreetMap (24 MB) no va en git: vive en el release
+[`indice-osm`](https://github.com/Langab/loica/releases/tag/indice-osm) del
+repositorio y el workflow lo baja en cada corrida. Cuando se reconstruye, se
+sube con `gh release upload indice-osm datos/indice_osm.db --clobber`.
+
+**Cómo mirarla.** Pestaña *Actions* → *Corrida diaria de eventos*. Cada corrida
+deja el informe del día en su resumen y un artefacto (30 días) con el Excel de
+diagnóstico, los informes y el sitio tal como se publicó. Si falla, GitHub avisa
+por correo y el sitio anterior sigue en pie.
+
+**Cómo correrla a mano.** *Run workflow* en esa pestaña, o desde la terminal:
 
 ```bash
-bash scripts/instalar_agenda.sh
+gh workflow run corrida.yml -f modo=completo       # extrae y publica
+gh workflow run corrida.yml -f modo=sin-publicar   # deja sitio e informes como artefacto
+gh workflow run corrida.yml -f modo=probar         # solo lista lo que traería cada fuente
 ```
 
-Queda programado **a las 11:00** con launchd (el equivalente a cron en macOS).
-Para cambiar el horario: `HORA=22 MINUTO=30 bash scripts/instalar_agenda.sh`.
-Para desinstalarlo: `bash scripts/instalar_agenda.sh --quitar`.
+Subir un CSV o YAML nuevo a `datos/manual/` también la dispara: la extracción
+asistida entra al sitio sin esperar a mañana y sin prender ningún Mac.
 
-**Qué necesita el Mac para que la corrida de las 11:00 salga:**
+**En el Mac** queda la corrida a mano, para probar:
 
-- **Prendido o durmiendo.** Si a las 11:00 está durmiendo, launchd corre la
-  corrida apenas despierte: el día no se pierde, solo sale más tarde.
-- **Apagado no corre nada**, y esa corrida no se recupera al encenderlo (la
-  del día siguiente sí sale normal).
-- Sesión iniciada (es un agente de usuario, no un demonio del sistema).
-- Red, y credenciales de git que no pidan clave: el push es desatendido.
-- Para que despierte solo justo antes (opcional, pide contraseña de admin):
-  `sudo pmset repeat wakeorpoweron MTWRFSU 10:55:00`.
+```bash
+git pull                              # trae la base de la nube
+python3 run_todo.py --sin-publicar    # corre todo, no toca git
+```
 
-Se puede verificar con `launchctl list | grep cl.loica.pipeline` y probar al
-tiro con `launchctl kickstart gui/$(id -u)/cl.loica.pipeline`.
+`scripts/instalar_agenda.sh` (la corrida con launchd) sigue en el repositorio,
+pero ya no es la corrida oficial y no conviene tenerla instalada a la vez: dos
+corridas publicando el mismo día se pisan la base. Se desinstala con
+`bash scripts/instalar_agenda.sh --quitar`.
 
-> Los descuentos además corren solos en GitHub Actions (~07:15), así que esa
-> parte no depende del Mac. La corrida de eventos sí: varias fuentes bloquean
-> IPs de datacenter, por eso vive en esta máquina y no en la nube.
+> Los descuentos corren además en `descuentos.yml` a las 07:15. Un commit hecho
+> desde Actions no dispara `pages.yml` (es la regla de GitHub contra los bucles),
+> así que ese JSON recién llega al sitio con la corrida de las 11:00, que sí le
+> avisa a Pages.
 
 ## El prototipo del mapa
 
@@ -621,15 +658,16 @@ loica/
 run_diario.py    Punto de entrada de los eventos
 run_descuentos.py Punto de entrada de los descuentos
 config/          Registro de fuentes y de bancos (esto es lo que se edita)
-datos/           Base de datos, caché y logs (no se versiona)
+datos/           Base, caché y logs (fuera de git) + el estado que sí viaja: eventos.jsonl, coordenadas.json, historial_corridas.json, revision/, manual/
 informes/        Un informe por corrida
 ```
 
 ## Pendientes conocidos
 
 - Cultura Providencia necesita otro adaptador (su RSS no trae fechas).
-- Falta la API key de Ticketmaster (y exportarla antes de correr
-  `instalar_agenda.sh` para que quede en el plist).
+- Falta la API key de Ticketmaster: se guarda como secreto `TICKETMASTER_API_KEY`
+  en el repositorio (Settings → Secrets and variables → Actions) y se enciende
+  la fuente en `config/fuentes.yaml`.
 - El registro tiene ~7 pares de fuentes duplicadas de la misma institución
   (`recoleta`/`recoleta_municipio`, etc.), todas inactivas: depurar antes de
   encenderlas.

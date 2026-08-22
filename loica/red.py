@@ -25,11 +25,25 @@ DIR_CACHE = Path(__file__).resolve().parent.parent / "datos" / "cache"
 DIR_CACHE.mkdir(parents=True, exist_ok=True)
 
 
+# Cuántas peticiones seguidas pueden fallar a nivel de conexión (timeout,
+# conexión rechazada o cortada) antes de dar el dominio por muerto por el
+# resto de la corrida. Un sitio que desde la IP del runner no responde nada
+# —ni siquiera un 403— cuesta 72 segundos por URL (20 s de timeout, tres
+# intentos y las esperas entre medio), y una fuente con cincuenta fichas
+# son sesenta minutos de corrida para cero eventos. Tres bastan para
+# saberlo; mañana se vuelve a intentar desde cero.
+FALLOS_PARA_CORTAR = 3
+
+
 class ClienteEducado:
     """Un cliente por dominio, que recuerda cuándo fue su última petición."""
 
     _ultima_peticion: dict[str, float] = {}
     _robots: dict[str, robotparser.RobotFileParser | None] = {}
+    # Fallos de conexión seguidos por dominio. Es de clase a propósito: dos
+    # fuentes del mismo dominio comparten el veredicto dentro de una corrida.
+    _fallos_seguidos: dict[str, int] = {}
+    _cortados: set[str] = set()
 
     def __init__(self, crawl_delay_seg: float = 2.0, timeout: int = 20, usar_cache: bool = True):
         self.crawl_delay = crawl_delay_seg
@@ -124,6 +138,11 @@ class ClienteEducado:
             log.warning("robots.txt prohíbe %s — se omite", url)
             return None
 
+        dominio = urlparse(url).netloc
+        if dominio in self._cortados:
+            log.debug("%s no responde en esta corrida — se omite %s", dominio, url)
+            return None
+
         url_completa = url
         if params:
             pedido = requests.Request("GET", url, params=params).prepare()
@@ -151,7 +170,6 @@ class ClienteEducado:
                 falsa.encoding = "utf-8"
                 return falsa
 
-        dominio = urlparse(url).netloc
         espera = self.delay_declarado(url)
         transcurrido = time.time() - self._ultima_peticion.get(dominio, 0)
         if transcurrido < espera:
@@ -178,6 +196,8 @@ class ClienteEducado:
                         time.sleep(pausa)
                         continue
 
+                # Respondió, aunque sea un 403: el dominio está vivo.
+                self._fallos_seguidos[dominio] = 0
                 if respuesta.ok and self.usar_cache:
                     self._guardar_cache(url_completa, respuesta.text, respuesta.status_code)
                 return respuesta
@@ -188,8 +208,17 @@ class ClienteEducado:
                     time.sleep(espera * (2 ** (intento + 1)))
                     continue
                 log.error("Falló %s: %s", url, e)
+                self._anotar_fallo(dominio)
                 return None
         return None
+
+    def _anotar_fallo(self, dominio: str) -> None:
+        fallos = self._fallos_seguidos.get(dominio, 0) + 1
+        self._fallos_seguidos[dominio] = fallos
+        if fallos >= FALLOS_PARA_CORTAR and dominio not in self._cortados:
+            self._cortados.add(dominio)
+            log.warning("%s no responde (%d peticiones seguidas sin conexión): "
+                        "se omite por el resto de la corrida", dominio, fallos)
 
     def json(self, url: str, params: dict | None = None, **kw) -> list | dict | None:
         respuesta = self.obtener(url, params=params, **kw)

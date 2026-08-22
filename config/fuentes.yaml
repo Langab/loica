@@ -693,16 +693,27 @@ fuentes:
   nombre: Ticketplus
   url_base: https://ticketplus.cl
   url_agenda: https://ticketplus.cl/sitemap.xml
-  tipo_adaptador: rss
-  endpoint: /sitemap.xml
-  comuna: Varias
-  crawl_delay_seg: 10
-  buscar_detalle: false
-  tope_detalle: 25
+  tipo_adaptador: sitemap
+  patron_url: /events/
+  tope_fichas: 120
+  requiere_comuna: true
+  comuna: ''
+  crawl_delay_seg: 3
   activa: false
-  notas: TECNICAMENTE ACCESIBLE PERO NO LA USAMOS POR DECISION ESTRATEGICA. Su robots.txt bloquea /api/*,
-    /eventos/*, /cuenta/*, /compras/*, y todas las rutas de carrito, venta y cortesias, pero NO bloquea
-    /events/*, y publica si
+  notas: 'LISTA PARA ENCENDER: cambiar activa a true. Apagada por una decision estrategica del
+    fundador cuya nota quedo truncada en este archivo (terminaba en "y publica si"), asi que la
+    razon no esta escrita en ninguna parte; mientras tanto Ticketplus se extraia A MANO cada
+    semana con Claude en Chrome (292 de las 700 filas de datos/manual/asistida.csv el 21-08-2026).
+    Tecnicamente es la misma puerta que ya usa ticketplus_subterraneo: robots.txt permite
+    /events/* y /companies/* (solo veda api, cuentas, carro, venta y cortesias), sitemap.xml
+    publica ~400 fichas de eventos de todo Chile con lastmod, y cada ficha trae schema.org/Event
+    con fecha, hora, lugar, comuna y precio. Sondeo del 22-08-2026 con este mismo bloque: 60
+    fichas en 229 s -> 59 eventos, 40 validos para Santiago; los otros 19 eran de regiones y
+    requiere_comuna los descarta. A 3 s por ficha, 120 fichas son 6 minutos de corrida; el
+    sitemap se ordena por lastmod descendente, asi que cada dia entran las fichas nuevas y las
+    que cambiaron. Al encenderla, sacar Ticketplus del prompt semanal de Chrome y dejar que el
+    CSV viejo se caduque solo.
+'
 - id: deporte_municipal
   nombre: Deporte Municipal (directorio privado)
   url_base: https://deportemunicipal.cl
@@ -1505,7 +1516,7 @@ fuentes:
     (verificado hoy con curl: HTTP 403 en 0,1 s) y el adaptador json registraba 0 encontrados SIN error,
     asi que la fuente se veia viva en el informe mientras pedia todos los dias para nada. No se arregla
     cambiando el user-agent: eso seria evadir un control de acceso, y la regla del proyecto es no hacerlo.
-    La via real de Passline es `ingesta_manual`, que lee datos/manual/passline.csv — un export que una
+    La via real de Passline es `ingesta_manual`, que lee datos/manual/asistida.csv (el CSV semanal del prompt de Chrome, solo Passline desde el 22-08-2026; subirlo con git dispara la corrida en la nube) — un export que una
     persona baja del sitio navegando normal. Si algun dia abren una API publica, se reactiva.'
 - id: normandie
   nombre: Cine Arte Normandie
