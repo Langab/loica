@@ -198,6 +198,24 @@ git pull                              # trae la base de la nube
 python3 run_todo.py --sin-publicar    # corre todo, no toca git
 ```
 
+**Lo que la nube no alcanza.** La IP del runner es de datacenter y hay sitios
+que la tratan distinto que a un computador de casa. Cuatro le responden 403
+siempre: Recoleta, Cultura Providencia, Teatro Oriente y el CEP (medido el
+22-08-2026). Otros la bloquean por volumen o según la IP que le toque ese
+día —Quilicura, Artequin, Parquemet, Corporación de Estación Central, Feria
+Friki, Club Chocolate, Teatro UC— y el cliente corta un dominio que cuelga a
+la tercera URL para que no se coma la corrida. Sus eventos ya guardados siguen
+vigentes hasta su fecha; lo nuevo de esas fuentes entra cuando alguien las
+corre desde el Mac:
+
+```bash
+git pull && python3 run_todo.py --fuente cep    # una fuente, y publica
+```
+
+`python3 scripts/sondear_fuentes.py` (o `gh workflow run corrida.yml -f
+modo=sondear` para verlo desde la nube) dice qué código HTTP responde cada
+fuente desde donde se corre: es la forma de revisar esa lista cuando cambie.
+
 `scripts/instalar_agenda.sh` (la corrida con launchd) sigue en el repositorio,
 pero ya no es la corrida oficial y no conviene tenerla instalada a la vez: dos
 corridas publicando el mismo día se pisan la base. Se desinstala con

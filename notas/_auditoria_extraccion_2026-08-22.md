@@ -91,19 +91,35 @@ un runner nace vacío. Decisiones:
     de 22).
   - **Siete fuentes devuelven cero desde la nube y 200 desde el Mac**, sin
     error de conexión: Municipalidad de Recoleta, Cultura Providencia, Teatro
-    Oriente, Feria Friki, Club Chocolate, CEP y Teatro UC. Es bloqueo por IP
-    de datacenter (WAF); `scripts/sondear_fuentes.py` (modo `sondear` del
-    workflow) dice con qué código. Sus eventos ya guardados siguen vigentes
-    hasta su fecha; lo nuevo de esas siete entra solo si alguien corre la
-    fuente desde el Mac (`git pull && python3 run_todo.py --fuente cep`) o
-    cuando se les encuentre otra puerta. Pesan 72 eventos vigentes entre las
-    siete, 43 de ellos del CEP.
+    Oriente, Feria Friki, Club Chocolate, CEP y Teatro UC. El sondeo de red
+    desde otro runner (`scripts/sondear_fuentes.py`, modo `sondear`, 08:27)
+    puso los códigos: **403 fijo** en Cultura Providencia y Teatro Oriente
+    (Cloudflare), Recoleta (WAF propio) y CEP (Cloudflare con challenge);
+    Parquemet cuelga; MAVI UC cuelga también desde el Mac (es lento, no
+    bloqueo). Quilicura, Artequin, Estación Central, Feria Friki, Club
+    Chocolate y Teatro UC respondieron **200 a la petición suelta** pero
+    fallaron en la corrida larga: bloquean por volumen o según la IP que le
+    toque al runner ese día. Sus eventos ya guardados siguen vigentes hasta su
+    fecha; lo nuevo de esas fuentes entra cuando alguien las corre desde el
+    Mac (`git pull && python3 run_todo.py --fuente cep`) o cuando se les
+    encuentre otra puerta. Entre las siete suman 72 eventos vigentes, 43 del
+    CEP.
   - `cultura.unab.cl` respondió 503 setenta veces y al final entregó sus 50:
     limita por IP, no bloquea. 14 minutos en vez de 7.
   - Sin los cuatro dominios colgados, la extracción son ~97 min, comparable a
     una corrida **en frío** del Mac (66–84 min las de 16, 18 y 19 de agosto;
     los 45 min del 20-08 fueron con la caché de fichas tibia). Muy por debajo
     del tope de 6 horas de GitHub.
+- **Segunda corrida, la primera que publica** (`completo`, 22-08-2026, 04:29):
+  101 min de extracción con el cortacircuito (Parquemet cortado a la tercera
+  URL; Quilicura, Artequin y Estación Central esta vez respondieron), 144
+  eventos nuevos, 3.434 publicados, doble check OK, commit `da420b7e` de
+  `loica-bot` en `main` y Pages desplegado por el aviso del workflow. Quedaron
+  en cero las mismas bloqueadas por IP: Recoleta, CEP, Cultura Providencia,
+  Teatro Oriente, Parquemet, Feria Friki, Club Chocolate y Teatro UC (más
+  Conchalí, que da cero también desde el Mac). Con eso el launchd del Mac se
+  desinstaló (`bash scripts/instalar_agenda.sh --quitar`): desde hoy la única
+  corrida que publica es la de la nube, a las 11:00 de Chile.
 
 ## 5. Hallazgos de paso
 
