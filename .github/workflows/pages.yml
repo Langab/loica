@@ -20,12 +20,21 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.despliegue.outputs.page_url }}
+    # Las acciones van fijadas por SHA y no por etiqueta. `@v4` es una etiqueta
+    # móvil: quien controle el repositorio de la acción puede reapuntarla a otro
+    # commit y ese código correría acá con permiso de publicar el sitio. El SHA
+    # no se puede reapuntar. El comentario al lado dice qué versión es, para que
+    # actualizar siga siendo legible.
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          # Este workflow solo empaqueta y publica: no necesita el token
+          # guardado en .git/config durante toda la corrida.
+          persist-credentials: false
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
       # Solo se publica la carpeta web/: el pipeline en Python no va al sitio
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:
           path: web
       - id: despliegue
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
