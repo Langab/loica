@@ -78,9 +78,32 @@ un runner nace vacío. Decisiones:
   cambiaba a las 20:00 de Chile.
 - Los informes quedan como artefacto (30 días) y el del día en el resumen de
   la corrida.
-- Primera corrida (`sin-publicar`, 22-08-2026): [pendiente — se completa con
-  el resultado: duración, fuentes que bloquean IPs de datacenter, diferencias
-  contra la corrida del Mac].
+- **Primera corrida en la nube** (`sin-publicar`, 22-08-2026, 01:11): terminó
+  bien de punta a punta —base restaurada con 5.476 eventos, 78 fuentes, 144
+  nuevos, 3.431 publicados, doble check OK— pero la extracción tardó **3 h 03**.
+  El log lo explica entero:
+  - **Cuatro dominios cuelgan la conexión desde la IP del runner** (no
+    responden nada, ni 403): `corpo.corpoquilicura.cl`, `www.artequin.cl`,
+    `parquemet.cl`, `www.ecentral.cl`. El adaptador de WordPress prueba 16
+    endpoints, cada uno con 3 intentos de 20 s: 22 minutos por dominio, 88 en
+    total. De ahí el cortacircuito en `loica/red.py`: a la tercera URL sin
+    conexión el dominio se omite por el resto de la corrida (~4 min en vez
+    de 22).
+  - **Siete fuentes devuelven cero desde la nube y 200 desde el Mac**, sin
+    error de conexión: Municipalidad de Recoleta, Cultura Providencia, Teatro
+    Oriente, Feria Friki, Club Chocolate, CEP y Teatro UC. Es bloqueo por IP
+    de datacenter (WAF); `scripts/sondear_fuentes.py` (modo `sondear` del
+    workflow) dice con qué código. Sus eventos ya guardados siguen vigentes
+    hasta su fecha; lo nuevo de esas siete entra solo si alguien corre la
+    fuente desde el Mac (`git pull && python3 run_todo.py --fuente cep`) o
+    cuando se les encuentre otra puerta. Pesan 72 eventos vigentes entre las
+    siete, 43 de ellos del CEP.
+  - `cultura.unab.cl` respondió 503 setenta veces y al final entregó sus 50:
+    limita por IP, no bloquea. 14 minutos en vez de 7.
+  - Sin los cuatro dominios colgados, la extracción son ~97 min, comparable a
+    una corrida **en frío** del Mac (66–84 min las de 16, 18 y 19 de agosto;
+    los 45 min del 20-08 fueron con la caché de fichas tibia). Muy por debajo
+    del tope de 6 horas de GitHub.
 
 ## 5. Hallazgos de paso
 

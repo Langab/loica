@@ -14,12 +14,19 @@ name: Corrida diaria de eventos
 #     gh workflow run corrida.yml -f modo=sin-publicar
 
 on:
+  schedule:
+    # 11:00 de Chile. GitHub programa en UTC y no sabe de horario de verano,
+    # así que se programan las dos horas posibles y el job `hora` decide cuál
+    # es la buena mirando el desfase de Santiago ese día (UTC-4 en invierno,
+    # UTC-3 en verano). La otra termina en un minuto sin hacer nada.
+    - cron: "0 14 * * *"
+    - cron: "0 15 * * *"
   workflow_dispatch:
     inputs:
       modo:
-        description: "completo publica · sin-publicar deja el sitio y los informes como artefactos · probar solo lista lo que traería cada fuente"
+        description: "completo publica · sin-publicar deja el sitio y los informes como artefactos · probar solo lista lo que traería cada fuente · sondear dice qué código HTTP le responde cada fuente al runner"
         type: choice
-        options: [completo, sin-publicar, probar]
+        options: [completo, sin-publicar, probar, sondear]
         default: completo
   push:
     branches: [main]
@@ -47,7 +54,32 @@ env:
   TICKETMASTER_API_KEY: ${{ secrets.TICKETMASTER_API_KEY }}
 
 jobs:
+  hora:
+    # ¿Esta ejecución programada es la de las 11:00 de Chile? Un dispatch o un
+    # push corren siempre.
+    runs-on: ubuntu-latest
+    outputs:
+      correr: ${{ steps.decidir.outputs.correr }}
+    steps:
+      - id: decidir
+        run: |
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "correr=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          desfase=$(TZ=America/Santiago date +%z)   # -0400 en invierno, -0300 en verano
+          case "${{ github.event.schedule }}|$desfase" in
+            "0 15 * * *|-0400"|"0 14 * * *|-0300")
+              echo "correr=true" >> "$GITHUB_OUTPUT"
+              echo "Son las 11:00 en Santiago (desfase $desfase): corre." ;;
+            *)
+              echo "correr=false" >> "$GITHUB_OUTPUT"
+              echo "Esta es la otra cron (desfase $desfase): no corre." ;;
+          esac
+
   corrida:
+    needs: hora
+    if: needs.hora.outputs.correr == 'true'
     runs-on: ubuntu-latest
     # Una corrida normal dura 45-60 minutos. Las 11 horas de la del 21-08-2026
     # fueron el Mac durmiendo entre fuente y fuente, no la extracción. El tope
@@ -87,6 +119,7 @@ jobs:
         run: |
           echo "antes=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           case "${{ inputs.modo || 'completo' }}" in
+            sondear)       python3 scripts/sondear_fuentes.py ;;
             probar)        python3 run_diario.py --probar ;;
             sin-publicar)  python3 run_todo.py --sin-publicar ;;
             *)             python3 run_todo.py ;;
