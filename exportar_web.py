@@ -248,8 +248,10 @@ PLANTILLA_FICHA = """<!doctype html>
      va abierto a propósito: las fotos son de los organizadores y viven en
      cientos de dominios que no se pueden listar. Ojo con `frame-ancestors`:
      en un <meta> el navegador lo ignora, solo sirve como cabecera HTTP, y
-     GitHub Pages no deja poner cabeceras. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+     GitHub Pages no deja poner cabeceras. Y `upgrade-insecure-requests` no
+     va: en Pages no hace nada y abierto por LAN desde el celular dejaba la
+     ficha en blanco (el detalle está en mapa.html). -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <title>{titulo_html} — Loica</title>

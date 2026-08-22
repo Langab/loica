@@ -14,8 +14,18 @@
        cargar un script de OTRO dominio y bloquea que algo inyectado mande los
        datos afuera (connect-src 'self').
      - `frame-ancestors` NO va: en un <meta> el navegador lo ignora, solo
-       funciona como cabecera HTTP y GitHub Pages no deja poner cabeceras. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; worker-src blob:; connect-src 'self' https://*.basemaps.cartocdn.com; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+       funciona como cabecera HTTP y GitHub Pages no deja poner cabeceras.
+     - `upgrade-insecure-requests` tampoco va, y no es olvido. En GitHub Pages
+       no hace nada: el sitio ya se sirve por https y github.io está en la
+       lista de precarga HSTS, así que no queda ninguna petición http que
+       subir. Y en el servidor de desarrollo (`python3 -m http.server 8777`)
+       abierto desde el celular por la IP de la red —http://192.168.x.x:8777—
+       la directiva subía loica.js, loica.css y eventos.json a un https:// que
+       no existe: el script moría en la primera línea (`pintarBarra is not
+       defined`) y la página quedaba sin estilos, sin lista y sin mapa. Ese
+       era "en celular el mapa no funciona". En el Mac no se notaba porque
+       Chrome exime a localhost de la subida; Safari ni eso. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; worker-src blob:; connect-src 'self' https://*.basemaps.cartocdn.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Mapa — ¿Qué hay hoy en Santiago?</title>
 <meta name="description" content="Todos los panoramas de Santiago en un mapa. Filtra por gratis, hoy, mañana o este fin de semana.">

@@ -14,8 +14,12 @@
        cargar un script de OTRO dominio y bloquea que algo inyectado mande los
        datos afuera (connect-src 'self').
      - `frame-ancestors` NO va: en un <meta> el navegador lo ignora, solo
-       funciona como cabecera HTTP y GitHub Pages no deja poner cabeceras. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+       funciona como cabecera HTTP y GitHub Pages no deja poner cabeceras.
+     - `upgrade-insecure-requests` tampoco va: en Pages no hace nada (https +
+       HSTS) y en el servidor local abierto desde el celular por la IP de la
+       red subía loica.js y loica.css a un https:// inexistente, y la página
+       quedaba en blanco. El detalle está en mapa.html. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Calendario — Loica</title>
 <meta name="description" content="Los panoramas de Santiago mes a mes, para planificar con tiempo.">

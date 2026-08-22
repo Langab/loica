@@ -9,8 +9,10 @@
      queda en pie si algun dia se escapa uno. Mismas notas que el resto de las
      paginas: img-src abierto por las fotos de los organizadores,
      'unsafe-inline' mientras la logica viva en un <script> inline, y
-     frame-ancestors no va porque en un <meta> el navegador lo ignora. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; worker-src blob:; connect-src 'self' https://*.basemaps.cartocdn.com; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+     frame-ancestors no va porque en un <meta> el navegador lo ignora, y
+     upgrade-insecure-requests tampoco: en Pages no hace nada y por LAN desde
+     el celular dejaba la página en blanco (el detalle está en mapa.html). -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; worker-src blob:; connect-src 'self' https://*.basemaps.cartocdn.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Talleres y clases — Loica</title>
 <meta name="description" content="Los talleres y clases semanales de Santiago: natación, yoga, baile, cerámica, idiomas. Casi todo municipal y de barrio.">
