@@ -45,7 +45,7 @@
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
       integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V"
       crossorigin="anonymous">
-<link rel="stylesheet" href="loica.css?v=22">
+<link rel="stylesheet" href="loica.css?v=23">
 <style>
   html,body{height:100%;overflow:hidden}
   /* Los dos altos van en este orden a proposito: `dvh` no existe en
@@ -70,6 +70,15 @@
       background-size:22px 22px;background-repeat:no-repeat;background-position:center;
     }
   }
+
+  /* Los botones de zoom en el lenguaje del sitio: contorno y repisa. El fondo
+     va en crema FIJO también de noche: los íconos de MapLibre son negros y
+     sobre el panel oscuro desaparecían. En celular no van: se pellizca, y cada
+     píxel de mapa cuenta. */
+  .maplibregl-ctrl-group{background:var(--arena-50)!important;border:2px solid var(--contorno);
+    border-radius:var(--r-md);box-shadow:var(--repisa-1)!important}
+  .maplibregl-ctrl-group button+button{border-top:2px solid var(--arena-300)!important}
+  @media(max-width:879px){.maplibregl-ctrl-top-left{display:none}}
 
   /* La atribución de OSM y CARTO sube al borde superior en celular.
      MapLibre la deja abajo a la derecha, que es justo donde viven el panel
@@ -161,7 +170,7 @@
      campo y deja la página corrida (la misma razón está escrita en loica.css
      para los formularios). */
   .campo-buscar input{
-    flex:1;min-width:0;border:0;background:transparent;color:var(--tinta);
+    flex:1;min-width:0;height:100%;border:0;background:transparent;color:var(--tinta);
     font:600 16px/1 var(--fuente-ui);padding:0;
   }
   .campo-buscar input::placeholder{color:var(--tinta-tenue);font-weight:500}
@@ -208,20 +217,23 @@
   }
 
   header .filtros{padding:var(--e-2) var(--e-4) var(--e-3);border-bottom:2.5px solid var(--contorno)}
-  header .filtros .chip{padding:6px 13px 6px 8px;gap:5px;font-size:var(--t-xs);
-    border-width:2px;box-shadow:0 2px 0 var(--contorno);min-height:38px}
+  /* UN chip para las dos filas (cabecera y afinar): 40 px de alto, repisa de 3
+     como el resto del sitio. Antes había cuatro alturas en la misma pantalla
+     (34, 36, 38 y 42) y dos repisas, que se leían como cuatro componentes. */
+  header .filtros .chip,.afinar .chip{padding:6px 13px 6px 8px;gap:5px;font-size:var(--t-xs);
+    border-width:2px;box-shadow:var(--repisa-1);min-height:40px}
   header .filtros .chip svg{width:22px;height:22px}
-  header .filtros .chip:active,
-  header .filtros .chip[aria-pressed="true"]{transform:translateY(2px);box-shadow:none}
-  /* El anillo de foco de loica.css se apila sobre la repisa, pero acá la
-     repisa se achicó a 2px con un selector más específico y volvía a tapar el
-     anillo. Se repone con la repisa de ESTA página; el chip prendido está
-     hundido y no tiene ninguna, solo anillo. */
-  header .filtros .chip:focus-visible{
-    box-shadow:0 2px 0 var(--contorno),
-               0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+  header .filtros .chip:active,.afinar .chip:active,
+  header .filtros .chip[aria-pressed="true"],
+  .afinar .chip[aria-pressed="true"]{transform:translateY(3px);box-shadow:none}
+  /* El anillo de foco de loica.css se apila sobre la repisa; el selector de
+     acá es más específico y la pisaba. Se repone; el chip prendido está
+     hundido y no tiene repisa, solo anillo. */
+  header .filtros .chip:focus-visible,.afinar .chip:focus-visible{
+    box-shadow:var(--repisa-1),0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
   }
-  header .filtros .chip[aria-pressed="true"]:focus-visible{
+  header .filtros .chip[aria-pressed="true"]:focus-visible,
+  .afinar .chip[aria-pressed="true"]:focus-visible{
     box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
   }
   /* El separador entre "precio y público" y "tipo de panorama": son dos
@@ -260,11 +272,21 @@
      entero, el navegador cancelaba el gesto de scroll de la lista: 37.000px
      de eventos en una caja de 200px que no se podía mover con el dedo. Ese
      era el "no funciona en celular". */
-  .tirador{padding:9px var(--e-4) 6px;cursor:grab;flex:none;touch-action:none}
+  .tirador{padding:12px var(--e-4) 10px;cursor:grab;flex:none;touch-action:none}
   .tirador:active{cursor:grabbing}
-  .barra-tirador{width:44px;height:4.5px;background:var(--borde-fuerte);border-radius:3px;margin:0 auto}
-  .conteo{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;font-size:var(--t-sm);
-    color:var(--tinta-suave);padding:var(--e-1) var(--e-4) var(--e-2)}
+  /* Pastilla de tinta de 52×7 (§7.5): la rayita gris de 44×4,5 no se veía
+     como algo que se agarra. */
+  .barra-tirador{width:52px;height:7px;background:var(--tinta);border-radius:4px;margin:0 auto}
+  /* Quién atiende: la carita de la categoría puesta (o la Loica, sin filtro)
+     al lado del número. Es la misma señalética de los chips a 30 px dentro
+     de un disco, y contesta "¿qué estoy mirando?" sin leer la línea de
+     estado. Uno a la vez: el del filtro puesto. */
+  .conteo{display:grid;grid-template-columns:auto 1fr;column-gap:10px;align-items:center;
+    font-size:var(--t-sm);color:var(--tinta-suave);padding:var(--e-1) var(--e-4) var(--e-2)}
+  .conteo .atiende{grid-row:1/3;display:grid;place-items:center;width:40px;height:40px;
+    border-radius:50%;background:var(--fondo-hundido);border:2px solid var(--contorno)}
+  .conteo .atiende svg{width:30px;height:30px}
+  .conteo .conteo-num{display:flex;align-items:baseline;gap:6px}
   .conteo b{font-family:var(--fuente-marca);font-size:var(--t-lg);color:var(--tinta)}
   /* La línea de estado: POR QUÉ ves 12 eventos.
      Con seis filtros combinables, quien vuelve a la pestaña al otro día no
@@ -294,19 +316,7 @@
   .afinar-fila::-webkit-scrollbar{display:none}
   .afinar-et{flex:none;font-size:var(--t-xs);font-weight:800;color:var(--tinta-tenue);
     text-transform:uppercase;letter-spacing:.05em}
-  .afinar .chip{padding:6px 12px;gap:5px;font-size:var(--t-xs);min-height:36px;
-    border-width:2px;box-shadow:0 2px 0 var(--contorno)}
-  .afinar .chip:active,
-  .afinar .chip[aria-pressed="true"]{transform:translateY(2px);box-shadow:none}
-  /* Igual que en el riel de arriba: repisa propia, así que el anillo se repone
-     acá o no se ve. */
-  .afinar .chip:focus-visible{
-    box-shadow:0 2px 0 var(--contorno),
-               0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
-  }
-  .afinar .chip[aria-pressed="true"]:focus-visible{
-    box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
-  }
+  /* Los chips de afinar comparten la regla de la cabecera (ver arriba). */
   /* El número va más apagado que el nombre, pero no tanto como para perderse:
      a .72 da 5,3:1 sobre el chip apagado y 7,4:1 sobre el relleno del activo,
      en claro y en oscuro. */
@@ -395,9 +405,8 @@
     .logo b{font-size:19px}
     .riel-fecha{padding:5px var(--e-3)}
     .segmentado{padding:2px}
-    .segmentado button{min-height:34px;padding:0 var(--e-3)}
-    header .filtros{padding:5px var(--e-3) 7px}
-    header .filtros .chip{min-height:36px}
+    .segmentado button{min-height:36px;padding:0 var(--e-3)}
+    header .filtros{padding:5px var(--e-3) 8px}
     .cuenta-rango{display:none}
   }
   /* Teléfono acostado. Los 150px de cabecera que en vertical son el 18% de la
@@ -483,7 +492,9 @@
     <section class="panel-lista" id="panel" aria-label="Lista de eventos">
       <div class="tirador" id="tirador" role="button" tabindex="0"
            aria-label="Arrastra para ver más eventos"><div class="barra-tirador"></div></div>
-      <div class="conteo"><b id="conteo">0</b> <span id="conteo-txt">eventos</span>
+      <div class="conteo">
+        <span class="atiende" id="atiende" aria-hidden="true"></span>
+        <div class="conteo-num"><b id="conteo">…</b> <span id="conteo-txt">eventos</span></div>
         <span class="conteo-estado" id="conteo-estado"></span></div>
       <div class="afinar" id="afinar"></div>
       <div class="lista" id="lista"></div>
@@ -497,7 +508,7 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
         integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
         crossorigin="anonymous"></script>
-<script src="loica.js?v=22"></script>
+<script src="loica.js?v=23"></script>
 <script>
 let EVENTOS = [], filtroCat = null, soloGratis = false, cuando = "todo", publicoFiltro = null;
 let busqueda = "", filtroSub = null;
@@ -535,10 +546,18 @@ function estiloMapa(){
             {id:"etiquetas",type:"raster",source:"etiquetas"}]};
 }
 
-/* Si el aparato no tiene WebGL, MapLibre tira una excepción y antes se caía
+/* El mapa se crea desde el ARRANQUE, después de pintar la cabecera, y no al
+   cargar el script. MapLibre mide el contenedor al nacer: si nace con la
+   cabecera a medio pintar (58 px) y después la cabecera crece a 150, el
+   primer cuadro de teselas queda calculado para el tamaño viejo y en celular
+   quedaba una banda crema de ~60 px bajo los filtros, que un resize() no
+   borraba. Con la cabecera lista antes, nace del tamaño definitivo.
+
+   Si el aparato no tiene WebGL, MapLibre tira una excepción y antes se caía
    la página entera: quedaba una pantalla en blanco sin lista y sin
    explicación. Pasa en iPhone viejos y con la aceleración por hardware
    apagada. Ahora la lista sigue siendo un producto completo. */
+function crearMapa(){
 try{
   mapa = new maplibregl.Map({
     container:"mapa", style:estiloMapa(),
@@ -550,9 +569,9 @@ try{
     `<div class="vacio" style="padding-top:var(--e-12)">${cuerpo("loica","var(--acento)",96,{pose:"durmiendo"})}
      <p><b>Este navegador no puede dibujar el mapa</b><br>
      La lista de abajo funciona igual.</p></div>`;
+  return;
 }
-
-if(hayMapa){
+{
   mapa.addControl(new maplibregl.NavigationControl({showCompass:false}), "top-left");
 
   // El mapa nace antes de que su caja tenga tamaño final. Se compara el
@@ -573,6 +592,8 @@ if(hayMapa){
            : IDIOMA === "pt" ? "O mapa está lento — a lista continua funcionando"
            : "El mapa va lento — la lista igual funciona");
   });
+  montarEventosDelMapa();
+}
 }
 
 function avisar(texto, quien = "loica"){
@@ -627,7 +648,7 @@ function svgPin(clave, gratis){
     <path d="M17 1C8.7 1 2 7.7 2 16c0 10.5 12.6 23 14.1 24.4.5.5 1.3.5 1.8 0C19.4 39 32 26.5 32 16 32 7.7 25.3 1 17 1z"
           fill="${tono}" stroke="${TINTA_PIN}" stroke-width="2.5"/>
     <circle cx="17" cy="15.6" r="11" fill="#FAF3E7"/>
-    <g transform="translate(4.4 3)scale(1.05)">${CARITAS[info.mascota](tono, TINTA_PIN, "posada")}</g>
+    <g transform="translate(4.4 3)scale(1.05)">${CARITAS[info.mascota](tono, TINTA_PIN, "posada", true)}</g>
   </svg>`;
 }
 
@@ -647,24 +668,26 @@ function montarCapas(){
     id:"pines", type:"symbol", source:"eventos",
     layout:{
       "icon-image":["concat","pin-",["get","cat"],["case",["get","gratis"],"-g",""]],
-      // Más chico de lejos, tamaño pleno de cerca: el traslape del centro
-      // molesta menos sin esconder a nadie
-      "icon-size":["interpolate",["linear"],["zoom"],11,.4,15,.55],
+      // De lejos chico, de cerca pleno. Antes iba de .4 a .55 sobre un
+      // dibujo de 34×42: un pin de 15 px con una carita de 11 que no se leía
+      // (la dirección visual pide 28 px de carita). Ahora al zoom inicial el
+      // pin mide ~25 px y la carita ~19, y desde el zoom 15 la carita llega a
+      // los 28 del contrato. El traslape del centro a zoom bajo se ordena
+      // con symbol-sort-key: gratis encima.
+      "icon-size":["interpolate",["linear"],["zoom"],11,.62,13,.85,15,1.05,17,1.2],
       "icon-anchor":"bottom",
       "icon-allow-overlap":true, "icon-ignore-placement":true,
       // Con allow-overlap, la clave más alta se dibuja encima: gratis gana
       "symbol-sort-key":["case",["get","gratis"],1,0],
     },
   });
-  mapa.on("click", "pines", e => {
-    const ev = EVENTOS.find(x => x.id === e.features[0].properties.id);
-    if(ev) abrirFicha(ev);
-  });
+  // El toque sobre un pin se resuelve en el manejador general del mapa (al
+  // final del archivo), con una caja de tolerancia alrededor del dedo.
   mapa.on("mouseenter", "pines", () => mapa.getCanvas().style.cursor = "pointer");
   mapa.on("mouseleave", "pines", () => mapa.getCanvas().style.cursor = "");
 }
 
-if(hayMapa){
+function montarEventosDelMapa(){
   mapa.on("styleimagemissing", async e => {
     const m = e.id.match(/^pin-([a-z_]+)(-g)?$/);
     if(!m || mapa.hasImage(e.id)) return;
@@ -746,7 +769,7 @@ function pintarFiltros(){
     fechas.appendChild(b);
   });
   document.getElementById("cuenta-rango").innerHTML =
-    `${carita("loica","var(--acento)",18)} ${escapar(t("cuandoLargo")[cuando])}`;
+    `${carita("loica","var(--acento)",22)} ${escapar(t("cuandoLargo")[cuando])}`;
 
   /* --- Riel 2: precio, público y tipo. Se combinan entre sí --- */
   const cont = document.getElementById("filtros");
@@ -900,6 +923,10 @@ function pintarEstado(){
   if(filtroCat) partes.push(cat(filtroCat)[IDIOMA]);
   if(filtroSub) partes.push(subcat(filtroSub));
   document.getElementById("conteo-estado").textContent = partes.join(" · ");
+  const quien = filtroCat ? cat(filtroCat) : null;
+  document.getElementById("atiende").innerHTML = quien
+    ? carita(quien.mascota, quien.hex, 30)
+    : carita("loica", "var(--acento)", 30);
 }
 
 /* ---------- EL BUSCADOR ----------
@@ -952,6 +979,9 @@ function montarBuscador(){
     riel.classList.add("buscando");
     campo.focus();
   };
+  // El <input> medía 22 px dentro de una cápsula de 38: tocar el borde no
+  // enfocaba. Ahora la cápsula entera es el campo.
+  document.querySelector(".campo-buscar").onclick = () => campo.focus();
   sincronizarBuscador();
 }
 
@@ -1006,9 +1036,12 @@ function refrescar(){
        palabra, del otro soltando un chip. Decir "prueba sacando algún filtro"
        a quien escribió "asdfgh" no ayuda a nadie. */
     const porPalabra = !!busqueda;
-    cont.innerHTML = `<div class="vacio">${cuerpo("loica","var(--tinta-tenue)",92,{pose:"durmiendo"})}
+    cont.innerHTML = `<div class="vacio">${cuerpo("loica","var(--acento)",76,{pose:"durmiendo"})}
       <p><b>${porPalabra ? t("buscarSin") : t("vacio")}</b><br>${
         porPalabra ? t("buscarSinPista") : t("vaciopista")}</p></div>`;
+    // En reposo el panel muestra 130 px de lista: la cabeza de la Loica y
+    // ningún texto. Sube a la altura media para que se lea la salida.
+    if(window.fijarPanel) fijarPanel(1);
     return;
   }
   cont.scrollTop = 0;
@@ -1069,7 +1102,7 @@ function abrirFicha(ev, direccion = 0){
         </div>` : ""}
       <div class="ficha-cuerpo">
         <span class="mascota-nombre" style="color:${info.tintaVar}">
-          ${carita(info.mascota, info.hex, 20)} ${info[IDIOMA]}</span>
+          ${carita(info.mascota, info.hex, 22)} ${info[IDIOMA]}</span>
         <h2>${escapar(ev.titulo)}</h2>
         ${urlSegura(ev.url) ? `<a class="boton bloque" href="${escapar(urlSegura(ev.url))}"
            target="_blank" rel="noopener nofollow">${t("ir")} ↗</a>` : ""}
@@ -1101,10 +1134,12 @@ function abrirFicha(ev, direccion = 0){
   document.getElementById("ev-cerrar").onclick = cerrarFicha;
 
   if(hayMapa && ev.lat != null){
-    const destino = mapa.project([ev.lon, ev.lat]);
+    /* Vuela a donde el pin VA A QUEDAR, no a donde está: el flyTo lo lleva al
+       centro menos los 90 px de offset. Antes se proyectaba la posición vieja
+       y la Loica aterrizaba a 130 px del pin, a veces fuera de la pantalla. */
     const caja = document.getElementById("mapa").getBoundingClientRect();
     volarLoica({x: caja.width/2, y: caja.height + 20},
-               {x: destino.x, y: destino.y}, 650);
+               {x: caja.width/2, y: caja.height/2 - 90}, 650);
     mapa.flyTo({center:[ev.lon, ev.lat], zoom:Math.max(mapa.getZoom(), 15),
                 offset:[0,-90], speed:1.5});
   }
@@ -1153,12 +1188,14 @@ function cerrarFicha(){
      dejaba en 249px, y acostado —donde el alto útil baja a ~225— el panel
      era MÁS ALTO que el espacio disponible y el mapa desaparecía entero.
      Ahora el reposo es una fracción del espacio real, con tope arriba (no
-     crece más que los 268 de antes en pantallas grandes) y piso abajo (nunca
-     baja de un asomo de dos tarjetas). La regla que sostiene todo esto: en
-     reposo el mapa se queda con la mayoría de la pantalla, siempre. */
+     crece más que 250 px en pantallas grandes) y piso abajo (nunca baja de un
+     asomo de dos tarjetas). Era el 40 % y bajó al 34 %: con la cabecera y la
+     barra de abajo, el mapa se quedaba con el 44 % de un iPhone. La regla que
+     sostiene todo esto: en reposo el mapa se queda con la mayoría de la
+     pantalla, siempre. */
   const alturas = () => {
     const disponible = panel.parentElement.clientHeight;
-    const reposo = Math.round(Math.min(268, Math.max(132, disponible * .40)));
+    const reposo = Math.round(Math.min(250, Math.max(132, disponible * .34)));
     return [reposo, Math.round(disponible * .62), Math.round(disponible * .88)];
   };
   let indice = 0, arrastrando = false, inicioY = 0, inicioAlto = 0;
@@ -1168,6 +1205,9 @@ function cerrarFicha(){
     panel.style.setProperty("--alto-panel", alturas()[indice] + "px");
   };
   fijar(0);
+  // refrescar() la usa para subir el panel cuando la lista queda en cero: en
+  // reposo solo se veía la cabeza de la Loica dormida y nada del texto.
+  window.fijarPanel = fijar;
 
   tirador.addEventListener("pointerdown", e => {
     arrastrando = true; inicioY = e.clientY; inicioAlto = panel.clientHeight;
@@ -1200,12 +1240,26 @@ function cerrarFicha(){
   addEventListener("resize", () => fijar(indice));
 })();
 
-/* ---------- ARRANQUE ---------- */
+/* ---------- ARRANQUE ----------
+   La cabecera se pinta ANTES de pedir el JSON. El riel de fechas y los tres
+   chips fijos no dependen de los datos, y pintarlos al tiro deja el header en
+   su alto definitivo desde el primer cuadro: antes crecía de 78 a 150 px
+   cuando llegaba eventos.json, el mapa ya había dibujado sus teselas para el
+   alto viejo y quedaba una banda crema de ~60 px bajo los filtros en cuatro
+   de cada cinco cargas en celular. La lista mientras tanto late con tres
+   filas vacías en vez de decir "0 eventos". */
+montarBuscador();
+pintarFiltros();
+document.getElementById("lista").innerHTML = esqueleto(3);
+// El panel midió su reposo con la cabecera a medio pintar; ahora que tiene
+// el alto definitivo, se vuelve a medir. Y recién ahora nace el mapa.
+if(window.fijarPanel) fijarPanel(0);
+crearMapa();
 cargarEventos()
   .then(evs => {
     EVENTOS = evs;
-    montarBuscador();
     pintarFiltros(); refrescar();
+    if(hayMapa) requestAnimationFrame(() => { mapa.resize(); mapa.triggerRepaint(); });
     const enlace = location.hash.match(/^#\/e\/(.+)$/);
     if(enlace){
       const ev = EVENTOS.find(e => e.id === enlace[1]);
@@ -1214,7 +1268,7 @@ cargarEventos()
   })
   .catch(() => {
     document.getElementById("lista").innerHTML =
-      `<div class="vacio">${cuerpo("loica","var(--tinta-tenue)",88,{pose:"durmiendo"})}
+      `<div class="vacio">${cuerpo("loica","var(--acento)",88,{pose:"durmiendo"})}
        <p><b>${IDIOMA === "en" ? "Couldn't load events" :
                IDIOMA === "pt" ? "Não consegui carregar os eventos" :
                "No pude cargar los eventos"}</b><br>
@@ -1228,12 +1282,19 @@ window.addEventListener("loica:idioma", () => {
   pintarFiltros(); refrescar(); if(seleccionado) abrirFicha(seleccionado);
 });
 
-// Tocar el mapa cierra la ficha, salvo que hayas tocado un pin: ahí el
-// manejador de la capa la va a reemplazar por el evento nuevo.
+/* Un solo manejador para el toque en el mapa, con una caja de ±14 px alrededor
+   del dedo. El pin se dibuja con la punta en la coordenada y el dedo toca el
+   cuerpo, no la punta: antes MapLibre consultaba el píxel exacto y a 12 px del
+   centro ya no abría nada. Si caen varios en la caja gana el último dibujado,
+   que por symbol-sort-key es el gratis. Tocar mapa pelado cierra la ficha. */
 if(hayMapa) mapa.on("click", e => {
-  if(mapa.getLayer("pines") &&
-     mapa.queryRenderedFeatures(e.point, {layers:["pines"]}).length) return;
-  cerrarFicha();
+  if(!mapa.getLayer("pines")) return cerrarFicha();
+  const r = 14, p = e.point;
+  const tocados = mapa.queryRenderedFeatures([[p.x - r, p.y - r], [p.x + r, p.y + r]],
+                                             {layers:["pines"]});
+  if(!tocados.length) return cerrarFicha();
+  const ev = EVENTOS.find(x => x.id === tocados[tocados.length - 1].properties.id);
+  if(ev) abrirFicha(ev);
 });
 addEventListener("keydown", e => {
   if(e.key === "Escape") cerrarFicha();

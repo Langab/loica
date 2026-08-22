@@ -26,15 +26,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=22">
+<link rel="stylesheet" href="loica.css?v=23">
 <style>
   html,body{height:100%;overflow:hidden}
-  /* Los dos altos van en este orden a proposito: `dvh` no existe en
-     Safari de iOS anterior a 15.4 ni en Chrome anterior a 108, y ahi la
-     declaracion se descarta entera. Sin el 100vh de respaldo el alto
-     quedaba en `auto` y la pagina —que es una app de alto fijo con
-     scroll interno— se desarmaba: la lista crecia sin fin y la barra de
-     abajo se iba de la pantalla. */
+  /* Los dos altos van en este orden a propósito: `dvh` no existe en Safari de
+     iOS anterior a 15.4 ni en Chrome anterior a 108, y ahí la declaración se
+     descarta entera. Sin el 100vh de respaldo el alto quedaba en `auto` y la
+     página —que es una app de alto fijo con scroll interno— se desarmaba. */
   #app{display:flex;flex-direction:column;height:100vh;height:100dvh}
   header{flex:none;z-index:6}
   main{flex:1;display:flex;min-height:0}
@@ -42,86 +40,120 @@
   /* min-height:0 es obligatorio: sin él la rejilla empuja el panel de la
      agenda fuera de la pantalla y su fondo queda inalcanzable en celular. */
   .calendario{flex:1;display:flex;flex-direction:column;min-width:0;min-height:0;
-    padding:var(--e-4);gap:var(--e-3)}
-  .mes-barra{display:flex;align-items:center;gap:var(--e-3)}
+    padding:var(--e-4);gap:var(--e-3);position:relative}
+  .mes-barra{display:flex;align-items:center;gap:var(--e-3);flex-wrap:wrap}
   /* Solo la primera letra: `capitalize` daría "9 De Agosto" */
   .mes-titulo{font-family:var(--fuente-marca);font-size:var(--t-xl);font-weight:800;
-    letter-spacing:-.02em;min-width:0}
+    letter-spacing:-.02em;min-width:0;line-height:1.1}
   .mes-titulo::first-letter,.agenda-cabecera h2::first-letter{text-transform:uppercase}
-  .mes-nav{display:flex;gap:var(--e-1);margin-left:auto}
+  .mes-nav{display:flex;gap:var(--e-2);margin-left:auto}
+  /* Las flechas y "Hoy" en el lenguaje del sitio: contorno de tinta y repisa
+     que se hunde al apretar. Tenían 1,5 px de borde gris, que es el único
+     grosor que la dirección visual prohíbe. */
   .mes-nav button{
-    width:38px;height:38px;border-radius:var(--r-sm);border:1.5px solid var(--borde);
-    background:var(--fondo-elevado);color:var(--tinta);cursor:pointer;font-size:15px;
-    transition:var(--rapido);
+    min-width:44px;height:44px;border-radius:var(--r-pill);border:2px solid var(--contorno);
+    background:var(--fondo-elevado);color:var(--tinta);cursor:pointer;
+    display:inline-flex;align-items:center;justify-content:center;padding:0;
+    box-shadow:var(--repisa-1);transition:var(--rapido);
   }
-  .mes-nav button:hover{background:var(--fondo-hundido);border-color:var(--borde-fuerte)}
-  .mes-nav .hoy{width:auto;padding:0 var(--e-4);font:700 var(--t-sm)/1 var(--fuente-ui)}
+  .mes-nav button svg{width:18px;height:18px}
+  .mes-nav button:hover{background:var(--fondo-hundido)}
+  .mes-nav button:active{transform:translateY(3px);box-shadow:none}
+  .mes-nav button:focus-visible{box-shadow:var(--repisa-1),0 0 0 3px var(--foco),0 0 0 6px var(--contorno)}
+  .mes-nav .hoy{padding:0 var(--e-4);font:800 var(--t-sm)/1 var(--fuente-marca)}
+
+  .encabezado-dias{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;flex:none}
+  .encabezado-dias span{
+    text-align:center;font-size:var(--t-xs);font-weight:800;color:var(--tinta-tenue);
+    text-transform:uppercase;letter-spacing:.06em;padding-bottom:2px;
+  }
+  /* El fin de semana es la única distinción que se busca en una agenda de
+     panoramas: sábado y domingo van en rojo arriba y con el papel más oscuro
+     en la columna. */
+  .encabezado-dias span:nth-child(n+6){color:var(--acento-solido)}
 
   .rejilla{
     flex:1;display:grid;grid-template-columns:repeat(7,1fr);grid-auto-rows:1fr;
-    gap:5px;min-height:0;
+    gap:5px;min-height:0;position:relative;z-index:1;
   }
-  .encabezado-dias{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;flex:none}
-  .encabezado-dias span{
-    text-align:center;font-size:var(--t-xs);font-weight:700;color:var(--tinta-tenue);
-    text-transform:uppercase;letter-spacing:.06em;padding-bottom:2px;
-  }
-
+  /* La celda. Solo los días con algo llevan caja: un mes de 42 cajas vacías
+     con borde era la rejilla de Google Calendar. Los vacíos son un número. */
   .dia{
-    background:var(--fondo-elevado);border:1.5px solid var(--borde);border-radius:var(--r-md);
+    background:transparent;border:2px solid transparent;border-radius:var(--r-md);
     padding:5px 6px;display:flex;flex-direction:column;gap:3px;overflow:hidden;
     cursor:pointer;transition:var(--rapido);text-align:left;font-family:inherit;color:inherit;
+    min-width:0;
   }
-  .dia:hover{border-color:var(--borde-fuerte);box-shadow:var(--sombra-1)}
-  .dia.fuera{opacity:.4}
-  .dia.hoy{border-color:var(--acento);border-width:2px}
-  .dia.elegido{background:var(--fondo-hundido);border-color:var(--tinta)}
-  .dia-num{font-size:var(--t-sm);font-weight:700;font-variant-numeric:tabular-nums}
-  .dia.hoy .dia-num{color:var(--acento)}
+  .dia.con{background:var(--fondo-elevado);border-color:var(--borde-fuerte)}
+  .dia:nth-child(7n-1),.dia:nth-child(7n){background:var(--fondo-hundido)}
+  .dia.con:nth-child(7n-1),.dia.con:nth-child(7n){background:var(--fondo-elevado)}
+  .dia:hover{border-color:var(--contorno-suave)}
+  .dia.elegido{border-color:var(--contorno);box-shadow:var(--repisa-1);background:var(--fondo-elevado)}
+  .dia.hoy{border-color:var(--acento)}
+  /* Elegido Y hoy: el borde sigue siendo rojo. Antes el elegido pisaba al hoy
+     y al cargar la página "hoy" dejaba de verse como hoy. */
+  .dia.hoy.elegido{border-color:var(--acento);box-shadow:0 3px 0 var(--acento-solido)}
+  .dia-num{font:700 var(--t-sm)/1.2 var(--fuente-ui);font-variant-numeric:tabular-nums}
+  .dia.hoy .dia-num{color:var(--acento-solido)}
+  /* Los días del mes vecino: se atenúa el NÚMERO, no la celda entera. Con
+     opacity:.4 los títulos de sus eventos quedaban a 1,7:1. */
+  .dia.fuera .dia-num{color:var(--tinta-tenue);font-weight:600}
   .marca-ev{
-    display:flex;align-items:center;gap:4px;font-size:10.5px;font-weight:600;
-    background:var(--tono-suave);color:var(--tono);border-radius:5px;padding:2px 4px;
+    display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;
+    background:var(--tono-suave);color:var(--tono);border-radius:5px;padding:2px 5px;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.35;
   }
   .marca-ev.libre{background:var(--gratis-fondo);color:var(--gratis)}
   .marca-ev i{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
-  .mas{font-size:10px;color:var(--tinta-tenue);font-weight:600;padding-left:3px}
+  .mas{font-size:12px;color:var(--tinta-tenue);font-weight:700;padding-left:3px}
+  .mas-movil,.fila-movil{display:none}
+
+  /* La mascota del mes: el animal de la categoría con más panoramas, grande y
+     al 12 % detrás de la rejilla (§6.5 de la dirección visual). Solo en
+     escritorio: en celular cada píxel es de las celdas. */
+  .mascota-mes{position:absolute;right:var(--e-6);bottom:var(--e-4);opacity:.12;pointer-events:none;z-index:0}
+  .mascota-mes svg{width:150px;height:150px}
 
   .agenda{
-    width:370px;flex:none;border-left:1px solid var(--borde);background:var(--fondo-elevado);
+    width:370px;flex:none;border-left:2.5px solid var(--contorno);background:var(--fondo-elevado);
     display:flex;flex-direction:column;
   }
-  .agenda-cabecera{padding:var(--e-4);border-bottom:1px solid var(--borde)}
-  .agenda-cabecera h2{font-size:var(--t-lg)}
-  .agenda-cabecera p{margin:3px 0 0;color:var(--tinta-suave);font-size:var(--t-sm)}
-  .agenda-lista{overflow-y:auto;flex:1}
+  /* La cabecera del día: la carita del animal que más se repite ese día al
+     lado de la fecha, y "N eventos · M gratis". Es la señalética de los chips
+     a 30 px, contestando qué clase de día es antes de leer la lista. */
+  .agenda-cabecera{padding:var(--e-3) var(--e-4);border-bottom:2px solid var(--borde);
+    display:grid;grid-template-columns:auto 1fr;column-gap:10px;align-items:center}
+  .agenda-cabecera .quien{grid-row:1/3;display:grid;place-items:center;width:40px;height:40px;
+    border-radius:50%;background:var(--fondo-hundido);border:2px solid var(--contorno)}
+  .agenda-cabecera .quien svg{width:30px;height:30px}
+  .agenda-cabecera h2{font-size:var(--t-lg);line-height:1.15}
+  .agenda-cabecera p{margin:0;color:var(--tinta-suave);font-size:var(--t-sm)}
+  .agenda-lista{overflow-y:auto;flex:1;overscroll-behavior:contain}
 
   /* --- El buscador, en la barra del mes ---
      Esta página no tiene riel de fechas: su eje temporal es el mes, y la fila
-     que hace de riel es la del título con las flechas. El campo va ahí, que es
-     "a la misma altura" de lo que pidió el dueño en el mapa.
-     Bajo 620px la barra ya lleva el mes y tres botones, así que el campo se va
-     a su propia línea en vez de espachurrar las flechas: cambiar de mes es LA
-     acción de esta página y no puede perder área táctil. */
-  .mes-barra{flex-wrap:wrap}
+     que hace de riel es la del título con las flechas. En escritorio el campo
+     va ahí; en celular se pliega en una lupa (como en el mapa) porque la fila
+     ya lleva el mes y tres botones, y una segunda línea le quitaba 46 px a la
+     rejilla, que es lo que no cabía. */
+  .lupa{display:none}
   .campo-buscar{
     display:flex;align-items:center;gap:4px;flex:1 1 200px;min-width:0;
-    max-width:320px;height:38px;padding:0 5px 0 10px;
+    max-width:320px;height:40px;padding:0 5px 0 10px;
     border:2px solid var(--contorno);border-radius:var(--r-pill);
-    background:var(--fondo-elevado);box-shadow:0 2px 0 var(--contorno);
+    background:var(--fondo-elevado);box-shadow:var(--repisa-1);
   }
   .campo-buscar > svg{width:18px;height:18px;flex:none;color:var(--tinta-tenue)}
   /* 16px y no --t-base: bajo 16px, Safari de iOS hace zoom solo al enfocar el
-     campo y deja la página corrida. */
+     campo y deja la página corrida. height:100%: el campo es la cápsula
+     entera, no una franja de 22 px en el medio. */
   .campo-buscar input{
-    flex:1;min-width:0;border:0;background:transparent;color:var(--tinta);
+    flex:1;min-width:0;height:100%;border:0;background:transparent;color:var(--tinta);
     font:600 16px/1 var(--fuente-ui);padding:0;
   }
   .campo-buscar input::placeholder{color:var(--tinta-tenue);font-weight:500}
   .campo-buscar input:focus{outline:none}
   .campo-buscar input::-webkit-search-cancel-button{display:none}
-  /* El anillo de foco va en la CÁPSULA: el <input> no tiene borde propio y el
-     anillo quedaba dibujado por dentro, escondido bajo el contorno. */
   .campo-buscar:focus-within{box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno)}
   .borra-buscar{
     flex:none;width:34px;height:34px;border-radius:var(--r-pill);border:0;
@@ -137,55 +169,71 @@
       height:44px;transform:translateY(-50%);
     }
   }
-  @media(max-width:620px){ .campo-buscar{flex-basis:100%;max-width:none;order:3} }
 
-  /* --- Afinar: subcategorías y tamaño, dentro del panel de la agenda ---
-     Bajo la cabecera del día, que es el equivalente al "bajo el número de
-     eventos" del mapa. El panel mide 370px, así que cada fila se desplaza de
-     lado en vez de envolver: música tiene nueve géneros y apilados no queda
-     agenda. */
+  /* --- Afinar: subcategorías, dentro del panel de la agenda --- */
   .afinar{flex:none;border-bottom:1px solid var(--borde)}
   .afinar-fila{display:flex;align-items:center;gap:6px;
-    padding:4px var(--e-4) 6px;overflow-x:auto;scrollbar-width:none}
+    padding:6px var(--e-4) 8px;overflow-x:auto;scrollbar-width:none}
   .afinar-fila::-webkit-scrollbar{display:none}
   .afinar-et{flex:none;font-size:var(--t-xs);font-weight:800;color:var(--tinta-tenue);
     text-transform:uppercase;letter-spacing:.05em}
-  .afinar .chip{padding:6px 12px;gap:5px;font-size:var(--t-xs);min-height:36px;
-    border-width:2px;box-shadow:0 2px 0 var(--contorno)}
+  /* El mismo chip de 40 px y repisa de 3 que usa el mapa. */
+  .afinar .chip{padding:6px 13px 6px 8px;gap:5px;font-size:var(--t-xs);min-height:40px;
+    border-width:2px;box-shadow:var(--repisa-1)}
   .afinar .chip:active,
-  .afinar .chip[aria-pressed="true"]{transform:translateY(2px);box-shadow:none}
-  /* La repisa de acá es de 2px y le gana a la de loica.css, así que el anillo
-     de foco se vuelve a apilar con la medida de esta página. El chip prendido
-     está hundido: solo anillo. */
+  .afinar .chip[aria-pressed="true"]{transform:translateY(3px);box-shadow:none}
   .afinar .chip:focus-visible{
-    box-shadow:0 2px 0 var(--contorno),
-               0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+    box-shadow:var(--repisa-1),0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
   }
   .afinar .chip[aria-pressed="true"]:focus-visible{
     box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
   }
   .afinar .cuenta{opacity:.72;font-variant-numeric:tabular-nums}
-  .afinar-nota{margin:0;padding:0 var(--e-4) 7px;font-size:var(--t-xs);
-    color:var(--tinta-tenue);font-style:italic;line-height:1.3}
 
   @media(max-width:879px){
     main{flex-direction:column;padding-bottom:var(--hueco-nav)}
-    .agenda{width:auto;border-left:0;border-top:1px solid var(--borde);
-      max-height:46%;min-height:150px}
-    .calendario{padding:var(--e-3)}
-    .marca-ev{display:none}
-    .rejilla{grid-auto-rows:minmax(44px,1fr)}
-    .dia{align-items:center;justify-content:center;gap:4px}
-    /* Cambiar de mes es LA acción de esta página y las flechas median 38x38.
-       Acá sí se agranda la caja y no solo el área: la barra del mes tiene
-       espacio de sobra y son botones que se aprietan varias veces seguidas. */
-    .mes-nav button{width:44px;height:44px}
-    .mes-nav .hoy{width:auto}
-    .puntos{display:flex;gap:2px;flex-wrap:wrap;justify-content:center}
+    /* La agenda se queda con lo que el mes no usa. Antes era el 46 % fijo y
+       la rejilla, con filas de 44 px, no cabía en lo que quedaba: los días 24
+       al 31 se pintaban debajo de la agenda y no se podían tocar. Ahora las
+       filas miden 34 y el mes completo entra en ~230 px; y si un teléfono es
+       más bajo todavía, la sección del mes scrollea en vez de esconder días. */
+    .calendario{padding:var(--e-3) var(--e-3) var(--e-2);gap:var(--e-2);overflow-y:auto;flex:none}
+    .agenda{width:auto;flex:1;min-height:150px;border-left:0;border-top:2.5px solid var(--contorno)}
+    .marca-ev,.mas-escritorio,.mascota-mes{display:none}
+    .rejilla{grid-auto-rows:minmax(34px,1fr);gap:4px;flex:none}
+    .encabezado-dias{gap:4px}
+    .dia{align-items:center;justify-content:center;gap:2px;padding:2px;border-radius:var(--r-sm)}
+    .dia-num{font-size:13px}
+    /* Puntos y total en UNA fila bajo el número: la celda baja de ~48 a ~38 px
+       y esos 60 px del mes se los queda la agenda. */
+    .dia .fila-movil{display:flex;align-items:center;justify-content:center;gap:3px;max-width:100%}
+    .puntos{display:flex;gap:2px;flex:none}
+    .fila-movil{display:flex}
     .puntos i{width:5px;height:5px;border-radius:50%;background:var(--tono)}
-    .marca-ev i{background:var(--punto,var(--tono))}
+    /* El total real del día en vez de "+153": con las marcas escondidas, el
+       "+N" restaba las tres que nadie veía. */
+    .mas-movil{display:block;font-size:10.5px;color:var(--tinta-tenue);font-weight:700;padding:0;line-height:1}
+    .mes-titulo{font-size:var(--t-lg)}
+    .mes-nav{gap:6px}
+    /* El buscador plegado: una lupa de 44 en la fila del mes; al tocarla la
+       fila entera pasa a ser el campo y el mes y las flechas se esconden
+       mientras se escribe. Con palabra escrita la lupa queda rellena. */
+    .lupa{
+      display:grid;place-items:center;width:44px;height:44px;border-radius:var(--r-pill);
+      border:2px solid var(--contorno);background:var(--fondo-elevado);color:var(--tinta);
+      cursor:pointer;box-shadow:var(--repisa-1);transition:var(--rapido);padding:0;
+    }
+    .lupa svg{width:20px;height:20px}
+    .lupa:active{transform:translateY(3px);box-shadow:none}
+    .lupa.activo{background:var(--tinta);color:var(--fondo-elevado);transform:translateY(3px);box-shadow:none}
+    .campo-buscar{display:none}
+    .mes-barra.buscando .mes-titulo,.mes-barra.buscando .mes-nav{display:none}
+    .mes-barra.buscando .campo-buscar{display:flex;flex:1;max-width:none}
   }
-  @media(min-width:901px){.puntos{display:none}}
+  @media(max-width:879px) and (max-height:560px){
+    .rejilla{grid-auto-rows:minmax(30px,1fr)}
+    .dia-num{font-size:12px}
+  }
 </style>
 </head>
 <body>
@@ -200,9 +248,10 @@
       <div class="mes-barra">
         <div class="mes-titulo" id="mes-titulo"></div>
         <div class="mes-nav">
-          <button id="ant" aria-label="Mes anterior">‹</button>
-          <button class="hoy" id="btn-hoy">Hoy</button>
-          <button id="sig" aria-label="Mes siguiente">›</button>
+          <button id="ant" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="hoy" id="btn-hoy" type="button">Hoy</button>
+          <button id="sig" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button type="button" class="lupa" id="lupa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.4 15.4 21 21"/></svg></button>
         </div>
         <!-- El buscador va en la fila que hace de riel en esta página. -->
         <div class="campo-buscar">
@@ -216,10 +265,12 @@
       </div>
       <div class="encabezado-dias" id="encabezado-dias"></div>
       <div class="rejilla" id="rejilla"></div>
+      <div class="mascota-mes" id="mascota-mes" aria-hidden="true"></div>
     </section>
 
     <aside class="agenda">
       <div class="agenda-cabecera">
+        <span class="quien" id="agenda-quien" aria-hidden="true"></span>
         <h2 id="agenda-titulo"></h2>
         <p id="agenda-sub"></p>
       </div>
@@ -231,7 +282,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegacion principal"></nav>
 
-<script src="loica.js?v=22"></script>
+<script src="loica.js?v=23"></script>
 <script>
 let EVENTOS = [], filtroCat = null, soloGratis = false;
 let busqueda = "", filtroSub = null;
@@ -239,13 +290,15 @@ let mesVisible = new Date(), diaElegido = new Date();
 
 pintarBarra("calendario.html");
 
-cargarEventos().then(evs => {
-  EVENTOS = evs;
-  // Arranca en el mes del primer evento disponible, no en uno vacío
-  if(evs.length && evs[0].fecha > new Date()) mesVisible = new Date(evs[0].fecha);
-  montarBuscador();
-  repintar();
-});
+/* El día elegido viaja en el hash (#2026-08-22): volver atrás desde una ficha
+   vuelve al mismo día, y un día se puede compartir. */
+const diaDelHash = () => {
+  const m = location.hash.match(/^#(\d{4})-(\d{2})-(\d{2})$/);
+  return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null;
+};
+if(diaDelHash()){ diaElegido = diaDelHash(); mesVisible = new Date(diaElegido); }
+
+
 window.addEventListener("loica:idioma", () => {
   sincronizarBuscador();
   repintar();
@@ -271,6 +324,32 @@ const hayFiltros = () => busqueda || filtroCat || filtroSub || soloGratis;
 // Todo lo que repinta la página, junto: son tres cosas y olvidar una deja la
 // rejilla del mes mostrando puntos de un filtro que ya no está puesto.
 const repintar = () => { pintarFiltros(); pintarMes(); mostrarDia(diaElegido); };
+
+/* La cabecera y el esqueleto se pintan ANTES de pedir el JSON: los chips fijos
+   no dependen de los datos y la agenda late con tres filas vacías en vez de
+   quedar en blanco el segundo que tarda eventos.json. */
+montarBuscador();
+pintarFiltros();
+pintarMes();
+document.getElementById("agenda-lista").innerHTML = esqueleto(3);
+cargarEventos().then(evs => {
+  EVENTOS = evs;
+  // Arranca en el mes del primer evento disponible, no en uno vacío (salvo
+  // que la URL ya traiga un día).
+  if(!diaDelHash() && evs.length && evs[0].fecha > new Date()) mesVisible = new Date(evs[0].fecha);
+  repintar();
+}).catch(() => {
+  // Sin esto, si el JSON falla quedaba "Agosto 2026" con 42 celdas vacías y
+  // ningún aviso. Misma salida que el mapa.
+  document.getElementById("agenda-lista").innerHTML =
+    `<div class="vacio">${cuerpo("chinchilla","var(--c-cultura)",88,{pose:"durmiendo"})}
+     <p><b>${IDIOMA === "en" ? "Couldn't load events" :
+             IDIOMA === "pt" ? "Não consegui carregar os eventos" :
+             "No pude cargar los eventos"}</b><br>
+     <button class="boton secundario" style="margin-top:12px"
+       onclick="location.reload()">${IDIOMA === "en" ? "Try again" :
+         IDIOMA === "pt" ? "Tentar de novo" : "Reintentar"}</button></p></div>`;
+});
 
 function pintarFiltros(){
   const cont = document.getElementById("filtros");
@@ -388,6 +467,11 @@ function sincronizarBuscador(){
   const campo = document.getElementById("buscar");
   campo.placeholder = t("buscar");
   campo.setAttribute("aria-label", t("buscarEtiqueta"));
+  const lupa = document.getElementById("lupa");
+  lupa.setAttribute("aria-label", t("buscarEtiqueta"));
+  lupa.classList.toggle("activo", !!campo.value);
+  document.getElementById("ant").setAttribute("aria-label", t("anterior"));
+  document.getElementById("sig").setAttribute("aria-label", t("siguiente"));
   const borrar = document.getElementById("borra-buscar");
   borrar.hidden = !campo.value;
   borrar.setAttribute("aria-label", t("buscarBorrar"));
@@ -395,6 +479,12 @@ function sincronizarBuscador(){
 
 function montarBuscador(){
   const campo = document.getElementById("buscar");
+  const barra = document.querySelector(".mes-barra");
+  // En celular la lupa abre el campo sobre la fila del mes; Escape con el
+  // campo vacío lo cierra. La lupa queda rellena mientras haya palabra.
+  document.getElementById("lupa").onclick = () => { barra.classList.add("buscando"); campo.focus(); };
+  document.querySelector(".campo-buscar").onclick = () => campo.focus();
+  campo.onblur = () => { if(!campo.value) barra.classList.remove("buscando"); };
   /* 180 ms antes de filtrar: sin esto cada tecla vuelve a armar la rejilla de
      42 celdas y a recorrer el catastro entero. */
   let temporizador = null;
@@ -404,10 +494,9 @@ function montarBuscador(){
     temporizador = setTimeout(() => { busqueda = campo.value.trim(); repintar(); }, 180);
   };
   campo.onkeydown = e => {
-    if(e.key === "Escape" && campo.value){
-      campo.value = "";
-      campo.dispatchEvent(new Event("input"));
-    }
+    if(e.key !== "Escape") return;
+    if(campo.value){ campo.value = ""; campo.dispatchEvent(new Event("input")); }
+    else barra.classList.remove("buscando");
   };
   document.getElementById("borra-buscar").onclick = () => {
     campo.value = "";
@@ -421,6 +510,16 @@ function porDia(){
   const mapa = {};
   visibles().forEach(ev => (mapa[claveDia(ev.fecha)] ||= []).push(ev));
   return mapa;
+}
+
+/* La categoría con más panoramas de una lista: es la que pone la cara en la
+   cabecera del día y la mascota grande del mes. Sin lista, la Chinchilla,
+   que es el color de esta página. */
+function dominante(lista){
+  const cuenta = {};
+  lista.forEach(ev => cuenta[ev.categoria] = (cuenta[ev.categoria] || 0) + 1);
+  const mejor = Object.keys(cuenta).sort((a, b) => cuenta[b] - cuenta[a])[0];
+  return mejor ? cat(mejor) : {mascota:"chinchilla", hex:"var(--c-cultura)"};
 }
 
 function pintarMes(){
@@ -440,6 +539,10 @@ function pintarMes(){
   const rejilla = document.getElementById("rejilla");
   rejilla.innerHTML = "";
   const hoy = new Date();
+  const delMes = visibles().filter(ev => ev.fecha.getMonth() === mesVisible.getMonth()
+                                      && ev.fecha.getFullYear() === mesVisible.getFullYear());
+  const dm = dominante(delMes);
+  document.getElementById("mascota-mes").innerHTML = cuerpo(dm.mascota, dm.hex, 150);
 
   for(let i = 0; i < 42; i++){
     const dia = new Date(inicio);
@@ -450,6 +553,7 @@ function pintarMes(){
     const celda = document.createElement("button");
     celda.type = "button";
     celda.className = "dia"
+      + (delDia.length ? " con" : " sin")
       + (dia.getMonth() !== mesVisible.getMonth() ? " fuera" : "")
       + (mismaFecha(dia, hoy) ? " hoy" : "")
       + (mismaFecha(dia, diaElegido) ? " elegido" : "");
@@ -462,16 +566,24 @@ function pintarMes(){
         style="--tono:${info.tintaVar};--punto:${info.hex};--tono-suave:${info.hex}1f">
         <i></i>${escapar(ev.titulo)}</span>`;
     }).join("");
-    const puntos = delDia.slice(0,4).map(ev =>
+    const puntos = delDia.slice(0,3).map(ev =>
       `<i style="--tono:${ev.gratis ? "var(--gratis)" : cat(ev.categoria).hex}"></i>`).join("");
 
     celda.innerHTML = `<span class="dia-num">${dia.getDate()}</span>
       ${marcas}
-      ${delDia.length > 3 ? `<span class="mas">+${delDia.length - 3}</span>` : ""}
-      <span class="puntos">${puntos}</span>`;
-    celda.onclick = () => { diaElegido = dia; pintarMes(); mostrarDia(dia); };
+      ${delDia.length > 3 ? `<span class="mas mas-escritorio">+${delDia.length - 3}</span>` : ""}
+      ${delDia.length ? `<span class="fila-movil"><span class="puntos">${puntos}</span><span class="mas mas-movil">${delDia.length}</span></span>` : ""}`;
+    celda.onclick = () => { elegirDia(dia); };
     rejilla.appendChild(celda);
   }
+}
+
+/* Elegir un día: se repinta el mes (para mover el borde), se muestra la
+   agenda y el día queda en la URL. */
+function elegirDia(dia){
+  diaElegido = dia;
+  history.replaceState(null, "", "#" + claveDia(dia));
+  pintarMes(); mostrarDia(dia);
 }
 
 function mostrarDia(dia){
@@ -482,23 +594,32 @@ function mostrarDia(dia){
     (enCartelera(a) ? 1 : 0) - (enCartelera(b) ? 1 : 0) || a.fecha - b.fecha);
   document.getElementById("agenda-titulo").textContent =
     dia.toLocaleDateString(localeDe(), {weekday:"long", day:"numeric", month:"long"});
+  const gratis = delDia.filter(ev => ev.gratis).length;
   document.getElementById("agenda-sub").textContent =
-    `${delDia.length} ${delDia.length === 1 ? t("evento") : t("eventos")}`;
+    `${delDia.length} ${delDia.length === 1 ? t("evento") : t("eventos")}`
+    + (gratis ? ` · ${gratis} ${t("gratis").toLowerCase()}` : "");
+  const dd = dominante(delDia);
+  document.getElementById("agenda-quien").innerHTML = carita(dd.mascota, dd.hex, 30);
 
   const cont = document.getElementById("agenda-lista");
   cont.innerHTML = "";
   if(!delDia.length){
     /* Un día sin nada y un día que se vació por los filtros se ven igual, y no
        lo son: del segundo se sale soltando un chip, no cambiando de día. Con
-       una palabra escrita se dice eso, que es lo que más despista. */
-    const texto = busqueda ? t("buscarSin") : hayFiltros() ? t("vacio") : t("vacio");
+       una palabra escrita se dice eso, que es lo que más despista. La
+       Chinchilla duerme en su color, no en gris: dormida ya dice "nada". */
+    const texto = busqueda ? t("buscarSin") : t("vacio");
     const pista = busqueda ? t("buscarSinPista") : hayFiltros() ? t("vaciopista") : "";
-    cont.innerHTML = `<div class="vacio">${cuerpo("chincol","var(--tinta-tenue)",88,{pose:"durmiendo"})}
+    cont.innerHTML = `<div class="vacio">${cuerpo("chinchilla","var(--c-cultura)",80,{pose:"durmiendo"})}
       <p><b>${escapar(texto)}</b>${pista ? `<br>${escapar(pista)}` : ""}</p></div>`;
     return;
   }
+  /* La tarjeta abre la ficha del evento (e/<id>.html), la misma que se
+     comparte, en la misma pestaña: con el día en el hash, volver atrás deja
+     la agenda donde estaba. Antes abría la fuente externa en otra pestaña,
+     que es lo único que ninguna otra página hace al tocar una tarjeta. */
   delDia.forEach(ev => cont.appendChild(
-    tarjetaEvento(ev, e => window.open(e.url, "_blank", "noopener"))));
+    tarjetaEvento(ev, e => { location.href = "e/" + encodeURIComponent(e.id) + ".html"; })));
 }
 
 document.getElementById("ant").onclick = () => {
@@ -508,7 +629,7 @@ document.getElementById("sig").onclick = () => {
   mesVisible = new Date(mesVisible.getFullYear(), mesVisible.getMonth() + 1, 1); pintarMes();
 };
 document.getElementById("btn-hoy").onclick = () => {
-  mesVisible = new Date(); diaElegido = new Date(); pintarMes(); mostrarDia(diaElegido);
+  mesVisible = new Date(); elegirDia(new Date());
 };
 addEventListener("keydown", e => {
   if(e.key === "ArrowLeft") document.getElementById("ant").click();
