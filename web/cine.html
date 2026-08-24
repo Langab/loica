@@ -11,7 +11,7 @@
      CDN de cada cadena; 'unsafe-inline' mientras la logica viva en un <script>
      inline; y frame-ancestors no va porque en un <meta> el navegador lo ignora,
      igual que upgrade-insecure-requests (el detalle esta en mapa.html). -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; worker-src blob:; connect-src 'self' https://*.basemaps.cartocdn.com; object-src 'none'; base-uri 'none'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; worker-src blob:; connect-src 'self' https://*.basemaps.cartocdn.com https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Cine en Santiago — Loica</title>
 <meta name="description" content="Qué dan hoy en los cines de Santiago y cuál te queda cerca: las salas de mall y el circuito de cine arte, con sus horarios y el link para comprar en el cine.">
@@ -139,7 +139,20 @@
     margin-top:var(--e-3);overflow:hidden;
   }
   .cine.arte{background:var(--c-cine-suave)}
-  .cine-cab{display:flex;gap:var(--e-2);align-items:flex-start;padding:var(--e-3)}
+  /* La cabecera es un <button> que ocupa la tarjeta entera: hay que devolverle
+     todo lo que el navegador le pone de fábrica (fondo, borde, fuente,
+     centrado) o se ve como un botón de formulario adentro de la tarjeta. */
+  .cine-cab{
+    display:flex;gap:var(--e-2);align-items:flex-start;padding:var(--e-3);
+    width:100%;text-align:left;background:none;border:0;font:inherit;color:inherit;
+    cursor:pointer;border-radius:var(--r-lg) var(--r-lg) 0 0;
+  }
+  .cine-cab:hover h3{text-decoration:underline;text-decoration-thickness:2px;
+    text-underline-offset:3px}
+  .cine-cab:focus-visible{outline:3px solid var(--foco);outline-offset:-3px}
+  /* La sala elegida se sube al frente: contorno más grueso y una repisa más
+     alta. Es el mismo acuse de recibo que da el pin al crecer en el mapa. */
+  .cine.elegido{border-width:3.5px;box-shadow:var(--repisa-4)}
   .cine-cab .mascota{flex:none;margin-top:1px}
   .cine-cab h3{margin:0;font:800 var(--t-md)/1.2 var(--fuente-marca);color:var(--tinta)}
   .cine.arte h3, .cine.arte .cine-donde, .cine.arte .peli-nombre{color:var(--azul-900)}
@@ -272,6 +285,7 @@
 let CINES = [], PELICULAS = [], generado = "", diasCartelera = 4;
 let dia = 0;                       // 0 = hoy, 1 = mañana…
 let vista = "cines";               // cines | peliculas
+let cineElegido = "";              // la sala que se apretó en el mapa
 let circuitoFiltro = "", comunaFiltro = "", idiomaFiltro = "";
 let miPosicion = null, estadoGeo = "";
 let mostrando = 24;
@@ -323,15 +337,32 @@ let mapa = null, popup = null, hayMapa = false;
 const esOscuro = () => document.documentElement.dataset.tema === "oscuro"
   || (!document.documentElement.dataset.tema && matchMedia("(prefers-color-scheme: dark)").matches);
 
-function urlesTeselas(estilo){
-  return ["a","b","c","d"].map(s => `https://${s}.basemaps.cartocdn.com/${estilo}/{z}/{x}/{y}{ratio}.png`
-    .replace("{ratio}", devicePixelRatio > 1 ? "@2x" : ""));
-}
+/* Las mismas teselas que el mapa de panoramas y el de talleres, copiadas tal
+   cual y no reinventadas: que las tres páginas se vean iguales es la mitad de
+   que se sientan del mismo sitio.
+
+   Acá había un `glyphs: null` y costó un mapa entero. MapLibre valida el
+   estilo antes de montarlo y `glyphs` tiene que ser una cadena o no estar:
+   con null el estilo se rechaza, el evento `load` NUNCA se dispara y
+   `montarCapas()` —que cuelga de ese evento— no llega a correr. El resultado
+   no es un mapa feo, es un rectángulo en blanco sin un solo pin, porque la
+   capa de cines jamás se agregó. Ninguna otra página del sitio declara
+   `glyphs`, y esta tampoco debe. */
+const TESELAS = {
+  claro:"https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png",
+  claroEtiquetas:"https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
+  oscuro:"https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png",
+  oscuroEtiquetas:"https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png",
+};
+const urlesTeselas = clave => ["a","b","c"].map(s =>
+  TESELAS[clave].replace("{s}", s).replace("{r}", devicePixelRatio > 1.5 ? "@2x" : ""));
+
 function estiloMapa(){
-  const t = esOscuro() ? ["dark_nolabels","dark_only_labels"] : ["light_nolabels","light_only_labels"];
-  return {version:8, glyphs:null, sources:{
+  const t = esOscuro() ? ["oscuro","oscuroEtiquetas"] : ["claro","claroEtiquetas"];
+  return {version:8,
+    sources:{
       base:{type:"raster", tiles:urlesTeselas(t[0]), tileSize:256,
-            attribution:'© <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> · © <a href="https://carto.com/attributions">CARTO</a>'},
+            attribution:'© OpenStreetMap © CARTO'},
       etiquetas:{type:"raster", tiles:urlesTeselas(t[1]), tileSize:256},
     },
     layers:[{id:"base",type:"raster",source:"base"},
@@ -366,6 +397,39 @@ if(hayMapa){
   mapa.on("styledata", () => { if(!mapa.getSource("cines")) montarCapas(); });
   new MutationObserver(() => mapa.setStyle(estiloMapa()))
     .observe(document.documentElement, {attributes:true, attributeFilter:["data-tema"]});
+
+  /* Un mapa que no carga no puede verse como un mapa vacío.
+     Cuando el estilo se rechazaba por el `glyphs: null` de más arriba, esta
+     página mostraba un rectángulo crema del alto de la pantalla y nada más:
+     parecía que Santiago no tenía cines. El error existía y estaba en la
+     consola, pero la consola no la mira quien entra a ver qué película dan.
+     Estas dos redes lo dicen en pantalla y dejan la lista funcionando, que es
+     lo que de verdad contesta la pregunta. */
+  mapa.on("error", ev => avisarMapaCaido(ev?.error?.message || ""));
+  setTimeout(() => { if(!mapa.getLayer("cines-pin")) avisarMapaCaido(""); }, 9000);
+}
+
+let mapaAvisado = false;
+function avisarMapaCaido(detalle){
+  if(mapaAvisado || !hayMapa || mapa.getLayer("cines-pin")) return;
+  mapaAvisado = true;
+  const caja = document.getElementById("mapa-cines");
+  const aviso = document.createElement("div");
+  aviso.className = "vacio";
+  aviso.style.cssText = "padding-top:var(--e-12);position:relative;z-index:2";
+  aviso.innerHTML = cuerpo("cabra", "var(--tinta-tenue)", 88, {pose:"durmiendo"});
+  const texto = document.createElement("p");
+  const fuerte = document.createElement("b");
+  fuerte.textContent = {es:"No pude dibujar el mapa",
+                        en:"Could not draw the map",
+                        pt:"Não consegui desenhar o mapa"}[IDIOMA];
+  texto.append(fuerte, document.createElement("br"),
+    document.createTextNode({es:"La lista de abajo tiene los mismos cines, con su dirección.",
+                             en:"The list below has the same cinemas, with their address.",
+                             pt:"A lista abaixo tem os mesmos cinemas, com o endereço."}[IDIOMA]));
+  aviso.appendChild(texto);
+  caja.appendChild(aviso);
+  if(detalle) console.warn("mapa de cines:", detalle);
 }
 
 function datosGeo(){
@@ -375,6 +439,7 @@ function datosGeo(){
       geometry:{type:"Point", coordinates:[c.lon, c.lat]},
       properties:{id:c.id, nombre:c.nombre, comuna:c.comuna,
                   url:c.url, funciones:funcionesDe(c.id).length,
+                  elegido:c.id === cineElegido ? 1 : 0,
                   arte:c.circuito === "arte" ? 1 : 0}}))};
 }
 
@@ -383,44 +448,25 @@ function montarCapas(){
   mapa.addSource("cines", {type:"geojson", data:datosGeo()});
   mapa.addLayer({id:"cines-pin", type:"circle", source:"cines",
     paint:{
-      "circle-radius":["interpolate",["linear"],["zoom"], 10, 5, 14, 10],
+      // La sala elegida crece: es el acuse de recibo de que se apretó ESE pin
+      // y no el de al lado, que a este zoom queda a pocos píxeles.
+      "circle-radius":["case",["==",["get","elegido"],1],
+        ["interpolate",["linear"],["zoom"], 10, 9, 14, 15],
+        ["interpolate",["linear"],["zoom"], 10, 5, 14, 10]],
       // El fucsia de la Cabra para la sala con función; el circuito de cine
       // arte va con el relleno claro para separarlo del mall de un vistazo.
       "circle-color":["case",["==",["get","arte"],1], "#F1D0EE", "#A51D99"],
-      "circle-stroke-width":2.4,
+      "circle-stroke-width":["case",["==",["get","elegido"],1], 4, 2.4],
       "circle-stroke-color":esOscuro() ? "#EDE7DE" : "#1E2A4A",
       // Sin función ese día el pin se atenúa, no desaparece: la dirección
       // sigue siendo la respuesta a "qué cine tengo cerca".
-      "circle-opacity":["case",["==",["get","funciones"],0], .38, .95],
+      "circle-opacity":["case",["==",["get","elegido"],1], 1,
+                        ["==",["get","funciones"],0], .38, .95],
     }});
-  mapa.on("click", "cines-pin", e => {
-    const p = e.features[0].properties;
-    // Nombre y comuna vienen del catastro (texto de terceros): van como TEXTO,
-    // nunca como HTML — la regla de la casa para dato de fuente.
-    const caja = document.createElement("div");
-    const titulo = document.createElement("b");
-    titulo.textContent = p.nombre;
-    const donde = document.createElement("div");
-    donde.textContent = p.comuna;
-    donde.style.cssText = "font-weight:500;margin:2px 0 6px";
-    caja.append(titulo, donde);
-    if(Number(p.funciones) > 0){
-      const ir = document.createElement("a");
-      ir.href = "#cine-" + encodeURIComponent(p.id);
-      ir.textContent = Number(p.funciones) + " " + tr("enCartelera") + " →";
-      ir.onclick = ev => { ev.preventDefault(); irACine(p.id); popup?.remove(); };
-      caja.append(ir);
-    } else if(urlSegura(p.url)){
-      const ir = document.createElement("a");
-      ir.href = urlSegura(p.url);
-      ir.target = "_blank"; ir.rel = "noopener noreferrer";
-      ir.textContent = tr("verOficial") + " →";
-      caja.append(ir);
-    }
-    popup?.remove();
-    popup = new maplibregl.Popup({closeButton:false, offset:10})
-      .setLngLat(e.lngLat).setDOMContent(caja).addTo(mapa);
-  });
+  // Apretar un cine muestra SU cartelera. Antes esto abría un globo con un
+  // link que había que apretar de nuevo para llegar a los horarios: dos pasos
+  // para la única pregunta que trae a alguien a esta página.
+  mapa.on("click", "cines-pin", e => elegirCine(e.features[0].properties.id));
   mapa.on("mouseenter", "cines-pin", () => mapa.getCanvas().style.cursor = "pointer");
   mapa.on("mouseleave", "cines-pin", () => mapa.getCanvas().style.cursor = "");
   pintarMapa();
@@ -431,11 +477,28 @@ function pintarMapa(){
   mapa.getSource("cines").setData(datosGeo());
 }
 
-function irACine(id){
+/* Elegir una sala: el panel pasa a mostrar SOLO su cartelera y el mapa se va
+   hacia ella. Volver a apretarla la suelta, igual que un chip de filtro. */
+function elegirCine(id){
+  cineElegido = (cineElegido === id) ? "" : id;
   vista = "cines";
+  mostrando = 24;
+  popup?.remove();
+
+  const sala = cinePorId(cineElegido);
+  if(sala && hayMapa && sala.lat != null){
+    // Se centra un poco más arriba que el pin porque en celular el panel se
+    // come el tercio de abajo de la pantalla.
+    mapa.easeTo({center:[sala.lon, sala.lat],
+                 zoom:Math.max(mapa.getZoom(), 13.4),
+                 offset:[0, -Math.min(110, mapa.getContainer().clientHeight * .18)],
+                 duration:600});
+  }
   pintarTodo();
-  const ficha = document.getElementById("cine-" + id);
-  if(ficha) ficha.scrollIntoView({behavior:"smooth", block:"start"});
+  document.getElementById("lista").scrollTop = 0;
+  // En celular el panel está en reposo (40% de la pantalla): con la cartelera
+  // recién elegida hay que subirlo o el primer horario queda tapado.
+  if(sala && innerWidth < 880) subirPanel(1);
 }
 
 /* ---------- DATOS ---------- */
@@ -675,11 +738,18 @@ function afiche(peli, ancho, alto){
 
 function tarjetaCine(cine, funciones){
   const caja = document.createElement("article");
-  caja.className = "cine" + (cine.circuito === "arte" ? " arte" : "");
+  caja.className = "cine" + (cine.circuito === "arte" ? " arte" : "")
+                          + (cine.id === cineElegido ? " elegido" : "");
   caja.id = "cine-" + cine.id;
 
-  const cab = document.createElement("div");
+  // La cabecera ES el botón: apretar la sala —en el mapa o en la lista— deja
+  // su cartelera sola en el panel. Va como <button> de verdad y no como un div
+  // con onclick para que se llegue con el teclado y se anuncie como control.
+  const cab = document.createElement("button");
+  cab.type = "button";
   cab.className = "cine-cab";
+  cab.setAttribute("aria-expanded", cine.id === cineElegido);
+  cab.onclick = () => elegirCine(cine.id);
   const mascota = document.createElement("span");
   mascota.className = "mascota";
   mascota.innerHTML = carita(cine.circuito === "arte" ? "chinchilla" : "cabra",
@@ -822,7 +892,10 @@ function pintarVista(){
     .map(([clave, txt]) =>
       `<button type="button" data-vista="${clave}" aria-pressed="${vista === clave}">${escapar(txt)}</button>`).join("");
   cont.querySelectorAll("button").forEach(b => b.onclick = () => {
-    vista = b.dataset.vista; mostrando = 24; pintarLista();
+    // La vista de películas es del catálogo entero: si se venía mirando una
+    // sala, se suelta. Si no, el título diría "11 en cartelera" mostrando las
+    // de una sola sala.
+    vista = b.dataset.vista; cineElegido = ""; mostrando = 24; pintarTodo();
   });
 }
 
@@ -833,11 +906,22 @@ function pintarLista(){
   cont.innerHTML = "";
 
   const salasConFuncion = new Set(funciones.map(f => f.cine.id));
-  document.getElementById("conteo").textContent =
-    vista === "cines" ? salasConFuncion.size : new Set(funciones.map(f => f.peli.clave)).size;
-  document.getElementById("conteo-txt").textContent = vista === "cines"
-    ? (salasConFuncion.size === 1 ? tr("sala1") : tr("salas"))
-    : tr("enCartelera");
+  const elegidaAhora = vista === "cines" ? cinePorId(cineElegido) : null;
+  if(elegidaAhora){
+    // Con una sala elegida el número deja de ser "cuántas salas" y pasa a ser
+    // lo único que importa ahí: cuántas funciones quedan hoy en ESA sala.
+    const suyas = funciones.filter(f => f.cine.id === elegidaAhora.id).length;
+    document.getElementById("conteo").textContent = suyas;
+    document.getElementById("conteo-txt").textContent = suyas === 1
+      ? {es:"función", en:"showing", pt:"sessão"}[IDIOMA]
+      : {es:"funciones", en:"showings", pt:"sessões"}[IDIOMA];
+  } else {
+    document.getElementById("conteo").textContent =
+      vista === "cines" ? salasConFuncion.size : new Set(funciones.map(f => f.peli.clave)).size;
+    document.getElementById("conteo-txt").textContent = vista === "cines"
+      ? (salasConFuncion.size === 1 ? tr("sala1") : tr("salas"))
+      : tr("enCartelera");
+  }
 
   // La deuda se dice, no se esconde: cuántas salas están en el mapa sin
   // horarios y por qué, y qué pasó con el permiso de ubicación.
@@ -860,9 +944,16 @@ function pintarLista(){
     // es donde sirven: cuando ya se miró lo que sí hay.
     const conFuncion = cinesVisibles().filter(c => salasConFuncion.has(c.id)).sort(ordenCines);
     const sinFuncion = cinesVisibles().filter(c => !salasConFuncion.has(c.id)).sort(ordenCines);
-    [...conFuncion, ...sinFuncion].slice(0, mostrando).forEach(cine =>
-      cont.appendChild(tarjetaCine(cine, funciones.filter(f => f.cine.id === cine.id))));
-    if(cinesVisibles().length > mostrando) cont.appendChild(botonVerMas(cinesVisibles().length));
+    const todas = [...conFuncion, ...sinFuncion];
+    const elegida = cinePorId(cineElegido);
+    if(elegida){
+      cont.appendChild(tarjetaCine(elegida, funciones.filter(f => f.cine.id === elegida.id)));
+      cont.appendChild(botonVolver(todas.length - 1));
+    } else {
+      todas.slice(0, mostrando).forEach(cine =>
+        cont.appendChild(tarjetaCine(cine, funciones.filter(f => f.cine.id === cine.id))));
+      if(todas.length > mostrando) cont.appendChild(botonVerMas(todas.length));
+    }
   } else {
     const porPeli = new Map();
     funciones.forEach(f => {
@@ -877,6 +968,24 @@ function pintarLista(){
   }
 
   if(cont.querySelector(".fin-lista") === null) cont.appendChild(selloHonesto());
+}
+
+/* Volver a todas. Va al FINAL de la tarjeta y no arriba a propósito: cuando
+   alguien aprieta una sala quiere ver los horarios, no un botón de salida
+   encima de ellos. */
+function botonVolver(cuantas){
+  const caja = document.createElement("div");
+  caja.className = "fin-lista";
+  caja.style.cssText = "padding:var(--e-4) 0 0;text-align:center";
+  const b = document.createElement("button");
+  b.type = "button";
+  b.className = "boton secundario";
+  b.textContent = "← " + {es:`Ver los otros ${cuantas} cines`,
+                          en:`See the other ${cuantas} cinemas`,
+                          pt:`Ver os outros ${cuantas} cinemas`}[IDIOMA];
+  b.onclick = () => elegirCine(cineElegido);
+  caja.appendChild(b);
+  return caja;
 }
 
 function botonVerMas(total){
@@ -905,7 +1014,11 @@ function selloHonesto(){
   return sello;
 }
 
-/* --- Arrastre del panel: tres alturas, calcado de mapa.html --- */
+/* --- Arrastre del panel: tres alturas, calcado de mapa.html ---
+   `subirPanel` sale del cierre porque elegir una sala en el mapa tiene que
+   poder levantar el panel: en celular queda en reposo tapando la cartelera
+   que se acaba de pedir. */
+let subirPanel = () => {};
 (() => {
   const panel = document.getElementById("panel");
   const tirador = document.getElementById("tirador");
@@ -949,9 +1062,15 @@ function selloHonesto(){
     if(e.key === "Enter" || e.key === " "){ e.preventDefault(); fijar(indice === 2 ? 0 : indice + 1); }
   });
   addEventListener("resize", () => fijar(indice));
+  subirPanel = i => fijar(Math.max(indice, i));
 })();
 </script>
 <!-- Cloudflare Web Analytics: cuenta visitas sin cookies y sin huella
-     digital, así que el sitio no necesita banner de consentimiento. -->
+     digital, así que el sitio no necesita banner de consentimiento (la Ley
+     21.719 rige desde diciembre de 2026). El token es público a propósito:
+     viaja en el HTML de todas las páginas, no es una credencial. Si se toca,
+     hay que tocarlo en las diez páginas Y en la plantilla de exportar_web.py,
+     igual que el ?v= de los estilos. -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "05b8b07df9224b248d539904774ba661"}'></script>
 </body>
 </html>
