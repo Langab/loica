@@ -5,7 +5,7 @@
 # Ordenadas por impacto: la primera arregla más eventos que ninguna.
 
 lugares:
-  # 26 eventos sin pin exacto
+  # 28 eventos sin pin exacto
   Red Salas de Teatro (agregador de salas RM):
     direccion: # COMPLETAR
     comuna: # COMPLETAR
@@ -39,6 +39,14 @@ lugares:
 
   # 7 eventos sin pin exacto
   Disfruta Santiago:
+    direccion: # COMPLETAR
+    comuna: Santiago
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
+
+  # 5 eventos sin pin exacto
+  Red Salas de Teatro (agregador de salas RM):
     direccion: # COMPLETAR
     comuna: Santiago
     lat: # COMPLETAR
@@ -89,14 +97,6 @@ lugares:
   Parque Ciudad Empresarial:
     direccion: Avenida del Parque 420
     comuna: Huechuraba
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
-
-  # 3 eventos sin pin exacto
-  Red Salas de Teatro (agregador de salas RM):
-    direccion: # COMPLETAR
-    comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-08-24 por # COMPLETAR
