@@ -1,6 +1,6 @@
 {
-  "_nota": "Recomendaciones escritas a mano. Esto NO lo llena el robot: se edita acá y listo. Campos por local: slug (va en la URL, no cambiarlo una vez publicado), nombre, tipo (texto libre que se ve en la tarjeta), cocina (define el filtro de arriba), comuna, barrio, direccion, precio ($ / $$ / $$$), foto (URL del sitio del propio local, o una ruta a web/fotos/comer/ si prefieres una foto tuya; vacío o roto muestra al Quiltro sobre el pastel oliva, que es un estado valido de la tarjeta), bajada (una línea, es lo que se lee en el cuadrado), pedir (lista corta: esto es lo que hay que pedir), cuando (a qué hora o qué día conviene ir), cuerpo (un string por párrafo, admite **negrita** y *cursiva*), ojo (el pero honesto, puede ir vacío), sitio (web propia del local, vacío si no tiene), instagram (cuenta oficial, vacío si no se pudo confirmar), mapa. Todo local tiene que quedar con al menos uno de los dos links.",
-  "actualizado": "2026-08-12",
+  "_nota": "Recomendaciones escritas a mano. Esto NO lo llena el robot: se edita acá y listo. Campos por local: slug (va en la URL, no cambiarlo una vez publicado), nombre, tipo (texto libre que se ve en la tarjeta), cocina (define el filtro de arriba), comuna, barrio, direccion, precio ($ / $$ / $$$), foto (la que se ve en el cuadrado del índice y arriba de la ficha: URL del sitio del propio local, o una ruta a web/fotos/comer/ si prefieres una foto tuya; vacío o roto muestra al Quiltro sobre el pastel oliva, que es un estado valido de la tarjeta), otra_foto (la segunda, un plato o el local por dentro; sale solo dentro de la ficha, entre el texto y el pero, y si va vacía no sale nada), bajada (una línea, es lo que se lee en el cuadrado), pedir (lista corta: esto es lo que hay que pedir), cuando (a qué hora o qué día conviene ir), cuerpo (un string por párrafo, admite **negrita** y *cursiva*), ojo (el pero honesto, puede ir vacío), sitio (web propia del local, vacío si no tiene), instagram (cuenta oficial, vacío si no se pudo confirmar), mapa. Todo local tiene que quedar con al menos uno de los dos links.",
+  "actualizado": "2026-08-24",
   "cocinas": {
     "italiana": "Italiana",
     "chilena": "Chilena y de barrio",
@@ -24,7 +24,8 @@
       "barrio": "Barrio Italia",
       "direccion": "Av. Italia 1350",
       "precio": "$$",
-      "foto": "",
+      "foto": "https://pedidosya.dhmedia.io/image/pedidosya/products/e7f79ff1-090b-4383-a107-150702d04b2d.jpg?quality=85&width=1200",
+      "otra_foto": "https://pedidosya.dhmedia.io/image/pedidosya/products/cec959b0-cf10-4294-ae6f-7691b10a6d4e.jpeg?quality=85&width=1200",
       "destacado": true,
       "bajada": "La mejor pizza napolitana de Chile, con la fila que eso implica.",
       "pedir": [
@@ -51,7 +52,8 @@
       "barrio": "Lastarria",
       "direccion": "José Victorino Lastarria 276",
       "precio": "$$$",
-      "foto": "https://www.tienda.bocanariz.cl/cdn/shop/files/social_1200x1200.jpg?v=1613797487",
+      "foto": "https://bocanariz.cl/wp-content/uploads/2018/04/Inicio-reemplazo-foto-de-barra-1024x682.jpg",
+      "otra_foto": "https://bocanariz.cl/wp-content/uploads/2020/08/BNCZ0026-Taller-del-vino-2-min-1024x683.jpg",
       "destacado": true,
       "bajada": "El primer bar de vinos de Chile: se viene a tomar por copa y a preguntar.",
       "pedir": [
@@ -79,7 +81,8 @@
       "barrio": "Nueva de Lyon",
       "direccion": "Nueva de Lyon 113",
       "precio": "$$$",
-      "foto": "https://er-s3-prod.s3.fr-par.scw.cloud/Baco_cover_optimized_d163d50772.jpg",
+      "foto": "https://er-s3-prod.s3.fr-par.scw.cloud/large_baco_photos1_adf42d4b00.jpg",
+      "otra_foto": "https://er-s3-prod.s3.fr-par.scw.cloud/large_baco_photos3_cd14b20c7a.jpg",
       "bajada": "Bistró francés con pizarra de vinos por copa. El almuerzo largo de Providencia.",
       "pedir": [
         "El steak tartare",
@@ -108,6 +111,7 @@
       "direccion": "Av. Pedro de Valdivia 210",
       "precio": "$$",
       "foto": "https://fuentealemana.cl/wp-content/uploads/2020/11/home-foto1.jpg",
+      "otra_foto": "https://fuentealemana.cl/wp-content/uploads/2020/11/home-foto2-scaled.jpg",
       "destacado": true,
       "bajada": "El lomito italiano contra el que se miden todos los demás. Desde 1954.",
       "pedir": [
@@ -135,7 +139,8 @@
       "barrio": "Bellas Artes",
       "direccion": "Monjitas 460",
       "precio": "$$",
-      "foto": "",
+      "foto": "https://tofuu.getjusto.com/orioneat-local/resized2/2SWLzTrzxh264Hovz-1400-x.webp",
+      "otra_foto": "https://tofuu.getjusto.com/orioneat-local/resized2/9qtQMBp3pBEarxJxe-1400-x.webp",
       "bajada": "El primer ramen de Chile. Sigue siendo la vara.",
       "pedir": [
         "Tonkotsu, si ese día hay: preguntar apenas se entra",
@@ -162,7 +167,8 @@
       "barrio": "Lastarria",
       "direccion": "Merced 318",
       "precio": "$$",
-      "foto": "https://tofuu.getjusto.com/orioneat-local/resized2/GyeLCX6ecg2ndw5pP-800-x.webp",
+      "foto": "https://tofuu.getjusto.com/orioneat-local/resized2/ArddgngAXPhvyQHBD-2400-x.webp",
+      "otra_foto": "https://tofuu.getjusto.com/orioneat-local/resized2/Ns4z9Z7PfCG44TX5k-2400-x.webp",
       "bajada": "Hamburguesas sin trucos en Lastarria, y tacos cuando el hambre es otra.",
       "pedir": [
         "Una hamburguesa de carne simple: el lema de la casa es *back to the basic* y conviene tomarlo en serio",
@@ -189,6 +195,7 @@
       "direccion": "Dublé Almeyda 2435",
       "precio": "$$",
       "foto": "https://golfodinapoli.cl/wp-content/uploads/2020/08/pizza-fiorentina-goldo-di-napoli.jpg",
+      "otra_foto": "https://golfodinapoli.cl/wp-content/uploads/2020/08/Spaghetti-alla-chittarra-paste-fresca-golfo-di-napoli-2.jpg",
       "bajada": "Picada napolitana en Ñuñoa, atendida por su dueño. Nada de pretensiones.",
       "pedir": [
         "Cannelloni di carne",
@@ -216,7 +223,8 @@
       "barrio": "Barrio Italia",
       "direccion": "Av. Italia 1791",
       "precio": "$$",
-      "foto": "https://er-s3-prod.s3.fr-par.scw.cloud/danoi_cover_85dcd6490b.jpg",
+      "foto": "https://www.danoi.cl/wp-content/uploads/2025/10/WhatsApp-Image-2025-10-27-at-12.23.14.jpeg",
+      "otra_foto": "https://www.danoi.cl/wp-content/uploads/2025/10/WhatsApp-Image-2025-10-27-at-12.29.14.jpeg",
       "bajada": "La trattoria más vieja del Barrio Italia, y sigue haciendo la pasta en casa.",
       "pedir": [
         "Ravioles de ricota",
@@ -244,6 +252,7 @@
       "direccion": "Moneda 1816",
       "precio": "$$",
       "foto": "https://ristorantesolemio.cl/wp-content/uploads/2025/01/Slider25.jpg",
+      "otra_foto": "https://ristorantesolemio.cl/wp-content/uploads/2025/12/Foto-Composicion-5-min.jpg",
       "bajada": "Italiano de mantel largo en el Santiago viejo, funcionando desde 2004.",
       "pedir": [
         "Canelones de jaiba y loco: es el plato de la casa",
@@ -272,6 +281,7 @@
       "direccion": "Av. Holanda 160",
       "precio": "$$$",
       "foto": "https://rishtedar.cl/images/locales/feature-banner.webp",
+      "otra_foto": "https://rishtedar.cl/images/locales/bar-interior.webp",
       "bajada": "La comida india que instaló el rubro en Santiago. La casa de Holanda es la buena.",
       "pedir": [
         "Malai kofta",
@@ -300,6 +310,7 @@
       "direccion": "Av. Italia 1139",
       "precio": "$$",
       "foto": "https://static.wixstatic.com/media/6940f2_845db8c27f2d4b0ebd3ba76b09cc1027~mv2.png/v1/fill/w_1200,h_1200,al_c,q_80/6940f2_845db8c27f2d4b0ebd3ba76b09cc1027~mv2.jpg",
+      "otra_foto": "https://static.wixstatic.com/media/6940f2_22f2e7584b354db6b388e431983bfa99~mv2.jpg/v1/fill/w_1400,h_1320,al_c,q_80/6940f2_22f2e7584b354db6b388e431983bfa99~mv2.jpg",
       "bajada": "Tailandesa de casa y terraza en Barrio Italia, con coctelería propia.",
       "pedir": [
         "Una tabla para partir y repartir",
@@ -325,7 +336,8 @@
       "barrio": "Costanera Center",
       "direccion": "Av. Andrés Bello 2447, Costanera Center",
       "precio": "$$$",
-      "foto": "",
+      "foto": "https://www.margo.cl/web/image/265432-29884a86/costanera-margo_inicio.webp",
+      "otra_foto": "https://www.margo.cl/web/image/267312-bc852e48/margo-carta-presentacion.webp",
       "bajada": "Bistró de carta ancha: cocina chilena pasada por Francia e Italia.",
       "pedir": [
         "Los sorrentinos",
@@ -353,6 +365,7 @@
       "direccion": "Av. Libertador Bernardo O'Higgins 248",
       "precio": "$",
       "foto": "",
+      "otra_foto": "",
       "bajada": "Fuente de soda ochentera que aguanta hasta las tres de la mañana.",
       "pedir": [
         "Las papas fritas, que son de las de verdad",
@@ -378,7 +391,8 @@
       "barrio": "Santa Isabel",
       "direccion": "Santa Isabel 0369",
       "precio": "$",
-      "foto": "",
+      "foto": "https://barderene.cl/wp-content/uploads/2023/10/BAR_DE_RENE-22.jpeg",
+      "otra_foto": "https://barderene.cl/wp-content/uploads/2023/10/361160d7-01db-fd1f-7cde-95c98d41ed22.jpeg",
       "bajada": "Bar de rock sin concesiones, a una cuadra del Barrio Italia.",
       "pedir": [
         "Cerveza y algo para picar: acá el pedido es simple a propósito"

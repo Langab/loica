@@ -41,13 +41,15 @@ def extraer_ticketmaster(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
     eventos: list[Evento] = []
     pagina = 0
 
-    ciudad = fuente.get("ciudad", "Santiago")
-
     while pagina < 5:  # 5 páginas x 100 = 500 eventos, de sobra para Santiago
+        # Sin `city`: se pedía city=Santiago y la API devolvía CERO eventos,
+        # porque en el catálogo chileno el recinto trae `city` vacío ({}). Lo
+        # que sí trae es `state.stateCode`, y por ahí se filtra la Región
+        # Metropolitana más abajo. Con el filtro de ciudad, esta fuente
+        # entregaba cero aunque la credencial fuera válida.
         respuesta = cliente.obtener(URL_DISCOVERY, params={
             "apikey": api_key,
             "countryCode": "CL",
-            "city": ciudad,
             "size": 100,
             "page": pagina,
             "sort": "date,asc",
@@ -87,7 +89,7 @@ def extraer_ticketmaster(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
             # Ticketmaster, no una falla nuestra. Se dice y no se revienta.
             if pagina == 0:
                 log.info("Ticketmaster: la API respondió 200 pero no tiene "
-                         "ningún evento para %s, Chile", ciudad)
+                         "ningún evento en Chile")
             break
 
         for item in lote:
@@ -109,19 +111,45 @@ def _desde_ticketmaster(item: dict, fuente: dict) -> Evento | None:
     if not titulo:
         return None
 
+    # Manda la fecha LOCAL, no `dateTime`: ese viene en UTC, y un show a las
+    # 21:00 en Santiago figura como las 00:00 del día siguiente. Robbie
+    # Williams es el 27 de septiembre a las 21:00 y su dateTime dice
+    # "2026-09-28T00:00:00Z". `dateTime` queda de respaldo por si algún día
+    # falta el par local.
     fechas = (item.get("dates") or {}).get("start") or {}
-    inicio = parsear_fecha(fechas.get("dateTime") or fechas.get("localDate") or "")
+    local = " ".join(p for p in (fechas.get("localDate"), fechas.get("localTime")) if p)
+    inicio = parsear_fecha(local) or parsear_fecha(fechas.get("dateTime") or "")
     if inicio is None:
         return None
-    if fechas.get("localTime") and inicio.hour == 0:
-        hora = parsear_fecha(f"{fechas.get('localDate')} {fechas.get('localTime')}")
-        inicio = hora or inicio
 
     recintos = (item.get("_embedded") or {}).get("venues") or []
     recinto = recintos[0] if recintos else {}
-    nombre_lugar = recinto.get("name", "")
+
+    # Solo Región Metropolitana. Es el único dato de ubicación que el catálogo
+    # chileno llena siempre: `city` y `address` vienen vacíos y el nombre del
+    # recinto falta en 8 de 9 fichas. Sin este filtro entrarían los shows de
+    # Viña o Concepción, y esta app es de Santiago.
+    if ((recinto.get("state") or {}).get("stateCode") or "") != "RM":
+        return None
+
+    # El nombre del recinto viene vacío casi siempre, pero su URL termina en el
+    # slug: .../venue/estadio-bicentenario-la-florida. Da un nombre legible y,
+    # de paso, la comuna cuando el slug la contiene.
+    nombre_lugar = (recinto.get("name") or "").strip()
+    slug = (recinto.get("url") or "").rstrip("/").rsplit("/venue/", 1)[-1]
+    if not nombre_lugar and slug and "/" not in slug:
+        nombre_lugar = slug.replace("-", " ").title()
     direccion = ((recinto.get("address") or {}).get("line1") or "")
     ciudad = ((recinto.get("city") or {}).get("name") or "")
+
+    # Las coordenadas del recinto vienen exactas: es un pin en el mapa que no
+    # hay que adivinar con el índice de direcciones.
+    lat = lon = None
+    ubic = recinto.get("location") or {}
+    try:
+        lat, lon = float(ubic["latitude"]), float(ubic["longitude"])
+    except (KeyError, TypeError, ValueError):
+        lat = lon = None
 
     # Precio: Ticketmaster entrega rangos; guardamos el mínimo como referencia
     precio = None
@@ -153,6 +181,8 @@ def _desde_ticketmaster(item: dict, fuente: dict) -> Evento | None:
         lugar_nombre=nombre_lugar,
         lugar_direccion=", ".join(p for p in (direccion, ciudad) if p),
         comuna=detectar_comuna(ciudad, direccion, nombre_lugar),
+        lat=lat,
+        lon=lon,
         precio_clp=precio,
         es_gratis=(precio == 0) if precio is not None else None,
         precio_texto=f"desde ${precio:,.0f}".replace(",", ".") if precio else "",

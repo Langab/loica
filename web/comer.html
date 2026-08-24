@@ -217,6 +217,19 @@
   .ficha-cuerpo p{margin:0 0 var(--e-4)}
   .ficha-cuerpo strong{color:var(--tinta)}
 
+  /* La segunda foto: el plato o el local por dentro. Va después del texto y
+     antes del pero, que es donde el ojo necesita descansar de tres párrafos
+     seguidos. En 4/3 y no en 16/9 como la de arriba: son proporciones
+     distintas a propósito, para que se lean como dos fotos y no como la
+     misma repetida. Y `object-fit:cover` con la altura fija porque las de los
+     locales llegan de todo: verticales de celular y horizontales de sitio. */
+  .ficha-otra{
+    display:block;width:100%;aspect-ratio:4/3;object-fit:cover;
+    background:var(--c-comer-suave);
+    border:3px solid var(--contorno);border-radius:var(--r-xl);
+    box-shadow:var(--repisa-3);margin:var(--e-6) 0;
+  }
+
   /* El "ojo" es el pero: la advertencia al pie de una recomendación.
      Es una tarjeta de la casa —contorno de tinta y repisa dura— con la
      advertencia colgada del borde, como la etiqueta de cartón amarrada a un
@@ -369,6 +382,18 @@ const fotoHtml = local => urlSegura(local.foto)
   ? `<img src="${escapar(urlSegura(local.foto))}" alt="" loading="lazy" decoding="async" onerror="this.remove()">`
   : "";
 
+/* La segunda foto —un plato o el local por dentro— sale SOLO dentro de la
+   ficha. En el índice no: catorce cuadrados ya son suficiente para elegir, y
+   la gracia de entrar a la ficha es ver algo que no estaba afuera.
+
+   Va suelta y no envuelta en un <figure>, a propósito: el borde y la repisa
+   son del <img>, así que si la foto no carga `onerror` la saca entera y no
+   queda un marco vacío colgando entre el texto y el pero. */
+const otraFotoHtml = local => urlSegura(local.otra_foto)
+  ? `<img class="ficha-otra" src="${escapar(urlSegura(local.otra_foto))}"
+        alt="" loading="lazy" decoding="async" onerror="this.remove()">`
+  : "";
+
 /* ---------- índice ---------- */
 function pintarIndice(noEncontrado){
   document.title = "Dónde comer — Loica";
@@ -481,6 +506,8 @@ function pintarFicha(local){
       </section>` : ""}
 
       <div class="ficha-cuerpo">${(local.cuerpo || []).map(p => `<p>${formatear(p)}</p>`).join("")}</div>
+
+      ${otraFotoHtml(local)}
 
       ${local.ojo ? `<div class="ojo"><b class="marca">El pero.</b><p>${escapar(local.ojo)}</p></div>` : ""}
 

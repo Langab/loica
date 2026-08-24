@@ -97,20 +97,23 @@ fuentes:
   nombre: Ticketmaster Chile
   url_base: https://app.ticketmaster.com
   tipo_adaptador: ticketmaster
-  ciudad: Santiago
   crawl_delay_seg: 1
   activa: true
-  notas: 'ENCENDIDA 2026-08-24. Estuvo apagada desde el 16-08 no porque estuviera rota sino porque le
-    faltaba la credencial: sacarla exige crear cuenta en developer.ticketmaster.com, que es un tramite
-    de una persona. La key vive como secreto TICKETMASTER_API_KEY del repositorio (Settings -> Secrets
-    and variables -> Actions) y el workflow la inyecta en el entorno de la corrida; no esta en ningun
-    archivo. Para correrla desde el Mac hay que exportarla a mano, pero no hace falta: se prueba en la
-    nube con `gh workflow run corrida.yml -f modo=probar`. Limites de la API Discovery: 5 peticiones
-    por segundo y 5.000 al dia (verificado en su pagina de getting-started el 24-08-2026; la nota vieja
-    decia 2/s). Con crawl_delay_seg 1 vamos en 1 req/s y la corrida pide 5 paginas de 100, o sea 5
-    llamadas al dia: sobra por tres ordenes de magnitud. Si algun dia falta la key, el adaptador falla
-    fuerte a proposito y la fuente queda anotada como error en la tabla `corridas`, en vez de devolver
-    cero en silencio y parecer sana un dia sin agenda, que es lo que hizo durante meses.
+  notas: 'ENCENDIDA 2026-08-24. La key vive como secreto TICKETMASTER_API_KEY del repositorio
+    (Settings -> Secrets and variables -> Actions) y el workflow la inyecta en la corrida; no esta en
+    ningun archivo. Probar una sola fuente: `gh workflow run corrida.yml -f modo=probar -f
+    fuente=ticketmaster`, veinte segundos.
+    QUE TRAE, medido el 24-08-2026: el catalogo chileno de la Discovery API son NUEVE eventos, todos
+    shows internacionales de estadio (Robbie Williams, BTS, Iron Maiden, Gorillaz, Rush, Foo Fighters).
+    Son pocos y valen: es lo unico que ninguna otra fuente nuestra tiene, porque el catastro se
+    construye sobre agendas municipales y el circuito under.
+    OJO CON DOS COSAS que costaron una tarde. (1) NO se pide `city`: el recinto chileno trae `city`
+    vacio ({}), asi que city=Santiago devolvia CERO aunque la credencial fuera valida. La region se
+    filtra por `state.stateCode == RM`, que es el unico campo de ubicacion que la API llena siempre.
+    Por eso ya no hay clave `ciudad` aca. (2) El nombre del recinto viene vacio en 8 de 9 fichas; se
+    saca del slug de su URL (.../venue/estadio-bicentenario-la-florida). Las coordenadas si vienen
+    exactas, asi que estos eventos caen con pin preciso sin pasar por el indice de direcciones.
+    Limites: 5 peticiones por segundo y 5.000 al dia. Pedimos 5 llamadas diarias a 1 req/s.
 '
 - id: cclm
   nombre: Centro Cultural La Moneda
@@ -2410,3 +2413,82 @@ fuentes:
   notas: The Events Calendar instalado con la API Tribe abierta pero VACIA (total 0, tambien en el historico;
     verificado 2026-08-14). Posts vivos pero retrospectivos, y /talleres-y-cursos/ deriva a PDFs. Encender
     cuando carguen el calendario, como teatro_aleph.
+- id: talleres_catastro
+  nombre: Talleres permanentes de Santiago (catastro)
+  url_base: https://loicasantiago.cl
+  url_agenda: https://loicasantiago.cl/talleres.html
+  tipo_adaptador: talleres
+  catastro: config/talleres.yaml
+  comuna: ''
+  horizonte_dias: 45
+  crawl_delay_seg: 0
+  activa: true
+  notas: 'No hace una sola peticion de red: lee config/talleres.yaml, el catastro de
+    talleres permanentes que escribe una persona (ceramica, grabado, teatro, danza,
+    cursos para personas mayores) y emite una sesion por cada dia declarado. Existe
+    porque un taller de barrio no publica agenda —su clase de los martes lleva anos
+    igual y no tiene nada que anunciar—, asi que su horario vive en prosa en una
+    pagina y no hay feed que raspar. Cada entrada trae `verificado` y `vigente_hasta`:
+    pasada esa fecha el lugar deja de emitir sesiones y la corrida lo avisa en el
+    registro, para que un horario viejo no mande a nadie a una puerta cerrada.'
+- id: escuela_teatro_uc
+  nombre: Escuela de Teatro UC (talleres y extension)
+  url_base: https://escueladeteatro.uc.cl
+  url_agenda: https://escueladeteatro.uc.cl/eventos/
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/tribe/events/v1/events
+  comuna: Providencia
+  crawl_delay_seg: 2
+  activa: true
+  notas: 'The Events Calendar con la API Tribe abierta (misma puerta que teatro_uc y
+    la mejor calidad de dato posible: fecha, hora y recinto estructurados). Publica
+    los talleres de educacion continua abiertos a la comunidad —tecnica de actuacion
+    frente a camara, encuentros de creacion teatral— mezclados con ceremonias y
+    charlas de la escuela. Volumen bajo (5 eventos vigentes el 24-08-2026) pero es
+    teatro que se ENSENA, que es justo lo que faltaba. Campus Oriente queda en
+    Providencia, no en Nunoa: Jaime Guzman Errazuriz 3300. robots.txt estandar.'
+- id: adultomayor_uc
+  nombre: Programa Adulto Mayor UC
+  url_base: https://adultomayor.uc.cl
+  url_agenda: https://adultomayor.uc.cl/curso-sitemap.xml
+  tipo_adaptador: sitemap
+  endpoint: /curso-sitemap.xml
+  patron_url: /curso/
+  comuna: Santiago
+  crawl_delay_seg: 3
+  tope_fichas: 25
+  activa: false
+  notas: 'APAGADA, y la razon vale para cualquier fuente de cursos: sus once fichas
+    traen el dato completo —"Todos los lunes", "3:30 pm - 5:00 pm", el valor y la
+    direccion— pero la fecha que publican es la de la PRIMERA clase, que en agosto
+    ya paso. El adaptador de sitemap lee esa fecha, `es_valido()` la descarta como
+    evento pasado y la fuente entrega 11 encontrados y 0 guardados (medido el
+    24-08-2026). Leer la cadencia del texto de la ficha ("todos los lunes") seria
+    la solucion general, pero es peligrosa: el pie de pagina de cualquier centro
+    cultural dice "Lunes: 15:00 a 19:00 horas" y eso NO es un taller. Mientras
+    tanto, los dos cursos presenciales del Centro de Extension UC estan en
+    config/talleres.yaml con su horario y su vigencia. La API REST esta cerrada
+    (401), el sitemap de Yoast expone el post type `curso` y robots.txt esta vacio
+    (todo permitido).'
+- id: lo_matta
+  nombre: Lo Matta Cultural (Vitacura)
+  url_base: https://www.lomatta.cl
+  url_agenda: https://www.lomatta.cl/wp-json/wp/v2/posts
+  tipo_adaptador: wordpress
+  endpoint: /wp-json/wp/v2/posts
+  buscar_terminos:
+  - taller
+  - clases
+  - curso
+  comuna: Vitacura
+  crawl_delay_seg: 3
+  buscar_detalle: true
+  tope_detalle: 25
+  activa: true
+  notas: 'Casa patrimonial de Vitacura con REST abierta y robots.txt sin Disallow.
+    Dicta talleres cortos de grabado (colografia, punta seca, xilografia con Taller
+    99), cueca, poda y oratorios, casi todos GRATIS con inscripcion previa. La fecha
+    viene en el texto de la ficha ("Sabado, 22 Y 29 agosto 11:00 a 13:00 horas"), la
+    lee normalizar.py. Sin post type de eventos: se busca por palabra, porque los
+    posts se mezclan con noticias del centro. Es la primera fuente de talleres de
+    Vitacura, que tenia cero.'
