@@ -1,4 +1,4 @@
-# Cola de RESTORANES con descuento — revisión del 2026-08-23.
+# Cola de RESTORANES con descuento — revisión del 2026-08-24.
 # Arriba los sin ubicación (completar direccion/comuna/lat/lon), abajo
 # los sin tipo de cocina (completar cocina). Pegar en
 # config/correcciones/restoranes.yaml bajo `restoranes:`.
@@ -12,7 +12,7 @@ restoranes:
     comuna: Lo Barnechea
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 5 descuentos sin pin exacto (Banco de Chile)
   Dunkin’:
@@ -20,7 +20,7 @@ restoranes:
     comuna: Estación Central
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 3 descuentos sin pin exacto (Cencosud, Entel, Santander)
   Burger King:
@@ -28,7 +28,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 3 descuentos sin pin exacto (Banco de Chile)
   Domino’s Pizza:
@@ -36,7 +36,7 @@ restoranes:
     comuna: Ñuñoa
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 3 descuentos sin pin exacto (Banco de Chile)
   Starbucks:
@@ -44,7 +44,7 @@ restoranes:
     comuna: Pudahuel
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 3 descuentos sin pin exacto (Banco de Chile)
   Sushiban:
@@ -52,7 +52,7 @@ restoranes:
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 3 descuentos sin pin exacto (Banco de Chile)
   Fagotto:
@@ -60,7 +60,7 @@ restoranes:
     comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Cencosud, Entel)
   Rappi:
@@ -68,7 +68,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco Falabella, Entel)
   Boost:
@@ -76,7 +76,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco de Chile, Santander)
   CuracaRibs:
@@ -84,7 +84,7 @@ restoranes:
     comuna: Curacaví
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco Falabella, Entel)
   Doggis:
@@ -92,7 +92,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco Falabella, Entel)
   Dunkin:
@@ -100,7 +100,7 @@ restoranes:
     comuna: Estación Central
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco Falabella, Entel)
   Juan Maestro:
@@ -108,7 +108,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco Falabella, Entel)
   Just Burger:
@@ -116,7 +116,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Cencosud, Santander)
   Melt Pizzas:
@@ -124,7 +124,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco Falabella, Santander)
   Streat Burger:
@@ -132,7 +132,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco Falabella, Entel)
   Tommy Beans:
@@ -140,7 +140,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco Falabella, Santander)
   Vapiano:
@@ -148,7 +148,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco de Chile)
   MARLEY COFFEE:
@@ -156,7 +156,7 @@ restoranes:
     comuna: Maipú
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco de Chile, Santander)
   Al Pesto:
@@ -164,7 +164,7 @@ restoranes:
     comuna: Colina
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Cencosud, Entel)
   Papa Johns:
@@ -172,7 +172,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco de Chile)
   Pastelería Riesco:
@@ -180,7 +180,7 @@ restoranes:
     comuna: Las Condes
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco de Chile, Entel)
   OAKBERRY:
@@ -188,7 +188,7 @@ restoranes:
     comuna: Pudahuel
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco de Chile)
   Europa Secreta:
@@ -196,7 +196,7 @@ restoranes:
     comuna: Vitacura
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco de Chile)
   Viña Undurraga:
@@ -204,7 +204,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Santander)
   Punta del Sol:
@@ -212,7 +212,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco Falabella)
   Anima Cocktail Lab:
@@ -220,7 +220,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Santander)
   Aquality:
@@ -228,7 +228,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco Falabella)
   Badass:
@@ -236,7 +236,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco Falabella)
   Bar Enigma:
@@ -244,7 +244,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-23 por # COMPLETAR
+    nota: verificada el 2026-08-24 por # COMPLETAR
 
   # ---- sin tipo de cocina ----
   Buffet Express:
