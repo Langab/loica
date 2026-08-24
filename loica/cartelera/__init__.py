@@ -26,7 +26,7 @@ from datetime import date, datetime, timedelta
 from ..cines import catalogo
 from ..red import ClienteEducado
 from . import agenda, asistida, jsonld, semanal
-from .modelo import Cartelera, Funcion, clave_pelicula
+from .modelo import Cartelera, Funcion, clave_pelicula, sin_coletillas
 
 log = logging.getLogger("loica.cartelera")
 
@@ -122,8 +122,12 @@ def para_la_web(cartelera: Cartelera) -> dict:
         peliculas.append({
             "clave": clave,
             # El título más largo suele ser el completo ("Spider-Man: Un nuevo
-            # día" contra "Spider-Man"), que es el que la gente reconoce.
-            "titulo": max((f.pelicula for f in funciones), key=len),
+            # día" contra "Spider-Man"), que es el que la gente reconoce. Pero
+            # se compara ya SIN la coletilla de sala o de ciclo: desde que esas
+            # variantes se agrupan juntas, la más larga es justamente la peor
+            # —"La Odisea / Centro Arte Alameda" le ganaba a "La Odisea"— y la
+            # ficha quedaba titulada con el nombre de UNA de sus ocho salas.
+            "titulo": max((sin_coletillas(f.pelicula) for f in funciones), key=len),
             "poster": _mejor([f.poster for f in funciones]),
             "duracion": next((f.duracion_min for f in funciones if f.duracion_min), None),
             "clasificacion": _mejor([f.clasificacion for f in funciones]),
@@ -172,4 +176,5 @@ def para_la_web(cartelera: Cartelera) -> dict:
     }
 
 
-__all__ = ["recolectar", "para_la_web", "Cartelera", "Funcion", "clave_pelicula", "DIAS"]
+__all__ = ["recolectar", "para_la_web", "Cartelera", "Funcion", "clave_pelicula",
+           "sin_coletillas", "DIAS"]

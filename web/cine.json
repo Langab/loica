@@ -1,7 +1,7 @@
 {
- "generado": "2026-08-24T18:13:42",
+ "generado": "2026-08-24T19:40:05",
  "dias": 4,
- "total_funciones": 630,
+ "total_funciones": 629,
  "cines": [
   {
    "id": "cinemark-mallplaza-oeste",
@@ -131,7 +131,7 @@
    "lon": -70.650245,
    "url": "https://centroartealameda.cl/",
    "formatos": "",
-   "funciones": 7
+   "funciones": 6
   },
   {
    "id": "cineplanet-mall-barrio-independencia",
@@ -3398,6 +3398,7 @@
    "duracion": 172,
    "clasificacion": "MA14",
    "cines": [
+    "centro-arte-alameda-sala-ceina",
     "cinemark-alto-las-condes",
     "cinemark-mallplaza-norte",
     "cinemark-mallplaza-oeste",
@@ -3414,6 +3415,14 @@
      "idioma": "",
      "sala": "3",
      "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-24T18:00",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/la-odisea-centro-arte-alameda-546339"
     },
     {
      "cine": "cinemark-alto-las-condes",
@@ -4559,6 +4568,231 @@
    ]
   },
   {
+   "clave": "mi-vecino-totoro",
+   "titulo": "Mi Vecino Totoro",
+   "poster": "https://cdn.cinemark.cl/content/posters/HO00015252.jpg",
+   "duracion": 87,
+   "clasificacion": "TE",
+   "cines": [
+    "cine-arte-normandie",
+    "cinemark-alto-las-condes",
+    "cinemark-mallplaza-norte",
+    "cinemark-mallplaza-oeste",
+    "cinemark-mallplaza-vespucio",
+    "cinemark-portal-nunoa"
+   ],
+   "funciones": [
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-24T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-24T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-24T18:40",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-24T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T16:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T16:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T16:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T16:20",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T16:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T18:40",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cine-arte-normandie",
+     "inicio": "2026-08-26T15:00",
+     "formato": "",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.flow.cl/btn.php?token=clx0am8"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T16:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T16:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T16:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T16:20",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T16:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T18:40",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    }
+   ]
+  },
+  {
    "clave": "paw-patrol-la-dino-pelicula",
    "titulo": "Paw Patrol: La Dino Película",
    "poster": "https://cdn.cinemark.cl/content/posters/HO00015191.jpg",
@@ -4782,222 +5016,6 @@
      "idioma": "doblada",
      "sala": "2",
      "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
-    }
-   ]
-  },
-  {
-   "clave": "mi-vecino-totoro-1988-ghibli-fest-2026",
-   "titulo": "Mi Vecino Totoro [1988] - Ghibli Fest 2026",
-   "poster": "https://cdn.cinemark.cl/content/posters/HO00015252.jpg",
-   "duracion": 87,
-   "clasificacion": "TE",
-   "cines": [
-    "cinemark-alto-las-condes",
-    "cinemark-mallplaza-norte",
-    "cinemark-mallplaza-oeste",
-    "cinemark-mallplaza-vespucio",
-    "cinemark-portal-nunoa"
-   ],
-   "funciones": [
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-24T18:40",
-     "formato": "2D",
-     "idioma": "",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-08-24T18:40",
-     "formato": "2D",
-     "idioma": "",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-24T18:40",
-     "formato": "2D",
-     "idioma": "",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-24T18:40",
-     "formato": "2D + PREMIER",
-     "idioma": "",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-08-24T18:40",
-     "formato": "2D",
-     "idioma": "",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-25T16:20",
-     "formato": "2D",
-     "idioma": "",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-08-25T16:20",
-     "formato": "2D",
-     "idioma": "",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-25T16:20",
-     "formato": "2D",
-     "idioma": "",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-25T16:20",
-     "formato": "2D + PREMIER",
-     "idioma": "",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-08-25T16:30",
-     "formato": "2D",
-     "idioma": "",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-25T18:40",
-     "formato": "2D",
-     "idioma": "",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-08-25T18:40",
-     "formato": "2D",
-     "idioma": "",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-25T18:40",
-     "formato": "2D",
-     "idioma": "",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-25T18:40",
-     "formato": "2D + PREMIER",
-     "idioma": "",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-08-25T18:40",
-     "formato": "2D",
-     "idioma": "",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-26T16:20",
-     "formato": "2D",
-     "idioma": "",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-08-26T16:20",
-     "formato": "2D",
-     "idioma": "",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-26T16:20",
-     "formato": "2D",
-     "idioma": "",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-26T16:20",
-     "formato": "2D + PREMIER",
-     "idioma": "",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-08-26T16:30",
-     "formato": "2D",
-     "idioma": "",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-26T18:40",
-     "formato": "2D",
-     "idioma": "",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-08-26T18:40",
-     "formato": "2D",
-     "idioma": "",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-26T18:40",
-     "formato": "2D",
-     "idioma": "",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-26T18:40",
-     "formato": "2D + PREMIER",
-     "idioma": "",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-08-26T18:40",
-     "formato": "2D",
-     "idioma": "",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
     }
    ]
   },
@@ -5685,8 +5703,8 @@
    ]
   },
   {
-   "clave": "rapido-y-furioso-2001",
-   "titulo": "Rápido y Furioso [2001]",
+   "clave": "rapido-y-furioso",
+   "titulo": "Rápido y Furioso",
    "poster": "https://cdn.cinemark.cl/content/posters/HO00015335.jpg",
    "duracion": 107,
    "clasificacion": "MA14",
@@ -5713,6 +5731,34 @@
    ]
   },
   {
+   "clave": "volver-al-futuro",
+   "titulo": "Volver al futuro",
+   "poster": "https://imagenes.passline.com/eventos/volver-al-futuro-cine-blondie-en-centro-arte-alameda-544910-rec.jpg",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "centro-arte-alameda-sala-ceina"
+   ],
+   "funciones": [
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-25T20:15",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/volver-al-futuro-cine-blondie-en-centro-arte-alameda"
+    },
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-25T20:30",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/cine-blondie-volver-al-futuro"
+    }
+   ]
+  },
+  {
    "clave": "alex-doll-presenta-bellissima",
    "titulo": "Alex Doll presenta Bellissima",
    "poster": "",
@@ -5733,8 +5779,8 @@
    ]
   },
   {
-   "clave": "au-revoir-les-enfants-cine-arte-independencia",
-   "titulo": "Au Revoir Les Enfants - Cine Arte Independencia",
+   "clave": "au-revoir-les-enfants",
+   "titulo": "Au Revoir Les Enfants",
    "poster": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/d6229afcb9c233777675ad9efeb2e8726afe8126d312a9bcd0674f453c92a512.jpg",
    "duracion": null,
    "clasificacion": "",
@@ -5769,46 +5815,6 @@
      "idioma": "subtitulada",
      "sala": "",
      "url": "https://www.flow.cl/btn.php?token=ac646d2e49081bc0b249fc6985ef5baf6e0e48f6"
-    }
-   ]
-  },
-  {
-   "clave": "cine-blondie-volver-al-futuro",
-   "titulo": "Cine Blondie: Volver al Futuro",
-   "poster": "https://imagenes.passline.com/eventos/cine-blondie-volver-al-futuro-541020-rec.jpg",
-   "duracion": null,
-   "clasificacion": "",
-   "cines": [
-    "centro-arte-alameda-sala-ceina"
-   ],
-   "funciones": [
-    {
-     "cine": "centro-arte-alameda-sala-ceina",
-     "inicio": "2026-08-25T20:30",
-     "formato": "",
-     "idioma": "",
-     "sala": "",
-     "url": "https://www.passline.com/eventos/cine-blondie-volver-al-futuro"
-    }
-   ]
-  },
-  {
-   "clave": "cine-blondie-volver-al-futuro-16",
-   "titulo": "Cine Blondie: Volver al Futuro (+16)",
-   "poster": "",
-   "duracion": null,
-   "clasificacion": "",
-   "cines": [
-    "centro-arte-alameda-sala-ceina"
-   ],
-   "funciones": [
-    {
-     "cine": "centro-arte-alameda-sala-ceina",
-     "inicio": "2026-08-25T20:30",
-     "formato": "",
-     "idioma": "",
-     "sala": "",
-     "url": "https://www.passline.com/eventos/cine-blondie-volver-al-futuro"
     }
    ]
   },
@@ -5853,8 +5859,8 @@
    ]
   },
   {
-   "clave": "elephant-centro-arte-alameda",
-   "titulo": "Elephant / Centro Arte Alameda",
+   "clave": "elephant",
+   "titulo": "Elephant",
    "poster": "https://imagenes.passline.com/eventos/-772254-rec.jpg",
    "duracion": null,
    "clasificacion": "",
@@ -5889,26 +5895,6 @@
      "idioma": "subtitulada",
      "sala": "",
      "url": "https://www.flow.cl/btn.php?token=oa0tqzg"
-    }
-   ]
-  },
-  {
-   "clave": "la-odisea-centro-arte-alameda",
-   "titulo": "La Odisea / Centro Arte Alameda",
-   "poster": "",
-   "duracion": null,
-   "clasificacion": "",
-   "cines": [
-    "centro-arte-alameda-sala-ceina"
-   ],
-   "funciones": [
-    {
-     "cine": "centro-arte-alameda-sala-ceina",
-     "inicio": "2026-08-24T18:00",
-     "formato": "",
-     "idioma": "",
-     "sala": "",
-     "url": "https://www.passline.com/eventos/la-odisea-centro-arte-alameda-546339"
     }
    ]
   },
@@ -5953,8 +5939,8 @@
    ]
   },
   {
-   "clave": "matapanki-centro-arte-alameda",
-   "titulo": "Matapanki / Centro Arte Alameda",
+   "clave": "matapanki",
+   "titulo": "Matapanki",
    "poster": "",
    "duracion": null,
    "clasificacion": "",
@@ -5973,28 +5959,8 @@
    ]
   },
   {
-   "clave": "mi-vecino-totoro",
-   "titulo": "Mi vecino Totoro",
-   "poster": "",
-   "duracion": null,
-   "clasificacion": "",
-   "cines": [
-    "cine-arte-normandie"
-   ],
-   "funciones": [
-    {
-     "cine": "cine-arte-normandie",
-     "inicio": "2026-08-26T15:00",
-     "formato": "",
-     "idioma": "subtitulada",
-     "sala": "",
-     "url": "https://www.flow.cl/btn.php?token=clx0am8"
-    }
-   ]
-  },
-  {
-   "clave": "obsesion-centro-arte-alameda",
-   "titulo": "Obsesión / Centro Arte Alameda",
+   "clave": "obsesion",
+   "titulo": "Obsesión",
    "poster": "",
    "duracion": null,
    "clasificacion": "",
@@ -6049,26 +6015,6 @@
      "idioma": "subtitulada",
      "sala": "",
      "url": "https://www.flow.cl/btn.php?token=wveqqyw"
-    }
-   ]
-  },
-  {
-   "clave": "volver-al-futuro-cine-blondie-en-centro-arte-alameda",
-   "titulo": "Volver al futuro / Cine Blondie en Centro Arte Alameda",
-   "poster": "https://imagenes.passline.com/eventos/volver-al-futuro-cine-blondie-en-centro-arte-alameda-544910-rec.jpg",
-   "duracion": null,
-   "clasificacion": "",
-   "cines": [
-    "centro-arte-alameda-sala-ceina"
-   ],
-   "funciones": [
-    {
-     "cine": "centro-arte-alameda-sala-ceina",
-     "inicio": "2026-08-25T20:15",
-     "formato": "",
-     "idioma": "",
-     "sala": "",
-     "url": "https://www.passline.com/eventos/volver-al-futuro-cine-blondie-en-centro-arte-alameda"
     }
    ]
   }

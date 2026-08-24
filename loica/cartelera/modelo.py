@@ -50,12 +50,19 @@ def _es_coletilla(texto: str) -> bool:
     from ..cines import catalogo  # acá dentro: evita un import circular
     for sala in catalogo():
         for clave in sala.get("_claves", ()):
-            if len(clave) > 4 and (clave in plano or plano in clave):
+            # Las dos direcciones necesitan su propio piso de largo, y el de
+            # abajo se me había escapado: con un solo `len(clave) > 4` una cola
+            # cortísima calzaba por estar CONTENIDA en un nombre de sala largo,
+            # y "El Ojo - Arte" perdía su segunda mitad porque "arte" vive
+            # dentro de "centro arte alameda".
+            if len(clave) > 4 and clave in plano:
+                return True
+            if len(plano) > 4 and plano in clave:
                 return True
     return False
 
 
-def _sin_coletillas(titulo: str) -> str:
+def sin_coletillas(titulo: str) -> str:
     """Saca el nombre del cine o del ciclo que algunas salas pegan al título.
 
     Las cadenas grandes publican el título limpio, pero las salas de barrio lo
@@ -102,7 +109,7 @@ def clave_pelicula(titulo: str) -> str:
     "Mi Vecino Totoro [1988] - Ghibli Fest 2026" pierde el corchete y conserva
     la cola, y sigue sin juntarse con "Mi vecino Totoro".
     """
-    sin_tildes = "".join(c for c in unicodedata.normalize("NFD", _sin_coletillas(titulo))
+    sin_tildes = "".join(c for c in unicodedata.normalize("NFD", sin_coletillas(titulo))
                          if unicodedata.category(c) != "Mn").lower()
     sin_formato = re.sub(
         r"\b(2d|3d|4d|xd|dbox|d-box|imax|premier|vip|atmos|screenx|"
