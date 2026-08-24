@@ -36,6 +36,7 @@ SITIO = "https://langab.github.io/loica"
 # generado desde web/_ux_filtros.md. Devuelven (valor, motivo).
 from loica.clasificar import clasificar as _clasificar
 from loica.clasificar import clasificar_publico
+from loica.clasificar import memoria as memoria_categorias, _norm as _norm_clasificador
 # Segundo nivel: qué género de fiesta y qué tamaño de panorama. Salen del
 # mismo archivo y con la misma regla —vacío antes que inventado—, así que la
 # interfaz tiene que estar preparada para recibir "".
@@ -233,6 +234,15 @@ def es_panorama(titulo: str, descripcion: str) -> tuple[bool, str]:
     for senal in NO_ES_PANORAMA:
         if senal in texto:
             return False, senal
+    # La memoria de categorías también sabe decir "esto no es un panorama":
+    # abonos, membresías, campañas de socios, convocatorias. Son reglas con
+    # `categoria: descartar` en config/correcciones/categorias.yaml, y viven
+    # ahí y no en la lista de arriba para que la revisión las agregue sin
+    # tocar código.
+    calce = memoria_categorias().descartar(_norm_clasificador(titulo),
+                                           _norm_clasificador(texto))
+    if calce:
+        return False, f"memoria: {calce[0].nombre} («{calce[1]}»)"
     return True, ""
 
 

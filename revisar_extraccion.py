@@ -295,7 +295,10 @@ def main() -> int:
         "",
         f"Cola de lugares por corregir: **{len(lugares)}** "
         f"(los {min(TOPE_COLA, len(lugares))} de más impacto quedaron en "
-        f"`datos/revision/pendientes_lugares.yaml`).",
+        f"`datos/revision/pendientes_lugares.yaml`). Las direcciones que se "
+        f"investiguen se anotan con su URL en "
+        f"`datos/revision/investigacion_lugares_AAAA-MM-DD.yaml` y pasan por el "
+        f"doble check contra OpenStreetMap: `python3 scripts/verificar_lugares.py`.",
         "",
         "## Categorías",
         "",
@@ -306,7 +309,10 @@ def main() -> int:
         "",
         f"En 'otros' quedaron **{categorias.get('otros', 0)}** ({pct(categorias.get('otros', 0))}): "
         "la cola está en `datos/revision/pendientes_eventos.yaml`. Si un error se "
-        "repite, el arreglo va en `loica/clasificar.py`.",
+        "repite, la regla va en `config/correcciones/categorias.yaml` (la memoria "
+        "del clasificador) y si pide lógica, en `loica/clasificar.py`. Para saber "
+        "si la regla nueva rompió algo que ya estaba bien: "
+        "`python3 scripts/auditar_categorias.py --comparar`.",
         "",
         "## Sin fecha (estado revisar_fecha)",
         "",
@@ -342,9 +348,12 @@ def main() -> int:
     lineas += [
         "", "## Cómo se corrige", "",
         "1. Abrir la cola en `datos/revision/pendientes_*.yaml`.",
-        "2. Completar los datos verificados (coordenadas desde Google Maps).",
-        "3. Pegar las entradas en `config/correcciones/*.yaml` y comitear.",
-        "4. La próxima corrida las aplica sola — la memoria no se olvida.",
+        "2. Completar los datos verificados, anotando de dónde salió cada uno.",
+        "3. Pasarlos por el doble check (`scripts/verificar_lugares.py` para "
+        "direcciones, `scripts/auditar_categorias.py --comparar` para categorías): "
+        "una corrección que rompe otra cosa no es una corrección.",
+        "4. Pegar las entradas en `config/correcciones/*.yaml` y comitear.",
+        "5. La próxima corrida las aplica sola — la memoria no se olvida.",
     ]
 
     DIR_INFORMES.mkdir(parents=True, exist_ok=True)

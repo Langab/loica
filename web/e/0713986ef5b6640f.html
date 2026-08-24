@@ -63,7 +63,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../talleres.html">← Ver todos los talleres y clases</a>
   <div class="foto" id="foto"><img src="https://finis.cl/wp-content/uploads/2026/08/Agenda-web-2026-08-12T165536.134.jpg" alt="" onerror="this.remove();document.getElementById('foto').classList.add('sin-foto')"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Club de Collage 2026-2027</h1>
@@ -81,7 +81,7 @@
   <div class="dato"><span class="et"></span><span>El Club de Collage invita a explorar la creatividad y la experimentación con distintos materiales a través de encuentros mensuales. El ciclo se desarrollará durante el último jueves de cada mes,…</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../mapa.html#/e/0713986ef5b6640f">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../talleres.html#/e/0713986ef5b6640f">Ver en la página de talleres</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Universidad Finis Terrae - Agenda</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
@@ -90,8 +90,8 @@
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 <script src="../loica.js?v=23"></script>
 <script>
-  pintarBarra("mapa.html", "../");
-  const EV = {"id": "0713986ef5b6640f", "titulo": "Club de Collage 2026-2027", "inicio": "2026-08-27T18:30:00", "fin": "2027-08-26T21:00:00", "lugar": "Universidad Finis Terrae", "direccion": "Av. Pedro de Valdivia 1509", "comuna": "Providencia", "lat": -33.43669, "lon": -70.6084, "precision": "correccion", "gratis": true, "precio": 0, "precio_texto": "font-weight: 400;\"\u003e $50.000, pago único por todo el ciclo.\u003c/", "categoria": "fiesta", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "El Club de Collage invita a explorar la creatividad y la experimentación con distintos materiales a través de encuentros mensuales. El ciclo se desarrollará durante el último jueves de cada mes,…", "imagen": "https://finis.cl/wp-content/uploads/2026/08/Agenda-web-2026-08-12T165536.134.jpg", "fuente": "Universidad Finis Terrae - Agenda", "url": "https://finis.cl/agenda/comunidad-finis-terrae/club-de-collage-2026-2027/", "formato": "panorama"};
+  pintarBarra("talleres.html", "../");
+  const EV = {"id": "0713986ef5b6640f", "titulo": "Club de Collage 2026-2027", "inicio": "2026-08-27T18:30:00", "fin": "2027-08-26T21:00:00", "lugar": "Universidad Finis Terrae", "direccion": "Av. Pedro de Valdivia 1509", "comuna": "Providencia", "lat": -33.43669, "lon": -70.6084, "precision": "correccion", "gratis": true, "precio": 0, "precio_texto": "font-weight: 400;\"\u003e $50.000, pago único por todo el ciclo.\u003c/", "categoria": "clases", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "El Club de Collage invita a explorar la creatividad y la experimentación con distintos materiales a través de encuentros mensuales. El ciclo se desarrollará durante el último jueves de cada mes,…", "imagen": "https://finis.cl/wp-content/uploads/2026/08/Agenda-web-2026-08-12T165536.134.jpg", "fuente": "Universidad Finis Terrae - Agenda", "url": "https://finis.cl/agenda/comunidad-finis-terrae/club-de-collage-2026-2027/", "formato": "taller", "dias_semana": [3]};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

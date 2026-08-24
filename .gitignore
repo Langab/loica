@@ -12,6 +12,14 @@ datos/*
 !datos/revision/
 datos/revision/*
 !datos/revision/pendientes_*.yaml
+# Las auditorías hechas a mano SÍ viajan, y por una razón distinta a las colas:
+# las colas las regenera la corrida todos los días y son desechables, pero una
+# auditoría es trabajo humano que no se puede rehacer solo. El .tsv de
+# categorías es el conjunto etiquetado contra el que scripts/auditar_categorias.py
+# mide si una regla nueva rompió algo que ya estaba bien, y el .yaml de lugares
+# es la evidencia (con URL) de dónde salió cada dirección del mapa.
+!datos/revision/auditoria_*.tsv
+!datos/revision/investigacion_*.yaml
 informes/
 __pycache__/
 *.pyc

@@ -91,7 +91,7 @@
 <script src="../loica.js?v=23"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "da17f54497b030a5", "titulo": "Ciclo de cine: 250 años de la independencia de Estados Unidos | Miniserie John Adams (Ep. 5)", "inicio": "2026-08-24T18:00:00", "fin": null, "lugar": "Centro de Estudios Públicos (CEP)", "direccion": "Auditorio CEP, ubicado en Monseñor Sótero Sanz 162, Providencia.", "comuna": "Providencia", "lat": -33.42386056666666, "lon": -70.61556651111111, "precision": "calle", "gratis": false, "precio": null, "precio_texto": "", "categoria": "cine", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "", "imagen": "", "fuente": "Centro de Estudios Públicos (CEP)", "url": "https://www.cepchile.cl/eventos/", "formato": "panorama"};
+  const EV = {"id": "da17f54497b030a5", "titulo": "Ciclo de cine: 250 años de la independencia de Estados Unidos | Miniserie John Adams (Ep. 5)", "inicio": "2026-08-24T18:00:00", "fin": null, "lugar": "Centro de Estudios Públicos (CEP)", "direccion": "Monseñor Sótero Sanz 162", "comuna": "Providencia", "lat": -33.42386, "lon": -70.61557, "precision": "correccion", "gratis": false, "precio": null, "precio_texto": "", "categoria": "cine", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "", "imagen": "", "fuente": "Centro de Estudios Públicos (CEP)", "url": "https://www.cepchile.cl/eventos/", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

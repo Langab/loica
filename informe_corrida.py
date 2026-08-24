@@ -290,6 +290,8 @@ def hoja_diagnostico(wb: Workbook, ctx: dict) -> None:
     f = _titulo(h, f, "CLASIFICACIÓN")
     f = _dato(h, f, "Leída del título o la descripción", ctx["origen_texto"],
               "el clasificador lo leyó, no lo adivinó", VERDE)
+    f = _dato(h, f, "Decidida por la memoria de categorías", ctx["origen_memoria"],
+              "una regla de config/correcciones/categorias.yaml", VERDE)
     f = _dato(h, f, "Adivinada por el recinto o la fuente", ctx["origen_prior"],
               "conjetura razonable (~85% de acierto); están en la hoja 2", AMBAR)
     f = _dato(h, f, "Sin señal: cayó en «otros»", ctx["origen_defecto"],
@@ -913,7 +915,8 @@ def armar_contexto() -> dict:
         "sin_pin": sum(1 for e in publicados if e["precision"] == "sin_ubicar"),
         "nuevos_publicados": len(pub_nuevos),
         "nuevos_con_pin": sum(1 for e in pub_nuevos if e["lat"] is not None),
-        "origen_texto": conteo_origen["titulo"] + conteo_origen["descripcion"],
+        "origen_texto": conteo_origen["titulo"] + conteo_origen["etiqueta"] + conteo_origen["descripcion"],
+        "origen_memoria": conteo_origen["memoria"],
         "origen_prior": conteo_origen["prior"],
         "origen_defecto": conteo_origen["defecto"],
         "con_subcat": sum(1 for e in publicados if e.get("subcategoria")),

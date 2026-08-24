@@ -91,7 +91,7 @@
 <script src="../loica.js?v=23"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "f0bc16c1a43eff05", "titulo": "La Gran Fonda de Chile", "inicio": "2026-09-17T12:00:00", "fin": "2026-09-20T00:00:00", "lugar": "Parque O'Higgins", "direccion": "", "comuna": "Santiago", "lat": -33.4425, "lon": -70.6505, "precision": "comuna", "gratis": false, "precio": null, "precio_texto": "", "categoria": "fiesta", "subcategoria": "folclor", "escala": "", "publico": "todos", "descripcion": "17, 18, 19 y 20 de septiembre en el Parque O'Higgins.", "imagen": "", "fuente": "Chile es Tuyo", "url": "https://chileestuyo.cl/fondas-en-santiago-conoce-las-mejores-para-celebrar-fiestas-patrias/", "formato": "panorama"};
+  const EV = {"id": "f0bc16c1a43eff05", "titulo": "La Gran Fonda de Chile", "inicio": "2026-09-17T12:00:00", "fin": "2026-09-20T00:00:00", "lugar": "Parque O'Higgins", "direccion": "Av. Blanco Encalada 2540", "comuna": "Santiago", "lat": -33.46306, "lon": -70.66664, "precision": "correccion", "gratis": false, "precio": null, "precio_texto": "", "categoria": "fiesta", "subcategoria": "folclor", "escala": "", "publico": "todos", "descripcion": "17, 18, 19 y 20 de septiembre en el Parque O'Higgins.", "imagen": "", "fuente": "Chile es Tuyo", "url": "https://chileestuyo.cl/fondas-en-santiago-conoce-las-mejores-para-celebrar-fiestas-patrias/", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

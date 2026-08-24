@@ -1,0 +1,609 @@
+# Auditoría de categorías del 22-08-2026: 1.740 panoramas y 454 títulos de
+# taller revisados uno por uno contra el catastro publicado ese día.
+# Es el conjunto etiquetado con que se mide el clasificador:
+#     python3 scripts/auditar_categorias.py
+# Cada línea: id  categoria_correcta  subcategoria  confianza
+# confianza=media significa "el auditor no pudo confirmarlo con el título, el
+# lugar y la descripción"; esas no cuentan como error si el clasificador
+# difiere, solo se listan aparte.
+# categoria "descartar" = no es un panorama y no debería publicarse.
+3de6cccecf6975a8	charla		media
+e80a9f7e54b95a69	musica	tributo	media
+320c423574c0a384	teatro	obra	alta
+5cc218ef852ead43	fiesta		media
+9d8dea664593bb42	fiesta		media
+eb58bd8b4c90c035	familia		alta
+12621fc7551e5a21	arte		alta
+14a567d409e118de	charla		alta
+6ad92752701982ce	familia		media
+1636ed1fa02181bc	charla		media
+4c41561c0b4b2c42	musica	tributo	alta
+d01c18a3cbc0c413	musica	tributo	alta
+9bda4b2ed968cd26	musica		alta
+45c4b0a8926d3a1a	teatro	obra	alta
+d031fedddc2485b2	descartar		alta
+79cb1b2efd0f91ee	feria		media
+86f496067f94f621	charla		alta
+7629c55ae3c3f925	descartar		media
+988a4d1794e91b33	descartar		alta
+f01e6579ac52a65e	arte		media
+8aed95dd6fe82684	descartar		media
+f1ad4de9a59326fd	arte		alta
+62a07742bee7212c	descartar		alta
+8702e1c88c66987d	musica	tributo	media
+8fc763136e3725ea	otros		media
+a9b25f92cee7d638	otros		media
+3275a76cb93d9f0d	musica	tributo	media
+8a0f0d88340c5f82	musica	tributo	media
+d3bfbca486dc3e25	descartar		alta
+f9bd5a235fe7ff28	descartar		alta
+447726989b258eb4	cine		alta
+4d19b8b2f08316d8	feria		alta
+4198cf03757661e7	familia		alta
+bfe2516e76e437a7	arte		alta
+c110fc51f3e79e97	arte		alta
+132717b17dae7293	cine		alta
+b85e26ec585a1f5c	cine		alta
+785f805db8d916c7	musica		media
+cff8f2426b703198	teatro	comedia	media
+cb55a25541fd9ded	fiesta		alta
+449cac4b853b2db2	deporte		alta
+f56a9b527a6df7fc	clases		alta
+690fd35165bbe2cc	teatro	danza	media
+e16197421e7a705f	teatro	danza	media
+2b6e406df38bade3	deporte		media
+8b99a6d23994785c	deporte		media
+b8ca4e86c9e96dd9	deporte		media
+d78b503d13eb908c	deporte		media
+06fd2e72a90d150d	deporte		media
+912da7db0e5dabb7	deporte		media
+00943805f7f25261	deporte		media
+636d3d802461e1f6	deporte		media
+325d6e91115881ec	deporte		media
+cc0bc95fecfdd805	charla		media
+14091624f06bc4ae	descartar		alta
+4263987ee988941f	fiesta		alta
+9d9963104b1fe338	fiesta		alta
+100e1549fa47ce49	charla		alta
+fc96f8985f2a3489	fiesta		alta
+3f7315b8069e002e	clases	bienestar	media
+145af3058c2a4921	teatro	obra	media
+e6260b8fdb1cb365	teatro	comedia	alta
+9f5c30abc78f147a	teatro	comedia	alta
+e133712d512ce383	feria		alta
+4152f999b1a3b8d8	feria		alta
+0f62ef0c3b1b28da	otros		alta
+8fbe0784b7a3c67f	descartar		alta
+bab11497dcbb3dc9	charla		alta
+6f63801aedee2b6b	feria		alta
+0d62b098e0ca73a2	descartar		alta
+08595876ef6113b7	feria		alta
+d9afc79706241b46	fiesta	electronica	alta
+96c4936b0a6d12d8	fiesta	electronica	alta
+735c5c54923fafcd	fiesta	urbano	alta
+50677f21c6ce5e88	charla		media
+288b93646e636cc8	charla		media
+15f3a0618b49a4e6	charla		media
+3019232218e76717	charla		media
+225c75bc35956862	fiesta	electronica	media
+65918a369ec19bca	fiesta	electronica	media
+fccac8cd314baf99	fiesta	electronica	media
+3859b460f2bbc1be	fiesta	electronica	media
+c9fa5579f53c51e1	fiesta	electronica	media
+495bafda5199da55	fiesta		media
+f98b12d068cd1df6	fiesta		media
+44829dd4bc03441b	otros		media
+7723d6e3895060e0	fiesta		media
+f7991ebb8a11996e	fiesta		media
+2e1c109f8a9d4303	fiesta		media
+3662866871a4dd26	teatro	danza	media
+5f004806239f56b3	teatro		media
+798cc43c11c9ae50	teatro	performance	media
+65af2ae365348ef8	otros		media
+5e6460ac3caaa807	familia		media
+c010ffbb4a779ee6	descartar		media
+b40cb4cf9946c7bf	descartar		media
+3aab19cecf5e910b	musica	urbano	alta
+2b2ff2b1e6acdb40	musica	urbano	alta
+4b61b85b5cccbf15	musica	urbano	alta
+051594a645f3d424	musica	pop	alta
+9d7f4e5c730965f1	musica	pop	alta
+3215a04bb872afb2	musica		alta
+98d2751f868df75a	musica	urbano	alta
+081212025e245954	musica	rock	alta
+8aab3473d2b792ab	musica	pop	alta
+9e4388db2514f2c5	musica	rock	alta
+fd97f40cc9425b28	musica	folclor	media
+0be059ebd304b388	musica	tributo	alta
+f06f520223fee120	musica	tributo	alta
+04adefcb1eb612d1	descartar		alta
+da5be22e6087cd03	cine		alta
+bb5d14c3a696725f	descartar		media
+3b2fa96637855f57	cine		alta
+c064f680e07f2405	teatro		media
+953c17904d2cfa2c	teatro	obra	alta
+8b88882a576ee554	teatro		media
+71620a3ddb3a7544	teatro		media
+22d44305fc821739	teatro	obra	alta
+b9e1e1f3a6f00861	teatro		alta
+ddfe812a73cafc3b	teatro		alta
+e709ce6df8c6b1eb	teatro		alta
+fa8f148f091ab143	teatro	obra	alta
+e87820e5a16d7405	fiesta	reggaeton	alta
+3b6aa55cdf6f488e	teatro		alta
+4829f9bfea70e3ae	descartar		alta
+066712e40fe3d8e8	teatro		media
+0452738ce04ba72a	descartar		alta
+3beb8f8030471ffd	cine		media
+a1c6f05414ef1393	charla		alta
+58d6762459116349	feria		media
+d0f9687f12c05239	teatro		media
+f688b16c0c8bc1a8	clases	manualidades	media
+075642f251a01d70	clases	manualidades	media
+39a4a9f0a7642ad4	clases	manualidades	media
+597635aad5a38098	clases	manualidades	media
+79e3f75c35f93689	clases	manualidades	media
+91634841db4f8663	clases	manualidades	media
+d30c0267afe2f9da	charla		media
+cc17ef14730ebd7b	cine		media
+3de7f5f54a3d81e5	teatro		media
+64cfe9e2c7e6d1f2	cine		alta
+9b1f6d598fc5aa42	teatro	obra	alta
+47f6e9396b5b8b99	descartar		alta
+5ddcd819e7a7ad89	descartar		alta
+b3c232bfb25a12ce	descartar		alta
+76bf0f81efe4814d	teatro	obra	alta
+755d9b1cb7a242fb	teatro		media
+9fb7532fb083cb8b	musica	electronica	alta
+569f27176720b0e7	feria		media
+1865faac70558ded	clases	danza	alta
+1a9b9a6c2ab9c7c4	musica	jazz	alta
+c73eebc1ef831550	teatro	comedia	media
+39692e93889baad2	otros		media
+094d575686b2f6bc	descartar		media
+91b42b001cc91d6e	teatro	obra	alta
+197a29175035a8a0	teatro	obra	alta
+a0f166d97fc8a1d4	musica		media
+4b7432e88f9ff64b	descartar		media
+e8de698a09044dd4	teatro		media
+ce72343a17feb4db	descartar		media
+4c0c5e5870ad324f	charla		alta
+23191b527c8dcf86	teatro	comedia	alta
+ea19c489e83605d9	musica		alta
+ac39ed986626109c	fiesta	urbano	media
+987741ce4bfcef04	musica		media
+8a67d7009ce571ec	musica	rock	alta
+00f702ff3058ed38	musica	rock	alta
+91c2b01c649ed878	descartar		alta
+e3633de12a737104	feria		alta
+c60344d8dcad7a95	feria		alta
+# 'ExpoYoga Promo Dos Dias' es un abono de la misma expo: un auditor lo dejó
+# en feria y otro descartó el abono equivalente del 3D Printer Party. Queda
+# como duda hasta que Benjamín zanje si un abono se publica o no.
+55fecb57b3558d5b	feria		media
+40515194233561f1	feria		alta
+e85dd8d048cb1c1f	charla		media
+b0ee5cccf74ccce6	charla		media
+08ff67d89ab3a476	musica		alta
+8364a4ee5cf30f4c	charla		media
+94662ecc60687ea0	charla		alta
+1068f1b34b99db07	musica		media
+d2151edc2363e888	descartar		alta
+95434c752f6cab14	cine		media
+9058222f7363aafd	feria		alta
+724826a07e316c95	cine		alta
+fe3f64bd42be9577	cine		alta
+6c11a3e36111807d	descartar		alta
+32a6f26e70b6f3e9	descartar		alta
+b2c85bd25ee38483	descartar		alta
+07c06a69729bf747	descartar		alta
+3d80b1f3adea78dd	descartar		media
+821d7ee0dd20ca82	descartar		alta
+9e0e6801b2e5817b	aire_libre		media
+d8bbd34b65dcb216	descartar		media
+7284307a7347b704	clases		media
+8c2381aa53aeeb6c	musica		alta
+134e111b9db62d1a	descartar		alta
+d6734c7edb783b4b	descartar		alta
+2b8293ef6c38e35d	descartar		media
+97f1ccff84be8f33	descartar		alta
+2f74470070a4e461	descartar		alta
+7cee80157e6dec60	descartar		alta
+d8aa4573c6fc955c	descartar		alta
+d33a2ec8d7dfec0c	descartar		alta
+848449301e3ff659	teatro	obra	alta
+f62f10d798177e32	musica		alta
+15dd6ac63c036eef	teatro	danza	alta
+fa8b7a4b3bb18ab3	teatro	danza	alta
+4d096c447f25f59f	descartar		alta
+32c35462c60ade00	clases	bienestar	media
+b90e7aab93bec954	descartar		media
+b37e83d8574f090e	musica		media
+a79e4783bc32cea7	musica	clasica	alta
+57a3ee69feec00bd	musica		alta
+71501b2e0cec22ca	musica		media
+294e6427cd046e78	descartar		alta
+15cb739c8cb0cb18	feria		alta
+ab696cc2adf58a5f	musica		alta
+f925451407c46a30	descartar		alta
+486867efb02f8f22	familia		media
+3847685f4cc8a2dc	musica		alta
+54eeaec2aa695f64	descartar		alta
+7a863f569e50fa63	teatro	comedia	media
+b5a95815e780af96	descartar		alta
+4702e7c1a08b7087	musica		alta
+220ed1249aa23c75	musica	jazz	alta
+641e7e0a17945159	musica	pop	alta
+91296498d5020916	musica	pop	alta
+eca460ac74c0326c	musica		media
+859912b06e9bf8f4	musica		alta
+b4b5e00d98403d97	musica		media
+0d7e8d9d40331cbf	musica		media
+301038d14cb54ebf	descartar		media
+7b1bb2489426b3d8	musica	clasica	alta
+58d05a936603ff6c	feria		media
+8e23bda61d383d2a	cine		alta
+9f01ddd8436af45b	cine		alta
+478ceeb548f1b378	cine		alta
+9ab0e16b6d6f1ccd	feria		alta
+e7a3f9c5e759e247	teatro		media
+d6133e1164202c42	arte		alta
+08844e5e6e20299c	arte		alta
+b5a64bbb5b4f9853	arte		media
+aebd056c18d81ef7	arte		alta
+4c96a6a86e792177	clases		alta
+5cdd753ca3fd4f2b	familia		media
+cf1d3596e4dc423a	familia		media
+1af83ec8bd20e739	familia		media
+a4d6cb1d24884616	familia		media
+3d8efd1bb0661a14	musica	folclor	alta
+696a133f5bbc3669	fiesta		alta
+8d878f971d20c157	fiesta		alta
+4916d0dc091570fe	descartar		alta
+8a81aa9d5dba3f83	charla		alta
+c690f7910aea9a28	familia		alta
+c7b950582b721666	descartar		alta
+9db737af9fb5ab88	familia		media
+5a3a072311b34601	musica		media
+28ca5f52923bb647	musica		alta
+d9b3504c979a03ee	familia		media
+c2cb32e24fdca5c4	musica		alta
+5c30c4c89f312bac	familia		media
+82920818c520f824	familia		media
+97b042ee1668a10c	familia		alta
+0f3a8bed84c21b8a	familia		alta
+26eeffc3e8db98a7	familia		media
+d14f0d9e358cb4ee	familia		alta
+9a42cdf307b250ac	musica	folclor	alta
+244214afafd4f238	fiesta		alta
+4bab51a2f830fe65	fiesta		alta
+c604e4cff05e559e	familia		media
+8ddb6a4c028ad119	familia		alta
+1c5bcd9c1a04133c	musica	rock	alta
+2f22f71e04db0f64	musica		alta
+0c26191158fc0c84	musica	urbano	alta
+4f82325fcdf3b560	clases		alta
+13217de4156a555c	musica		alta
+6661707b996197bf	musica		alta
+f8ad4434345e35d6	musica	clasica	alta
+6f96a5ec955f17c7	descartar		alta
+39b7c6fa7db6ad3b	charla		alta
+9e57fbd2ea104c4e	musica		alta
+91e250011d2a12b4	musica		alta
+50aa317527eb21c0	musica	folclor	media
+98c443d52ec7663a	familia		alta
+c3b52650d14306ec	familia		alta
+83681c5d5114c149	musica	tributo	alta
+a4b11611767d4951	familia		alta
+476bb56562e2d534	musica	folclor	media
+424978000b8522f4	musica	rock	alta
+69a95cbd8acd3305	musica	clasica	alta
+a3190dd40fffd9f1	descartar		media
+4a02eb9efbcf0aeb	otros		alta
+001d30e59fd36d02	musica	clasica	alta
+a594381f0cd60412	musica	clasica	alta
+a0d020d9704d43e7	musica		alta
+bfce50814d060f7b	musica		alta
+c3d1904b79bd8119	musica		alta
+2d9bec7d9f7df41c	feria		media
+367e4f54ca39ea93	familia		alta
+f1ee70631a7049c9	musica		alta
+9f5b19b8c397c1ad	musica		alta
+860c59bd96f00412	familia		media
+5b24d53b54f9b18e	deporte		alta
+aeb1dac36ed7799d	musica	tributo	alta
+e125d4466792f029	charla		alta
+b3087017e8bfcb61	clases		alta
+ea80ce0c4b1aa32b	musica	clasica	alta
+f07af3539c16fc51	musica	folclor	alta
+361004eeaf6359f9	familia		media
+6693a7f3724f10d4	musica		alta
+6e6a4fa0286d129f	musica	pop	alta
+48dbb525ce80dc8f	musica	rock	alta
+599a4925778b2159	musica	folclor	alta
+a25db01e457b0fa8	musica	folclor	alta
+1e881409b42ae38d	musica	rock	media
+a40e4f9e776cbf75	familia		media
+0cbadc60481a752a	musica	clasica	alta
+62370f168ead6cba	musica	clasica	alta
+f3e71745dfacbbae	musica		media
+ec01554113a84f39	familia		alta
+852a4b2a5c6323da	musica	clasica	alta
+2b3e272142bc582c	musica	tributo	alta
+ca63e0c4af1f6cf0	musica	clasica	media
+5e3f51a5ed80b1df	fiesta		media
+b190faf8f10347e9	musica	pop	alta
+12ea7a85f08cadf4	musica	clasica	alta
+ba6478f390341631	clases		alta
+f6a97675970e5b44	musica		alta
+99f354ecd6065132	musica	rock	alta
+ad3b20efc7e470a1	musica	clasica	alta
+d76574fb8219b733	musica	clasica	alta
+1e18aa115d14adf1	musica		media
+231cea58a04d1423	musica	clasica	alta
+24d6227cd939c346	musica	clasica	alta
+88201b122c9b43d5	charla		media
+c42716d1a6fc1b28	clases		media
+d1f37483f06b3156	familia		media
+abf1b561b5e80cf5	descartar		alta
+bda32833cab991ca	descartar		alta
+ef5df2d7a380d507	charla		media
+6d683830fa12cc38	descartar		alta
+c28579de0da6de2f	feria		media
+331b6e311f4b8420	descartar		alta
+6597146d2b3b49af	descartar		alta
+729a0fa0bfad2114	descartar		alta
+420f633920da1fe2	descartar		alta
+d32e374f33f8f840	cine		media
+7c9c10c9a6fb2002	teatro	obra	alta
+ad09d91973380b9e	teatro	obra	alta
+89a9c92d53ad29d9	teatro	obra	alta
+90df39fa09bb6073	teatro	obra	alta
+e6d4b3311be6b79c	teatro	obra	alta
+c7e5458384c8152b	teatro	obra	alta
+5772911342a2669e	cine		media
+a03e07399c49d78a	cine		media
+ca39c0f7e73b233b	cine		media
+ce5a228e111dac53	teatro	comedia	alta
+696a434a76f99ce7	fiesta		alta
+5c2ed2b8762ce9d6	teatro	obra	alta
+8399741dc447a391	deporte		alta
+765891b8bf268c8e	fiesta		media
+b5a5e6231efcf8e3	familia		alta
+45c04bdff3b6d8ba	feria		alta
+bf5a6ef390488c08	deporte	futbol	media
+69fd0384b7c3c11b	teatro		media
+538e5bd1230cc3a8	musica		media
+35a818f6cd763ad9	fiesta		alta
+858b249cbe705214	musica		media
+fa4f338897256b9e	teatro	comedia	alta
+64aab1bcc853e920	fiesta	brasilera	alta
+073f7f8669ac6d4d	fiesta	electronica	alta
+32947d5f927a6eff	teatro		media
+9c800dc739cdc695	fiesta		alta
+b91005c9c77b6a20	teatro		media
+ef28d8fbd5aabe2a	fiesta	reggaeton	alta
+664a20dab922a126	fiesta		alta
+eddfcd58dbba5f9f	musica		media
+feb2ef3a0d4f5168	fiesta		alta
+010955f9d0cfa562	fiesta	urbano	alta
+1cd5609eac790f07	fiesta		alta
+406132c49116a814	fiesta		alta
+6b022253178e7727	teatro	danza	media
+36aa5975ea3344ee	fiesta		alta
+d812da0cc2d0e414	teatro		media
+fe946a92c972c6d0	teatro	comedia	media
+2e832da35db101fb	fiesta		alta
+6d45ac981ef541f2	charla		alta
+65330166a911489a	teatro	obra	alta
+9c077019cbaddad0	familia		alta
+c7d2c06b00049df4	charla		media
+2dae4a3440c19235	teatro	comedia	media
+4be1768390846dec	teatro	comedia	alta
+44dafbf61312976d	teatro	comedia	alta
+0e002311ad4e8f87	teatro	comedia	alta
+987d0e0f92338dc6	teatro	obra	alta
+9b55fb08e7b6e21e	musica		alta
+c1af710d083087e7	charla		alta
+e82b7bfd1c2b3748	teatro	obra	alta
+90b60d5ae027a3f8	musica		alta
+c7b8021cc1fd8cef	teatro	comedia	alta
+1497b1e08e9bfb7e	teatro	obra	alta
+35d38c0c9b7241db	teatro	obra	alta
+f3619e3db084e5a1	fiesta	electronica	media
+35ff81d557054878	fiesta		alta
+c308811482edc85a	descartar		alta
+abb020a3aa7ec20a	feria		media
+1df5360403758f81	teatro	obra	alta
+e7d4d7255df8f059	fiesta		media
+2d183da6e21aeddc	teatro	obra	alta
+3d9b52c80c3b36e3	deporte		alta
+3f6bafbcbe4a6f1d	teatro	obra	alta
+af40c59369f52de9	teatro	obra	alta
+a4151b09c655e4ee	musica	clasica	alta
+936cce4cf0512bb0	teatro	obra	alta
+01f281be2f3f328f	teatro		media
+13ad013a3b19b9ed	musica		media
+24630eaf98df1697	charla		alta
+ff01d1604d24542e	teatro	obra	alta
+2290c69321823777	teatro	obra	alta
+aab3b4ec72e20026	teatro	obra	alta
+6177040f8cacf454	teatro	comedia	alta
+d39c2d7fa538f2ea	fiesta		media
+b8b1ab3e04d1c12f	charla		media
+0c71856bf0fd9b1c	teatro	comedia	media
+1e1ac54a364b9c92	charla		alta
+9b60b4aa84cb02be	teatro	obra	alta
+01c0e3c51f735926	musica	clasica	alta
+c746b9216271eeae	otros		media
+ebd9ca02afea60b2	charla		alta
+3d5a3fe14de1ea33	teatro	obra	alta
+caf2bd5c8af78fb4	feria		media
+162470d013fa0413	clases	danza	media
+946359d4485abbea	deporte		media
+3ec4cce25be99466	feria		alta
+c8ea42b020e51767	feria		media
+7f2f628adf1e78d6	feria		alta
+5012c6e198e0e4eb	musica	urbano	alta
+6ac946ee383d4c4c	teatro	obra	alta
+8e43ac658fb8224e	teatro	obra	alta
+2313e1a91f6ee46c	musica	clasica	media
+8b5ce54ec888976b	musica		alta
+dc29d336a8dbdb31	musica	rock	alta
+b6654ca6b924159c	teatro	danza	alta
+04ef7e228de7e369	musica		alta
+253d10f6e0697fdf	aire_libre		media
+fee041f9e2836f02	musica		alta
+dcde57781a32d582	charla		alta
+b8911b00d5b8a7f9	musica		alta
+19d65e7980ff8bd0	descartar		alta
+de6dc73913a4433f	charla		alta
+8159fcb2de90b748	feria		media
+c91a6ef995196735	descartar		alta
+e48c18cf8be3ba69	descartar		media
+4d4cbb01465b4c08	otros		media
+b3818327cb1ac9d3	familia		alta
+f40a2356c6632860	musica		alta
+76709ae3428c2b37	musica	rock	alta
+34983d2f629cd525	musica		alta
+7a0f9210584f6fca	teatro	comedia	alta
+e0796bfc31f619bf	teatro	comedia	alta
+4c9e60c3dc60ddb7	musica	urbano	media
+495cb2afeeeb2882	musica	urbano	media
+f211710ff29f7b21	descartar		media
+63dd029a80f14140	musica		alta
+d3af882e720ba6b6	musica		alta
+2ec8c6a7e063d5f6	musica	jazz	alta
+645cc17459bd685c	musica		alta
+f8c24e61edebb668	musica		alta
+a9859011841d0fad	teatro	obra	alta
+e3d449978a338a09	teatro	comedia	alta
+2fc0cff7526bba27	teatro	comedia	alta
+b326790d36c8e9b6	musica		alta
+0713986ef5b6640f	clases	artes_visuales	alta
+121c17828926527a	teatro	comedia	alta
+6936751b06bfe60f	musica		alta
+65afb00f7ee32186	musica	urbano	media
+1ba97bf4b782c11d	descartar		alta
+3d9c3812b31ba9f7	otros		media
+3c7ce161f24a3f6e	familia		media
+3a2b14512b44e5d8	musica	tributo	alta
+a8851d42033f572b	musica	tributo	alta
+b0e0d11870b3dcf3	musica		media
+ef1d5bb99240a73b	teatro	obra	alta
+8201f2d394ce3149	musica	electronica	alta
+9e3aec085e7c7f4c	musica	tributo	alta
+17337ab4635e295a	musica	tributo	alta
+0122de35ef331e26	teatro	comedia	alta
+2f767055ad017ee8	musica		alta
+039ea7e4608cabbc	descartar		alta
+1380aa130623398a	musica		alta
+84a72710297d6011	otros		media
+5dd00d90494ebccb	musica		alta
+2b76741b63f6d7a6	musica		media
+6c799ee14de2ae09	descartar		alta
+55171106b2b14f1a	feria		media
+bcdf596aab5a6a66	musica	urbano	media
+7c3d92de9d81525e	familia		media
+f81413da270c1998	familia		media
+b12a9f5ba70e81aa	teatro	comedia	alta
+37295060d26749c3	musica	rock	alta
+2fa0c6c93611a422	musica	tributo	alta
+8f4e0497a05d2fa3	descartar		media
+67fbd35d7936195a	fiesta	electronica	alta
+a81018cbf03fd421	descartar		alta
+22336a2a268b7c76	descartar		alta
+bc9c3c60c892d498	descartar		media
+fe838a114f929730	descartar		alta
+6a3ca23f25d916d7	descartar		alta
+20de1ec95bade1c1	descartar		alta
+4919f7577f8af929	feria		media
+0f94903c3c861b01	familia		media
+63015b928ab8b9f6	descartar		alta
+622a18958d315781	musica	urbano	alta
+48ab222a19bdc264	teatro	comedia	alta
+8b54ebf1f7b9cbbf	musica		media
+002a59a81062236e	musica	urbano	alta
+77faecf1c41f657a	clases		media
+0b60ba3239522377	familia		alta
+607621aea1f5fc25	musica		media
+8a0f5059f27b22a4	feria		alta
+299953650afe1cd6	musica	rock	alta
+7cc446df6204ee69	musica	rock	alta
+a9ce801bbc5398f1	feria		media
+b9e6824ef2765216	musica	urbano	alta
+5a0d80888e292c04	feria		media
+f6ffd6d4579510f0	familia		alta
+b6eeaba229d25afb	cine		alta
+5dd264352001dd31	musica	urbano	alta
+f50ab3e202761aa3	musica	tributo	alta
+b5fe1891d02f0910	musica	pop	alta
+c950efe6c6397215	musica		alta
+4c5b7bed6fc122e4	musica	rock	alta
+9916cf93f3c16f56	feria		alta
+41a87dce41d0395d	deporte		alta
+4709270838efd7b0	feria		alta
+4fb5f8c81f37ea72	feria		alta
+fd8e4eab5a7ba2a8	descartar		media
+cc16c65a8d73a72a	feria		media
+7d6ff4b763200a81	otros		alta
+79e0ab28d0a5e190	arte		media
+76dc2edaf1752a72	musica	cumbia	alta
+2b1656aed25b921f	otros		alta
+4d7f6dcd144e63c8	fiesta		alta
+c33df33f91807b23	fiesta	pop	alta
+34f0f8515cab7e43	fiesta	electronica	alta
+ec706dc4500e452e	fiesta	electronica	alta
+2c7afa919f22a293	otros		alta
+5983acd0a2dcac6c	familia		alta
+6bb9081d33a64e38	charla		media
+2c9707ce64b0b6a5	musica		alta
+4f014901c590e6b2	descartar		alta
+16002564a376ce98	teatro	obra	alta
+c28d7bb2479cf1f1	feria		alta
+e7826281141fc99e	otros		alta
+ed4b084d65260eaa	fiesta	reggaeton	alta
+838a28c1a2611950	teatro	obra	alta
+cd0a585390f4d764	fiesta		media
+25b01c5baf48bb50	fiesta	pop	alta
+57442276ee104f69	fiesta	pop	alta
+d70c472feecce639	charla		alta
+548db315a71cd193	charla		media
+63e5239130953551	cine		media
+a577579b6858420f	charla		media
+e8b954b8ebdd4343	cine		media
+f83ebc2cc407a659	fiesta		media
+d68b9a02a00bb2cf	fiesta		alta
+8e66ad12bead2d55	fiesta		media
+2e492388046a89f6	fiesta	electronica	alta
+0161675af7672ad0	fiesta		media
+ff74b2fe2f3e1e96	musica	tributo	alta
+588c8f4b4c60ed3c	deporte		alta
+03730d12406066ce	charla		media
+1ed1a204f9987405	charla		media
+a3f2a62c988a5df7	fiesta		media
+bb68cfea068fdce6	otros		alta
+6bf1beb57f89d3e3	musica	tributo	media
+f41f3d8aa0908db3	musica	cumbia	alta
+98418efdd7123cc8	teatro	circo	media
+3970990af60d8bae	musica	pop	alta
+7f2781576b7e94a9	fiesta	folclor	media
+aef275e239c1d973	fiesta	pop	alta
+80c5ebdee17bf97d	descartar		media
+c1bd58470e0669b2	fiesta		alta
+ad58705381c4ef93	musica		media
+ef8779344f74bc2a	descartar		alta
+a933ad2ce1934627	musica		alta
+eb611328209aa812	musica	rock	alta
+119165f00ef72ce0	teatro	comedia	alta
+d7ecdea04390a6fc	teatro	obra	alta
+f41d2051c20152fb	musica	urbano	alta
+cd202e6aea68112c	descartar		alta
+c797a8467f397c37	fiesta		alta
+bf53d0b6196ffd38	descartar		alta
+c14cd3878435eb46	musica		media
+4a230defc83379b3	musica	tributo	media
+bf74fcb74260d02c	fiesta		media
+cc619d88956f33b6	descartar		alta
+488323491ea269d4	descartar		alta
+09dce44da40a41d7	musica	electronica	media

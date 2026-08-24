@@ -63,7 +63,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../talleres.html">← Ver todos los talleres y clases</a>
   <div class="foto" id="foto"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Motricidad Infantil</h1>
@@ -81,7 +81,7 @@
   <div class="dato"><span class="et"></span><span>todos los lunes y miércoles a las 17:00, 4 a 10 años</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../mapa.html#/e/2b6e406df38bade3">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../talleres.html#/e/2b6e406df38bade3">Ver en la página de talleres</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Municipalidad de Huechuraba - Actividades y Talleres Deportivos</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
@@ -90,8 +90,8 @@
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 <script src="../loica.js?v=23"></script>
 <script>
-  pintarBarra("mapa.html", "../");
-  const EV = {"id": "2b6e406df38bade3", "titulo": "Motricidad Infantil", "inicio": "2026-08-24T17:00:00", "fin": "2026-08-26T17:00:00", "lugar": "GIMNASIO MUNICIPAL", "direccion": "Guillermo Subiabre 705, Huechuraba", "comuna": "Huechuraba", "lat": -33.37397614, "lon": -70.63796404, "precision": "calle", "gratis": false, "precio": null, "precio_texto": "", "categoria": "familia", "subcategoria": "", "escala": "under", "publico": "ninos", "descripcion": "todos los lunes y miércoles a las 17:00, 4 a 10 años", "imagen": "", "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos", "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026", "formato": "panorama"};
+  pintarBarra("talleres.html", "../");
+  const EV = {"id": "2b6e406df38bade3", "titulo": "Motricidad Infantil", "inicio": "2026-08-24T17:00:00", "fin": "2026-08-26T17:00:00", "lugar": "GIMNASIO MUNICIPAL", "direccion": "Guillermo Subiabre 705, Huechuraba", "comuna": "Huechuraba", "lat": -33.37397614, "lon": -70.63796404, "precision": "calle", "gratis": false, "precio": null, "precio_texto": "", "categoria": "deporte", "subcategoria": "gimnasia", "escala": "under", "publico": "ninos", "descripcion": "todos los lunes y miércoles a las 17:00, 4 a 10 años", "imagen": "", "fuente": "Municipalidad de Huechuraba - Actividades y Talleres Deportivos", "url": "https://huechuraba.cl/deporte/actividades-y-talleres-deportivos-2026", "formato": "taller", "dias_semana": [0, 2]};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

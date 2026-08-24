@@ -12,8 +12,14 @@ aplica solo en todas las corridas futuras. La revisión diaria
 (`revisar_extraccion.py`) propone qué corregir; una persona o una sesión de
 Claude completa el dato; y desde ahí queda en la memoria.
 
-Tres archivos, del más general al más quirúrgico:
+Cuatro archivos, del más general al más quirúrgico:
 
+  categorias.yaml  Palabras en contexto → categoría. Es la memoria del
+                   clasificador: "Magallanes" junto a "vs" es un partido,
+                   "maratón" junto a "película" es cine. Vale para los eventos
+                   de hoy y para los que lleguen mañana con las mismas
+                   palabras; el clasificador la consulta ANTES que sus propios
+                   patrones (ver MemoriaCategorias, más abajo).
   lugares.yaml     Un lugar → dirección, comuna y coordenadas. Sirve para
                    TODOS los eventos que pasen por ese lugar, hoy y siempre.
                    Es la extensión editable de RECINTOS (geo.py) sin tocar código.
@@ -34,7 +40,9 @@ equivocado es peor que ninguno.
 from __future__ import annotations
 
 import logging
+import re
 import unicodedata
+from dataclasses import dataclass, field
 from pathlib import Path
 
 import yaml
@@ -42,6 +50,21 @@ import yaml
 log = logging.getLogger("loica.correcciones")
 
 RUTA_CORRECCIONES = Path(__file__).resolve().parent.parent / "config" / "correcciones"
+
+# Las categorías que existen en el sitio (cada una es un animal guía) más
+# "descartar", que no es una categoría sino la decisión de que el evento no es
+# un panorama. Una regla con otra cosa es un error de tipeo y se avisa fuerte.
+CATEGORIAS = {"idiomas", "familia", "feria", "deporte", "fiesta", "cine",
+              "teatro", "musica", "arte", "clases", "aire_libre", "charla",
+              "otros"}
+# Dónde se busca la regla. `titulo` es la etiqueta de la fuente más el título
+# (corto y curado, la señal más limpia); `texto` agrega la descripción (trae
+# ruido: una regla acá tiene que ser específica); `lugar` es el nombre del
+# recinto más el de la fuente, y SOLO opina cuando el texto no dijo nada —es
+# el prior por recinto, escrito como dato en vez de como código.
+DONDES = {"titulo", "texto", "lugar"}
+CAMPOS_REGLA = {"nombre", "palabras", "contexto", "sin", "donde", "categoria",
+                "subcategoria", "nota"}
 
 # Campos que una corrección de evento puede tocar. Cualquier otra clave en el
 # YAML es un error de tipeo y se avisa fuerte en vez de ignorarla en silencio.
@@ -146,8 +169,199 @@ def _cargar(ruta: Path, raiz: str, campos_validos: set[str]) -> dict[str, dict]:
     return limpias
 
 
+def _normalizar_texto(texto: str) -> str:
+    """La normalización con que el clasificador compara: minúsculas, sin
+    tildes, espacios colapsados. La puntuación se queda, y por eso el límite
+    de palabra de abajo es "no letra ni dígito": "vs" calza en "vs." y en
+    "(vs)", y "nino" NO calza dentro de "leonino"."""
+    texto = unicodedata.normalize("NFD", (texto or "").lower())
+    texto = "".join(c for c in texto if unicodedata.category(c) != "Mn")
+    return re.sub(r"\s+", " ", texto)
+
+
+def _compilar_frases(frases: list[str]) -> re.Pattern | None:
+    """Una alternancia de frases con límite de palabra, ya normalizadas."""
+    limpias = [re.escape(_normalizar_texto(f).strip()) for f in frases
+               if isinstance(f, str) and f.strip()]
+    if not limpias:
+        return None
+    return re.compile(r"(?<![a-z0-9])(?:" + "|".join(limpias) + r")(?![a-z0-9])")
+
+
+@dataclass
+class Regla:
+    """Una entrada de categorias.yaml, ya compilada.
+
+    Dispara cuando alguna de `palabras` aparece en el texto del ámbito
+    (`donde`), NINGUNA de `sin` aparece, y —si hay `contexto`— alguna de esas
+    también aparece. El contexto es lo que vuelve segura a una palabra que
+    sola sería ambigua: "magallanes" es un club, una región y una calle;
+    "magallanes" al lado de "vs" es un partido.
+    """
+    nombre: str
+    categoria: str
+    donde: str = "titulo"
+    subcategoria: str = ""
+    nota: str = ""
+    palabras: list[str] = field(default_factory=list)
+    contexto: list[str] = field(default_factory=list)
+    sin: list[str] = field(default_factory=list)
+    _palabras: re.Pattern | None = None
+    _contexto: re.Pattern | None = None
+    _sin: re.Pattern | None = None
+
+    def __post_init__(self):
+        self._palabras = _compilar_frases(self.palabras)
+        self._contexto = _compilar_frases(self.contexto)
+        self._sin = _compilar_frases(self.sin)
+
+    def calza(self, texto_normalizado: str) -> str | None:
+        """La palabra que disparó, o None. El texto ya viene normalizado."""
+        if not self._palabras:
+            return None
+        m = self._palabras.search(texto_normalizado)
+        if not m:
+            return None
+        if self._sin and self._sin.search(texto_normalizado):
+            return None
+        if self._contexto and not self._contexto.search(texto_normalizado):
+            return None
+        return m.group(0)
+
+
+class MemoriaCategorias:
+    """Las reglas de categorias.yaml, en el orden del archivo.
+
+    Se consulta por ámbito: `buscar(texto, "titulo")` mira solo las reglas
+    escritas para el título, etc. La primera que calza gana, así que dentro
+    del archivo lo específico va antes que lo general. Una memoria vacía (el
+    archivo no existe) es válida: el clasificador sigue con sus patrones.
+    """
+
+    def __init__(self, ruta: Path | str | None = None):
+        if ruta is None:
+            ruta = RUTA_CORRECCIONES / "categorias.yaml"
+        self.ruta = Path(ruta)
+        self.reglas: list[Regla] = []
+        self.problemas: list[str] = []   # lo que no se pudo cargar, para avisar
+        self._cargar()
+        self._por_donde = {d: [r for r in self.reglas if r.donde == d]
+                           for d in DONDES}
+
+    def _cargar(self) -> None:
+        if not self.ruta.exists():
+            return
+        try:
+            crudo = yaml.safe_load(self.ruta.read_text(encoding="utf-8")) or {}
+        except (yaml.YAMLError, UnicodeDecodeError, OSError) as e:
+            self.problemas.append(f"no se pudo leer: {e}")
+            log.error("No pude leer %s (%s): el clasificador sigue sin memoria",
+                      self.ruta.name, e)
+            return
+        entradas = crudo.get("reglas") if isinstance(crudo, dict) else None
+        if not isinstance(entradas, list):
+            self.problemas.append("falta la lista raíz 'reglas:'")
+            log.error("%s: se esperaba una lista bajo 'reglas:'", self.ruta.name)
+            return
+        for i, datos in enumerate(entradas, 1):
+            regla = self._regla(i, datos)
+            if regla:
+                self.reglas.append(regla)
+        if self.reglas:
+            log.info("Memoria de categorías: %d reglas", len(self.reglas))
+
+    def _regla(self, i: int, datos) -> Regla | None:
+        """Valida una entrada; la que está mal se avisa y se salta, no bota la
+        corrida (esto corre solo a las 11:00)."""
+        if not isinstance(datos, dict):
+            self._avisar(f"regla #{i} no es un mapa")
+            return None
+        nombre = str(datos.get("nombre") or f"regla #{i}")
+        desconocidos = set(datos) - CAMPOS_REGLA
+        if desconocidos:
+            self._avisar(f"{nombre}: campos desconocidos {sorted(desconocidos)} (se ignoran)")
+        categoria = str(datos.get("categoria") or "").strip()
+        if categoria not in CATEGORIAS and categoria != "descartar":
+            self._avisar(f"{nombre}: categoría {categoria!r} no existe — se salta")
+            return None
+        donde = str(datos.get("donde") or "titulo").strip()
+        if donde not in DONDES:
+            self._avisar(f"{nombre}: donde={donde!r} no existe (titulo|texto|lugar) — se salta")
+            return None
+        palabras = self._lista(datos.get("palabras"))
+        if not palabras:
+            self._avisar(f"{nombre}: sin 'palabras' — se salta")
+            return None
+        # Una palabra muy corta sin contexto calza en todas partes: "dj" tiene
+        # límite de palabra y pasa, pero "a" o "el" no dicen nada.
+        cortas = [p for p in palabras if len(_normalizar_texto(p).strip()) < 3]
+        if cortas and not datos.get("contexto"):
+            self._avisar(f"{nombre}: palabras de menos de 3 letras sin contexto {cortas} — se salta")
+            return None
+        return Regla(nombre=nombre, categoria=categoria, donde=donde,
+                     subcategoria=str(datos.get("subcategoria") or "").strip(),
+                     nota=str(datos.get("nota") or ""), palabras=palabras,
+                     contexto=self._lista(datos.get("contexto")),
+                     sin=self._lista(datos.get("sin")))
+
+    @staticmethod
+    def _lista(valor) -> list[str]:
+        if valor is None:
+            return []
+        if isinstance(valor, str):
+            return [valor]
+        if isinstance(valor, list):
+            return [str(v) for v in valor if v is not None and str(v).strip()]
+        return []
+
+    def _avisar(self, mensaje: str) -> None:
+        self.problemas.append(mensaje)
+        log.warning("%s: %s", self.ruta.name, mensaje)
+
+    # ---------- consultas ----------
+
+    def buscar(self, texto_normalizado: str, donde: str,
+               categoria: str | None = None) -> tuple[Regla, str] | None:
+        """La primera regla del ámbito `donde` que calza, y la palabra que la
+        disparó. Con `categoria`, solo las reglas de esa categoría que traen
+        subcategoría (es la consulta del segundo nivel). Las reglas de
+        descarte no se devuelven acá: las pregunta `descartar`."""
+        if not texto_normalizado:
+            return None
+        for regla in self._por_donde.get(donde, ()):
+            if regla.categoria == "descartar":
+                continue
+            if categoria is not None and (regla.categoria != categoria
+                                          or not regla.subcategoria):
+                continue
+            palabra = regla.calza(texto_normalizado)
+            if palabra:
+                return regla, palabra
+        return None
+
+    def descartar(self, titulo_normalizado: str,
+                  texto_normalizado: str = "") -> tuple[Regla, str] | None:
+        """¿Alguna regla dice que esto NO es un panorama? (abonos, membresías,
+        campañas de socios…). Las de ámbito `titulo` miran el título; las de
+        `texto`, título y descripción."""
+        for regla in self.reglas:
+            if regla.categoria != "descartar":
+                continue
+            texto = titulo_normalizado if regla.donde == "titulo" else texto_normalizado
+            palabra = regla.calza(texto) if texto else None
+            if palabra:
+                return regla, palabra
+        return None
+
+    def __len__(self) -> int:
+        return len(self.reglas)
+
+    def __bool__(self) -> bool:
+        return True   # una memoria vacía sigue siendo una memoria
+
+
 class Correcciones:
-    """Carga los tres YAML una vez y responde consultas baratas."""
+    """Carga los cuatro YAML una vez y responde consultas baratas."""
 
     def __init__(self, ruta: Path | str = RUTA_CORRECCIONES):
         ruta = Path(ruta)
@@ -155,9 +369,12 @@ class Correcciones:
         self.eventos = _cargar(ruta / "eventos.yaml", "eventos", CAMPOS_EVENTO)
         self.restoranes = _cargar(ruta / "restoranes.yaml", "restoranes",
                                   CAMPOS_RESTORAN)
-        if self.lugares or self.eventos or self.restoranes:
-            log.info("Correcciones cargadas: %d lugares, %d eventos, %d restoranes",
-                     len(self.lugares), len(self.eventos), len(self.restoranes))
+        self.categorias = MemoriaCategorias(ruta / "categorias.yaml")
+        if self.lugares or self.eventos or self.restoranes or len(self.categorias):
+            log.info("Correcciones cargadas: %d lugares, %d eventos, %d restoranes, "
+                     "%d reglas de categoría",
+                     len(self.lugares), len(self.eventos), len(self.restoranes),
+                     len(self.categorias))
 
     # ---------- consultas ----------
 

@@ -819,3 +819,658 @@ lugares:
     lat: -33.43669
     lon: -70.6084
     nota: Google Maps, ficha única (2026-08-13)
+
+  # ---------------------------------------------------------------
+  # Investigación web + doble check contra OSM — 22/23 de agosto de 2026
+  # (scripts/verificar_lugares.py; la evidencia con URL de cada dirección
+  #  está en datos/revision/investigacion_lugares_2026-08-22.yaml)
+  #
+  # Los 339 lugares que caían al centro de su comuna se ordenaron por impacto
+  # y se buscaron uno por uno: la ficha del evento en la ticketera, el sitio
+  # del recinto, el Registro Central de Colaboradores del Estado para las
+  # juntas de vecinos. Cada dirección salió de una página citable, y después
+  # se contrastó contra el catastro local de OpenStreetMap, que es un testigo
+  # que no habló con el primero. Ninguna de las 95 discrepó por más de 1 km.
+  #
+  # Las entradas SIN lat/lon no son un olvido: son las direcciones que el
+  # catastro no conoce (pasajes de población, sedes vecinales, cruces sin
+  # número). Entran igual porque una dirección corregida mejora la búsqueda
+  # de la corrida siguiente, y poner un pin a ojo sería justo lo que este
+  # archivo existe para evitar.
+  # ---------------------------------------------------------------
+  'JJ. VV. Simón Bolívar Av. Las Torres # 840':
+    direccion: 'Av. Las Torres 840'
+    comuna: 'Huechuraba'
+    nota: 'el catastro OSM no conoce esa calle o ese número: entra la dirección, el pin lo resolverá la corrida · Registro Central de Colaboradores del Estado: domicilio de la JJVV Simón Bolívar · fuente: https://registros19862.gob.cl/institucion/72670700/ficha'
+
+  'JJ. VV Villa Wolf Las Moras # 6096':
+    direccion: 'Las Moras 6096'
+    comuna: 'Huechuraba'
+    nota: 'el catastro OSM no conoce esa calle o ese número: entra la dirección, el pin lo resolverá la corrida · Registro Central de Colaboradores del Estado: JJVV Nueva Villa Wolf · fuente: https://registros19862.gob.cl/institucion/65261644/ficha'
+
+  'Multicancha Pablo Neruda Av. Pablo Neruda con Las Frutillas':
+    direccion: 'Av. Pablo Neruda con Las Frutillas'
+    comuna: 'Huechuraba'
+    nota: 'el catastro OSM no conoce esa calle o ese número: entra la dirección, el pin lo resolverá la corrida · nota de prensa municipal confirma la multicancha de Las Frutillas (La Pincoya); es un cruce, sin número · fuente: https://www.huechuraba.cl/sala-de-prensa/732/detalle/obra-de-teatro-otelo-se-presento-en-la-multichancha-de-las-frutillas'
+
+  'JJ. VV La Última Hora Jorge Inostroza # 1055':
+    direccion: 'Jorge Inostroza 1055'
+    comuna: 'Huechuraba'
+    nota: 'el catastro OSM no conoce esa calle o ese número: entra la dirección, el pin lo resolverá la corrida · Registro Central de Colaboradores del Estado: JJVV Población Última Hora · fuente: https://registros19862.gob.cl/institucion/73750100/ficha'
+
+  'JJ. VV René Schneider Av. Presidente Salvador Allende # 5655':
+    direccion: 'Av. Presidente Salvador Allende 5655'
+    comuna: 'Huechuraba'
+    nota: 'el catastro OSM no conoce esa calle o ese número: entra la dirección, el pin lo resolverá la corrida · Registro Central de Colaboradores del Estado: JJVV General René Schneider · fuente: https://registros19862.gob.cl/institucion/73964300/ficha'
+
+  'Los Jardines':
+    direccion: 'Rodrigo de Araya 4500'
+    comuna: 'Ñuñoa'
+    lat: -33.47334
+    lon: -70.58533
+    nota: 'web y catastro coinciden dentro de 44 m · cancha Villa Los Jardines (ahí se dicta la escuela de fútbol); coordenadas del link a Google Maps de la ficha · fuente: https://teatroamil.cl/sala/cancha-villa-los-jardines-nunoa/'
+
+  'JJVV Villa Olímpica':
+    direccion: 'Sócrates 1237'
+    comuna: 'Ñuñoa'
+    lat: -33.46294
+    lon: -70.61921
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · JJVV Villa Olímpica UV 32, registro oficial · fuente: https://registros19862.gob.cl/institucion/74186300/ficha'
+
+  'JJVV Villa Alemana':
+    direccion: 'Los Tres Antonios 868'
+    comuna: 'Ñuñoa'
+    lat: -33.46338
+    lon: -70.60389
+    nota: 'web y catastro coinciden dentro de 84 m · placemark 17 del mapa de sedes de la Unión Comunal de JJVV de Ñuñoa · fuente: https://www.unconunoa.cl/'
+
+  'JJVV Los Alerces':
+    direccion: 'Lluta 3800'
+    comuna: 'Ñuñoa'
+    lat: -33.47031
+    lon: -70.59265
+    nota: 'web y catastro coinciden dentro de 141 m · placemark 27 del mapa de sedes de la Unión Comunal · fuente: https://www.unconunoa.cl/'
+
+  'Cancha Amapolas':
+    direccion: 'Bremen 1589'
+    comuna: 'Ñuñoa'
+    lat: -33.43984
+    lon: -70.57889
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · Multicancha Amapolas; distinta de la sede de la JJVV Amapolas · fuente: https://www.instagram.com/multicancha.amapolas/p/C6UZrkNuY55/'
+
+  'JJVV Suárez Mujica':
+    direccion: 'Av. Grecia 790'
+    comuna: 'Ñuñoa'
+    lat: -33.45855
+    lon: -70.62437
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · JJVV N°13 Suárez Mujica, registro oficial · fuente: https://registros19862.gob.cl/institucion/65187480/ficha'
+
+  'JJVV Gorostiaga':
+    direccion: 'Julio Zegers 4223'
+    comuna: 'Ñuñoa'
+    lat: -33.45144
+    lon: -70.58698
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · nota de la Unión Comunal sobre la inauguración de la sede · fuente: https://www.unconunoa.cl/junta-de-vecinos-parque-gorostiaga-inaugura-sede-social/'
+
+  'JJVV Amapolas':
+    direccion: 'Pasaje 9 4890'
+    comuna: 'Ñuñoa'
+    lat: -33.44108
+    lon: -70.58074
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · JJVV Amapolas, registro oficial · fuente: https://registros19862.gob.cl/fichas/ver/rut/72682800/clase/5'
+
+  'JJVV San Eugenio':
+    direccion: 'Lo Encalada 1855'
+    comuna: 'Ñuñoa'
+    lat: -33.46753
+    lon: -70.62211
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · JJVV Parque San Eugenio, registro oficial (figura como ''1855 interior'') · fuente: https://registros19862.gob.cl/fichas/ver/rut/71437100/clase/5'
+
+  'JJVV Irarrázaval':
+    direccion: 'Ricardo Lyon 2856'
+    comuna: 'Ñuñoa'
+    lat: -33.44849
+    lon: -70.60230
+    nota: 'web y catastro coinciden dentro de 138 m · placemark 8 del mapa de sedes de la Unión Comunal (Ricardo Lyon 2856-A) · fuente: https://www.unconunoa.cl/'
+
+  'JJVV Eusebio Lillo':
+    direccion: 'Elías de la Cruz 13'
+    comuna: 'Ñuñoa'
+    lat: -33.45476
+    lon: -70.61645
+    nota: 'web y catastro coinciden dentro de 70 m · placemark 14 del mapa de sedes de la Unión Comunal · fuente: https://www.unconunoa.cl/'
+
+  'Cancha Puquios':
+    direccion: 'Puquios 4125'
+    comuna: 'Ñuñoa'
+    lat: -33.47129
+    lon: -70.58944
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · complejo de canchas en calle Puquios (numeración 4125-4211) · fuente: https://agendapro.com/mp/cl/pl/canchas-deportivo-nunoa/233166'
+
+  'JJVV Contramaestre Micalvi':
+    direccion: 'Contramaestre Micalvi 536'
+    comuna: 'Ñuñoa'
+    lat: -33.45985
+    lon: -70.57924
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · JJVV UV 22, registro oficial · fuente: https://registros19862.gob.cl/institucion/73650100/ficha'
+
+  'JJVV Villa Frei':
+    direccion: 'Raúl Silva Castro 4795'
+    comuna: 'Ñuñoa'
+    lat: -33.46513
+    lon: -70.58212
+    nota: 'web y catastro coinciden dentro de 53 m · placemark 23 Villa Presidente Frei del mapa de sedes · fuente: https://www.unconunoa.cl/'
+
+  'JJVV Exequiel González Cortes':
+    direccion: 'Doce 930'
+    comuna: 'Ñuñoa'
+    nota: 'el catastro OSM no conoce esa calle o ese número: entra la dirección, el pin lo resolverá la corrida · registro oficial; la calle también aparece como Vía 12 · fuente: https://registros19862.gob.cl/fichas/ver/rut/72047000/clase/5'
+
+  'JJVV Contramaestre Mcalvi':
+    direccion: 'Contramaestre Micalvi 536'
+    comuna: 'Ñuñoa'
+    lat: -33.45985
+    lon: -70.57924
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · variante de escritura de JJVV Contramaestre Micalvi · fuente: https://registros19862.gob.cl/institucion/73650100/ficha'
+
+  'JJVV Ramón Cruz':
+    direccion: 'Irarrázaval 4665'
+    comuna: 'Ñuñoa'
+    lat: -33.45444
+    lon: -70.58150
+    nota: 'web y catastro coinciden dentro de 52 m · placemark 21 Parque Ramón Cruz del mapa de sedes (4665-F) · fuente: https://www.unconunoa.cl/'
+
+  'JJVV Lo Plaza':
+    direccion: 'Quilpué 4242'
+    comuna: 'Ñuñoa'
+    lat: -33.46914
+    lon: -70.58789
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · JJVV N°25 Villa Lo Plaza, registro oficial · fuente: https://registros19862.gob.cl/fichas/ver/rut/71904300/clase/5'
+
+  'Cancha Ampolas':
+    direccion: 'Bremen 1589'
+    comuna: 'Ñuñoa'
+    lat: -33.43984
+    lon: -70.57889
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · variante de escritura de Cancha Amapolas · fuente: https://www.instagram.com/multicancha.amapolas/p/C6UZrkNuY55/'
+
+  'JJVV Rebeca Matte':
+    direccion: 'Nueva Uno 1600'
+    comuna: 'Ñuñoa'
+    lat: -33.46903
+    lon: -70.61594
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · JJVV Villa Rebecca Matte, registro oficial · fuente: https://registros19862.gob.cl/institucion/72214300/ficha'
+
+  'JJVV Los Jardines':
+    direccion: 'Peatonal 24 4560'
+    comuna: 'Ñuñoa'
+    lat: -33.42016
+    lon: -70.60902
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · JJVV N°24 Villa Los Jardines, registro oficial; distinta de la cancha Los Jardines · fuente: https://registros19862.gob.cl/fichas/ver/rut/72053700/clase/5'
+
+  'JJVV Bernardo O''Higgins':
+    direccion: 'Los Alerces 1680'
+    comuna: 'Ñuñoa'
+    lat: -33.47141
+    lon: -70.61258
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · JJVV N°37, directorio Chileguia (Los Alerces 1680-F) · fuente: https://www.chileguia.cl/detalle/junta-de-vecinos-n-37-bernardo-ohiggins-nunoa-646154'
+
+  'JJVV Villa Salvador Cruz Gana':
+    direccion: 'Los Jazmines 1705'
+    comuna: 'Ñuñoa'
+    lat: -33.46586
+    lon: -70.61820
+    nota: 'web y catastro coinciden dentro de 166 m · placemark 33 del mapa de sedes; corroborado por Waze · fuente: https://www.unconunoa.cl/'
+
+  'Villa Olímpica':
+    direccion: 'Aristóteles 1125'
+    comuna: 'Ñuñoa'
+    lat: -33.46422
+    lon: -70.62119
+    nota: 'web y catastro coinciden dentro de 84 m · cancha Villa Olímpica; coordenadas del link a Google Maps de la ficha · fuente: https://teatroamil.cl/sala/cancha-villa-olimpica-nunoa/'
+
+  'Corporacion Cultural de Lo Barnechea (El Tranque)':
+    direccion: 'Av. El Tranque 10300'
+    comuna: 'Lo Barnechea'
+    lat: -33.36076
+    lon: -70.54118
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · Centro Cultural El Tranque, sede propia de la corporación · fuente: https://corporacionculturaldelobarnechea.cl/espacios/centro-cultural-el-tranque/'
+
+  'TEATRO CACHAFAZ':
+    direccion: 'Av. Italia 1679'
+    comuna: 'Ñuñoa'
+    lat: -33.45051
+    lon: -70.62400
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · dirección publicada en la ficha de Ticketplus · fuente: https://ticketplus.cl/events/taller-de-impro-agosto-2026-08-06-19-30-00-0400'
+
+  'Sala Julieta, Teatro Aleph Chile':
+    direccion: 'Eulogio Altamirano 7425'
+    comuna: 'La Cisterna'
+    lat: -33.52688
+    lon: -70.65811
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · sala dentro del Teatro Aleph; dirección del recinto · fuente: https://ticketplus.cl/events/el-inspector-2026-08-28-20-00-00-0400'
+
+  'Planetario Huechuraba':
+    direccion: 'Premio Nobel 5555'
+    comuna: 'Huechuraba'
+    lat: -33.37382
+    lon: -70.63367
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · Ciudad Empresarial · fuente: https://ticketplus.cl/events/orbita-sonora-daft-punk-discovery'
+
+  'Sala K U Mayor':
+    direccion: 'Marín 321'
+    comuna: 'Santiago'
+    lat: -33.44614
+    lon: -70.63644
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · sala de cine en el Campus El Claustro de la U. Mayor · fuente: https://ticketplus.cl/events/los-domingos-de-alauda-ruiz-de-azua-en-sala-k'
+
+  'Teatro Nacional Chileno':
+    direccion: 'Morandé 25'
+    comuna: 'Santiago'
+    lat: -33.44362
+    lon: -70.65285
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · dirección en Ticketplus · fuente: https://ticketplus.cl/events/no-se-beckett'
+
+  '(Foyer principal) Gran Sala Sinfónica Nacional':
+    direccion: 'Av. Vicuña Mackenna 20'
+    comuna: 'Providencia'
+    lat: -33.43816
+    lon: -70.63488
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · Complejo VM20 del CEAC · fuente: https://ticketplus.cl/events/la-previa-concierto-n-16-americana-250'
+
+  'Sala Nemesio':
+    direccion: 'Av. Alcalde Fernando Castillo Velasco 8580'
+    comuna: 'La Reina'
+    lat: -33.45055
+    lon: -70.54348
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · comparte domicilio con la Biblioteca Pública de La Reina · fuente: https://ticketplus.cl/events/membresia-sala-nemesio'
+
+  'Teatro ICTUS':
+    direccion: 'Merced 349'
+    comuna: 'Santiago'
+    lat: -33.43733
+    lon: -70.64237
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · dirección en Ticketplus · fuente: https://ticketplus.cl/events/pa-ta-yo-ba-e-2026-07-31-20-00-00-0400'
+
+  'Metropolitan Santiago':
+    direccion: 'Av. San Josemaría Escrivá de Balaguer 5600'
+    comuna: 'Vitacura'
+    lat: -33.38342
+    lon: -70.58825
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · ex Casapiedra; la fuente declaraba comuna Santiago y está en Vitacura · fuente: https://metropolitansantiago.cl/'
+
+  'Estadio Bicentenario La Florida':
+    direccion: 'Enrique Olivares 1003'
+    comuna: 'La Florida'
+    lat: -33.54011
+    lon: -70.57800
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · dirección en Ticketplus · fuente: https://ticketplus.cl/events/abono-famiglia-audina'
+
+  'Estadio Bicentenario de La Florida':
+    direccion: 'Enrique Olivares 1003'
+    comuna: 'La Florida'
+    lat: -33.54011
+    lon: -70.57800
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · variante de escritura del mismo estadio · fuente: https://ticketplus.cl/events/abono-famiglia-audina'
+
+  'SALA MULTIUSO APUC (Av. Libertador Bdo O’Higgins 406)':
+    direccion: 'Av. Libertador Bernardo O''Higgins 406'
+    comuna: 'Santiago'
+    lat: -33.44215
+    lon: -70.64179
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · recinto deportivo municipal del sector San Borja · fuente: https://www.munistgo.cl/talleres-deportivos/'
+
+  'Corporacion Cultural de La Pintana (Teatro Municipal)':
+    direccion: 'Av. Santa Rosa 12975'
+    comuna: 'La Pintana'
+    lat: -33.58431
+    lon: -70.63090
+    nota: 'web y catastro coinciden dentro de 99 m · Teatro Municipal de La Pintana; su página de venta publica las coordenadas · fuente: https://ticket.culturapintana.cl/cartelera/sueno/'
+
+  'Teatro Universidad de Chile':
+    direccion: 'Av. Providencia 043'
+    comuna: 'Providencia'
+    nota: 'el catastro OSM no conoce esa calle o ese número: entra la dirección, el pin lo resolverá la corrida · sede junto a Plaza Italia; OJO con el cero inicial del 043 · fuente: https://ticketplus.cl/events/la-previa-ballet-nacional-chileno-ciclo-n-3-voces-reposicion'
+
+  'Mori Parque Arauco':
+    direccion: 'Av. Presidente Kennedy 5413'
+    comuna: 'Las Condes'
+    lat: -33.40324
+    lon: -70.57958
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · sala dentro del Mall Parque Arauco, piso -1 · fuente: https://www.parquearauco.cl/tiendas/teatro-mori'
+
+  'Mori Vitacura':
+    direccion: 'Av. Bicentenario 3800'
+    comuna: 'Vitacura'
+    lat: -33.39884
+    lon: -70.60136
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · el sitio propio de Teatro Mori bloqueó el acceso · fuente: https://www.ticketmaster.cl/page/teatro-mori-vitacura'
+
+  'Cultura Providencia':
+    direccion: 'Av. Nueva Providencia 1995'
+    comuna: 'Providencia'
+    lat: -33.42517
+    lon: -70.61244
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · sede de la Fundación Cultural de Providencia, esquina Pedro de Valdivia · fuente: https://culturaprovidencia.cl/2026/07/31/exposicion-de-claudia-rios/'
+
+  'TEATRO SIDARTE':
+    direccion: 'Ernesto Pinto Lagarrigue 131'
+    comuna: 'Recoleta'
+    lat: -33.43288
+    lon: -70.63711
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · dirección en Ticketplus · fuente: https://ticketplus.cl/events/corazon-de-chocolate-cronica-de-un-dulce-suicidio-ocaso-teatro'
+
+  'Centro de Extensión Artística y Cultural Universidad de Chile, Complejo Universitario VM20':
+    direccion: 'Av. Vicuña Mackenna 20'
+    comuna: 'Providencia'
+    lat: -33.43816
+    lon: -70.63488
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · VM20; mismo edificio que la Gran Sala Sinfónica · fuente: https://portaluchile.uchile.cl/vm20'
+
+  'MAC - Parque Forestal (Parque Forestal s/n frente calle Mosqueto, Metro estación Bellas Artes, Santiago, Chile)':
+    direccion: 'Ismael Valdés Vergara 506'
+    comuna: 'Santiago'
+    lat: -33.43511
+    lon: -70.64448
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · sede Parque Forestal del MAC (la de Quinta Normal es Matucana 464) · fuente: https://mac.uchile.cl/actividades/obras-extraordinarias-las-politicas-del-habitar-ciclo-de-encuentros/'
+
+  'MAC - Museo de Arte Contemporaneo (U. de Chile)':
+    direccion: 'Ismael Valdés Vergara 506'
+    comuna: 'Santiago'
+    lat: -33.43511
+    lon: -70.64448
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · sede Parque Forestal · fuente: https://mac.uchile.cl/actividades/obras-extraordinarias-las-politicas-del-habitar-ciclo-de-encuentros/'
+
+  'MULTICANCHA ARAUCO (Av. El Mirador / Manuel de Amatt)':
+    direccion: 'Av. El Mirador esquina Manuel Antonio Amat'
+    comuna: 'Santiago'
+    nota: 'el catastro OSM no conoce esa calle o ese número: entra la dirección, el pin lo resolverá la corrida · la fuente solo da la intersección, sin numeración · fuente: https://www.munistgo.cl/talleres-deportivos/'
+
+  'MULTICANCHA PARQUE O’HIGGINS – CORDESAN (entrada por AV. Blanco)':
+    direccion: 'Av. Blanco Encalada 2540'
+    comuna: 'Santiago'
+    lat: -33.46306
+    lon: -70.66664
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · recinto de CORDESAN dentro del Parque O''Higgins; se usa el acceso de Blanco Encalada · fuente: https://www.munistgo.cl/talleres-deportivos/'
+
+  'Parque O''Higgins':
+    direccion: 'Av. Blanco Encalada 2540'
+    comuna: 'Santiago'
+    lat: -33.46306
+    lon: -70.66664
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · acceso principal del parque, como referencia · fuente: https://moovitapp.com/index/en/public_transit-Acceso_Parque_O_Higgins-Santiago-street_11472764-642'
+
+  'MUT, Piso 1: La Calle':
+    direccion: 'Av. Apoquindo 2730'
+    comuna: 'Las Condes'
+    lat: -33.41729
+    lon: -70.60077
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · MUT; la fuente declara Providencia y el edificio está en Las Condes · fuente: https://es.wikipedia.org/wiki/Mercado_Urbano_Tobalaba'
+
+  'MUT, Piso 1: La Calle — Calle Roger de Flor':
+    direccion: 'Av. Apoquindo 2730'
+    comuna: 'Las Condes'
+    lat: -33.41729
+    lon: -70.60077
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · piso del complejo MUT · fuente: https://es.wikipedia.org/wiki/Mercado_Urbano_Tobalaba'
+
+  'MUT, Piso 2: El Barrio — Galería MUT':
+    direccion: 'Av. Apoquindo 2730'
+    comuna: 'Las Condes'
+    lat: -33.41729
+    lon: -70.60077
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · piso del complejo MUT · fuente: https://es.wikipedia.org/wiki/Mercado_Urbano_Tobalaba'
+
+  'MUT, Piso 4: La Terraza':
+    direccion: 'Av. Apoquindo 2730'
+    comuna: 'Las Condes'
+    lat: -33.41729
+    lon: -70.60077
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · piso del complejo MUT · fuente: https://es.wikipedia.org/wiki/Mercado_Urbano_Tobalaba'
+
+  'MUT, Piso -1: El Taller':
+    direccion: 'Av. Apoquindo 2730'
+    comuna: 'Las Condes'
+    lat: -33.41729
+    lon: -70.60077
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · piso del complejo MUT · fuente: https://es.wikipedia.org/wiki/Mercado_Urbano_Tobalaba'
+
+  'MUT, Piso -3: La Estación':
+    direccion: 'Av. Apoquindo 2730'
+    comuna: 'Las Condes'
+    lat: -33.41729
+    lon: -70.60077
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · piso -3 con acceso a Metro Tobalaba · fuente: https://es.wikipedia.org/wiki/Mercado_Urbano_Tobalaba'
+
+  'MUT — Mercado Urbano Tobalaba':
+    direccion: 'Av. Apoquindo 2730'
+    comuna: 'Las Condes'
+    lat: -33.41729
+    lon: -70.60077
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · complejo MUT · fuente: https://es.wikipedia.org/wiki/Mercado_Urbano_Tobalaba'
+
+  'Factoria Franklin':
+    direccion: 'Franklin 741'
+    comuna: 'Santiago'
+    lat: -33.47269
+    lon: -70.64317
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · Barrio Franklin, entre Santa Rosa y San Francisco · fuente: https://factoria-franklin.cl/contacto/'
+
+  'Freedom':
+    direccion: 'Avenida Recoleta 345'
+    comuna: 'Recoleta'
+    lat: -33.42940
+    lon: -70.64738
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · dirección en Ticketplus · fuente: https://ticketplus.cl/events/fiesta-macarena-moster-high-spot-freedom-23-00'
+
+  'Parque Ciudad Empresarial':
+    direccion: 'Avenida del Parque 420'
+    comuna: 'Huechuraba'
+    nota: 'el catastro OSM no conoce esa calle o ese número: entra la dirección, el pin lo resolverá la corrida · explanada de eventos del distrito Ciudad Empresarial · fuente: https://www.ciudadempresarial.cl/'
+
+  'Omnium':
+    direccion: 'Avenida Apoquindo 4900'
+    comuna: 'Las Condes'
+    lat: -33.41223
+    lon: -70.57776
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · sala de eventos dentro de la galería Omnium · fuente: https://www.waze.com/live-map/directions/galeria-omnium-av.-apoquindo-4900-las-condes'
+
+  'Parque Padre Hurtado':
+    direccion: 'Avenida Francisco Bilbao 8105'
+    comuna: 'La Reina'
+    lat: -33.43134
+    lon: -70.54528
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · dirección en Ticketplus · fuente: https://ticketplus.cl/events/semana-de-la-chilenidad-2026'
+
+  'Centro de Estudios Públicos (CEP)':
+    direccion: 'Monseñor Sótero Sanz 162'
+    comuna: 'Providencia'
+    lat: -33.42386
+    lon: -70.61557
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · Auditorio CEP · fuente: https://www.cepchile.cl/eventos/'
+
+  'Hotel Las Majadas':
+    direccion: 'José Julio Nieto s/n'
+    comuna: 'Pirque'
+    nota: 'el catastro OSM no conoce esa calle o ese número: entra la dirección, el pin lo resolverá la corrida · Loteo Parque Las Majadas; la fuente no traía comuna y está en Pirque · fuente: https://ticketplus.cl/events/taste-society'
+
+  'DETUCH':
+    direccion: 'Morandé 750'
+    comuna: 'Santiago'
+    lat: -33.43554
+    lon: -70.65419
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · sala del Departamento de Teatro de la U. de Chile · fuente: https://ticketplus.cl/events/la-mision-detuch'
+
+  'TEATRO DEL PUENTE':
+    direccion: 'Parque Forestal s/n, entre puentes Pío Nono y Purísima'
+    comuna: 'Santiago'
+    nota: 'el catastro OSM no conoce esa calle o ese número: entra la dirección, el pin lo resolverá la corrida · sin número formal · fuente: https://teatrodelpuente.cl/ubicacion/'
+
+  'Sala Ana González':
+    direccion: 'Jorge Washington 26'
+    comuna: 'Ñuñoa'
+    lat: -33.45485
+    lon: -70.59444
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · sala del Teatro UC en Plaza Ñuñoa · fuente: https://teatrouc.uc.cl/evento/gemelos/'
+
+  'Sala Eugenio Dittborn':
+    direccion: 'Jorge Washington 26'
+    comuna: 'Ñuñoa'
+    lat: -33.45485
+    lon: -70.59444
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · sala del Teatro UC · fuente: https://teatrouc.uc.cl/evento/el-nino-de-los-fosiles/'
+
+  'CLUB ALICIA - EX 2.0 CLUB':
+    direccion: 'San Pablo 7151'
+    comuna: 'Lo Prado'
+    lat: -33.44438
+    lon: -70.73392
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · ex 2.0 Club; varios directorios coinciden · fuente: https://twitter.com/espacio2punto0/status/72692436287242240'
+
+  'HANGAR':
+    direccion: 'Santa Filomena 10'
+    comuna: 'Recoleta'
+    lat: -33.43035
+    lon: -70.63795
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · Hangar Bellavista, casi esquina Pío Nono · fuente: https://www.hangarbellavista.cl/como-llegar'
+
+  'Municipalidad de El Bosque - Cartelera de Eventos':
+    direccion: 'Eleuterio Ramírez 10264'
+    comuna: 'El Bosque'
+    lat: -33.55724
+    lon: -70.66326
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · Centro Cívico Cultural de El Bosque · fuente: https://www.municipalidadelbosque.cl/cartelera-de-eventos/'
+
+  'Aiquia Espacio Creativo':
+    direccion: 'Girardi 1067'
+    comuna: 'Providencia'
+    lat: -33.44451
+    lon: -70.62461
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · dirección en Ticketplus · fuente: https://ticketplus.cl/events/formato'
+
+  'Espacio Cowork':
+    direccion: 'Av. Pedro de Valdivia 1509'
+    comuna: 'Providencia'
+    lat: -33.43693
+    lon: -70.60853
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · campus Casa Central de la U. Finis Terrae · fuente: https://finis.cl/nuestra-universidad/campus-e-infraestructura/'
+
+  'Auditorio Gonzalo Vial Correa C101':
+    direccion: 'Av. Pedro de Valdivia 1509'
+    comuna: 'Providencia'
+    lat: -33.43693
+    lon: -70.60853
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · campus Casa Central de la U. Finis Terrae · fuente: https://finis.cl/nuestra-universidad/campus-e-infraestructura/'
+
+  'Sala C301':
+    direccion: 'Av. Pedro de Valdivia 1509'
+    comuna: 'Providencia'
+    lat: -33.43693
+    lon: -70.60853
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · campus Casa Central de la U. Finis Terrae · fuente: https://finis.cl/nuestra-universidad/campus-e-infraestructura/'
+
+  'Sala Vitacura':
+    direccion: 'Av. Bicentenario 3800'
+    comuna: 'Vitacura'
+    lat: -33.39884
+    lon: -70.60136
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · sala de la Corporación Cultural de Vitacura · fuente: https://vitacuracultura.cl/evento/seis-al-blues-jam-session/'
+
+  'Aula Magna Biblioteca, Universidad de los Andes':
+    direccion: 'Monseñor Álvaro del Portillo 12455'
+    comuna: 'Las Condes'
+    lat: -33.40279
+    lon: -70.50791
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · campus de la U. de los Andes · fuente: https://ticketplus.cl/events/de-haydn-a-mozart'
+
+  'Teatro Parque Cousiño':
+    direccion: 'San Ignacio de Loyola 1249'
+    comuna: 'Santiago'
+    lat: -33.46225
+    lon: -70.65553
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · ex Humoresque, Monumento Nacional · fuente: https://www.monumentos.gob.cl/monumentos/monumentos-historicos/teatro-parque-cousino-ex-humoresque'
+
+  'Munich Malloco':
+    direccion: 'Av. Balmaceda 2933'
+    comuna: 'Peñaflor'
+    lat: -33.62487
+    lon: -70.86911
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · restaurante y centro de eventos en Malloco · fuente: https://www.munich.cl/'
+
+  'Estadio Estrella Manuel Rodriguez':
+    direccion: 'José Miguel Carrera 865'
+    comuna: 'La Florida'
+    lat: -33.55003
+    lon: -70.57619
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · directorio deportivo · fuente: https://ligaproyeccionchilelpc.cl/stadium/estadio-estrella-manuel-rodriguez/'
+
+  'Hotel Wyndham Pettra, La Dehesa':
+    direccion: 'Comandante Malbec 12851'
+    comuna: 'Lo Barnechea'
+    lat: -33.35962
+    lon: -70.51538
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · sitio de reservas; el hotel no publica el número · fuente: https://www.hotels.com/ho343978/hotel-pettra-santiago-lo-barnechea-chile/'
+
+  'Plaza Chacabuco':
+    direccion: 'Av. Independencia s/n'
+    comuna: 'Independencia'
+    nota: 'el catastro OSM no conoce esa calle o ese número: entra la dirección, el pin lo resolverá la corrida · plaza pública entre el Hipódromo Chile y Santa Laura, sin número · fuente: https://es.wikipedia.org/wiki/Plaza_Chacabuco'
+
+  'Campus B':
+    direccion: 'Los Leones 1200'
+    comuna: 'Providencia'
+    lat: -33.43035
+    lon: -70.60228
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · sede de la U. Alberto Hurtado distinta de la casa central · fuente: https://www.uahurtado.cl/'
+
+  'Gimnasio Municipal De Puente Allto':
+    direccion: 'Balmaceda 265'
+    comuna: 'Puente Alto'
+    lat: -33.60961
+    lon: -70.57486
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · gimnasio municipal; el nombre viene con la falta de ortografía de la fuente · fuente: https://ticketplus.cl/events/abono-m-puente-alto-2026'
+
+  'Futbolito UC':
+    direccion: 'Circunvalación Las Flores s/n'
+    comuna: 'Las Condes'
+    nota: 'el catastro OSM no conoce esa calle o ese número: entra la dirección, el pin lo resolverá la corrida · canchas del Club Deportivo UC; sin número · fuente: https://ticketplus.cl/events/liga-ex-tabancura'
+
+  'Lo Matta Cultural':
+    direccion: 'Av. Kennedy 9350'
+    comuna: 'Vitacura'
+    lat: -33.38724
+    lon: -70.54470
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · centro cultural de la Corporación Cultural de Vitacura · fuente: https://www.lomatta.cl/'
+
+  'Club de Teatro':
+    direccion: 'Constitución 75'
+    comuna: 'Providencia'
+    lat: -33.43345
+    lon: -70.63457
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · Club de Teatro Fernando González · fuente: https://ticketplus.cl/events/animas-de-dia-claro-2026'
+
+  'Eventos San Jorge':
+    direccion: 'San Jorge 1975'
+    comuna: 'La Florida'
+    lat: -33.55803
+    lon: -70.56692
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · casona de eventos · fuente: https://weddy.cl/lugares-para-matrimonios/eventos-san-jorge--MR1CRHQT'
+
+  'MIA CLUB ( EX 2.0 PREMIUM) Camino a San Jose de Maipo 07769':
+    direccion: 'Camino a San José de Maipo 07769'
+    comuna: 'Puente Alto'
+    nota: 'el catastro OSM no conoce esa calle o ese número: entra la dirección, el pin lo resolverá la corrida · OJO con el cero inicial del 07769 · fuente: https://www.waze.com/live-map/directions/cl/region-metropolitana/puente-alto/camino-a-san-jose-de-maipo-07769'
+
+  'Basel':
+    direccion: 'Av. Independencia 565'
+    comuna: 'Independencia'
+    lat: -33.42463
+    lon: -70.65328
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · la fuente declaraba Santiago y está en Independencia · fuente: https://www.ticketmaster.cl/venue/basel-mall-barrio-independencia'
+
+  'Taringuita Farellones':
+    direccion: 'Av. Los Cóndores 1284'
+    comuna: 'Lo Barnechea'
+    lat: -33.35167
+    lon: -70.31217
+    nota: 'la dirección existe en el catastro OSM y cae en su comuna · restaurante en Farellones · fuente: https://www.instagram.com/taringuitafarellones/'

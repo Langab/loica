@@ -136,3 +136,502 @@ eventos:
   e1ac14c68048b252:
     descartar: true
     nota: '"Feria Friki Pueblito Las Vizcachas – FeriaFriki" — se publicó como 2027-06-08 por el error de año; la fecha real era 2025-06-08 (ya pasó)'
+
+  # ---------------------------------------------------------------
+  # Auditoría de categorías del 22-08-2026 (scripts/auditar_categorias.py)
+  # Los 1.740 panoramas publicados ese día se revisaron uno por uno. Lo que se
+  # repetía quedó como regla en config/correcciones/categorias.yaml y arregló
+  # 205 eventos; esto es lo que sobró — casos donde una regla habría sido
+  # demasiado ancha (el nombre de un cantautor, una sala que programa de todo,
+  # una noticia institucional suelta). El veredicto de cada uno vive en
+  # datos/revision/auditoria_categorias_2026-08-22.tsv, que es contra lo que
+  # se mide el clasificador.
+  #
+  # OJO con la caducidad: el id nace de título+fecha+lugar, así que estas
+  # entradas mueren cuando el evento pasa. Es el precio del bisturí y por eso
+  # lo general va arriba, en categorias.yaml.
+  # ---------------------------------------------------------------
+  # LUIS JARA  (teatro → musica)
+  6e6a4fa0286d129f:
+    categoria: musica
+    nota: auditoría del 2026-08-22
+
+  # La Naturaleza de las Cosas Invisibles  (arte → cine)
+  64cfe9e2c7e6d1f2:
+    categoria: cine
+    nota: auditoría del 2026-08-22
+
+  # RAPUNZEL  (teatro → familia)
+  98c443d52ec7663a:
+    categoria: familia
+    nota: auditoría del 2026-08-22
+
+  # Pullman Xchange - El poder de la Resilencia  (otros → charla)
+  a1c6f05414ef1393:
+    categoria: charla
+    nota: auditoría del 2026-08-22
+
+  # QUE LE CORTEN LA CABEZA  (cine → teatro)
+  320c423574c0a384:
+    categoria: teatro
+    nota: auditoría del 2026-08-22
+
+  # Buena Vista Social Club «El Legado»  (fiesta → musica)
+  2fa0c6c93611a422:
+    categoria: musica
+    nota: auditoría del 2026-08-22
+
+  # Mercado Libre Experience 2026  (musica → feria)
+  c28d7bb2479cf1f1:
+    categoria: feria
+    nota: auditoría del 2026-08-22
+
+  # Un Mentes Expertas de Nathaly Marcus  (otros → charla)
+  1e1ac54a364b9c92:
+    categoria: charla
+    nota: auditoría del 2026-08-22
+
+  # Sala Nemesio presenta "Café Con" con el equipo de “Mil Pedazos”  (otros → charla)
+  de6dc73913a4433f:
+    categoria: charla
+    nota: auditoría del 2026-08-22
+
+  # VERBALIZAR  (fiesta → teatro)
+  ef1d5bb99240a73b:
+    categoria: teatro
+    nota: auditoría del 2026-08-22
+
+  # NOCHE DE MEEPLES EN TEATRO FÁBRICA  (musica → otros)
+  4a02eb9efbcf0aeb:
+    categoria: otros
+    nota: auditoría del 2026-08-22
+
+  # SANTIAGO IPA FEST (+18)  (musica → feria)
+  4fb5f8c81f37ea72:
+    categoria: feria
+    nota: auditoría del 2026-08-22
+
+  # Nueva alianza: NAVE y Centro Cultural La Moneda  (clases → descartar)
+  abf1b561b5e80cf5:
+    descartar: true
+    nota: auditoría del 2026-08-22
+
+  # CALEUCHÍSTICO  (musica → familia)
+  5983acd0a2dcac6c:
+    categoria: familia
+    nota: auditoría del 2026-08-22
+
+  # Not-Antígona  (arte → teatro)
+  9b1f6d598fc5aa42:
+    categoria: teatro
+    nota: auditoría del 2026-08-22
+
+  # Ineino visita la capital: Lanzamiento de la Nueva Ola  (charla → musica)
+  91296498d5020916:
+    categoria: musica
+    nota: auditoría del 2026-08-22
+
+  # JAZZ CLUB 🎵 MIÉRCOLES 26 AGOSTO ★ Club Subterráneo  (fiesta → musica)
+  2ec8c6a7e063d5f6:
+    categoria: musica
+    nota: auditoría del 2026-08-22
+
+  # Prepara tu PAES desde donde estés  (charla → descartar)
+  f925451407c46a30:
+    descartar: true
+    nota: auditoría del 2026-08-22
+
+  # Goes To The Disco - 4 Pistas de Baile:_  (musica → fiesta)
+  aef275e239c1d973:
+    categoria: fiesta
+    nota: auditoría del 2026-08-22
+
+  # Castillo Ilabaca en Centro Arte Alameda  (cine → musica)
+  9bda4b2ed968cd26:
+    categoria: musica
+    nota: auditoría del 2026-08-22
+
+  # La Cenicienta. Mi primera ópera | Teatro CA660  (teatro → familia)
+  ec01554113a84f39:
+    categoria: familia
+    nota: auditoría del 2026-08-22
+
+  # STRONG FST - CIRCUS: SELVA, TOBY & MACARENA - SPOT FREEDOM - 22:00 - 1  (otros → fiesta)
+  35ff81d557054878:
+    categoria: fiesta
+    nota: auditoría del 2026-08-22
+
+  # Ada (LSCH)  (arte → teatro)
+  ddfe812a73cafc3b:
+    categoria: teatro
+    nota: auditoría del 2026-08-22
+
+  # Rubio en M100  (teatro → musica)
+  9fb7532fb083cb8b:
+    categoria: musica
+    nota: auditoría del 2026-08-22
+
+  # Temporada Fundación Guitarra Viva Ernesto Quezada – Felipe Egaña  (teatro → musica)
+  12ea7a85f08cadf4:
+    categoria: musica
+    nota: auditoría del 2026-08-22
+
+  # Centro Cultural Chimkowe invita a un seminario de teatro musical socia  (charla → clases)
+  4f82325fcdf3b560:
+    categoria: clases
+    nota: auditoría del 2026-08-22
+
+  # FERNANDO MILAGROS  (teatro → musica)
+  90b60d5ae027a3f8:
+    categoria: musica
+    nota: auditoría del 2026-08-22
+
+  # Jamás Visto  (musica → teatro)
+  16002564a376ce98:
+    categoria: teatro
+    nota: auditoría del 2026-08-22
+
+  # Mazapan | Teatro CA660  (musica → familia)
+  367e4f54ca39ea93:
+    categoria: familia
+    nota: auditoría del 2026-08-22
+
+  # POL PABLO - Show Íntimo  (fiesta → descartar)
+  039ea7e4608cabbc:
+    descartar: true
+    nota: auditoría del 2026-08-22
+
+  # Canción Nacional Vol. 1  (otros → musica)
+  fee041f9e2836f02:
+    categoria: musica
+    nota: auditoría del 2026-08-22
+
+  # Ciclo a!HACS “Teatro, sonido y metodologías de investigación escénica”  (teatro → charla)
+  39b7c6fa7db6ad3b:
+    categoria: charla
+    nota: auditoría del 2026-08-22
+
+  # Postescuela 2026: La materia soñada  (feria → arte)
+  f1ad4de9a59326fd:
+    categoria: arte
+    nota: auditoría del 2026-08-22
+
+  # Tormenta (Valdivia)  (arte → teatro)
+  22d44305fc821739:
+    categoria: teatro
+    nota: auditoría del 2026-08-22
+
+  # CLUB FAUNA: SOFI TUKKER en Blondie  (fiesta → musica)
+  8201f2d394ce3149:
+    categoria: musica
+    nota: auditoría del 2026-08-22
+
+  # People Day by BUK 2026  (otros → charla)
+  24630eaf98df1697:
+    categoria: charla
+    nota: auditoría del 2026-08-22
+
+  # El rey que quería ser músico | Municipal Delivery 2026  (musica → descartar)
+  ef8779344f74bc2a:
+    descartar: true
+    nota: auditoría del 2026-08-22
+
+  # LLEVADOS POR EL DESEO Historias de Grindr…/Lospleimovil  (otros → teatro)
+  e82b7bfd1c2b3748:
+    categoria: teatro
+    nota: auditoría del 2026-08-22
+
+  # DANIEL HABIF GIRA "ASCENDER EL PASO FINAL"  (musica → charla)
+  bab11497dcbb3dc9:
+    categoria: charla
+    nota: auditoría del 2026-08-22
+
+  # CINE HALLOWEEN  (fiesta → cine)
+  b6eeaba229d25afb:
+    categoria: cine
+    nota: auditoría del 2026-08-22
+
+  # Fondo Juventud y Acción Climática 2026  (otros → descartar)
+  420f633920da1fe2:
+    descartar: true
+    nota: auditoría del 2026-08-22
+
+  # Cuentos de la Selva: Las Medias de los Flamencos  (teatro → familia)
+  8ddb6a4c028ad119:
+    categoria: familia
+    nota: auditoría del 2026-08-22
+
+  # Las Cacerolas Vacías  (arte → teatro)
+  197a29175035a8a0:
+    categoria: teatro
+    nota: auditoría del 2026-08-22
+
+  # Infinita, paisajes de Gabriela | La Llave Maestra  (otros → teatro)
+  65330166a911489a:
+    categoria: teatro
+    nota: auditoría del 2026-08-22
+
+  # FIESTA FAMILIAR DE LA HISPANIDAD  (fiesta → familia)
+  0b60ba3239522377:
+    categoria: familia
+    nota: auditoría del 2026-08-22
+
+  # JAMÁS VISTO  (musica → teatro)
+  838a28c1a2611950:
+    categoria: teatro
+    nota: auditoría del 2026-08-22
+
+  # Prenderse fuego, Las voces de Pedro Lemebel  (musica → descartar)
+  4f014901c590e6b2:
+    descartar: true
+    nota: auditoría del 2026-08-22
+
+  # Sueño  (teatro → familia)
+  0f3a8bed84c21b8a:
+    categoria: familia
+    nota: auditoría del 2026-08-22
+
+  # "La Misión, recuerdo de una revolución" de DETUCH  (otros → teatro)
+  89a9c92d53ad29d9:
+    categoria: teatro
+    nota: auditoría del 2026-08-22
+
+  # Club de Collage 2026-2027  (fiesta → clases)
+  0713986ef5b6640f:
+    categoria: clases
+    nota: auditoría del 2026-08-22
+
+  # Circdomingo HALLOWEN  (fiesta → familia)
+  f6ffd6d4579510f0:
+    categoria: familia
+    nota: auditoría del 2026-08-22
+
+  # DESCONECTA2  (teatro → familia)
+  d14f0d9e358cb4ee:
+    categoria: familia
+    nota: auditoría del 2026-08-22
+
+  # NO SÉ QUÉ RIMA CON TE QUIERO  (cine → teatro)
+  45c4b0a8926d3a1a:
+    categoria: teatro
+    nota: auditoría del 2026-08-22
+
+  # Ada  (arte → teatro)
+  b9e1e1f3a6f00861:
+    categoria: teatro
+    nota: auditoría del 2026-08-22
+
+  # EUPHORIA • THE BIRTHDAY QUEENS (+17)  (musica → fiesta)
+  57442276ee104f69:
+    categoria: fiesta
+    nota: auditoría del 2026-08-22
+
+  # Douglas en La Cabra de Chicureo  (fiesta → musica)
+  2f767055ad017ee8:
+    categoria: musica
+    nota: auditoría del 2026-08-22
+
+  # Tour Claro Arena en Claro Arena  (musica → otros)
+  0f62ef0c3b1b28da:
+    categoria: otros
+    nota: auditoría del 2026-08-22
+
+  # Las ideas y procesos que dieron forma a Cartografías del dolor  (teatro → descartar)
+  6f96a5ec955f17c7:
+    descartar: true
+    nota: auditoría del 2026-08-22
+
+  # Aura ★ SABADO 22 AGOSTO ★  (musica → fiesta)
+  4d7f6dcd144e63c8:
+    categoria: fiesta
+    nota: auditoría del 2026-08-22
+
+  # Temporada Ópera para Todos junto a Teatro Zoco  (teatro → musica)
+  ea80ce0c4b1aa32b:
+    categoria: musica
+    nota: auditoría del 2026-08-22
+
+  # Sala Nemesio presenta “Café Con Nayra Ilic” junto a la exhibición de "  (arte → cine)
+  fe3f64bd42be9577:
+    categoria: cine
+    nota: auditoría del 2026-08-22
+
+  # Presentación Grupo Tertulia y Canto: “Cosechando Canciones”  (otros → musica)
+  b8911b00d5b8a7f9:
+    categoria: musica
+    nota: auditoría del 2026-08-22
+
+  # SCROLL INFINITO, ATRAPADOS POR LA VIRTUALIDAD  (teatro → familia)
+  a4b11611767d4951:
+    categoria: familia
+    nota: auditoría del 2026-08-22
+
+  # ADA – FAMFEST  (familia → teatro)
+  3b6aa55cdf6f488e:
+    categoria: teatro
+    nota: auditoría del 2026-08-22
+
+  # FATUM: secret session VOL.01  (musica → fiesta)
+  ec706dc4500e452e:
+    categoria: fiesta
+    nota: auditoría del 2026-08-22
+
+  # OSCURA #03  (musica → fiesta)
+  c797a8467f397c37:
+    categoria: fiesta
+    nota: auditoría del 2026-08-22
+
+  # AMALGAMA VOL 4  (musica → fiesta)
+  c1bd58470e0669b2:
+    categoria: fiesta
+    nota: auditoría del 2026-08-22
+
+  # Y SIGO AQUIÍ...UN MUSICAL PARA RECORDAR  (musica → teatro)
+  d7ecdea04390a6fc:
+    categoria: teatro
+    nota: auditoría del 2026-08-22
+
+  # Valentina Cruz. De amor, humor y muerte  (teatro → arte)
+  08844e5e6e20299c:
+    categoria: arte
+    nota: auditoría del 2026-08-22
+
+  # DevOpsDays Santiago 2026  (otros → charla)
+  c1af710d083087e7:
+    categoria: charla
+    nota: auditoría del 2026-08-22
+
+  # Joris Voorn presenta TRIP TO GALAXY  (musica → fiesta)
+  2e492388046a89f6:
+    categoria: fiesta
+    nota: auditoría del 2026-08-22
+
+  # Ciclo N°3 - Voces  (charla → teatro)
+  fa8b7a4b3bb18ab3:
+    categoria: teatro
+    nota: auditoría del 2026-08-22
+
+  # Eventos  (teatro → descartar)
+  4916d0dc091570fe:
+    descartar: true
+    nota: auditoría del 2026-08-22
+
+  # Educando a Rita | CA660 Las Condes  (otros → teatro)
+  af40c59369f52de9:
+    categoria: teatro
+    nota: auditoría del 2026-08-22
+
+  # Sala Nemesio presenta “Café Con Ignacio Agüero” con la exhibición de "  (arte → cine)
+  724826a07e316c95:
+    categoria: cine
+    nota: auditoría del 2026-08-22
+
+  # Casa Museo EFM celebra el Mes del niño con “Ciclo de Cine de Animé Fra  (familia → cine)
+  447726989b258eb4:
+    categoria: cine
+    nota: auditoría del 2026-08-22
+
+  # SANTIAGO IPA FEST  (musica → feria)
+  4709270838efd7b0:
+    categoria: feria
+    nota: auditoría del 2026-08-22
+
+  # Caserio x Gallery  (musica → fiesta)
+  735c5c54923fafcd:
+    categoria: fiesta
+    nota: auditoría del 2026-08-22
+
+  # Cabaret: Dua Lipa - 4 Pistas de Baile_ (+18)  (musica → fiesta)
+  c33df33f91807b23:
+    categoria: fiesta
+    nota: auditoría del 2026-08-22
+
+  # SINCRO: RECUERDOS DISTANTES - LANZAMIENTO OFICAL NUEVO ALBUMEN SALA SC  (charla → musica)
+  4702e7c1a08b7087:
+    categoria: musica
+    nota: auditoría del 2026-08-22
+
+  # KOFFE EL KAFETERO EN VIVO | FIESTAS PATRIAS 2026 |  (fiesta → musica)
+  622a18958d315781:
+    categoria: musica
+    nota: auditoría del 2026-08-22
+
+  # VERBALIZAR  (fiesta → teatro)
+  a9859011841d0fad:
+    categoria: teatro
+    nota: auditoría del 2026-08-22
+
+  # EL CASCANUECES - El Corazón de Navidad  (otros → teatro)
+  b6654ca6b924159c:
+    categoria: teatro
+    nota: auditoría del 2026-08-22
+
+  # Malditas  (cine → arte)
+  12621fc7551e5a21:
+    categoria: arte
+    nota: auditoría del 2026-08-22
+
+  # 🇨🇱 FONDA TIKI TIKI 2026 🇨🇱  (fiesta → descartar)
+  63015b928ab8b9f6:
+    descartar: true
+    nota: auditoría del 2026-08-22
+
+  # Vicaría  (arte → teatro)
+  91b42b001cc91d6e:
+    categoria: teatro
+    nota: auditoría del 2026-08-22
+
+  # Tappabuchi, el origen del Payaso  (teatro → familia)
+  c690f7910aea9a28:
+    categoria: familia
+    nota: auditoría del 2026-08-22
+
+  # BODOQUE / TENGO OTRA IDEA - CLUB SAN MIGUEL  (otros → teatro)
+  0122de35ef331e26:
+    categoria: teatro
+    nota: auditoría del 2026-08-22
+
+  # Rubio en M100  (teatro → musica)
+  bfce50814d060f7b:
+    categoria: musica
+    nota: auditoría del 2026-08-22
+
+  # Exposición "Obras extraordinarias" en el MAC Parque Forestal  (teatro → arte)
+  aebd056c18d81ef7:
+    categoria: arte
+    nota: auditoría del 2026-08-22
+
+  # Aura ★ VIERNES 28 AGOSTO ★  (musica → fiesta)
+  d68b9a02a00bb2cf:
+    categoria: fiesta
+    nota: auditoría del 2026-08-22
+
+  # Tormenta (Valdivia)  (arte → teatro)
+  fa8f148f091ab143:
+    categoria: teatro
+    nota: auditoría del 2026-08-22
+
+  # Ada (LSCH)  (arte → teatro)
+  e709ce6df8c6b1eb:
+    categoria: teatro
+    nota: auditoría del 2026-08-22
+
+  # EUPHORIA • THE BIRTHDAY QUEENS  (musica → fiesta)
+  25b01c5baf48bb50:
+    categoria: fiesta
+    nota: auditoría del 2026-08-22
+
+  # La Previa / Concierto N° 16 • Americana 250  (musica → charla)
+  d70c472feecce639:
+    categoria: charla
+    nota: auditoría del 2026-08-22
+
+  # Ciclo Premios Nacionales junto a Teatro Zoco  (teatro → charla)
+  e125d4466792f029:
+    categoria: charla
+    nota: auditoría del 2026-08-22
+
+  # Niños del Cerro + Invitados (día 4)  (arte → musica)
+  8a67d7009ce571ec:
+    categoria: musica
+    nota: auditoría del 2026-08-22

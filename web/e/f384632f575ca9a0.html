@@ -63,7 +63,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../talleres.html">← Ver todos los talleres y clases</a>
+  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
   <div class="foto" id="foto"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Talleres familiares Qué tanto será</h1>
@@ -81,7 +81,7 @@
   <div class="dato"><span class="et"></span><span>Tres talleres familiares que tomarán la obra de Violeta Parra como fuente de inspiración para crear arpilleras, figuras de papel maché y poesía. Ver…</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../talleres.html#/e/f384632f575ca9a0">Ver en la página de talleres</a></p>
+    <a class="boton secundario bloque" href="../mapa.html#/e/f384632f575ca9a0">Ver en el mapa</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Corporacion Cultural de Lo Barnechea (El Tranque)</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
@@ -90,8 +90,8 @@
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 <script src="../loica.js?v=23"></script>
 <script>
-  pintarBarra("talleres.html", "../");
-  const EV = {"id": "f384632f575ca9a0", "titulo": "Talleres familiares Qué tanto será", "inicio": "2026-09-12T00:00:00", "fin": null, "lugar": "Corporacion Cultural de Lo Barnechea (El Tranque)", "direccion": "", "comuna": "Lo Barnechea", "lat": -33.3512, "lon": -70.518, "precision": "comuna", "gratis": false, "precio": null, "precio_texto": "", "categoria": "clases", "subcategoria": "escritura", "escala": "", "publico": "todos", "descripcion": "Tres talleres familiares que tomarán la obra de Violeta Parra como fuente de inspiración para crear arpilleras, figuras de papel maché y poesía. Ver…", "imagen": "", "fuente": "Corporacion Cultural de Lo Barnechea (El Tranque)", "url": "https://corporacionculturaldelobarnechea.cl/actividades/talleres/talleres-familiares-que-tanto-sera/", "formato": "taller"};
+  pintarBarra("mapa.html", "../");
+  const EV = {"id": "f384632f575ca9a0", "titulo": "Talleres familiares Qué tanto será", "inicio": "2026-09-12T00:00:00", "fin": null, "lugar": "Corporacion Cultural de Lo Barnechea (El Tranque)", "direccion": "Av. El Tranque 10300", "comuna": "Lo Barnechea", "lat": -33.36076, "lon": -70.54118, "precision": "correccion", "gratis": false, "precio": null, "precio_texto": "", "categoria": "familia", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "Tres talleres familiares que tomarán la obra de Violeta Parra como fuente de inspiración para crear arpilleras, figuras de papel maché y poesía. Ver…", "imagen": "", "fuente": "Corporacion Cultural de Lo Barnechea (El Tranque)", "url": "https://corporacionculturaldelobarnechea.cl/actividades/talleres/talleres-familiares-que-tanto-sera/", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

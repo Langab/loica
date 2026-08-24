@@ -44,6 +44,12 @@ geocodificador encuentra, un taller de aerobike que cae en "música", un
 restaurante sin comuna. La regla acá es que **cada error se corrige UNA vez**
 y queda en la memoria:
 
+- `config/correcciones/categorias.yaml` — **palabras en contexto → categoría**.
+  Es la memoria del clasificador: "Magallanes" al lado de "vs" es un partido,
+  "maratón" al lado de "película" es cine, "Edo Caroe" es stand-up aunque lo
+  vendan en una sala de conciertos. Vale para los eventos de hoy y para los que
+  lleguen mañana con las mismas palabras. Una regla puede además decir
+  `categoria: descartar`: esto no es un panorama y no se publica.
 - `config/correcciones/lugares.yaml` — un lugar → dirección, comuna y
   coordenadas. Arregla todos sus eventos, presentes y futuros.
 - `config/correcciones/eventos.yaml` — un evento puntual (por id) → categoría,
@@ -58,6 +64,52 @@ persona —o una sesión de Claude— verifica los datos, los pega en
 `config/correcciones/` y comitea. La corrida siguiente los aplica sola.
 Si el mismo error se repite en eventos nuevos, el arreglo va en el código
 (`loica/clasificar.py`), no en la memoria.
+
+### Cómo se sabe que una corrección arregla más de lo que rompe
+
+Escribir una regla nueva es fácil; saber si se llevó puesto algo que ya estaba
+bien, no. Contar solo los eventos que arregla esconde los que quiebra, y esa
+lección costó cara una vez: una heurística de comunas que arreglaba 14 eventos
+y rompía 15 estuvo a punto de publicarse porque nadie contó el otro lado.
+
+Por eso las dos mitades de la calidad tienen su medición, y las dos usan el
+mismo principio: **una segunda fuente que no habló con la primera.**
+
+```bash
+python3 scripts/auditar_categorias.py --comparar   # categorías
+python3 scripts/verificar_lugares.py               # georreferenciación
+```
+
+**Categorías.** `datos/revision/auditoria_categorias_2026-08-22.tsv` es un
+conjunto etiquetado a mano: 597 eventos del catastro revisados uno por uno,
+cada uno con la categoría que le corresponde y con qué confianza se pudo
+determinar (los `media` no cuentan como error — son los casos donde el título,
+el lugar y la descripción no alcanzaban). `auditar_categorias.py` clasifica
+esos mismos eventos con el código de hoy y dice cuántos calzan, cuántos no, y
+—lo importante— **cuáles se rompieron** respecto de la corrida anterior. El
+archivo viaja en git justamente para eso: el día que alguien toque
+`clasificar.py` puede saber en un comando si retrocedió.
+
+**Georreferenciación.** Una dirección sacada de internet puede estar vieja, mal
+tipeada o ser de otra ciudad, y un pin equivocado manda a alguien a una esquina
+donde no hay nada — peor que no tener pin. Así que cada dirección investigada
+pasa por `verificar_lugares.py`, que la resuelve contra el catastro local de
+OpenStreetMap. El catastro no sabe qué buscó nadie: si dice que "Merced 349"
+existe en Santiago y cae donde el sitio del teatro dice que cae, son dos
+testigos independientes. Sus cuatro veredictos:
+
+| veredicto | qué pasa |
+|---|---|
+| `confirmado` | las dos vías coinciden (menos de 1 km). Entra con pin exacto. |
+| `discrepa` | el catastro lo ubica lejos. **No entra el pin**, queda anotado. |
+| `sin_catastro` | el catastro no conoce la calle (pasajes de población, sedes vecinales). Entra la dirección **sin coordenadas**: mejora la búsqueda de la corrida siguiente sin inventar un punto. |
+| `descartado` | la investigación no encontró dato, o el lugar está fuera de la RM. |
+
+El circuito de tres pasos: `revisar_extraccion.py` deja la cola ordenada por
+impacto → alguien busca las direcciones y las anota **con la URL** en
+`datos/revision/investigacion_lugares_AAAA-MM-DD.yaml` → `verificar_lugares.py`
+contrasta y deja en `datos/revision/propuesta_lugares.yaml` solo lo aprobado,
+listo para pegar en `lugares.yaml`.
 
 ### El índice local de OSM
 

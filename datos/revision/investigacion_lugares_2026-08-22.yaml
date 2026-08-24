@@ -1,0 +1,833 @@
+# Investigación web de lugares sin pin exacto — 22 de agosto de 2026.
+#
+# Los 339 lugares que caían al centro de su comuna (o a ninguna parte) se
+# ordenaron por cuántos eventos arregla cada uno y se buscaron en internet:
+# la ficha del evento en la ticketera, el sitio del recinto, el registro
+# oficial de juntas de vecinos, el directorio municipal. Cada dirección de
+# acá salió de una página que se puede abrir y leer — `fuente_url` — y no de
+# la memoria de nadie.
+#
+# ESTE ARCHIVO NO SE APLICA SOLO. Es el insumo del doble check:
+#     python3 scripts/verificar_lugares.py            # contrasta y muestra
+#     python3 scripts/verificar_lugares.py --escribir # deja el YAML aprobado
+# que cruza cada dirección contra el catastro local de OpenStreetMap. Solo lo
+# que las dos vías confirman entra a config/correcciones/lugares.yaml; lo que
+# discrepa queda anotado acá para que alguien lo mire, porque un pin puesto a
+# ojo manda a una persona a una esquina donde no hay nada.
+#
+# resultado: encontrado | no_encontrado | ambiguo | no_es_lugar
+# confianza: alta (sitio oficial o ticketera con dirección completa)
+#            media (directorio, red social, nota de prensa)
+#            baja (la fuente no coincide o no se pudo confirmar el número)
+
+lugares:
+- lugar: 'JJ. VV. Simón Bolívar Av. Las Torres # 840'
+  resultado: encontrado
+  direccion: Av. Las Torres 840
+  comuna: Huechuraba
+  fuente_url: https://registros19862.gob.cl/institucion/72670700/ficha
+  confianza: alta
+  nota: 'Registro Central de Colaboradores del Estado: domicilio de la JJVV Simón Bolívar'
+- lugar: 'Multicancha Cideco Jorge Inostroza # 595'
+  resultado: ambiguo
+  direccion: Jorge Inostroza 595
+  comuna: Huechuraba
+  fuente_url: https://registros19862.gob.cl/institucion/65075953/ficha
+  confianza: baja
+  nota: el club Cideco tiene domicilio legal en El Lazo 6344; la multicancha no se pudo confirmar
+- lugar: Multicancha Los Húsares Liberty con Bell Boy
+  resultado: ambiguo
+  direccion: Liberty con Bell Boy
+  comuna: Huechuraba
+  fuente_url: https://www.todolicitaciones.cl/licitacion/2793-122-LP22/mejoramiento-multicancha-los-husares-3publicacion
+  confianza: baja
+  nota: multicancha municipal real (licitación de mejoramiento); el cruce exacto no se confirmó
+- lugar: 'Cancha de las Águilas de Huechuraba Pdte. Salvador Allende # 451'
+  resultado: ambiguo
+  direccion: Pdte. Salvador Allende 451
+  comuna: Huechuraba
+  fuente_url: https://registros19862.gob.cl/institucion/65224182/ficha
+  confianza: baja
+  nota: el club tiene domicilio legal en Las Azucenas 407; la cancha no se confirmó
+- lugar: 'JJ. VV Villa Wolf Las Moras # 6096'
+  resultado: encontrado
+  direccion: Las Moras 6096
+  comuna: Huechuraba
+  fuente_url: https://registros19862.gob.cl/institucion/65261644/ficha
+  confianza: alta
+  nota: 'Registro Central de Colaboradores del Estado: JJVV Nueva Villa Wolf'
+- lugar: 'Calle Los Cipreses #142'
+  resultado: ambiguo
+  direccion: Los Cipreses 142
+  comuna: Huechuraba
+  fuente_url: https://callejero.openalfa.cl/poblacion-el-barrero
+  confianza: baja
+  nota: existe Pasaje Los Cipreses en la Población El Barrero; el número no se confirmó
+- lugar: Multicancha Pablo Neruda Av. Pablo Neruda con Las Frutillas
+  resultado: encontrado
+  direccion: Av. Pablo Neruda con Las Frutillas
+  comuna: Huechuraba
+  fuente_url: https://www.huechuraba.cl/sala-de-prensa/732/detalle/obra-de-teatro-otelo-se-presento-en-la-multichancha-de-las-frutillas
+  confianza: media
+  nota: nota de prensa municipal confirma la multicancha de Las Frutillas (La Pincoya); es un cruce, sin
+    número
+- lugar: 'JJ. VV La Última Hora Jorge Inostroza # 1055'
+  resultado: encontrado
+  direccion: Jorge Inostroza 1055
+  comuna: Huechuraba
+  fuente_url: https://registros19862.gob.cl/institucion/73750100/ficha
+  confianza: alta
+  nota: 'Registro Central de Colaboradores del Estado: JJVV Población Última Hora'
+- lugar: 'JJ. VV René Schneider Av. Presidente Salvador Allende # 5655'
+  resultado: encontrado
+  direccion: Av. Presidente Salvador Allende 5655
+  comuna: Huechuraba
+  fuente_url: https://registros19862.gob.cl/institucion/73964300/ficha
+  confianza: alta
+  nota: 'Registro Central de Colaboradores del Estado: JJVV General René Schneider'
+- lugar: Los Jardines
+  resultado: encontrado
+  direccion: Rodrigo de Araya 4500
+  comuna: Ñuñoa
+  lat: -33.4733634
+  lon: -70.584857
+  fuente_url: https://teatroamil.cl/sala/cancha-villa-los-jardines-nunoa/
+  confianza: media
+  nota: cancha Villa Los Jardines (ahí se dicta la escuela de fútbol); coordenadas del link a Google Maps
+    de la ficha
+- lugar: JJVV Villa Olímpica
+  resultado: encontrado
+  direccion: Sócrates 1237
+  comuna: Ñuñoa
+  fuente_url: https://registros19862.gob.cl/institucion/74186300/ficha
+  confianza: alta
+  nota: JJVV Villa Olímpica UV 32, registro oficial
+- lugar: JJVV Villa Alemana
+  resultado: encontrado
+  direccion: Los Tres Antonios 868
+  comuna: Ñuñoa
+  lat: -33.4626203
+  lon: -70.6038485
+  fuente_url: https://www.unconunoa.cl/
+  confianza: media
+  nota: placemark 17 del mapa de sedes de la Unión Comunal de JJVV de Ñuñoa
+- lugar: JJVV Los Alerces
+  resultado: encontrado
+  direccion: Lluta 3800
+  comuna: Ñuñoa
+  lat: -33.4713676
+  lon: -70.5917963
+  fuente_url: https://www.unconunoa.cl/
+  confianza: media
+  nota: placemark 27 del mapa de sedes de la Unión Comunal
+- lugar: Cancha Amapolas
+  resultado: encontrado
+  direccion: Bremen 1589
+  comuna: Ñuñoa
+  fuente_url: https://www.instagram.com/multicancha.amapolas/p/C6UZrkNuY55/
+  confianza: media
+  nota: Multicancha Amapolas; distinta de la sede de la JJVV Amapolas
+- lugar: JJVV Suárez Mujica
+  resultado: encontrado
+  direccion: Av. Grecia 790
+  comuna: Ñuñoa
+  fuente_url: https://registros19862.gob.cl/institucion/65187480/ficha
+  confianza: alta
+  nota: JJVV N°13 Suárez Mujica, registro oficial
+- lugar: JJVV Gorostiaga
+  resultado: encontrado
+  direccion: Julio Zegers 4223
+  comuna: Ñuñoa
+  fuente_url: https://www.unconunoa.cl/junta-de-vecinos-parque-gorostiaga-inaugura-sede-social/
+  confianza: media
+  nota: nota de la Unión Comunal sobre la inauguración de la sede
+- lugar: JJVV Amapolas
+  resultado: encontrado
+  direccion: Pasaje 9 4890
+  comuna: Ñuñoa
+  fuente_url: https://registros19862.gob.cl/fichas/ver/rut/72682800/clase/5
+  confianza: alta
+  nota: JJVV Amapolas, registro oficial
+- lugar: JJVV San Eugenio
+  resultado: encontrado
+  direccion: Lo Encalada 1855
+  comuna: Ñuñoa
+  fuente_url: https://registros19862.gob.cl/fichas/ver/rut/71437100/clase/5
+  confianza: alta
+  nota: JJVV Parque San Eugenio, registro oficial (figura como '1855 interior')
+- lugar: JJVV Irarrázaval
+  resultado: encontrado
+  direccion: Ricardo Lyon 2856
+  comuna: Ñuñoa
+  lat: -33.44725
+  lon: -70.6023679
+  fuente_url: https://www.unconunoa.cl/
+  confianza: media
+  nota: placemark 8 del mapa de sedes de la Unión Comunal (Ricardo Lyon 2856-A)
+- lugar: JJVV Eusebio Lillo
+  resultado: encontrado
+  direccion: Elías de la Cruz 13
+  comuna: Ñuñoa
+  lat: -33.455331
+  lon: -70.6167795
+  fuente_url: https://www.unconunoa.cl/
+  confianza: media
+  nota: placemark 14 del mapa de sedes de la Unión Comunal
+- lugar: Rosita Renard
+  resultado: ambiguo
+  comuna: Ñuñoa
+  confianza: baja
+  nota: varios recintos sobre la calle Rosita Renard (escuela municipal 1179, Depto. Provincial 1191);
+    no se eligió uno
+- lugar: Cancha Puquios
+  resultado: encontrado
+  direccion: Puquios 4125
+  comuna: Ñuñoa
+  fuente_url: https://agendapro.com/mp/cl/pl/canchas-deportivo-nunoa/233166
+  confianza: media
+  nota: complejo de canchas en calle Puquios (numeración 4125-4211)
+- lugar: Exequiel González Cortes
+  resultado: no_encontrado
+  comuna: Ñuñoa
+  nota: multicancha de la población; sin fuente citable
+- lugar: Cancha Kutral
+  resultado: ambiguo
+  direccion: Pasaje 35 1651
+  comuna: Ñuñoa
+  fuente_url: https://www.dpvkutral.cl/archivos/2539
+  confianza: baja
+  nota: club de balonmano DPV Kutral; las fuentes no coinciden en el número
+- lugar: JJVV Contramaestre Micalvi
+  resultado: encontrado
+  direccion: Contramaestre Micalvi 536
+  comuna: Ñuñoa
+  fuente_url: https://registros19862.gob.cl/institucion/73650100/ficha
+  confianza: alta
+  nota: JJVV UV 22, registro oficial
+- lugar: JJVV Villa Frei
+  resultado: encontrado
+  direccion: Raúl Silva Castro 4795
+  comuna: Ñuñoa
+  lat: -33.4651208
+  lon: -70.5815453
+  fuente_url: https://www.unconunoa.cl/
+  confianza: media
+  nota: placemark 23 Villa Presidente Frei del mapa de sedes
+- lugar: JJVV Exequiel González Cortes
+  resultado: encontrado
+  direccion: Doce 930
+  comuna: Ñuñoa
+  fuente_url: https://registros19862.gob.cl/fichas/ver/rut/72047000/clase/5
+  confianza: alta
+  nota: registro oficial; la calle también aparece como Vía 12
+- lugar: JJVV Contramaestre Mcalvi
+  resultado: encontrado
+  direccion: Contramaestre Micalvi 536
+  comuna: Ñuñoa
+  fuente_url: https://registros19862.gob.cl/institucion/73650100/ficha
+  confianza: alta
+  nota: variante de escritura de JJVV Contramaestre Micalvi
+- lugar: JJVV Ramón Cruz
+  resultado: encontrado
+  direccion: Irarrázaval 4665
+  comuna: Ñuñoa
+  lat: -33.4548687
+  lon: -70.5817179
+  fuente_url: https://www.unconunoa.cl/
+  confianza: media
+  nota: placemark 21 Parque Ramón Cruz del mapa de sedes (4665-F)
+- lugar: JJVV Lo Plaza
+  resultado: encontrado
+  direccion: Quilpué 4242
+  comuna: Ñuñoa
+  fuente_url: https://registros19862.gob.cl/fichas/ver/rut/71904300/clase/5
+  confianza: alta
+  nota: JJVV N°25 Villa Lo Plaza, registro oficial
+- lugar: Cancha Ampolas
+  resultado: encontrado
+  direccion: Bremen 1589
+  comuna: Ñuñoa
+  fuente_url: https://www.instagram.com/multicancha.amapolas/p/C6UZrkNuY55/
+  confianza: media
+  nota: variante de escritura de Cancha Amapolas
+- lugar: Salvador Cruz Gana
+  resultado: no_encontrado
+  comuna: Ñuñoa
+  nota: multicancha de la villa; sin fuente citable
+- lugar: JJVV Rebeca Matte
+  resultado: encontrado
+  direccion: Nueva Uno 1600
+  comuna: Ñuñoa
+  fuente_url: https://registros19862.gob.cl/institucion/72214300/ficha
+  confianza: alta
+  nota: JJVV Villa Rebecca Matte, registro oficial
+- lugar: JJVV Los Jardines
+  resultado: encontrado
+  direccion: Peatonal 24 4560
+  comuna: Ñuñoa
+  fuente_url: https://registros19862.gob.cl/fichas/ver/rut/72053700/clase/5
+  confianza: alta
+  nota: JJVV N°24 Villa Los Jardines, registro oficial; distinta de la cancha Los Jardines
+- lugar: JJVV Bernardo O'Higgins
+  resultado: encontrado
+  direccion: Los Alerces 1680
+  comuna: Ñuñoa
+  fuente_url: https://www.chileguia.cl/detalle/junta-de-vecinos-n-37-bernardo-ohiggins-nunoa-646154
+  confianza: media
+  nota: JJVV N°37, directorio Chileguia (Los Alerces 1680-F)
+- lugar: JJVV Villa Salvador Cruz Gana
+  resultado: encontrado
+  direccion: Los Jazmines 1705
+  comuna: Ñuñoa
+  lat: -33.4673511
+  lon: -70.6181899
+  fuente_url: https://www.unconunoa.cl/
+  confianza: media
+  nota: placemark 33 del mapa de sedes; corroborado por Waze
+- lugar: Villa Olímpica
+  resultado: encontrado
+  direccion: Aristóteles 1125
+  comuna: Ñuñoa
+  lat: -33.4634946
+  lon: -70.6214435
+  fuente_url: https://teatroamil.cl/sala/cancha-villa-olimpica-nunoa/
+  confianza: media
+  nota: cancha Villa Olímpica; coordenadas del link a Google Maps de la ficha
+- lugar: Corporacion Cultural de La Reina
+  resultado: ambiguo
+  fuente_url: https://culturalareina.cl/
+  nota: 'administra varias sedes (Casona Nemesio Antúnez, CC Vicente Bianchi, Sala Nemesio): no hay una
+    dirección para el conjunto'
+- lugar: Corporacion Cultural de Lo Barnechea (El Tranque)
+  resultado: encontrado
+  direccion: Av. El Tranque 10300
+  comuna: Lo Barnechea
+  fuente_url: https://corporacionculturaldelobarnechea.cl/espacios/centro-cultural-el-tranque/
+  confianza: alta
+  nota: Centro Cultural El Tranque, sede propia de la corporación
+- lugar: TEATRO CACHAFAZ
+  resultado: encontrado
+  direccion: Av. Italia 1679
+  comuna: Ñuñoa
+  fuente_url: https://ticketplus.cl/events/taller-de-impro-agosto-2026-08-06-19-30-00-0400
+  confianza: alta
+  nota: dirección publicada en la ficha de Ticketplus
+- lugar: Sala Julieta, Teatro Aleph Chile
+  resultado: encontrado
+  direccion: Eulogio Altamirano 7425
+  comuna: La Cisterna
+  fuente_url: https://ticketplus.cl/events/el-inspector-2026-08-28-20-00-00-0400
+  confianza: alta
+  nota: sala dentro del Teatro Aleph; dirección del recinto
+- lugar: Planetario Huechuraba
+  resultado: encontrado
+  direccion: Premio Nobel 5555
+  comuna: Huechuraba
+  fuente_url: https://ticketplus.cl/events/orbita-sonora-daft-punk-discovery
+  confianza: alta
+  nota: Ciudad Empresarial
+- lugar: Sala K U Mayor
+  resultado: encontrado
+  direccion: Marín 321
+  comuna: Santiago
+  fuente_url: https://ticketplus.cl/events/los-domingos-de-alauda-ruiz-de-azua-en-sala-k
+  confianza: alta
+  nota: sala de cine en el Campus El Claustro de la U. Mayor
+- lugar: Teatro Nacional Chileno
+  resultado: encontrado
+  direccion: Morandé 25
+  comuna: Santiago
+  fuente_url: https://ticketplus.cl/events/no-se-beckett
+  confianza: alta
+  nota: dirección en Ticketplus
+- lugar: (Foyer principal) Gran Sala Sinfónica Nacional
+  resultado: encontrado
+  direccion: Av. Vicuña Mackenna 20
+  comuna: Providencia
+  fuente_url: https://ticketplus.cl/events/la-previa-concierto-n-16-americana-250
+  confianza: alta
+  nota: Complejo VM20 del CEAC
+- lugar: Sala Nemesio
+  resultado: encontrado
+  direccion: Av. Alcalde Fernando Castillo Velasco 8580
+  comuna: La Reina
+  fuente_url: https://ticketplus.cl/events/membresia-sala-nemesio
+  confianza: alta
+  nota: comparte domicilio con la Biblioteca Pública de La Reina
+- lugar: Teatro ICTUS
+  resultado: encontrado
+  direccion: Merced 349
+  comuna: Santiago
+  fuente_url: https://ticketplus.cl/events/pa-ta-yo-ba-e-2026-07-31-20-00-00-0400
+  confianza: alta
+  nota: dirección en Ticketplus
+- lugar: Metropolitan Santiago
+  resultado: encontrado
+  direccion: Av. San Josemaría Escrivá de Balaguer 5600
+  comuna: Vitacura
+  fuente_url: https://metropolitansantiago.cl/
+  confianza: alta
+  nota: ex Casapiedra; la fuente declaraba comuna Santiago y está en Vitacura
+- lugar: Estadio Bicentenario La Florida
+  resultado: encontrado
+  direccion: Enrique Olivares 1003
+  comuna: La Florida
+  fuente_url: https://ticketplus.cl/events/abono-famiglia-audina
+  confianza: alta
+  nota: dirección en Ticketplus
+- lugar: Estadio Bicentenario de La Florida
+  resultado: encontrado
+  direccion: Enrique Olivares 1003
+  comuna: La Florida
+  fuente_url: https://ticketplus.cl/events/abono-famiglia-audina
+  confianza: alta
+  nota: variante de escritura del mismo estadio
+- lugar: SALA MULTIUSO APUC (Av. Libertador Bdo O’Higgins 406)
+  resultado: encontrado
+  direccion: Av. Libertador Bernardo O'Higgins 406
+  comuna: Santiago
+  fuente_url: https://www.munistgo.cl/talleres-deportivos/
+  confianza: alta
+  nota: recinto deportivo municipal del sector San Borja
+- lugar: Corporacion Cultural de La Pintana (Teatro Municipal)
+  resultado: encontrado
+  direccion: Av. Santa Rosa 12975
+  comuna: La Pintana
+  lat: -33.5846129
+  lon: -70.6319109
+  fuente_url: https://ticket.culturapintana.cl/cartelera/sueno/
+  confianza: alta
+  nota: Teatro Municipal de La Pintana; su página de venta publica las coordenadas
+- lugar: Teatro Universidad de Chile
+  resultado: encontrado
+  direccion: Av. Providencia 043
+  comuna: Providencia
+  fuente_url: https://ticketplus.cl/events/la-previa-ballet-nacional-chileno-ciclo-n-3-voces-reposicion
+  confianza: alta
+  nota: sede junto a Plaza Italia; OJO con el cero inicial del 043
+- lugar: Mori Parque Arauco
+  resultado: encontrado
+  direccion: Av. Presidente Kennedy 5413
+  comuna: Las Condes
+  fuente_url: https://www.parquearauco.cl/tiendas/teatro-mori
+  confianza: alta
+  nota: sala dentro del Mall Parque Arauco, piso -1
+- lugar: Mori Vitacura
+  resultado: encontrado
+  direccion: Av. Bicentenario 3800
+  comuna: Vitacura
+  fuente_url: https://www.ticketmaster.cl/page/teatro-mori-vitacura
+  confianza: media
+  nota: el sitio propio de Teatro Mori bloqueó el acceso
+- lugar: Cultura Providencia
+  resultado: encontrado
+  direccion: Av. Nueva Providencia 1995
+  comuna: Providencia
+  fuente_url: https://culturaprovidencia.cl/2026/07/31/exposicion-de-claudia-rios/
+  confianza: media
+  nota: sede de la Fundación Cultural de Providencia, esquina Pedro de Valdivia
+- lugar: TEATRO SIDARTE
+  resultado: encontrado
+  direccion: Ernesto Pinto Lagarrigue 131
+  comuna: Recoleta
+  fuente_url: https://ticketplus.cl/events/corazon-de-chocolate-cronica-de-un-dulce-suicidio-ocaso-teatro
+  confianza: alta
+  nota: dirección en Ticketplus
+- lugar: Centro de Extensión Artística y Cultural Universidad de Chile, Complejo Universitario VM20
+  resultado: encontrado
+  direccion: Av. Vicuña Mackenna 20
+  comuna: Providencia
+  fuente_url: https://portaluchile.uchile.cl/vm20
+  confianza: alta
+  nota: VM20; mismo edificio que la Gran Sala Sinfónica
+- lugar: MAC - Parque Forestal (Parque Forestal s/n frente calle Mosqueto, Metro estación Bellas Artes,
+    Santiago, Chile)
+  resultado: encontrado
+  direccion: Ismael Valdés Vergara 506
+  comuna: Santiago
+  fuente_url: https://mac.uchile.cl/actividades/obras-extraordinarias-las-politicas-del-habitar-ciclo-de-encuentros/
+  confianza: alta
+  nota: sede Parque Forestal del MAC (la de Quinta Normal es Matucana 464)
+- lugar: MAC - Museo de Arte Contemporaneo (U. de Chile)
+  resultado: encontrado
+  direccion: Ismael Valdés Vergara 506
+  comuna: Santiago
+  fuente_url: https://mac.uchile.cl/actividades/obras-extraordinarias-las-politicas-del-habitar-ciclo-de-encuentros/
+  confianza: alta
+  nota: sede Parque Forestal
+- lugar: MULTICANCHA ARAUCO (Av. El Mirador / Manuel de Amatt)
+  resultado: encontrado
+  direccion: Av. El Mirador esquina Manuel Antonio Amat
+  comuna: Santiago
+  fuente_url: https://www.munistgo.cl/talleres-deportivos/
+  confianza: media
+  nota: la fuente solo da la intersección, sin numeración
+- lugar: MULTICANCHA PARQUE O’HIGGINS – CORDESAN (entrada por AV. Blanco)
+  resultado: encontrado
+  direccion: Av. Blanco Encalada 2540
+  comuna: Santiago
+  fuente_url: https://www.munistgo.cl/talleres-deportivos/
+  confianza: media
+  nota: recinto de CORDESAN dentro del Parque O'Higgins; se usa el acceso de Blanco Encalada
+- lugar: Parque O'Higgins
+  resultado: encontrado
+  direccion: Av. Blanco Encalada 2540
+  comuna: Santiago
+  fuente_url: https://moovitapp.com/index/en/public_transit-Acceso_Parque_O_Higgins-Santiago-street_11472764-642
+  confianza: media
+  nota: acceso principal del parque, como referencia
+- lugar: COSTADO CLUB AÉREO MELEPÍLLA
+  resultado: ambiguo
+  direccion: Parcela 19, Lumbreras
+  comuna: Melipilla
+  fuente_url: https://www.clubaereomelipilla.com/
+  confianza: baja
+  nota: el evento es 'al costado' del aeródromo; dirección rural aproximada
+- lugar: TECHNOBUS
+  resultado: no_es_lugar
+  nota: fiesta itinerante en bus, sin sede fija
+- lugar: Agenda Cultural Las Condes
+  resultado: no_es_lugar
+  nota: agenda centralizada de la Corporación Cultural de Las Condes
+- lugar: Municipalidad de Nunoa
+  resultado: no_es_lugar
+  nota: fuente municipal genérica, varias sedes
+- lugar: 'MUT, Piso 1: La Calle'
+  resultado: encontrado
+  direccion: Av. Apoquindo 2730
+  comuna: Las Condes
+  fuente_url: https://es.wikipedia.org/wiki/Mercado_Urbano_Tobalaba
+  confianza: alta
+  nota: MUT; la fuente declara Providencia y el edificio está en Las Condes
+- lugar: 'MUT, Piso 1: La Calle — Calle Roger de Flor'
+  resultado: encontrado
+  direccion: Av. Apoquindo 2730
+  comuna: Las Condes
+  fuente_url: https://es.wikipedia.org/wiki/Mercado_Urbano_Tobalaba
+  confianza: alta
+  nota: piso del complejo MUT
+- lugar: 'MUT, Piso 2: El Barrio — Galería MUT'
+  resultado: encontrado
+  direccion: Av. Apoquindo 2730
+  comuna: Las Condes
+  fuente_url: https://es.wikipedia.org/wiki/Mercado_Urbano_Tobalaba
+  confianza: alta
+  nota: piso del complejo MUT
+- lugar: 'MUT, Piso 4: La Terraza'
+  resultado: encontrado
+  direccion: Av. Apoquindo 2730
+  comuna: Las Condes
+  fuente_url: https://es.wikipedia.org/wiki/Mercado_Urbano_Tobalaba
+  confianza: alta
+  nota: piso del complejo MUT
+- lugar: 'MUT, Piso -1: El Taller'
+  resultado: encontrado
+  direccion: Av. Apoquindo 2730
+  comuna: Las Condes
+  fuente_url: https://es.wikipedia.org/wiki/Mercado_Urbano_Tobalaba
+  confianza: alta
+  nota: piso del complejo MUT
+- lugar: 'MUT, Piso -3: La Estación'
+  resultado: encontrado
+  direccion: Av. Apoquindo 2730
+  comuna: Las Condes
+  fuente_url: https://es.wikipedia.org/wiki/Mercado_Urbano_Tobalaba
+  confianza: alta
+  nota: piso -3 con acceso a Metro Tobalaba
+- lugar: MUT — Mercado Urbano Tobalaba
+  resultado: encontrado
+  direccion: Av. Apoquindo 2730
+  comuna: Las Condes
+  fuente_url: https://es.wikipedia.org/wiki/Mercado_Urbano_Tobalaba
+  confianza: alta
+  nota: complejo MUT
+- lugar: Factoria Franklin
+  resultado: encontrado
+  direccion: Franklin 741
+  comuna: Santiago
+  fuente_url: https://factoria-franklin.cl/contacto/
+  confianza: alta
+  nota: Barrio Franklin, entre Santa Rosa y San Francisco
+- lugar: Freedom
+  resultado: encontrado
+  direccion: Avenida Recoleta 345
+  comuna: Recoleta
+  fuente_url: https://ticketplus.cl/events/fiesta-macarena-moster-high-spot-freedom-23-00
+  confianza: alta
+  nota: dirección en Ticketplus
+- lugar: Parque Ciudad Empresarial
+  resultado: encontrado
+  direccion: Avenida del Parque 420
+  comuna: Huechuraba
+  confianza: media
+  fuente_url: https://www.ciudadempresarial.cl/
+  nota: explanada de eventos del distrito Ciudad Empresarial
+- lugar: Omnium
+  resultado: encontrado
+  direccion: Avenida Apoquindo 4900
+  comuna: Las Condes
+  fuente_url: https://www.waze.com/live-map/directions/galeria-omnium-av.-apoquindo-4900-las-condes
+  confianza: alta
+  nota: sala de eventos dentro de la galería Omnium
+- lugar: Parque Padre Hurtado
+  resultado: encontrado
+  direccion: Avenida Francisco Bilbao 8105
+  comuna: La Reina
+  fuente_url: https://ticketplus.cl/events/semana-de-la-chilenidad-2026
+  confianza: alta
+  nota: dirección en Ticketplus
+- lugar: Centro de Estudios Públicos (CEP)
+  resultado: encontrado
+  direccion: Monseñor Sótero Sanz 162
+  comuna: Providencia
+  fuente_url: https://www.cepchile.cl/eventos/
+  confianza: alta
+  nota: Auditorio CEP
+- lugar: Hotel Las Majadas
+  resultado: encontrado
+  direccion: José Julio Nieto s/n
+  comuna: Pirque
+  fuente_url: https://ticketplus.cl/events/taste-society
+  confianza: alta
+  nota: Loteo Parque Las Majadas; la fuente no traía comuna y está en Pirque
+- lugar: DETUCH
+  resultado: encontrado
+  direccion: Morandé 750
+  comuna: Santiago
+  fuente_url: https://ticketplus.cl/events/la-mision-detuch
+  confianza: alta
+  nota: sala del Departamento de Teatro de la U. de Chile
+- lugar: TEATRO DEL PUENTE
+  resultado: encontrado
+  direccion: Parque Forestal s/n, entre puentes Pío Nono y Purísima
+  comuna: Santiago
+  fuente_url: https://teatrodelpuente.cl/ubicacion/
+  confianza: media
+  nota: sin número formal
+- lugar: Sala Ana González
+  resultado: encontrado
+  direccion: Jorge Washington 26
+  comuna: Ñuñoa
+  fuente_url: https://teatrouc.uc.cl/evento/gemelos/
+  confianza: alta
+  nota: sala del Teatro UC en Plaza Ñuñoa
+- lugar: Sala Eugenio Dittborn
+  resultado: encontrado
+  direccion: Jorge Washington 26
+  comuna: Ñuñoa
+  fuente_url: https://teatrouc.uc.cl/evento/el-nino-de-los-fosiles/
+  confianza: alta
+  nota: sala del Teatro UC
+- lugar: CLUB ALICIA - EX 2.0 CLUB
+  resultado: encontrado
+  direccion: San Pablo 7151
+  comuna: Lo Prado
+  fuente_url: https://twitter.com/espacio2punto0/status/72692436287242240
+  confianza: media
+  nota: ex 2.0 Club; varios directorios coinciden
+- lugar: HANGAR
+  resultado: encontrado
+  direccion: Santa Filomena 10
+  comuna: Recoleta
+  fuente_url: https://www.hangarbellavista.cl/como-llegar
+  confianza: alta
+  nota: Hangar Bellavista, casi esquina Pío Nono
+- lugar: Municipalidad de El Bosque - Cartelera de Eventos
+  resultado: encontrado
+  direccion: Eleuterio Ramírez 10264
+  comuna: El Bosque
+  fuente_url: https://www.municipalidadelbosque.cl/cartelera-de-eventos/
+  confianza: media
+  nota: Centro Cívico Cultural de El Bosque
+- lugar: Aiquia Espacio Creativo
+  resultado: encontrado
+  direccion: Girardi 1067
+  comuna: Providencia
+  fuente_url: https://ticketplus.cl/events/formato
+  confianza: alta
+  nota: dirección en Ticketplus
+- lugar: Espacio Cowork
+  resultado: encontrado
+  direccion: Av. Pedro de Valdivia 1509
+  comuna: Providencia
+  fuente_url: https://finis.cl/nuestra-universidad/campus-e-infraestructura/
+  confianza: media
+  nota: campus Casa Central de la U. Finis Terrae
+- lugar: Auditorio Gonzalo Vial Correa C101
+  resultado: encontrado
+  direccion: Av. Pedro de Valdivia 1509
+  comuna: Providencia
+  fuente_url: https://finis.cl/nuestra-universidad/campus-e-infraestructura/
+  confianza: media
+  nota: campus Casa Central de la U. Finis Terrae
+- lugar: Sala C301
+  resultado: encontrado
+  direccion: Av. Pedro de Valdivia 1509
+  comuna: Providencia
+  fuente_url: https://finis.cl/nuestra-universidad/campus-e-infraestructura/
+  confianza: media
+  nota: campus Casa Central de la U. Finis Terrae
+- lugar: Sala Vitacura
+  resultado: encontrado
+  direccion: Av. Bicentenario 3800
+  comuna: Vitacura
+  fuente_url: https://vitacuracultura.cl/evento/seis-al-blues-jam-session/
+  confianza: alta
+  nota: sala de la Corporación Cultural de Vitacura
+- lugar: Aula Magna Biblioteca, Universidad de los Andes
+  resultado: encontrado
+  direccion: Monseñor Álvaro del Portillo 12455
+  comuna: Las Condes
+  fuente_url: https://ticketplus.cl/events/de-haydn-a-mozart
+  confianza: alta
+  nota: campus de la U. de los Andes
+- lugar: Teatro Parque Cousiño
+  resultado: encontrado
+  direccion: San Ignacio de Loyola 1249
+  comuna: Santiago
+  fuente_url: https://www.monumentos.gob.cl/monumentos/monumentos-historicos/teatro-parque-cousino-ex-humoresque
+  confianza: alta
+  nota: ex Humoresque, Monumento Nacional
+- lugar: Munich Malloco
+  resultado: encontrado
+  direccion: Av. Balmaceda 2933
+  comuna: Peñaflor
+  fuente_url: https://www.munich.cl/
+  confianza: alta
+  nota: restaurante y centro de eventos en Malloco
+- lugar: Estadio Estrella Manuel Rodriguez
+  resultado: encontrado
+  direccion: José Miguel Carrera 865
+  comuna: La Florida
+  fuente_url: https://ligaproyeccionchilelpc.cl/stadium/estadio-estrella-manuel-rodriguez/
+  confianza: media
+  nota: directorio deportivo
+- lugar: Hotel Wyndham Pettra, La Dehesa
+  resultado: encontrado
+  direccion: Comandante Malbec 12851
+  comuna: Lo Barnechea
+  fuente_url: https://www.hotels.com/ho343978/hotel-pettra-santiago-lo-barnechea-chile/
+  confianza: media
+  nota: sitio de reservas; el hotel no publica el número
+- lugar: Plaza Chacabuco
+  resultado: encontrado
+  direccion: Av. Independencia s/n
+  comuna: Independencia
+  fuente_url: https://es.wikipedia.org/wiki/Plaza_Chacabuco
+  confianza: media
+  nota: plaza pública entre el Hipódromo Chile y Santa Laura, sin número
+- lugar: Campus B
+  resultado: encontrado
+  direccion: Los Leones 1200
+  comuna: Providencia
+  fuente_url: https://www.uahurtado.cl/
+  confianza: alta
+  nota: sede de la U. Alberto Hurtado distinta de la casa central
+- lugar: Gimnasio Municipal De Puente Allto
+  resultado: encontrado
+  direccion: Balmaceda 265
+  comuna: Puente Alto
+  fuente_url: https://ticketplus.cl/events/abono-m-puente-alto-2026
+  confianza: alta
+  nota: gimnasio municipal; el nombre viene con la falta de ortografía de la fuente
+- lugar: Futbolito UC
+  resultado: encontrado
+  direccion: Circunvalación Las Flores s/n
+  comuna: Las Condes
+  fuente_url: https://ticketplus.cl/events/liga-ex-tabancura
+  confianza: media
+  nota: canchas del Club Deportivo UC; sin número
+- lugar: Lo Matta Cultural
+  resultado: encontrado
+  direccion: Av. Kennedy 9350
+  comuna: Vitacura
+  fuente_url: https://www.lomatta.cl/
+  confianza: alta
+  nota: centro cultural de la Corporación Cultural de Vitacura
+- lugar: Club de Teatro
+  resultado: encontrado
+  direccion: Constitución 75
+  comuna: Providencia
+  fuente_url: https://ticketplus.cl/events/animas-de-dia-claro-2026
+  confianza: alta
+  nota: Club de Teatro Fernando González
+- lugar: Eventos San Jorge
+  resultado: encontrado
+  direccion: San Jorge 1975
+  comuna: La Florida
+  fuente_url: https://weddy.cl/lugares-para-matrimonios/eventos-san-jorge--MR1CRHQT
+  confianza: media
+  nota: casona de eventos
+- lugar: MIA CLUB ( EX 2.0 PREMIUM) Camino a San Jose de Maipo 07769
+  resultado: encontrado
+  direccion: Camino a San José de Maipo 07769
+  comuna: Puente Alto
+  fuente_url: https://www.waze.com/live-map/directions/cl/region-metropolitana/puente-alto/camino-a-san-jose-de-maipo-07769
+  confianza: media
+  nota: OJO con el cero inicial del 07769
+- lugar: Basel
+  resultado: encontrado
+  direccion: Av. Independencia 565
+  comuna: Independencia
+  fuente_url: https://www.ticketmaster.cl/venue/basel-mall-barrio-independencia
+  confianza: alta
+  nota: la fuente declaraba Santiago y está en Independencia
+- lugar: Taringuita Farellones
+  resultado: encontrado
+  direccion: Av. Los Cóndores 1284
+  comuna: Lo Barnechea
+  fuente_url: https://www.instagram.com/taringuitafarellones/
+  confianza: media
+  nota: restaurante en Farellones
+- lugar: DISTRITO 04
+  resultado: ambiguo
+  comuna: San Miguel
+  fuente_url: https://www.wokiapp.com/restaurante/distrito-04-san-ignacio
+  confianza: baja
+  nota: 'dos sucursales (San Ignacio y Garden): no se pudo determinar cuál'
+- lugar: Quincho Cabo Blanco
+  resultado: encontrado
+  direccion: Ruta T-344 24
+  comuna: Valdivia
+  lat: -39.779327
+  lon: -73.241733
+  fuente_url: https://www.toliv.com/eventos/chile/valdivia/
+  confianza: alta
+  nota: 'FUERA DE LA RM (Valdivia): el evento no corresponde a la agenda, no el pin'
+- lugar: USACH - Departamento de Extension (agenda cultural)
+  resultado: ambiguo
+  fuente_url: https://extension.usach.cl/
+  confianza: baja
+  nota: agenda con varias sedes; el Aula Magna está en Av. Víctor Jara 3659, Estación Central
+- lugar: Independencia
+  resultado: ambiguo
+  direccion: Av. Pedro de Valdivia 1509
+  comuna: Providencia
+  fuente_url: https://finis.cl/nuestra-universidad/campus-e-infraestructura/
+  confianza: baja
+  nota: '''Independencia'' es el nombre de un recinto de la U. Finis Terrae, no la comuna; el nombre es
+    demasiado genérico para guardarlo'
+- lugar: La Quinta Muranos
+  resultado: no_encontrado
+  nota: quinta de eventos sin dirección publicada
+- lugar: Club Deportivo Linderos
+  resultado: no_encontrado
+  nota: club amateur de Linderos (Buin); sin número confiable
+- lugar: Club Safari
+  resultado: no_encontrado
+  nota: no identificable
+- lugar: Sala 211 - Laboratorio escénico
+  resultado: no_encontrado
+  nota: solo aparece en Passline, que bloqueó el acceso
+- lugar: Fiesta LA MONGA
+  resultado: no_es_lugar
+  nota: marca de fiesta itinerante
+- lugar: Montañita Las Vizcachas
+  resultado: no_encontrado
+  nota: Montañita Restobar, Camino a San José de Maipo, sin número
+- lugar: Complejo Industrial / Estacion Central
+  resultado: no_encontrado
+  nota: varios galpones industriales se usan para fiestas en esa comuna
+- lugar: Donde La Chipi
+  resultado: no_encontrado
+  nota: sin información

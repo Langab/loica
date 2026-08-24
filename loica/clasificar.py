@@ -2,8 +2,15 @@
 #  CLASIFICACIÓN — categorías y público
 #  Reemplaza a CATEGORIAS/clasificar(). Ver web/_ux_filtros.md
 # ============================================================
+# El `from __future__` no es decorativo: el runner de la corrida usa Python
+# 3.11 pero el Mac trae el 3.9 de las Command Line Tools, y ahí un
+# `X | None` en una anotación de módulo revienta al importar.
+from __future__ import annotations
+
 import re
 import unicodedata
+
+from .correcciones import MemoriaCategorias
 
 
 def _norm(texto: str) -> str:
@@ -11,6 +18,34 @@ def _norm(texto: str) -> str:
     texto = unicodedata.normalize("NFD", (texto or "").lower())
     texto = "".join(c for c in texto if unicodedata.category(c) != "Mn")
     return re.sub(r"\s+", " ", texto)
+
+
+# ---------- LA MEMORIA ----------
+# config/correcciones/categorias.yaml: palabras en contexto → categoría, escritas
+# por la revisión y no por el código. Se consulta ANTES que los patrones de
+# abajo, porque es lo curado: cuando la auditoría encontró que "maratón" al
+# lado de "película" es cine, eso vale más que el patrón genérico de deporte.
+# Los patrones del código siguen siendo la base —la memoria parte vacía y el
+# clasificador funciona igual—; la memoria es la capa que aprende sin tocar
+# código. Si una regla de la memoria se repite mucho o pide lógica (un orden,
+# una excepción de recinto), ahí sí se baja al código.
+#
+# Se carga una vez por proceso y perezosamente: los scripts que solo importan
+# `es_taller` o `clasificar_escala` no leen el YAML.
+_MEMORIA: MemoriaCategorias | None = None
+
+
+def memoria() -> MemoriaCategorias:
+    global _MEMORIA
+    if _MEMORIA is None:
+        _MEMORIA = MemoriaCategorias()
+    return _MEMORIA
+
+
+def usar_memoria(nueva: MemoriaCategorias | None) -> None:
+    """Cambia la memoria en uso (la auditoría clasifica con y sin ella)."""
+    global _MEMORIA
+    _MEMORIA = nueva
 
 
 def _tiene(texto, palabras):
@@ -36,6 +71,14 @@ MUSEOS_DE_ARTE = re.compile(
     r"museo de arte|museo nacional de bellas artes|museo de artes visuales"
     r"|\bmavi\b|\bmac (quinta normal|parque forestal)\b|precolombino")
 SENTIDO_DE_OBRA = re.compile(r"\bobras?\b")
+
+# "Obra" dentro de una frase hecha que no tiene nada que ver con el teatro.
+# La banda se llama MANO DE OBRA y su fecha en la Sala RBX salía como una
+# función de teatro; "obras extraordinarias" ya tenía su guarda para los
+# museos, pero esto pasa en cualquier parte y por eso se limpia siempre.
+FRASES_CON_OBRA = re.compile(
+    r"\bmano de obra\b|\bobras? (publicas?|viales?|sanitarias?|de mejoramiento)\b"
+    r"|\bobra gruesa\b|\bmaestro de obra\b|\bvida y obra\b|\bla obra de\b")
 
 
 # ---------- CATEGORÍAS ----------
@@ -124,7 +167,12 @@ PATRONES_CATEGORIA = [
                 # filtro de los carretes.
                 r"|3d printer|impresion 3d"
                 r"|kpop|k-pop|coleccionismo|pokemon|magic the gathering)"),
-    ("fiesta",  r"\b(fiesta|party|carrete|rave|after ?party|tocata|djs?\b"
+    # "tocata" NO va acá y estuvo: una tocata es un grupo tocando en vivo, o
+    # sea música, y la palabra mandaba a fiesta desde "Tocata Jamás" hasta
+    # "Floresalegría + Gomitas Ácidas: una tocata documental". Que sea de
+    # noche y en un bar no la convierte en carrete; la fiesta es la que pone
+    # un DJ. Vive ahora en el patrón de música, donde siempre debió estar.
+    ("fiesta",  r"\b(fiesta|party|carrete|rave|after ?party|djs?\b"
                 r"|club\b|discoteca|sesion(es)? electronica|reggaeton|techno"
                 # "Sunset" es un formato de carrete, no un atardecer: los
                 # Sunset Andes Winter de El Colorado y el Sky Sunset de la
@@ -152,6 +200,7 @@ PATRONES_CATEGORIA = [
                 r"|quesito|micro(fono)? abierto|open mic|impro\b|improvisad"
                 r"|performance|comedia|stand ?up|variete|clown)"),
     ("musica",  r"\b(concierto|recital|tributo|showcase|banda|en vivo|music"
+                r"|tocata|tocatas"
                 r"|sinfonic|orquesta|coro|cantata|unplugged|jam|gira|tour"
                 # Los géneros. Passline publica el nombre de la banda y nada
                 # más —"Hellripper", "Old Mans Child"— pero cuando el género
@@ -298,6 +347,67 @@ PRIOR_FUENTE = [
 ]
 
 
+# Etiquetas de fuente que no dicen nada. La etiqueta de la fuente se pega
+# delante del título y entra a la búsqueda como si fuera texto del evento, y
+# eso es bueno cuando la etiqueta es honesta ("Actividad Física y Salud",
+# "Cine"). Pero "Exposiciones y Conferencias" es el cajón de sastre de
+# Passline: la auditoría del 22-08-2026 encontró que 11 de los 12 eventos con
+# esa etiqueta no eran exposiciones —un perreo en Club Berlín, un congreso
+# veterinario, una expo de yoga— y la palabra "exposiciones" los mandaba a
+# arte a todos. Se borra la etiqueta y decide el título; si el título calla,
+# el recinto.
+ETIQUETAS_RUIDO = {"exposiciones y conferencias", "otro", "otros",
+                   "evento-especial", "evento especial"}
+
+
+def _etiqueta_util(categoria_fuente: str) -> str:
+    return "" if _norm(categoria_fuente).strip() in ETIQUETAS_RUIDO else categoria_fuente
+
+
+# El nombre del recinto suele venir DENTRO del título, y ahí no dice qué es el
+# evento sino dónde pasa: "ORQUESTA USACH ... EN TEATRO AULA MAGNA USACH" es un
+# concierto, "BLACKDALI ★ VIERNES 16 OCTUBRE ★ Club Subterráneo" es una banda.
+# El clasificador leía esas dos palabras —"teatro", "club"— como si fueran el
+# formato del evento y mandaba conciertos a teatro y a fiesta. Se borran del
+# título antes de buscar: el recinto ya tiene su propia capa (el prior), que
+# opina después y solo si el texto calló.
+#
+# Se borra el LUGAR declarado y también las formas "en el Teatro X" / "en Sala
+# Y" que aparecen aunque el campo `lugar` diga otra cosa (PortalTickets pone su
+# propio nombre ahí y deja el recinto en el título).
+_TIPOS_DE_RECINTO = (r"teatro|sala|club|centro cultural|centro de eventos|gimnasio"
+                     r"|estadio|arena|auditorio|anfiteatro|casona|galpon|bar")
+_RECINTO_EN_TITULO = re.compile(
+    rf"\ben (el |la |los |las )?({_TIPOS_DE_RECINTO})\b[^,.\-–—|]*", re.IGNORECASE)
+
+
+def _sin_nombre_del_lugar(titulo_plano: str, lugar: str) -> str:
+    """Saca del título el nombre del recinto, que dice dónde y no qué."""
+    lug = _norm(lugar).strip()
+    if len(lug) >= 6:
+        # El campo `lugar` a veces trae la dirección pegada ("Club Hell Bar
+        # Rojas Magallanes 51"): se prueba también con las primeras palabras.
+        palabras = lug.split()
+        for corte in range(len(palabras), 1, -1):
+            trozo = " ".join(palabras[:corte])
+            if len(trozo) >= 6 and trozo in titulo_plano:
+                titulo_plano = titulo_plano.replace(trozo, " ")
+                break
+    return _RECINTO_EN_TITULO.sub(" ", titulo_plano)
+
+
+def _titulo_para_clasificar(titulo, categoria_fuente, lugar, fuente) -> str:
+    """El título normalizado y limpio de lo que no habla del evento."""
+    tit = _norm(f"{_etiqueta_util(categoria_fuente)} {titulo}")
+    if _tiene(tit, FALSOS_INFANTILES):     # "Niños del Cerro" es una banda
+        return " "
+    tit = FRASES_CON_OBRA.sub(" ", tit)    # "MANO DE OBRA" es una banda
+    # "Obras extraordinarias" en el MAC es una muestra, no una función.
+    if MUSEOS_DE_ARTE.search(_norm(f"{lugar} {fuente}")):
+        tit = SENTIDO_DE_OBRA.sub(" ", tit)
+    return _sin_nombre_del_lugar(tit, lugar)
+
+
 def _buscar_categoria(texto):
     for categoria, patron in PATRONES_CATEGORIA:
         # Va en el lugar de deporte en la lista, no antes: si el título ya dijo
@@ -308,46 +418,113 @@ def _buscar_categoria(texto):
             continue
         # El medio no define la categoría cuando el título dice que se enseña:
         # "Taller de grabado" es clases, "Bienal de grabado" es arte; y
-        # "Taller de cueca" es clases, "Peña con cuecas" es música.
-        if categoria in ("arte", "musica") and SE_APRENDE.search(texto):
+        # "Taller de cueca" es clases, "Peña con cuecas" es música. Teatro y
+        # cine entraron el 22-08-2026: "Taller de Impro" y "Taller de Clown"
+        # salían como funciones por "impro" y "clown". Deporte NO entra: una
+        # clase de natación es deporte por regla de la casa.
+        if categoria in ("arte", "musica", "teatro", "cine") and SE_APRENDE.search(texto):
             continue
         if re.search(patron, texto):
             return categoria
     return None
 
 
-def clasificar(titulo, categoria_fuente, descripcion, lugar="", fuente=""):
+def clasificar(titulo, categoria_fuente, descripcion, lugar="", fuente="",
+               con_memoria=True):
     """Devuelve (categoria, origen).
 
-    origen ∈ {'titulo','descripcion','prior','defecto'} — sirve para auditar
-    cuánto está adivinando el clasificador en cada corrida.
+    origen ∈ {'memoria','titulo','descripcion','prior','defecto'} — sirve para
+    auditar cuánto está adivinando el clasificador en cada corrida. 'memoria'
+    es una regla de categorias.yaml leída en el texto; una regla de recinto de
+    la memoria sale como 'prior', porque eso es: una conjeta por el lugar,
+    solo que curada.
+
+    `con_memoria=False` clasifica solo con los patrones del código; lo usa la
+    auditoría para medir qué cambia cada regla.
     """
-    tit = _norm(f"{categoria_fuente} {titulo}")
-    if _tiene(tit, FALSOS_INFANTILES):     # "Niños del Cerro" es una banda
-        tit = " "
-    # "Obras extraordinarias" en el MAC es una muestra, no una función.
-    if MUSEOS_DE_ARTE.search(_norm(f"{lugar} {fuente}")):
-        tit = SENTIDO_DE_OBRA.sub(" ", tit)
-
-    # 1. El título manda. Es corto y curado; la descripción trae ruido.
-    categoria = _buscar_categoria(tit)
-    if categoria:
-        return categoria, "titulo"
-
-    # 2. Recién ahora la descripción.
+    tit = _titulo_para_clasificar(titulo, categoria_fuente, lugar, fuente)
     cuerpo = _norm(f"{tit} {descripcion}")
     for nombre in FALSOS_INFANTILES:
         cuerpo = cuerpo.replace(_norm(nombre), " ")
+    mem = memoria() if con_memoria else None
+
+    # 0. La memoria curada, primero sobre el título y después sobre el texto
+    #    completo. Va antes que los patrones del código a propósito: es lo que
+    #    alguien ya revisó, y si contradice a un patrón es porque el patrón se
+    #    equivocaba en ese contexto.
+    if mem:
+        calce = mem.buscar(tit, "titulo") or mem.buscar(cuerpo, "texto")
+        if calce:
+            return calce[0].categoria, "memoria"
+
+    # 1. El título manda. Es corto y curado; la descripción trae ruido.
+    #    Primero el título PELADO y recién después con la etiqueta de la
+    #    fuente pegada adelante: la etiqueta es lo que el organizador eligió
+    #    de un menú, y en Ticketplus "Teatro y Musicales" viste a "Concierto
+    #    Orquesta Toki Rapa Nui" y a "Tributo BTS". Como el patrón de teatro
+    #    va antes que el de música, la etiqueta le ganaba al título. Ahora la
+    #    etiqueta solo opina cuando el título no dijo nada.
+    titulo_pelado = _titulo_para_clasificar(titulo, "", lugar, fuente)
+    if tit.strip():
+        categoria = _buscar_categoria(titulo_pelado)
+        if categoria:
+            return categoria, "titulo"
+        categoria = _buscar_categoria(tit)
+        if categoria:
+            return categoria, "etiqueta"
+
+    # 2. Recién ahora la descripción.
     categoria = _buscar_categoria(cuerpo)
     if categoria:
         return categoria, "descripcion"
 
     # 3. Prior por fuente/recinto. Es una conjetura y queda marcada como tal.
+    #    Primero el de la memoria (un recinto que la revisión ya caracterizó),
+    #    después el del código.
     contexto = _norm(f"{lugar} {fuente}")
+    if mem:
+        calce = mem.buscar(contexto, "lugar")
+        if calce:
+            return calce[0].categoria, "prior"
     for patron, categoria in PRIOR_FUENTE:
         if re.search(patron, contexto):
             return categoria, "prior"
     return "otros", "defecto"
+
+
+def explicar(titulo, categoria_fuente, descripcion, lugar="", fuente=""):
+    """Qué dijo cada capa sobre un evento. Para la auditoría, no para el export.
+
+    Devuelve una lista de (capa, categoria, detalle) en el orden en que
+    `clasificar` las consulta; la primera con categoría es la que manda.
+    """
+    tit = _titulo_para_clasificar(titulo, categoria_fuente, lugar, fuente)
+    cuerpo = _norm(f"{tit} {descripcion}")
+    contexto = _norm(f"{lugar} {fuente}")
+    mem = memoria()
+    pasos = []
+    for nombre, texto in (("memoria:titulo", tit), ("memoria:texto", cuerpo)):
+        calce = mem.buscar(texto, nombre.split(":")[1])
+        pasos.append((nombre, calce[0].categoria if calce else "",
+                      f"{calce[0].nombre} ← «{calce[1]}»" if calce else ""))
+    for nombre, texto in (("codigo:titulo", tit), ("codigo:descripcion", cuerpo)):
+        cat = _buscar_categoria(texto)
+        palabra = ""
+        if cat:
+            if cat == "deporte" and PARTIDO.search(texto):
+                palabra = "PARTIDO"
+            else:
+                m = next((re.search(p, texto) for c, p in PATRONES_CATEGORIA
+                          if c == cat and re.search(p, texto)), None)
+                palabra = m.group(0) if m else ""
+        pasos.append((nombre, cat or "", f"«{palabra}»" if palabra else ""))
+    calce = mem.buscar(contexto, "lugar")
+    pasos.append(("memoria:lugar", calce[0].categoria if calce else "",
+                  f"{calce[0].nombre} ← «{calce[1]}»" if calce else ""))
+    prior = next(((c, p) for p, c in PRIOR_FUENTE if re.search(p, contexto)), None)
+    pasos.append(("codigo:prior", prior[0] if prior else "",
+                  prior[1][:50] if prior else ""))
+    return pasos
 
 
 # ---------- SUBCATEGORÍA ----------
@@ -585,11 +762,22 @@ def clasificar_subcategoria(categoria, titulo, categoria_fuente, descripcion,
     if not listas:
         return "", "defecto"
 
+    tit = _titulo_para_clasificar(titulo, categoria_fuente, lugar, fuente)
+    cuerpo = _norm(f"{tit} {descripcion}")
+    contexto = _norm(f"{lugar} {fuente}")
+
+    # 0. La memoria: una regla de categorias.yaml que trae subcategoría y es
+    #    de esta misma categoría. Misma razón que en `clasificar`: el prior
+    #    de la Sala RBX manda "rock" a todo lo que pasa por ahí, y la regla
+    #    "mixtape/freestyle → urbano" que alguien ya revisó tiene que ganarle.
+    mem = memoria()
+    calce = mem.buscar(tit, "titulo", categoria) or mem.buscar(cuerpo, "texto", categoria)
+    if calce:
+        return calce[0].subcategoria, "memoria"
+
     # Mismo orden de confianza que en `clasificar`: el título es corto y
     # curado, la descripción trae ruido.
-    for texto, origen in ((f"{categoria_fuente} {titulo}", "titulo"),
-                          (descripcion, "descripcion")):
-        plano = _norm(texto)
+    for plano, origen in ((tit, "titulo"), (_norm(descripcion), "descripcion")):
         if not plano.strip():
             continue
         for subcategoria, palabras in listas:
@@ -597,7 +785,9 @@ def clasificar_subcategoria(categoria, titulo, categoria_fuente, descripcion,
                 return subcategoria, origen
 
     # Y al final el recinto, que es una conjetura y queda marcada como tal.
-    contexto = _norm(f"{lugar} {fuente}")
+    calce = mem.buscar(contexto, "lugar", categoria)
+    if calce:
+        return calce[0].subcategoria, "lugar"
     for patron, cat_recinto, subcategoria in RECINTO_SUBCATEGORIA:
         if cat_recinto == categoria and re.search(patron, contexto):
             return subcategoria, "lugar"

@@ -1,0 +1,607 @@
+# Memoria de CATEGORÍAS: palabras en contexto → categoría.
+#
+# Es la memoria del clasificador (loica/clasificar.py). El clasificador tiene
+# sus patrones en el código y funciona sin este archivo; lo que va acá es lo
+# que la revisión aprendió mirando eventos de verdad: "Magallanes" al lado de
+# "vs" es un partido, "maratón" al lado de "película" es cine, "Edo Caroe" es
+# stand-up aunque lo vendan en una sala de conciertos. Cada regla vale para
+# los eventos de hoy y para los que lleguen mañana con las mismas palabras.
+#
+# Cómo se lee una regla:
+#   - nombre: qué es (aparece en la auditoría y en el informe)
+#     palabras: [...]     alguna tiene que aparecer (frase completa, con límite
+#                         de palabra; sin tildes ni mayúsculas, da lo mismo)
+#     contexto: [...]     opcional: además, alguna de estas tiene que aparecer
+#                         en el mismo texto. Es lo que hace segura a una
+#                         palabra ambigua ("magallanes" + "vs")
+#     sin: [...]          opcional: ninguna de estas puede aparecer
+#     donde: titulo       titulo = etiqueta de la fuente + título (lo normal)
+#                         texto  = título + descripción (ojo: trae ruido)
+#                         lugar  = nombre del recinto + de la fuente; SOLO
+#                                  opina cuando el texto no dijo nada, como el
+#                                  prior de recinto del código
+#     categoria: ...      idiomas familia feria deporte fiesta cine teatro
+#                         musica arte clases aire_libre charla otros
+#                         — o `descartar`: no es un panorama, no se publica
+#     subcategoria: ...   opcional; también vale para una regla que solo
+#                         corrige el segundo nivel (la categoría tiene que ser
+#                         la que ya tiene el evento)
+#     nota: por qué       el caso que la motivó y la fecha
+#
+# Orden: la PRIMERA regla que calza gana, y la memoria se consulta ANTES que
+# los patrones del código. Lo específico va arriba. Una regla demasiado ancha
+# se lleva eventos que estaban bien: antes de agregar una, medirla con
+#     python3 scripts/auditar_categorias.py --comparar
+# que muestra qué eventos cambian y hacia dónde, en las dos direcciones.
+#
+# Si una regla pide lógica (un orden, una excepción por recinto) o se repite
+# con variantes, el arreglo de verdad va en loica/clasificar.py.
+
+reglas:
+
+  # ---------------------------------------------------------------
+  # EL FORMATO DICHO EN EL TÍTULO manda sobre todo lo demás
+  # Van primero porque son la señal más limpia que existe: el organizador
+  # escribió qué es. Antes de esto, "Concierto de Fiestas Patrias" se iba a
+  # fiesta por "fiestas patrias", "Concierto N°20 • Poemas, Danzas y Gloria"
+  # a teatro por "danzas" y "TRIBUTO A BUENA VISTA SOCIAL CLUB" a fiesta por
+  # "club" — en los tres el título ya decía la respuesta y el clasificador
+  # miraba la otra palabra.
+  # ---------------------------------------------------------------
+  - nombre: el título dice que es un concierto
+    palabras: [concierto, conciertos, recital, recitales, tocata, tocatas,
+               en concierto, unplugged, showcase, jam session, cantata,
+               tributo, tributos, banda homenaje, banda tributo, homenaje a,
+               gira, pregira, fin de gira, tour, world tour, latam tour,
+               lanzamiento del disco, lanzamiento de disco, lanzamiento ep,
+               lanzamiento single, listening party, release party,
+               cantos y danzas, noche criolla, is back, big band, big-band]
+    sin: [taller, curso, clase, clases, workshop, escuela de, academia,
+           tour virtual, visita guiada, museo y tour, tour en el, tour por]
+    donde: titulo
+    categoria: musica
+    nota: "el formato escrito en el título gana sobre cualquier otra palabra; 'tour' se excluye cuando es una visita guiada (Tour Claro Arena) porque eso no es una gira (2026-08-22)"
+
+  # ---------------------------------------------------------------
+  # DEPORTE — los partidos se publican con el nombre de los equipos
+  # ---------------------------------------------------------------
+  - nombre: partido de fútbol por el nombre del club
+    palabras: [colo colo, colo-colo, universidad de chile, universidad catolica,
+               union espanola, palestino, audax italiano, huachipato, everton,
+               santiago wanderers, coquimbo unido, deportes iquique,
+               deportes antofagasta, cobreloa, cobresal, o'higgins, nublense,
+               union la calera, deportes la serena, deportes copiapo,
+               deportes limache, magallanes, santiago morning, san marcos de arica,
+               deportes temuco, rangers, curico unido, deportes santa cruz,
+               san luis, deportes recoleta, deportes concepcion,
+               universidad de concepcion, barnechea, deportes melipilla,
+               santiago city, lautaro de buin, provincial osorno, fernandez vial,
+               deportes puerto montt, union san felipe, deportes colina,
+               atletico colina, lota schwager, trasandino, general velasquez,
+               real san joaquin, provincial ovalle, deportes rengo, colchagua,
+               deportes linares, brujas de salamanca, deportes valdivia,
+               deportes ancud, la roja, seleccion chilena]
+    contexto: [vs, versus, v/s, partido, estadio, fecha, campeonato, copa,
+               liga, clasico, superclasico, amistoso, torneo, femenino, fem,
+               primera b, segunda division, eliminatorias]
+    donde: titulo
+    categoria: deporte
+    subcategoria: futbol
+    nota: "Puntoticket titula 'Magallanes vs. Cobreloa en Estadio Municipal de San Bernardo' sin una palabra de fútbol. Sin el contexto, 'Universidad de Chile' sola es una charla en la universidad (2026-08-22)"
+
+  - nombre: copas y clasificatorios
+    palabras: [copa davis, copa libertadores, copa sudamericana, supercopa,
+               copa del mundo, mundial de clubes, eliminatorias, clasificatorio,
+               clasificatorias, chile vs, chile v/s, premier league,
+               champions league, real madrid, fc barcelona]
+    donde: titulo
+    categoria: deporte
+    nota: "'Copa davis Chile vs España' caía en otros; ver el partido del Real Madrid con la peña en un bar es un panorama futbolero (2026-08-22)"
+
+  - nombre: ajedrez es deporte
+    palabras: [ajedrez]
+    donde: titulo
+    categoria: deporte
+    nota: "'Torneo Escolar Club de Ajedrez' caía en fiesta por 'club' (2026-08-22)"
+
+  - nombre: automovilismo
+    palabras: [automovilismo, autodromo, racing, karting, drift, rally]
+    sin: [racing experience tour]
+    donde: titulo
+    categoria: deporte
+    nota: "'2da Copa Ayala Racing' en el Autódromo Las Vizcachas caía en otros (2026-08-22)"
+
+  - nombre: gimnasio municipal que la etiqueta no cubre
+    palabras: [sala de maquinas, musculacion, hiit, entrenamiento personalizado,
+               entrenamiento con maquinas, chikung, chi kung, qigong,
+               nunoa master, motricidad, psicomotricidad]
+    donde: titulo
+    categoria: deporte
+    nota: "'Sala de Máquinas Personas Mayores' y 'Ñuñoa Máster' caían en clases; 'Motricidad Infantil' en familia por 'infantil' (auditoría de talleres 2026-08-22)"
+
+  - nombre: pista de hielo es panorama familiar
+    palabras: [pista de hielo, patinaje sobre hielo, pista de patinaje]
+    donde: titulo
+    categoria: familia
+    nota: "'Xtreme Ice' caía en deporte por 'patinaje' (2026-08-22)"
+
+  # ---------------------------------------------------------------
+  # "MARATÓN" no siempre es una corrida
+  # ---------------------------------------------------------------
+  - nombre: maratón de películas
+    palabras: [maraton]
+    contexto: [pelicula, peliculas, film, cine, trilogia, saga, senor de los anillos,
+               harry potter, star wars, serie, series, capitulos, funciones]
+    sin: [corrida, running, 10k, 21k, 42k, inscripcion, largada, trote]
+    donde: titulo
+    categoria: cine
+    nota: "'Maratón El Señor de los Anillos' en el Teatro Oriente iba a deporte/running (2026-08-22)"
+
+  - nombre: maratón fotográfica es una muestra
+    palabras: [maraton]
+    contexto: [exposicion, fotografia, fotografico, fotografica, muestra]
+    donde: titulo
+    categoria: arte
+    nota: "'Exposición Maratón de Fotografía' iba a deporte (2026-08-22)"
+
+  - nombre: maratón de lectura
+    palabras: [maraton]
+    contexto: [lectura, poesia, cuentos, relatos, lectora]
+    donde: titulo
+    categoria: charla
+    nota: "una maratón de lectura se escucha, no se corre"
+
+  # ---------------------------------------------------------------
+  # FERIA — convenciones, expos y festivales de comer y beber
+  # ---------------------------------------------------------------
+  - nombre: convención de tatuaje
+    palabras: [tattoo, tatuaje, tatuajes]
+    donde: titulo
+    categoria: feria
+    nota: "Passline etiqueta 'Deportes' al Tattoo Masters Fest y esa etiqueta entra al texto (2026-08-22)"
+
+  - nombre: festival de cerveza o de comida
+    palabras: [bier fest, bierfest, beer fest, beerfest, oktoberfest,
+               festival de la cerveza, fest de cerveza, festival gastronomico,
+               food & wine, food&wine, food fest, feria costumbrista,
+               casa de campo]
+    donde: titulo
+    categoria: feria
+    nota: "el Florida Bier Fest anuncia bandas pero es una feria de cerveza; Casa de Campo en La Reina es feria costumbrista (2026-08-22)"
+
+  - nombre: expo de rubro con nombre pegado
+    palabras: [expoyoga, expo yoga, mundo tuerca, tuning, anticuarios,
+               salon de la historieta, salon internacional de la historieta,
+               salon del comic, comiquer, comiqueres, juegos de mesa,
+               encuentro de juegos, convencion, dia del vino, noche de librerias,
+               feria holistica, feria del vino, feria de vinos]
+    sin: [exposicion]
+    donde: titulo
+    categoria: feria
+    nota: "'ExpoYoga' es una sola palabra y el patrón 'expo' con límite de palabra no la ve; el XTFEST 'del mundo tuerca' es una expo de autos; 'Feria Holística regresa con charlas' iba a charla (2026-08-22)"
+
+  - nombre: una feria es una feria
+    palabras: [feria]
+    sin: [la feria, feria laboral, feria vocacional, feria cientifica, feria de empleo,
+           feria de postgrados, feria de universidades, feria de proyectos,
+           feria de carreras, taller, postula, expositor, expositores]
+    donde: titulo
+    categoria: feria
+    nota: "el patrón del código solo conoce ferias con apellido (artesanal, del libro, vintage…) y 'Feria Holística' o 'Feria de las Flores' se iban a otra parte por una palabra suelta; 'La Feria' se excluye porque es una discoteca (2026-08-22)"
+
+  # ---------------------------------------------------------------
+  # FIESTA — lo que el título no llama fiesta
+  # ---------------------------------------------------------------
+  - nombre: perreo
+    palabras: [perreo, perreito]
+    donde: titulo
+    categoria: fiesta
+    subcategoria: reggaeton
+    nota: "'PRIMER PERREO by SAGRADO' en Club Berlín iba a arte por la etiqueta de Passline (2026-08-22)"
+
+  - nombre: set extendido de DJ
+    palabras: [dj set, all night long, open to close, b2b, extended set,
+               4 hours, 5 hours, 6 hours, 8 hours]
+    donde: titulo
+    categoria: fiesta
+    subcategoria: electronica
+    nota: "'The Grid: KI/KI 5 hours en Espacio Riesco' iba a música por el prior del recinto (2026-08-22)"
+
+  - nombre: productoras y ciclos de fiestas
+    palabras: [disco sour machine, gallery sessions, high bpm, clubroom,
+               kiss & shoot, kiss and shoot, coco bongo, sabado sato,
+               off paes, post paes, fiesta paes, aura chile, the project x,
+               la plena, roda de samba, fiesta brasilera, fista brasilera,
+               noche de caballeros, domingos lecheros, iconicos de los,
+               pary]
+    donde: titulo
+    categoria: fiesta
+    nota: "nombres de noche que no dicen 'fiesta': Coco Bongo y Kiss & Shoot son productoras que ocupan el Teatro Alicia, AURA y Project X llenan Centro Parque (2026-08-22)"
+
+  - nombre: la fiesta Aerobica no es aeróbica
+    palabras: [aerobica]
+    contexto: [aniversario, dj, djs, fiesta, party, centro de eventos]
+    donde: texto
+    categoria: fiesta
+    nota: "'Aerobica Aniversario 7 en Centro de Eventos Basel' es un dúo de DJs; iba a deporte/baile_fitness (2026-08-22)"
+
+  - nombre: festivales que son carretes
+    palabras: [black fest, mike fest, harder internacional, atardeceres,
+               respira primavera]
+    donde: titulo
+    categoria: fiesta
+    nota: "ciclos de fiesta en parques y centros de eventos que se llaman 'fest' (auditoría de música, confianza media, 2026-08-22)"
+
+  # ---------------------------------------------------------------
+  # TEATRO — comediantes que se venden como conciertos
+  # ---------------------------------------------------------------
+  - nombre: comediantes chilenos y de gira
+    palabras: [edo caroe, alto yoyo, luis slimming, natalia valdebenito,
+               fabrizio copano, pedro ruminot, stefan kramer, felipe avello,
+               sergio freire, bombo fica, jorge alis, pamela leiva, diego urrutia,
+               alison mandel, rodrigo villegas, carlos ballarta, paloma salas,
+               rodrigo salinas, luis hachem, clara ulrich, pank en, claudio reyes,
+               dino gordillo, ernesto belloni, chiqui aguayo, javiera contador,
+               lucho miranda, paul vasquez, juan pablo flores, george harris,
+               franco escamilla, ricardo quevedo, la bala, yerko puchento]
+    donde: titulo
+    categoria: teatro
+    subcategoria: comedia
+    nota: "Edo Caroe y Alto Yoyo iban a música: el título es solo el nombre y el recinto es de conciertos (2026-08-22)"
+
+  - nombre: stand-up dicho en la descripción
+    palabras: [comediante, humorista, stand up, stand-up, standup, rutina de humor,
+               monologo de humor, comedia en vivo]
+    sin: [banda, concierto, tocata, recital, tributo]
+    donde: texto
+    categoria: teatro
+    subcategoria: comedia
+    nota: "la descripción delata al comediante aunque el título sea solo su nombre (2026-08-22)"
+
+  - nombre: galas de academias de baile
+    palabras: [presentacion de alumnas, presentacion de alumnos, gala de alumnos,
+               gala de alumnas, gala academia, muestra de fin de ano, muestra de alumnos]
+    donde: titulo
+    categoria: teatro
+    subcategoria: danza
+    nota: "'Gala Academia BYDA Infantil' iba a familia por 'infantil'; 'infantil' describe a los alumnos (2026-08-22)"
+
+  - nombre: conciertos en recintos que se llaman teatro
+    palabras: [teatro caupolican, teatro coliseo, teatro fabrica, teatro ca660,
+               teatro cariola, teatro nescafe, teatro oriente]
+    sin: [obra, comedia, stand up, standup, humor, danza, circo, magia, musical,
+           pelicula, ciclo, maraton, ballet, opera]
+    donde: titulo
+    categoria: musica
+    nota: "'Memphis May Fire en Teatro Coliseo', 'Toly Fu en Teatro Caupolicán': el recinto dice teatro y el patrón 'teatr' se lo creía (2026-08-22)"
+
+  - nombre: coros y folclor son música
+    palabras: [encuentro coral, encuentro de coros, festival de folclore,
+               festival folclorico, festival de folklore, big-band, big band,
+               ensamble, + invitados, quinta de recreo, quartet, quintet,
+               zarzuela]
+    sin: [taller, curso, clase]
+    donde: titulo
+    categoria: musica
+    nota: "el 'Festival de Folclore en Teatro Municipal de La Florida' y el 'Encuentro Coral en Teatro Aula Magna' iban a teatro por el recinto; 'Big-Band' con guion no calza con el patrón; 'Joshua Redman Quartet' iba a charla por el prior de la universidad (2026-08-22)"
+
+  - nombre: lanzamiento de disco, no de libro
+    palabras: [lanzamiento]
+    contexto: [disco, ep, single, sencillo, album, videoclip, sala scd, sala master,
+               casa palacio, teatro fiebre, citylab, banda]
+    sin: [libro, novela, revista, publicacion, editorial, poemario, ensayo]
+    donde: texto
+    categoria: musica
+    nota: "el patrón de charla tiene 'lanzamiento' a secas y mandaba nueve lanzamientos de discos en la Sala SCD y la Sala Master a charla (2026-08-22)"
+
+  - nombre: repertorio clásico
+    palabras: [haydn, mozart, vivaldi, beethoven, bach, chopin, brahms, schubert,
+               tchaikovsky, mahler, debussy, faure, prokofiev, strauss, verdi,
+               puccini, wagner, rachmaninov, stravinsky, ravel, handel, haendel,
+               las cuatro estaciones, sinfonia, requiem, misa solemne,
+               musica de camara, musica antigua, syntagma, el rey del vals]
+    sin: [charla, conversatorio, seminario, taller, curso]
+    donde: titulo
+    categoria: musica
+    subcategoria: clasica
+    nota: "'De Haydn a Mozart' y 'Las Cuatro Estaciones' en el Aula Magna de la U. de los Andes iban a charla por el prior de universidad; el 'Réquiem de Fauré' y el 'Johann Strauss: El Rey del Vals' caían en otros porque el título no dice ni concierto ni orquesta (2026-08-22)"
+
+  - nombre: orquesta que no es sinfónica
+    palabras: [orquesta, orquestas]
+    sin: [sinfonica, sinfonico, filarmonica, camara, camerata, juvenil,
+           de cuerdas, clasica, barroca]
+    donde: titulo
+    categoria: musica
+    nota: "'orquesta' sola no es clásica: Golosa La Orquesta es cumbia, La Brígida Orquesta es hip-hop y la Orquesta de Miguel Molina es tropical. La regla fija la categoría (música) y deja la subcategoría vacía, que es la respuesta honesta (2026-08-22)"
+
+  - nombre: ballet es danza
+    palabras: [ballet, ballet nacional chileno, banch, apertura de proceso,
+               ensayo abierto, work in progress]
+    sin: [taller, curso, clase, academia]
+    donde: titulo
+    categoria: teatro
+    subcategoria: danza
+    nota: "el patrón de teatro tiene 'danza' pero no 'ballet'; 'Ciclo N°3 - Voces' del BANCH iba a charla (2026-08-22)"
+
+  - nombre: talleres de artes escénicas son clases
+    palabras: [taller de impro, taller de improvisacion, taller de teatro,
+               taller de actuacion, taller de clown, taller de danza,
+               taller de circo, taller de dramaturgia, taller de cueca,
+               clases de cueca, danza arabe, taller quiero ser cuentacuentos,
+               aprende]
+    donde: titulo
+    categoria: clases
+    nota: "'Taller de Impro' iba a teatro por 'impro', 'Taller de Cueca' de la corporación de deportes iba a deporte por la etiqueta, 'Aprende cueca en M100' caía en arte (2026-08-22)"
+
+  - nombre: obra dicha en el texto
+    palabras: [unipersonal, montaje teatral, puesta en escena, dramaturgia de,
+               direccion de, elenco]
+    contexto: [obra, escena, escenico, teatral, funcion]
+    donde: texto
+    categoria: teatro
+    subcategoria: obra
+    nota: "'Vicaría' y 'Las Cacerolas Vacías' en M100 se iban a arte por el prior del recinto (2026-08-22)"
+
+  # ---------------------------------------------------------------
+  # FAMILIA — lo anunciado para niños
+  # ---------------------------------------------------------------
+  - nombre: festival de teatro familiar y mes del niño
+    palabras: [famfest, mes del nino, mes de la ninez, mes de la infancia,
+               cine en familia, cine familiar, matine infantil, funcion familiar,
+               jornada familiar, concierto familiar, talleres familiares,
+               para infancias, kamishibai, dinosaurio, dinosaurios, carnotaurus]
+    donde: titulo
+    categoria: familia
+    nota: "FAMFEST es el Festival Internacional de Teatro Familiar; sus funciones iban a arte (CEINA) o teatro (2026-08-22)"
+
+  # ---------------------------------------------------------------
+  # CHARLA — conversación, no función
+  # ---------------------------------------------------------------
+  - nombre: seminario antes que el recinto
+    palabras: [seminario, conversatorio, coloquio, conferencia, congreso,
+               ciclo de charlas, ciclo de encuentros, simposio, summit,
+               lanzamiento del libro, lanzamiento de libro, presentacion del libro,
+               conoce al autor, encuentro con el autor, anatomia de una serie,
+               presentacion de estudio, presentacion del estudio, power skills,
+               grupo de apoyo, conferencista, charla motivacional, daniel habif,
+               la previa /]
+    sin: [taller, workshop, curso]
+    donde: titulo
+    categoria: charla
+    nota: "'Seminario Traspaso de Experiencias... del Teatro' iba a teatro, 'Ciclo de encuentros' del MAC a aire_libre por Parque Forestal, 'La Previa /' del CEAC es la conversación gratis en el foyer antes del concierto (2026-08-22)"
+
+  - nombre: proyecciones que son pronósticos
+    palabras: [proyecciones]
+    contexto: [analisis, primera vuelta, elecciones, electoral, economia,
+               economicas, escenario, tendencias]
+    sin: [pelicula, film, documental, cortometraje, ciclo]
+    donde: titulo
+    categoria: charla
+    nota: "'Análisis y proyecciones tras la primera vuelta' del CEP iba a cine (2026-08-22)"
+
+  - nombre: visita guiada a un recinto
+    palabras: [tour claro arena, tour estadio, tour por el estadio, tour virtual,
+               visita guiada al estadio, museo y tour, tour monumental,
+               visitas guiadas, visita guiada, tour en el cementerio]
+    donde: titulo
+    categoria: otros
+    nota: "'Tour Claro Arena en Claro Arena' iba a música por 'tour' = gira (2026-08-22)"
+
+  # ---------------------------------------------------------------
+  # RECINTOS que programan siempre lo mismo (solo si el texto calla)
+  # ---------------------------------------------------------------
+  - nombre: salas de teatro
+    palabras: [teatro ictus, teatro azares, teatro del puente, teatro nacional chileno,
+               club de teatro, aiquia, teatro aleph, sala julieta, teatro cachafaz,
+               teatro la memoria, teatro sidarte, sidarte, teatro mori, mori parque arauco,
+               mori bellavista, mori recoleta, teatro san gines, sala de teatro,
+               laboratorio escenico]
+    donde: lugar
+    categoria: teatro
+    nota: "'PA$$$TA(YO)BA$$$E!!!!' en el Teatro ICTUS, 'Cornisa' en Teatro del Puente: títulos opacos de obras (2026-08-22)"
+
+  - nombre: salas de conciertos
+    palabras: [sala scd, sala master, casa palacio, kross bar, auditorio sofofa,
+               citylab, city lab]
+    donde: lugar
+    categoria: musica
+    nota: "un 'Título - Artista' con entrada en el Auditorio Sofofa es un show, no una charla (2026-08-22)"
+
+  - nombre: el ciclo de cine del CEP
+    palabras: [ciclo stanley kubrick, kubrick, odisea del espacio, eyes wide shut,
+               ciclo de cine]
+    donde: titulo
+    categoria: cine
+    nota: "el CEP titula sus funciones 'Ciclo Stanley Kubrick: ... | «2001, odisea del espacio» (1968)' y el prior del centro de estudios las mandaba a charla (2026-08-22)"
+
+  - nombre: salas de stand-up
+    palabras: [happy people, club de la comedia, comedy club, comedia bar]
+    donde: lugar
+    categoria: teatro
+    subcategoria: comedia
+    nota: "Happy People solo programa stand-up (2026-08-22)"
+
+  - nombre: discotecas y clubes de carrete
+    palabras: [teatro alicia, tom house, club ambar, aura club, hilaria, la suite chicureo,
+               fausto, club berlin, club fist, la feria club, club 1, mystic valley]
+    donde: lugar
+    categoria: fiesta
+    nota: "'“22 SÁBADO (+18)' en FAUSTO es el título completo; el Teatro Alicia es un local de carretes aunque se llame teatro (2026-08-22)"
+
+  - nombre: bares de tocatas
+    palabras: [bar victoria, bar estudio oculto, el sotano, club amanda, mibar,
+               bar de rene, la casa en el aire, el meson nerudiano, kahuin, teatro fiebre,
+               bar teatro fiebre, casa palacio, la juguera, club hell bar]
+    donde: lugar
+    categoria: musica
+    nota: "'AMERIKA JUNIOR Y LOS MAL PASO' en Bar Victoria es el circuito tropical; el Bar Teatro Fiebre programa shows y tocatas, y antes caía en otros (2026-08-22)"
+
+  - nombre: el Club Subterráneo programa bandas salvo sus propias fiestas
+    palabras: [club subterraneo, club subterráneo]
+    donde: lugar
+    categoria: musica
+    nota: "el Subte usa dos plantillas: 'ARTISTA ★ DÍA FECHA ★ Club Subterráneo' con apertura de sala es un show (Blackdali, The Cat Empire, Jaze, Delta, Julius Popper), y sus fiestas de la casa —ultrabailable, Weekend Dance, Portofino, Rumba, Fonda Subte— dicen su nombre en el título y las pesca el patrón de fiesta antes de llegar acá (2026-08-22)"
+
+  - nombre: las ticketeras de shows grandes
+    palabras: [ticketmaster, puntoticket, portaltickets, portaldisc]
+    donde: lugar
+    categoria: musica
+    nota: "Ticketmaster publica el puro nombre del artista —Slayer, Lollapalooza, Silvia Pérez Cruz, EASYKID— y esos nueve eventos caían en 'otros'. Sus partidos ya los pesca PARTIDO en el título y sus obras dicen teatro, así que lo que llega acá sin señal es el show grande en el recinto grande (2026-08-22)"
+
+  - nombre: el Municipal de Santiago programa más música que teatro
+    palabras: [teatro municipal de santiago, municipal de santiago]
+    donde: lugar
+    categoria: musica
+    nota: "el prior del código lo tenía como teatro y mandaba ahí a Gustavo Santaolalla y al pianista Daniil Trifonov; su cartelera es ópera, sinfónica y recitales, y los ballets ya los pesca la regla de 'ballet' por título (2026-08-22)"
+
+  - nombre: salas de cine
+    palabras: [sala nemesio, cine arte alameda, centro arte alameda, cineteca,
+               sala k u mayor, cine normandie, "matucana 100 / cine"]
+    donde: lugar
+    categoria: cine
+    nota: "Sala Nemesio (La Reina) lista películas a $3.500 con el puro título: Spiderman, Locamente (2026-08-22)"
+
+  - nombre: explanada y salas de Matucana 100
+    palabras: ["matucana 100 / explanada"]
+    donde: lugar
+    categoria: musica
+    nota: "en la Explanada van tocatas y fiestas; el prior de M100 las mandaba a arte (2026-08-22)"
+
+  - nombre: salas de función pagada de M100 y GAM
+    palabras: ["matucana 100 / microsala", "matucana 100 / espacio patricio bunster",
+               "matucana 100 / teatro principal", gam sala, "gam -n", "gam - b", "gam -b"]
+    donde: lugar
+    categoria: teatro
+    nota: "las exposiciones de M100 y GAM son gratis y no pasan por ticketera: una función con entrada ahí es teatro salvo que el título diga banda (2026-08-22)"
+
+  # ---------------------------------------------------------------
+  # NO ES UN PANORAMA
+  # ---------------------------------------------------------------
+  - nombre: abonos y membresías
+    palabras: [abono, abonos, pase festival, pase temporada, membresia,
+               pase 2 dias, pase 3 dias, pase ambos dias, pase ambos días,
+               promo 2 dias, promo 3 dias, promo 4 dias, promo dos dias,
+               estacionamiento, estacionamientos, parking, contenedor,
+               campana de abonados, campana de socios, gift card, giftcard,
+               puesto maker, venta de stand, venta de stands, "/ stands",
+               expositores, como expositor]
+    sin: [organico, compost, huerto, taller de abono]
+    donde: titulo
+    categoria: descartar
+    nota: "'PASE FESTIVAL 2027', 'Abono M. Puente Alto 2026', '3D Printer Party - Puesto Maker': se venden como entradas y no lo son (2026-08-22)"
+
+  - nombre: convocatorias, noticias y trámites
+    palabras: [convocatoria, abre convocatoria, postulaciones abiertas,
+               concurso de fotografia, concurso literario, entrevista a,
+               exitoso cierre, previa cita, cortes de transito, fondo concursable,
+               fondos concursables, ensayo paes, uah abierta, puertas abiertas,
+               jornada de admision, eventos archive, columna de opinion,
+               mes de la red de salas, actividades libreria, liga ex,
+               agenda de actividades, programa de actividades, revive la, revive el,
+               call for papers, mediacion artistica]
+    donde: titulo
+    categoria: descartar
+    nota: "las fuentes institucionales (BAJ, municipios, universidades, CEINA) mezclan noticias, convocatorias y trámites con su agenda (2026-08-22)"
+
+  - nombre: la universidad hablándose a sí misma
+    palabras: [admision, open house, charla informativa, facultad abierta,
+               conoce tu futura carrera, mock exam, sesion informativa,
+               alumni, egresados, egresadas, titulados, tutorias pares,
+               buenas practicas tutoriales, aniversario de la facultad,
+               santo patrono, semana de la solidaridad, encargados de bienestar,
+               pinta tu independencia, podcast]
+    sin: [en vivo, en directo, concierto, festival]
+    donde: titulo
+    categoria: descartar
+    nota: "admisión, jornadas de egresados, misas de facultad y voluntariados internos llegaban como charla por el prior de universidad: 15 de los 51 errores de la auditoría de charlas; la etiqueta 'Admisión' de la fuente entra al texto y basta para descartarlos (2026-08-22)"
+
+  - nombre: llamado a ponencias
+    palabras: [convoca a enviar, envio de propuestas, enviar sus propuestas,
+               call for papers, postulaciones abiertas hasta]
+    donde: texto
+    categoria: descartar
+    nota: "el texto es el llamado a ponencias, no el coloquio (2026-08-22)"
+
+  - nombre: fuera de la Región Metropolitana
+    palabras: [en vina del mar, en valparaiso, en concepcion, en rancagua,
+               en codegua, en coinco, en antofagasta, en temuco, en la serena,
+               en puerto montt, en los lagos, en valdivia, en punta arenas,
+               en vicuna, en curico, en chillan, en iquique, en calama, en arica,
+               en osorno, en talca, en san pedro de la paz, en coquimbo,
+               en villa alemana, en quillota, en la ligua, en ovalle,
+               region de los rios, region de o'higgins, region del biobio,
+               baj biobio, baj antofagasta, baj valparaiso, foto antofagasta]
+    donde: titulo
+    categoria: descartar
+    nota: "Cultura UNAB y Balmaceda Arte Joven publican su agenda nacional y Toliv trae carteleras de regiones; la categoría estaba bien pero el evento no está en Santiago (2026-08-22)"
+
+  - nombre: la ciudad aparece solo en la descripción
+    palabras: [punta arenas, region de magallanes, en magallanes, la serena,
+               san pedro de la paz, puerto varas, puerto natales, castro chiloe]
+    donde: texto
+    categoria: descartar
+    nota: "Toliv publica fondas y tributos de todo Chile con un lugar genérico ('Club K', 'Club Somos') y la ciudad solo en el texto; se usan frases largas y no el nombre suelto porque 'Magallanes' a secas es un club de fútbol de la RM (2026-08-22)"
+
+  # ---------------------------------------------------------------
+  # SUBCATEGORÍAS — el segundo nivel cuando el recinto lo adivina mal
+  # ---------------------------------------------------------------
+  - nombre: rap y trap que el prior de la sala llamaba rock
+    palabras: [homer el mero mero, saint cattiveria, shing02, mixtape, freestyle,
+               toly fu, ranchera urbana]
+    donde: titulo
+    categoria: musica
+    subcategoria: urbano
+    nota: "la Sala RBX y el Metrónomo fijan 'rock' a todo lo que pasa por ahí (2026-08-22)"
+
+  - nombre: pop que el prior de la sala llamaba rock o clásica
+    palabras: [one pact, paula mattheus, francisca valenzuela]
+    donde: titulo
+    categoria: musica
+    subcategoria: pop
+    nota: "'Gran Sala Sinfónica' en el título de Francisca Valenzuela disparaba clásica (2026-08-22)"
+
+  - nombre: bandas cuyo nombre engaña al segundo nivel
+    palabras: [opera ix, foo fighters, memphis may fire, blessthefall]
+    donde: titulo
+    categoria: musica
+    subcategoria: rock
+    nota: "'OPERA IX' es black metal y 'Take Cover Tour' no es una banda de covers (2026-08-22)"
+
+  - nombre: bandas tributo que no dicen tributo
+    palabras: [xperience, experience, a tribute to, soda xperience,
+               dream theater experience]
+    donde: titulo
+    categoria: musica
+    subcategoria: tributo
+    nota: "'Soda Xperience', 'Dream Theater Experience - Nightmare Cinema' (2026-08-22)"
+
+  - nombre: bienestar dentro de un programa deportivo
+    palabras: [parafinoterapia, masoterapia, kinesiologia, breath y float, breathwork]
+    donde: titulo
+    categoria: clases
+    subcategoria: bienestar
+    nota: "la parafinoterapia de la corporación de deportes no es actividad física (2026-08-22)"
+
+  # ---------------------------------------------------------------
+  # Últimos rescates de la auditoría del 22-08-2026
+  # ---------------------------------------------------------------
+  - nombre: perreo pegado a otra palabra
+    palabras: [perreolandia, perreoton, perreo intenso]
+    donde: titulo
+    categoria: fiesta
+    subcategoria: reggaeton
+    nota: "'Perreolandia en Movistar Arena' no calza con el límite de palabra de 'perreo' (2026-08-22)"
+
+  - nombre: festivales que son de deporte
+    palabras: [training fest, fitness fest, crossfit, hybrid race, lucha libre,
+               arengazo, banderazo]
+    donde: titulo
+    categoria: deporte
+    nota: "'Stgo Training Fest' se iba a música por 'fest' y 'Lucha Libre Xplosion' a teatro por el prior del circo (2026-08-22)"
+
+  - nombre: la fiesta que es feria
+    palabras: [fiesta de la lana, fiesta de la vendimia, fiesta del libro,
+               motor clasica, cars & coffee, top marques]
+    donde: titulo
+    categoria: feria
+    nota: "'La Fiesta de la Lana' del GAM es un encuentro textil con stands y talleres (2026-08-22)"

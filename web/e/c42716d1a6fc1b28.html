@@ -63,7 +63,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../talleres.html">← Ver todos los talleres y clases</a>
   <div class="foto" id="foto"><img src="https://static.ptocdn.net/images/eventos/zoc083_rs.jpg" alt="" onerror="this.remove();document.getElementById('foto').classList.add('sin-foto')"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Taller de Actualidad en Teatro Zoco</h1>
@@ -81,7 +81,7 @@
   <div class="dato"><span class="et"></span><span>TICKETPRECIOCARGOTOTALENTRADA GENERAL $25.000 $3.750 $28</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../mapa.html#/e/c42716d1a6fc1b28">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../talleres.html#/e/c42716d1a6fc1b28">Ver en la página de talleres</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Puntoticket (deportes, musica y familia)</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
@@ -90,8 +90,8 @@
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 <script src="../loica.js?v=23"></script>
 <script>
-  pintarBarra("mapa.html", "../");
-  const EV = {"id": "c42716d1a6fc1b28", "titulo": "Taller de Actualidad en Teatro Zoco", "inicio": "2026-12-01T19:30:00", "fin": null, "lugar": "Teatro Zoco", "direccion": "AVENIDA LA DEHESA 1.500, Lo Barnechea", "comuna": "Lo Barnechea", "lat": -33.3636765, "lon": -70.5150055, "precision": "calle", "gratis": false, "precio": 13438, "precio_texto": "desde $13.438", "categoria": "teatro", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "TICKETPRECIOCARGOTOTALENTRADA GENERAL $25.000 $3.750 $28", "imagen": "https://static.ptocdn.net/images/eventos/zoc083_rs.jpg", "fuente": "Puntoticket (deportes, musica y familia)", "url": "https://www.puntoticket.com/evento/taller-de-actualidad-teatro-zoco-mar-2026?utm_medium=organic\u0026utm_source=microformat", "formato": "panorama"};
+  pintarBarra("talleres.html", "../");
+  const EV = {"id": "c42716d1a6fc1b28", "titulo": "Taller de Actualidad en Teatro Zoco", "inicio": "2026-12-01T19:30:00", "fin": null, "lugar": "Teatro Zoco", "direccion": "AVENIDA LA DEHESA 1.500, Lo Barnechea", "comuna": "Lo Barnechea", "lat": -33.3636765, "lon": -70.5150055, "precision": "calle", "gratis": false, "precio": 13438, "precio_texto": "desde $13.438", "categoria": "clases", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "TICKETPRECIOCARGOTOTALENTRADA GENERAL $25.000 $3.750 $28", "imagen": "https://static.ptocdn.net/images/eventos/zoc083_rs.jpg", "fuente": "Puntoticket (deportes, musica y familia)", "url": "https://www.puntoticket.com/evento/taller-de-actualidad-teatro-zoco-mar-2026?utm_medium=organic\u0026utm_source=microformat", "formato": "taller"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));
