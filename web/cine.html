@@ -449,10 +449,19 @@ if(hayMapa){
   setTimeout(() => { if(!mapa.getLayer("cines-pin")) avisarMapaCaido(""); }, 9000);
 }
 
-let mapaAvisado = false;
+/* El aviso se RETIRA solo cuando el mapa aparece.
+   Sin esto la red de seguridad se convertía en el problema: un mapa que
+   simplemente iba lento —3G malo, CDN fría— montaba su capa al segundo doce y
+   quedaba con un cartel de "no pude dibujar el mapa" pegado encima de un mapa
+   que estaba funcionando. Un aviso que contradice lo que se ve abajo es peor
+   que no avisar. */
+let mapaAvisado = null;
+function sacarAvisoMapa(){
+  mapaAvisado?.remove();
+  mapaAvisado = null;
+}
 function avisarMapaCaido(detalle){
   if(mapaAvisado || !hayMapa || mapa.getLayer("cines-pin")) return;
-  mapaAvisado = true;
   const caja = document.getElementById("mapa-cines");
   const aviso = document.createElement("div");
   aviso.className = "vacio";
@@ -469,6 +478,7 @@ function avisarMapaCaido(detalle){
                              pt:"A lista abaixo tem os mesmos cinemas, com o endereço."}[IDIOMA]));
   aviso.appendChild(texto);
   caja.appendChild(aviso);
+  mapaAvisado = aviso;
   if(detalle) console.warn("mapa de cines:", detalle);
 }
 
@@ -509,6 +519,7 @@ function montarCapas(){
   mapa.on("click", "cines-pin", e => elegirCine(e.features[0].properties.id));
   mapa.on("mouseenter", "cines-pin", () => mapa.getCanvas().style.cursor = "pointer");
   mapa.on("mouseleave", "cines-pin", () => mapa.getCanvas().style.cursor = "");
+  sacarAvisoMapa();
   pintarMapa();
 }
 
