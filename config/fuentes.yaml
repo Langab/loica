@@ -99,18 +99,19 @@ fuentes:
   tipo_adaptador: ticketmaster
   ciudad: Santiago
   crawl_delay_seg: 1
-  activa: false
-  notas: 'APAGADA 2026-08-16: nunca estuvo rota, esta sin configurar. Necesita TICKETMASTER_API_KEY en
-    el entorno y sacarla exige crear cuenta en developer.ticketmaster.com, que es un tramite de una
-    persona, no del pipeline. Estuvo meses activa devolviendo cero sin registrar error, o sea contandose
-    como fuente sana en un dia sin agenda; apagada dice la verdad (no la estamos usando) y deja de
-    aparecer en fuentes_degradadas() al lado de fuentes que si se rompieron. Para encenderla: sacar la
-    key (gratis, developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/), exportarla en el
-    entorno, poner activa: true y probar con TICKETMASTER_API_KEY=... python3 run_diario.py --fuente
-    ticketmaster --probar. El adaptador (loica/fuentes/apis.py) esta escrito y respeta los limites de la
-    API (2 req/s, 5.000/dia); si falta la key ahora falla fuerte en vez de callarse.
-
-    '
+  activa: true
+  notas: 'ENCENDIDA 2026-08-24. Estuvo apagada desde el 16-08 no porque estuviera rota sino porque le
+    faltaba la credencial: sacarla exige crear cuenta en developer.ticketmaster.com, que es un tramite
+    de una persona. La key vive como secreto TICKETMASTER_API_KEY del repositorio (Settings -> Secrets
+    and variables -> Actions) y el workflow la inyecta en el entorno de la corrida; no esta en ningun
+    archivo. Para correrla desde el Mac hay que exportarla a mano, pero no hace falta: se prueba en la
+    nube con `gh workflow run corrida.yml -f modo=probar`. Limites de la API Discovery: 5 peticiones
+    por segundo y 5.000 al dia (verificado en su pagina de getting-started el 24-08-2026; la nota vieja
+    decia 2/s). Con crawl_delay_seg 1 vamos en 1 req/s y la corrida pide 5 paginas de 100, o sea 5
+    llamadas al dia: sobra por tres ordenes de magnitud. Si algun dia falta la key, el adaptador falla
+    fuerte a proposito y la fuente queda anotada como error en la tabla `corridas`, en vez de devolver
+    cero en silencio y parecer sana un dia sin agenda, que es lo que hizo durante meses.
+'
 - id: cclm
   nombre: Centro Cultural La Moneda
   url_base: https://www.cclm.cl

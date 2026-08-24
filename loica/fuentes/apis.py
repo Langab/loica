@@ -1,8 +1,14 @@
 """APIs oficiales. Hoy: Ticketmaster Discovery (la única con permiso explícito
-y cobertura de Chile). Límites: 2 peticiones/segundo, 5.000 al día.
+y cobertura de Chile). Límites: 5 peticiones/segundo, 5.000 al día.
 
 La API key se lee de la variable de entorno TICKETMASTER_API_KEY. Si no está,
-la fuente se salta sin romper la corrida.
+la fuente falla fuerte y queda anotada como error en la tabla `corridas`:
+devolver cero en silencio la hacía verse igual que una fuente sana en un día
+sin agenda, y así estuvo meses. `run_diario` atrapa la excepción por fuente,
+así que la corrida no se cae por esto.
+
+En la corrida diaria la key llega desde los secretos del repositorio, que el
+workflow inyecta en el entorno. No está escrita en ningún archivo.
 """
 
 from __future__ import annotations
