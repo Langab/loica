@@ -28,7 +28,10 @@ SALIDA_TALLERES = RAIZ / "web" / "talleres.json"
 DIR_FICHAS = RAIZ / "web" / "e"
 
 # Dominio público: es lo que viaja en los links compartidos por WhatsApp.
-SITIO = "https://langab.github.io/loica"
+# Es el único interruptor del dominio: de acá salen las canónicas, los og:url,
+# el JSON-LD de cada ficha, el sitemap y el robots.txt. Cambiarlo y volver a
+# correr basta para mudar el sitio entero de dirección.
+SITIO = "https://loicasantiago.cl"
 
 # Taxonomía provisional: mapea lo que dicen las fuentes a las categorías del
 # producto. La definitiva está en definicion_producto_mvp.md.
@@ -502,6 +505,44 @@ def escribir_fichas(eventos: list[dict]) -> int:
     return len(eventos)
 
 
+# Las páginas fijas del sitio. El sitemap descubre solo las fichas de web/e/
+# porque se generan acá; estas hay que nombrarlas.
+PAGINAS_FIJAS = [
+    "", "mapa.html", "calendario.html", "talleres.html", "descuentos.html",
+    "comer.html", "blog.html", "nosotros.html", "habla.html", "agrega.html",
+]
+
+# Los ids de ficha son hashes hexadecimales. Al sitemap solo entra lo que
+# calza con eso: es el mismo criterio de la casa de no dejar que un dato de
+# fuente llegue crudo a un archivo que otro sistema va a leer.
+ID_FICHA = re.compile(r"^[0-9a-f]{8,32}$")
+
+
+def escribir_sitemap(ids: list[str], dia: str) -> int:
+    """El índice que leen los buscadores. Sin esto, Google descubre las fichas
+    solo si alguien las enlaza, y a las de un panorama que dura tres días no
+    las enlaza nadie a tiempo."""
+    urls = [f"{SITIO}/{pagina}" for pagina in PAGINAS_FIJAS]
+    urls += [f"{SITIO}/e/{i}.html" for i in ids if ID_FICHA.match(i)]
+    cuerpo = "\n".join(
+        f"  <url><loc>{u}</loc><lastmod>{dia}</lastmod></url>" for u in urls)
+    (RAIZ / "web" / "sitemap.xml").write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        f"{cuerpo}\n</urlset>\n", encoding="utf-8")
+    return len(urls)
+
+
+def escribir_robots() -> None:
+    """Se genera en vez de escribirse a mano para que el dominio salga de
+    SITIO y no quede una dirección vieja apuntando a un sitemap que no existe."""
+    (RAIZ / "web" / "robots.txt").write_text(
+        "User-agent: *\n"
+        "Allow: /\n"
+        "\n"
+        f"Sitemap: {SITIO}/sitemap.xml\n", encoding="utf-8")
+
+
 def main() -> int:
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     log = logging.getLogger("exportar")
@@ -713,6 +754,11 @@ def main() -> int:
     exactos = sum(1 for e in panoramas if e["precision"] == "recinto")
     fichas = escribir_fichas(panoramas + talleres)
     log.info("Fichas individuales para compartir: %d en web/e/", fichas)
+    direcciones = escribir_sitemap([e["id"] for e in panoramas + talleres],
+                                   ahora[:10])
+    escribir_robots()
+    log.info("Sitemap con %d direcciones y robots.txt para los buscadores",
+             direcciones)
 
     con_imagen = sum(1 for e in panoramas if e["imagen"])
     exactos += sum(1 for e in panoramas if e["precision"] in ("fuente", "correccion", "calle"))

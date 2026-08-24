@@ -278,6 +278,41 @@ corridas publicando el mismo día se pisan la base. Se desinstala con
 > así que ese JSON recién llega al sitio con la corrida de las 11:00, que sí le
 > avisa a Pages.
 
+## El dominio
+
+El sitio vive en **https://loicasantiago.cl** (comprado en NIC Chile el
+2026-08-24 a nombre de Benjamín, vence 2027-08-24). Sigue alojado en GitHub
+Pages: el dominio solo cambia la dirección, no el hosting.
+
+`SITIO` en `exportar_web.py` es el **único interruptor**. De ahí salen las
+canónicas, los `og:url`, el `og:image`, el JSON-LD de cada ficha, el
+`sitemap.xml` y el `robots.txt`. Los links internos son relativos, así que no
+dependen de él.
+
+La configuración que no vive en el repositorio:
+
+| Dónde | Qué |
+|---|---|
+| NIC Chile | Los nameservers del dominio apuntan a Cloudflare |
+| Cloudflare (DNS) | `A` del ápex a las cuatro IP de Pages, `AAAA` a las cuatro `2606:50c0:800x::153`, y `CNAME www → langab.github.io`. Todo en gris (sin proxy): con el proxy naranja, Pages no puede emitir el certificado |
+| GitHub → Settings → Pages | Custom domain = `loicasantiago.cl` + Enforce HTTPS |
+
+**El orden importa.** Poner el dominio personalizado en GitHub *antes* de que
+los DNS resuelvan deja el sitio caído en las dos direcciones: apenas se
+configura, `langab.github.io/loica` empieza a redirigir al dominio nuevo. Se
+configuran los DNS primero, se espera a que `dig loicasantiago.cl` conteste las
+IP de Pages, y recién ahí se toca GitHub.
+
+Como se publica desde un workflow y no desde una rama, **no va un archivo
+`CNAME` en `web/`**: GitHub lo ignora. El dominio se guarda en la configuración
+del repositorio.
+
+`web/sitemap.xml` y `web/robots.txt` los genera `exportar_web.py` en cada
+corrida (`escribir_sitemap` y `escribir_robots`). El sitemap lleva las diez
+páginas fijas más una línea por ficha; sin él, Google descubre una ficha solo
+si alguien la enlaza, y a un panorama que dura tres días no lo enlaza nadie a
+tiempo.
+
 ## El prototipo del mapa
 
 ```bash

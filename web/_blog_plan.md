@@ -94,7 +94,7 @@ Consecuencia práctica: publicar un post es escribir ~8 párrafos y pegar ~10 ID
 ```jsonc
 {
   "actualizado": "2026-08-10",
-  "sitio": "https://langab.github.io/loica",
+  "sitio": "https://loicasantiago.cl",
 
   // Config de los tres formatos. La página lee de acá el color y la mascota:
   // no se hardcodea nada en el HTML.
