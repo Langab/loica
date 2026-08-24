@@ -23,7 +23,7 @@ El pipeline implementa este circuito, y cada paso tiene su comando:
 | 6 | **Diagnóstico de la corrida** | `informe_corrida.py` deja un Excel en `informes/` para mirar el proceso, no el catastro (ver abajo) |
 | 7 | **Doble check** | `verificar_web.py`: si el sitio quedó roto, vacío o cayó a la mitad, **no hay push** |
 | 8 | **Publicación** | `run_todo.py` comitea solo su salida y pushea; GitHub Actions deja `web/` en Pages |
-| 9 | **Corrida diaria a las 11:00** | GitHub Actions (`.github/workflows/corrida.yml`): no depende de ningún computador prendido. El Mac queda para probar (`--sin-publicar`) |
+| 9 | **Corrida diaria a las 06:00** | GitHub Actions (`.github/workflows/corrida.yml`): no depende de ningún computador prendido. El Mac queda para probar (`--sin-publicar`) |
 
 Un solo comando encadena los pasos 3 a 8:
 
@@ -201,7 +201,9 @@ con los eventos nuevos agrupados por comuna, listos para revisar.
 ## Cómo corre solo (GitHub Actions)
 
 La corrida completa vive en `.github/workflows/corrida.yml` y corre todos los
-días a las 11:00 de Chile en un runner de GitHub. **No depende de ningún
+días a las **06:00 de Chile** en un runner de GitHub: dura unos 105 minutos, así
+que el sitio queda actualizado antes de las 08:00 y nadie abre Loica con la
+agenda de ayer. **No depende de ningún
 computador prendido.** Sigue siendo Python puro —no llama a ningún modelo, no
 consume tokens— y en un repositorio público los minutos de Actions no cuestan.
 
@@ -273,10 +275,13 @@ pero ya no es la corrida oficial y no conviene tenerla instalada a la vez: dos
 corridas publicando el mismo día se pisan la base. Se desinstala con
 `bash scripts/instalar_agenda.sh --quitar`.
 
-> Los descuentos corren además en `descuentos.yml` a las 07:15. Un commit hecho
-> desde Actions no dispara `pages.yml` (es la regla de GitHub contra los bucles),
-> así que ese JSON recién llega al sitio con la corrida de las 11:00, que sí le
-> avisa a Pages.
+> Los descuentos corren además en `descuentos.yml` a las 03:00, tres horas antes
+> a propósito: la corrida grande regenera ese mismo JSON en su paso 2/7, y si se
+> cruzaran habría dos workflows empujando `web/descuentos.json` a la vez. Queda
+> de red de seguridad: si la corrida falla, los descuentos igual se actualizaron.
+> Un commit hecho desde Actions no dispara `pages.yml` (es la regla de GitHub
+> contra los bucles), así que ese JSON recién llega al sitio con la corrida de
+> las 06:00, que sí le avisa a Pages.
 
 ## El dominio
 

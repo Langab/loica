@@ -15,12 +15,14 @@ name: Corrida diaria de eventos
 
 on:
   schedule:
-    # 11:00 de Chile. GitHub programa en UTC y no sabe de horario de verano,
-    # así que se programan las dos horas posibles y el job `hora` decide cuál
-    # es la buena mirando el desfase de Santiago ese día (UTC-4 en invierno,
-    # UTC-3 en verano). La otra termina en un minuto sin hacer nada.
-    - cron: "0 14 * * *"
-    - cron: "0 15 * * *"
+    # 06:00 de Chile: la corrida dura ~105 minutos, así que el sitio queda
+    # actualizado antes de las 08:00 y nadie se despierta con la agenda de
+    # ayer. GitHub programa en UTC y no sabe de horario de verano, así que se
+    # programan las dos horas posibles y el job `hora` decide cuál es la buena
+    # mirando el desfase de Santiago ese día (UTC-4 en invierno, UTC-3 en
+    # verano). La otra termina en un minuto sin hacer nada.
+    - cron: "0 10 * * *"
+    - cron: "0 9 * * *"
   workflow_dispatch:
     inputs:
       modo:
@@ -55,7 +57,7 @@ env:
 
 jobs:
   hora:
-    # ¿Esta ejecución programada es la de las 11:00 de Chile? Un dispatch o un
+    # ¿Esta ejecución programada es la de las 06:00 de Chile? Un dispatch o un
     # push corren siempre.
     runs-on: ubuntu-latest
     outputs:
@@ -69,9 +71,9 @@ jobs:
           fi
           desfase=$(TZ=America/Santiago date +%z)   # -0400 en invierno, -0300 en verano
           case "${{ github.event.schedule }}|$desfase" in
-            "0 15 * * *|-0400"|"0 14 * * *|-0300")
+            "0 10 * * *|-0400"|"0 9 * * *|-0300")
               echo "correr=true" >> "$GITHUB_OUTPUT"
-              echo "Son las 11:00 en Santiago (desfase $desfase): corre." ;;
+              echo "Son las 06:00 en Santiago (desfase $desfase): corre." ;;
             *)
               echo "correr=false" >> "$GITHUB_OUTPUT"
               echo "Esta es la otra cron (desfase $desfase): no corre." ;;

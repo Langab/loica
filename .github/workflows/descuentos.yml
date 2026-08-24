@@ -6,12 +6,20 @@ name: Catastro diario de descuentos
 # lenguaje, no consume tokens y no cuesta nada.
 on:
   schedule:
-    # 07:15 en Chile continental. GitHub usa UTC y no sabe de horario de
-    # verano, así que se programan las dos: en invierno (UTC-3) corre la de
-    # las 10:15 y en verano (UTC-4) la de las 11:15. La otra encuentra el
-    # JSON idéntico y no commitea nada.
-    - cron: "15 10 * * *"
-    - cron: "15 11 * * *"
+    # 03:00 en Chile continental, y ese horario lo manda la corrida de
+    # eventos: desde el 24-08-2026 arranca a las 06:00 y dura ~105 minutos, y
+    # regenera este mismo JSON en su paso 2/7. Si las dos se cruzaran habría
+    # dos workflows empujando web/descuentos.json a la vez. Corriendo tres
+    # horas antes no se pisan, y esto queda de red de seguridad: si la corrida
+    # grande falla, los descuentos igual se actualizaron esa mañana.
+    #
+    # GitHub usa UTC y no sabe de horario de verano, así que se programan las
+    # dos horas posibles: en invierno (UTC-4) la buena es la de las 07:00 UTC
+    # y en verano (UTC-3) la de las 06:00. La otra encuentra el JSON idéntico
+    # y no commitea nada. (La nota anterior tenía las estaciones al revés:
+    # Chile está en UTC-4 en invierno y UTC-3 en verano, no al contrario.)
+    - cron: "0 7 * * *"
+    - cron: "0 6 * * *"
   workflow_dispatch:
 
 permissions:
