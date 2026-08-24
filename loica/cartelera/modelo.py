@@ -24,6 +24,71 @@ from dataclasses import dataclass, field
 from datetime import datetime
 
 
+def _plano(texto: str) -> str:
+    sin_tildes = "".join(c for c in unicodedata.normalize("NFD", texto or "")
+                         if unicodedata.category(c) != "Mn")
+    return re.sub(r"[^a-z0-9 ]+", " ", sin_tildes.lower()).strip()
+
+
+# Palabras que delatan un ciclo o una muestra, no una película.
+_CICLO = re.compile(r"\b(fest|festival|ciclo|muestra|retrospectiva|semana|"
+                    r"preestreno|reestreno|funcion|especial|gala|maraton)\b")
+
+
+def _es_coletilla(texto: str) -> bool:
+    """¿Este trozo es el nombre de una sala o de un ciclo, y no parte del título?
+
+    Se consulta el catastro de salas (`loica/cines.py`, cacheado) para no
+    inventar una lista aparte que se desactualice: si mañana entra una sala
+    nueva al catastro, esta función la reconoce sola.
+    """
+    plano = _plano(texto)
+    if not plano:
+        return False
+    if _CICLO.search(plano) or plano.startswith(("cine ", "sala ")):
+        return True
+    from ..cines import catalogo  # acá dentro: evita un import circular
+    for sala in catalogo():
+        for clave in sala.get("_claves", ()):
+            if len(clave) > 4 and (clave in plano or plano in clave):
+                return True
+    return False
+
+
+def _sin_coletillas(titulo: str) -> str:
+    """Saca el nombre del cine o del ciclo que algunas salas pegan al título.
+
+    Las cadenas grandes publican el título limpio, pero las salas de barrio lo
+    firman: "La Odisea / Centro Arte Alameda", "Mi Vecino Totoro [1988] -
+    Ghibli Fest 2026", "Cine Blondie: Volver al Futuro". Sin esto la misma
+    película entra como fichas distintas y la cartelera miente sobre en cuántos
+    cines está: La Odisea aparecía con 7 salas cuando estaba en 8.
+
+    Ninguno de los tres cortes se hace a ciegas, porque hay títulos con guión y
+    con dos puntos de verdad ("Spider-Man: Un Nuevo Día"): sólo se corta cuando
+    el trozo que sobra es reconocible como sala o como ciclo.
+    """
+    limpio = re.sub(r"\[[^\]]*\]|\([^)]*\)", " ", titulo or "")
+
+    if " / " in limpio:
+        cabeza, cola = limpio.split(" / ", 1)
+        if _es_coletilla(cola):
+            limpio = cabeza
+
+    for separador in (" - ", " – ", " — "):
+        if separador in limpio:
+            cabeza, cola = limpio.split(separador, 1)
+            if _es_coletilla(cola):
+                limpio = cabeza
+
+    if ":" in limpio:
+        prefijo, resto = limpio.split(":", 1)
+        if resto.strip() and _es_coletilla(prefijo):
+            limpio = resto
+
+    return limpio.strip() or (titulo or "")
+
+
 def clave_pelicula(titulo: str) -> str:
     """Identificador estable de una película a partir de su título.
 
@@ -32,8 +97,12 @@ def clave_pelicula(titulo: str) -> str:
     veces en la cartelera, una por cine. Se bajan tildes, mayúsculas y
     puntuación, y se sacan las etiquetas de formato que algunas salas pegan al
     título ("(2D DOB)", "- SUBTITULADA").
+
+    Las coletillas de sala y de ciclo se sacan ANTES que las de formato: si no,
+    "Mi Vecino Totoro [1988] - Ghibli Fest 2026" pierde el corchete y conserva
+    la cola, y sigue sin juntarse con "Mi vecino Totoro".
     """
-    sin_tildes = "".join(c for c in unicodedata.normalize("NFD", titulo or "")
+    sin_tildes = "".join(c for c in unicodedata.normalize("NFD", _sin_coletillas(titulo))
                          if unicodedata.category(c) != "Mn").lower()
     sin_formato = re.sub(
         r"\b(2d|3d|4d|xd|dbox|d-box|imax|premier|vip|atmos|screenx|"
