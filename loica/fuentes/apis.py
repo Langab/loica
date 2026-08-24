@@ -41,21 +41,53 @@ def extraer_ticketmaster(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
     eventos: list[Evento] = []
     pagina = 0
 
+    ciudad = fuente.get("ciudad", "Santiago")
+
     while pagina < 5:  # 5 páginas x 100 = 500 eventos, de sobra para Santiago
-        datos = cliente.json(URL_DISCOVERY, params={
+        respuesta = cliente.obtener(URL_DISCOVERY, params={
             "apikey": api_key,
             "countryCode": "CL",
-            "city": fuente.get("ciudad", "Santiago"),
+            "city": ciudad,
             "size": 100,
             "page": pagina,
             "sort": "date,asc",
         }, max_edad_cache_seg=6 * 3600)
 
+        # Acá se miraba sólo si la respuesta era un diccionario, y cualquier
+        # otra cosa cortaba el bucle en silencio. El efecto: una key inválida
+        # (401) o la cuota agotada (429) daban EXACTAMENTE el mismo resultado
+        # que una ciudad sin eventos —cero, sin error—, que es el patrón que
+        # ya nos costó meses con Passline. Ahora cada caso dice lo suyo.
+        #
+        # El código de estado va solo en el mensaje: la URL completa lleva la
+        # key en la query y no puede terminar en un log.
+        if respuesta is None:
+            raise RuntimeError("la API de Ticketmaster no respondió "
+                               "(sin conexión o robots.txt)")
+        if respuesta.status_code == 401:
+            raise RuntimeError(
+                "la API rechazó la credencial (HTTP 401): revisar el secreto "
+                "TICKETMASTER_API_KEY — tiene que ser el Consumer Key")
+        if respuesta.status_code == 429:
+            raise RuntimeError("cuota de Ticketmaster agotada (HTTP 429): "
+                               "son 5.000 llamadas al día")
+        if not respuesta.ok:
+            raise RuntimeError(f"la API devolvió HTTP {respuesta.status_code}")
+
+        try:
+            datos = respuesta.json()
+        except ValueError:
+            raise RuntimeError("la API respondió algo que no es JSON")
         if not isinstance(datos, dict):
-            break
+            raise RuntimeError("la API respondió un JSON con forma inesperada")
 
         lote = (datos.get("_embedded") or {}).get("events") or []
         if not lote:
+            # Respondió bien y no trae nada: es un hecho sobre el catálogo de
+            # Ticketmaster, no una falla nuestra. Se dice y no se revienta.
+            if pagina == 0:
+                log.info("Ticketmaster: la API respondió 200 pero no tiene "
+                         "ningún evento para %s, Chile", ciudad)
             break
 
         for item in lote:

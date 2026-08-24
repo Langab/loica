@@ -30,6 +30,10 @@ on:
         type: choice
         options: [completo, sin-publicar, probar, sondear]
         default: completo
+      fuente:
+        description: "opcional: el id de UNA fuente de config/fuentes.yaml (p.ej. ticketmaster), para no esperar las 78"
+        type: string
+        required: false
   push:
     branches: [main]
     paths:
@@ -118,13 +122,21 @@ jobs:
 
       - name: Corrida
         id: corrida
+        env:
+          # Por variable de entorno y no interpolado en el `run`: lo que
+          # escriba una persona en el formulario de Actions entra al shell,
+          # y `${{ }}` dentro de un script lo pega tal cual. Acá se pasa como
+          # dato y se cita, así que no puede convertirse en un comando.
+          MODO: ${{ inputs.modo || 'completo' }}
+          FUENTE: ${{ inputs.fuente }}
         run: |
           echo "antes=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
-          case "${{ inputs.modo || 'completo' }}" in
+          if [ -n "$FUENTE" ]; then set -- --fuente "$FUENTE"; else set --; fi
+          case "$MODO" in
             sondear)       python3 scripts/sondear_fuentes.py ;;
-            probar)        python3 run_diario.py --probar ;;
-            sin-publicar)  python3 run_todo.py --sin-publicar ;;
-            *)             python3 run_todo.py ;;
+            probar)        python3 run_diario.py --probar "$@" ;;
+            sin-publicar)  python3 run_todo.py --sin-publicar "$@" ;;
+            *)             python3 run_todo.py "$@" ;;
           esac
 
       # Un push hecho con el token del workflow NO dispara otros workflows (es

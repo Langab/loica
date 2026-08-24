@@ -9,6 +9,7 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
+import re
 import time
 import urllib.robotparser as robotparser
 from pathlib import Path
@@ -17,6 +18,14 @@ from urllib.parse import urljoin, urlparse
 import requests
 
 log = logging.getLogger("loica.red")
+
+# Nombres de parámetro que nunca deben quedar escritos: los usan las APIs que
+# llevan la credencial en la query en vez de en una cabecera.
+_CREDENCIALES = re.compile(r"(?i)\b(apikey|api_key|key|token|secret|password)=[^&#\s]*")
+
+
+def _sin_credenciales(url: str) -> str:
+    return _CREDENCIALES.sub(lambda m: m.group(0).split("=")[0] + "=CENSURADO", url)
 
 CONTACTO = "https://loica.cl/bot"  # cambiar por el dominio real cuando exista
 USER_AGENT = f"LoicaBot/0.1 (agenda de eventos de Santiago; +{CONTACTO})"
@@ -109,7 +118,15 @@ class ClienteEducado:
     def _guardar_cache(self, url: str, contenido: str, status: int) -> None:
         try:
             self._ruta_cache(url).write_text(
-                json.dumps({"url": url, "status": status, "texto": contenido}),
+                # La URL se guarda sólo para poder mirar un archivo de caché y
+                # saber de dónde salió, y va CENSURADA: algunas APIs llevan la
+                # credencial en la query (Ticketmaster manda `apikey=`), y sin
+                # esto la key quedaba escrita en claro en datos/cache/. Esa
+                # carpeta no se versiona, pero un secreto en disco es un
+                # secreto en disco. El nombre del archivo no cambia: se sigue
+                # calculando sobre la URL entera, así que la caché acierta.
+                json.dumps({"url": _sin_credenciales(url), "status": status,
+                            "texto": contenido}),
                 encoding="utf-8",
             )
         except OSError as e:
