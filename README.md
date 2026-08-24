@@ -363,7 +363,7 @@ Las páginas son:
 | `web/mapa.html` | El **mapa**: un pin-animal por evento (sin agrupar, a propósito), filtros de fecha (Hoy / Mañana / 7 días / Finde), precio, público y categoría, lista lateral y ficha con anterior/siguiente |
 | `web/habla.html` | **Habla con la Loica**: el elenco recomienda por turnos, sin tokens ni servidor |
 | `web/calendario.html` | Mes a mes |
-| `web/talleres.html` | Los **talleres y clases** semanales (natación, yoga, cerámica), con filtro por día, tipo y comuna y su propio mapa. Salen de `web/talleres.json`, separados de los panoramas por `es_taller()` en el export: una maratón es un panorama, la clase de natación de los martes es un taller |
+| `web/talleres.html` | Los **talleres y clases** semanales (natación, yoga, cerámica, grabado, teatro, danza, cursos para personas mayores), con filtro por día, tipo y comuna y su propio mapa. Salen de `web/talleres.json`, separados de los panoramas por `es_taller()` en el export: una maratón es un panorama, la clase de natación de los martes es un taller. Lo que no es municipal entra por `config/talleres.yaml` (ver el adaptador `talleres`) |
 | `web/descuentos.html` | Los **descuentos** de restaurante por banco, día y comuna |
 | `web/blog.html` | Las ediciones del blog |
 | `web/agrega.html` | Formulario para publicar |
@@ -433,6 +433,7 @@ Conviene probarla sola antes de sumarla a la corrida diaria:
 | `carteleras` | Dos niveles: índice de locales → cartelera de cada local. |
 | `cine` | Cartelera semanal de cine: una sección por día, funciones con hora. |
 | `tabla` | Tablas de talleres municipales, con el recinto y su dirección en las filas sobre el encabezado. |
+| `talleres` | Catastro de talleres permanentes (`config/talleres.yaml`): lugares que enseñan todas las semanas y no publican agenda. No hace peticiones. |
 | `json` | API JSON propia, con el mapeo de campos declarado en el YAML. |
 | `ticketmaster` | Ticketmaster Discovery (API oficial con permiso explícito). |
 | `manual` | Ingesta asistida desde `datos/manual/*.yaml` y `*.csv`. No hace peticiones. |
@@ -519,6 +520,50 @@ Después `colapsar_multidia` hace lo correcto con cada caso sin configuración:
 cadencia se guarda como texto en la descripción ("todos los martes y jueves a
 las 19:00"). Alcanza para el mapa y para el filtro de gratis, pero un taller
 semanal ocupa varias filas en vez de una.
+
+### El catastro de talleres que no son municipales: `talleres`
+
+El 24-08-2026 la página de talleres tenía 1.879 clases y el **96% venía de tres
+corporaciones municipales de deportes**: Ñuñoa (1.247), Huechuraba (384) y
+Santiago (190). La cerámica, el grabado, el teatro, la danza y los cursos para
+personas mayores de la ciudad no aparecían por ninguna parte, y no es que no
+existan: es que **un taller de barrio no publica agenda**. Su clase de los
+martes a las 19:00 lleva años igual y no tiene nada que anunciar, así que no
+hay feed, ni JSON, ni calendario — hay una página que dice "Martes de 11:00 a
+13:30 hrs" en prosa. Sondear treinta estudios lo confirmó: casi todos son
+WordPress con la API REST cerrada, Wix o Squarespace, y el horario está escrito
+a mano en una página suelta.
+
+Eso se cataloga UNA vez, como las salas de cine: `config/talleres.yaml` guarda
+el lugar (nombre, dirección, comuna, link) y sus talleres (días, hora, precio),
+y `loica/fuentes/talleres.py` emite una sesión por cada día declarado. De ahí
+en adelante es una fuente más: se deduplica, se geocodifica y el export la
+junta en una tarjeta con sus `dias_semana`, que es lo que la página filtra.
+
+Las reglas que evitan que el archivo se llene de mentiras:
+
+- **Nada se inventa.** Un taller entra con los días y la hora que su sitio
+  publica. El que no los publica queda con `activo: false` y una nota: existe,
+  su dirección ya está verificada, y completarlo es una llamada de teléfono.
+  De los 24 lugares catastrados hoy, 7 publican horario y 17 esperan ese dato.
+- **Todo caduca.** `verificado` + `vigente_hasta` (por defecto, cuatro meses:
+  el largo de una temporada) sacan al lugar del sitio cuando la verificación
+  vence, y la corrida lo avisa en su registro.
+- **El año se revisa.** Centro Cerámica publica "los domingos 5, 12, 19 y 26 de
+  octubre", pero en 2026 el 5 de octubre cae lunes: ese ciclo es de 2025 y la
+  página nunca caducó sola. Por eso está apagado.
+- **Sin `url` no se publica**, como en toda fuente.
+
+Dos detalles del adaptador que costaron una medición:
+
+- El mismo curso en cuatro horarios son **cuatro clases distintas** para quien
+  elige a cuál puede ir, pero la huella de deduplicación es título+día+lugar y
+  `colapsar_multidia` fusiona lo que caiga a menos de cuatro días: de 92
+  sesiones entraban 42 y la sobreviviente se dibujaba como una temporada de un
+  mes. El catastro guarda el nombre tal como lo escribe el taller y el
+  adaptador le agrega el día y la hora **solo cuando el nombre se repite**.
+- `vigente_desde` existe para las temporadas que empiezan después: un ciclo que
+  parte en octubre no tiene clases en septiembre.
 
 ### Los museos: una sola puerta para ocho instituciones
 

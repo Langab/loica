@@ -17,6 +17,7 @@ from .cine import extraer_cine
 from .json_api import extraer_json
 from .manual import extraer_manual
 from .tablas import extraer_tabla
+from .talleres import extraer_talleres
 from .web import extraer_html, extraer_rss, extraer_sitemap_fichas
 from .wordpress import extraer as extraer_wordpress
 from .wordpress import extraer_eventon
@@ -30,6 +31,7 @@ ADAPTADORES = {
     "carteleras": extraer_carteleras,
     "cine": extraer_cine,
     "tabla": extraer_tabla,
+    "talleres": extraer_talleres,
     "json": extraer_json,
     "manual": extraer_manual,
     "ticketmaster": extraer_ticketmaster,

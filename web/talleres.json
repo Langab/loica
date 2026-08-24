@@ -1,6 +1,6 @@
 {
- "generado": "2026-08-24T13:46:33",
- "total": 1879,
+ "generado": "2026-08-24T18:48:12",
+ "total": 1905,
  "talleres": [
   {
    "id": "bf9b4c354e93637b",
@@ -10758,6 +10758,34 @@
    ]
   },
   {
+   "id": "5f6afcd810be025d",
+   "titulo": "Juego y memoria cultural",
+   "inicio": "2026-08-24T15:30:00",
+   "fin": "2026-10-05T15:30:00",
+   "lugar": "Centro de Extensión UC",
+   "direccion": "Alameda 390",
+   "comuna": "Santiago",
+   "lat": -33.44144712600001,
+   "lon": -70.641188372,
+   "precision": "recinto",
+   "gratis": false,
+   "precio": 120000,
+   "precio_texto": "$120.000 el curso",
+   "categoria": "otros",
+   "subcategoria": "",
+   "escala": "masivo",
+   "publico": "todos",
+   "descripcion": "todos los lunes de 15:30 a 17:00",
+   "imagen": "",
+   "fuente": "Programa Adulto Mayor UC",
+   "url": "https://adultomayor.uc.cl/curso/juego-y-memoria-cultural/",
+   "dias_semana": [
+    0
+   ],
+   "sesiones": 7,
+   "formato": "taller"
+  },
+  {
    "id": "04b0100fc4da8ccc",
    "titulo": "Skate Lu-Mi 16:00 h. / Estadio Nacional.",
    "inicio": "2026-08-24T16:00:00",
@@ -11793,6 +11821,34 @@
     0,
     1
    ]
+  },
+  {
+   "id": "159d175af9d3aa16",
+   "titulo": "Taller de teatro para adultos",
+   "inicio": "2026-08-24T19:00:00",
+   "fin": "2026-10-05T19:00:00",
+   "lugar": "Teatro Azares",
+   "direccion": "Huérfanos 2146",
+   "comuna": "Santiago",
+   "lat": -33.4414358,
+   "lon": -70.6664057,
+   "precision": "calle",
+   "gratis": false,
+   "precio": 45000,
+   "precio_texto": "$45.000 mensuales",
+   "categoria": "clases",
+   "subcategoria": "",
+   "escala": "",
+   "publico": "todos",
+   "descripcion": "todos los lunes de 19:00 a 21:00",
+   "imagen": "",
+   "fuente": "Teatro Azares",
+   "url": "https://teatroazares.cl/talleres/",
+   "dias_semana": [
+    0
+   ],
+   "sesiones": 7,
+   "formato": "taller"
   },
   {
    "id": "b4c681f5699b8977",
@@ -13784,6 +13840,34 @@
    ]
   },
   {
+   "id": "462603652ae4a7dc",
+   "titulo": "Taller de cerámica gres para adultos (martes 11:00)",
+   "inicio": "2026-08-25T11:00:00",
+   "fin": "2026-10-06T11:00:00",
+   "lugar": "Aprendiendo Arte",
+   "direccion": "Pablo Burchard 670",
+   "comuna": "La Reina",
+   "lat": -33.4450905,
+   "lon": -70.5486951,
+   "precision": "calle",
+   "gratis": false,
+   "precio": 93000,
+   "precio_texto": "$93.000 mensuales",
+   "categoria": "clases",
+   "subcategoria": "manualidades",
+   "escala": "",
+   "publico": "todos",
+   "descripcion": "todos los martes de 11:00 a 13:30",
+   "imagen": "",
+   "fuente": "Aprendiendo Arte",
+   "url": "https://www.aprendiendoarte.com/ceramica",
+   "dias_semana": [
+    1
+   ],
+   "sesiones": 7,
+   "formato": "taller"
+  },
+  {
    "id": "07e49701f3cc9922",
    "titulo": "Pilates Ma-Ju 11:15 h. / JJVV Villa Olímpica.",
    "inicio": "2026-08-25T11:15:00",
@@ -14034,6 +14118,34 @@
     1,
     3
    ]
+  },
+  {
+   "id": "647129b27d5a44e1",
+   "titulo": "Filosofía y cine en diálogo",
+   "inicio": "2026-08-25T12:00:00",
+   "fin": "2026-10-06T12:00:00",
+   "lugar": "Centro de Extensión UC",
+   "direccion": "Alameda 390",
+   "comuna": "Santiago",
+   "lat": -33.44144712600001,
+   "lon": -70.641188372,
+   "precision": "recinto",
+   "gratis": false,
+   "precio": 120000,
+   "precio_texto": "$120.000 el curso",
+   "categoria": "cine",
+   "subcategoria": "",
+   "escala": "masivo",
+   "publico": "todos",
+   "descripcion": "todos los martes de 12:00 a 13:30",
+   "imagen": "",
+   "fuente": "Programa Adulto Mayor UC",
+   "url": "https://adultomayor.uc.cl/curso/filosofia-y-cine-en-dialogo/",
+   "dias_semana": [
+    1
+   ],
+   "sesiones": 7,
+   "formato": "taller"
   },
   {
    "id": "c8cb8a7de21dd9de",
@@ -14426,6 +14538,34 @@
     1,
     3
    ]
+  },
+  {
+   "id": "6c90ae56b12ba258",
+   "titulo": "Clases de cerámica gres (martes 16:00)",
+   "inicio": "2026-08-25T16:00:00",
+   "fin": "2026-10-06T16:00:00",
+   "lugar": "Rayün Cerámicas (Chicureo)",
+   "direccion": "Condominio Los Castaños, Chicureo",
+   "comuna": "Colina",
+   "lat": -33.2019,
+   "lon": -70.6747,
+   "precision": "comuna",
+   "gratis": false,
+   "precio": null,
+   "precio_texto": "",
+   "categoria": "clases",
+   "subcategoria": "manualidades",
+   "escala": "",
+   "publico": "todos",
+   "descripcion": "todos los martes de 16:00 a 18:30",
+   "imagen": "",
+   "fuente": "Rayün Cerámicas (Chicureo)",
+   "url": "https://www.rayunceramicas.cl/clases/",
+   "dias_semana": [
+    1
+   ],
+   "sesiones": 7,
+   "formato": "taller"
   },
   {
    "id": "b4fb4405c5540eb5",
@@ -14903,6 +15043,34 @@
     1,
     3
    ]
+  },
+  {
+   "id": "3a92bd821c0f0e3f",
+   "titulo": "Taller de cerámica para niños y niñas (martes 17:00)",
+   "inicio": "2026-08-25T17:00:00",
+   "fin": "2026-10-06T17:00:00",
+   "lugar": "Aprendiendo Arte",
+   "direccion": "Pablo Burchard 670",
+   "comuna": "La Reina",
+   "lat": -33.4450905,
+   "lon": -70.5486951,
+   "precision": "calle",
+   "gratis": false,
+   "precio": 83000,
+   "precio_texto": "$83.000 mensuales",
+   "categoria": "familia",
+   "subcategoria": "",
+   "escala": "",
+   "publico": "ninos",
+   "descripcion": "todos los martes de 17:00 a 19:00",
+   "imagen": "",
+   "fuente": "Aprendiendo Arte",
+   "url": "https://www.aprendiendoarte.com/ceramica",
+   "dias_semana": [
+    1
+   ],
+   "sesiones": 7,
+   "formato": "taller"
   },
   {
    "id": "95e9c93ea4b33e30",
@@ -16447,6 +16615,34 @@
    ]
   },
   {
+   "id": "7d19efca1258a828",
+   "titulo": "Clases de cerámica gres (martes 19:00)",
+   "inicio": "2026-08-25T19:00:00",
+   "fin": "2026-10-06T19:00:00",
+   "lugar": "Rayün Cerámicas (Chicureo)",
+   "direccion": "Condominio Los Castaños, Chicureo",
+   "comuna": "Colina",
+   "lat": -33.2019,
+   "lon": -70.6747,
+   "precision": "comuna",
+   "gratis": false,
+   "precio": null,
+   "precio_texto": "",
+   "categoria": "clases",
+   "subcategoria": "manualidades",
+   "escala": "",
+   "publico": "todos",
+   "descripcion": "todos los martes de 19:00 a 21:30",
+   "imagen": "",
+   "fuente": "Rayün Cerámicas (Chicureo)",
+   "url": "https://www.rayunceramicas.cl/clases/",
+   "dias_semana": [
+    1
+   ],
+   "sesiones": 7,
+   "formato": "taller"
+  },
+  {
    "id": "434403d22d03757c",
    "titulo": "HIIT Ma-Ju 19:30 h.",
    "inicio": "2026-08-25T19:30:00",
@@ -16665,6 +16861,34 @@
     1,
     3
    ]
+  },
+  {
+   "id": "4bfd984a5b0097af",
+   "titulo": "Taller de cerámica gres para adultos (martes 19:30)",
+   "inicio": "2026-08-25T19:30:00",
+   "fin": "2026-10-06T19:30:00",
+   "lugar": "Aprendiendo Arte",
+   "direccion": "Pablo Burchard 670",
+   "comuna": "La Reina",
+   "lat": -33.4450905,
+   "lon": -70.5486951,
+   "precision": "calle",
+   "gratis": false,
+   "precio": 93000,
+   "precio_texto": "$93.000 mensuales",
+   "categoria": "clases",
+   "subcategoria": "manualidades",
+   "escala": "",
+   "publico": "todos",
+   "descripcion": "todos los martes de 19:30 a 22:00",
+   "imagen": "",
+   "fuente": "Aprendiendo Arte",
+   "url": "https://www.aprendiendoarte.com/ceramica",
+   "dias_semana": [
+    1
+   ],
+   "sesiones": 7,
+   "formato": "taller"
   },
   {
    "id": "cf47fdf6ec2a4958",
@@ -17551,6 +17775,34 @@
    "formato": "taller"
   },
   {
+   "id": "00ea25a22ceca85e",
+   "titulo": "Clases de cerámica gres (miércoles 10:30)",
+   "inicio": "2026-08-26T10:30:00",
+   "fin": "2026-10-07T10:30:00",
+   "lugar": "Rayün Cerámicas (Chicureo)",
+   "direccion": "Condominio Los Castaños, Chicureo",
+   "comuna": "Colina",
+   "lat": -33.2019,
+   "lon": -70.6747,
+   "precision": "comuna",
+   "gratis": false,
+   "precio": null,
+   "precio_texto": "",
+   "categoria": "clases",
+   "subcategoria": "manualidades",
+   "escala": "",
+   "publico": "todos",
+   "descripcion": "todos los miércoles de 10:30 a 13:00",
+   "imagen": "",
+   "fuente": "Rayün Cerámicas (Chicureo)",
+   "url": "https://www.rayunceramicas.cl/clases/",
+   "dias_semana": [
+    2
+   ],
+   "sesiones": 7,
+   "formato": "taller"
+  },
+  {
    "id": "0debca7464966efb",
    "titulo": "Clase abierta: “Ficción, memética y discurso histórico”",
    "inicio": "2026-08-26T12:30:00",
@@ -17596,6 +17848,34 @@
    "imagen": "https://finis.cl/wp-content/uploads/2026/08/Agenda-web-2026-08-12T160501.985.jpg",
    "fuente": "Universidad Finis Terrae - Agenda",
    "url": "https://finis.cl/agenda/comunidad-finis-terrae/taller-de-cesteria-contemporanea-tejer-ideas-2/",
+   "formato": "taller"
+  },
+  {
+   "id": "36ae6686cfba3bd9",
+   "titulo": "Taller de cerámica para niños y niñas (miércoles 17:00)",
+   "inicio": "2026-08-26T17:00:00",
+   "fin": "2026-10-07T17:00:00",
+   "lugar": "Aprendiendo Arte",
+   "direccion": "Pablo Burchard 670",
+   "comuna": "La Reina",
+   "lat": -33.4450905,
+   "lon": -70.5486951,
+   "precision": "calle",
+   "gratis": false,
+   "precio": 83000,
+   "precio_texto": "$83.000 mensuales",
+   "categoria": "familia",
+   "subcategoria": "",
+   "escala": "",
+   "publico": "ninos",
+   "descripcion": "todos los miércoles de 17:00 a 19:00",
+   "imagen": "",
+   "fuente": "Aprendiendo Arte",
+   "url": "https://www.aprendiendoarte.com/ceramica",
+   "dias_semana": [
+    2
+   ],
+   "sesiones": 7,
    "formato": "taller"
   },
   {
@@ -17711,6 +17991,58 @@
    ]
   },
   {
+   "id": "557314d3647b36e3",
+   "titulo": "Taller de litografía (miércoles 18:00)",
+   "inicio": "2026-08-26T18:00:00",
+   "fin": "2026-10-07T18:00:00",
+   "lugar": "Taller 99",
+   "direccion": "Zañartu 1016",
+   "comuna": "Providencia",
+   "lat": -33.43736,
+   "lon": -70.6168,
+   "precision": "correccion",
+   "gratis": false,
+   "precio": null,
+   "precio_texto": "",
+   "categoria": "clases",
+   "subcategoria": "",
+   "escala": "",
+   "publico": "todos",
+   "descripcion": "todos los miércoles de 18:00 a 22:00",
+   "imagen": "",
+   "fuente": "Taller 99",
+   "url": "https://www.taller99.cl/talleres/",
+   "dias_semana": [
+    2
+   ],
+   "sesiones": 7,
+   "formato": "taller"
+  },
+  {
+   "id": "2e1511ca55e766c8",
+   "titulo": "TALLER, TESOROS COMPARTIDOS",
+   "inicio": "2026-08-26T18:00:00",
+   "fin": null,
+   "lugar": "Lo Matta Cultural (Vitacura)",
+   "direccion": "Av. Kennedy 9350",
+   "comuna": "Vitacura",
+   "lat": -33.38724,
+   "lon": -70.5447,
+   "precision": "correccion",
+   "gratis": false,
+   "precio": 190000,
+   "precio_texto": "20:30 horas. Valor: $190.000 general; $170.000 con Tarjeta M",
+   "categoria": "clases",
+   "subcategoria": "",
+   "escala": "",
+   "publico": "todos",
+   "descripcion": "Este taller creativo invita a los participantes a recordar, buscar, crear y plasmar lo que cada uno lleva consigo y quiere revelar. A partir de una antigua caja tipográfica de madera y de objetos…",
+   "imagen": "https://www.lomatta.cl/wp-content/uploads/2026/06/Tesoros-compartidos_portada-LM-300x187.png",
+   "fuente": "Lo Matta Cultural (Vitacura)",
+   "url": "https://www.lomatta.cl/taller-de-tesoros-compartidos/",
+   "formato": "taller"
+  },
+  {
    "id": "224701eef01bf69e",
    "titulo": "Webinar para la formación docente",
    "inicio": "2026-08-26T19:00:00",
@@ -17787,6 +18119,34 @@
    "formato": "taller"
   },
   {
+   "id": "ae1a4b0cd4bf776d",
+   "titulo": "Clases de cerámica gres (miércoles 19:00)",
+   "inicio": "2026-08-26T19:00:00",
+   "fin": "2026-10-07T19:00:00",
+   "lugar": "Rayün Cerámicas (Chicureo)",
+   "direccion": "Condominio Los Castaños, Chicureo",
+   "comuna": "Colina",
+   "lat": -33.2019,
+   "lon": -70.6747,
+   "precision": "comuna",
+   "gratis": false,
+   "precio": null,
+   "precio_texto": "",
+   "categoria": "clases",
+   "subcategoria": "manualidades",
+   "escala": "",
+   "publico": "todos",
+   "descripcion": "todos los miércoles de 19:00 a 21:30",
+   "imagen": "",
+   "fuente": "Rayün Cerámicas (Chicureo)",
+   "url": "https://www.rayunceramicas.cl/clases/",
+   "dias_semana": [
+    2
+   ],
+   "sesiones": 7,
+   "formato": "taller"
+  },
+  {
    "id": "be46882c7bb7ae2c",
    "titulo": "Taekwondo",
    "inicio": "2026-08-26T19:15:00",
@@ -17843,6 +18203,34 @@
    ]
   },
   {
+   "id": "ea482e651a64077c",
+   "titulo": "Taller de cerámica gres para adultos (miércoles 19:30)",
+   "inicio": "2026-08-26T19:30:00",
+   "fin": "2026-10-07T19:30:00",
+   "lugar": "Aprendiendo Arte",
+   "direccion": "Pablo Burchard 670",
+   "comuna": "La Reina",
+   "lat": -33.4450905,
+   "lon": -70.5486951,
+   "precision": "calle",
+   "gratis": false,
+   "precio": 93000,
+   "precio_texto": "$93.000 mensuales",
+   "categoria": "clases",
+   "subcategoria": "manualidades",
+   "escala": "",
+   "publico": "todos",
+   "descripcion": "todos los miércoles de 19:30 a 22:00",
+   "imagen": "",
+   "fuente": "Aprendiendo Arte",
+   "url": "https://www.aprendiendoarte.com/ceramica",
+   "dias_semana": [
+    2
+   ],
+   "sesiones": 7,
+   "formato": "taller"
+  },
+  {
    "id": "eed427068bba0cde",
    "titulo": "Taller para profesores: \"Jugando aprendo... de todo: claves del juego en las aulas\"",
    "inicio": "2026-08-27T00:00:00",
@@ -17864,6 +18252,30 @@
    "imagen": "",
    "fuente": "Corporacion Cultural de Lo Barnechea (El Tranque)",
    "url": "https://corporacionculturaldelobarnechea.cl/actividades/talleres/taller-para-profesores-jugando-aprendo-de-todo-claves-del-juego-en-las-aulas/",
+   "formato": "taller"
+  },
+  {
+   "id": "4f30865073752cf3",
+   "titulo": "Técnica de actuación frente a cámara",
+   "inicio": "2026-08-27T00:00:00",
+   "fin": null,
+   "lugar": "Escuela de Teatro UC (talleres y extension)",
+   "direccion": "",
+   "comuna": "Providencia",
+   "lat": -33.4372,
+   "lon": -70.6222,
+   "precision": "recinto",
+   "gratis": false,
+   "precio": null,
+   "precio_texto": "",
+   "categoria": "clases",
+   "subcategoria": "",
+   "escala": "",
+   "publico": "todos",
+   "descripcion": "[INSCRIPCIONES CERRADAS] Para más información sobre futuros programas de actuación frente a cámara, no dudes en contactar a extensionteatro@uc.cl. La Facultad de Artes y la Escuela de Teatro UC ,…",
+   "imagen": "https://escueladeteatro.uc.cl/wp-content/uploads/sites/10/2026/07/Sara-Imagen-2-600x584.png",
+   "fuente": "Escuela de Teatro UC (talleres y extension)",
+   "url": "https://escueladeteatro.uc.cl/evento/tecnica-de-actuacion-frente-a-camara/",
    "formato": "taller"
   },
   {
@@ -17918,6 +18330,62 @@
    "formato": "taller"
   },
   {
+   "id": "ad794109c905fa19",
+   "titulo": "Taller de litografía (jueves 10:00)",
+   "inicio": "2026-08-27T10:00:00",
+   "fin": "2026-10-08T10:00:00",
+   "lugar": "Taller 99",
+   "direccion": "Zañartu 1016",
+   "comuna": "Providencia",
+   "lat": -33.43736,
+   "lon": -70.6168,
+   "precision": "correccion",
+   "gratis": false,
+   "precio": null,
+   "precio_texto": "",
+   "categoria": "clases",
+   "subcategoria": "",
+   "escala": "",
+   "publico": "todos",
+   "descripcion": "todos los jueves de 10:00 a 14:00",
+   "imagen": "",
+   "fuente": "Taller 99",
+   "url": "https://www.taller99.cl/talleres/",
+   "dias_semana": [
+    3
+   ],
+   "sesiones": 7,
+   "formato": "taller"
+  },
+  {
+   "id": "b8fdf8efd4ddf12c",
+   "titulo": "Taller de metal y calcografía II",
+   "inicio": "2026-08-27T10:00:00",
+   "fin": "2026-10-08T10:00:00",
+   "lugar": "Taller 99",
+   "direccion": "Zañartu 1016",
+   "comuna": "Providencia",
+   "lat": -33.43736,
+   "lon": -70.6168,
+   "precision": "correccion",
+   "gratis": false,
+   "precio": null,
+   "precio_texto": "",
+   "categoria": "clases",
+   "subcategoria": "",
+   "escala": "",
+   "publico": "todos",
+   "descripcion": "todos los jueves de 10:00 a 14:00",
+   "imagen": "",
+   "fuente": "Taller 99",
+   "url": "https://www.taller99.cl/talleres/",
+   "dias_semana": [
+    3
+   ],
+   "sesiones": 7,
+   "formato": "taller"
+  },
+  {
    "id": "049d65fec29797e2",
    "titulo": "Futsal Ju 17:30 h. / Vi 17:00 h. / Sa 12:00 h. / Club Ñuñoa.",
    "inicio": "2026-08-27T12:00:00",
@@ -17945,6 +18413,62 @@
     4,
     5
    ]
+  },
+  {
+   "id": "734acbaeb9e80ce4",
+   "titulo": "Taller de xilografía",
+   "inicio": "2026-08-27T15:00:00",
+   "fin": "2026-10-08T15:00:00",
+   "lugar": "Taller 99",
+   "direccion": "Zañartu 1016",
+   "comuna": "Providencia",
+   "lat": -33.43736,
+   "lon": -70.6168,
+   "precision": "correccion",
+   "gratis": false,
+   "precio": null,
+   "precio_texto": "",
+   "categoria": "clases",
+   "subcategoria": "",
+   "escala": "",
+   "publico": "todos",
+   "descripcion": "todos los jueves de 15:00 a 19:00",
+   "imagen": "",
+   "fuente": "Taller 99",
+   "url": "https://www.taller99.cl/talleres/",
+   "dias_semana": [
+    3
+   ],
+   "sesiones": 7,
+   "formato": "taller"
+  },
+  {
+   "id": "09dfedfebddbefae",
+   "titulo": "Taller de metal y calcografía I",
+   "inicio": "2026-08-27T15:00:00",
+   "fin": "2026-10-08T15:00:00",
+   "lugar": "Taller 99",
+   "direccion": "Zañartu 1016",
+   "comuna": "Providencia",
+   "lat": -33.43736,
+   "lon": -70.6168,
+   "precision": "correccion",
+   "gratis": false,
+   "precio": null,
+   "precio_texto": "",
+   "categoria": "clases",
+   "subcategoria": "",
+   "escala": "",
+   "publico": "todos",
+   "descripcion": "todos los jueves de 15:00 a 19:00",
+   "imagen": "",
+   "fuente": "Taller 99",
+   "url": "https://www.taller99.cl/talleres/",
+   "dias_semana": [
+    3
+   ],
+   "sesiones": 7,
+   "formato": "taller"
   },
   {
    "id": "d8e0200ecfa467c1",
@@ -18163,6 +18687,62 @@
     4
    ],
    "sesiones": 4,
+   "formato": "taller"
+  },
+  {
+   "id": "9c8820d9c1a94fb1",
+   "titulo": "Clases de cerámica gres (viernes 11:00)",
+   "inicio": "2026-08-28T11:00:00",
+   "fin": "2026-10-02T11:00:00",
+   "lugar": "Rayün Cerámicas (La Reina)",
+   "direccion": "Carlos Dickens 2329",
+   "comuna": "La Reina",
+   "lat": -33.4343933,
+   "lon": -70.5566788,
+   "precision": "calle",
+   "gratis": false,
+   "precio": null,
+   "precio_texto": "",
+   "categoria": "clases",
+   "subcategoria": "manualidades",
+   "escala": "",
+   "publico": "todos",
+   "descripcion": "todos los viernes de 11:00 a 13:30",
+   "imagen": "",
+   "fuente": "Rayün Cerámicas (La Reina)",
+   "url": "https://www.rayunceramicas.cl/clases/",
+   "dias_semana": [
+    4
+   ],
+   "sesiones": 6,
+   "formato": "taller"
+  },
+  {
+   "id": "a9044b72d8e565c0",
+   "titulo": "Clases de cerámica gres (viernes 17:00)",
+   "inicio": "2026-08-28T17:00:00",
+   "fin": "2026-10-02T17:00:00",
+   "lugar": "Rayün Cerámicas (La Reina)",
+   "direccion": "Carlos Dickens 2329",
+   "comuna": "La Reina",
+   "lat": -33.4343933,
+   "lon": -70.5566788,
+   "precision": "calle",
+   "gratis": false,
+   "precio": null,
+   "precio_texto": "",
+   "categoria": "clases",
+   "subcategoria": "manualidades",
+   "escala": "",
+   "publico": "todos",
+   "descripcion": "todos los viernes de 17:00 a 19:30",
+   "imagen": "",
+   "fuente": "Rayün Cerámicas (La Reina)",
+   "url": "https://www.rayunceramicas.cl/clases/",
+   "dias_semana": [
+    4
+   ],
+   "sesiones": 6,
    "formato": "taller"
   },
   {
@@ -18747,6 +19327,34 @@
    "formato": "taller"
   },
   {
+   "id": "586feee2f8fd813a",
+   "titulo": "Taller de xilografía y metal",
+   "inicio": "2026-08-29T10:00:00",
+   "fin": "2026-10-03T10:00:00",
+   "lugar": "Taller 99",
+   "direccion": "Zañartu 1016",
+   "comuna": "Providencia",
+   "lat": -33.43736,
+   "lon": -70.6168,
+   "precision": "correccion",
+   "gratis": false,
+   "precio": null,
+   "precio_texto": "",
+   "categoria": "clases",
+   "subcategoria": "",
+   "escala": "",
+   "publico": "todos",
+   "descripcion": "todos los sábado de 10:00 a 14:00",
+   "imagen": "",
+   "fuente": "Taller 99",
+   "url": "https://www.taller99.cl/talleres/",
+   "dias_semana": [
+    5
+   ],
+   "sesiones": 6,
+   "formato": "taller"
+  },
+  {
    "id": "88de0dfd2d19bf12",
    "titulo": "Escalada Escolar",
    "inicio": "2026-08-29T10:30:00",
@@ -19012,6 +19620,58 @@
    "imagen": "https://static.ptocdn.net/images/eventos/evt002_rs.jpg",
    "fuente": "Puntoticket (deportes, musica y familia)",
    "url": "https://www.puntoticket.com/evento/workshop-constelaciones-familiares-sistematicas?utm_medium=organic&utm_source=microformat",
+   "formato": "taller"
+  },
+  {
+   "id": "164056160c0ee32a",
+   "titulo": "Taller de cerámica gres para adultos (sábado 11:00)",
+   "inicio": "2026-08-29T11:00:00",
+   "fin": "2026-10-03T11:00:00",
+   "lugar": "Aprendiendo Arte",
+   "direccion": "Pablo Burchard 670",
+   "comuna": "La Reina",
+   "lat": -33.4450905,
+   "lon": -70.5486951,
+   "precision": "calle",
+   "gratis": false,
+   "precio": 93000,
+   "precio_texto": "$93.000 mensuales",
+   "categoria": "clases",
+   "subcategoria": "manualidades",
+   "escala": "",
+   "publico": "todos",
+   "descripcion": "todos los sábado de 11:00 a 13:30",
+   "imagen": "",
+   "fuente": "Aprendiendo Arte",
+   "url": "https://www.aprendiendoarte.com/ceramica",
+   "dias_semana": [
+    5
+   ],
+   "sesiones": 6,
+   "formato": "taller"
+  },
+  {
+   "id": "878b22c51d0eb985",
+   "titulo": "CLASES DE CUECA",
+   "inicio": "2026-08-29T11:00:00",
+   "fin": null,
+   "lugar": "Lo Matta Cultural (Vitacura)",
+   "direccion": "Av. Kennedy 9350",
+   "comuna": "Vitacura",
+   "lat": -33.38724,
+   "lon": -70.5447,
+   "precision": "correccion",
+   "gratis": false,
+   "precio": 15000,
+   "precio_texto": "gún disponibilidad. $15.000 general; $10.000 con Tarjeta Mi",
+   "categoria": "clases",
+   "subcategoria": "danza",
+   "escala": "",
+   "publico": "todos",
+   "descripcion": "Inscripciones AQUÍ La cueca es mucho más que un baile: es una expresión viva de nuestra identidad, nuestras tradiciones y nuestra cultura. En este taller, podrás conocer sus fundamentos, comprender…",
+   "imagen": "https://www.lomatta.cl/wp-content/uploads/2026/07/Taller-de-cueca_portada-LM-300x187.png",
+   "fuente": "Lo Matta Cultural (Vitacura)",
+   "url": "https://www.lomatta.cl/taller-de-cueca/",
    "formato": "taller"
   },
   {
@@ -37464,6 +38124,34 @@
    ]
   },
   {
+   "id": "598b16b8382fe75c",
+   "titulo": "Taller de teatro impro para adultos (martes 19:30)",
+   "inicio": "2026-09-08T19:30:00",
+   "fin": "2026-10-06T19:30:00",
+   "lugar": "Lospleimovil",
+   "direccion": "Dardignac 91",
+   "comuna": "Recoleta",
+   "lat": -33.4333592,
+   "lon": -70.6382937,
+   "precision": "calle",
+   "gratis": false,
+   "precio": 48000,
+   "precio_texto": "$48.000 mensuales más $19.000 de matrícula",
+   "categoria": "clases",
+   "subcategoria": "",
+   "escala": "",
+   "publico": "todos",
+   "descripcion": "todos los martes de 19:30 a 21:30",
+   "imagen": "",
+   "fuente": "Lospleimovil",
+   "url": "https://lospleimovil.cl/talleres-de-teatro-adultos/",
+   "dias_semana": [
+    1
+   ],
+   "sesiones": 5,
+   "formato": "taller"
+  },
+  {
    "id": "37f7fcab0e7763fc",
    "titulo": "Vóleibol Selección (Damas)",
    "inicio": "2026-09-08T19:40:00",
@@ -38662,6 +39350,34 @@
    "dias_semana": [
     5
    ]
+  },
+  {
+   "id": "27d9af76fcd2649b",
+   "titulo": "Taller de teatro impro para adultos (sábado 17:00)",
+   "inicio": "2026-09-12T17:00:00",
+   "fin": "2026-10-03T17:00:00",
+   "lugar": "Lospleimovil",
+   "direccion": "Dardignac 91",
+   "comuna": "Recoleta",
+   "lat": -33.4333592,
+   "lon": -70.6382937,
+   "precision": "calle",
+   "gratis": false,
+   "precio": 48000,
+   "precio_texto": "$48.000 mensuales más $19.000 de matrícula",
+   "categoria": "clases",
+   "subcategoria": "",
+   "escala": "",
+   "publico": "todos",
+   "descripcion": "todos los sábado de 17:00 a 19:00",
+   "imagen": "",
+   "fuente": "Lospleimovil",
+   "url": "https://lospleimovil.cl/talleres-de-teatro-adultos/",
+   "dias_semana": [
+    5
+   ],
+   "sesiones": 4,
+   "formato": "taller"
   },
   {
    "id": "8c4fae8079ea1af9",

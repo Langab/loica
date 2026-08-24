@@ -1,0 +1,514 @@
+# Catastro de talleres permanentes de Santiago
+# ============================================
+#
+# Lo que este archivo arregla: hasta el 24-08-2026 el 96% de las 1.879 clases
+# publicadas venían de TRES corporaciones municipales de deportes (Ñuñoa 1.247,
+# Huechuraba 384, Santiago 190) y el resto de la ciudad —la cerámica, el
+# grabado, el teatro, la danza, los cursos para personas mayores— no aparecía.
+# No es que no exista: es que un taller de barrio no publica agenda. Su clase
+# de los martes a las 19:00 lleva años igual y no tiene nada que anunciar, así
+# que no hay feed, ni JSON, ni calendario: hay una página que dice "Martes de
+# 11:00 a 13:30 hrs" en prosa.
+#
+# Eso se cataloga a mano, una vez, como las salas de cine en `cines.yaml`.
+# `loica/fuentes/talleres.py` lo convierte en una sesión por día y el export
+# las junta en una tarjeta con sus días, que es lo que la página de talleres
+# sabe filtrar.
+#
+# CÓMO SE AGREGA UN LUGAR
+# -----------------------
+#   - id: nombre-corto            # sin tildes ni espacios, único
+#     nombre: Cómo se llama       # sale en la tarjeta y en la atribución
+#     lugar: Centro de Extensión UC  # opcional: dónde se dicta, si no es el mismo
+#                                    # nombre. Es lo que geocodifica el índice OSM.
+#     url: https://...            # OBLIGATORIO: la página donde está el dato
+#     direccion: Calle 1234       # como la escribe el lugar
+#     comuna: Providencia
+#     disciplina: ceramica        # informativo; la categoría la decide el clasificador
+#     verificado: 2026-08-24      # el día que alguien MIRÓ la página
+#     vigente_hasta: 2026-12-31   # opcional; por defecto verificado + 120 días
+#     activo: true                # false = catastrado pero fuera del sitio
+#     nota: ...                   # por qué está apagado, qué falta, qué avisar
+#     talleres:
+#       - titulo: Taller de xilografía
+#         dias: [jueves]          # "lunes", "martes"... los lee recurrencia.py
+#         hora_inicio: "15:00"
+#         hora_fin: "19:00"
+#         precio_texto: $120.000 por 4 clases
+#         precio_clp: 120000      # opcional, si el precio es un número limpio
+#         gratis: true            # opcional
+#         vigente_desde: 2026-10-05   # opcional: temporadas que empiezan después
+#
+# LAS TRES REGLAS
+# ---------------
+# 1. Nada se inventa. Un taller entra con los días y la hora que su sitio
+#    publica, citados de ahí. El que no los publica queda con `activo: false`
+#    y una nota: existe, se sabe dónde está, y alguien puede llamar y
+#    completarlo. Un horario inventado manda a una persona a una puerta cerrada.
+# 2. Todo caduca. `verificado` + `vigente_hasta` mandan: pasada esa fecha el
+#    lugar deja de emitir sesiones y la corrida avisa en su registro. Cuatro
+#    meses es el largo de una temporada de talleres en Chile. Y ojo con las
+#    páginas que no caducan solas: si un sitio anuncia "los domingos 5, 12, 19
+#    y 26 de octubre", hay que revisar que esos días calcen con el año — en
+#    2026 el 5 de octubre cae lunes, así que ese ciclo es de 2025 (le pasó a
+#    Centro Cerámica, que por eso está apagado).
+# 3. La atribución manda. Sin `url` no se publica. La tarjeta existe para
+#    mandar gente al taller, no para reemplazarlo.
+#
+# Las direcciones de este catastro se contrastaron una por una contra el índice
+# local de OpenStreetMap (`datos/indice_osm.db`): todas las de los lugares
+# activos calzan calle+número en la comuna declarada, así que sus pines son
+# exactos y no el centro de la comuna.
+
+lugares:
+
+  # ---------- GRABADO Y SERIGRAFÍA ----------
+
+  - id: taller99
+    nombre: Taller 99
+    url: https://www.taller99.cl/talleres/
+    direccion: Zañartu 1016
+    comuna: Providencia
+    disciplina: grabado
+    verificado: 2026-08-24
+    vigente_hasta: 2026-12-31
+    activo: true
+    nota: 'El taller de grabado que fundó Nemesio Antúnez en 1956 y sigue enseñando
+      xilografía, litografía y calcografía. Publica el día y la hora de cada taller
+      en su página; el precio no. Su WordPress tiene la API REST cerrada (404 en
+      /wp-json), por eso va en el catastro y no como fuente automática.'
+    talleres:
+      - titulo: Taller de xilografía
+        dias: [jueves]
+        hora_inicio: "15:00"
+        hora_fin: "19:00"
+      - titulo: Taller de xilografía y metal
+        dias: [sábado]
+        hora_inicio: "10:00"
+        hora_fin: "14:00"
+      - titulo: Taller de litografía
+        dias: [miércoles]
+        hora_inicio: "18:00"
+        hora_fin: "22:00"
+      - titulo: Taller de litografía
+        dias: [jueves]
+        hora_inicio: "10:00"
+        hora_fin: "14:00"
+      - titulo: Taller de metal y calcografía I
+        dias: [jueves]
+        hora_inicio: "15:00"
+        hora_fin: "19:00"
+      - titulo: Taller de metal y calcografía II
+        dias: [jueves]
+        hora_inicio: "10:00"
+        hora_fin: "14:00"
+      - titulo: Divertimento
+        activo: false
+        nota: Solo para integrantes del Taller 99, y sin horario publicado.
+
+  # ---------- CERÁMICA ----------
+
+  - id: aprendiendo_arte
+    nombre: Aprendiendo Arte
+    url: https://www.aprendiendoarte.com/ceramica
+    direccion: Pablo Burchard 670
+    comuna: La Reina
+    disciplina: ceramica
+    verificado: 2026-08-24
+    activo: true
+    nota: 'Cerámica gres, acuarela y mosaico. Es de los pocos talleres privados que
+      publica los cuatro horarios de su curso de adultos y el arancel mensual. Los
+      talleres de acuarela y mosaico no traen día, así que no entran.'
+    talleres:
+      - titulo: Taller de cerámica gres para adultos
+        dias: [martes]
+        hora_inicio: "11:00"
+        hora_fin: "13:30"
+        precio_texto: $93.000 mensuales
+        precio_clp: 93000
+      - titulo: Taller de cerámica gres para adultos
+        dias: [martes]
+        hora_inicio: "19:30"
+        hora_fin: "22:00"
+        precio_texto: $93.000 mensuales
+        precio_clp: 93000
+      - titulo: Taller de cerámica gres para adultos
+        dias: [miércoles]
+        hora_inicio: "19:30"
+        hora_fin: "22:00"
+        precio_texto: $93.000 mensuales
+        precio_clp: 93000
+      - titulo: Taller de cerámica gres para adultos
+        dias: [sábado]
+        hora_inicio: "11:00"
+        hora_fin: "13:30"
+        precio_texto: $93.000 mensuales
+        precio_clp: 93000
+      - titulo: Taller de cerámica para niños y niñas
+        dias: [martes]
+        hora_inicio: "17:00"
+        hora_fin: "19:00"
+        precio_texto: $83.000 mensuales
+        precio_clp: 83000
+      - titulo: Taller de cerámica para niños y niñas
+        dias: [miércoles]
+        hora_inicio: "17:00"
+        hora_fin: "19:00"
+        precio_texto: $83.000 mensuales
+        precio_clp: 83000
+
+  - id: rayun_la_reina
+    nombre: Rayün Cerámicas (La Reina)
+    url: https://www.rayunceramicas.cl/clases/
+    direccion: Carlos Dickens 2329
+    comuna: La Reina
+    disciplina: ceramica
+    verificado: 2026-08-24
+    activo: true
+    nota: Clases de cerámica gres. Publica los horarios de sus dos sedes y no los precios.
+    talleres:
+      - titulo: Clases de cerámica gres
+        dias: [viernes]
+        hora_inicio: "11:00"
+        hora_fin: "13:30"
+      - titulo: Clases de cerámica gres
+        dias: [viernes]
+        hora_inicio: "17:00"
+        hora_fin: "19:30"
+
+  - id: rayun_chicureo
+    nombre: Rayün Cerámicas (Chicureo)
+    url: https://www.rayunceramicas.cl/clases/
+    direccion: Condominio Los Castaños, Chicureo
+    comuna: Colina
+    disciplina: ceramica
+    verificado: 2026-08-24
+    activo: true
+    nota: 'La sede de Chicureo es la ÚNICA entrada del catastro en Colina. La dirección
+      que publica es el condominio, sin calle ni número: el pin va a quedar al centro
+      de la comuna hasta que alguien consiga la dirección exacta.'
+    talleres:
+      - titulo: Clases de cerámica gres
+        dias: [martes]
+        hora_inicio: "16:00"
+        hora_fin: "18:30"
+      - titulo: Clases de cerámica gres
+        dias: [martes]
+        hora_inicio: "19:00"
+        hora_fin: "21:30"
+      - titulo: Clases de cerámica gres
+        dias: [miércoles]
+        hora_inicio: "10:30"
+        hora_fin: "13:00"
+      - titulo: Clases de cerámica gres
+        dias: [miércoles]
+        hora_inicio: "19:00"
+        hora_fin: "21:30"
+
+  - id: centro_ceramica
+    nombre: Centro Cerámica
+    url: https://www.centroceramica.net/torno-alfarero
+    direccion: Puma 1180
+    comuna: Recoleta
+    disciplina: ceramica
+    verificado: 2026-08-24
+    activo: false
+    nota: 'Torno alfarero en Recoleta. PUBLICA horario —domingos de 10:00 a 13:00 y
+      lunes de 18:00 a 21:00, $120.000 por cuatro clases— pero la temporada que
+      anuncia es de OTRO AÑO: dice "los domingos 5, 12, 19 y 26 de octubre" y en
+      2026 el 5 de octubre cae lunes. Esos números y esos días solo calzan en 2025.
+      Es el caso que obliga a la regla: antes de publicar un ciclo con fechas, hay
+      que revisar que el nombre del día calce con el año. Se enciende cuando el
+      taller cargue su temporada nueva.
+
+'
+  # ---------- TEATRO ----------
+
+  - id: teatro_azares
+    nombre: Teatro Azares
+    url: https://teatroazares.cl/talleres/
+    direccion: Huérfanos 2146
+    comuna: Santiago
+    disciplina: teatro
+    verificado: 2026-08-24
+    vigente_hasta: 2026-11-30
+    activo: true
+    nota: 'Taller anual de teatro para adultos sin experiencia, de abril a noviembre,
+      en Plaza Brasil. La vigencia termina con la temporada que el propio sitio declara.'
+    talleres:
+      - titulo: Taller de teatro para adultos
+        dias: [lunes]
+        hora_inicio: "19:00"
+        hora_fin: "21:00"
+        precio_texto: $45.000 mensuales
+        precio_clp: 45000
+
+  - id: lospleimovil
+    nombre: Lospleimovil
+    url: https://lospleimovil.cl/talleres-de-teatro-adultos/
+    direccion: Dardignac 91
+    comuna: Recoleta
+    disciplina: teatro
+    verificado: 2026-08-24
+    activo: true
+    nota: 'Taller de impro para adultos sin experiencia en el Circuito Teatral de
+      Santiago (Bellavista, lado Recoleta). La temporada que publica hoy parte el
+      8 de septiembre y termina el 20 de diciembre de 2026.'
+    talleres:
+      - titulo: Taller de teatro impro para adultos
+        dias: [martes]
+        hora_inicio: "19:30"
+        hora_fin: "21:30"
+        precio_texto: $48.000 mensuales más $19.000 de matrícula
+        precio_clp: 48000
+        vigente_desde: 2026-09-08
+        vigente_hasta: 2026-12-20
+      - titulo: Taller de teatro impro para adultos
+        dias: [sábado]
+        hora_inicio: "17:00"
+        hora_fin: "19:00"
+        precio_texto: $48.000 mensuales más $19.000 de matrícula
+        precio_clp: 48000
+        vigente_desde: 2026-09-08
+        vigente_hasta: 2026-12-20
+
+  # ---------- PERSONAS MAYORES ----------
+
+  - id: adultomayor_uc
+    nombre: Programa Adulto Mayor UC
+    lugar: Centro de Extensión UC
+    url: https://adultomayor.uc.cl/curso/
+    direccion: Alameda 390
+    comuna: Santiago
+    disciplina: adulto-mayor
+    verificado: 2026-08-24
+    activo: true
+    nota: 'El único programa del catastro dedicado a personas mayores, y publica el
+      dato completo: "Todos los lunes", la hora, el valor y dónde. Solo entran los
+      dos cursos PRESENCIALES del Centro de Extensión UC: los otros siete son por
+      Zoom (una clase sin lugar no tiene nada que hacer en un mapa de Santiago) y
+      el Coro Mayor, que sí es presencial en Campus Oriente, no publica su día.
+      Su sitemap expone las once fichas y está catastrado como fuente automática
+      apagada en fuentes.yaml: la ficha fecha la PRIMERA clase, que ya pasó, así
+      que el pipeline las descartaba enteras como eventos pasados.'
+    talleres:
+      - titulo: Filosofía y cine en diálogo
+        url: https://adultomayor.uc.cl/curso/filosofia-y-cine-en-dialogo/
+        dias: [martes]
+        hora_inicio: "12:00"
+        hora_fin: "13:30"
+        precio_texto: $120.000 el curso
+        precio_clp: 120000
+        vigente_hasta: 2026-12-15
+      - titulo: Juego y memoria cultural
+        url: https://adultomayor.uc.cl/curso/juego-y-memoria-cultural/
+        dias: [lunes]
+        hora_inicio: "15:30"
+        hora_fin: "17:00"
+        precio_texto: $120.000 el curso
+        precio_clp: 120000
+        vigente_hasta: 2026-12-07
+
+  # ---------- CATASTRADOS, TODAVÍA SIN HORARIO PUBLICADO ----------
+  #
+  # Existen, se sabe dónde están y su dirección ya está verificada contra el
+  # índice de OSM. Lo único que falta es el dato que su sitio no publica: qué
+  # día y a qué hora. Se dejan acá —apagados— porque el trabajo de encontrarlos
+  # ya está hecho: completar uno es una llamada de teléfono, no una búsqueda.
+
+  - id: academia_musica_el_centro
+    nombre: Academia de Música El Centro
+    url: https://www.academiaelcentro.cl/
+    direccion: Avenida Libertador Bernardo O'Higgins 142
+    comuna: Santiago
+    disciplina: musica
+    verificado: 2026-08-24
+    activo: false
+    nota: 'Guitarra, bajo, ukelele, saxo, batería, canto, piano, armónica y violín
+      en clases de 60 minutos, a media cuadra del Metro Universidad Católica. Publica
+      el horario de ATENCIÓN de la academia (lunes a viernes 10:00 a 21:00, sábado
+      09:00 a 14:00), no el de cada clase: el alumno arma su hora. Así, no hay taller
+      con día que publicar.'
+
+  - id: escuela_musica_toka
+    nombre: Escuela de Música Toka
+    url: https://toka.cl/
+    direccion: Avenida Tajamar 263
+    comuna: Las Condes
+    disciplina: musica
+    verificado: 2026-08-24
+    activo: false
+    nota: Escuela de música con salas de ensayo. Mismo caso que El Centro, publica horario de atención y no el de cada clase.
+
+  - id: nataliaz_music
+    nombre: Nataliaz Music
+    url: https://www.nataliazmusic.cl/
+    direccion: ''
+    comuna: ''
+    disciplina: musica
+    verificado: 2026-08-24
+    activo: false
+    nota: 'PUBLICA HORARIOS de verdad —talleres los martes 19:00 y sábados 10:00,
+      guitarra los sábados 11:15, $35.000 mensuales por cuatro clases— pero su sitio
+      arma todo con JavaScript y no dice en ninguna parte legible dónde queda. Se
+      enciende apenas alguien confirme la dirección.'
+
+  - id: cultura_la_florida
+    nombre: Corporación de Cultura de La Florida
+    lugar: Centro Cultural La Florida
+    url: https://culturalaflorida.cl/
+    direccion: Serafín Zamora 6792
+    comuna: La Florida
+    disciplina: varios
+    verificado: 2026-08-24
+    activo: false
+    nota: 'Talleres artísticos anuales de cueca, danza urbana, teatro, flamenco, tango,
+      guitarra acústica, pintura acrílica, cómic, literatura y magia, para niños,
+      jóvenes y adultos; matrícula $15.000 y la temporada 2026 empezó el 1 de abril.
+      Sería la primera entrada de La Florida —comuna de 366 mil habitantes con cero
+      talleres en el catastro— pero su sitio responde 403 a cualquier cliente
+      automático y los horarios viven en un afiche. Hay que pedirlos por escrito.'
+
+  - id: cultura_macul
+    nombre: Talleres de Arte y Cultura de Macul
+    url: https://www.munimacul.cl/
+    direccion: Avenida Quilín 3250
+    comuna: Macul
+    disciplina: varios
+    verificado: 2026-08-24
+    activo: false
+    nota: 'Talleres artísticos, musicales, de teatro y de danza para todas las edades,
+      TOTALMENTE GRATUITOS, repartidos en los espacios culturales de la comuna. El
+      municipio anuncia la temporada pero no publica ni disciplinas ni horarios: la
+      única vía es escribir a culturamacul@munimacul.cl. Macul tampoco tiene ningún
+      taller en el catastro.'
+
+  - id: ceramicas_grof
+    nombre: Cerámicas Grof
+    url: https://www.ceramicasgrof.cl/clases/
+    direccion: María de Iglesias 4466
+    comuna: Ñuñoa
+    disciplina: ceramica
+    verificado: 2026-08-24
+    activo: false
+    nota: 'Clases semanales de dos horas y media, diurnas y vespertinas, y un taller
+      abierto de tres horas. La página describe las modalidades pero no publica ni
+      días ni horarios ni precios.'
+
+  - id: taller_los_jacintos
+    nombre: Taller Los Jacintos
+    url: https://www.ceramicagres.cl/
+    direccion: ''
+    comuna: Providencia
+    disciplina: ceramica
+    verificado: 2026-08-24
+    activo: false
+    nota: 'Cerámica gres con cursos mensuales para principiantes y avanzados. El sitio
+      arma el contenido con JavaScript y no entrega ni la dirección ni los horarios
+      en el HTML.'
+
+  - id: taller_ceramica_gres
+    nombre: P! Taller Cerámica Gres
+    url: https://www.tallerceramicagres.com/
+    direccion: Melchor Concha y Toro 143
+    comuna: Providencia
+    disciplina: ceramica
+    verificado: 2026-08-24
+    activo: false
+    nota: Tiene sección de clases, pero los horarios no están publicados en el sitio.
+
+  - id: la_hacedora
+    nombre: La Hacedora
+    url: https://www.lahacedora.cl/taller-ceramica
+    direccion: ''
+    comuna: ''
+    disciplina: ceramica
+    verificado: 2026-08-24
+    activo: false
+    nota: 'PUBLICA HORARIOS (miércoles 10:30 y 18:00, jueves 18:00; $100.000 por cuatro
+      clases) pero NO su dirección: dice "Barrio Italia, Girardi con Caupolicán" y
+      manda la dirección exacta recién al reservar. Girardi cruza Ñuñoa y Providencia,
+      así que la comuna no se puede afirmar. Se enciende apenas alguien confirme
+      dónde queda: los horarios ya están.'
+
+  - id: taller_0180
+    nombre: Taller 0180
+    url: https://www.taller0180.cl/
+    direccion: Malaquías Concha 0180
+    comuna: Providencia
+    disciplina: artes-visuales
+    verificado: 2026-08-24
+    activo: false
+    nota: 'Talleres permanentes de dibujo, pintura al óleo, acuarela, fotografía,
+      figura humana, danza, encuadernación, cómic y grabado: la oferta más ancha
+      que se encontró en un solo lugar. No publica días ni horarios. OJO con el cero
+      inicial de la dirección: Malaquías Concha 0180 y 180 son cuadras distintas.'
+
+  - id: club_de_teatro
+    nombre: Club de Teatro
+    url: https://www.clubdeteatro.cl/
+    direccion: Constitución 75
+    comuna: Providencia
+    disciplina: teatro
+    verificado: 2026-08-24
+    activo: false
+    nota: 'Escuela histórica de actuación (Fernando González). Publica cuatro cursos
+      —interpretación superior, vespertinos, adolescentes y actuación frente a cámara—
+      sin días, horarios ni valores.'
+
+  - id: pulsodanza
+    nombre: Pulsodanza
+    url: https://pulsodanza.cl/
+    direccion: Andacollo 1623
+    comuna: Providencia
+    disciplina: danza
+    verificado: 2026-08-24
+    activo: false
+    nota: Danza contemporánea, moderna y ballet para niños, jóvenes y adultos. Sin horarios publicados.
+
+  - id: la_academia_danza
+    nombre: La Academia — Escuela de Danza
+    url: https://laacademia.cl/
+    direccion: Manuel Montt 500
+    comuna: Providencia
+    disciplina: danza
+    verificado: 2026-08-24
+    activo: false
+    nota: 'Ballet y flamenco. El sitio enlaza "Ver Horarios" y "Ver Valores" a páginas
+      que no cargan su contenido en el HTML.'
+
+  - id: mas_danza_maipu
+    nombre: Academia Más Danza
+    url: http://www.masdanza.cl/
+    direccion: Avenida Sur 1626
+    comuna: Maipú
+    disciplina: danza
+    verificado: 2026-08-24
+    activo: false
+    nota: 'La ÚNICA entrada del catastro en Maipú, una comuna de 520 mil habitantes
+      sin un solo taller publicado. Pre-ballet, salsa, bachata, K-pop, hip hop y
+      taller coreográfico; invita a una clase demostrativa y no publica horarios.'
+
+  - id: camelia_studio
+    nombre: Camelia Studio
+    url: https://cameliastudio.cl/
+    direccion: ''
+    comuna: ''
+    disciplina: danza
+    verificado: 2026-08-24
+    activo: false
+    nota: 'Siete sedes declaradas por ellos mismos —Cumming, Matta, República, Maipú,
+      San Miguel, Providencia y La Florida—, o sea cuatro comunas que hoy no tienen
+      talleres. Gimnasia rítmica, circo, K-pop, ballet y jiu-jitsu. No publica ni
+      las direcciones de cada sede ni los horarios: hay que pedirlos por WhatsApp.'
+
+  - id: ymca_santiago
+    nombre: YMCA Santiago
+    url: https://ymca.cl/programas/adultos-mayores/
+    direccion: Compañía de Jesús 1360
+    comuna: Santiago
+    disciplina: adulto-mayor
+    verificado: 2026-08-24
+    activo: false
+    nota: 'Programa de gimnasio, piscina y talleres dedicado a personas mayores. Los
+      horarios existen pero viven dentro de PDF descargables, no en el HTML.'
