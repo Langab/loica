@@ -1,0 +1,713 @@
+# Catastro de salas de cine de la Región Metropolitana.
+#
+# Lo escribe y refresca scripts/catastro_cines.py, y se edita a mano sin miedo:
+# los campos de la casa (nombre, alias, url, circuito, cartelera) y cualquier
+# entrada con `verificado: true` no los pisa el script.
+#
+#   cadena      cinemark · cineplanet · cinepolis · independiente
+#   circuito    comercial (la sala del mall) · arte (el cine de barrio)
+#   cartelera   de dónde salen los horarios de esta sala:
+#                 jsonld     Cinemark publica ScreeningEvent en su HTML
+#                 semanal    el cine publica la semana en su sitio (Normandie)
+#                 agenda     ya llega por otra fuente del pipeline (CCLM, M100)
+#                 navegador  hay que sacarla con la extracción asistida
+#                            (datos/manual/_prompt_cine.md)
+#                 vacío      no tiene cartelera propia que leer
+#   alias       cómo la nombran OTRAS fuentes; es lo que permite pegar una
+#               función con su sala aunque la ticketera la escriba distinto
+#   verificado  alguien confirmó el nombre mirando el sitio del cine
+#
+# Las coordenadas son el motivo por el que este archivo existe: se guardan una
+# vez y el mapa las usa para siempre, incluso las de las cadenas cuya cartelera
+# no se puede leer.
+
+cines:
+- id: centro-arte-alameda-sala-ceina
+  nombre: Centro Arte Alameda — Sala CEINA
+  cadena: independiente
+  circuito: arte
+  direccion: Arturo Prat 33
+  comuna: Santiago
+  lat: -33.445308
+  lon: -70.650245
+  url: https://centroartealameda.cl/
+  formatos: ''
+  cartelera: agenda
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - Centro Arte Alameda
+  - Centro Arte Alameda / Sala CEINA
+  - CENTRO ARTE ALAMEDA
+  - Sala CEINA
+  - CEINA
+  - Cine Arte Alameda
+  - Arte Alameda
+- id: centro-cine-creacion
+  nombre: Centro de Cine y Creación
+  cadena: independiente
+  circuito: arte
+  direccion: Raulí 571
+  comuna: Santiago
+  lat: -33.449322
+  lon: -70.636581
+  url: https://centrodecineycreacion.cl/
+  formatos: ''
+  cartelera: agenda
+  fuente_geo: osm
+  alias:
+  - CCC
+  - Centro de Cine y Creación
+  verificado: true
+- id: cine-arte-normandie
+  nombre: Cine Arte Normandie
+  cadena: independiente
+  circuito: arte
+  direccion: Tarapacá 1181
+  comuna: Santiago
+  lat: -33.447383
+  lon: -70.652052
+  url: https://normandie.cl/cartelera/
+  formatos: ''
+  cartelera: semanal
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - Cine Arte Normandie
+  - Normandie
+  - Cine Normandie
+- id: cine-mayo
+  nombre: Cine Mayo
+  cadena: independiente
+  circuito: arte
+  direccion: ''
+  comuna: Santiago
+  lat: -33.437032
+  lon: -70.649528
+  url: ''
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - Cine Mayo
+- id: cine-uc
+  nombre: Cine UC
+  cadena: independiente
+  circuito: arte
+  direccion: ''
+  comuna: Santiago
+  lat: -33.441113
+  lon: -70.641241
+  url: ''
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - Cine UC
+  - Centro de Extensión UC
+- id: cineteca-nacional
+  nombre: Cineteca Nacional de Chile
+  cadena: independiente
+  circuito: arte
+  direccion: Plaza de la Ciudadanía 26
+  comuna: Santiago
+  lat: -33.443503
+  lon: -70.653646
+  url: https://www.cclm.cl/cineteca-nacional/
+  formatos: ''
+  cartelera: agenda
+  fuente_geo: osm
+  alias:
+  - Cineteca Nacional
+  - Centro Cultural La Moneda
+  - CCLM
+  verificado: true
+- id: el-biografo
+  nombre: El Biógrafo
+  cadena: independiente
+  circuito: arte
+  direccion: José Victorino Lastarria 181
+  comuna: Santiago
+  lat: -33.438493
+  lon: -70.640977
+  url: https://elbiografo.cl/
+  formatos: ''
+  cartelera: semanal
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - El Biógrafo
+  - Cine Arte El Biógrafo
+  - Biógrafo
+  - El Biografo
+- id: sala-cine-m100
+  nombre: Sala de Cine Matucana 100
+  cadena: independiente
+  circuito: arte
+  direccion: Av. Matucana 100
+  comuna: Estación Central
+  lat: -33.444483
+  lon: -70.679953
+  url: https://www.m100.cl/
+  formatos: ''
+  cartelera: agenda
+  fuente_geo: osm
+  alias:
+  - MATUCANA 100 / CINE
+  - Matucana 100
+  - M100
+  verificado: true
+- id: zoocine
+  nombre: ZooCine
+  cadena: independiente
+  circuito: arte
+  direccion: ''
+  comuna: Santiago
+  lat: -33.429932
+  lon: -70.634156
+  url: ''
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - ZooCine
+  - Zoocine
+- id: cinemark-alto-las-condes
+  nombre: Cinemark Alto Las Condes
+  cadena: cinemark
+  circuito: comercial
+  direccion: Avenida Kennedy 9001, Local 3092, Las Condes
+  comuna: Las Condes
+  lat: -33.391198
+  lon: -70.547522
+  url: https://www.cinemark.cl/cartelera/cinemark-alto-las-condes
+  formatos: 3D | 2D | XD | PRE | DBOX
+  cartelera: jsonld
+  fuente_geo: cinemark
+  verificado: true
+- id: cinemark-gran-avenida
+  nombre: Cinemark Gran Avenida
+  cadena: cinemark
+  circuito: comercial
+  direccion: Gran Avenida José Miguel Carrera 6150, Local 1216
+  comuna: San Miguel
+  lat: -33.511696
+  lon: -70.65934
+  url: https://www.cinemark.cl/cartelera/cinemark-gran-avenida
+  formatos: 3D | 2D
+  cartelera: jsonld
+  fuente_geo: cinemark
+  verificado: true
+- id: cinemark-mallplaza-norte
+  nombre: Cinemark Mallplaza Norte
+  cadena: cinemark
+  circuito: comercial
+  direccion: Av. Américo Vespucio 1737, Local C6, Huechuraba
+  comuna: Huechuraba
+  lat: -33.364387
+  lon: -70.680307
+  url: https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte
+  formatos: 3D | 2D | XD | DBOX
+  cartelera: jsonld
+  fuente_geo: cinemark
+  verificado: true
+- id: cinemark-mallplaza-oeste
+  nombre: Cinemark Mallplaza Oeste
+  cadena: cinemark
+  circuito: comercial
+  direccion: Av. Américo Vespucio 1501, Local CN 100, 200 y 300, Cerrillos
+  comuna: Cerrillos
+  lat: -33.515547
+  lon: -70.721491
+  url: https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste
+  formatos: PALCO | 3D | 2D | PLAY | XD | DBOX
+  cartelera: jsonld
+  fuente_geo: cinemark
+  verificado: true
+- id: cinemark-mallplaza-tobalaba
+  nombre: Cinemark Mallplaza Tobalaba
+  cadena: cinemark
+  circuito: comercial
+  direccion: Av. Camilo Henríquez 3690, Puente Alto
+  comuna: Puente Alto
+  lat: -33.569024
+  lon: -70.560564
+  url: https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba
+  formatos: 2D | XD
+  cartelera: jsonld
+  fuente_geo: cinemark
+  verificado: true
+- id: cinemark-mallplaza-vespucio
+  nombre: Cinemark Mallplaza Vespucio
+  cadena: cinemark
+  circuito: comercial
+  direccion: Av. Vicuña Mackenna 7110, Local 158, La Florida
+  comuna: La Florida
+  lat: -33.51695
+  lon: -70.599966
+  url: https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio
+  formatos: 3D | 2D | PRE | DBOX | IMAX | 4D
+  cartelera: jsonld
+  fuente_geo: cinemark
+  verificado: true
+- id: cinemark-mid-mall-maipu
+  nombre: Cinemark Mid Mall Maipú
+  cadena: cinemark
+  circuito: comercial
+  direccion: Camino a Melipilla 15.900, Maipú
+  comuna: Maipú
+  lat: -33.538726
+  lon: -70.773205
+  url: https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu
+  formatos: 2D | XD
+  cartelera: jsonld
+  fuente_geo: cinemark
+  verificado: true
+- id: cinemark-portal-nunoa
+  nombre: Cinemark Portal Ñuñoa
+  cadena: cinemark
+  circuito: comercial
+  direccion: Av. José Pedro Alessandri 1166, Local 4033, Ñuñoa
+  comuna: Ñuñoa
+  lat: -33.465493
+  lon: -70.600017
+  url: https://www.cinemark.cl/cartelera/cinemark-portal-nunoa
+  formatos: 2D
+  cartelera: jsonld
+  fuente_geo: cinemark
+  verificado: true
+- id: cineplanet-alameda
+  nombre: Cineplanet Alameda
+  cadena: cineplanet
+  circuito: comercial
+  direccion: Avenida Libertador Bernardo O'Higgins
+  comuna: Estación Central
+  lat: -33.452882
+  lon: -70.682639
+  url: https://www.cineplanet.cl/
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - Cineplanet Alameda
+  - Cineplanet
+- id: cineplanet-costanera-center
+  nombre: Cineplanet Costanera Center
+  cadena: cineplanet
+  circuito: comercial
+  direccion: Avenida Andrés Bello 2461
+  comuna: Providencia
+  lat: -33.41824
+  lon: -70.606685
+  url: https://www.cineplanet.cl/
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - Cineplanet Costanera Center
+  - Cineplanet
+- id: cineplanet-florida-center
+  nombre: Cineplanet Florida Center
+  cadena: cineplanet
+  circuito: comercial
+  direccion: Avenida Vicuña Mackenna Oriente 6100
+  comuna: La Florida
+  lat: -33.509389
+  lon: -70.608215
+  url: https://www.cineplanet.cl/
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - Cineplanet Florida Center
+  - Cineplanet
+- id: cineplanet-lo-barnechea-lo-barnechea
+  nombre: Cineplanet Lo Barnechea
+  cadena: cineplanet
+  circuito: comercial
+  direccion: Avenida La Dehesa 1445
+  comuna: Lo Barnechea
+  lat: -33.356937
+  lon: -70.514246
+  url: https://www.cineplanet.cl/
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: false
+  alias:
+  - Cineplanet Lo Barnechea
+  - Cineplanet
+- id: cineplanet-mall-barrio-independencia
+  nombre: Cineplanet Mall Barrio Independencia
+  cadena: cineplanet
+  circuito: comercial
+  direccion: Avenida Independencia 565
+  comuna: Independencia
+  lat: -33.424787
+  lon: -70.654398
+  url: https://www.cineplanet.cl/
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - Cineplanet Mall Barrio Independencia
+  - Cineplanet
+- id: cineplanet-quilin
+  nombre: Cineplanet Quilín
+  cadena: cineplanet
+  circuito: comercial
+  direccion: Avenida Américo Vespucio 3300
+  comuna: Peñalolén
+  lat: -33.487672
+  lon: -70.57702
+  url: https://www.cineplanet.cl/
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - Cineplanet Quilín
+  - Cineplanet
+- id: cinepolis-arauco-maipu
+  nombre: Cinépolis Arauco Maipú
+  cadena: cinepolis
+  circuito: comercial
+  direccion: Avenida Américo Vespucio 399
+  comuna: Maipú
+  lat: -33.482283
+  lon: -70.751675
+  url: https://cinepolis.com/cl
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - Cinépolis Arauco Maipú
+  - Cinépolis
+- id: cinepolis-arauco-quilicura
+  nombre: Cinépolis Arauco Quilicura
+  cadena: cinepolis
+  circuito: comercial
+  direccion: Avenida Bernardo O'Higgins 581
+  comuna: Quilicura
+  lat: -33.369017
+  lon: -70.729747
+  url: https://cinepolis.com/cl
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - Cinépolis Arauco Quilicura
+  - Cinépolis
+- id: cinepolis-casacostanera
+  nombre: Cinépolis Casacostanera
+  cadena: cinepolis
+  circuito: comercial
+  direccion: Avenida Nueva Costanera 3900
+  comuna: Vitacura
+  lat: -33.398404
+  lon: -70.599077
+  url: https://cinepolis.com/cl
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - Cinépolis Casacostanera
+  - Cinépolis
+- id: cinepolis-la-reina-la-reina
+  nombre: Cinépolis La Reina
+  cadena: cinepolis
+  circuito: comercial
+  direccion: Avenida Ossa 655
+  comuna: La Reina
+  lat: -33.447352
+  lon: -70.570946
+  url: https://cinepolis.com/cl
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: false
+  alias:
+  - Cinépolis La Reina
+  - Cinépolis
+- id: cinepolis-maipu-maipu
+  nombre: Cinépolis Maipú
+  cadena: cinepolis
+  circuito: comercial
+  direccion: Avenida Lo Espejo
+  comuna: Maipú
+  lat: -33.523924
+  lon: -70.733424
+  url: https://cinepolis.com/cl
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: false
+  alias:
+  - Cinépolis Maipú
+  - Cinépolis
+- id: cinepolis-mallplaza-egana
+  nombre: Cinépolis Mallplaza Egaña
+  cadena: cinepolis
+  circuito: comercial
+  direccion: Avenida Larraín 5862
+  comuna: La Reina
+  lat: -33.452112
+  lon: -70.569763
+  url: https://cinepolis.com/cl
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - Cinépolis Mallplaza Egaña
+  - Cinépolis
+- id: cinepolis-mallplaza-sur
+  nombre: Cinépolis Mallplaza Sur
+  cadena: cinepolis
+  circuito: comercial
+  direccion: Avenida Presidente Jorge Alessandri Rodríguez 20040
+  comuna: San Bernardo
+  lat: -33.632071
+  lon: -70.710632
+  url: https://cinepolis.com/cl
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - Cinépolis Mallplaza Sur
+  - Cinépolis
+- id: cinepolis-melipilla
+  nombre: Cinépolis Melipilla
+  cadena: cinepolis
+  circuito: comercial
+  direccion: Vicuña Mackenna 01372
+  comuna: Melipilla
+  lat: -33.680039
+  lon: -71.185321
+  url: https://cinepolis.com/cl
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - Cinépolis Melipilla
+  - Cinépolis
+- id: cinepolis-melipilla-serrano-395
+  nombre: Cinépolis Melipilla (Serrano 395)
+  cadena: cinepolis
+  circuito: comercial
+  direccion: Serrano 395
+  comuna: Melipilla
+  lat: -33.684391
+  lon: -71.213087
+  url: https://cinepolis.com/cl
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: false
+  alias:
+  - Cinépolis Melipilla
+  - Cinépolis
+- id: cinepolis-parque-arauco
+  nombre: Cinépolis Parque Arauco
+  cadena: cinepolis
+  circuito: comercial
+  direccion: Avenida Presidente Kennedy 5413
+  comuna: Las Condes
+  lat: -33.402063
+  lon: -70.577962
+  url: https://cinepolis.com/cl
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - Cinépolis Parque Arauco
+  - Cinépolis
+- id: cinepolis-paseo-los-dominicos
+  nombre: Cinépolis Paseo Los Dominicos
+  cadena: cinepolis
+  circuito: comercial
+  direccion: Camino El Alba 11969
+  comuna: Las Condes
+  lat: -33.401926
+  lon: -70.514487
+  url: https://cinepolis.com/cl
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - Cinépolis Paseo Los Dominicos
+  - Cinépolis
+- id: cinepolis-paseo-los-trapenses
+  nombre: Cinépolis Paseo Los Trapenses
+  cadena: cinepolis
+  circuito: comercial
+  direccion: Avenida Los Trapenses 3515
+  comuna: Lo Barnechea
+  lat: -33.343366
+  lon: -70.54443
+  url: https://cinepolis.com/cl
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - Cinépolis Paseo Los Trapenses
+  - Cinépolis
+- id: cinepolis-paseo-san-bernardo
+  nombre: Cinépolis Paseo San Bernardo
+  cadena: cinepolis
+  circuito: comercial
+  direccion: Eyzaguirre
+  comuna: San Bernardo
+  lat: -33.595315
+  lon: -70.707047
+  url: https://cinepolis.com/cl
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - Cinépolis Paseo San Bernardo
+  - Cinépolis
+- id: cinepolis-plaza-los-dominicos
+  nombre: Cinépolis Plaza Los Dominicos
+  cadena: cinepolis
+  circuito: comercial
+  direccion: Avenida Padre Hurtado Sur 875
+  comuna: Las Condes
+  lat: -33.415071
+  lon: -70.541222
+  url: https://cinepolis.com/cl
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - Cinépolis Plaza Los Dominicos
+  - Cinépolis
+- id: cinepolis-portal-exposicion
+  nombre: Cinépolis Portal Exposición
+  cadena: cinepolis
+  circuito: comercial
+  direccion: ''
+  comuna: Estación Central
+  lat: -33.452941
+  lon: -70.678365
+  url: https://cinepolis.com/cl
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - Cinépolis Portal Exposición
+  - Cinépolis
+- id: cinepolis-puente-alto-puente-alto
+  nombre: Cinépolis Puente Alto
+  cadena: cinepolis
+  circuito: comercial
+  direccion: ''
+  comuna: Puente Alto
+  lat: -33.599857
+  lon: -70.574942
+  url: https://cinepolis.com/cl
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: false
+  alias:
+  - Cinépolis Puente Alto
+  - Cinépolis
+- id: cinepolis-puente-alto-independencia
+  nombre: Cinépolis Puente Alto (Independencia)
+  cadena: cinepolis
+  circuito: comercial
+  direccion: Independencia
+  comuna: Puente Alto
+  lat: -33.600921
+  lon: -70.579137
+  url: https://cinepolis.com/cl
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: false
+  alias:
+  - Cinépolis Puente Alto
+  - Cinépolis
+- id: cinepolis-terrazas-maipu
+  nombre: Cinépolis Terrazas Maipú
+  cadena: cinepolis
+  circuito: comercial
+  direccion: ''
+  comuna: Maipú
+  lat: -33.500685
+  lon: -70.75646
+  url: https://cinepolis.com/cl
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - Cinépolis Terrazas Maipú
+  - Cinépolis
+- id: cinepolis-vivo-imperio
+  nombre: Cinépolis Vivo Imperio
+  cadena: cinepolis
+  circuito: comercial
+  direccion: Huérfanos
+  comuna: Santiago
+  lat: -33.43956
+  lon: -70.648549
+  url: https://cinepolis.com/cl
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - Cinépolis Vivo Imperio
+  - Cinépolis
+- id: cinepolis-vivo-outlet-la-florida
+  nombre: Cinépolis Vivo Outlet La Florida
+  cadena: cinepolis
+  circuito: comercial
+  direccion: Rojas Magallanes 1856
+  comuna: La Florida
+  lat: -33.535086
+  lon: -70.571017
+  url: https://cinepolis.com/cl
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - Cinépolis Vivo Outlet La Florida
+  - Cinépolis
+- id: muvix-cinema
+  nombre: MUVIX Cinema
+  cadena: independiente
+  circuito: comercial
+  direccion: Avenida Alcalde Carlos Valdovinos 200
+  comuna: San Joaquín
+  lat: -33.486801
+  lon: -70.62737
+  url: https://muvix.cl/
+  formatos: ''
+  cartelera: navegador
+  fuente_geo: osm
+  verificado: true
+  alias:
+  - MUVIX
+  - Muvix Cinema

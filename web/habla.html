@@ -33,7 +33,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=23">
+<link rel="stylesheet" href="loica.css?v=24">
 <style>
   /* ============================================================
      HABLA CON LA LOICA — v2
@@ -435,7 +435,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
-<script src="loica.js?v=23"></script>
+<script src="loica.js?v=24"></script>
 <script src="recomendador.js?v=24"></script>
 <script>
 /* ============================================================
@@ -455,6 +455,7 @@ const GUIAS = {
   pinguino:  {tono:"var(--c-charla)",    suave:"var(--c-charla-suave)",     tinta:"var(--c-charla-tinta)",    art:{es:"el ", pt:"o "}},
   guaren:    {tono:"var(--c-descuento)", suave:"var(--c-descuento-suave)",  tinta:"var(--c-descuento-tinta)", art:{es:"el ", pt:"o "}},
   degu:      {tono:"var(--verde-700)",   suave:"var(--c-libre-suave)",      tinta:"var(--c-libre-tinta)",     art:{es:"el ", pt:"o "}},
+  cabra:     {tono:"var(--c-cine)",      suave:"var(--c-cine-suave)",       tinta:"var(--c-cine-tinta)",      art:{es:"la ", pt:"a "}},
 };
 const elenco = c => ELENCO.find(e => e.clave === c) || ELENCO[0];
 const hexDe = c => elenco(c).hex;

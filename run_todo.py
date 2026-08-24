@@ -17,10 +17,11 @@ pisaban entre ellos. Acá van en la misma corrida y en el mismo commit.
     python3 run_todo.py --fuente gam     # una sola fuente (se pasa a run_diario)
     python3 run_todo.py --forzar         # publica aunque caiga el volumen
 
-La corrida completa son seis pasos: extraer eventos, extraer descuentos,
-exportar el sitio, revisar la extracción (informe + colas de corrección en
-datos/revision/, no bloquea), doble check (verificar_web.py, SÍ bloquea) y
-publicar.
+La corrida completa son ocho pasos: extraer eventos, extraer descuentos,
+exportar el sitio, armar la cartelera de cine (va después de exportar porque
+lee web/eventos.json), revisar la extracción (informe + colas de corrección en
+datos/revision/, no bloquea), el diagnóstico, doble check (verificar_web.py,
+SÍ bloquea) y publicar.
 
 Después del push, GitHub Actions publica `web/` en Pages: no hay que hacer
 nada más.
@@ -53,14 +54,15 @@ RAIZ = Path(__file__).resolve().parent
 # historial del diagnóstico y las colas de revisión. Un runner nuevo cada
 # día no recuerda nada; lo que no esté en git mañana no existe.
 RUTAS_PUBLICABLES = ["web/eventos.json", "web/talleres.json",
-                     "web/descuentos.json", "web/e", "datos/manual",
+                     "web/descuentos.json", "web/cine.json",
+                     "web/e", "datos/manual",
                      "datos/eventos.jsonl", "datos/coordenadas.json",
                      "datos/historial_corridas.json", "datos/revision"]
 
 # Archivos que cada corrida regenera enteros: en un choque entre dos corridas
 # no hay nada que fusionar, gana la más nueva.
 GENERADOS = {"web/eventos.json", "web/talleres.json", "web/descuentos.json",
-             "datos/eventos.jsonl", "datos/coordenadas.json",
+             "web/cine.json", "datos/eventos.jsonl", "datos/coordenadas.json",
              "datos/historial_corridas.json"}
 PREFIJOS_GENERADOS = ("web/e/", "datos/revision/")
 
@@ -81,7 +83,7 @@ def _git(*args: str, capturar: bool = True) -> subprocess.CompletedProcess:
 
 
 def paso_extraer(extra: list[str]) -> bool:
-    return _correr([sys.executable, "run_diario.py", *extra], "1/7  Eventos")
+    return _correr([sys.executable, "run_diario.py", *extra], "1/8  Eventos")
 
 
 def paso_descuentos(extra: list[str]) -> bool:
@@ -90,19 +92,37 @@ def paso_descuentos(extra: list[str]) -> bool:
     Son un catastro aparte: que Bci cambie su JSON no es razón para dejar sin
     actualizar la agenda de eventos, que es el corazón del proyecto.
     """
-    if not _correr([sys.executable, "run_descuentos.py", *extra], "2/7  Descuentos"):
+    if not _correr([sys.executable, "run_descuentos.py", *extra], "2/8  Descuentos"):
         print("    Se sigue igual: los eventos no dependen de esto.")
     return True
 
 
 def paso_exportar() -> bool:
-    return _correr([sys.executable, "exportar_web.py"], "3/7  Exportar el sitio")
+    return _correr([sys.executable, "exportar_web.py"], "3/8  Exportar el sitio")
+
+
+def paso_cine(extra: list[str]) -> bool:
+    """La cartelera de cine. NO aborta la corrida si falla.
+
+    Es un catastro aparte, como los descuentos: que Cinemark cambie su HTML no
+    es razón para dejar sin actualizar la agenda, que es el corazón del
+    proyecto. Y va DESPUÉS de exportar porque una de sus cuatro vías lee
+    `web/eventos.json` para recoger las funciones de la Cineteca, de M100 y
+    del Centro Arte Alameda, que ya llegan por las fuentes de siempre.
+
+    Cuando trae menos funciones que su piso, run_cine.py no escribe el archivo
+    y devuelve 1: la página se queda con la cartelera de ayer, que es vieja
+    pero cierta, en vez de quedar en blanco.
+    """
+    if not _correr([sys.executable, "run_cine.py", *extra], "4/8  Cartelera de cine"):
+        print("    Se sigue igual: web/cine.json conserva la corrida anterior.")
+    return True
 
 
 def paso_revisar() -> bool:
     """La revisión del estado de extracción NO bloquea: es el insumo de
     curaduría (informe + colas de corrección en datos/revision/)."""
-    if not _correr([sys.executable, "revisar_extraccion.py"], "4/7  Revisión"):
+    if not _correr([sys.executable, "revisar_extraccion.py"], "5/8  Revisión"):
         print("    Se sigue igual: la revisión informa, no bloquea.")
     return True
 
@@ -113,7 +133,7 @@ def paso_diagnostico() -> bool:
     Va después de exportar porque compara contra `web/eventos.json`, y antes
     del doble check porque cuando el doble check corta la publicación es
     JUSTO cuando uno quiere abrir el diagnóstico a ver qué se cayó."""
-    if not _correr([sys.executable, "informe_corrida.py"], "5/7  Diagnóstico"):
+    if not _correr([sys.executable, "informe_corrida.py"], "6/8  Diagnóstico"):
         print("    Se sigue igual: el diagnóstico informa, no bloquea.")
     return True
 
@@ -122,7 +142,7 @@ def paso_verificar(forzar: bool) -> bool:
     """El doble check SÍ bloquea: si el sitio está roto o vacío, no hay push."""
     extra = ["--forzar"] if forzar else []
     return _correr([sys.executable, "verificar_web.py", *extra],
-                   "6/7  Doble check")
+                   "7/8  Doble check")
 
 
 def _resolver_generados() -> bool:
@@ -167,7 +187,7 @@ def _resolver_generados() -> bool:
 
 def paso_publicar() -> bool:
     """Comitea y sube SOLO la salida del pipeline."""
-    print(f"\n{'=' * 62}\n  7/7  Publicar\n{'=' * 62}", flush=True)
+    print(f"\n{'=' * 62}\n  8/8  Publicar\n{'=' * 62}", flush=True)
 
     # La base es local; lo que se publica es su copia. run_diario ya la
     # volcó al terminar, pero con --solo-publicar no corrió: se vuelca acá
@@ -266,6 +286,8 @@ def main() -> int:
         print("\n✗ El export falló — no se publica nada.")
         return 1
 
+    paso_cine([a for a in (["--sin-cache"] if args.sin_cache else [])
+               + (["-v"] if args.verboso else [])])
     paso_revisar()
     paso_diagnostico()
 

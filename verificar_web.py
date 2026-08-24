@@ -27,10 +27,14 @@ import sys
 from datetime import datetime, timedelta
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from loica.modelo import es_url_publica  # noqa: E402
+
 RAIZ = Path(__file__).resolve().parent
 RUTA_EVENTOS = RAIZ / "web" / "eventos.json"
 RUTA_TALLERES = RAIZ / "web" / "talleres.json"
 RUTA_DESCUENTOS = RAIZ / "web" / "descuentos.json"
+RUTA_CINE = RAIZ / "web" / "cine.json"
 DIR_FICHAS = RAIZ / "web" / "e"
 
 # Umbrales. La base hoy ronda los 2.500 eventos y 650 descuentos; estos pisos
@@ -40,6 +44,11 @@ MIN_EVENTOS = 100
 MIN_TALLERES = 200        # el catálogo municipal ronda los 1.600; menos que
                           # esto es una fuente caída, no una semana tranquila
 MIN_DESCUENTOS = 100          # el mismo piso que usa .github/workflows/descuentos.yml
+# Ocho salas de Cinemark dan del orden de 600 funciones en cuatro días. Este es
+# el piso de AVISO, no de error: run_cine.py ya tiene el suyo y se niega a
+# escribir el archivo por debajo, así que si acá llega poco es que el archivo
+# es viejo, y un archivo viejo se publica igual — es dato cierto de ayer.
+MIN_FUNCIONES_CINE = 120
 MAX_CAIDA = 0.5               # publicar menos de la mitad que ayer requiere --forzar
 MIN_PROPORCION_PIN = 0.6      # al menos 60% de los eventos con pin en el mapa
 FRESCURA_HORAS = 24
@@ -355,6 +364,66 @@ def verificar_correcciones(errores: list[str]) -> None:
             errores.append(f"config/correcciones/{ruta.name}: falta la clave raíz.")
 
 
+def verificar_cine(errores: list[str], avisos: list[str]) -> None:
+    """La cartelera de cine.
+
+    Es un catastro aparte —lo escribe run_cine.py, no exportar_web.py— así que
+    su ausencia es un AVISO y no un error: la corrida pudo haber saltado el
+    paso. Lo que sí es error es publicarla rota, y hay dos maneras concretas
+    de romperla que esta página no perdona:
+
+    · Un horario sin link de compra o con un link que no es http(s). La página
+      promete dejar al usuario en la boletería del cine; un botón que no lleva
+      a ninguna parte es peor que no mostrar la función.
+    · Una función que apunta a una sala que no está en el catastro. El mapa la
+      dibujaría en ninguna parte, o peor, la lista la escondería sin decirlo.
+    """
+    if not RUTA_CINE.exists():
+        avisos.append("No existe web/cine.json (¿la corrida saltó run_cine.py?)")
+        return
+    try:
+        datos = json.loads(RUTA_CINE.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as e:
+        errores.append(f"web/cine.json no es JSON válido: {e}")
+        return
+
+    cines = datos.get("cines") or []
+    peliculas = datos.get("peliculas") or []
+    if not cines:
+        errores.append("web/cine.json sin catastro de salas: el mapa quedaría vacío.")
+        return
+
+    ids = {c.get("id") for c in cines}
+    sin_coordenada = [c["nombre"] for c in cines
+                      if c.get("lat") is None or c.get("lon") is None]
+    if sin_coordenada:
+        errores.append(f"{len(sin_coordenada)} salas sin coordenada "
+                       f"({', '.join(sin_coordenada[:3])}): no salen en el mapa, "
+                       "que es la mitad de esa página.")
+
+    funciones = sum(len(p.get("funciones") or []) for p in peliculas)
+    if peliculas and funciones < MIN_FUNCIONES_CINE:
+        avisos.append(f"Solo {funciones} funciones de cine (se esperan al menos "
+                      f"{MIN_FUNCIONES_CINE}): revisa run_cine.py.")
+
+    huerfanas = rotas = 0
+    for peli in peliculas:
+        if not peli.get("titulo"):
+            errores.append("Una película sin título en web/cine.json")
+        for f in peli.get("funciones") or []:
+            if f.get("cine") not in ids:
+                huerfanas += 1
+            destino = f.get("url") or ""
+            if destino and not es_url_publica(destino):
+                rotas += 1
+    if huerfanas:
+        errores.append(f"{huerfanas} funciones apuntan a una sala que no está "
+                       "en el catastro: quedarían sin pin y sin tarjeta.")
+    if rotas:
+        errores.append(f"{rotas} funciones con un link de compra que no es "
+                       "http(s) — no puede llegar a un href.")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Doble check antes del push")
     parser.add_argument("--forzar", action="store_true",
@@ -368,6 +437,7 @@ def main() -> int:
     ids |= verificar_talleres(errores, avisos)
     verificar_volumen_y_fichas(errores, avisos, args.forzar, ids)
     verificar_descuentos(errores, avisos)
+    verificar_cine(errores, avisos)
 
     for a in avisos[:20]:
         print(f"  aviso: {a}")

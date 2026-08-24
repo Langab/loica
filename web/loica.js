@@ -127,6 +127,22 @@ const ACC = {
     <g class="p-borla"><path d="M12.2 1.6c2.6.5 4.9 1.7 5.8 3.4v3.1" fill="none" stroke="${AMARILLO}" stroke-width="1" stroke-linecap="round"/>
     <circle cx="18" cy="8.9" r="1.05" fill="${AMARILLO}" stroke="${k}" stroke-width=".7"/></g></g>`,
 
+  /* La Cabra entra con los lentes 3D puestos. Es el accesorio que más
+     trabaja del elenco: a 22px nadie distingue una cabra de un pudú, pero
+     dos lentes —uno rojo y uno cian— dicen "cine" antes de que se lea la
+     etiqueta. Los cristales van translúcidos y por debajo, así que los ojos
+     siguen viéndose y siguen parpadeando: con lentes opacos la cara quedaba
+     muerta. */
+  cabra: k => `<g class="p-acc p-lentes">
+    <path d="M3.4 10.9h17.2" stroke="${k}" stroke-width="1.3" stroke-linecap="round"/>
+    <rect x="4.6" y="10.1" width="6.2" height="4.6" rx="1.2" fill="${ROJO}" fill-opacity=".5"
+          stroke="${k}" stroke-width="1.2"/>
+    <rect x="13.2" y="10.1" width="6.2" height="4.6" rx="1.2" fill="#2FBBD1" fill-opacity=".5"
+          stroke="${k}" stroke-width="1.2"/>
+    <path d="M10.8 11.6h2.4" stroke="${k}" stroke-width="1.2" stroke-linecap="round"/>
+    <path d="M4.6 11.4 3 10.4M19.4 11.4 21 10.4" stroke="${k}" stroke-width="1.2"
+          stroke-linecap="round"/></g>`,
+
   /* El Quiltro ya tiene puesta la servilleta: estaba afuera del local
      antes que tú. La lengua le cae encima. */
   quiltro: k => `<g class="p-acc">
@@ -266,6 +282,30 @@ const CARITAS = {
     <path class="p-lengua" d="M10.8 18.9h2.4v2.5a1.2 1.2 0 0 1-2.4 0z"
           fill="${ROSA}" stroke="${k}" stroke-width="1.1" stroke-linejoin="round"/>`,
 
+  /* La Cabra: cuernos hacia atrás, orejas caídas al costado y la chivita.
+     Los tres rasgos juntos son lo que la separa del Pudú, que es el otro
+     herbívoro chico del elenco: el pudú lleva astas rectas y cortas hacia
+     ARRIBA y orejas redondas; ésta lleva cuernos curvos hacia ATRÁS, orejas
+     largas hacia los lados y barba. La cara va más alta que ancha porque una
+     cabra tiene el hocico largo, y eso se nota aunque el dibujo sea chico. */
+  cabra: (c, k, p, a) => `
+    <path d="M9.3 7.2C8.4 4.4 7.2 2.6 5.6 1.8M14.7 7.2c.9-2.8 2.1-4.6 3.7-5.4"
+          fill="none" stroke="${k}" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M9.3 7.2C8.4 4.4 7.2 2.6 5.6 1.8M14.7 7.2c.9-2.8 2.1-4.6 3.7-5.4"
+          fill="none" stroke="#C7B9A4" stroke-width="1.1" stroke-linecap="round"/>
+    ${oreja("i", `<ellipse cx="4.5" cy="11.6" rx="3.4" ry="1.9" transform="rotate(20 4.5 11.6)" fill="${c}" stroke="${k}" stroke-width="1.5"/>
+    <ellipse cx="4.7" cy="11.7" rx="1.7" ry=".85" transform="rotate(20 4.7 11.7)" fill="${ROSA}" opacity=".6"/>`)}
+    ${oreja("d", `<ellipse cx="19.5" cy="11.6" rx="3.4" ry="1.9" transform="rotate(-20 19.5 11.6)" fill="${c}" stroke="${k}" stroke-width="1.5"/>
+    <ellipse cx="19.3" cy="11.7" rx="1.7" ry=".85" transform="rotate(-20 19.3 11.7)" fill="${ROSA}" opacity=".6"/>`)}
+    <path d="M12 5.9c-4.2 0-7.1 2.4-7.1 5.9 0 2.4.7 4.5 1.9 6.1C8.1 19.7 9.9 21 12 21s3.9-1.3 5.2-3.1c1.2-1.6 1.9-3.7 1.9-6.1 0-3.5-2.9-5.9-7.1-5.9z"
+          fill="${c}" stroke="${k}" stroke-width="1.6" stroke-linejoin="round"/>
+    <ellipse cx="12" cy="17.6" rx="3.5" ry="2.9" fill="${CREMA}"/>
+    ${ojos(8.8, 15.2, 12.3, 1.75, p)}
+    <ellipse cx="12" cy="16.6" rx="1.5" ry="1.05" fill="${OJO}"/>
+    <path class="p-chiva" d="M10.4 20.2h3.2l-1.6 3.6z" fill="${CREMA}" stroke="${k}"
+          stroke-width="1.1" stroke-linejoin="round"/>
+    ${a ? ACC.cabra(k) : ""}`,
+
   pinguino: (c, k, p, a) => `
     <circle cx="12" cy="12.2" r="8.6" fill="${c}" stroke="${k}" stroke-width="1.6"/>
     <path d="M7 6.2c-2 1.9-2.6 4.7-1.9 7.2.8 2.9 3.5 4.9 6.9 4.9s6.1-2 6.9-4.9c.7-2.5.1-5.3-1.9-7.2"
@@ -300,6 +340,15 @@ const PROPS = {
     <rect x="22.4" y="28.2" width="9.4" height="7.4" rx="1" fill="${CREMA}" stroke="${k}" stroke-width="1.5"/>
     <path d="M25.2 30.6h3.8l-2.6 3.6" fill="none" stroke="${OJO}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
     <circle cx="23.7" cy="29.4" r=".55" fill="${k}"/><circle cx="30.5" cy="29.4" r=".55" fill="${k}"/></g>`,
+  /* La caja de cabritas, que es el chiste entero: en Chile a las palomitas
+     se les dice cabritas. Va al costado, del tamaño en que se lee a 48px:
+     rayas rojas y crema, y los granos asomando arriba. */
+  cabra: k => `<g class="p-prop p-cabritas" transform="translate(35.4 28.6) scale(.88)">
+    <path d="M-6 3.4 -4.6 15.4h9.2L6 3.4z" fill="${CREMA}" stroke="${k}" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M-4.4 3.4 -3.4 15.4M-1 3.4v12M2.4 3.4l.6 12" stroke="${ROJO}" stroke-width="1.9" opacity=".9"/>
+    <circle cx="-3.4" cy="2.2" r="2.5" fill="${AMARILLO}" stroke="${k}" stroke-width="1.3"/>
+    <circle cx=".6" cy=".6" r="2.7" fill="${CREMA}" stroke="${k}" stroke-width="1.3"/>
+    <circle cx="4.2" cy="2.4" r="2.3" fill="${AMARILLO}" stroke="${k}" stroke-width="1.3"/></g>`,
   pinguino: k => `<g class="p-prop p-libro" transform="rotate(-8 12 32)">
     <rect x="7.2" y="27.2" width="8.4" height="10.6" rx="1" fill="${OJO}" stroke="${k}" stroke-width="1.5"/>
     <rect x="8.8" y="27.2" width="6.8" height="10.6" fill="${CREMA}" stroke="${k}" stroke-width="1.2"/>
@@ -345,6 +394,10 @@ const COLAS = {
   chungungo:  (c, k) => `<path d="M38.2 29.2c4.2-.2 7.6 2.5 8.8 6.6.3 1-.8 1.9-1.7 1.3-3.3-2-5.9-4.7-7.1-7.9z"
                           fill="${c}" stroke="${k}" stroke-width="1.8" stroke-linejoin="round"/>`,
   guaren:     (c, k) => cola("M37.6 32.6c5.4.4 8.8-2.6 10.2-9", PIEL, k, 4),
+  /* La cola de la cabra es corta y parada, no cuelga: es medio centímetro de
+     pelo apuntando al cielo y sin eso el cuerpo se lee como un pudú. */
+  cabra:      (c, k) => `<path d="M38.4 26.4c.6-2.6 2.4-3.8 3.8-2.8 1.4 1 1.2 3.2-.4 4.6z"
+                          fill="${c}" stroke="${k}" stroke-width="1.8" stroke-linejoin="round"/>`,
   quiltro:    (c, k) => cola("M37.6 29c4-1.2 6.4-4.2 6.6-8 .1-2.1-1.3-3.4-3-3-1.6.4-2.5 1.9-2.3 3.6", c, k, 5),
 };
 
@@ -363,6 +416,9 @@ const CUADRUPEDOS = {
                patas:"M20.8 39.4v4.8M26.6 39.8v4.4M33.2 39.6v4.6M38.2 38.6v5.4", extra:""},
   guaren:     {cuerpo:[28.4, 31.8, 12, 8], grosor:2.8, cabeza:"3.2 4.6",
                patas:"M21.8 39.2v5.4M27.4 39.6v5M33.4 39.2v5.4M38.2 38.4v6", extra:""},
+  cabra:      {cuerpo:[28.6, 31, 11.6, 8.4], grosor:2.9, cabeza:"2.5 3.4",
+               patas:"M21.6 38.6v6M27.4 39v5.6M33.6 38.6v6M38.4 37.8v6.8",
+               extra:`<ellipse cx="27.4" cy="35" rx="7.4" ry="3.1" fill="${CREMA}" opacity=".92"/>`},
   quiltro:    {cuerpo:[28.4, 31.6, 12.4, 8.8], grosor:3.5, cabeza:"2.5 3.4",
                patas:"M21.8 39.2v5.2M27.6 39.6v4.8M33.8 39.2v5.2M38.4 38.4v6",
                extra:`<ellipse cx="28.4" cy="37.4" rx="8.2" ry="3.4" fill="${CREMA}" opacity=".92"/>`},
@@ -446,7 +502,7 @@ const CATEGORIAS = {
   musica:    {mascota:"condor",     color:"var(--c-musica)", tintaVar:"var(--c-musica-tinta)",  hex:"#DE3A1E", tinta:"#A82B12", es:"Música",    en:"Music",    pt:"Música"},
   teatro:    {mascota:"chinchilla", color:"var(--c-cultura)", tintaVar:"var(--c-cultura-tinta)", hex:"#1B6FD1", tinta:"#1A5599", es:"Teatro",    en:"Theatre",  pt:"Teatro"},
   arte:      {mascota:"chinchilla", color:"var(--c-cultura)", tintaVar:"var(--c-cultura-tinta)", hex:"#1B6FD1", tinta:"#1A5599", es:"Arte",      en:"Art",      pt:"Arte"},
-  cine:      {mascota:"chinchilla", color:"var(--c-cultura)", tintaVar:"var(--c-cultura-tinta)", hex:"#1B6FD1", tinta:"#1A5599", es:"Cine",      en:"Film",     pt:"Cinema"},
+  cine:      {mascota:"cabra",      color:"var(--c-cine)",   tintaVar:"var(--c-cine-tinta)",    hex:"#A51D99", tinta:"#7E1574", es:"Cine",      en:"Film",     pt:"Cinema"},
   charla:    {mascota:"pinguino",   color:"var(--c-charla)",  tintaVar:"var(--c-charla-tinta)",  hex:"#C42B67", tinta:"#8F1C4A", es:"Charlas",   en:"Talks",    pt:"Palestras"},
   clases:    {mascota:"chincol",    color:"var(--c-clases)", tintaVar:"var(--c-clases-tinta)",  hex:"#F08800", tinta:"#8A5000", es:"Clases",    en:"Classes",  pt:"Aulas"},
   feria:     {mascota:"chincol",    color:"var(--c-clases)", tintaVar:"var(--c-clases-tinta)",  hex:"#F08800", tinta:"#8A5000", es:"Ferias",    en:"Markets",  pt:"Feiras"},
@@ -552,6 +608,12 @@ const ELENCO = [
                                                        "With those ears she could hear the prompter from the back row. She walked into a theatre just to confirm the actor was getting it wrong, she was right, and she never left. She claps loudly and slightly late, as one should."],
                                                        pt:["Chinchila","Cultura","Teatro, cinema, arte e palestras. Escuta mais do que fala.",
                                                        "Com aquelas orelhas ouvia o ponto desde a última fila. Entrou num teatro só para confirmar que o ator estava errando, tinha razão, e nunca mais saiu. Aplaude forte e atrasada, como manda o figurino."]},
+  {clave:"cabra",      hex:"#A51D99", tinta:"#7E1574", es:["Cabra","Cine","Las cabritas son suyas. Sabe qué dan hoy, en qué sala y a qué hora.",
+                                                       "En Chile a las palomitas les dicen cabritas, y ella se lo tomó personal. Entró a una función a reclamar por el nombre, se sentó en la última fila y no salió más. Ahora llega veinte minutos antes, se sienta al medio y se queda hasta que terminan los créditos, por si acaso."],
+                                                       en:["Goat","Cinema","The popcorn is hers. She knows what's on today, in which screen and at what time.",
+                                                       "In Chile popcorn is called cabritas — little goats — and she took it personally. She walked into a screening to complain about the name, sat in the back row and never left. Now she turns up twenty minutes early, takes the middle seat and stays through the credits, just in case."],
+                                                       pt:["Cabra","Cinema","A pipoca é dela. Sabe o que está passando hoje, em qual sala e a que horas.",
+                                                       "No Chile a pipoca se chama cabritas — cabrinhas — e ela levou para o lado pessoal. Entrou numa sessão para reclamar do nome, sentou na última fila e nunca mais saiu. Agora chega vinte minutos antes, senta no meio e fica até o fim dos créditos, vai que aparece algo."]},
   {clave:"chincol",    hex:"#F08800", tinta:"#8A5000", es:["Chincol","Barrio","Clases, talleres y ferias. El pájaro más de barrio que hay.",
                                                        "Nunca se ha ido del barrio. Ni de vacaciones. Conoce a la señora de la esquina, sabe qué día pasa la feria y una vez tomó un taller de mimbre solo porque era en la sede de la junta de vecinos y había once para todos."],
                                                        en:["Chincol","Neighbourhood","Classes, workshops and markets. The most local bird there is.",
@@ -600,7 +662,7 @@ const ELENCO = [
 const TEXTOS = {
   es:{
     lema:"Santiago está pasando",
-    mapa:"Mapa", habla:"Habla", blog:"Blog", comer:"Dónde comer", ninos:"Niños", mas18:"+18", calendario:"Calendario", agregar:"Agrega tu evento", nosotros:"Quién hace esto",
+    mapa:"Mapa", habla:"Habla", blog:"Blog", cine:"Cine", comer:"Dónde comer", ninos:"Niños", mas18:"+18", calendario:"Calendario", agregar:"Agrega tu evento", nosotros:"Quién hace esto",
     eventos:"eventos", evento:"evento", gratis:"Gratis",
     hoy:"Hoy", manana:"Mañana", semana:"7 días", finde:"Finde",
     cuandoLargo:{hoy:"Hoy", manana:"Mañana", semana:"En estos 7 días", finde:"Este fin de semana", todo:"Todos"},
@@ -636,6 +698,7 @@ const TEXTOS = {
     pGratisT:"gratis", pGratisD:"panoramas que no cuestan nada",
     pTotalD:"panoramas vigentes", pFuentesD:"fuentes revisadas cada mañana",
     pCierreT:"¿Organizas algo?", pCierreD:"Si tu evento es abierto y pasa en Santiago, cabe acá. No cobramos por aparecer.",
+    pCineT:"Cine", pCineD:"Qué dan hoy y qué sala te queda cerca, del mall al cine arte.",
     pTallerT:"Talleres y clases", pTallerD:"Lo que se toma todas las semanas: natación, yoga, cerámica.",
     pDctoT:"Los descuentos", pDctoD:"Dónde comer más barato hoy, según tu tarjeta.",
     pDctoCifra:"descuentos de banco vigentes",
@@ -669,7 +732,7 @@ const TEXTOS = {
   },
   en:{
     lema:"Santiago is happening",
-    mapa:"Map", habla:"Talk", blog:"Blog", comer:"Where to eat", ninos:"Kids", mas18:"18+", calendario:"Calendar", agregar:"Add your event", nosotros:"Who makes this",
+    mapa:"Map", habla:"Talk", blog:"Blog", cine:"Cinema", comer:"Where to eat", ninos:"Kids", mas18:"18+", calendario:"Calendar", agregar:"Add your event", nosotros:"Who makes this",
     eventos:"events", evento:"event", gratis:"Free",
     hoy:"Today", manana:"Tomorrow", semana:"7 days", finde:"Weekend",
     cuandoLargo:{hoy:"Today", manana:"Tomorrow", semana:"Within 7 days", finde:"This weekend", todo:"All"},
@@ -705,6 +768,7 @@ const TEXTOS = {
     pGratisT:"free", pGratisD:"events that cost nothing",
     pTotalD:"events on right now", pFuentesD:"sources checked every morning",
     pCierreT:"Running something?", pCierreD:"If your event is open to the public and happens in Santiago, it belongs here. We don't charge for it.",
+    pCineT:"Cinema", pCineD:"What is on today and which screen is near you, from the mall to the arthouse.",
     pTallerT:"Workshops & classes", pTallerD:"The weekly stuff: swimming, yoga, pottery.",
     pDctoT:"The discounts", pDctoD:"Where to eat cheaper today, depending on your card.",
     pDctoCifra:"live bank discounts",
@@ -738,7 +802,7 @@ const TEXTOS = {
   },
   pt:{
     lema:"Santiago está acontecendo",
-    mapa:"Mapa", habla:"Fale", blog:"Blog", comer:"Onde comer", ninos:"Crianças", mas18:"+18", calendario:"Calendário", agregar:"Adicione seu evento", nosotros:"Quem faz isso",
+    mapa:"Mapa", habla:"Fale", blog:"Blog", cine:"Cinema", comer:"Onde comer", ninos:"Crianças", mas18:"+18", calendario:"Calendário", agregar:"Adicione seu evento", nosotros:"Quem faz isso",
     eventos:"eventos", evento:"evento", gratis:"Grátis",
     hoy:"Hoje", manana:"Amanhã", semana:"7 dias", finde:"Fim de semana",
     cuandoLargo:{hoy:"Hoje", manana:"Amanhã", semana:"Nestes 7 dias", finde:"Neste fim de semana", todo:"Todos"},
@@ -774,6 +838,7 @@ const TEXTOS = {
     pGratisT:"grátis", pGratisD:"programas que não custam nada",
     pTotalD:"programas em cartaz", pFuentesD:"fontes revisadas toda manhã",
     pCierreT:"Organiza algo?", pCierreD:"Se o seu evento é aberto e acontece em Santiago, cabe aqui. Não cobramos para aparecer.",
+    pCineT:"Cinema", pCineD:"O que está passando hoje e qual sala fica perto, do shopping ao cine arte.",
     pTallerT:"Oficinas e aulas", pTallerD:"O que se faz toda semana: natação, ioga, cerâmica.",
     pDctoT:"Os descontos", pDctoD:"Onde comer mais barato hoje, conforme o seu cartão.",
     pDctoCifra:"descontos de banco em vigor",
@@ -874,6 +939,16 @@ const ICONOS_NAV = {
         <path d="M17.4 2.6v3.6H21" fill="none" stroke="currentColor" stroke-width="1.8"
         stroke-linecap="round" stroke-linejoin="round"/>
         <circle cx="12" cy="12" r="1.6" fill="currentColor"/>`,
+  /* Cine: la claqueta. Se eligió sobre el rollo de película y sobre la
+     butaca porque a 21px las perforaciones del rollo se cierran y la butaca
+     queda igual al globo de "habla". La barra diagonal de arriba es la que
+     la hace reconocible aunque el resto se empaste. */
+  cine:`<rect x="2.6" y="8.4" width="18.8" height="12.4" rx="2.2" fill="none"
+        stroke="currentColor" stroke-width="1.8"/>
+        <path d="M2.9 8.4 6.9 3.6l3.6 4.8M9.9 8.4l4-4.8 3.6 4.8" fill="none"
+        stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M17.1 8.4 21.1 3.6" fill="none" stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round"/>`,
   mapa:`<path d="M9 3 3 5.4v15.1l6-2.4 6 2.4 6-2.4V2.9l-6 2.4L9 3z" fill="none"
         stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
         <path d="M9 3v15.1M15 5.4v15.1" stroke="currentColor" stroke-width="1.8"/>`,
@@ -916,7 +991,7 @@ const ICONOS_NAV = {
    ella por el logo. Seis destinos no caben en la barra inferior de un
    celular sin que las etiquetas se corten. */
 const PAGINAS = [["mapa.html","mapa"],["habla.html","habla"],["calendario.html","calendario"],
-                 ["talleres.html","talleres"],
+                 ["cine.html","cine"], ["talleres.html","talleres"],
                  ["descuentos.html","descuentos"],["comer.html","comer"],["blog.html","blog"],
                  ["agrega.html","agregar"],["nosotros.html","nosotros"]];
 // En la barra inferior el espacio manda: con OCHO destinos cada celda baja a
@@ -931,9 +1006,9 @@ const PAGINAS = [["mapa.html","mapa"],["habla.html","habla"],["calendario.html",
 // recomendación, que es el precio conocido de este destino. Un noveno destino
 // deja de caber en cualquier teléfono y tendría que vivir en otra parte.
 const CORTOS = {
-  es:{mapa:"Mapa", habla:"Habla", calendario:"Agenda", talleres:"Clases", descuentos:"Dctos", comer:"Comer", blog:"Blog", agregar:"Subir", nosotros:"Quién"},
-  en:{mapa:"Map", habla:"Talk", calendario:"Agenda", talleres:"Class", descuentos:"Deals", comer:"Eat", blog:"Blog", agregar:"Post", nosotros:"Who"},
-  pt:{mapa:"Mapa", habla:"Fale", calendario:"Agenda", talleres:"Aulas", descuentos:"Dctos", comer:"Comer", blog:"Blog", agregar:"Subir", nosotros:"Quem"},
+  es:{mapa:"Mapa", habla:"Habla", calendario:"Agenda", cine:"Cine", talleres:"Clases", descuentos:"Dctos", comer:"Comer", blog:"Blog", agregar:"Subir", nosotros:"Quién"},
+  en:{mapa:"Map", habla:"Talk", calendario:"Agenda", cine:"Cinema", talleres:"Class", descuentos:"Deals", comer:"Eat", blog:"Blog", agregar:"Post", nosotros:"Who"},
+  pt:{mapa:"Mapa", habla:"Fale", calendario:"Agenda", cine:"Cinema", talleres:"Aulas", descuentos:"Dctos", comer:"Comer", blog:"Blog", agregar:"Subir", nosotros:"Quem"},
 };
 
 /* `raiz` es el prefijo hacia la raíz del sitio. Las fichas de `e/` viven un

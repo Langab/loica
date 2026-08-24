@@ -168,5 +168,6 @@ jobs:
             web/eventos.json
             web/talleres.json
             web/descuentos.json
+            web/cine.json
           retention-days: 30
           if-no-files-found: ignore

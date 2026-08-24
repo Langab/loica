@@ -1,0 +1,957 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyeccion es
+     que todo lo que se pinta pase por escapar() y urlSegura(); esto es lo que
+     queda en pie si algun dia se escapa uno. Mismas notas que el resto de las
+     paginas: img-src abierto por los afiches de las peliculas, que viven en el
+     CDN de cada cadena; 'unsafe-inline' mientras la logica viva en un <script>
+     inline; y frame-ancestors no va porque en un <meta> el navegador lo ignora,
+     igual que upgrade-insecure-requests (el detalle esta en mapa.html). -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; worker-src blob:; connect-src 'self' https://*.basemaps.cartocdn.com; object-src 'none'; base-uri 'none'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Cine en Santiago — Loica</title>
+<meta name="description" content="Qué dan hoy en los cines de Santiago y cuál te queda cerca: las salas de mall y el circuito de cine arte, con sus horarios y el link para comprar en el cine.">
+<link rel="canonical" href="https://loicasantiago.cl/cine.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
+      integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V" crossorigin="anonymous">
+<link rel="stylesheet" href="loica.css?v=24">
+<style>
+  html,body{height:100%;overflow:hidden}
+  /* Los dos altos van en este orden a propósito: `dvh` no existe en Safari de
+     iOS anterior a 15.4 y ahí la declaración se descarta entera (la nota larga
+     está en descuentos.html, que es de donde esta página copia el esqueleto). */
+  #app{display:flex;flex-direction:column;height:100vh;height:100dvh}
+  header{flex:none;z-index:6}
+  main{flex:1;position:relative;min-height:0;display:flex;flex-direction:column}
+
+  /* --- Cabecera: dos rieles, igual que talleres y descuentos --- */
+  .riel-fecha{
+    display:flex;gap:5px;padding:var(--e-2) var(--e-4);background:var(--fondo-elevado);
+    overflow-x:auto;scrollbar-width:none;align-items:center;
+  }
+  .riel-fecha::-webkit-scrollbar{display:none}
+  .segmentado{
+    display:inline-flex;gap:3px;padding:3px;flex:none;
+    background:var(--fondo-hundido);border:2.5px solid var(--contorno);
+    border-radius:var(--r-pill);box-shadow:var(--repisa-1);
+  }
+  .segmentado button{
+    flex:none;border:0;background:transparent;color:var(--tinta-suave);cursor:pointer;
+    padding:0 var(--e-3);min-height:36px;min-width:38px;border-radius:var(--r-pill);
+    font:800 var(--t-sm)/1 var(--fuente-marca);white-space:nowrap;transition:var(--rapido);
+  }
+  .segmentado button:hover{color:var(--tinta)}
+  /* El fucsia del cine con tinta crema: a diferencia del naranjo de clases,
+     este relleno es oscuro (5,9:1 sobre crema) y el texto claro encima se lee. */
+  .segmentado button[aria-pressed="true"]{background:var(--c-cine);color:var(--arena-50)}
+  .segmentado .destacado{padding:0 var(--e-4);border-right:2px solid var(--borde-fuerte);
+    border-radius:var(--r-pill) 0 0 var(--r-pill);margin-right:2px}
+  .cuenta-rango{
+    display:flex;align-items:center;gap:5px;flex:none;margin-left:auto;padding-left:var(--e-3);
+    font-size:var(--t-xs);font-weight:700;color:var(--tinta-tenue);white-space:nowrap;
+  }
+
+  header .filtros{padding:var(--e-2) var(--e-4) var(--e-3);border-bottom:2.5px solid var(--contorno);
+    align-items:center}
+  header .filtros .chip{padding:6px 13px 6px 8px;gap:5px;font-size:var(--t-xs);
+    border-width:2px;box-shadow:0 2px 0 var(--contorno);min-height:38px}
+  header .filtros .chip svg{width:22px;height:22px}
+  header .filtros .chip:active,
+  header .filtros .chip[aria-pressed="true"]{transform:translateY(2px);box-shadow:none}
+  header .filtros .chip:focus-visible{
+    box-shadow:0 2px 0 var(--contorno),0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+  }
+  header .filtros .chip[aria-pressed="true"]:focus-visible{
+    box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+  }
+  header .filtros .chip[aria-pressed="true"]{background:var(--tono,var(--tinta));color:var(--arena-50)}
+  .separa-chips{flex:none;width:2px;background:var(--borde-fuerte);margin:4px 3px;border-radius:2px}
+
+  /* El desplegable vestido de chip, calcado de descuentos. */
+  .chip-select{
+    flex:none;position:relative;display:inline-flex;align-items:center;
+    border:2px solid var(--contorno);background:var(--fondo-elevado);
+    border-radius:var(--r-pill);box-shadow:0 2px 0 var(--contorno);min-height:38px;
+  }
+  .chip-select b{
+    font:700 var(--t-xs)/1 var(--fuente-marca);padding:0 26px 0 13px;
+    max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+  .chip-select select{
+    position:absolute;left:0;right:0;top:50%;width:100%;height:44px;
+    transform:translateY(-50%);
+    appearance:none;border:0;background:transparent;color:transparent;
+    opacity:0;cursor:pointer;font-size:16px;
+  }
+  .chip-select::after{
+    content:"▾";position:absolute;right:10px;pointer-events:none;
+    font-size:11px;color:var(--tinta-suave);
+  }
+  .chip-select:has(select:not([data-vacio="1"])){background:var(--tinta);box-shadow:none;transform:translateY(2px)}
+  .chip-select:has(select:not([data-vacio="1"])) b{color:var(--fondo-elevado)}
+  .chip-select:has(select:not([data-vacio="1"]))::after{color:var(--fondo-elevado)}
+  .chip-select:has(select:focus-visible){box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno)}
+
+  /* --- El mapa de fondo y la lista encima, igual que en talleres --- */
+  #mapa-cines{position:absolute;inset:0}
+  .panel-lista{
+    position:absolute;left:0;right:0;bottom:0;background:var(--fondo-elevado);
+    border-radius:var(--r-xl) var(--r-xl) 0 0;
+    border:2.5px solid var(--contorno);border-bottom:0;
+    display:flex;flex-direction:column;z-index:4;
+    height:var(--alto-panel,268px);max-height:88%;
+    transition:height var(--medio);
+  }
+  .panel-lista.arrastrando{transition:none}
+  .tirador{padding:9px var(--e-4) 6px;cursor:grab;flex:none;touch-action:none}
+  .tirador:active{cursor:grabbing}
+  .barra-tirador{width:44px;height:4.5px;background:var(--borde-fuerte);border-radius:3px;margin:0 auto}
+  .conteo{display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-size:var(--t-sm);
+    color:var(--tinta-suave);padding:var(--e-1) var(--e-4) var(--e-2)}
+  .conteo b{font-family:var(--fuente-marca);font-size:var(--t-lg);color:var(--tinta)}
+  .vista{margin-left:auto}
+  .nota-geo{flex:1 1 100%;font-size:var(--t-xs);color:var(--tinta-tenue);line-height:1.35}
+  .nota-geo:empty{display:none}
+  .lista{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+    flex:1;min-height:0;padding:0 var(--e-4) var(--e-5)}
+
+  .maplibregl-popup-content{
+    font:600 var(--t-sm)/1.4 var(--fuente-ui);color:var(--azul-900);
+    border:2px solid var(--azul-900);border-radius:var(--r-md);
+    box-shadow:0 3px 0 var(--azul-900);padding:10px 12px;max-width:230px;
+  }
+  .maplibregl-popup-content a{color:var(--c-cine-tinta);font-weight:800;text-decoration:none}
+  .maplibregl-popup-content a:hover{text-decoration:underline}
+
+  /* --- La tarjeta del cine ---
+     Fondo pastel de la familia, contorno de tinta y repisa dura: las reglas de
+     la casa. La sala es el mueble y las funciones son lo que hay adentro. */
+  .cine{
+    background:var(--fondo-elevado);border:2.5px solid var(--contorno);
+    border-radius:var(--r-lg);box-shadow:var(--repisa-2);
+    margin-top:var(--e-3);overflow:hidden;
+  }
+  .cine.arte{background:var(--c-cine-suave)}
+  .cine-cab{display:flex;gap:var(--e-2);align-items:flex-start;padding:var(--e-3)}
+  .cine-cab .mascota{flex:none;margin-top:1px}
+  .cine-cab h3{margin:0;font:800 var(--t-md)/1.2 var(--fuente-marca);color:var(--tinta)}
+  .cine.arte h3, .cine.arte .cine-donde, .cine.arte .peli-nombre{color:var(--azul-900)}
+  .cine-donde{font-size:var(--t-xs);color:var(--tinta-suave);margin-top:2px;line-height:1.35}
+  .cine-lejos{
+    flex:none;margin-left:auto;align-self:flex-start;
+    font:800 var(--t-xs)/1 var(--fuente-marca);color:var(--c-cine-tinta);
+    background:var(--fondo-hundido);border:2px solid var(--contorno);
+    border-radius:var(--r-pill);padding:5px 8px;white-space:nowrap;
+  }
+  .cine.arte .cine-lejos{background:var(--arena-50)}
+
+  .peli{padding:var(--e-2) var(--e-3);border-top:2px dashed var(--borde-fuerte)}
+  .peli-cab{display:flex;gap:var(--e-2);align-items:center}
+  .peli-cab img{
+    width:34px;height:50px;object-fit:cover;flex:none;
+    border:2px solid var(--contorno);border-radius:var(--r-sm);background:var(--fondo-hundido);
+  }
+  .peli-nombre{font:800 var(--t-sm)/1.25 var(--fuente-marca);color:var(--tinta)}
+  .peli-datos{font-size:var(--t-xs);color:var(--tinta-tenue);margin-top:2px}
+  .horas{display:flex;flex-wrap:wrap;gap:5px;margin-top:var(--e-2)}
+  /* Cada hora es el botón de comprar. Se ve como pastilla y no como texto
+     porque es la única acción de la página: apretarla te deja en la boletería
+     del cine, no en otra pantalla de Loica. */
+  .hora{
+    display:inline-flex;align-items:baseline;gap:4px;text-decoration:none;
+    border:2px solid var(--contorno);border-radius:var(--r-pill);
+    background:var(--fondo-elevado);color:var(--tinta);
+    font:800 var(--t-xs)/1 var(--fuente-marca);padding:8px 10px;
+    box-shadow:0 2px 0 var(--contorno);transition:var(--rapido);min-height:34px;
+  }
+  .hora:hover{background:var(--c-cine);color:var(--arena-50)}
+  .hora:active{transform:translateY(2px);box-shadow:none}
+  .hora:focus-visible{box-shadow:0 2px 0 var(--contorno),0 0 0 3px var(--foco),0 0 0 6px var(--contorno)}
+  .hora small{font:700 9.5px/1 var(--fuente-ui);opacity:.75;letter-spacing:.02em}
+
+  .sin-cartelera{
+    padding:var(--e-2) var(--e-3) var(--e-3);border-top:2px dashed var(--borde-fuerte);
+    font-size:var(--t-xs);color:var(--tinta-suave);line-height:1.45;
+  }
+  .sin-cartelera a{color:var(--c-cine-tinta);font-weight:800}
+
+  /* --- La tarjeta de la película, para la otra vista --- */
+  .film{
+    display:flex;gap:var(--e-3);background:var(--fondo-elevado);
+    border:2.5px solid var(--contorno);border-radius:var(--r-lg);
+    box-shadow:var(--repisa-2);margin-top:var(--e-3);padding:var(--e-3);
+  }
+  .film img{
+    width:66px;height:98px;object-fit:cover;flex:none;
+    border:2px solid var(--contorno);border-radius:var(--r-sm);background:var(--fondo-hundido);
+  }
+  .film h3{margin:0;font:800 var(--t-md)/1.2 var(--fuente-marca);color:var(--tinta)}
+  .film .peli-datos{margin-bottom:var(--e-2)}
+  .film-sala{margin-top:var(--e-2)}
+  .film-sala b{display:block;font:700 var(--t-xs)/1.3 var(--fuente-ui);color:var(--tinta-suave)}
+
+  .aviso-cine{
+    display:flex;gap:var(--e-2);align-items:flex-start;
+    padding:var(--e-3) var(--e-4);background:var(--c-cine-suave);
+    color:var(--azul-900);font-size:var(--t-xs);line-height:1.45;
+    border-bottom:2px solid var(--contorno);
+  }
+  .aviso-cine svg{flex:none;margin-top:-2px}
+
+  @media(max-width:879px){
+    main{padding-bottom:0}
+    .panel-lista{bottom:var(--hueco-nav)}
+    header .filtros{padding:5px var(--e-3) 7px}
+    .riel-fecha{padding:var(--e-2) var(--e-3)}
+  }
+  @media(min-width:880px){
+    .panel-lista{left:auto;right:var(--e-4);top:var(--e-4);bottom:var(--e-4);width:430px;
+      height:auto!important;border-radius:var(--r-lg);max-height:none;transition:none;
+      border-bottom:2.5px solid var(--contorno)}
+    .tirador{display:none}
+    .conteo{padding-top:var(--e-3)}
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="barra" id="barra"></div>
+    <div class="riel-fecha">
+      <div class="segmentado" id="dias" role="group"></div>
+      <div class="cuenta-rango" id="cuenta"></div>
+    </div>
+    <div class="filtros" id="filtros" role="group"></div>
+  </header>
+
+  <main>
+    <div id="mapa-cines"></div>
+    <section class="panel-lista" id="panel" aria-label="Cines y cartelera">
+      <div class="tirador" id="tirador" role="button" tabindex="0"
+           aria-label="Arrastra para ver más"><div class="barra-tirador"></div></div>
+      <div class="conteo"><b id="conteo">0</b> <span id="conteo-txt"></span>
+        <span class="segmentado vista" id="vista" role="group"></span>
+        <span class="nota-geo" id="nota-geo"></span></div>
+      <div class="lista" id="lista"></div>
+    </section>
+  </main>
+</div>
+
+<nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
+        integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
+        crossorigin="anonymous"></script>
+<script src="loica.js?v=24"></script>
+<script>
+/* ------------------------------------------------------------------
+   Cine: qué dan hoy y en qué sala.
+
+   La página contesta dos preguntas y por eso tiene dos vistas de la MISMA
+   lista: "¿qué cine tengo cerca?" (por sala, ordenada por distancia si el
+   navegador la da) y "¿dónde dan esta película?" (por película). El mapa es
+   la mitad de la respuesta a la primera y por eso está siempre, no detrás de
+   un botón.
+
+   Lo que la página promete y cumple: el horario que se aprieta lleva a la
+   boletería del cine, no a otra pantalla de Loica. Loica no vende entradas ni
+   sabe si quedan.
+
+   Treinta y dos de las cuarenta y cuatro salas salen en el mapa SIN horarios
+   —Cineplanet y Cinépolis cierran su cartelera a todo lo que no sea su propia
+   app— y eso se dice con todas sus letras en la tarjeta en vez de esconderlo:
+   la dirección y el link a su cartelera oficial siguen sirviendo.
+   ------------------------------------------------------------------ */
+let CINES = [], PELICULAS = [], generado = "", diasCartelera = 4;
+let dia = 0;                       // 0 = hoy, 1 = mañana…
+let vista = "cines";               // cines | peliculas
+let circuitoFiltro = "", comunaFiltro = "", idiomaFiltro = "";
+let miPosicion = null, estadoGeo = "";
+let mostrando = 24;
+
+pintarBarra("cine.html");
+
+const T = {
+  cines:      {es:"Cines",     en:"Cinemas",  pt:"Cinemas"},
+  peliculas:  {es:"Películas", en:"Films",    pt:"Filmes"},
+  salas:      {es:"salas con función", en:"screens showing", pt:"salas com sessão"},
+  sala1:      {es:"sala con función",  en:"screen showing",  pt:"sala com sessão"},
+  enCartelera:{es:"en cartelera", en:"now showing", pt:"em cartaz"},
+  comercial:  {es:"De mall",   en:"Multiplex", pt:"De shopping"},
+  arte:       {es:"Cine arte", en:"Arthouse",  pt:"Cine arte"},
+  cerca:      {es:"Cerca mío", en:"Near me",   pt:"Perto de mim"},
+  doblada:    {es:"Doblada",   en:"Dubbed",    pt:"Dublado"},
+  subtitulada:{es:"Subtitulada",en:"Subtitled",pt:"Legendado"},
+  comuna:     {es:"Comuna",    en:"District",  pt:"Comuna"},
+  limpiar:    {es:"Limpiar filtros", en:"Clear filters", pt:"Limpar filtros"},
+  vacio:      {es:"No hay funciones con esos filtros",
+               en:"No showings with those filters",
+               pt:"Não há sessões com esses filtros"},
+  vaciopista: {es:"Prueba sacando algún filtro o mirando otro día",
+               en:"Try removing a filter or looking at another day",
+               pt:"Tente tirar um filtro ou olhar outro dia"},
+  sinCartelera:{es:"Esta cadena no publica sus horarios donde se puedan leer. La sala está acá para ubicarla; la cartelera está en su sitio.",
+               en:"This chain does not publish readable showtimes. The cinema is here so you can find it; its listings live on their own site.",
+               pt:"Esta rede não publica horários legíveis. O cinema está aqui para localizá-lo; a programação fica no site deles."},
+  verOficial: {es:"Ver su cartelera oficial", en:"See their official listings", pt:"Ver a programação oficial"},
+  hoyNo:      {es:"Sin funciones publicadas para este día", en:"No showings published for this day", pt:"Sem sessões publicadas para este dia"},
+  revisado:   {es:"Revisado el", en:"Checked", pt:"Revisado em"},
+  sinHorarios:{es:"salas más en el mapa sin horarios publicados",
+               en:"more cinemas on the map without published showtimes",
+               pt:"salas a mais no mapa sem horários publicados"},
+  compra:     {es:"Comprar en el cine", en:"Buy at the cinema", pt:"Comprar no cinema"},
+  min:        {es:"min", en:"min", pt:"min"},
+  ojo:        {es:"Loica no vende entradas ni sabe si quedan: cada horario te deja en la boletería del cine.",
+               en:"Loica does not sell tickets and cannot tell you if seats are left: every showtime takes you to the cinema's own box office.",
+               pt:"A Loica não vende ingressos nem sabe se ainda há lugares: cada horário leva você à bilheteria do cinema."},
+};
+const tr = clave => T[clave][IDIOMA];
+
+/* ---------- EL MAPA ----------
+   Círculos y no pines-animal: son 44 puntos y la lección de mapa.html es que
+   los marcadores DOM se pagan caro en el arrastre. El color dice si la sala
+   tiene función ese día; el pin apagado sigue estando porque su dirección es
+   la mitad de la respuesta. */
+let mapa = null, popup = null, hayMapa = false;
+const esOscuro = () => document.documentElement.dataset.tema === "oscuro"
+  || (!document.documentElement.dataset.tema && matchMedia("(prefers-color-scheme: dark)").matches);
+
+function urlesTeselas(estilo){
+  return ["a","b","c","d"].map(s => `https://${s}.basemaps.cartocdn.com/${estilo}/{z}/{x}/{y}{ratio}.png`
+    .replace("{ratio}", devicePixelRatio > 1 ? "@2x" : ""));
+}
+function estiloMapa(){
+  const t = esOscuro() ? ["dark_nolabels","dark_only_labels"] : ["light_nolabels","light_only_labels"];
+  return {version:8, glyphs:null, sources:{
+      base:{type:"raster", tiles:urlesTeselas(t[0]), tileSize:256,
+            attribution:'© <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> · © <a href="https://carto.com/attributions">CARTO</a>'},
+      etiquetas:{type:"raster", tiles:urlesTeselas(t[1]), tileSize:256},
+    },
+    layers:[{id:"base",type:"raster",source:"base"},
+            {id:"etiquetas",type:"raster",source:"etiquetas"}]};
+}
+
+try{
+  mapa = new maplibregl.Map({
+    container:"mapa-cines", style:estiloMapa(),
+    center:[-70.645,-33.46], zoom:11.2, attributionControl:{compact:true}
+  });
+  hayMapa = true;
+}catch(e){
+  document.getElementById("mapa-cines").innerHTML =
+    `<div class="vacio" style="padding-top:var(--e-12)">${cuerpo("cabra","var(--tinta-tenue)",88,{pose:"durmiendo"})}
+     <p><b>Este navegador no puede dibujar el mapa</b><br>La lista funciona igual.</p></div>`;
+}
+
+if(hayMapa){
+  mapa.addControl(new maplibregl.NavigationControl({showCompass:false}), "top-left");
+  // El mapa nace antes de que su caja tenga tamaño final (ver mapa.html).
+  (() => {
+    const caja = document.getElementById("mapa-cines");
+    let ancho = 0, alto = 0;
+    new ResizeObserver(() => {
+      if(caja.clientWidth === ancho && caja.clientHeight === alto) return;
+      ancho = caja.clientWidth; alto = caja.clientHeight;
+      mapa.resize();
+    }).observe(caja);
+  })();
+  mapa.on("load", montarCapas);
+  mapa.on("styledata", () => { if(!mapa.getSource("cines")) montarCapas(); });
+  new MutationObserver(() => mapa.setStyle(estiloMapa()))
+    .observe(document.documentElement, {attributes:true, attributeFilter:["data-tema"]});
+}
+
+function datosGeo(){
+  return {type:"FeatureCollection", features:cinesVisibles()
+    .filter(c => c.lat !== null && c.lat !== undefined)
+    .map(c => ({type:"Feature",
+      geometry:{type:"Point", coordinates:[c.lon, c.lat]},
+      properties:{id:c.id, nombre:c.nombre, comuna:c.comuna,
+                  url:c.url, funciones:funcionesDe(c.id).length,
+                  arte:c.circuito === "arte" ? 1 : 0}}))};
+}
+
+function montarCapas(){
+  if(!hayMapa || mapa.getSource("cines")) return;
+  mapa.addSource("cines", {type:"geojson", data:datosGeo()});
+  mapa.addLayer({id:"cines-pin", type:"circle", source:"cines",
+    paint:{
+      "circle-radius":["interpolate",["linear"],["zoom"], 10, 5, 14, 10],
+      // El fucsia de la Cabra para la sala con función; el circuito de cine
+      // arte va con el relleno claro para separarlo del mall de un vistazo.
+      "circle-color":["case",["==",["get","arte"],1], "#F1D0EE", "#A51D99"],
+      "circle-stroke-width":2.4,
+      "circle-stroke-color":esOscuro() ? "#EDE7DE" : "#1E2A4A",
+      // Sin función ese día el pin se atenúa, no desaparece: la dirección
+      // sigue siendo la respuesta a "qué cine tengo cerca".
+      "circle-opacity":["case",["==",["get","funciones"],0], .38, .95],
+    }});
+  mapa.on("click", "cines-pin", e => {
+    const p = e.features[0].properties;
+    // Nombre y comuna vienen del catastro (texto de terceros): van como TEXTO,
+    // nunca como HTML — la regla de la casa para dato de fuente.
+    const caja = document.createElement("div");
+    const titulo = document.createElement("b");
+    titulo.textContent = p.nombre;
+    const donde = document.createElement("div");
+    donde.textContent = p.comuna;
+    donde.style.cssText = "font-weight:500;margin:2px 0 6px";
+    caja.append(titulo, donde);
+    if(Number(p.funciones) > 0){
+      const ir = document.createElement("a");
+      ir.href = "#cine-" + encodeURIComponent(p.id);
+      ir.textContent = Number(p.funciones) + " " + tr("enCartelera") + " →";
+      ir.onclick = ev => { ev.preventDefault(); irACine(p.id); popup?.remove(); };
+      caja.append(ir);
+    } else if(urlSegura(p.url)){
+      const ir = document.createElement("a");
+      ir.href = urlSegura(p.url);
+      ir.target = "_blank"; ir.rel = "noopener noreferrer";
+      ir.textContent = tr("verOficial") + " →";
+      caja.append(ir);
+    }
+    popup?.remove();
+    popup = new maplibregl.Popup({closeButton:false, offset:10})
+      .setLngLat(e.lngLat).setDOMContent(caja).addTo(mapa);
+  });
+  mapa.on("mouseenter", "cines-pin", () => mapa.getCanvas().style.cursor = "pointer");
+  mapa.on("mouseleave", "cines-pin", () => mapa.getCanvas().style.cursor = "");
+  pintarMapa();
+}
+
+function pintarMapa(){
+  if(!hayMapa || !mapa.getSource("cines")) return;
+  mapa.getSource("cines").setData(datosGeo());
+}
+
+function irACine(id){
+  vista = "cines";
+  pintarTodo();
+  const ficha = document.getElementById("cine-" + id);
+  if(ficha) ficha.scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+/* ---------- DATOS ---------- */
+fetch("cine.json", {cache:"no-cache"}).then(r => r.json()).then(d => {
+  CINES = d.cines || [];
+  PELICULAS = d.peliculas || [];
+  generado = d.generado || "";
+  diasCartelera = d.dias || 4;
+  pintarTodo();
+}).catch(() => {
+  document.getElementById("lista").innerHTML =
+    `<div class="vacio">${cuerpo("cabra","var(--tinta-tenue)",96,{pose:"durmiendo"})}
+       <p>No pude cargar la cartelera.</p></div>`;
+});
+
+window.addEventListener("loica:idioma", pintarTodo);
+
+/* El día que se está mirando, como fecha. `dia` es un desplazamiento desde
+   hoy y no una fecha fija: si alguien deja la pestaña abierta hasta pasada la
+   medianoche, "Hoy" sigue queriendo decir hoy. */
+const fechaDelDia = () => {
+  const f = new Date(); f.setHours(0,0,0,0); f.setDate(f.getDate() + dia); return f;
+};
+const claveFecha = f => `${f.getFullYear()}-${String(f.getMonth()+1).padStart(2,"0")}-${String(f.getDate()).padStart(2,"0")}`;
+
+const cinePorId = id => CINES.find(c => c.id === id);
+
+/* Las funciones que pasan TODOS los filtros, con su película pegada. Es la
+   lista de la que salen las dos vistas y también el mapa: si el filtro de
+   idioma deja fuera una sala, su pin también se apaga. */
+function funcionesVisibles(){
+  const hoy = claveFecha(fechaDelDia());
+  const ahora = new Date();
+  const esHoy = dia === 0;
+  const salida = [];
+  PELICULAS.forEach(peli => {
+    peli.funciones.forEach(f => {
+      if(f.inicio.slice(0,10) !== hoy) return;
+      // Una función que ya empezó no se ofrece: nadie compra entrada para
+      // algo que partió hace cuarenta minutos.
+      if(esHoy && new Date(f.inicio) < ahora) return;
+      if(idiomaFiltro && f.idioma !== idiomaFiltro) return;
+      const cine = cinePorId(f.cine);
+      if(!cine) return;
+      if(circuitoFiltro && cine.circuito !== circuitoFiltro) return;
+      if(comunaFiltro && cine.comuna !== comunaFiltro) return;
+      salida.push({...f, peli, cine});
+    });
+  });
+  return salida;
+}
+
+const funcionesDe = id => funcionesVisibles().filter(f => f.cine.id === id);
+
+/* Las salas que salen en el mapa y en la lista. Con filtros de sala puestos
+   (circuito, comuna) se recorta el catastro entero; el filtro de idioma no
+   saca salas del mapa, apaga las que quedan sin función. */
+function cinesVisibles(){
+  return CINES.filter(c =>
+    (!circuitoFiltro || c.circuito === circuitoFiltro) &&
+    (!comunaFiltro || c.comuna === comunaFiltro));
+}
+
+/* Distancia en línea recta, en km. Sirve para ORDENAR, no para prometer
+   cuánto se camina: a escala de ciudad el plano alcanza y de sobra. */
+function distanciaKm(a, b){
+  return Math.hypot((a[0] - b[0]) * 111.32, (a[1] - b[1]) * 92.6);
+}
+
+function pintarTodo(){
+  pintarDias(); pintarFiltros(); pintarLista(); pintarMapa();
+}
+
+/* El riel del día. Solo los días que la cartelera de verdad tiene cargados:
+   las cadenas publican tres o cuatro, y ofrecer una semana sería mostrar
+   días vacíos que parecen un error del sitio y no del cine. */
+function pintarDias(){
+  const cont = document.getElementById("dias");
+  cont.setAttribute("aria-label", {es:"Día",en:"Day",pt:"Dia"}[IDIOMA]);
+  const opciones = [];
+  for(let i = 0; i < diasCartelera; i++){
+    const f = new Date(); f.setHours(0,0,0,0); f.setDate(f.getDate() + i);
+    const etiqueta = i === 0 ? t("hoy") : i === 1 ? t("manana")
+      : `${t("dias")[(f.getDay() + 6) % 7]} ${f.getDate()}`;
+    opciones.push([i, etiqueta, i === 0]);
+  }
+  cont.innerHTML = opciones.map(([i, etiqueta, destacado]) =>
+    `<button type="button" data-dia="${i}" aria-pressed="${dia === i}"
+       class="${destacado ? "destacado" : ""}">${escapar(etiqueta)}</button>`).join("");
+  cont.querySelectorAll("button").forEach(b => b.onclick = () => {
+    dia = Number(b.dataset.dia); mostrando = 24; pintarTodo();
+  });
+
+  const fecha = generado
+    ? new Date(generado).toLocaleDateString(localeDe(), {day:"numeric", month:"long"})
+    : "";
+  document.getElementById("cuenta").innerHTML = fecha
+    ? `${carita("cabra","var(--c-cine-tinta)",18)} ${escapar(tr("revisado"))} ${escapar(fecha)}`
+    : "";
+}
+
+function pintarFiltros(){
+  const cont = document.getElementById("filtros");
+  cont.innerHTML = "";
+  cont.setAttribute("aria-label", `${tr("comuna")} · ${tr("cines")}`);
+
+  const chip = (etiqueta, activo, tono, alPulsar, dibujo) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "chip";
+    b.style.setProperty("--tono", tono);
+    b.setAttribute("aria-pressed", activo);
+    b.innerHTML = (dibujo || "") + " " + escapar(etiqueta);
+    b.onclick = alPulsar;
+    cont.appendChild(b);
+    return b;
+  };
+
+  // Cerca mío: el navegador pregunta, y si dice que no la página sigue
+  // funcionando ordenada por cartelera. Nunca se guarda la posición.
+  chip(tr("cerca"), !!miPosicion, "var(--c-cine)", () => {
+    if(miPosicion){ miPosicion = null; pintarTodo(); return; }
+    if(!navigator.geolocation){ estadoGeo = "no"; pintarTodo(); return; }
+    estadoGeo = "pidiendo"; pintarTodo();
+    navigator.geolocation.getCurrentPosition(
+      p => { miPosicion = [p.coords.latitude, p.coords.longitude]; estadoGeo = ""; pintarTodo(); },
+      () => { estadoGeo = "no"; pintarTodo(); },
+      {timeout:8000, maximumAge:300000});
+  }, `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none"
+        stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="7"/>
+        <path d="M12 1.6v3M12 19.4v3M1.6 12h3M19.4 12h3" stroke-linecap="round"/>
+        <circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none"/></svg>`);
+
+  const sep = document.createElement("span");
+  sep.className = "separa-chips";
+  cont.appendChild(sep);
+
+  chip(tr("comercial"), circuitoFiltro === "comercial", "var(--c-cine)",
+    () => { circuitoFiltro = circuitoFiltro === "comercial" ? "" : "comercial"; mostrando = 24; pintarTodo(); },
+    carita("cabra", circuitoFiltro === "comercial" ? "#FAF3E7" : "#A51D99", 22));
+  chip(tr("arte"), circuitoFiltro === "arte", "var(--c-cine)",
+    () => { circuitoFiltro = circuitoFiltro === "arte" ? "" : "arte"; mostrando = 24; pintarTodo(); },
+    carita("chinchilla", circuitoFiltro === "arte" ? "#FAF3E7" : "#1B6FD1", 22));
+
+  const sep2 = document.createElement("span");
+  sep2.className = "separa-chips";
+  cont.appendChild(sep2);
+
+  chip(tr("subtitulada"), idiomaFiltro === "subtitulada", "var(--c-cultura)",
+    () => { idiomaFiltro = idiomaFiltro === "subtitulada" ? "" : "subtitulada"; mostrando = 24; pintarTodo(); });
+  chip(tr("doblada"), idiomaFiltro === "doblada", "var(--c-cultura)",
+    () => { idiomaFiltro = idiomaFiltro === "doblada" ? "" : "doblada"; mostrando = 24; pintarTodo(); });
+
+  const comunas = [...new Set(CINES.map(c => c.comuna).filter(Boolean))]
+    .sort((a, b) => a.localeCompare(b));
+  cont.appendChild(desplegable(tr("comuna"), comunas.map(c => [c, c]),
+    comunaFiltro, v => { comunaFiltro = v; mostrando = 24; pintarTodo(); }));
+
+  if(circuitoFiltro || comunaFiltro || idiomaFiltro){
+    const limpiar = document.createElement("button");
+    limpiar.type = "button";
+    limpiar.className = "chip";
+    limpiar.textContent = "✕ " + tr("limpiar");
+    limpiar.onclick = () => {
+      circuitoFiltro = ""; comunaFiltro = ""; idiomaFiltro = "";
+      mostrando = 24; pintarTodo();
+    };
+    cont.appendChild(limpiar);
+  }
+}
+
+function desplegable(etiqueta, opciones, valor, alCambiar){
+  const caja = document.createElement("span");
+  caja.className = "chip-select";
+  const elegida = opciones.find(([v]) => v === valor);
+  caja.innerHTML = `<b>${escapar(elegida ? elegida[1] : etiqueta)}</b>
+    <select aria-label="${escapar(etiqueta)}" data-vacio="${valor ? "0" : "1"}">
+      <option value="">${escapar(etiqueta)}</option>
+      ${opciones.map(([v, txt]) =>
+        `<option value="${escapar(v)}" ${v === valor ? "selected" : ""}>${escapar(txt)}</option>`).join("")}
+    </select>`;
+  caja.querySelector("select").onchange = e => alCambiar(e.target.value);
+  return caja;
+}
+
+/* ---------- LA LISTA ---------- */
+const horaCorta = iso => new Date(iso).toLocaleTimeString(localeDe(),
+  {hour:"2-digit", minute:"2-digit", hour12:false});
+
+/* El botón de una función. Es un enlace de verdad —no un div con onclick—
+   para que se pueda abrir en otra pestaña, y sale por urlSegura porque la
+   dirección la escribió el cine, no nosotros. */
+function botonHora(f){
+  const destino = urlSegura(f.url) || urlSegura(f.cine.url);
+  const etiqueta = [f.formato, f.idioma ? tr(f.idioma) : ""].filter(Boolean).join(" · ");
+  const nodo = document.createElement(destino ? "a" : "span");
+  nodo.className = "hora";
+  if(destino){
+    nodo.href = destino;
+    nodo.target = "_blank";
+    nodo.rel = "noopener noreferrer";
+    nodo.title = `${tr("compra")} — ${f.cine.nombre}`;
+  }
+  const hora = document.createElement("span");
+  hora.textContent = horaCorta(f.inicio);
+  nodo.appendChild(hora);
+  if(etiqueta){
+    const chico = document.createElement("small");
+    chico.textContent = etiqueta;
+    nodo.appendChild(chico);
+  }
+  return nodo;
+}
+
+function datosPeli(peli){
+  return [peli.clasificacion, peli.duracion ? `${peli.duracion} ${tr("min")}` : ""]
+    .filter(Boolean).join(" · ");
+}
+
+/* El afiche. Si el cine no publicó uno, no se inventa un cuadro gris con una
+   cámara: va la carita de la Cabra, que es lo que esta página usa cuando no
+   hay foto (la misma regla del blog con los organizadores sin foto). */
+function afiche(peli, ancho, alto){
+  const src = urlSegura(peli.poster);
+  if(src){
+    const img = document.createElement("img");
+    img.src = src; img.alt = ""; img.loading = "lazy"; img.decoding = "async";
+    img.width = ancho; img.height = alto;
+    return img;
+  }
+  const caja = document.createElement("div");
+  caja.style.cssText = `width:${ancho}px;height:${alto}px;flex:none;display:grid;
+    place-items:center;border:2px solid var(--contorno);border-radius:var(--r-sm);
+    background:var(--c-cine-suave)`;
+  caja.innerHTML = carita("cabra", "#7E1574", Math.round(ancho * .7));
+  return caja;
+}
+
+function tarjetaCine(cine, funciones){
+  const caja = document.createElement("article");
+  caja.className = "cine" + (cine.circuito === "arte" ? " arte" : "");
+  caja.id = "cine-" + cine.id;
+
+  const cab = document.createElement("div");
+  cab.className = "cine-cab";
+  const mascota = document.createElement("span");
+  mascota.className = "mascota";
+  mascota.innerHTML = carita(cine.circuito === "arte" ? "chinchilla" : "cabra",
+                             cine.circuito === "arte" ? "#1B6FD1" : "#A51D99", 30);
+  const texto = document.createElement("div");
+  const titulo = document.createElement("h3");
+  titulo.textContent = cine.nombre;
+  const donde = document.createElement("div");
+  donde.className = "cine-donde";
+  // La comuna solo se agrega si la dirección no la trae ya: Cinemark escribe
+  // "Av. Américo Vespucio 1501, Local CN 100, Cerrillos" y sin esto la línea
+  // terminaba en "Cerrillos · Cerrillos".
+  const sinTildes = x => String(x || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  const yaDice = cine.comuna && sinTildes(cine.direccion).includes(sinTildes(cine.comuna));
+  donde.textContent = [cine.direccion, yaDice ? "" : cine.comuna].filter(Boolean).join(" · ");
+  texto.append(titulo, donde);
+  cab.append(mascota, texto);
+
+  if(miPosicion && cine.lat != null){
+    const lejos = document.createElement("span");
+    lejos.className = "cine-lejos";
+    lejos.textContent = distanciaKm(miPosicion, [cine.lat, cine.lon]).toFixed(1) + " km";
+    cab.appendChild(lejos);
+  }
+  caja.appendChild(cab);
+
+  if(!funciones.length){
+    const nota = document.createElement("div");
+    nota.className = "sin-cartelera";
+    // "navegador" quiere decir que su cartelera no se puede leer desde un
+    // programa; cualquier otra cosa es que hoy no hay funciones cargadas.
+    nota.textContent = cine.funciones === 0 ? tr("sinCartelera") : tr("hoyNo");
+    const oficial = urlSegura(cine.url);
+    if(oficial){
+      const a = document.createElement("a");
+      a.href = oficial; a.target = "_blank"; a.rel = "noopener noreferrer";
+      a.textContent = " " + tr("verOficial") + " →";
+      nota.appendChild(a);
+    }
+    caja.appendChild(nota);
+    return caja;
+  }
+
+  // Dentro de la sala, una fila por película, con la primera función primero.
+  const porPeli = new Map();
+  funciones.forEach(f => {
+    if(!porPeli.has(f.peli.clave)) porPeli.set(f.peli.clave, []);
+    porPeli.get(f.peli.clave).push(f);
+  });
+  [...porPeli.values()]
+    .sort((a, b) => a[0].inicio.localeCompare(b[0].inicio))
+    .forEach(lista => {
+      const peli = lista[0].peli;
+      const fila = document.createElement("div");
+      fila.className = "peli";
+      const cab2 = document.createElement("div");
+      cab2.className = "peli-cab";
+      cab2.appendChild(afiche(peli, 34, 50));
+      const bloque = document.createElement("div");
+      const nombre = document.createElement("div");
+      nombre.className = "peli-nombre";
+      nombre.textContent = peli.titulo;
+      const datos = document.createElement("div");
+      datos.className = "peli-datos";
+      datos.textContent = datosPeli(peli);
+      bloque.append(nombre, datos);
+      cab2.appendChild(bloque);
+      fila.appendChild(cab2);
+
+      const horas = document.createElement("div");
+      horas.className = "horas";
+      lista.sort((a, b) => a.inicio.localeCompare(b.inicio))
+           .forEach(f => horas.appendChild(botonHora(f)));
+      fila.appendChild(horas);
+      caja.appendChild(fila);
+    });
+  return caja;
+}
+
+function tarjetaPelicula(peli, funciones){
+  const caja = document.createElement("article");
+  caja.className = "film";
+  caja.appendChild(afiche(peli, 66, 98));
+
+  const bloque = document.createElement("div");
+  bloque.style.minWidth = "0";
+  const titulo = document.createElement("h3");
+  titulo.textContent = peli.titulo;
+  const datos = document.createElement("div");
+  datos.className = "peli-datos";
+  datos.textContent = datosPeli(peli);
+  bloque.append(titulo, datos);
+
+  const porCine = new Map();
+  funciones.forEach(f => {
+    if(!porCine.has(f.cine.id)) porCine.set(f.cine.id, []);
+    porCine.get(f.cine.id).push(f);
+  });
+  [...porCine.entries()]
+    .sort((a, b) => ordenCines(cinePorId(a[0]), cinePorId(b[0])))
+    .forEach(([id, lista]) => {
+      const sala = document.createElement("div");
+      sala.className = "film-sala";
+      const nombre = document.createElement("b");
+      const cine = cinePorId(id);
+      nombre.textContent = miPosicion && cine.lat != null
+        ? `${cine.nombre} · ${distanciaKm(miPosicion, [cine.lat, cine.lon]).toFixed(1)} km`
+        : `${cine.nombre} · ${cine.comuna}`;
+      sala.appendChild(nombre);
+      const horas = document.createElement("div");
+      horas.className = "horas";
+      lista.sort((a, b) => a.inicio.localeCompare(b.inicio))
+           .forEach(f => horas.appendChild(botonHora(f)));
+      sala.appendChild(horas);
+      bloque.appendChild(sala);
+    });
+
+  caja.appendChild(bloque);
+  return caja;
+}
+
+/* El orden de las salas: si el navegador dio la posición, la más cerca
+   primero — que es la pregunta con la que la gente llega. Si no, la que más
+   funciones tiene, y el circuito de barrio antes que el mall a igualdad de
+   cartelera, porque es lo que no está en ninguna otra app. */
+function ordenCines(a, b){
+  if(!a || !b) return 0;
+  if(miPosicion && a.lat != null && b.lat != null){
+    return distanciaKm(miPosicion, [a.lat, a.lon]) - distanciaKm(miPosicion, [b.lat, b.lon]);
+  }
+  const fa = funcionesDe(a.id).length, fb = funcionesDe(b.id).length;
+  if(fa !== fb) return fb - fa;
+  if((a.circuito === "arte") !== (b.circuito === "arte")) return a.circuito === "arte" ? -1 : 1;
+  return a.nombre.localeCompare(b.nombre);
+}
+
+function pintarVista(){
+  const cont = document.getElementById("vista");
+  cont.innerHTML = [["cines", tr("cines")], ["peliculas", tr("peliculas")]]
+    .map(([clave, txt]) =>
+      `<button type="button" data-vista="${clave}" aria-pressed="${vista === clave}">${escapar(txt)}</button>`).join("");
+  cont.querySelectorAll("button").forEach(b => b.onclick = () => {
+    vista = b.dataset.vista; mostrando = 24; pintarLista();
+  });
+}
+
+function pintarLista(){
+  pintarVista();
+  const funciones = funcionesVisibles();
+  const cont = document.getElementById("lista");
+  cont.innerHTML = "";
+
+  const salasConFuncion = new Set(funciones.map(f => f.cine.id));
+  document.getElementById("conteo").textContent =
+    vista === "cines" ? salasConFuncion.size : new Set(funciones.map(f => f.peli.clave)).size;
+  document.getElementById("conteo-txt").textContent = vista === "cines"
+    ? (salasConFuncion.size === 1 ? tr("sala1") : tr("salas"))
+    : tr("enCartelera");
+
+  // La deuda se dice, no se esconde: cuántas salas están en el mapa sin
+  // horarios y por qué, y qué pasó con el permiso de ubicación.
+  const partes = [];
+  const mudas = cinesVisibles().filter(c => !salasConFuncion.has(c.id)).length;
+  if(mudas) partes.push(`${mudas} ${tr("sinHorarios")}`);
+  if(estadoGeo === "no") partes.push({es:"No pude leer tu ubicación; el orden es por cartelera.",
+    en:"Could not read your location; sorted by listings.",
+    pt:"Não consegui ler sua localização; a ordem é por programação."}[IDIOMA]);
+  document.getElementById("nota-geo").textContent = partes.join(" · ");
+
+  if(!funciones.length){
+    cont.innerHTML = `<div class="vacio">${cuerpo("cabra","var(--tinta-tenue)",96,{pose:"durmiendo"})}
+      <p><b>${escapar(tr("vacio"))}</b><br>${escapar(tr("vaciopista"))}</p></div>`;
+    return;
+  }
+
+  if(vista === "cines"){
+    // Primero las salas que hoy tienen función; las mudas van al final, que
+    // es donde sirven: cuando ya se miró lo que sí hay.
+    const conFuncion = cinesVisibles().filter(c => salasConFuncion.has(c.id)).sort(ordenCines);
+    const sinFuncion = cinesVisibles().filter(c => !salasConFuncion.has(c.id)).sort(ordenCines);
+    [...conFuncion, ...sinFuncion].slice(0, mostrando).forEach(cine =>
+      cont.appendChild(tarjetaCine(cine, funciones.filter(f => f.cine.id === cine.id))));
+    if(cinesVisibles().length > mostrando) cont.appendChild(botonVerMas(cinesVisibles().length));
+  } else {
+    const porPeli = new Map();
+    funciones.forEach(f => {
+      if(!porPeli.has(f.peli.clave)) porPeli.set(f.peli.clave, []);
+      porPeli.get(f.peli.clave).push(f);
+    });
+    [...porPeli.values()]
+      .sort((a, b) => b.length - a.length || a[0].peli.titulo.localeCompare(b[0].peli.titulo))
+      .slice(0, mostrando)
+      .forEach(lista => cont.appendChild(tarjetaPelicula(lista[0].peli, lista)));
+    if(porPeli.size > mostrando) cont.appendChild(botonVerMas(porPeli.size));
+  }
+
+  if(cont.querySelector(".fin-lista") === null) cont.appendChild(selloHonesto());
+}
+
+function botonVerMas(total){
+  const mas = document.createElement("div");
+  mas.className = "fin-lista";
+  mas.style.cssText = "padding:var(--e-5) 0;text-align:center";
+  const b = document.createElement("button");
+  b.type = "button";
+  b.className = "boton secundario";
+  b.textContent = `${t("verMas")} (${total - mostrando})`;
+  b.onclick = () => { mostrando += 24; pintarLista(); };
+  mas.appendChild(b);
+  return mas;
+}
+
+/* El pie honesto, igual que en talleres: lo que esta página NO hace. */
+function selloHonesto(){
+  const sello = document.createElement("div");
+  sello.style.cssText = "padding:var(--e-5) 0 0;text-align:center;font-size:var(--t-xs);color:var(--tinta-tenue);line-height:1.5";
+  const cara = document.createElement("div");
+  cara.innerHTML = carita("cabra","var(--tinta-tenue)",26);
+  const texto = document.createElement("p");
+  texto.style.margin = "6px 0 0";
+  texto.textContent = tr("ojo");
+  sello.append(cara, texto);
+  return sello;
+}
+
+/* --- Arrastre del panel: tres alturas, calcado de mapa.html --- */
+(() => {
+  const panel = document.getElementById("panel");
+  const tirador = document.getElementById("tirador");
+  const alturas = () => {
+    const disponible = panel.parentElement.clientHeight;
+    const reposo = Math.round(Math.min(268, Math.max(132, disponible * .40)));
+    return [reposo, Math.round(disponible * .62), Math.round(disponible * .88)];
+  };
+  let indice = 0, arrastrando = false, inicioY = 0, inicioAlto = 0;
+  const fijar = i => {
+    indice = Math.max(0, Math.min(2, i));
+    panel.style.setProperty("--alto-panel", alturas()[indice] + "px");
+  };
+  fijar(0);
+  tirador.addEventListener("pointerdown", e => {
+    arrastrando = true; inicioY = e.clientY; inicioAlto = panel.clientHeight;
+    panel.classList.add("arrastrando");
+    tirador.setPointerCapture(e.pointerId);
+  });
+  tirador.addEventListener("pointermove", e => {
+    if(!arrastrando) return;
+    const alto = Math.min(panel.parentElement.clientHeight * .88,
+                          Math.max(120, inicioAlto - (e.clientY - inicioY)));
+    panel.style.setProperty("--alto-panel", alto + "px");
+  });
+  const soltar = () => {
+    if(!arrastrando) return;
+    arrastrando = false;
+    panel.classList.remove("arrastrando");
+    const actual = panel.clientHeight;
+    const opciones = alturas();
+    fijar(opciones.indexOf(opciones.reduce((a,b) =>
+      Math.abs(b - actual) < Math.abs(a - actual) ? b : a)));
+  };
+  tirador.addEventListener("pointerup", soltar);
+  tirador.addEventListener("pointercancel", soltar);
+  tirador.addEventListener("click", () => { if(!arrastrando) fijar(indice === 2 ? 0 : indice + 1); });
+  tirador.addEventListener("keydown", e => {
+    if(e.key === "ArrowUp"){ e.preventDefault(); fijar(indice + 1); }
+    if(e.key === "ArrowDown"){ e.preventDefault(); fijar(indice - 1); }
+    if(e.key === "Enter" || e.key === " "){ e.preventDefault(); fijar(indice === 2 ? 0 : indice + 1); }
+  });
+  addEventListener("resize", () => fijar(indice));
+})();
+</script>
+<!-- Cloudflare Web Analytics: cuenta visitas sin cookies y sin huella
+     digital, así que el sitio no necesita banner de consentimiento. -->
+</body>
+</html>

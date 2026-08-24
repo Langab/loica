@@ -780,6 +780,64 @@ Para agregar un banco se edita `config/bancos.yaml`, pero a diferencia de las
 fuentes de eventos **sí hay que escribir un adaptador**: los tres publican
 formas distintas del mismo hecho y esa diferencia no se puede esconder en YAML.
 
+## El tercer catastro: la cartelera de cine
+
+Un pipeline aparte, como el de descuentos y por la misma razón: una cartelera
+son **miles de funciones que caducan en tres días**. Meterlas a
+`datos/eventos.jsonl` —la copia de la base que viaja en git y se comitea en
+cada corrida— habría hecho crecer el repositorio varios megas diarios para
+guardar lo que mañana ya no existe. Y la huella de deduplicación de un evento
+es (título, DÍA, lugar), así que las cinco funciones de la misma película el
+mismo día en la misma sala habrían colapsado en una.
+
+```bash
+python3 run_cine.py                  # corrida completa
+python3 run_cine.py --via jsonld     # una sola vía, para depurar
+python3 run_cine.py --probar         # muestra sin escribir el JSON
+python3 scripts/catastro_cines.py    # refresca el catastro de salas
+```
+
+Deja `web/cine.json`, que alimenta `web/cine.html` (mapa de salas + cartelera).
+Corre dentro de `run_todo.py` como paso 4, **después de exportar**, porque una
+de sus cuatro vías lee `web/eventos.json`.
+
+### Las cuatro vías, y por qué son cuatro
+
+| Vía | Salas | Cómo |
+|---|---|---|
+| `jsonld` | 8 | Cinemark publica `ScreeningEvent` de schema.org en el HTML de cada sala. Es el dato que ellos mismos publican para las máquinas: se lee con `requests` y punto. Una petición extra por película trae la clasificación y el idioma, que el JSON-LD no incluye. |
+| `semanal` | 2 | El Normandie y El Biógrafo publican **la semana**, no la función. Un parser por sala. |
+| `agenda` | 4 | La Cineteca Nacional, Matucana 100, el Centro Arte Alameda y el CCC ya llegan por las fuentes de siempre: se recogen de `web/eventos.json` y no se piden dos veces. |
+| `asistida` | 30 | Cineplanet y Cinépolis cierran su cartelera. Las mira una persona con el navegador siguiendo `datos/manual/_prompt_cine.md` y deja `datos/manual/cartelera_cines.csv`, que dispara la corrida al subirse. |
+
+**Por qué esas dos cadenas no se leen solas**, medido el 24-08-2026:
+Cineplanet entrega la cartelera solo a quien trae la cookie de sesión que su
+propio sitio planta en el navegador (la misma petición da 200 con cookie y 403
+sin ella, con cualquier user-agent), y la API de Cinépolis responde
+`401 Unauthorized access` porque pide un token. Las dos son puertas cerradas a
+propósito y el proyecto no las fuerza — la misma regla que con Passline. Sus
+30 salas igual salen **en el mapa con su dirección y el link a su cartelera
+oficial**, y la página lo dice con todas sus letras en vez de esconderlo.
+
+### El catastro de salas
+
+`config/cines.yaml` guarda las 44 salas de la Región Metropolitana con su
+coordenada, y ese archivo es el motivo por el que la página tiene mapa aunque
+ese día no se haya podido leer ninguna cartelera: una sala no es un evento,
+es una dirección que va a seguir ahí el año que viene.
+
+Lo arma `scripts/catastro_cines.py` con la lista oficial de Cinemark (que trae
+las coordenadas dentro del `googleMapsUrl`) y el índice OSM local, el mismo que
+geocodifica todo el pipeline. OSM tiene las salas de Cinépolis con el nombre de
+la cadena pelado —veinte pines que dicen "Cinepolis" y ninguno dice en qué mall
+está—, así que el nombre de cada una salió de cruzar su coordenada con el
+centro comercial que la contiene. Las seis que no tenían ningún mall a menos de
+350 m quedaron con `verificado: false`: es una pregunta abierta para la próxima
+extracción asistida, no un nombre inventado.
+
+Lo escrito a mano manda: el script rellena huecos y avisa de lo que cambió,
+pero no pisa una entrada con `verificado: true`.
+
 ## Estructura
 
 ```
@@ -791,9 +849,12 @@ loica/
   almacen.py     Base SQLite y estados de curaduría
   fuentes/       Un adaptador por tipo de fuente
   descuentos/    El catastro bancario: modelo, parseo y un adaptador por banco
+  cines.py       El catastro de salas de cine y cómo se le pega una función
+  cartelera/     Las cuatro vías de la cartelera: jsonld, semanal, agenda, asistida
 run_diario.py    Punto de entrada de los eventos
 run_descuentos.py Punto de entrada de los descuentos
-config/          Registro de fuentes y de bancos (esto es lo que se edita)
+run_cine.py      Punto de entrada de la cartelera de cine
+config/          Registro de fuentes, de bancos y de salas de cine (esto es lo que se edita)
 datos/           Base, caché y logs (fuera de git) + el estado que sí viaja: eventos.jsonl, coordenadas.json, historial_corridas.json, revision/, manual/
 informes/        Un informe por corrida
 ```
@@ -808,3 +869,10 @@ informes/        Un informe por corrida
   (`recoleta`/`recoleta_municipio`, etc.), todas inactivas: depurar antes de
   encenderlas.
 - La subida a Supabase todavía no está: hoy el destino es SQLite local.
+- El JSON-LD de Cinemark no declara el idioma de cada función: la ficha de la
+  película sí dice en qué idiomas se está dando, y de ahí se rescata solo
+  cuando la película se da en UNO —si está en doblada y subtitulada, cuál es
+  cada función no se sabe y la celda queda vacía a propósito.
+- El Biógrafo se actualiza los jueves y a veces se atrasa. Cuando la semana
+  publicada ya terminó, el adaptador devuelve cero y lo dice: no se manda a
+  nadie a una función de hace cinco días. Eso se arregla hablando con el cine.

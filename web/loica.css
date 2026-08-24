@@ -148,11 +148,24 @@
      con ninguno. Que además sea el color del aceite de oliva y de las hierbas
      es la razón por la que se prefirió al lila, que era el otro hueco. */
   --c-comer:#5C7A1E;     --c-comer-tinta:#47600F;
+  /* La Cabra. Es el único FUCSIA del sistema y no se eligió a ojo: con once
+     familias puestas, el hueco que quedaba se midió. Entre el morado de las
+     fiestas (H264) y el magenta de las charlas (H337) hay setenta grados sin
+     nadie, y este cae en H305, a más de treinta de cada vecino en las DOS
+     versiones —la de relleno y la clara del modo oscuro—, que es donde suelen
+     chocar los colores nuevos: uno elige un relleno que se distingue y su
+     versión clara termina idéntica a la del vecino.
+     El otro hueco grande era el verde hierba, y se descartó por lo mismo que
+     dice la nota del Degú: ya hay dos verdes hablando (el del Pudú dice
+     "gratis" y el de la Bandurria dice "comer") y un tercero no se lee como
+     una familia nueva sino como uno de los dos mal impreso. */
+  --c-cine:#A51D99;      --c-cine-tinta:#7E1574;
   --c-fiesta-suave:var(--morado-200); --c-musica-suave:var(--rojo-200);
   --c-cultura-suave:var(--lapis-200); --c-clases-suave:var(--naranjo-200);
   --c-libre-suave:var(--verde-200);   --c-otros-suave:var(--amarillo-200);
   --c-deporte-suave:#BFE6EA;          --c-charla-suave:#F7CBDC;
   --c-descuento-suave:#F0D8BE;        --c-comer-suave:#D9E6A8;
+  --c-cine-suave:#F1D0EE;
 }
 /* En oscuro la tinta se invierte: sobre azul-950 el que falla es el oscuro.
    Se usa el relleno fuerte, que ahí sí pasa de sobra. */
@@ -161,12 +174,14 @@
     --c-clases-tinta:#F6B65E; --c-libre-tinta:#5FC79B; --c-deporte-tinta:#5FC8D6;
     --c-charla-tinta:#EE8FB4; --c-otros-tinta:#FAD391;
     --c-descuento-tinta:#E0A063; --c-comer-tinta:#A8C64F;
+    --c-cine-tinta:#E052D4;
   }
 :root[data-tema="oscuro"]{
   --c-fiesta-tinta:#A893E7; --c-musica-tinta:#F47662; --c-cultura-tinta:#7DA5D5;
   --c-clases-tinta:#F6B65E; --c-libre-tinta:#5FC79B; --c-deporte-tinta:#5FC8D6;
   --c-charla-tinta:#EE8FB4; --c-otros-tinta:#FAD391;
   --c-descuento-tinta:#E0A063; --c-comer-tinta:#A8C64F;
+  --c-cine-tinta:#E052D4;
 }
 
 /* ---------- 2. BASE ---------- */
@@ -242,19 +257,34 @@ img{max-width:100%;display:block}
     height:calc(var(--alto-nav) + env(safe-area-inset-bottom));
     box-sizing:border-box;
   }
-  /* Ocho destinos: a 375px cada celda queda en 47px, así que el texto baja
-     a 9.5px y el ícono a 21. El alto se respeta igual — es el área táctil y
-     esa no se negocia. La etiqueta no envuelve nunca: prefiero que se corte
-     a que la barra crezca a dos líneas.
+  /* La barra SE DESLIZA, y esa fue la única salida honesta.
+     Con ocho destinos cada celda quedaba en 47px a 375px de ancho, que ya era
+     el límite; el noveno la bajó a 41 y el cine —el décimo— la habría dejado
+     en 37, bien debajo de los 44px que mide un dedo. Repartir diez celdas en
+     una pantalla de teléfono no se puede, así que en vez de encoger el área
+     táctil hasta que deje de funcionar, la fila se desliza: cada celda tiene
+     un ancho mínimo de 54px, se ven las primeras y las demás llegan
+     arrastrando. Nada se esconde en un menú y ningún destino queda con un
+     área táctil que no se puede apretar.
 
-     Es una REJILLA y no una columna flex por una razón concreta: el ícono de
+     `scroll-snap` alinea las celdas al soltar para que ninguna quede cortada
+     a la mitad, que es lo que hace que una fila deslizable se lea como un
+     error de maquetación. */
+  .nav-inferior{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;
+    scroll-snap-type:x proximity;overscroll-behavior-x:contain}
+  .nav-inferior::-webkit-scrollbar{display:none}
+
+  /* Es una REJILLA y no una columna flex por una razón concreta: el ícono de
      la página activa lleva pastilla y mide 30px contra los 21 de los demás.
      En flex ese ícono estiraba la fila entera, la barra pasaba de 54 a 65px
-     y las seis reservas de espacio calculadas sobre 52 quedaban cortas: la
-     última línea de cada página terminaba debajo de la barra. Con la primera
-     fila fijada en 30px la altura es la misma haya pastilla o no. */
+     y las reservas de espacio calculadas sobre 52 quedaban cortas: la última
+     línea de cada página terminaba debajo de la barra. Con la primera fila
+     fijada en 30px la altura es la misma haya pastilla o no.
+
+     La etiqueta no envuelve nunca: prefiero que se corte a que la barra
+     crezca a dos líneas. */
   .nav-inferior a{
-    flex:1;min-width:0;position:relative;
+    flex:1 0 auto;min-width:54px;position:relative;scroll-snap-align:center;
     display:grid;grid-template-rows:30px auto;gap:2px;
     justify-items:center;align-content:center;
     height:100%;padding:0 2px;
@@ -294,6 +324,7 @@ img{max-width:100%;display:block}
 /* Comer se lleva el oliva de la Bandurria. Al lado de los descuentos —que son
    café— se distinguen: uno es la tarjeta del banco, el otro es la mesa. */
 :root[data-pagina="comer"]      {--nav-color:var(--c-comer);  --nav-tinta:var(--arena-50)}
+:root[data-pagina="cine"]       {--nav-color:var(--c-cine);   --nav-tinta:var(--arena-50)}
 
 .idiomas{display:flex;gap:2px}
 .idiomas button, .tema{
@@ -660,6 +691,17 @@ img{max-width:100%;display:block}
 @keyframes m-colita{from{transform:rotate(-10deg)}to{transform:rotate(14deg)}}
 .masc-quiltro.anima .p-lengua{transform-origin:50% 0%;animation:m-jadeo .55s ease-in-out var(--d,0s) infinite alternate}
 @keyframes m-jadeo{from{transform:scaleY(.78)}to{transform:scaleY(1.08)}}
+/* Cabra: mastica sin parar. Las cabras mastican siempre, y ésta además llegó
+   con las cabritas, así que la chiva se mueve corto y rápido y la caja se
+   sacude cada tanto — el gesto de meter la mano y no encontrar el fondo. */
+.masc-cabra.anima .p-chiva{transform-origin:50% 0%;animation:m-mastica 1.05s ease-in-out var(--d,0s) infinite alternate}
+@keyframes m-mastica{from{transform:translateY(0) rotate(-2.5deg)}to{transform:translateY(.4px) rotate(2.5deg)}}
+.masc-cabra.anima .p-cabritas{transform-origin:50% 100%;animation:m-manotazo 3.1s ease-in-out var(--d,0s) infinite}
+@keyframes m-manotazo{0%,70%,100%{transform:rotate(0)}78%{transform:rotate(-6deg)}88%{transform:rotate(4deg)}}
+/* Los lentes 3D atrapan el reflejo de la pantalla, que es lo único que
+   ilumina una sala a oscuras. */
+.masc-cabra.anima .p-lentes{animation:m-pantalla 6.2s ease-in-out var(--d,0s) infinite}
+@keyframes m-pantalla{0%,72%,100%{opacity:1}80%{opacity:.72}88%{opacity:1}}
 /* Aves en vuelo: aleteo en dos cuadros, corte seco = dibujado, no interpolado */
 .masc.anima[data-pose="volando"] .p-ala,.masc.anima[data-pose="celebrando"] .p-ala{animation:m-aleteo .22s steps(1) var(--d,0s) infinite}
 .masc.anima .p-ala-i{transform-origin:100% 100%}.masc.anima .p-ala-d{transform-origin:0% 100%}
@@ -690,6 +732,10 @@ img{max-width:100%;display:block}
 /* El Quiltro no entra: ya estaba. Solo se sacude cuando llegan los demás. */
 .entra .masc-quiltro{animation:m-sacudida .6s ease-in-out calc(var(--d,0s) + .2s) backwards}
 @keyframes m-sacudida{0%,100%{transform:rotate(0)}25%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}75%{transform:rotate(-3deg)}}
+/* La Cabra llega tarde y se sienta: entra desde abajo, con la sala ya a
+   oscuras, y se acomoda. Es la única entrada que empieza en negro. */
+.entra .masc-cabra{animation:m-butaca .85s cubic-bezier(.34,1.4,.64,1) calc(var(--d,0s) + .15s) backwards}
+@keyframes m-butaca{from{transform:translateY(52%) scale(.88);opacity:0}45%{opacity:1}to{transform:none}}
 /* Reacciones: celebra (un brinco con rebote) y se duerme (se hunde) */
 .masc.celebra{animation:m-celebra .6s cubic-bezier(.34,1.56,.64,1)}
 @keyframes m-celebra{0%{transform:none}40%{transform:translateY(-14%) rotate(-6deg)}70%{transform:translateY(0) rotate(4deg)}100%{transform:none}}

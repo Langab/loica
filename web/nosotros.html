@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=23">
+<link rel="stylesheet" href="loica.css?v=24">
 <style>
   body{overflow-x:hidden}
 
@@ -250,7 +250,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegacion principal"></nav>
 
-<script src="loica.js?v=23"></script>
+<script src="loica.js?v=24"></script>
 <script>
 const TX = {
   es:{
@@ -279,7 +279,8 @@ const TX = {
       ["loica","La Loica","La anfitriona","El pájaro que le da el nombre a esto. Pecho rojo encendido, parada en los alambrados de cualquier camino del campo chileno. Es el pin que ves en el mapa."],
       ["condor","El Cóndor","Música","Tres metros de ala y horas planeando sin batirlas, mirando desde arriba. Le tocaron las tocatas, los conciertos y los festivales."],
       ["culpeo","El Culpeo","Fiestas","El zorro grande de Chile: sale de noche y se mueve por donde nadie está mirando. Se quedó con las fiestas."],
-      ["chinchilla","La Chinchilla","Cultura","Chilena, nocturna y en peligro; tiene el pelaje más denso de los mamíferos terrestres, decenas de pelos saliendo de un mismo folículo. Le tocó el teatro, el cine, el arte y las charlas."],
+      ["chinchilla","La Chinchilla","Cultura","Chilena, nocturna y en peligro; tiene el pelaje más denso de los mamíferos terrestres, decenas de pelos saliendo de un mismo folículo. Le tocó el teatro, el arte y las charlas."],
+      ["cabra","La Cabra","Cine","En Chile a las palomitas les dicen cabritas, y con eso bastaba. Le tocó el cine entero: las doce salas del mall y el circuito de barrio, que es donde dan lo que no llega a ninguna otra parte."],
       ["chincol","El Chincol","Barrio","Canta en cualquier plaza de Santiago a las siete de la mañana, se lo hayas pedido o no. Anda justo donde pasan las clases, los talleres y las ferias."],
       ["pudu","El Pudú","Aire libre","El ciervo más chico del mundo: no llega al medio metro y vive metido en el bosque. Cuida lo que pasa sin techo — cerros, parques, caminatas y plazas."],
       ["degu","El Degú","Gratis","El roedor del matorral de Santiago, el que anda por el San Cristóbal a pleno sol sin pagarle la entrada a nadie. Cuida los panoramas que no cuestan nada."],
@@ -319,7 +320,8 @@ const TX = {
       ["loica","The Loica","Your host","The bird this is named after. Bright red breast, perched on the fence wires of any country road in Chile. It is the pin you see on the map."],
       ["condor","The Cóndor","Music","Three metres of wing, and hours of gliding without a single flap, watching from above. It got the gigs, the concerts and the festivals."],
       ["culpeo","The Culpeo","Parties","Chile's big fox: out at night, moving through the places nobody is watching. It kept the parties."],
-      ["chinchilla","The Chinchilla","Culture","Chilean, nocturnal and endangered; it has the densest fur of any land mammal, dozens of hairs growing from a single follicle. It got theatre, film, art and talks."],
+      ["chinchilla","The Chinchilla","Culture","Chilean, nocturnal and endangered; it has the densest fur of any land mammal, dozens of hairs growing from a single follicle. It got theatre, art and talks."],
+      ["cabra","The Goat","Cinema","In Chile popcorn is called cabritas — little goats — and that settled it. She got cinema whole: the twelve screens at the mall and the arthouse circuit, which is where the films that reach nowhere else are shown."],
       ["chincol","The Chincol","Neighbourhood","Sings in every square in Santiago at seven in the morning, whether you asked for it or not. Which is exactly where the classes, workshops and street fairs happen."],
       ["pudu","The Pudú","Outdoors","The smallest deer in the world, under half a metre tall, living deep in the forest. It looks after everything that happens without a roof — hills, parks, walks and squares."],
       ["degu","The Degu","Free","The rodent of the Santiago scrubland, the one you see on Cerro San Cristóbal in broad daylight without paying anyone admission. It looks after everything that costs nothing."],
@@ -359,7 +361,8 @@ const TX = {
       ["loica","A Loica","A anfitriã","O pássaro que dá nome a isto. Peito vermelho aceso, pousada nos arames de qualquer estrada de campo do Chile. É o pin que você vê no mapa."],
       ["condor","O Cóndor","Música","Três metros de asa e horas planando sem bater nenhuma, olhando de cima. Ficou com os shows, os concertos e os festivais."],
       ["culpeo","O Culpeo","Festas","A raposa grande do Chile: sai de noite e circula por onde ninguém está olhando. Ficou com as festas."],
-      ["chinchilla","A Chinchilla","Cultura","Chilena, noturna e ameaçada; tem a pelagem mais densa entre os mamíferos terrestres, dezenas de pelos saindo de um mesmo folículo. Ficou com o teatro, o cinema, a arte e as palestras."],
+      ["chinchilla","A Chinchilla","Cultura","Chilena, noturna e ameaçada; tem a pelagem mais densa entre os mamíferos terrestres, dezenas de pelos saindo de um mesmo folículo. Ficou com o teatro, a arte e as palestras."],
+      ["cabra","A Cabra","Cinema","No Chile a pipoca se chama cabritas — cabrinhas — e isso bastou. Ficou com o cinema inteiro: as doze salas do shopping e o circuito de bairro, que é onde passa o que não chega a nenhum outro lugar."],
       ["chincol","O Chincol","Bairro","Canta em qualquer praça de Santiago às sete da manhã, você tendo pedido ou não. Bem onde acontecem as aulas, as oficinas e as feiras."],
       ["pudu","O Pudú","Ar livre","O menor cervo do mundo: não chega a meio metro e vive enfiado na mata. Cuida do que acontece sem teto — morros, parques, caminhadas e praças."],
       ["degu","O Degu","De graça","O roedor do matagal de Santiago, aquele que anda pelo Cerro San Cristóbal em pleno sol sem pagar entrada a ninguém. Cuida do que não custa nada."],
@@ -382,6 +385,7 @@ const PALETA = {
   condor:    {tono:"var(--c-musica)",   suave:"var(--c-musica-suave)"},
   culpeo:    {tono:"var(--c-fiesta)",   suave:"var(--c-fiesta-suave)"},
   chinchilla:{tono:"var(--c-cultura)",  suave:"var(--c-cultura-suave)"},
+  cabra:     {tono:"var(--c-cine)",     suave:"var(--c-cine-suave)"},
   chincol:   {tono:"var(--c-clases)",   suave:"var(--c-clases-suave)"},
   pudu:      {tono:"var(--c-libre)",    suave:"var(--c-libre-suave)"},
   guaren:    {tono:"var(--c-descuento)",suave:"var(--c-descuento-suave)"},

@@ -1,0 +1,6076 @@
+{
+ "generado": "2026-08-24T18:13:42",
+ "dias": 4,
+ "total_funciones": 630,
+ "cines": [
+  {
+   "id": "cinemark-mallplaza-oeste",
+   "nombre": "Cinemark Mallplaza Oeste",
+   "cadena": "cinemark",
+   "circuito": "comercial",
+   "direccion": "Av. Américo Vespucio 1501, Local CN 100, 200 y 300, Cerrillos",
+   "comuna": "Cerrillos",
+   "lat": -33.515547,
+   "lon": -70.721491,
+   "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste",
+   "formatos": "PALCO | 3D | 2D | PLAY | XD | DBOX",
+   "funciones": 127
+  },
+  {
+   "id": "cinemark-alto-las-condes",
+   "nombre": "Cinemark Alto Las Condes",
+   "cadena": "cinemark",
+   "circuito": "comercial",
+   "direccion": "Avenida Kennedy 9001, Local 3092, Las Condes",
+   "comuna": "Las Condes",
+   "lat": -33.391198,
+   "lon": -70.547522,
+   "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes",
+   "formatos": "3D | 2D | XD | PRE | DBOX",
+   "funciones": 107
+  },
+  {
+   "id": "cinemark-mallplaza-vespucio",
+   "nombre": "Cinemark Mallplaza Vespucio",
+   "cadena": "cinemark",
+   "circuito": "comercial",
+   "direccion": "Av. Vicuña Mackenna 7110, Local 158, La Florida",
+   "comuna": "La Florida",
+   "lat": -33.51695,
+   "lon": -70.599966,
+   "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio",
+   "formatos": "3D | 2D | PRE | DBOX | IMAX | 4D",
+   "funciones": 93
+  },
+  {
+   "id": "cinemark-mallplaza-norte",
+   "nombre": "Cinemark Mallplaza Norte",
+   "cadena": "cinemark",
+   "circuito": "comercial",
+   "direccion": "Av. Américo Vespucio 1737, Local C6, Huechuraba",
+   "comuna": "Huechuraba",
+   "lat": -33.364387,
+   "lon": -70.680307,
+   "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte",
+   "formatos": "3D | 2D | XD | DBOX",
+   "funciones": 77
+  },
+  {
+   "id": "cinemark-portal-nunoa",
+   "nombre": "Cinemark Portal Ñuñoa",
+   "cadena": "cinemark",
+   "circuito": "comercial",
+   "direccion": "Av. José Pedro Alessandri 1166, Local 4033, Ñuñoa",
+   "comuna": "Ñuñoa",
+   "lat": -33.465493,
+   "lon": -70.600017,
+   "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa",
+   "formatos": "2D",
+   "funciones": 62
+  },
+  {
+   "id": "cinemark-mid-mall-maipu",
+   "nombre": "Cinemark Mid Mall Maipú",
+   "cadena": "cinemark",
+   "circuito": "comercial",
+   "direccion": "Camino a Melipilla 15.900, Maipú",
+   "comuna": "Maipú",
+   "lat": -33.538726,
+   "lon": -70.773205,
+   "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu",
+   "formatos": "2D | XD",
+   "funciones": 59
+  },
+  {
+   "id": "cinemark-mallplaza-tobalaba",
+   "nombre": "Cinemark Mallplaza Tobalaba",
+   "cadena": "cinemark",
+   "circuito": "comercial",
+   "direccion": "Av. Camilo Henríquez 3690, Puente Alto",
+   "comuna": "Puente Alto",
+   "lat": -33.569024,
+   "lon": -70.560564,
+   "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba",
+   "formatos": "2D | XD",
+   "funciones": 51
+  },
+  {
+   "id": "cinemark-gran-avenida",
+   "nombre": "Cinemark Gran Avenida",
+   "cadena": "cinemark",
+   "circuito": "comercial",
+   "direccion": "Gran Avenida José Miguel Carrera 6150, Local 1216",
+   "comuna": "San Miguel",
+   "lat": -33.511696,
+   "lon": -70.65934,
+   "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida",
+   "formatos": "3D | 2D",
+   "funciones": 35
+  },
+  {
+   "id": "cine-arte-normandie",
+   "nombre": "Cine Arte Normandie",
+   "cadena": "independiente",
+   "circuito": "arte",
+   "direccion": "Tarapacá 1181",
+   "comuna": "Santiago",
+   "lat": -33.447383,
+   "lon": -70.652052,
+   "url": "https://normandie.cl/cartelera/",
+   "formatos": "",
+   "funciones": 10
+  },
+  {
+   "id": "centro-arte-alameda-sala-ceina",
+   "nombre": "Centro Arte Alameda — Sala CEINA",
+   "cadena": "independiente",
+   "circuito": "arte",
+   "direccion": "Arturo Prat 33",
+   "comuna": "Santiago",
+   "lat": -33.445308,
+   "lon": -70.650245,
+   "url": "https://centroartealameda.cl/",
+   "formatos": "",
+   "funciones": 7
+  },
+  {
+   "id": "cineplanet-mall-barrio-independencia",
+   "nombre": "Cineplanet Mall Barrio Independencia",
+   "cadena": "cineplanet",
+   "circuito": "comercial",
+   "direccion": "Avenida Independencia 565",
+   "comuna": "Independencia",
+   "lat": -33.424787,
+   "lon": -70.654398,
+   "url": "https://www.cineplanet.cl/",
+   "formatos": "",
+   "funciones": 1
+  },
+  {
+   "id": "cinepolis-vivo-imperio",
+   "nombre": "Cinépolis Vivo Imperio",
+   "cadena": "cinepolis",
+   "circuito": "comercial",
+   "direccion": "Huérfanos",
+   "comuna": "Santiago",
+   "lat": -33.43956,
+   "lon": -70.648549,
+   "url": "https://cinepolis.com/cl",
+   "formatos": "",
+   "funciones": 1
+  },
+  {
+   "id": "centro-cine-creacion",
+   "nombre": "Centro de Cine y Creación",
+   "cadena": "independiente",
+   "circuito": "arte",
+   "direccion": "Raulí 571",
+   "comuna": "Santiago",
+   "lat": -33.449322,
+   "lon": -70.636581,
+   "url": "https://centrodecineycreacion.cl/",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cine-mayo",
+   "nombre": "Cine Mayo",
+   "cadena": "independiente",
+   "circuito": "arte",
+   "direccion": "",
+   "comuna": "Santiago",
+   "lat": -33.437032,
+   "lon": -70.649528,
+   "url": "",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cine-uc",
+   "nombre": "Cine UC",
+   "cadena": "independiente",
+   "circuito": "arte",
+   "direccion": "",
+   "comuna": "Santiago",
+   "lat": -33.441113,
+   "lon": -70.641241,
+   "url": "",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cineplanet-alameda",
+   "nombre": "Cineplanet Alameda",
+   "cadena": "cineplanet",
+   "circuito": "comercial",
+   "direccion": "Avenida Libertador Bernardo O'Higgins",
+   "comuna": "Estación Central",
+   "lat": -33.452882,
+   "lon": -70.682639,
+   "url": "https://www.cineplanet.cl/",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cineplanet-costanera-center",
+   "nombre": "Cineplanet Costanera Center",
+   "cadena": "cineplanet",
+   "circuito": "comercial",
+   "direccion": "Avenida Andrés Bello 2461",
+   "comuna": "Providencia",
+   "lat": -33.41824,
+   "lon": -70.606685,
+   "url": "https://www.cineplanet.cl/",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cineplanet-florida-center",
+   "nombre": "Cineplanet Florida Center",
+   "cadena": "cineplanet",
+   "circuito": "comercial",
+   "direccion": "Avenida Vicuña Mackenna Oriente 6100",
+   "comuna": "La Florida",
+   "lat": -33.509389,
+   "lon": -70.608215,
+   "url": "https://www.cineplanet.cl/",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cineplanet-lo-barnechea-lo-barnechea",
+   "nombre": "Cineplanet Lo Barnechea",
+   "cadena": "cineplanet",
+   "circuito": "comercial",
+   "direccion": "Avenida La Dehesa 1445",
+   "comuna": "Lo Barnechea",
+   "lat": -33.356937,
+   "lon": -70.514246,
+   "url": "https://www.cineplanet.cl/",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cineplanet-quilin",
+   "nombre": "Cineplanet Quilín",
+   "cadena": "cineplanet",
+   "circuito": "comercial",
+   "direccion": "Avenida Américo Vespucio 3300",
+   "comuna": "Peñalolén",
+   "lat": -33.487672,
+   "lon": -70.57702,
+   "url": "https://www.cineplanet.cl/",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cineteca-nacional",
+   "nombre": "Cineteca Nacional de Chile",
+   "cadena": "independiente",
+   "circuito": "arte",
+   "direccion": "Plaza de la Ciudadanía 26",
+   "comuna": "Santiago",
+   "lat": -33.443503,
+   "lon": -70.653646,
+   "url": "https://www.cclm.cl/cineteca-nacional/",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cinepolis-arauco-maipu",
+   "nombre": "Cinépolis Arauco Maipú",
+   "cadena": "cinepolis",
+   "circuito": "comercial",
+   "direccion": "Avenida Américo Vespucio 399",
+   "comuna": "Maipú",
+   "lat": -33.482283,
+   "lon": -70.751675,
+   "url": "https://cinepolis.com/cl",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cinepolis-arauco-quilicura",
+   "nombre": "Cinépolis Arauco Quilicura",
+   "cadena": "cinepolis",
+   "circuito": "comercial",
+   "direccion": "Avenida Bernardo O'Higgins 581",
+   "comuna": "Quilicura",
+   "lat": -33.369017,
+   "lon": -70.729747,
+   "url": "https://cinepolis.com/cl",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cinepolis-casacostanera",
+   "nombre": "Cinépolis Casacostanera",
+   "cadena": "cinepolis",
+   "circuito": "comercial",
+   "direccion": "Avenida Nueva Costanera 3900",
+   "comuna": "Vitacura",
+   "lat": -33.398404,
+   "lon": -70.599077,
+   "url": "https://cinepolis.com/cl",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cinepolis-la-reina-la-reina",
+   "nombre": "Cinépolis La Reina",
+   "cadena": "cinepolis",
+   "circuito": "comercial",
+   "direccion": "Avenida Ossa 655",
+   "comuna": "La Reina",
+   "lat": -33.447352,
+   "lon": -70.570946,
+   "url": "https://cinepolis.com/cl",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cinepolis-maipu-maipu",
+   "nombre": "Cinépolis Maipú",
+   "cadena": "cinepolis",
+   "circuito": "comercial",
+   "direccion": "Avenida Lo Espejo",
+   "comuna": "Maipú",
+   "lat": -33.523924,
+   "lon": -70.733424,
+   "url": "https://cinepolis.com/cl",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cinepolis-mallplaza-egana",
+   "nombre": "Cinépolis Mallplaza Egaña",
+   "cadena": "cinepolis",
+   "circuito": "comercial",
+   "direccion": "Avenida Larraín 5862",
+   "comuna": "La Reina",
+   "lat": -33.452112,
+   "lon": -70.569763,
+   "url": "https://cinepolis.com/cl",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cinepolis-mallplaza-sur",
+   "nombre": "Cinépolis Mallplaza Sur",
+   "cadena": "cinepolis",
+   "circuito": "comercial",
+   "direccion": "Avenida Presidente Jorge Alessandri Rodríguez 20040",
+   "comuna": "San Bernardo",
+   "lat": -33.632071,
+   "lon": -70.710632,
+   "url": "https://cinepolis.com/cl",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cinepolis-melipilla",
+   "nombre": "Cinépolis Melipilla",
+   "cadena": "cinepolis",
+   "circuito": "comercial",
+   "direccion": "Vicuña Mackenna 01372",
+   "comuna": "Melipilla",
+   "lat": -33.680039,
+   "lon": -71.185321,
+   "url": "https://cinepolis.com/cl",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cinepolis-melipilla-serrano-395",
+   "nombre": "Cinépolis Melipilla (Serrano 395)",
+   "cadena": "cinepolis",
+   "circuito": "comercial",
+   "direccion": "Serrano 395",
+   "comuna": "Melipilla",
+   "lat": -33.684391,
+   "lon": -71.213087,
+   "url": "https://cinepolis.com/cl",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cinepolis-parque-arauco",
+   "nombre": "Cinépolis Parque Arauco",
+   "cadena": "cinepolis",
+   "circuito": "comercial",
+   "direccion": "Avenida Presidente Kennedy 5413",
+   "comuna": "Las Condes",
+   "lat": -33.402063,
+   "lon": -70.577962,
+   "url": "https://cinepolis.com/cl",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cinepolis-paseo-los-dominicos",
+   "nombre": "Cinépolis Paseo Los Dominicos",
+   "cadena": "cinepolis",
+   "circuito": "comercial",
+   "direccion": "Camino El Alba 11969",
+   "comuna": "Las Condes",
+   "lat": -33.401926,
+   "lon": -70.514487,
+   "url": "https://cinepolis.com/cl",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cinepolis-paseo-los-trapenses",
+   "nombre": "Cinépolis Paseo Los Trapenses",
+   "cadena": "cinepolis",
+   "circuito": "comercial",
+   "direccion": "Avenida Los Trapenses 3515",
+   "comuna": "Lo Barnechea",
+   "lat": -33.343366,
+   "lon": -70.54443,
+   "url": "https://cinepolis.com/cl",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cinepolis-paseo-san-bernardo",
+   "nombre": "Cinépolis Paseo San Bernardo",
+   "cadena": "cinepolis",
+   "circuito": "comercial",
+   "direccion": "Eyzaguirre",
+   "comuna": "San Bernardo",
+   "lat": -33.595315,
+   "lon": -70.707047,
+   "url": "https://cinepolis.com/cl",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cinepolis-plaza-los-dominicos",
+   "nombre": "Cinépolis Plaza Los Dominicos",
+   "cadena": "cinepolis",
+   "circuito": "comercial",
+   "direccion": "Avenida Padre Hurtado Sur 875",
+   "comuna": "Las Condes",
+   "lat": -33.415071,
+   "lon": -70.541222,
+   "url": "https://cinepolis.com/cl",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cinepolis-portal-exposicion",
+   "nombre": "Cinépolis Portal Exposición",
+   "cadena": "cinepolis",
+   "circuito": "comercial",
+   "direccion": "",
+   "comuna": "Estación Central",
+   "lat": -33.452941,
+   "lon": -70.678365,
+   "url": "https://cinepolis.com/cl",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cinepolis-puente-alto-puente-alto",
+   "nombre": "Cinépolis Puente Alto",
+   "cadena": "cinepolis",
+   "circuito": "comercial",
+   "direccion": "",
+   "comuna": "Puente Alto",
+   "lat": -33.599857,
+   "lon": -70.574942,
+   "url": "https://cinepolis.com/cl",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cinepolis-puente-alto-independencia",
+   "nombre": "Cinépolis Puente Alto (Independencia)",
+   "cadena": "cinepolis",
+   "circuito": "comercial",
+   "direccion": "Independencia",
+   "comuna": "Puente Alto",
+   "lat": -33.600921,
+   "lon": -70.579137,
+   "url": "https://cinepolis.com/cl",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cinepolis-terrazas-maipu",
+   "nombre": "Cinépolis Terrazas Maipú",
+   "cadena": "cinepolis",
+   "circuito": "comercial",
+   "direccion": "",
+   "comuna": "Maipú",
+   "lat": -33.500685,
+   "lon": -70.75646,
+   "url": "https://cinepolis.com/cl",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cinepolis-vivo-outlet-la-florida",
+   "nombre": "Cinépolis Vivo Outlet La Florida",
+   "cadena": "cinepolis",
+   "circuito": "comercial",
+   "direccion": "Rojas Magallanes 1856",
+   "comuna": "La Florida",
+   "lat": -33.535086,
+   "lon": -70.571017,
+   "url": "https://cinepolis.com/cl",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "el-biografo",
+   "nombre": "El Biógrafo",
+   "cadena": "independiente",
+   "circuito": "arte",
+   "direccion": "José Victorino Lastarria 181",
+   "comuna": "Santiago",
+   "lat": -33.438493,
+   "lon": -70.640977,
+   "url": "https://elbiografo.cl/",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "muvix-cinema",
+   "nombre": "MUVIX Cinema",
+   "cadena": "independiente",
+   "circuito": "comercial",
+   "direccion": "Avenida Alcalde Carlos Valdovinos 200",
+   "comuna": "San Joaquín",
+   "lat": -33.486801,
+   "lon": -70.62737,
+   "url": "https://muvix.cl/",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "sala-cine-m100",
+   "nombre": "Sala de Cine Matucana 100",
+   "cadena": "independiente",
+   "circuito": "arte",
+   "direccion": "Av. Matucana 100",
+   "comuna": "Estación Central",
+   "lat": -33.444483,
+   "lon": -70.679953,
+   "url": "https://www.m100.cl/",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "zoocine",
+   "nombre": "ZooCine",
+   "cadena": "independiente",
+   "circuito": "arte",
+   "direccion": "",
+   "comuna": "Santiago",
+   "lat": -33.429932,
+   "lon": -70.634156,
+   "url": "",
+   "formatos": "",
+   "funciones": 0
+  }
+ ],
+ "peliculas": [
+  {
+   "clave": "spider-man-un-nuevo-dia",
+   "titulo": "Spider-Man: Un Nuevo Día",
+   "poster": "https://cdn.cinemark.cl/content/posters/HO00015116.jpg",
+   "duracion": 144,
+   "clasificacion": "TE+7",
+   "cines": [
+    "cinemark-alto-las-condes",
+    "cinemark-gran-avenida",
+    "cinemark-mallplaza-norte",
+    "cinemark-mallplaza-oeste",
+    "cinemark-mallplaza-tobalaba",
+    "cinemark-mallplaza-vespucio",
+    "cinemark-mid-mall-maipu",
+    "cinemark-portal-nunoa"
+   ],
+   "funciones": [
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-24T17:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T17:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "13",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-24T18:00",
+     "formato": "3D + PREMIER",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-24T18:00",
+     "formato": "3D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-24T18:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-24T18:20",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-24T18:30",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T18:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "12",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-24T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-24T18:40",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T18:50",
+     "formato": "3D + PALCO",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-24T18:50",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-24T19:00",
+     "formato": "3D + PREMIER",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-24T19:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-24T19:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-24T19:10",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-24T19:10",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T19:20",
+     "formato": "2D + XD + DBOX + PALCO",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-24T19:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-24T20:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-24T20:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-24T20:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-24T20:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-24T20:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-24T20:20",
+     "formato": "3D + DBOX",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T20:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "14",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-24T20:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-24T20:30",
+     "formato": "4D + 3D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-24T21:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-24T21:00",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-24T21:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-24T21:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-24T21:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-24T21:10",
+     "formato": "3D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T21:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "13",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-24T21:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-24T21:20",
+     "formato": "3D + PREMIER",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-24T21:30",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T21:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "12",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-24T21:50",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T22:00",
+     "formato": "3D + PALCO",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-24T22:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-24T22:00",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-24T22:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-24T22:10",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-24T22:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-24T22:20",
+     "formato": "3D + PREMIER",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-24T22:20",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-24T22:30",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T22:30",
+     "formato": "2D + XD + DBOX + PALCO",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T12:00",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T12:20",
+     "formato": "3D + PREMIER",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T12:25",
+     "formato": "3D + PALCO",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T12:30",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T12:30",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T12:40",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-25T12:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T13:00",
+     "formato": "2D + XD + DBOX + PALCO",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T13:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-25T13:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T13:30",
+     "formato": "4D + 3D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T13:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T13:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T13:40",
+     "formato": "3D + DBOX",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-25T13:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T14:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "14",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T14:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-25T14:20",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-25T14:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T14:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T14:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "13",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T14:40",
+     "formato": "3D + PREMIER",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T14:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-25T15:00",
+     "formato": "3D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T15:10",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T15:10",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T15:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "12",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-25T15:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-25T15:20",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T15:30",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T15:40",
+     "formato": "3D + PREMIER",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T15:40",
+     "formato": "3D + PALCO",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T15:50",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-25T15:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T15:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T16:00",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-25T16:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T16:10",
+     "formato": "2D + XD + DBOX + PALCO",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T16:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-25T16:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-25T16:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-25T16:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T16:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T17:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T17:00",
+     "formato": "4D + 3D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T17:10",
+     "formato": "3D + DBOX",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T17:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "14",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T17:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T17:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-25T17:40",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-25T17:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T17:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T17:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "13",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T18:00",
+     "formato": "3D + PREMIER",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-25T18:00",
+     "formato": "3D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T18:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T18:20",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T18:30",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T18:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "12",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-25T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-25T18:40",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T18:50",
+     "formato": "3D + PALCO",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T18:50",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T19:00",
+     "formato": "3D + PREMIER",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-25T19:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T19:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T19:10",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T19:10",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T19:20",
+     "formato": "2D + XD + DBOX + PALCO",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-25T19:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-25T20:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T20:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-25T20:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T20:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T20:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T20:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "14",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-25T20:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T20:30",
+     "formato": "3D + DBOX",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T20:30",
+     "formato": "4D + 3D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T21:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-25T21:00",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T21:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-25T21:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T21:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-25T21:10",
+     "formato": "3D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T21:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "13",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T21:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T21:20",
+     "formato": "3D + PREMIER",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T21:30",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T21:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "12",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T21:50",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T22:00",
+     "formato": "3D + PALCO",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-25T22:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-25T22:00",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-25T22:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T22:10",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T22:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T22:20",
+     "formato": "3D + PREMIER",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T22:20",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T22:30",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T22:30",
+     "formato": "2D + XD + DBOX + PALCO",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T12:00",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T12:00",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T12:20",
+     "formato": "3D + PREMIER",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T12:25",
+     "formato": "3D + PALCO",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T12:30",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T12:30",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T12:40",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-26T12:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T13:00",
+     "formato": "2D + XD + DBOX + PALCO",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T13:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-26T13:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T13:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T13:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T13:40",
+     "formato": "3D + DBOX",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-26T13:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T14:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "14",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T14:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-26T14:20",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-26T14:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T14:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T14:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "13",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T14:40",
+     "formato": "3D + PREMIER",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T14:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-26T15:00",
+     "formato": "3D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T15:10",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T15:10",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T15:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "12",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-26T15:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-26T15:20",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T15:30",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T15:40",
+     "formato": "3D + PREMIER",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T15:40",
+     "formato": "3D + PALCO",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T15:50",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-26T15:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T15:50",
+     "formato": "4D + 3D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T15:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T16:00",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-26T16:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T16:10",
+     "formato": "2D + XD + DBOX + PALCO",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T16:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-26T16:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-26T16:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-26T16:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T16:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T17:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T17:10",
+     "formato": "3D + DBOX",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T17:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "14",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T17:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T17:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-26T17:40",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-26T17:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T17:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T17:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "13",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T17:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T18:00",
+     "formato": "3D + PREMIER",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-26T18:00",
+     "formato": "3D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T18:20",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T18:30",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T18:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "12",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-26T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-26T18:40",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T18:50",
+     "formato": "3D + PALCO",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T18:50",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T19:00",
+     "formato": "3D + PREMIER",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-26T19:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T19:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T19:10",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T19:10",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T19:20",
+     "formato": "2D + XD + DBOX + PALCO",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-26T19:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-26T20:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T20:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-26T20:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T20:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T20:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T20:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "14",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-26T20:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T20:30",
+     "formato": "3D + DBOX",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T20:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T21:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-26T21:10",
+     "formato": "3D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T21:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "13",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-26T21:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T21:20",
+     "formato": "3D + PREMIER",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-26T21:20",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T21:30",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T21:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "12",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T21:50",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T22:00",
+     "formato": "3D + PALCO",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-26T22:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-26T22:00",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-26T22:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T22:10",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T22:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T22:20",
+     "formato": "3D + PREMIER",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T22:20",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T22:30",
+     "formato": "2D + XD",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T22:30",
+     "formato": "2D + XD + DBOX + PALCO",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/spider-man-un-nuevo-dia/compra-entradas/entradas"
+    }
+   ]
+  },
+  {
+   "clave": "la-noche-del-demonio-estan-entre-nosotros",
+   "titulo": "La Noche del Demonio: Están Entre Nosotros",
+   "poster": "https://cdn.cinemark.cl/content/posters/HO00015308.jpg",
+   "duracion": 106,
+   "clasificacion": "MA14",
+   "cines": [
+    "cinemark-alto-las-condes",
+    "cinemark-gran-avenida",
+    "cinemark-mallplaza-norte",
+    "cinemark-mallplaza-oeste",
+    "cinemark-mallplaza-tobalaba",
+    "cinemark-mallplaza-vespucio",
+    "cinemark-mid-mall-maipu",
+    "cinemark-portal-nunoa"
+   ],
+   "funciones": [
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-24T18:30",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-24T18:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-24T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T19:00",
+     "formato": "2D + PALCO",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-24T19:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-24T19:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-24T19:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-24T19:50",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-24T19:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-24T20:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T20:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-24T20:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-24T21:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T21:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-24T21:20",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-24T21:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-24T22:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-24T22:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-24T22:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-24T22:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-24T22:30",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-24T22:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T22:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T13:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-25T14:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-25T14:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T14:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T14:30",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T14:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T14:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T15:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T16:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-25T16:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-25T17:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T17:10",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T17:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-25T17:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T17:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T18:30",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-25T18:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T19:00",
+     "formato": "2D + PALCO",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T19:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-25T19:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-25T19:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T19:50",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T19:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T20:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T20:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-25T20:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-25T21:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T21:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T21:20",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T21:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T22:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-25T22:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-25T22:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-25T22:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T22:30",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T22:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T22:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T11:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T13:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-26T14:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-26T14:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T14:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T14:30",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T14:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T14:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T15:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T16:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-26T16:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-26T17:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T17:10",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T17:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-26T17:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T17:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T18:30",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-26T18:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T19:00",
+     "formato": "2D + PALCO",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T19:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-26T19:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-26T19:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T19:50",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T19:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T20:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-26T20:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T21:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T21:20",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T21:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T22:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-26T22:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-26T22:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-26T22:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T22:30",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T22:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T22:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/la-noche-del-demonio-estan-entre-nosotros/compra-entradas/entradas"
+    }
+   ]
+  },
+  {
+   "clave": "la-odisea",
+   "titulo": "La Odisea",
+   "poster": "https://cdn.cinemark.cl/content/posters/HO00015098.jpg",
+   "duracion": 172,
+   "clasificacion": "MA14",
+   "cines": [
+    "cinemark-alto-las-condes",
+    "cinemark-mallplaza-norte",
+    "cinemark-mallplaza-oeste",
+    "cinemark-mallplaza-tobalaba",
+    "cinemark-mallplaza-vespucio",
+    "cinemark-mid-mall-maipu",
+    "cinemark-portal-nunoa"
+   ],
+   "funciones": [
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-24T17:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-24T18:00",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-24T18:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-24T18:00",
+     "formato": "2D + IMAX",
+     "idioma": "",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-24T18:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T18:35",
+     "formato": "2D + PALCO",
+     "idioma": "",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-24T20:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-24T20:40",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "12",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T21:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-24T21:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-24T21:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-24T21:40",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-24T21:40",
+     "formato": "2D + IMAX",
+     "idioma": "",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-24T21:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-24T21:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T22:10",
+     "formato": "2D + PALCO",
+     "idioma": "",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T12:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T13:10",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "12",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-25T13:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T14:10",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T14:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T14:20",
+     "formato": "2D + IMAX",
+     "idioma": "",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T15:00",
+     "formato": "2D + PALCO",
+     "idioma": "",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T16:50",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "12",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T16:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-25T17:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T18:00",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T18:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T18:00",
+     "formato": "2D + IMAX",
+     "idioma": "",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T18:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T18:35",
+     "formato": "2D + PALCO",
+     "idioma": "",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T20:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T20:40",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "12",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T21:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-25T21:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-25T21:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T21:40",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T21:40",
+     "formato": "2D + IMAX",
+     "idioma": "",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T21:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T21:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T22:10",
+     "formato": "2D + PALCO",
+     "idioma": "",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T12:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T13:10",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "12",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-26T13:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T14:10",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T14:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T14:20",
+     "formato": "2D + IMAX",
+     "idioma": "",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T15:00",
+     "formato": "2D + PALCO",
+     "idioma": "",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T16:50",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "12",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T16:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-26T17:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T18:00",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T18:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T18:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T18:35",
+     "formato": "2D + PALCO",
+     "idioma": "",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T20:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T20:40",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "12",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-26T21:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T21:40",
+     "formato": "2D + DBOX",
+     "idioma": "",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T21:40",
+     "formato": "2D + IMAX",
+     "idioma": "",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T21:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T21:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T22:10",
+     "formato": "2D + PALCO",
+     "idioma": "",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/pelicula/la-odisea/compra-entradas/entradas"
+    }
+   ]
+  },
+  {
+   "clave": "el-final-de-la-calle-oak",
+   "titulo": "El Final de la Calle Oak",
+   "poster": "https://cdn.cinemark.cl/content/posters/HO00015046.jpg",
+   "duracion": 99,
+   "clasificacion": "MA14",
+   "cines": [
+    "cinemark-alto-las-condes",
+    "cinemark-mallplaza-norte",
+    "cinemark-mallplaza-oeste",
+    "cinemark-mallplaza-tobalaba",
+    "cinemark-mallplaza-vespucio",
+    "cinemark-mid-mall-maipu",
+    "cinemark-portal-nunoa"
+   ],
+   "funciones": [
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T18:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-24T18:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-24T20:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T20:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-24T20:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-24T21:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-24T21:00",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-24T22:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-24T22:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T13:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T13:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T14:25",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T15:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T15:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T17:00",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T17:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T18:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-25T18:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T20:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T20:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T20:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T21:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T21:00",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T22:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-25T22:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T13:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T13:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T14:25",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T15:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T15:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T17:00",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T17:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T18:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-26T18:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T20:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T20:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T20:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T20:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T21:00",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T22:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-26T22:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/el-final-de-la-calle-oak/compra-entradas/entradas"
+    }
+   ]
+  },
+  {
+   "clave": "solo-por-una-noche",
+   "titulo": "Sólo por una Noche",
+   "poster": "https://cdn.cinemark.cl/content/posters/HO00015209.jpg",
+   "duracion": 102,
+   "clasificacion": "MA14",
+   "cines": [
+    "cinemark-alto-las-condes",
+    "cinemark-gran-avenida",
+    "cinemark-mallplaza-norte",
+    "cinemark-mallplaza-oeste",
+    "cinemark-mallplaza-tobalaba",
+    "cinemark-mallplaza-vespucio",
+    "cinemark-mid-mall-maipu",
+    "cinemark-portal-nunoa"
+   ],
+   "funciones": [
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-24T19:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-24T19:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-24T20:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-24T21:10",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T21:30",
+     "formato": "2D + PALCO",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-24T22:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-24T22:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T13:45",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T14:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T14:05",
+     "formato": "2D + PALCO",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-25T14:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T15:40",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-25T15:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-25T17:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T19:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T19:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-25T20:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T21:10",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T21:30",
+     "formato": "2D + PALCO",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T22:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-25T22:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T13:45",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T14:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T14:05",
+     "formato": "2D + PALCO",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-26T14:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T15:40",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-26T15:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-26T17:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T18:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T19:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T19:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-26T20:10",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T21:10",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T21:30",
+     "formato": "2D + PALCO",
+     "idioma": "",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-26T22:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/solo-por-una-noche/compra-entradas/entradas"
+    }
+   ]
+  },
+  {
+   "clave": "paw-patrol-la-dino-pelicula",
+   "titulo": "Paw Patrol: La Dino Película",
+   "poster": "https://cdn.cinemark.cl/content/posters/HO00015191.jpg",
+   "duracion": 88,
+   "clasificacion": "TE",
+   "cines": [
+    "cinemark-alto-las-condes",
+    "cinemark-gran-avenida",
+    "cinemark-mallplaza-norte",
+    "cinemark-mallplaza-oeste",
+    "cinemark-mallplaza-tobalaba",
+    "cinemark-mallplaza-vespucio",
+    "cinemark-mid-mall-maipu",
+    "cinemark-portal-nunoa"
+   ],
+   "funciones": [
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T12:40",
+     "formato": "2D + PLAY",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-25T13:30",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T13:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T13:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-25T13:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T14:00",
+     "formato": "2D + PREMIER",
+     "idioma": "doblada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T14:00",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-25T14:30",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T14:50",
+     "formato": "2D + PLAY",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-25T15:40",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-25T16:00",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T16:05",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T17:20",
+     "formato": "2D + PLAY",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T12:40",
+     "formato": "2D + PLAY",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-26T13:30",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T13:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T13:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-26T13:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T14:00",
+     "formato": "2D + PREMIER",
+     "idioma": "doblada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T14:00",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-26T14:30",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T14:50",
+     "formato": "2D + PLAY",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-26T15:40",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-08-26T16:00",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T16:05",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T17:20",
+     "formato": "2D + PLAY",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/paw-patrol-la-dino-pelicula/compra-entradas/entradas"
+    }
+   ]
+  },
+  {
+   "clave": "mi-vecino-totoro-1988-ghibli-fest-2026",
+   "titulo": "Mi Vecino Totoro [1988] - Ghibli Fest 2026",
+   "poster": "https://cdn.cinemark.cl/content/posters/HO00015252.jpg",
+   "duracion": 87,
+   "clasificacion": "TE",
+   "cines": [
+    "cinemark-alto-las-condes",
+    "cinemark-mallplaza-norte",
+    "cinemark-mallplaza-oeste",
+    "cinemark-mallplaza-vespucio",
+    "cinemark-portal-nunoa"
+   ],
+   "funciones": [
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-24T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-24T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-24T18:40",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-24T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T16:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T16:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T16:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T16:20",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T16:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T18:40",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T16:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T16:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T16:20",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T16:20",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T16:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T18:40",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T18:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/mi-vecino-totoro-1988-ghibli-fest-2026/compra-entradas/entradas"
+    }
+   ]
+  },
+  {
+   "clave": "toy-story-5",
+   "titulo": "Toy Story 5",
+   "poster": "https://cdn.cinemark.cl/content/posters/HO00014889.jpg",
+   "duracion": 102,
+   "clasificacion": "TE",
+   "cines": [
+    "cinemark-alto-las-condes",
+    "cinemark-mallplaza-norte",
+    "cinemark-mallplaza-oeste",
+    "cinemark-mid-mall-maipu"
+   ],
+   "funciones": [
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T19:30",
+     "formato": "2D + PLAY",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/toy-story-5/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T12:30",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/toy-story-5/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T12:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/toy-story-5/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-25T13:20",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/toy-story-5/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T13:30",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/toy-story-5/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T15:00",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/toy-story-5/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T15:30",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/toy-story-5/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T15:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/toy-story-5/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T17:30",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/toy-story-5/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T19:30",
+     "formato": "2D + PLAY",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/toy-story-5/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T12:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/toy-story-5/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T13:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/toy-story-5/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-08-26T13:20",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/toy-story-5/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T13:30",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/toy-story-5/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T15:30",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/toy-story-5/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T15:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/toy-story-5/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T15:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/toy-story-5/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T19:30",
+     "formato": "2D + PLAY",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/toy-story-5/compra-entradas/entradas"
+    }
+   ]
+  },
+  {
+   "clave": "la-muerte-de-robin-hood",
+   "titulo": "La Muerte de Robin Hood",
+   "poster": "https://cdn.cinemark.cl/content/posters/HO00015321.jpg",
+   "duracion": 122,
+   "clasificacion": "MA14",
+   "cines": [
+    "cine-arte-normandie",
+    "cinemark-alto-las-condes",
+    "cinemark-mallplaza-oeste",
+    "cinemark-mallplaza-vespucio",
+    "cinemark-portal-nunoa"
+   ],
+   "funciones": [
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-24T19:30",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-muerte-de-robin-hood/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T20:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/la-muerte-de-robin-hood/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-24T20:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/la-muerte-de-robin-hood/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-24T21:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/la-muerte-de-robin-hood/compra-entradas/entradas"
+    },
+    {
+     "cine": "cine-arte-normandie",
+     "inicio": "2026-08-25T15:00",
+     "formato": "",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.flow.cl/btn.php?token=szuyu8y"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T19:30",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-muerte-de-robin-hood/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T20:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/la-muerte-de-robin-hood/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T20:50",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/la-muerte-de-robin-hood/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T21:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/la-muerte-de-robin-hood/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T19:30",
+     "formato": "2D + PREMIER",
+     "idioma": "",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/la-muerte-de-robin-hood/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T20:40",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/la-muerte-de-robin-hood/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T21:00",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/la-muerte-de-robin-hood/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T21:30",
+     "formato": "2D",
+     "idioma": "",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/la-muerte-de-robin-hood/compra-entradas/entradas"
+    }
+   ]
+  },
+  {
+   "clave": "locamente",
+   "titulo": "Locamente",
+   "poster": "https://cdn.cinemark.cl/content/posters/HO00015330.jpg",
+   "duracion": 98,
+   "clasificacion": "MA14",
+   "cines": [
+    "cinemark-alto-las-condes",
+    "cinemark-mallplaza-oeste",
+    "cinemark-mallplaza-vespucio",
+    "cinemark-portal-nunoa"
+   ],
+   "funciones": [
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-24T18:10",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/locamente/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-24T22:20",
+     "formato": "2D + PREMIER",
+     "idioma": "subtitulada",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/locamente/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T14:00",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/locamente/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T16:15",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/locamente/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T17:30",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/locamente/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T18:10",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/locamente/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T22:20",
+     "formato": "2D + PREMIER",
+     "idioma": "subtitulada",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/locamente/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T14:00",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/pelicula/locamente/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T16:15",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/locamente/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T17:30",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/locamente/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T18:10",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/locamente/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T22:20",
+     "formato": "2D + PREMIER",
+     "idioma": "subtitulada",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/locamente/compra-entradas/entradas"
+    }
+   ]
+  },
+  {
+   "clave": "minions-monstruos",
+   "titulo": "Minions & Monstruos",
+   "poster": "https://cdn.cinemark.cl/content/posters/HO00015081.jpg",
+   "duracion": 90,
+   "clasificacion": "TE",
+   "cines": [
+    "cinemark-alto-las-condes",
+    "cinemark-mallplaza-oeste",
+    "cinemark-portal-nunoa"
+   ],
+   "funciones": [
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T12:50",
+     "formato": "2D + DBOX",
+     "idioma": "doblada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/minions-monstruos/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T14:15",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/minions-monstruos/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T15:05",
+     "formato": "2D + DBOX",
+     "idioma": "doblada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/minions-monstruos/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T16:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/minions-monstruos/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T12:50",
+     "formato": "2D + DBOX",
+     "idioma": "doblada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/minions-monstruos/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T14:15",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/pelicula/minions-monstruos/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T15:05",
+     "formato": "2D + DBOX",
+     "idioma": "doblada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/minions-monstruos/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T16:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/minions-monstruos/compra-entradas/entradas"
+    }
+   ]
+  },
+  {
+   "clave": "moana",
+   "titulo": "Moana",
+   "poster": "https://cdn.cinemark.cl/content/posters/HO00015171.jpg",
+   "duracion": 115,
+   "clasificacion": "TE",
+   "cines": [
+    "cinemark-mallplaza-oeste",
+    "cinemark-mallplaza-vespucio"
+   ],
+   "funciones": [
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T12:30",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/moana/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T13:00",
+     "formato": "2D + DBOX",
+     "idioma": "doblada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/moana/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T15:00",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/moana/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T15:50",
+     "formato": "2D + DBOX",
+     "idioma": "doblada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/moana/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T12:30",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/moana/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T13:00",
+     "formato": "2D + DBOX",
+     "idioma": "doblada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/moana/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T15:00",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/moana/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T15:50",
+     "formato": "2D + DBOX",
+     "idioma": "doblada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/pelicula/moana/compra-entradas/entradas"
+    }
+   ]
+  },
+  {
+   "clave": "tu-corazon-sera-destrozado",
+   "titulo": "Tu Corazón Será Destrozado",
+   "poster": "https://cdn.cinemark.cl/content/posters/HO00015040.jpg",
+   "duracion": 135,
+   "clasificacion": "MA14",
+   "cines": [
+    "cinemark-mallplaza-oeste",
+    "cinemark-mallplaza-vespucio"
+   ],
+   "funciones": [
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T18:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/tu-corazon-sera-destrozado/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-24T18:10",
+     "formato": "2D + PREMIER",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/tu-corazon-sera-destrozado/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T12:40",
+     "formato": "2D + PREMIER",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/tu-corazon-sera-destrozado/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T18:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/tu-corazon-sera-destrozado/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T18:10",
+     "formato": "2D + PREMIER",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/tu-corazon-sera-destrozado/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T12:40",
+     "formato": "2D + PREMIER",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/tu-corazon-sera-destrozado/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T18:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/pelicula/tu-corazon-sera-destrozado/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T18:10",
+     "formato": "2D + PREMIER",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/pelicula/tu-corazon-sera-destrozado/compra-entradas/entradas"
+    }
+   ]
+  },
+  {
+   "clave": "la-negociacion",
+   "titulo": "La Negociación",
+   "poster": "https://cdn.cinemark.cl/content/posters/HO00015280.jpg",
+   "duracion": 105,
+   "clasificacion": "MA14",
+   "cines": [
+    "cinemark-alto-las-condes",
+    "cinemark-mallplaza-oeste"
+   ],
+   "funciones": [
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-24T20:10",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/la-negociacion/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-24T22:10",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/la-negociacion/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T20:10",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/la-negociacion/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T22:10",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/la-negociacion/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T20:10",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/pelicula/la-negociacion/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T22:10",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/pelicula/la-negociacion/compra-entradas/entradas"
+    }
+   ]
+  },
+  {
+   "clave": "rapido-y-furioso-2001",
+   "titulo": "Rápido y Furioso [2001]",
+   "poster": "https://cdn.cinemark.cl/content/posters/HO00015335.jpg",
+   "duracion": 107,
+   "clasificacion": "MA14",
+   "cines": [
+    "cinemark-mallplaza-oeste"
+   ],
+   "funciones": [
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T16:30",
+     "formato": "2D + PALCO",
+     "idioma": "doblada",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/rapido-y-furioso-2001/compra-entradas/entradas"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T16:30",
+     "formato": "2D + PALCO",
+     "idioma": "doblada",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/pelicula/rapido-y-furioso-2001/compra-entradas/entradas"
+    }
+   ]
+  },
+  {
+   "clave": "alex-doll-presenta-bellissima",
+   "titulo": "Alex Doll presenta Bellissima",
+   "poster": "",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "cine-arte-normandie"
+   ],
+   "funciones": [
+    {
+     "cine": "cine-arte-normandie",
+     "inicio": "2026-08-24T15:00",
+     "formato": "",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.flow.cl/btn.php?token=n886bde957a143755a84eae11f08319cc31d2e76"
+    }
+   ]
+  },
+  {
+   "clave": "au-revoir-les-enfants-cine-arte-independencia",
+   "titulo": "Au Revoir Les Enfants - Cine Arte Independencia",
+   "poster": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/d6229afcb9c233777675ad9efeb2e8726afe8126d312a9bcd0674f453c92a512.jpg",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "cineplanet-mall-barrio-independencia"
+   ],
+   "funciones": [
+    {
+     "cine": "cineplanet-mall-barrio-independencia",
+     "inicio": "2026-08-26T23:30",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.toliv.com/eventos/chile/independencia/au-revoir-les-enfants-cine-arte-independencia-26028"
+    }
+   ]
+  },
+  {
+   "clave": "backrooms-version-extendida",
+   "titulo": "Backrooms – Versión extendida",
+   "poster": "",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "cine-arte-normandie"
+   ],
+   "funciones": [
+    {
+     "cine": "cine-arte-normandie",
+     "inicio": "2026-08-24T17:15",
+     "formato": "",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.flow.cl/btn.php?token=ac646d2e49081bc0b249fc6985ef5baf6e0e48f6"
+    }
+   ]
+  },
+  {
+   "clave": "cine-blondie-volver-al-futuro",
+   "titulo": "Cine Blondie: Volver al Futuro",
+   "poster": "https://imagenes.passline.com/eventos/cine-blondie-volver-al-futuro-541020-rec.jpg",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "centro-arte-alameda-sala-ceina"
+   ],
+   "funciones": [
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-25T20:30",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/cine-blondie-volver-al-futuro"
+    }
+   ]
+  },
+  {
+   "clave": "cine-blondie-volver-al-futuro-16",
+   "titulo": "Cine Blondie: Volver al Futuro (+16)",
+   "poster": "",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "centro-arte-alameda-sala-ceina"
+   ],
+   "funciones": [
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-25T20:30",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/cine-blondie-volver-al-futuro"
+    }
+   ]
+  },
+  {
+   "clave": "documental-el-fotografo-de-la-40",
+   "titulo": "Documental \"El fotógrafo de La 40\"",
+   "poster": "",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "cinepolis-vivo-imperio"
+   ],
+   "funciones": [
+    {
+     "cine": "cinepolis-vivo-imperio",
+     "inicio": "2026-08-26T11:00",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.bibliotecanacional.gob.cl/cartelera/documental-el-fotografo-de-la-40"
+    }
+   ]
+  },
+  {
+   "clave": "el-desprecio",
+   "titulo": "El desprecio",
+   "poster": "",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "cine-arte-normandie"
+   ],
+   "funciones": [
+    {
+     "cine": "cine-arte-normandie",
+     "inicio": "2026-08-25T17:20",
+     "formato": "",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.flow.cl/btn.php?token=kecjply"
+    }
+   ]
+  },
+  {
+   "clave": "elephant-centro-arte-alameda",
+   "titulo": "Elephant / Centro Arte Alameda",
+   "poster": "https://imagenes.passline.com/eventos/-772254-rec.jpg",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "centro-arte-alameda-sala-ceina"
+   ],
+   "funciones": [
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-25T18:45",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/elephant-centro-arte-alameda"
+    }
+   ]
+  },
+  {
+   "clave": "entrevista-con-el-vampiro",
+   "titulo": "Entrevista con el vampiro",
+   "poster": "",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "cine-arte-normandie"
+   ],
+   "funciones": [
+    {
+     "cine": "cine-arte-normandie",
+     "inicio": "2026-08-25T19:20",
+     "formato": "",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.flow.cl/btn.php?token=oa0tqzg"
+    }
+   ]
+  },
+  {
+   "clave": "la-odisea-centro-arte-alameda",
+   "titulo": "La Odisea / Centro Arte Alameda",
+   "poster": "",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "centro-arte-alameda-sala-ceina"
+   ],
+   "funciones": [
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-24T18:00",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/la-odisea-centro-arte-alameda-546339"
+    }
+   ]
+  },
+  {
+   "clave": "leviticus-ritual-de-sangre",
+   "titulo": "Leviticus: Ritual de sangre",
+   "poster": "",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "cine-arte-normandie"
+   ],
+   "funciones": [
+    {
+     "cine": "cine-arte-normandie",
+     "inicio": "2026-08-26T16:45",
+     "formato": "",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.flow.cl/btn.php?token=2nvcnlo"
+    }
+   ]
+  },
+  {
+   "clave": "los-angeles-caidos",
+   "titulo": "Los ángeles caídos",
+   "poster": "",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "cine-arte-normandie"
+   ],
+   "funciones": [
+    {
+     "cine": "cine-arte-normandie",
+     "inicio": "2026-08-24T19:40",
+     "formato": "",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.flow.cl/btn.php?token=yqkozhm"
+    }
+   ]
+  },
+  {
+   "clave": "matapanki-centro-arte-alameda",
+   "titulo": "Matapanki / Centro Arte Alameda",
+   "poster": "",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "centro-arte-alameda-sala-ceina"
+   ],
+   "funciones": [
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-26T15:15",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/matapanki-centro-arte-alameda-546342"
+    }
+   ]
+  },
+  {
+   "clave": "mi-vecino-totoro",
+   "titulo": "Mi vecino Totoro",
+   "poster": "",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "cine-arte-normandie"
+   ],
+   "funciones": [
+    {
+     "cine": "cine-arte-normandie",
+     "inicio": "2026-08-26T15:00",
+     "formato": "",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.flow.cl/btn.php?token=clx0am8"
+    }
+   ]
+  },
+  {
+   "clave": "obsesion-centro-arte-alameda",
+   "titulo": "Obsesión / Centro Arte Alameda",
+   "poster": "",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "centro-arte-alameda-sala-ceina"
+   ],
+   "funciones": [
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-24T16:00",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/obsesion-centro-arte-alameda-546337"
+    }
+   ]
+  },
+  {
+   "clave": "perfect-blue",
+   "titulo": "Perfect Blue",
+   "poster": "",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "cine-arte-normandie"
+   ],
+   "funciones": [
+    {
+     "cine": "cine-arte-normandie",
+     "inicio": "2026-08-26T18:30",
+     "formato": "",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.flow.cl/btn.php?token=ac4bb0695e30ef585590a1a1e4c5471624b67ef6"
+    }
+   ]
+  },
+  {
+   "clave": "pink-floyd-the-wall",
+   "titulo": "Pink Floyd The Wall",
+   "poster": "",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "cine-arte-normandie"
+   ],
+   "funciones": [
+    {
+     "cine": "cine-arte-normandie",
+     "inicio": "2026-08-26T20:30",
+     "formato": "",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.flow.cl/btn.php?token=wveqqyw"
+    }
+   ]
+  },
+  {
+   "clave": "volver-al-futuro-cine-blondie-en-centro-arte-alameda",
+   "titulo": "Volver al futuro / Cine Blondie en Centro Arte Alameda",
+   "poster": "https://imagenes.passline.com/eventos/volver-al-futuro-cine-blondie-en-centro-arte-alameda-544910-rec.jpg",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "centro-arte-alameda-sala-ceina"
+   ],
+   "funciones": [
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-25T20:15",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/volver-al-futuro-cine-blondie-en-centro-arte-alameda"
+    }
+   ]
+  }
+ ]
+}
