@@ -101,6 +101,18 @@
 
   /* --- El mapa de fondo y la lista encima, igual que en talleres --- */
   #mapa-cines{position:absolute;inset:0}
+  /* La cinta de "el mapa está pero sin pines": angosta y arriba, para no tapar
+     un mapa que sí sirve para ubicarse. */
+  .aviso-mapa{
+    position:absolute;left:var(--e-3);right:var(--e-3);top:var(--e-3);z-index:3;
+    display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+    background:var(--c-cine-suave);color:var(--azul-900);
+    border:2.5px solid var(--contorno);border-radius:var(--r-pill);
+    box-shadow:var(--repisa-1);padding:8px var(--e-3);
+    font-size:var(--t-xs);line-height:1.35;
+  }
+  .aviso-mapa b{font-family:var(--fuente-marca)}
+  @media(min-width:880px){ .aviso-mapa{right:470px} }
   .panel-lista{
     position:absolute;left:0;right:0;bottom:0;background:var(--fondo-elevado);
     border-radius:var(--r-xl) var(--r-xl) 0 0;
@@ -433,8 +445,21 @@ if(hayMapa){
       mapa.resize();
     }).observe(caja);
   })();
-  mapa.on("load", montarCapas);
-  mapa.on("styledata", () => { if(!mapa.getSource("cines")) montarCapas(); });
+  /* `montarCapas` se llama DESDE eventos de MapLibre, y una excepción ahí
+     dentro se la traga el despachador: no aparece en la consola, no rompe la
+     página y no deja rastro. Así fue como una expresión mal anidada en
+     `circle-radius` dejó el mapa sin un solo pin durante dos commits, con el
+     mapa base dibujándose perfecto al lado. Ahora se atrapa, se dice fuerte y
+     se muestra el aviso: un mapa sin pines es un mapa roto, no un mapa vacío. */
+  const montar = () => {
+    try{ montarCapas(); }
+    catch(e){
+      console.error("no pude montar la capa de cines:", e);
+      avisarMapaCaido(e.message || String(e));
+    }
+  };
+  mapa.on("load", montar);
+  mapa.on("styledata", () => { if(!mapa.getLayer("cines-pin")) montar(); });
   new MutationObserver(() => mapa.setStyle(estiloMapa()))
     .observe(document.documentElement, {attributes:true, attributeFilter:["data-tema"]});
 
@@ -463,20 +488,40 @@ function sacarAvisoMapa(){
 function avisarMapaCaido(detalle){
   if(mapaAvisado || !hayMapa || mapa.getLayer("cines-pin")) return;
   const caja = document.getElementById("mapa-cines");
+  // Son DOS fallas distintas y decirlas igual es mentir a medias: el mapa
+  // puede no haber llegado, o puede estar dibujado y perfecto y ser los PINES
+  // los que faltan. Con el bug de la expresión anidada pasaba lo segundo, y el
+  // cartel decía "no pude dibujar el mapa" encima de Santiago dibujado entero.
+  const hayLienzo = mapa.isStyleLoaded && mapa.isStyleLoaded();
   const aviso = document.createElement("div");
-  aviso.className = "vacio";
-  aviso.style.cssText = "padding-top:var(--e-12);position:relative;z-index:2";
-  aviso.innerHTML = cuerpo("cabra", "var(--tinta-tenue)", 88, {pose:"durmiendo"});
-  const texto = document.createElement("p");
-  const fuerte = document.createElement("b");
-  fuerte.textContent = {es:"No pude dibujar el mapa",
-                        en:"Could not draw the map",
-                        pt:"Não consegui desenhar o mapa"}[IDIOMA];
-  texto.append(fuerte, document.createElement("br"),
-    document.createTextNode({es:"La lista de abajo tiene los mismos cines, con su dirección.",
-                             en:"The list below has the same cinemas, with their address.",
-                             pt:"A lista abaixo tem os mesmos cinemas, com o endereço."}[IDIOMA]));
-  aviso.appendChild(texto);
+
+  if(hayLienzo){
+    // El mapa sirve: el aviso es una cinta angosta arriba y no un bloque que
+    // tape lo que sí se puede usar.
+    aviso.className = "aviso-mapa";
+    const b = document.createElement("b");
+    b.textContent = {es:"No pude poner los cines en el mapa",
+                     en:"Could not place the cinemas on the map",
+                     pt:"Não consegui pôr os cinemas no mapa"}[IDIOMA];
+    aviso.append(carita("cabra", "currentColor", 20), b,
+      document.createTextNode(" " + {es:"— están todos en la lista, con su dirección.",
+                                     en:"— they are all in the list, with their address.",
+                                     pt:"— estão todos na lista, com o endereço."}[IDIOMA]));
+  } else {
+    aviso.className = "vacio";
+    aviso.style.cssText = "padding-top:var(--e-12);position:relative;z-index:2";
+    aviso.innerHTML = cuerpo("cabra", "var(--tinta-tenue)", 88, {pose:"durmiendo"});
+    const texto = document.createElement("p");
+    const fuerte = document.createElement("b");
+    fuerte.textContent = {es:"No pude dibujar el mapa",
+                          en:"Could not draw the map",
+                          pt:"Não consegui desenhar o mapa"}[IDIOMA];
+    texto.append(fuerte, document.createElement("br"),
+      document.createTextNode({es:"La lista de abajo tiene los mismos cines, con su dirección.",
+                               en:"The list below has the same cinemas, with their address.",
+                               pt:"A lista abaixo tem os mesmos cinemas, com o endereço."}[IDIOMA]));
+    aviso.appendChild(texto);
+  }
   caja.appendChild(aviso);
   mapaAvisado = aviso;
   if(detalle) console.warn("mapa de cines:", detalle);
@@ -494,15 +539,27 @@ function datosGeo(){
 }
 
 function montarCapas(){
-  if(!hayMapa || mapa.getSource("cines")) return;
-  mapa.addSource("cines", {type:"geojson", data:datosGeo()});
+  // El guardia mira la CAPA y no la fuente. Con la fuente alcanzaba mientras
+  // las dos se agregaban juntas o ninguna; cuando `addLayer` falló y
+  // `addSource` había pasado, este `return` impedía cualquier reintento y el
+  // mapa se quedaba para siempre con datos y sin pines.
+  if(!hayMapa || mapa.getLayer("cines-pin")) return;
+  if(!mapa.getSource("cines")) mapa.addSource("cines", {type:"geojson", data:datosGeo()});
   mapa.addLayer({id:"cines-pin", type:"circle", source:"cines",
     paint:{
-      // La sala elegida crece: es el acuse de recibo de que se apretó ESE pin
-      // y no el de al lado, que a este zoom queda a pocos píxeles.
-      "circle-radius":["case",["==",["get","elegido"],1],
-        ["interpolate",["linear"],["zoom"], 10, 9, 14, 15],
-        ["interpolate",["linear"],["zoom"], 10, 5, 14, 10]],
+      /* La sala elegida crece: es el acuse de recibo de que se apretó ESE pin
+         y no el de al lado, que a este zoom queda a pocos píxeles.
+
+         El `case` va DENTRO de las paradas del `interpolate` y no al revés, y
+         esa vuelta no es estilo: MapLibre lo exige. Su validador dice
+         `"zoom" expression may only be used as input to a top-level "step" or
+         "interpolate" expression`, así que un `interpolate` sobre el zoom
+         metido dentro de un `case` hace reventar `addLayer` entero. Costó
+         caro: el mapa base se dibujaba perfecto y no había un solo pin, que es
+         el síntoma que menos se parece a "una expresión mal anidada". */
+      "circle-radius":["interpolate",["linear"],["zoom"],
+        10, ["case",["==",["get","elegido"],1], 9, 5],
+        14, ["case",["==",["get","elegido"],1], 15, 10]],
       // El fucsia de la Cabra para la sala con función; el circuito de cine
       // arte va con el relleno claro para separarlo del mall de un vistazo.
       "circle-color":["case",["==",["get","arte"],1], "#F1D0EE", "#A51D99"],
