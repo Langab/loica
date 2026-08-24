@@ -12,7 +12,7 @@
      frame-ancestors no va porque en un <meta> el navegador lo ignora, y
      upgrade-insecure-requests tampoco: en Pages no hace nada y por LAN desde
      el celular dejaba la página en blanco (el detalle está en mapa.html). -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; worker-src blob:; connect-src 'self' https://*.basemaps.cartocdn.com; object-src 'none'; base-uri 'none'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; worker-src blob:; connect-src 'self' https://*.basemaps.cartocdn.com https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Talleres y clases — Loica</title>
 <meta name="description" content="Los talleres y clases semanales de Santiago: natación, yoga, baile, cerámica, idiomas. Casi todo municipal y de barrio.">
@@ -595,5 +595,12 @@ function pintarLista(){
   addEventListener("resize", () => fijar(indice));
 })();
 </script>
+<!-- Cloudflare Web Analytics: cuenta visitas sin cookies y sin huella
+     digital, así que el sitio no necesita banner de consentimiento (la Ley
+     21.719 rige desde diciembre de 2026). El token es público a propósito:
+     viaja en el HTML de todas las páginas, no es una credencial. Si se toca,
+     hay que tocarlo en las diez páginas Y en la plantilla de exportar_web.py,
+     igual que el ?v= de los estilos. -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "05b8b07df9224b248d539904774ba661"}'></script>
 </body>
 </html>

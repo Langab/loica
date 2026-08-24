@@ -307,6 +307,32 @@ Como se publica desde un workflow y no desde una rama, **no va un archivo
 `CNAME` en `web/`**: GitHub lo ignora. El dominio se guarda en la configuración
 del repositorio.
 
+### La analítica
+
+El sitio mide visitas con **Cloudflare Web Analytics**: sin cookies y sin huella
+digital, así que no lleva banner de consentimiento —lo que importa porque la
+Ley 21.719 rige desde diciembre de 2026—. A cambio no mide campañas UTM ni
+eventos; si algún día hacen falta, el reemplazo natural es Umami.
+
+Va en modo **manual (JS snippet)** y no en el automático: el automático inyecta
+el script desde el proxy de Cloudflare, y los registros están en gris a
+propósito.
+
+El token es **público**: viaja en el HTML de todas las páginas, no es una
+credencial y no va en los secretos del repositorio. Está repetido en las diez
+páginas fijas y en la plantilla de `exportar_web.py`, igual que el `?v=` de los
+estilos; si se cambia, se cambia en todas:
+
+```bash
+# cambia el token del beacon en todo el sitio de una vez
+sed -i '' 's/TOKEN_VIEJO/TOKEN_NUEVO/g' web/*.html web/e/*.html exportar_web.py
+```
+
+La CSP de cada página tiene que dejar pasar dos cosas o la medición sale en
+cero, sin avisar: `https://static.cloudflareinsights.com` en `script-src` (de
+ahí baja el beacon) y `https://cloudflareinsights.com` en `connect-src` (ahí
+reporta, en `/cdn-cgi/rum`).
+
 `web/sitemap.xml` y `web/robots.txt` los genera `exportar_web.py` en cada
 corrida (`escribir_sitemap` y `escribir_robots`). El sitemap lleva las diez
 páginas fijas más una línea por ficha; sin él, Google descubre una ficha solo
