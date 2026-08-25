@@ -5,7 +5,7 @@
 # Ordenadas por impacto: la primera arregla más eventos que ninguna.
 
 lugares:
-  # 30 eventos sin pin exacto
+  # 32 eventos sin pin exacto
   Red Salas de Teatro (agregador de salas RM):
     direccion: # COMPLETAR
     comuna: # COMPLETAR
@@ -117,14 +117,6 @@ lugares:
     lon: # COMPLETAR
     nota: verificada el 2026-08-25 por # COMPLETAR
 
-  # 4 eventos sin pin exacto
-  Fiesta LA MONGA:
-    direccion: # COMPLETAR
-    comuna: Ñuñoa
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-08-25 por # COMPLETAR
-
   # 3 eventos sin pin exacto
   PortalTickets (PortalDisc):
     direccion: # COMPLETAR
@@ -150,22 +142,6 @@ lugares:
     nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 3 eventos sin pin exacto
-  Complejo Industrial / Estacion Central:
-    direccion: # COMPLETAR
-    comuna: Estación Central
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-08-25 por # COMPLETAR
-
-  # 3 eventos sin pin exacto
-  Montañita Las Vizcachas:
-    direccion: # COMPLETAR
-    comuna: Puente Alto
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-08-25 por # COMPLETAR
-
-  # 3 eventos sin pin exacto
   Terraza Arrayan:
     direccion: # COMPLETAR
     comuna: Lo Barnechea
@@ -174,17 +150,17 @@ lugares:
     nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 3 eventos sin pin exacto
-  Parque Ciudad Empresarial:
-    direccion: Avenida del Parque 420
-    comuna: Huechuraba
+  Montañita Las Vizcachas:
+    direccion: Camino San José de Maipo 06680
+    comuna: Puente Alto
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 3 eventos sin pin exacto
-  .:
-    direccion: # COMPLETAR
-    comuna: Recoleta
+  Parque Ciudad Empresarial:
+    direccion: Avenida del Parque 420
+    comuna: Huechuraba
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-08-25 por # COMPLETAR
@@ -199,14 +175,6 @@ lugares:
 
   # 3 eventos sin pin exacto
   USACH - Departamento de Extension (agenda cultural):
-    direccion: # COMPLETAR
-    comuna: Santiago
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-08-25 por # COMPLETAR
-
-  # 2 eventos sin pin exacto
-  Sala 211 - Laboratorio escénico:
     direccion: # COMPLETAR
     comuna: Santiago
     lat: # COMPLETAR
@@ -230,17 +198,49 @@ lugares:
     nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 2 eventos sin pin exacto
-  Vrava Club:
+  Online:
     direccion: # COMPLETAR
-    comuna: Las Condes
+    comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 2 eventos sin pin exacto
-  Online:
+  REVELATION:
+    direccion:  #, Providencia
+    comuna: Providencia
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
+
+  # 2 eventos sin pin exacto
+  Distrito 04:
+    direccion: # COMPLETAR
+    comuna: San Miguel
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
+
+  # 2 eventos sin pin exacto
+  CUCA BUIN:
+    direccion: PANAMERICANA SUR KM 28 SAN BERNARDO SALIDA LOS NARAJOS
+    comuna: San Bernardo
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
+
+  # 2 eventos sin pin exacto
+  Hotel Boutique Ladera:
     direccion: # COMPLETAR
     comuna: Providencia
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
+
+  # 2 eventos sin pin exacto
+  Complejo Industrial / Estacion Central:
+    direccion: # COMPLETAR
+    comuna: Estación Central
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-08-25 por # COMPLETAR

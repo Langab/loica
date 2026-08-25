@@ -1,7 +1,7 @@
 {
- "generado": "2026-08-25T17:38:45",
+ "generado": "2026-08-25T19:53:09",
  "dias": 7,
- "total_funciones": 951,
+ "total_funciones": 908,
  "cines": [
   {
    "id": "cineplanet-costanera-center",
@@ -40,7 +40,7 @@
    "lon": -70.7183,
    "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste",
    "formatos": "PALCO | 3D | 2D | PLAY | XD | DBOX",
-   "funciones": 106
+   "funciones": 96
   },
   {
    "id": "cinemark-mallplaza-vespucio",
@@ -53,7 +53,7 @@
    "lon": -70.5975,
    "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio",
    "formatos": "3D | 2D | PRE | DBOX | IMAX | 4D",
-   "funciones": 88
+   "funciones": 79
   },
   {
    "id": "cinemark-alto-las-condes",
@@ -66,7 +66,7 @@
    "lon": -70.5466,
    "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes",
    "formatos": "3D | 2D | XD | PRE | DBOX",
-   "funciones": 85
+   "funciones": 77
   },
   {
    "id": "cineplanet-mall-barrio-independencia",
@@ -82,19 +82,6 @@
    "funciones": 77
   },
   {
-   "id": "cinemark-mallplaza-norte",
-   "nombre": "Cinemark Mallplaza Norte",
-   "cadena": "cinemark",
-   "circuito": "comercial",
-   "direccion": "Av. Américo Vespucio 1737, Local C6, Huechuraba",
-   "comuna": "Huechuraba",
-   "lat": -33.3649,
-   "lon": -70.6787,
-   "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte",
-   "formatos": "3D | 2D | XD | DBOX",
-   "funciones": 59
-  },
-  {
    "id": "cineplanet-alameda",
    "nombre": "Cineplanet Alameda",
    "cadena": "cineplanet",
@@ -108,6 +95,19 @@
    "funciones": 59
   },
   {
+   "id": "cinemark-mallplaza-norte",
+   "nombre": "Cinemark Mallplaza Norte",
+   "cadena": "cinemark",
+   "circuito": "comercial",
+   "direccion": "Av. Américo Vespucio 1737, Local C6, Huechuraba",
+   "comuna": "Huechuraba",
+   "lat": -33.3649,
+   "lon": -70.6787,
+   "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte",
+   "formatos": "3D | 2D | XD | DBOX",
+   "funciones": 53
+  },
+  {
    "id": "cinemark-portal-nunoa",
    "nombre": "Cinemark Portal Ñuñoa",
    "cadena": "cinemark",
@@ -118,7 +118,7 @@
    "lon": -70.5975,
    "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa",
    "formatos": "2D",
-   "funciones": 54
+   "funciones": 49
   },
   {
    "id": "cineplanet-quilin",
@@ -144,7 +144,7 @@
    "lon": -70.7702,
    "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu",
    "formatos": "2D | XD",
-   "funciones": 44
+   "funciones": 40
   },
   {
    "id": "cinemark-mallplaza-tobalaba",
@@ -157,7 +157,7 @@
    "lon": -70.5579,
    "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba",
    "formatos": "2D | XD",
-   "funciones": 40
+   "funciones": 36
   },
   {
    "id": "cinemark-gran-avenida",
@@ -170,20 +170,7 @@
    "lon": -70.6567,
    "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida",
    "formatos": "3D | 2D",
-   "funciones": 26
-  },
-  {
-   "id": "cinemark-la-dehesa",
-   "nombre": "Cinemark Portal La Dehesa",
-   "cadena": "cinemark",
-   "circuito": "comercial",
-   "direccion": "Avenida La Dehesa 1445, Local 2000",
-   "comuna": "Lo Barnechea",
-   "lat": -33.3568,
-   "lon": -70.5156,
-   "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa",
-   "formatos": "3D | 2D | PRE",
-   "funciones": 14
+   "funciones": 23
   },
   {
    "id": "centro-arte-alameda-sala-ceina",
@@ -196,7 +183,20 @@
    "lon": -70.650245,
    "url": "https://centroartealameda.cl/",
    "formatos": "",
-   "funciones": 11
+   "funciones": 18
+  },
+  {
+   "id": "cinemark-la-dehesa",
+   "nombre": "Cinemark Portal La Dehesa",
+   "cadena": "cinemark",
+   "circuito": "comercial",
+   "direccion": "Avenida La Dehesa 1445, Local 2000",
+   "comuna": "Lo Barnechea",
+   "lat": -33.3568,
+   "lon": -70.5156,
+   "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa",
+   "formatos": "3D | 2D | PRE",
+   "funciones": 13
   },
   {
    "id": "cine-arte-normandie",
@@ -766,38 +766,6 @@
      "url": "https://www.cineplanet.cl/peliculas/spider-man-un-nuevo-dia"
     },
     {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-25T16:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "8",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-08-25T16:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-08-25T16:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-08-25T16:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
      "cine": "cineplanet-costanera-center",
      "inicio": "2026-08-25T16:40",
      "formato": "2D + XTREME",
@@ -822,52 +790,12 @@
      "url": "https://www.cineplanet.cl/peliculas/spider-man-un-nuevo-dia"
     },
     {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-08-25T16:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-25T17:00",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-25T17:00",
-     "formato": "4D 3D",
-     "idioma": "subtitulada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
      "cine": "cineplanet-alameda",
      "inicio": "2026-08-25T17:00",
      "formato": "2D + CONV",
      "idioma": "doblada",
      "sala": "",
      "url": "https://www.cineplanet.cl/peliculas/spider-man-un-nuevo-dia"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-08-25T17:10",
-     "formato": "3D DBOX",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-25T17:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "14",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
     },
     {
      "cine": "cineplanet-costanera-center",
@@ -886,44 +814,12 @@
      "url": "https://www.cineplanet.cl/peliculas/spider-man-un-nuevo-dia"
     },
     {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-25T17:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-25T17:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "9",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
      "cine": "cineplanet-florida-center",
      "inicio": "2026-08-25T17:30",
      "formato": "2D + CONV",
      "idioma": "doblada",
      "sala": "",
      "url": "https://www.cineplanet.cl/peliculas/spider-man-un-nuevo-dia"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-08-25T17:40",
-     "formato": "2D XD",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-08-25T17:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
     },
     {
      "cine": "cineplanet-alameda",
@@ -940,46 +836,6 @@
      "idioma": "doblada",
      "sala": "",
      "url": "https://www.cineplanet.cl/peliculas/spider-man-un-nuevo-dia"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-25T17:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-25T17:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "13",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-25T18:00",
-     "formato": "3D PRE",
-     "idioma": "subtitulada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-08-25T18:00",
-     "formato": "3D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-08-25T18:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
     },
     {
      "cine": "cinemark-mallplaza-norte",
@@ -2738,9 +2594,9 @@
   {
    "clave": "la-noche-del-demonio-estan-entre-nosotros",
    "titulo": "La Noche del Demonio: Están Entre Nosotros",
-   "poster": "https://cdn.cinemark.cl/content/posters/HO00015308.jpg",
+   "poster": "https://cdn.apis.cineplanet.cl/CDN/media/entity/get/FilmPosterGraphic/HO00001857?referenceScheme=HeadOffice&allowPlaceHolder=true",
    "duracion": 106,
-   "clasificacion": "MA14",
+   "clasificacion": "+14",
    "cines": [
     "cinemark-alto-las-condes",
     "cinemark-gran-avenida",
@@ -2860,68 +2716,12 @@
      "url": "https://www.cineplanet.cl/peliculas/la-noche-del-demonio-estn-entre-nosotros"
     },
     {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-08-25T16:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-08-25T16:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-08-25T17:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
      "cine": "cineplanet-florida-center",
      "inicio": "2026-08-25T17:00",
      "formato": "2D + CONV",
      "idioma": "doblada",
      "sala": "",
      "url": "https://www.cineplanet.cl/peliculas/la-noche-del-demonio-estn-entre-nosotros"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-25T17:10",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-08-25T17:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-08-25T17:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-25T17:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "11",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
     },
     {
      "cine": "cineplanet-alameda",
@@ -5251,22 +5051,6 @@
      "url": "https://www.cineplanet.cl/peliculas/la-odisea"
     },
     {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-25T16:50",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "12",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-25T16:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
      "cine": "cineplanet-costanera-center",
      "inicio": "2026-08-25T17:00",
      "formato": "2D + PRIME",
@@ -5283,44 +5067,12 @@
      "url": "https://www.cineplanet.cl/peliculas/la-odisea"
     },
     {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-08-25T17:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
      "cine": "cineplanet-florida-center",
      "inicio": "2026-08-25T17:50",
      "formato": "2D + CONV",
      "idioma": "doblada",
      "sala": "",
      "url": "https://www.cineplanet.cl/peliculas/la-odisea"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-25T18:00",
-     "formato": "2D DBOX",
-     "idioma": "subtitulada",
-     "sala": "9",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-08-25T18:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-25T18:00",
-     "formato": "2D IMAX",
-     "idioma": "subtitulada",
-     "sala": "11",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
     },
     {
      "cine": "cineplanet-costanera-center",
@@ -5832,14 +5584,6 @@
      "url": "https://www.cineplanet.cl/peliculas/el-final-de-la-calle-oak"
     },
     {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-25T17:00",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
      "cine": "cineplanet-quilin",
      "inicio": "2026-08-25T17:00",
      "formato": "2D + CONV",
@@ -5848,28 +5592,12 @@
      "url": "https://www.cineplanet.cl/peliculas/el-final-de-la-calle-oak"
     },
     {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-08-25T17:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "8",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
      "cine": "cineplanet-florida-center",
      "inicio": "2026-08-25T17:55",
      "formato": "2D + CONV",
      "idioma": "doblada",
      "sala": "",
      "url": "https://www.cineplanet.cl/peliculas/el-final-de-la-calle-oak"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-25T18:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
     },
     {
      "cine": "cineplanet-mall-barrio-independencia",
@@ -6307,7 +6035,7 @@
   },
   {
    "clave": "solo-por-una-noche",
-   "titulo": "Sólo por una Noche",
+   "titulo": "Solo por una Noche",
    "poster": "https://cdn.cinemark.cl/content/posters/HO00015209.jpg",
    "duracion": 102,
    "clasificacion": "MA14",
@@ -6333,14 +6061,6 @@
     "Romance"
    ],
    "funciones": [
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-08-25T17:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
     {
      "cine": "cineplanet-alameda",
      "inicio": "2026-08-25T18:00",
@@ -6616,297 +6336,6 @@
    ]
   },
   {
-   "clave": "mi-vecino-totoro",
-   "titulo": "Mi Vecino Totoro",
-   "poster": "https://cdn.cinemark.cl/content/posters/HO00015252.jpg",
-   "duracion": 87,
-   "clasificacion": "TE",
-   "cines": [
-    "cine-arte-normandie",
-    "cinemark-alto-las-condes",
-    "cinemark-mallplaza-norte",
-    "cinemark-mallplaza-oeste",
-    "cinemark-mallplaza-vespucio",
-    "cinemark-portal-nunoa",
-    "cineplanet-alameda",
-    "cineplanet-costanera-center",
-    "cineplanet-florida-center",
-    "cineplanet-mall-barrio-independencia",
-    "cineplanet-quilin"
-   ],
-   "sinopsis": "Cuando las hermanas Satsuki y Mei se mudan al campo junto a su padre para estar más cerca de su madre enferma, descubren un mundo mágico oculto entre los bosques. Allí conocen a Totoro, un misterioso y amable espíritu de la naturaleza que las acompañará en una inolvidable aventura llena de imaginación, amistad y asombro.",
-   "trailer": "https://www.youtube.com/watch?v=Pr8drhw55A4",
-   "generos": [
-    "Animacion"
-   ],
-   "funciones": [
-    {
-     "cine": "cineplanet-florida-center",
-     "inicio": "2026-08-25T14:00",
-     "formato": "2D + CONV",
-     "idioma": "subtitulada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/mi-vecino-totoro"
-    },
-    {
-     "cine": "cineplanet-florida-center",
-     "inicio": "2026-08-25T16:00",
-     "formato": "2D + CONV",
-     "idioma": "subtitulada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/mi-vecino-totoro"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-25T16:20",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-08-25T16:20",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-25T16:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-25T16:20",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cineplanet-quilin",
-     "inicio": "2026-08-25T16:20",
-     "formato": "2D + CONV",
-     "idioma": "subtitulada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/mi-vecino-totoro"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-08-25T16:30",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cineplanet-costanera-center",
-     "inicio": "2026-08-25T16:30",
-     "formato": "2D + CONV",
-     "idioma": "subtitulada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/mi-vecino-totoro"
-    },
-    {
-     "cine": "cineplanet-alameda",
-     "inicio": "2026-08-25T16:50",
-     "formato": "2D + CONV",
-     "idioma": "subtitulada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/mi-vecino-totoro"
-    },
-    {
-     "cine": "cineplanet-mall-barrio-independencia",
-     "inicio": "2026-08-25T17:00",
-     "formato": "2D + CONV",
-     "idioma": "subtitulada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/mi-vecino-totoro"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-25T18:40",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-08-25T18:40",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-25T18:40",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-25T18:40",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-08-25T18:40",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cineplanet-florida-center",
-     "inicio": "2026-08-26T14:00",
-     "formato": "2D + CONV",
-     "idioma": "subtitulada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/mi-vecino-totoro"
-    },
-    {
-     "cine": "cine-arte-normandie",
-     "inicio": "2026-08-26T15:00",
-     "formato": "",
-     "idioma": "subtitulada",
-     "sala": "",
-     "url": "https://www.flow.cl/btn.php?token=clx0am8"
-    },
-    {
-     "cine": "cineplanet-florida-center",
-     "inicio": "2026-08-26T16:00",
-     "formato": "2D + CONV",
-     "idioma": "subtitulada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/mi-vecino-totoro"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-26T16:20",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-08-26T16:20",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-26T16:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-26T16:20",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cineplanet-quilin",
-     "inicio": "2026-08-26T16:20",
-     "formato": "2D + CONV",
-     "idioma": "subtitulada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/mi-vecino-totoro"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-08-26T16:30",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cineplanet-costanera-center",
-     "inicio": "2026-08-26T16:30",
-     "formato": "2D + CONV",
-     "idioma": "subtitulada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/mi-vecino-totoro"
-    },
-    {
-     "cine": "cineplanet-alameda",
-     "inicio": "2026-08-26T16:50",
-     "formato": "2D + CONV",
-     "idioma": "subtitulada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/mi-vecino-totoro"
-    },
-    {
-     "cine": "cineplanet-mall-barrio-independencia",
-     "inicio": "2026-08-26T17:00",
-     "formato": "2D + CONV",
-     "idioma": "subtitulada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/mi-vecino-totoro"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-26T18:40",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-08-26T18:40",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-26T18:40",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-26T18:40",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-08-26T18:40",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    }
-   ]
-  },
-  {
    "clave": "paw-patrol-la-dino-pelicula",
    "titulo": "Paw Patrol: La Dino Película",
    "poster": "https://cdn.apis.cineplanet.cl/CDN/media/entity/get/FilmPosterGraphic/HO00001868?referenceScheme=HeadOffice&allowPlaceHolder=true",
@@ -6997,14 +6426,6 @@
      "idioma": "doblada",
      "sala": "",
      "url": "https://www.cineplanet.cl/peliculas/paw-patrol-la-dino-pelcula"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-25T17:20",
-     "formato": "2D PLAY",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
     },
     {
      "cine": "cinemark-mallplaza-oeste",
@@ -7280,14 +6701,6 @@
      "url": "https://www.cineplanet.cl/peliculas/toy-story-5"
     },
     {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-08-25T17:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
      "cine": "cineplanet-florida-center",
      "inicio": "2026-08-25T18:30",
      "formato": "2D + CONV",
@@ -7446,6 +6859,257 @@
      "idioma": "doblada",
      "sala": "2",
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    }
+   ]
+  },
+  {
+   "clave": "mi-vecino-totoro",
+   "titulo": "Mi Vecino Totoro",
+   "poster": "https://cdn.cinemark.cl/content/posters/HO00015252.jpg",
+   "duracion": 87,
+   "clasificacion": "TE",
+   "cines": [
+    "cine-arte-normandie",
+    "cinemark-alto-las-condes",
+    "cinemark-mallplaza-norte",
+    "cinemark-mallplaza-oeste",
+    "cinemark-mallplaza-vespucio",
+    "cinemark-portal-nunoa",
+    "cineplanet-alameda",
+    "cineplanet-costanera-center",
+    "cineplanet-florida-center",
+    "cineplanet-mall-barrio-independencia",
+    "cineplanet-quilin"
+   ],
+   "sinopsis": "Cuando las hermanas Satsuki y Mei se mudan al campo junto a su padre para estar más cerca de su madre enferma, descubren un mundo mágico oculto entre los bosques. Allí conocen a Totoro, un misterioso y amable espíritu de la naturaleza que las acompañará en una inolvidable aventura llena de imaginación, amistad y asombro.",
+   "trailer": "https://www.youtube.com/watch?v=Pr8drhw55A4",
+   "generos": [
+    "Animacion"
+   ],
+   "funciones": [
+    {
+     "cine": "cineplanet-florida-center",
+     "inicio": "2026-08-25T14:00",
+     "formato": "2D + CONV",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/mi-vecino-totoro"
+    },
+    {
+     "cine": "cineplanet-florida-center",
+     "inicio": "2026-08-25T16:00",
+     "formato": "2D + CONV",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/mi-vecino-totoro"
+    },
+    {
+     "cine": "cineplanet-quilin",
+     "inicio": "2026-08-25T16:20",
+     "formato": "2D + CONV",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/mi-vecino-totoro"
+    },
+    {
+     "cine": "cineplanet-costanera-center",
+     "inicio": "2026-08-25T16:30",
+     "formato": "2D + CONV",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/mi-vecino-totoro"
+    },
+    {
+     "cine": "cineplanet-alameda",
+     "inicio": "2026-08-25T16:50",
+     "formato": "2D + CONV",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/mi-vecino-totoro"
+    },
+    {
+     "cine": "cineplanet-mall-barrio-independencia",
+     "inicio": "2026-08-25T17:00",
+     "formato": "2D + CONV",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/mi-vecino-totoro"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-25T18:40",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-25T18:40",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-25T18:40",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T18:40",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-25T18:40",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
+    },
+    {
+     "cine": "cineplanet-florida-center",
+     "inicio": "2026-08-26T14:00",
+     "formato": "2D + CONV",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/mi-vecino-totoro"
+    },
+    {
+     "cine": "cine-arte-normandie",
+     "inicio": "2026-08-26T15:00",
+     "formato": "",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.flow.cl/btn.php?token=clx0am8"
+    },
+    {
+     "cine": "cineplanet-florida-center",
+     "inicio": "2026-08-26T16:00",
+     "formato": "2D + CONV",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/mi-vecino-totoro"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T16:20",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T16:20",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T16:20",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T16:20",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
+    },
+    {
+     "cine": "cineplanet-quilin",
+     "inicio": "2026-08-26T16:20",
+     "formato": "2D + CONV",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/mi-vecino-totoro"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T16:30",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
+    },
+    {
+     "cine": "cineplanet-costanera-center",
+     "inicio": "2026-08-26T16:30",
+     "formato": "2D + CONV",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/mi-vecino-totoro"
+    },
+    {
+     "cine": "cineplanet-alameda",
+     "inicio": "2026-08-26T16:50",
+     "formato": "2D + CONV",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/mi-vecino-totoro"
+    },
+    {
+     "cine": "cineplanet-mall-barrio-independencia",
+     "inicio": "2026-08-26T17:00",
+     "formato": "2D + CONV",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/mi-vecino-totoro"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T18:40",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-08-26T18:40",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T18:40",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T18:40",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T18:40",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
     }
    ]
   },
@@ -7861,298 +7525,13 @@
    ]
   },
   {
-   "clave": "locamente",
-   "titulo": "Locamente",
-   "poster": "https://cdn.cinemark.cl/content/posters/HO00015330.jpg",
-   "duracion": 98,
-   "clasificacion": "MA14",
-   "cines": [
-    "cinemark-alto-las-condes",
-    "cinemark-la-dehesa",
-    "cinemark-mallplaza-oeste",
-    "cinemark-mallplaza-vespucio",
-    "cinemark-portal-nunoa",
-    "cineplanet-costanera-center",
-    "cineplanet-florida-center"
-   ],
-   "sinopsis": "En su primera cita, Piero y Lara intentan impresionarse, pero dentro de sus cabezas reina el caos. Las múltiples personalidades que ocupan su mente — la romántica, la racional, la insegura y la pasional— pelean por el control de la situación. Discuten, seducen, sabotean y a veces pierden los nervios. ¿Quién ganará la batalla interior? ¿El corazón o el deseo? Las expectativas son altas y la noche promete.",
-   "trailer": "",
-   "generos": [
-    "Comedia"
-   ],
-   "funciones": [
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-08-25T16:15",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-08-25T17:00",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-25T17:30",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-25T18:10",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cineplanet-costanera-center",
-     "inicio": "2026-08-25T19:10",
-     "formato": "2D + CONV",
-     "idioma": "subtitulada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/locamente"
-    },
-    {
-     "cine": "cineplanet-florida-center",
-     "inicio": "2026-08-25T20:50",
-     "formato": "2D + CONV",
-     "idioma": "subtitulada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/locamente"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-25T22:20",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-26T14:00",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-08-26T15:50",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-08-26T16:15",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-26T17:30",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-26T18:10",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cineplanet-costanera-center",
-     "inicio": "2026-08-26T19:10",
-     "formato": "2D + CONV",
-     "idioma": "subtitulada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/locamente"
-    },
-    {
-     "cine": "cineplanet-florida-center",
-     "inicio": "2026-08-26T20:50",
-     "formato": "2D + CONV",
-     "idioma": "subtitulada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/locamente"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-26T22:20",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    }
-   ]
-  },
-  {
-   "clave": "tu-corazon-sera-destrozado",
-   "titulo": "Tu Corazon Sera Destrozado",
-   "poster": "https://cdn.apis.cineplanet.cl/CDN/media/entity/get/FilmPosterGraphic/HO00001846?referenceScheme=HeadOffice&allowPlaceHolder=true",
-   "duracion": 135,
-   "clasificacion": "+14",
-   "cines": [
-    "cinemark-mallplaza-oeste",
-    "cinemark-mallplaza-vespucio",
-    "cineplanet-alameda",
-    "cineplanet-costanera-center",
-    "cineplanet-florida-center",
-    "cineplanet-mall-barrio-independencia",
-    "cineplanet-quilin"
-   ],
-   "sinopsis": "Polina llega a un nuevo colegio intentando pasar desapercibida, pero rápidamente se convierte en el blanco de los abusos de sus compañeros.",
-   "trailer": "https://www.youtube.com/watch?v=hrqU6rChAgE",
-   "generos": [
-    "Romance"
-   ],
-   "funciones": [
-    {
-     "cine": "cineplanet-alameda",
-     "inicio": "2026-08-25T15:10",
-     "formato": "2D + CONV",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/tu-corazon-sera-destrozado"
-    },
-    {
-     "cine": "cineplanet-mall-barrio-independencia",
-     "inicio": "2026-08-25T16:20",
-     "formato": "2D + CONV",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/tu-corazon-sera-destrozado"
-    },
-    {
-     "cine": "cineplanet-costanera-center",
-     "inicio": "2026-08-25T17:50",
-     "formato": "2D + CONV",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/tu-corazon-sera-destrozado"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-25T18:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-25T18:10",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cineplanet-florida-center",
-     "inicio": "2026-08-25T18:20",
-     "formato": "2D + CONV",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/tu-corazon-sera-destrozado"
-    },
-    {
-     "cine": "cineplanet-quilin",
-     "inicio": "2026-08-25T18:20",
-     "formato": "2D + CONV",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/tu-corazon-sera-destrozado"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-26T12:40",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cineplanet-alameda",
-     "inicio": "2026-08-26T15:10",
-     "formato": "2D + CONV",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/tu-corazon-sera-destrozado"
-    },
-    {
-     "cine": "cineplanet-mall-barrio-independencia",
-     "inicio": "2026-08-26T16:20",
-     "formato": "2D + CONV",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/tu-corazon-sera-destrozado"
-    },
-    {
-     "cine": "cineplanet-costanera-center",
-     "inicio": "2026-08-26T17:50",
-     "formato": "2D + CONV",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/tu-corazon-sera-destrozado"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-26T18:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-26T18:10",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cineplanet-florida-center",
-     "inicio": "2026-08-26T18:20",
-     "formato": "2D + CONV",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/tu-corazon-sera-destrozado"
-    },
-    {
-     "cine": "cineplanet-quilin",
-     "inicio": "2026-08-26T18:20",
-     "formato": "2D + CONV",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/tu-corazon-sera-destrozado"
-    }
-   ]
-  },
-  {
    "clave": "la-negociacion",
    "titulo": "La Negociación",
    "poster": "https://cdn.apis.cineplanet.cl/CDN/media/entity/get/FilmPosterGraphic/HO00001881?referenceScheme=HeadOffice&allowPlaceHolder=true",
    "duracion": 105,
    "clasificacion": "+14",
    "cines": [
+    "centro-arte-alameda-sala-ceina",
     "cinemark-alto-las-condes",
     "cinemark-mallplaza-oeste",
     "cineplanet-costanera-center",
@@ -8260,6 +7639,252 @@
      "idioma": "subtitulada",
      "sala": "11",
      "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-27T16:30",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/la-negociacion-centro-arte-alameda-548645"
+    }
+   ]
+  },
+  {
+   "clave": "tu-corazon-sera-destrozado",
+   "titulo": "Tu Corazon Sera Destrozado",
+   "poster": "https://cdn.apis.cineplanet.cl/CDN/media/entity/get/FilmPosterGraphic/HO00001846?referenceScheme=HeadOffice&allowPlaceHolder=true",
+   "duracion": 135,
+   "clasificacion": "+14",
+   "cines": [
+    "cinemark-mallplaza-oeste",
+    "cinemark-mallplaza-vespucio",
+    "cineplanet-alameda",
+    "cineplanet-costanera-center",
+    "cineplanet-florida-center",
+    "cineplanet-mall-barrio-independencia",
+    "cineplanet-quilin"
+   ],
+   "sinopsis": "Polina llega a un nuevo colegio intentando pasar desapercibida, pero rápidamente se convierte en el blanco de los abusos de sus compañeros.",
+   "trailer": "https://www.youtube.com/watch?v=hrqU6rChAgE",
+   "generos": [
+    "Romance"
+   ],
+   "funciones": [
+    {
+     "cine": "cineplanet-alameda",
+     "inicio": "2026-08-25T15:10",
+     "formato": "2D + CONV",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/tu-corazon-sera-destrozado"
+    },
+    {
+     "cine": "cineplanet-mall-barrio-independencia",
+     "inicio": "2026-08-25T16:20",
+     "formato": "2D + CONV",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/tu-corazon-sera-destrozado"
+    },
+    {
+     "cine": "cineplanet-costanera-center",
+     "inicio": "2026-08-25T17:50",
+     "formato": "2D + CONV",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/tu-corazon-sera-destrozado"
+    },
+    {
+     "cine": "cineplanet-florida-center",
+     "inicio": "2026-08-25T18:20",
+     "formato": "2D + CONV",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/tu-corazon-sera-destrozado"
+    },
+    {
+     "cine": "cineplanet-quilin",
+     "inicio": "2026-08-25T18:20",
+     "formato": "2D + CONV",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/tu-corazon-sera-destrozado"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T12:40",
+     "formato": "2D PRE",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
+    },
+    {
+     "cine": "cineplanet-alameda",
+     "inicio": "2026-08-26T15:10",
+     "formato": "2D + CONV",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/tu-corazon-sera-destrozado"
+    },
+    {
+     "cine": "cineplanet-mall-barrio-independencia",
+     "inicio": "2026-08-26T16:20",
+     "formato": "2D + CONV",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/tu-corazon-sera-destrozado"
+    },
+    {
+     "cine": "cineplanet-costanera-center",
+     "inicio": "2026-08-26T17:50",
+     "formato": "2D + CONV",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/tu-corazon-sera-destrozado"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T18:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T18:10",
+     "formato": "2D PRE",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
+    },
+    {
+     "cine": "cineplanet-florida-center",
+     "inicio": "2026-08-26T18:20",
+     "formato": "2D + CONV",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/tu-corazon-sera-destrozado"
+    },
+    {
+     "cine": "cineplanet-quilin",
+     "inicio": "2026-08-26T18:20",
+     "formato": "2D + CONV",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/tu-corazon-sera-destrozado"
+    }
+   ]
+  },
+  {
+   "clave": "locamente",
+   "titulo": "Locamente",
+   "poster": "https://cdn.cinemark.cl/content/posters/HO00015330.jpg",
+   "duracion": 97,
+   "clasificacion": "MA14",
+   "cines": [
+    "cinemark-alto-las-condes",
+    "cinemark-la-dehesa",
+    "cinemark-mallplaza-oeste",
+    "cinemark-mallplaza-vespucio",
+    "cinemark-portal-nunoa",
+    "cineplanet-costanera-center",
+    "cineplanet-florida-center"
+   ],
+   "sinopsis": "En su primera cita, Piero y Lara intentan impresionarse, pero dentro de sus cabezas reina el caos. Las múltiples personalidades que ocupan su mente — la romántica, la racional, la insegura y la pasional— pelean por el control de la situación. Discuten, seducen, sabotean y a veces pierden los nervios. ¿Quién ganará la batalla interior? ¿El corazón o el deseo? Las expectativas son altas y la noche promete.",
+   "trailer": "",
+   "generos": [
+    "Comedia"
+   ],
+   "funciones": [
+    {
+     "cine": "cineplanet-costanera-center",
+     "inicio": "2026-08-25T19:10",
+     "formato": "2D + CONV",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/locamente"
+    },
+    {
+     "cine": "cineplanet-florida-center",
+     "inicio": "2026-08-25T20:50",
+     "formato": "2D + CONV",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/locamente"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-25T22:20",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T14:00",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cinemark-la-dehesa",
+     "inicio": "2026-08-26T15:50",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-08-26T16:15",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T17:30",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-08-26T18:10",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
+     "cine": "cineplanet-costanera-center",
+     "inicio": "2026-08-26T19:10",
+     "formato": "2D + CONV",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/locamente"
+    },
+    {
+     "cine": "cineplanet-florida-center",
+     "inicio": "2026-08-26T20:50",
+     "formato": "2D + CONV",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/locamente"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-08-26T22:20",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
     }
    ]
   },
@@ -8288,14 +7913,6 @@
      "idioma": "doblada",
      "sala": "",
      "url": "https://www.cineplanet.cl/peliculas/minions-monstruos"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-25T16:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "11",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
     },
     {
      "cine": "cinemark-mallplaza-oeste",
@@ -8413,6 +8030,7 @@
    "duracion": 108,
    "clasificacion": "+14",
    "cines": [
+    "centro-arte-alameda-sala-ceina",
     "el-biografo"
    ],
    "sinopsis": "",
@@ -8450,6 +8068,14 @@
      "idioma": "subtitulada",
      "sala": "",
      "url": "https://elbiografo.cl/"
+    },
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-29T14:45",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/la-invitacion-centro-arte-alameda-548653"
     }
    ]
   },
@@ -8481,6 +8107,37 @@
      "idioma": "doblada",
      "sala": "",
      "url": "https://elbiografo.cl/"
+    }
+   ]
+  },
+  {
+   "clave": "la-misteriosa-mirada-del-flamenco",
+   "titulo": "La Misteriosa Mirada del Flamenco",
+   "poster": "",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "centro-arte-alameda-sala-ceina"
+   ],
+   "sinopsis": "",
+   "trailer": "",
+   "generos": [],
+   "funciones": [
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-25T14:30",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/la-misteriosa-mirada-del-flamenco-centro-arte-alameda-546241"
+    },
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-28T15:00",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/la-misteriosa-mirada-del-flamenco-centro-arte-alameda-548651"
     }
    ]
   },
@@ -8518,35 +8175,33 @@
    ]
   },
   {
-   "clave": "rapido-y-furioso",
-   "titulo": "Rápido y Furioso",
-   "poster": "https://cdn.cinemark.cl/content/posters/HO00015335.jpg",
-   "duracion": 107,
-   "clasificacion": "MA14",
+   "clave": "teenage-sex-and-death-at-camp-miasma",
+   "titulo": "Teenage Sex and Death at Camp Miasma",
+   "poster": "",
+   "duracion": null,
+   "clasificacion": "",
    "cines": [
-    "cinemark-mallplaza-oeste"
+    "centro-arte-alameda-sala-ceina"
    ],
-   "sinopsis": "Estrenada originalmente en 2001, Rápido y Furioso gira en torno a Dominic Toretto (Vin Diesel), quien conduce por las calles de Los Ángeles como si fueran suyas. En lo que respecta a Letty (Michelle Rodríguez) y al resto de su pandilla.",
-   "trailer": "https://youtu.be/yg2jV7V5MhU",
-   "generos": [
-    "Acción"
-   ],
+   "sinopsis": "",
+   "trailer": "",
+   "generos": [],
    "funciones": [
     {
-     "cine": "cinemark-mallplaza-oeste",
+     "cine": "centro-arte-alameda-sala-ceina",
      "inicio": "2026-08-25T16:30",
-     "formato": "2D PALCO",
-     "idioma": "doblada",
-     "sala": "8",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/teenage-sex-and-death-at-camp-miasma-centro-arte-alameda-546329"
     },
     {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-26T16:30",
-     "formato": "2D PALCO",
-     "idioma": "doblada",
-     "sala": "8",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-26T20:45",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/teenage-sex-and-death-at-camp-miasma-centro-arte-alameda-546330"
     }
    ]
   },
@@ -8601,6 +8256,29 @@
      "idioma": "",
      "sala": "",
      "url": "https://www.toliv.com/eventos/chile/independencia/au-revoir-les-enfants-cine-arte-independencia-26028"
+    }
+   ]
+  },
+  {
+   "clave": "backrooms-extended",
+   "titulo": "Backrooms Extended",
+   "poster": "",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "centro-arte-alameda-sala-ceina"
+   ],
+   "sinopsis": "",
+   "trailer": "",
+   "generos": [],
+   "funciones": [
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-31T20:30",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/backrooms-extended-centro-arte-alameda-548660"
     }
    ]
   },
@@ -8743,29 +8421,6 @@
    ]
   },
   {
-   "clave": "la-misteriosa-mirada-del-flamenco",
-   "titulo": "La Misteriosa Mirada del Flamenco",
-   "poster": "",
-   "duracion": null,
-   "clasificacion": "",
-   "cines": [
-    "centro-arte-alameda-sala-ceina"
-   ],
-   "sinopsis": "",
-   "trailer": "",
-   "generos": [],
-   "funciones": [
-    {
-     "cine": "centro-arte-alameda-sala-ceina",
-     "inicio": "2026-08-25T14:30",
-     "formato": "",
-     "idioma": "",
-     "sala": "",
-     "url": "https://www.passline.com/eventos/la-misteriosa-mirada-del-flamenco-centro-arte-alameda-546241"
-    }
-   ]
-  },
-  {
    "clave": "la-naturaleza-de-las-cosas-invisibles",
    "titulo": "La Naturaleza de las Cosas Invisibles",
    "poster": "https://www.m100.cl/wp-content/uploads/2026/08/naturaleza-cosas-invisibles_slidehome_1920x1488-768x595.jpg",
@@ -8858,6 +8513,29 @@
    ]
   },
   {
+   "clave": "obsesion",
+   "titulo": "Obsesión",
+   "poster": "",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "centro-arte-alameda-sala-ceina"
+   ],
+   "sinopsis": "",
+   "trailer": "",
+   "generos": [],
+   "funciones": [
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-31T14:30",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/obsesion-centro-arte-alameda-548658"
+    }
+   ]
+  },
+  {
    "clave": "paranoid-park",
    "titulo": "Paranoid Park",
    "poster": "https://imagenes.passline.com/eventos/paranoid-park-centro-arte-alameda-540559-rec.jpg",
@@ -8927,8 +8605,33 @@
    ]
   },
   {
-   "clave": "teenage-sex-and-death-at-camp-miasma",
-   "titulo": "Teenage Sex and Death at Camp Miasma",
+   "clave": "rapido-y-furioso",
+   "titulo": "Rápido y Furioso",
+   "poster": "https://cdn.cinemark.cl/content/posters/HO00015335.jpg",
+   "duracion": 107,
+   "clasificacion": "MA14",
+   "cines": [
+    "cinemark-mallplaza-oeste"
+   ],
+   "sinopsis": "Estrenada originalmente en 2001, Rápido y Furioso gira en torno a Dominic Toretto (Vin Diesel), quien conduce por las calles de Los Ángeles como si fueran suyas. En lo que respecta a Letty (Michelle Rodríguez) y al resto de su pandilla.",
+   "trailer": "https://youtu.be/yg2jV7V5MhU",
+   "generos": [
+    "Acción"
+   ],
+   "funciones": [
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-26T16:30",
+     "formato": "2D PALCO",
+     "idioma": "doblada",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    }
+   ]
+  },
+  {
+   "clave": "the-doors",
+   "titulo": "The Doors",
    "poster": "",
    "duracion": null,
    "clasificacion": "",
@@ -8941,11 +8644,11 @@
    "funciones": [
     {
      "cine": "centro-arte-alameda-sala-ceina",
-     "inicio": "2026-08-25T16:30",
+     "inicio": "2026-08-27T20:00",
      "formato": "",
      "idioma": "",
      "sala": "",
-     "url": "https://www.passline.com/eventos/teenage-sex-and-death-at-camp-miasma-centro-arte-alameda-546329"
+     "url": "https://www.passline.com/eventos/the-doors-centro-arte-alameda-548650"
     }
    ]
   }
