@@ -46,7 +46,7 @@
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
       integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V"
       crossorigin="anonymous">
-<link rel="stylesheet" href="loica.css?v=24">
+<link rel="stylesheet" href="loica.css?v=25">
 <style>
   html,body{height:100%;overflow:hidden}
   /* Los dos altos van en este orden a proposito: `dvh` no existe en
@@ -509,7 +509,7 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
         integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
         crossorigin="anonymous"></script>
-<script src="loica.js?v=24"></script>
+<script src="loica.js?v=25"></script>
 <script>
 let EVENTOS = [], filtroCat = null, soloGratis = false, cuando = "todo", publicoFiltro = null;
 let busqueda = "", filtroSub = null;
@@ -617,8 +617,14 @@ function avisar(texto, quien = "loica"){
    desaparecen. Para que el traslape de lejos moleste menos, el pin crece
    con el zoom, y los gratis se dibujan encima del resto.
 
-   Los íconos se dibujan a canvas la primera vez que el mapa los pide
-   (`styleimagemissing`), así que solo se generan los que de verdad se ven.
+   Los íconos se registran ANTES de que exista la capa que los usa. Antes se
+   dibujaban a pedido, escuchando `styleimagemissing`, y eso no puede
+   funcionar: MapLibre dispara el evento y vuelve a leer la imagen en la línea
+   siguiente, sin ceder el turno. Como pasar un SVG a mapa de bits obliga a
+   esperar el onload de una Image, el oyente nunca llegaba a tiempo y la
+   consola juntaba un aviso "could not be loaded" por categoría —veinte en una
+   carga común—. Los pines igual aparecían un tic después, así que era ruido,
+   pero ruido que tapa los avisos de verdad.
    ============================================================ */
 const ESCALA_PIN = 2;
 
@@ -662,39 +668,62 @@ function datosGeo(lista){
                   gratis:!!ev.gratis}}))};
 }
 
-function montarCapas(){
-  if(!hayMapa || mapa.getSource("eventos")) return;
-  mapa.addSource("eventos", {type:"geojson", data:datosGeo(listaActual)});
-  mapa.addLayer({
-    id:"pines", type:"symbol", source:"eventos",
-    layout:{
-      "icon-image":["concat","pin-",["get","cat"],["case",["get","gratis"],"-g",""]],
-      // De lejos chico, de cerca pleno. Antes iba de .4 a .55 sobre un
-      // dibujo de 34×42: un pin de 15 px con una carita de 11 que no se leía
-      // (la dirección visual pide 28 px de carita). Ahora al zoom inicial el
-      // pin mide ~25 px y la carita ~19, y desde el zoom 15 la carita llega a
-      // los 28 del contrato. El traslape del centro a zoom bajo se ordena
-      // con symbol-sort-key: gratis encima.
-      "icon-size":["interpolate",["linear"],["zoom"],11,.62,13,.85,15,1.05,17,1.2],
-      "icon-anchor":"bottom",
-      "icon-allow-overlap":true, "icon-ignore-placement":true,
-      // Con allow-overlap, la clave más alta se dibuja encima: gratis gana
-      "symbol-sort-key":["case",["get","gratis"],1,0],
-    },
-  });
-  // El toque sobre un pin se resuelve en el manejador general del mapa (al
-  // final del archivo), con una caja de tolerancia alrededor del dedo.
-  mapa.on("mouseenter", "pines", () => mapa.getCanvas().style.cursor = "pointer");
-  mapa.on("mouseleave", "pines", () => mapa.getCanvas().style.cursor = "");
+/* Las 13 categorías por dos (pagado y gratis) son 26 dibujos de 34×42 que se
+   generan una sola vez, en paralelo, mientras todavía viaja eventos.json. No
+   se guarda la promesa: cambiar de tema puede llevarse las imágenes junto con
+   el estilo, y hasImage() vuelve a decir la verdad después de cada setStyle. */
+function prepararPines(){
+  return Promise.all(Object.keys(CATEGORIAS).flatMap(clave =>
+    [false, true].map(async gratis => {
+      const id = `pin-${clave}${gratis ? "-g" : ""}`;
+      if(mapa.hasImage(id)) return;
+      const datos = await svgAImagen(svgPin(clave, gratis), 34, 42);
+      if(datos && !mapa.hasImage(id)) mapa.addImage(id, datos, {pixelRatio:ESCALA_PIN});
+    })));
+}
+
+/* Montar la capa pasó a ser asíncrono, así que `load` y `styledata` pueden
+   entrar los dos mientras se dibujan los íconos: sin esta tranca se agregaba
+   la fuente dos veces y MapLibre tiraba error. */
+let montandoCapas = false;
+
+async function montarCapas(){
+  if(!hayMapa || montandoCapas || mapa.getSource("eventos")) return;
+  montandoCapas = true;
+  try{
+    await prepararPines();
+    if(mapa.getSource("eventos")) return;
+    mapa.addSource("eventos", {type:"geojson", data:datosGeo(listaActual)});
+    mapa.addLayer({
+      id:"pines", type:"symbol", source:"eventos",
+      layout:{
+        "icon-image":["concat","pin-",["get","cat"],["case",["get","gratis"],"-g",""]],
+        // De lejos chico, de cerca pleno. Antes iba de .4 a .55 sobre un
+        // dibujo de 34×42: un pin de 15 px con una carita de 11 que no se leía
+        // (la dirección visual pide 28 px de carita). Ahora al zoom inicial el
+        // pin mide ~25 px y la carita ~19, y desde el zoom 15 la carita llega a
+        // los 28 del contrato. El traslape del centro a zoom bajo se ordena
+        // con symbol-sort-key: gratis encima.
+        "icon-size":["interpolate",["linear"],["zoom"],11,.62,13,.85,15,1.05,17,1.2],
+        "icon-anchor":"bottom",
+        "icon-allow-overlap":true, "icon-ignore-placement":true,
+        // Con allow-overlap, la clave más alta se dibuja encima: gratis gana
+        "symbol-sort-key":["case",["get","gratis"],1,0],
+      },
+    });
+    // El toque sobre un pin se resuelve en el manejador general del mapa (al
+    // final del archivo), con una caja de tolerancia alrededor del dedo.
+    mapa.on("mouseenter", "pines", () => mapa.getCanvas().style.cursor = "pointer");
+    mapa.on("mouseleave", "pines", () => mapa.getCanvas().style.cursor = "");
+  }catch(e){
+    /* Esperar los íconos abre una rendija que antes no existía: si el tema
+       cambia justo ahí, el estilo se rehace y addSource cae con "Style is not
+       done loading". No se hace nada acá a propósito —el styledata del estilo
+       nuevo vuelve a llamar a montarCapas y la capa queda igual—. */
+  } finally { montandoCapas = false; }
 }
 
 function montarEventosDelMapa(){
-  mapa.on("styleimagemissing", async e => {
-    const m = e.id.match(/^pin-([a-z_]+)(-g)?$/);
-    if(!m || mapa.hasImage(e.id)) return;
-    const datos = await svgAImagen(svgPin(m[1], !!m[2]), 34, 42);
-    if(datos && !mapa.hasImage(e.id)) mapa.addImage(e.id, datos, {pixelRatio:ESCALA_PIN});
-  });
   mapa.on("load", montarCapas);
   // Cambiar de tema reconstruye el estilo y con él se van fuentes y capas
   mapa.on("styledata", () => { if(!mapa.getSource("eventos")) montarCapas(); });

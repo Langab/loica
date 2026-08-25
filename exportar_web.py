@@ -288,7 +288,7 @@ PLANTILLA_FICHA = """<!doctype html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=24">
+<link rel="stylesheet" href="../loica.css?v=25">
 <style>
   body{{min-height:100vh;min-height:100dvh}}
   .ficha-sola{{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}}
@@ -338,7 +338,7 @@ PLANTILLA_FICHA = """<!doctype html>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=24"></script>
+<script src="../loica.js?v=25"></script>
 <script>
   pintarBarra("{pagina_madre}", "../");
   const EV = {evento_json};

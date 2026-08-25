@@ -22,7 +22,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
       integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V" crossorigin="anonymous">
-<link rel="stylesheet" href="loica.css?v=24">
+<link rel="stylesheet" href="loica.css?v=25">
 <style>
   html,body{height:100%;overflow:hidden}
   /* Los dos altos van en este orden a propósito: `dvh` no existe en Safari de
@@ -75,11 +75,41 @@
   header .filtros .chip[aria-pressed="true"]:focus-visible{
     box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
   }
-  /* El chip del tipo se prende con el color de SU categoría (natación con el
-     teal del Chungungo, cerámica con el naranjo del Chincol): prendido y
-     apagado tienen que decir lo mismo. Tinta azul encima — ver el segmentado. */
-  header .filtros .chip[aria-pressed="true"]{background:var(--tono,var(--tinta));color:var(--azul-900)}
+  /* El chip del tipo se prende con el color de SU TIPO —no el de su categoría—
+     y prendido y apagado dicen lo mismo. La tinta de encima no es siempre la
+     azul: el teal de la sala y el verde de la cancha con azul-900 dan 3,5:1 y
+     con crema pasan de 4,6:1; el ámbar y el naranjo, al revés. Cada familia
+     trae escrita cuál le toca en `sobre` (ver PALETA, más abajo). */
+  header .filtros .chip[aria-pressed="true"]{
+    background:var(--tono,var(--tinta));color:var(--tono-sobre,var(--azul-900));
+  }
   .separa-chips{flex:none;width:2px;background:var(--borde-fuerte);margin:4px 3px;border-radius:2px}
+
+  /* --- La señal del tipo ---
+     Un taller de natación y uno de fútbol tienen que verse distintos en el
+     mapa, y el color solo no alcanza: hay daltonismo y hay pines de 12px que
+     se apilan. Así que cada familia de tipos trae DOS marcas, color y forma,
+     y la misma forma aparece en los tres lugares donde se nombra el tipo: el
+     chip que filtra, el pin del mapa y la etiqueta de la tarjeta. El chip es
+     la leyenda del mapa sin ser una caja de leyenda. */
+  .senal{flex:none;display:block}
+  /* La señal en la miniatura sin foto: grande para que se lea a un metro, pero
+     no llenando la baldosa —el borde de tinta de `.miniatura` la enmarca. */
+  .lista .miniatura > .senal{width:30px;height:30px}
+  .etiqueta-tipo{
+    display:inline-flex;align-items:center;gap:4px;min-width:0;
+    font:800 var(--t-xs)/1 var(--fuente-ui);letter-spacing:.01em;
+    color:var(--tipo-tinta,var(--tinta-suave));
+  }
+  .etiqueta-tipo span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  /* La ceja de la tarjeta: hora y tipo en la misma línea, que es la línea que
+     la tarjeta ya gastaba solo en la hora. */
+  .linea-tipo{display:flex;align-items:center;gap:var(--e-2);min-width:0;margin-bottom:1px}
+  .linea-tipo .hora{flex:none}
+  /* El precio que no se sabe deja de gritar en la columna de la derecha: se
+     dice UNA vez en la nota del panel. Antes "Precio en la fuente" se partía
+     en dos líneas al lado del título en 1.420 de 1.905 tarjetas. */
+  .lista .precio.sin-dato{display:none}
 
   /* El desplegable vestido de chip, calcado de descuentos (la nota sobre el
      select invisible de 16px y el zoom de Safari de iOS vive allá). */
@@ -146,18 +176,9 @@
   }
   .maplibregl-popup-content a{color:var(--c-clases-tinta);font-weight:800;text-decoration:none}
   .maplibregl-popup-content a:hover{text-decoration:underline}
-
-  .lista{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;flex:1;min-height:0}
-  .fin-lista{padding:var(--e-5) var(--e-4);text-align:center}
-  .fin-lista .boton{box-shadow:var(--repisa-2)}
-  /* La burbuja del pin: tarjeta mínima con el borde de tinta de la casa. */
-  .maplibregl-popup-content{
-    font:600 var(--t-sm)/1.4 var(--fuente-ui);color:var(--azul-900);
-    border:2px solid var(--azul-900);border-radius:var(--r-md);
-    box-shadow:0 3px 0 var(--azul-900);padding:10px 12px;max-width:230px;
-  }
-  .maplibregl-popup-content a{color:var(--c-clases-tinta);font-weight:800;text-decoration:none}
-  .maplibregl-popup-content a:hover{text-decoration:underline}
+  /* La burbuja repite la señal del pin que se tocó: es lo que convierte un
+     punto de color en un tipo con nombre. */
+  .maplibregl-popup-content .etiqueta-tipo{margin-bottom:3px;color:inherit}
 
   /* --- El aviso y la lista, como en descuentos --- */
   .aviso-taller{
@@ -167,6 +188,60 @@
     border-bottom:2px solid var(--contorno);
   }
   .aviso-taller svg{flex:none;margin-top:-2px}
+
+  /* --- El Chincol vive en el estado vacío ---
+     Cuatro filtros que se combinan sobre 1.905 talleres muy cargados al día
+     de semana: filtrar hasta que no queda nada acá no es una esquina rara,
+     es el resultado de todos los días —"natación" un domingo y ya no hay
+     nada—. Ahí está el pájaro: entero, grande, con su lápiz y sus dos
+     saltitos, en la única pantalla de esta página donde sobra el espacio y
+     donde alguien está trabado.
+
+     Y va con la salida escrita al lado: quien llegó acá no vino a ver un
+     pájaro, vino a encontrar un taller.
+
+     (`--vacio-masc` es la perilla de tamaño de `.vacio` en loica.css; el
+     ancho del `<svg>` va por CSS y le gana al que emite `cuerpo()`.) */
+  .lista .vacio{
+    --vacio-masc:128px;
+    padding:var(--e-8) var(--e-5) var(--e-10);
+    /* La entrada del Chincol llega saltando desde 110px a la izquierda y
+       `.lista` scrollea: sin recortar aparecía una barra horizontal durante
+       un segundo. Recortada, entra desde fuera del panel, que es el gesto. */
+    overflow:hidden;
+  }
+  .lista .vacio p{margin:0 0 var(--e-5);line-height:1.5}
+  .lista .vacio .boton{box-shadow:var(--repisa-2)}
+  /* En escritorio el panel llega hasta el pie: sin esto el Chincol quedaba
+     apretado arriba con 600px de nada debajo. Centrado, la pantalla vacía es
+     de él.
+     `safe` no es adorno: con `center` a secas, cuando el contenido es más
+     alto que la caja —la hoja corta del celular— el desborde se va por el
+     canto de ARRIBA, donde no hay scroll que lo alcance, y el botón de salida
+     queda cortado. Con `safe`, si no cabe se comporta como `flex-start` y la
+     lista scrollea como siempre. */
+  .lista:has(> .vacio){display:flex;flex-direction:column;justify-content:safe center}
+  @media(max-width:879px){
+    .lista .vacio{--vacio-masc:88px;padding:var(--e-5) var(--e-5) var(--e-6)}
+    .lista .vacio p{margin-bottom:var(--e-4)}
+  }
+
+  /* El botón de plegar: en escritorio el panel se comía un tercio del mapa y
+     no había forma de correrlo. Plegado deja la barra con el conteo —que es
+     el dato que uno quiere seguir viendo— y devuelve el mapa entero. */
+  .plegar{
+    display:none;flex:none;margin-left:auto;align-self:center;
+    width:34px;height:34px;border-radius:var(--r-pill);cursor:pointer;
+    border:2px solid var(--contorno);background:var(--fondo-elevado);color:var(--tinta);
+    box-shadow:0 2px 0 var(--contorno);transition:var(--rapido);
+    align-items:center;justify-content:center;
+  }
+  .plegar:hover{transform:translateY(-1px)}
+  .plegar:active{transform:translateY(2px);box-shadow:none}
+  .plegar:focus-visible{box-shadow:0 2px 0 var(--contorno),0 0 0 3px var(--foco),0 0 0 6px var(--contorno)}
+  .plegar svg{width:15px;height:15px;transition:transform var(--medio)}
+  .panel-lista.plegado .plegar svg{transform:rotate(180deg)}
+
   @media(max-width:879px){
     main{padding-bottom:0}
     .panel-lista{bottom:var(--hueco-nav)}
@@ -182,6 +257,13 @@
       border-bottom:2.5px solid var(--contorno)}
     .tirador{display:none}
     .conteo{padding-top:var(--e-3)}
+    .plegar{display:inline-flex}
+    /* `bottom:auto` y el panel deja de estirarse hasta el pie: queda del alto
+       de su propia barra. */
+    .panel-lista.plegado{bottom:auto;width:auto;min-width:230px}
+    .panel-lista.plegado .lista{display:none}
+    .panel-lista.plegado .nota-geo{display:none}
+    .panel-lista.plegado .plegar{margin-left:var(--e-6)}
   }
 </style>
 </head>
@@ -202,6 +284,10 @@
       <div class="tirador" id="tirador" role="button" tabindex="0"
            aria-label="Arrastra para ver más talleres"><div class="barra-tirador"></div></div>
       <div class="conteo"><b id="conteo">0</b> <span id="conteo-txt">talleres</span>
+        <button type="button" class="plegar" id="plegar" aria-expanded="true"
+                aria-controls="lista"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"
+          fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"
+          stroke-linejoin="round"><path d="M5 15l7-7 7 7"/></svg></button>
         <span class="nota-geo" id="nota-geo"></span></div>
       <div class="lista" id="lista"></div>
     </section>
@@ -213,7 +299,7 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
         integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
         crossorigin="anonymous"></script>
-<script src="loica.js?v=24"></script>
+<script src="loica.js?v=25"></script>
 <script>
 /* ------------------------------------------------------------------
    Talleres y clases: lo que se toma todas las semanas. El esqueleto es el
@@ -226,6 +312,152 @@ let dia = "hoy", tipoFiltro = "", comunaFiltro = "", soloGratis = false;
 let mostrando = 80;   // 1.600 tarjetas de una sola vez traban el teléfono
 
 pintarBarra("talleres.html");
+
+/* ==================================================================
+   COLOR Y FORMA POR TIPO DE TALLER
+   ------------------------------------------------------------------
+   El problema: 1.780 de los 1.905 talleres son categoría "deporte", así que
+   pintar por categoría dejaba la piscina, la cancha y la sala de máquinas
+   exactamente del mismo teal. Lo que discrimina de verdad es la SUBcategoría
+   (gimnasia 686, baile 259, natación 237, fútbol 182…), y ahí sí hay 18
+   claves. Dieciocho colores no son información, son ruido.
+
+   La regla: se colorea por FAMILIA, y la familia dice DÓNDE pasa la cosa.
+   Ocho familias, y las que se parecen se parecen a propósito —fútbol y los
+   deportes de equipo son dos verdes de la misma cancha—, así que quien
+   confunde el tono igual acierta la familia. Los ocho tipos que concentran
+   el volumen caen cada uno en un tono distinto entre sí.
+
+   Cada familia trae tres cosas, calcado del registro CATEGORIAS de loica.js:
+     hex   → relleno. Pin del mapa, chip prendido. Siempre con contorno.
+     tinta → variable CSS de la familia de marca más cercana. Es el ÚNICO que
+             toca texto, y como es variable se da vuelta sola en modo oscuro.
+     sobre → la tinta que va ENCIMA del relleno cuando el chip se prende.
+             No es siempre la azul: el teal con azul-900 da 3,5:1.
+     forma → la marca que no depende del color, para el pin de 12px y para
+             quien no distingue el verde del rojo.
+
+   Los tonos salen de los rellenos de marca de loica.css; tres bajaron un
+   punto de luz (el teal 0C8B9B→0B7E8D, el verde 0E8757→0E8354, el rojo
+   DE3A1E→D4371D) porque el chip prendido con crema encima daba 3,9-4,4:1 y
+   AA pide 4,5. A ojo son el mismo color; medidos, pasan.
+   ================================================================== */
+const FORMAS = {
+  circulo:  "M21.2 12A9.2 9.2 0 1 1 2.8 12a9.2 9.2 0 0 1 18.4 0z",
+  gota:     "M12 2.2c3.4 4 7 7.3 7 10.7a7 7 0 0 1-14 0c0-3.4 3.6-6.7 7-10.7z",
+  rombo:    "M12 2.2 21.8 12 12 21.8 2.2 12z",
+  triangulo:"M12 2.4 22.2 20.2H1.8z",
+  punta:    "M12 21.6 1.8 3.8h20.4z",
+  cuadrado: "M5 3.6h14A1.4 1.4 0 0 1 20.4 5v14a1.4 1.4 0 0 1-1.4 1.4H5A1.4 1.4 0 0 1 3.6 19V5A1.4 1.4 0 0 1 5 3.6z",
+  /* La estrella va gorda de puntas a propósito: la de cinco puntas finas, con
+     el contorno de 2,6 encima, a 12px se cierra y queda una mancha. */
+  estrella: "M12 1.8L15.35 7.39L21.7 8.85L17.42 13.76L18 20.25L12 17.7L6 20.25L6.58 13.76L2.3 8.85L8.65 7.39Z",
+  /* El hexágono es la figura DÉBIL del juego: a 12px, con el contorno de 2,6
+     encima, las esquinas se redondean y se lee "círculo". Por eso va en la
+     familia más chica y con el tono más lejos del teal de la sala (el naranjo
+     de las clases): ahí el color hace el trabajo que la figura no alcanza. */
+  hexagono: "M12 2.2 20.5 7.1v9.8L12 21.8 3.5 16.9V7.1z",
+  /* Reservada, sin uso hoy: es la que estrena un tipo que el clasificador
+     invente mañana, para que no aparezca disfrazado de otra familia. Los
+     brazos van gordos (8,8 de 24) porque el contorno come 1,3 por lado: más
+     finos y a tamaño de pin queda puro contorno sin relleno. */
+  cruz:     "M7.6 2.4h8.8v5.2h5.2v8.8h-5.2v5.2H7.6v-5.2H2.4V7.6h5.2z",
+};
+
+const FAMILIAS = {
+  /* En el agua. El azul es el de Cultura en el registro de marca; acá dice
+     piscina, que es lo que dice un azul en un mapa de Santiago. */
+  agua:   {forma:"gota",      hex:"#1B6FD1", tinta:"var(--c-cultura-tinta)", sobre:"#FFFBF5"},
+  /* La sala: máquinas, colchoneta, pilates. Se queda con el teal del
+     Chungungo porque es el deporte por defecto y es lo que la página ya
+     mostraba: nadie tiene que reaprender el color más común. */
+  sala:   {forma:"circulo",   hex:"#0B7E8D", tinta:"var(--c-deporte-tinta)", sobre:"#FFFBF5"},
+  /* Con música. El morado del Culpeo: el baile entretenido es lo más cerca
+     de una fiesta que hay en un gimnasio municipal a las nueve de la mañana. */
+  baile:  {forma:"rombo",     hex:"#7A3FE0", tinta:"var(--c-fiesta-tinta)",  sobre:"#FFFBF5"},
+  /* Cancha de pasto. */
+  cancha: {forma:"triangulo", hex:"#0E8354", tinta:"var(--c-libre-tinta)",   sobre:"#FFFBF5"},
+  /* Cancha con red o tablero: equipo y raqueta. Los dos verdes son vecinos a
+     propósito —es la misma pregunta, "¿dónde juego?", con otra pelota—, pero
+     la figura NO puede ser la misma: fútbol (182) y equipos (178) son dos de
+     los seis chips grandes, y con deuteranopia el verde pasto y el verde
+     oliva son el mismo color. Vecinos de tono, distintos de silueta. */
+  red:    {forma:"cuadrado",  hex:"#5C7A1E", tinta:"var(--c-comer-tinta)",   sobre:"#FFFBF5"},
+  /* A pulso: artes marciales, running, ciclismo. Sin pelota, sin agua. */
+  pulso:  {forma:"punta",     hex:"#D4371D", tinta:"var(--c-musica-tinta)",  sobre:"#FFFBF5"},
+  /* "Deportes", sin decir cuál: escalada, skate, patín, spinning, cheerleaders.
+     Es el cajón de lo demás y en este sistema lo demás es el ámbar de la
+     Loica. La estrella lo separa del naranjo de las clases, que es su vecino
+     más cercano de tono. */
+  resto:  {forma:"estrella",  hex:"#FFB61F", tinta:"var(--c-otros-tinta)",   sobre:"#1E2A4A"},
+  /* Manos y cabeza: cerámica, cocina, idiomas, oficios. El naranjo del
+     Chincol, que es el color de esta página entera. Es la familia más chica
+     de las ocho (101) y la que no alcanza chip propio, así que le toca el
+     hexágono, la figura floja: su naranjo no se parece a ningún otro de las
+     ocho ni siquiera con daltonismo, y ahí el color sí alcanza solo. */
+  manos:  {forma:"hexagono",  hex:"#F08800", tinta:"var(--c-clases-tinta)",  sobre:"#1E2A4A"},
+};
+
+/* Qué tipo cae en qué familia. Lo que no está escrito acá se resuelve solo
+   más abajo con el color de su categoría: si mañana el clasificador inventa
+   "escalada", la página la pinta igual en vez de quedar en blanco. */
+const TIPO_FAMILIA = {
+  natacion:"agua",
+  gimnasia:"sala", bienestar:"sala",
+  baile_fitness:"baile", danza:"baile",
+  futbol:"cancha",
+  equipo:"red", raqueta:"red",
+  artes_marciales:"pulso", running:"pulso", ciclismo:"pulso",
+  "cat:deporte":"resto",
+  manualidades:"manos", artes_visuales:"manos", cocina:"manos", oficios:"manos",
+  idiomas:"manos", tecnologia:"manos", escritura:"manos", musica:"manos",
+  "cat:clases":"manos", "cat:idiomas":"manos", "cat:feria":"manos",
+  /* La cola de la cola: cinco talleres en total que el clasificador dejó en
+     una categoría de panorama (un taller de teatro, uno de cine, dos de
+     familia, uno al aire libre). Son clases igual, y van con las clases: si
+     se dejan caer al respaldo de categoría estrenan un color y una figura
+     propios para cinco fichas, que es exactamente el ruido que esta tabla
+     vino a evitar. */
+  "cat:teatro":"manos", "cat:cine":"manos", "cat:familia":"manos",
+  "cat:aire_libre":"manos", "cat:otros":"resto",
+};
+
+/* Luminancia relativa de WCAG. Se usa SOLO para las claves que no están en la
+   tabla: hay que decidir si encima del relleno va tinta azul o crema y no se
+   puede adivinar. Cuatro líneas y evita un chip ilegible. */
+const luz = hex => {
+  const v = [1,3,5].map(i => {
+    const c = parseInt(hex.substr(i,2),16)/255;
+    return c <= .03928 ? c/12.92 : Math.pow((c+.055)/1.055, 2.4);
+  });
+  return .2126*v[0] + .7152*v[1] + .0722*v[2];
+};
+
+const _fam = new Map();
+function familiaDe(clave){
+  if(_fam.has(clave)) return _fam.get(clave);
+  let f = FAMILIAS[TIPO_FAMILIA[clave]];
+  if(!f){
+    // Sin familia escrita: se usa el color de marca de su categoría, que es
+    // lo que hacía la página entera antes de esta tabla.
+    const ejemplo = TALLERES.find(ev => tipoDe(ev) === clave);
+    const c = cat(clave.startsWith("cat:") ? clave.slice(4)
+                                           : (ejemplo ? ejemplo.categoria : "otros"));
+    f = {forma:"cruz", hex:c.hex, tinta:c.tintaVar,
+         sobre: luz(c.hex) > .3 ? "#1E2A4A" : "#FFFBF5"};
+  }
+  f = {...f, icono: f.forma + f.hex};
+  _fam.set(clave, f);
+  return f;
+}
+
+/* La señal, en SVG, para el chip, la tarjeta y la burbuja del pin. El color
+   entra desde la tabla de acá arriba, nunca desde el dato. */
+function senal(forma, relleno, tam = 13, tinta = "var(--contorno)"){
+  return `<svg class="senal" viewBox="0 0 24 24" width="${tam}" height="${tam}"
+    aria-hidden="true" focusable="false"><path d="${FORMAS[forma] || FORMAS.circulo}"
+    fill="${relleno}" stroke="${tinta}" stroke-width="2.6" stroke-linejoin="round"/></svg>`;
+}
 
 /* ---------- EL MAPA, SIEMPRE PRESENTE ----------
    Círculos y no pines-animal: acá puede haber 1.600 puntos y los marcadores
@@ -286,29 +518,82 @@ if(hayMapa){
 function datosGeo(lista){
   return {type:"FeatureCollection", features:lista
     .filter(ev => ev.lat !== null && ev.lon !== null)
-    .map(ev => ({type:"Feature",
-      geometry:{type:"Point", coordinates:[ev.lon, ev.lat]},
-      properties:{id:ev.id, titulo:ev.titulo, lugar:ev.lugar,
-                  color:cat(ev.categoria).hex,
-                  aprox:ev.precision === "comuna" ? 1 : 0}}))};
+    .map(ev => {
+      const clave = tipoDe(ev), f = familiaDe(clave);
+      return {type:"Feature",
+        geometry:{type:"Point", coordinates:[ev.lon, ev.lat]},
+        properties:{id:ev.id, titulo:ev.titulo, lugar:ev.lugar,
+                    icono:f.icono, forma:f.forma, color:f.hex,
+                    tipo:nombreTipo(clave),
+                    aprox:ev.precision === "comuna" ? 1 : 0}};
+    })};
+}
+
+/* El pin deja de ser un círculo de color y pasa a ser la señal de su familia:
+   gota, círculo, rombo, triángulo, punta, cuadrado o estrella, con el relleno
+   de su tipo y el contorno de tinta de la casa. Cada figura se dibuja UNA vez
+   en un canvas y se registra como imagen del mapa; MapLibre la reparte entre
+   los 1.900 puntos sin costo por punto. El contorno cambia con el tema, así
+   que las imágenes se rehacen cuando cambia (setStyle las borra igual). */
+let tintaPin = "";
+function imagenPin(forma, relleno, tinta, lado = 20, pr = 3){
+  const c = document.createElement("canvas");
+  c.width = c.height = lado * pr;
+  const g = c.getContext("2d");
+  // El trazo va centrado en el borde, así que la figura de 24 se dibuja
+  // dentro de una caja de 28: si no, se le corta la mitad del contorno.
+  g.scale(c.width/28, c.height/28);
+  g.translate(2, 2);
+  const p = new Path2D(FORMAS[forma] || FORMAS.circulo);
+  g.fillStyle = relleno; g.fill(p);
+  g.lineWidth = 2.6; g.lineJoin = "round"; g.strokeStyle = tinta; g.stroke(p);
+  const d = g.getImageData(0, 0, c.width, c.height);
+  return {width:d.width, height:d.height, data:d.data};
+}
+
+function asegurarIconos(lista){
+  if(!hayMapa) return;
+  const tinta = esOscuro() ? "#EDE7DE" : "#1E2A4A";
+  const cambio = tinta !== tintaPin;
+  tintaPin = tinta;
+  const vistos = new Set();
+  lista.forEach(ev => {
+    const f = familiaDe(tipoDe(ev));
+    if(vistos.has(f.icono)) return;
+    vistos.add(f.icono);
+    try{
+      if(cambio && mapa.hasImage(f.icono)) mapa.removeImage(f.icono);
+      if(!mapa.hasImage(f.icono))
+        mapa.addImage(f.icono, imagenPin(f.forma, f.hex, tinta), {pixelRatio:3});
+    }catch(e){ /* el estilo se estaba recargando; vuelve en el próximo pintado */ }
+  });
 }
 
 function montarCapas(){
   if(!hayMapa || mapa.getSource("talleres")) return;
+  asegurarIconos(TALLERES);
   mapa.addSource("talleres", {type:"geojson", data:datosGeo(visibles())});
-  mapa.addLayer({id:"talleres-pin", type:"circle", source:"talleres",
-    paint:{
-      "circle-radius":["interpolate",["linear"],["zoom"], 10, 4, 14, 9],
-      "circle-color":["get","color"],
-      "circle-stroke-width":2,
-      "circle-stroke-color":esOscuro() ? "#EDE7DE" : "#1E2A4A",
-      "circle-opacity":["case",["==",["get","aprox"],1], .45, .92],
-    }});
+  mapa.addLayer({id:"talleres-pin", type:"symbol", source:"talleres",
+    layout:{
+      "icon-image":["get","icono"],
+      // Sin esto MapLibre esconde los pines que se pisan y el mapa miente
+      // sobre cuántos talleres hay en una cuadra.
+      "icon-allow-overlap":true, "icon-ignore-placement":true,
+      "icon-size":["interpolate",["linear"],["zoom"], 10, .55, 14, 1.05],
+    },
+    paint:{"icon-opacity":["case",["==",["get","aprox"],1], .5, 1]}});
   mapa.on("click", "talleres-pin", e => {
     const p = e.features[0].properties;
-    // Título y lugar vienen del catastro (texto de terceros): van como TEXTO,
-    // nunca como HTML — la regla de la casa para dato de fuente.
+    // Título, lugar y tipo vienen del catastro (texto de terceros): van como
+    // TEXTO, nunca como HTML — la regla de la casa para dato de fuente.
     const caja = document.createElement("div");
+    const marca = document.createElement("span");
+    marca.className = "etiqueta-tipo";
+    // La señal no lleva dato: forma y color salen de la tabla de la página.
+    marca.innerHTML = senal(p.forma, p.color, 12, "#1E2A4A");
+    const nombre = document.createElement("span");
+    nombre.textContent = p.tipo;
+    marca.appendChild(nombre);
     const titulo = document.createElement("b");
     titulo.textContent = p.titulo;
     const lugar = document.createElement("div");
@@ -317,7 +602,7 @@ function montarCapas(){
     const enlace = document.createElement("a");
     enlace.href = "e/" + encodeURIComponent(p.id) + ".html";
     enlace.textContent = t("tVerFicha") + " →";
-    caja.append(titulo, lugar, enlace);
+    caja.append(marca, titulo, lugar, enlace);
     popup?.remove();
     popup = new maplibregl.Popup({closeButton:false, offset:10})
       .setLngLat(e.lngLat).setDOMContent(caja).addTo(mapa);
@@ -329,7 +614,9 @@ function montarCapas(){
 
 function pintarMapa(){
   if(!hayMapa || !mapa.getSource("talleres")) return;
-  mapa.getSource("talleres").setData(datosGeo(visibles()));
+  const lista = visibles();
+  asegurarIconos(lista);
+  mapa.getSource("talleres").setData(datosGeo(lista));
 }
 
 cargarTalleres().then(lista => {
@@ -351,10 +638,63 @@ window.addEventListener("loica:idioma", pintarTodo);
 const tipoDe = ev => ev.subcategoria || "cat:" + ev.categoria;
 const nombreTipo = clave => clave.startsWith("cat:")
   ? cat(clave.slice(4))[IDIOMA] : subcat(clave);
-const colorTipo = clave => {
-  const ejemplo = TALLERES.find(ev => tipoDe(ev) === clave);
-  return cat(ejemplo ? ejemplo.categoria : "clases");
-};
+
+/* ---------- EL TÍTULO QUE SE REPITE TRES VECES ----------
+   1.205 de los 1.905 títulos municipales terminan en su horario y su sede:
+   "Gimnasia Adulto Mayor Lu-Mi-Vi 09:00 h. / JJVV Villa Alemana." La tarjeta
+   ya dice los días abajo ("lunes, miércoles y viernes"), ya dice el lugar
+   ("JJVV Villa Alemana") y tiene una línea reservada para la hora. O sea: la
+   cola del título es el mismo dato escrito tres veces, y por culpa de ella el
+   título de verdad se cortaba a la mitad con puntos suspensivos.
+
+   Acá se corta la cola SOLO para mostrar —el JSON no se toca y la ficha del
+   evento sigue mostrando el título entero— y la hora que venía en la cola se
+   rescata y se pone en la línea de la hora, que estaba vacía.
+
+   Dos formas de cortar, y las dos exigen algo para no comerse un nombre:
+     a) corrida de días + hora ("Lu-Mi-Vi 06:00 h.") → corta desde los días;
+     b) corrida de DOS o más días al final ("Ñuñoa Máster Lu-Mi-Vi.").
+   Un "Do" o un "Mi" sueltos no bastan, que es lo que salva a "Taller Do Re Mi".
+   Probado contra los 1.905: los únicos títulos que quedan de tres letras son
+   los que se llaman GAP, que se llaman así.
+
+   Los catastros NO municipales escriben la misma cola entre paréntesis
+   ("Clases de cerámica gres (martes 16:00)"), así que el paréntesis de
+   apertura entra en el patrón; y algunos dejan solo la hora ("Yoga (19:30)"),
+   que es el tercer patrón. */
+
+/* Las abreviaturas van SOLO con mayúscula inicial: en minúscula, "ma", "mi",
+   "do" y "sa" son el arranque de media lengua ("manualidades", "sala") y sin
+   límite de palabra al final se comen cualquier cosa. Los nombres completos,
+   en cambio, no son ambiguos y por eso van también en minúscula — que es como
+   los escriben los catastros no municipales dentro del paréntesis. */
+const _DIA = "(?:Lu|Ma|Mi|Ju|Vi|Sa|Sá|Do|Lun|Mar|Mié|Mie|Jue|Vie|Sáb|Sab|Dom|Lunes|Martes|Miércoles|Miercoles|Jueves|Viernes|Sábado|Sabado|Domingo"
+           + "|lunes|martes|miércoles|miercoles|jueves|viernes|sábado|sabado|domingo)";
+const _UNION = "(?:\\s*(?:-|–|/|,|y|a)\\s*" + _DIA + ")";
+const COLA_CON_HORA = new RegExp("\\s+\\(?(" + _DIA + _UNION + "*)\\s*(\\d{1,2}[:.]\\d{2})\\s*(?:h\\.?|hrs?\\.?|horas)?\\b.*$");
+const COLA_SOLA     = new RegExp("\\s+\\(?" + _DIA + _UNION + "+\\s*\\.?\\)?\\s*$");
+/* Solo la hora, y SOLO entre paréntesis: sin el paréntesis, "Zumba 19:30" es
+   ambiguo con un nombre que lleve números y no vale la pena arriesgarlo. */
+const COLA_HORA_SOLA = /\s+\((\d{1,2}[:.]\d{2})\s*(?:h\.?|hrs?\.?|horas)?\)\s*$/;
+
+function limpiarTitulo(titulo){
+  let texto = String(titulo || ""), hora = "";
+  const m = COLA_CON_HORA.exec(texto);
+  const mh = COLA_HORA_SOLA.exec(texto);
+  if(m){
+    hora = m[2].replace(".", ":");
+    texto = texto.slice(0, m.index);
+  }else if(mh){
+    hora = mh[1].replace(".", ":");
+    texto = texto.slice(0, mh.index);
+  }else{
+    const m2 = COLA_SOLA.exec(texto);
+    if(m2) texto = texto.slice(0, m2.index);
+  }
+  texto = texto.replace(/[\s./–-]+$/, "").trim();
+  // Si cortar dejó el título en nada, es que la corrida ERA el título.
+  return {texto: texto.length >= 3 ? texto : String(titulo || ""), hora};
+}
 
 /* Qué días corre un taller. Tres casos, y el vacío es honesto:
    - la serie declara sus días (dias_semana, del export);
@@ -421,16 +761,23 @@ function pintarFiltros(){
   const tipos = Object.keys(conteo)
     .sort((a, b) => conteo[b] - conteo[a] || nombreTipo(a).localeCompare(nombreTipo(b)));
 
-  /* Chips para los tipos grandes, con la carita de su animal; el resto vive
-     en el desplegable. */
+  /* Chips para los tipos grandes; el resto vive en el desplegable.
+     El chip lleva la señal de su familia —la misma figura y el mismo color
+     que sus pines— y no la carita del animal: los seis chips más grandes son
+     todos deporte, así que la carita dibujaba seis chungungos idénticos y no
+     decía nada. La señal, en cambio, es la leyenda del mapa. El Degú se queda
+     con la suya en el chip de Gratis, que sí es una pregunta de otra especie. */
   tipos.filter(k => conteo[k] >= 60).slice(0, 6).forEach(k => {
-    const info = colorTipo(k), activo = tipoFiltro === k;
+    const f = familiaDe(k), activo = tipoFiltro === k;
     const chip = document.createElement("button");
     chip.type = "button";
     chip.className = "chip";
-    chip.style.setProperty("--tono", info.hex);
+    chip.style.setProperty("--tono", f.hex);
+    chip.style.setProperty("--tono-sobre", f.sobre);
     chip.setAttribute("aria-pressed", activo);
-    chip.innerHTML = `${carita(info.mascota, activo ? "#1E2A4A" : info.hex, 22)} ${escapar(nombreTipo(k))}`;
+    chip.innerHTML = `${senal(f.forma, activo ? f.sobre : f.hex, 17,
+                              activo ? "currentColor" : "var(--contorno)")}
+                      ${escapar(nombreTipo(k))}`;
     chip.onclick = () => { tipoFiltro = activo ? "" : k; mostrando = 80; pintarTodo(); };
     cont.appendChild(chip);
   });
@@ -502,6 +849,10 @@ function pintarLista(){
         && (!comunaFiltro || ev.comuna === comunaFiltro)
         && (!soloGratis || ev.gratis)).length
     : 0;
+  // La tercera deuda: el precio. En 1.420 de 1.905 no está publicado, y
+  // repetir "Precio en la fuente" en cada tarjeta partía el título en dos.
+  // Se dice acá, una vez, con el número.
+  const sinPrecio = lista.filter(ev => !ev.gratis && !ev.precio).length;
   const partes = [];
   if(sinPin) partes.push({es:`${sinPin} sin dirección conocida salen solo en la lista`,
        en:`${sinPin} with unknown address are list-only`,
@@ -509,19 +860,29 @@ function pintarLista(){
   if(sinDias) partes.push({es:`${sinDias} no declaran sus días y están en "Todos"`,
        en:`${sinDias} don't state their days — see "All"`,
        pt:`${sinDias} não declaram seus dias — veja "Todas"`}[IDIOMA]);
+  if(sinPrecio) partes.push({es:`${sinPrecio} no publican precio: se pregunta en el lugar`,
+       en:`${sinPrecio} publish no price — ask at the venue`,
+       pt:`${sinPrecio} não publicam preço: pergunte no local`}[IDIOMA]);
   document.getElementById("nota-geo").textContent = partes.join(" · ");
 
   if(!lista.length){
-    cont.innerHTML = `<div class="vacio">${cuerpo("chincol","var(--tinta-tenue)",96,{pose:"durmiendo"})}
-      <p><b>${escapar(t("tVacio"))}</b><br>${escapar(t("tVaciopista"))}</p></div>`;
+    cont.appendChild(estadoVacio());
+    /* En celular la hoja descansa en 268px y ahí el Chincol con su mensaje y
+       su botón no caben: el botón, que es la salida, quedaba bajo el canto.
+       Sin lista que recorrer la hoja no tiene por qué seguir chica, así que
+       sube un tramo. Solo desde el tramo de reposo — si la persona ya la
+       movió a mano, mandan sus manos. */
+    subirHoja();
     return;
   }
 
   // La tarjeta es LA MISMA del mapa y el calendario (tarjetaEvento): un taller
   // no se ve distinto de un panorama, se filtra distinto. Tocarla abre su
-  // ficha, que ya sabe compartir y agendar.
-  lista.slice(0, mostrando).forEach(ev => cont.appendChild(
-    tarjetaEvento(ev, e => location.href = "e/" + encodeURIComponent(e.id) + ".html")));
+  // ficha, que ya sabe compartir y agendar. Lo que esta página le agrega —la
+  // señal del tipo, el título sin su cola— se hace DESPUÉS, sobre el nodo ya
+  // armado, para no tener que forkear el componente compartido.
+  lista.slice(0, mostrando).forEach(ev => cont.appendChild(vestirTarjeta(
+    tarjetaEvento(ev, e => location.href = "e/" + encodeURIComponent(e.id) + ".html"), ev)));
 
   if(lista.length > mostrando){
     const mas = document.createElement("div");
@@ -549,7 +910,143 @@ function pintarLista(){
   }
 }
 
-/* --- Arrastre del panel: tres alturas, calcado de mapa.html --- */
+/* La tarjeta compartida, vestida para talleres: la señal de su tipo en la
+   ceja (donde ya vivía la hora), el título sin su cola de días, horario y
+   sede, y el "Precio en la fuente" fuera de la columna del precio. Todo el
+   texto entra por textContent — es dato de terceros. */
+function vestirTarjeta(nodo, ev){
+  const cuerpoTarjeta = nodo.querySelector(".tarjeta-cuerpo");
+  if(!cuerpoTarjeta) return nodo;
+  const clave = tipoDe(ev), f = familiaDe(clave);
+
+  /* La miniatura sin foto trae la carita de la CATEGORÍA, y en esta página eso
+     es una fila de chincoles idénticos —o de chungungos idénticos, que son el
+     94%—: la mascota repetida deja de ser información y pasa a ser textura. En
+     su lugar va la señal del tipo, que es la misma figura del pin y del chip y
+     sí dice algo distinto en cada fila. Debajo de la foto cuando hay foto, así
+     que las tarjetas con imagen no cambian. */
+  const marcaMini = nodo.querySelector(".miniatura > svg");
+  if(marcaMini) marcaMini.outerHTML = senal(f.forma, f.hex, 30);
+
+  const titulo = cuerpoTarjeta.querySelector("h3");
+  const limpio = limpiarTitulo(ev.titulo);
+  if(titulo) titulo.textContent = limpio.texto;
+
+  const ceja = document.createElement("div");
+  ceja.className = "linea-tipo";
+  let hora = cuerpoTarjeta.querySelector(".hora");
+  if(!hora && limpio.hora){
+    // La hora venía escondida en el título; se pone donde la tarjeta la espera.
+    hora = document.createElement("div");
+    hora.className = "hora";
+    hora.textContent = limpio.hora;
+  }
+  if(hora) ceja.appendChild(hora);
+
+  const marca = document.createElement("span");
+  marca.className = "etiqueta-tipo";
+  marca.style.setProperty("--tipo-tinta", f.tinta);
+  marca.innerHTML = senal(f.forma, f.hex, 12);
+  const nombre = document.createElement("span");
+  nombre.textContent = nombreTipo(clave);
+  marca.appendChild(nombre);
+  ceja.appendChild(marca);
+
+  cuerpoTarjeta.insertBefore(ceja, cuerpoTarjeta.firstChild);
+  return nodo;
+}
+
+/* ---------- EL CHINCOL, EN EL ESTADO VACÍO ----------
+   Es el animal de esta página —clases, talleres y ferias, el pájaro más de
+   barrio que hay— y hasta ahora salía dormido, chico y quieto: el 96 que
+   pedía la llamada lo recortaba `.vacio svg` a 78, y sin {anima:true} el
+   gesto que ya tiene escrito en loica.css no enganchaba nunca.
+
+   Ahora sale entero a 112, despierto, con su lápiz y con su gesto: dos
+   saltitos cada 3,4s, porque los chincoles saltan y no caminan. Entra
+   saltando desde fuera del panel (`entra` + m-saltos-entra).
+
+   Y sale acá, en el estado vacío, y en ninguna otra parte de la página. No es
+   una esquina rara: cuatro filtros que se combinan sobre 1.905 talleres muy
+   cargados al día de semana dejan la lista en cero todos los días —"natación"
+   un domingo y no hay nada—. Es la única pantalla de esta página donde sobra
+   el espacio, y es donde alguien está trabado.
+
+   Por eso va con la salida escrita al lado: quien filtró hasta quedarse sin
+   nada no vino a ver un pájaro, vino a encontrar un taller. El botón deshace
+   exactamente lo que dejó la lista vacía. */
+function estadoVacio(){
+  const caja = document.createElement("div");
+  caja.className = "vacio entra";
+  // El 128 de acá es el respaldo: el que manda es `--vacio-masc` del CSS, que
+  // le gana al atributo del <svg>. Los dos dicen lo mismo a propósito.
+  caja.innerHTML = cuerpo("chincol", "var(--c-clases)", 128, {anima:true});
+
+  const texto = document.createElement("p");
+  const fuerte = document.createElement("b");
+  fuerte.textContent = t("tVacio");
+  texto.append(fuerte, document.createElement("br"), document.createTextNode(t("tVaciopista")));
+  caja.appendChild(texto);
+
+  /* La salida deshace lo que dejó la lista en cero, y solo eso: los filtros si
+     hay filtros, el día si lo único puesto es el día. Con "Todos" y sin ningún
+     filtro no hay nada que deshacer —la lista está vacía porque no llegaron
+     datos— y entonces no se ofrece un botón que no hace nada. */
+  const hayFiltro = tipoFiltro || comunaFiltro || soloGratis;
+  if(hayFiltro || dia !== "todo"){
+    const salida = document.createElement("button");
+    salida.type = "button";
+    salida.className = "boton";
+    if(hayFiltro){
+      salida.textContent = "✕ " + t("filtrosLimpiar");
+      salida.onclick = () => {
+        tipoFiltro = ""; comunaFiltro = ""; soloGratis = false;
+        mostrando = 80; pintarTodo();
+      };
+    }else{
+      salida.textContent = t("tTodos");
+      salida.onclick = () => { dia = "todo"; mostrando = 80; pintarTodo(); };
+    }
+    caja.appendChild(salida);
+  }
+
+  // La entrada se apaga al terminar: `.entra .masc-chincol` le gana al tic de
+  // reposo, así que si la clase se queda puesta el pájaro queda congelado
+  // después del primer salto en vez de seguir saltando cada 3,4s.
+  setTimeout(() => caja.classList.remove("entra"), 1400);
+  return caja;
+}
+
+/* --- Plegar la lista (escritorio) ---
+   El panel se llevaba 410 de 1.280 px de mapa y no había forma de correrlo:
+   el tirador que lo pliega en celular está escondido en escritorio. Plegado
+   deja la barra con el conteo, que es el dato que uno quiere seguir viendo
+   mientras mira el mapa. */
+(() => {
+  const panel = document.getElementById("panel");
+  const boton = document.getElementById("plegar");
+  const etiquetas = {
+    abrir:{es:"Mostrar la lista", en:"Show the list", pt:"Mostrar a lista"},
+    cerrar:{es:"Plegar la lista", en:"Collapse the list", pt:"Recolher a lista"},
+  };
+  const rotular = () => {
+    const abierto = boton.getAttribute("aria-expanded") === "true";
+    boton.setAttribute("aria-label", etiquetas[abierto ? "cerrar" : "abrir"][IDIOMA]);
+  };
+  boton.onclick = () => {
+    const plegado = panel.classList.toggle("plegado");
+    boton.setAttribute("aria-expanded", String(!plegado));
+    rotular();
+    if(hayMapa) requestAnimationFrame(() => mapa.resize());
+  };
+  rotular();
+  addEventListener("loica:idioma", rotular);
+})();
+
+/* --- Arrastre del panel: tres alturas, calcado de mapa.html ---
+   `subirHoja` es la única puerta que el arrastre le deja al resto de la
+   página: la usa el estado vacío para que su botón no quede bajo el canto. */
+let subirHoja = () => {};
 (() => {
   const panel = document.getElementById("panel");
   const tirador = document.getElementById("tirador");
@@ -564,6 +1061,7 @@ function pintarLista(){
     panel.style.setProperty("--alto-panel", alturas()[indice] + "px");
   };
   fijar(0);
+  subirHoja = () => { if(indice === 0) fijar(1); };
   tirador.addEventListener("pointerdown", e => {
     arrastrando = true; inicioY = e.clientY; inicioAlto = panel.clientHeight;
     panel.classList.add("arrastrando");

@@ -46,6 +46,11 @@
   --borde:var(--arena-300);
   --borde-fuerte:var(--arena-400);
   --acento:var(--rojo-500);
+  /* El rojo de acento vale para un botón o un borde (pasa el piso de 3:1 de
+     controles) pero NO para texto: sobre crema da 3,6:1 y el mensaje de error
+     va a 12px. Era el texto peor contrastado del formulario, y justo el único
+     que la página muestra cuando algo sale mal. */
+  --error:var(--rojo-700);
   --acento-solido:var(--rojo-600);
   --acento-hover:var(--rojo-700);
   --acento-contraste:#fff;
@@ -96,6 +101,9 @@
 /* Modo oscuro: la tinta SE INVIERTE (contorno crema). Primera clase. */
   
 :root[data-tema="oscuro"]{
+  /* De noche se invierte igual que las tintas de categoría: sobre azul-950 el
+     que falla es el oscuro (4,5:1 justo) y el claro pasa de sobra (9,3:1). */
+  --error:var(--rojo-300);
   --fondo:var(--azul-950);
   --fondo-elevado:#1E2740;
   --fondo-hundido:var(--azul-975);
@@ -214,7 +222,14 @@ img{max-width:100%;display:block}
 .logo{display:flex;align-items:center;gap:var(--e-2);text-decoration:none;flex:none}
 .logo svg{width:32px;height:32px}
 .logo b{font-family:var(--fuente-marca);font-size:21px;font-weight:800;letter-spacing:-.03em}
-.nav{display:flex;gap:var(--e-1);margin-left:var(--e-4);overflow-x:auto;scrollbar-width:none}
+/* `min-width:0` no es cosmético: sin él un hijo flex se niega a achicarse bajo
+   el ancho de su contenido, así que `overflow-x:auto` nunca entraba y la barra
+   se desbordaba en silencio. En español los diez enlaces piden 1318px, y entre
+   880 y 1318 "Agrega tu evento" y "Quién hace esto" quedaban IMPRESOS ENCIMA
+   del botón de tema y del selector de idioma —o sea, en un MacBook de 1280,
+   que es la pantalla más común que llega al sitio. */
+.nav{display:flex;gap:var(--e-1);margin-left:var(--e-4);overflow-x:auto;
+     scrollbar-width:none;min-width:0}
 .nav::-webkit-scrollbar{display:none}
 .nav a{
   display:inline-flex;align-items:center;min-height:42px;
@@ -234,6 +249,42 @@ img{max-width:100%;display:block}
   box-shadow:var(--repisa-1),0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
 }
 .barra-fin{margin-left:auto;display:flex;align-items:center;gap:var(--e-2)}
+
+/* Diez destinos en español no caben a tamaño natural bajo los ~1340px. Antes
+   de dejar que la barra scrollee —un scroll sin barra visible esconde enlaces
+   sin avisar— se aprieta el enlace: menos padding, un paso menos de tipo. Con
+   esto los diez entran completos hasta ~1140px, que cubre las pantallas de
+   laptop reales. Bajo eso sí scrollea, y el degradado del borde lo avisa. */
+@media(min-width:880px) and (max-width:1339px){
+  .barra{gap:var(--e-2);padding-left:var(--e-3);padding-right:var(--e-3)}
+  .barra .nav{margin-left:var(--e-2);gap:2px}
+  .barra .nav a{padding:0 10px;font-size:var(--t-sm)}
+}
+
+/* Entre 880 y 1139 los diez enlaces siguen sin caber y la barra scrollea. Un
+   scroll sin barra visible esconde destinos sin avisar, así que el borde se
+   difumina para decir "sigue". Va con timeline de scroll y no con un degradado
+   fijo porque un degradado fijo MIENTE: dejaría el último enlace apagado
+   incluso al final del recorrido, cuando ya no queda nada que anunciar. Donde
+   no haya timeline de scroll simplemente no hay degradado —el enlace se ve
+   entero, que es el peor caso aceptable. */
+@supports (animation-timeline:scroll()){
+  @media(min-width:880px) and (max-width:1139px){
+    .barra .nav{
+      animation:desvanece-nav linear both;
+      animation-timeline:scroll(self inline);
+    }
+    /* Con el foco dentro no se enmascara nada: quien navega con Tab tiene que
+       ver completo el enlace en el que está parado. */
+    .barra .nav:focus-within{animation:none;-webkit-mask-image:none;mask-image:none}
+  }
+}
+@keyframes desvanece-nav{
+  from{-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent);
+               mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent)}
+  to  {-webkit-mask-image:linear-gradient(to right,transparent,#000 28px);
+               mask-image:linear-gradient(to right,transparent,#000 28px)}
+}
 
 /* Navegación inferior: en celular los destinos van al alcance del pulgar.
    En la barra de arriba solo se veía 1 de los 4 enlaces. */
@@ -471,7 +522,10 @@ img{max-width:100%;display:block}
 .precio.libre{color:var(--gratis)}
 /* Sin dato no se pinta un guion: se dice dónde está el precio. */
 .precio.sin-dato{color:var(--tinta-tenue);font:600 var(--t-xs)/1.25 var(--fuente-ui);
-  max-width:78px;white-space:normal}
+  /* Eran 78px y "Precio en la fuente" son cuatro palabras: se partía en
+     tres líneas y chocaba con el título. Pasa en el mapa y en el
+     calendario, o sea en todas las que usan tarjetaEvento(). */
+  max-width:104px;white-space:normal}
 
 /* --- La misma tarjeta, con datos de descuento ---
    Donde el evento pone la hora, el descuento pone el banco; donde pone el
@@ -566,7 +620,7 @@ img{max-width:100%;display:block}
 }
 .campo textarea{min-height:110px;resize:vertical}
 .campo.error input,.campo.error textarea,.campo.error select{border-color:var(--acento)}
-.campo .mensaje-error{color:var(--acento);font-size:var(--t-xs);margin-top:4px;font-weight:600}
+.campo .mensaje-error{color:var(--error);font-size:var(--t-xs);margin-top:4px;font-weight:600}
 
 /* ---------- 7b. COMPARTIR ---------- */
 .compartir{display:flex;align-items:center;gap:var(--e-3);flex-wrap:wrap}
@@ -612,7 +666,14 @@ img{max-width:100%;display:block}
    `inline-block` con relleno vertical les da área sin correr la línea. */
 .pie a{display:inline-block;padding:12px 4px;margin:-12px 0}
 /* Sin opacidad: el animal dormido ya dice "nada"; a medio tono parecía enfermo. */
-.vacio svg{width:78px;height:78px;margin:0 auto var(--e-3)}
+/* El tamaño de la mascota del estado vacío es un DEFECTO, no una orden.
+   `carita()` y `cuerpo()` emiten el tamaño como atributos `width`/`height` del
+   `<svg>`, y una regla CSS le gana a un atributo: una página que pedía
+   `cuerpo("cabra", …, 96)` la dibujaba a 78 y no había cómo saberlo mirando la
+   llamada. Ahora la página sube `--vacio-masc` en el contenedor `.vacio` y se
+   respeta, sin pelear especificidad. Sin variable, 78 como siempre. */
+.vacio svg{width:var(--vacio-masc,78px);height:var(--vacio-masc,78px);
+           margin:0 auto var(--e-3)}
 
 /* Etiqueta de mascota */
 .mascota-nombre{
@@ -739,10 +800,52 @@ img{max-width:100%;display:block}
 /* Reacciones: celebra (un brinco con rebote) y se duerme (se hunde) */
 .masc.celebra{animation:m-celebra .6s cubic-bezier(.34,1.56,.64,1)}
 @keyframes m-celebra{0%{transform:none}40%{transform:translateY(-14%) rotate(-6deg)}70%{transform:translateY(0) rotate(4deg)}100%{transform:none}}
-@media (prefers-reduced-motion:reduce){
-  .masc,.masc *{animation:none!important}
-}
+/* ---------- MOVIMIENTO REDUCIDO ----------
+   Estaban las dos reglas duplicadas y la segunda era una escoba:
+   `*{transition:none!important;animation:none!important}`.
 
-@media (prefers-reduced-motion: reduce){
-  *{transition:none!important;animation:none!important}
+   Conviene dejar dicho lo que NO pasaba, porque es la trampa obvia y alguien
+   la va a volver a pensar: las dieciséis entradas de acá arriba usan
+   `backwards` y arrancan en `opacity:0`, así que parece que apagarlas dejaría
+   el elemento plantado e invisible. No ocurre. El atajo `animation` con
+   `!important` resetea TODOS sus longhands, `animation-fill-mode` incluido,
+   que pasa a `none`: sin animación no hay relleno que aplicar y el elemento se
+   pinta con su estilo normal, visible. Medido en el navegador, no deducido.
+
+   El motivo real para cambiarla es otro y alcanza: una escoba con `*` y
+   `!important` apaga cosas que nadie revisó una por una, empezando por los
+   `transition` donde la transición ES el mecanismo. Acortar la duración es más
+   preciso: la animación corre, termina en el mismo tick y el elemento queda en
+   su estado final. Es lo que pide _direccion_visual.md 8.5.
+
+   Lo que la regla previene HACIA ADELANTE —y conviene decirlo como riesgo y no
+   como bug, porque hoy no muerde— es una animación cuyo estado de reposo
+   dependa de `forwards`: ésa con `none` pierde su estado final. Las dos que
+   usan `forwards` en el sitio están apagadas antes por otra vía y ninguna
+   depende de este bloque: `bicho-sale` (habla.html) nunca recibe la clase
+   `sale` porque el JS la salta con `!reduce()`, y `loica-vuela` (mapa.html)
+   tiene doble candado, `display:none` en su propia media query y un `return`
+   temprano. La regla está para que la TERCERA no dependa de que alguien se
+   acuerde.
+
+   Lo que sí se conserva es el acuse de la presión: que un botón se hunda al
+   apretarlo no es adorno, es la confirmación de que registró el toque. */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    animation-delay:0s!important;
+    transition-duration:.01ms!important;
+    transition-delay:0s!important;
+    scroll-behavior:auto!important;
+  }
+  /* Las mascotas son la excepción y van con `none`, no con duración corta.
+     Sus tics son puro adorno y su fotograma inicial ES la pose en reposo;
+     acortarlos las dejaría en el fotograma FINAL, que en un aleteo hecho con
+     `steps(1)` es el ala levantada y en el jadeo del quiltro es la lengua
+     afuera. Acá `none` sí es lo correcto: el reposo del dibujo no depende de
+     ninguna animación. */
+  .masc,.masc *{animation:none!important}
+  /* La presión conserva el desplazamiento y el colapso de la repisa. */
+  .boton:active,.chip:active{transition:none;transform:translateY(4px)}
 }

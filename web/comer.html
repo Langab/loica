@@ -37,19 +37,83 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=24">
+<link rel="stylesheet" href="loica.css?v=25">
 <style>
   body{overflow-x:hidden}
   .contenido-comer{max-width:940px;margin:0 auto;padding:var(--e-6) var(--e-4) var(--e-12)}
 
-  /* El Quiltro de la cabecera no vuela como la Loica: mueve la cola. Es la
-     única animación del sitio que se lee como un perro contento. */
-  .caminando{animation:caminar 2.6s ease-in-out infinite}
-  @keyframes caminar{
-    0%,100%{transform:translateY(0) rotate(-2.5deg)}
-    50%{transform:translateY(-4px) rotate(2.5deg)}
+  /* El Quiltro deja de ser un ícono y pasa a ser el anfitrión.
+     Antes la cabecera lo dibujaba a 64px y lo mecía con un @keyframes propio
+     —un balanceo genérico que servía igual para cualquier animal— y además
+     lo repetía a 24px en las catorce tarjetas. Ahora aparece UNA vez, entero
+     y grande, y se mueve con SU gesto: la cola no para y la lengua jadea.
+     Los dos ya están en loica.css (`.masc-quiltro.anima`) y se encienden con
+     {anima:true}; acá no se redefine ninguno. La entrada también es suya:
+     `.entra` le da m-sacudida, que es lo que hace un perro cuando llegas.
+
+     De ahí que el balanceo de antes se haya ido entero: mover el SVG completo
+     PELEABA con la cola. Un solo gesto, el que le corresponde.
+
+     El título, la bajada y los metadatos son HERMANOS del Quiltro en la
+     rejilla, no un bloque anidado. Es lo que permite que en celular el perro
+     se quede al lado del título y el párrafo pase por debajo de los dos: con
+     el texto envuelto en un <div> la única opción en pantalla angosta era
+     apilar perro ENCIMA de todo, y eso costaba 150px de scroll antes de la
+     primera tarjeta. */
+  .comer-cabecera{
+    display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;
+    column-gap:var(--e-5);padding:var(--e-5) 0 var(--e-2);
   }
-  @media (prefers-reduced-motion:reduce){.caminando{animation:none}}
+  .comer-cabecera .anfitrion{grid-column:1;grid-row:1/4;align-self:center;line-height:0}
+  .comer-cabecera .anfitrion svg{width:clamp(96px,13vw,148px);height:auto}
+  .comer-cabecera h1{grid-column:2;grid-row:1;margin:0 0 var(--e-2)}
+  /* La bajada deja de ir centrada. Tres líneas centradas obligan al ojo a
+     buscar el inicio de cada una; en un bloque de texto que explica de qué se
+     trata la página eso es fricción pura. Alineada a la izquierda y con la
+     medida cortada a ~58 caracteres se lee de un viaje. */
+  .comer-cabecera .bajada{
+    grid-column:2;grid-row:2;
+    margin:0;color:var(--tinta-suave);line-height:1.6;font-size:var(--t-md);max-width:54ch;
+  }
+  /* Fecha y aviso de idioma comparten línea y rango: los dos son metadatos de
+     la página, no contenido. Antes el aviso de idioma era lo PRIMERO que se
+     veía, en su propia caja, con más peso visual que los catorce locales.
+
+     Van con `.bajada` y `.comer-meta` como clases y no como `p`: son dos
+     párrafos con rango distinto y el selector de elemento pintaba los dos
+     iguales. */
+  .comer-cabecera .comer-meta{
+    grid-column:2;grid-row:3;
+    display:flex;flex-wrap:wrap;align-items:center;gap:2px var(--e-2);
+    margin:var(--e-3) 0 0;font-size:var(--t-xs);color:var(--tinta-tenue);
+    font-weight:600;line-height:1.4;max-width:none;
+  }
+  .comer-cabecera .comer-meta .sep{opacity:.45}
+
+  /* En celular el Quiltro NO se va arriba de todo: se queda al lado del
+     título, en su misma línea, y el párrafo pasa por debajo de los dos a lo
+     ancho completo. Apilado costaba 150px de cielo vacío antes de la primera
+     tarjeta —en una pantalla de 844px eso es una quinta parte— y además
+     dejaba el perro solo en una banda sin nada más, que es la pose de un
+     ícono de error, no la de un anfitrión.
+     Nada se centra: un párrafo de cuatro líneas centrado obliga a cazar el
+     inicio de cada una, y en pantalla angosta son más líneas, no menos. */
+  @media(max-width:640px){
+    /* El cielo de arriba se cobra dos veces: 24px de la columna más 12 de la
+       cabecera, y encima el SVG del Quiltro es CUADRADO, así que trae su
+       propio aire sobre las orejas. Sumaban 46px de nada antes de la primera
+       palabra de la página. */
+    .contenido-comer{padding-top:var(--e-2)}
+    .comer-cabecera{column-gap:var(--e-3);padding:0 0 0}
+    .comer-cabecera .anfitrion{grid-row:1;align-self:center}
+    .comer-cabecera .anfitrion svg{width:88px}
+    .comer-cabecera h1{margin:0}
+    .comer-cabecera .bajada{
+      grid-column:1/-1;grid-row:2;margin-top:var(--e-3);
+      max-width:none;font-size:var(--t-base);
+    }
+    .comer-cabecera .comer-meta{grid-column:1/-1;grid-row:3}
+  }
 
   .aviso-linea{
     display:flex;align-items:center;gap:var(--e-2);
@@ -58,38 +122,66 @@
   }
   .aviso-linea svg{flex:none}
 
-  .comer-cabecera{text-align:center;padding:var(--e-6) 0 var(--e-2)}
-  .comer-cabecera h1{margin:var(--e-3) 0 var(--e-2)}
-  .comer-cabecera p{max-width:560px;margin:0 auto;color:var(--tinta-suave);line-height:1.62;font-size:var(--t-md)}
-  .comer-actualizado{display:block;margin-top:var(--e-3);font-size:var(--t-xs);color:var(--tinta-tenue);font-weight:600}
-
-  /* ---------- Filtros ----------
+  /* ---------- Filtros de cocina ----------
      Con catorce locales una barra de búsqueda sobra; lo que sí se pregunta
-     uno es "¿qué se me antoja?", y eso son seis chips. */
-  .filtros{
-    display:flex;flex-wrap:wrap;gap:var(--e-2);justify-content:center;
-    margin:var(--e-6) 0 var(--e-2);
+     uno es "¿qué se me antoja?", y eso son seis chips.
+
+     Dos cambios de fondo y los dos son de consistencia, no de gusto:
+
+     1. Los botones ahora son `.chip`, el chip de verdad de loica.css — el
+        mismo del mapa, de descuentos y de talleres. Antes esta página tenía su
+        propio chip: borde de --borde-fuerte en vez de contorno, sin repisa,
+        y hundiéndose al revés que los demás. Cuatro páginas con el mismo
+        control resuelto de dos maneras.
+     2. El contenedor NO se llama `.filtros`. `.filtros` en loica.css es el
+        RIEL —fondo elevado, borde abajo, scroll horizontal— y acá el control
+        es un grupo que envuelve dentro de una columna de 940px. Reusar el
+        nombre obligaba a apagarle el fondo y el borde al componente
+        compartido, que es justo como un sitio se convierte en nueve.
+
+     Alineados a la izquierda y no centrados: la grilla que filtran empieza en
+     el borde izquierdo, y una fila centrada sobre una grilla alineada deja dos
+     ejes peleando en la misma pantalla. */
+  .cocinas{
+    display:flex;flex-wrap:wrap;gap:var(--e-2);justify-content:flex-start;
+    margin:var(--e-5) 0 0;
   }
-  .filtros button{
-    display:inline-flex;align-items:center;gap:7px;min-height:38px;
-    background:var(--fondo-elevado);color:var(--tinta-suave);
-    border:2px solid var(--borde-fuerte);border-radius:var(--r-pill);
-    padding:0 var(--e-4);font:800 var(--t-sm)/1 var(--fuente-ui);cursor:pointer;
-    transition:var(--rapido);
-  }
-  .filtros button:hover{border-color:var(--contorno);color:var(--tinta)}
-  .filtros button[aria-pressed="true"]{
+  /* El chip encendido toma el oliva de la familia en vez de la tinta. Es el
+     mismo permiso que ya se toma `.chip.es-gratis[aria-pressed]` en loica.css
+     con el verde: la familia manda sobre el gris, y el par oliva/crema pasa
+     4,5:1 en los dos temas porque --c-comer es fijo. */
+  .cocinas .chip[aria-pressed="true"]{
     background:var(--c-comer);color:var(--arena-50);
-    border-color:var(--contorno);box-shadow:var(--repisa-1);
   }
-  .cuenta{text-align:center;font-size:var(--t-sm);color:var(--tinta-tenue);font-weight:700;margin-bottom:var(--e-5)}
+  .cuenta{font-size:var(--t-sm);color:var(--tinta-tenue);font-weight:700;
+    margin:var(--e-4) 0 var(--e-3)}
+
+  /* `.vacio svg` de loica.css fija 78px y una regla CSS le gana al atributo
+     width que emite cuerpo(): la llamada decía 72 y se dibujaba 78, sin que
+     nada lo delatara. La variable existe justamente para eso. 108 y no 78
+     porque acá el Quiltro es el anfitrión y el estado vacío es el momento en
+     que hace falta que esté: a 78 el gesto —la cola— no se lee. */
+  .vacio{--vacio-masc:108px}
 
   /* ---------- La grilla ----------
      Cuadrados chicos a propósito: acá se elige con el ojo y catorce fotos
      grandes serían catorce scrolls. El nombre va ENCIMA de la foto, no debajo,
      porque a este tamaño una tarjeta con foto arriba y texto abajo deja las
-     dos cosas chicas; y el Quiltro va encima de todo, en su medalla, que es lo
-     que hace que la grilla se lea Loica y no un directorio de restaurantes.
+     dos cosas chicas.
+
+     Acá VIVÍA una medalla con el Quiltro, arriba a la izquierda, en las
+     catorce tarjetas. Se fue, y por dos razones distintas:
+
+     1. Repetida en cada fila, la mascota deja de ser información y pasa a ser
+        textura. Nadie mira catorce veces la misma carita para saber que está
+        en la página que se llama "Dónde comer" y que ya tiene un Quiltro de
+        148px en la cabecera.
+     2. Ocupaba la esquina superior izquierda, que es justo donde la foto de
+        un local suele traer el plato o la fachada. Tapaba el contenido con
+        una marca de agua de sí misma.
+
+     Lo que quedó en esa esquina es "Imperdible", que sí es un dato del local
+     y antes vivía apretado 47px más abajo, esquivando la medalla.
 
      La foto se enlaza al servidor del local, igual que las de los eventos se
      enlazan a las del organizador: acá no se copian fotos ajenas. Si el local
@@ -104,11 +196,61 @@
   }
   .local:hover{transform:translateY(-3px);box-shadow:var(--repisa-4)}
   .local:active{transform:translateY(4px);box-shadow:none}
-  /* El Quiltro de respaldo va sobre el tercio alto y no al centro: abajo vive
-     el nombre, y centrado quedaba con las patas detrás del texto. */
+  /* --- El local sin foto ---
+     Un pastel oliva liso de 215×215 con un perro pálido al medio se leía como
+     un error de carga. El Quiltro entero lo arregla, pero apoyarlo en el piso
+     de la tarjeta y dejar el resto igual creaba un problema nuevo y peor: el
+     velo —un degradado a casi negro pensado para que el nombre se lea sobre
+     UNA FOTO— caía encima del perro y le comía la panza y las patas, y encima
+     "Costa Bright" y "Fuente de soda y bar" quedaban escritos sobre el lomo.
+     Un dibujo tapado por su propio contenido no se ve mejor que el rectángulo
+     verde: se ve como dos capas que no se pusieron de acuerdo.
+
+     Esta tarjeta no lleva foto, así que tampoco necesita velo. Lleva REPISA:
+     una banda plana de azul tinta con contorno duro arriba, que es la pieza
+     que el sitio ya usa en todas partes, y el Quiltro parado ENCIMA de ella,
+     igual que los animales del desfile de la portada están parados sobre la
+     cordillera. El texto vuelve a tener fondo plano y contraste predecible
+     —crema sobre --azul-900, el mismo par que la pastilla de precio— y se le
+     puede sacar la sombra de texto, que sobre un plano no hace nada salvo
+     ensuciar el trazo.
+
+     Se resuelve con flujo y no con posiciones absolutas: la banda mide lo que
+     mide su texto (que en inglés o en portugués puede ser una línea más), y el
+     perro se apoya en su borde superior sin que nadie tenga que adivinar la
+     altura. */
   .local > svg{
-    position:absolute;left:50%;top:43%;transform:translate(-50%,-50%);
-    width:58%;height:auto;opacity:.92;
+    position:absolute;left:50%;bottom:3%;transform:translateX(-50%);
+    width:72%;height:auto;
+  }
+  .local.sin-foto{
+    display:flex;flex-direction:column;justify-content:flex-end;align-items:center;
+  }
+  .local.sin-foto > svg{
+    position:static;transform:none;flex:none;
+    width:auto;height:64%;margin-bottom:-2px;
+  }
+  .local.sin-foto .local-velo{display:none}
+  /* Sin `border-top`: el borde de la repisa sale de --contorno, que se invierte
+     a crema de noche, y el resto de la tarjeta NO se invierte (el pastel oliva
+     y el azul tinta son fijos). Habría quedado una raya crema que solo existe
+     en oscuro. El salto de verde claro a azul tinta ya es un canto duro. */
+  .local.sin-foto .local-texto{
+    position:static;width:100%;background:var(--azul-900);
+  }
+  .local.sin-foto .local-texto h2,
+  .local.sin-foto .local-donde,
+  .local.sin-foto .local-tipo{text-shadow:none}
+  /* La cola se mueve SOLO al apuntar o enfocar la tarjeta. Es el gesto del
+     Quiltro (m-colita, ya definido en loica.css) y acá se pide prestado por
+     nombre, sin redeclararlo. No corre solo por la regla 8.3 de
+     _direccion_visual.md: nada infinito dentro de una fila de lista repetida.
+     Aunque hoy haya un solo local sin foto, mañana pueden ser seis colas
+     moviéndose a la vez en una grilla que scrollea. */
+  .local:hover  > svg .p-cola,
+  .local:focus-visible > svg .p-cola{
+    transform-origin:0% 90%;
+    animation:m-colita .32s ease-in-out infinite alternate;
   }
   .local img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 
@@ -138,21 +280,14 @@
     overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
   }
 
-  /* La medalla del Quiltro: la misma bolita crema con contorno que usa la
-     etiqueta de categoría en el blog, acá arriba a la izquierda. */
-  .local-medalla{
-    position:absolute;top:8px;left:8px;z-index:2;width:34px;height:34px;
-    border-radius:var(--r-pill);background:#FFFBF5;
-    border:2.5px solid var(--contorno);box-shadow:var(--repisa-1);
-    display:grid;place-items:center;
-  }
   .local-precio{
     position:absolute;top:8px;right:8px;z-index:2;background:var(--azul-900);color:#FFFBF5;
     border:2px solid var(--contorno);border-radius:var(--r-pill);padding:1px 9px;
     font:800 var(--t-xs)/1.7 var(--fuente-ui);letter-spacing:.06em;
   }
+  /* "Imperdible" sube a la esquina que dejó libre la medalla del Quiltro. */
   .estrella{
-    position:absolute;top:47px;left:8px;z-index:2;background:var(--amarillo-300);color:var(--azul-900);
+    position:absolute;top:8px;left:8px;z-index:2;background:var(--amarillo-300);color:var(--azul-900);
     border:2px solid var(--contorno);border-radius:var(--r-pill);padding:1px 9px;
     font:800 11px/1.7 var(--fuente-ui);
   }
@@ -165,8 +300,11 @@
   .ficha-foto{
     position:relative;aspect-ratio:16/9;background:var(--c-comer-suave);
     border:3px solid var(--contorno);border-radius:var(--r-xl);overflow:hidden;
-    display:grid;place-items:center;box-shadow:var(--repisa-4);margin-bottom:var(--e-5);
+    display:grid;place-items:end center;box-shadow:var(--repisa-4);margin-bottom:var(--e-5);
   }
+  /* Cuando el local no tiene foto, la ficha queda con el Quiltro y ahí sí
+     mueve la cola: es UNO, es grande y no está dentro de una lista. */
+  .ficha-foto > svg{height:88%;width:auto;margin-bottom:-1%}
   .ficha-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .ficha-etiqueta{
     display:inline-flex;align-items:center;gap:7px;font-size:var(--t-sm);font-weight:800;
@@ -279,8 +417,6 @@
     .locales{grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:var(--e-3)}
     .local-texto{padding:var(--e-2) var(--e-3) var(--e-3)}
     .local-texto h2{font-size:var(--t-base)}
-    .local-medalla{width:30px;height:30px}
-    .estrella{top:42px}
   }
 </style>
 </head>
@@ -292,7 +428,7 @@
 <div class="remate" id="cordillera" aria-hidden="true"></div>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="loica.js?v=24"></script>
+<script src="loica.js?v=25"></script>
 <script>
 /* ============================================================
    DÓNDE COMER — índice + ficha de un local, ruteado por hash
@@ -330,12 +466,14 @@ window.addEventListener("hashchange", enrutar);
 window.addEventListener("loica:idioma", () => { if(DATOS) enrutar(); });
 
 /* ---------- estados ---------- */
+/* Cargando: el Quiltro entero moviendo la cola. Es el único indicador de
+   progreso de la página y es UNO, así que el gesto puede correr solo. */
 function mostrarCargando(){
-  vista.innerHTML = `<div class="vacio">${mascota("quiltro","var(--tinta-tenue)",70)}
+  vista.innerHTML = `<div class="vacio">${cuerpo("quiltro","var(--c-comer)",108,{anima:true})}
     <p>Cargando…</p></div>`;
 }
 function mostrarError(){
-  vista.innerHTML = `<div class="vacio">${mascota("quiltro","var(--tinta-tenue)",70)}
+  vista.innerHTML = `<div class="vacio">${cuerpo("quiltro","var(--tinta-tenue)",108,{pose:"durmiendo"})}
     <p><b>No pude cargar las recomendaciones</b><br>
     <button class="boton secundario" style="margin-top:12px"
       onclick="location.reload()">Reintentar</button></p></div>`;
@@ -361,10 +499,15 @@ function actualizarMetaDescripcion(texto){
   const meta = document.querySelector('meta[name="description"]');
   if(meta) meta.setAttribute("content", texto);
 }
+/* El aviso de idioma bajó de rango. Antes abría la página en su propia caja,
+   arriba de todo, y pesaba más que los catorce locales: lo primero que veía
+   alguien en inglés era una disculpa. Ahora va en la línea de metadatos, al
+   lado de la fecha, que es exactamente su categoría —un dato sobre la página,
+   no contenido de la página—. Sigue estando y sigue siendo honesto. */
 function avisoIdiomaHtml(){
   return AVISO_IDIOMA[IDIOMA]
-    ? `<div class="aviso-linea">${mascota("quiltro","var(--tinta-tenue)",22)}
-        <span>${escapar(AVISO_IDIOMA[IDIOMA])}</span></div>`
+    ? `<span class="sep" aria-hidden="true">·</span>
+       <span lang="${IDIOMA}">${escapar(AVISO_IDIOMA[IDIOMA])}</span>`
     : "";
 }
 const fechaLarga = iso => new Date(iso + "T12:00:00")
@@ -379,8 +522,32 @@ const fechaLarga = iso => new Date(iso + "T12:00:00")
    Para reemplazarla por una foto propia basta apuntar `foto` a un archivo de
    web/fotos/comer/ en comer.json. Ahí está el LEEME con los nombres. */
 const fotoHtml = local => urlSegura(local.foto)
-  ? `<img src="${escapar(urlSegura(local.foto))}" alt="" loading="lazy" decoding="async" onerror="this.remove()">`
+  ? `<img src="${escapar(urlSegura(local.foto))}" alt="" loading="lazy" decoding="async">`
   : "";
+
+/* El Quiltro de respaldo se dibuja SOLO en la tarjeta que lo necesita.
+   Antes iba en las catorce y trece quedaban escondidas detrás de la foto:
+   catorce cuerpos completos en el DOM para que se viera uno. */
+const quiltroDeRespaldo = () => cuerpo("quiltro", OLIVA, 160, TINTA_FIJA);
+
+/* Y para la foto que existe pero no carga —el servidor del local puede
+   bloquear la lectura desde otro dominio— el respaldo se inyecta recién ahí.
+   Va como listener y no como `onerror=` en el atributo porque el atributo solo
+   alcanzaba a borrar la foto: no podía poner nada en su lugar, y la tarjeta
+   quedaba como un cuadrado oliva vacío. */
+function armarRespaldos(raiz){
+  raiz.querySelectorAll(".local > img, .ficha-foto > img").forEach(img => {
+    img.addEventListener("error", () => {
+      const caja = img.parentElement;
+      img.remove();
+      /* `sin-foto` es lo que apaga el velo y convierte el pie de la tarjeta en
+         repisa. Sin esta línea la foto caída quedaba peor que la que nunca
+         existió: mismo perro, pero con el degradado a negro encima. */
+      caja.classList.add("sin-foto");
+      if(!caja.querySelector("svg")) caja.insertAdjacentHTML("afterbegin", quiltroDeRespaldo());
+    }, {once:true});
+  });
+}
 
 /* La segunda foto —un plato o el local por dentro— sale SOLO dentro de la
    ficha. En el índice no: catorce cuadrados ya son suficiente para elegir, y
@@ -402,7 +569,7 @@ function pintarIndice(noEncontrado){
 
   const chips = [["todas","Todo"]].concat(Object.entries(DATOS.cocinas || {}));
   const filtros = chips.map(([clave, etiqueta]) => `
-    <button type="button" data-cocina="${escapar(clave)}" aria-pressed="${clave === FILTRO}">
+    <button type="button" class="chip" data-cocina="${escapar(clave)}" aria-pressed="${clave === FILTRO}">
       ${escapar(etiqueta)}
     </button>`).join("");
 
@@ -410,9 +577,12 @@ function pintarIndice(noEncontrado){
   const orden = [...visibles].sort((a,b) =>
     (!!b.destacado - !!a.destacado) || a.nombre.localeCompare(b.nombre, "es"));
 
+  /* Estado vacío: el Quiltro a 72px como manda la escala de _direccion_visual
+     6.3, y con los ojos cerrados (pose "durmiendo"). Un perro moviendo la cola
+     sobre una lista vacía diría lo contrario de lo que pasó. */
   const lista = orden.length
     ? orden.map(tarjeta).join("")
-    : `<div class="vacio" style="grid-column:1/-1">${mascota("quiltro","var(--tinta-tenue)",64)}
+    : `<div class="vacio" style="grid-column:1/-1">${cuerpo("quiltro",OLIVA,108,{pose:"durmiendo"})}
         <p>Todavía no hay nada de esa cocina en la lista.</p></div>`;
 
   const avisoNoEncontrado = noEncontrado
@@ -422,16 +592,18 @@ function pintarIndice(noEncontrado){
 
   vista.innerHTML = `
     ${avisoNoEncontrado}
-    ${avisoIdiomaHtml()}
-    <header class="comer-cabecera" lang="es">
-      <div class="caminando">${mascota("quiltro",OLIVA,64)}</div>
+    <header class="comer-cabecera entra" lang="es">
+      <div class="anfitrion" aria-hidden="true">${cuerpo("quiltro",OLIVA,148,{anima:true})}</div>
       <h1>Dónde comer</h1>
-      <p>El resto del sitio lo llena un robot. Esta página no: son los locales de
+      <p class="bajada">El resto del sitio lo llena un robot. Esta página no: son los locales de
         Santiago a los que se vuelve, uno por uno, con lo que hay que pedir en cada
         uno y a qué hora conviene llegar.</p>
-      ${DATOS.actualizado ? `<span class="comer-actualizado">Actualizado el ${fechaLarga(DATOS.actualizado)}</span>` : ""}
+      <p class="comer-meta">
+        ${DATOS.actualizado ? `<span>Actualizado el ${fechaLarga(DATOS.actualizado)}</span>` : ""}
+        ${avisoIdiomaHtml()}
+      </p>
     </header>
-    <div class="filtros" role="group" aria-label="Filtrar por cocina">${filtros}</div>
+    <div class="cocinas" role="group" aria-label="Filtrar por cocina">${filtros}</div>
     <p class="cuenta">${orden.length} ${orden.length === 1 ? "local" : "locales"}</p>
     <div class="locales">${lista}</div>
     <div class="declaracion" lang="es">
@@ -441,20 +613,21 @@ function pintarIndice(noEncontrado){
       <a href="habla.html">avísame y lo corrijo</a>.
     </div>`;
 
-  document.querySelectorAll(".filtros button").forEach(b => b.onclick = () => {
+  armarRespaldos(vista);
+  document.querySelectorAll(".cocinas .chip").forEach(b => b.onclick = () => {
     FILTRO = b.dataset.cocina;
     pintarIndice(false);
   });
 }
 
 function tarjeta(local){
+  const conFoto = !!urlSegura(local.foto);
   return `
-    <a class="local" href="#/l/${encodeURIComponent(local.slug)}"
+    <a class="local${conFoto ? "" : " sin-foto"}" href="#/l/${encodeURIComponent(local.slug)}"
        aria-label="${escapar(local.nombre)} — ${escapar(local.tipo)}, ${escapar(local.comuna)}">
-      ${mascota("quiltro", OLIVA, 96, TINTA_FIJA)}
+      ${conFoto ? "" : quiltroDeRespaldo()}
       ${fotoHtml(local)}
       <span class="local-velo" aria-hidden="true"></span>
-      <span class="local-medalla" aria-hidden="true">${mascota("quiltro", OLIVA, 24, TINTA_FIJA)}</span>
       <span class="local-precio">${escapar(local.precio || "")}</span>
       ${local.destacado ? `<span class="estrella">Imperdible</span>` : ""}
       <span class="local-texto" lang="es">
@@ -479,13 +652,21 @@ function pintarFicha(local){
     ${avisoIdiomaHtml()}
     <article class="ficha" lang="es">
       <div class="ficha-foto">
-        ${mascota("quiltro", OLIVA, 96, TINTA_FIJA)}
+        ${urlSegura(local.foto) ? "" : cuerpo("quiltro", OLIVA, 200, {...TINTA_FIJA, anima:true})}
         ${fotoHtml(local)}
       </div>
 
-      <span class="ficha-etiqueta">
-        ${mascota("quiltro","var(--c-comer-tinta)",22)} ${escapar(local.tipo)}
-      </span>
+      <!-- La etiqueta va sin carita. La regla del proyecto deja la mascota de
+           18-26px cuando MARCA una categoría, y acá no marcaba ninguna: era el
+           mismo Quiltro en las catorce fichas, al lado de catorce tipos de
+           cocina distintos, en la página que ya se llama "Dónde comer". No
+           distinguía nada. Y en tema oscuro estaba roto además: el relleno
+           salía de --c-comer-tinta, que es el oliva ENSOMBRECIDO para que
+           pase contraste como texto sobre crema, y sobre el fondo nocturno
+           quedaba una mancha pálida sin cara.
+           El Quiltro sigue en la ficha una vez, en la medalla de "Qué hay que
+           pedir", que es el único lugar donde habla. -->
+      <span class="ficha-etiqueta">${escapar(local.tipo)}</span>
       <h1>${escapar(local.nombre)}</h1>
       <p class="ficha-bajada">${escapar(local.bajada)}</p>
 
@@ -522,6 +703,7 @@ function pintarFicha(local){
       <div id="compartir-local" style="margin-top:var(--e-6)"></div>
     </article>`;
 
+  armarRespaldos(vista);
   document.getElementById("compartir-local").appendChild(compartirLocal(local));
 }
 

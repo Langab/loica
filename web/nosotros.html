@@ -18,7 +18,9 @@
      - `upgrade-insecure-requests` tampoco va: en Pages no hace nada (https +
        HSTS) y en el servidor local abierto desde el celular por la IP de la
        red subía loica.js y loica.css a un https:// inexistente, y la página
-       quedaba en blanco. El detalle está en mapa.html. -->
+       quedaba en blanco. El detalle está en mapa.html.
+     - Esta página no agrega ningún dominio: las cifras salen de eventos.json,
+       talleres.json y cine.json, que son del propio sitio (connect-src 'self'). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Quién hace Loica</title>
@@ -27,87 +29,244 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=24">
+<link rel="stylesheet" href="loica.css?v=25">
 <style>
   body{overflow-x:hidden}
 
+  /* ============================================================
+     RITMO DE LA PÁGINA
+     La página explica un proceso, así que se lee de arriba abajo una sola
+     vez. Para que el ojo tenga dónde parar, las secciones NO tienen todas la
+     misma densidad ni el mismo fondo: columna angosta de prosa → diagrama en
+     tres escenas → banda de cifras a ancho completo → dos columnas → grilla
+     densa → cierre. Los cambios de fondo (fondo / elevado / hundido) son lo
+     que separa una sección de otra; el hueco vertical es el mismo en todas y
+     ya no hay que llenarlo con 200 px de nada.
+     ============================================================ */
+  .seccion{max-width:880px;margin:0 auto;padding:var(--e-10) var(--e-5)}
+  .seccion.ancha{max-width:1060px}
+  /* Medida de lectura. Cada bloque de prosa la declara (`.sub`, `.entrada p`,
+     `.principio p`, `.guia p`, `.cierre p`): 54ch, que en Manrope caen en unos
+     65 caracteres. Antes la línea llegaba a 95 a 1280 px, y el rango cómodo
+     es 60-75. El `ch` engaña: mide el ancho del CERO, que en esta fuente es
+     más ancho que la letra promedio, así que 62ch daban 75 caracteres. */
+  .cabeza-seccion h2{font-size:var(--t-2xl);line-height:1.14}
+  .cabeza-seccion{margin-bottom:var(--e-6)}
+  .sub{color:var(--tinta-suave);margin:var(--e-3) 0 0;font-size:var(--t-md);
+       line-height:1.55;max-width:54ch}
+  /* Bandas a ancho completo: son el respiro entre bloques de texto y la única
+     razón por la que la página no se lee como una columna de cajas. */
+  .banda{border-top:2.5px solid var(--contorno);border-bottom:2.5px solid var(--contorno)}
+  .banda.elevada{background:var(--fondo-elevado)}
+
   /* ---------- PORTADA ---------- */
   .portada{
-    position:relative;padding:var(--e-12) var(--e-5) var(--e-10);text-align:center;overflow:hidden;
+    position:relative;padding:var(--e-12) var(--e-5) 0;overflow:hidden;
     background:linear-gradient(170deg,var(--fondo-hundido) 0%,var(--fondo) 62%);
   }
-  .portada-interior{position:relative;max-width:700px;margin:0 auto}
-  .portada h1{font-size:clamp(30px,7vw,var(--t-3xl));margin-bottom:var(--e-4)}
-  .portada .entrada{font-size:var(--t-md);color:var(--tinta-suave);line-height:1.62}
+  .portada-interior{position:relative;z-index:2;max-width:660px;margin:0 auto;text-align:center}
+  .portada h1{font-size:clamp(31px,6.8vw,var(--t-3xl));line-height:1.06;margin-bottom:var(--e-6)}
+  /* La entrada se alinea a la IZQUIERDA aunque el bloque esté centrado: un
+     párrafo de cinco líneas centrado no se lee, se adivina. */
+  .entrada{text-align:left;max-width:54ch;margin:0 auto}
+  .entrada p{font-size:var(--t-md);color:var(--tinta-suave);line-height:1.62;margin:0}
+  .entrada p + p{margin-top:var(--e-4)}
+  /* La frase política de la entrada va marcada con destacador, como en un
+     panfleto. `--destacado` y `--destacado-tinta` son el único par del sistema
+     que NO cambia con el tema y que ya viene calculado sobre 4,5:1, así que
+     sirve igual de día y de noche. `box-decoration-break:clone` es lo que hace
+     que el amarillo envuelva cada línea y no una sola caja larga. */
+  .marcado{margin:var(--e-5) 0}
+  .marcado b{
+    font:800 var(--t-lg)/1.75 var(--fuente-marca);letter-spacing:-.01em;
+    background:var(--destacado);color:var(--destacado-tinta);
+    box-decoration-break:clone;-webkit-box-decoration-break:clone;
+    padding:3px 9px;border-radius:7px;
+  }
+  /* La anfitriona. Llega volando (`entra` → m-vuelo-llega) y una vez posada se
+     queda ladeando la cabeza, que es el tic propio de la Loica: el gesto de
+     quien escucha una pregunta. Los dos están escritos en loica.css; acá solo
+     se encienden. El flote es del contenedor, así que no pelea con el tic del
+     SVG. */
   .volando{margin:0 auto var(--e-5);animation:volar 5s ease-in-out infinite}
+  .volando svg{width:clamp(104px,17vw,168px);height:auto;margin:0 auto}
   @keyframes volar{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
   @media (prefers-reduced-motion:reduce){.volando{animation:none}}
 
-  /* La fila de animales guía cierra la portada: son la señalética del mapa,
-     así que aparecen antes de que alguien lea una sola línea. */
+  /* ---------- EL DESFILE ----------
+     Cierra la portada: son la señalética del mapa, así que se presentan antes
+     de que alguien lea una línea. Tres cosas que antes no hacían:
+       - salen ENTEROS (cuerpo, no carita) y parados en la cordillera, como en
+         la portada. Antes eran doce cabezas de 30 px metidas en doce nidos
+         iguales: el nido es lo que los volvía stickers.
+       - cada uno hace su tic de reposo ({anima:true}) y entra con SU entrada
+         (`entra` + --d): el Chincol a saltos, el Guarén desde la muralla, la
+         Cabra llega tarde, el Quiltro no entra porque ya estaba.
+       - cada uno es un ENLACE a su ficha del elenco, que es la pregunta que
+         uno se hace mirando la fila ("¿y este quién es?").
+     El retardo entre uno y otro son 20 ms con tope de 240 (la regla del
+     stagger, _direccion_visual.md 8.4). Con eso el escalonamiento no lo pone
+     el retardo sino las entradas mismas, que duran entre 0,5 y 1,3 s y traen
+     su propio desfase: la Chinchilla llega 0,9 s tarde y la Cabra 0,15. */
+  /* La franja se sale del relleno lateral de la portada: la cordillera tiene
+     que llegar a los dos bordes de la pantalla o deja de ser el horizonte. */
+  .paseo{
+    position:relative;height:clamp(126px,15vw,178px);margin-top:var(--e-8);
+    margin-left:calc(var(--e-5) * -1);margin-right:calc(var(--e-5) * -1);
+  }
+  .paseo #cordillera{position:absolute;inset:0}
   .desfile{
-    position:relative;display:flex;justify-content:center;flex-wrap:wrap;
-    gap:var(--e-2);margin-top:var(--e-6);
+    position:absolute;inset:auto 0 12px 0;z-index:2;
+    display:flex;align-items:flex-end;justify-content:center;
+    gap:clamp(2px,1.4vw,14px);padding:0 var(--e-3);
   }
-  .desfile span{
-    width:46px;height:46px;border-radius:var(--r-pill);display:grid;place-items:center;
-    background:var(--suave);border:2.5px solid var(--contorno);box-shadow:var(--repisa-1);
+  .desfile a{
+    display:block;transform-origin:bottom center;transition:transform var(--rebote);
+    border-radius:8px;
   }
-  .desfile svg{width:30px;height:30px}
+  .desfile a:hover{transform:translateY(-9px) scale(1.07)}
+  .desfile svg{width:clamp(27px,6.2vw,62px);height:auto;display:block}
+  /* Con el dedo cada animal medía 27 px de ancho. Doce celdas de 44 no caben
+     en 390 px, así que se reparte el ancho entero entre los doce: quedan
+     pegados y con 48 px de alto tocable, que es todo lo que da la pantalla.
+     El dibujo no cambia; crece la caja. Mismo arreglo que en la portada. */
+  @media (max-width:640px) and (pointer:coarse){
+    .desfile{gap:0;padding:0 var(--e-2)}
+    .desfile a{flex:1;min-width:0;min-height:48px;
+               display:flex;align-items:flex-end;justify-content:center}
+  }
 
-  section{max-width:820px;margin:0 auto;padding:var(--e-10) var(--e-5)}
-  section > h2{margin-bottom:var(--e-2)}
-  /* Descendiente y no hijo directo: la bajada de "Lo que todavía no funciona"
-     vive dentro de .falta-cabeza para poder poner a la Loica al lado, y con
-     `section > .sub` se quedaba sin color, sin tamaño y sin ancho de lectura.
-     Los únicos .sub de la página son estas bajadas de sección. */
-  section .sub{color:var(--tinta-suave);margin:0 0 var(--e-6);font-size:var(--t-md);max-width:62ch}
+  /* ---------- CÓMO SE LLENA EL MAPA: EL DIAGRAMA ----------
+     Esta página explicaba un proceso de tres pasos sin mostrarlo. Ahora cada
+     paso trae su escena dibujada con el mismo lenguaje del resto del sitio
+     —contorno grueso, tinta plana, cero degradado— y una regla de color que
+     vale para las tres: la MÁQUINA va en tinta (`--contorno` sobre papel) y lo
+     que SE MUEVE va en rojo (`--acento`). Así el ojo sigue el rojo de escena
+     en escena: las agujas del reloj, el lápiz, el link que vuelve.
+
+     Los dibujos no llevan una sola palabra a propósito: se entienden sin leer
+     y no hay que traducirlos tres veces. El texto de al lado dice lo mismo.
+     Los dos colores salen de tokens, así que el diagrama funciona igual en
+     claro y en oscuro sin una sola regla aparte. */
+  .linea{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--e-6);
+         list-style:none;margin:0;padding:0}
+  /* La tarjeta NO recorta: la flecha que la une con la siguiente vive fuera de
+     ella. Por eso las esquinas de arriba de la escena se redondean a mano en
+     vez de con overflow:hidden. */
+  .paso{
+    position:relative;display:flex;flex-direction:column;
+    background:var(--fondo-elevado);border:2.5px solid var(--contorno);
+    border-radius:var(--r-xl);box-shadow:var(--repisa-2);
+  }
+  .escena{
+    background:var(--fondo);border-bottom:2.5px solid var(--contorno);padding:var(--e-3);
+    border-radius:calc(var(--r-xl) - 3px) calc(var(--r-xl) - 3px) 0 0;
+  }
+  .escena svg{display:block;width:100%;height:auto}
+  .paso-texto{padding:var(--e-4) var(--e-5) var(--e-5)}
+  .paso b{display:block;font-family:var(--fuente-marca);font-size:var(--t-lg);
+          line-height:1.18;margin-bottom:var(--e-2)}
+  .paso p{margin:0;color:var(--tinta-suave);font-size:var(--t-base);line-height:1.6}
+  /* La flecha entre paso y paso vive en el hueco de la grilla. En escritorio
+     apunta a la derecha; en celular, donde la línea se apila, apunta abajo. */
+  .paso::after{
+    content:"";position:absolute;width:15px;height:15px;
+    border-right:4px solid var(--contorno);border-top:4px solid var(--contorno);
+    right:-20px;top:76px;transform:rotate(45deg);
+  }
+  .paso:last-child::after{content:none}
+  @media (max-width:860px){
+    .linea{grid-template-columns:1fr;gap:var(--e-8)}
+    .paso::after{right:auto;top:auto;left:50%;bottom:-27px;
+                 transform:translateX(-50%) rotate(135deg)}
+  }
+
+  /* ---------- RECUENTO ----------
+     Las cifras salen del MISMO JSON que el mapa, en el momento de cargar la
+     página. Escritas a mano envejecen y quedan mintiendo, que es justo lo
+     contrario de lo que dice esta página. Mientras viajan se ve un guion
+     latiendo; si el archivo no llega, la banda entera se esconde: mejor sin
+     cifra que con una inventada. */
+  .recuento{padding:var(--e-8) var(--e-5)}
+  .recuento[hidden]{display:none}
+  .recuento-interior{max-width:1060px;margin:0 auto;display:grid;gap:var(--e-6)}
+  .gran-cifra{display:flex;align-items:center;gap:var(--e-4)}
+  .gran-cifra svg{flex:none}
+  .gran-cifra b{
+    display:block;font-family:var(--fuente-marca);font-size:clamp(46px,10vw,76px);
+    line-height:.92;color:var(--acento);font-variant-numeric:tabular-nums;letter-spacing:-.03em;
+  }
+  .gran-cifra span{display:block;font-size:var(--t-sm);color:var(--tinta-suave);
+                   font-weight:600;line-height:1.35;max-width:17ch;margin-top:4px}
+  .cifras{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:var(--e-4)}
+  .cifra{display:flex;align-items:flex-start;gap:var(--e-2)}
+  .cifra svg{flex:none;margin-top:2px}
+  .cifra b{display:block;font-family:var(--fuente-marca);font-size:var(--t-2xl);line-height:1;
+           color:var(--tono,var(--tinta));font-variant-numeric:tabular-nums}
+  .cifra span{display:block;font-size:var(--t-xs);color:var(--tinta-tenue);
+              font-weight:600;line-height:1.3;max-width:17ch;margin-top:3px}
+  .revisado{margin:0;font-size:var(--t-xs);color:var(--tinta-tenue);font-weight:600}
+  @media (min-width:820px){
+    .recuento-interior{grid-template-columns:auto 1fr;align-items:center;
+                       column-gap:var(--e-12);row-gap:var(--e-5)}
+    .revisado{grid-column:1/-1}
+  }
+  @media (max-width:560px){
+    /* `grid-auto-flow:row` explícito: arriba la fila es de columnas automáticas
+       y sin esto las dos columnas declaradas acá se llenarían de lado, no de
+       arriba abajo, y saldría una tercera columna fuera de pantalla. */
+    .cifras{grid-auto-flow:row;grid-template-columns:1fr 1fr;gap:var(--e-4) var(--e-3)}
+    .cifra b{font-size:var(--t-xl)}
+  }
 
   /* ---------- PRINCIPIOS ----------
      Tinta plana, contorno grueso y repisa dura, como el resto de la app.
      Cada principio lleva el animal de la categoría que le corresponde: no es
      adorno, es la misma señalética del mapa repetida acá. El pastel y la
-     tinta azul no cambian con el tema, por eso el texto va fijo. */
+     tinta azul no cambian con el tema, por eso el texto va fijo.
+
+     El animal va SIEMPRE a la izquierda. Antes alternaba izquierda/derecha
+     con `direction:rtl` y no había ninguna razón detrás: se leía como un
+     error de maquetación, no como una decisión. Y el párrafo ya no vive en
+     una columna angosta al lado del animal: el animal y el título hacen la
+     cabecera, y la prosa corre debajo a lo ancho, con su medida acotada. */
   .principios{display:grid;gap:var(--e-5)}
   .principio{
-    position:relative;display:grid;grid-template-columns:auto 1fr;gap:var(--e-4);align-items:start;
     background:var(--suave);color:var(--azul-900);
     border:3px solid var(--contorno);border-radius:var(--r-xl);
     box-shadow:var(--repisa-4);padding:var(--e-5);
   }
-  .principio:nth-child(even){direction:rtl}
-  .principio:nth-child(even) > *{direction:ltr}
+  .principio-cabeza{
+    display:flex;align-items:center;gap:var(--e-4);
+    padding-bottom:var(--e-4);margin-bottom:var(--e-4);
+    border-bottom:2.5px solid rgba(30,42,74,.18);
+  }
   .principio-animal{
-    width:84px;height:84px;border-radius:var(--r-pill);display:grid;place-items:center;
+    flex:none;width:76px;height:76px;border-radius:var(--r-pill);display:grid;place-items:center;
     background:var(--tono);border:3px solid var(--contorno);box-shadow:var(--repisa-2);
   }
-  .principio-animal svg{width:58px;height:58px}
+  .principio-animal svg{width:52px;height:52px}
   .principio h3{
-    font-family:var(--fuente-marca);font-size:var(--t-xl);line-height:1.15;
-    margin-bottom:var(--e-2);color:var(--azul-900);
+    font-family:var(--fuente-marca);font-size:var(--t-xl);line-height:1.12;
+    color:var(--azul-900);
   }
-  .principio p{margin:0;line-height:1.62;color:#2C3A5C}
+  .principio p{margin:0;line-height:1.65;color:#2C3A5C;max-width:54ch}
   @media (max-width:560px){
-    .principio{gap:var(--e-3);padding:var(--e-4)}
-    .principio-animal{width:62px;height:62px}
-    .principio-animal svg{width:44px;height:44px}
+    .principio{padding:var(--e-4)}
+    .principio-cabeza{gap:var(--e-3);padding-bottom:var(--e-3);margin-bottom:var(--e-3)}
+    .principio-animal{width:60px;height:60px;border-width:2.5px}
+    .principio-animal svg{width:42px;height:42px}
     .principio h3{font-size:var(--t-lg)}
   }
 
-  /* ---------- PASOS ---------- */
-  .pasos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--e-4)}
-  .paso{
-    background:var(--fondo-elevado);border:2.5px solid var(--contorno);border-radius:var(--r-lg);
-    box-shadow:var(--repisa-2);padding:var(--e-5) var(--e-4);text-align:center;
+  /* Dos columnas: la cabecera de la sección se queda al costado mientras los
+     tres principios pasan. Es el único bloque de la página con esta forma, y
+     por eso corta el ritmo de "otra pila de cajas". */
+  .dos-columnas{display:grid;gap:var(--e-6)}
+  @media (min-width:940px){
+    .dos-columnas{grid-template-columns:minmax(210px,268px) 1fr;gap:var(--e-10)}
+    .dos-columnas .cabeza-seccion{position:sticky;top:var(--e-6);align-self:start;margin:0}
   }
-  .paso .num{
-    width:46px;height:46px;border-radius:var(--r-pill);background:var(--tono);color:#fff;
-    border:2.5px solid var(--contorno);box-shadow:var(--repisa-1);
-    display:grid;place-items:center;margin:0 auto var(--e-3);
-    font:800 var(--t-md)/1 var(--fuente-marca);
-  }
-  .paso b{display:block;margin-bottom:6px;font-family:var(--fuente-marca);font-size:var(--t-md)}
-  .paso span{color:var(--tinta-suave);font-size:var(--t-sm);line-height:1.55}
 
   /* ---------- LO QUE NO FUNCIONA ----------
      Acá el color se apaga a propósito: es la sección honesta, no la vitrina.
@@ -119,7 +278,7 @@
      fondo es el hundido —más oscuro que la página en los dos temas—. Así el
      bloque dice "esto todavía no está" con la misma gramática con la que el
      resto dice "esto sí", y no con una barra de color al costado. */
-  .fallas{display:grid;gap:var(--e-3)}
+  .fallas{display:grid;gap:var(--e-3);grid-template-columns:repeat(auto-fit,minmax(310px,1fr))}
   .falla{
     background:var(--fondo-hundido);
     border:2.5px solid var(--contorno);border-radius:var(--r-lg);
@@ -127,7 +286,7 @@
     padding:var(--e-5);
   }
   .falla h3{font-family:var(--fuente-ui);font-size:var(--t-md);font-weight:800;margin-bottom:6px}
-  .falla p{margin:0;color:var(--tinta-suave);line-height:1.6}
+  .falla p{margin:0;color:var(--tinta-suave);line-height:1.6;font-size:var(--t-base)}
 
   /* La cabecera de la sección lleva a la Loica dormida: la misma pose de los
      estados vacíos, en el mismo nido contorneado del desfile. Es la lista de
@@ -138,8 +297,7 @@
     display:grid;grid-template-columns:1fr auto;gap:var(--e-5);
     align-items:center;margin-bottom:var(--e-6);
   }
-  .falta-cabeza h2{margin-bottom:var(--e-2)}
-  .falta-cabeza .sub{margin:0}   /* el hueco lo pone el grid, no el párrafo */
+  .falta-cabeza .sub{margin-top:var(--e-3)}
   /* El pastel y la tinta azul del SVG NO cambian con el tema: por eso el
      animal va con tinta fija (var(--contorno) se vuelve crema de noche y la
      Loica se quedaría sin contorno sobre el amarillo). */
@@ -160,67 +318,133 @@
     .falla{padding:var(--e-4)}
   }
 
-  /* ---------- ANIMALES GUÍA ---------- */
-  .elenco{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:var(--e-4)}
+  /* ---------- ANIMALES GUÍA ----------
+     Es la leyenda del mapa, no doce tarjetas de producto: por eso va densa,
+     en dos o tres columnas, con el animal a la izquierda y el texto alineado
+     a la izquierda. Antes eran doce fichas de ancho completo con el texto
+     centrado, que es la peor forma de leer un párrafo.
+
+     La Loica va aparte y a lo ancho porque no es una categoría: es la
+     anfitriona. Once animales son señalética; ella es la casa. */
+  .elenco{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:var(--e-4)}
   .guia{
-    background:var(--fondo-elevado);border:2.5px solid var(--contorno);border-radius:var(--r-lg);
-    box-shadow:var(--repisa-2);overflow:hidden;transition:var(--rapido);text-align:center;
+    display:grid;grid-template-columns:auto 1fr;align-items:stretch;
+    background:var(--fondo);border:2.5px solid var(--contorno);border-radius:var(--r-lg);
+    box-shadow:var(--repisa-2);overflow:hidden;text-align:left;scroll-margin-top:var(--e-6);
   }
-  .guia:hover{transform:translateY(-2px);box-shadow:var(--repisa-4)}
-  .guia-cabeza{
-    background:var(--suave);border-bottom:2.5px solid var(--contorno);
-    padding:var(--e-4) var(--e-3) var(--e-3);
+  /* El animal sale ENTERO y grande (§6.5 de la dirección visual: "Nosotros es
+     la página donde el mascotario se explica") y hace su tic de reposo. Va
+     sobre el pastel de su familia, con tinta azul fija: el pastel no cambia
+     con el tema y var(--contorno) sí, así que de noche el animal se quedaría
+     sin contorno. */
+  .guia-animal{
+    display:grid;place-items:center;padding:var(--e-3);
+    background:var(--suave);border-right:2.5px solid var(--contorno);
   }
-  .guia-cabeza svg{width:64px;height:64px;margin:0 auto}
-  .guia-cuerpo{padding:var(--e-4) var(--e-4) var(--e-5)}
+  .guia-animal svg{width:88px;height:88px}
+  .guia-texto{padding:var(--e-4) var(--e-5) var(--e-5) var(--e-4)}
   .guia b{display:block;font-family:var(--fuente-marca);font-size:var(--t-lg);line-height:1.2}
+  /* La pastilla usa la versión OSCURA del color de la familia y no el relleno
+     fuerte: con el relleno, el naranjo del Chincol daba 2,4:1 en blanco y el
+     turquesa 4,05:1, o sea que la etiqueta que dice de qué se hace cargo cada
+     animal era ilegible (hallazgo de la auditoría del 22-08-2026). Estos hex
+     vienen de ELENCO y están calculados para pasar 4,5:1 con texto blanco;
+     como no dependen del tema, sirven igual de noche. */
   .guia .rol{
-    display:inline-block;margin:6px 0 var(--e-2);padding:3px 11px;border-radius:var(--r-pill);
-    background:var(--tono);color:#fff;border:2px solid var(--contorno);
-    font:800 var(--t-xs)/1.5 var(--fuente-ui);
+    display:inline-block;margin:5px 0 var(--e-2);padding:3px 10px;border-radius:var(--r-pill);
+    background:var(--rol-fondo);color:#fff;border:2px solid var(--contorno);
+    font:800 var(--t-xs)/1.5 var(--fuente-ui);text-transform:uppercase;letter-spacing:.05em;
   }
-  .guia span{display:block;font-size:var(--t-sm);color:var(--tinta-suave);line-height:1.55}
+  .guia p{margin:0;font-size:var(--t-base);color:var(--tinta-suave);line-height:1.58;max-width:52ch}
+  .guia.anfitriona{grid-column:1/-1;border-width:3px;box-shadow:var(--repisa-4)}
+  .guia.anfitriona .guia-animal{padding:var(--e-4) var(--e-5)}
+  .guia.anfitriona .guia-animal svg{width:132px;height:132px}
+  .guia.anfitriona b{font-size:var(--t-2xl)}
+  .guia.anfitriona p{font-size:var(--t-md);max-width:54ch;line-height:1.6}
+  .guia.anfitriona .guia-texto{padding:var(--e-5) var(--e-6)}
+  /* En celular los once SIGUEN al lado del texto, no encima: apilados, cada
+     ficha medía 440 px y las doce sumaban cinco pantallas de scroll para leer
+     una leyenda. Al costado bajan a ~170 px y el animal se mantiene entero
+     (72 px, muy por encima de los 38 que separan cabeza de cuerpo).
+     La anfitriona sí se apila: es el retrato de la página, no una entrada más
+     de la tabla. */
+  @media (max-width:520px){
+    .elenco{grid-template-columns:1fr}
+    .guia-animal{padding:var(--e-2)}
+    .guia-animal svg{width:72px;height:72px}
+    .guia-texto{padding:var(--e-4) var(--e-4) var(--e-4) var(--e-3)}
+    .guia b{font-size:var(--t-md)}
+    .guia p{font-size:var(--t-sm)}
+    .guia.anfitriona{grid-template-columns:1fr}
+    .guia.anfitriona .guia-animal{
+      border-right:0;border-bottom:3px solid var(--contorno);padding:var(--e-4)}
+    .guia.anfitriona .guia-animal svg{width:112px;height:112px}
+    .guia.anfitriona b{font-size:var(--t-xl)}
+    .guia.anfitriona p{font-size:var(--t-base)}
+    .guia.anfitriona .guia-texto{padding:var(--e-4)}
+  }
 
   /* ---------- CIERRE ---------- */
   .cierre{
     position:relative;background:var(--azul-cordillera);color:#F3EDE1;text-align:center;
-    padding:var(--e-12) var(--e-5) var(--e-10);margin-top:var(--e-8);overflow:hidden;
+    padding:var(--e-12) var(--e-5) var(--e-10);overflow:hidden;
+    border-top:2.5px solid var(--contorno);
   }
-  .cierre h2{color:#fff;margin-bottom:var(--e-3)}
-  .cierre p{max-width:560px;margin:0 auto var(--e-6);opacity:.88;line-height:1.62}
-  .cierre .boton.secundario{color:#F3EDE1;border-color:rgba(243,237,225,.45);background:transparent}
+  .cierre h2{color:#fff;margin-bottom:var(--e-4);font-size:var(--t-2xl)}
+  .cierre p{max-width:54ch;margin:0 auto var(--e-6);color:#E4DBCB;line-height:1.62;
+            text-align:left}
+  .cierre .boton.secundario{color:#F3EDE1;border-color:rgba(243,237,225,.6);background:transparent}
   .cierre .boton.secundario:hover{background:rgba(243,237,225,.12)}
   .botones{display:flex;gap:var(--e-3);justify-content:center;flex-wrap:wrap}
   .pie{text-align:center;padding:var(--e-6) var(--e-5);color:var(--tinta-tenue);font-size:var(--t-xs);
-       max-width:560px;margin:0 auto;line-height:1.6}
+       max-width:56ch;margin:0 auto;line-height:1.6}
 </style>
 </head>
 <body class="con-nav-inferior">
 <div class="barra" id="barra"></div>
 
 <header class="portada">
-  <div id="cordillera"></div>
   <div class="portada-interior">
-    <div class="volando" id="loica-grande"></div>
+    <div class="volando" id="loica-grande" aria-hidden="true"></div>
     <h1 id="tit"></h1>
-    <p class="entrada" id="entrada"></p>
-    <div class="desfile" id="desfile" aria-hidden="true"></div>
+    <div class="entrada" id="entrada"></div>
+  </div>
+  <div class="paseo">
+    <div id="cordillera"></div>
+    <nav class="desfile" id="desfile" aria-label="Los animales guía"></nav>
   </div>
 </header>
 
-<section>
-  <h2 id="t-creencias"></h2>
-  <p class="sub" id="s-creencias"></p>
-  <div class="principios" id="creencias"></div>
+<section class="seccion">
+  <div class="cabeza-seccion">
+    <h2 id="t-como"></h2>
+    <p class="sub" id="s-como"></p>
+  </div>
+  <ol class="linea" id="pasos"></ol>
 </section>
 
-<section>
-  <h2 id="t-como"></h2>
-  <p class="sub" id="s-como"></p>
-  <div class="pasos" id="pasos"></div>
+<!-- Nace ESCONDIDA y solo aparece cuando llegaron los catastros. Si el
+     archivo no llega, la banda no existe: una banda de cifras vacía es
+     peor que ninguna, sobre todo en la página que promete no fingir. -->
+<div class="banda elevada recuento" id="recuento" hidden>
+  <div class="recuento-interior">
+    <div class="gran-cifra" id="rec-mayor"></div>
+    <div class="cifras" id="rec-cifras"></div>
+    <p class="revisado" id="rec-revisado"></p>
+  </div>
+</div>
+
+<section class="seccion ancha">
+  <div class="dos-columnas">
+    <div class="cabeza-seccion">
+      <h2 id="t-creencias"></h2>
+      <p class="sub" id="s-creencias"></p>
+    </div>
+    <div class="principios" id="creencias"></div>
+  </div>
 </section>
 
-<section>
+<section class="seccion">
   <div class="falta-cabeza">
     <div>
       <h2 id="t-falta"></h2>
@@ -231,11 +455,15 @@
   <div class="fallas" id="falta"></div>
 </section>
 
-<section>
-  <h2 id="t-elenco"></h2>
-  <p class="sub" id="s-elenco"></p>
-  <div class="elenco" id="elenco"></div>
-</section>
+<div class="banda elevada">
+  <section class="seccion ancha">
+    <div class="cabeza-seccion">
+      <h2 id="t-elenco"></h2>
+      <p class="sub" id="s-elenco"></p>
+    </div>
+    <div class="elenco" id="elenco"></div>
+  </section>
+</div>
 
 <div class="cierre">
   <h2 id="t-cierre"></h2>
@@ -250,15 +478,21 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegacion principal"></nav>
 
-<script src="loica.js?v=24"></script>
+<script src="loica.js?v=25"></script>
 <script>
 const TX = {
   es:{
     tit:"Santiago está lleno de cosas que nadie avisa",
-    entrada:"Todos los días hay tocatas, talleres, ferias y partidos repartidos por Santiago, y la mayoría no tiene cómo avisarle a nadie. La difusión se compra: aparece lo que tiene presupuesto y el resto queda entregado al boca a boca del barrio. Loica es un mapa de lo que está pasando hoy en la ciudad, sin importar si detrás hay una productora o una junta de vecinos. Está hecho para que decidas en dos minutos y salgas.",
+    /* La entrada viene partida en tres para poder marcar la del medio con
+       destacador. El texto es el mismo, cortado por punto seguido. */
+    entrada:[
+      "Todos los días hay tocatas, talleres, ferias y partidos repartidos por Santiago, y la mayoría no tiene cómo avisarle a nadie.",
+      "La difusión se compra: aparece lo que tiene presupuesto y el resto queda entregado al boca a boca del barrio.",
+      "Loica es un mapa de lo que está pasando hoy en la ciudad, sin importar si detrás hay una productora o una junta de vecinos. Está hecho para que decidas en dos minutos y salgas.",
+    ],
     tCre:"Por qué está armada así", sCre:"Tres decisiones tomadas al principio, que ordenan todo lo demás.",
     cre:[
-      ["Lo gratis va primero","En la mayoría de las plataformas de eventos existe lo que se vende y el resto no aparece. Buena parte de lo que sostiene la vida de un barrio no tiene entrada: el taller municipal, el cuentacuentos de la biblioteca, el ciclo de cine de una universidad, la clase de la plaza. Ninguno de esos tiene con qué pagar difusión, así que desaparecen del radar antes de ocurrir. Acá el filtro de gratis está arriba de todo: casi un tercio de lo que aparece no cuesta nada. Quien organiza algo gratis no paga nunca, ni ahora ni si esto crece."],
+      ["Lo gratis va primero","En la mayoría de las plataformas de eventos existe lo que se vende y el resto no aparece. Buena parte de lo que sostiene la vida de un barrio no tiene entrada: el taller municipal, el cuentacuentos de la biblioteca, el ciclo de cine de una universidad, la clase de la plaza. Ninguno de esos tiene con qué pagar difusión, así que desaparecen del radar antes de ocurrir. Acá el filtro de gratis está arriba de todo: {unoDeCada} no cuesta nada. Quien organiza algo gratis no paga nunca, ni ahora ni si esto crece."],
       ["No se venden entradas","Cada ficha termina en un botón que te saca de Loica y te deja en el sitio del organizador, en su Instagram o en su ticketera. Eso significa que la gente se va, y está bien. La plata de un panorama es de quien lo organiza; ponerse al medio a cobrar peaje es otro negocio, y ese ya existe."],
       ["El mapa es para salir","La idea es que uses esto dos minutos, encuentres algo y salgas. Una plaza con gente se camina distinto de noche, y eso no lo resuelve ninguna app desde adentro de la pantalla. El espacio público se sostiene ocupándolo. Por eso acá no hay feed infinito ni notificaciones de más."],
     ],
@@ -268,9 +502,15 @@ const TX = {
       ["Después, a mano","Nada se publica solo: todo entra como borrador y lo revisa una persona. Hay fuentes que publican talleres sin fecha, el CEINA es el caso clásico, y esos se completan uno por uno abriendo la página."],
       ["La fuente queda a la vista","Cada ficha guarda el link de donde salió. Si la hora está mal, el original está a un toque para confirmarla."],
     ],
+    /* Etiquetas de las cifras. Las que ya existen en loica.js se piden con
+       t() para no tener dos redacciones del mismo dato dando vueltas. */
+    recTalleres:"talleres en pie",
+    recGratis:"gratis, sin cobrar entrada",
+    recCines:"cines catastrados",
+    revisado:"Revisado el",
     tFal:"Lo que todavía no funciona", sFal:"Queda escrito acá para no tener que fingir después.",
     fal:[
-      ["Cien panoramas en “otros”","El clasificador trabaja solo y muchas veces no cacha qué encontró: hoy hay más de cien panoramas en la categoría “otros”. Se corrige de a poco, con reglas nuevas y a mano."],
+      ["{otros} panoramas en “otros”","El clasificador trabaja solo y muchas veces no cacha qué encontró: hoy hay {otros} panoramas en la categoría “otros”. Se corrige de a poco, con reglas nuevas y a mano."],
       ["Faltan comunas","La provincia de Santiago tiene 32 comunas y acá se cubren bien seis o siete: Santiago Centro, Providencia, Ñuñoa, Recoleta, Las Condes, Estación Central. De Puente Alto, Maipú o La Florida casi no hay nada. Mientras siga así, esto es el mapa de una parte de Santiago, no de Santiago."],
       ["Se cuelan errores","Una vez apareció un concierto en Talca porque la ticketera no decía la ciudad. No hay equipo de moderación: si ves algo raro, avísame y se corrige."],
     ],
@@ -295,10 +535,14 @@ const TX = {
   },
   en:{
     tit:"Santiago is full of things nobody announces",
-    entrada:"Every day there are gigs, workshops, street fairs and pickup games spread all over Santiago, and most of them have no way of telling anyone. Publicity is bought: what has a budget shows up, and the rest is left to word of mouth in the neighbourhood. Loica is a map of what is happening in the city today, whether the organiser is a production company or a residents' association. It is built so you can decide in two minutes and get out the door.",
+    entrada:[
+      "Every day there are gigs, workshops, street fairs and pickup games spread all over Santiago, and most of them have no way of telling anyone.",
+      "Publicity is bought: what has a budget shows up, and the rest is left to word of mouth in the neighbourhood.",
+      "Loica is a map of what is happening in the city today, whether the organiser is a production company or a residents' association. It is built so you can decide in two minutes and get out the door.",
+    ],
     tCre:"Why it is built this way", sCre:"Three decisions made early on, and everything else follows them.",
     cre:[
-      ["Free comes first","On most event platforms, what sells is what exists and the rest is invisible. A lot of what keeps a neighbourhood alive has no ticket at all: the council workshop, story hour at the library, a university film season, the class in the square. None of them can pay for promotion, so they vanish from view before they even happen. Here the free filter sits above everything else: close to a third of what you see costs nothing. Anyone running something free never pays, not now and not later."],
+      ["Free comes first","On most event platforms, what sells is what exists and the rest is invisible. A lot of what keeps a neighbourhood alive has no ticket at all: the council workshop, story hour at the library, a university film season, the class in the square. None of them can pay for promotion, so they vanish from view before they even happen. Here the free filter sits above everything else: {unoDeCada} of what you see costs nothing. Anyone running something free never pays, not now and not later."],
       ["No tickets sold here","Every listing ends in a button that takes you out of Loica and leaves you on the organiser's own site, their Instagram or their ticket seller. That means people leave, and that is fine. The money from an event belongs to whoever put it on; standing in the middle to charge a toll is a different business, and that business already exists."],
       ["The map is for going out","The idea is that you use this for two minutes, find something and leave. A square with people in it feels different to walk through at night, and no app solves that from behind a screen. Public space holds up by being used. That is why there is no infinite feed here and no extra notifications."],
     ],
@@ -308,9 +552,13 @@ const TX = {
       ["Then by hand","Nothing publishes itself: everything arrives as a draft and a person reviews it. Some sources post workshops with no date at all, CEINA being the classic case, and those get filled in one at a time, page by page."],
       ["The source stays visible","Every listing keeps the link it came from. If the time is wrong, the original is one tap away."],
     ],
+    recTalleres:"workshops running",
+    recGratis:"free, no ticket at all",
+    recCines:"cinemas on the list",
+    revisado:"Checked",
     tFal:"What still does not work", sFal:"Written down here so there is no need to pretend later.",
     fal:[
-      ["A hundred events in “other”","The classifier works on its own and often has no idea what it just found: right now more than a hundred listings sit in the “other” category. It gets fixed slowly, with new rules and by hand."],
+      ["{otros} events in “other”","The classifier works on its own and often has no idea what it just found: right now {otros} listings sit in the “other” category. It gets fixed slowly, with new rules and by hand."],
       ["Whole comunas are missing","The province of Santiago has 32 comunas and six or seven are covered properly: Santiago Centro, Providencia, Ñuñoa, Recoleta, Las Condes, Estación Central. There is almost nothing from Puente Alto, Maipú or La Florida. Until that changes, this is a map of part of Santiago, not of Santiago."],
       ["Errors get through","A concert in Talca once turned up here because the ticket site never mentioned the city. There is no moderation team: if you see something odd, tell me and it gets corrected."],
       ["Descriptions are still in Spanish","The interface is translated, but the text of each event stays as the organiser wrote it, which is almost always Spanish. Translating it automatically would mean publishing things nobody has read."],
@@ -336,10 +584,14 @@ const TX = {
   },
   pt:{
     tit:"Santiago está cheia de coisas que ninguém avisa",
-    entrada:"Todo dia tem show, oficina, feira e jogo espalhados por Santiago, e a maioria não tem como avisar ninguém. Divulgação se compra: aparece o que tem verba e o resto fica no boca a boca do bairro. A Loica é um mapa do que está rolando na cidade hoje, não importa se quem organiza é uma produtora ou uma associação de moradores. Foi feita para você decidir em dois minutos e sair.",
+    entrada:[
+      "Todo dia tem show, oficina, feira e jogo espalhados por Santiago, e a maioria não tem como avisar ninguém.",
+      "Divulgação se compra: aparece o que tem verba e o resto fica no boca a boca do bairro.",
+      "A Loica é um mapa do que está rolando na cidade hoje, não importa se quem organiza é uma produtora ou uma associação de moradores. Foi feita para você decidir em dois minutos e sair.",
+    ],
     tCre:"Por que ela é assim", sCre:"Três decisões tomadas no começo, e todo o resto vem delas.",
     cre:[
-      ["O que é de graça vem primeiro","Na maioria das plataformas de eventos existe o que se vende, e o resto não aparece. Boa parte do que sustenta a vida de um bairro não tem ingresso: a oficina da prefeitura, a hora do conto na biblioteca, a mostra de cinema de uma universidade, a aula na praça. Nada disso tem com que pagar divulgação, então some do radar antes mesmo de acontecer. Aqui o filtro de graça fica acima de tudo: quase um terço do que aparece não custa nada. Quem organiza algo gratuito nunca paga, nem agora nem depois."],
+      ["O que é de graça vem primeiro","Na maioria das plataformas de eventos existe o que se vende, e o resto não aparece. Boa parte do que sustenta a vida de um bairro não tem ingresso: a oficina da prefeitura, a hora do conto na biblioteca, a mostra de cinema de uma universidade, a aula na praça. Nada disso tem com que pagar divulgação, então some do radar antes mesmo de acontecer. Aqui o filtro de graça fica acima de tudo: {unoDeCada} não custa nada. Quem organiza algo gratuito nunca paga, nem agora nem depois."],
       ["Aqui não se vende ingresso","Cada ficha termina num botão que te tira da Loica e te deixa no site de quem organiza, no Instagram dele ou na bilheteria. Isso significa que as pessoas vão embora, e tudo bem. O dinheiro de um rolê é de quem o organiza; se meter no meio para cobrar pedágio é outro negócio, e esse já existe."],
       ["O mapa é para sair","A ideia é que você use isto dois minutos, ache alguma coisa e saia. Uma praça com gente se atravessa de outro jeito à noite, e isso nenhum aplicativo resolve de dentro da tela. Espaço público se sustenta ocupando. Por isso aqui não tem feed infinito nem notificação a mais."],
     ],
@@ -349,9 +601,13 @@ const TX = {
       ["Depois, na mão","Nada é publicado sozinho: tudo entra como rascunho e uma pessoa revisa. Tem fonte que publica oficina sem data nenhuma, o CEINA é o caso clássico, e essas são completadas uma por uma, abrindo a página."],
       ["A fonte fica à vista","Cada ficha guarda o link de onde saiu. Se o horário estiver errado, o original está a um toque."],
     ],
+    recTalleres:"oficinas em cartaz",
+    recGratis:"grátis, sem cobrar entrada",
+    recCines:"cinemas catalogados",
+    revisado:"Revisado em",
     tFal:"O que ainda não funciona", sFal:"Fica escrito aqui para não ter que fingir depois.",
     fal:[
-      ["Cem rolês em “outros”","O classificador trabalha sozinho e muitas vezes não faz ideia do que achou: hoje tem mais de cem eventos na categoria “outros”. Vai sendo corrigido aos poucos, com regras novas e na mão."],
+      ["{otros} rolês em “outros”","O classificador trabalha sozinho e muitas vezes não faz ideia do que achou: hoje tem {otros} eventos na categoria “outros”. Vai sendo corrigido aos poucos, com regras novas e na mão."],
       ["Faltam comunas inteiras","A província de Santiago tem 32 comunas e umas seis ou sete estão bem cobertas: Santiago Centro, Providencia, Ñuñoa, Recoleta, Las Condes, Estación Central. De Puente Alto, Maipú ou La Florida quase não tem nada. Enquanto for assim, isto é o mapa de uma parte de Santiago, não de Santiago."],
       ["Escapa erro","Uma vez apareceu um show em Talca porque a bilheteria não dizia a cidade. Não existe equipe de moderação: se você vir algo estranho, me avisa que eu corrijo."],
       ["As descrições seguem em espanhol","A interface está traduzida, mas o texto de cada evento fica como quem organiza escreveu, quase sempre em espanhol. Traduzir automático seria publicar coisa que ninguém leu."],
@@ -378,78 +634,334 @@ const TX = {
 };
 const x = k => TX[IDIOMA][k];
 
-/* Paleta de la página: cada bloque toma prestada una familia del mapa.
-   tono = el relleno fuerte, suave = el pastel de fondo. */
-const PALETA = {
-  loica:     {tono:"var(--rojo-500)",   suave:"var(--rojo-100)"},
-  condor:    {tono:"var(--c-musica)",   suave:"var(--c-musica-suave)"},
-  culpeo:    {tono:"var(--c-fiesta)",   suave:"var(--c-fiesta-suave)"},
-  chinchilla:{tono:"var(--c-cultura)",  suave:"var(--c-cultura-suave)"},
-  cabra:     {tono:"var(--c-cine)",     suave:"var(--c-cine-suave)"},
-  chincol:   {tono:"var(--c-clases)",   suave:"var(--c-clases-suave)"},
-  pudu:      {tono:"var(--c-libre)",    suave:"var(--c-libre-suave)"},
-  guaren:    {tono:"var(--c-descuento)",suave:"var(--c-descuento-suave)"},
-  chungungo: {tono:"var(--c-deporte)",  suave:"var(--c-deporte-suave)"},
-  pinguino:  {tono:"var(--c-charla)",   suave:"var(--c-charla-suave)"},
-  degu:      {tono:"var(--gratis)",     suave:"var(--verde-200)"},
-  quiltro:   {tono:"var(--c-comer)",    suave:"var(--c-comer-suave)"},
+/* Dos frases del texto afirmaban cantidades escritas a mano —"casi un tercio"
+   de lo gratis y "más de cien" en la categoría otros— y las dos habían
+   envejecido: eran 19% y 75. En cualquier página sería un descuido; en ÉSTA,
+   que existe para explicar por qué se puede confiar en el sitio, es el peor
+   lugar posible para una cifra falsa. Y el rediseño lo empeoraba, porque la
+   banda de cifras muestra los dos números arriba del párrafo: la resta queda
+   a la vista.
+
+   Se calculan del dato, como todo lo demás de esta página. La proporción se
+   dice "uno de cada N" y no en porcentaje porque es la voz de la casa y
+   porque un entero redondo envejece mejor que un decimal. Mientras el
+   catastro no llegue, la frase se pinta sin la cifra en vez de arriesgar una
+   inventada. */
+const NUMEROS = {
+  es:["", "", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez"],
+  en:["", "", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"],
+  pt:["", "", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez"],
 };
-/* El desfile recorre ELENCO, que vive en loica.js y lo comparten nueve páginas.
-   Cuando allá entra un animal nuevo, acá todavía no tiene color: sin este
-   respaldo `PALETA[clave].suave` revienta y la página entera queda en blanco,
-   porque pintar() muere antes de llegar al resto. Un animal sin color se ve
-   con el amarillo de "otros"; una página vacía no se ve. */
-const paleta = clave => PALETA[clave] || {tono:"var(--c-otros)", suave:"var(--c-otros-suave)"};
+function cifrasVivas(txt){
+  if(!RECUENTO) return txt.replace(/\s*\{unoDeCada\}\s*/g, " ").replace(/\{otros\}/g, "");
+  const total = RECUENTO.panoramas + RECUENTO.talleres;
+  const n = RECUENTO.gratis ? Math.round(total / RECUENTO.gratis) : 0;
+  const palabra = NUMEROS[IDIOMA][n] || String(n);
+  const proporcion = n >= 2 && n <= 10
+    ? {es:`una de cada ${palabra} cosas que aparecen`,
+       en:`one in ${palabra}`,   // la frase en inglés ya trae "of what you see"
+       pt:`uma em cada ${palabra} coisas que aparecem`}[IDIOMA]
+    : {es:"parte de lo que aparece", en:"part",
+       pt:"parte do que aparece"}[IDIOMA];
+  return txt.replace(/\{unoDeCada\}/g, proporcion)
+            .replace(/\{otros\}/g, RECUENTO.otros.toLocaleString(localeDe()));
+}
+
+/* ---------- PALETA ----------
+   Los colores de cada animal salen de ELENCO (loica.js), que es el registro
+   que comparten las nueve páginas: si allá cambia un color, acá cambia solo.
+   Tres papeles y cada uno tiene un solo trabajo:
+     tono  → relleno fuerte. Medallón, pin. Siempre con contorno.
+     tinta → el mismo color oscurecido hasta pasar 4,5:1 con blanco encima.
+             Es el ÚNICO que puede ir detrás de texto (la pastilla del rol).
+     suave → el pastel del fondo, con tinta azul encima.
+   `hex` y `tinta` son fijos y no cambian con el tema, que es lo correcto acá:
+   el animal se dibuja en crema sobre el relleno fuerte, y con un token que se
+   aclara de noche (--gratis, por ejemplo) el Degú quedaba crema sobre verde
+   claro y desaparecía. */
+const PASTEL = {
+  loica:"var(--rojo-100)",             condor:"var(--c-musica-suave)",
+  culpeo:"var(--c-fiesta-suave)",      chinchilla:"var(--c-cultura-suave)",
+  cabra:"var(--c-cine-suave)",         chincol:"var(--c-clases-suave)",
+  pudu:"var(--c-libre-suave)",         degu:"var(--verde-200)",
+  guaren:"var(--c-descuento-suave)",   chungungo:"var(--c-deporte-suave)",
+  pinguino:"var(--c-charla-suave)",    quiltro:"var(--c-comer-suave)",
+};
+const FICHA = Object.fromEntries(ELENCO.map(a => [a.clave, a]));
+/* El desfile y el elenco recorren claves que viven en loica.js. Cuando allá
+   entra un animal nuevo, acá todavía no tiene color: sin este respaldo la
+   página entera queda en blanco, porque pintar() muere antes de llegar al
+   resto. Un animal sin color se ve con el amarillo de "otros"; una página
+   vacía no se ve. */
+const paleta = clave => {
+  const a = FICHA[clave];
+  return {
+    tono:  a ? a.hex   : "#FFB61F",
+    tinta: a ? a.tinta : "#7E5900",
+    suave: PASTEL[clave] || "var(--c-otros-suave)",
+  };
+};
 /* Qué animal acompaña a cada principio: el degú cuida lo gratis, la loica es
    la casa y el chungungo no para quieto. Mismo criterio que en el mapa. */
 const ANIMAL_PRINCIPIO = ["degu","loica","chungungo"];
-const COLOR_PASO = ["var(--c-clases)","var(--c-cultura)","var(--c-fiesta)"];
 /* El contorno de la mascota es var(--contorno) y en oscuro se vuelve crema.
    Sobre pastel o sobre relleno fuerte —que no cambian con el tema— hay que
    fijarlo a tinta azul o el animal se queda sin borde de noche. */
 const TINTA_FIJA = {tinta:"#1E2A4A"};
 
+/* ---------- LAS TRES ESCENAS DEL DIAGRAMA ----------
+   Sin una sola palabra: se entienden sin leer y no hay que traducirlas tres
+   veces. Dos reglas de color y nada más:
+     - la máquina va en tinta (var(--contorno)) sobre papel (var(--fondo-elevado));
+     - lo que SE MUEVE va en rojo (var(--acento)): las agujas, el lápiz, el
+       link que vuelve a la fuente.
+   Los dos tokens se invierten con el tema, así que el dibujo sirve igual de
+   día y de noche sin una regla aparte. */
+const ESCENAS = [
+
+/* 1. Tres agendas entran al despertador de las seis. La cuarta —la que pide
+      por escrito no ser rastreada— se queda afuera, con el disco de prohibido
+      encima. Antes llevaba una X de esquina a esquina y el resultado era un
+      sobre cerrado: rectángulo + aspa ES el ícono de correo. */
+`<svg viewBox="0 0 180 134" aria-hidden="true" focusable="false">
+  <g stroke="var(--contorno)" stroke-width="3" fill="var(--fondo-elevado)" stroke-linejoin="round">
+    <rect x="5" y="4" width="46" height="26" rx="6"/>
+    <rect x="5" y="34" width="46" height="26" rx="6"/>
+    <rect x="5" y="64" width="46" height="26" rx="6"/>
+  </g>
+  <rect x="13" y="11" width="26" height="5" rx="2.5" fill="var(--c-musica)"/>
+  <rect x="13" y="21" width="18" height="4" rx="2" fill="var(--contorno)" opacity=".3"/>
+  <rect x="13" y="41" width="26" height="5" rx="2.5" fill="var(--c-cultura)"/>
+  <rect x="13" y="51" width="18" height="4" rx="2" fill="var(--contorno)" opacity=".3"/>
+  <rect x="13" y="71" width="26" height="5" rx="2.5" fill="var(--c-clases)"/>
+  <rect x="13" y="81" width="18" height="4" rx="2" fill="var(--contorno)" opacity=".3"/>
+  <rect x="5" y="102" width="46" height="26" rx="6" fill="var(--fondo-hundido)"
+        stroke="var(--tinta-tenue)" stroke-width="2.5"/>
+  <rect x="13" y="109" width="26" height="5" rx="2.5" fill="var(--tinta-tenue)" opacity=".5"/>
+  <rect x="13" y="119" width="18" height="4" rx="2" fill="var(--tinta-tenue)" opacity=".3"/>
+  <circle cx="45" cy="119" r="12" fill="var(--fondo)"
+          stroke="var(--tinta-tenue)" stroke-width="3.4"/>
+  <path d="M37 111 L53 127" stroke="var(--tinta-tenue)"
+        stroke-width="3.4" stroke-linecap="round"/>
+  <g stroke="var(--contorno)" stroke-width="2.5" fill="none" stroke-linecap="round">
+    <path d="M51 17 C66 17 64 58 76 58"/>
+    <path d="M51 47 C64 47 66 58 76 58"/>
+    <path d="M51 77 C66 77 64 58 76 58"/>
+    <path d="M76 58 H91"/>
+    <path d="M84 52 L91 58 L84 64" stroke-linejoin="round"/>
+  </g>
+  <g stroke="var(--contorno)" stroke-width="3.2" stroke-linecap="round">
+    <ellipse cx="106" cy="22" rx="10" ry="8" fill="var(--fondo-elevado)"/>
+    <ellipse cx="152" cy="22" rx="10" ry="8" fill="var(--fondo-elevado)"/>
+    <path d="M107 91 L100 108 M151 91 L158 108"/>
+    <circle cx="129" cy="58" r="34" fill="var(--fondo-elevado)" stroke-width="3.4"/>
+    <path d="M129 30 V36 M155 58 H149 M129 86 V80 M103 58 H109" stroke-width="2.6"/>
+  </g>
+  <g stroke="var(--acento)" stroke-linecap="round">
+    <path d="M129 58 L152 45" stroke-width="3"/>
+    <path d="M129 58 L127 80" stroke-width="4.6"/>
+  </g>
+  <circle cx="129" cy="58" r="4" fill="var(--acento)"/>
+</svg>`,
+
+/* 2. La bandeja de borradores. El de arriba tiene la fecha en blanco —el caso
+      CEINA— y hay un lápiz encima: nada se publica solo. */
+`<svg viewBox="0 0 180 134" aria-hidden="true" focusable="false">
+  <path d="M10 88 L22 126 H158 L170 88" fill="var(--fondo-hundido)"
+        stroke="var(--contorno)" stroke-width="3.2" stroke-linejoin="round"/>
+  <g stroke="var(--contorno)" stroke-width="3" stroke-linejoin="round" fill="var(--fondo-elevado)">
+    <rect x="24" y="48" width="62" height="52" rx="7" transform="rotate(-8 55 74)"/>
+    <rect x="52" y="42" width="62" height="52" rx="7" transform="rotate(5 83 68)"/>
+    <rect x="56" y="24" width="72" height="62" rx="8"/>
+  </g>
+  <rect x="66" y="36" width="44" height="5" rx="2.5" fill="var(--contorno)" opacity=".34"/>
+  <rect x="66" y="48" width="30" height="4" rx="2" fill="var(--contorno)" opacity=".22"/>
+  <rect x="66" y="60" width="42" height="16" rx="4" fill="none"
+        stroke="var(--acento)" stroke-width="2.6" stroke-dasharray="6 5"/>
+  <g transform="translate(110 70) rotate(-34)">
+    <polygon points="0,0 17,-10 17,10" fill="var(--fondo-elevado)"
+             stroke="var(--contorno)" stroke-width="3" stroke-linejoin="round"/>
+    <rect x="17" y="-10" width="40" height="20" rx="3" fill="var(--acento)"
+          stroke="var(--contorno)" stroke-width="3"/>
+    <rect x="55" y="-10" width="13" height="20" rx="5" fill="var(--fondo-hundido)"
+          stroke="var(--contorno)" stroke-width="3"/>
+  </g>
+</svg>`,
+
+/* 3. La ficha publicada —el pin del mapa— y la flecha roja que vuelve a la
+      ventana de donde salió. Esa flecha ES el paso: el link no se pierde. */
+`<svg viewBox="0 0 180 134" aria-hidden="true" focusable="false">
+  <rect x="10" y="16" width="76" height="94" rx="10" fill="var(--fondo-elevado)"
+        stroke="var(--contorno)" stroke-width="3.2"/>
+  <path d="M48 28 c-10 0 -18 8 -18 18 c0 12 18 26 18 26 s18 -14 18 -26 c0 -10 -8 -18 -18 -18 z"
+        fill="var(--acento)" stroke="var(--contorno)" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="48" cy="46" r="6" fill="var(--fondo-elevado)"/>
+  <rect x="22" y="82" width="52" height="5" rx="2.5" fill="var(--contorno)" opacity=".34"/>
+  <rect x="22" y="93" width="34" height="4" rx="2" fill="var(--contorno)" opacity=".22"/>
+  <rect x="106" y="20" width="66" height="54" rx="8" fill="var(--fondo-elevado)"
+        stroke="var(--contorno)" stroke-width="3"/>
+  <path d="M107 37 H171" stroke="var(--contorno)" stroke-width="3"/>
+  <circle cx="116" cy="28" r="2.6" fill="var(--contorno)"/>
+  <circle cx="125" cy="28" r="2.6" fill="var(--contorno)"/>
+  <circle cx="134" cy="28" r="2.6" fill="var(--contorno)"/>
+  <rect x="116" y="47" width="42" height="5" rx="2.5" fill="var(--contorno)" opacity=".34"/>
+  <rect x="116" y="58" width="28" height="4" rx="2" fill="var(--contorno)" opacity=".22"/>
+  <g stroke="var(--acento)" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M88 100 C120 122 158 116 154 84"/>
+    <path d="M147 91 L154 81 L161 90"/>
+  </g>
+</svg>`,
+];
+
+/* ---------- CIFRAS EN VIVO ----------
+   Salen del mismo JSON que el mapa. Escritas a mano se vuelven mentira en una
+   semana, y esta es justo la página que promete no mentir. Se piden UNA vez y
+   quedan en memoria: cambiar de idioma repinta, no vuelve a bajar 3 MB. */
+let RECUENTO = null;   // {panoramas, talleres, gratis, fecha}
+let CINES = null;      // número de cines catastrados
+
+function pintarRecuento(){
+  const caja = document.getElementById("recuento");
+  if(!RECUENTO){ return; }
+  caja.hidden = false;
+
+  const numero = n => n.toLocaleString(localeDe());
+  document.getElementById("rec-mayor").innerHTML =
+    `<div>${carita("loica", "#E8442E", 40)}</div>
+     <div><b>${numero(RECUENTO.panoramas)}</b>
+     <span>${escapar(t("pTotalD"))}</span></div>`;
+
+  const cifra = ([n, txt, tono, masc]) =>
+    `<div class="cifra" style="--tono:${tono}">
+       ${carita(masc, tono, 30)}
+       <div><b>${numero(n)}</b><span>${escapar(txt)}</span></div>
+     </div>`;
+  /* La cifra cuyo archivo no llegó simplemente NO se dibuja. Un guion latiendo
+     para siempre es una cifra que promete y no cumple, y el cine viaja aparte
+     justo para que su caída no arrastre a las otras tres. */
+  document.getElementById("rec-cifras").innerHTML = [
+    [RECUENTO.talleres, x("recTalleres"), "var(--c-clases-tinta)", "chincol"],
+    [RECUENTO.gratis,   x("recGratis"),   "var(--gratis)",         "degu"],
+    [CINES,             x("recCines"),    "var(--c-cine-tinta)",   "cabra"],
+  ].filter(([n]) => typeof n === "number").map(cifra).join("");
+
+  /* Solo el día: la corrida ya no siempre es a las seis (ahora la dispara
+     GitHub Actions) y una hora en pantalla contradiría al paso 1. */
+  document.getElementById("rec-revisado").textContent =
+    `${x("revisado")} ${RECUENTO.fecha.toLocaleDateString(localeDe(), {day:"numeric", month:"long"})}`;
+}
+
+/* La banda nace escondida y solo aparece cuando llegaron los dos catastros
+   grandes. Si fallan, se queda escondida: mejor sin cifra que con una
+   inventada. El cine viaja aparte —es el archivo chico— así que si se cae,
+   los otros tres números se pintan igual. */
+Promise.all([cargarEventos(), cargarTalleres()]).then(([evs, tls]) => {
+  RECUENTO = {
+    panoramas: evs.length,
+    talleres:  tls.length,
+    gratis:    evs.filter(e => e.gratis).length + tls.filter(e => e.gratis).length,
+    otros:     evs.filter(e => e.categoria === "otros").length,
+    fecha:     new Date(),
+  };
+  return fetch("eventos.json", {cache:"no-cache"}).then(r => r.json()).then(d => {
+    const f = new Date(d.generado);
+    if(!isNaN(f)) RECUENTO.fecha = f;
+  }).catch(() => {});
+}).then(() => { pintarRecuento(); pintar(); })   // repinta: las dos frases
+  .catch(() => {});                              // con cifra viva la esperaban
+
+fetch("cine.json", {cache:"no-cache"}).then(r => r.json()).then(d => {
+  CINES = Array.isArray(d.cines) ? d.cines.length : null;
+  if(RECUENTO) pintarRecuento();
+}).catch(() => {});
+
 pintarBarra("nosotros.html");
 
+/* Enciende una entrada y la apaga cuando termina. Hay que apagarla: las
+   entradas y los tics de reposo se disputan el mismo `animation` del SVG y la
+   entrada gana por orden en la hoja, así que mientras `entra` esté puesta la
+   Loica no ladea la cabeza ni el Chincol salta. Mismo relevo que en la
+   portada y en habla. */
+function entrar(caja, ms){
+  if(!caja || caja.dataset.entro) return;
+  caja.dataset.entro = "1";
+  caja.classList.add("entra");
+  setTimeout(() => caja.classList.remove("entra"), ms);
+}
+
 function pintar(){
-  document.getElementById("loica-grande").innerHTML = mascota("loica","var(--rojo-500)",96);
+  const grande = document.getElementById("loica-grande");
+  grande.innerHTML = cuerpo("loica", "var(--rojo-500)", 168, {anima:true});
   document.getElementById("tit").textContent = x("tit");
-  document.getElementById("entrada").textContent = x("entrada");
+  document.getElementById("entrada").innerHTML = x("entrada").map((p, i) =>
+    i === 1 ? `<p class="marcado"><b>${escapar(p)}</b></p>` : `<p>${escapar(p)}</p>`).join("");
+  entrar(grande, 1500);   // m-vuelo-llega dura 1,1 s
 
   document.getElementById("cordillera").innerHTML = cordillera();
 
-  document.getElementById("desfile").innerHTML = ELENCO.map(a =>
-    `<span style="--suave:${paleta(a.clave).suave}">${mascota(a.clave,a.hex,30,TINTA_FIJA)}</span>`).join("");
-
-  document.getElementById("t-creencias").textContent = x("tCre");
-  document.getElementById("s-creencias").textContent = x("sCre");
-  document.getElementById("creencias").innerHTML = x("cre").map(([t,d],i) => {
-    const clave = ANIMAL_PRINCIPIO[i], p = paleta(clave);
-    return `<article class="principio" style="--tono:${p.tono};--suave:${p.suave}">
-      <div class="principio-animal">${mascota(clave,"#FFFBF5",58,TINTA_FIJA)}</div>
-      <div class="principio-texto"><h3>${t}</h3><p>${d}</p></div>
-    </article>`;
-  }).join("");
+  /* El desfile: los doce enteros, parados en la cordillera, cada uno con su
+     retardo para que entren de a uno y no parpadeen todos juntos. Cada animal
+     es un enlace a su ficha del elenco, más abajo. */
+  const desfile = document.getElementById("desfile");
+  desfile.setAttribute("aria-label",
+    {es:"Los animales guía", en:"The guide animals", pt:"Os animais-guia"}[IDIOMA]);
+  desfile.innerHTML = ELENCO.map((a, i) =>
+    `<a href="#guia-${escapar(a.clave)}" style="--d:${Math.min(i, 11) * 20}ms"
+        aria-label="${escapar(a[IDIOMA][0])} — ${escapar(a[IDIOMA][1])}"
+        title="${escapar(a[IDIOMA][0])}">${cuerpo(a.clave, a.hex, 62, {anima:true})}</a>`).join("");
+  entrar(desfile, 1900);  // 240 ms de retardo + la entrada más larga (1,3 s + 0,24)
 
   document.getElementById("t-como").textContent = x("tCom");
   document.getElementById("s-como").textContent = x("sCom");
-  document.getElementById("pasos").innerHTML = x("pasos").map(([t,d],i) =>
-    `<div class="paso" style="--tono:${COLOR_PASO[i]}"><div class="num">${i+1}</div><b>${t}</b><span>${d}</span></div>`).join("");
+  document.getElementById("pasos").innerHTML = x("pasos").map(([tit,desc],i) =>
+    `<li class="paso">
+       <div class="escena">${ESCENAS[i] || ""}</div>
+       <div class="paso-texto"><b>${escapar(tit)}</b><p>${escapar(desc)}</p></div>
+     </li>`).join("");
+
+  pintarRecuento();
+
+  document.getElementById("t-creencias").textContent = x("tCre");
+  document.getElementById("s-creencias").textContent = x("sCre");
+  document.getElementById("creencias").innerHTML = x("cre").map(([tit,desc],i) => {
+    const clave = ANIMAL_PRINCIPIO[i], p = paleta(clave);
+    return `<article class="principio" style="--tono:${p.tono};--suave:${p.suave}">
+      <div class="principio-cabeza">
+        <div class="principio-animal">${
+          cuerpo(clave, "#FFFBF5", 52, {...TINTA_FIJA, anima:true})}</div>
+        <h3>${escapar(cifrasVivas(tit))}</h3>
+      </div>
+      <p>${escapar(cifrasVivas(desc))}</p>
+    </article>`;
+  }).join("");
 
   document.getElementById("t-falta").textContent = x("tFal");
   document.getElementById("s-falta").textContent = x("sFal");
+  /* La única mascota de la página SIN {anima:true}, y es a propósito: está
+     durmiendo. La Loica se mueve donde trabaja —llega volando a la portada,
+     ladea la cabeza, encabeza el elenco— y se queda quieta en la sección de
+     lo que todavía no alcanza a hacer. Ese contraste es el chiste. */
   document.getElementById("loica-dormida").innerHTML =
     cuerpo("loica", "var(--rojo-500)", 60, {tinta:"#1E2A4A", pose:"durmiendo"});
-  document.getElementById("falta").innerHTML = x("fal").map(([t,d]) =>
-    `<article class="falla"><h3>${t}</h3><p>${d}</p></article>`).join("");
+  document.getElementById("falta").innerHTML = x("fal").map(([tit,desc]) =>
+    `<article class="falla"><h3>${escapar(cifrasVivas(tit))}</h3><p>${escapar(cifrasVivas(desc))}</p></article>`).join("");
 
   document.getElementById("t-elenco").textContent = x("tEle");
   document.getElementById("s-elenco").textContent = x("sEle");
-  document.getElementById("elenco").innerHTML = x("ele").map(([clave,nombre,rol,desc]) => {
-    const p = paleta(clave);
-    return `<article class="guia" style="--tono:${p.tono};--suave:${p.suave}">
-      <div class="guia-cabeza">${mascota(clave, p.tono, 64, TINTA_FIJA)}</div>
-      <div class="guia-cuerpo"><b>${nombre}</b><div class="rol">${rol}</div><span>${desc}</span></div>
+  /* Cada animal sale entero y grande, con el id al que apunta el desfile.
+     Los once NO llevan tic: la fila de la portada ya los presenta en
+     movimiento y una leyenda es una tabla de referencia, no un escenario.
+     Además evita dejar doce animaciones infinitas dentro de una grilla
+     (_direccion_visual.md 8.3). La única que se mueve acá es la Loica, que es
+     la anfitriona y la encargada de esta página. */
+  document.getElementById("elenco").innerHTML = x("ele").map(([clave,nombre,rol,desc],i) => {
+    const p = paleta(clave), anfitriona = i === 0;
+    return `<article class="guia${anfitriona ? " anfitriona" : ""}" id="guia-${escapar(clave)}"
+                     style="--suave:${p.suave};--rol-fondo:${p.tinta}">
+      <div class="guia-animal">${
+        cuerpo(clave, p.tono, anfitriona ? 132 : 88, {...TINTA_FIJA, anima:anfitriona})}</div>
+      <div class="guia-texto"><b>${escapar(nombre)}</b><div class="rol">${escapar(rol)}</div>
+      <p>${escapar(desc)}</p></div>
     </article>`;
   }).join("");
 

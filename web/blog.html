@@ -37,14 +37,24 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=24">
+<link rel="stylesheet" href="loica.css?v=25">
 <style>
   body{overflow-x:hidden}
   .contenido-blog{max-width:760px;margin:0 auto;padding:var(--e-6) var(--e-4) var(--e-12)}
 
-  /* Mascota que "vuela" en la cabecera — mismo truco que nosotros.html */
-  .volando{animation:volar 5s ease-in-out infinite}
-  @keyframes volar{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+  /* La Loica de la cabecera.
+     Estaba a 56px y era la mascota de portada más chica del sitio —la portada
+     la dibuja a 224, nosotros a 168, comer a 148— y además congelada: blog era
+     una de las tres páginas que no pedían `{anima:true}` en ninguna llamada.
+     A 56px el gesto de la Loica (ladear la cabeza, como quien escucha tu
+     pregunta) no se lee ni aunque corra.
+
+     Y se le quita el `@keyframes volar` propio, que era un sube-y-baja
+     genérico que servía igual para cualquier animal y que ADEMÁS peleaba con
+     el tic real: las dos animaciones se disputan el mismo `animation` del SVG,
+     igual que le pasaba al Quiltro de comer con su balanceo. Un solo gesto, el
+     que le corresponde. */
+  .blog-cabecera .anfitriona{line-height:0}
 
   /* Aviso en línea: idioma, post no encontrado, etc. */
   .aviso-linea{
@@ -59,6 +69,24 @@
   .blog-cabecera h1{margin:var(--e-3) 0 var(--e-2)}
   .blog-cabecera p{max-width:540px;margin:0 auto;color:var(--tinta-suave);line-height:1.62;font-size:var(--t-md)}
   .blog-actualizado{display:block;margin-top:var(--e-3);font-size:var(--t-xs);color:var(--tinta-tenue);font-weight:600}
+  /* En celular la portada centrada se cobra caro: la bajada pasa de tres
+     líneas a SEIS, y seis líneas centradas obligan a cazar el inicio de cada
+     una. Es el mismo arreglo que ya tiene la cabecera de comer, con la misma
+     forma: la Loica al lado del título, la bajada por debajo de los dos y a lo
+     ancho completo, todo sobre un solo eje a la izquierda. En pantalla
+     angosta el centrado no ayuda, empeora: son más líneas, no menos. */
+  @media(max-width:640px){
+    .blog-cabecera{
+      text-align:left;padding:var(--e-3) 0 var(--e-2);
+      display:grid;grid-template-columns:auto minmax(0,1fr);
+      column-gap:var(--e-3);align-items:center;
+    }
+    .blog-cabecera .anfitriona{grid-column:1;grid-row:1}
+    .blog-cabecera .anfitriona svg{width:88px;height:auto}
+    .blog-cabecera h1{grid-column:2;grid-row:1;margin:0}
+    .blog-cabecera p{grid-column:1/-1;grid-row:2;margin:var(--e-3) 0 0;max-width:none}
+    .blog-actualizado{grid-column:1/-1;grid-row:3;margin-top:var(--e-2)}
+  }
 
   /* Los tres formatos. Cada uno tiene animal y color propios: el lector
      aprende que la verde es la de los gratis antes de leer la etiqueta. */
@@ -90,10 +118,22 @@
   }
   .post-tarjeta:hover{transform:translateY(-2px)}
   .post-tarjeta:active{transform:translateY(5px);box-shadow:none}
+  /* --- La tapa ---
+     `place-items:center` dejaba al animal flotando en el medio de una banda de
+     1180×180: un dibujo chico centrado en un rectángulo de color plano se lee
+     como ícono de "no se pudo cargar la imagen", que es exactamente lo que NO
+     es (el post sin foto es un post normal cuyo primer panorama no traía una).
+     Se apoya en el piso de la banda y crece, igual que el Quiltro de la
+     tarjeta sin foto de comer y que los animales del desfile de la portada
+     sobre la cordillera: un dibujo que toca el suelo de su marco se lee como
+     ilustración.
+     Acá no hace falta velo ni repisa como en comer, porque el título del post
+     va DEBAJO de la tapa y no encima: nada compite con el dibujo. */
   .post-tapa{
     position:relative;height:180px;background:var(--suave);
-    border-bottom:3px solid var(--contorno);display:grid;place-items:center;overflow:hidden;
+    border-bottom:3px solid var(--contorno);display:grid;place-items:end center;overflow:hidden;
   }
+  .post-tapa > svg{height:88%;width:auto;margin-bottom:-1%}
   /* Los afiches suelen tener el título arriba: encuadrar al centro justo les
      corta la cabeza. Un tercio más arriba salva casi todos. */
   .post-tapa img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 32%}
@@ -242,7 +282,7 @@
 <div class="remate" id="cordillera" aria-hidden="true"></div>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="loica.js?v=24"></script>
+<script src="loica.js?v=25"></script>
 <script>
 /* ============================================================
    BLOG — índice + vista de post, ruteado por hash (#/p/<slug>).
@@ -354,6 +394,24 @@ function actualizarMetaDescripcion(texto){
 // suele caer directo en un post, así que el aviso tiene que vivir en los dos.
 // Un post puede declarar su idioma ("idioma": "pt"): si coincide con el del
 // lector, avisar que "el blog está en español" sería mentirle en la cara.
+/* La foto de la tapa la sirve el organizador y puede caerse o bloquear la
+   lectura desde otro dominio. Cuando pasa, la tapa se quedaba como una banda
+   de color plano y vacía —peor que la del post que nunca tuvo foto, que al
+   menos trae su animal—. Va como listener y no como `onerror=` en el atributo
+   porque el atributo solo alcanzaba a borrar la imagen: no podía poner nada
+   en su lugar. */
+function armarRespaldosTapa(raiz){
+  raiz.querySelectorAll(".post-tapa img[data-respaldo]").forEach(img => {
+    img.addEventListener("error", () => {
+      const caja = img.parentElement;
+      const [animal, tono] = img.dataset.respaldo.split("|");
+      img.remove();
+      if(!caja.querySelector(":scope > svg"))
+        caja.insertAdjacentHTML("afterbegin", cuerpo(animal, tono, 150, TINTA_FIJA));
+    }, {once:true});
+  });
+}
+
 function avisoIdiomaHtml(post){
   if(post && post.idioma === IDIOMA) return "";
   return AVISO_IDIOMA[IDIOMA]
@@ -403,7 +461,7 @@ function pintarIndice(noEncontrado){
     ${avisoNoEncontrado}
     ${avisoIdioma}
     <header class="blog-cabecera" lang="es">
-      <div class="volando">${mascota("loica","var(--acento)",56)}</div>
+      <div class="anfitriona" aria-hidden="true">${cuerpo("loica","var(--acento)",104,{anima:true})}</div>
       <h1>El blog</h1>
       <p>El mapa muestra todo lo que hay. Acá va lo que vale la pena y por qué: alguien
         abrió cada link, confirmó el precio real y dejó fuera lo que no daba. Tres
@@ -412,6 +470,7 @@ function pintarIndice(noEncontrado){
     </header>
     <div class="formatos-legend">${legend}</div>
     <div class="lista-posts">${lista}</div>`;
+  armarRespaldosTapa(vista);
 }
 
 function pintarTarjetaIndice(post){
@@ -426,8 +485,9 @@ function pintarTarjetaIndice(post){
     <a class="post-tarjeta" style="--tono:${p.tono};--suave:${p.suave};--tono-tinta:${p.tinta}"
        href="#/p/${encodeURIComponent(post.slug)}">
       <div class="post-tapa">
-        ${mascota(animal, p.tono, 84, TINTA_FIJA)}
-        ${urlSegura(foto) ? `<img src="${escapar(urlSegura(foto))}" alt="" loading="lazy" onerror="this.remove()">` : ""}
+        ${urlSegura(foto) ? "" : cuerpo(animal, p.tono, 150, TINTA_FIJA)}
+        ${urlSegura(foto) ? `<img src="${escapar(urlSegura(foto))}" alt="" loading="lazy"
+             data-respaldo="${escapar(animal)}|${escapar(p.tono)}">` : ""}
         <span class="post-formato">
           <span class="bolita">${mascota(animal, p.tono, 22, TINTA_FIJA)}</span>
           ${escapar(f.etiqueta)}

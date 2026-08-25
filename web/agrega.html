@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=24">
+<link rel="stylesheet" href="loica.css?v=25">
 <style>
   .hero{text-align:center;padding:var(--e-8) var(--e-5) var(--e-6);max-width:660px;margin:0 auto}
   .hero svg{margin:0 auto var(--e-4)}
@@ -36,22 +36,66 @@
     display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
     gap:var(--e-3);max-width:760px;margin:0 auto var(--e-6);padding:0 var(--e-5);
   }
-  .promesa{background:var(--fondo-elevado);border:1px solid var(--borde);
-    border-radius:var(--r-md);padding:var(--e-4)}
+  /* Las tres promesas son la misma pieza que los "DÓNDE / PRECIO / COCINA" de
+     la ficha de comer (`comer.html:322`): caja de dato chica, fondo elevado,
+     contorno de tinta y repisa de 1. Estaban en 1px de --borde y sin repisa,
+     o sea flotando; con el contorno del sistema quedan sobre el papel, que es
+     lo que dice la marca. */
+  .promesa{background:var(--fondo-elevado);border:2.5px solid var(--contorno);
+    border-radius:var(--r-md);box-shadow:var(--repisa-1);padding:var(--e-4)}
   .promesa b{display:block;font-size:var(--t-sm);margin-bottom:3px}
   .promesa span{font-size:var(--t-sm);color:var(--tinta-suave)}
   .doble{display:grid;grid-template-columns:1fr 1fr;gap:var(--e-3)}
   @media(max-width:520px){.doble{grid-template-columns:1fr}}
+  /* ---------- Las once categorías ----------
+     Es el mismo control que en el mapa, en cine, en talleres, en descuentos y
+     ahora en comer: elegir una categoría de una fila de pastillas con la carita
+     del animal. En las otras cinco páginas eso es `.chip` de loica.css. Acá era
+     una pastilla propia que se apartaba en las cuatro cosas que definen el
+     chip de la casa:
+
+       borde 1.5px de --borde (arena)   →  2px de --contorno (tinta)
+       sin repisa                        →  --repisa-1
+       el elegido no se movía            →  se hunde 3px, como todos
+       radio --r-full                    →  --r-pill
+
+     Y 1.5px es, además, el único grosor que la dirección visual prohíbe: sobre
+     crema no llega a leerse como contorno de serigrafía, se lee como una línea
+     de formulario de banco.
+
+     Se conserva la mecánica, que estaba bien y es mejor que la de las otras
+     páginas: son <label> envolviendo un <input type="radio"> de verdad, así
+     que el grupo se recorre con las flechas y es un solo alto en la
+     tabulación. El chip del sistema es un <button aria-pressed>, que para
+     "elige UNA" es peor. Por eso acá se toma el ASPECTO del chip y no su
+     etiqueta. */
   .opciones-cat{display:flex;flex-wrap:wrap;gap:var(--e-2)}
   .opcion-cat{
-    display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--borde);
-    background:var(--fondo);border-radius:var(--r-full);padding:7px 13px 7px 9px;
-    cursor:pointer;font-size:var(--t-sm);font-weight:600;transition:var(--rapido);
+    display:inline-flex;align-items:center;gap:7px;min-height:40px;
+    border:2px solid var(--contorno);background:var(--fondo-elevado);color:var(--tinta);
+    border-radius:var(--r-pill);padding:7px 15px 7px 10px;box-shadow:var(--repisa-1);
+    cursor:pointer;font-size:var(--t-sm);font-weight:700;
+    transition:transform var(--rapido),box-shadow var(--rapido),background-color var(--rapido);
   }
-  .opcion-cat:hover{border-color:var(--borde-fuerte)}
+  .opcion-cat:hover{background:var(--fondo-hundido)}
   .opcion-cat input{position:absolute;opacity:0;width:0;height:0}
-  .opcion-cat:has(input:checked){background:var(--tinta);color:var(--fondo-elevado);border-color:var(--tinta)}
-  .opcion-cat:has(input:focus-visible){outline:2.5px solid var(--acento);outline-offset:2px}
+  .opcion-cat:has(input:checked){
+    background:var(--tinta);color:var(--fondo-elevado);
+    transform:translateY(3px);box-shadow:none;
+  }
+  /* El anillo va con la repisa dentro del mismo box-shadow: en una pastilla que
+     ya usa box-shadow para la repisa, un `outline` aparte quedaba a distinto
+     radio y se cortaba contra la sombra. Es el foco del proyecto, el mismo de
+     loica.css. */
+  .opcion-cat:has(input:focus-visible){
+    box-shadow:var(--repisa-1),0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+  }
+  .opcion-cat:has(input:checked):has(input:focus-visible){
+    box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+  }
+  /* El animal a 22px, que es el tamaño del ícono del chip en loica.css (y en
+     el mapa, en cine y en talleres). A 18 era el único de seis páginas. */
+  .opcion-cat svg{flex:none;width:22px;height:22px}
   /* La fila entera es el área que se toca —casilla y etiqueta— y llega a los
      44px. Antes la casilla medía 19px y era el blanco más chico del
      formulario. */
@@ -59,9 +103,25 @@
     min-height:44px}
   .gratis-fila input{accent-color:var(--verde-cerro)}
   .gratis-fila label{display:flex;align-items:center;min-height:44px;cursor:pointer}
+  /* ---------- El texto de error ----------
+     `loica.css:612` lo pinta con `var(--acento)`, que en tema claro es
+     --rojo-500 (#E8442E) y sobre el crema del formulario da **3,85:1** a 12px.
+     El piso del proyecto para texto normal es 4,5:1, así que el único mensaje
+     que la página da cuando algo salió mal era el texto peor contrastado de
+     todo el formulario. En oscuro no pasa: ahí --acento es --rojo-400 y da
+     5,36:1.
+     La familia roja ya tiene resuelto el par: --rojo-700 sobre crema da
+     6,55:1 y --rojo-300 sobre el azul de noche está de sobra. Se corrige acá
+     porque agrega.html es la ÚNICA página con `.mensaje-error` en todo el
+     sitio; el arreglo de fondo va en loica.css y queda anotado en el informe.
+     El BORDE rojo del campo se deja como está: 3,85:1 pasa el piso de 3:1 que
+     rige para bordes de control, y bajarlo de tono lo haría menos visible. */
+  .campo .mensaje-error{color:var(--rojo-700)}
+  :root[data-tema="oscuro"] .campo .mensaje-error{color:var(--rojo-300)}
+
   .exito{
-    background:var(--gratis-fondo);border:1.5px solid var(--gratis);border-radius:var(--r-lg);
-    padding:var(--e-6);text-align:center;
+    background:var(--gratis-fondo);border:2.5px solid var(--contorno);border-radius:var(--r-lg);
+    box-shadow:var(--repisa-2);padding:var(--e-6);text-align:center;
   }
   .exito h2{color:var(--gratis);margin-bottom:var(--e-2)}
 </style>
@@ -82,19 +142,24 @@
     <div class="campo">
       <label for="titulo" data-l="lTitulo"></label>
       <input id="titulo" name="titulo" required maxlength="120">
-      <div class="mensaje-error" hidden data-l="eTitulo"></div>
+      <div class="mensaje-error" id="err-titulo" hidden data-l="eTitulo"></div>
     </div>
 
+    <!-- El rótulo va atado al grupo con aria-labelledby y no suelto: son once
+         radios, y sin nombre de grupo un lector de pantalla los canta uno por
+         uno sin decir nunca de qué se está eligiendo. El <label> sin `for` no
+         ata nada; es texto. -->
     <div class="campo">
-      <label data-l="lCategoria"></label>
-      <div class="opciones-cat" id="opciones-cat"></div>
+      <label id="rot-categoria" data-l="lCategoria"></label>
+      <div class="opciones-cat" id="opciones-cat"
+           role="radiogroup" aria-labelledby="rot-categoria"></div>
     </div>
 
     <div class="doble">
       <div class="campo">
         <label for="fecha" data-l="lFecha"></label>
         <input type="date" id="fecha" name="fecha" required>
-        <div class="mensaje-error" hidden data-l="eFecha"></div>
+        <div class="mensaje-error" id="err-fecha" hidden data-l="eFecha"></div>
       </div>
       <div class="campo">
         <label for="hora" data-l="lHora"></label>
@@ -106,7 +171,7 @@
       <div class="campo">
         <label for="lugar" data-l="lLugar"></label>
         <input id="lugar" name="lugar" required maxlength="120">
-        <div class="mensaje-error" hidden data-l="eLugar"></div>
+        <div class="mensaje-error" id="err-lugar" hidden data-l="eLugar"></div>
       </div>
       <div class="campo">
         <label for="comuna" data-l="lComuna"></label>
@@ -114,14 +179,20 @@
       </div>
     </div>
 
+    <!-- "Precio" rotula el BLOQUE (la casilla de gratis más el monto), así que
+         el campo del monto se quedaba sin nombre accesible: un cuadro de texto
+         que se anuncia como "cuadro de edición" y nada más. Ahora el <label>
+         apunta al campo con `for`, y la ayuda de abajo va colgada con
+         aria-describedby en vez de quedar a la deriva. -->
     <div class="campo">
-      <label data-l="lPrecio"></label>
+      <label for="precio" data-l="lPrecio"></label>
       <div class="gratis-fila">
         <input type="checkbox" id="es-gratis" name="es-gratis">
         <label for="es-gratis" style="margin:0;font-weight:600" data-l="lEsGratis"></label>
       </div>
-      <input id="precio" name="precio" inputmode="numeric" placeholder="5000">
-      <div class="ayuda" data-l="aPrecio"></div>
+      <input id="precio" name="precio" inputmode="numeric" placeholder="5000"
+             aria-describedby="ayuda-precio">
+      <div class="ayuda" id="ayuda-precio" data-l="aPrecio"></div>
     </div>
 
     <div class="campo">
@@ -129,8 +200,9 @@
       <!-- inputmode=url le pide al teléfono el teclado con "/" y ".cl" a mano;
            el autocorrector le mete mayúscula al dominio si no se apaga. -->
       <input type="url" id="enlace" name="enlace" placeholder="https://instagram.com/tu_evento"
-             inputmode="url" autocapitalize="off" autocorrect="off" spellcheck="false">
-      <div class="ayuda" data-l="aEnlace"></div>
+             inputmode="url" autocapitalize="off" autocorrect="off" spellcheck="false"
+             aria-describedby="ayuda-enlace">
+      <div class="ayuda" id="ayuda-enlace" data-l="aEnlace"></div>
     </div>
 
     <div class="campo">
@@ -143,7 +215,7 @@
         <label for="contacto-nombre" data-l="lTuNombre"></label>
         <input id="contacto-nombre" name="contacto-nombre" required
                autocomplete="name" autocapitalize="words">
-        <div class="mensaje-error" hidden data-l="eNombre"></div>
+        <div class="mensaje-error" id="err-contacto-nombre" hidden data-l="eNombre"></div>
       </div>
       <div class="campo">
         <label for="contacto" data-l="lTuContacto"></label>
@@ -153,7 +225,7 @@
              inicial, que en un correo estorban. -->
         <input id="contacto" name="contacto" required placeholder="hola@correo.cl / @instagram"
                autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false">
-        <div class="mensaje-error" hidden data-l="eContacto"></div>
+        <div class="mensaje-error" id="err-contacto" hidden data-l="eContacto"></div>
       </div>
     </div>
 
@@ -173,7 +245,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegacion principal"></nav>
 
-<script src="loica.js?v=24"></script>
+<script src="loica.js?v=25"></script>
 <script>
 const CORREO = "hola@loica.cl";   // cambiar por el correo real del proyecto
 
@@ -251,7 +323,12 @@ const COMUNAS = ["Santiago","Providencia","Ñuñoa","Las Condes","Vitacura","Lo 
 pintarBarra("agrega.html");
 
 function pintarTextos(){
-  document.getElementById("mascota-hero").innerHTML = mascota("chincol","var(--amarillo-micro)",84);
+  /* El Chincol vivo. Era una de las tres páginas del sitio que dibujaban su
+     animal congelado, y su gesto —dos saltitos y el lápiz— ya está escrito en
+     loica.css; solo faltaba pedirlo. `cuerpo()` y no `mascota()`: a 84px son
+     lo mismo, pero `mascota()` cambia sola a solo-cabeza bajo 38 y entonces no
+     hay lápiz que mover. */
+  document.getElementById("mascota-hero").innerHTML = cuerpo("chincol","var(--amarillo-micro)",84,{anima:true});
   document.getElementById("mascota-listo").innerHTML = mascota("loica","var(--gratis)",70);
   document.getElementById("tit").textContent = x("tit");
   document.getElementById("baj").textContent = x("baj");
@@ -265,7 +342,7 @@ function pintarTextos(){
       const info = cat(c);
       return `<label class="opcion-cat">
         <input type="radio" name="categoria" value="${c}" ${i===0?"":""}>
-        ${mascota(info.mascota, info.hex, 18)} ${info[IDIOMA]}</label>`;
+        ${carita(info.mascota, info.hex, 22)} ${info[IDIOMA]}</label>`;
     }).join("");
 
   document.getElementById("comuna").innerHTML =
@@ -288,6 +365,13 @@ document.getElementById("form").onsubmit = e => {
                         "contacto-nombre":"eNombre", contacto:"eContacto"};
   let valido = true;
 
+  /* El error se decía SOLO de tres maneras que un lector de pantalla no ve:
+     el borde rojo del campo, el texto de abajo (suelto, sin colgar de nadie) y
+     el foco que salta al primer campo vacío. O sea que alguien navegando a
+     ciegas apretaba "Enviar", el foco se movía a un cuadro de texto y nada le
+     decía por qué. Ahora el campo se marca `aria-invalid` y el mensaje se le
+     cuelga con `aria-describedby`, que es lo que hace que al recibir el foco se
+     lea "Nombre del evento, no válido, ponle un nombre a tu evento". */
   for(const [campo, claveError] of Object.entries(obligatorios)){
     const entrada = document.getElementById(campo === "contacto-nombre" ? "contacto-nombre" : campo);
     const caja = entrada.closest(".campo");
@@ -295,6 +379,14 @@ document.getElementById("form").onsubmit = e => {
     const vacio = !String(datos.get(campo) || "").trim();
     caja.classList.toggle("error", vacio);
     if(error) error.hidden = !vacio;
+    entrada.setAttribute("aria-invalid", vacio ? "true" : "false");
+    if(error && error.id){
+      const otros = (entrada.getAttribute("aria-describedby") || "")
+        .split(/\s+/).filter(id => id && id !== error.id);
+      const cuelga = vacio ? otros.concat(error.id) : otros;
+      if(cuelga.length) entrada.setAttribute("aria-describedby", cuelga.join(" "));
+      else entrada.removeAttribute("aria-describedby");
+    }
     if(vacio && valido){ entrada.focus(); valido = false; }
   }
   if(!valido) return;

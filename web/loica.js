@@ -407,7 +407,7 @@ const CUADRUPEDOS = {
                extra:`<ellipse cx="19.6" cy="27.6" rx="3.4" ry="4.2" fill="${CREMA}"/>`},
   pudu:       {cuerpo:[28.8, 30.8, 11.4, 8.2], grosor:2.7, cabeza:"2.5 3.4",
                patas:"M21.8 38.2v6.4M27.4 38.6v6M33.6 38.4v6.2M38.6 37.4v7.2", extra:""},
-  chinchilla: {cuerpo:[28.4, 31.4, 10.8, 9.6], grosor:3.2, cabeza:"2.5 3.4",
+  chinchilla: {cuerpo:[28.4, 31.4, 10.8, 9.6], grosor:3.2, cabeza:"4.4 5.2", /* era "2.5 3.4" y dejaba la cabeza despegada del cuerpo: el único    cuadrúpedo de los ocho al que le pasaba. Se nota en todas las    páginas y más desde que el calendario la saca a 92px. */
                patas:"M22.6 39.8v4.4M27.8 40.2v4M33.4 39.8v4.4M37.6 38.8v5.2", extra:""},
   degu:       {cuerpo:[28.6, 31.8, 11.4, 8.4], grosor:3, cabeza:"2.5 3.4",
                patas:"M22.2 39.4v5M27.6 39.8v4.6M33.4 39.4v5M38 38.6v5.6",
@@ -694,7 +694,6 @@ const TEXTOS = {
     pElencoT:"Los que te acompañan",
     pHistoriaT:"Cómo llegó a esto", pHistoriaPista:"Toca a cualquiera y te cuenta su historia",
     pHistoriaCerrar:"Cerrar", pHistoriaVer:"Ver sus panoramas",
-    pElencoD:"Once animales chilenos hacen de señalética: cada uno se hace cargo de un tipo de panorama en el mapa y el calendario, el Degú de lo que es gratis, el Guarén de los descuentos y el Quiltro de dónde comer.",
     pGratisT:"gratis", pGratisD:"panoramas que no cuestan nada",
     pTotalD:"panoramas vigentes", pFuentesD:"fuentes revisadas cada mañana",
     pCierreT:"¿Organizas algo?", pCierreD:"Si tu evento es abierto y pasa en Santiago, cabe acá. No cobramos por aparecer.",
@@ -764,7 +763,6 @@ const TEXTOS = {
     pElencoT:"Your guides",
     pHistoriaT:"How it came to this", pHistoriaPista:"Tap any of them and you get the backstory",
     pHistoriaCerrar:"Close", pHistoriaVer:"See what they cover",
-    pElencoD:"Eleven Chilean animals work as signage: each one looks after a type of event on the map and the calendar, the Degu looks after what is free, the Guarén rat after the discounts and the Quiltro after where to eat.",
     pGratisT:"free", pGratisD:"events that cost nothing",
     pTotalD:"events on right now", pFuentesD:"sources checked every morning",
     pCierreT:"Running something?", pCierreD:"If your event is open to the public and happens in Santiago, it belongs here. We don't charge for it.",
@@ -834,7 +832,6 @@ const TEXTOS = {
     pElencoT:"Quem te acompanha",
     pHistoriaT:"Como chegou nisso", pHistoriaPista:"Toque em qualquer um e ele conta a história",
     pHistoriaCerrar:"Fechar", pHistoriaVer:"Ver os programas dele",
-    pElencoD:"Onze animais chilenos servem de sinalização: cada um cuida de um tipo de programa no mapa e no calendário, o Degu cuida do que é grátis, o Guarén cuida dos descontos e o Vira-lata cuida de onde comer.",
     pGratisT:"grátis", pGratisD:"programas que não custam nada",
     pTotalD:"programas em cartaz", pFuentesD:"fontes revisadas toda manhã",
     pCierreT:"Organiza algo?", pCierreD:"Se o seu evento é aberto e acontece em Santiago, cabe aqui. Não cobramos para aparecer.",
@@ -1550,8 +1547,15 @@ function cordillera({tono = "var(--c-fiesta)"} = {}){
       L740 126 L740 140 L830 140 Q880 74 930 140 L1010 140 L1010 123 L1055 123
       L1055 140 L1200 140 L1200 150 Z"/>
     <!-- La cruz del San Cristóbal: dos trazos que ubican la ciudad entera -->
+    <!-- La cruz iba en y=62, que es la COORDENADA DE CONTROL de la Bézier del
+         cerro, no su cumbre. Una cuadrática solo llega a la mitad del camino
+         hacia su control: con Q302 62 entre dos extremos en y=140 el ápice
+         real cae en 0,25·140 + 0,5·62 + 0,25·140 = 101. O sea que la cruz
+         flotaba 39 unidades sobre el cerro, como un signo "+" suelto en el
+         cielo, en las once páginas que dibujan la cordillera. Mismas
+         proporciones, apoyada en la cumbre de verdad. -->
     <path stroke="var(--azul-cordillera)" stroke-width="3" opacity=".72" fill="none"
-          d="M302 62 L302 48 M295 53 L309 53"/>
+          d="M302 101 L302 87 M295 92 L309 92"/>
   </svg>`;
 }
 
@@ -1679,6 +1683,14 @@ const BANCOS = {
   falabella: {color:"#0E8757", tinta:"var(--c-libre-tinta)"},
   santander: {color:"#C42B67", tinta:"var(--c-charla-tinta)"},
   cencosud:  {color:"#0C8B9B", tinta:"var(--c-deporte-tinta)"},
+  /* Entel y Ripley faltaban y los dos caían al café del respaldo: 67
+     descuentos pintados exactamente del mismo color, indistinguibles entre sí
+     en el chip y en el pin. Los tonos salen de la paleta de la casa y no de la
+     marca del banco —acá el color es señalética nuestra, no publicidad
+     suya— y cada uno trae su tinta oscurecida, que es la única que puede
+     tocar texto: el naranjo fuerte sobre crema da 2,4:1. */
+  entel:     {color:"#F08800", tinta:"var(--c-clases-tinta)"},
+  ripley:    {color:"#A51D99", tinta:"var(--c-cine-tinta)"},
 };
 const banco = id => BANCOS[id] || {color:"#95521C", tinta:"var(--c-descuento-tinta)"};
 

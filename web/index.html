@@ -33,7 +33,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=24">
+<link rel="stylesheet" href="loica.css?v=25">
 <style>
   body{overflow-x:hidden}
 
@@ -55,15 +55,30 @@
   
   :root[data-tema="oscuro"] .hero .mancha{mix-blend-mode:screen;opacity:.26}
   :root[data-tema="oscuro"] .hero .m2{background:var(--c-musica)}
-  .hero .m1{width:340px;height:340px;background:var(--c-fiesta);top:-130px;left:-90px}
-  .hero .m2{width:280px;height:280px;background:var(--c-otros);top:-60px;right:-80px}
-  .hero .m3{width:220px;height:220px;background:var(--c-deporte);bottom:120px;right:12%}
+  /* Las tres manchas entran POR EL BORDE, no flotan dentro del cuadro.
+     Estaban puestas con el centro del círculo todavía dentro del hero (la
+     lila: 340px de diámetro en left:-90, o sea centro en x=80), y un círculo
+     recortado por un lado con el centro adentro no se lee como una mancha que
+     sigue más allá del papel: se lee como un círculo mordido. La regla es
+     simple y vale para las tres: el centro va FUERA del cuadro, y entonces lo
+     que queda dentro es un arco limpio.
+
+     La menta era peor porque no tocaba ningún borde: era un disco suelto
+     detrás de las patas de la Loica, cortado abajo por la cordillera. Ahora
+     entra por la derecha como las otras dos. */
+  .hero .m1{width:340px;height:340px;background:var(--c-fiesta);top:-200px;left:-190px}
+  .hero .m2{width:280px;height:280px;background:var(--c-otros);top:-165px;right:-160px}
+  .hero .m3{width:260px;height:260px;background:var(--c-deporte);bottom:52px;right:-140px}
 
   /* Dos columnas: el texto y la anfitriona. La Loica deja de ser un adorno
      que cruza el cielo y pasa a ser la guía del proyecto: llega volando,
      se posa junto al título y recién ahí saluda. */
+  /* El relleno de arriba bajó de --e-10 a --e-8. Suena a nada y no lo es: el
+     hero medía 682px y con la barra encima empujaba "Hoy en Santiago" a los
+     750px, o sea que en un portátil de 900 no se veía un solo panorama sin
+     scrollear. La portada prometía panoramas y mostraba solo la promesa. */
   .hero-interior{position:relative;max-width:960px;margin:0 auto;
-    padding:var(--e-10) var(--e-5) 0;z-index:2;text-align:left;
+    padding:var(--e-8) var(--e-5) 0;z-index:2;text-align:left;
     display:grid;grid-template-columns:1fr auto;gap:var(--e-2) var(--e-8);
     align-items:center}
   .hero h1{font-size:clamp(34px,8.4vw,58px);line-height:1.04;margin-bottom:var(--e-4)}
@@ -76,32 +91,87 @@
     position:absolute;left:0;right:0;bottom:-.12em;width:100%;height:.26em;overflow:visible;
   }
   .hero .bajada{font-size:var(--t-md);color:var(--tinta-suave);line-height:1.6;
-    max-width:560px;margin:0 0 var(--e-6)}
+    max-width:560px;margin:0 0 var(--e-5)}
   .hero-botones{display:flex;gap:var(--e-3);justify-content:flex-start;flex-wrap:wrap;
-    margin-bottom:var(--e-6)}
+    margin-bottom:var(--e-5)}
 
-  /* Los números en vivo: salen del JSON, no están escritos a mano */
-  /* Cuatro cifras en dos filas de dos. En una sola fila no caben dentro de la
-     columna del hero, y envueltas 3+1 la cuarta parecía pegada después. */
-  .cifras{display:grid;grid-template-columns:repeat(2,1fr);
-    gap:var(--e-4) var(--e-5);max-width:470px}
-  .cifra{display:flex;align-items:center;gap:var(--e-2);text-align:left}
-  .cifra b{font-family:var(--fuente-marca);font-size:var(--t-xl);line-height:1;
-    display:block;color:var(--tono,var(--tinta));font-variant-numeric:tabular-nums}
-  .cifra span{font-size:var(--t-xs);color:var(--tinta-tenue);font-weight:600;line-height:1.3;
-    display:block;max-width:120px}
-  /* En celular las tres cifras van en una sola fila apretada: envueltas se
-     leían como tres párrafos sueltos flotando sobre las manchas. */
+  /* --- Los números en vivo ---
+     Salen del JSON, no están escritos a mano.
+
+     Iban en dos filas de dos y estaban descuadradas por dos motivos que se
+     suman: la etiqueta tenía `max-width:120px`, así que "events that cost
+     nothing" envolvía a dos líneas y "panoramas vigentes" no; y la cifra se
+     centraba verticalmente contra su etiqueta (`align-items:center`), de modo
+     que una etiqueta de dos líneas EMPUJABA su número fuera de la línea del
+     vecino. En inglés la fila de abajo quedaba visiblemente torcida.
+
+     Ahora son cuatro columnas en una sola fila y cada cifra es una rejilla de
+     dos filas: número arriba, etiqueta abajo. Los cuatro números caen en la
+     MISMA línea base pase lo que pase con las etiquetas, porque ninguna
+     etiqueta puede empujar hacia arriba. De paso el hero pierde una fila
+     entera de alto, que es lo que hacía falta para que "Hoy en Santiago"
+     asome sin scrollear.
+
+     Y el color: eran cuatro números en cuatro colores distintos —rojo, verde,
+     azul, café— sin nada que explicara por qué. Cuatro acentos peleando es
+     ninguno. El sistema ahora es el que ya usa el resto del sitio: el NÚMERO
+     va en tinta, uno solo para los cuatro, y el color vive en el animal, que
+     es el que de verdad identifica de qué habla la cifra. La medalla crema
+     con contorno es la misma pieza que ya tienen la etiqueta de formato del
+     blog, el pin de categoría de las recomendaciones y el título de "qué hay
+     que pedir" en comer. */
+  .cifras{
+    display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:var(--e-4) var(--e-3);align-items:start;
+  }
+  .cifra{
+    display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;
+    column-gap:var(--e-2);row-gap:1px;align-items:center;text-align:left;
+  }
+  .cifra .medalla{
+    grid-column:1;grid-row:1/3;align-self:start;
+    width:34px;height:34px;border-radius:var(--r-pill);
+    background:var(--arena-50);border:2.5px solid var(--contorno);
+    display:grid;place-items:center;
+  }
+  .cifra b{
+    grid-column:2;grid-row:1;
+    font-family:var(--fuente-marca);font-size:var(--t-xl);line-height:1.05;
+    color:var(--tinta);font-variant-numeric:tabular-nums;
+  }
+  /* La etiqueta lleva clase propia y no se apunta con `.cifra span`: la
+     medalla TAMBIÉN es un span, así que la regla del rótulo se la llevaba
+     puesta y la mandaba a la columna 2, encima del número. */
+  .cifra .rotulo{
+    grid-column:2;grid-row:2;
+    font-size:var(--t-xs);color:var(--tinta-tenue);font-weight:600;line-height:1.3;
+    text-wrap:pretty;
+  }
+  /* Bajo 900px la columna del hero se angosta y cuatro etiquetas de 12px no
+     caben una al lado de la otra sin partirse en cuatro líneas. Vuelven a dos
+     filas de dos, pero ya sin el descuadre: la rejilla de cada cifra sigue
+     poniendo el número arriba. */
+  @media(max-width:900px){
+    .cifras{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--e-3) var(--e-4);max-width:470px}
+  }
   @media(max-width:600px){
-    .cifras{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--e-3) var(--e-2)}
-    .cifra{flex-direction:column;gap:2px;text-align:center;align-items:center}
-    .cifra svg{width:28px;height:28px}
+    .cifras{gap:var(--e-3) var(--e-2);max-width:none}
+    .cifra .medalla{width:32px;height:32px}
     .cifra b{font-size:var(--t-lg)}
-    .cifra span{max-width:none;font-size:11px}
+    /* Acá vivía `.cifra span{font-size:11px}` y no hacía nada: el rótulo ya
+       tiene clase propia, y `.cifra .rotulo` (0,2,0) le gana a `.cifra span`
+       (0,1,1) aunque esté antes en el archivo. Se va en vez de arreglarse:
+       --t-xs son 12px y es el piso de tamaño del sitio; 11px para una etiqueta
+       que ya envuelve bien en dos líneas es perder legibilidad a cambio de
+       nada. La rejilla de cada cifra es la que mantiene los números en línea,
+       no el ancho de la etiqueta. */
   }
 
-  /* --- El paseo --- */
-  .paseo{position:relative;height:196px;margin-top:var(--e-6)}
+  /* --- El paseo ---
+     168 y no 196: el desfile sobre la cordillera es el momento de identidad de
+     la portada y no se toca, pero tenía 28px de cielo vacío arriba de las
+     cabezas que no hacían nada salvo empujar los panoramas fuera de pantalla. */
+  .paseo{position:relative;height:168px;margin-top:var(--e-5)}
     .desfile{
     position:absolute;inset:auto 0 18px 0;display:flex;align-items:flex-end;
     justify-content:center;gap:clamp(2px,2.4vw,22px);padding:0 var(--e-3);
@@ -202,15 +272,30 @@
      etiqueta que dice de qué se hace cargo cada animal quedaba ilegible. El
      animal de arriba sí lleva el color fuerte, así que la tarjeta no pierde
      nada de fuerza. */
+  /* `align-self:center` porque la tarjeta pasó a ser una columna flex y ahí un
+     hijo se estira al ancho completo por defecto: la pastilla dejaba de ser
+     pastilla y se convertía en una banda de lado a lado. En `.fb-cuerpo`, que
+     no es flex, la declaración es inerte. */
   .bicho .rol,.fb-cuerpo .rol{
-    display:inline-block;font-size:var(--t-xs);font-weight:800;text-transform:uppercase;
+    display:inline-block;align-self:center;
+    font-size:var(--t-xs);font-weight:800;text-transform:uppercase;
     letter-spacing:.06em;color:#fff;background:var(--tono-tinta);border:2px solid var(--contorno);
     border-radius:var(--r-pill);padding:3px 10px;margin:5px 0 var(--e-2);
   }
   .bicho p{margin:0;font-size:var(--t-sm);color:var(--tinta-suave);line-height:1.5}
   /* Ahora son botones: heredan lo de arriba pero el navegador les pone su
-     propio tipo y alineación, así que se los devolvemos. */
-  button.bicho{width:100%;font:inherit;color:inherit;cursor:pointer;display:block}
+     propio tipo y alineación, así que se los devolvemos.
+
+     `display:flex` y no `block`: un <button> CENTRA VERTICALMENTE su contenido
+     por defecto, y ese defecto sobrevive a `display:block`. Como la rejilla
+     estira las cuatro tarjetas de una fila al alto de la más larga, el animal
+     de la tarjeta con la historia más corta bajaba 10px —media línea— y con él
+     bajaban su nombre y su pastilla. En la fila de "Cabra · Chincol · Pudú ·
+     Degú" eso se ve: los cuatro nombres son una fila que el ojo lee de
+     corrido, y uno estaba descuadrado. Con flex en columna el sobrante queda
+     abajo, que es donde no molesta. */
+  button.bicho{width:100%;font:inherit;color:inherit;cursor:pointer;
+    display:flex;flex-direction:column;justify-content:flex-start}
   .bicho .lupa{
     display:block;margin-top:var(--e-3);font-size:var(--t-xs);font-weight:800;
     text-transform:uppercase;letter-spacing:.05em;color:var(--tono-tinta);opacity:0;
@@ -430,7 +515,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
-<script src="loica.js?v=24"></script>
+<script src="loica.js?v=25"></script>
 <script>
 /* La raíz del sitio era el mapa hasta este cambio, así que hay links dando
    vueltas por WhatsApp con la forma `.../#/e/<id>`. Se reenvían al mapa en vez
@@ -440,13 +525,28 @@ if(enlaceViejo) location.replace("mapa.html#/e/" + enlaceViejo[1]);
 
 pintarBarra("index.html");
 
+/* La medalla de las cifras es crema FIJA (--arena-50 es un primitivo y no se
+   invierte), así que el contorno del animal de adentro también tiene que ser
+   fijo: con var(--contorno) se volvía crema de noche y el bicho quedaba sin
+   borde sobre su propio fondo. Es la misma constante que ya usan comer y blog
+   sobre pastel. */
+const TINTA_MEDALLA = {tinta:"#1E2A4A"};
+
 /* Un color por destino. Son los mismos de la navegación, así que llegar al
    mapa desde la portada y desde la barra inferior se siente igual. */
 const DESTINOS = [
   {url:"mapa.html",       tono:"--c-musica",  claro:true,  masc:"condor",     t:"pMapaT",  d:"pMapaD"},
   {url:"calendario.html", tono:"--c-cultura", claro:true,  masc:"chinchilla", t:"pCalT",   d:"pCalD"},
   {url:"cine.html",       tono:"--c-cine",    claro:true,  masc:"cabra",      t:"pCineT",  d:"pCineD"},
-  {url:"talleres.html",   tono:"--c-clases",  claro:true,  masc:"chincol",    t:"pTallerT",d:"pTallerD"},
+  /* Talleres es la ÚNICA de las ocho que va con tinta oscura, y no es un
+     gusto: el naranjo --c-clases (#F08800) con texto blanco da 2,55:1. Las
+     otras siete van entre 4,44 y 6,49; ésta estaba a menos de la mitad del
+     piso, y su bajada es de 13px, o sea texto normal, o sea 4,5:1 obligado.
+     El mismo naranjo con la tinta azul da 5,4:1. Es el par que el sitio ya usa
+     cuando el relleno es claro —el amarillo de "Imperdible" en comer, el de
+     "El pero." en la ficha— así que no estrena nada. La bandera `claro` existía
+     justo para esto y estaba en true en las ocho, sin que nadie las midiera. */
+  {url:"talleres.html",   tono:"--c-clases",  claro:false, masc:"chincol",    t:"pTallerT",d:"pTallerD"},
   {url:"descuentos.html", tono:"--c-descuento", claro:true, masc:"guaren",   t:"pDctoT",  d:"pDctoD"},
   {url:"comer.html",      tono:"--c-comer",   claro:true,  masc:"quiltro",  t:"pComerT", d:"pComerD"},
   {url:"blog.html",       tono:"--c-fiesta",  claro:true,  masc:"culpeo",     t:"pBlogT",  d:"pBlogD"},
@@ -491,18 +591,25 @@ function pintarPortada(){
 
   // El desfile: los once, cada uno con su retardo (--d) para que entren de a
   // uno y no parpadeen al mismo tiempo. `entra` dispara las entradas y se va
-  // a los 4,3 s para que los tics de reposo tomen el relevo (las dos
-  // animaciones se disputan el mismo `animation` del SVG).
+  // cuando la última terminó, para que los tics de reposo tomen el relevo
+  // (las dos animaciones se disputan el mismo `animation` del SVG).
+  //
+  // El paso es de 20ms, con tope de doce, que es la regla 8.4 de
+  // _direccion_visual.md. Estaba en 220ms: doce animales × 220 = 2,42 s de
+  // desfile incompleto, y esta fila es lo primero que se ve al abrir la
+  // portada. Quien bajaba a mirar panoramas en el primer segundo veía media
+  // cordillera vacía. El mismo desfile en habla.html corría a 200ms; ahora
+  // los dos van al mismo paso, que es de lo que se trataba.
   const desfile = document.getElementById("desfile");
   desfile.innerHTML = ELENCO.map((a, i) =>
-    `<button class="bicho-hero" style="--d:${(i * .22).toFixed(2)}s"
+    `<button class="bicho-hero" style="--d:${Math.min(i, 11) * 20}ms"
              data-ir="${a.clave}" title="${escapar(a[IDIOMA][0])}"
              aria-label="${escapar(a[IDIOMA][0])} — ${escapar(a[IDIOMA][1])}">
        ${cuerpo(a.clave, a.hex, 74, {anima:true})}</button>`).join("");
   if(!desfile.dataset.entro){
     desfile.dataset.entro = "1";
     desfile.classList.add("entra");
-    setTimeout(() => desfile.classList.remove("entra"), 4300);
+    setTimeout(() => desfile.classList.remove("entra"), 1600);
   }
   // Antes solo bajaban la página hasta el elenco. Ahora abren la ficha del
   // animal directamente: es el mismo gesto y responde la pregunta que uno se
@@ -514,7 +621,16 @@ function pintarPortada(){
   document.getElementById("s-hoy-t").textContent = T("pHoyTitulo");
   document.getElementById("s-dest-t").textContent = T("pDondeIr");
   document.getElementById("s-elenco-t").textContent = T("pElencoT");
-  document.getElementById("s-elenco-d").textContent = T("pElencoD");
+  /* El elenco decía "Once animales" y abajo había DOCE tarjetas: alguien sumó
+     un animal y el número se quedó escrito a mano, en los tres idiomas. Sale
+     de ELENCO.length para que no vuelva a mentir el día que entre el trece.
+     (`pElencoD` quedó sin usuarios y ya se retiró de loica.js: decía
+     "Once animales" cuando son doce.) */
+  document.getElementById("s-elenco-d").textContent = {
+    es:`${ELENCO.length} animales chilenos hacen de señalética: cada uno se hace cargo de un tipo de panorama en el mapa y el calendario, el Degú de lo que es gratis, el Guarén de los descuentos y el Quiltro de dónde comer.`,
+    en:`${ELENCO.length} Chilean animals work as signage: each one looks after a type of event on the map and the calendar, the Degu looks after what is free, the Guarén rat after the discounts and the Quiltro after where to eat.`,
+    pt:`${ELENCO.length} animais chilenos servem de sinalização: cada um cuida de um tipo de programa no mapa e no calendário, o Degu cuida do que é grátis, o Guarén cuida dos descontos e o Vira-lata cuida de onde comer.`,
+  }[IDIOMA];
   document.getElementById("s-cierre-t").textContent = T("pCierreT");
   document.getElementById("s-cierre-d").textContent = T("pCierreD");
   document.getElementById("c-cta").textContent = T("agregar");
@@ -526,7 +642,13 @@ function pintarPortada(){
        <b>${escapar(T(d.t))}</b>
        <span>${escapar(T(d.d))}</span>
        <span class="flecha" aria-hidden="true">→</span>
-       <span class="asoma" aria-hidden="true">${cuerpo(d.masc, "#fff", 118, {tinta:"#fff"})}</span>
+       <!-- La marca de agua toma el color de la tinta de SU tarjeta. En las
+            siete de tinta clara es el blanco de siempre; en la de talleres,
+            que ahora va con tinta azul, un contorno blanco al 30% sobre
+            naranjo dejaba un animal fantasma peleando con el texto oscuro. -->
+       <span class="asoma" aria-hidden="true">${d.claro
+         ? cuerpo(d.masc, "#fff", 118, {tinta:"#fff"})
+         : cuerpo(d.masc, "var(--azul-900)", 118, {tinta:"var(--azul-900)"})}</span>
      </a>`).join("");
 
   document.getElementById("s-elenco-pista").textContent = T("pHistoriaPista");
@@ -689,14 +811,19 @@ function pintarDatos(evs){
   const gratis = evs.filter(ev => ev.gratis);
   const fuentes = new Set(evs.map(ev => ev.fuente)).size;
 
+  /* El `<b>` y el `<span>` son hermanos y no anidados: son las dos filas de la
+     rejilla de .cifra, y así el número de las cuatro cae en la misma línea
+     base aunque una etiqueta envuelva. Antes iban los dos dentro de un mismo
+     <span>, que es lo que hacía imposible alinearlos entre columnas.
+     El color va SOLO al animal; el número lo hereda de la tinta. */
   const cifra = ([n, txt, tono, masc]) =>
-    `<div class="cifra" style="--tono:${tono}">
-       ${carita(masc, tono, 34)}
-       <span><b>${n}</b>${escapar(txt)}</span>
+    `<div class="cifra">
+       <span class="medalla" aria-hidden="true">${carita(masc, tono, 26, TINTA_MEDALLA)}</span>
+       <b>${n}</b><span class="rotulo">${escapar(txt)}</span>
      </div>`;
   document.getElementById("cifras").innerHTML = [
-    [evs.length, t("pTotalD"), "var(--acento)", "loica"],
-    [gratis.length, t("pGratisD"), "var(--gratis)", "degu"],
+    [evs.length, t("pTotalD"), "var(--rojo-500)", "loica"],
+    [gratis.length, t("pGratisD"), "var(--c-libre)", "degu"],
     [fuentes, t("pFuentesD"), "var(--c-cultura)", "chinchilla"],
   ].map(cifra).join("");
 
@@ -704,7 +831,7 @@ function pintarDatos(evs){
      catastro de bancos falla, la portada se pinta igual con tres. */
   cargarDescuentos().then(d => {
     document.getElementById("cifras").insertAdjacentHTML("beforeend",
-      cifra([d.total, t("pDctoCifra"), "var(--c-descuento-tinta)", "guaren"]));
+      cifra([d.total, t("pDctoCifra"), "var(--c-descuento)", "guaren"]));
   }).catch(() => {});
 
   const caja = document.getElementById("hoy-caja");

@@ -9,6 +9,12 @@
      queda en pie si algun dia se escapa uno. Notas:
      - `img-src https:` va abierto a proposito: las fotos son de los
        organizadores y viven en cientos de dominios que no se pueden listar.
+       Los logos de los comercios entran por la misma puerta y tampoco se
+       pueden listar: hoy son cuatro CDN (assets.bancochile.cl,
+       bci-cdn.azureedge.net, images.ctfassets.net y
+       firebasestorage.googleapis.com) porque son los cuatro bancos que
+       publican logo, y cambian cuando cambia el banco. No hizo falta tocar
+       esta linea para ponerlos.
      - `'unsafe-inline'` en script-src es obligatorio mientras las paginas
        tengan su logica en un <script> inline. Aun asi la CSP sirve: bloquea
        cargar un script de OTRO dominio y bloquea que algo inyectado mande los
@@ -38,7 +44,7 @@
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
       integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V"
       crossorigin="anonymous">
-<link rel="stylesheet" href="loica.css?v=24">
+<link rel="stylesheet" href="loica.css?v=25">
 <style>
   html,body{height:100%;overflow:hidden}
   /* Los dos altos van en este orden a proposito: `dvh` no existe en
@@ -49,7 +55,7 @@
      abajo se iba de la pantalla. */
   #app{display:flex;flex-direction:column;height:100vh;height:100dvh}
   header{flex:none;z-index:6}
-  main{flex:1;position:relative;min-height:0;display:flex;flex-direction:column}
+  main{flex:1;position:relative;min-height:0}
 
   /* --- Cabecera: dos rieles, igual que el mapa ---
      El día es una pregunta de una sola respuesta (no se come el martes y el
@@ -78,17 +84,17 @@
      del resto por una línea. */
   .segmentado .destacado{padding:0 var(--e-4);border-right:2px solid var(--borde-fuerte);
     border-radius:var(--r-pill) 0 0 var(--r-pill);margin-right:2px}
+  /* El contador se fue al panel, donde está la lista que cuenta. Acá queda la
+     fecha de revisión, igual que en talleres. */
   .cuenta-rango{
     display:flex;align-items:center;gap:5px;flex:none;margin-left:auto;padding-left:var(--e-3);
     font-size:var(--t-xs);font-weight:700;color:var(--tinta-tenue);white-space:nowrap;
   }
-  .cuenta-rango b{font-family:var(--fuente-marca);font-size:var(--t-md);color:var(--tinta)}
 
   header .filtros{padding:var(--e-2) var(--e-4) var(--e-3);border-bottom:2.5px solid var(--contorno);
     align-items:center}
-  header .filtros .chip{padding:6px 13px 6px 8px;gap:5px;font-size:var(--t-xs);
+  header .filtros .chip{padding:6px 13px 6px 11px;gap:7px;font-size:var(--t-xs);
     border-width:2px;box-shadow:0 2px 0 var(--contorno);min-height:38px}
-  header .filtros .chip svg{width:22px;height:22px}
   header .filtros .chip:active,
   header .filtros .chip[aria-pressed="true"]{transform:translateY(2px);box-shadow:none}
   /* El anillo de foco de loica.css se apila sobre la repisa, pero acá la
@@ -102,9 +108,23 @@
   header .filtros .chip[aria-pressed="true"]:focus-visible{
     box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
   }
-  /* El chip del banco se prende con el color del banco, no con la tinta
-     genérica: prendido y apagado tienen que decir lo mismo. */
-  header .filtros .chip[aria-pressed="true"]{background:var(--banco,var(--tinta));color:var(--arena-50)}
+  /* El banco se dice con un punto de tinta y con su nombre escrito, no con
+     una carita. Antes cada chip llevaba el mismo guarén recoloreado siete
+     veces: en el resto del sitio el animal del chip nombra la CATEGORÍA, y
+     acá las siete categorías eran la misma, así que el dibujo no decía nada
+     y se comía 22px por chip en el único riel que ya se desbordaba.
+     El punto conserva el color —que es lo que sirve para barrer— y el
+     nombre sigue escrito, así que nada depende solo del color. */
+  .punto-banco{
+    width:14px;height:14px;flex:none;border-radius:50%;
+    background:var(--banco,var(--tinta));border:2px solid var(--contorno);
+  }
+  /* Prendido, el chip usa la tinta de la casa y NO el color del banco: con
+     crema encima, el teal de Cencosud daba 3,6:1 y el verde de Falabella
+     4,3:1 — los dos por debajo del 4,5 que pide un texto de 13px. El color
+     del banco sigue dicho por el punto, que ahora se recorta contra la
+     tinta. */
+  header .filtros .chip[aria-pressed="true"] .punto-banco{border-color:var(--fondo-elevado)}
   .separa-chips{flex:none;width:2px;background:var(--borde-fuerte);margin:4px 3px;border-radius:2px}
 
   /* Las comunas son noventa y los rubros cinco: como chips no caben y como
@@ -147,55 +167,210 @@
      que dibujarlo en el chip o no se ve dónde está uno al tabular. */
   .chip-select:has(select:focus-visible){box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno)}
 
-  /* --- El botón del mapa, al lado de los días --- */
-  .boton-mapa{
-    flex:none;display:inline-flex;align-items:center;gap:6px;cursor:pointer;
-    padding:0 var(--e-4);min-height:38px;margin-left:var(--e-2);
-    border:2.5px solid var(--contorno);border-radius:var(--r-pill);
-    background:var(--fondo-elevado);color:var(--tinta);
-    font:800 var(--t-sm)/1 var(--fuente-marca);box-shadow:var(--repisa-1);
-    transition:var(--rapido);white-space:nowrap;
+  /* --- El mapa de fondo y la lista encima ---
+     Antes el mapa vivía detrás de un botón que TURNABA lista y mapa: obligaba
+     a elegir entre saber QUÉ y saber DÓNDE, y mientras tanto media pantalla de
+     escritorio era margen vacío a los lados de una columna de 820px. Ahora es
+     el mismo mueble del mapa de actividades y de talleres: el mapa ocupa todo
+     y la lista va en un panel que en escritorio vive desplegado a la derecha y
+     en celular es una hoja que se arrastra desde abajo. */
+  #mapa-descuentos{position:absolute;inset:0}
+  .panel-lista{
+    position:absolute;left:0;right:0;bottom:0;background:var(--fondo-elevado);
+    border-radius:var(--r-xl) var(--r-xl) 0 0;
+    border:2.5px solid var(--contorno);border-bottom:0;
+    display:flex;flex-direction:column;z-index:4;
+    height:var(--alto-panel,360px);max-height:88%;
+    transition:height var(--medio);
   }
-  .boton-mapa::before{content:"◉";font-size:13px;color:var(--c-descuento)}
-  .boton-mapa:active,
-  .boton-mapa[aria-pressed="true"]{transform:translateY(2px);box-shadow:none}
-  .boton-mapa[aria-pressed="true"]{background:var(--c-descuento);color:var(--arena-50)}
-  .boton-mapa[aria-pressed="true"]::before{color:var(--arena-50)}
-
-  .panel-mapa{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--fondo-hundido)}
-  /* `display:flex` le gana al atributo `hidden`, que solo vale `display:none`
-     por hoja de estilos del navegador. Sin esta línea el panel tapaba la lista
-     entera aunque estuviera "oculto". */
-  .panel-mapa[hidden]{display:none}
-  #mapa-descuentos{flex:1;min-height:0}
-  .nota-mapa{
-    flex:none;padding:var(--e-2) var(--e-4);background:var(--fondo-elevado);
-    border-top:2px solid var(--contorno);font-size:var(--t-xs);
-    color:var(--tinta-tenue);line-height:1.4;
-  }
-  /* El pin aproximado se ve distinto del exacto a propósito: uno dice "en esta
-     esquina" y el otro "en algún lugar de esta comuna". */
-  .pin-dcto{
-    width:34px;height:34px;border-radius:50%;cursor:pointer;
-    border:2.5px solid var(--contorno);background:var(--fondo-elevado);
-    display:grid;place-items:center;box-shadow:var(--repisa-1);
-    font:800 11px/1 var(--fuente-marca);color:var(--tinta);
-  }
-  .pin-dcto.aprox{border-style:dashed;opacity:.72}
-
-  /* --- La lista --- */
-  .aviso-banco{
-    display:flex;gap:var(--e-2);align-items:flex-start;
-    padding:var(--e-3) var(--e-4);background:var(--c-descuento-suave);
-    color:var(--azul-900);font-size:var(--t-xs);line-height:1.45;
-    border-bottom:2px solid var(--contorno);
-  }
-  .aviso-banco svg{flex:none;margin-top:-2px}
-  .lista{overflow-y:auto;-webkit-overflow-scrolling:touch;flex:1;min-height:0}
+  .panel-lista.arrastrando{transition:none}
+  /* touch-action:none va SOLO en el tirador: en el panel entero el navegador
+     cancela el gesto de scroll de la lista (la nota larga está en mapa.html). */
+  .tirador{padding:9px var(--e-4) 6px;cursor:grab;flex:none;touch-action:none}
+  .tirador:active{cursor:grabbing}
+  .barra-tirador{width:52px;height:7px;background:var(--tinta);border-radius:4px;margin:0 auto}
+  .conteo{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;font-size:var(--t-sm);
+    color:var(--tinta-suave);padding:2px var(--e-4) 7px}
+  .conteo b{font-family:var(--fuente-marca);font-size:var(--t-lg);color:var(--tinta)}
+  /* La deuda se dice, no se esconde: cuántos no tienen dirección y por eso no
+     están en el mapa, y cuántos tienen el punto al centro de su comuna. */
+  .nota-geo{flex:1 1 100%;font-size:var(--t-xs);color:var(--tinta-tenue);line-height:1.35}
+  .nota-geo:empty{display:none}
+  .lista{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;flex:1;min-height:0}
+  /* 78px es el defecto de loica.css y ahí el guarén no alcanza a mostrar la
+     tarjeta que le muerde al banco, que es el chiste entero de esta página.
+     El tamaño se pide por variable, que es como loica.css lo dejó: la regla
+     de allá sigue mandando, esta solo le cambia el número. */
+  .vacio{--vacio-masc:112px}
   .fin-lista{padding:var(--e-5) var(--e-4);text-align:center}
+  .fin-lista .boton{box-shadow:var(--repisa-2)}
   .sello{padding:var(--e-4);text-align:center;color:var(--tinta-tenue);font-size:var(--t-xs)}
 
-  /* --- La ficha, igual que en el mapa: sube desde abajo --- */
+  /* --- LA REPISA DEL GUARÉN ---
+     El aviso legal deja de ser una franja beige a sangre —pesaba más que los
+     descuentos que venía a acompañar— y pasa a ser el pie fijo del panel, con
+     el guarén entero al lado. El animal no ilustra el aviso: lo sostiene. Y
+     el gesto que ya trae dibujado desde loica.js dice exactamente lo que dice
+     la letra chica — le está dando un mordisco a la tarjeta del banco.
+     Es la única mascota de la página y aparece UNA vez: antes había una
+     carita recoloreada en cada una de las 437 filas y siete más en los chips,
+     que es mucho guarén diciendo poco. Acá está entero, vivo, y en el lugar
+     donde el sitio se hace cargo de lo que no es suyo.
+     Los tics son los de reposo de loica.css (mordisco 1,7s, cola 3,2s) y no
+     hay ninguno adentro de la lista: la regla 8.3 de la dirección visual dice
+     que nada se anima mientras la lista scrollea, y esta repisa vive fuera
+     del contenedor que scrollea. */
+  .aviso-banco{
+    flex:none;margin:0;display:flex;gap:var(--e-3);align-items:center;
+    padding:6px var(--e-4);border-top:2px solid var(--borde);
+    font-size:var(--t-xs);line-height:1.42;color:var(--tinta-tenue);
+  }
+  .aviso-banco svg{flex:none}
+  /* Cuando ya hay un guarén grande en pantalla —lista vacía, mapa caído— el
+     siguiente se retira. El texto se queda: la letra chica del banco es lo
+     que no puede faltar. */
+  .sin-animal svg{display:none}
+
+  /* La burbuja del pin: tarjeta mínima con el borde de tinta de la casa,
+     calcada de talleres. Es papel claro en los dos temas. */
+  .maplibregl-popup-content{
+    font:600 var(--t-sm)/1.4 var(--fuente-ui);color:var(--azul-900);
+    border:2px solid var(--azul-900);border-radius:var(--r-md);
+    box-shadow:0 3px 0 var(--azul-900);padding:10px 12px;max-width:236px;
+  }
+  .popup-monto{font-family:var(--fuente-marca);font-size:var(--t-lg);color:var(--c-descuento-tinta)}
+  :root[data-tema="oscuro"] .popup-monto{color:#8A4A18}
+  .popup-banco{font-weight:800;font-size:11px;letter-spacing:.05em;text-transform:uppercase}
+  .popup-ver{
+    display:inline-block;margin-top:7px;background:none;border:0;padding:0;cursor:pointer;
+    font:800 var(--t-sm)/1.3 var(--fuente-ui);color:var(--c-descuento-tinta);
+    font-family:var(--fuente-ui);text-decoration:underline;
+  }
+  :root[data-tema="oscuro"] .popup-ver{color:#8A4A18}
+
+  /* --- LA FILA DE UN DESCUENTO ---
+     Rejilla de dos columnas y no de tres: la placa del comercio y el cuerpo.
+     El porcentaje viajó ADENTRO del cuerpo, en la misma línea que el nombre,
+     porque en la columna de la derecha flotaba a media pantalla del dato que
+     modifica. Ahora se leen juntos: "QB Restaurant Bar — 50%". */
+  .dcto{
+    display:grid;grid-template-columns:58px 1fr;gap:var(--e-3);
+    padding:var(--e-3) var(--e-4);align-items:start;width:100%;text-align:left;
+    background:var(--fondo-elevado);color:inherit;font-family:inherit;
+    border:0;border-bottom:1px solid var(--borde);cursor:pointer;
+    box-shadow:inset 4px 0 0 var(--banco);transition:var(--rapido);
+  }
+  .dcto:hover{background:var(--fondo-hundido)}
+  .dcto:focus-visible{box-shadow:inset 4px 0 0 var(--banco),
+    0 0 0 3px var(--foco),0 0 0 6px var(--contorno);border-radius:6px}
+
+  /* Entrada escalonada, con el mismo presupuesto que loica.css: solo las 12
+     primeras, 20ms entre una y otra. */
+  .lista-anima .dcto{animation:dcto-entra var(--medio) backwards}
+  .lista-anima .dcto:nth-child(1){animation-delay:0ms}
+  .lista-anima .dcto:nth-child(2){animation-delay:20ms}
+  .lista-anima .dcto:nth-child(3){animation-delay:40ms}
+  .lista-anima .dcto:nth-child(4){animation-delay:60ms}
+  .lista-anima .dcto:nth-child(5){animation-delay:80ms}
+  .lista-anima .dcto:nth-child(6){animation-delay:100ms}
+  .lista-anima .dcto:nth-child(7){animation-delay:120ms}
+  .lista-anima .dcto:nth-child(8){animation-delay:140ms}
+  .lista-anima .dcto:nth-child(9){animation-delay:160ms}
+  .lista-anima .dcto:nth-child(10){animation-delay:180ms}
+  .lista-anima .dcto:nth-child(11){animation-delay:200ms}
+  .lista-anima .dcto:nth-child(12){animation-delay:220ms}
+  @keyframes dcto-entra{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+
+  /* --- LA PLACA DEL COMERCIO ---
+     Es una calcomanía de papel y lo es en los DOS temas. Casi todos los logos
+     que publican los bancos son JPG con fondo blanco: puestos sobre el azul de
+     la noche se leían como un parche recortado. Así el parche pasa a ser el
+     soporte, y el logo —venga cuadrado, apaisado o con transparencia— cae
+     siempre dentro del mismo rectángulo.
+     El contorno va en --azul-900 fijo y no en --contorno porque de noche
+     --contorno es crema y desaparecería contra el papel. Es el mismo criterio
+     de la burbuja del mapa, que también es clara en los dos temas. */
+  .placa{
+    position:relative;width:58px;height:58px;flex:none;overflow:hidden;
+    border-radius:var(--r-md);border:2.5px solid var(--azul-900);
+    background:var(--papel,var(--c-descuento-suave));display:grid;place-items:center;
+  }
+  /* El respaldo del comercio sin logo, y de todo logo que no cargue: la
+     inicial impresa sobre un papel de color. Cinco papeles y no uno solo
+     porque la lista va ordenada por descuento y después por nombre, así que
+     las iniciales iguales caen juntas: tres "B" seguidas sobre el mismo
+     fondo se leían como un error de repetición y no como un mosaico. El
+     papel sale del nombre del local, así que un mismo comercio se ve igual
+     en todas sus filas.
+     Los cinco son de la familia arena/naranjo y ninguno es un color de
+     categoría: en este sitio esos colores SON la señalética, y usarlos de
+     relleno haría creer que la baldosa dice algo. Acá no dice nada: lo que
+     nombra al local es la letra y el nombre escrito al lado. */
+  .placa .inicial{font:800 20px/1 var(--fuente-marca);color:var(--azul-900);
+    letter-spacing:-.02em;user-select:none}
+  /* object-fit:contain y no cover: un logo apaisado recortado al centro deja
+     de ser el logo. El relleno de papel es del <img>, así que la banda que
+     sobra a los lados es del mismo color que el resto de la placa. */
+  .placa img{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:contain;background:var(--arena-50);padding:4px;
+  }
+
+  .dcto-cuerpo{min-width:0;display:flex;flex-direction:column;gap:3px}
+  .dcto-arriba{display:flex;align-items:center;gap:7px;min-width:0}
+  /* El día era una pastilla colgada sobre el mentón de la carita y no se
+     leía. Ahora abre la línea de arriba, que es donde el ojo entra. */
+  .pastilla-dia{
+    flex:none;border:1.5px solid var(--borde-fuerte);border-radius:var(--r-pill);
+    padding:2px 8px;font:800 10.5px/1.35 var(--fuente-marca);
+    letter-spacing:.04em;text-transform:uppercase;color:var(--tinta-suave);
+  }
+  .pastilla-dia.hoy{background:var(--acento-solido);color:var(--acento-contraste);
+    border-color:var(--contorno)}
+  /* El banco es el requisito, no el protagonista: se dice en 12px, en la
+     tinta accesible de su color, y se repite en el lomo de la izquierda.
+     Antes venía codificado tres veces (texto de color, carita de color y
+     lomo de color) y el nombre del local —que es lo que se busca— iba en
+     negro corriente sin ninguna jerarquía. */
+  .dcto-banco{
+    font:800 var(--t-xs)/1.35 var(--fuente-ui);letter-spacing:.04em;text-transform:uppercase;
+    color:var(--banco-tinta,var(--tinta-tenue));
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+  .dcto-linea{display:flex;align-items:baseline;gap:var(--e-3);justify-content:space-between}
+  /* El nombre del local es LO MÁS GRANDE de la fila, y esa es la corrección
+     de fondo de esta página: antes el nombre iba en negro corriente a 17px
+     mientras el banco se decía tres veces y el porcentaje flotaba a 27px al
+     otro lado. Quien entra acá busca dónde comer; el descuento y el banco
+     califican esa respuesta, no la reemplazan. 21 contra 17. */
+  .dcto-nombre{
+    min-width:0;font:700 var(--t-lg)/1.2 var(--fuente-ui);letter-spacing:-.015em;color:var(--tinta);
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  /* Debajo del nombre en tamaño y encima de todo lo demás en peso: es la
+     única cifra de la fila, va en la letra de marca, en el café del Degú y
+     con cifras de ancho fijo para que la columna quede a plomo. Se encuentra
+     por color y por posición, no por ser la más grande. */
+  .dcto-monto{
+    flex:none;font:800 var(--t-md)/1.15 var(--fuente-marca);color:var(--c-descuento-tinta);
+    font-variant-numeric:tabular-nums;
+  }
+  /* Un 2x1 o un combo no son un número: se dicen con palabras y en el tamaño
+     de las palabras, no estirados a 27px. */
+  .dcto-monto.texto{font:800 var(--t-sm)/1.3 var(--fuente-ui);max-width:104px;text-align:right}
+  /* 76 convenios no publican ni porcentaje ni frase: el beneficio está en las
+     condiciones, dentro de la ficha. Un guion diría "no hay nada"; esto dice
+     dónde está. */
+  .dcto-monto.sin-cifra{font:600 var(--t-xs)/1.3 var(--fuente-ui);color:var(--tinta-tenue);
+    max-width:88px;text-align:right}
+  .dcto-meta{
+    font-size:var(--t-sm);color:var(--tinta-suave);line-height:1.35;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+  .dcto-meta .aviso{color:var(--tinta-tenue);font-style:italic}
+
+  /* --- La ficha: sube desde abajo, y en escritorio ocupa el mismo hueco que
+     el panel de la lista, como en el mapa de actividades --- */
   .ficha{
     position:absolute;inset:auto 0 0 0;background:var(--fondo-elevado);z-index:8;
     border-radius:var(--r-xl) var(--r-xl) 0 0;
@@ -207,17 +382,16 @@
   .ficha-scroll{overflow-y:auto;flex:1;min-height:0;padding:0 var(--e-5) var(--e-6)}
   .ficha-cabeza{
     display:flex;gap:var(--e-3);align-items:flex-start;
-    padding:var(--e-5) var(--e-5) var(--e-3);position:sticky;top:0;
+    padding:var(--e-5) var(--e-5) var(--e-3);position:sticky;top:0;z-index:1;
     background:var(--fondo-elevado);border-radius:var(--r-xl) var(--r-xl) 0 0;
   }
-  .ficha-cabeza .avatar{
-    width:62px;height:62px;flex:none;border-radius:var(--r-md);
-    border:2.5px solid var(--contorno);background:var(--fondo-hundido);
-    display:grid;place-items:center;overflow:hidden;position:relative;
-  }
-  .ficha-cabeza .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  /* La misma placa de la lista, en grande: el comercio se presenta con su
+     logo y no con una mascota recoloreada. */
+  .ficha-cabeza .placa{width:66px;height:66px}
+  .ficha-cabeza .placa .inicial{font-size:24px}
   .ficha-cabeza h2{font-size:var(--t-xl);line-height:1.14}
-  .ficha-banco{font:800 var(--t-sm)/1.3 var(--fuente-ui);color:var(--banco)}
+  .ficha-banco{font:800 var(--t-sm)/1.3 var(--fuente-ui);color:var(--banco-tinta,var(--tinta-tenue));
+    letter-spacing:.03em;text-transform:uppercase}
   .cerrar{
     margin-left:auto;flex:none;width:44px;height:44px;border-radius:var(--r-pill);
     border:2px solid var(--contorno);background:var(--fondo-elevado);color:var(--tinta);
@@ -255,21 +429,30 @@
   .dato a:hover{text-decoration:underline}
 
   @media(max-width:879px){
-    main{padding-bottom:var(--hueco-nav)}
+    .panel-lista,.ficha{bottom:var(--hueco-nav)}
     header .filtros{padding:5px var(--e-3) 7px}
     .riel-fecha{padding:var(--e-2) var(--e-3)}
     .ficha{max-height:86%}
   }
   @media(min-width:880px){
-    /* En pantalla ancha la lista es una columna de 820px. Sin los filos de
-       tinta a los lados quedaba flotando sobre el fondo y las tarjetas se
-       leían sueltas; con ellos es una sola pieza, como la caja de la portada. */
-    main{background:var(--fondo-hundido)}
-    .lista{max-width:820px;width:100%;margin:0 auto;background:var(--fondo-elevado);
-      border-inline:2.5px solid var(--contorno)}
-    .aviso-banco{justify-content:center}
-    .ficha{left:auto;right:0;width:min(480px,100%);border-radius:var(--r-xl) 0 0 0;
-      max-height:100%;top:0;border-bottom:2.5px solid var(--contorno)}
+    /* En escritorio la lista vive DESPLEGADA a la derecha, en el mismo hueco
+       y con el mismo ancho que en el mapa de actividades y en talleres: la
+       misma persona cruza de una página a la otra y el mueble tiene que estar
+       en el mismo lugar. Los 460px de margen muerto que había a cada lado de
+       la columna vieja ahora son mapa. */
+    .panel-lista{left:auto;right:var(--e-4);top:var(--e-4);bottom:var(--e-4);width:410px;
+      height:auto!important;border-radius:var(--r-lg);max-height:none;transition:none;
+      border-bottom:2.5px solid var(--contorno)}
+    .tirador{display:none}
+    .conteo{padding-top:var(--e-3)}
+    .aviso-banco{border-radius:0 0 var(--r-lg) var(--r-lg)}
+    /* La ficha se para EXACTAMENTE encima del panel: se lee como la misma
+       columna dada vuelta, no como una tercera cosa. */
+    .ficha{left:auto;right:var(--e-4);top:var(--e-4);bottom:var(--e-4);width:410px;
+      border-radius:var(--r-lg);max-height:none;border-bottom:2.5px solid var(--contorno);
+      transform:translateX(105%)}
+    .ficha.visible{transform:translateX(0)}
+    .ficha-cabeza{border-radius:var(--r-lg) var(--r-lg) 0 0}
   }
 </style>
 </head>
@@ -279,26 +462,23 @@
     <div class="barra" id="barra"></div>
     <div class="riel-fecha">
       <div class="segmentado" id="dias" role="group"></div>
-      <!-- El mapa vive en esta misma página, no en otra: cambiar de página
-           pierde el día y los filtros que la persona acaba de elegir. -->
-      <button type="button" id="ver-mapa" class="boton-mapa" aria-pressed="false">
-        <span id="ver-mapa-txt">Mapa</span>
-      </button>
       <div class="cuenta-rango" id="cuenta"></div>
     </div>
     <div class="filtros" id="filtros" role="group"></div>
   </header>
 
   <main>
-    <div class="aviso-banco" id="aviso"></div>
-    <div class="lista" id="lista"></div>
-    <!-- Ocupa el mismo hueco que la lista y se turna con ella. Los filtros de
-         arriba siguen mandando: el mapa muestra exactamente lo mismo que la
-         lista, no un universo aparte. -->
-    <div class="panel-mapa" id="panel-mapa" hidden>
-      <div id="mapa-descuentos"></div>
-      <p class="nota-mapa" id="nota-mapa"></p>
-    </div>
+    <div id="mapa-descuentos"></div>
+    <!-- El mapa y la lista muestran lo MISMO: los dos leen visibles(). Lo que
+         no cabe en el mapa —los que el banco publica sin dirección— vive
+         igual en la lista, y el panel dice cuántos son. -->
+    <section class="panel-lista" id="panel" aria-labelledby="conteo-txt">
+      <div class="tirador" id="tirador" role="button" tabindex="0"><div class="barra-tirador"></div></div>
+      <div class="conteo"><b id="conteo">0</b> <span id="conteo-txt">descuentos</span>
+        <span class="nota-geo" id="nota-geo"></span></div>
+      <div class="lista" id="lista"></div>
+      <p class="aviso-banco" id="aviso"></p>
+    </section>
 
     <aside class="ficha" id="ficha" aria-hidden="true" aria-labelledby="ficha-titulo">
       <div class="ficha-cabeza" id="ficha-cabeza"></div>
@@ -312,7 +492,7 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
         integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
         crossorigin="anonymous"></script>
-<script src="loica.js?v=24"></script>
+<script src="loica.js?v=25"></script>
 <script>
 /* ------------------------------------------------------------------
    Estado. Tres filtros y ninguno depende del otro: el día es de una
@@ -362,13 +542,179 @@ const cocina = clave => (COCINAS[IDIOMA][clave] || clave.replace(/[-_]/g, " "));
 
 pintarBarra("descuentos.html");
 
+/* ---------- EL MAPA, SIEMPRE PRESENTE ----------
+   Círculos y no marcadores del DOM: con "Hoy" puesto hay ~370 puntos y con
+   "Todos" son 610, y a esa escala un elemento del DOM por punto traba el
+   arrastre (la lección está en mapa.html y se repite en talleres). El tamaño
+   del círculo crece con el descuento, así que el mapa igual dice de un
+   vistazo dónde están los grandes; el número exacto lo da la burbuja. */
+let mapa = null, hayMapa = false, popup = null;
+
+const esOscuro = () => document.documentElement.dataset.tema === "oscuro";
+const TESELAS = {
+  claro:"https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png",
+  claroEtiquetas:"https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
+  oscuro:"https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png",
+  oscuroEtiquetas:"https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png",
+};
+const urlesTeselas = clave => ["a","b","c"].map(s =>
+  TESELAS[clave].replace("{s}", s).replace("{r}", devicePixelRatio > 1.5 ? "@2x" : ""));
+function estiloMapa(){
+  const t = esOscuro() ? ["oscuro","oscuroEtiquetas"] : ["claro","claroEtiquetas"];
+  return {version:8,
+    sources:{
+      base:{type:"raster", tiles:urlesTeselas(t[0]), tileSize:256,
+            attribution:'© OpenStreetMap © CARTO'},
+      etiquetas:{type:"raster", tiles:urlesTeselas(t[1]), tileSize:256},
+    },
+    /* La capa de fondo va primero y no es adorno: mientras las teselas no
+       llegan, el lienzo de MapLibre es transparente y se ve el crema de la
+       página, que se lee como una banda rota bajo los filtros. Con un fondo
+       propio, un mapa a medio cargar se lee como un mapa a medio cargar.
+       Los dos colores van escritos porque un estilo de MapLibre es JSON y no
+       puede leer una variable de CSS; son --arena-200 y --azul-975, el mismo
+       criterio con que mapa.html escribe el borde de sus pines. */
+    layers:[{id:"papel", type:"background",
+             paint:{"background-color":esOscuro() ? "#0B0F1C" : "#EDE7DE"}},
+            {id:"base",type:"raster",source:"base"},
+            {id:"etiquetas",type:"raster",source:"etiquetas"}]};
+}
+
+try{
+  mapa = new maplibregl.Map({
+    container:"mapa-descuentos", style:estiloMapa(),
+    center:[-70.62,-33.44], zoom:11.4, attributionControl:{compact:true}
+  });
+  hayMapa = true;
+}catch(e){
+  /* Sin WebGL antes se caía la página entera. La lista es un producto
+     completo por su cuenta y tiene que seguir en pie. */
+  document.getElementById("mapa-descuentos").innerHTML =
+    `<div class="vacio entra" style="padding-top:var(--e-12)">${
+       cuerpo("guaren","var(--tinta-tenue)",112,{pose:"durmiendo", anima:true})}
+     <p><b>${escapar({es:"Este navegador no puede dibujar el mapa",
+                      en:"This browser cannot draw the map",
+                      pt:"Este navegador não consegue desenhar o mapa"}[IDIOMA])}</b><br>${
+        escapar({es:"La lista funciona igual.", en:"The list works anyway.",
+                 pt:"A lista funciona do mesmo jeito."}[IDIOMA])}</p></div>`;
+}
+
+if(hayMapa){
+  mapa.addControl(new maplibregl.NavigationControl({showCompass:false}), "top-left");
+  // El mapa nace antes de que su caja tenga tamaño final (ver mapa.html).
+  (() => {
+    const caja = document.getElementById("mapa-descuentos");
+    let ancho = 0, alto = 0;
+    new ResizeObserver(() => {
+      if(caja.clientWidth === ancho && caja.clientHeight === alto) return;
+      ancho = caja.clientWidth; alto = caja.clientHeight;
+      mapa.resize();
+    }).observe(caja);
+  })();
+  mapa.on("load", montarCapas);
+  mapa.on("styledata", () => { if(!mapa.getSource("dctos")) montarCapas(); });
+  new MutationObserver(() => mapa.setStyle(estiloMapa()))
+    .observe(document.documentElement, {attributes:true, attributeFilter:["data-tema"]});
+}
+
+function datosGeo(lista){
+  return {type:"FeatureCollection", features:lista
+    .filter(d => d.lat !== null && d.lon !== null)
+    .map(d => ({type:"Feature",
+      geometry:{type:"Point", coordinates:[d.lon, d.lat]},
+      properties:{id:d.id, pct:d.porcentaje || 0,
+                  color:banco(d.banco_id).color,
+                  aprox:d.precision === "comuna" ? 1 : 0}}))};
+}
+
+function montarCapas(){
+  if(!hayMapa || mapa.getSource("dctos")) return;
+  mapa.addSource("dctos", {type:"geojson", data:datosGeo(visibles())});
+  mapa.addLayer({id:"dctos-pin", type:"circle", source:"dctos",
+    // Con traslape, el descuento más grande queda encima. Va en `layout` y
+    // no en `paint`: MapLibre rechaza el estilo entero si se equivoca de
+    // bolsa y la capa no se monta, así que el mapa quedaba sin un solo punto.
+    layout:{"circle-sort-key":["get","pct"]},
+    paint:{
+      // El radio crece con el porcentaje: un 50% se ve más gordo que un 10%.
+      // Los que no publican cifra caen en el mínimo, que es lo honesto.
+      "circle-radius":["interpolate",["linear"],["zoom"],
+        10, ["+", 3.2, ["*", .028, ["get","pct"]]],
+        14, ["+", 6,   ["*", .085, ["get","pct"]]],
+        17, ["+", 9,   ["*", .12,  ["get","pct"]]]],
+      "circle-color":["get","color"],
+      "circle-stroke-width":2,
+      "circle-stroke-color":esOscuro() ? "#EDE7DE" : "#1E2A4A",
+      // El punto pálido es el que está al centro de la comuna, no en su
+      // dirección: dice "en algún lugar de acá", no "en esta esquina".
+      "circle-opacity":["case",["==",["get","aprox"],1], .42, .9],
+      "circle-stroke-opacity":["case",["==",["get","aprox"],1], .5, 1],
+    }});
+  mapa.on("click", "dctos-pin", e => abrirBurbuja(e.features[0], e.lngLat));
+  mapa.on("mouseenter", "dctos-pin", () => mapa.getCanvas().style.cursor = "pointer");
+  mapa.on("mouseleave", "dctos-pin", () => mapa.getCanvas().style.cursor = "");
+  pintarMapa();
+}
+
+/* La burbuja se arma con nodos y textContent, nunca con innerHTML: el nombre
+   del comercio y el del banco son texto de terceros. */
+function abrirBurbuja(rasgo, lngLat){
+  const d = DATOS.descuentos.find(x => x.id === rasgo.properties.id);
+  if(!d) return;
+  const b = banco(d.banco_id);
+  const caja = document.createElement("div");
+
+  const lineaBanco = document.createElement("div");
+  lineaBanco.className = "popup-banco";
+  lineaBanco.textContent = d.banco;
+  lineaBanco.style.color = b.tinta;
+
+  const titulo = document.createElement("b");
+  titulo.textContent = d.comercio;
+
+  const monto = montoDescuento(d);
+  const cifra = document.createElement("div");
+  if(monto){ cifra.className = "popup-monto"; cifra.textContent = monto; }
+
+  const donde = document.createElement("div");
+  donde.textContent = [d.direccion, d.comuna].filter(Boolean).join(", ");
+  donde.style.cssText = "font-weight:500;font-size:12px;margin-top:2px";
+
+  const ver = document.createElement("button");
+  ver.type = "button";
+  ver.className = "popup-ver";
+  ver.textContent = {es:"Ver el descuento", en:"See the deal",
+                     pt:"Ver o desconto"}[IDIOMA] + " →";
+  ver.onclick = () => { popup?.remove(); abrirFicha(d); };
+
+  caja.append(lineaBanco, titulo, cifra, donde, ver);
+  popup?.remove();
+  popup = new maplibregl.Popup({closeButton:false, offset:12})
+    .setLngLat(lngLat).setDOMContent(caja).addTo(mapa);
+}
+
+function pintarMapa(){
+  if(!hayMapa || !mapa.getSource("dctos")) return;
+  mapa.getSource("dctos").setData(datosGeo(visibles()));
+}
+
 cargarDescuentos().then(d => {
   DATOS = d;
   pintarTodo();
 }).catch(() => {
   document.getElementById("lista").innerHTML =
-    `<div class="vacio">${cuerpo("guaren","var(--tinta-tenue)",96,{pose:"durmiendo"})}
-       <p>No pude cargar los descuentos.</p></div>`;
+    /* Iba sin `anima` y en español duro: el guarén quedaba congelado y un
+       lector en inglés leía una frase suelta en castellano. Es el estado que
+       menos se ve y por eso mismo es el que nadie revisa. */
+    `<div class="vacio entra">${
+       cuerpo("guaren","var(--tinta-tenue)",112,{pose:"durmiendo", anima:true})}
+       <p><b>${escapar({es:"No pude cargar los descuentos",
+                        en:"I could not load the discounts",
+                        pt:"Não consegui carregar os descontos"}[IDIOMA])}</b><br>${
+          escapar({es:"Prueba recargando la página.",
+                   en:"Try reloading the page.",
+                   pt:"Tente recarregar a página."}[IDIOMA])}</p></div>`;
+  unSoloGuaren();
 });
 
 window.addEventListener("loica:idioma", pintarTodo);
@@ -388,20 +734,35 @@ function visibles(){
 }
 
 function pintarTodo(){
-  pintarDias(); pintarFiltros(); pintarLista(); pintarAviso();
-  // El mapa se turna con la lista pero obedece los mismos filtros, así que se
-  // repinta con ella. Sin esto el contador decía 147 y el mapa seguía con los
-  // 267 pines de antes: dos respuestas distintas a la misma pregunta.
-  if(mapaAbierto) pintarMapa();
+  pintarDias(); pintarFiltros(); pintarLista(); pintarAviso(); pintarMapa();
+  unSoloGuaren();
+}
+
+/* Un guarén en pantalla, nunca dos. Esta página tiene cuatro puertas por
+   donde puede salir —el pie del panel, la lista vacía, la lista que no cargó
+   y el hueco del mapa sin WebGL— y dos pueden abrirse a la vez: sin WebGL la
+   lista viene llena y el animal grande ya está puesto en el mapa.
+   Se queda el primero de la lista de prioridad, que va de más grande a más
+   chico, y los demás esconden el suyo. El texto nunca se esconde: la letra
+   chica del banco es lo único que no puede faltar.
+   Corre al final de pintarTodo() y no dentro de pintarLista(), porque tiene
+   que mirar el DOM ya pintado —adentro leía el del render anterior. */
+function unSoloGuaren(){
+  let ocupado = false;
+  for(const cont of document.querySelectorAll(
+        "#mapa-descuentos .vacio, #panel .vacio, #aviso")){
+    const tiene = !!cont.querySelector("svg");
+    cont.classList.toggle("sin-animal", tiene && ocupado);
+    ocupado = ocupado || tiene;
+  }
 }
 
 function pintarAviso(){
-  const fecha = DATOS.generado
-    ? new Date(DATOS.generado).toLocaleDateString(localeDe(), {day:"numeric", month:"long"})
-    : "";
+  /* Cuerpo entero y no carita: 54px es el tamaño en que se le ven la cola y
+     la tarjeta que muerde, que es de lo que trata la frase de al lado. */
   document.getElementById("aviso").innerHTML =
-    `${carita("guaren","var(--c-descuento-tinta)",22)}
-     <span>${escapar(t("dOjo"))}${fecha ? ` · ${{es:"Revisado el",en:"Checked on",pt:"Revisado em"}[IDIOMA]} ${fecha}.` : ""}</span>`;
+    `${cuerpo("guaren","var(--c-descuento-tinta)",54,{anima:true})}
+     <span>${escapar(t("dOjo"))}</span>`;
 }
 
 /* El riel del día. "Hoy" primero porque es la pregunta real; los siete días
@@ -420,6 +781,14 @@ function pintarDias(){
   cont.querySelectorAll("button").forEach(b => b.onclick = () => {
     dia = b.dataset.dia; mostrando = 80; pintarTodo();
   });
+
+  // El contador se fue al panel; la cabecera dice cuándo se revisó.
+  const fecha = DATOS.generado
+    ? new Date(DATOS.generado).toLocaleDateString(localeDe(), {day:"numeric", month:"long"})
+    : "";
+  document.getElementById("cuenta").textContent = fecha
+    ? `${{es:"Revisado el",en:"Checked",pt:"Revisado em"}[IDIOMA]} ${fecha}`
+    : "";
 }
 
 function pintarFiltros(){
@@ -427,7 +796,7 @@ function pintarFiltros(){
   cont.innerHTML = "";
   cont.setAttribute("aria-label", `${t("dBanco")} · ${t("dComuna")}`);
 
-  // Un chip por banco, con el degú en el color del banco
+  // Un chip por banco, con un punto de su color
   (DATOS.bancos || []).forEach(([id, nombre]) => {
     const b = banco(id), activo = bancoFiltro === id;
     const chip = document.createElement("button");
@@ -435,7 +804,7 @@ function pintarFiltros(){
     chip.className = "chip";
     chip.style.setProperty("--banco", b.color);
     chip.setAttribute("aria-pressed", activo);
-    chip.innerHTML = `${carita("guaren", activo ? "#fff" : b.color, 22)} ${escapar(nombre)}`;
+    chip.innerHTML = `<i class="punto-banco"></i> ${escapar(nombre)}`;
     chip.onclick = () => { bancoFiltro = activo ? null : id; mostrando = 80; pintarTodo(); };
     cont.appendChild(chip);
   });
@@ -478,17 +847,22 @@ function pintarFiltros(){
       v => { minimoFiltro = Number(v) || 0; mostrando = 80; pintarTodo(); }));
   }
 
-  if(bancoFiltro || comunaFiltro || rubroFiltro || cocinaFiltro || minimoFiltro){
+  if(hayFiltros()){
     const limpiar = document.createElement("button");
     limpiar.type = "button";
     limpiar.className = "chip";
     limpiar.textContent = "✕ " + t("dLimpiar");
-    limpiar.onclick = () => {
-      bancoFiltro = null; comunaFiltro = ""; rubroFiltro = ""; cocinaFiltro = "";
-      minimoFiltro = 0; mostrando = 80; pintarTodo();
-    };
+    limpiar.onclick = limpiarFiltros;
     cont.appendChild(limpiar);
   }
+}
+
+const hayFiltros = () =>
+  !!(bancoFiltro || comunaFiltro || rubroFiltro || cocinaFiltro || minimoFiltro);
+
+function limpiarFiltros(){
+  bancoFiltro = null; comunaFiltro = ""; rubroFiltro = ""; cocinaFiltro = "";
+  minimoFiltro = 0; mostrando = 80; pintarTodo();
 }
 
 function desplegable(etiqueta, opciones, valor, alCambiar){
@@ -506,31 +880,191 @@ function desplegable(etiqueta, opciones, valor, alCambiar){
   return caja;
 }
 
+/* ---------- LA PLACA DEL COMERCIO ----------
+   590 de los 758 descuentos traen logo y 421 de los 538 comercios tienen uno.
+   Los otros 117 —y cualquier logo que el CDN del banco deje de servir— caen
+   en la misma baldosa con la inicial, que se ve puesta a propósito y no rota.
+
+   Sobre el ancho de banda: la nota vieja de loica.js decía que no correspondía
+   pedirle ochenta imágenes al servidor del banco cada vez que alguien hace
+   scroll. El reparo era correcto y se resuelve, no se ignora: `loading="lazy"`
+   deja fuera todo lo que no está en pantalla —en el panel entran seis filas—,
+   `decoding="async"` saca la decodificación del hilo que dibuja, y a
+   Contentful se le pide la miniatura y no el original. */
+function logoDe(d){
+  const u = urlSegura(d.logo);
+  if(!u) return "";
+  /* Los 332 logos de assets.bancochile.cl no se piden, y no es por gusto.
+     Ese host está detrás de un Imperva que contesta 307 a la MISMA URL y
+     recién sirve la imagen cuando el cliente devuelve la cookie
+     `visid_incap_*`, que viaja con SameSite=None sobre .bancochile.cl. En
+     una etiqueta <img> eso es una cookie de tercera parte: Safari y Firefox
+     no la devuelven nunca y el navegador queda dando vueltas en el bucle de
+     redirecciones hasta que corta (en Chromium sale como
+     ERR_BLOCKED_BY_ORB). O sea: para una parte grande de la gente la imagen
+     no existe, y para la otra el precio es aceptarle una cookie de rastreo a
+     un banco en una página que no pone banner de consentimiento porque no
+     usa cookies. Ese trato no se hace por un adorno de 58px.
+     La baldosa con la inicial cubre esas filas. El arreglo de verdad es
+     aguas arriba —espejar el archivo o dejar de exportar un logo que no se
+     puede dibujar— y va anotado en el informe. */
+  if(u.startsWith("https://assets.bancochile.cl/")) return "";
+  /* Contentful (los logos que publica Falabella) sirve el archivo original:
+     hay PNG de medio mega para una placa de 58px. Su API acepta el ancho por
+     query, así que se pide 128 —el doble, por las pantallas de 2x—. Solo
+     cuando la URL no trae parámetros propios: los de Ripley vienen firmados
+     con token y tocarlos los rompe. */
+  return (u.startsWith("https://images.ctfassets.net/") && !u.includes("?"))
+    ? u + "?w=128" : u;
+}
+
+/* El monograma del local: DOS letras, no una.
+   La lista va ordenada por descuento y después por nombre, así que con una
+   sola letra los respaldos se apilan idénticos —Boga, Brasas del Arriero y
+   Burger King daban tres "B" seguidas— y eso no se lee como un mosaico, se
+   lee como un render roto. Con dos letras los vecinos alfabéticos difieren
+   siempre, que es justo la propiedad que regala el orden alfabético.
+   Dos palabras con peso → sus iniciales ("Burger King" → BK), que además es
+   como se abrevian de verdad; una sola palabra → sus dos primeras letras
+   ("Boga" → BO). Los nexos no cuentan: "Brasas del Arriero" es BA, no BD. */
+const NEXOS = new Set(["de","del","la","las","el","los","y","e","al","a","con",
+                       "the","of","and","da","do","dos","das"]);
+function monograma(nombre){
+  const palabras = String(nombre).replace(/[^\p{L}\p{N}\s]/gu, " ")
+    .split(/\s+/).filter(Boolean);
+  const fuertes = palabras.filter(p => !NEXOS.has(p.toLowerCase()));
+  const util = fuertes.length ? fuertes : palabras;
+  if(!util.length) return "··";
+  /* Si la primera palabra ya es corta, ES la marca y se toma entera: "QB
+     Restaurant Bar" es QB y no QR, "APPA" es AP. */
+  if([...util[0]].length > 3 && util.length >= 2)
+    return ([...util[0]][0] + [...util[1]][0]).toUpperCase();
+  return [...util[0]].slice(0, 2).join("").toUpperCase();
+}
+
+/* Los cinco papeles del mosaico. Se elige por el nombre del comercio —no al
+   azar y no por el orden de la fila— para que el mismo local salga siempre
+   con el mismo papel, aunque aparezca en cuatro bancos distintos. */
+const PAPELES = ["var(--c-descuento-suave)", "var(--naranjo-200)", "var(--arena-200)",
+                 "var(--arena-300)", "var(--amarillo-100)"];
+function papelDe(nombre){
+  let s = 0;
+  for(const c of String(nombre)) s = (s * 31 + c.codePointAt(0)) % 9973;
+  return PAPELES[s % PAPELES.length];
+}
+
+function placa(d, clase = ""){
+  const logo = logoDe(d);
+  return `<span class="placa ${clase}" style="--papel:${papelDe(d.comercio)}">
+    <span class="inicial" aria-hidden="true">${escapar(monograma(d.comercio))}</span>
+    ${logo ? `<img src="${escapar(logo)}" alt="" width="58" height="58"
+                   loading="lazy" decoding="async" onerror="this.remove()">` : ""}
+  </span>`;
+}
+
+/* ---------- LA FILA ---------- */
+function tarjetaDcto(d){
+  const b = banco(d.banco_id);
+  const cinta = cintaDia(d);
+  const monto = montoDescuento(d);
+  /* El día se enciende en rojo solo cuando decir "hoy" agrega algo: si el
+     filtro puesto YA es "Hoy", todas las filas corren hoy y encender las 437
+     no informa de nada. Y "todos los días" tampoco se enciende: no es una
+     promesa sobre hoy, es una sobre siempre. */
+  const hoyImporta = dia !== "hoy" && d.dias.length && d.dias.includes(hoyClave());
+
+  const lugar = [d.direccion, d.comuna].filter(Boolean).join(" · ")
+    || d.region
+    || {es:"Sin dirección publicada", en:"No published address",
+        pt:"Sem endereço publicado"}[IDIOMA];
+
+  const boton = document.createElement("button");
+  boton.className = "dcto";
+  boton.type = "button";
+  boton.style.setProperty("--banco", b.color);
+  boton.style.setProperty("--banco-tinta", b.tinta);
+  boton.innerHTML = `
+    ${placa(d)}
+    <span class="dcto-cuerpo">
+      <span class="dcto-arriba">
+        <span class="pastilla-dia${hoyImporta ? " hoy" : ""}">${escapar(cinta.texto)}</span>
+        <span class="dcto-banco">${escapar(d.banco)}</span>
+      </span>
+      <span class="dcto-linea">
+        <span class="dcto-nombre">${escapar(d.comercio)}</span>
+        ${monto
+          ? `<span class="dcto-monto${d.porcentaje ? "" : " texto"}">${escapar(monto)}</span>`
+          : `<span class="dcto-monto sin-cifra">${escapar(
+              {es:"Beneficio", en:"Perk", pt:"Benefício"}[IDIOMA])}</span>`}
+      </span>
+      <span class="dcto-meta">${escapar(lugar)}${d.segmentado
+        ? ` <span class="aviso">· ${IDIOMA === "en" ? "segmented" : "segmentado"}</span>` : ""}</span>
+    </span>`;
+  boton.onclick = () => abrirFicha(d);
+  return boton;
+}
+
 /* ---------- LISTA ---------- */
 function pintarLista(){
   const lista = visibles();
   const cont = document.getElementById("lista");
   cont.innerHTML = "";
 
-  document.getElementById("cuenta").innerHTML =
-    `<b>${lista.length}</b> ${escapar(lista.length === 1 ? t("dCuantos1") : t("dCuantos"))}`;
+  document.getElementById("conteo").textContent = lista.length;
+  document.getElementById("conteo-txt").textContent =
+    lista.length === 1 ? t("dCuantos1") : t("dCuantos");
+
+  /* La deuda se dice, no se esconde. 148 descuentos —las cadenas de "Todo
+     Chile" y lo que el banco publica sin dirección— no tienen punto: siguen
+     en la lista, y acá se cuenta cuántos son para que nadie crea que el mapa
+     los tiene todos. */
+  const sinPin = lista.filter(d => !(d.lat && d.lon)).length;
+  const aprox  = lista.filter(d => d.precision === "comuna").length;
+  const partes = [];
+  if(sinPin) partes.push({es:`${sinPin} sin dirección salen solo en la lista`,
+    en:`${sinPin} with no address are list-only`,
+    pt:`${sinPin} sem endereço ficam só na lista`}[IDIOMA]);
+  if(aprox) partes.push({es:`${aprox} al centro de su comuna`,
+    en:`${aprox} pinned at their district centre`,
+    pt:`${aprox} no centro da comuna`}[IDIOMA]);
+  document.getElementById("nota-geo").textContent = partes.join(" · ");
 
   if(!lista.length){
-    cont.innerHTML = `<div class="vacio">${cuerpo("guaren","var(--tinta-tenue)",96,{pose:"durmiendo"})}
+    /* El otro lugar donde el guarén se gana el puesto: si el filtro no deja
+       nada, entra corriendo desde el costado (la entrada `m-muralla` que ya
+       trae) y se echa a dormir. Es una sola mascota, es grande, y explica el
+       vacío mejor que la frase. */
+    cont.innerHTML = `<div class="vacio entra">${
+      cuerpo("guaren","var(--tinta-tenue)",112,{pose:"durmiendo", anima:true})}
       <p><b>${escapar(t("dVacio"))}</b><br>${escapar(t("dVaciopista"))}</p></div>`;
+    /* El chip de limpiar vive al final del riel de filtros y con cinco puestos
+       queda fuera de pantalla, que es justo cuando más se necesita. Acá el
+       botón está donde está el problema. */
+    if(hayFiltros()){
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "boton secundario";
+      b.textContent = "✕ " + t("dLimpiar");
+      b.onclick = limpiarFiltros;
+      cont.querySelector(".vacio").appendChild(b);
+    }
     return;
   }
 
   const caja = document.createElement("div");
   caja.className = "lista-anima";
-  lista.slice(0, mostrando).forEach(d => caja.appendChild(tarjetaDescuento(d, abrirFicha)));
+  lista.slice(0, mostrando).forEach(d => caja.appendChild(tarjetaDcto(d)));
   cont.appendChild(caja);
 
   if(lista.length > mostrando){
     const pie = document.createElement("div");
     pie.className = "fin-lista";
-    pie.innerHTML = `<button class="boton secundario" type="button">${escapar(t("verMas"))} →</button>`;
-    pie.querySelector("button").onclick = () => { mostrando += 80; pintarLista(); };
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "boton secundario";
+    b.textContent = `${t("verMas")} (${lista.length - mostrando})`;
+    b.onclick = () => { mostrando += 80; pintarLista(); };
+    pie.appendChild(b);
     cont.appendChild(pie);
   } else {
     const sello = document.createElement("p");
@@ -548,10 +1082,11 @@ function abrirFicha(d){
   const ficha = document.getElementById("ficha");
   const monto = montoDescuento(d);
 
-  document.getElementById("ficha-cabeza").innerHTML = `
-    <span class="avatar">${carita("guaren", b.color, 44)}
-      ${urlSegura(d.logo) ? `<img src="${escapar(urlSegura(d.logo))}" alt="" onerror="this.remove()">` : ""}</span>
-    <span style="--banco:${b.color};min-width:0">
+  const cabeza = document.getElementById("ficha-cabeza");
+  cabeza.style.setProperty("--banco-tinta", b.tinta);
+  cabeza.innerHTML = `
+    ${placa(d)}
+    <span style="min-width:0">
       <span class="ficha-banco">${escapar(d.banco)}</span>
       <h2 id="ficha-titulo">${escapar(d.comercio)}</h2>
     </span>
@@ -609,6 +1144,19 @@ function abrirFicha(d){
 
   ficha.classList.add("visible");
   ficha.setAttribute("aria-hidden", "false");
+  volarA(d);
+}
+
+/* Abrir una ficha lleva el mapa al local. Es la razón de que el mapa esté
+   siempre puesto: la pregunta que sigue a "hay 40%" es "¿dónde queda?", y la
+   respuesta ya está dibujada al lado. El desplazamiento deja el punto en el
+   trozo de mapa que el panel no tapa. */
+function volarA(d){
+  if(!hayMapa || !(d.lat && d.lon)) return;
+  const anchoPanel = innerWidth >= 880 ? 426 : 0;
+  const altoPanel  = innerWidth >= 880 ? 0 : document.getElementById("panel").clientHeight;
+  mapa.easeTo({center:[d.lon, d.lat], zoom:Math.max(mapa.getZoom(), 14.5),
+               offset:[-anchoPanel / 2, -altoPanel / 2], duration:600});
 }
 
 function cerrarFicha(){
@@ -628,88 +1176,56 @@ function nombreTarjeta(slug){
   ).join(" ");
 }
 
-/* ---------------------------------------------------------------------------
-   El mapa, en esta misma página
-   Se turna con la lista y obedece los mismos filtros: lo que el mapa muestra
-   es exactamente lo que la lista muestra, no un universo aparte. Se crea
-   recién la primera vez que alguien lo abre — MapLibre pesa, y la mayoría
-   entra a "¿dónde como hoy?" y se queda en la lista.
---------------------------------------------------------------------------- */
-let mapa = null, mapaAbierto = false, pines = [];
-
-const TESELAS = ["a","b","c"].map(s =>
-  `https://${s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`);
-
-function abrirMapa(abrir){
-  mapaAbierto = abrir;
-  document.getElementById("panel-mapa").hidden = !abrir;
-  document.getElementById("lista").style.display = abrir ? "none" : "";
-  const boton = document.getElementById("ver-mapa");
-  boton.setAttribute("aria-pressed", abrir);
-  document.getElementById("ver-mapa-txt").textContent =
-    abrir ? {es:"Lista",en:"List",pt:"Lista"}[IDIOMA] : {es:"Mapa",en:"Map",pt:"Mapa"}[IDIOMA];
-  if(!abrir) return;
-
-  if(!mapa){
-    mapa = new maplibregl.Map({
-      container:"mapa-descuentos",
-      style:{version:8, sources:{base:{type:"raster", tiles:TESELAS, tileSize:256,
-             attribution:'© OpenStreetMap · © CARTO'}},
-             layers:[{id:"base", type:"raster", source:"base"}]},
-      center:[-70.62,-33.44], zoom:11.4, attributionControl:{compact:true},
-    });
-    mapa.addControl(new maplibregl.NavigationControl({showCompass:false}), "top-left");
-    // `idle` y no `load`: load puede dispararse con el estilo todavía a medio
-    // aplicar y pintarMapa se salía por su propia guarda, dejando el mapa sin
-    // un solo pin. `idle` sólo llega cuando no queda nada pendiente de dibujar.
-    pintarMapa();
-    return;
-  }
-  // El contenedor estaba oculto cuando el mapa se creó, así que hay que
-  // avisarle que ya tiene tamaño o se dibuja de 0px de alto.
-  mapa.resize();
-  pintarMapa();
-}
-
-function pintarMapa(){
-  // Sin `isStyleLoaded()` a propósito: los marcadores son elementos del DOM
-  // encima del lienzo, no capas del estilo, así que se pueden poner antes de
-  // que carguen las teselas. Con esa guarda el mapa quedaba sin un solo pin
-  // cada vez que el CDN de teselas tardaba.
-  if(!mapa) return;
-  pines.forEach(p => p.remove());
-  pines = [];
-
-  // `visibles()` es la MISMA función que alimenta la lista: si el mapa
-  // filtrara por su cuenta, mostrar y listar dejarían de coincidir.
-  const enPantalla = visibles();
-  const conPin = enPantalla.filter(d => d.lat && d.lon);
-
-  conPin.forEach(d => {
-    const el = document.createElement("div");
-    el.className = "pin-dcto" + (d.precision === "comuna" ? " aprox" : "");
-    el.style.setProperty("--banco", banco(d.banco_id).color);
-    el.style.borderColor = banco(d.banco_id).color;
-    el.textContent = d.porcentaje ? d.porcentaje + "%" : "•";
-    el.title = d.comercio;
-    el.onclick = () => abrirFicha(d);
-    pines.push(new maplibregl.Marker({element:el}).setLngLat([d.lon, d.lat]).addTo(mapa));
+/* --- Arrastre del panel: tres alturas, calcado de mapa.html --- */
+(() => {
+  const panel = document.getElementById("panel");
+  const tirador = document.getElementById("tirador");
+  tirador.setAttribute("aria-label", {es:"Arrastra para ver más descuentos",
+    en:"Drag to see more discounts", pt:"Arraste para ver mais descontos"}[IDIOMA]);
+  const alturas = () => {
+    const disponible = panel.parentElement.clientHeight;
+    /* Más alta que la hoja de mapa.html (268) a propósito: acá el pie fijo del
+       guarén se lleva 66px, y con el reposo de allá la lista abría mostrando
+       una fila y media. */
+    const reposo = Math.round(Math.min(360, Math.max(170, disponible * .52)));
+    return [reposo, Math.round(disponible * .68), Math.round(disponible * .88)];
+  };
+  let indice = 0, arrastrando = false, inicioY = 0, inicioAlto = 0;
+  const fijar = i => {
+    indice = Math.max(0, Math.min(2, i));
+    panel.style.setProperty("--alto-panel", alturas()[indice] + "px");
+  };
+  fijar(0);
+  tirador.addEventListener("pointerdown", e => {
+    arrastrando = true; inicioY = e.clientY; inicioAlto = panel.clientHeight;
+    panel.classList.add("arrastrando");
+    tirador.setPointerCapture(e.pointerId);
   });
-
-  const exactos = conPin.filter(d => d.precision !== "comuna").length;
-  const fuera = enPantalla.length - conPin.length;
-  const partes = [];
-  partes.push(`${conPin.length} en el mapa`);
-  if(exactos) partes.push(`${exactos} en su dirección exacta`);
-  if(fuera) partes.push(`${fuera} sin dirección, solo en la lista`);
-  // El pin punteado no se explica solo: hay que decir qué significa.
-  document.getElementById("nota-mapa").textContent =
-    partes.join(" · ") + (conPin.length > exactos
-      ? ". Los pines punteados son aproximados al centro de la comuna." : ".");
-}
-
-document.getElementById("ver-mapa").onclick = () => abrirMapa(!mapaAbierto);
-
+  tirador.addEventListener("pointermove", e => {
+    if(!arrastrando) return;
+    const alto = Math.min(panel.parentElement.clientHeight * .88,
+                          Math.max(120, inicioAlto - (e.clientY - inicioY)));
+    panel.style.setProperty("--alto-panel", alto + "px");
+  });
+  const soltar = () => {
+    if(!arrastrando) return;
+    arrastrando = false;
+    panel.classList.remove("arrastrando");
+    const actual = panel.clientHeight;
+    const opciones = alturas();
+    fijar(opciones.indexOf(opciones.reduce((a,b) =>
+      Math.abs(b - actual) < Math.abs(a - actual) ? b : a)));
+  };
+  tirador.addEventListener("pointerup", soltar);
+  tirador.addEventListener("pointercancel", soltar);
+  tirador.addEventListener("click", () => { if(!arrastrando) fijar(indice === 2 ? 0 : indice + 1); });
+  tirador.addEventListener("keydown", e => {
+    if(e.key === "ArrowUp"){ e.preventDefault(); fijar(indice + 1); }
+    if(e.key === "ArrowDown"){ e.preventDefault(); fijar(indice - 1); }
+    if(e.key === "Enter" || e.key === " "){ e.preventDefault(); fijar(indice === 2 ? 0 : indice + 1); }
+  });
+  addEventListener("resize", () => fijar(indice));
+})();
 </script>
 <!-- Cloudflare Web Analytics: cuenta visitas sin cookies y sin huella
      digital, así que el sitio no necesita banner de consentimiento (la Ley

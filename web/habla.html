@@ -33,7 +33,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=24">
+<link rel="stylesheet" href="loica.css?v=25">
 <style>
   /* ============================================================
      HABLA CON LA LOICA — v2
@@ -298,13 +298,23 @@
   .opciones.elenco{grid-template-columns:repeat(2,minmax(0,1fr))}
   @media(min-width:640px){.opciones.elenco{grid-template-columns:repeat(3,minmax(0,1fr))}}
   @media(max-width:540px){.opciones{margin-left:0}}
+  /* --- El escalonado de entrada, en un solo lugar ---
+     Regla 8.4 de _direccion_visual.md: se escalonan los primeros DOCE, 20ms
+     entre uno y otro, 240ms de tope. Los tres escalonados de esta página lo
+     incumplían con tres constantes distintas —45ms las opciones, 45ms los
+     chips de afinar, 90ms los resultados— y ninguno tenía corte: la lista de
+     opciones ya son once, así que la última entraba a los 450ms, y bastaba un
+     cuarto resultado por lote para que el de los descuentos se pasara.
+     `min()` hace de tope sin necesidad de once `nth-child`. */
+  .opciones .opcion,.afina .chip,.reco{--paso:20ms}
   .opcion{display:flex;align-items:center;gap:var(--e-3);text-align:left;min-height:60px;
     border:2.5px solid var(--contorno);border-radius:var(--r-lg);
     background:var(--fondo-elevado);color:var(--tinta);padding:var(--e-2) var(--e-3);cursor:pointer;
     font:700 var(--t-md)/1.2 var(--fuente-marca);
     box-shadow:0 4px 0 var(--marca,var(--guia));
     transition:transform var(--rapido),box-shadow var(--rapido),background-color var(--rapido);
-    animation:opcion-entra .38s var(--rebote) backwards;animation-delay:calc(var(--i,0) * 45ms)}
+    animation:opcion-entra .38s var(--rebote) backwards;
+    animation-delay:min(calc(var(--i,0) * var(--paso,20ms)),240ms)}
   @keyframes opcion-entra{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:none}}
   .opcion:hover{transform:translateY(-2px);box-shadow:0 6px 0 var(--marca,var(--guia))}
   .opcion:active{transform:translateY(4px);box-shadow:none}
@@ -339,7 +349,8 @@
   .afina{display:flex;flex-wrap:wrap;gap:var(--e-2);margin:var(--e-2) 0 var(--e-6) calc(46px + var(--e-3));
     scroll-margin-bottom:calc(var(--alto-escribe) + 20px)}
   @media(max-width:540px){.afina{margin-left:0}}
-  .afina .chip{animation:opcion-entra .38s var(--rebote) backwards;animation-delay:calc(var(--i,0) * 45ms);
+  .afina .chip{animation:opcion-entra .38s var(--rebote) backwards;
+    animation-delay:min(calc(var(--i,0) * var(--paso,20ms)),240ms);
     min-height:42px;text-decoration:none}
   .afina .chip.principal{background:var(--tinta);color:var(--fondo-elevado)}
   .afina .chip svg{width:22px;height:22px}
@@ -354,7 +365,7 @@
     scroll-margin-bottom:calc(var(--alto-escribe) + 20px)}
   @media(max-width:540px){.resultados{margin-left:0}}
   .reco{border-bottom:1px solid var(--borde);animation:tarjeta-entra .45s var(--rebote) backwards;
-    animation-delay:calc(var(--i,0) * 90ms)}
+    animation-delay:min(calc(var(--i,0) * var(--paso,20ms)),240ms)}
   .reco:last-child{border-bottom:0}
   .reco .tarjeta{border-bottom:0}
   .porque{display:flex;flex-wrap:wrap;gap:6px;padding:0 var(--e-4) var(--e-3);margin-top:-4px}
@@ -435,7 +446,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
-<script src="loica.js?v=24"></script>
+<script src="loica.js?v=25"></script>
 <script src="recomendador.js?v=24"></script>
 <script>
 /* ============================================================
@@ -1474,8 +1485,14 @@ function pintarEscenario(){
   desfile.innerHTML = guias.map((a, i) => {
     const sit = SITUACIONES.find(s => s.guia === a.clave);
     const g = GUIAS[a.clave];
+    /* El escalonado sigue la regla 8.4 de _direccion_visual.md: solo los
+       primeros doce, 20ms entre uno y otro, 240ms de tope. Estaba en 200ms
+       por animal, o sea 2,0 s para que entraran los once: a los dos segundos
+       y medio de cargar la página el último todavía se estaba dibujando, y
+       quien tocara antes tocaba un botón en movimiento. A 20ms el desfile
+       sigue llegando de a uno —se lee como una ola— pero termina en 220ms. */
     return `<button class="bicho-hero" type="button" data-sit="${sit.id}" data-guia="${a.clave}"
-        style="--d:${(i * .2).toFixed(2)}s;--tono:${g.tono};--tono-suave:${g.suave}"
+        style="--d:${Math.min(i, 11) * 20}ms;--tono:${g.tono};--tono-suave:${g.suave}"
         aria-label="${escapar(a[IDIOMA][0])} — ${escapar(sit[IDIOMA][0])}">
         ${cuerpo(a.clave, a.hex, 58, {anima:true})}
         <span class="rotulo">${escapar(a[IDIOMA][0])}</span></button>`;
@@ -1484,7 +1501,13 @@ function pintarEscenario(){
     desfile.dataset.entro = "1";
     if(!reduce()){
       desfile.classList.add("entra");
-      setTimeout(() => desfile.classList.remove("entra"), 4300);
+      /* 1600 y no 4300: `entra` se quita cuando la última entrada terminó,
+         para que los tics de reposo tomen el relevo (las dos animaciones se
+         pelean el mismo `animation` del SVG). Con el escalonado en 220ms la
+         última acaba antes del segundo; 4,3 s eran de cuando el desfile
+         tardaba dos segundos en armarse, y dejaban a los once quietos casi
+         tres segundos de más. */
+      setTimeout(() => desfile.classList.remove("entra"), 1600);
     }
   }
   document.querySelectorAll(".bicho-hero").forEach(bt => bt.onclick = () => {

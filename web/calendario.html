@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=24">
+<link rel="stylesheet" href="loica.css?v=25">
 <style>
   html,body{height:100%;overflow:hidden}
   /* Los dos altos van en este orden a propósito: `dvh` no existe en Safari de
@@ -36,18 +36,65 @@
      página —que es una app de alto fijo con scroll interno— se desarmaba. */
   #app{display:flex;flex-direction:column;height:100vh;height:100dvh}
   header{flex:none;z-index:6}
-  main{flex:1;display:flex;min-height:0}
+  /* `position:relative` es de la Chinchilla: cuelga de <main> y no de la banda
+     ni del panel, para ser el mismo nodo en los dos puntos de quiebre. */
+  main{flex:1;display:flex;min-height:0;position:relative;--ancho-agenda:400px}
+
+  /* La banda de chips es la LEYENDA de las barras del mes, no un adorno: cada
+     chip lleva su cuenta del mes visible y su color es el de su segmento. Se
+     aprieta al alto de descuentos.html para devolverle el aire a la rejilla,
+     que es la que tiene que crecer. */
+  header .filtros{padding:var(--e-2) var(--e-4);align-items:center}
+  header .filtros .chip{padding:6px 12px 6px 8px;gap:5px;font-size:var(--t-xs);
+    min-height:38px;border-width:2px;box-shadow:0 2px 0 var(--contorno)}
+  header .filtros .chip svg{width:20px;height:20px}
+  .chip .cuenta{opacity:.72;font-variant-numeric:tabular-nums;font-family:var(--fuente-ui)}
+  /* Una categoría que este mes no tiene nada sigue en la fila —esconderla haría
+     saltar el riel entero al cambiar de mes— pero se apaga para que no compita
+     con las que sí. Sigue siendo pulsable: apretarla y cambiar de mes es una
+     forma legítima de buscar.
+
+     Se apaga con TINTA y no con `opacity`. Al 50 % el azul del rótulo sobre
+     crema daba 2,9:1 y el chip pasaba de "vacío" a "ilegible"; `--tinta-tenue`
+     está calculado para pasar 4,5:1 en los dos temas (da 6,3 en claro y 7,5 en
+     oscuro). Lo único que baja de opacidad es el dibujo del animal, que es
+     decorativo y no lleva texto. */
+  header .filtros .chip.sin-mes{
+    color:var(--tinta-tenue);border-color:var(--borde-fuerte);box-shadow:none;
+    transform:translateY(2px);
+  }
+  header .filtros .chip.sin-mes svg{opacity:.55}
 
   /* min-height:0 es obligatorio: sin él la rejilla empuja el panel de la
      agenda fuera de la pantalla y su fondo queda inalcanzable en celular. */
+  /* `overflow-y:auto` es la red de seguridad de toda la maqueta: cuando la
+     ventana es tan baja que las seis semanas no caben ni en su mínimo, el mes
+     scrollea en vez de dibujar la última fila debajo de la cordillera. Y el
+     relleno de abajo es el alto de la banda: sin él la última semana quedaba
+     tapada por los cerros. */
   .calendario{flex:1;display:flex;flex-direction:column;min-width:0;min-height:0;
-    padding:var(--e-4);gap:var(--e-3);position:relative}
+    overflow-y:auto;overscroll-behavior:contain;
+    padding:var(--e-4) var(--e-4) clamp(72px,10vh,104px);gap:var(--e-3)}
+
+  /* --- Cabecera del mes ---
+     Es el MISMO bloque que la cabecera del día en la agenda: medallón con el
+     animal que más se repite, nombre, y una línea que dice cuántos y cuántos
+     gratis. El mes contesta lo mismo que el día, una escala más arriba. */
   .mes-barra{display:flex;align-items:center;gap:var(--e-3);flex-wrap:wrap}
+  .mes-quien{flex:none;display:grid;place-items:center;width:44px;height:44px;
+    border-radius:50%;background:var(--fondo-hundido);border:2.5px solid var(--contorno);
+    box-shadow:var(--repisa-1)}
+  .mes-quien svg{width:32px;height:32px}
+  .mes-texto{min-width:0;margin-right:auto}
   /* Solo la primera letra: `capitalize` daría "9 De Agosto" */
   .mes-titulo{font-family:var(--fuente-marca);font-size:var(--t-xl);font-weight:800;
-    letter-spacing:-.02em;min-width:0;line-height:1.1}
+    letter-spacing:-.02em;min-width:0;line-height:1.05}
   .mes-titulo::first-letter,.agenda-cabecera h2::first-letter{text-transform:uppercase}
-  .mes-nav{display:flex;gap:var(--e-2);margin-left:auto}
+  .mes-resumen{margin:2px 0 0;font-size:var(--t-xs);font-weight:700;color:var(--tinta-tenue);
+    white-space:nowrap}
+  .mes-resumen b{font-family:var(--fuente-marca);font-size:var(--t-sm);color:var(--tinta);
+    font-variant-numeric:tabular-nums}
+  .mes-nav{display:flex;gap:var(--e-2)}
   /* Las flechas y "Hoy" en el lenguaje del sitio: contorno de tinta y repisa
      que se hunde al apretar. Tenían 1,5 px de borde gris, que es el único
      grosor que la dirección visual prohíbe. */
@@ -63,62 +110,209 @@
   .mes-nav button:focus-visible{box-shadow:var(--repisa-1),0 0 0 3px var(--foco),0 0 0 6px var(--contorno)}
   .mes-nav .hoy{padding:0 var(--e-4);font:800 var(--t-sm)/1 var(--fuente-marca)}
 
-  .encabezado-dias{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;flex:none}
+  .encabezado-dias{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;flex:none}
+  /* Alineado a la IZQUIERDA y no centrado: el número del día vive arriba a la
+     izquierda de su celda y el rótulo tiene que caer sobre él, no en el medio
+     de una celda que ya no es una caja simétrica. */
   .encabezado-dias span{
-    text-align:center;font-size:var(--t-xs);font-weight:800;color:var(--tinta-tenue);
-    text-transform:uppercase;letter-spacing:.06em;padding-bottom:2px;
+    text-align:left;padding:0 0 2px 9px;font-size:var(--t-xs);font-weight:800;
+    color:var(--tinta-tenue);text-transform:uppercase;letter-spacing:.07em;
   }
   /* El fin de semana es la única distinción que se busca en una agenda de
-     panoramas: sábado y domingo van en rojo arriba y con el papel más oscuro
-     en la columna. */
+     panoramas, y va SOLO en el rótulo. Antes la columna del sábado y el
+     domingo llevaba además el papel hundido, y ese gris se leía igual que el
+     de una celda deshabilitada: el finde parecía cerrado. */
   .encabezado-dias span:nth-child(n+6){color:var(--acento-solido)}
 
+  /* La rejilla NO reparte el alto en partes iguales: `pintarMes` le escribe
+     `grid-template-rows` con un peso por semana, sacado de cuántos panoramas
+     tiene esa semana. Una semana de 492 no puede medir lo mismo que una de 3.
+     El peso va con raíz y tope: entre la semana más muerta y la más viva hay
+     poco más del doble, no cincuenta veces. */
+  /* Sin `min-height:0`: un hijo flexible con `min-height:auto` no se encoge
+     por debajo de su contenido, y el contenido de una rejilla es la suma de los
+     mínimos de sus filas. Eso es exactamente lo que hace falta — que las seis
+     semanas nunca midan menos de su piso y que el sobrante lo absorba el scroll
+     de la sección, no las celdas. */
   .rejilla{
-    flex:1;display:grid;grid-template-columns:repeat(7,1fr);grid-auto-rows:1fr;
-    gap:5px;min-height:0;position:relative;z-index:1;
+    flex:1;display:grid;grid-template-columns:repeat(7,1fr);gap:6px;
   }
-  /* La celda. Solo los días con algo llevan caja: un mes de 42 cajas vacías
-     con borde era la rejilla de Google Calendar. Los vacíos son un número. */
-  .dia{
-    background:transparent;border:2px solid transparent;border-radius:var(--r-md);
-    padding:5px 6px;display:flex;flex-direction:column;gap:3px;overflow:hidden;
-    cursor:pointer;transition:var(--rapido);text-align:left;font-family:inherit;color:inherit;
-    min-width:0;
-  }
-  .dia.con{background:var(--fondo-elevado);border-color:var(--borde-fuerte)}
-  .dia:nth-child(7n-1),.dia:nth-child(7n){background:var(--fondo-hundido)}
-  .dia.con:nth-child(7n-1),.dia.con:nth-child(7n){background:var(--fondo-elevado)}
-  .dia:hover{border-color:var(--contorno-suave)}
-  .dia.elegido{border-color:var(--contorno);box-shadow:var(--repisa-1);background:var(--fondo-elevado)}
-  .dia.hoy{border-color:var(--acento)}
-  /* Elegido Y hoy: el borde sigue siendo rojo. Antes el elegido pisaba al hoy
-     y al cargar la página "hoy" dejaba de verse como hoy. */
-  .dia.hoy.elegido{border-color:var(--acento);box-shadow:0 3px 0 var(--acento-solido)}
-  .dia-num{font:700 var(--t-sm)/1.2 var(--fuente-ui);font-variant-numeric:tabular-nums}
-  .dia.hoy .dia-num{color:var(--acento-solido)}
-  /* Los días del mes vecino: se atenúa el NÚMERO, no la celda entera. Con
-     opacity:.4 los títulos de sus eventos quedaban a 1,7:1. */
-  .dia.fuera .dia-num{color:var(--tinta-tenue);font-weight:600}
-  .marca-ev{
-    display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;
-    background:var(--tono-suave);color:var(--tono);border-radius:5px;padding:2px 5px;
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.35;
-  }
-  .marca-ev.libre{background:var(--gratis-fondo);color:var(--gratis)}
-  .marca-ev i{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
-  .mas{font-size:12px;color:var(--tinta-tenue);font-weight:700;padding-left:3px}
-  .mas-movil,.fila-movil{display:none}
+  /* La celda. Se llama `.celda` y no `.dia` porque `.dia` ya es, en loica.css,
+     la pastilla de fecha que cuelga de la miniatura de CADA tarjeta de evento
+     (`.mini-caja .dia`). Con el nombre repetido, la rejilla de esta página le
+     metía `display:grid`, relleno y cursor a las cincuenta pastillas del panel
+     de la derecha. Es la clase de choque que no avisa: no rompe nada visible
+     hasta que alguien toca una de las dos reglas.
 
-  /* La mascota del mes: el animal de la categoría con más panoramas, grande y
-     al 12 % detrás de la rejilla (§6.5 de la dirección visual). Solo en
-     escritorio: en celular cada píxel es de las celdas. */
-  .mascota-mes{position:absolute;right:var(--e-6);bottom:var(--e-4);opacity:.12;pointer-events:none;z-index:0}
-  .mascota-mes svg{width:150px;height:150px}
+     Solo los días con algo llevan caja: un mes de 42 cajas vacías con borde era
+     la rejilla de Google Calendar. Los vacíos son un número.
+
+     Es una rejilla de dos columnas y tres filas —número+animal / cuenta /
+     barra— repartidas a lo alto. Todas las celdas de una fila arrancan y
+     terminan en la misma línea, así que las siete barras de una semana quedan
+     alineadas y la fila se lee como un gráfico de barras. En celular la misma
+     rejilla se reordena: el número y la cuenta en una línea y la barra debajo.
+
+     El número y el animal van PEGADOS, no uno en cada esquina. Repartidos a lo
+     ancho, en una celda sin caja —un día del mes vecino, uno vacío— el animal
+     quedaba flotando más cerca del día siguiente que del suyo. */
+  .celda{
+    background:transparent;border:2px solid transparent;border-radius:var(--r-md);
+    padding:6px 8px 8px;display:grid;grid-template-columns:auto 1fr;
+    align-content:space-between;row-gap:4px;column-gap:5px;
+    overflow:hidden;cursor:pointer;transition:var(--rapido);
+    text-align:left;font-family:inherit;color:inherit;min-width:0;
+  }
+  .celda.con{background:var(--fondo-elevado);border-color:var(--borde-fuerte)}
+  .celda:hover{border-color:var(--contorno-suave)}
+  .celda:focus-visible{outline:none;border-color:var(--contorno);
+    box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno)}
+  /* Baloo y 19px: el número del día es la identidad de la celda y estaba en
+     13px de la fuente de interfaz, más chico que el texto de una tarjeta. */
+  .celda-num{
+    grid-area:1/1;justify-self:start;
+    font:800 19px/1 var(--fuente-marca);font-variant-numeric:tabular-nums;
+    letter-spacing:-.02em;padding:3px 4px;margin:-1px -2px;
+    border-radius:var(--r-pill);color:var(--tinta);
+  }
+  .celda.sin .celda-num{color:var(--tinta-tenue);font-weight:700}
+  .celda-quien{grid-area:1/2;justify-self:start;align-self:center;display:block}
+  .celda-quien svg{width:22px;height:22px;display:block}
+  /* La cuenta va en la fuente de interfaz y el número del día en la de marca:
+     son dos cifras en la misma celda y tienen que leerse como dos cosas
+     distintas. Pegada a la barra, es su rótulo. */
+  .celda-cuenta{
+    grid-area:2/1/3/3;align-self:end;
+    font:800 var(--t-sm)/1 var(--fuente-ui);color:var(--tinta);
+    font-variant-numeric:tabular-nums;letter-spacing:-.01em;
+  }
+  .celda.sin .celda-cuenta,.celda.pasado .celda-cuenta{color:var(--tinta-suave)}
+  /* LA BARRA. El largo dice cuánto (contra el día más cargado del mes visible,
+     con exponente .55 para que un día de 1 no desaparezca al lado de uno de
+     156) y los tramos dicen de qué. Los tramos usan la variante `-tinta` de
+     cada familia y no el relleno fuerte: el amarillo de "Otros" sobre papel
+     crema da 1,7:1 y una barra es información, no adorno — pide 3:1. Las
+     `-tinta` están calculadas para pasar en los dos temas. */
+  .celda-barra{
+    grid-area:3/1/4/3;
+    display:flex;height:9px;border-radius:var(--r-pill);overflow:hidden;
+    width:var(--largo,10%);min-width:9px;
+  }
+  .celda-barra i{display:block;min-width:3px;background:var(--seg)}
+  .celda-barra i.resto{background:var(--tinta-tenue)}
+
+  /* --- Los tres estados, en tres canales distintos ---
+     HOY: pastilla roja rellena en el número. Es el mismo recurso que la cinta
+       "HOY" de la tarjeta y la pastilla del destino activo en la navegación.
+     ELEGIDO: contorno de tinta + repisa. Nada más en la rejilla tiene repisa,
+       así que la celda elegida es la única que se levanta del papel.
+     PASADO: menos tinta. Sin relleno y con el borde suave — antes quedaba con
+       el papel hundido, que es gris, y un día pasado se leía "cerrado".
+     Los tres se pueden dar juntos sin taparse: color, elevación y peso. */
+  .celda.hoy .celda-num{background:var(--acento-solido);color:var(--acento-contraste)}
+  .celda.elegido{border-color:var(--contorno);border-width:2.5px;box-shadow:var(--repisa-2)}
+  .celda.elegido.con{background:var(--fondo-elevado)}
+  .celda.elegido:active{transform:translateY(4px);box-shadow:none}
+  .celda.pasado.con{background:transparent;border-color:var(--borde)}
+  .celda.pasado .celda-num{color:var(--tinta-suave)}
+  .celda.pasado .celda-barra,.celda.pasado .celda-quien{opacity:.6}
+  .celda.pasado.elegido.con{background:var(--fondo-elevado)}
+  .celda.pasado.elegido .celda-barra,.celda.pasado.elegido .celda-quien{opacity:1}
+  /* Los días del mes vecino: número tenue y sin caja. La barra sí se dibuja
+     —saber que el 1 de septiembre está lleno es justo lo que uno mira desde el
+     31 de agosto— pero a media tinta. Tocarlos salta a ese mes. */
+  .celda.fuera{background:transparent;border-color:transparent}
+  .celda.fuera .celda-num{color:var(--tinta-tenue);font-weight:700}
+  .celda.fuera .celda-barra,.celda.fuera .celda-quien{opacity:.55}
+
+  /* --- El pie del mes: la cordillera ---
+     Acá vivía la marca de agua: una Chinchilla al 12 %, quieta, DETRÁS de la
+     rejilla, cortada por las celdas y por el borde del panel. Un animal guía
+     tapado por el contenido es lo contrario de una guía.
+
+     Ahora la banda es la misma de cierre del resto del sitio (`cordillera()`
+     de loica.js con el `.cerros` de loica.css) y sirve de suelo: la Chinchilla
+     se para encima. El alto es fluido para que una ventana baja no tenga que
+     elegir entre la banda y una fila de celdas — antes la banda desaparecía
+     bajo 720px de alto y la página se quedaba sin nadie.
+
+     Va CLAVADA a <main> y no dentro de la sección del mes. La sección scrollea
+     cuando el mes no cabe (una ventana de 640px de alto, por ejemplo), y una
+     banda dentro de ella se iba con el scroll: la cordillera aparecía en medio
+     de la rejilla. Fuera, se queda quieta y las celdas le pasan por debajo. */
+  .paseo-mes{
+    position:absolute;left:0;right:var(--ancho-agenda);bottom:0;z-index:1;
+    height:clamp(72px,10vh,104px);pointer-events:none;
+  }
+  /* Sin esto la cordillera se dibuja a sus 132px de siempre y se sube encima
+     de la última fila de celdas. Es el mismo ajuste que hace `.remate`. */
+  .paseo-mes .cerros{height:100%}
+
+  /* --- LA CHINCHILLA, una sola y siempre a la vista ---
+     Cuelga de `main` y no de la banda ni del panel, porque cambia de casa por
+     punto de quiebre y tiene que ser el MISMO nodo en las dos:
+       escritorio → parada sobre los cerros, al pie del mes, con el panel de la
+                    agenda a su derecha;
+       celular    → posada en el canto de la hoja de la agenda, con las patas
+                    en el borde y el cuerpo afuera. Es la misma repisa literal
+                    del Chincol en talleres.html, y sube y baja con la hoja.
+     Entera y grande en las dos (§2 del criterio: de 38 para arriba el dibujo
+     trae cuerpo; acá va a 92 y 78). Los tics —las orejas alternadas— viven en
+     loica.css (`.masc-chinchilla.anima .p-oreja`) y se encienden con
+     {anima:true}. Es la ÚNICA mascota animada de la página: las 42 caritas de
+     la rejilla van quietas, que es lo que manda §8.3 de la dirección visual.
+     `pointer-events:none` porque debajo hay celdas que se tocan. */
+  .anfitriona{
+    position:absolute;z-index:3;pointer-events:none;display:block;
+    inset:auto calc(var(--ancho-agenda) + var(--e-10)) 10px auto;
+    transform-origin:bottom center;
+  }
+  .anfitriona svg{width:92px;height:92px;display:block;overflow:visible}
+  @media(max-width:879px){
+    /* El `min()` es la clave: la Chinchilla y los cerros BAJAN con la hoja pero
+       no suben con ella. Anclados a `--alto-panel` a secas, con la hoja arriba
+       del todo terminaban pisando el título del mes y cortados por el canto de
+       la cabecera. Anclados al reposo, la hoja les pasa por encima como un
+       cajón que se cierra, que es lo que uno espera de una hoja. */
+    .anfitriona{inset:auto auto min(calc(var(--alto-panel,236px) + var(--hueco-nav) + 6px),
+                                    calc(var(--reposo,236px) + var(--hueco-nav) + 6px)) 10px}
+    .anfitriona svg{width:70px;height:70px}
+  }
 
   .agenda{
-    width:370px;flex:none;border-left:2.5px solid var(--contorno);background:var(--fondo-elevado);
-    display:flex;flex-direction:column;
+    width:var(--ancho-agenda);flex:none;border-left:2.5px solid var(--contorno);background:var(--fondo-elevado);
+    display:flex;flex-direction:column;min-height:0;
   }
+  /* El estado vacío ya NO dibuja una segunda Chinchilla. La regla es "una, no
+     muchas", y en escritorio se veían las dos a la vez: la del pie del mes y
+     la del panel. La que quedó es la grande, y lo que decía la del panel ahora
+     lo dice su POSE — duerme cuando el día está vacío de verdad y está
+     despierta cuando lo vació un filtro. En celular queda además justo encima
+     del texto, posada en el canto de la hoja. */
+  .agenda .vacio{padding:var(--e-8) var(--e-5)}
+  /* El botón del salto no puede pasarse del panel: en celular la hoja mide 236
+     y una fecha larga lo sacaba por el costado. */
+  .agenda .vacio .boton{max-width:100%;white-space:normal}
+  .salto-dia{margin-top:var(--e-4)}
+
+  /* --- El tirador de la hoja (solo en celular) ---
+     Calcado de talleres.html y descuentos.html, que ya resolvieron este mismo
+     reparto: un mapa (acá, el mes) y una lista que se arrastra encima. Tres
+     alturas, se arrastra con el dedo, se turna con un toque y se mueve con las
+     flechas. `touch-action:none` va SOLO acá: en el panel entero el navegador
+     cancela el gesto de scroll de la lista. */
+  .tirador{display:none;position:relative;padding:9px var(--e-4) 5px;
+    cursor:grab;flex:none;touch-action:none}
+  .tirador:active{cursor:grabbing}
+  /* La barrita mide 18 px de alto y el dedo pide 44. El área se estira con un
+     pseudoelemento en vez de con relleno para no gastarle 26 px de lista a la
+     hoja; hacia arriba cae sobre la cordillera, que no recibe toques. Es el
+     mismo truco que usa el ✕ del buscador un poco más abajo. */
+  .tirador::before{content:"";position:absolute;left:0;right:0;top:50%;
+    height:44px;transform:translateY(-50%)}
+  .tirador:focus-visible{outline:none;box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+    border-radius:var(--r-md)}
+  .barra-tirador{width:44px;height:4.5px;background:var(--borde-fuerte);border-radius:3px;margin:0 auto}
   /* La cabecera del día: la carita del animal que más se repite ese día al
      lado de la fecha, y "N eventos · M gratis". Es la señalética de los chips
      a 30 px, contestando qué clase de día es antes de leer la lista. */
@@ -130,6 +324,11 @@
   .agenda-cabecera h2{font-size:var(--t-lg);line-height:1.15}
   .agenda-cabecera p{margin:0;color:var(--tinta-suave);font-size:var(--t-sm)}
   .agenda-lista{overflow-y:auto;flex:1;overscroll-behavior:contain}
+  /* "Precio en la fuente" son cuatro palabras dentro de un tope de 78px: se
+     partía en tres líneas y chocaba con el título de la tarjeta. El panel pasó
+     de 370 a 400px y acá se le da el ancho que necesita. El tope de loica.css
+     habría que subirlo para el mapa también — va en el informe. */
+  .agenda .precio.sin-dato{max-width:104px}
 
   /* --- El buscador, en la barra del mes ---
      Esta página no tiene riel de fechas: su eje temporal es el mes, y la fila
@@ -191,31 +390,105 @@
   }
   .afinar .cuenta{opacity:.72;font-variant-numeric:tabular-nums}
 
+  /* ==================== CELULAR ====================
+     El reparto de arriba —mes arriba, agenda abajo, las dos peleando por el
+     mismo alto— no da en un teléfono: la rejilla de siete columnas quedaba en
+     celdas de 43 px cortadas por el panel y la agenda mostraba una tarjeta y
+     media. Cabía; no servía.
+
+     Acá el mes se queda con la pantalla entera y la agenda es una HOJA que se
+     arrastra encima, con tres alturas. Es el mismo mueble que ya usan
+     talleres.html y descuentos.html para el mapa y su lista: el mes se mira
+     completo, se toca un día, y la hoja sube cuando uno quiere leer.
+
+     No se cambia a una lista sin rejilla porque el día de la semana es el dato
+     que más se busca en una agenda de panoramas —"algo para el sábado"— y eso
+     solo se ve con las siete columnas alineadas. Lo que sobraba no era la
+     rejilla: era tenerla peleando con la lista. */
   @media(max-width:879px){
-    main{flex-direction:column;padding-bottom:var(--hueco-nav)}
-    /* La agenda se queda con lo que el mes no usa. Antes era el 46 % fijo y
-       la rejilla, con filas de 44 px, no cabía en lo que quedaba: los días 24
-       al 31 se pintaban debajo de la agenda y no se podían tocar. Ahora las
-       filas miden 34 y el mes completo entra en ~230 px; y si un teléfono es
-       más bajo todavía, la sección del mes scrollea en vez de esconder días. */
-    .calendario{padding:var(--e-3) var(--e-3) var(--e-2);gap:var(--e-2);overflow-y:auto;flex:none}
-    .agenda{width:auto;flex:1;min-height:150px;border-left:0;border-top:2.5px solid var(--contorno)}
-    .marca-ev,.mas-escritorio,.mascota-mes{display:none}
-    .rejilla{grid-auto-rows:minmax(34px,1fr);gap:4px;flex:none}
+    main{flex-direction:column;position:relative;overflow:hidden}
+    /* El relleno de abajo le reserva a la hoja su altura de reposo MÁS los 78px
+       de la cordillera con la Chinchilla parada encima: si la rejilla llegara
+       hasta la hoja, el animal le taparía el último lunes del mes. `--reposo`
+       lo escribe el JS al medir la ventana. Cuando la hoja SUBE, la Chinchilla
+       queda debajo de ella (no se mueve) y las celdas se cubren, y ahí está
+       bien: con la hoja arriba se está leyendo la lista, no eligiendo día. */
+    .calendario{
+      flex:1;min-height:0;gap:var(--e-2);
+      padding:0 var(--e-3) calc(var(--reposo,236px) + var(--hueco-nav) + 78px);
+    }
+    /* En celular la cordillera se pega al canto de la hoja: es el SUELO de la
+       Chinchilla y la línea que separa el mes de la lista. Baja con la hoja
+       —lee la misma variable— pero no sube con ella; el porqué está en la nota
+       de `.anfitriona`. */
+    .paseo-mes{
+      right:0;height:48px;z-index:2;
+      bottom:min(calc(var(--alto-panel,236px) + var(--hueco-nav)), calc(var(--reposo,236px) + var(--hueco-nav)));
+    }
+    /* La hoja. Bordes de tinta y esquinas grandes arriba, como el panel de
+       talleres: se lee como una hoja que se levanta, no como media pantalla. */
+    .agenda{
+      position:absolute;left:0;right:0;bottom:var(--hueco-nav);width:auto;flex:none;
+      height:var(--alto-panel,236px);max-height:88%;
+      border:2.5px solid var(--contorno);border-bottom:0;
+      border-radius:var(--r-xl) var(--r-xl) 0 0;z-index:4;
+      transition:height var(--medio);
+    }
+    .agenda.arrastrando{transition:none}
+    .tirador{display:block}
+    .agenda-cabecera{padding-top:var(--e-1)}
+    /* En la hoja en reposo el estado vacío tiene entre 80 y 150 px según la
+       pantalla: con el relleno de escritorio el botón del salto quedaba fuera. */
+    .agenda .vacio{padding:var(--e-4) var(--e-3)}
+    /* Dos filas de chips de 54 px dentro de una hoja de 236 dejaban la lista en
+       35: acá van más apretadas, sin bajar de los 40 de área táctil. */
+    .afinar-fila{padding:4px var(--e-3) 5px}
+    .afinar .chip{min-height:40px;padding:5px 11px 5px 8px}
+    .salto-dia{margin-top:var(--e-3)}
+    .rejilla{gap:4px}
     .encabezado-dias{gap:4px}
-    .dia{align-items:center;justify-content:center;gap:2px;padding:2px;border-radius:var(--r-sm)}
-    .dia-num{font-size:13px}
-    /* Puntos y total en UNA fila bajo el número: la celda baja de ~48 a ~38 px
-       y esos 60 px del mes se los queda la agenda. */
-    .dia .fila-movil{display:flex;align-items:center;justify-content:center;gap:3px;max-width:100%}
-    .puntos{display:flex;gap:2px;flex:none}
-    .fila-movil{display:flex}
-    .puntos i{width:5px;height:5px;border-radius:50%;background:var(--tono)}
-    /* El total real del día en vez de "+153": con las marcas escondidas, el
-       "+N" restaba las tres que nadie veía. */
-    .mas-movil{display:block;font-size:10.5px;color:var(--tinta-tenue);font-weight:700;padding:0;line-height:1}
-    .mes-titulo{font-size:var(--t-lg)}
-    .mes-nav{gap:6px}
+    .encabezado-dias span{text-align:center;padding-left:0}
+    /* La celda se reordena sin volver a pintarse: el número y la cuenta pasan
+       a la MISMA línea, centrados, y la barra queda debajo cruzando la celda.
+       Apilados en tres pisos, en 50 px de ancho, el número quedaba en 14 px y
+       la barra en 5. Ésta es la razón de que las cuatro piezas estén sueltas
+       en la celda y no anidadas: la maqueta cambia por punto de quiebre. */
+    .celda{
+      grid-template-columns:auto auto;justify-content:center;align-content:center;
+      row-gap:3px;column-gap:4px;padding:3px;border-radius:var(--r-sm);
+    }
+    .celda-num{grid-area:1/1;font-size:17px;padding:1px 5px;margin:0}
+    /* La carita de 22 px no cabe en una celda de 50 px de ancho. El animal del
+       día sigue estando —en la cabecera de la hoja, a un toque. */
+    .celda-quien{display:none}
+    .celda-cuenta{grid-area:1/2;align-self:baseline;font-size:11px}
+    .celda-barra{grid-area:2/1/3/3;justify-self:center;height:7px}
+    /* Pegajosos los dos: cuando el mes no cabe y la sección scrollea, la fila
+       del título con las flechas y el "Hoy" se iba de pantalla y para cambiar
+       de mes había que devolverse. Y los rótulos de los días son la leyenda de
+       las siete columnas: sin ellos la rejilla son 42 números sueltos.
+
+       El relleno de arriba se muda de la sección a esta fila: un pegajoso se
+       para en el borde del RELLENO del contenedor, así que con los 12 px
+       puestos en la sección quedaba una franja de 12 por la que se veían pasar
+       las celdas. Puestos acá, el fondo de la fila los cubre.
+       El `top:56` del segundo es el alto exacto del primero —44 de botones más
+       12 de relleno— para que queden pegados uno al otro. */
+    .mes-barra{flex-wrap:nowrap;gap:var(--e-2);
+      position:sticky;top:0;z-index:3;background:var(--fondo);padding-top:var(--e-3)}
+    .encabezado-dias{position:sticky;top:56px;z-index:3;background:var(--fondo)}
+    /* El medallón del mes se va: el mismo animal, más grande, está en la
+       cabecera de la hoja dos dedos más abajo, y sin él el título deja de
+       partirse en dos líneas. Eran 50 px que la fila no tenía. */
+    .mes-quien{display:none}
+    .mes-titulo{font-size:var(--t-md);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .mes-resumen{font-size:11px}
+    .mes-resumen b{font-size:var(--t-xs)}
+    /* En 390 px la fila del mes lleva el título, tres botones y la lupa. El
+       "· N gratis" es lo primero que sobra. */
+    .mes-resumen .gratis-mes{display:none}
+    .mes-nav{gap:6px;flex:none}
+    header .filtros{padding:var(--e-2) var(--e-3)}
     /* El buscador plegado: una lupa de 44 en la fila del mes; al tocarla la
        fila entera pasa a ser el campo y el mes y las flechas se esconden
        mientras se escribe. Con palabra escrita la lupa queda rellena. */
@@ -228,12 +501,28 @@
     .lupa:active{transform:translateY(3px);box-shadow:none}
     .lupa.activo{background:var(--tinta);color:var(--fondo-elevado);transform:translateY(3px);box-shadow:none}
     .campo-buscar{display:none}
-    .mes-barra.buscando .mes-titulo,.mes-barra.buscando .mes-nav{display:none}
+    .mes-barra.buscando .mes-texto,.mes-barra.buscando .mes-nav{display:none}
     .mes-barra.buscando .campo-buscar{display:flex;flex:1;max-width:none}
   }
-  @media(max-width:879px) and (max-height:560px){
-    .rejilla{grid-auto-rows:minmax(30px,1fr)}
-    .dia-num{font-size:12px}
+  /* Bajo 480 px de ancho la celda mide 50 y la cifra no cabe al lado del
+     número: "156" quedaba cortada en "15" y media. Se va la cifra y queda el
+     número con su barra, que es lo que de verdad se mira en la rejilla —cuánto
+     hay y de qué clase. El número exacto está a un toque, en la cabecera de la
+     hoja. De 480 para arriba (un teléfono grande acostado, una tableta) los dos
+     caben y los dos van. */
+  @media(max-width:479px){
+    .celda-cuenta{display:none}
+    .celda-num{font-size:18px}
+  }
+  /* Un teléfono acostado: la fila del mes y los rótulos se comen la mitad del
+     alto útil, así que la Chinchilla se achica y la barra adelgaza. */
+  @media(max-width:879px) and (max-height:460px){
+    .celda-num{font-size:15px}
+    .celda-cuenta{display:none}
+    .celda-barra{height:6px}
+    .anfitriona svg{width:56px;height:56px}
+    .calendario{padding-bottom:calc(var(--reposo,236px) + var(--hueco-nav) + 58px)}
+    .paseo-mes{height:36px}
   }
 </style>
 </head>
@@ -247,7 +536,13 @@
   <main>
     <section class="calendario">
       <div class="mes-barra">
-        <div class="mes-titulo" id="mes-titulo"></div>
+        <!-- El animal del mes deja de ser marca de agua detrás de la rejilla y
+             pasa a la cabecera, en el mismo medallón que usa el día. -->
+        <span class="mes-quien" id="mes-quien" aria-hidden="true"></span>
+        <div class="mes-texto">
+          <div class="mes-titulo" id="mes-titulo"></div>
+          <p class="mes-resumen" id="mes-resumen"></p>
+        </div>
         <div class="mes-nav">
           <button id="ant" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <button class="hoy" id="btn-hoy" type="button">Hoy</button>
@@ -264,12 +559,13 @@
           <button type="button" class="borra-buscar" id="borra-buscar" hidden>✕</button>
         </div>
       </div>
-      <div class="encabezado-dias" id="encabezado-dias"></div>
+      <div class="encabezado-dias" id="encabezado-dias" aria-hidden="true"></div>
       <div class="rejilla" id="rejilla"></div>
-      <div class="mascota-mes" id="mascota-mes" aria-hidden="true"></div>
     </section>
 
-    <aside class="agenda">
+    <aside class="agenda" id="agenda">
+      <!-- El tirador solo se ve en celular; en escritorio el panel es fijo. -->
+      <div class="tirador" id="tirador" role="button" tabindex="0"><div class="barra-tirador"></div></div>
       <div class="agenda-cabecera">
         <span class="quien" id="agenda-quien" aria-hidden="true"></span>
         <h2 id="agenda-titulo"></h2>
@@ -278,16 +574,36 @@
       <div class="afinar" id="afinar"></div>
       <div class="agenda-lista" id="agenda-lista"></div>
     </aside>
+
+    <!-- La banda de cierre del sitio y la Chinchilla parada encima. Las dos
+         cuelgan de <main> y no de la sección del mes: la sección scrollea
+         cuando la ventana es baja y ellas tienen que quedarse quietas.
+         `montarCordillera()` de loica.js rellena el #cordillera vacío sola. -->
+    <div class="paseo-mes" id="paseo-mes" aria-hidden="true">
+      <div id="cordillera"></div>
+    </div>
+    <span class="anfitriona" id="anfitriona" aria-hidden="true"></span>
   </main>
 </div>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegacion principal"></nav>
 
-<script src="loica.js?v=24"></script>
+<script src="loica.js?v=25"></script>
 <script>
 let EVENTOS = [], filtroCat = null, soloGratis = false;
 let busqueda = "", filtroSub = null;
 let mesVisible = new Date(), diaElegido = new Date();
+// El día más cargado del mes visible. Lo fija `pintarMes` y lo leen las barras
+// de la rejilla y la pose de la Chinchilla: las dos comparan contra el mes.
+let techoDelMes = 0;
+// La pose que la Chinchilla tiene puesta. Arriba del todo y no al lado de su
+// función porque se dibuja antes del JSON, y un `let` más abajo la deja en
+// zona muerta: "Cannot access 'poseAnfitriona' before initialization".
+let poseAnfitriona = "";
+// Rehace el reparto de la hoja cuando cambia el número de semanas del mes. La
+// declara `montarHoja`; va arriba por lo mismo que `poseAnfitriona` —el boot la
+// llama antes de llegar a la línea donde está escrita.
+let ajustarHoja = null;
 
 pintarBarra("calendario.html");
 
@@ -315,23 +631,38 @@ const visibles = () => EVENTOS.filter(ev =>
    tocaras. Sin esto los números de los chips se cuentan sobre la base entera y
    mienten: un "Reggaetón 40" que al tocarlo muestra 3 es peor que no ponerlo. */
 const visiblesSalvo = salvo => EVENTOS.filter(ev =>
-  (!soloGratis || ev.gratis) &&
+  (salvo === "gratis" || !soloGratis || ev.gratis) &&
   (salvo === "cat" || !filtroCat || ev.categoria === filtroCat) &&
   (salvo === "sub" || !filtroSub || ev.subcategoria === filtroSub) &&
   coincideBusqueda(ev, busqueda));
 
+/* Recorta una lista al mes que se está mirando. La usan las cuentas de los
+   chips y el resumen de la cabecera: los dos hablan del mes, no del catastro. */
+const delMes = lista => lista.filter(ev =>
+  ev.fecha.getMonth() === mesVisible.getMonth() &&
+  ev.fecha.getFullYear() === mesVisible.getFullYear());
+
 const hayFiltros = () => busqueda || filtroCat || filtroSub || soloGratis;
 
 // Todo lo que repinta la página, junto: son tres cosas y olvidar una deja la
-// rejilla del mes mostrando puntos de un filtro que ya no está puesto.
+// rejilla del mes con barras de un filtro que ya no está puesto.
 const repintar = () => { pintarFiltros(); pintarMes(); mostrarDia(diaElegido); };
 
 /* La cabecera y el esqueleto se pintan ANTES de pedir el JSON: los chips fijos
    no dependen de los datos y la agenda late con tres filas vacías en vez de
    quedar en blanco el segundo que tarda eventos.json. */
 montarBuscador();
+montarHoja();
+/* La cordillera del pie va con el tono de siempre —el morado de la portada— y
+   no con el azul de esta página: la Chinchilla ES azul, y sobre cerros azules
+   se perdía. La monta sola `montarCordillera()` de loica.js, que busca un
+   #cordillera vacío al cargar el documento. */
 pintarFiltros();
 pintarMes();
+/* La Chinchilla se dibuja ANTES del JSON, igual que el esqueleto: si esperara
+   a `repintar()`, la página aparecería sin nadie el segundo que tarda
+   eventos.json, y sin nadie para siempre si el JSON se cae. */
+pintarAnfitriona(1, 0);
 document.getElementById("agenda-lista").innerHTML = esqueleto(3);
 cargarEventos().then(evs => {
   EVENTOS = evs;
@@ -341,9 +672,10 @@ cargarEventos().then(evs => {
   repintar();
 }).catch(() => {
   // Sin esto, si el JSON falla quedaba "Agosto 2026" con 42 celdas vacías y
-  // ningún aviso. Misma salida que el mapa.
+  // ningún aviso. Misma salida que el mapa. Sin mascota: la de la página ya
+  // está puesta y sigue siendo una sola.
   document.getElementById("agenda-lista").innerHTML =
-    `<div class="vacio">${cuerpo("chinchilla","var(--c-cultura)",88,{pose:"durmiendo"})}
+    `<div class="vacio">
      <p><b>${IDIOMA === "en" ? "Couldn't load events" :
              IDIOMA === "pt" ? "Não consegui carregar os eventos" :
              "No pude cargar los eventos"}</b><br>
@@ -367,27 +699,38 @@ function pintarFiltros(){
   };
   // El Degú es la mascota de lo gratis desde que el Guarén entró a los
   // descuentos y el Pudú se quedó con el aire libre.
-  agregar(`${carita("degu", soloGratis ? "#fff" : "#2E7D5B", 22)} ${t("gratis")}`,
-          soloGratis, () => soloGratis = !soloGratis, "es-gratis");
-  /* Ordenadas por cuántas hay y no alfabéticamente: el riel se desplaza de
+  const gratisMes = delMes(visiblesSalvo("gratis")).filter(ev => ev.gratis).length;
+  agregar(`${carita("degu", soloGratis ? "#fff" : "#2E7D5B", 22)} ${t("gratis")}`
+          + ` <span class="cuenta">${gratisMes}</span>`,
+          soloGratis, () => soloGratis = !soloGratis,
+          "es-gratis" + (gratisMes ? "" : " sin-mes"));
+  /* La cuenta de cada chip es la del MES QUE SE ESTÁ MIRANDO, no la del
+     catastro entero, y por eso la banda deja de ser doce botones iguales: es
+     la leyenda de las barras de la rejilla. Un chip de "Música 412" al lado de
+     uno de "Deporte 3" ya no pesan lo mismo, y al cambiar de mes las cuentas
+     cambian, que es como se aprende qué describe la banda.
+
+     Ordenadas por cuántas hay y no alfabéticamente: el riel se desplaza de
      lado y en un teléfono se ven cuatro chips, así que el orden decide qué
      queda al alcance del pulgar. Alfabético dejaba "Aire libre" (9 eventos)
      primero y "Deporte" (1.071) fuera de pantalla. */
   const cuantosPorCat = {};
-  visiblesSalvo("cat").forEach(e => cuantosPorCat[e.categoria] = (cuantosPorCat[e.categoria] || 0) + 1);
+  delMes(visiblesSalvo("cat")).forEach(e =>
+    cuantosPorCat[e.categoria] = (cuantosPorCat[e.categoria] || 0) + 1);
   [...new Set(EVENTOS.map(e => e.categoria))]
     .sort((a,b) => (cuantosPorCat[b] || 0) - (cuantosPorCat[a] || 0)
                 || cat(a)[IDIOMA].localeCompare(cat(b)[IDIOMA]))
     .forEach(c => {
-      const info = cat(c);
-      agregar(`${carita(info.mascota, filtroCat === c ? "#fff" : info.hex, 22)} ${info[IDIOMA]}`,
+      const info = cat(c), n = cuantosPorCat[c] || 0;
+      agregar(`${carita(info.mascota, filtroCat === c ? "#fff" : info.hex, 22)} ${info[IDIOMA]}`
+              + ` <span class="cuenta">${n}</span>`,
               filtroCat === c, () => {
                 // Cambiar o soltar la categoría BORRA la subcategoría: un
                 // `filtroSub` de fiestas colgado en teatro deja el mes entero
-                // sin puntos y parece que la página se rompió.
+                // sin barras y parece que la página se rompió.
                 filtroCat = filtroCat === c ? null : c;
                 filtroSub = null;
-              });
+              }, n ? "" : "sin-mes");
     });
   pintarAfinar();
 }
@@ -507,6 +850,115 @@ function montarBuscador(){
   sincronizarBuscador();
 }
 
+/* ---------- LA HOJA DE LA AGENDA (solo en celular) ----------
+   Calcado de talleres.html y descuentos.html, que resuelven el mismo reparto:
+   una superficie grande detrás —allá el mapa, acá el mes— y una lista que se
+   levanta encima. Tres alturas: en reposo se ve el día con su primera tarjeta
+   y el mes entero arriba; arrastrando (o tocando el tirador, o con las flechas
+   si se llegó con el teclado) sube a leer.
+
+   `--reposo` va en #app y no cambia al arrastrar: es el alto que la rejilla
+   reserva abajo. Si se moviera con el dedo, las 42 celdas se recalcularían en
+   cada cuadro del gesto. */
+function montarHoja(){
+  const app = document.getElementById("app");
+  const hoja = document.getElementById("agenda");
+  const tirador = document.getElementById("tirador");
+  /* El reposo NO es un porcentaje de la ventana: es lo que sobra después de que
+     el mes tenga lo suyo. Con un 35 % fijo, una ventana de 700 px en maqueta de
+     celular —un teléfono acostado, media pantalla de tableta— le daba 205 px a
+     la hoja y las seis semanas ya no cabían: la última fila se dibujaba debajo
+     de la cordillera y el 31 quedaba tapado por la Chinchilla. Acá se reserva
+     primero el piso del mes y la hoja se queda con el resto.
+       166 = 12 de relleno + 44 de la fila del mes + 16 de rótulos + 16 de
+             huecos + 78 del hueco de la Chinchilla sobre los cerros.
+       224 = seis semanas al mínimo de 34 px con sus cinco huecos de 4. */
+  const alturas = () => {
+    const disponible = hoja.parentElement.clientHeight;
+    /* El hueco de la nav se MIDE y no se lee de `--hueco-nav`: la variable es un
+       `calc()` con un `env()` dentro y `getPropertyValue` la devuelve sin
+       resolver, así que `parseFloat` daba NaN y el reparto se iba 58 px. */
+    const nav = document.getElementById("nav-inferior").offsetHeight || 0;
+    const filas = +document.getElementById("rejilla").style.getPropertyValue("--filas") || 6;
+    const pisoDelMes = 172 + nav + (filas * 46 + (filas - 1) * 4);
+    /* Con una categoría puesta, la hoja gana además la fila de subcategorías:
+       si no, "afinar" y "limpiar filtros" se comían el reposo entero y bajo
+       ellos no quedaba ni media tarjeta. Solo si sobra alto. */
+    const afinar = document.getElementById("afinar").offsetHeight;
+    /* El piso de 168 es tirador + cabecera del día + una tarjeta a medias: bajo
+       eso la hoja deja de contestar "qué hay" y obliga a arrastrar siempre. En
+       una pantalla donde el mes no cabe igual, es preferible que scrollee el
+       mes —que es una superficie que se recorre— a dejar la lista en un hilo. */
+    const base = Math.min(236, Math.max(168, disponible - pisoDelMes));
+    /* La fila de subcategorías se SUMA al reposo y no compite con él: el alto
+       se lo cede el mes, que a cambio scrollea. Con una categoría puesta uno ya
+       eligió qué mirar, y lo que quiere ver es la lista. El tope del 55 % deja
+       el reposo por debajo del primer tirón, para que el tirador siga sirviendo
+       de algo. */
+    const reposo = Math.round(Math.min(disponible * 0.55, base + afinar));
+    return [reposo, Math.round(disponible * 0.62), Math.round(disponible * 0.88)];
+  };
+  let indice = 0, arrastrando = false, inicioY = 0, inicioAlto = 0;
+  // `pintarMes` la llama cuando cambia el número de semanas: un mes de cinco
+  // filas le deja 50 px más a la hoja que uno de seis.
+  ajustarHoja = () => fijar(indice);
+  const fijar = i => {
+    const opciones = alturas();
+    indice = Math.max(0, Math.min(2, i));
+    app.style.setProperty("--reposo", opciones[0] + "px");
+    app.style.setProperty("--alto-panel", opciones[indice] + "px");
+  };
+  fijar(0);
+  const rotular = () => tirador.setAttribute("aria-label",
+    {es:"Arrastra para ver más panoramas del día",
+     en:"Drag to see more of the day",
+     pt:"Arraste para ver mais do dia"}[IDIOMA]);
+  rotular();
+  addEventListener("loica:idioma", rotular);
+
+  tirador.addEventListener("pointerdown", e => {
+    arrastrando = true; inicioY = e.clientY; inicioAlto = hoja.clientHeight;
+    hoja.classList.add("arrastrando");
+    tirador.setPointerCapture(e.pointerId);
+  });
+  tirador.addEventListener("pointermove", e => {
+    if(!arrastrando) return;
+    const alto = Math.min(hoja.parentElement.clientHeight * 0.88,
+                          Math.max(120, inicioAlto - (e.clientY - inicioY)));
+    app.style.setProperty("--alto-panel", alto + "px");
+  });
+  const soltar = () => {
+    if(!arrastrando) return;
+    arrastrando = false;
+    hoja.classList.remove("arrastrando");
+    const actual = hoja.clientHeight, opciones = alturas();
+    fijar(opciones.indexOf(opciones.reduce((a, b) =>
+      Math.abs(b - actual) < Math.abs(a - actual) ? b : a)));
+  };
+  tirador.addEventListener("pointerup", soltar);
+  tirador.addEventListener("pointercancel", soltar);
+  tirador.addEventListener("click", () => { if(!arrastrando) fijar(indice === 2 ? 0 : indice + 1); });
+  tirador.addEventListener("keydown", e => {
+    if(e.key === "ArrowUp"){ e.preventDefault(); fijar(indice + 1); }
+    if(e.key === "ArrowDown"){ e.preventDefault(); fijar(indice - 1); }
+    if(e.key === "Enter" || e.key === " "){ e.preventDefault(); fijar(indice === 2 ? 0 : indice + 1); }
+  });
+  addEventListener("resize", () => fijar(indice));
+}
+
+/* El próximo día que tenga algo CON LOS FILTROS PUESTOS, mirando hasta dos
+   meses adelante. Dos meses porque el catastro llega hasta ahí; más allá la
+   respuesta sería siempre "no hay" y eso ya lo dice el mes vacío. */
+function proximoDiaCon(desde){
+  const agenda = porDia();
+  const d = new Date(desde);
+  for(let i = 0; i < 62; i++){
+    d.setDate(d.getDate() + 1);
+    if((agenda[claveDia(d)] || []).length) return new Date(d);
+  }
+  return null;
+}
+
 function porDia(){
   const mapa = {};
   visibles().forEach(ev => (mapa[claveDia(ev.fecha)] ||= []).push(ev));
@@ -514,8 +966,8 @@ function porDia(){
 }
 
 /* La categoría con más panoramas de una lista: es la que pone la cara en la
-   cabecera del día y la mascota grande del mes. Sin lista, la Chinchilla,
-   que es el color de esta página. */
+   cabecera del día, en la celda de la rejilla y en el medallón del mes. Sin
+   lista, la Chinchilla, que es el color de esta página. */
 function dominante(lista){
   const cuenta = {};
   lista.forEach(ev => cuenta[ev.categoria] = (cuenta[ev.categoria] || 0) + 1);
@@ -523,11 +975,52 @@ function dominante(lista){
   return mejor ? cat(mejor) : {mascota:"chinchilla", hex:"var(--c-cultura)"};
 }
 
+/* ---------- LA BARRA DEL DÍA ----------
+   Reemplaza a las tres píldoras con título recortado y al "+153". Tres títulos
+   sacados al azar de ciento cincuenta y seis no ayudan a elegir nada: lo que
+   sirve es cuánto hay y de qué clase es, y eso cabe en una barra.
+
+   El desglose se corta en TRES familias y el resto se junta en un tramo de
+   tinta tenue. Con ocho tramos en 120px cada uno queda en dos píxeles y la
+   barra deja de leerse; con tres se distinguen y el resto sigue contando para
+   el largo. Quien quiera el desglose fino tiene los chips: apretar una
+   categoría vuelve a dibujar el mes entero solo con ella. */
+function desglose(lista, tope = 3){
+  const cuenta = {};
+  lista.forEach(ev => cuenta[ev.categoria] = (cuenta[ev.categoria] || 0) + 1);
+  const orden = Object.entries(cuenta).sort((a, b) => b[1] - a[1]);
+  return {
+    cabeza: orden.slice(0, tope),
+    resto: orden.slice(tope).reduce((s, x) => s + x[1], 0),
+  };
+}
+
+/* El largo, contra el día más cargado del mes visible.
+   Lineal no sirve: en agosto el día más cargado tiene 156 y la mediana 3, y
+   todo lo que no es el fin de semana quedaría en un píxel. El exponente .55
+   deja al de 1 en un 10 % visible y al de 16 en un 29 %, sin dejar de decir
+   que el de 156 es otra cosa. El piso de 6 en el techo es para los meses
+   flacos: en diciembre el día más lleno tiene 5, y sin piso un día de 4
+   dibujaría una barra al tope y diría "diciembre está imperdible". */
+function largoBarra(n, techo){
+  if(!n) return 0;
+  return Math.max(9, Math.min(100, Math.round(100 * Math.pow(n / Math.max(6, techo), 0.55))));
+}
+
+function barraDia(lista, techo){
+  const {cabeza, resto} = desglose(lista);
+  const tramos = cabeza.map(([c, n]) =>
+      `<i style="flex:${n};--seg:${cat(c).tintaVar}"></i>`).join("")
+    + (resto ? `<i class="resto" style="flex:${resto}"></i>` : "");
+  return `<span class="celda-barra" style="--largo:${largoBarra(lista.length, techo)}%">${tramos}</span>`;
+}
+
 function pintarMes(){
+  const rejilla = document.getElementById("rejilla");
   document.getElementById("mes-titulo").textContent =
     `${t("meses")[mesVisible.getMonth()]} ${mesVisible.getFullYear()}`;
   document.getElementById("encabezado-dias").innerHTML =
-    t("dias").map(d => `<span>${d}</span>`).join("");
+    t("dias").map(d => `<span>${escapar(d)}</span>`).join("");
   document.getElementById("btn-hoy").textContent = t("hoyBoton");
 
   const agenda = porDia();
@@ -537,54 +1030,225 @@ function pintarMes(){
   const inicio = new Date(primero);
   inicio.setDate(1 - desplazamiento);
 
-  const rejilla = document.getElementById("rejilla");
-  rejilla.innerHTML = "";
-  const hoy = new Date();
-  const delMes = visibles().filter(ev => ev.fecha.getMonth() === mesVisible.getMonth()
-                                      && ev.fecha.getFullYear() === mesVisible.getFullYear());
-  const dm = dominante(delMes);
-  document.getElementById("mascota-mes").innerHTML = cuerpo(dm.mascota, dm.hex, 150);
+  // La cabecera del mes: el mismo medallón + cuentas que la del día.
+  const deEsteMes = delMes(visibles());
+  const dm = dominante(deEsteMes);
+  document.getElementById("mes-quien").innerHTML = carita(dm.mascota, dm.hex, 32);
+  const gratisMes = deEsteMes.filter(ev => ev.gratis).length;
+  document.getElementById("mes-resumen").innerHTML =
+    `<b>${deEsteMes.length.toLocaleString(localeDe())}</b> `
+    + escapar(deEsteMes.length === 1 ? t("evento") : t("eventos"))
+    + (gratisMes ? `<span class="gratis-mes"> · <b>${gratisMes.toLocaleString(localeDe())}</b> `
+                   + escapar(t("gratis").toLowerCase()) + `</span>` : "");
 
+  const hoy = new Date();
+  const arranqueHoy = new Date(hoy); arranqueHoy.setHours(0, 0, 0, 0);
+
+  /* Primero los días, después las celdas: el largo de cada barra y el peso de
+     cada semana se miden contra el mes entero y hay que tenerlo antes.
+
+     La sexta semana va ENTERA o no va. Antes se cortaba en el primer día del
+     mes siguiente, y un mes que termina en lunes —agosto de 2026— dejaba una
+     fila con una sola celda y seis huecos, que se lee como página rota. Si esa
+     semana no tiene ningún día del mes visible, no se dibuja. */
+  const celdas = [];
   for(let i = 0; i < 42; i++){
     const dia = new Date(inicio);
     dia.setDate(inicio.getDate() + i);
-    if(i >= 35 && dia.getMonth() !== mesVisible.getMonth()) break;
+    celdas.push({dia, lista: agenda[claveDia(dia)] || []});
+  }
+  if(celdas.slice(35).every(c => c.dia.getMonth() !== mesVisible.getMonth()))
+    celdas.length = 35;
+  const techo = techoDelMes = Math.max(0, ...celdas
+    .filter(c => c.dia.getMonth() === mesVisible.getMonth())
+    .map(c => c.lista.length));
 
-    const delDia = agenda[claveDia(dia)] || [];
+  /* El reparto del alto. La semana del 24 al 30 de agosto tiene 492 panoramas
+     y la del 3 al 9 tiene nueve: darles la misma franja era regalarle más de
+     la mitad de la página a celdas vacías. El peso va con raíz cuadrada y tope
+     de 1,8 contra 1, así que la semana viva respira sin que la muerta se
+     aplaste hasta no poder tocarse: entre la más chica y la más grande hay
+     poco menos del doble, no cincuenta veces. */
+  const filas = Math.ceil(celdas.length / 7);
+  const porSemana = [];
+  for(let s = 0; s < filas; s++)
+    porSemana.push(celdas.slice(s * 7, s * 7 + 7).reduce((n, c) => n + c.lista.length, 0));
+  const mayor = Math.max(1, ...porSemana);
+  /* El piso de la fila va en `clamp` y no en un número fijo: en una ventana
+     baja —un teléfono acostado, un portátil de 13"— seis filas de 52 no caben
+     y la rejilla se desbordaba fuera del recuadro, que tiene `overflow:hidden`,
+     así que la última semana simplemente desaparecía. */
+  rejilla.style.setProperty("--filas", filas);
+  if(ajustarHoja) ajustarHoja();
+  rejilla.style.gridTemplateRows = porSemana
+    .map(n => `minmax(clamp(32px, 4.7vh, 52px), ${(1 + 0.45 * Math.sqrt(n / mayor)).toFixed(3)}fr)`)
+    .join(" ");
+
+  rejilla.innerHTML = "";
+  // Un solo tabulador para toda la rejilla: 42 paradas de Tab para llegar al
+  // panel de la agenda no es navegable. Se entra al día elegido y de ahí se
+  // recorre con las flechas, como en cualquier calendario.
+  let hayFoco = false;
+  celdas.forEach(({dia, lista}) => {
+    const fuera = dia.getMonth() !== mesVisible.getMonth();
+    const elegido = mismaFecha(dia, diaElegido);
     const celda = document.createElement("button");
     celda.type = "button";
-    celda.className = "dia"
-      + (delDia.length ? " con" : " sin")
-      + (dia.getMonth() !== mesVisible.getMonth() ? " fuera" : "")
+    celda.dataset.clave = claveDia(dia);
+    celda.className = "celda"
+      + (lista.length ? " con" : " sin")
+      + (fuera ? " fuera" : "")
+      + (!fuera && dia < arranqueHoy ? " pasado" : "")
       + (mismaFecha(dia, hoy) ? " hoy" : "")
-      + (mismaFecha(dia, diaElegido) ? " elegido" : "");
+      + (elegido ? " elegido" : "");
+    if(elegido) hayFoco = true;
+    celda.tabIndex = elegido ? 0 : -1;
+
+    // El nombre accesible dice lo que la celda dibuja: la fecha entera —el
+    // rótulo "lun/mar/mié" es decorativo y va aria-hidden—, cuántos, cuántos
+    // gratis y de qué familias. Las familias son lo único que en la celda va
+    // solo en color, así que acá van con su nombre.
+    const {cabeza} = desglose(lista);
+    const gratis = lista.filter(ev => ev.gratis).length;
     celda.setAttribute("aria-label",
-      `${dia.getDate()} ${t("meses")[dia.getMonth()]}, ${delDia.length} ${t("eventos")}`);
+      dia.toLocaleDateString(localeDe(), {weekday:"long", day:"numeric", month:"long"})
+      + `, ${lista.length} ${lista.length === 1 ? t("evento") : t("eventos")}`
+      + (gratis ? `, ${gratis} ${t("gratis").toLowerCase()}` : "")
+      + (cabeza.length ? ": " + cabeza.map(([c]) => cat(c)[IDIOMA]).join(", ") : ""));
+    celda.setAttribute("aria-pressed", elegido);
 
-    const marcas = delDia.slice(0,3).map(ev => {
-      const info = cat(ev.categoria);
-      return `<span class="marca-ev${ev.gratis ? " libre" : ""}"
-        style="--tono:${info.tintaVar};--punto:${info.hex};--tono-suave:${info.hex}1f">
-        <i></i>${escapar(ev.titulo)}</span>`;
-    }).join("");
-    const puntos = delDia.slice(0,3).map(ev =>
-      `<i style="--tono:${ev.gratis ? "var(--gratis)" : cat(ev.categoria).hex}"></i>`).join("");
-
-    celda.innerHTML = `<span class="dia-num">${dia.getDate()}</span>
-      ${marcas}
-      ${delDia.length > 3 ? `<span class="mas mas-escritorio">+${delDia.length - 3}</span>` : ""}
-      ${delDia.length ? `<span class="fila-movil"><span class="puntos">${puntos}</span><span class="mas mas-movil">${delDia.length}</span></span>` : ""}`;
-    celda.onclick = () => { elegirDia(dia); };
+    /* Las cuatro piezas van SUELTAS y no anidadas en dos filas: la celda es
+       una rejilla y en escritorio las apila (número+animal / cuenta / barra)
+       mientras que en celular pone el número y la cuenta en la misma línea con
+       la barra debajo. Anidadas, esa segunda disposición no se podía armar
+       desde CSS y había que pintar dos veces. */
+    const info = dominante(lista);
+    celda.innerHTML =
+      `<span class="celda-num">${dia.getDate()}</span>`
+      + (lista.length
+         ? `<span class="celda-quien">${carita(info.mascota, info.hex, 22)}</span>`
+           + `<span class="celda-cuenta">${lista.length.toLocaleString(localeDe())}</span>`
+           + barraDia(lista, techo)
+         : "");
+    celda.onclick = () => irADia(dia);
     rejilla.appendChild(celda);
+  });
+  // Si el día elegido quedó en otro mes, la entrada es el primero del visible.
+  if(!hayFoco && rejilla.children.length){
+    const uno = rejilla.querySelector(`.celda[data-clave="${claveDia(primero)}"]`) || rejilla.firstChild;
+    uno.tabIndex = 0;
   }
+  requestAnimationFrame(asomarSemanaElegida);
+}
+
+/* Cuando el mes no cabe entero —un teléfono de 667 px de alto, una ventana
+   baja— la sección scrollea, y arriba del todo la semana que se ve es la
+   primera del mes, que en agosto está muerta. La semana que importa es la del
+   día elegido, y casi siempre es la de hoy. Se asoma sola.
+   El límite de abajo no es el borde de la sección sino el borde del relleno:
+   ahí empieza la cordillera y debajo está la hoja, y una celda "visible" detrás
+   de los cerros no está visible. */
+function asomarSemanaElegida(){
+  const cal = document.querySelector(".calendario");
+  if(cal.scrollHeight <= cal.clientHeight + 1) return;
+  const celda = cal.querySelector(".celda.elegido");
+  if(!celda) return;
+  const relleno = parseFloat(getComputedStyle(cal).paddingBottom) || 0;
+  const caja = cal.getBoundingClientRect(), dia = celda.getBoundingClientRect();
+  const abajo = caja.bottom - relleno;
+  if(dia.bottom > abajo) cal.scrollTop += dia.bottom - abajo + 6;
+  else if(dia.top < caja.top + 8) cal.scrollTop -= caja.top + 8 - dia.top;
 }
 
 /* Elegir un día: se repinta el mes (para mover el borde), se muestra la
-   agenda y el día queda en la URL. */
-function elegirDia(dia){
+   agenda y el día queda en la URL. Si el día es del mes vecino —tocar el 1 de
+   septiembre desde la rejilla de agosto— el mes salta con él, que es lo que
+   uno espera y lo que antes no pasaba: la celda se elegía y quedaba fuera de
+   la vista. */
+function irADia(dia, enfocar = false){
   diaElegido = dia;
+  if(dia.getMonth() !== mesVisible.getMonth() || dia.getFullYear() !== mesVisible.getFullYear())
+    mesVisible = new Date(dia.getFullYear(), dia.getMonth(), 1);
   history.replaceState(null, "", "#" + claveDia(dia));
-  pintarMes(); mostrarDia(dia);
+  repintar();
+  if(enfocar){
+    const celda = document.querySelector(`.celda[data-clave="${claveDia(dia)}"]`);
+    if(celda) celda.focus();
+  }
+}
+
+/* Cambiar de mes deja el panel de la agenda en un día del mes ANTERIOR, y ese
+   desajuste es lo que hacía que las flechas se sintieran rotas. Al cambiar,
+   la agenda se para en el primer día del mes que tenga algo —hoy si el mes es
+   el de hoy— y así el mes y el panel hablan siempre de lo mismo. */
+function irAMes(delta){
+  const nuevo = new Date(mesVisible.getFullYear(), mesVisible.getMonth() + delta, 1);
+  const hoy = new Date();
+  mesVisible = nuevo;
+  if(nuevo.getMonth() === hoy.getMonth() && nuevo.getFullYear() === hoy.getFullYear()){
+    irADia(hoy);
+    return;
+  }
+  const agenda = porDia();
+  const ultimo = new Date(nuevo.getFullYear(), nuevo.getMonth() + 1, 0).getDate();
+  let destino = nuevo;
+  for(let d = 1; d <= ultimo; d++){
+    const cand = new Date(nuevo.getFullYear(), nuevo.getMonth(), d);
+    if((agenda[claveDia(cand)] || []).length){ destino = cand; break; }
+  }
+  irADia(destino);
+}
+
+/* Las flechas dentro de la rejilla mueven el DÍA, no el mes: es lo que hace
+   cualquier calendario y sin eso quien navega con teclado no tenía forma de
+   recorrerlo. Si el salto cae fuera del mes, el mes cambia con él. */
+function moverFoco(e){
+  const pasos = {ArrowLeft:-1, ArrowRight:1, ArrowUp:-7, ArrowDown:7, PageUp:-28, PageDown:28};
+  let destino = null;
+  if(pasos[e.key] !== undefined){
+    destino = new Date(diaElegido);
+    destino.setDate(destino.getDate() + pasos[e.key]);
+  } else if(e.key === "Home"){
+    destino = new Date(diaElegido);
+    destino.setDate(destino.getDate() - ((destino.getDay() + 6) % 7));
+  } else if(e.key === "End"){
+    destino = new Date(diaElegido);
+    destino.setDate(destino.getDate() + (6 - ((destino.getDay() + 6) % 7)));
+  }
+  if(!destino) return;
+  e.preventDefault();
+  irADia(destino, true);
+}
+
+/* ---------- LA CHINCHILLA ----------
+   La anfitriona de esta página, y la única de las once mascotas que aparece
+   acá: parada en la cordillera al pie del mes en escritorio, posada en el
+   canto de la hoja de la agenda en celular. Es un solo nodo y sale entera.
+
+   No es un adorno quieto: la POSE dice cómo viene el día que está elegido, que
+   es justo la pregunta que uno se hace mirando la rejilla.
+     durmiendo   → el día no tiene nada (o los filtros lo vaciaron)
+     celebrando  → es uno de los días grandes del mes (60 % del más cargado)
+     posada      → un día normal
+   Los tics de reposo (las orejas alternadas, `m-oreja` en loica.css) se
+   encienden con {anima:true}; la entrada `m-tarde` —la Chinchilla llega tarde,
+   que es su historia— la dispara la clase `entra` en el contenedor y se retira
+   a los 3 s. `prefers-reduced-motion` apaga las dos en loica.css y deja el
+   dibujo en su fotograma de reposo; la POSE, en cambio, se conserva: es dato,
+   no movimiento. */
+function pintarAnfitriona(cuantos, techo){
+  const pose = !cuantos ? (hayFiltros() ? "posada" : "durmiendo")
+             : cuantos >= Math.max(4, techo * 0.6) ? "celebrando" : "posada";
+  if(pose === poseAnfitriona) return;
+  poseAnfitriona = pose;
+  const nido = document.getElementById("anfitriona");
+  // El tamaño real lo manda el CSS (92 en escritorio, 78 en celular); acá va
+  // el 104 solo para que `cuerpo()` dibuje el animal completo y no la cabeza.
+  nido.innerHTML = cuerpo("chinchilla", "var(--c-cultura)", 104, {pose, anima:true});
+  if(nido.dataset.entro) return;
+  nido.dataset.entro = "1";
+  nido.classList.add("entra");
+  setTimeout(() => nido.classList.remove("entra"), 3000);
 }
 
 function mostrarDia(dia){
@@ -593,6 +1257,7 @@ function mostrarDia(dia){
      solo por fecha encabezaba la agenda del día. Mismo criterio que el mapa. */
   const delDia = (porDia()[claveDia(dia)] || []).slice().sort((a,b) =>
     (enCartelera(a) ? 1 : 0) - (enCartelera(b) ? 1 : 0) || a.fecha - b.fecha);
+  pintarAnfitriona(delDia.length, techoDelMes);
   document.getElementById("agenda-titulo").textContent =
     dia.toLocaleDateString(localeDe(), {weekday:"long", day:"numeric", month:"long"});
   const gratis = delDia.filter(ev => ev.gratis).length;
@@ -607,12 +1272,52 @@ function mostrarDia(dia){
   if(!delDia.length){
     /* Un día sin nada y un día que se vació por los filtros se ven igual, y no
        lo son: del segundo se sale soltando un chip, no cambiando de día. Con
-       una palabra escrita se dice eso, que es lo que más despista. La
-       Chinchilla duerme en su color, no en gris: dormida ya dice "nada". */
-    const texto = busqueda ? t("buscarSin") : t("vacio");
-    const pista = busqueda ? t("buscarSinPista") : hayFiltros() ? t("vaciopista") : "";
-    cont.innerHTML = `<div class="vacio">${cuerpo("chinchilla","var(--c-cultura)",80,{pose:"durmiendo"})}
+       una palabra escrita se dice eso, que es lo que más despista.
+
+       Acá NO se dibuja una segunda Chinchilla. La que ya está en la página
+       —al pie del mes, o posada en el canto de esta misma hoja en celular— es
+       la que contesta, y lo hace con la pose: duerme cuando el día está vacío
+       de verdad y sigue despierta cuando lo vació un filtro, porque de eso no
+       se sale esperando, se sale soltando un chip. Dos chinchillas a la vez
+       era lo que había, y era una de más. */
+    /* `t("vacio")` dice "No hay eventos con esos filtros" y es del mapa, donde
+       siempre hay filtros puestos. Acá se leía en un día limpio de agosto, sin
+       un solo chip apretado, y era falso: no es que los filtros escondan algo,
+       es que ese día nadie publicó nada. La distinción importa porque manda a
+       hacer cosas distintas —soltar un chip, o cambiar de día. */
+    const sinNada = {es:"Nadie publicó nada para este día",
+                     en:"Nobody posted anything for this day",
+                     pt:"Ninguém publicou nada para este dia"}[IDIOMA];
+    const sinNadaPista = {es:"Prueba otro día del mes",
+                          en:"Try another day of the month",
+                          pt:"Tente outro dia do mês"}[IDIOMA];
+    /* "Prueba otro día" y nada más es un callejón: la página sabe perfectamente
+       cuál es el próximo día con algo —con los filtros puestos, además— y no lo
+       decía. El salto va como botón y no como texto porque es la acción que uno
+       iba a hacer igual, a mano, mirando la rejilla. Y cuando el botón está, la
+       pista sobra: decir "prueba otro día" arriba de un botón que dice cuál es
+       el otro día es hablar dos veces. */
+    const salto = proximoDiaCon(dia);
+    const texto = busqueda ? t("buscarSin") : hayFiltros() ? t("vacio") : sinNada;
+    const pista = busqueda ? t("buscarSinPista")
+                : hayFiltros() ? t("vaciopista")
+                : salto ? "" : sinNadaPista;
+    cont.innerHTML = `<div class="vacio">
       <p><b>${escapar(texto)}</b>${pista ? `<br>${escapar(pista)}` : ""}</p></div>`;
+    if(salto){
+      const b = document.createElement("button");
+      b.className = "boton secundario salto-dia";
+      /* Fecha corta y no entera: "El próximo con algo: sábado 29 de agosto" se
+         salía del panel en celular. Con `month:"short"` sigue sin ambigüedad
+         cuando el salto cae en el mes siguiente, que es el caso que importa. */
+      const cuando = salto.toLocaleDateString(localeDe(), {weekday:"long", day:"numeric", month:"short"});
+      b.textContent = {es:"Ir al ", en:"Go to ", pt:"Ir para "}[IDIOMA] + cuando;
+      b.setAttribute("aria-label",
+        {es:"Ir al próximo día con panoramas: ", en:"Go to the next day with something on: ",
+         pt:"Ir para o próximo dia com algo: "}[IDIOMA] + cuando);
+      b.onclick = () => irADia(salto, true);
+      cont.querySelector(".vacio").appendChild(b);
+    }
     return;
   }
   /* La tarjeta abre la ficha del evento (e/<id>.html), la misma que se
@@ -623,18 +1328,17 @@ function mostrarDia(dia){
     tarjetaEvento(ev, e => { location.href = "e/" + encodeURIComponent(e.id) + ".html"; })));
 }
 
-document.getElementById("ant").onclick = () => {
-  mesVisible = new Date(mesVisible.getFullYear(), mesVisible.getMonth() - 1, 1); pintarMes();
-};
-document.getElementById("sig").onclick = () => {
-  mesVisible = new Date(mesVisible.getFullYear(), mesVisible.getMonth() + 1, 1); pintarMes();
-};
-document.getElementById("btn-hoy").onclick = () => {
-  mesVisible = new Date(); elegirDia(new Date());
-};
+document.getElementById("ant").onclick = () => irAMes(-1);
+document.getElementById("sig").onclick = () => irAMes(1);
+document.getElementById("btn-hoy").onclick = () => irADia(new Date(), true);
+document.getElementById("rejilla").addEventListener("keydown", moverFoco);
+/* Fuera de la rejilla las flechas siguen cambiando de mes. Dentro las agarra
+   `moverFoco`, que mueve el día y detiene el evento: si no se comprobara el
+   foco, una flecha sobre una celda movería el día Y el mes a la vez. */
 addEventListener("keydown", e => {
-  if(e.key === "ArrowLeft") document.getElementById("ant").click();
-  if(e.key === "ArrowRight") document.getElementById("sig").click();
+  if(e.defaultPrevented || document.activeElement?.closest(".rejilla, input")) return;
+  if(e.key === "ArrowLeft") irAMes(-1);
+  if(e.key === "ArrowRight") irAMes(1);
 });
 </script>
 <!-- Cloudflare Web Analytics: cuenta visitas sin cookies y sin huella
