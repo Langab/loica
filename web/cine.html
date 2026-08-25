@@ -65,6 +65,12 @@
     display:inline-block;vertical-align:middle;margin-left:5px;opacity:.7;
   }
   .segmentado button.sin-cartelera-dia[aria-pressed="true"]{color:var(--arena-50);font-weight:800}
+  /* El día que solo tiene circuito de barrio: un punto hueco. No está vacío,
+     pero tampoco está publicado. */
+  .segmentado button.dia-flaco::after{
+    content:"";width:4px;height:4px;border-radius:50%;border:1.5px solid currentColor;
+    display:inline-block;vertical-align:middle;margin-left:5px;opacity:.65;
+  }
   .cuenta-rango{
     display:flex;align-items:center;gap:5px;flex:none;margin-left:auto;padding-left:var(--e-3);
     font-size:var(--t-xs);font-weight:700;color:var(--tinta-tenue);white-space:nowrap;
@@ -189,6 +195,13 @@
   .cine-cab h3{margin:0;font:800 var(--t-md)/1.2 var(--fuente-marca);color:var(--tinta)}
   .cine.arte h3, .cine.arte .cine-donde, .cine.arte .peli-nombre{color:var(--azul-900)}
   .cine-donde{font-size:var(--t-xs);color:var(--tinta-suave);margin-top:2px;line-height:1.35}
+  .cine-circuito{
+    display:inline-block;margin-top:3px;padding:2px 8px;border-radius:var(--r-pill);
+    border:2px solid var(--contorno);background:var(--fondo-hundido);
+    font:800 10.5px/1.5 var(--fuente-marca);color:var(--tinta-suave);
+    text-transform:uppercase;letter-spacing:.03em;
+  }
+  .cine.arte .cine-circuito{background:var(--arena-50);color:var(--azul-900)}
   .cine-lejos{
     flex:none;margin-left:auto;align-self:flex-start;
     font:800 var(--t-xs)/1 var(--fuente-marca);color:var(--c-cine-tinta);
@@ -214,12 +227,17 @@
     border:2px solid var(--contorno);border-radius:var(--r-pill);
     background:var(--fondo-elevado);color:var(--tinta);
     font:800 var(--t-xs)/1 var(--fuente-marca);padding:8px 10px;
-    box-shadow:0 2px 0 var(--contorno);transition:var(--rapido);min-height:34px;
+    box-shadow:0 2px 0 var(--contorno);transition:var(--rapido);min-height:44px;
   }
   .hora:hover{background:var(--c-cine);color:var(--arena-50)}
   .hora:active{transform:translateY(2px);box-shadow:none}
   .hora:focus-visible{box-shadow:0 2px 0 var(--contorno),0 0 0 3px var(--foco),0 0 0 6px var(--contorno)}
-  .hora small{font:700 9.5px/1 var(--fuente-ui);opacity:.75;letter-spacing:.02em}
+  /* Acá va "2D · Subtitulada": formato e idioma, o sea información de COMPRA,
+     no un adorno. Estaba a 9.5px con opacidad .75, que no pasa AA ni por
+     tamaño ni por contraste. Sube a 11px y sin opacidad: el color ya es más
+     claro que la hora por el `--tinta-suave`, que sí pasa. */
+  .hora small{font:700 11px/1 var(--fuente-ui);color:var(--tinta-suave);letter-spacing:.02em}
+  .hora:hover small{color:inherit;opacity:.85}
 
   .sin-cartelera{
     padding:var(--e-2) var(--e-3) var(--e-3);border-top:2px dashed var(--borde-fuerte);
@@ -242,13 +260,6 @@
   .film-sala{margin-top:var(--e-2)}
   .film-sala b{display:block;font:700 var(--t-xs)/1.3 var(--fuente-ui);color:var(--tinta-suave)}
 
-  .aviso-cine{
-    display:flex;gap:var(--e-2);align-items:flex-start;
-    padding:var(--e-3) var(--e-4);background:var(--c-cine-suave);
-    color:var(--azul-900);font-size:var(--t-xs);line-height:1.45;
-    border-bottom:2px solid var(--contorno);
-  }
-  .aviso-cine svg{flex:none;margin-top:-2px}
 
   .caja-buscar{display:flex;align-items:center;gap:var(--e-2);
     margin:0 var(--e-3) var(--e-2);padding:0 var(--e-3);
@@ -294,15 +305,15 @@
            stroke="currentColor" stroke-width="2" stroke-linecap="round">
         <circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
       <input type="search" id="buscar" autocomplete="off" spellcheck="false">
-      <button type="button" id="limpiar-buscar" hidden aria-label="Limpiar">×</button>
+      <button type="button" id="limpiar-buscar" hidden>×</button>
     </div>
   </header>
 
   <main>
     <div id="mapa-cines"></div>
-    <section class="panel-lista" id="panel" aria-label="Cines y cartelera">
+    <section class="panel-lista" id="panel">
       <div class="tirador" id="tirador" role="button" tabindex="0"
-           aria-label="Arrastra para ver más"><div class="barra-tirador"></div></div>
+           ><div class="barra-tirador"></div></div>
       <div class="conteo"><b id="conteo">0</b> <span id="conteo-txt"></span>
         <span class="segmentado vista" id="vista" role="group"></span>
         <span class="nota-geo" id="nota-geo"></span></div>
@@ -656,9 +667,22 @@ fetch("cine.json", {cache:"no-cache"}).then(r => r.json()).then(d => {
   montarBuscador();
   pintarTodo();
 }).catch(() => {
+  // Se pintan igual el riel y los filtros. `pintarDias` y `pintarFiltros` solo
+  // se llamaban desde `pintarTodo()`, que solo corre si el fetch salió bien:
+  // con el archivo caído la cabecera quedaba a medio construir —dos franjas
+  // vacías— y la página se veía ROTA en vez de degradada. Con las listas en
+  // cero se dibujan los siete días y ningún filtro, que es honesto.
+  pintarNombresAccesibles();
+  pintarDias();
+  pintarFiltros();
   document.getElementById("lista").innerHTML =
     `<div class="vacio">${cuerpo("cabra","var(--tinta-tenue)",96,{pose:"durmiendo"})}
-       <p>No pude cargar la cartelera.</p></div>`;
+       <p><b>${escapar({es:"No pude cargar la cartelera",
+                        en:"Could not load the listings",
+                        pt:"Não consegui carregar a programação"}[IDIOMA])}</b><br>${
+         escapar({es:"Vuelve a intentar en un rato. Los cines del mapa siguen en su dirección de siempre.",
+                  en:"Try again in a while. The cinemas on the map are still at their usual address.",
+                  pt:"Tente de novo mais tarde. Os cinemas do mapa continuam no endereço de sempre."}[IDIOMA])}</p></div>`;
 });
 
 window.addEventListener("loica:idioma", () => {
@@ -742,7 +766,22 @@ function loPublicado(indice){
   return {total, cadenas, porDelante};
 }
 
+/* Los nombres accesibles se pintan como todo lo demás.
+   Estaban escritos a mano en el HTML y en español: en inglés y portugués el
+   lector de pantalla seguía diciendo "Arrastra para ver más". El `placeholder`
+   del buscador sí se repintaba, así que el patrón ya estaba y a estos tres se
+   les pasó — que es justo cómo se cuela este bicho, uno por uno. */
+function pintarNombresAccesibles(){
+  const poner = (id, texto) => { const n = document.getElementById(id); if(n) n.setAttribute("aria-label", texto); };
+  poner("tirador", {es:"Arrastra para ver más", en:"Drag to see more",
+                    pt:"Arraste para ver mais"}[IDIOMA]);
+  poner("limpiar-buscar", {es:"Borrar la búsqueda", en:"Clear the search",
+                           pt:"Limpar a busca"}[IDIOMA]);
+  poner("panel", `${tr("cines")} · ${tr("enCartelera")}`);
+}
+
 function pintarTodo(){
+  pintarNombresAccesibles();
   pintarDias(); pintarFiltros(); pintarLista(); pintarMapa();
 }
 
@@ -793,10 +832,17 @@ function pintarDias(){
   // que hay que poder mirarlo. Atenuado dice "todavía no", deshabilitado diría
   // "nunca", y son cosas distintas.
   cont.innerHTML = opciones.map(([i, etiqueta, destacado]) => {
-    const vacio = PELICULAS.length && loPublicado(i).total === 0;
+    const p = PELICULAS.length ? loPublicado(i) : null;
+    // Dos avisos distintos, porque son dos cosas distintas: el día que no
+    // existe todavía y el día que solo tiene circuito de barrio. Hoy son
+    // cuatro de siete —el 27 en cero y el 28, 29 y 30 sin ninguna cadena— así
+    // que callarlo sería dejar que el riel prometa una semana que no hay.
+    const vacio = p && p.total === 0;
+    const flaco = p && p.total > 0 && p.cadenas === 0;
+    const aviso = vacio ? tr("sinPublicarRiel") : flaco ? tr("soloBarrio") : "";
     return `<button type="button" data-dia="${i}" aria-pressed="${dia === i}"
-       class="${destacado ? "destacado " : ""}${vacio ? "sin-cartelera-dia" : ""}"
-       ${vacio ? `title="${escapar(tr("sinPublicarRiel"))}"` : ""}>${escapar(etiqueta)}</button>`;
+       class="${destacado ? "destacado " : ""}${vacio ? "sin-cartelera-dia" : flaco ? "dia-flaco" : ""}"
+       ${aviso ? `title="${escapar(aviso)}"` : ""}>${escapar(etiqueta)}</button>`;
   }).join("");
   cont.querySelectorAll("button").forEach(b => b.onclick = () => {
     dia = Number(b.dataset.dia); mostrando = 24; pintarTodo();
@@ -977,6 +1023,16 @@ function tarjetaCine(cine, funciones){
   const texto = document.createElement("div");
   const titulo = document.createElement("h3");
   titulo.textContent = cine.nombre;
+  // El circuito va ESCRITO. Al sacar las 44 caritas repetidas —que eran
+  // textura— se fue con ellas el único canal que no era color: la forma
+  // cambiaba, cabra contra chinchilla. Quedó la tarjeta distinguiéndose solo
+  // por su pastel de fondo, y nada puede depender solo del color. Una
+  // etiqueta de texto sirve mejor que la carita en las dos direcciones: se ve
+  // sin distinguir tonos y además se ANUNCIA, cosa que la mascota nunca hizo
+  // porque va aria-hidden.
+  const sello = document.createElement("span");
+  sello.className = "cine-circuito";
+  sello.textContent = cine.circuito === "arte" ? tr("arte") : tr("comercial");
   const donde = document.createElement("div");
   donde.className = "cine-donde";
   // La comuna solo se agrega si la dirección no la trae ya: Cinemark escribe
@@ -985,7 +1041,7 @@ function tarjetaCine(cine, funciones){
   const sinTildes = x => String(x || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   const yaDice = cine.comuna && sinTildes(cine.direccion).includes(sinTildes(cine.comuna));
   donde.textContent = [cine.direccion, yaDice ? "" : cine.comuna].filter(Boolean).join(" · ");
-  texto.append(titulo, donde);
+  texto.append(titulo, sello, donde);
   cab.append(texto);
 
   if(miPosicion && cine.lat != null){
