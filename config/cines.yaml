@@ -7,7 +7,8 @@
 #   cadena      cinemark · cineplanet · cinepolis · independiente
 #   circuito    comercial (la sala del mall) · arte (el cine de barrio)
 #   cartelera   de dónde salen los horarios de esta sala:
-#                 jsonld     Cinemark publica ScreeningEvent en su HTML
+#                 cinemark   el BFF público de Cinemark (semana entera,
+#                            sinopsis y tráiler); JSON-LD queda de respaldo
 #                 semanal    el cine publica la semana en su sitio (Normandie)
 #                 agenda     ya llega por otra fuente del pipeline (CCLM, M100)
 #                 navegador  hay que sacarla con la extracción asistida
@@ -181,11 +182,11 @@ cines:
   circuito: comercial
   direccion: Avenida Kennedy 9001, Local 3092, Las Condes
   comuna: Las Condes
-  lat: -33.391198
-  lon: -70.547522
+  lat: -33.3906
+  lon: -70.5466
   url: https://www.cinemark.cl/cartelera/cinemark-alto-las-condes
   formatos: 3D | 2D | XD | PRE | DBOX
-  cartelera: jsonld
+  cartelera: cinemark
   fuente_geo: cinemark
   verificado: true
 - id: cinemark-gran-avenida
@@ -194,11 +195,11 @@ cines:
   circuito: comercial
   direccion: Gran Avenida José Miguel Carrera 6150, Local 1216
   comuna: San Miguel
-  lat: -33.511696
-  lon: -70.65934
+  lat: -33.5114
+  lon: -70.6567
   url: https://www.cinemark.cl/cartelera/cinemark-gran-avenida
   formatos: 3D | 2D
-  cartelera: jsonld
+  cartelera: cinemark
   fuente_geo: cinemark
   verificado: true
 - id: cinemark-mallplaza-norte
@@ -207,11 +208,11 @@ cines:
   circuito: comercial
   direccion: Av. Américo Vespucio 1737, Local C6, Huechuraba
   comuna: Huechuraba
-  lat: -33.364387
-  lon: -70.680307
+  lat: -33.3649
+  lon: -70.6787
   url: https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte
   formatos: 3D | 2D | XD | DBOX
-  cartelera: jsonld
+  cartelera: cinemark
   fuente_geo: cinemark
   verificado: true
 - id: cinemark-mallplaza-oeste
@@ -220,11 +221,11 @@ cines:
   circuito: comercial
   direccion: Av. Américo Vespucio 1501, Local CN 100, 200 y 300, Cerrillos
   comuna: Cerrillos
-  lat: -33.515547
-  lon: -70.721491
+  lat: -33.5156
+  lon: -70.7183
   url: https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste
   formatos: PALCO | 3D | 2D | PLAY | XD | DBOX
-  cartelera: jsonld
+  cartelera: cinemark
   fuente_geo: cinemark
   verificado: true
 - id: cinemark-mallplaza-tobalaba
@@ -233,11 +234,11 @@ cines:
   circuito: comercial
   direccion: Av. Camilo Henríquez 3690, Puente Alto
   comuna: Puente Alto
-  lat: -33.569024
-  lon: -70.560564
+  lat: -33.5684
+  lon: -70.5579
   url: https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba
   formatos: 2D | XD
-  cartelera: jsonld
+  cartelera: cinemark
   fuente_geo: cinemark
   verificado: true
 - id: cinemark-mallplaza-vespucio
@@ -246,11 +247,11 @@ cines:
   circuito: comercial
   direccion: Av. Vicuña Mackenna 7110, Local 158, La Florida
   comuna: La Florida
-  lat: -33.51695
-  lon: -70.599966
+  lat: -33.5167
+  lon: -70.5975
   url: https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio
   formatos: 3D | 2D | PRE | DBOX | IMAX | 4D
-  cartelera: jsonld
+  cartelera: cinemark
   fuente_geo: cinemark
   verificado: true
 - id: cinemark-mid-mall-maipu
@@ -259,11 +260,24 @@ cines:
   circuito: comercial
   direccion: Camino a Melipilla 15.900, Maipú
   comuna: Maipú
-  lat: -33.538726
-  lon: -70.773205
+  lat: -33.5389
+  lon: -70.7702
   url: https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu
   formatos: 2D | XD
-  cartelera: jsonld
+  cartelera: cinemark
+  fuente_geo: cinemark
+  verificado: true
+- id: cinemark-la-dehesa
+  nombre: Cinemark Portal La Dehesa
+  cadena: cinemark
+  circuito: comercial
+  direccion: Avenida La Dehesa 1445, Local 2000
+  comuna: Lo Barnechea
+  lat: -33.3568
+  lon: -70.5156
+  url: https://www.cinemark.cl/cartelera/cinemark-la-dehesa
+  formatos: 3D | 2D | PRE
+  cartelera: cinemark
   fuente_geo: cinemark
   verificado: true
 - id: cinemark-portal-nunoa
@@ -272,11 +286,11 @@ cines:
   circuito: comercial
   direccion: Av. José Pedro Alessandri 1166, Local 4033, Ñuñoa
   comuna: Ñuñoa
-  lat: -33.465493
-  lon: -70.600017
+  lat: -33.4654
+  lon: -70.5975
   url: https://www.cinemark.cl/cartelera/cinemark-portal-nunoa
   formatos: 2D
-  cartelera: jsonld
+  cartelera: cinemark
   fuente_geo: cinemark
   verificado: true
 - id: cineplanet-alameda
@@ -326,22 +340,6 @@ cines:
   verificado: true
   alias:
   - Cineplanet Florida Center
-  - Cineplanet
-- id: cineplanet-lo-barnechea-lo-barnechea
-  nombre: Cineplanet Lo Barnechea
-  cadena: cineplanet
-  circuito: comercial
-  direccion: Avenida La Dehesa 1445
-  comuna: Lo Barnechea
-  lat: -33.356937
-  lon: -70.514246
-  url: https://www.cineplanet.cl/
-  formatos: ''
-  cartelera: navegador
-  fuente_geo: osm
-  verificado: false
-  alias:
-  - Cineplanet Lo Barnechea
   - Cineplanet
 - id: cineplanet-mall-barrio-independencia
   nombre: Cineplanet Mall Barrio Independencia

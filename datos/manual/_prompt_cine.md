@@ -18,7 +18,7 @@ cartelera de doce:
 
 | Cómo se lee | Salas | Detalle |
 |---|---|---|
-| Dato estructurado | 8 | Cinemark publica `ScreeningEvent` de schema.org en el HTML de cada sala. Es el dato que ellos mismos publican para las máquinas. |
+| BFF público | 9 | Cinemark sirve su cartelera —la semana entera, con sinopsis y tráiler— en `bff.cinemark.cl`, abierto sin credencial. Entra solo a la corrida. |
 | Página semanal | 2 | El Normandie y El Biógrafo publican la semana en su sitio y se leen con un parser propio. |
 | Agenda cultural | 4 | La Cineteca Nacional, Matucana 100 y el Centro Arte Alameda ya llegan por las fuentes de siempre. |
 | **Navegador** | **30** | **Esto.** |
@@ -26,8 +26,12 @@ cartelera de doce:
 Las dos cadenas grandes que faltan cierran su cartelera a propósito:
 
 - **Cineplanet** entrega los horarios solo a quien trae la cookie de sesión
-  que su propio sitio planta en el navegador. La misma petición da 200 con
-  cookie y 403 sin ella.
+  que su propio sitio planta en el navegador (200 con cookie, 403 sin ella).
+  Con el navegador abierto en cineplanet.cl, sus tres caches
+  —`/v3/api/cache/moviescache`, `/sessioncache`, `/cinemascache`— traen la
+  semana completa, con sinopsis, tráiler y géneros. Las 5 salas RM son
+  Alameda, Costanera Center, Florida Center, Mall Barrio Independencia y
+  Quilín.
 - **Cinépolis** (ex Cinehoyts) responde `401 Unauthorized access` en su API:
   pide un token.
 
@@ -90,8 +94,15 @@ Un único CSV, UTF-8, separador coma, con este encabezado exacto y en este
 orden:
 
 ```
-cine,pelicula,fecha,hora,formato,idioma,duracion_min,clasificacion,poster,link_compra
+cine,pelicula,fecha,hora,formato,idioma,duracion_min,clasificacion,poster,link_compra,sinopsis,trailer,generos
 ```
+
+Las tres últimas son de la PELÍCULA (se repiten en cada una de sus funciones,
+está bien): **sinopsis** es el resumen que publica el cine —un párrafo, sin
+inventar—, **trailer** la URL de YouTube o Vimeo del tráiler, y **generos** los
+géneros separados por coma ("Acción, Aventura"). Si el sitio no los trae,
+quedan vacías. Sirven para la vista "¿Qué película veo?", donde la Cabra
+presenta la cartelera con su descripción.
 
 Ordena por `cine`, después por `fecha` y después por `hora`. Deduplica por
 (cine + pelicula + fecha + hora). Entrega el archivo `.csv` adjunto **y** el
@@ -100,9 +111,8 @@ contenido en un bloque de código.
 Ejemplo de dos filas bien hechas:
 
 ```
-cine,pelicula,fecha,hora,formato,idioma,duracion_min,clasificacion,poster,link_compra
-Cinépolis Mallplaza Egaña,La odisea,2026-08-25,19:40,2D,subtitulada,152,MA14,https://static.cinepolis.com/posters/odisea.jpg,https://cinepolis.com/cl/compra/12345
-Cineplanet Costanera Center,Spider-Man: Un nuevo día,2026-08-25,20:20,3D,doblada,144,TE+7,https://cdn.cineplanet.cl/posters/spiderman.jpg,https://www.cineplanet.cl/pelicula/spider-man/costanera
+cine,pelicula,fecha,hora,formato,idioma,duracion_min,clasificacion,poster,link_compra,sinopsis,trailer,generos
+Cinépolis Mallplaza Egaña,La odisea,2026-08-25,19:40,2D,subtitulada,152,MA14,https://…/odisea.jpg,https://cinepolis.com/cl/compra/12345,"La saga de Homero llega a IMAX por primera vez.",https://youtu.be/8un_UztYsw0,"Acción, Aventura"
 ```
 
 ### Además del CSV, quiero un resumen corto

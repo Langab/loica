@@ -192,9 +192,17 @@ class Funcion:
 
 @dataclass
 class Cartelera:
-    """Lo que devuelve cada adaptador: sus funciones y qué le pasó."""
+    """Lo que devuelve cada adaptador: sus funciones y qué le pasó.
+
+    `fichas` va aparte de las funciones porque es dato de la PELÍCULA, no de la
+    función: sinopsis, tráiler y géneros, con la clave de `clave_pelicula` como
+    llave. Lo llena quien lo tenga (hoy, el BFF de Cinemark) y lo consume el
+    presentador de la página: la Cabra no puede contar de qué se trata una
+    película si nadie se lo dijo.
+    """
 
     funciones: list[Funcion] = field(default_factory=list)
     salas_leidas: int = 0
     salas_fallidas: list[str] = field(default_factory=list)
     notas: list[str] = field(default_factory=list)
+    fichas: dict = field(default_factory=dict)

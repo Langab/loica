@@ -11,10 +11,10 @@ incluso el de las cadenas cuya cartelera no se puede leer.
 
 De dónde sale cada dato:
 
-  · **Cinemark** publica su lista de salas en https://www.cinemark.cl/cines
-    con nombre, dirección y un `googleMapsUrl` que lleva las coordenadas
-    dentro (`!2d<lon>!3d<lat>`). Es la fuente más precisa que hay y es de
-    ellos mismos.
+  · **Cinemark**, por su BFF público (bff.cinemark.cl/api/cinema/theaters):
+    nombre, slug, dirección y coordenadas como campos propios, incluida la
+    sala Portal La Dehesa que su página /cines no lista. Es la fuente más
+    precisa que hay y es de ellos mismos.
   · **El índice OSM local** (`datos/indice_osm.db`, el mismo que geocodifica
     todo el pipeline) para las demás salas: Cinépolis, Cineplanet, los cines
     de barrio y las salas de los centros culturales. Overpass daría además el
@@ -137,7 +137,11 @@ CURADOS = {
     (-33.43956, -70.64855): ("Cinépolis Vivo Imperio", "Santiago"),
     (-33.53509, -70.57102): ("Cinépolis Vivo Outlet La Florida", "La Florida"),
     (-33.68004, -71.18532): ("Cinépolis Melipilla", "Melipilla"),
-    # Cineplanet, con los nombres de su propia lista de salas
+    # Cineplanet, con los nombres de su propia lista de salas. Ojo: su lista
+    # tiene CINCO salas en la RM, no seis — el pin de OSM en Av. La Dehesa 1445
+    # que decía "Cineplanet" era una etiqueta vieja: ese cine es el Cinemark
+    # Portal La Dehesa (lo confirma el BFF de Cinemark, con 5 salas y su
+    # dirección exacta). Ese punto se descarta abajo, en PUNTOS_FALSOS.
     (-33.452882, -70.682639): ("Cineplanet Alameda", "Estación Central"),
     (-33.418240, -70.606685): ("Cineplanet Costanera Center", "Providencia"),
     (-33.509389, -70.608215): ("Cineplanet Florida Center", "La Florida"),
@@ -151,6 +155,17 @@ CURADOS = {
     (-33.437032, -70.649528): ("Cine Mayo", "Santiago"),
     (-33.486801, -70.627370): ("MUVIX Cinema", "San Joaquín"),
     (-33.429928, -70.634156): ("ZooCine", "Santiago"),
+}
+
+# Puntos de OSM que sabemos EQUIVOCADOS: etiquetas viejas que nombran una
+# cadena que ya no está (o nunca estuvo) en esa dirección. Se descartan por
+# cercanía, con su porqué escrito — borrar un dato sin decir por qué es como
+# se pierden las discusiones dentro de seis meses.
+PUNTOS_FALSOS = {
+    # OSM dice "Cineplanet" en Av. La Dehesa 1445. Cineplanet no tiene sala en
+    # Lo Barnechea (su propia lista: 5 salas RM); el cine de ese mall es el
+    # Cinemark Portal La Dehesa, que entra por el BFF con dirección propia.
+    (-33.3569374, -70.5142459): "etiqueta vieja: ahí está Cinemark Portal La Dehesa",
 }
 
 # Sitio oficial y de dónde sale la cartelera de las salas que no son Cinemark.
@@ -241,33 +256,45 @@ def _marca(nombre: str) -> str:
 
 
 def cines_de_cinemark(cliente: ClienteEducado) -> list[dict]:
-    """La lista oficial, incrustada en el HTML del servidor de /cines.
+    """La lista oficial, ahora por su BFF (bff.cinemark.cl/api/cinema/theaters).
 
-    Viene como JSON escapado dentro del payload de Next, así que se desescapa
-    una vez y se lee con una expresión regular anclada al orden de los campos.
-    Si Cinemark cambia ese orden esto devuelve cero y el catastro conserva lo
-    que ya tenía, que es exactamente lo que debe pasar.
+    Antes se leía del HTML de /cines, desescapando el payload de Next con una
+    expresión regular. El BFF entrega lo mismo en JSON limpio y con DOS mejoras
+    que el HTML no tenía: coordenadas como campos propios (no adentro de una
+    URL de Google Maps) y la sala Portal La Dehesa, que la página /cines no
+    lista pero el BFF sí — y existe: 5 salas en Avenida La Dehesa 1445.
+
+    Está abierto: 200 a nuestro user-agent identificado, sin credencial
+    (medido el 25-08-2026). Si deja de responder, el catastro conserva lo que
+    ya tenía, que es exactamente lo que debe pasar.
     """
-    respuesta = cliente.obtener(CINEMARK_CINES, max_edad_cache_seg=24 * 3600)
+    respuesta = cliente.obtener("https://bff.cinemark.cl/api/cinema/theaters",
+                                max_edad_cache_seg=24 * 3600)
     if respuesta is None or not respuesta.ok:
-        print("  Cinemark: no pude leer /cines — se conserva lo que ya estaba", file=sys.stderr)
+        print("  Cinemark: el BFF no respondió — se conserva lo que ya estaba", file=sys.stderr)
+        return []
+    try:
+        teatros = (respuesta.json() or {}).get("data") or []
+    except ValueError:
+        print("  Cinemark: el BFF no devolvió JSON", file=sys.stderr)
         return []
 
-    texto = respuesta.text.replace('\\"', '"')
-    patron = re.compile(
-        r'\{"id":(\d+),"slug":"([^"]+)","name":"([^"]+)",'
-        r'"address":"([^"]*)","features":"([^"]*)","googleMapsUrl":"([^"]*)"')
-    salas = {}
-    for _id, slug, nombre, direccion, formatos, gmaps in patron.findall(texto):
-        coords = re.search(r"!2d(-?\d+\.\d+)!3d(-?\d+\.\d+)", gmaps)
-        if not coords:
+    salas = []
+    for t in teatros:
+        try:
+            lat, lon = float(t["latitude"]), float(t["longitude"])
+        except (KeyError, TypeError, ValueError):
             continue
-        salas[slug] = {
-            "slug": slug, "nombre": nombre, "direccion": direccion,
-            "formatos": formatos,
-            "lon": float(coords.group(1)), "lat": float(coords.group(2)),
-        }
-    return list(salas.values())
+        if not t.get("slug") or not t.get("name"):
+            continue
+        salas.append({
+            "slug": t["slug"], "nombre": t["name"],
+            "direccion": (t.get("address") or "").strip(),
+            "formatos": " | ".join(f.get("shortName", "") for f in t.get("formats") or []
+                                   if isinstance(f, dict) and f.get("shortName")),
+            "lat": lat, "lon": lon,
+        })
+    return salas
 
 
 def cines_del_indice() -> list[dict]:
@@ -329,7 +356,7 @@ def construir() -> list[dict]:
             "lon": round(sala["lon"], 6),
             "url": f"https://www.cinemark.cl/cartelera/{sala['slug']}",
             "formatos": sala["formatos"],
-            "cartelera": "jsonld",
+            "cartelera": "cinemark",
             "fuente_geo": "cinemark",
             "verificado": True,
         })
@@ -337,6 +364,11 @@ def construir() -> list[dict]:
     puntos_cinemark = [(s["lat"], s["lon"]) for s in cinemark]
     for sala in indice:
         punto = (sala["lat"], sala["lon"])
+        motivo_falso = next((m for p, m in PUNTOS_FALSOS.items()
+                             if _metros(punto, p) < 200), None)
+        if motivo_falso:
+            print(f"  descartado un punto de OSM: {motivo_falso}")
+            continue
         cadena = _marca(sala["nombre"])
         # Cinemark ya entró con su dato oficial: el nodo de OSM es el mismo
         # local visto de lejos.
@@ -471,7 +503,8 @@ CABECERA = """# Catastro de salas de cine de la Región Metropolitana.
 #   cadena      cinemark · cineplanet · cinepolis · independiente
 #   circuito    comercial (la sala del mall) · arte (el cine de barrio)
 #   cartelera   de dónde salen los horarios de esta sala:
-#                 jsonld     Cinemark publica ScreeningEvent en su HTML
+#                 cinemark   el BFF público de Cinemark (semana entera,
+#                            sinopsis y tráiler); JSON-LD queda de respaldo
 #                 semanal    el cine publica la semana en su sitio (Normandie)
 #                 agenda     ya llega por otra fuente del pipeline (CCLM, M100)
 #                 navegador  hay que sacarla con la extracción asistida

@@ -2,8 +2,9 @@
 
 Cuatro maneras de conseguir los horarios, en orden de cuánto cuesta cada una:
 
-  jsonld     Cinemark publica ScreeningEvent en el HTML de cada sala. Gratis,
-             estructurado, sin navegador: entra a la corrida diaria y listo.
+  cinemark   El BFF público de Cinemark (bff.cinemark.cl): la semana entera,
+             el idioma por función y la ficha con sinopsis y tráiler. Si el
+             BFF se cae, la vía baja sola al JSON-LD de sus páginas.
   semanal    El Normandie y El Biógrafo publican la semana en su página. Se
              lee con un parser por sala; son dos.
   agenda     La Cineteca, M100 y el Centro Arte Alameda ya llegan por las
@@ -25,7 +26,7 @@ from datetime import date, datetime, timedelta
 
 from ..cines import catalogo
 from ..red import ClienteEducado
-from . import agenda, asistida, jsonld, semanal
+from . import agenda, asistida, cinemark, semanal
 from .modelo import Cartelera, Funcion, clave_pelicula, sin_coletillas
 
 log = logging.getLogger("loica.cartelera")
@@ -53,7 +54,7 @@ log = logging.getLogger("loica.cartelera")
 DIAS = 7
 
 VIAS = {
-    "jsonld": jsonld.extraer,
+    "cinemark": cinemark.extraer,
     "semanal": semanal.extraer,
     "agenda": agenda.extraer,
     "asistida": asistida.extraer,
@@ -79,6 +80,7 @@ def recolectar(cliente: ClienteEducado | None = None,
         total.salas_leidas += parcial.salas_leidas
         total.salas_fallidas.extend(parcial.salas_fallidas)
         total.notas.extend(parcial.notas)
+        total.fichas.update(parcial.fichas)
 
     total.funciones = _limpiar(total.funciones)
     return total
@@ -149,6 +151,12 @@ def para_la_web(cartelera: Cartelera) -> dict:
             "duracion": next((f.duracion_min for f in funciones if f.duracion_min), None),
             "clasificacion": _mejor([f.clasificacion for f in funciones]),
             "cines": sorted({f.cine_id for f in funciones}),
+            # La ficha, si alguna fuente la contó: es lo que el presentador
+            # muestra para ayudar a elegir. Vacío es una respuesta — el
+            # circuito de barrio no publica sinopsis estructurada.
+            "sinopsis": (cartelera.fichas.get(clave) or {}).get("sinopsis", ""),
+            "trailer": (cartelera.fichas.get(clave) or {}).get("trailer", ""),
+            "generos": (cartelera.fichas.get(clave) or {}).get("generos", []),
             "funciones": [{
                 "cine": f.cine_id,
                 "inicio": f.inicio.isoformat(timespec="minutes"),

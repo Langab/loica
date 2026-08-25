@@ -251,11 +251,57 @@
     border:2.5px solid var(--contorno);border-radius:var(--r-lg);
     box-shadow:var(--repisa-2);margin-top:var(--e-3);padding:var(--e-3);
   }
+  .film{align-items:flex-start}
   .film img{
     width:66px;height:98px;object-fit:cover;flex:none;
     border:2px solid var(--contorno);border-radius:var(--r-sm);background:var(--fondo-hundido);
   }
+  /* La fila del buscador y el botón "¿qué veo?" comparten el riel: el botón
+     va en el espacio que quedaba en blanco a la derecha del campo. En celular
+     se apilan. */
+  .fila-buscar{display:flex;gap:var(--e-2);align-items:stretch;
+    padding:var(--e-2) var(--e-4) var(--e-3)}
+  .fila-buscar .caja-buscar{flex:1;min-width:0;margin:0}
+  .que-ver{
+    flex:none;display:inline-flex;align-items:center;gap:6px;cursor:pointer;
+    border:2.5px solid var(--contorno);border-radius:var(--r-pill);
+    background:var(--c-cine);color:var(--arena-50);
+    font:800 var(--t-sm)/1 var(--fuente-marca);padding:0 var(--e-3);min-height:42px;
+    box-shadow:var(--repisa-1);transition:var(--rapido);white-space:nowrap;
+  }
+  .que-ver:hover{background:var(--c-cine-tinta)}
+  .que-ver:active{transform:translateY(3px);box-shadow:none}
+  .que-ver:focus-visible{box-shadow:var(--repisa-1),0 0 0 3px var(--foco),0 0 0 6px var(--contorno)}
+  .que-ver-masc{display:inline-flex}
+  @media(max-width:520px){
+    .que-ver-txt{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+    .que-ver{padding:0 12px}
+  }
+
+  /* La Cabra presenta la cartelera: una banda arriba de la lista de películas,
+     con la mascota viva a un lado y su invitación. Es el gesto de "yo te
+     muestro qué hay", que es literalmente lo que hace la Cabra. */
+  .cabra-presenta{
+    display:flex;gap:var(--e-3);align-items:center;margin-top:var(--e-3);
+    padding:var(--e-3);background:var(--c-cine-suave);color:var(--azul-900);
+    border:2.5px solid var(--contorno);border-radius:var(--r-lg);box-shadow:var(--repisa-1);
+  }
+  .cabra-presenta-masc{flex:none}
+  .cabra-presenta p{margin:0;font-size:var(--t-sm);line-height:1.4;font-weight:600}
+
   .film h3{margin:0;font:800 var(--t-md)/1.2 var(--fuente-marca);color:var(--tinta)}
+  /* La sinopsis: dos o tres líneas, cortada con elipsis. La vista de películas
+     es para decidir, no para leer una ficha entera; quien quiere más va al
+     tráiler o al cine. */
+  .film-sinopsis{
+    margin:var(--e-2) 0 0;font-size:var(--t-xs);line-height:1.45;color:var(--tinta-suave);
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  .film-trailer{
+    display:inline-flex;align-items:center;gap:5px;margin-top:var(--e-2);
+    color:var(--c-cine-tinta);font:800 var(--t-xs)/1 var(--fuente-marca);text-decoration:none;
+  }
+  .film-trailer:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:2px}
   .film .peli-datos{margin-bottom:var(--e-2)}
   .film-sala{margin-top:var(--e-2)}
   .film-sala b{display:block;font:700 var(--t-xs)/1.3 var(--fuente-ui);color:var(--tinta-suave)}
@@ -300,12 +346,18 @@
     <!-- Fuera de #filtros a propósito: pintarFiltros() reconstruye ese
          contenedor en cada pintada, y un input recreado a cada tecla pierde
          el foco y el cursor. Este vive en el HTML y solo se le lee el valor. -->
+    <div class="fila-buscar">
     <div class="caja-buscar">
       <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none"
            stroke="currentColor" stroke-width="2" stroke-linecap="round">
         <circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
       <input type="search" id="buscar" autocomplete="off" spellcheck="false">
       <button type="button" id="limpiar-buscar" hidden>×</button>
+    </div>
+    <button type="button" id="que-ver" class="que-ver">
+      <span class="que-ver-masc" aria-hidden="true"></span>
+      <span class="que-ver-txt"></span>
+    </button>
     </div>
   </header>
 
@@ -352,6 +404,7 @@ let dia = 0;                       // 0 = hoy, 1 = mañana…
 let vista = "cines";               // cines | peliculas
 let cineElegido = "";              // la sala que se apretó en el mapa
 let vacioEnPantalla = false;       // para que la Cabra entre una vez y no por tecla
+let recienEnPeliculas = false;     // la Cabra presenta con animación solo al abrir la vista
 let circuitoFiltro = "", comunaFiltro = "", idiomaFiltro = "";
 let busqueda = "";                 // lo que se escribió en el buscador
 let miPosicion = null, estadoGeo = "";
@@ -390,6 +443,11 @@ const T = {
   compra:     {es:"Comprar en el cine", en:"Buy at the cinema", pt:"Comprar no cinema"},
   min:        {es:"min", en:"min", pt:"min"},
   buscar:     {es:"Buscar una película", en:"Search for a film", pt:"Buscar um filme"},
+  verTrailer: {es:"Ver el tráiler", en:"Watch the trailer", pt:"Ver o trailer"},
+  queVer:     {es:"¿Qué película veo?", en:"What should I watch?", pt:"Que filme eu vejo?"},
+  cabraPresenta:{es:"Estas son las películas de la semana. Toca una y te cuento de qué trata, en qué cine la dan y dónde ver el tráiler.",
+               en:"These are this week's films. Tap one and I'll tell you what it's about, which cinema is showing it, and where to watch the trailer.",
+               pt:"Estes são os filmes da semana. Toque em um e eu conto do que se trata, em qual cinema passa e onde ver o trailer."},
   sinPeli:    {es:"Ninguna película con ese nombre", en:"No film by that name",
                pt:"Nenhum filme com esse nome"},
   sinPeliHoy: {es:"No la dan este día, pero sí", en:"Not showing this day, but it is on",
@@ -812,6 +870,22 @@ function montarBuscador(){
     if(ev.key === "Escape"){ campo.value = ""; aplicar(); }
   });
   limpiar.onclick = () => { campo.value = ""; aplicar(); campo.focus(); };
+
+  // El botón que lleva a "qué película veo": cambia a la vista de películas,
+  // suelta la sala y el filtro, y deja a la Cabra presentando desde arriba.
+  const queVer = document.getElementById("que-ver");
+  queVer.querySelector(".que-ver-masc").innerHTML = carita("cabra", "currentColor", 26);
+  queVer.querySelector(".que-ver-txt").textContent = tr("queVer");
+  queVer.setAttribute("aria-label", tr("queVer"));
+  queVer.onclick = () => {
+    vista = "peliculas"; cineElegido = ""; mostrando = 24;
+    recienEnPeliculas = true;
+    // Si venía un texto en el buscador, la vista de películas lo respeta; si
+    // no, muestra todas. En cualquier caso se sube al tope.
+    pintarTodo();
+    document.getElementById("lista").scrollTop = 0;
+    if(innerWidth < 880) subirPanel(1);
+  };
 }
 
 /* El riel del día. Solo los días que la cartelera de verdad tiene cargados:
@@ -1116,8 +1190,31 @@ function tarjetaPelicula(peli, funciones){
   titulo.textContent = peli.titulo;
   const datos = document.createElement("div");
   datos.className = "peli-datos";
-  datos.textContent = datosPeli(peli);
+  // Los géneros van en la línea de datos: es lo primero que decide "¿me
+  // interesa?" antes de leer la sinopsis. Vienen del catálogo del cine.
+  const gen = (peli.generos && peli.generos.length)
+    ? " · " + peli.generos.map(g => g[0].toUpperCase() + g.slice(1).toLowerCase()).join(", ") : "";
+  datos.textContent = datosPeli(peli) + gen;
   bloque.append(titulo, datos);
+
+  // La sinopsis y el tráiler son la razón de esta vista: ayudan a elegir qué
+  // ver antes de mirar horarios. Solo salen si el cine los publicó —el
+  // circuito de barrio no—, y eso es una respuesta, no un hueco.
+  if(peli.sinopsis){
+    const sin = document.createElement("p");
+    sin.className = "film-sinopsis";
+    sin.textContent = peli.sinopsis;
+    bloque.appendChild(sin);
+  }
+  if(urlSegura(peli.trailer)){
+    const tr2 = document.createElement("a");
+    tr2.className = "film-trailer";
+    tr2.href = urlSegura(peli.trailer);
+    tr2.target = "_blank"; tr2.rel = "noopener noreferrer";
+    tr2.innerHTML = `<svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
+        <path d="M8 5v14l11-7z" fill="currentColor"/></svg>${escapar(tr("verTrailer"))}`;
+    bloque.appendChild(tr2);
+  }
 
   const porCine = new Map();
   funciones.forEach(f => {
@@ -1171,7 +1268,9 @@ function pintarVista(){
     // La vista de películas es del catálogo entero: si se venía mirando una
     // sala, se suelta. Si no, el título diría "11 en cartelera" mostrando las
     // de una sola sala.
-    vista = b.dataset.vista; cineElegido = ""; mostrando = 24; pintarTodo();
+    vista = b.dataset.vista; cineElegido = ""; mostrando = 24;
+    recienEnPeliculas = (vista === "peliculas");
+    pintarTodo();
   });
 }
 
@@ -1314,6 +1413,18 @@ function pintarLista(){
       if(todas.length > mostrando) cont.appendChild(botonVerMas(todas.length));
     }
   } else {
+    // La Cabra presenta la cartelera: es la vista de "¿qué veo?", y la mascota
+    // que la conduce le da la bienvenida jugando con su gesto. Sale UNA vez,
+    // arriba de todo, viva; no se repite por tarjeta. `entra` solo si recién
+    // se cambió a esta vista, no en cada repintado del buscador.
+    const presenta = document.createElement("div");
+    presenta.className = "cabra-presenta" + (recienEnPeliculas ? " entra" : "");
+    presenta.innerHTML =
+      `<div class="cabra-presenta-masc">${cuerpo("cabra","var(--c-cine)",76,{anima:true})}</div>
+       <p>${escapar(tr("cabraPresenta"))}</p>`;
+    cont.appendChild(presenta);
+    recienEnPeliculas = false;
+
     const porPeli = new Map();
     funciones.forEach(f => {
       if(!porPeli.has(f.peli.clave)) porPeli.set(f.peli.clave, []);

@@ -204,7 +204,10 @@ def _ficha_de_pelicula(cliente: ClienteEducado, url_compra: str) -> tuple[str, s
 
 def extraer(cliente: ClienteEducado) -> Cartelera:
     salida = Cartelera()
-    for cine in por_cartelera("jsonld"):
+    # Acepta la marca nueva y la vieja: desde que el BFF es la vía primaria,
+    # el catastro dice "cinemark" y este módulo queda de respaldo.
+    salas = {c["id"]: c for c in por_cartelera("jsonld") + por_cartelera("cinemark")}
+    for cine in salas.values():
         url = cine.get("url") or ""
         if not url:
             salida.salas_fallidas.append(f"{cine['nombre']}: sin url en el catastro")
