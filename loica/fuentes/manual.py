@@ -64,6 +64,39 @@ def _fecha(valor) -> datetime | None:
     return None
 
 
+# El rectángulo que envuelve a la Región Metropolitana. Es un guardia GRUESO
+# y hay que saber qué no hace: como es un rectángulo, no distingue regiones
+# vecinas —Valparaíso cae dentro de él— y no puede. De eso se encargan la
+# comuna y `requiere_comuna`, que sí saben de límites administrativos.
+#
+# Lo que sí atrapa es el error bruto: la latitud sin signo (Santiago en el
+# hemisferio norte), el par invertido, la coordenada de otro país pegada por
+# error. Ese es el error que importa, porque un pin en el lugar equivocado
+# engaña más que la ausencia de pin: nadie duda de un mapa.
+CAJA_RM = (-34.35, -32.90, -71.75, -69.75)   # lat_min, lat_max, lon_min, lon_max
+
+
+def _coordenadas(crudo: dict, origen: str, titulo: str) -> tuple[float | None, float | None]:
+    """Lee lat/lon si vienen y caen dentro de la Región Metropolitana."""
+    bruto_lat, bruto_lon = crudo.get("lat"), crudo.get("lon")
+    if bruto_lat in (None, "") or bruto_lon in (None, ""):
+        return None, None
+    try:
+        # Coma decimal: quien copia de una hoja de cálculo en español la trae.
+        lat = float(str(bruto_lat).strip().replace(",", "."))
+        lon = float(str(bruto_lon).strip().replace(",", "."))
+    except (TypeError, ValueError):
+        log.warning("%s: '%s' trae coordenadas ilegibles (%r, %r) — se ignoran",
+                    origen, titulo[:40], bruto_lat, bruto_lon)
+        return None, None
+    lat_min, lat_max, lon_min, lon_max = CAJA_RM
+    if not (lat_min <= lat <= lat_max and lon_min <= lon <= lon_max):
+        log.warning("%s: '%s' tiene coordenadas lejos de Santiago (%s, %s) — se ignoran",
+                    origen, titulo[:40], lat, lon)
+        return None, None
+    return lat, lon
+
+
 def _desde_dict(crudo: dict, fuente: dict, origen: str) -> Evento | None:
     if not isinstance(crudo, dict):
         return None
@@ -87,6 +120,8 @@ def _desde_dict(crudo: dict, fuente: dict, origen: str) -> Evento | None:
     except (TypeError, ValueError):
         precio = None
 
+    lat, lon = _coordenadas(crudo, origen, datos["titulo"])
+
     return Evento(
         titulo=datos["titulo"][:200],
         categoria=datos["categoria"],
@@ -97,6 +132,8 @@ def _desde_dict(crudo: dict, fuente: dict, origen: str) -> Evento | None:
         lugar_direccion=datos["lugar_direccion"],
         comuna=detectar_comuna(datos["comuna"], datos["lugar_direccion"],
                                datos["lugar_nombre"], fuente.get("comuna", "")),
+        lat=lat,
+        lon=lon,
         precio_clp=precio,
         es_gratis=bool(gratis) if gratis is not None else None,
         precio_texto=datos["precio_texto"],
@@ -120,6 +157,15 @@ COLUMNAS_CSV = {
     "hora_inicio": "hora_inicio",
     "fin": "fecha_termino",
     "lugar_nombre": "lugar",
+    # La dirección con número es lo que convierte un pin al centro de la
+    # comuna en un pin en la puerta del lugar. El índice local de OSM la
+    # resuelve sola; sin ella hay que adivinar por el nombre del recinto.
+    "lugar_direccion": "direccion",
+    # Y si quien extrajo ya tenía las coordenadas —porque la página las
+    # publica o porque las sacó del mapa del propio sitio—, mejor todavía:
+    # entran directas y no pasan por el geocodificador.
+    "lat": "lat",
+    "lon": "lon",
     "comuna": "comuna",
     "precio_clp": "precio_min",
     "fuente_url": "link_evento",
@@ -186,6 +232,9 @@ def _desde_fila(fila: dict, mapa: dict, fuente: dict, origen: str) -> dict | Non
         "inicio": inicio,
         "fin": col("fin"),
         "lugar_nombre": col("lugar_nombre"),
+        "lugar_direccion": col("lugar_direccion"),
+        "lat": col("lat"),
+        "lon": col("lon"),
         "comuna": col("comuna"),
         "precio_clp": precio,
         "es_gratis": gratis,
