@@ -1304,12 +1304,20 @@ function botonVerMas(total){
   return mas;
 }
 
-/* El pie honesto, igual que en talleres: lo que esta página NO hace. */
+/* El pie honesto: lo que esta página NO hace.
+   La Cabra también sale acá, y no contradice la regla de "una sola vez": es
+   una a la VEZ. Nunca conviven, porque `pintarLista` retorna antes del sello
+   cuando la lista está vacía — o está la grande del vacío, o está ésta.
+   Se gana el puesto por lo mismo que el guarén se ganó el pie de descuentos:
+   el gesto ES la frase. Una cabra masticando cabritas al lado de "Loica no
+   vende entradas" dice lo mismo que el texto, y este pie es el único hueco
+   permanente y ancho de la página. Va entera —54px, sobre los 38 que necesita
+   el cuerpo— y viva. */
 function selloHonesto(){
   const sello = document.createElement("div");
   sello.style.cssText = "padding:var(--e-5) 0 0;text-align:center;font-size:var(--t-xs);color:var(--tinta-tenue);line-height:1.5";
   const cara = document.createElement("div");
-  cara.innerHTML = carita("cabra","var(--tinta-tenue)",26);
+  cara.innerHTML = cuerpo("cabra","var(--c-cine-tinta)",54,{anima:true});
   const texto = document.createElement("p");
   texto.style.margin = "6px 0 0";
   texto.textContent = tr("ojo");
