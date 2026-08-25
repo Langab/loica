@@ -30,10 +30,27 @@ from .modelo import Cartelera, Funcion, clave_pelicula, sin_coletillas
 
 log = logging.getLogger("loica.cartelera")
 
-# Cuántos días de cartelera se publican. Cinemark entrega tres; más allá de
-# eso las salas todavía no cargaron horarios y la página mostraría días
-# vacíos que parecen un error del sitio y no del cine.
-DIAS = 4
+# Cuántos días de cartelera se publican.
+#
+# Siete, porque es lo que alguien quiere preguntarle a una cartelera: "¿qué dan
+# el sábado?". Pero hay que saber lo que se está publicando, y esto está
+# MEDIDO (24-08-2026, un lunes):
+#
+#   Cinemark              3 días — hoy, mañana y pasado. No publica más.
+#   Normandie             hasta el miércoles: su semana corre de jueves a
+#                         miércoles y ese lunes le quedaban 3 días.
+#   agenda cultural       6 días, pero con 2, 1 y 1 función en los últimos.
+#
+# O sea que del cuarto día en adelante la cartelera está casi vacía SIEMPRE, y
+# no por una falla nuestra: las cadenas cargan sus horarios con dos o tres días
+# de anticipación y los jueves, que es cuando cambian la programación, el
+# calendario se llena de golpe. Mostrar los siete días es honesto mientras la
+# página diga que ese día todavía no lo publica el cine —y no que sobran
+# filtros, que es lo que decía antes—. Esa parte vive en web/cine.html.
+#
+# Subir este número no cuesta peso: los días extra agregaron 3 funciones a las
+# 630 que ya había.
+DIAS = 7
 
 VIAS = {
     "jsonld": jsonld.extraer,

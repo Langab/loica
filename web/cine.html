@@ -53,6 +53,18 @@
   .segmentado button[aria-pressed="true"]{background:var(--c-cine);color:var(--arena-50)}
   .segmentado .destacado{padding:0 var(--e-4);border-right:2px solid var(--borde-fuerte);
     border-radius:var(--r-pill) 0 0 var(--r-pill);margin-right:2px}
+  /* El día que el cine todavía no publica. Atenuado y con un punto, no
+     deshabilitado: atenuado dice "todavía no" y deshabilitado diría "nunca".
+     El jueves amanece en cero y se llena el miércoles en la noche, así que
+     tiene que poder apretarse — y lo que se lee ahí adentro explica por qué
+     está vacío. Se mantiene el contraste de texto: lo que baja es el peso
+     visual, no la legibilidad. */
+  .segmentado button.sin-cartelera-dia{color:var(--tinta-tenue);font-weight:600}
+  .segmentado button.sin-cartelera-dia::after{
+    content:"";width:4px;height:4px;border-radius:50%;background:currentColor;
+    display:inline-block;vertical-align:middle;margin-left:5px;opacity:.7;
+  }
+  .segmentado button.sin-cartelera-dia[aria-pressed="true"]{color:var(--arena-50);font-weight:800}
   .cuenta-rango{
     display:flex;align-items:center;gap:5px;flex:none;margin-left:auto;padding-left:var(--e-3);
     font-size:var(--t-xs);font-weight:700;color:var(--tinta-tenue);white-space:nowrap;
@@ -112,6 +124,15 @@
     font-size:var(--t-xs);line-height:1.35;
   }
   .aviso-mapa b{font-family:var(--fuente-marca)}
+
+  /* `loica.css` fija `.vacio svg{width:78px;height:78px}` para las mascotas
+     chicas y quietas que tenían todas las páginas. Acá la Cabra es el
+     personaje del estado vacío, no un adorno: pedía 118 y se dibujaba a 78.
+     Se libera SOLO a ella y solo en este contexto — la regla global sigue
+     valiendo para el resto. Bajo 38px `mascota()` dibuja solo la cabeza y la
+     caja de cabritas no existe, así que el tamaño acá es contenido. */
+  .lista .vacio .masc-cabra{width:118px;height:118px}
+  @media(max-width:879px){ .lista .vacio .masc-cabra{width:96px;height:96px} }
   @media(min-width:880px){ .aviso-mapa{right:470px} }
   .panel-lista{
     position:absolute;left:0;right:0;bottom:0;background:var(--fondo-elevado);
@@ -165,7 +186,6 @@
   /* La sala elegida se sube al frente: contorno más grueso y una repisa más
      alta. Es el mismo acuse de recibo que da el pin al crecer en el mapa. */
   .cine.elegido{border-width:3.5px;box-shadow:var(--repisa-4)}
-  .cine-cab .mascota{flex:none;margin-top:1px}
   .cine-cab h3{margin:0;font:800 var(--t-md)/1.2 var(--fuente-marca);color:var(--tinta)}
   .cine.arte h3, .cine.arte .cine-donde, .cine.arte .peli-nombre{color:var(--azul-900)}
   .cine-donde{font-size:var(--t-xs);color:var(--tinta-suave);margin-top:2px;line-height:1.35}
@@ -320,6 +340,7 @@ let CINES = [], PELICULAS = [], generado = "", diasCartelera = 4;
 let dia = 0;                       // 0 = hoy, 1 = mañana…
 let vista = "cines";               // cines | peliculas
 let cineElegido = "";              // la sala que se apretó en el mapa
+let vacioEnPantalla = false;       // para que la Cabra entre una vez y no por tecla
 let circuitoFiltro = "", comunaFiltro = "", idiomaFiltro = "";
 let busqueda = "";                 // lo que se escribió en el buscador
 let miPosicion = null, estadoGeo = "";
@@ -365,6 +386,23 @@ const T = {
   sinPeliPista:{es:"No está en la cartelera de estos días. Revisa cómo se escribe, o prueba con una palabra sola.",
                en:"It is not in these days' listings. Check the spelling, or try a single word.",
                pt:"Não está na programação destes dias. Confira a grafia, ou tente uma só palavra."},
+  sinPublicar:{es:"Los cines todavía no publican este día",
+               en:"The cinemas have not published this day yet",
+               pt:"Os cinemas ainda não publicaram este dia"},
+  sinPublicarPista:{es:"Las cadenas cargan sus horarios con dos o tres días de anticipación, y los jueves cambian la cartelera. Mira los días marcados en el riel de arriba.",
+               en:"The chains load their showtimes two or three days ahead, and listings change on Thursdays. Check the days marked in the strip above.",
+               pt:"As redes carregam os horários com dois ou três dias de antecedência, e às quintas trocam a programação. Veja os dias marcados na faixa acima."},
+  yaEmpezaron:{es:"Las funciones de hoy ya empezaron",
+               en:"Today's showings have already started",
+               pt:"As sessões de hoje já começaram"},
+  yaEmpezaronPista:{es:"Mira mañana, o busca la película para ver qué día la dan.",
+               en:"Try tomorrow, or search the film to see which day it is on.",
+               pt:"Veja amanhã, ou busque o filme para ver em que dia passa."},
+  soloBarrio: {es:"las cadenas todavía no publican este día: esto es lo que hay",
+               en:"the chains have not published this day yet — this is what there is",
+               pt:"as redes ainda não publicaram este dia — isto é o que há"},
+  sinPublicarRiel:{es:"sin cartelera publicada", en:"no listings published yet",
+               pt:"sem programação publicada"},
   ojo:        {es:"Loica no vende entradas ni sabe si quedan: cada horario te deja en la boletería del cine.",
                en:"Loica does not sell tickets and cannot tell you if seats are left: every showtime takes you to the cinema's own box office.",
                pt:"A Loica não vende ingressos nem sabe se ainda há lugares: cada horário leva você à bilheteria do cinema."},
@@ -682,6 +720,28 @@ function distanciaKm(a, b){
   return Math.hypot((a[0] - b[0]) * 111.32, (a[1] - b[1]) * 92.6);
 }
 
+/* Qué hay publicado en un día, IGNORANDO los filtros y la hora.
+   Es una pregunta distinta de la que contesta `funcionesVisibles()`: no es
+   "¿qué puedo ver?" sino "¿el cine ya publicó este día?". Sin separarlas, un
+   día sin cartelera y un día donde los filtros dejaron todo fuera se ven
+   idénticos, y la página le echa la culpa a los filtros —que es justo lo que
+   hacía—. Devuelve también cuántas son de las cadenas, porque un día con una
+   sola función del Normandie no está vacío pero tampoco está publicado. */
+function loPublicado(indice){
+  const f = new Date(); f.setHours(0,0,0,0); f.setDate(f.getDate() + indice);
+  const clave = claveFecha(f);
+  const ahora = new Date();
+  let total = 0, cadenas = 0, porDelante = 0;
+  PELICULAS.forEach(p => p.funciones.forEach(fn => {
+    if(fn.inicio.slice(0,10) !== clave) return;
+    total++;
+    if(new Date(fn.inicio) >= ahora) porDelante++;
+    const cine = cinePorId(fn.cine);
+    if(cine && cine.circuito === "comercial") cadenas++;
+  }));
+  return {total, cadenas, porDelante};
+}
+
 function pintarTodo(){
   pintarDias(); pintarFiltros(); pintarLista(); pintarMapa();
 }
@@ -728,9 +788,16 @@ function pintarDias(){
       : `${t("dias")[(f.getDay() + 6) % 7]} ${f.getDate()}`;
     opciones.push([i, etiqueta, i === 0]);
   }
-  cont.innerHTML = opciones.map(([i, etiqueta, destacado]) =>
-    `<button type="button" data-dia="${i}" aria-pressed="${dia === i}"
-       class="${destacado ? "destacado" : ""}">${escapar(etiqueta)}</button>`).join("");
+  // Los días sin cartelera se marcan pero NO se esconden ni se deshabilitan:
+  // el jueves aparece en cero el lunes y se llena el miércoles en la noche, así
+  // que hay que poder mirarlo. Atenuado dice "todavía no", deshabilitado diría
+  // "nunca", y son cosas distintas.
+  cont.innerHTML = opciones.map(([i, etiqueta, destacado]) => {
+    const vacio = PELICULAS.length && loPublicado(i).total === 0;
+    return `<button type="button" data-dia="${i}" aria-pressed="${dia === i}"
+       class="${destacado ? "destacado " : ""}${vacio ? "sin-cartelera-dia" : ""}"
+       ${vacio ? `title="${escapar(tr("sinPublicarRiel"))}"` : ""}>${escapar(etiqueta)}</button>`;
+  }).join("");
   cont.querySelectorAll("button").forEach(b => b.onclick = () => {
     dia = Number(b.dataset.dia); mostrando = 24; pintarTodo();
   });
@@ -860,9 +927,13 @@ function datosPeli(peli){
     .filter(Boolean).join(" · ");
 }
 
-/* El afiche. Si el cine no publicó uno, no se inventa un cuadro gris con una
-   cámara: va la carita de la Cabra, que es lo que esta página usa cuando no
-   hay foto (la misma regla del blog con los organizadores sin foto). */
+/* El afiche. Si el cine no publicó uno va una claqueta, no la Cabra.
+   Acá había una carita de la Cabra y estaba mal por dónde vive esto: `afiche`
+   se llama una vez por película, dentro de una lista que scrollea, así que en
+   un día con varias funciones de barrio —que son justo las que no traen
+   póster— salían seis u ocho cabras idénticas en fila. La mascota repetida
+   deja de ser información y pasa a ser textura. La claqueta es un símbolo, no
+   un personaje, y puede repetirse sin gastar a nadie. */
 function afiche(peli, ancho, alto){
   const src = urlSegura(peli.poster);
   if(src){
@@ -875,7 +946,12 @@ function afiche(peli, ancho, alto){
   caja.style.cssText = `width:${ancho}px;height:${alto}px;flex:none;display:grid;
     place-items:center;border:2px solid var(--contorno);border-radius:var(--r-sm);
     background:var(--c-cine-suave)`;
-  caja.innerHTML = carita("cabra", "#7E1574", Math.round(ancho * .7));
+  const lado = Math.round(ancho * .62);
+  caja.innerHTML = `<svg viewBox="0 0 24 24" width="${lado}" height="${lado}" aria-hidden="true"
+      fill="none" stroke="#7E1574" stroke-width="1.9" stroke-linejoin="round">
+      <rect x="2.6" y="8.4" width="18.8" height="12.4" rx="2.2"/>
+      <path d="M2.9 8.4 6.9 3.6l3.6 4.8M9.9 8.4l4-4.8 3.6 4.8"/>
+      <path d="M17.1 8.4 21.1 3.6" stroke-linecap="round"/></svg>`;
   return caja;
 }
 
@@ -893,10 +969,11 @@ function tarjetaCine(cine, funciones){
   cab.className = "cine-cab";
   cab.setAttribute("aria-expanded", cine.id === cineElegido);
   cab.onclick = () => elegirCine(cine.id);
-  const mascota = document.createElement("span");
-  mascota.className = "mascota";
-  mascota.innerHTML = carita(cine.circuito === "arte" ? "chinchilla" : "cabra",
-                             cine.circuito === "arte" ? "#1B6FD1" : "#A51D99", 30);
+  // Acá había una carita de la Cabra por tarjeta. Con 44 salas eso son 44
+  // cabras idénticas: cuando la mascota se repite deja de ser información y
+  // pasa a ser textura, y encima ocupa el lugar donde debería ir el nombre.
+  // El circuito ya se distingue solo — la tarjeta de cine arte va con el
+  // pastel de la familia y la de mall con el fondo elevado.
   const texto = document.createElement("div");
   const titulo = document.createElement("h3");
   titulo.textContent = cine.nombre;
@@ -909,7 +986,7 @@ function tarjetaCine(cine, funciones){
   const yaDice = cine.comuna && sinTildes(cine.direccion).includes(sinTildes(cine.comuna));
   donde.textContent = [cine.direccion, yaDice ? "" : cine.comuna].filter(Boolean).join(" · ");
   texto.append(titulo, donde);
-  cab.append(mascota, texto);
+  cab.append(texto);
 
   if(miPosicion && cine.lat != null){
     const lejos = document.createElement("span");
@@ -1042,6 +1119,58 @@ function pintarVista(){
   });
 }
 
+/* Por qué la lista quedó vacía. UNA sola función que decide, y no cuatro `if`
+   escritos por acumulación, que es donde se cuela el mensaje que miente.
+
+   Los cuatro casos son distintos entre sí y ofrecerle a alguien "saca un
+   filtro" cuando no hay nada para nadie es el peor de todos: le echa la culpa
+   de algo que no hizo y lo manda a probar cosas que no van a servir. Con
+   cuatro días eso casi no pasaba; con siete pasa todos los días, porque las
+   cadenas publican con dos o tres de anticipación.
+
+   El orden importa: se descarta de lo más específico a lo más general. */
+function textoDelVacio(){
+  // 1. Buscó una película. La pregunta es por ESA película, no por el día.
+  if(busqueda){
+    const otros = [];
+    for(let i = 0; i < diasCartelera; i++){
+      if(i === dia) continue;
+      const f = new Date(); f.setHours(0,0,0,0); f.setDate(f.getDate() + i);
+      const clave = claveFecha(f);
+      const hay = PELICULAS.some(p => calzaBusqueda(p)
+        && p.funciones.some(fn => fn.inicio.slice(0,10) === clave));
+      if(hay) otros.push([i, f]);
+    }
+    if(otros.length){
+      // Está en cartelera pero no este día: decir CUÁL día es la respuesta que
+      // la persona vino a buscar.
+      const nombres = otros.map(([i, f]) => i === 0 ? t("hoy") : i === 1 ? t("manana")
+        : `${t("dias")[(f.getDay() + 6) % 7]} ${f.getDate()}`);
+      return [`${tr("sinPeliHoy")} ${nombres.join(", ")}`, ""];
+    }
+    // Ya se recorrieron todos los días: mandar a "probar otro día" sería
+    // mandarla a mirar donde acabamos de mirar nosotros.
+    return [tr("sinPeli"), tr("sinPeliPista")];
+  }
+
+  const publicado = loPublicado(dia);
+
+  // 2. El cine no ha publicado este día. No sobra ningún filtro: no hay nada.
+  if(!publicado.total) return [tr("sinPublicar"), tr("sinPublicarPista")];
+
+  // 3. Hoy, con cartelera publicada y nada por delante: ya empezaron todas.
+  //    A las once de la noche "no hay funciones con esos filtros" es falso.
+  //    Se pregunta por `porDelante` y NO por `dia === 0` a secas: si quedan
+  //    funciones por empezar y aun así la lista está vacía, es que los filtros
+  //    las dejaron fuera, y decir "ya empezaron" sería la misma clase de
+  //    mentira que este bloque vino a arreglar, solo que al revés.
+  if(!publicado.porDelante) return [tr("yaEmpezaron"), tr("yaEmpezaronPista")];
+
+  // 4. Hay funciones ese día y los filtros las dejaron fuera. Recién ACÁ
+  //    ofrecer sacar un filtro es un consejo útil y no una acusación.
+  return [tr("vacio"), tr("vaciopista")];
+}
+
 function pintarLista(){
   pintarVista();
   const funciones = funcionesVisibles();
@@ -1069,7 +1198,20 @@ function pintarLista(){
   // La deuda se dice, no se esconde: cuántas salas están en el mapa sin
   // horarios y por qué, y qué pasó con el permiso de ubicación.
   const partes = [];
-  const mudas = cinesVisibles().filter(c => !salasConFuncion.has(c.id)).length;
+  // El día a medio publicar: hay funciones —una del Normandie, una de la
+  // Cineteca— y CERO de las cadenas. No dispara el estado vacío porque la
+  // lista trae algo, y sin esta línea parece que Santiago tiene un solo cine.
+  // Es el caso más engañoso de los tres, justamente porque no se ve como error.
+  const publicadoHoy = loPublicado(dia);
+  if(publicadoHoy.total && !publicadoHoy.cadenas) partes.push(tr("soloBarrio"));
+  // "Sin horarios publicados" es una propiedad de la SALA —su cartelera no se
+  // puede leer—, no del filtro puesto. Se contaba sobre las salas que quedaban
+  // sin función DESPUÉS de filtrar y buscar, así que escribir "zzzz" hacía
+  // saltar el número a 44 y la frase pasaba a ser falsa: esas salas sí
+  // publican, es la búsqueda la que no calzó. `c.funciones` viene del catastro
+  // y cuenta la cartelera entera, así que no se mueve con lo que alguien
+  // escriba. Sí respeta comuna y circuito, porque ésos sí cambian el mapa.
+  const mudas = cinesVisibles().filter(c => !c.funciones).length;
   if(mudas) partes.push(`${mudas} ${tr("sinHorarios")}`);
   if(estadoGeo === "no") partes.push({es:"No pude leer tu ubicación; el orden es por cartelera.",
     en:"Could not read your location; sorted by listings.",
@@ -1077,35 +1219,28 @@ function pintarLista(){
   document.getElementById("nota-geo").textContent = partes.join(" · ");
 
   if(!funciones.length){
-    let titulo = tr("vacio"), pista = tr("vaciopista");
-    if(busqueda){
-      // Buscar una película que sí está en cartelera pero no HOY es el caso
-      // más frustrante: "no hay funciones" suena a que no existe. Se buscan
-      // sus días y se dicen, que es la respuesta que la persona vino a buscar.
-      const otros = [];
-      for(let i = 0; i < diasCartelera; i++){
-        if(i === dia) continue;
-        const f = new Date(); f.setHours(0,0,0,0); f.setDate(f.getDate() + i);
-        const clave = claveFecha(f);
-        const hay = PELICULAS.some(p => calzaBusqueda(p)
-          && p.funciones.some(fn => fn.inicio.slice(0,10) === clave));
-        if(hay) otros.push([i, f]);
-      }
-      titulo = tr("sinPeli");
-      // Ya se recorrieron todos los días de la cartelera: mandar a "probar otro
-      // día" sería mandar a un lugar donde acabamos de mirar.
-      pista = tr("sinPeliPista");
-      if(otros.length){
-        const nombres = otros.map(([i, f]) => i === 0 ? t("hoy") : i === 1 ? t("manana")
-          : `${t("dias")[(f.getDay() + 6) % 7]} ${f.getDate()}`);
-        titulo = `${tr("sinPeliHoy")} ${nombres.join(", ")}`;
-        pista = "";
-      }
-    }
-    cont.innerHTML = `<div class="vacio">${cuerpo("cabra","var(--tinta-tenue)",96,{pose:"durmiendo"})}
+    const [titulo, pista] = textoDelVacio();
+    // El estado vacío es donde la Cabra se gana el puesto: es donde alguien
+    // está frustrado, donde sobra espacio y donde una página sin nadie se
+    // siente rota. Va ENTERA (de 38px para arriba `mascota()` dibuja el cuerpo
+    // y aparece la caja de cabritas), viva —`{anima:true}`, sin eso la clase
+    // no se agrega y el gesto escrito en loica.css no engancha nunca— y
+    // despierta: está esperando con sus cabritas, no durmiendo. La pose
+    // dormida queda para cuando algo falla de verdad, que no es este caso.
+    // `entra` en el contenedor le da su llegada: entra desde abajo y se
+    // sienta, como quien llega con la sala ya a oscuras.
+    // `entra` solo la PRIMERA vez que el vacío aparece. El buscador repinta la
+    // lista entera en cada evento `input`, así que sin esta bandera escribir
+    // "zzzz" son cuatro llegadas seguidas de la Cabra: la mascota rebotando
+    // mientras alguien escribe es exactamente el tipo de animación que cansa.
+    const recienLlega = !vacioEnPantalla;
+    vacioEnPantalla = true;
+    cont.innerHTML = `<div class="vacio${recienLlega ? " entra" : ""}">
+      ${cuerpo("cabra","var(--c-cine)",118,{anima:true})}
       <p><b>${escapar(titulo)}</b>${pista ? "<br>" + escapar(pista) : ""}</p></div>`;
     return;
   }
+  vacioEnPantalla = false;
 
   if(vista === "cines"){
     // Primero las salas que hoy tienen función; las mudas van al final, que

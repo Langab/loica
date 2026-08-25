@@ -1,7 +1,7 @@
 {
- "generado": "2026-08-24T19:40:05",
- "dias": 4,
- "total_funciones": 629,
+ "generado": "2026-08-24T21:45:43",
+ "dias": 7,
+ "total_funciones": 633,
  "cines": [
   {
    "id": "cinemark-mallplaza-oeste",
@@ -131,7 +131,7 @@
    "lon": -70.650245,
    "url": "https://centroartealameda.cl/",
    "formatos": "",
-   "funciones": 6
+   "funciones": 9
   },
   {
    "id": "cineplanet-mall-barrio-independencia",
@@ -156,6 +156,19 @@
    "lat": -33.43956,
    "lon": -70.648549,
    "url": "https://cinepolis.com/cl",
+   "formatos": "",
+   "funciones": 1
+  },
+  {
+   "id": "sala-cine-m100",
+   "nombre": "Sala de Cine Matucana 100",
+   "cadena": "independiente",
+   "circuito": "arte",
+   "direccion": "Av. Matucana 100",
+   "comuna": "Estación Central",
+   "lat": -33.444483,
+   "lon": -70.679953,
+   "url": "https://www.m100.cl/",
    "formatos": "",
    "funciones": 1
   },
@@ -546,19 +559,6 @@
    "lat": -33.486801,
    "lon": -70.62737,
    "url": "https://muvix.cl/",
-   "formatos": "",
-   "funciones": 0
-  },
-  {
-   "id": "sala-cine-m100",
-   "nombre": "Sala de Cine Matucana 100",
-   "cadena": "independiente",
-   "circuito": "arte",
-   "direccion": "Av. Matucana 100",
-   "comuna": "Estación Central",
-   "lat": -33.444483,
-   "lon": -70.679953,
-   "url": "https://www.m100.cl/",
    "formatos": "",
    "funciones": 0
   },
@@ -5839,6 +5839,26 @@
    ]
   },
   {
+   "clave": "dont-look-back",
+   "titulo": "Dont look back",
+   "poster": "https://imagenes.passline.com/eventos/dont-look-back-centro-arte-alameda-541849-rec.jpg",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "centro-arte-alameda-sala-ceina"
+   ],
+   "funciones": [
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-29T19:00",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/dont-look-back-centro-arte-alameda"
+    }
+   ]
+  },
+  {
    "clave": "el-desprecio",
    "titulo": "El desprecio",
    "poster": "",
@@ -5895,6 +5915,46 @@
      "idioma": "subtitulada",
      "sala": "",
      "url": "https://www.flow.cl/btn.php?token=oa0tqzg"
+    }
+   ]
+  },
+  {
+   "clave": "grey-gardens",
+   "titulo": "Grey Gardens",
+   "poster": "https://imagenes.passline.com/eventos/grey-gardens-centro-arte-alameda-541847-rec.jpg",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "centro-arte-alameda-sala-ceina"
+   ],
+   "funciones": [
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-28T17:00",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/grey-gardens-centro-arte-alameda"
+    }
+   ]
+  },
+  {
+   "clave": "la-naturaleza-de-las-cosas-invisibles",
+   "titulo": "La Naturaleza de las Cosas Invisibles",
+   "poster": "https://www.m100.cl/wp-content/uploads/2026/08/naturaleza-cosas-invisibles_slidehome_1920x1488-768x595.jpg",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "sala-cine-m100"
+   ],
+   "funciones": [
+    {
+     "cine": "sala-cine-m100",
+     "inicio": "2026-08-30T19:30",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.m100.cl/programacion/cine/la-naturaleza-de-las-cosas-invisibles/"
     }
    ]
   },
@@ -5975,6 +6035,26 @@
      "idioma": "",
      "sala": "",
      "url": "https://www.passline.com/eventos/obsesion-centro-arte-alameda-546337"
+    }
+   ]
+  },
+  {
+   "clave": "paranoid-park",
+   "titulo": "Paranoid Park",
+   "poster": "https://imagenes.passline.com/eventos/paranoid-park-centro-arte-alameda-540559-rec.jpg",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "centro-arte-alameda-sala-ceina"
+   ],
+   "funciones": [
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-28T19:00",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/paranoid-park-centro-arte-alameda"
     }
    ]
   },
