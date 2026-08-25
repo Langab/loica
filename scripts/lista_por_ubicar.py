@@ -64,18 +64,24 @@ def locales_de_descuentos() -> list[dict]:
     datos = json.loads(RUTA_DESCUENTOS.read_text(encoding="utf-8"))
     grupos: dict[str, dict] = {}
     for d in datos["descuentos"]:
-        if d.get("precision") in ("fuente", "calle", "correccion"):
+        # Cada fila es un convenio y sus sucursales cuelgan de `locales`. El
+        # que tiene aunque sea una ubicada ya cae en el mapa —da lo mismo que
+        # la dirección se la haya prestado otro banco o OSM—, y mandarlo a esta
+        # lista sería pedir que alguien busque a mano lo que ya está.
+        locales = d.get("locales") or []
+        if locales and not all(l.get("precision") == "comuna" for l in locales):
             continue
         nombre = (d.get("comercio") or "").strip()
         if not nombre:
             continue
-        g = grupos.setdefault(nombre, {"nombre": nombre, "comuna": d.get("comuna") or "",
-                                       "n": 0, "pista": d.get("direccion") or "",
+        g = grupos.setdefault(nombre, {"nombre": nombre, "comuna": "",
+                                       "n": 0, "pista": "",
                                        "tipo": "descuento", "bancos": set()})
         g["n"] += 1
         g["bancos"].add(d.get("banco") or "")
-        if not g["comuna"] and d.get("comuna"):
-            g["comuna"] = d["comuna"]
+        for local in locales:
+            g["comuna"] = g["comuna"] or (local.get("comuna") or "")
+            g["pista"] = g["pista"] or (local.get("direccion") or "")
     return sorted(grupos.values(), key=lambda g: -g["n"])
 
 

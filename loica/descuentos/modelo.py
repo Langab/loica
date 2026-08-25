@@ -119,13 +119,39 @@ class Descuento:
 
     @property
     def id(self) -> str:
-        """Huella estable: el mismo comercio del mismo banco no se duplica.
+        """La huella del CONVENIO: un banco y un comercio, una sola oferta.
 
-        Va la comuna porque una cadena con veinte locales publica veinte
-        entradas distintas y todas son descuentos reales, no repetidos.
+        Adentro del pipeline cada fila es una sucursal, pero el descuento no
+        es de la sucursal: Banco de Chile publica el mismo 25% de Dunkin'
+        sesenta y seis veces, una por local, y es un solo convenio con
+        sesenta y seis lugares donde usarlo. Este id es el de ese convenio,
+        y es el que la página usa para abrir la ficha.
         """
-        crudo = f"{self.banco_id}|{self.comercio.lower().strip()}|{self.comuna.lower()}"
+        crudo = f"{self.banco_id}|{self.comercio.lower().strip()}"
         return hashlib.sha1(crudo.encode("utf-8")).hexdigest()[:12]
+
+    @property
+    def huella(self) -> str:
+        """La de la SUCURSAL, que es la que decide si dos filas son la misma.
+
+        Lleva la dirección y no solo la comuna. Con la comuna sola, los 34
+        Starbucks de Las Condes eran uno: el primero se quedaba y los otros
+        33 desaparecían del mapa sin que nadie lo notara, porque el que
+        quedaba se veía perfectamente bien. Banco de Chile publica 112
+        Starbucks en Santiago y el catastro mostraba 22, uno por comuna.
+        """
+        crudo = (f"{self.banco_id}|{self.comercio.lower().strip()}"
+                 f"|{self.comuna.lower()}|{' '.join(self.direccion.lower().split())}")
+        return hashlib.sha1(crudo.encode("utf-8")).hexdigest()[:12]
+
+    def a_campos(self) -> dict:
+        """Los campos tal cual, para clonar la fila cambiándole la sucursal.
+
+        `asdict` y no `vars` porque hay que copiar las listas: dos sucursales
+        clonadas de la misma oferta compartirían la lista `dias` y corregir el
+        día de una cambiaría el de la otra.
+        """
+        return asdict(self)
 
     def a_dict(self) -> dict:
         datos = asdict(self)

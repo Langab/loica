@@ -1255,14 +1255,24 @@ function descuentosDe(){
   const cats = op ? op.cats : [].concat(...sit.opciones.map(o => o.cats));
   return (DESCUENTOS || []).filter(d => cats.includes(d.categoria));
 }
+/* El lugar se pregunta a los locales del convenio, no al convenio: el 40% de
+   Burger King de Cencosud vale en diecisiete comunas y tiene que salir tanto
+   en "el centro" como en "el oriente", porque en ambos hay uno. Basta con que
+   UN local caiga en el sector o la comuna.
+   El convenio que no declaró ningún local igual pasa el filtro de sector
+   —el banco dijo que existe, no dónde queda— pero no el de comuna, que es una
+   pregunta que no se le puede contestar sin inventar.
+   Acá había además un deduplicador por comercio+banco, porque el JSON traía
+   una fila por sucursal y la lista mostraba veintiún Dunkin' seguidos. Desde
+   el 25-08-2026 cada fila ya es un convenio: lo que cuentan los chips y lo que
+   se pinta después son la misma cosa sin ayuda. */
 function rankearDescuentos(lista, sector, comuna, soloHoy){
-  const vistos = new Set();
   return lista
     .filter(d => !soloHoy || correHoy(d))
-    .filter(d => !comuna || d.comuna === comuna)
-    .filter(d => !sector || sector === "todo" || !d.comuna || enSector({comuna:d.comuna}, sector))
-    .sort((a, z) => (z.porcentaje || 0) - (a.porcentaje || 0))
-    .filter(d => { const k = d.comercio + "|" + d.banco_id; if(vistos.has(k)) return false; vistos.add(k); return true; });
+    .filter(d => !comuna || (d.comunas || []).includes(comuna))
+    .filter(d => !sector || sector === "todo" || !(d.comunas || []).length
+                 || (d.comunas || []).some(c => enSector({comuna:c}, sector)))
+    .sort((a, z) => (z.porcentaje || 0) - (a.porcentaje || 0));
 }
 async function caminoDelGuaren(){
   const sit = situacionPorId("comer");

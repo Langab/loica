@@ -22,11 +22,12 @@ fuente**, no la reemplaza. Cada descuento queda amarrado al link del banco.
 | **Banco Falabella / CMR** | Contentful | Token público en bundle JS | ★★★ | ✅ campo propio | **Encender ya** |
 | **BCI** | vivirconbeneficios.cl | API abierta, sin token | ★★ | ❌ hay que parsear | **Encender, con parseo** |
 | Santander | banco.santander.cl | WAF 403 | PDF mensual | ✅ pero en PDF | Difícil |
+| **Banco Security** | personas.bancosecurity.cl | JSON:API de Drupal, sin token | ★★★ | ✅ 100% en taxonomía | **Encendido el 25-08** |
 | Scotiabank | scotiarewards.cl | Tras login | — | — | Descartado |
-| Itaú | itau.cl | SPA vacía / no resuelve | — | — | Pendiente |
-| BancoEstado | bancoestado.cl | Shell de 2 KB | — | — | Pendiente |
+| Itaú | itau.cl | WAF Incapsula (403) | — | — | Bloqueado (25-08) |
+| BancoEstado | bancoestado.cl | WAF Akamai (403 con cara de 200) | — | — | Bloqueado (25-08) |
 | MACH | machbank.cl | Contentful (7,4 MB) | ? | ? | Pendiente |
-| Coopeuch | coopeuch.cl | HTML | ? | ? | Pendiente |
+| Coopeuch | coopeuch.cl | WAF Akamai (retrocedió) | — | — | Bloqueado (25-08) |
 | Ripley / BICE / Security / Cencosud / Tenpo | varios | 404 en rutas probadas | — | — | Falta encontrar ruta |
 
 ---
@@ -303,6 +304,106 @@ y detrás de `/scclubfront/auth`.
 Sacarlo usando la sesión iniciada de una persona significaría publicar contenido
 autenticado —posiblemente segmentado por cliente— como si fuera público.
 **Descartado**, igual que en el sondeo anterior.
+
+---
+
+## Sondeo dirigido 2026-08-25 — BancoEstado, Itaú, BICE, Coopeuch, Security
+
+Se rehicieron los cuatro que estaban "Pendiente" desde el 11-08 y se agregó
+Banco Security. Método de siempre: HTTP educado, dos segundos de pausa, User-
+Agent honesto, y leer el bundle del propio sitio cuando la URL no aparece.
+
+**Tres de los cuatro pendientes están bloqueados, y uno que no estaba en la
+lista resultó ser la mejor fuente nueva del catastro.**
+
+| Banco | Veredicto | Qué lo bloquea |
+|---|---|---|
+| **Banco Security** | **ENCENDIDO** | nada: JSON:API de Drupal abierto |
+| BancoEstado | Bloqueado | Akamai, host completo |
+| Itaú | Bloqueado | Imperva Incapsula |
+| BICE | Bloqueado | desafío de Cloudflare (confirmado) |
+| Coopeuch | Bloqueado | Akamai (**retrocedió**: el 11-08 servía HTML) |
+
+### Banco Security — encendido. Y trae adentro parte de BICE.
+
+`personas.bancosecurity.cl` es un Drupal 10 con **JSON:API abierto**, sin token
+y sin WAF. Su robots.txt es el estándar de Drupal y no prohíbe `/jsonapi/` ni
+`/beneficios/`.
+
+```
+GET https://personas.bancosecurity.cl/jsonapi/node/beneficio?page[limit]=50
+    Accept: application/vnd.api+json
+```
+
+**175 beneficios publicados, 80 gastronómicos, 76 locales en la RM.** El día
+viene en taxonomía propia con **100% de cobertura** —mejor que Banco de Chile,
+que va en 98,8%— y la vigencia es fecha ISO real.
+
+Y el dato que amarra lo otro: los 80 dicen en su frase legal *"no cabiéndole a
+Banco BICE, continuador legal de Banco Security"*. **El catálogo de BICE que
+quedó afuera por WAF entra en parte por acá.** Ése es también el riesgo: si el
+contenido migra a bice.cl, la fuente se pierde.
+
+Las trampas están resueltas en el adaptador y comentadas ahí. En orden de lo
+caro que salen: `field_descripcion_vigencia_benef` se llama vigencia pero trae
+el día; `field_porcentaje_descuento = 0` es centinela en 14 de 80 y esconde
+menús a precio fijo, montos que solo están en el título y dos portadas de
+cuponera; 18 registros traen varias direcciones separadas por ` | ` y esconden
+54 locales; y el API omite los nodos sin publicar uno a uno, así que hay
+páginas con `data: []` en medio y un paginador que corte en la primera vacía se
+lleva cero.
+
+### BancoEstado — bloqueado por Akamai, y de host completo
+
+Se encontró la ruta real que faltaba —es un árbol de Adobe Experience Manager,
+`/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/`—
+y **encontrarla no sirvió**: el bloqueo no es de ruta sino de host. Ocho
+peticiones a `www.bancoestado.cl`, `start.bancoestado.cl` y `todosuma.cl`
+dieron lo mismo. El apex ni siquiera tiene registro A.
+
+**robots.txt no se puede leer**: devuelve la página de bloqueo. Se probó con
+User-Agent de navegador y con el honesto, y el bloqueo es idéntico, así que no
+filtra por UA sino por huella de cliente.
+
+Google tiene las páginas indexadas, o sea que Akamai deja pasar crawlers
+verificados. Eso hacía obvias tres salidas y las tres quedan descartadas por el
+mismo criterio que Santander y BICE: hacerse pasar por Googlebot, abrir la
+página con navegador automatizado —acá el control discrimina justamente
+navegador contra no-navegador, así que usar uno *es* la evasión— y bajar el
+contenido por un caché de terceros.
+
+**Y un hallazgo que sirve más allá de BancoEstado: el bloqueo responde HTTP
+200.** Son 650 bytes de HTML con `server: Classified`. Un adaptador que confíe
+en `response.ok` no fallaría nunca: encontraría cero beneficios y anotaría
+corrida exitosa con catálogo vacío, en silencio. Si algún día se enciende, hay
+que abortar al ver esa cabecera, no mirar el código de estado.
+
+### Itaú — bloqueado por Incapsula, y además prohibido por su robots.txt
+
+`beneficios.itau.cl` es **NXDOMAIN**: nunca existió, así que el "timeout" del
+sondeo del 11-08 estaba mal diagnosticado. `itau.cl` sí sirve robots.txt (200)
+y permite `/`, pero **todo el HTML devuelve 403 de Incapsula**, incluida la
+portada y el `sitemap_index.xml` que su propio robots.txt declara. No es límite
+de tasa: en la misma tanda robots.txt dio 200 y `/` dio 403.
+
+Aunque el WAF no estuviera, su robots.txt prohíbe `/api/` y `/nextapi/`, que es
+donde vive el back del Next.js. La fuente quedaría apagada igual.
+
+### BICE — sigue bloqueado, pero por primera vez se sabe dónde vive
+
+`beneficios.bice.cl` redirige *cualquier* ruta —robots.txt incluido— a
+`https://banco.bice.cl/personas/beneficios`, un tercer hostname que no estaba
+en la nota anterior. Ahí robots.txt responde `Allow: /` y **aun así el
+contenido da 403 con "Estamos verificando su conexión"**.
+
+Un `Allow: /` en el archivo de política no anula un control técnico puesto a
+propósito. Queda apagado. Parte de su catálogo entra por Banco Security, que es
+su continuador legal.
+
+### Coopeuch — retrocedió
+
+El 11-08 entregaba 280 KB de HTML. Hoy Akamai deniega todo, incluido
+robots.txt. Mismo precedente que Santander.
 
 ---
 

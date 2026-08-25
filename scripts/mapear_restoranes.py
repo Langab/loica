@@ -4,14 +4,27 @@
     python3 scripts/mapear_restoranes.py            # propone y muestra
     python3 scripts/mapear_restoranes.py --escribir # además deja el YAML
 
-Santander publica 83 restaurantes y **ninguna dirección**: su catálogo se
-captura a mano y solo trae el nombre. Falabella y Cencosud tampoco dan calle.
-Eso son 185 descuentos que no caen en el mapa, y un descuento sin mapa es una
-lista de nombres que no dice a dónde ir.
+Banco Falabella, Banco de Chile y Santander publican convenios sin decir dónde
+queda el local: su catálogo se captura a mano y muchas veces solo trae el
+nombre. Hoy quedan así 154 convenios de 149 comercios distintos —118 sin
+ninguna sucursal y 36 con todas sus sucursales cayendo al centro de la
+comuna—, y un descuento sin mapa es una lista de nombres que no dice a dónde ir.
 
 Acá se aprovecha que el índice local de OSM (datos/indice_osm.db) tiene 8.250
 locales de comida de la RM con nombre, dirección y comuna. Se cruza el nombre
 del comercio contra ese catastro y se propone la ficha completa.
+
+QUÉ LE TOCA A CADA UNO. Desde que `loica/descuentos/cadenas.py` corre en la
+corrida, las CADENAS se resuelven solas contra este mismo índice —nombre
+exacto y tres o más locales en la RM— y la oferta se publica con una sucursal
+por cada uno: hoy son 21 comercios y 375 pines. Eso es justamente lo que este
+script nunca pudo proponer, porque una corrección se guarda POR NOMBRE y una
+sola ficha de "Starbucks" mandaría los 135 locales de la ciudad a la misma
+esquina.
+
+Lo que queda para acá es el local ÚNICO: el que OSM conoce una sola vez, o dos
+veces en la misma cuadra porque alguien mapeó el nodo y el edificio. Ese no lo
+toca cadenas.py, y es el único al que una ficha por nombre le queda bien.
 
 REGLA DE ORO: se propone SOLO cuando el calce es inequívoco.
   - Nombre normalizado idéntico, y
@@ -145,12 +158,18 @@ def main() -> int:
     if args.banco:
         descuentos = [d for d in descuentos if d["banco_id"] == args.banco]
 
-    # Un local puede aparecer en varios bancos; se resuelve una vez.
+    # Un comercio puede aparecer en varios bancos; se resuelve una vez. Y una
+    # oferta que ya trae sucursales ubicadas queda fuera aunque sean prestadas
+    # de otro banco o de OSM: ya está en el mapa, y proponerle ficha sería
+    # volver a resolver lo que cadenas.py resolvió mejor, con todos sus locales
+    # en vez de uno solo.
     pendientes: dict[str, str] = {}
     for d in descuentos:
-        if d.get("precision") in ("fuente", "calle", "correccion"):
+        locales = d.get("locales") or []
+        if locales and not all(l.get("precision") == "comuna" for l in locales):
             continue
-        pendientes.setdefault(d["comercio"], d.get("comuna") or "")
+        comuna = next((l.get("comuna") for l in locales if l.get("comuna")), "")
+        pendientes[d["comercio"]] = pendientes.get(d["comercio"], "") or comuna
 
     con = sqlite3.connect(f"file:{RUTA_INDICE}?mode=ro", uri=True)
     resueltos, sin_calce = [], []
@@ -161,7 +180,8 @@ def main() -> int:
 
     altas = [f for f in resueltos if f["confianza"] == "alta"]
     medias = [f for f in resueltos if f["confianza"] == "media"]
-    print(f"{len(pendientes)} locales sin ubicación exacta")
+    print(f"{len(pendientes)} comercios sin ubicar (sin ninguna sucursal, o "
+          f"todas al centro de su comuna)")
     print(f"  con dirección en el catastro (entran solos): {len(altas)}")
     print(f"  solo con coordenada (van a revisión): {len(medias)}")
     print(f"  sin calce, quedan a mano: {len(sin_calce)}")
@@ -178,7 +198,9 @@ def main() -> int:
             "# catastro local de OSM. Cada entrada tuvo un calce INEQUÍVOCO:",
             "# nombre idéntico y un solo local en la RM (las cadenas se",
             "# descartan: la corrección se guarda por nombre y mandaría los",
-            "# 135 Starbucks de la ciudad a la misma esquina).",
+            "# 135 Starbucks de la ciudad a la misma esquina; de esas se",
+            "# encarga loica/descuentos/cadenas.py, que les pone una sucursal",
+            "# por local en vez de una ficha para todas).",
             "#",
             "# Revisar y pegar en config/correcciones/restoranes.yaml.",
             "",

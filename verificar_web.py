@@ -44,6 +44,26 @@ MIN_EVENTOS = 100
 MIN_TALLERES = 200        # el catálogo municipal ronda los 1.600; menos que
                           # esto es una fuente caída, no una semana tranquila
 MIN_DESCUENTOS = 100          # el mismo piso que usa .github/workflows/descuentos.yml
+# Este cuenta CONVENIOS desde que cada fila del JSON es una oferta con sus
+# sucursales adentro: hoy son 580 donde antes había 756 filas-sucursal. El piso
+# de 100 no se movió porque nunca midió sucursales, y `total` —lo que mira el
+# workflow— también pasó a ser convenios, así que los dos siguen contando lo
+# mismo.
+#
+# Los locales del mapa sí quedaron sin nadie que los contara, y son un catastro
+# aparte: una oferta puede traer veintiún pines o ninguno. Hoy son 1.587 para
+# esos 580 convenios, y vienen de tres partes: 831 los publica el propio banco
+# con su dirección, 381 los presta otro banco que sí dijo la calle y 375 salen
+# del índice OSM. El día que el préstamo se caiga entero —el índice ilegible y
+# el cruce entre bancos roto— el mapa queda con las 831 propias y este piso lo
+# frena. Perder una sola de las dos patas deja ~1.200 y no lo cruza: esa caída
+# más chica la dice el aviso de acá abajo.
+MIN_LOCALES_DESCUENTOS = 1000
+# Una oferta sin ningún local igual sale en la lista, solo que no cae en el
+# mapa: es el convenio que el banco publicó sin dirección y cuya cadena nadie
+# conoce. Hoy son 118 de 580 (20%). Sin el índice OSM serían 147 (25%) y sin el
+# préstamo entre bancos 140 (24%), así que el aviso puesto acá dice las dos.
+MAX_OFERTAS_SIN_LOCAL = 0.24
 # Ocho salas de Cinemark dan del orden de 600 funciones en cuatro días. Este es
 # el piso de AVISO, no de error: run_cine.py ya tiene el suyo y se niega a
 # escribir el archivo por debajo, así que si acá llega poco es que el archivo
@@ -318,6 +338,8 @@ def verificar_descuentos(errores: list[str], avisos: list[str]) -> None:
         r"\b(lunes|martes|mi[eé]rcoles|jueves|viernes|s[áa]bados?|domingos?"
         r"|fin de semana|finde)\b", re.IGNORECASE)
 
+    total_locales = 0
+    sin_local = 0
     for i, d in enumerate(descuentos):
         donde = f"descuento {i} ({str(d.get('comercio'))[:40]!r})"
         # `dias` que no sea lista revienta descuentos.html con TypeError: la
@@ -337,9 +359,49 @@ def verificar_descuentos(errores: list[str], avisos: list[str]) -> None:
         for campo in ("comercio", "banco", "id"):
             if not d.get(campo):
                 errores.append(f"{donde}: sin {campo}")
-        lat, lon = d.get("lat"), d.get("lon")
-        if (lat is None) != (lon is None):
-            errores.append(f"{donde}: lat/lon a medias ({lat}, {lon})")
+
+        # Las sucursales se fueron de la raíz de la oferta a `locales`, y la
+        # página recorre esa lista sin mirar el tipo: algo que no sea una lista
+        # no rompe una tarjeta, bota el mapa entero.
+        locales = d.get("locales")
+        if not isinstance(locales, list):
+            errores.append(f"{donde}: 'locales' no es una lista: {locales!r}")
+            continue
+        total_locales += len(locales)
+        if not locales:
+            sin_local += 1
+
+        for j, local in enumerate(locales):
+            if not isinstance(local, dict):
+                errores.append(f"{donde}: el local {j} no es un objeto: {local!r}")
+                continue
+            aqui = f"{donde}, local {j} ({str(local.get('direccion'))[:30]!r})"
+            lat, lon = local.get("lat"), local.get("lon")
+            if (lat is None) != (lon is None):
+                errores.append(f"{aqui}: lat/lon a medias ({lat}, {lon})")
+            elif lat is not None and not all(isinstance(c, (int, float))
+                                             for c in (lat, lon)):
+                errores.append(f"{aqui}: lat/lon no son números "
+                               f"({lat!r}, {lon!r})")
+            if local.get("precision") not in PRECISIONES:
+                avisos.append(f"{aqui}: precisión desconocida "
+                              f"{local.get('precision')!r}")
+            # `origen` es la deuda declarada de cada sucursal: "" cuando la
+            # publicó el propio banco, y si no de dónde se prestó. La ficha lo
+            # escribe tal cual, así que un no-texto sale impreso en la página.
+            if not isinstance(local.get("origen"), str):
+                errores.append(f"{aqui}: 'origen' no es texto: "
+                               f"{local.get('origen')!r}")
+
+    if total_locales < MIN_LOCALES_DESCUENTOS:
+        errores.append(f"Solo {total_locales} locales con descuento en el mapa "
+                       f"(mínimo {MIN_LOCALES_DESCUENTOS}): se cayó el índice "
+                       "OSM o el préstamo de direcciones entre bancos.")
+    if descuentos and sin_local / len(descuentos) > MAX_OFERTAS_SIN_LOCAL:
+        avisos.append(f"{sin_local} de {len(descuentos)} convenios sin ningún "
+                      f"local ({sin_local * 100 // len(descuentos)}%): salen en "
+                      "la lista pero no en el mapa. Si el número sube de golpe, "
+                      "las sucursales prestadas dejaron de llegar.")
 
 
 def verificar_correcciones(errores: list[str]) -> None:

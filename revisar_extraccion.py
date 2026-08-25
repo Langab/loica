@@ -76,18 +76,33 @@ def cola_categorias(eventos: list[dict]) -> list[dict]:
 
 
 def cola_restoranes(descuentos: list[dict]) -> tuple[list[dict], list[dict]]:
-    """Locales con descuento sin ubicación exacta y sin tipo de cocina."""
+    """Convenios sin ubicación exacta y sin tipo de cocina.
+
+    "Sin ubicar" quiere decir otra cosa desde que cada fila es un convenio con
+    sus sucursales adentro. Una oferta con locales prestados —de otro banco que
+    sí publicó la calle, o del índice de OSM— ya está en el mapa: mandarla a la
+    cola sería pedir que alguien busque a mano una dirección que ya se sabe.
+    Falta ubicar la oferta que no tiene NINGÚN local, y la que los tiene todos
+    en el centro de la comuna.
+    """
     sin_pin: dict[str, dict] = {}
     sin_cocina: dict[str, dict] = {}
     for d in descuentos:
         nombre = d.get("comercio") or ""
-        if d.get("precision") in ("comuna", "sin_ubicar", ""):
+        locales = d.get("locales") or []
+        if not locales or all(l.get("precision") == "comuna" for l in locales):
             g = sin_pin.setdefault(nombre, {"comercio": nombre, "n": 0,
-                                            "comuna": d.get("comuna") or "",
-                                            "direccion": d.get("direccion") or "",
+                                            "comuna": "", "direccion": "",
                                             "bancos": set()})
             g["n"] += 1
             g["bancos"].add(d.get("banco") or "")
+            # La pista sale del primer local que traiga algo. Cuando la oferta
+            # cayó al centro de la comuna es porque el banco dijo una dirección
+            # que el geocodificador no supo resolver, y esa dirección a medias
+            # es por donde empieza la búsqueda a mano.
+            for local in locales:
+                g["comuna"] = g["comuna"] or (local.get("comuna") or "")
+                g["direccion"] = g["direccion"] or (local.get("direccion") or "")
         if not d.get("cocina"):
             g = sin_cocina.setdefault(nombre, {"comercio": nombre, "n": 0,
                                                "categoria": d.get("categoria") or ""})
@@ -332,17 +347,30 @@ def main() -> int:
                    for d in degradadas]
 
     if descuentos:
-        dc_precision = Counter(d.get("precision") or "sin_ubicar" for d in descuentos)
+        # La precisión es de cada sucursal y no del convenio: Dunkin' es una
+        # sola oferta con veintiún pines, y contarla una vez escondería veinte.
+        locales = [l for d in descuentos for l in (d.get("locales") or [])]
+        dc_precision = Counter(l.get("precision") or "sin_ubicar" for l in locales)
         dc_exactos = sum(dc_precision[p] for p in ("fuente", "calle", "correccion"))
+        prestados = sum(1 for l in locales if l.get("origen"))
+        sin_local = sum(1 for d in descuentos if not (d.get("locales") or []))
         sin_cocina_n = sum(1 for d in descuentos if not d.get("cocina"))
         lineas += [
             "", "## Descuentos", "",
-            f"- Con pin exacto: {dc_exactos} de {len(descuentos)}",
+            f"- {len(descuentos)} convenios con {len(locales)} locales en el mapa",
+            f"- Con pin exacto: {dc_exactos} de {len(locales)}",
             f"- Al centro de comuna: {dc_precision.get('comuna', 0)}",
-            f"- Sin pin: {dc_precision.get('sin_ubicar', 0) + dc_precision.get('', 0)}",
+            f"- Sin pin: {dc_precision.get('sin_ubicar', 0)}",
+            f"- Sucursales prestadas (las dijo otro banco o OSM, no el que "
+            f"publica el convenio): {prestados}",
+            f"- Convenios sin ningún local, que salen en la lista pero no en el "
+            f"mapa: {sin_local}",
             f"- Sin tipo de cocina: {sin_cocina_n}",
             "",
-            "Cola en `datos/revision/pendientes_restoranes.yaml`.",
+            f"Por ubicar a mano quedan **{len(rest_pin)}** comercios: los que no "
+            "tienen ningún local y los que caen todos al centro de su comuna. "
+            "Lo prestado ya está ubicado y no entra a la cola. Cola en "
+            "`datos/revision/pendientes_restoranes.yaml`.",
         ]
 
     lineas += [

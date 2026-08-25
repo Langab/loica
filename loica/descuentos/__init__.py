@@ -91,16 +91,22 @@ def _sigue_viva(descuento: Descuento, hoy: date | None = None) -> bool:
 
 
 def _sin_repetidos(descuentos: list[Descuento]) -> list[Descuento]:
-    """Mismo comercio, mismo banco, misma comuna = una sola fila.
+    """Mismo comercio, mismo banco y MISMA DIRECCIÓN = una sola fila.
 
     Se queda con la que tenga más dato: entre dos entradas del mismo local
     gana la que trae día y porcentaje, porque es la que sirve para filtrar.
+
+    Antes la llave era la comuna y no la dirección, y eso borraba sucursales
+    de verdad: los tres Starbucks de Las Condes quedaban en uno solo, sin
+    aviso y sin que se notara, porque el que sobrevivía se veía bien. La lista
+    no se alarga por esto —las sucursales se agrupan de nuevo al publicar, en
+    cadenas.py— pero el mapa gana los pines que faltaban.
     """
     mejores: dict[str, Descuento] = {}
     for d in descuentos:
-        previo = mejores.get(d.id)
+        previo = mejores.get(d.huella)
         if previo is None or _riqueza(d) > _riqueza(previo):
-            mejores[d.id] = d
+            mejores[d.huella] = d
     # Por valor y no por banco. Agrupada por banco, la lista abría con las
     # 137 de Falabella una tras otra y parecía que ese era el único banco;
     # ordenada por cuánto rebaja, arriba queda lo que conviene y los tres

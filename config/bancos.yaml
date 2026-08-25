@@ -143,6 +143,59 @@ bancos:
 
     '
 
+- id: security
+  nombre: Banco Security
+  # Las dos marcas son el mismo emisor: la letra chica de los 80 beneficios
+  # gastronómicos dice "Banco BICE, continuador legal de Banco Security".
+  emisor: Banco Security · Banco BICE
+  adaptador: security
+  # JSON:API de Drupal, abierto y sin token. Ojo con el host: el sitio real es
+  # personas.bancosecurity.cl; www.bancosecurity.cl es un ASP legacy cuyo
+  # sitemap está fechado en 2012 y que ni siquiera sirve un robots.txt.
+  url_base: https://personas.bancosecurity.cl
+  endpoint: /jsonapi/node/beneficio
+  # page[limit] tiene tope 50 en el propio Drupal; pedir más no trae más.
+  por_pagina: 50
+  # Términos del vocabulario `beneficios` de su propio Drupal, EN ORDEN DE
+  # PRIORIDAD: un beneficio puede llevar dos y manda el primero que calce.
+  # "Gourmet" va al final porque en Security NO es un rubro fino sino el
+  # nombre de la sección de comida entera —su propia agenda vive en
+  # /beneficios/gourmet y ahí adentro hay pizzerías, Rappi y una heladería—,
+  # así que es el cajón grande. 27 de los 80 llevan Gourmet y Restaurantes a
+  # la vez y se quedan con Restaurantes, que es lo que el banco agregó; con el
+  # orden al revés el catálogo entero salía como gourmet (114 de 115 filas).
+  # El vocabulario tiene además "Vinos y Licores" y "Saludable", hoy sin un
+  # solo beneficio publicado; el resto (Viajes, Shopping y servicios,
+  # Entretención, Bienestar) es otro producto.
+  categorias:
+  - Comida Rápida
+  - Restaurantes
+  - Gourmet
+  crawl_delay_seg: 2
+  activo: true
+  # No son locales: son la portada de una cuponera, igual que las dos de
+  # Falabella. Prometen un lugar donde comer que no existe, y encima entran
+  # con el porcentaje en cero.
+  excluir_comercios:
+  - Mastercard - App Copec
+  - The Mastercard Collection
+  notas: 'La mejor fuente nueva desde Banco de Chile: los 80 beneficios gastronómicos traen el día
+    en taxonomía propia (80 de 80) y la vigencia en fecha ISO. Son de barrio alto y de tarjeta de
+    gama alta —Vitacura, Las Condes, Providencia y Lo Barnechea con Black y Black One—, así que
+    todo el catálogo va marcado como segmentado.
+
+    La campaña es mensual y eso se nota: 66 de los 80 vencen el 30 y el 31 de agosto de 2026. Si
+    la corrida de septiembre trae cero o todo vencido no es que se rompió el adaptador, es que se
+    acabó la campaña y Security todavía no publica la del mes; mismo criterio que Restofans de
+    Ripley.
+
+    Riesgo de mediano plazo: la letra chica dice "Banco BICE, continuador legal de Banco
+    Security", o sea que este catálogo es el del grupo BICE-Security y entra por la única puerta
+    abierta —banco.bice.cl está tras un desafío de Cloudflare y quedó fuera del catastro—. El día
+    que la marca Security se apague y el contenido migre a bice.cl, esta fuente se pierde.
+
+    '
+
 - id: entel
   nombre: Entel
   emisor: Club Entel

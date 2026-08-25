@@ -720,6 +720,7 @@ const TEXTOS = {
     dTodosDias:"Todos los días", dHoyEs:"Hoy es",
     dSinFecha:"Sin fecha declarada por el banco", dHasta:"Hasta el",
     dTope:"Tope", dSegmentado:"No es para todos los clientes del banco",
+    dLocales:"locales", dOtraComuna:"y otra comuna", dOtrasComunas:"y {n} comunas más",
     dSoloOnline:"Solo online", dSoloPresencial:"Solo presencial",
     dVerBanco:"Ver en la página del banco",
     dVacio:"No hay descuentos con esos filtros", dVaciopista:"Prueba sacando alguno",
@@ -789,6 +790,7 @@ const TEXTOS = {
     dTodosDias:"Every day", dHoyEs:"Today is",
     dSinFecha:"No end date published by the bank", dHasta:"Until",
     dTope:"Cap", dSegmentado:"Not available to every customer of the bank",
+    dLocales:"venues", dOtraComuna:"and one more district", dOtrasComunas:"and {n} more districts",
     dSoloOnline:"Online only", dSoloPresencial:"In person only",
     dVerBanco:"See it on the bank's page",
     dVacio:"No discounts match these filters", dVaciopista:"Try removing one",
@@ -858,6 +860,7 @@ const TEXTOS = {
     dTodosDias:"Todos os dias", dHoyEs:"Hoje é",
     dSinFecha:"Sem data de término declarada pelo banco", dHasta:"Até",
     dTope:"Limite", dSegmentado:"Não vale para todos os clientes do banco",
+    dLocales:"locais", dOtraComuna:"e mais uma comuna", dOtrasComunas:"e mais {n} comunas",
     dSoloOnline:"Só online", dSoloPresencial:"Só presencial",
     dVerBanco:"Ver na página do banco",
     dVacio:"Nenhum desconto com esses filtros", dVaciopista:"Tente tirar algum",
@@ -1723,8 +1726,30 @@ function cintaDia(d){
   return {texto: d.dias.map(x => t("dias")[DIAS_CLAVE.indexOf(x)].toUpperCase()).join(" "), hoy};
 }
 
+/* Dónde vale el convenio, en una línea. Desde el 25-08-2026 el JSON trae una
+   fila por convenio y las sucursales colgando en `locales[]`: antes venía una
+   fila por sucursal y el 25% de Dunkin' del Banco de Chile aparecía veintiuna
+   veces en la lista, una por local. */
+function dondeDescuento(d){
+  const locales = d.locales || [];
+  if(!locales.length) return {calle:"", donde:""};
+  if(locales.length === 1) return {calle: locales[0].direccion || "", donde: locales[0].comuna || ""};
+  /* El 40% de Burger King de Cencosud corre en diecisiete comunas: nombrarlas
+     todas no cabe en la tarjeta. Se dicen las dos primeras y el resto se
+     cuenta, que es lo que necesita saber quien está eligiendo dónde comer. */
+  const comunas = d.comunas || [];
+  const resto = comunas.length - 2;
+  return {
+    calle: `${locales.length} ${t("dLocales")}`,
+    donde: resto <= 0 ? comunas.join(", ")
+      : `${comunas.slice(0, 2).join(", ")} ${
+          resto === 1 ? t("dOtraComuna") : t("dOtrasComunas").replace("{n}", resto)}`,
+  };
+}
+
 function tarjetaDescuento(d, alPulsar){
   const b = banco(d.banco_id);
+  const donde = dondeDescuento(d);
   const dia = cintaDia(d);
   const monto = montoDescuento(d);
 
@@ -1747,9 +1772,9 @@ function tarjetaDescuento(d, alPulsar){
       <div class="hora banco-nombre">${escapar(d.banco)}</div>
       <h3>${escapar(d.comercio)}</h3>
       <div class="tarjeta-meta">
-        ${d.direccion ? `<span>${escapar(d.direccion)}</span>` : ""}
-        ${d.comuna ? `<span>${d.direccion ? "· " : ""}${escapar(d.comuna)}</span>`
-                   : d.region ? `<span>${escapar(d.region)}</span>` : ""}
+        ${donde.calle ? `<span>${escapar(donde.calle)}</span>` : ""}
+        ${donde.donde ? `<span>${donde.calle ? "· " : ""}${escapar(donde.donde)}</span>`
+                      : d.region ? `<span>${donde.calle ? "· " : ""}${escapar(d.region)}</span>` : ""}
         ${d.segmentado ? `<span class="aviso" title="${escapar(t("dSegmentado"))}">·&nbsp;${
           IDIOMA === "en" ? "segmented" : "segmentado"}</span>` : ""}
       </div>

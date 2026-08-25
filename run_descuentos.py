@@ -21,10 +21,8 @@ from __future__ import annotations
 import argparse
 import json
 import logging
-import re
 import sys
 import time
-import unicodedata
 from collections import Counter
 from datetime import datetime
 from pathlib import Path
@@ -66,45 +64,7 @@ def cargar_bancos(solo: str | None = None) -> list[dict]:
     return bancos
 
 
-def prestar_direcciones(descuentos) -> int:
-    """El mismo restaurante en dos bancos: el que sabe dónde queda se lo dice al otro.
-
-    Banco de Chile y Bci publican la dirección de casi todos sus locales;
-    Santander, Falabella y Cencosud no publican ninguna. Pero son en buena
-    medida los mismos restaurantes: Pescados Capitales está en los dos lados,
-    y en uno de ellos con calle y comuna.
-
-    Se copia la dirección SOLO cuando el nombre normalizado calza exacto. Un
-    match parcial pondría a "Sushi Home" en la dirección de "Sushi Home Ñuñoa",
-    que es otro local, y un pin equivocado es peor que ninguno.
-    """
-    def clave(nombre: str) -> str:
-        plano = unicodedata.normalize("NFD", (nombre or "").lower())
-        plano = "".join(c for c in plano if unicodedata.category(c) != "Mn")
-        return " ".join(re.sub(r"[^a-z0-9 ]", " ", plano).split())
-
-    conocidas: dict[str, object] = {}
-    for d in descuentos:
-        if d.direccion and d.comuna:
-            conocidas.setdefault(clave(d.comercio), d)
-
-    prestadas = 0
-    for d in descuentos:
-        if d.direccion:
-            continue
-        origen = conocidas.get(clave(d.comercio))
-        if origen is None:
-            continue
-        d.direccion, d.comuna = origen.direccion, origen.comuna
-        if d.lat is None:
-            d.lat, d.lon = origen.lat, origen.lon
-        # Queda dicho de dónde salió: es un dato de otro banco, no del suyo.
-        d.direccion_prestada_de = origen.banco
-        prestadas += 1
-    return prestadas
-
-
-def ubicar(descuentos) -> Counter:
+def ubicar(descuentos) -> tuple[list, Counter, dict]:
     """Le pone coordenadas a cada descuento para que caiga en el mapa.
 
     Tres precisiones, y la página las distingue porque no son lo mismo:
@@ -114,22 +74,30 @@ def ubicar(descuentos) -> Counter:
     Un pin aproximado se muestra atenuado: mandar a alguien a una esquina donde
     no hay nada es peor que decirle "está en Ñuñoa, mira la dirección".
     """
+    log = logging.getLogger("loica")
+
     # Primero la memoria de arreglos (config/correcciones/restoranes.yaml):
     # cocina, rubro, dirección o coordenadas que la revisión ya corrigió una
-    # vez. Va ANTES del préstamo entre bancos a propósito: una dirección
-    # corregida a mano también se les presta a los otros bancos que publican
-    # el mismo local.
+    # vez. Va ANTES de abrir las cadenas a propósito: una dirección corregida
+    # a mano también sirve de sucursal para los otros bancos que publican el
+    # mismo local.
     from loica.correcciones import Correcciones
     corr = Correcciones()
     corregidos = sum(1 for d in descuentos if corr.aplicar_a_descuento(d))
     if corregidos:
-        logging.getLogger("loica").info(
-            "%d descuentos con correcciones de la memoria", corregidos)
+        log.info("%d descuentos con correcciones de la memoria", corregidos)
 
-    prestadas = prestar_direcciones(descuentos)
-    if prestadas:
-        logging.getLogger("loica").info(
-            "%d direcciones prestadas entre bancos", prestadas)
+    # Y ahora las cadenas: la oferta que el banco publicó sin ninguna
+    # dirección —"Melt Pizzas", a secas— se abre en una fila por sucursal
+    # conocida, para que caiga en el mapa entera y no se quede solo en la
+    # lista. Ver loica/descuentos/cadenas.py.
+    from loica.descuentos.cadenas import _comuna_de, expandir
+    descuentos, cuenta = expandir(descuentos)
+    if cuenta["ofertas"]:
+        log.info("%d ofertas de cadena abiertas en %d sucursales "
+                 "(%d del mismo banco, %d de otros bancos, %d de OpenStreetMap)",
+                 cuenta["ofertas"], cuenta["sedes"], cuenta["propias"],
+                 cuenta["de_bancos"], cuenta["de_osm"])
 
     from loica.geo import Geocodificador
     # Se reusa la misma caché de coordenadas que los eventos: muchos de estos
@@ -154,24 +122,51 @@ def ubicar(descuentos) -> Counter:
         precisiones[d.precision] += 1
 
     geocodificador.guardar()
-    return precisiones
+
+    # Último filtro, y va DESPUÉS de geocodificar porque antes no había con
+    # qué. `es_metropolitana` deja pasar lo que no declara ni comuna ni
+    # región, y tiene razón en hacerlo: la mayoría de esos son cadenas
+    # nacionales que sí tienen local en Santiago. Pero algunos no lo son, y
+    # cuando la dirección se resuelve queda un pin en Chiloé, en Huasco, en
+    # Quillota o en Reñaca dentro del mapa de Santiago. Son cinco hoy y
+    # estaban desde antes de las cadenas: el pin se veía correcto porque lo
+    # era —el local existe y queda ahí—, solo que a seiscientos kilómetros de
+    # quien abre la página.
+    fuera = [d for d in descuentos
+             if d.lat is not None and not _comuna_de(d.lat, d.lon, d.comuna)]
+    if fuera:
+        log.info("%d locales quedan fuera del mapa por estar fuera de la RM: %s",
+                 len(fuera), ", ".join(f"{d.comercio} ({d.direccion})" for d in fuera[:6]))
+        descartados = {id(d) for d in fuera}
+        descuentos = [d for d in descuentos if id(d) not in descartados]
+
+    return descuentos, precisiones, cuenta
 
 
-def escribir_json(descuentos, estadisticas) -> Path:
+def escribir_json(ofertas: list[dict], estadisticas) -> Path:
     """El JSON que lee la página. Trae los índices ya calculados para que el
-    navegador no tenga que recorrer la lista entera solo para pintar chips."""
+    navegador no tenga que recorrer la lista entera solo para pintar chips.
+
+    Lo que se publica son OFERTAS, no filas: un convenio del banco con su
+    lista de locales adentro. `total` cuenta convenios —que es lo que la
+    página muestra como "N descuentos"— y `locales` cuenta los lugares donde
+    usarlos, que es lo que se ve en el mapa. Los dos números son distintos y
+    los dos importan: Banco de Chile tiene un convenio con Dunkin' y sesenta y
+    seis lugares donde comerse la dona.
+    """
     dias = Counter()
-    for d in descuentos:
-        dias.update(d.dias)
+    for o in ofertas:
+        dias.update(o["dias"])
 
     RUTA_SALIDA.parent.mkdir(parents=True, exist_ok=True)
     RUTA_SALIDA.write_text(json.dumps({
         "generado": datetime.now().isoformat(timespec="seconds"),
-        "total": len(descuentos),
-        "bancos": sorted({(d.banco_id, d.banco) for d in descuentos}),
-        "comunas": sorted({d.comuna for d in descuentos if d.comuna}),
+        "total": len(ofertas),
+        "locales": sum(len(o["locales"]) for o in ofertas),
+        "bancos": sorted({(o["banco_id"], o["banco"]) for o in ofertas}),
+        "comunas": sorted({c for o in ofertas for c in o["comunas"]}),
         "por_dia": dict(dias),
-        "descuentos": [d.a_dict() for d in descuentos],
+        "descuentos": ofertas,
     }, ensure_ascii=False, indent=1), encoding="utf-8")
     return RUTA_SALIDA
 
@@ -220,21 +215,24 @@ def guardar_estado(bancos, estadisticas, duracion: float) -> Path:
     return RUTA_ESTADO
 
 
-def escribir_informe(descuentos, estadisticas, duracion: float) -> Path:
+def escribir_informe(ofertas: list[dict], estadisticas, duracion: float,
+                    cadenas: dict | None = None) -> Path:
     DIR_INFORMES.mkdir(parents=True, exist_ok=True)
     hoy = datetime.now()
     ruta = DIR_INFORMES / f"{hoy:%Y-%m-%d}_descuentos.md"
 
-    con_dia = sum(1 for d in descuentos if d.dias)
-    sin_vigencia = sum(1 for d in descuentos if d.vigencia_hasta is None)
+    con_dia = sum(1 for o in ofertas if o["dias"])
+    sin_vigencia = sum(1 for o in ofertas if o["vigencia_hasta"] is None)
+    locales = sum(len(o["locales"]) for o in ofertas)
     # `%B` da "August" en el entorno de GitHub Actions, que corre en inglés
     mes = ("enero", "febrero", "marzo", "abril", "mayo", "junio", "julio",
            "agosto", "septiembre", "octubre", "noviembre", "diciembre")[hoy.month - 1]
     lineas = [
         f"# Descuentos — {hoy.day} de {mes} de {hoy.year}",
         "",
-        f"{len(descuentos)} descuentos vigentes en {duracion:.1f}s. "
-        f"{con_dia} traen día de la semana ({con_dia * 100 // max(len(descuentos), 1)}%).",
+        f"{len(ofertas)} descuentos vigentes en {locales} locales, en "
+        f"{duracion:.1f}s. {con_dia} traen día de la semana "
+        f"({con_dia * 100 // max(len(ofertas), 1)}%).",
         "",
         "| Banco | Crudos | Vigentes | Con día | Vencidos |",
         "|---|---:|---:|---:|---:|",
@@ -249,10 +247,29 @@ def escribir_informe(descuentos, estadisticas, duracion: float) -> Path:
                        "Van marcados en la página como *sin fecha declarada*; no se dan "
                        "por buenos."]
 
-    porcomuna = Counter(d.comuna for d in descuentos if d.comuna)
+    if cadenas and cadenas.get("ofertas"):
+        partes = []
+        if cadenas.get("propias"):
+            partes.append(f"{cadenas['propias']} las publica el mismo banco en otra entrada")
+        if cadenas.get("de_bancos"):
+            partes.append(f"{cadenas['de_bancos']} las publica otro banco")
+        if cadenas.get("de_osm"):
+            partes.append(f"{cadenas['de_osm']} salen de OpenStreetMap")
+        lineas += ["", f"> {cadenas['ofertas']} ofertas venían sin ninguna dirección y se "
+                       f"abrieron en {cadenas['sedes']} sucursales: {', '.join(partes)}. "
+                       "Cada local dice de dónde salió."]
+
+    porcomuna = Counter(l["comuna"] for o in ofertas for l in o["locales"] if l["comuna"])
     if porcomuna:
         lineas += ["", "## Dónde están", ""]
         lineas += [f"- **{c}** — {n}" for c, n in porcomuna.most_common(15)]
+
+    cadenones = sorted(((len(o["locales"]), o["comercio"], o["banco"]) for o in ofertas),
+                       reverse=True)[:10]
+    if cadenones and cadenones[0][0] > 1:
+        lineas += ["", "## Las cadenas más largas", ""]
+        lineas += [f"- **{com}** ({banco}) — {n} locales"
+                   for n, com, banco in cadenones if n > 1]
 
     for e in estadisticas:
         if e.get("error"):
@@ -302,15 +319,22 @@ def main() -> int:
                         RUTA_SALIDA.relative_to(RAIZ))
         return 0
 
-    precisiones = ubicar(descuentos)
+    descuentos, precisiones, cadenas = ubicar(descuentos)
     con_pin = sum(n for p, n in precisiones.items() if p != "sin_ubicar")
     log.info("%d con pin en el mapa (%d exactos) · %d solo en la lista",
              con_pin, precisiones.get("fuente", 0) + precisiones.get("calle", 0)
              + precisiones.get("correccion", 0),
              precisiones.get("sin_ubicar", 0))
 
-    salida = escribir_json(descuentos, estadisticas)
-    informe = escribir_informe(descuentos, estadisticas, duracion)
+    # Las sucursales se juntan de vuelta en su convenio: una fila por oferta
+    # con su lista de locales adentro. Es lo que se publica.
+    from loica.descuentos.cadenas import agrupar
+    ofertas = agrupar(descuentos)
+    log.info("%d convenios en %d locales", len(ofertas),
+             sum(len(o["locales"]) for o in ofertas))
+
+    salida = escribir_json(ofertas, estadisticas)
+    informe = escribir_informe(ofertas, estadisticas, duracion, cadenas)
     guardar_estado(bancos, estadisticas, duracion)
     log.info("JSON:    %s", salida.relative_to(RAIZ))
     log.info("Informe: %s", informe.relative_to(RAIZ))

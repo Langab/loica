@@ -27,8 +27,9 @@ import yaml
 from ..normalizar import limpiar_html
 from ..red import ClienteEducado
 from .modelo import Descuento
-from .texto import (datos_bci, dias_en, lugar_en, modalidad_en, oferta_en,
-                    porcentaje_en, sucursales_bch, tope_en, url_normal, vigencia_en)
+from .texto import (COMUNAS, datos_bci, dias_en, lugar_en, modalidad_en, oferta_en,
+                    plano, porcentaje_en, sucursales_bch, tope_en, url_normal,
+                    vigencia_en)
 
 
 def token_de(banco: dict) -> str:
@@ -164,6 +165,8 @@ def _bci(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
                 local = datos_bci(bruto)
                 comuna = local["comuna"] or comuna
 
+                porcentaje, promocion = _descuento_bci(promo, descripcion, condiciones)
+
                 recogidos.append(Descuento(
                     banco_id=banco["id"],
                     banco=banco["nombre"],
@@ -171,15 +174,8 @@ def _bci(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
                     categoria=(promo.get("category") or categoria).split("/")[-1],
                     comuna=comuna,
                     region=region,
-                    # `discount` es el porcentaje como número. Leerlo del
-                    # titular en prosa dejaba 66 de 147 con porcentaje; el
-                    # campo lo trae casi siempre y no hay que adivinar.
-                    porcentaje=(int(promo["discount"])
-                                if str(promo.get("discount") or "").isdigit()
-                                and 0 < int(promo["discount"]) <= 100
-                                else porcentaje_en(promo.get("title"), descripcion,
-                                                   condiciones)),
-                    oferta=oferta_en(descripcion, condiciones),
+                    porcentaje=porcentaje,
+                    oferta=promocion or oferta_en(descripcion, condiciones),
                     tope=tope_en(condiciones),
                     # Acá está la diferencia con los otros dos: no hay campo de
                     # día, solo prosa. Buena parte no dice ninguno y queda sin
@@ -207,6 +203,43 @@ def _bci(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
             pagina += 1
 
     return recogidos
+
+
+def _descuento_bci(promo: dict, descripcion: str, condiciones: str) -> tuple[int | None, str]:
+    """Cuánto rebaja esta promoción de Bci, y el 1 que no es un uno por ciento.
+
+    `discount` es el porcentaje como número, y leerlo del campo en vez del
+    titular en prosa subió de 66 a 147 las promociones con cifra. Pero Bci lo
+    usa además como bandera: cuando la promoción no es un porcentaje sino un
+    combo a precio fijo, escribe **1**. Los catorce China Wok del catastro
+    salían en la página anunciando "1% de descuento" —que es un insulto— sobre
+    una promoción que en realidad es *"2 woky pack mongoliana a $6.180"*.
+
+    Un uno por ciento no existe como oferta comercial: nadie arma una campaña
+    para rebajar cien pesos en diez mil. Así que por debajo del piso de
+    `porcentaje_en` (5%) el número no se lee como porcentaje, se lee como lo
+    que es —hay promoción— y la fila lo dice con palabras.
+
+    Devuelve (porcentaje, etiqueta). Solo uno de los dos trae algo.
+    """
+    crudo = str(promo.get("discount") or "").strip()
+    numero = int(crudo) if crudo.isdigit() else None
+
+    if numero is not None and 5 <= numero <= 100:
+        return numero, ""
+
+    # Sin cifra utilizable: puede que el titular sí la traiga.
+    del_texto = porcentaje_en(promo.get("title"), descripcion, condiciones)
+    if del_texto is not None:
+        return del_texto, ""
+
+    if numero is None:
+        return None, ""
+
+    # La bandera. "2x1" es una etiqueta mejor que "Promoción" y se gana el
+    # puesto; para todo lo demás, decir "hay promoción" es lo único cierto.
+    etiqueta = oferta_en(promo.get("title"), descripcion, condiciones)
+    return None, etiqueta if etiqueta and "x" in etiqueta else "Promoción"
 
 
 def _titulo_bci(titulo: str) -> str:
@@ -693,6 +726,357 @@ def _entel(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
     return list(vistos.values())
 
 
+# --------------------------------------------------------------------------
+# Banco Security — el catálogo del grupo BICE-Security
+# --------------------------------------------------------------------------
+# La cabecera que el estándar JSON:API define para negociar el formato. Es lo
+# único que hay que mandar: el endpoint no pide token, ni cookie, ni nada más.
+_JSONAPI = {"Accept": "application/vnd.api+json"}
+
+
+def _security(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
+    """Banco Security: Drupal 10 con el JSON:API abierto, sin token y sin WAF.
+
+    En calidad de campos es el mejor dato del catastro después de Banco de
+    Chile, y en el día de la semana es incluso mejor: los 80 beneficios
+    gastronómicos traen el día en una taxonomía propia —80 de 80— y la
+    vigencia como fecha ISO de verdad, no como prosa.
+
+    Las dos trampas grandes están en el nombre de un campo y en la forma de
+    otro, y cada una se resuelve donde corresponde:
+
+        field_descripcion_vigencia_benef   se llama vigencia y trae EL DÍA
+        field_direccion_establecimiento_   puede traer varios locales en uno
+
+    La tercera trampa es de sistema y está en `_paginas_security`: el API
+    omite lo no publicado uno por uno y deja páginas vacías en medio.
+    """
+    url = banco["url_base"] + banco["endpoint"]
+    # `include` resuelve las relaciones en la misma respuesta. Sin él habría
+    # que pedir aparte cada logo, cada día y cada categoría: más de trescientas
+    # peticiones para 175 fichas, contra las once páginas que son con esto.
+    params = {"page[limit]": banco.get("por_pagina", 50),
+              "include": "field_logo,field_dias_de_aplicacion,field_categorias_beneficio"}
+    categorias = [str(c) for c in (banco.get("categorias") or [])]
+    hoy = date.today()
+    recogidos: list[Descuento] = []
+    fichas_vistas = 0
+
+    for fichas, incluidos in _paginas_security(cliente, url, params):
+        for ficha in fichas:
+            atributos = ficha.get("attributes") or {}
+            categoria = _categoria_security(ficha, incluidos, categorias)
+            if not categoria:
+                continue          # viajes, shopping, farmacias: otro producto
+
+            rango = atributos.get("field_vigencia_beneficio") or {}
+            desde = _fecha_iso(rango.get("value"))
+            if desde and desde > hoy:
+                # Ventana que todavía no empieza. `Al Pesto` (nid 616) declara
+                # 2026-11-01 a 2026-11-30 estando hoy en agosto, y el modelo no
+                # tiene dónde guardar "desde cuándo": o se deja fuera o se
+                # publica un 40% que no existe todavía.
+                continue
+
+            detalle = limpiar_html((atributos.get("field_detalle_beneficio") or {}).get("value"))
+            porcentaje, oferta = _descuento_security(atributos)
+            # "Black One y Black" o "Black One": son los dos únicos valores del
+            # campo en los 80 gastronómicos, las dos tarjetas de gama alta del
+            # banco. No hay un solo beneficio de comida para la tarjeta de
+            # entrada, así que el catálogo entero va marcado como segmentado,
+            # igual que Amex y Limited en Santander.
+            tarjetas = [t.strip().lower() for t in
+                        re.split(r"\s+y\s+", str(atributos.get("field_tipo_de_tarjeta") or ""))
+                        if t.strip()]
+
+            base = dict(
+                banco_id=banco["id"],
+                banco=banco["nombre"],
+                comercio=_comercio_security(atributos),
+                categoria=categoria,
+                porcentaje=porcentaje,
+                oferta=oferta,
+                # El tope no tiene campo: está en la prosa del detalle ("Tope de
+                # dcto. de $10.000"), y ahí lo encuentra el mismo lector que usan
+                # los otros bancos en 63 de los 80.
+                tope=tope_en(detalle),
+                # EL DÍA. `field_dias_de_aplicacion` es una taxonomía —limpia
+                # hoy, pero de 27 términos que mezclan días, prosa ("Sabados,
+                # domingos y feriados") y hasta un "Descuentos adicionales" que
+                # no es un día—, así que el nombre del término no se cree: se
+                # parsea igual que la prosa de los otros bancos.
+                #
+                # `field_descripcion_vigencia_benef` se suma acá y NO en la
+                # vigencia, aunque se llame así: lo que trae es "Todos los
+                # lunes", "Martes y jueves". Es la trampa de Ripley al revés y
+                # en el mismo lugar del modelo —allá un campo de vigencia de
+                # campaña se leía como el día del local—, y sale igual de cara:
+                # leerlo como vigencia deja los 80 sin día y mete prosa en una
+                # fecha.
+                dias=dias_en(" · ".join(_terminos(ficha, "field_dias_de_aplicacion", incluidos)),
+                             atributos.get("field_descripcion_vigencia_benef")),
+                vigencia_hasta=_vigencia_security(rango, atributos),
+                tarjetas=tarjetas,
+                segmentado=bool(tarjetas),
+                modalidad=modalidad_en(detalle,
+                                       atributos.get("field_descripcion_caluga_benefic")),
+                # El detalle y no la frase legal: la legal son 41 variantes de
+                # una misma plantilla en los 175, y sus dos datos útiles —hasta
+                # cuándo y con qué tarjeta— ya viajan en `vigencia_hasta` y en
+                # `tarjetas`. El detalle es el que trae el tope y el cómo.
+                condiciones=detalle,
+                url=banco["url_base"] + ((atributos.get("path") or {}).get("alias") or ""),
+                sitio_web=url_normal((atributos.get("field_enlace_marca") or {}).get("uri")),
+                logo=_logo_security(ficha, incluidos, banco["url_base"]),
+            )
+            fichas_vistas += 1
+            for local in _locales_security(atributos):
+                recogidos.append(Descuento(**base, **local))
+
+    log.info("Security: %d locales en %d beneficios gastronómicos",
+             len(recogidos), fichas_vistas)
+    return recogidos
+
+
+def _paginas_security(cliente: ClienteEducado, url: str, params: dict, tope: int = 40):
+    """Las páginas del JSON:API, siguiendo `links.next` y sin contar registros.
+
+    Drupal omite uno a uno los nodos que no están publicados —335 de los 510
+    que tiene el sitio— y no rellena el hueco: quedan páginas con `data: []`
+    en medio de la lista, y la primera de todas es una de ellas. Un paginador
+    que corte en la primera página vacía se lleva CERO de los 175 beneficios
+    publicados; uno que corte al ver menos de 50 registros se lleva la mitad.
+
+    Se corta cuando `links.next` desaparece, que es lo que define el estándar.
+    El tope es sólo un seguro contra un `next` que apunte a sí mismo: hoy son
+    once páginas y el sitio entero cabría en once más.
+    """
+    vistas = 0
+    while url and vistas < tope:
+        datos = cliente.json(url, params=params, cabeceras=_JSONAPI)
+        # `next` ya trae el page[offset], el page[limit] y el include en la
+        # query: repetir los params encima duplicaría el límite.
+        params = None
+        vistas += 1
+        if not isinstance(datos, dict):
+            log.warning("Security: la página %d del JSON:API no devolvió JSON", vistas)
+            return
+        incluidos = {(x.get("type"), x.get("id")): x for x in datos.get("included") or []}
+        yield (datos.get("data") or []), incluidos
+        url = ((datos.get("links") or {}).get("next") or {}).get("href") or ""
+
+
+def _relacionados(ficha: dict, campo: str, incluidos: dict) -> list[dict]:
+    """Los recursos de una relación, resueltos contra el `included` de la página.
+
+    JSON:API entrega la relación como puntero ({type, id}) y el recurso aparte.
+    Un campo de un solo valor viene como objeto y uno multivaluado como lista
+    —`field_logo` es objeto, `field_dias_de_aplicacion` es lista—, así que los
+    dos casos se resuelven acá y no en cada llamada.
+    """
+    dato = ((ficha.get("relationships") or {}).get(campo) or {}).get("data")
+    punteros = dato if isinstance(dato, list) else ([dato] if isinstance(dato, dict) else [])
+    return [incluidos[(p.get("type"), p.get("id"))]
+            for p in punteros if (p.get("type"), p.get("id")) in incluidos]
+
+
+def _terminos(ficha: dict, campo: str, incluidos: dict) -> list[str]:
+    """Los nombres de los términos de taxonomía de una relación."""
+    return [str((r.get("attributes") or {}).get("name") or "")
+            for r in _relacionados(ficha, campo, incluidos)]
+
+
+def _categoria_security(ficha: dict, incluidos: dict, categorias: list[str]) -> str:
+    """El rubro del beneficio, o "" si no es de comer.
+
+    El filtro es la taxonomía del propio banco y no una lista de palabras:
+    Security clasifica sus 175 beneficios en su vocabulario `beneficios`
+    (Gourmet, Restaurantes, Comida Rápida, Viajes, Shopping y servicios…) y
+    eso es más fiel que adivinar por el nombre. Son 80 de 175.
+
+    Un beneficio puede llevar dos rubros —27 de los 80 son Gourmet Y
+    Restaurantes— así que el orden de `categorias` en el YAML es de prioridad:
+    manda el primero que calce.
+    """
+    suyas = {plano(n) for n in _terminos(ficha, "field_categorias_beneficio", incluidos)}
+    for candidata in categorias:
+        if plano(candidata) in suyas:
+            return candidata
+    return ""
+
+
+def _descuento_security(atributos: dict) -> tuple[int | None, str]:
+    """Cuánto rebaja el beneficio, y el 0 que no es un cero por ciento.
+
+    `field_porcentaje_descuento` trae 0 en 14 de los 80 gastronómicos, y no es
+    que el descuento sea nulo: es un centinela para lo que no cabe en un
+    entero. Publicarlo tal cual pondría catorce tarjetas anunciando "0% de
+    descuento", que es la misma mentira que el "1% de descuento" de los China
+    Wok de Bci —ver `_descuento_bci`— y se resuelve igual: por debajo del piso,
+    el número no se lee como porcentaje sino como bandera, y el valor real se
+    busca donde el banco sí lo escribió.
+
+    Detrás del 0 hay cuatro cosas distintas y cada una tiene su lugar:
+
+      7  menús a precio fijo   → `field_titulo_caluga` dice "Menú Priceless"
+      4  montos por app Copec  → el precio está SÓLO en el título ($3.000)
+      1  un 10% escondido      → el título y la caluga lo dicen, el campo no
+      2  portadas de cuponera  → no son locales; se excluyen en el YAML
+
+    Devuelve (porcentaje, etiqueta). Solo uno de los dos trae algo.
+    """
+    crudo = atributos.get("field_porcentaje_descuento")
+    numero = crudo if isinstance(crudo, int) else None
+    if numero is not None and 5 <= numero <= 100:
+        return numero, ""
+
+    titulo = str(atributos.get("title") or "")
+    caluga = str(atributos.get("field_titulo_caluga") or "")
+
+    # "Mastercard - Claro Arena 10% de dcto." lleva el 10 en el título y en la
+    # caluga, y un 0 en el campo numérico. Se miran esos dos y no el detalle:
+    # el detalle es prosa larga y `porcentaje_en` se queda con el número más
+    # alto que encuentre, que ahí puede ser el de otra cosa.
+    del_texto = porcentaje_en(titulo, caluga)
+    if del_texto is not None:
+        return del_texto, ""
+
+    # "Mastercard - app Copec - Juan Valdez $3.000": el precio cerrado vive en
+    # el título y en ninguna otra parte. Son cuatro (Juan Valdez, SBARRO,
+    # Streat Burger y Pronto Copec) y es una oferta, no un porcentaje.
+    monto = re.search(r"\$\s?[\d.]+", titulo)
+    if monto:
+        return None, monto.group(0).replace(" ", "").rstrip(".")
+
+    # La caluga es el titular de la tarjeta del banco. Cuando dice algo
+    # distinto del nombre de la marca, ese algo es la oferta —los siete "Menú
+    # Priceless"—; cuando repite la marca no dice nada y se deja en blanco.
+    marca = str(atributos.get("field_nombre_marca") or "")
+    if caluga and plano(caluga) != plano(marca):
+        return None, caluga.strip()
+    return None, oferta_en(titulo, caluga)
+
+
+def _vigencia_security(rango: dict, atributos: dict) -> date | None:
+    """Hasta cuándo corre: la más restrictiva entre la fecha y la letra chica.
+
+    `field_vigencia_beneficio.end_value` es una fecha ISO de verdad y en 79 de
+    los 80 coincide con la que declara `field_frase_legal_beneficio`. El que
+    sobra es `Al Pesto`, que dice 2026-11-30 en el campo y "Promoción válida
+    hasta el 31/03/2026" en la frase legal, y no lo toca nadie desde marzo:
+    filtrando sólo por el campo estructurado entra como vigente y manda a
+    alguien a pagar la cuenta completa.
+
+    Quedarse con la menor no le cuesta nada a los otros 79 —tienen la misma
+    fecha en los dos lados— y deja fuera al único que se contradice.
+    """
+    candidatas = [f for f in (_fecha_iso((rango or {}).get("end_value")),
+                              vigencia_en(str(atributos.get("field_frase_legal_beneficio") or "")))
+                  if f is not None]
+    return min(candidatas) if candidatas else None
+
+
+def _comercio_security(atributos: dict) -> str:
+    """El nombre del local, sin la marca de segmento pegada atrás.
+
+    13 de los 175 nombres terminan en "- Mastercard" y 6 en "- Banca Joven":
+    eso es a qué cliente apunta la campaña, no cómo se llama el restaurante.
+    Sin sacarlo el mismo local aparece dos veces con nombres distintos, y no es
+    hipotético: `Capogrossi` está publicado con 40% y `Capogrossi - Mastercard`
+    con un menú a precio fijo, los dos en Alonso de Córdova 4225. Con el sufijo
+    afuera son una sola ficha y se queda la que tiene más dato.
+    """
+    nombre = " ".join(str(atributos.get("field_nombre_marca")
+                          or atributos.get("title") or "").split())
+    nombre = re.sub(r"\s*[-–]\s*(Mastercard|Banca Joven)\s*$", "", nombre, flags=re.I)
+    return nombre.strip(" -–")
+
+
+def _locales_security(atributos: dict) -> list[dict]:
+    """Una fila por local: Security mete varios en un campo separados por " | ".
+
+    18 de los 80 gastronómicos traen más de una dirección ahí adentro —la
+    Barquillería tiene seis— y son 111 direcciones en total. Sin partirlas, El
+    Taller cae en un solo pin y sus otros dos locales desaparecen del mapa: se
+    perdían dos tercios de los pines de esta fuente. Es lo mismo que hace
+    `_bancochile` con sus sucursales, y además deja que la huella
+    banco|comercio|comuna|dirección de `modelo.py` distinga los locales sola.
+    """
+    crudas = str(atributos.get("field_direccion_establecimiento_") or "").strip()
+    if not crudas:
+        # `field_ubicacion_caluga` es el texto de la tarjeta y casi siempre es
+        # una lista de comunas ("Las Condes, Lo Barnechea y Providencia."), que
+        # como dirección no sirve. Sólo se usa cuando trae número de calle: en
+        # el catálogo de hoy eso rescata a ZIA Bistró & Café (Avenida El Rodeo
+        # 13453, Lo Barnechea) y deja afuera "Rappi app." y "PedidosYa app.".
+        caluga = str(atributos.get("field_ubicacion_caluga") or "").strip()
+        crudas = caluga if re.search(r"\d", caluga) else ""
+
+    locales = []
+    for cruda in crudas.split("|"):
+        direccion = _direccion_security(cruda)
+        # La comuna NO existe como campo en esta fuente: sale de la dirección o
+        # no sale. Lo que no calce con la tabla de comunas del proyecto queda
+        # en blanco y lo resuelven después el geocodificador y la memoria de
+        # correcciones; inventarla sería peor que no tenerla.
+        comuna, region = lugar_en(_trozos_direccion(direccion))
+        if not (direccion or comuna):
+            continue
+        locales.append({"direccion": direccion, "comuna": comuna, "region": region})
+    return locales or [{"direccion": "", "comuna": "", "region": ""}]
+
+
+def _direccion_security(cruda: str) -> str:
+    """Una dirección, o vacío cuando lo que hay no es una dirección.
+
+    Los cuatro locales de la plataforma Justo escriben su URL en el campo de
+    la dirección: "kobo.cl", "ryge.cl", "streetwrap.cl" y
+    "delivery.comidaslapunta.cl/pedir". Publicarlas manda al geocodificador a
+    buscar una calle que no existe y deja la ficha diciendo que el local queda
+    en kobo.cl. El sitio del local ya viaja en `sitio_web`.
+    """
+    limpia = " ".join(str(cruda or "").split()).strip(" .,")
+    if re.match(r"^(https?://)?[\w-]+(\.[\w-]+)+(/\S*)?$", limpia):
+        return ""
+    return limpia
+
+
+def _trozos_direccion(direccion: str) -> list[str]:
+    """La dirección partida en los pedazos donde puede estar la comuna.
+
+    `lugar_en` compara etiqueta por etiqueta y no busca dentro del texto, que
+    es justo lo que hay que hacer con una dirección chilena: "Av. Las Condes
+    1234, Lo Barnechea" es de Lo Barnechea, y una búsqueda por substring la
+    mandaría a Las Condes.
+    """
+    trozos = []
+    for parte in re.split(r"[,;]", direccion):
+        # El código postal pegado a la comuna: "Av. Vitacura 9275, 7630000
+        # Vitacura." es el único caso del catálogo, y sin sacarle el número el
+        # trozo no calza con nada y Barbazul se queda sin comuna.
+        limpio = re.sub(r"^\s*\d{4,8}\s+", "", parte).strip(" .")
+        if limpio:
+            trozos.append(limpio)
+
+    # "Santiago" es una comuna Y el nombre de la ciudad entera. En "Av. El
+    # Rodeo 13032, Santiago, Lo Barnechea." es lo segundo, y como `lugar_en` se
+    # queda con el primer trozo que reconoce, Tanaka salía en la comuna de
+    # Santiago —el centro— estando en Lo Barnechea, doce kilómetros más arriba.
+    # Cuando la misma dirección nombra otra comuna, manda ella.
+    if len([t for t in trozos if plano(t) in COMUNAS]) > 1:
+        trozos = [t for t in trozos if plano(t) != "santiago"]
+    return trozos
+
+
+def _logo_security(ficha: dict, incluidos: dict, url_base: str) -> str:
+    """El logo del local. Drupal lo entrega como ruta del sitio, sin dominio."""
+    for archivo in _relacionados(ficha, "field_logo", incluidos):
+        ruta = ((archivo.get("attributes") or {}).get("uri") or {}).get("url") or ""
+        if ruta:
+            return (url_base + ruta) if ruta.startswith("/") else ruta
+    return ""
+
+
 ADAPTADORES = {
     "bancochile": _bancochile,
     "bci": _bci,
@@ -701,4 +1085,5 @@ ADAPTADORES = {
     "cencosud": _cencosud,
     "ripley": _ripley,
     "entel": _entel,
+    "security": _security,
 }

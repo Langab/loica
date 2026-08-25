@@ -45,6 +45,20 @@ jobs:
 
       - run: pip install -r requirements.txt
 
+      # El índice de OSM no es opcional acá desde que existen las cadenas.
+      # `loica/descuentos/cadenas.py` lo usa para saber dónde quedan los Melt
+      # Pizzas y los Burger King que el banco publica sin ninguna dirección, y
+      # el geocodificador lo usa para resolver las calles. Sin él la corrida
+      # NO falla: degrada en silencio y publica unos 400 locales menos que la
+      # corrida grande de las 06:00, que sí lo baja. Dos corridas del mismo
+      # día dejaban el sitio con catastros distintos según cuál corrió última.
+      - name: Bajar el índice local de OpenStreetMap
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download indice-osm --pattern indice_osm.db --dir datos --clobber
+          python3 -c "import sqlite3; c = sqlite3.connect('datos/indice_osm.db'); print('locales en el índice:', c.execute('select count(*) from locales').fetchone()[0])"
+
       # Sin caché: en el runner la carpeta datos/cache viene vacía igual, y
       # dejarlo explícito evita que un día alguien la cachee y publiquemos
       # descuentos de la semana pasada.
@@ -53,12 +67,26 @@ jobs:
 
       # Si un banco se cae, el JSON queda con menos descuentos pero no vacío.
       # Publicar una página vacía es peor que publicar la de ayer.
+      #
+      # Son DOS pisos porque son dos formas distintas de romperse. `total`
+      # cuenta convenios y se cae cuando un banco deja de responder; `locales`
+      # cuenta las sucursales del mapa, que es un catastro aparte —un convenio
+      # puede traer veintiún pines o ninguno— y se vacía sin que el primer
+      # número se entere, porque los convenios siguen todos ahí.
+      # Hoy son 580 convenios y 1.626 locales. Los mismos números y el mismo
+      # razonamiento están en verificar_web.py (MIN_LOCALES_DESCUENTOS): si se
+      # tocan acá, se tocan allá.
       - name: No publicar si quedó vacío
         run: |
-          total=$(python3 -c "import json;print(json.load(open('web/descuentos.json'))['total'])")
-          echo "Descuentos vigentes: $total"
+          leer() { python3 -c "import json;print(json.load(open('web/descuentos.json'))['$1'])"; }
+          total=$(leer total); locales=$(leer locales)
+          echo "Convenios: $total · locales: $locales"
           if [ "$total" -lt 100 ]; then
-            echo "::error::Solo $total descuentos. Algo se cayó — no se publica."
+            echo "::error::Solo $total convenios. Algo se cayó — no se publica."
+            exit 1
+          fi
+          if [ "$locales" -lt 1000 ]; then
+            echo "::error::Solo $locales locales en el mapa. Se cayó el préstamo de sucursales entre bancos y el índice OSM a la vez — no se publica."
             exit 1
           fi
 

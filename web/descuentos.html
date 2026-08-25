@@ -28,7 +28,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; worker-src blob:; connect-src 'self' https://*.basemaps.cartocdn.com https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Descuentos — ¿Dónde como hoy en Santiago?</title>
-<meta name="description" content="Descuentos de restaurantes con tarjetas de bancos chilenos, filtrados por día, banco y comuna. Banco de Chile, Bci y Banco Falabella.">
+<meta name="description" content="Descuentos de restaurantes con tarjetas de bancos chilenos, filtrados por día, banco y comuna. Banco de Chile, Bci, Falabella, Santander, Ripley, Cencosud y Entel.">
 <link rel="canonical" href="https://loicasantiago.cl/descuentos.html">
 <meta property="og:title" content="Loica — ¿Dónde como hoy?">
 <meta property="og:description" content="Descuentos de restaurantes con tarjetas de banco, por día y por comuna. Los revisa un robot todas las mañanas.">
@@ -425,6 +425,20 @@
   .ficha .boton{width:100%;margin-top:var(--e-4)}
   .enlace-lugar{color:var(--c-descuento-tinta);font-weight:700;text-decoration:none}
   .enlace-lugar:hover{text-decoration:underline}
+  /* Una sucursal por renglón. Con varias, la lista se lee como una lista y no
+     como un párrafo de direcciones pegadas. */
+  .locales{display:flex;flex-direction:column;gap:5px}
+  .enlace-lugar.local{font-weight:600;line-height:1.4}
+  .mas-locales{display:flex;flex-direction:column;gap:5px;margin-top:2px}
+  .mas-locales summary{cursor:pointer;font-size:var(--t-xs);font-weight:700;
+    color:var(--tinta-tenue);list-style:none;padding:2px 0}
+  .mas-locales summary::-webkit-details-marker{display:none}
+  .mas-locales summary::before{content:"▸ "}
+  .mas-locales[open] summary::before{content:"▾ "}
+  .mas-locales summary:hover{color:var(--c-descuento-tinta)}
+  .origen-locales{margin:var(--e-2) 0 0}
+  /* En la burbuja del mapa: chico y apagado. Es una salvedad, no el titular. */
+  .popup-origen{font-size:11px;font-style:italic;color:var(--tinta-tenue);margin-top:3px}
   .dato a{color:var(--tinta);text-decoration:none;font-weight:600}
   .dato a:hover{text-decoration:underline}
 
@@ -617,14 +631,21 @@ if(hayMapa){
     .observe(document.documentElement, {attributes:true, attributeFilter:["data-tema"]});
 }
 
+/* Un punto por LOCAL y no por oferta: el convenio de Dunkin' es uno y los
+   lugares donde comerse la dona son veintiuno. Antes el JSON traía una fila
+   por sucursal y esto era directo; ahora las sucursales cuelgan de su oferta
+   y hay que aplanarlas acá. El rasgo guarda el índice del local dentro de la
+   lista YA FILTRADA, que es la misma que lee la burbuja. */
 function datosGeo(lista){
-  return {type:"FeatureCollection", features:lista
-    .filter(d => d.lat !== null && d.lon !== null)
-    .map(d => ({type:"Feature",
-      geometry:{type:"Point", coordinates:[d.lon, d.lat]},
-      properties:{id:d.id, pct:d.porcentaje || 0,
-                  color:banco(d.banco_id).color,
-                  aprox:d.precision === "comuna" ? 1 : 0}}))};
+  return {type:"FeatureCollection", features:lista.flatMap(d =>
+    localesDe(d)
+      .map((l, i) => ({local: l, i}))
+      .filter(({local}) => local.lat !== null && local.lon !== null)
+      .map(({local, i}) => ({type:"Feature",
+        geometry:{type:"Point", coordinates:[local.lon, local.lat]},
+        properties:{id:d.id, sede:i, pct:d.porcentaje || 0,
+                    color:banco(d.banco_id).color,
+                    aprox:local.precision === "comuna" ? 1 : 0}})))};
 }
 
 function montarCapas(){
@@ -661,6 +682,7 @@ function montarCapas(){
 function abrirBurbuja(rasgo, lngLat){
   const d = DATOS.descuentos.find(x => x.id === rasgo.properties.id);
   if(!d) return;
+  const sede = localesDe(d)[rasgo.properties.sede];
   const b = banco(d.banco_id);
   const caja = document.createElement("div");
 
@@ -677,8 +699,19 @@ function abrirBurbuja(rasgo, lngLat){
   if(monto){ cifra.className = "popup-monto"; cifra.textContent = monto; }
 
   const donde = document.createElement("div");
-  donde.textContent = [d.direccion, d.comuna].filter(Boolean).join(", ");
+  donde.textContent = sede
+    ? [sede.direccion, sede.comuna].filter(Boolean).join(", ") : "";
   donde.style.cssText = "font-weight:500;font-size:12px;margin-top:2px";
+
+  /* De dónde salió esta dirección. El banco dijo "hay descuento en Melt
+     Pizzas" sin decir en cuáles, así que este punto es una sucursal de la
+     cadena, no un local que el banco haya declarado. Es una diferencia real y
+     el que está mirando el pin tiene derecho a saberla. */
+  const fuente = document.createElement("div");
+  if(sede && sede.origen){
+    fuente.className = "popup-origen";
+    fuente.textContent = textoOrigen(sede.origen);
+  }
 
   const ver = document.createElement("button");
   ver.type = "button";
@@ -687,7 +720,7 @@ function abrirBurbuja(rasgo, lngLat){
                      pt:"Ver o desconto"}[IDIOMA] + " →";
   ver.onclick = () => { popup?.remove(); abrirFicha(d); };
 
-  caja.append(lineaBanco, titulo, cifra, donde, ver);
+  caja.append(lineaBanco, titulo, cifra, donde, fuente, ver);
   popup?.remove();
   popup = new maplibregl.Popup({closeButton:false, offset:12})
     .setLngLat(lngLat).setDOMContent(caja).addTo(mapa);
@@ -720,12 +753,22 @@ cargarDescuentos().then(d => {
 window.addEventListener("loica:idioma", pintarTodo);
 
 /* ---------- FILTRADO ---------- */
+/* Los locales de una oferta que el filtro deja pasar.
+   Con la comuna puesta, Dunkin' deja de ser "21 locales": son los dos de
+   Ñuñoa, y el mapa tiene que pintar esos dos. Pintar los veintiuno con el
+   filtro de Ñuñoa encendido sería contradecir el filtro en la misma pantalla. */
+const localesDe = d => (comunaFiltro
+  ? d.locales.filter(l => l.comuna === comunaFiltro)
+  : d.locales);
+
 function visibles(){
   return DATOS.descuentos.filter(d =>
     (dia === "todo" || (dia === "hoy" ? correHoy(d)
                                       : (!d.dias.length || d.dias.includes(dia)))) &&
     (!bancoFiltro || d.banco_id === bancoFiltro) &&
-    (!comunaFiltro || d.comuna === comunaFiltro) &&
+    // Una oferta entra si CUALQUIERA de sus locales está en la comuna: el
+    // convenio de Starbucks es uno solo y sirve en cuarenta comunas.
+    (!comunaFiltro || d.comunas.includes(comunaFiltro)) &&
     (!rubroFiltro || d.categoria === rubroFiltro) &&
     (!cocinaFiltro || d.cocina === cocinaFiltro) &&
     // Un 2x1 o un combo no tienen porcentaje: con umbral puesto quedan
@@ -962,6 +1005,58 @@ function placa(d, clase = ""){
   </span>`;
 }
 
+/* ---------- DE DÓNDE SALIÓ LA DIRECCIÓN ----------
+   Cada local trae `origen`: vacío cuando lo publicó el propio banco y, si no,
+   quién lo aportó. No es un detalle de trastienda. Santander publica "Melt
+   Pizzas" a secas, sin una sola dirección, así que los nueve pines de Melt en
+   el mapa son las sucursales de la cadena según OpenStreetMap y no locales
+   que el banco haya declarado uno por uno. En el mapa los dos se ven igual y
+   no son lo mismo: quien mira el pin tiene derecho a saber cuál está mirando. */
+function textoOrigen(origen){
+  if(!origen) return "";
+  if(origen === "OpenStreetMap")
+    return {es:"Sucursal de la cadena, según OpenStreetMap",
+            en:"Chain branch, per OpenStreetMap",
+            pt:"Filial da rede, segundo o OpenStreetMap"}[IDIOMA];
+  return {es:`Dirección publicada por ${origen}`,
+          en:`Address published by ${origen}`,
+          pt:`Endereço publicado por ${origen}`}[IDIOMA];
+}
+
+const SIN_DIRECCION = {es:"Sin dirección publicada", en:"No published address",
+                       pt:"Sem endereço publicado"};
+
+/* La línea de lugar de la fila. Una oferta puede tener cuarenta locales, uno
+   o ninguno, y los tres casos caen en el mismo renglón de la tarjeta.
+
+   El caso de los cuarenta es el que motivó todo esto: con una fila por
+   sucursal, la lista abría con veintiún Dunkin' seguidos y Banco de Chile
+   parecía tener el triple de convenios que el resto. Tiene los mismos; lo que
+   tiene de más es que dice dónde queda cada local. Acá eso se cuenta en vez
+   de repetirse. */
+function resumenLugar(d){
+  const sedes = localesDe(d);
+  if(!sedes.length) return d.region || SIN_DIRECCION[IDIOMA];
+  if(sedes.length === 1)
+    return [sedes[0].direccion, sedes[0].comuna].filter(Boolean).join(" · ")
+           || d.region || SIN_DIRECCION[IDIOMA];
+
+  const cuantos = {es:`${sedes.length} locales`, en:`${sedes.length} branches`,
+                   pt:`${sedes.length} locais`}[IDIOMA];
+  const comunas = [...new Set(sedes.map(l => l.comuna).filter(Boolean))];
+  if(!comunas.length) return cuantos;
+  /* Dos nombres y el resto contado. Con la lista entera el renglón se iba a
+     cuatro líneas y tapaba la fila siguiente; con ninguno, "12 locales" no
+     dice si alguno queda cerca. */
+  const visibles = comunas.slice(0, 2).join(", ");
+  const resto = comunas.length - 2;
+  if(resto <= 0) return `${cuantos} · ${visibles}`;
+  const mas = {es:`y ${resto} comuna${resto > 1 ? "s" : ""} más`,
+               en:`and ${resto} more district${resto > 1 ? "s" : ""}`,
+               pt:`e mais ${resto} comuna${resto > 1 ? "s" : ""}`}[IDIOMA];
+  return `${cuantos} · ${visibles} ${mas}`;
+}
+
 /* ---------- LA FILA ---------- */
 function tarjetaDcto(d){
   const b = banco(d.banco_id);
@@ -973,10 +1068,7 @@ function tarjetaDcto(d){
      promesa sobre hoy, es una sobre siempre. */
   const hoyImporta = dia !== "hoy" && d.dias.length && d.dias.includes(hoyClave());
 
-  const lugar = [d.direccion, d.comuna].filter(Boolean).join(" · ")
-    || d.region
-    || {es:"Sin dirección publicada", en:"No published address",
-        pt:"Sem endereço publicado"}[IDIOMA];
+  const lugar = resumenLugar(d);
 
   const boton = document.createElement("button");
   boton.className = "dcto";
@@ -1014,13 +1106,20 @@ function pintarLista(){
   document.getElementById("conteo-txt").textContent =
     lista.length === 1 ? t("dCuantos1") : t("dCuantos");
 
-  /* La deuda se dice, no se esconde. 148 descuentos —las cadenas de "Todo
-     Chile" y lo que el banco publica sin dirección— no tienen punto: siguen
-     en la lista, y acá se cuenta cuántos son para que nadie crea que el mapa
-     los tiene todos. */
-  const sinPin = lista.filter(d => !(d.lat && d.lon)).length;
-  const aprox  = lista.filter(d => d.precision === "comuna").length;
+  /* La deuda se dice, no se esconde. Lo primero que se cuenta son los
+     locales: el número grande del panel son CONVENIOS —un Dunkin', no
+     veintiuno— y sin esta línea nadie entendería por qué el mapa tiene el
+     triple de puntos que filas la lista. Después, lo que el mapa no tiene:
+     las ofertas que el banco publica sin dirección y sin cadena conocida
+     siguen en la lista, y acá se dice cuántas son para que nadie crea que el
+     mapa las tiene todas. */
+  const sedes  = lista.reduce((n, d) => n + localesDe(d).length, 0);
+  const sinPin = lista.filter(d => !localesDe(d).some(l => l.lat && l.lon)).length;
+  const aprox  = lista.reduce((n, d) =>
+    n + localesDe(d).filter(l => l.precision === "comuna").length, 0);
   const partes = [];
+  if(sedes > lista.length) partes.push({es:`en ${sedes} locales`,
+    en:`across ${sedes} branches`, pt:`em ${sedes} locais`}[IDIOMA]);
   if(sinPin) partes.push({es:`${sinPin} sin dirección salen solo en la lista`,
     en:`${sinPin} with no address are list-only`,
     pt:`${sinPin} sem endereço ficam só na lista`}[IDIOMA]);
@@ -1076,6 +1175,72 @@ function pintarLista(){
   }
 }
 
+/* ---------- LOS LOCALES DE LA FICHA ----------
+   Acá el convenio se abre y muestra dónde se usa. Es la mitad de la respuesta
+   a "hay 40% en Dunkin'": la otra mitad es cuál de los veintiuno me queda
+   cerca.
+
+   Los ocho primeros a la vista y el resto dentro de un <details>. Con la lista
+   entera abierta, los 112 Starbucks empujaban las condiciones y el link al
+   banco tan abajo que nadie los alcanzaba; con solo ocho y sin salida, la
+   ficha escondía locales sin decirlo. El <details> es de HTML y no de
+   JavaScript a propósito: funciona con teclado y con lector de pantalla sin
+   que tengamos que reimplementar nada. */
+const CUANTOS_A_LA_VISTA = 8;
+
+function lineaLocal(d, l){
+  const texto = [l.direccion, l.comuna].filter(Boolean).join(", ")
+    || l.comuna || d.region;
+  if(!texto) return "";
+  const consulta = encodeURIComponent(
+    `${d.comercio} ${[l.direccion, l.comuna].filter(Boolean).join(" ")} Santiago Chile`);
+  return `<a class="enlace-lugar local" target="_blank" rel="noopener"
+    href="https://www.google.com/maps/search/?api=1&query=${consulta}"
+    >${escapar(texto)} ↗</a>`;
+}
+
+function bloqueLocales(d){
+  const sedes = localesDe(d);
+  if(!sedes.length) return escapar(d.region) || "—";
+
+  const lineas = sedes.map(l => lineaLocal(d, l)).filter(Boolean);
+  if(!lineas.length) return escapar(d.region) || "—";
+
+  const visibles = lineas.slice(0, CUANTOS_A_LA_VISTA).join("");
+  const resto = lineas.slice(CUANTOS_A_LA_VISTA);
+  const mas = resto.length
+    ? `<details class="mas-locales"><summary>${escapar(
+        {es:`ver los ${resto.length} locales restantes`,
+         en:`see the other ${resto.length} branches`,
+         pt:`ver os outros ${resto.length} locais`}[IDIOMA])}</summary>${
+        resto.join("")}</details>`
+    : "";
+
+  /* El origen se dice UNA vez por ficha y no una vez por local: repetir
+     "según OpenStreetMap" treinta y siete veces no informa más y arruina la
+     lectura de la lista, que es para lo que se abrió la ficha.
+
+     Y dice dos cosas distintas según el caso, porque son dos. Si NINGUNA
+     dirección la puso el banco, la frase completa: el banco publicó la cadena
+     y nada más. Si algunas sí y otras se completaron, decir "el banco no
+     publica en qué locales corre" sería falso — publicó varios. */
+  const origenes = [...new Set(sedes.map(l => l.origen).filter(Boolean))];
+  if(!origenes.length) return `<div class="locales">${visibles}${mas}</div>`;
+
+  const todos = sedes.every(l => l.origen);
+  const frase = escapar(origenes.map(textoOrigen).join(" · ")) + ". " + escapar(
+    todos
+      ? {es:"El banco no publica en qué locales corre el descuento.",
+         en:"The bank does not publish which branches the deal applies to.",
+         pt:"O banco não publica em quais locais o desconto vale."}[IDIOMA]
+      : {es:"El resto de las direcciones las publica el banco.",
+         en:"The remaining addresses come from the bank itself.",
+         pt:"Os outros endereços são publicados pelo banco."}[IDIOMA]);
+
+  return `<div class="locales">${visibles}${mas}
+    <p class="letra-chica sin-fecha origen-locales">${frase}</p></div>`;
+}
+
 /* ---------- FICHA ---------- */
 function abrirFicha(d){
   const b = banco(d.banco_id);
@@ -1102,23 +1267,22 @@ function abrirFicha(d){
   /* La dirección va primero y como link a mapas: la pregunta que sigue a
      "hay 40%" es "¿dónde queda?", y responderla dentro de la ficha evita que
      la persona se vaya a buscarla a otra pestaña y no vuelva. */
-  const lugar = [d.direccion, d.comuna].filter(Boolean).join(", ");
   const filas = [
     [t("dDia"), `<div class="pastillas">${dias}</div>`],
-    [t("donde"), lugar
-      ? `<a class="enlace-lugar" target="_blank" rel="noopener"
-           href="https://www.google.com/maps/search/?api=1&query=${
-             encodeURIComponent(d.comercio + " " + lugar + " Santiago Chile")}">
-           ${escapar(lugar)} ↗</a>`
-      : (escapar(d.region) || "—")],
+    [t("donde"), bloqueLocales(d)],
     [{es:"Rubro",en:"Type",pt:"Tipo"}[IDIOMA], escapar(rubro(d.categoria))],
     [t("dHasta"), d.vigencia_hasta
       ? escapar(new Date(d.vigencia_hasta + "T12:00").toLocaleDateString(localeDe(),
           {day:"numeric", month:"long", year:"numeric"}))
       : `<span class="sin-fecha">${escapar(t("dSinFecha"))}</span>`],
   ];
-  if(d.telefono) filas.push([{es:"Teléfono",en:"Phone",pt:"Telefone"}[IDIOMA],
-    `<a href="tel:${escapar(d.telefono.replace(/[^+\d]/g, ""))}">${escapar(d.telefono)}</a>`]);
+  /* El teléfono es del local, no del convenio, así que se toma del primero
+     que lo traiga. Con una cadena de veinte sucursales sería otro dato por
+     local; con lo que publican los bancos hoy, o lo trae uno o no lo trae
+     ninguno. */
+  const telefono = (localesDe(d).find(l => l.telefono) || {}).telefono || "";
+  if(telefono) filas.push([{es:"Teléfono",en:"Phone",pt:"Telefone"}[IDIOMA],
+    `<a href="tel:${escapar(telefono.replace(/[^+\d]/g, ""))}">${escapar(telefono)}</a>`]);
   if(d.tope) filas.push([t("dTope"), "$" + d.tope.toLocaleString("es-CL")]);
   if(d.modalidad === "online") filas.push(["", `<b>${escapar(t("dSoloOnline"))}</b>`]);
   if(d.modalidad === "presencial") filas.push(["", `<b>${escapar(t("dSoloPresencial"))}</b>`]);
@@ -1152,11 +1316,30 @@ function abrirFicha(d){
    respuesta ya está dibujada al lado. El desplazamiento deja el punto en el
    trozo de mapa que el panel no tapa. */
 function volarA(d){
-  if(!hayMapa || !(d.lat && d.lon)) return;
+  if(!hayMapa) return;
+  const puntos = localesDe(d).filter(l => l.lat && l.lon);
+  if(!puntos.length) return;
   const anchoPanel = innerWidth >= 880 ? 426 : 0;
   const altoPanel  = innerWidth >= 880 ? 0 : document.getElementById("panel").clientHeight;
-  mapa.easeTo({center:[d.lon, d.lat], zoom:Math.max(mapa.getZoom(), 14.5),
-               offset:[-anchoPanel / 2, -altoPanel / 2], duration:600});
+  const desvio = [-anchoPanel / 2, -altoPanel / 2];
+
+  if(puntos.length === 1){
+    mapa.easeTo({center:[puntos[0].lon, puntos[0].lat],
+                 zoom:Math.max(mapa.getZoom(), 14.5),
+                 offset:desvio, duration:600});
+    return;
+  }
+  /* Con varias sucursales, acercarse a la primera es elegir una al azar y
+     dejar las otras veinte fuera de pantalla. El encuadre que las contiene a
+     todas responde la pregunta de verdad: dónde está esta cadena. El tope de
+     zoom evita el otro extremo —dos locales en la misma cuadra dan un
+     encuadre pegado a la vereda. */
+  const lats = puntos.map(l => l.lat), lons = puntos.map(l => l.lon);
+  mapa.fitBounds([[Math.min(...lons), Math.min(...lats)],
+                  [Math.max(...lons), Math.max(...lats)]],
+                 {padding:{top:40, bottom:40 + (altoPanel ? altoPanel : 0),
+                           left:40, right:40 + anchoPanel},
+                  maxZoom:14.5, duration:600});
 }
 
 function cerrarFicha(){
