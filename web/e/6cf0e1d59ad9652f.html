@@ -37,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=24">
+<link rel="stylesheet" href="../loica.css?v=25">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -88,10 +88,10 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=24"></script>
+<script src="../loica.js?v=25"></script>
 <script>
   pintarBarra("talleres.html", "../");
-  const EV = {"id": "6cf0e1d59ad9652f", "titulo": "Running Ma-Ju 08:00 h. / Estadio Nacional.", "inicio": "2026-09-22T08:00:00", "fin": null, "lugar": "Estadio Nacional", "direccion": "Juan Moya 1370", "comuna": "Ñuñoa", "lat": -33.4644, "lon": -70.6106, "precision": "recinto", "gratis": true, "precio": null, "precio_texto": "Gratis", "categoria": "deporte", "subcategoria": "running", "escala": "under", "publico": "todos", "descripcion": "todos los martes y jueves de 08:00 a 10:00. El running es un deporte que consiste en correr a una velocidad mayor que la de caminar, ya sea de forma recreativa o competitiva. El running suele…", "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1765367478454-672606281.webp", "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres", "url": "https://talleres.nunoadeportes.cl/talleres/693822dac7c097cd0e95e639", "formato": "taller", "dias_semana": [1, 3]};
+  const EV = {"id": "6cf0e1d59ad9652f", "titulo": "Running Ma-Ju 08:00 h. / Estadio Nacional.", "inicio": "2026-09-22T08:00:00", "fin": "2026-09-24T08:00:00", "lugar": "Estadio Nacional", "direccion": "Juan Moya 1370", "comuna": "Ñuñoa", "lat": -33.4644, "lon": -70.6106, "precision": "recinto", "gratis": true, "precio": null, "precio_texto": "Gratis", "categoria": "deporte", "subcategoria": "running", "escala": "under", "publico": "todos", "descripcion": "todos los martes y jueves de 08:00 a 10:00. El running es un deporte que consiste en correr a una velocidad mayor que la de caminar, ya sea de forma recreativa o competitiva. El running suele…", "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1765367478454-672606281.webp", "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres", "url": "https://talleres.nunoadeportes.cl/talleres/693822dac7c097cd0e95e639", "formato": "taller", "dias_semana": [1, 3]};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

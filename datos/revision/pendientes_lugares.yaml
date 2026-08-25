@@ -1,4 +1,4 @@
-# Cola de LUGARES sin ubicación exacta — revisión del 2026-08-24.
+# Cola de LUGARES sin ubicación exacta — revisión del 2026-08-25.
 # Completa lat/lon (Google Maps: click derecho → copiar coordenadas),
 # borra las entradas que no puedas verificar, y pega las listas en
 # config/correcciones/lugares.yaml bajo la clave `lugares:`.
@@ -11,7 +11,7 @@ lugares:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 25 eventos sin pin exacto
   Corporacion Cultural de La Reina:
@@ -19,15 +19,15 @@ lugares:
     comuna: La Reina
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
-  # 14 eventos sin pin exacto
+  # 15 eventos sin pin exacto
   PortalTickets (PortalDisc):
     direccion: # COMPLETAR
     comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 13 eventos sin pin exacto
   PortalTickets (PortalDisc):
@@ -35,7 +35,7 @@ lugares:
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 7 eventos sin pin exacto
   Disfruta Santiago:
@@ -43,7 +43,7 @@ lugares:
     comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 5 eventos sin pin exacto
   Red Salas de Teatro (agregador de salas RM):
@@ -51,7 +51,7 @@ lugares:
     comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 5 eventos sin pin exacto
   Disfruta Santiago:
@@ -59,7 +59,7 @@ lugares:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 4 eventos sin pin exacto
   Teatro Universidad de Chile:
@@ -67,7 +67,7 @@ lugares:
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 3 eventos sin pin exacto
   PortalTickets (PortalDisc):
@@ -75,7 +75,7 @@ lugares:
     comuna: Recoleta
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 3 eventos sin pin exacto
   PortalTickets (PortalDisc):
@@ -83,7 +83,7 @@ lugares:
     comuna: La Reina
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 3 eventos sin pin exacto
   Fiesta LA MONGA:
@@ -91,7 +91,7 @@ lugares:
     comuna: Ñuñoa
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 3 eventos sin pin exacto
   Parque Ciudad Empresarial:
@@ -99,7 +99,7 @@ lugares:
     comuna: Huechuraba
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 3 eventos sin pin exacto
   COSTADO CLUB AÉREO MELEPÍLLA:
@@ -107,7 +107,7 @@ lugares:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 3 eventos sin pin exacto
   USACH - Departamento de Extension (agenda cultural):
@@ -115,15 +115,7 @@ lugares:
     comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
-
-  # 2 eventos sin pin exacto
-  TECHNOBUS:
-    direccion: # COMPLETAR
-    comuna: Santiago
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   PortalTickets (PortalDisc):
@@ -131,7 +123,7 @@ lugares:
     comuna: Ñuñoa
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Red Salas de Teatro (agregador de salas RM):
@@ -139,7 +131,7 @@ lugares:
     comuna: La Reina
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   REVELATION:
@@ -147,7 +139,7 @@ lugares:
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Complejo Industrial / Estacion Central:
@@ -155,7 +147,7 @@ lugares:
     comuna: Estación Central
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Donde La Chipi:
@@ -163,7 +155,7 @@ lugares:
     comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   DISTRITO 04:
@@ -171,7 +163,7 @@ lugares:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Agenda Cultural Las Condes:
@@ -179,7 +171,7 @@ lugares:
     comuna: Las Condes
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   La Quinta Muranos:
@@ -187,7 +179,7 @@ lugares:
     comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Municipalidad de Nunoa:
@@ -195,7 +187,7 @@ lugares:
     comuna: Ñuñoa
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Club Deportivo Linderos:
@@ -203,7 +195,7 @@ lugares:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 1 eventos sin pin exacto
   Disfruta Santiago:
@@ -211,15 +203,7 @@ lugares:
     comuna: La Reina
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
-
-  # 1 eventos sin pin exacto
-  Club Safari:
-    direccion: # COMPLETAR
-    comuna: Santiago
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 1 eventos sin pin exacto
   Sala 211 - Laboratorio escénico:
@@ -227,20 +211,36 @@ lugares:
     comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 1 eventos sin pin exacto
-  Roxbury 22-08-2026:
-    direccion:  #, Santiago
+  Universidad Alberto Hurtado - Agenda de eventos:
+    direccion: # COMPLETAR
     comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
 
   # 1 eventos sin pin exacto
-  SUNDAY COMPACK:
-    direccion:  #, Providencia
+  Vrava Club:
+    direccion: # COMPLETAR
+    comuna: Las Condes
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
+
+  # 1 eventos sin pin exacto
+  Online:
+    direccion: # COMPLETAR
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-08-24 por # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
+
+  # 1 eventos sin pin exacto
+  TEATRO DEL PUENTE:
+    direccion: Parque Forestal s/n, entre puentes Pío Nono y Purísima
+    comuna: Santiago
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-25 por # COMPLETAR
