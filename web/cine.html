@@ -42,6 +42,12 @@
     background:var(--fondo-hundido);border:2.5px solid var(--contorno);
     border-radius:var(--r-pill);box-shadow:var(--repisa-1);
   }
+  /* `hidden` tiene que poder esconderlo: la regla `[hidden]` vive en la hoja
+     del navegador y este `display:inline-flex` de la página le gana, así que
+     `#dias.hidden = true` dejaba el riel de días dibujado igual —con el rótulo
+     del catálogo al lado, los dos a la vez— y el día seguía pareciendo algo
+     que se elige en una vista que no lo usa. */
+  .segmentado[hidden]{display:none}
   .segmentado button{
     flex:none;border:0;background:transparent;color:var(--tinta-suave);cursor:pointer;
     padding:0 var(--e-3);min-height:36px;min-width:38px;border-radius:var(--r-pill);
@@ -306,6 +312,84 @@
   .film-sala{margin-top:var(--e-2)}
   .film-sala b{display:block;font:700 var(--t-xs)/1.3 var(--fuente-ui);color:var(--tinta-suave)}
 
+  /* --- La tercera vista: el catálogo de la semana ---
+     Solo las películas: carátula, de qué se trata y el tráiler. Ni un horario,
+     y eso es exactamente el punto. En la vista de películas cada ficha lleva
+     debajo las ocho salas donde la dan con sus cuarenta botones de compra, y
+     ELEGIR ahí se vuelve tosco: para llegar a la película siguiente hay que
+     pasar por encima de la compra de la anterior. Son dos preguntas distintas
+     —"qué veo" y "dónde y a qué hora"— y cada una tiene su pantalla; el botón
+     de la ficha es el puente.
+
+     La carátula va grande a propósito: en una lista para decidir, el afiche
+     hace más trabajo que el título. */
+  .ficha{
+    display:grid;grid-template-columns:auto minmax(0,1fr);
+    gap:var(--e-2) var(--e-3);align-items:start;
+    background:var(--fondo-elevado);border:2.5px solid var(--contorno);
+    border-radius:var(--r-lg);box-shadow:var(--repisa-2);
+    margin-top:var(--e-3);padding:var(--e-3);
+  }
+  .ficha img{
+    width:104px;height:154px;object-fit:cover;
+    border:2px solid var(--contorno);border-radius:var(--r-sm);background:var(--fondo-hundido);
+  }
+  .ficha h3{margin:0;font:800 var(--t-md)/1.2 var(--fuente-marca);color:var(--tinta)}
+  /* "Hoy" es el único dato de calendario que sobrevive acá, y se lo gana: dice
+     que la película no es una promesa del jueves sino algo que todavía se
+     alcanza esta noche. */
+  .ficha-hoy{
+    flex:none;padding:2px 9px;border-radius:var(--r-pill);
+    background:var(--c-cine);color:var(--arena-50);border:2px solid var(--contorno);
+    font:800 10.5px/1.5 var(--fuente-marca);text-transform:uppercase;letter-spacing:.03em;
+  }
+  /* La pastilla comparte línea con la clasificación y la duración: sola se
+     comía veintiséis píxeles por tarjeta, y en una lista de treinta y tres
+     eso es una pantalla entera de aire. */
+  .ficha-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:5px}
+  .ficha-meta .peli-datos{margin-top:0}
+  .ficha-gens{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+  .gen{
+    padding:2px 8px;border-radius:var(--r-pill);border:2px solid var(--contorno);
+    background:var(--c-cine-suave);color:var(--azul-900);
+    font:800 10.5px/1.5 var(--fuente-marca);text-transform:uppercase;letter-spacing:.03em;
+  }
+  /* La sinopsis y los botones cruzan las dos columnas: contra la carátula
+     quedarían en 200px —treinta caracteres por línea— y una sinopsis no se lee
+     en una columna de diario. */
+  .ficha-pie{grid-column:1/-1}
+  .ficha .film-sinopsis{margin-top:0;-webkit-line-clamp:4}
+  .ficha .film-sinopsis.abierta{-webkit-line-clamp:unset;display:block}
+  .mas-sinopsis{
+    border:0;background:none;padding:4px 0 0;cursor:pointer;
+    color:var(--c-cine-tinta);font:800 var(--t-xs)/1 var(--fuente-marca);
+    text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px;
+  }
+  .ficha-acciones{display:flex;flex-wrap:wrap;gap:var(--e-2);align-items:center;margin-top:var(--e-3)}
+  .ficha-acciones .film-trailer{margin-top:0}
+  /* El puente a los horarios. Va como botón sólido porque es la acción de la
+     ficha: el tráiler es para mirar, esto es para seguir. */
+  .ficha-donde{
+    margin-left:auto;display:inline-flex;align-items:center;gap:5px;cursor:pointer;
+    border:2px solid var(--contorno);border-radius:var(--r-pill);
+    background:var(--fondo-hundido);color:var(--tinta);
+    font:800 var(--t-xs)/1 var(--fuente-marca);padding:0 var(--e-3);min-height:40px;
+    box-shadow:0 2px 0 var(--contorno);transition:var(--rapido);
+  }
+  .ficha-donde:hover{background:var(--c-cine);color:var(--arena-50)}
+  .ficha-donde:active{transform:translateY(2px);box-shadow:none}
+  .ficha-donde:focus-visible{box-shadow:0 2px 0 var(--contorno),0 0 0 3px var(--foco),0 0 0 6px var(--contorno)}
+  /* El riel de días se esconde en el catálogo —no hay día que elegir— y en su
+     lugar queda escrito qué se está mirando. Un rótulo, no un control. */
+  .rango-semana{
+    display:inline-flex;align-items:center;flex:none;
+    font:800 var(--t-sm)/1 var(--fuente-marca);color:var(--tinta-suave);
+  }
+  .rango-semana:empty{display:none}
+  @media(max-width:400px){
+    .ficha img{width:88px;height:130px}
+    .ficha-donde{margin-left:0}
+  }
 
   .caja-buscar{display:flex;align-items:center;gap:var(--e-2);
     margin:0 var(--e-3) var(--e-2);padding:0 var(--e-3);
@@ -340,6 +424,7 @@
     <div class="barra" id="barra"></div>
     <div class="riel-fecha">
       <div class="segmentado" id="dias" role="group"></div>
+      <span class="rango-semana" id="rango-semana"></span>
       <div class="cuenta-rango" id="cuenta"></div>
     </div>
     <div class="filtros" id="filtros" role="group"></div>
@@ -401,10 +486,10 @@
    ------------------------------------------------------------------ */
 let CINES = [], PELICULAS = [], generado = "", diasCartelera = 4;
 let dia = 0;                       // 0 = hoy, 1 = mañana…
-let vista = "cines";               // cines | peliculas
+let vista = "cines";               // cines | peliculas | catalogo
 let cineElegido = "";              // la sala que se apretó en el mapa
 let vacioEnPantalla = false;       // para que la Cabra entre una vez y no por tecla
-let recienEnPeliculas = false;     // la Cabra presenta con animación solo al abrir la vista
+let recienPresenta = false;        // la Cabra presenta con animación solo al abrir la vista
 let circuitoFiltro = "", comunaFiltro = "", idiomaFiltro = "";
 let busqueda = "";                 // lo que se escribió en el buscador
 let miPosicion = null, estadoGeo = "";
@@ -415,6 +500,7 @@ pintarBarra("cine.html");
 const T = {
   cines:      {es:"Cines",     en:"Cinemas",  pt:"Cinemas"},
   peliculas:  {es:"Películas", en:"Films",    pt:"Filmes"},
+  catalogo:   {es:"Qué ver",   en:"What to watch", pt:"O que ver"},
   salas:      {es:"salas con función", en:"screens showing", pt:"salas com sessão"},
   sala1:      {es:"sala con función",  en:"screen showing",  pt:"sala com sessão"},
   enCartelera:{es:"en cartelera", en:"now showing", pt:"em cartaz"},
@@ -445,9 +531,25 @@ const T = {
   buscar:     {es:"Buscar una película", en:"Search for a film", pt:"Buscar um filme"},
   verTrailer: {es:"Ver el tráiler", en:"Watch the trailer", pt:"Ver o trailer"},
   queVer:     {es:"¿Qué película veo?", en:"What should I watch?", pt:"Que filme eu vejo?"},
-  cabraPresenta:{es:"Estas son las películas de la semana. Toca una y te cuento de qué trata, en qué cine la dan y dónde ver el tráiler.",
-               en:"These are this week's films. Tap one and I'll tell you what it's about, which cinema is showing it, and where to watch the trailer.",
-               pt:"Estes são os filmes da semana. Toque em um e eu conto do que se trata, em qual cinema passa e onde ver o trailer."},
+  cabraPresenta:{es:"Estas son las películas de la semana, sin horarios encima: de qué trata cada una y su tráiler. Cuando ya sepas cuál, el botón de la ficha te lleva a dónde y a qué hora la dan.",
+               en:"These are this week's films, with no showtimes in the way: what each one is about, and its trailer. Once you know which, the button on the card takes you to where and when it is on.",
+               pt:"Estes são os filmes da semana, sem horários no meio: do que trata cada um e o trailer. Quando souber qual, o botão da ficha leva você a onde e a que horas passa."},
+  enCatalogo: {es:"películas esta semana", en:"films this week", pt:"filmes esta semana"},
+  enCatalogo1:{es:"película esta semana", en:"film this week", pt:"filme esta semana"},
+  verHorarios:{es:"Ver horarios", en:"See showtimes", pt:"Ver horários"},
+  salasCortas:{es:"salas", en:"screens", pt:"salas"},
+  salaCorta:  {es:"sala",  en:"screen",  pt:"sala"},
+  leerMas:    {es:"Leer más", en:"Read more", pt:"Ler mais"},
+  leerMenos:  {es:"Leer menos", en:"Read less", pt:"Ler menos"},
+  sinSinopsis:{es:"sin sinopsis publicada: el circuito de barrio no la escribe en ninguna parte que se pueda leer",
+               en:"without a published synopsis: the neighbourhood circuit does not write one anywhere readable",
+               pt:"sem sinopse publicada: o circuito de bairro não a escreve em lugar legível"},
+  vacioPelis: {es:"No hay películas con esos filtros",
+               en:"No films with those filters",
+               pt:"Não há filmes com esses filtros"},
+  vacioPelisPista:{es:"Prueba sacando la comuna, el circuito o el idioma.",
+               en:"Try removing the district, the circuit or the language.",
+               pt:"Tente tirar a comuna, o circuito ou o idioma."},
   sinPeli:    {es:"Ninguna película con ese nombre", en:"No film by that name",
                pt:"Nenhum filme com esse nome"},
   sinPeliHoy: {es:"No la dan este día, pero sí", en:"Not showing this day, but it is on",
@@ -752,28 +854,36 @@ window.addEventListener("loica:idioma", () => {
 /* El día que se está mirando, como fecha. `dia` es un desplazamiento desde
    hoy y no una fecha fija: si alguien deja la pestaña abierta hasta pasada la
    medianoche, "Hoy" sigue queriendo decir hoy. */
-const fechaDelDia = () => {
-  const f = new Date(); f.setHours(0,0,0,0); f.setDate(f.getDate() + dia); return f;
+const fechaEn = i => {
+  const f = new Date(); f.setHours(0,0,0,0); f.setDate(f.getDate() + i); return f;
 };
+const fechaDelDia = () => fechaEn(dia);
 const claveFecha = f => `${f.getFullYear()}-${String(f.getMonth()+1).padStart(2,"0")}-${String(f.getDate()).padStart(2,"0")}`;
 
 const cinePorId = id => CINES.find(c => c.id === id);
 
 /* Las funciones que pasan TODOS los filtros, con su película pegada. Es la
-   lista de la que salen las dos vistas y también el mapa: si el filtro de
-   idioma deja fuera una sala, su pin también se apaga. */
-function funcionesVisibles(){
+   lista de la que salen las tres vistas y también el mapa: si el filtro de
+   idioma deja fuera una sala, su pin también se apaga.
+
+   `todaLaSemana` es lo único que separa al catálogo de las otras dos vistas:
+   ahí la pregunta no es "¿qué dan el jueves?" sino "¿qué hay para ver?", y una
+   película no se elige por el día. Todo lo demás —comuna, circuito, idioma,
+   búsqueda, la función que ya empezó— se aplica igual, porque ésos sí cambian
+   si la película está a tu alcance. */
+function funcionesVisibles(todaLaSemana){
   const hoy = claveFecha(fechaDelDia());
   const ahora = new Date();
-  const esHoy = dia === 0;
   const salida = [];
   PELICULAS.forEach(peli => {
     if(!calzaBusqueda(peli)) return;
     peli.funciones.forEach(f => {
-      if(f.inicio.slice(0,10) !== hoy) return;
+      if(!todaLaSemana && f.inicio.slice(0,10) !== hoy) return;
       // Una función que ya empezó no se ofrece: nadie compra entrada para
-      // algo que partió hace cuarenta minutos.
-      if(esHoy && new Date(f.inicio) < ahora) return;
+      // algo que partió hace cuarenta minutos. Sin el `esHoy` de antes, que
+      // sobraba —las de los otros días están todas por delante— y que en la
+      // semana entera habría dejado pasar las de esta mañana.
+      if(new Date(f.inicio) < ahora) return;
       if(idiomaFiltro && f.idioma !== idiomaFiltro) return;
       const cine = cinePorId(f.cine);
       if(!cine) return;
@@ -859,8 +969,11 @@ function montarBuscador(){
     // que hace el botón de la vista "Películas".
     cineElegido = "";
     // La pregunta "¿en qué cines la dan?" la contesta la vista de películas:
-    // una ficha con el afiche y todas sus salas debajo.
-    if(busqueda) vista = "peliculas";
+    // una ficha con el afiche y todas sus salas debajo. Desde el catálogo no
+    // se sale: ahí buscar es acotar lo que se está mirando, y saltar de vista
+    // a media palabra le cambiaría la pantalla bajo los dedos a alguien que
+    // solo estaba filtrando.
+    if(busqueda && vista !== "catalogo") vista = "peliculas";
     mostrando = 24;
     pintarTodo();
   };
@@ -871,20 +984,23 @@ function montarBuscador(){
   });
   limpiar.onclick = () => { campo.value = ""; aplicar(); campo.focus(); };
 
-  // El botón que lleva a "qué película veo": cambia a la vista de películas,
-  // suelta la sala y el filtro, y deja a la Cabra presentando desde arriba.
+  // El botón que lleva a "qué película veo": abre el catálogo de la semana,
+  // suelta la sala y deja a la Cabra presentando desde arriba. Es la misma
+  // vista que la tercera pestaña; ésta es la puerta que se ve sin buscarla.
   const queVer = document.getElementById("que-ver");
   queVer.querySelector(".que-ver-masc").innerHTML = carita("cabra", "currentColor", 26);
   queVer.querySelector(".que-ver-txt").textContent = tr("queVer");
   queVer.setAttribute("aria-label", tr("queVer"));
   queVer.onclick = () => {
-    vista = "peliculas"; cineElegido = ""; mostrando = 24;
-    recienEnPeliculas = true;
-    // Si venía un texto en el buscador, la vista de películas lo respeta; si
-    // no, muestra todas. En cualquier caso se sube al tope.
+    vista = "catalogo"; cineElegido = ""; mostrando = 24;
+    recienPresenta = true;
+    // Si venía un texto en el buscador, el catálogo lo respeta; si no, muestra
+    // todas. En cualquier caso se sube al tope.
     pintarTodo();
     document.getElementById("lista").scrollTop = 0;
-    if(innerWidth < 880) subirPanel(1);
+    // El catálogo no usa el mapa: en celular el panel se sube del todo para
+    // que la carátula entre entera.
+    if(innerWidth < 880) subirPanel(2);
   };
 }
 
@@ -894,6 +1010,14 @@ function montarBuscador(){
 function pintarDias(){
   const cont = document.getElementById("dias");
   cont.setAttribute("aria-label", {es:"Día",en:"Day",pt:"Dia"}[IDIOMA]);
+  // En el catálogo no hay día que elegir, y un control visible que no mueve lo
+  // que se está mirando es peor que no tenerlo: se esconde y en su lugar queda
+  // escrito qué se está mirando. Vuelve solo al salir de esa vista.
+  cont.hidden = vista === "catalogo";
+  document.getElementById("rango-semana").textContent = vista === "catalogo"
+    ? {es:`Los próximos ${diasCartelera} días`, en:`The next ${diasCartelera} days`,
+       pt:`Os próximos ${diasCartelera} dias`}[IDIOMA]
+    : "";
   const opciones = [];
   for(let i = 0; i < diasCartelera; i++){
     const f = new Date(); f.setHours(0,0,0,0); f.setDate(f.getDate() + i);
@@ -1179,6 +1303,158 @@ function tarjetaCine(cine, funciones){
   return caja;
 }
 
+/* El catálogo de la semana: una entrada por película, con en cuántas salas
+   está y si todavía alcanza hoy. Sale de las MISMAS funciones que las otras
+   dos vistas, así que un filtro puesto arriba se nota acá igual.
+
+   El orden es por alcance —cuántas salas, después cuántas funciones— y no por
+   circuito: ordenar por gusto sería editorializar una lista que existe para
+   que cada quien elija. El cine arte no queda escondido igual, porque la
+   página tiene un chip que lo deja solo. */
+function catalogoSemana(funciones){
+  const hoy = claveFecha(fechaEn(0));
+  const porPeli = new Map();
+  funciones.forEach(f => {
+    let entrada = porPeli.get(f.peli.clave);
+    if(!entrada){
+      entrada = {peli:f.peli, cines:new Set(), funciones:0, hoy:false};
+      porPeli.set(f.peli.clave, entrada);
+    }
+    entrada.cines.add(f.cine.id);
+    entrada.funciones++;
+    if(f.inicio.slice(0,10) === hoy) entrada.hoy = true;
+  });
+  return [...porPeli.values()].sort((a, b) =>
+    b.cines.size - a.cines.size || b.funciones - a.funciones
+    || a.peli.titulo.localeCompare(b.peli.titulo));
+}
+
+/* La ficha del catálogo: carátula, de qué se trata, el tráiler y un botón a
+   los horarios. Ni un horario adentro — para eso está el botón. */
+function tarjetaFicha(entrada){
+  const peli = entrada.peli;
+  const caja = document.createElement("article");
+  caja.className = "ficha";
+  caja.appendChild(afiche(peli, 104, 154));
+
+  const cab = document.createElement("div");
+  const titulo = document.createElement("h3");
+  titulo.textContent = peli.titulo;
+  cab.appendChild(titulo);
+
+  const meta = document.createElement("div");
+  meta.className = "ficha-meta";
+  if(entrada.hoy){
+    const hoy = document.createElement("span");
+    hoy.className = "ficha-hoy";
+    hoy.textContent = t("hoy");
+    meta.appendChild(hoy);
+  }
+  const datos = document.createElement("div");
+  datos.className = "peli-datos";
+  const salas = entrada.cines.size;
+  datos.textContent = [datosPeli(peli),
+    `${salas} ${salas === 1 ? tr("salaCorta") : tr("salasCortas")}`].filter(Boolean).join(" · ");
+  meta.appendChild(datos);
+  cab.appendChild(meta);
+
+  // Los géneros primero que la sinopsis: es lo que decide "¿me interesa?" en
+  // un segundo, antes de leer nada. Tres como máximo, o la ficha se vuelve una
+  // nube de etiquetas.
+  if(peli.generos && peli.generos.length){
+    const gens = document.createElement("div");
+    gens.className = "ficha-gens";
+    peli.generos.slice(0, 3).forEach(g => {
+      const pastilla = document.createElement("span");
+      pastilla.className = "gen";
+      pastilla.textContent = g[0].toUpperCase() + g.slice(1).toLowerCase();
+      gens.appendChild(pastilla);
+    });
+    cab.appendChild(gens);
+  }
+  caja.appendChild(cab);
+
+  const pie = document.createElement("div");
+  pie.className = "ficha-pie";
+  // Sin sinopsis la ficha queda con carátula, datos y botones, y así se
+  // publica: quince de las treinta y tres son del circuito de barrio, que no
+  // escribe una en ninguna parte. Inventarle un resumen sería peor que el
+  // hueco, y decir "sin sinopsis" en cada tarjeta sería repetir quince veces
+  // lo mismo — eso se dice UNA vez, arriba, en la línea de la deuda.
+  if(peli.sinopsis){
+    const sinopsis = document.createElement("p");
+    sinopsis.className = "film-sinopsis";
+    sinopsis.id = "sinopsis-" + peli.clave;
+    sinopsis.textContent = peli.sinopsis;
+    pie.appendChild(sinopsis);
+    // Cuatro líneas y el resto a un botón. Cortar sin ofrecerlo escondería un
+    // tercio de lo que el cine sí publicó: la sinopsis mediana son cinco
+    // líneas y la más larga, doce. El botón se esconde solo cuando no hay nada
+    // cortado, y eso lo mide `ajustarLeerMas()` con la tarjeta ya puesta.
+    const mas = document.createElement("button");
+    mas.type = "button";
+    mas.className = "mas-sinopsis";
+    mas.textContent = tr("leerMas");
+    mas.setAttribute("aria-expanded", "false");
+    mas.setAttribute("aria-controls", sinopsis.id);
+    mas.onclick = () => {
+      const abierta = sinopsis.classList.toggle("abierta");
+      mas.textContent = abierta ? tr("leerMenos") : tr("leerMas");
+      mas.setAttribute("aria-expanded", abierta);
+    };
+    pie.appendChild(mas);
+  }
+
+  const acciones = document.createElement("div");
+  acciones.className = "ficha-acciones";
+  if(urlSegura(peli.trailer)){
+    const trailer = document.createElement("a");
+    trailer.className = "film-trailer";
+    trailer.href = urlSegura(peli.trailer);
+    trailer.target = "_blank"; trailer.rel = "noopener noreferrer";
+    trailer.innerHTML = `<svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
+        <path d="M8 5v14l11-7z" fill="currentColor"/></svg>${escapar(tr("verTrailer"))}`;
+    acciones.appendChild(trailer);
+  }
+  const donde = document.createElement("button");
+  donde.type = "button";
+  donde.className = "ficha-donde";
+  donde.textContent = tr("verHorarios") + " →";
+  donde.setAttribute("aria-label", `${tr("verHorarios")} — ${peli.titulo}`);
+  donde.onclick = () => verFunciones(peli);
+  acciones.appendChild(donde);
+  pie.appendChild(acciones);
+  caja.appendChild(pie);
+  return caja;
+}
+
+/* El puente entre las dos preguntas: elegida la película, "¿dónde y a qué
+   hora?" la contesta la vista de películas filtrada por ella.
+
+   El título se escribe en el buscador de verdad y no en una variable
+   escondida, para que el estado se VEA: quien llega ahí puede borrar el texto
+   y volver a la cartelera entera sin adivinar qué lo dejó ahí. */
+function verFunciones(peli){
+  const campo = document.getElementById("buscar");
+  campo.value = peli.titulo;
+  busqueda = peli.titulo;
+  document.getElementById("limpiar-buscar").hidden = false;
+  vista = "peliculas"; cineElegido = ""; mostrando = 24;
+
+  // Si el día que estaba puesto no tiene funciones de ESTA película, se salta
+  // al primero que sí: la ficha prometió sus horarios y caer en un panel vacío
+  // rompe la promesa. El salto no es silencioso — el riel de días vuelve a
+  // aparecer al salir del catálogo, con el día nuevo apretado.
+  const ahora = new Date();
+  const tiene = i => peli.funciones.some(f =>
+    f.inicio.slice(0,10) === claveFecha(fechaEn(i)) && new Date(f.inicio) >= ahora);
+  if(!tiene(dia)){
+    for(let i = 0; i < diasCartelera; i++){ if(tiene(i)){ dia = i; break; } }
+  }
+  pintarTodo();
+  document.getElementById("lista").scrollTop = 0;
+}
+
 function tarjetaPelicula(peli, funciones){
   const caja = document.createElement("article");
   caja.className = "film";
@@ -1261,16 +1537,20 @@ function ordenCines(a, b){
 
 function pintarVista(){
   const cont = document.getElementById("vista");
-  cont.innerHTML = [["cines", tr("cines")], ["peliculas", tr("peliculas")]]
+  cont.innerHTML = [["cines", tr("cines")], ["peliculas", tr("peliculas")], ["catalogo", tr("catalogo")]]
     .map(([clave, txt]) =>
       `<button type="button" data-vista="${clave}" aria-pressed="${vista === clave}">${escapar(txt)}</button>`).join("");
   cont.querySelectorAll("button").forEach(b => b.onclick = () => {
-    // La vista de películas es del catálogo entero: si se venía mirando una
+    // Las otras dos vistas son del catálogo entero: si se venía mirando una
     // sala, se suelta. Si no, el título diría "11 en cartelera" mostrando las
     // de una sola sala.
     vista = b.dataset.vista; cineElegido = ""; mostrando = 24;
-    recienEnPeliculas = (vista === "peliculas");
+    recienPresenta = (vista === "catalogo");
     pintarTodo();
+    document.getElementById("lista").scrollTop = 0;
+    // El catálogo no usa el mapa: en celular sube el panel para que la
+    // carátula entre entera en vez de asomarse por el borde de abajo.
+    if(vista === "catalogo" && innerWidth < 880) subirPanel(2);
   });
 }
 
@@ -1285,6 +1565,16 @@ function pintarVista(){
 
    El orden importa: se descarta de lo más específico a lo más general. */
 function textoDelVacio(){
+  // 0. El catálogo no tiene día, así que los casos 2 y 3 —"el cine no publicó
+  //    este día" y "las de hoy ya empezaron"— ahí no existen, y mandar a
+  //    "mirar otro día" sería mandar a mover un riel que en esa vista ni
+  //    siquiera está en pantalla.
+  if(vista === "catalogo"){
+    if(busqueda && !PELICULAS.some(p => calzaBusqueda(p)))
+      return [tr("sinPeli"), tr("sinPeliPista")];
+    return [tr("vacioPelis"), tr("vacioPelisPista")];
+  }
+
   // 1. Buscó una película. La pregunta es por ESA película, no por el día.
   if(busqueda){
     const otros = [];
@@ -1328,7 +1618,10 @@ function textoDelVacio(){
 
 function pintarLista(){
   pintarVista();
-  const funciones = funcionesVisibles();
+  // El catálogo mira la semana entera; las otras dos, el día que dice el riel.
+  const esCatalogo = vista === "catalogo";
+  const funciones = funcionesVisibles(esCatalogo);
+  const fichas = esCatalogo ? catalogoSemana(funciones) : null;
   const cont = document.getElementById("lista");
   cont.innerHTML = "";
 
@@ -1343,16 +1636,25 @@ function pintarLista(){
       ? {es:"función", en:"showing", pt:"sessão"}[IDIOMA]
       : {es:"funciones", en:"showings", pt:"sessões"}[IDIOMA];
   } else {
+    const pelis = new Set(funciones.map(f => f.peli.clave)).size;
     document.getElementById("conteo").textContent =
-      vista === "cines" ? salasConFuncion.size : new Set(funciones.map(f => f.peli.clave)).size;
+      vista === "cines" ? salasConFuncion.size : pelis;
     document.getElementById("conteo-txt").textContent = vista === "cines"
       ? (salasConFuncion.size === 1 ? tr("sala1") : tr("salas"))
+      : esCatalogo ? (pelis === 1 ? tr("enCatalogo1") : tr("enCatalogo"))
       : tr("enCartelera");
   }
 
   // La deuda se dice, no se esconde: cuántas salas están en el mapa sin
   // horarios y por qué, y qué pasó con el permiso de ubicación.
   const partes = [];
+  if(esCatalogo){
+    // La deuda de ESTA vista es otra: la ficha sin sinopsis. Se dice una vez
+    // acá arriba y no quince veces, una por tarjeta — repetir "sin sinopsis"
+    // en cada hueco convierte la falta en textura y deja de leerse.
+    const sinFicha = fichas.filter(e => !e.peli.sinopsis).length;
+    if(sinFicha) partes.push(`${sinFicha} ${tr("sinSinopsis")}`);
+  } else {
   // El día a medio publicar: hay funciones —una del Normandie, una de la
   // Cineteca— y CERO de las cadenas. No dispara el estado vacío porque la
   // lista trae algo, y sin esta línea parece que Santiago tiene un solo cine.
@@ -1368,6 +1670,7 @@ function pintarLista(){
   // escriba. Sí respeta comuna y circuito, porque ésos sí cambian el mapa.
   const mudas = cinesVisibles().filter(c => !c.funciones).length;
   if(mudas) partes.push(`${mudas} ${tr("sinHorarios")}`);
+  }
   if(estadoGeo === "no") partes.push({es:"No pude leer tu ubicación; el orden es por cartelera.",
     en:"Could not read your location; sorted by listings.",
     pt:"Não consegui ler sua localização; a ordem é por programação."}[IDIOMA]);
@@ -1412,19 +1715,24 @@ function pintarLista(){
         cont.appendChild(tarjetaCine(cine, funciones.filter(f => f.cine.id === cine.id))));
       if(todas.length > mostrando) cont.appendChild(botonVerMas(todas.length));
     }
-  } else {
-    // La Cabra presenta la cartelera: es la vista de "¿qué veo?", y la mascota
-    // que la conduce le da la bienvenida jugando con su gesto. Sale UNA vez,
-    // arriba de todo, viva; no se repite por tarjeta. `entra` solo si recién
-    // se cambió a esta vista, no en cada repintado del buscador.
+  } else if(esCatalogo){
+    // La Cabra presenta la cartelera: ésta es la vista de "¿qué veo?", y la
+    // mascota que la conduce le da la bienvenida jugando con su gesto. Sale
+    // UNA vez, arriba de todo, viva; no se repite por tarjeta. `entra` solo si
+    // recién se cambió a esta vista, no en cada repintado del buscador.
     const presenta = document.createElement("div");
-    presenta.className = "cabra-presenta" + (recienEnPeliculas ? " entra" : "");
+    presenta.className = "cabra-presenta" + (recienPresenta ? " entra" : "");
     presenta.innerHTML =
       `<div class="cabra-presenta-masc">${cuerpo("cabra","var(--c-cine)",76,{anima:true})}</div>
        <p>${escapar(tr("cabraPresenta"))}</p>`;
     cont.appendChild(presenta);
-    recienEnPeliculas = false;
+    recienPresenta = false;
 
+    fichas.slice(0, mostrando).forEach(e => cont.appendChild(tarjetaFicha(e)));
+    if(fichas.length > mostrando) cont.appendChild(botonVerMas(fichas.length));
+
+    ajustarLeerMas();
+  } else {
     const porPeli = new Map();
     funciones.forEach(f => {
       if(!porPeli.has(f.peli.clave)) porPeli.set(f.peli.clave, []);
@@ -1437,8 +1745,29 @@ function pintarLista(){
     if(porPeli.size > mostrando) cont.appendChild(botonVerMas(porPeli.size));
   }
 
-  if(cont.querySelector(".fin-lista") === null) cont.appendChild(selloHonesto());
+  // La Cabra del pie solo si no está ya la que presenta: una a la vez, y en
+  // el catálogo con una sola película las dos caben en la misma pantalla.
+  if(cont.querySelector(".fin-lista") === null)
+    cont.appendChild(selloHonesto(!cont.querySelector(".cabra-presenta")));
 }
+
+/* "Leer más" solo donde hay algo cortado. Se pregunta con las tarjetas ya
+   puestas en la página porque la respuesta depende del ancho real: la misma
+   sinopsis se corta en el panel de 430px y entra entera en una pantalla
+   ancha. Un botón que abre y no cambia nada es un botón que miente.
+
+   Se vuelve a preguntar al cambiar el tamaño de la ventana —ahí es donde el
+   ancho cambia y la respuesta con él—, con las abiertas intactas: a quien
+   estaba leyendo no se le cierra el texto por girar el teléfono. */
+function ajustarLeerMas(){
+  document.querySelectorAll(".mas-sinopsis").forEach(boton => {
+    const texto = boton.previousElementSibling;
+    if(!texto) return;
+    if(texto.classList.contains("abierta")){ boton.hidden = false; return; }
+    boton.hidden = texto.scrollHeight <= texto.clientHeight + 2;
+  });
+}
+addEventListener("resize", ajustarLeerMas);
 
 /* Volver a todas. Va al FINAL de la tarjeta y no arriba a propósito: cuando
    alguien aprieta una sala quiere ver los horarios, no un botón de salida
@@ -1474,21 +1803,27 @@ function botonVerMas(total){
 /* El pie honesto: lo que esta página NO hace.
    La Cabra también sale acá, y no contradice la regla de "una sola vez": es
    una a la VEZ. Nunca conviven, porque `pintarLista` retorna antes del sello
-   cuando la lista está vacía — o está la grande del vacío, o está ésta.
+   cuando la lista está vacía —o está la grande del vacío, o está ésta— y
+   porque cuando arriba está la Cabra que presenta el catálogo, este pie viene
+   sin la suya: con una sola película en la lista las dos caben en la misma
+   pantalla, y ahí la mascota deja de ser una presencia y pasa a ser un eco.
    Se gana el puesto por lo mismo que el guarén se ganó el pie de descuentos:
    el gesto ES la frase. Una cabra masticando cabritas al lado de "Loica no
    vende entradas" dice lo mismo que el texto, y este pie es el único hueco
    permanente y ancho de la página. Va entera —54px, sobre los 38 que necesita
    el cuerpo— y viva. */
-function selloHonesto(){
+function selloHonesto(conCabra){
   const sello = document.createElement("div");
   sello.style.cssText = "padding:var(--e-5) 0 0;text-align:center;font-size:var(--t-xs);color:var(--tinta-tenue);line-height:1.5";
-  const cara = document.createElement("div");
-  cara.innerHTML = cuerpo("cabra","var(--c-cine-tinta)",54,{anima:true});
+  if(conCabra){
+    const cara = document.createElement("div");
+    cara.innerHTML = cuerpo("cabra","var(--c-cine-tinta)",54,{anima:true});
+    sello.appendChild(cara);
+  }
   const texto = document.createElement("p");
-  texto.style.margin = "6px 0 0";
+  texto.style.margin = conCabra ? "6px 0 0" : "0";
   texto.textContent = tr("ojo");
-  sello.append(cara, texto);
+  sello.appendChild(texto);
   return sello;
 }
 
