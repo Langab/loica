@@ -348,6 +348,12 @@
      eso es una pantalla entera de aire. */
   .ficha-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:5px}
   .ficha-meta .peli-datos{margin-top:0}
+  /* Quién la dirigió, de dónde y de qué año: el dato con que se elige en una
+     sala de repertorio, y el único que las cadenas no publican. Va más fuerte
+     que la línea de datos porque acá el nombre del director ES el titular. */
+  .ficha-credito{
+    margin-top:5px;font:700 var(--t-xs)/1.35 var(--fuente-ui);color:var(--tinta-suave);
+  }
   .ficha-gens{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
   .gen{
     padding:2px 8px;border-radius:var(--r-pill);border:2px solid var(--contorno);
@@ -1357,6 +1363,16 @@ function tarjetaFicha(entrada){
     `${salas} ${salas === 1 ? tr("salaCorta") : tr("salasCortas")}`].filter(Boolean).join(" · ");
   meta.appendChild(datos);
   cab.appendChild(meta);
+
+  // El crédito, cuando el cine lo publica. Es del circuito de repertorio: el
+  // Normandie escribe dirección, país y año de cada película y las cadenas no
+  // escriben ninguno de los tres.
+  if(peli.credito){
+    const credito = document.createElement("div");
+    credito.className = "ficha-credito";
+    credito.textContent = peli.credito;
+    cab.appendChild(credito);
+  }
 
   // Los géneros primero que la sinopsis: es lo que decide "¿me interesa?" en
   // un segundo, antes de leer nada. Tres como máximo, o la ficha se vuelve una

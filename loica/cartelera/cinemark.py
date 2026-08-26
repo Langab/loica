@@ -46,6 +46,15 @@ from .modelo import Cartelera, Funcion, clave_pelicula, normalizar_idioma, titul
 log = logging.getLogger("loica.cartelera.cinemark")
 
 BFF = "https://bff.cinemark.cl/api/cinema"
+# Cinemark opera el mismo BFF para varios países y desde el 25-08-2026 pide que
+# se lo digan: sin esta cabecera la ficha de la película responde 500 con
+# "Country undefined not implemented". Las salas y los horarios siguen
+# contestando sin ella —tenían un valor por omisión que la ficha perdió— pero
+# se manda en las cuatro llamadas, que es lo que el sitio de ellos manda y lo
+# que evita que el próximo endpoint que endurezcan nos deje sin sinopsis otra
+# vez. Como parámetro en la query NO sirve: probado con ?country=CL y sigue en
+# 500. Va en la cabecera.
+PAIS = {"country": "CL"}
 # La cartelera de la SALA: apretar un horario del Alto Las Condes tiene que
 # dejar al usuario en la cartelera del Alto Las Condes, no en la página de la
 # película con las 22 salas para volver a elegir. La página de /compra-entradas
@@ -65,7 +74,7 @@ def _salas() -> list[dict]:
 
 
 def _json(cliente: ClienteEducado, url: str, edad: int) -> dict | list | None:
-    respuesta = cliente.obtener(url, max_edad_cache_seg=edad)
+    respuesta = cliente.obtener(url, max_edad_cache_seg=edad, cabeceras=PAIS)
     if respuesta is None or not respuesta.ok:
         return None
     try:

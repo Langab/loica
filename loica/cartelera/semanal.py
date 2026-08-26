@@ -18,6 +18,11 @@ semana Y ese número; la combinación se repite recién en meses distintos, así
 que dentro de una ventana de dos semanas es inequívoca, y cruza sola el fin de
 mes y el fin de año.
 
+El Normandie tiene además su archivo de películas en otra parte del sitio, con
+sinopsis, tráiler, afiche y quién la dirigió: eso se lee en `normandie.py` y se
+pega acá al final. Su página de cartelera —la que se lee más abajo— no trae
+nada de eso: es una lista de horas con un título.
+
 La segunda trampa es más peligrosa y por eso hay una regla dura acá: **una
 semana que ya terminó no se publica**. El Biógrafo estaba mostrando la semana
 del 13 al 19 de agosto el día 24 —se actualiza los jueves y a veces se
@@ -40,6 +45,7 @@ from ..modelo import es_url_publica
 from ..normalizar import limpiar_html
 from ..recurrencia import DIAS_SEMANA
 from ..red import ClienteEducado
+from . import normandie
 from .modelo import Cartelera, Funcion, normalizar_idioma, titulo_legible
 
 log = logging.getLogger("loica.cartelera.semanal")
@@ -119,7 +125,14 @@ def _normandie(sopa: BeautifulSoup, cine: dict, hoy: date) -> tuple[list[Funcion
                     pelicula=titulo_legible(titulo[:160]),
                     cine_id=cine["id"],
                     inicio=datetime.combine(dia, time(hora, minuto)),
-                    idioma="subtitulada",   # la sala programa siempre en VOSE
+                    # La sala programa en VOSE salvo cuando avisa lo contrario
+                    # en el título —"Mi vecino Totoro (doblada al español)"—, y
+                    # eso pasa casi siempre con las de niños. Decir
+                    # "subtitulada" a secas mandaba a una familia con lectores
+                    # de seis años a la función equivocada, y el filtro de
+                    # idioma de la página, que existe justamente para eso,
+                    # respondía al revés.
+                    idioma=normalizar_idioma(titulo) or "subtitulada",
                     url=compra if es_url_publica(compra) else cine.get("url", ""),
                     fuente="normandie",
                 ))
@@ -226,4 +239,9 @@ def extraer(cliente: ClienteEducado) -> Cartelera:
         else:
             salida.salas_fallidas.append(f"{cine['nombre']}: sin funciones futuras")
 
+    # La cartelera del Normandie trae la hora y el título; de qué se trata cada
+    # película lo publica aparte, en su propio WordPress. Va al final y no
+    # dentro del parser porque es otra fuente, con su propia caché y su propia
+    # manera de fallar: si se cae, las funciones se publican igual.
+    normandie.enriquecer(cliente, salida)
     return salida

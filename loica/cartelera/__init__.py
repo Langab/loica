@@ -6,7 +6,9 @@ Cuatro maneras de conseguir los horarios, en orden de cuánto cuesta cada una:
              el idioma por función y la ficha con sinopsis y tráiler. Si el
              BFF se cae, la vía baja sola al JSON-LD de sus páginas.
   semanal    El Normandie y El Biógrafo publican la semana en su página. Se
-             lee con un parser por sala; son dos.
+             lee con un parser por sala; son dos. Del Normandie se lee además
+             su archivo de películas —sinopsis, tráiler y quién la dirigió—,
+             que vive en otra parte de su sitio (ver normandie.py).
   agenda     La Cineteca, M100 y el Centro Arte Alameda ya llegan por las
              fuentes de siempre; acá solo se recogen de web/eventos.json.
   asistida   Cineplanet y Cinépolis cierran su cartelera a todo lo que no sea
@@ -80,10 +82,31 @@ def recolectar(cliente: ClienteEducado | None = None,
         total.salas_leidas += parcial.salas_leidas
         total.salas_fallidas.extend(parcial.salas_fallidas)
         total.notas.extend(parcial.notas)
-        total.fichas.update(parcial.fichas)
+        _juntar_fichas(total.fichas, parcial.fichas)
 
     total.funciones = _limpiar(total.funciones)
     return total
+
+
+def _juntar_fichas(destino: dict, nuevas: dict) -> None:
+    """Junta las fichas CAMPO POR CAMPO, no ficha por ficha.
+
+    La misma película se da en tres circuitos y cada uno cuenta lo que sabe:
+    Cinemark publica sinopsis, tráiler y género; el Normandie publica sinopsis,
+    tráiler y quién la dirigió, de dónde y de qué año. Con un `update` de
+    diccionarios la última vía en correr borraba la ficha entera de la
+    anterior, y "La Odisea" —que está en las tres— perdía el crédito de Nolan
+    porque el CSV asistido, que corre al final, no trae esa columna.
+
+    Dos reglas, y las dos importan:
+      · lo vacío NUNCA pisa lo lleno, venga de donde venga;
+      · a igualdad, gana quien llegó primero, o sea el orden de VIAS.
+    """
+    for clave, ficha in nuevas.items():
+        acumulada = destino.setdefault(clave, {})
+        for campo, valor in ficha.items():
+            if valor and not acumulada.get(campo):
+                acumulada[campo] = valor
 
 
 def _limpiar(funciones: list[Funcion]) -> list[Funcion]:
@@ -112,6 +135,24 @@ def _limpiar(funciones: list[Funcion]) -> list[Funcion]:
                               > len(previa.poster) + len(previa.url)):
             vistas[llave] = funcion
     return sorted(vistas.values(), key=lambda f: (f.inicio, f.cine_id, f.pelicula))
+
+
+def _mejor_titulo(titulos: list[str]) -> str:
+    """El título más largo, y a igual largo el que conserva sus tildes.
+
+    El más largo suele ser el completo ("Spider-Man: Un nuevo día" contra
+    "Spider-Man"), que es el que la gente reconoce. Pero se compara ya SIN la
+    coletilla de sala o de ciclo: desde que esas variantes se agrupan juntas,
+    la más larga es justamente la peor —"La Odisea / Centro Arte Alameda" le
+    ganaba a "La Odisea"— y la ficha quedaba titulada con el nombre de UNA de
+    sus ocho salas.
+
+    El desempate por tildes es porque las cadenas publican en mayúsculas de
+    imprenta y sin acentos: "CALLE MALAGA" contra "Calle Málaga" del
+    Normandie, mismo largo, y sin esto ganaba la de la cadena y publicábamos
+    el título mal escrito. Quien escribe con tildes escribió con cuidado.
+    """
+    return max(titulos, key=lambda t: (len(t), sum(1 for c in t if ord(c) > 127)))
 
 
 def _mejor(valores: list) -> str:
@@ -146,7 +187,7 @@ def para_la_web(cartelera: Cartelera) -> dict:
             # variantes se agrupan juntas, la más larga es justamente la peor
             # —"La Odisea / Centro Arte Alameda" le ganaba a "La Odisea"— y la
             # ficha quedaba titulada con el nombre de UNA de sus ocho salas.
-            "titulo": max((sin_coletillas(f.pelicula) for f in funciones), key=len),
+            "titulo": _mejor_titulo([sin_coletillas(f.pelicula) for f in funciones]),
             "poster": _mejor([f.poster for f in funciones]),
             "duracion": next((f.duracion_min for f in funciones if f.duracion_min), None),
             "clasificacion": _mejor([f.clasificacion for f in funciones]),
@@ -157,6 +198,12 @@ def para_la_web(cartelera: Cartelera) -> dict:
             "sinopsis": (cartelera.fichas.get(clave) or {}).get("sinopsis", ""),
             "trailer": (cartelera.fichas.get(clave) or {}).get("trailer", ""),
             "generos": (cartelera.fichas.get(clave) or {}).get("generos", []),
+            # Quién la dirigió, de dónde y de qué año. Lo publica el circuito
+            # de repertorio y NO las cadenas, que en cambio publican género:
+            # son dos maneras de contestar la misma pregunta —"¿esto es para
+            # mí?"— y cada cine contesta con la que tiene. En una sala que
+            # programa a Godard un martes, el nombre del director es el dato.
+            "credito": (cartelera.fichas.get(clave) or {}).get("credito", ""),
             "funciones": [{
                 "cine": f.cine_id,
                 "inicio": f.inicio.isoformat(timespec="minutes"),
