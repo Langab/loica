@@ -46,7 +46,13 @@
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
       integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V"
       crossorigin="anonymous">
-<link rel="stylesheet" href="loica.css?v=25">
+<!-- v=26 y no v=25 como el resto del sitio, y NO es un descuido: esta página ya
+     llama a `montarHoja()`, que nació en la v=26 de loica.js. A quien tuviera
+     la v=25 en caché se le caería el script entero en la primera línea. Las
+     otras nueve páginas siguen en 25 a propósito —no usan nada nuevo— y suben
+     cuando se porten (cine, descuentos, talleres) o en el próximo barrido
+     general, que incluye la plantilla de exportar_web.py. -->
+<link rel="stylesheet" href="loica.css?v=26">
 <style>
   html,body{height:100%;overflow:hidden}
   /* Los dos altos van en este orden a proposito: `dvh` no existe en
@@ -267,14 +273,15 @@
     height:var(--alto-panel,268px);max-height:88%;
     transition:height var(--medio);
   }
-  .panel-lista.arrastrando{transition:none}
+  /* `oculto` NO es "la escondió el usuario" —eso es `hoja-fuera`, de la hoja—
+     sino "hay una ficha encima": el panel se aparta para no asomar bajo ella.
+     Dos estados distintos con el mismo destino visual y por eso dos clases. */
   .panel-lista.oculto{transform:translateY(104%);pointer-events:none}
-  /* touch-action:none va SOLO en el tirador. Cuando estaba en el panel
-     entero, el navegador cancelaba el gesto de scroll de la lista: 37.000px
-     de eventos en una caja de 200px que no se podía mover con el dedo. Ese
-     era el "no funciona en celular". */
-  .tirador{padding:12px var(--e-4) 10px;cursor:grab;flex:none;touch-action:none}
-  .tirador:active{cursor:grabbing}
+  /* El resto del tirador —los 44 px de blanco táctil, el cursor, el
+     touch-action, el anillo de foco— vive en loica.css §4b, junto al mecanismo
+     de la hoja, porque es igual en las cuatro páginas con mapa. Acá queda solo
+     lo que es de esta página. */
+  .tirador{padding:0 var(--e-4);flex:none}
   /* Pastilla de tinta de 52×7 (§7.5): la rayita gris de 44×4,5 no se veía
      como algo que se agarra. */
   .barra-tirador{width:52px;height:7px;background:var(--tinta);border-radius:4px;margin:0 auto}
@@ -509,7 +516,7 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
         integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
         crossorigin="anonymous"></script>
-<script src="loica.js?v=25"></script>
+<script src="loica.js?v=26"></script>
 <script>
 let EVENTOS = [], filtroCat = null, soloGratis = false, cuando = "todo", publicoFiltro = null;
 let busqueda = "", filtroSub = null;
@@ -1069,9 +1076,13 @@ function refrescar(){
     cont.innerHTML = `<div class="vacio">${cuerpo("loica","var(--acento)",76,{pose:"durmiendo"})}
       <p><b>${porPalabra ? t("buscarSin") : t("vacio")}</b><br>${
         porPalabra ? t("buscarSinPista") : t("vaciopista")}</p></div>`;
-    // En reposo el panel muestra 130 px de lista: la cabeza de la Loica y
-    // ningún texto. Sube a la altura media para que se lea la salida.
-    if(window.fijarPanel) fijarPanel(1);
+    /* En reposo el panel muestra 130 px de lista: la cabeza de la Loica y
+       ningún texto. Sube a la altura media para que se lea la salida.
+       Pero si el usuario ESCONDIÓ la hoja para ver el mapa, no se le devuelve
+       sola: quedarse en cero es una respuesta que ya está dada —el mapa sin
+       pines y el botón diciendo "0 eventos"— y hacerla saltar sería pisarle
+       una decisión que tomó a propósito. */
+    if(hoja && hoja.indice > HOJA_OCULTA) fijarPanel(1);
     return;
   }
   cont.scrollTop = 0;
@@ -1209,66 +1220,22 @@ function cerrarFicha(){
   ficha.addEventListener("pointercancel", () => activo = false);
 })();
 
-/* --- Arrastre del panel: tres alturas, con gesto de verdad --- */
-(() => {
-  const panel = document.getElementById("panel");
-  const tirador = document.getElementById("tirador");
-  /* El reposo era 268px fijos, y 268 significa cosas muy distintas según el
-     teléfono: en uno de 812 dejaba medio mapa a la vista, en uno de 667 lo
-     dejaba en 249px, y acostado —donde el alto útil baja a ~225— el panel
-     era MÁS ALTO que el espacio disponible y el mapa desaparecía entero.
-     Ahora el reposo es una fracción del espacio real, con tope arriba (no
-     crece más que 250 px en pantallas grandes) y piso abajo (nunca baja de un
-     asomo de dos tarjetas). Era el 40 % y bajó al 34 %: con la cabecera y la
-     barra de abajo, el mapa se quedaba con el 44 % de un iPhone. La regla que
-     sostiene todo esto: en reposo el mapa se queda con la mayoría de la
-     pantalla, siempre. */
-  const alturas = () => {
-    const disponible = panel.parentElement.clientHeight;
-    const reposo = Math.round(Math.min(250, Math.max(132, disponible * .34)));
-    return [reposo, Math.round(disponible * .62), Math.round(disponible * .88)];
-  };
-  let indice = 0, arrastrando = false, inicioY = 0, inicioAlto = 0;
+/* --- La hoja de la lista: cuatro topes, agarre ancho y botón de vuelta ---
+   El arrastre ya no vive acá. Era un bloque copiado y pegado en las cuatro
+   páginas con mapa (mapa, cine, descuentos, talleres) y con el mismo defecto
+   en las cuatro: solo enganchaba en el tirador, 29 px de alto que el pulgar
+   no encuentra. Ahora lo hace `montarHoja()` en loica.js, que agrega el agarre
+   desde la cabecera del contador y desde la lista, el tope OCULTA para ver el
+   mapa entero, y el botón flotante que la trae de vuelta con el conteo vivo.
+   Las otras tres páginas usan exactamente esto mismo; el contrato para
+   portarlas está en notas/hoja-movil-contrato.md.
 
-  const fijar = i => {
-    indice = Math.max(0, Math.min(2, i));
-    panel.style.setProperty("--alto-panel", alturas()[indice] + "px");
-  };
-  fijar(0);
-  // refrescar() la usa para subir el panel cuando la lista queda en cero: en
-  // reposo solo se veía la cabeza de la Loica dormida y nada del texto.
-  window.fijarPanel = fijar;
-
-  tirador.addEventListener("pointerdown", e => {
-    arrastrando = true; inicioY = e.clientY; inicioAlto = panel.clientHeight;
-    panel.classList.add("arrastrando");
-    tirador.setPointerCapture(e.pointerId);
-  });
-  tirador.addEventListener("pointermove", e => {
-    if(!arrastrando) return;
-    const alto = Math.min(panel.parentElement.clientHeight * .88,
-                          Math.max(120, inicioAlto - (e.clientY - inicioY)));
-    panel.style.setProperty("--alto-panel", alto + "px");
-  });
-  const soltar = () => {
-    if(!arrastrando) return;
-    arrastrando = false;
-    panel.classList.remove("arrastrando");
-    const actual = panel.clientHeight;
-    const opciones = alturas();
-    fijar(opciones.indexOf(opciones.reduce((a,b) =>
-      Math.abs(b - actual) < Math.abs(a - actual) ? b : a)));
-  };
-  tirador.addEventListener("pointerup", soltar);
-  tirador.addEventListener("pointercancel", soltar);
-  tirador.addEventListener("click", () => { if(!arrastrando) fijar(indice === 2 ? 0 : indice + 1); });
-  tirador.addEventListener("keydown", e => {
-    if(e.key === "ArrowUp"){ e.preventDefault(); fijar(indice + 1); }
-    if(e.key === "ArrowDown"){ e.preventDefault(); fijar(indice - 1); }
-    if(e.key === "Enter" || e.key === " "){ e.preventDefault(); fijar(indice === 2 ? 0 : indice + 1); }
-  });
-  addEventListener("resize", () => fijar(indice));
-})();
+   El rótulo del botón lo pone ESTA página: la hoja no sabe si cuenta eventos,
+   películas o descuentos, y "128" solo no es una respuesta. */
+const hoja = montarHoja({
+  rotulo: () => `${document.getElementById("conteo").textContent} ` +
+                `${document.getElementById("conteo-txt").textContent}`,
+});
 
 /* ---------- ARRANQUE ----------
    La cabecera se pinta ANTES de pedir el JSON. El riel de fechas y los tres

@@ -675,6 +675,7 @@ const TEXTOS = {
     vacio:"No hay eventos con esos filtros", vaciopista:"Prueba sacando algún filtro",
     aprox:"Ubicación aproximada: centro de la comuna", sinUbicar:"Dirección por confirmar — revísala en la fuente", fuente:"Información publicada por",
     libre:"Entrada liberada", verMapa:"Ver en el mapa", cerrar:"Cerrar",
+    verLista:"Ver la lista", ajustarLista:"Arrastra para ver más o menos de la lista",
     anteriorEv:"Anterior", siguienteEv:"Siguiente", deN:"de",
     verMas:"Ver más panoramas", cargando:"Cargando…",
     meses:["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"],
@@ -745,6 +746,7 @@ const TEXTOS = {
     vacio:"No events match these filters", vaciopista:"Try removing a filter",
     aprox:"Approximate location: district centre", sinUbicar:"Address to be confirmed — check the source", fuente:"Information published by",
     libre:"Free entry", verMapa:"See on the map", cerrar:"Close",
+    verLista:"Show the list", ajustarLista:"Drag to show more or less of the list",
     anteriorEv:"Previous", siguienteEv:"Next", deN:"of",
     verMas:"See more events", cargando:"Loading…",
     meses:["January","February","March","April","May","June","July","August","September","October","November","December"],
@@ -815,6 +817,7 @@ const TEXTOS = {
     vacio:"Nenhum evento com esses filtros", vaciopista:"Tente remover algum filtro",
     aprox:"Localização aproximada: centro da comuna", sinUbicar:"Endereço a confirmar — veja na fonte", fuente:"Informação publicada por",
     libre:"Entrada gratuita", verMapa:"Ver no mapa", cerrar:"Fechar",
+    verLista:"Ver a lista", ajustarLista:"Arraste para ver mais ou menos da lista",
     anteriorEv:"Anterior", siguienteEv:"Próximo", deN:"de",
     verMas:"Ver mais programas", cargando:"Carregando…",
     meses:["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"],
@@ -1783,6 +1786,575 @@ function tarjetaDescuento(d, alPulsar){
 
   boton.onclick = () => alPulsar(d);
   return boton;
+}
+
+/* ---------- LA HOJA INFERIOR: la lista que sube, baja y se va ----------
+
+   Cuatro páginas (mapa, cine, descuentos, talleres) tenían el MISMO arrastre
+   copiado y pegado, y por lo tanto el mismo defecto. Medido con toques reales
+   —CDP Input.dispatchTouchEvent sobre un iPhone 13, no con un mouse fingido—
+   en mapa.html: arrastrar desde el contador movía el panel de 173 px a 173, o
+   sea nada; desde la lista, igual; solo enganchaba desde el tirador, que mide
+   29 px de alto. Un dedo mide 44 y cae en el contador o en la lista. Eso es lo
+   que el dueño reportaba como "no deja subir ni bajar la pestaña": el gesto
+   existía, pero en una franja que el pulgar no encuentra.
+
+   Lo que arregla esta función:
+
+   1. TRES ZONAS DE AGARRE en vez de una. El tirador (ahora con 44 px de blanco
+      táctil), la cabecera del contador entera —que es donde de verdad cae el
+      pulgar— y la lista, pero solo cuando ya está arriba del todo y el dedo va
+      hacia abajo. Ese último es el patrón de Google Maps y de Apple Maps: la
+      hoja se lleva el gesto únicamente cuando la lista no tiene a dónde
+      seguir. En cualquier otro caso la lista scrollea y la hoja no se mete.
+
+      Ojo con la trampa que ya nos costó una vez: `touch-action:none` en el
+      PANEL entero cancelaba el scroll de la lista (37.000 px de eventos en una
+      caja que no se movía). Por eso el `touch-action` restrictivo va SOLO en
+      las zonas de agarre, con la clase `.hoja-agarre` que esta función pone y
+      saca, y la lista se queda en `pan-y`.
+
+   2. UN CUARTO TOPE: oculta. El dueño lo pidió con todas sus letras — poder
+      esconder la lista para ver el mapa completo, y traerla de vuelta con un
+      toque. Vuelve con un botón flotante que además dice cuántos resultados la
+      están esperando, así esconderla no se siente como perderlos.
+
+   3. GESTO DE VERDAD. Soltar rápido salta al siguiente tope en esa dirección
+      (fling); soltar lento cae en el más cercano; y un arrastre corto pero
+      decidido (>24 px) siempre cambia de tope, porque volver al mismo se lee
+      como que el gesto no se registró. El `click` sintético que el navegador
+      dispara detrás de cada toque se suprime si el dedo se movió: antes la
+      guarda era `if(!arrastrando)`, y como `soltar()` apagaba esa bandera
+      ANTES de que llegara el click, no protegía nada y cada arrastre
+      adelantaba un tope de más.
+
+   4. NO SE ROMPE SI SE PIERDE LA CAPTURA. `setPointerCapture` se pide, pero no
+      se confía en él: los `pointermove`/`pointerup` se escuchan en `window`,
+      porque en Safari la captura se suelta sola a mitad de gesto y la hoja
+      quedaba colgada entre dos topes. `pointercancel` cae siempre en un tope
+      válido. Si el navegador no tiene Pointer Events, hay respaldo en Touch.
+
+   Lo que NO hace, y es a propósito: en escritorio y en teléfono acostado la
+   lista es una COLUMNA al costado, no una hoja. Ahí esta función queda inerte
+   —no toca el alto, no pinta el botón, no escucha el dedo— y se vuelve a
+   activar sola si la pantalla rota. Quién manda en esa decisión es la CSS: se
+   pregunta si el tirador está visible, y no se comparan anchos a mano, porque
+   las cuatro páginas NO tienen los mismos cortes (solo mapa.html tiene el
+   layout de acostado). El `matchMedia` está para enterarse del cambio al
+   instante; quien decide es el `display` del tirador. */
+
+/* Los tres números del gesto, juntos y con nombre para que se puedan discutir:
+   cuánto hay que mover el dedo para que deje de ser un toque, cuánto para que
+   el arrastre cuente como decidido, y a qué velocidad (px/ms) deja de ser un
+   arrastre y pasa a ser un envión. */
+const HOJA_TOQUE = 8, HOJA_DECIDIDO = 24, HOJA_ENVION = .45;
+/* Una velocidad medida hace más de 120 ms ya no describe el gesto: es el dedo
+   parado antes de soltar, y ahí el envión sería una invención nuestra. */
+const HOJA_VELOCIDAD_VIEJA = 120;
+
+/* Los topes van numerados -1..2 y NO 0..3 a propósito: las páginas ya llaman
+   `fijarPanel(0)` para el reposo y `fijarPanel(1)` para la altura media desde
+   `refrescar()`. Renumerar habría hecho que `fijarPanel(0)` escondiera la hoja
+   en el arranque. El tope nuevo se cuelga por abajo. */
+const HOJA_OCULTA = -1, HOJA_REPOSO = 0, HOJA_MEDIA = 1, HOJA_ALTA = 2;
+
+function montarHoja(opc = {}){
+  const panel = document.querySelector(opc.panel || "#panel");
+  if(!panel) return null;
+  const marco = panel.parentElement;
+  const tirador = panel.querySelector(opc.tirador || ".tirador");
+  if(!marco || !tirador) return null;
+  const lista = panel.querySelector(opc.lista || ".lista");
+  const cabecera = panel.querySelector(opc.conteo || ".conteo");
+  const agarres = [tirador, cabecera].filter(Boolean);
+
+  let movil = false, indice = HOJA_REPOSO;
+  /* Dos identificadores y no uno: el tirador y el contador se manejan con
+     Pointer Events y la lista con Touch Events (ver el cableado), y un mismo
+     dedo real llega a los dos con numeraciones distintas —`pointerId` empieza
+     en 1 y `Touch.identifier` en 0—. Con una sola variable se confundían y un
+     `pointerup` ajeno cortaba el arrastre de la lista. */
+  let gesto = null, seMovio = false, esperaLista = null;
+  let idPuntero = null, idTacto = null;
+  let cuadro = 0, pendiente = null, reMedida = 0;
+
+  /* ---- El CROMO: todo lo que el panel tiene que mostrar sí o sí ----
+     Son los hijos del panel que no son la lista —el tirador, la cabecera del
+     contador, la fila de afinar, y en descuentos un pie fijo— más los bordes
+     propios del panel, que con `box-sizing:border-box` entran en el `height`.
+     Se MIDE, no se declara: cada página tiene una cabecera distinta y pedirle
+     un número a mano es garantizar que algún día no calce. */
+  const cromoDelPanel = () => {
+    let alto = panel.offsetHeight - panel.clientHeight;   // los bordes propios
+    for(const hijo of panel.children){
+      if(hijo === lista || (lista && hijo.contains(lista))) continue;
+      alto += hijo.offsetHeight;                          // 0 si está display:none
+    }
+    return alto;
+  };
+
+  /* Cuánta lista tiene que asomar en reposo. Se mide una FILA DE VERDAD en vez
+     de clavar un número: una tarjeta de evento, una de descuento y una de
+     taller no miden lo mismo.
+     La banda de plausibilidad DESCARTA, no recorta, y la diferencia importa:
+     la primera cría de la lista no siempre es una fila. Puede ser el esqueleto
+     de carga, el cartel de "no hay nada", o —medido— un envoltorio que agrupa
+     el día entero: 693 px en cine y 7.566 en descuentos. Recortando esos a un
+     tope de 132 el reposo salía inflado (cine al 61 % de la pantalla,
+     descuentos al 66 %); descartándolos cae al asomo por defecto, que es lo
+     honesto cuando no hay una fila que medir. */
+  const HOJA_ASOMO = 90;
+  const asomoDeLista = () => {
+    const fila = lista && lista.firstElementChild;
+    const alto = fila ? fila.offsetHeight : 0;
+    const esFila = alto >= 56 && alto <= 132;
+    /* El asomo tiene TECHO, y la fila medida solo lo baja. Dejar entrar la
+       fila entera parecía lo correcto y no lo es por dos razones: una fila que
+       calza exacta con el borde de la hoja se lee como el final de la lista,
+       cuando lo que hay que decir es "sigue"; y con filas altas el reposo se
+       inflaba —talleres, con filas de 119, se llevaba el 50 % de la pantalla—.
+       Con techo, el que asoma es un pedazo de la fila siguiente, que es la
+       señal de que hay más abajo, y el mapa conserva su parte. */
+    return Math.min(esFila ? alto : HOJA_ASOMO, HOJA_ASOMO);
+  };
+
+  /* El reposo tiene un tope arriba (no crece más de 250 px en pantallas
+     grandes) y un piso abajo. El piso ERA 132 píxeles pelados y ese fue el
+     error: 132 no sabe nada del cromo de cada página. mapa.html funcionaba de
+     casualidad —sus 97 px de cabecera caben en 173 y dejan 74 de lista— y las
+     otras tres no. Medido en un iPhone 13 con el reposo viejo: cine abría con
+     43 px de lista, talleres con 63 y descuentos con CERO, o sea la hoja se
+     abría entera de cabecera. Y empeoró cuando el tirador subió de 29 a 44.
+     No es teoría: descuentos tenía su propia fórmula (.52 en vez de .34)
+     justamente por esto, y el comentario que lo advertía se perdió al portarla
+     —decía que su pie fijo se lleva 66 px y que con el reposo de mapa la lista
+     abría mostrando una fila y media—.
+
+     Ahora el piso es el cromo medido más un asomo de lista, y el tope de 250
+     CEDE ante el piso, no al revés: una hoja que abre sin una sola fila no es
+     una lista, es una cabecera con barra de agarre.
+
+     La regla de diseño que sostiene todo esto —en reposo el mapa se queda con
+     la mayoría de la pantalla— se sigue cumpliendo donde puede: mapa queda en
+     el 37 % del alto y cine y talleres cerca del 42 %. Descuentos se pasa al
+     55 %, y es a propósito: esa página ya se daba el 52 % antes de portarse
+     porque su pie fijo no deja otra. Apretarle el cromo (el aviso del banco,
+     la nota de geo) es una decisión de diseño y no se toma desde acá. */
+  let medidaCache = null;
+  const medidas = () => {
+    /* Durante un arrastre las medidas no cambian, y volver a leerlas en cada
+       `touchmove` obliga al navegador a recalcular el layout justo después de
+       que le escribimos el alto: es el clásico ida y vuelta que hace que el
+       gesto se sienta pegajoso. Se mide una vez al empezar el gesto. */
+    if(gesto && medidaCache) return medidaCache;
+    const disponible = marco.clientHeight;
+    const alta = Math.round(disponible * .88);
+    const piso = cromoDelPanel() + asomoDeLista();
+    // El reposo nunca puede pasar de la altura alta, y media nunca puede
+    // quedar por debajo del reposo: si la escalera se desordena, el tope más
+    // cercano deja de significar nada. Pasa de verdad en pantallas muy bajas.
+    const reposo = Math.min(alta, Math.round(Math.max(piso, Math.min(250, disponible * .34))));
+    return (medidaCache = {disponible, reposo, alta,
+                           media: Math.max(reposo, Math.round(disponible * .62))});
+  };
+  // La escalera en píxeles, en el mismo orden que los índices -1..2.
+  const escalera = m => [0, m.reposo, m.media, m.alta];
+  const altoDe = (i, m) => escalera(m)[i + 1];
+
+  /* Una sola escritura de estilo por cuadro. Durante el arrastre llegan
+     pointermove a 120 Hz y escribir dos custom properties en cada uno es
+     pedirle al navegador un recálculo de layout por evento. */
+  const escribir = (alto, baja) => {
+    panel.style.setProperty("--alto-panel", Math.round(alto) + "px");
+    panel.style.setProperty("--baja-hoja", Math.round(baja) + "px");
+  };
+  const escribirEnCuadro = (alto, baja) => {
+    pendiente = [alto, baja];
+    if(cuadro) return;
+    cuadro = requestAnimationFrame(() => { cuadro = 0; escribir(pendiente[0], pendiente[1]); });
+  };
+  // Cuando el tope ya se decidió, la escritura es inmediata y el cuadro
+  // pendiente sobra: si se dejara, pisaría el destino un instante después.
+  const escribirYa = (alto, baja) => {
+    if(cuadro){ cancelAnimationFrame(cuadro); cuadro = 0; }
+    escribir(alto, baja);
+  };
+
+  /* ---- El botón que trae la hoja de vuelta ----
+     Lo construye la función y no el HTML: así portar una página no obliga a
+     acordarse de un marcado nuevo, y el botón nunca queda huérfano de su
+     lógica. El texto lo pone la página —lee su propio contador— y se refresca
+     solo, ver `vigilarConteo` más abajo. */
+  const boton = document.createElement("button");
+  boton.type = "button";
+  boton.className = "volver-hoja";
+  boton.id = opc.idBoton || "volver-hoja";
+  boton.hidden = true;
+  boton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
+      stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg>
+    <span class="volver-hoja-txt"></span>`;
+  if(panel.id) boton.setAttribute("aria-controls", panel.id);
+  boton.addEventListener("click", () => fijar(HOJA_REPOSO, true));
+  marco.appendChild(boton);
+  const rotuloTxt = boton.querySelector(".volver-hoja-txt");
+
+  /* El rótulo por defecto sale del contador de la propia página (`#conteo` +
+     `#conteo-txt`), que es el dato que ya está pintado y traducido. Una página
+     que cuente distinto pasa `opc.rotulo`. */
+  const rotuloPorDefecto = () => {
+    const n = panel.querySelector("#conteo"), s = panel.querySelector("#conteo-txt");
+    return [n && n.textContent.trim(), s && s.textContent.trim()]
+      .filter(Boolean).join(" ").trim();
+  };
+  const rotular = () => {
+    const texto = (opc.rotulo ? opc.rotulo() : rotuloPorDefecto()) || t("verLista");
+    rotuloTxt.textContent = texto;
+    // El texto visible es "128 eventos", que como nombre de un botón no dice
+    // qué hace. El lector de pantalla escucha el verbo.
+    boton.setAttribute("aria-label", t("verLista") + ", " + texto);
+  };
+
+  /* ---- Fijar un tope ---- */
+  function fijar(i, conFoco){
+    indice = Math.max(HOJA_OCULTA, Math.min(HOJA_ALTA, Math.round(i)));
+    if(!movil) return indice;
+    const m = medidas();
+    const fuera = indice === HOJA_OCULTA;
+    panel.classList.toggle("hoja-fuera", fuera);
+    // Escondida conserva el alto de reposo: así vuelve creciendo desde donde
+    // corresponde y no aparece de golpe con el alto que tenía antes de irse.
+    escribirYa(fuera ? m.reposo : altoDe(indice, m), 0);
+    // Fuera de pantalla la hoja sigue teniendo tarjetas enfocables con Tab.
+    // `inert` la saca del tabulador y del árbol de accesibilidad de una vez.
+    if("inert" in panel) panel.inert = fuera;
+    tirador.setAttribute("aria-expanded", indice > HOJA_REPOSO ? "true" : "false");
+    boton.hidden = !fuera;
+    if(fuera) rotular();
+    if(conFoco) (fuera ? boton : tirador).focus();
+    return indice;
+  }
+
+  /* ---- El gesto ---- */
+  function empezar(y){
+    // Se tira la medida vieja ANTES de abrir el gesto: la de adentro se
+    // congela, así que la que se congela tiene que ser fresca.
+    medidaCache = null;
+    gesto = {y0:y, yUlt:y, tUlt:performance.now(), v:0,
+             alto0:panel.clientHeight, i0:indice, alto:panel.clientHeight, baja:0};
+    seMovio = false;
+    panel.classList.add("arrastrando");
+  }
+
+  function mover(y){
+    if(!gesto) return;
+    const ahora = performance.now(), dt = ahora - gesto.tUlt;
+    if(dt > 0){ gesto.v = (y - gesto.yUlt) / dt; gesto.yUlt = y; gesto.tUlt = ahora; }
+    /* `hoja-moviendo` marca que esto ya es un ARRASTRE y no un dedo apoyado.
+       De ella cuelga el apagado de la selección de texto en la cabecera del
+       contador, que tiene que seguir siendo copiable en reposo y con un pulso
+       largo (ver loica.css §4b). Por eso no se cuelga de `arrastrando`, que se
+       pone en el `pointerdown` y por lo tanto también en un pulso quieto. */
+    if(!seMovio && Math.abs(y - gesto.y0) > HOJA_TOQUE){
+      seMovio = true;
+      panel.classList.add("hoja-moviendo");
+    }
+    const m = medidas();
+    const bruto = gesto.alto0 - (y - gesto.y0);
+    /* Dos variables y no una: por arriba del reposo la hoja CRECE (cambia de
+       alto), y por debajo ya no puede encoger más —el tirador y el contador
+       tienen alto propio— así que se DESLIZA hacia abajo. Estirar el alto por
+       debajo de su contenido dejaba la cabecera desbordada fuera de la caja. */
+    gesto.alto = Math.min(m.alta, Math.max(m.reposo, bruto));
+    gesto.baja = Math.max(0, Math.min(m.reposo, m.reposo - bruto));
+    escribirEnCuadro(gesto.alto, gesto.baja);
+  }
+
+  function soltar(cancelado){
+    if(!gesto) return;
+    const g = gesto; gesto = null;
+    panel.classList.remove("arrastrando", "hoja-moviendo");
+    const m = medidas(), pasos = escalera(m);
+    // Lo que el ojo ve: el alto menos lo que se fue por abajo.
+    const visible = g.alto - g.baja;
+    let cerca = 0;
+    pasos.forEach((h, k) => {
+      if(Math.abs(h - visible) < Math.abs(pasos[cerca] - visible)) cerca = k;
+    });
+    let destino = cerca - 1;
+
+    /* Un gesto CANCELADO no es un gesto soltado: el sistema se llevó el dedo
+       (una llamada, el gesto de volver de iOS, el navegador que decide que el
+       toque era para scrollear). Ahí solo se cae al tope más cercano, sin
+       envión y sin la regla del arrastre decidido.
+       Esto no es celo: era un error real. Con `pan-y` en la lista, Chromium
+       mandaba `pointerdown`, uno o dos `pointermove` y un `pointercancel`; con
+       DOS movimientos alcanzaba a guardarse una velocidad de 0,5 px/ms, el
+       cancel entraba por la misma puerta que un soltar normal y la hoja se
+       iba un tope hacia abajo (448 → 316) por un gesto que el navegador ya
+       había dado por muerto. Peor: eso hacía PASAR una prueba que en realidad
+       estaba fallando. */
+    if(!cancelado){
+      const v = (performance.now() - g.tUlt > HOJA_VELOCIDAD_VIEJA) ? 0 : g.v;
+      const dy = g.yUlt - g.y0;                       // + hacia abajo
+      const rumbo = (v !== 0 ? v : dy) < 0 ? 1 : -1;  // +1 sube, -1 baja
+      if(Math.abs(v) >= HOJA_ENVION) destino += rumbo;
+      // Un arrastre corto pero decidido tiene que cambiar de tope. Si cae en el
+      // mismo del que salió, el usuario lee "no me registró" y repite el gesto.
+      else if(Math.abs(dy) > HOJA_DECIDIDO && destino === g.i0) destino = g.i0 + rumbo;
+    }
+    fijar(destino);
+  }
+
+  /* Soltar el dedo limpia SIEMPRE, haya o no arrastre: si la lista se quedó
+     esperando (`esperaLista`) o el toque fue limpio, `soltar()` se devuelve
+     temprano y sin esto el id del dedo quedaba pegado hasta el toque siguiente. */
+  function terminar(cancelado){
+    soltar(cancelado);
+    esperaLista = null; idPuntero = null; idTacto = null;
+  }
+
+  /* ---- La lista: solo se lleva el gesto cuando ya no tiene a dónde bajar ----
+     No se decide en el `touchstart` sino en el primer movimiento que pasa el
+     umbral de toque: antes de eso no se sabe si el dedo viene a scrollear o a
+     bajar la hoja, y adivinar mal rompe una de las dos cosas.
+     Tres condiciones para quedárselo, y las tres tienen que darse:
+       · el dedo va HACIA ABAJO y más vertical que horizontal;
+       · la lista ya está arriba del todo, así que no tiene a dónde bajar;
+       · el evento todavía es `cancelable`. Si el navegador ya empezó a
+         scrollear, `preventDefault()` no hace nada y quedarse con el gesto
+         sería mover la hoja Y scrollear la lista al mismo tiempo. */
+  function decidirLista(d, e){
+    const dy = d.clientY - esperaLista.y0, dx = d.clientX - esperaLista.x0;
+    if(Math.abs(dy) <= HOJA_TOQUE && Math.abs(dx) <= HOJA_TOQUE) return false;
+    const nuestro = dy > 0 && Math.abs(dy) > Math.abs(dx) &&
+                    lista.scrollTop <= 0 && e.cancelable;
+    esperaLista = null;
+    // El gesto arranca DESDE AQUÍ, no desde el punto original: si no, la hoja
+    // pegaría un salto de los 8 px que el dedo ya llevaba andados.
+    if(nuestro) empezar(d.clientY);
+    return nuestro;
+  }
+
+  /* ---- Cableado: cada zona con la familia de eventos que le sirve ----
+
+     Y no es capricho, es lo único que funciona. El tirador y el contador
+     llevan `touch-action:none`, así que ahí no hay ningún scroller peleando
+     por el gesto y Pointer Events anda perfecto.
+
+     La LISTA es otra cosa. Lleva `touch-action:pan-y` —tiene que scrollear— y
+     eso significa que el gesto vertical es del scroller nativo, no nuestro.
+     Medido en Chromium con toques reales: llega `pointerdown`, UNO o dos
+     `pointermove`, y `pointercancel`. Se acabó. La lógica de "decido en el
+     primer movimiento pasados 8 px" no alcanza a correr, y cuando alcanzaba
+     era peor: el `pointercancel` entraba con velocidad guardada y la hoja se
+     movía un tope sola. Pointer Events y querer interceptar un gesto vertical
+     dentro de un scroller son incompatibles por construcción.
+
+     La salida es la que usan las librerías de bottom sheet: escuchar
+     `touchmove` en la lista con `{passive:false}` y llamar `preventDefault()`.
+     Eso hace dos cosas a la vez —y por eso es la línea entera del arreglo—:
+       1. le avisa al navegador, ANTES del gesto, que acá alguien podría
+          cancelarlo, y entonces marca los `touchmove` como `cancelable`. Con
+          todos los listeners pasivos llegaban con `cancelable=false` desde el
+          primero, y `preventDefault()` no habría hecho nada;
+       2. cuando decidimos quedarnos el gesto, frena el scroll de verdad.
+     El `{passive:false}` tiene que ir EN EL REGISTRO: después no se cambia. */
+  const hayPuntero = typeof window.PointerEvent === "function";
+  /* ---- Los controles que viven DENTRO de una zona de agarre ----
+     La primera versión se negaba a empezar el gesto si el dedo caía sobre un
+     botón. Sonaba prudente y era el error: renunciaba al GESTO cuando solo
+     había que renunciar al TOQUE. En cine el conmutador Cines/Películas/Qué
+     ver vive dentro del `.conteo` y se lleva 219 de sus 386 px: barriendo el
+     ancho con toques reales, la hoja arrancaba en la mitad de los puntos —y
+     justo en la página donde el agarre nuevo más falta hacía.
+
+     Ahora es al revés, que es lo que hacen las hojas nativas: el arrastre
+     arranca igual encima de un botón, y quien decide es el desenlace. Si el
+     dedo se movió, se traga el `click` del botón y manda la hoja; si no se
+     movió, el botón recibe su toque como si nada hubiera pasado. La bandera
+     que lo resuelve es la misma `seMovio` de 8 px que ya mataba el click
+     fantasma: es la misma decisión tomada en el mismo lugar.
+
+     Va en captura y sobre el panel entero, así cubre el conmutador de cine,
+     los chips de cualquier cabecera, las tarjetas de la lista y el propio
+     tirador, sin tener que enumerar a ninguno. */
+  panel.addEventListener("click", e => {
+    if(!seMovio) return;
+    seMovio = false;
+    e.stopPropagation();
+    e.preventDefault();
+  }, true);
+
+  // El dedo de ESTE gesto entre todos los que cambiaron en el evento.
+  const dedoDe = e => idTacto === null ? null
+    : Array.prototype.find.call(e.changedTouches, d => d.identifier === idTacto);
+
+  /* Touch Events para una zona. `esLista` distingue las dos maneras de
+     empezar: en el tirador el gesto es nuestro desde el toque, y en la lista
+     hay que esperar a ver para dónde va el dedo.
+     No hacen falta listeners en `window`: a diferencia de los punteros, un
+     Touch le pertenece al elemento donde EMPEZÓ durante toda su vida, así que
+     el `touchend` llega acá aunque el dedo termine en la otra punta. */
+  const cablearTacto = (zona, esLista) => {
+    zona.addEventListener("touchstart", e => {
+      if(!movil || gesto || esperaLista || idTacto !== null) return;
+      const d = e.changedTouches[0];
+      idTacto = d.identifier;
+      if(esLista) esperaLista = {y0:d.clientY, x0:d.clientX};
+      else empezar(d.clientY);
+    }, {passive:true});
+
+    zona.addEventListener("touchmove", e => {
+      const d = dedoDe(e); if(!d) return;
+      if(esperaLista && !decidirLista(d, e)) return;   // es de la lista: que scrollee
+      if(!gesto) return;
+      mover(d.clientY);
+      if(e.cancelable) e.preventDefault();
+    }, {passive:false});
+
+    zona.addEventListener("touchend", e => { if(dedoDe(e)) terminar(); }, {passive:true});
+    zona.addEventListener("touchcancel", e => { if(dedoDe(e)) terminar(true); }, {passive:true});
+  };
+
+  if(lista) cablearTacto(lista, true);
+
+  if(hayPuntero){
+    agarres.forEach(zona => zona.addEventListener("pointerdown", e => {
+      // El segundo dedo no hereda el gesto: con dos apoyados saltaba de uno a
+      // otro y la hoja pegaba tirones.
+      if(!movil || gesto || idPuntero !== null || e.button > 0) return;
+      idPuntero = e.pointerId;
+      // Se pide la captura, pero los `move`/`up` se escuchan en window: si
+      // Safari la suelta, el arrastre sigue vivo igual.
+      try{ zona.setPointerCapture(e.pointerId); }catch(_){}
+      empezar(e.clientY);
+    }));
+    addEventListener("pointermove", e => {
+      if(e.pointerId === idPuntero) mover(e.clientY);
+    }, {passive:true});
+    addEventListener("pointerup", e => { if(e.pointerId === idPuntero) terminar(); });
+    addEventListener("pointercancel", e => { if(e.pointerId === idPuntero) terminar(true); });
+  }else{
+    // Sin Pointer Events, el tirador y el contador van por Touch como la lista.
+    agarres.forEach(zona => cablearTacto(zona, false));
+  }
+
+  /* Un toque limpio en el tirador cicla topes. Acá ya no hace falta preguntar
+     por `seMovio`: el guardia en captura del panel se traga el click de todo
+     arrastre antes de que llegue hasta acá. Si este click existe, es un toque
+     de verdad. */
+  tirador.addEventListener("click", () => {
+    if(movil) fijar(indice >= HOJA_ALTA ? HOJA_REPOSO : indice + 1);
+  });
+  tirador.addEventListener("keydown", e => {
+    if(!movil) return;
+    if(e.key === "ArrowUp"){ e.preventDefault(); fijar(indice + 1); }
+    else if(e.key === "ArrowDown"){ e.preventDefault(); fijar(indice - 1); }
+    else if(e.key === "Enter" || e.key === " "){
+      e.preventDefault(); fijar(indice >= HOJA_ALTA ? HOJA_REPOSO : indice + 1);
+    }
+    // Escape esconde y deja el foco en el botón de volver: la salida del
+    // teclado no puede terminar en un foco perdido en el <body>.
+    else if(e.key === "Escape"){ e.preventDefault(); fijar(HOJA_OCULTA, true); }
+  });
+  tirador.setAttribute("role", "button");
+  if(!tirador.hasAttribute("tabindex")) tirador.tabIndex = 0;
+  if(panel.id) tirador.setAttribute("aria-controls", panel.id);
+  // El rótulo de la página manda: cada una nombra lo que lista (eventos,
+  // películas, descuentos, talleres). Este es el que se pone si no hay ninguno.
+  if(!tirador.hasAttribute("aria-label")) tirador.setAttribute("aria-label", t("ajustarLista"));
+
+  /* ---- Modo: hoja o columna ----
+     Lo decide el `display` del tirador, o sea la CSS de cada página, porque
+     los cortes NO son los mismos en las cuatro (solo mapa.html manda la lista
+     al costado con el teléfono acostado). Escribir los anchos acá otra vez era
+     garantizar que algún día dejen de calzar. */
+  const enHoja = () => getComputedStyle(tirador).display !== "none";
+  function modo(){
+    const antes = movil;
+    movil = enHoja();
+    if(!movil){
+      // Inerte: se devuelven las llaves y manda la columna. Si quedaran puestos
+      // el alto o el desplazamiento de un gesto a medias, la columna aparecería
+      // corrida hacia abajo al rotar.
+      terminar(true);
+      panel.classList.remove("hoja-fuera", "arrastrando", "hoja-moviendo", "hoja-viva");
+      panel.style.removeProperty("--alto-panel");
+      panel.style.removeProperty("--baja-hoja");
+      agarres.forEach(z => z.classList.remove("hoja-agarre"));
+      if("inert" in panel) panel.inert = false;
+      tirador.removeAttribute("aria-expanded");
+      boton.hidden = true;
+      return;
+    }
+    panel.classList.add("hoja-viva");
+    agarres.forEach(z => z.classList.add("hoja-agarre"));
+    // Al volver de la columna la hoja NO vuelve escondida: rotar el teléfono
+    // no es pedir que la lista desaparezca.
+    fijar(!antes && indice === HOJA_OCULTA ? HOJA_REPOSO : indice);
+  }
+  const volverAMedir = () => {
+    // Con el dedo apoyado no se remide nada: las medidas del gesto están
+    // congeladas a propósito y recalcular a mitad de arrastre pega un tirón.
+    if(reMedida || gesto) return;
+    reMedida = requestAnimationFrame(() => { reMedida = 0; modo(); });
+  };
+  /* `resize` cubre el alto que cambia cuando iOS pliega la barra de
+     direcciones; los `matchMedia` avisan del giro al instante, sin esperar a
+     que el navegador se decida a emitir el resize. */
+  addEventListener("resize", volverAMedir);
+  ["(min-width:880px)", "(max-height:460px)"].forEach(consulta => {
+    const vigia = matchMedia(consulta);
+    if(vigia.addEventListener) vigia.addEventListener("change", volverAMedir);
+    else if(vigia.addListener) vigia.addListener(volverAMedir);
+  });
+
+  /* La hoja nace ANTES de que la página termine de pintarse, y eso desfasaba
+     todas sus cuentas. Medido en talleres: al montarse, el marco decía 565 px
+     cuando el definitivo son 492, y el reposo salía en 192 en vez de 167. No
+     era nuevo —el arrastre viejo tenía el mismo desfase— pero se arreglaba a
+     mano y solo en mapa.html, que volvía a llamar `fijarPanel(0)` después de
+     pintar la cabecera. Pedirle eso a cada página es pedirle que se acuerde.
+
+     Un ResizeObserver lo cierra solo y para las cuatro. Mira dos cosas:
+       · el MARCO, que encoge cuando la cabecera crece al llegar el JSON;
+       · el CROMO del panel, porque la cabecera del contador envuelve a dos
+         líneas cuando aparece la nota del catastro, y ahí el piso del reposo
+         cambia sin que el marco se haya movido ni un píxel.
+     No hay lazo posible: `fijar()` solo escribe el alto del PANEL, y el panel
+     no está observado —sus hijos fijos no cambian de alto porque la hoja suba
+     o baje; el que absorbe la diferencia es la lista, que tampoco se mira. */
+  if(typeof ResizeObserver === "function"){
+    const vigia = new ResizeObserver(volverAMedir);
+    vigia.observe(marco);
+    for(const hijo of panel.children){
+      if(hijo === lista || (lista && hijo.contains(lista))) continue;
+      vigia.observe(hijo);
+    }
+  }
+
+  /* El rótulo del botón sigue vivo mientras la hoja está escondida: los
+     filtros se pueden tocar igual y "128 eventos" tiene que dejar de mentir.
+     Se mira el contador de la página en vez de pedirle que nos avise. */
+  if(cabecera && typeof MutationObserver === "function"){
+    new MutationObserver(() => { if(!boton.hidden) rotular(); })
+      .observe(cabecera, {childList:true, characterData:true, subtree:true});
+  }
+  addEventListener("loica:idioma", () => { if(!boton.hidden) rotular(); });
+
+  modo();
+
+  /* La API. `fijarPanel` se conserva con la MISMA numeración de siempre
+     —0 reposo, 1 media, 2 alta— porque `refrescar()` la llama en las cuatro
+     páginas; el tope nuevo es el -1. */
+  const api = {
+    fijar, ocultar: () => fijar(HOJA_OCULTA), mostrar: () => fijar(HOJA_REPOSO),
+    rotular, remedir: modo, get indice(){ return indice; }, get activa(){ return movil; },
+    boton, panel,
+  };
+  window.fijarPanel = i => fijar(i);
+  window.hojaLista = api;
+  return api;
 }
 
 /* Auto-montaje de la cordillera: cualquier página que ponga un #cordillera

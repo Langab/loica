@@ -44,7 +44,10 @@
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
       integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V"
       crossorigin="anonymous">
-<link rel="stylesheet" href="loica.css?v=25">
+<!-- v=26 y no v=25: esta página ya llama a `montarHoja()`, que nació en la v=26
+     de loica.js. A quien tuviera la v=25 en caché le llegaría un loica.js sin
+     esa función y el script de la página se caería en la primera línea. -->
+<link rel="stylesheet" href="loica.css?v=26">
 <style>
   html,body{height:100%;overflow:hidden}
   /* Los dos altos van en este orden a proposito: `dvh` no existe en
@@ -183,11 +186,14 @@
     height:var(--alto-panel,360px);max-height:88%;
     transition:height var(--medio);
   }
-  .panel-lista.arrastrando{transition:none}
-  /* touch-action:none va SOLO en el tirador: en el panel entero el navegador
-     cancela el gesto de scroll de la lista (la nota larga está en mapa.html). */
-  .tirador{padding:9px var(--e-4) 6px;cursor:grab;flex:none;touch-action:none}
-  .tirador:active{cursor:grabbing}
+  /* El resto del tirador —los 44 px de blanco táctil, el cursor, el
+     touch-action y el anillo de foco— vive en loica.css §4b, junto al
+     mecanismo de la hoja, porque es igual en las cuatro páginas con mapa. Acá
+     queda solo lo de esta página. Y sigue en pie la advertencia que estaba
+     escrita en este mismo lugar: el `touch-action:none` va SOLO en las zonas
+     de agarre y nunca en el panel entero, porque ahí el navegador le cancela
+     el gesto de scroll a la lista. */
+  .tirador{padding:0 var(--e-4);flex:none}
   .barra-tirador{width:52px;height:7px;background:var(--tinta);border-radius:4px;margin:0 auto}
   .conteo{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;font-size:var(--t-sm);
     color:var(--tinta-suave);padding:2px var(--e-4) 7px}
@@ -506,7 +512,7 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
         integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
         crossorigin="anonymous"></script>
-<script src="loica.js?v=25"></script>
+<script src="loica.js?v=26"></script>
 <script>
 /* ------------------------------------------------------------------
    Estado. Tres filtros y ninguno depende del otro: el día es de una
@@ -1359,56 +1365,33 @@ function nombreTarjeta(slug){
   ).join(" ");
 }
 
-/* --- Arrastre del panel: tres alturas, calcado de mapa.html --- */
-(() => {
-  const panel = document.getElementById("panel");
-  const tirador = document.getElementById("tirador");
-  tirador.setAttribute("aria-label", {es:"Arrastra para ver más descuentos",
-    en:"Drag to see more discounts", pt:"Arraste para ver mais descontos"}[IDIOMA]);
-  const alturas = () => {
-    const disponible = panel.parentElement.clientHeight;
-    /* Más alta que la hoja de mapa.html (268) a propósito: acá el pie fijo del
-       guarén se lleva 66px, y con el reposo de allá la lista abría mostrando
-       una fila y media. */
-    const reposo = Math.round(Math.min(360, Math.max(170, disponible * .52)));
-    return [reposo, Math.round(disponible * .68), Math.round(disponible * .88)];
-  };
-  let indice = 0, arrastrando = false, inicioY = 0, inicioAlto = 0;
-  const fijar = i => {
-    indice = Math.max(0, Math.min(2, i));
-    panel.style.setProperty("--alto-panel", alturas()[indice] + "px");
-  };
-  fijar(0);
-  tirador.addEventListener("pointerdown", e => {
-    arrastrando = true; inicioY = e.clientY; inicioAlto = panel.clientHeight;
-    panel.classList.add("arrastrando");
-    tirador.setPointerCapture(e.pointerId);
-  });
-  tirador.addEventListener("pointermove", e => {
-    if(!arrastrando) return;
-    const alto = Math.min(panel.parentElement.clientHeight * .88,
-                          Math.max(120, inicioAlto - (e.clientY - inicioY)));
-    panel.style.setProperty("--alto-panel", alto + "px");
-  });
-  const soltar = () => {
-    if(!arrastrando) return;
-    arrastrando = false;
-    panel.classList.remove("arrastrando");
-    const actual = panel.clientHeight;
-    const opciones = alturas();
-    fijar(opciones.indexOf(opciones.reduce((a,b) =>
-      Math.abs(b - actual) < Math.abs(a - actual) ? b : a)));
-  };
-  tirador.addEventListener("pointerup", soltar);
-  tirador.addEventListener("pointercancel", soltar);
-  tirador.addEventListener("click", () => { if(!arrastrando) fijar(indice === 2 ? 0 : indice + 1); });
-  tirador.addEventListener("keydown", e => {
-    if(e.key === "ArrowUp"){ e.preventDefault(); fijar(indice + 1); }
-    if(e.key === "ArrowDown"){ e.preventDefault(); fijar(indice - 1); }
-    if(e.key === "Enter" || e.key === " "){ e.preventDefault(); fijar(indice === 2 ? 0 : indice + 1); }
-  });
-  addEventListener("resize", () => fijar(indice));
-})();
+/* --- La hoja de la lista: cuatro topes, agarre ancho y botón de vuelta ---
+   El arrastre ya no vive acá. Era el mismo bloque copiado en las cuatro
+   páginas con mapa y con el mismo defecto en las cuatro: solo enganchaba en el
+   tirador, que en ESTA página medía 22 px de alto —la mitad de un pulgar—
+   así que arrastrar desde el contador o desde la lista no hacía nada. Ahora lo
+   hace `montarHoja()` en loica.js, que suma el agarre desde la cabecera del
+   contador, el tope OCULTA para ver el mapa entero y el botón flotante que la
+   trae de vuelta con el conteo vivo. El contrato está en
+   notas/hoja-movil-contrato.md.
+
+   El aria-label del tirador se pone ANTES y sigue siendo de la página: la hoja
+   solo pone el suyo si no encuentra ninguno, y el genérico ("más o menos de la
+   lista") no dice QUÉ lista. Acá se nombra lo que se cuenta, en el idioma que
+   está puesto. */
+const tirador = document.getElementById("tirador");
+tirador.setAttribute("aria-label", {es:"Arrastra para ver más descuentos",
+  en:"Drag to see more discounts", pt:"Arraste para ver mais descontos"}[IDIOMA]);
+
+/* El rótulo del botón lo pone ESTA página: la hoja no sabe si cuenta eventos,
+   películas o descuentos, y "254" solo no es una respuesta. Sigue el mismo
+   criterio de idioma que el aria-label de arriba sin repetir el diccionario,
+   porque `#conteo-txt` ya lo escribe `pintarLista()` con t("dCuantos") —
+   descuentos / discounts / descontos, y en singular cuando queda uno. */
+const hoja = montarHoja({
+  rotulo: () => `${document.getElementById("conteo").textContent} ` +
+                `${document.getElementById("conteo-txt").textContent}`,
+});
 </script>
 <!-- Cloudflare Web Analytics: cuenta visitas sin cookies y sin huella
      digital, así que el sitio no necesita banner de consentimiento (la Ley

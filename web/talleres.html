@@ -22,7 +22,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
       integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V" crossorigin="anonymous">
-<link rel="stylesheet" href="loica.css?v=25">
+<!-- v=26 y no v=25, y NO es un descuido: esta página ya llama a `montarHoja()`,
+     que nació en la v=26 de loica.js. A quien tuviera la v=25 en caché se le
+     caería el script entero en la primera línea. Las páginas sin mapa siguen
+     en 25 a propósito —no usan nada nuevo— y suben en el próximo barrido
+     general, que incluye la plantilla de exportar_web.py. -->
+<link rel="stylesheet" href="loica.css?v=26">
 <style>
   html,body{height:100%;overflow:hidden}
   /* Los dos altos van en este orden a propósito: `dvh` no existe en Safari de
@@ -152,11 +157,12 @@
     height:var(--alto-panel,268px);max-height:88%;
     transition:height var(--medio);
   }
-  .panel-lista.arrastrando{transition:none}
-  /* touch-action:none va SOLO en el tirador: en el panel entero el navegador
-     cancela el gesto de scroll de la lista (la nota larga está en mapa.html). */
-  .tirador{padding:9px var(--e-4) 6px;cursor:grab;flex:none;touch-action:none}
-  .tirador:active{cursor:grabbing}
+  /* El resto del tirador —los 44 px de blanco táctil, el cursor, el
+     touch-action, el anillo de foco— vive en loica.css §4b junto al mecanismo
+     de la hoja, porque es igual en las cuatro páginas con mapa. Acá queda solo
+     lo de esta página. El tirador de talleres medía 20 px de alto: menos de la
+     mitad de un pulgar, y por eso el arrastre no existía en la práctica. */
+  .tirador{padding:0 var(--e-4);flex:none}
   .barra-tirador{width:44px;height:4.5px;background:var(--borde-fuerte);border-radius:3px;margin:0 auto}
   .conteo{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;font-size:var(--t-sm);
     color:var(--tinta-suave);padding:var(--e-1) var(--e-4) var(--e-2)}
@@ -299,7 +305,7 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
         integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
         crossorigin="anonymous"></script>
-<script src="loica.js?v=25"></script>
+<script src="loica.js?v=26"></script>
 <script>
 /* ------------------------------------------------------------------
    Talleres y clases: lo que se toma todas las semanas. El esqueleto es el
@@ -867,11 +873,11 @@ function pintarLista(){
 
   if(!lista.length){
     cont.appendChild(estadoVacio());
-    /* En celular la hoja descansa en 268px y ahí el Chincol con su mensaje y
-       su botón no caben: el botón, que es la salida, quedaba bajo el canto.
-       Sin lista que recorrer la hoja no tiene por qué seguir chica, así que
-       sube un tramo. Solo desde el tramo de reposo — si la persona ya la
-       movió a mano, mandan sus manos. */
+    /* En celular la hoja descansa en su tope de reposo —un tercio de pantalla,
+       250px como techo— y ahí el Chincol con su mensaje y su botón no caben:
+       el botón, que es la salida, quedaba bajo el canto. Sin lista que
+       recorrer la hoja no tiene por qué seguir chica, así que sube un tramo.
+       Las condiciones para hacerlo están en `subirHoja`, al pie del script. */
     subirHoja();
     return;
   }
@@ -1043,55 +1049,40 @@ function estadoVacio(){
   addEventListener("loica:idioma", rotular);
 })();
 
-/* --- Arrastre del panel: tres alturas, calcado de mapa.html ---
-   `subirHoja` es la única puerta que el arrastre le deja al resto de la
-   página: la usa el estado vacío para que su botón no quede bajo el canto. */
-let subirHoja = () => {};
-(() => {
-  const panel = document.getElementById("panel");
-  const tirador = document.getElementById("tirador");
-  const alturas = () => {
-    const disponible = panel.parentElement.clientHeight;
-    const reposo = Math.round(Math.min(268, Math.max(132, disponible * .40)));
-    return [reposo, Math.round(disponible * .62), Math.round(disponible * .88)];
-  };
-  let indice = 0, arrastrando = false, inicioY = 0, inicioAlto = 0;
-  const fijar = i => {
-    indice = Math.max(0, Math.min(2, i));
-    panel.style.setProperty("--alto-panel", alturas()[indice] + "px");
-  };
-  fijar(0);
-  subirHoja = () => { if(indice === 0) fijar(1); };
-  tirador.addEventListener("pointerdown", e => {
-    arrastrando = true; inicioY = e.clientY; inicioAlto = panel.clientHeight;
-    panel.classList.add("arrastrando");
-    tirador.setPointerCapture(e.pointerId);
-  });
-  tirador.addEventListener("pointermove", e => {
-    if(!arrastrando) return;
-    const alto = Math.min(panel.parentElement.clientHeight * .88,
-                          Math.max(120, inicioAlto - (e.clientY - inicioY)));
-    panel.style.setProperty("--alto-panel", alto + "px");
-  });
-  const soltar = () => {
-    if(!arrastrando) return;
-    arrastrando = false;
-    panel.classList.remove("arrastrando");
-    const actual = panel.clientHeight;
-    const opciones = alturas();
-    fijar(opciones.indexOf(opciones.reduce((a,b) =>
-      Math.abs(b - actual) < Math.abs(a - actual) ? b : a)));
-  };
-  tirador.addEventListener("pointerup", soltar);
-  tirador.addEventListener("pointercancel", soltar);
-  tirador.addEventListener("click", () => { if(!arrastrando) fijar(indice === 2 ? 0 : indice + 1); });
-  tirador.addEventListener("keydown", e => {
-    if(e.key === "ArrowUp"){ e.preventDefault(); fijar(indice + 1); }
-    if(e.key === "ArrowDown"){ e.preventDefault(); fijar(indice - 1); }
-    if(e.key === "Enter" || e.key === " "){ e.preventDefault(); fijar(indice === 2 ? 0 : indice + 1); }
-  });
-  addEventListener("resize", () => fijar(indice));
-})();
+/* --- La hoja de la lista: cuatro topes, agarre ancho y botón de vuelta ---
+   El arrastre ya no vive acá. Era el mismo bloque copiado y pegado en las
+   cuatro páginas con mapa, y con el mismo defecto en las cuatro: solo
+   enganchaba en el tirador, que acá medía 20 px de alto. Un pulgar mide 44 y
+   cae en el contador o en la lista, donde no pasaba nada. Ahora lo hace
+   `montarHoja()` en loica.js, que suma el agarre desde la cabecera del
+   contador, el tope OCULTA para ver el mapa entero y el botón flotante que la
+   trae de vuelta. El contrato está en notas/hoja-movil-contrato.md.
+
+   El rótulo del botón lo pone ESTA página: la hoja no sabe si cuenta eventos,
+   películas o talleres, y "128" solo no es una respuesta. */
+const hoja = montarHoja({
+  rotulo: () => `${document.getElementById("conteo").textContent} ` +
+                `${document.getElementById("conteo-txt").textContent}`,
+});
+
+/* `subirHoja` es la única puerta que la hoja le deja al resto de la página: la
+   usa el estado vacío para que su botón —que es la salida del callejón— no
+   quede bajo el canto. Sube SOLO desde el reposo, porque si la persona ya la
+   movió a mano mandan sus manos; y no la resucita si la escondió a propósito
+   para ver el mapa, que sería pisarle una decisión. Va declarada como función
+   y no como const para que `pintarLista()`, que está más arriba, la encuentre
+   pase lo que pase con el orden.
+
+   Sube al tope ALTO y no al medio, y ese sí es un cambio de esta portación: el
+   tirador pasó de 20 a 44 px (loica.css §4b) y el estado vacío quedó pidiendo
+   218 px de una caja de 216. En el medio el botón se iba 9 px bajo el canto.
+   Robarle esos 9 px al Chincol era pan para hoy: la frase mide dos líneas en
+   español y tres en portugués, y volvería a desbordar en la primera
+   traducción. Sin resultados no hay pines que tapar, así que la hoja alta no
+   le cuesta nada al mapa y deja 65 px de aire bajo el botón. */
+function subirHoja(){
+  if(hoja && hoja.indice === HOJA_REPOSO) hoja.fijar(HOJA_ALTA);
+}
 </script>
 <!-- Cloudflare Web Analytics: cuenta visitas sin cookies y sin huella
      digital, así que el sitio no necesita banner de consentimiento (la Ley

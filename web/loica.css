@@ -445,6 +445,129 @@ img{max-width:100%;display:block}
   box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
 }
 
+/* ---------- 4b. LA HOJA INFERIOR ----------
+   El mecanismo de la lista que sube y baja con el dedo en celular. Lo monta
+   `montarHoja()` (loica.js) y lo usan mapa, cine, descuentos y talleres; el
+   contrato está escrito en notas/hoja-movil-contrato.md.
+
+   Acá vive SOLO lo que es del mecanismo. La caja del panel —dónde se para, qué
+   ancho tiene, en qué corte se va al costado— sigue siendo de cada página,
+   porque no es la misma en las cuatro: solo mapa.html manda la lista a una
+   columna con el teléfono acostado.
+
+   Todas las reglas cuelgan de una clase que pone el JS (`.hoja-viva` en el
+   panel, `.hoja-agarre` en las zonas de agarre) y no del selector pelado. Eso
+   no es manía: mientras las otras tres páginas no estén portadas, siguen
+   trayendo su propio `.tirador` y su propio `.panel-lista` en un <style> que
+   se carga DESPUÉS de este archivo. Colgando de la clase, esto gana por
+   especificidad donde corresponde y no toca nada donde la hoja no está
+   montada. */
+
+/* El desplazamiento hacia abajo del arrastre viaja en una variable y no en un
+   `style.transform` escrito a mano: así la página puede seguir teniendo sus
+   propias reglas de transform (el `.oculto` de mapa.html, que significa otra
+   cosa —la ficha está encima— y no puede confundirse con esta). */
+.panel-lista{transform:translateY(var(--baja-hoja,0px))}
+/* La transición del transform hace falta para que esconder y traer de vuelta
+   se vea como un movimiento y no como un parpadeo. Va colgada de `.hoja-viva`
+   para NO reactivarse en escritorio ni con el teléfono acostado, donde las
+   páginas apagan la transición a propósito. */
+.panel-lista.hoja-viva{transition:height var(--medio),transform var(--medio)}
+/* Mientras el dedo manda, la transición sobra: interpola contra el dedo y la
+   hoja se siente pesada. Va DESPUÉS de .hoja-viva para ganarle por orden. */
+.panel-lista.arrastrando{transition:none}
+/* Escondida del todo, y "del todo" quiere decir FUERA DE LA PANTALLA, no
+   "detrás de la barra de abajo". Un `translateY(104%)` —que es lo que usa el
+   `.oculto` de la ficha— la deja asomada exactamente `--hueco-nav` menos un
+   pelo: invisible porque la barra inferior es opaca y va en z-index 20, pero
+   ahí igual. Medido en un iPhone 13 quedaban 51 px de hoja dentro del
+   viewport. Se baja su propio alto MÁS el hueco de la barra, y así la medida
+   honesta —cuánto de la hoja cae dentro de la pantalla— da cero.
+   `pointer-events:none` para que no atrape toques del mapa que quedó
+   descubierto; el JS además le pone `inert`, que es lo que la saca del
+   tabulador. */
+.panel-lista.hoja-fuera{
+  transform:translateY(calc(100% + var(--hueco-nav) + 8px));pointer-events:none;
+}
+
+/* Las zonas de agarre. `touch-action:none` va SOLO acá y nunca en el panel
+   entero: cuando estuvo en el panel, el navegador cancelaba el scroll de la
+   lista y quedaban 37.000 px de eventos en una caja que no se movía. */
+.hoja-agarre{touch-action:none;cursor:grab}
+
+/* Sobre apagar la selección de texto, que acá hubo que elegir:
+
+   El tirador es un CONTROL. No tiene texto, no hay nada que copiar, y el menú
+   de iOS asomando sobre una pastilla de agarre es puro ruido. Ahí se apaga
+   todo, sin dudarlo.
+
+   La cabecera del contador es otra cosa: en talleres y en descuentos no lleva
+   solo el número, lleva la nota con la deuda del catastro ("31 no declaran sus
+   días · 195 no publican precio"). Apagarle la selección —que fue lo primero
+   que se hizo acá— dejaba ese texto sin poder copiarse en celular. No se
+   notaba en mapa.html porque ahí no hay nada copiable, y ése es justamente el
+   riesgo de decidirlo mirando una sola página.
+
+   Así que en el contador la selección se apaga SOLO cuando el dedo ya se
+   movió, no mientras está apoyado: `.hoja-moviendo` la pone el JS recién al
+   pasar el umbral de arrastre. En reposo y con un pulso largo el texto se
+   selecciona y se copia como en cualquier otra parte; apenas empieza un
+   arrastre de verdad, deja de pintarse una selección detrás del gesto. */
+.tirador.hoja-agarre{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.panel-lista.hoja-moviendo .hoja-agarre{-webkit-user-select:none;user-select:none}
+.panel-lista.arrastrando .hoja-agarre{cursor:grabbing}
+/* 44 px, que es lo que mide un pulgar. El tirador venía en 29 y ése era el
+   corazón del problema: el único blanco que arrastraba era una franja que el
+   dedo no encuentra. Los 15 px que esto le quita a la lista en reposo son el
+   precio, y se paga con gusto — la cabecera del contador también arrastra
+   ahora, así que la banda de agarre pasó de 29 px a más de 90. */
+.tirador.hoja-agarre{
+  min-height:44px;box-sizing:border-box;
+  display:flex;align-items:center;justify-content:center;
+}
+/* La lista conserva `pan-y`: scrollea sola, y la hoja solo le quita el gesto
+   cuando ya está arriba del todo y el dedo va hacia abajo (eso lo decide el
+   JS, no la CSS). */
+.panel-lista.hoja-viva .lista{touch-action:pan-y}
+
+/* El anillo de foco se dibuja en la PASTILLA y no en el <div> del tirador, que
+   es una franja transparente de ancho completo: ahí el anillo se leía como un
+   recuadro suelto flotando sobre la lista. */
+.tirador:focus-visible{box-shadow:none}
+.tirador:focus-visible .barra-tirador{
+  box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+}
+
+/* El botón que trae la hoja de vuelta. Existe solo mientras la hoja está
+   escondida, y dice CUÁNTOS resultados la esperan: esconder la lista no puede
+   sentirse como haberlos perdido.
+   Va abajo y al centro, sobre `--hueco-nav`, por descarte: en celular los
+   controles de zoom de MapLibre están apagados y su atribución se sube al
+   borde de arriba, así que el borde inferior es el único rincón libre — y es
+   donde llega el pulgar. z-index 5 lo deja sobre el mapa y bajo la ficha (8) y
+   el aviso (7): con una ficha abierta, el botón no tiene nada que hacer. */
+.volver-hoja{
+  position:absolute;left:50%;bottom:calc(var(--hueco-nav) + var(--e-3));z-index:5;
+  transform:translateX(-50%);
+  display:inline-flex;align-items:center;gap:7px;
+  min-height:44px;padding:0 var(--e-4);
+  border:2.5px solid var(--contorno);border-radius:var(--r-pill);
+  background:var(--fondo-elevado);color:var(--tinta);
+  font:800 var(--t-sm)/1 var(--fuente-marca);white-space:nowrap;cursor:pointer;
+  box-shadow:var(--repisa-2);animation:volver-hoja-entra var(--rebote);
+}
+/* `display:inline-flex` le gana a [hidden] del navegador, igual que le pasaba
+   a `.aviso`: sin esta línea el botón queda flotando sobre el mapa siempre. */
+.volver-hoja[hidden]{display:none}
+.volver-hoja svg{width:18px;height:18px;flex:none}
+.volver-hoja:active{transform:translate(-50%,3px);box-shadow:none}
+.volver-hoja:focus-visible{
+  box-shadow:var(--repisa-2),0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+}
+@keyframes volver-hoja-entra{
+  from{opacity:0;transform:translate(-50%,14px)} to{opacity:1;transform:translate(-50%,0)}
+}
+
 /* ---------- 5. TARJETA DE EVENTO ----------
    Los dos datos que deciden si voy son la HORA y el PRECIO. Antes la
    categoría se repetía tres veces y la hora no aparecía nunca. */
