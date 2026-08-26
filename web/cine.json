@@ -1,5 +1,5 @@
 {
- "generado": "2026-08-26T02:08:47",
+ "generado": "2026-08-26T04:15:49",
  "dias": 7,
  "total_funciones": 647,
  "cines": [
@@ -2652,7 +2652,7 @@
    "generos": [
     "Concierto"
    ],
-   "credito": "",
+   "credito": "María José Cuevas · México · 2026",
    "funciones": [
     {
      "cine": "cineplanet-quilin",
@@ -6081,17 +6081,17 @@
   {
    "clave": "los-domingos",
    "titulo": "Los domingos",
-   "poster": "",
-   "duracion": null,
-   "clasificacion": "",
+   "poster": "https://normandie.cl/wp-content/uploads/2026/08/img-los-domingos.jpg",
+   "duracion": 110,
+   "clasificacion": "14 años",
    "cines": [
     "centro-arte-alameda-sala-ceina",
     "cine-arte-normandie"
    ],
-   "sinopsis": "",
-   "trailer": "",
+   "sinopsis": "Ainara (Blanca Soroa), una joven idealista y brillante de 17 años, ha de decidir qué carrera universitaria estudiará. O, al menos, eso espera su familia que haga. Sin embargo, la chica manifiesta que se siente cada vez más cerca de Dios y que se plantea abrazar la vida de monja de clausura. La noticia pilla por sorpresa a toda la familia, provocando un abismo y una prueba de fuego para todos. Estrenos",
+   "trailer": "https://www.youtube.com/watch?v=fSRrZVzDTVA",
    "generos": [],
-   "credito": "",
+   "credito": "Alauda Ruiz de Azúa · España · 2025",
    "funciones": [
     {
      "cine": "cine-arte-normandie",
