@@ -1,5 +1,5 @@
 {
- "generado": "2026-08-26T04:09:17",
+ "generado": "2026-08-26T08:24:44",
  "total": 636,
  "locales": 1779,
  "bancos": [
@@ -34783,42 +34783,6 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
-   "comercio": "PizzaPizza Huechuraba",
-   "categoria": "comida_rapida",
-   "cocina": "italiana",
-   "region": "Metropolitana",
-   "sitio_web": "http://www.pizzapizza.cl/",
-   "porcentaje": null,
-   "oferta": "",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": null,
-   "tarjetas": [],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-13",
-   "logo": "https://bci-cdn.azureedge.net/uploads/c8e46226-3716-4d2a-b3e3-51da708a67c1/original/imagen.jpg",
-   "capturado": "",
-   "id": "2112b445bfb0",
-   "locales": [
-    {
-     "direccion": "Pedro Fontova 7281",
-     "comuna": "Huechuraba",
-     "lat": -33.3550624,
-     "lon": -70.67051839999999,
-     "precision": "fuente",
-     "telefono": "2 2948 8888",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Huechuraba"
-   ]
-  },
-  {
-   "banco_id": "bci",
-   "banco": "Bci",
    "comercio": "PizzaPizza Independencia",
    "categoria": "comida_rapida",
    "cocina": "italiana",
@@ -35097,6 +35061,42 @@
      "lon": -70.75770436923077,
      "precision": "calle",
      "telefono": "&nbsp;2 2534 2020",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Maipú"
+   ]
+  },
+  {
+   "banco_id": "bci",
+   "banco": "Bci",
+   "comercio": "PizzaPizza Maipú Poniente",
+   "categoria": "comida_rapida",
+   "cocina": "italiana",
+   "region": "Metropolitana",
+   "sitio_web": "http://www.pizzapizza.cl/",
+   "porcentaje": null,
+   "oferta": "",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-15",
+   "logo": "https://bci-cdn.azureedge.net/uploads/ac2a988f-63ed-4ddf-a40b-91590e0c64dd/original/imagen.jpg",
+   "capturado": "",
+   "id": "c64cc3ef8cbc",
+   "locales": [
+    {
+     "direccion": "3 Poniente 0876",
+     "comuna": "Maipú",
+     "lat": -33.012944,
+     "lon": -71.553406,
+     "precision": "fuente",
+     "telefono": "2 2942 3999",
      "origen": ""
     }
    ],
