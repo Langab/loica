@@ -515,7 +515,6 @@ cines:
   fuente_geo: osm
   verificado: false
   alias:
-  - Cinépolis Melipilla
   - Cinépolis
 - id: cinepolis-parque-arauco
   nombre: Cinépolis Parque Arauco
@@ -643,7 +642,6 @@ cines:
   fuente_geo: osm
   verificado: false
   alias:
-  - Cinépolis Puente Alto
   - Cinépolis
 - id: cinepolis-terrazas-maipu
   nombre: Cinépolis Terrazas Maipú
