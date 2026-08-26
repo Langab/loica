@@ -1,7 +1,7 @@
 {
- "generado": "2026-08-25T21:53:17",
+ "generado": "2026-08-25T23:18:02",
  "dias": 7,
- "total_funciones": 831,
+ "total_funciones": 837,
  "cines": [
   {
    "id": "cineplanet-costanera-center",
@@ -196,7 +196,7 @@
    "lon": -70.650245,
    "url": "https://centroartealameda.cl/",
    "formatos": "",
-   "funciones": 11
+   "funciones": 18
   },
   {
    "id": "cinemark-la-dehesa",
@@ -223,19 +223,6 @@
    "url": "https://elbiografo.cl/",
    "formatos": "",
    "funciones": 6
-  },
-  {
-   "id": "cinepolis-vivo-imperio",
-   "nombre": "Cinépolis Vivo Imperio",
-   "cadena": "cinepolis",
-   "circuito": "comercial",
-   "direccion": "Huérfanos",
-   "comuna": "Santiago",
-   "lat": -33.43956,
-   "lon": -70.648549,
-   "url": "https://cinepolis.com/cl",
-   "formatos": "",
-   "funciones": 1
   },
   {
    "id": "sala-cine-m100",
@@ -532,6 +519,19 @@
    "comuna": "Maipú",
    "lat": -33.500685,
    "lon": -70.75646,
+   "url": "https://cinepolis.com/cl",
+   "formatos": "",
+   "funciones": 0
+  },
+  {
+   "id": "cinepolis-vivo-imperio",
+   "nombre": "Cinépolis Vivo Imperio",
+   "cadena": "cinepolis",
+   "circuito": "comercial",
+   "direccion": "Huérfanos",
+   "comuna": "Santiago",
+   "lat": -33.43956,
+   "lon": -70.648549,
    "url": "https://cinepolis.com/cl",
    "formatos": "",
    "funciones": 0
@@ -7033,6 +7033,7 @@
    "duracion": 105,
    "clasificacion": "+14",
    "cines": [
+    "centro-arte-alameda-sala-ceina",
     "cinemark-alto-las-condes",
     "cinemark-mallplaza-oeste",
     "cineplanet-costanera-center",
@@ -7133,6 +7134,14 @@
      "idioma": "subtitulada",
      "sala": "11",
      "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-27T16:30",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/la-negociacion-centro-arte-alameda-548645"
     }
    ]
   },
@@ -7395,6 +7404,7 @@
    "duracion": 108,
    "clasificacion": "+14",
    "cines": [
+    "centro-arte-alameda-sala-ceina",
     "el-biografo"
    ],
    "sinopsis": "Una pareja invita a los vecinos a su casa, lo que desencadena una velada llena de giros inesperados, revelando emociones profundamente reprimidas y una sexualidad inexplorada en esta historia que explora las complejidades de las relaciones de hoy en día. Basada en la obra de teatro Cesc Gay ‘Los vecinos de arriba’, que dio origen a su película ‘Sentimental’ (2020).",
@@ -7433,6 +7443,14 @@
      "idioma": "subtitulada",
      "sala": "",
      "url": "https://elbiografo.cl/"
+    },
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-29T14:45",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/la-invitacion-centro-arte-alameda-548653"
     }
    ]
   },
@@ -7499,6 +7517,14 @@
      "idioma": "",
      "sala": "",
      "url": "https://www.passline.com/eventos/la-misteriosa-mirada-del-flamenco-centro-arte-alameda-546241"
+    },
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-28T15:00",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/la-misteriosa-mirada-del-flamenco-centro-arte-alameda-548651"
     },
     {
      "cine": "cine-arte-normandie",
@@ -7611,6 +7637,38 @@
    ]
   },
   {
+   "clave": "teenage-sex-and-death-at-camp-miasma",
+   "titulo": "Teenage Sex and Death at Camp Miasma",
+   "poster": "",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "centro-arte-alameda-sala-ceina"
+   ],
+   "sinopsis": "",
+   "trailer": "",
+   "generos": [],
+   "credito": "",
+   "funciones": [
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-25T16:30",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/teenage-sex-and-death-at-camp-miasma-centro-arte-alameda-546329"
+    },
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-26T20:45",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/teenage-sex-and-death-at-camp-miasma-centro-arte-alameda-546330"
+    }
+   ]
+  },
+  {
    "clave": "volver-al-futuro",
    "titulo": "Volver al futuro",
    "poster": "https://imagenes.passline.com/eventos/volver-al-futuro-cine-blondie-en-centro-arte-alameda-544910-rec.jpg",
@@ -7715,6 +7773,30 @@
    ]
   },
   {
+   "clave": "backrooms-extended",
+   "titulo": "Backrooms Extended",
+   "poster": "",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "centro-arte-alameda-sala-ceina"
+   ],
+   "sinopsis": "",
+   "trailer": "",
+   "generos": [],
+   "credito": "",
+   "funciones": [
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-31T20:30",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/backrooms-extended-centro-arte-alameda-548660"
+    }
+   ]
+  },
+  {
    "clave": "batman",
    "titulo": "Batman",
    "poster": "",
@@ -7735,30 +7817,6 @@
      "idioma": "subtitulada",
      "sala": "",
      "url": "https://normandie.cl/cartelera/"
-    }
-   ]
-  },
-  {
-   "clave": "documental-el-fotografo-de-la-40",
-   "titulo": "Documental \"El fotógrafo de La 40\"",
-   "poster": "",
-   "duracion": null,
-   "clasificacion": "",
-   "cines": [
-    "cinepolis-vivo-imperio"
-   ],
-   "sinopsis": "",
-   "trailer": "",
-   "generos": [],
-   "credito": "",
-   "funciones": [
-    {
-     "cine": "cinepolis-vivo-imperio",
-     "inicio": "2026-08-26T11:00",
-     "formato": "",
-     "idioma": "",
-     "sala": "",
-     "url": "https://www.bibliotecanacional.gob.cl/cartelera/documental-el-fotografo-de-la-40"
     }
    ]
   },
@@ -8003,6 +8061,30 @@
    ]
   },
   {
+   "clave": "obsesion",
+   "titulo": "Obsesión",
+   "poster": "",
+   "duracion": null,
+   "clasificacion": "",
+   "cines": [
+    "centro-arte-alameda-sala-ceina"
+   ],
+   "sinopsis": "El anhelo romántico desesperado de un chico por su amor platónico de toda la vida desencadena un siniestro hechizo: Niki se vuelve irracionalmente obsesiva hasta convertirse en la sombra de Bear. Una fantasía aparentemente inofensiva que se convertirá en una perturbadora pesadilla. Potente metáfora sobre la cosificación de las relaciones románticas y de los límites a los que estamos dispuestos a llegar movidos por el deseo de ser correspondidos.",
+   "trailer": "https://www.youtube.com/watch?v=yITS7zQJuwk",
+   "generos": [],
+   "credito": "Curry Barker · Estados Unidos · 2025",
+   "funciones": [
+    {
+     "cine": "centro-arte-alameda-sala-ceina",
+     "inicio": "2026-08-31T14:30",
+     "formato": "",
+     "idioma": "",
+     "sala": "",
+     "url": "https://www.passline.com/eventos/obsesion-centro-arte-alameda-548658"
+    }
+   ]
+  },
+  {
    "clave": "paranoid-park",
    "titulo": "Paranoid Park",
    "poster": "https://imagenes.passline.com/eventos/paranoid-park-centro-arte-alameda-540559-rec.jpg",
@@ -8128,8 +8210,8 @@
    ]
   },
   {
-   "clave": "teenage-sex-and-death-at-camp-miasma",
-   "titulo": "Teenage Sex and Death at Camp Miasma",
+   "clave": "the-doors",
+   "titulo": "The Doors",
    "poster": "",
    "duracion": null,
    "clasificacion": "",
@@ -8143,11 +8225,11 @@
    "funciones": [
     {
      "cine": "centro-arte-alameda-sala-ceina",
-     "inicio": "2026-08-25T16:30",
+     "inicio": "2026-08-27T20:00",
      "formato": "",
      "idioma": "",
      "sala": "",
-     "url": "https://www.passline.com/eventos/teenage-sex-and-death-at-camp-miasma-centro-arte-alameda-546329"
+     "url": "https://www.passline.com/eventos/the-doors-centro-arte-alameda-548650"
     }
    ]
   },
