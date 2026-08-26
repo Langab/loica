@@ -696,6 +696,9 @@ const TEXTOS = {
     pHistoriaT:"Cómo llegó a esto", pHistoriaPista:"Toca a cualquiera y te cuenta su historia",
     pHistoriaCerrar:"Cerrar", pHistoriaVer:"Ver sus panoramas",
     pGratisT:"gratis", pGratisD:"panoramas que no cuestan nada",
+    pSelloHoy:"Panoramas revisados hoy a las {h}",
+    pSelloAyer:"Panoramas revisados ayer a las {h}",
+    pSelloViejo:"Panoramas revisados el {f}", pSelloSin:"Sin fecha de revisión",
     pTotalD:"panoramas vigentes", pFuentesD:"fuentes revisadas cada mañana",
     pCierreT:"¿Organizas algo?", pCierreD:"Si tu evento es abierto y pasa en Santiago, cabe acá. No cobramos por aparecer.",
     pCineT:"Cine", pCineD:"Qué dan hoy y qué sala te queda cerca, del mall al cine arte.",
@@ -767,6 +770,9 @@ const TEXTOS = {
     pHistoriaT:"How it came to this", pHistoriaPista:"Tap any of them and you get the backstory",
     pHistoriaCerrar:"Close", pHistoriaVer:"See what they cover",
     pGratisT:"free", pGratisD:"events that cost nothing",
+    pSelloHoy:"Listings checked today at {h}",
+    pSelloAyer:"Listings checked yesterday at {h}",
+    pSelloViejo:"Listings checked on {f}", pSelloSin:"No check date",
     pTotalD:"events on right now", pFuentesD:"sources checked every morning",
     pCierreT:"Running something?", pCierreD:"If your event is open to the public and happens in Santiago, it belongs here. We don't charge for it.",
     pCineT:"Cinema", pCineD:"What is on today and which screen is near you, from the mall to the arthouse.",
@@ -838,6 +844,9 @@ const TEXTOS = {
     pHistoriaT:"Como chegou nisso", pHistoriaPista:"Toque em qualquer um e ele conta a história",
     pHistoriaCerrar:"Fechar", pHistoriaVer:"Ver os programas dele",
     pGratisT:"grátis", pGratisD:"programas que não custam nada",
+    pSelloHoy:"Programas revisados hoje às {h}",
+    pSelloAyer:"Programas revisados ontem às {h}",
+    pSelloViejo:"Programas revisados em {f}", pSelloSin:"Sem data de revisão",
     pTotalD:"programas em cartaz", pFuentesD:"fontes revisadas toda manhã",
     pCierreT:"Organiza algo?", pCierreD:"Se o seu evento é aberto e acontece em Santiago, cabe aqui. Não cobramos para aparecer.",
     pCineT:"Cinema", pCineD:"O que está passando hoje e qual sala fica perto, do shopping ao cine arte.",
@@ -1100,6 +1109,12 @@ async function cargarEventos(){
   // el sitio sigue viendo la cartelera del día que entró por primera vez.
   const r = await fetch("eventos.json", {cache: "no-cache"});
   const d = await r.json();
+  /* La marca de la corrida se guarda al pasar, sin cambiar lo que esta función
+     devuelve: la llaman cuatro páginas y ninguna espera un objeto. La portada
+     la usa para decir cuándo se revisó el catálogo. Viene en hora de Santiago
+     y sin huso escrito —el workflow fija TZ: America/Santiago— así que se
+     compara como texto contra el día de Santiago, nunca con new Date(). */
+  window.generadoEventos = d.generado || "";
   return d.eventos
     .filter(siguesVigente)
     .map(ev => ({...ev, fecha: new Date(ev.inicio)}));

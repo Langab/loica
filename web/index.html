@@ -33,7 +33,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=26">
+<link rel="stylesheet" href="loica.css?v=27">
 <style>
   body{overflow-x:hidden}
 
@@ -94,6 +94,100 @@
     max-width:560px;margin:0 0 var(--e-5)}
   .hero-botones{display:flex;gap:var(--e-3);justify-content:flex-start;flex-wrap:wrap;
     margin-bottom:var(--e-5)}
+
+
+  /* --- El sello de hoy: qué día es y cuándo se revisó ---
+     Va ARRIBA del h1 y no debajo porque el h1 pregunta "¿Qué hacemos hoy por
+     Santiago?" y esto contesta qué es "hoy". Leídos en orden dan una frase:
+     martes 26 de agosto → ¿qué hacemos hoy? El antetítulo no decora, completa.
+
+     Y hace un segundo trabajo, que es el que lo pidió: la corrida de las 06:00
+     publica sola y nadie mira. Si falla, el sitio se ve idéntico —los mismos
+     panoramas de ayer, la misma portada— y no hay forma de notarlo desde
+     afuera. Acá la fecha de la última revisión queda a la vista en la primera
+     pantalla, con un punto de color que dice si es de hoy, de ayer o vieja.
+     Un catálogo viejo deja de ser invisible.
+
+     Piezas prestadas, ninguna nueva: la medalla crema con contorno de tinta es
+     la misma de las cifras de abajo.
+
+     El animal es la CHINCHILLA y no la Loica, aunque la Loica sea la
+     anfitriona. Dos razones, y la segunda es la que manda: en celular la Loica
+     grande queda justo encima del sello, así que eran dos Loicas apiladas a
+     20px de distancia; y la chinchilla es la que atiende el calendario, o sea
+     que acá la señalética del sitio dice lo que la pieza hace. El animal
+     nombra, no adorna. */
+  .sello-hoy{
+    display:inline-grid;grid-template-columns:auto auto;align-items:center;
+    gap:2px var(--e-3);margin-bottom:var(--e-4);
+    padding:var(--e-2) var(--e-4) var(--e-2) var(--e-2);
+    background:var(--fondo-elevado);border:2.5px solid var(--contorno);
+    border-radius:var(--r-pill);
+  }
+  .sello-hoy .medalla{
+    grid-row:1/3;width:38px;height:38px;border-radius:var(--r-pill);
+    background:var(--arena-50);border:2.5px solid var(--contorno);
+    display:grid;place-items:center;
+  }
+  .sello-fecha{
+    font-family:var(--fuente-marca);font-weight:800;font-size:var(--t-md);
+    line-height:1.15;color:var(--tinta);display:flex;align-items:baseline;
+    gap:var(--e-2);flex-wrap:wrap;
+  }
+  /* Tabular: sin esto el reloj cambia de ancho cada vez que un 1 reemplaza a un
+     8, y el sello entero tirita una vez por minuto. */
+  /* Rejilla y no fila: la regla de los segundos va DEBAJO de los dígitos y del
+     ancho exacto de los dígitos. Al costado se leía como una raya suelta —o
+     peor, como un tachón sobre la hora— y no como parte del reloj. */
+  .sello-reloj{
+    font-family:var(--fuente-ui);font-weight:700;font-variant-numeric:tabular-nums;
+    font-size:var(--t-base);color:var(--tinta-suave);
+    display:inline-grid;justify-items:stretch;gap:3px;
+  }
+  /* El único elemento vivo del sello: una regla que cruza el minuto y vuelve a
+     empezar. Se prefirió a los segundos en dígitos —que obligan a mirar un
+     número que cambia y no dice nada— y a los dos puntos parpadeando, que es
+     el reloj digital de todo el mundo. Es una línea plana, del ancho de una
+     regla impresa, y basta para que se note que la página está viva. */
+  .sello-seg{
+    display:block;height:2.5px;border-radius:2px;
+    background:var(--borde);overflow:hidden;
+  }
+  .sello-seg i{
+    display:block;height:100%;width:calc(var(--seg,0) * 100%);
+    background:var(--acento);border-radius:2px;
+  }
+  /* El estado: es el ÚNICO lugar del sello donde el color significa algo, y por
+     eso es el único que lo usa. El texto nunca queda solo en manos del color
+     —dice "hoy", "ayer" o la fecha— porque un punto verde no se lee en un
+     lector de pantalla ni lo distingue quien no ve el rojo. */
+  .sello-estado{
+    font-size:var(--t-xs);color:var(--tinta-tenue);line-height:1.3;
+    display:flex;align-items:center;gap:6px;
+  }
+  /* El punto nace NEUTRO y cada estado conocido se pinta encima. Al revés
+     —verde por defecto y gris como excepción— el sitio decía "al día" justo
+     cuando no tiene cómo saberlo: un archivo sin `generado` es exactamente el
+     caso en que hay que desconfiar. El que no sabe no opina.
+
+     Y los colores son primitivos y no tokens semánticos, que fue el error de
+     la primera pasada: `--gratis` está afinado para TEXTO, así que en oscuro
+     se remapea a un verde-300 pálido, y como relleno de un punto de 9px se
+     leía igual que el gris de "sin marca". Un semáforo con dos luces del
+     mismo color no es un semáforo. En oscuro el verde baja a verde-500, que
+     sobre el azul de la tarjeta sigue leyéndose verde. */
+  .sello-punto{
+    flex:none;width:9px;height:9px;border-radius:var(--r-pill);
+    background:var(--borde-fuerte);border:1.5px solid var(--contorno);
+  }
+  .sello-hoy[data-frescura="hoy"] .sello-punto{background:var(--verde-700)}
+  .sello-hoy[data-frescura="ayer"] .sello-punto{background:var(--amarillo-300)}
+  .sello-hoy[data-frescura="vieja"] .sello-punto{background:var(--acento-solido)}
+  :root[data-tema="oscuro"] .sello-hoy[data-frescura="hoy"] .sello-punto{background:var(--verde-500)}
+  .sello-hoy[data-frescura="vieja"] .sello-estado{color:var(--error);font-weight:700}
+  @media(prefers-reduced-motion:reduce){
+    .sello-seg{display:none}
+  }
 
   /* --- Los números en vivo ---
      Salen del JSON, no están escritos a mano.
@@ -447,6 +541,9 @@
   <span class="mancha m3" aria-hidden="true"></span>
   <div class="hero-interior">
     <div class="hero-texto">
+      <!-- Lo pinta pintarSello(); nace vacío para que no parpadee una fecha
+           de plantilla mientras llega eventos.json. -->
+      <div class="sello-hoy" id="sello-hoy" hidden></div>
       <h1 id="h-titulo"></h1>
       <p class="bajada" id="h-bajada"></p>
       <div class="hero-botones">
@@ -515,7 +612,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
-<script src="loica.js?v=26"></script>
+<script src="loica.js?v=27"></script>
 <script>
 /* La raíz del sitio era el mapa hasta este cambio, así que hay links dando
    vueltas por WhatsApp con la forma `.../#/e/<id>`. Se reenvían al mapa en vez
@@ -569,6 +666,7 @@ function pintarPortada(){
   document.getElementById("h-bajada").textContent = T("pBajada");
   document.getElementById("h-cta").textContent = T("pVerMapa");
   document.getElementById("h-cta2").textContent = T("pVerHoy");
+  pintarSello();
   /* La anfitriona: vuela, aterriza, saluda — en ese orden. Con
      prefers-reduced-motion aparece ya posada y con el globo puesto.
      En cambios de idioma solo se actualiza el saludo: la llegada es una. */
@@ -806,7 +904,85 @@ function cuatroDeHoy(delDia, todos){
 /* --- Datos en vivo: las cifras y los panoramas de hoy ---
    Números escritos a mano se vuelven mentira en una semana. Estos salen del
    mismo JSON que el mapa. */
+
+/* --- El sello de hoy ---
+   Dos datos con dos trabajos distintos, y por eso van juntos pero no revueltos:
+   arriba QUÉ DÍA ES —que es lo que le da valor al "hoy" del título— y abajo
+   CUÁNDO SE REVISÓ el catálogo, que es lo que delata una corrida caída.
+
+   Todo en hora de SANTIAGO y no en la del visitante. El sitio habla de una
+   sola ciudad, y si se usara la hora del aparato, alguien mirando desde Madrid
+   vería su propia tarde contra un catálogo revisado en la mañana chilena y el
+   punto de estado mentiría por cuatro husos. */
+const DIA_SCL = (d = new Date()) =>
+  // en-CA formatea AAAA-MM-DD, que es justo la forma en que viene `generado`.
+  // Comparar dos textos evita parsear una fecha sin huso, que JS interpreta
+  // como local y correría el día entero para quien no esté en Chile.
+  new Intl.DateTimeFormat("en-CA", {timeZone:"America/Santiago",
+    year:"numeric", month:"2-digit", day:"2-digit"}).format(d);
+
+function pintarSello(){
+  const sello = document.getElementById("sello-hoy");
+  const ahora = new Date();
+  const fmt = o => new Intl.DateTimeFormat(localeDe(),
+    {timeZone:"America/Santiago", ...o}).format(ahora);
+
+  /* Armada en dos pedazos para sacarle la coma que mete Intl: "miércoles, 26
+     de agosto" no es como se escribe una fecha en Chile, y esta es la fecha
+     más grande del sitio. Los tres idiomas quedan bien: "Wednesday 26 August",
+     "quarta-feira 26 de agosto". */
+  const fecha = `${fmt({weekday:"long"})} ${fmt({day:"numeric", month:"long"})}`;
+  const gen = window.generadoEventos || "";
+
+  /* Tres estados y no dos: "de ayer" no es lo mismo que "vieja". Una corrida
+     que falló una vez se recupera sola al otro día; una de hace cinco es una
+     fuente caída que nadie fue a mirar. El punto los separa de un vistazo y el
+     texto lo dice con palabras, porque un color no se lee en voz alta. */
+  let frescura = "sin", estado = t("pSelloSin");
+  if(gen){
+    const dia = gen.slice(0, 10), hora = gen.slice(11, 16);
+    const ayer = DIA_SCL(new Date(Date.now() - 864e5));
+    if(dia === DIA_SCL())     { frescura = "hoy";   estado = t("pSelloHoy").replace("{h}", hora); }
+    else if(dia === ayer)     { frescura = "ayer";  estado = t("pSelloAyer").replace("{h}", hora); }
+    else {
+      // Se arma desde las partes y se formatea en UTC para que el día impreso
+      // sea EXACTAMENTE el que dice el archivo, sin correrse por el huso.
+      const [a, m, d] = dia.split("-").map(Number);
+      frescura = "vieja";
+      estado = t("pSelloViejo").replace("{f}", new Intl.DateTimeFormat(localeDe(),
+        {day:"numeric", month:"long", timeZone:"UTC"}).format(Date.UTC(a, m - 1, d)));
+    }
+  }
+
+  sello.dataset.frescura = frescura;
+  sello.innerHTML =
+    `<span class="medalla" aria-hidden="true">${carita("chinchilla","var(--c-cultura)",26,TINTA_MEDALLA)}</span>
+     <span class="sello-fecha">${escapar(fecha)}
+       <span class="sello-reloj"><span id="sello-hora">--:--</span><span
+         class="sello-seg" aria-hidden="true"><i id="sello-seg"></i></span></span></span>
+     <span class="sello-estado"><span class="sello-punto" aria-hidden="true"></span>${escapar(estado)}</span>`;
+  sello.hidden = false;
+  latir();
+}
+
+/* El reloj y la regla de los segundos. Un solo intervalo para los dos, y toca
+   solo dos nodos: reescribir el sello entero cada segundo botaría el foco de
+   quien esté navegando con teclado. */
+function latir(){
+  const h = document.getElementById("sello-hora"), s = document.getElementById("sello-seg");
+  if(!h) return;
+  const d = new Date();
+  h.textContent = new Intl.DateTimeFormat(localeDe(), {timeZone:"America/Santiago",
+    hour:"2-digit", minute:"2-digit", hour12:false}).format(d);
+  if(s) s.parentElement.style.setProperty("--seg", d.getSeconds() / 60);
+}
+setInterval(latir, 1000);
+
 function pintarDatos(evs){
+  /* Segunda pasada del sello: pintarPortada() lo dibuja antes de pedir el JSON
+     —para que el hero no nazca cojo— y ahí todavía no existe la marca de la
+     corrida. Recién acá se sabe cuándo se revisó el catálogo. */
+  pintarSello();
   const hoy = evs.filter(ev => sesionEnRango(ev, "hoy"));
   const gratis = evs.filter(ev => ev.gratis);
   const fuentes = new Set(evs.map(ev => ev.fuente)).size;
