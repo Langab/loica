@@ -1,7 +1,7 @@
 {
- "generado": "2026-08-26T06:47:57",
- "total": 639,
- "locales": 1782,
+ "generado": "2026-08-26T07:55:18",
+ "total": 636,
+ "locales": 1779,
  "bancos": [
   [
    "bancochile",
@@ -33929,42 +33929,6 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
-   "comercio": "China Wok Arauco Maipú",
-   "categoria": "comida_rapida",
-   "cocina": "asiatica",
-   "region": "Metropolitana",
-   "sitio_web": "http://www.chinawok.cl",
-   "porcentaje": null,
-   "oferta": "2x1",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": null,
-   "tarjetas": [],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "2 woky pack mongoliana a $6180 (2 woky pack de carne mongoliana con arroz chaunfa + 2 bebidas regulares) o 2 woki pack chapsui de ave a $5790 (2 woky pack chapsui de ave con arroz chaunfa + 2 bebidas regulares) Sólo en tiendas.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/china-wok-17",
-   "logo": "https://bci-cdn.azureedge.net/uploads/2987396c-36c8-4f4c-a706-f96ca93782f4/R320x240/chinawok.png",
-   "capturado": "",
-   "id": "bce107ec0108",
-   "locales": [
-    {
-     "direccion": "Av. Américo Vespucio 399 Loc. 19 (Arauco Maipú)",
-     "comuna": "Maipú",
-     "lat": -33.4833453,
-     "lon": -70.7497514,
-     "precision": "calle",
-     "telefono": "2-27453326",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Maipú"
-   ]
-  },
-  {
-   "banco_id": "bci",
-   "banco": "Bci",
    "comercio": "China Wok Costanera Center",
    "categoria": "comida_rapida",
    "cocina": "asiatica",
@@ -34215,6 +34179,42 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
+   "comercio": "China Wok Mall Plaza Oeste",
+   "categoria": "comida_rapida",
+   "cocina": "asiatica",
+   "region": "Metropolitana",
+   "sitio_web": "http://www.chinawok.cl",
+   "porcentaje": null,
+   "oferta": "2x1",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "2 woky pack mongoliana a $6180 (2 woky pack de carne mongoliana con arroz chaunfa + 2 bebidas regulares) o 2 woki pack chapsui de ave a $5790 (2 woky pack chapsui de ave con arroz chaunfa + 2 bebidas regulares) Sólo en tiendas.",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/china-wok-9",
+   "logo": "https://bci-cdn.azureedge.net/uploads/c0ea481f-8b31-4f7f-89b5-9adcc601f0ce/R320x240/chinawok.png",
+   "capturado": "",
+   "id": "1a8c4ed423ca",
+   "locales": [
+    {
+     "direccion": "Av. Américo Vespucio 1501 -Local B-310 (Plaza Oeste)",
+     "comuna": "Cerrillos",
+     "lat": -33.5148451,
+     "lon": -70.7180172,
+     "precision": "fuente",
+     "telefono": "2-25701772",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Cerrillos"
+   ]
+  },
+  {
+   "banco_id": "bci",
+   "banco": "Bci",
    "comercio": "China Wok Mall Plaza Sur",
    "categoria": "comida_rapida",
    "cocina": "asiatica",
@@ -34354,42 +34354,6 @@
    ],
    "comunas": [
     "Las Condes"
-   ]
-  },
-  {
-   "banco_id": "bci",
-   "banco": "Bci",
-   "comercio": "China Wok Recoleta",
-   "categoria": "comida_rapida",
-   "cocina": "asiatica",
-   "region": "Metropolitana",
-   "sitio_web": "http://www.chinawok.cl",
-   "porcentaje": null,
-   "oferta": "2x1",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": null,
-   "tarjetas": [],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "2 woky pack mongoliana a $6180 (2 woky pack de carne mongoliana con arroz chaunfa + 2 bebidas regulares) o 2 woki pack chapsui de ave a $5790 (2 woky pack chapsui de ave con arroz chaunfa + 2 bebidas regulares) Sólo en tiendas.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/china-wok-18",
-   "logo": "https://bci-cdn.azureedge.net/uploads/acecfccc-0aed-4d9a-98f3-96f85ec8a569/R320x240/chinawok.png",
-   "capturado": "",
-   "id": "8b41bf924714",
-   "locales": [
-    {
-     "direccion": "Eusebio Lillo 440-446 Loc. 10 -1er Nivel Patronato",
-     "comuna": "Recoleta",
-     "lat": -33.42871616,
-     "lon": -70.6444889,
-     "precision": "fuente",
-     "telefono": "2-25123800",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Recoleta"
    ]
   },
   {
@@ -35138,78 +35102,6 @@
    ],
    "comunas": [
     "Maipú"
-   ]
-  },
-  {
-   "banco_id": "bci",
-   "banco": "Bci",
-   "comercio": "PizzaPizza Maipú Poniente",
-   "categoria": "comida_rapida",
-   "cocina": "italiana",
-   "region": "Metropolitana",
-   "sitio_web": "http://www.pizzapizza.cl/",
-   "porcentaje": null,
-   "oferta": "",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": null,
-   "tarjetas": [],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-15",
-   "logo": "https://bci-cdn.azureedge.net/uploads/ac2a988f-63ed-4ddf-a40b-91590e0c64dd/original/imagen.jpg",
-   "capturado": "",
-   "id": "c64cc3ef8cbc",
-   "locales": [
-    {
-     "direccion": "3 Poniente 0876",
-     "comuna": "Maipú",
-     "lat": -33.012944,
-     "lon": -71.553406,
-     "precision": "fuente",
-     "telefono": "2 2942 3999",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Maipú"
-   ]
-  },
-  {
-   "banco_id": "bci",
-   "banco": "Bci",
-   "comercio": "PizzaPizza Peñalolén",
-   "categoria": "comida_rapida",
-   "cocina": "italiana",
-   "region": "Metropolitana",
-   "sitio_web": "http://www.pizzapizza.cl/",
-   "porcentaje": null,
-   "oferta": "",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": null,
-   "tarjetas": [],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-14",
-   "logo": "https://bci-cdn.azureedge.net/uploads/19a27e67-d4c2-4a79-92a2-a07610882369/original/imagen.jpg",
-   "capturado": "",
-   "id": "51418bad7124",
-   "locales": [
-    {
-     "direccion": "Los Presidentes 7640",
-     "comuna": "Peñalolén",
-     "lat": -33.486479,
-     "lon": -70.5572526,
-     "precision": "fuente",
-     "telefono": "2 2758 1212",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Peñalolén"
    ]
   },
   {
