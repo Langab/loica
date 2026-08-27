@@ -1,7 +1,7 @@
 {
- "generado": "2026-08-27T18:15:18",
- "total": 637,
- "locales": 1779,
+ "generado": "2026-08-27T17:57:15",
+ "total": 641,
+ "locales": 1783,
  "bancos": [
   [
    "bancochile",
@@ -34243,6 +34243,42 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
+   "comercio": "China Wok Mall Plaza Oeste",
+   "categoria": "comida_rapida",
+   "cocina": "asiatica",
+   "region": "Metropolitana",
+   "sitio_web": "http://www.chinawok.cl",
+   "porcentaje": null,
+   "oferta": "2x1",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "2 woky pack mongoliana a $6180 (2 woky pack de carne mongoliana con arroz chaunfa + 2 bebidas regulares) o 2 woki pack chapsui de ave a $5790 (2 woky pack chapsui de ave con arroz chaunfa + 2 bebidas regulares) Sólo en tiendas.",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/china-wok-9",
+   "logo": "https://bci-cdn.azureedge.net/uploads/c0ea481f-8b31-4f7f-89b5-9adcc601f0ce/R320x240/chinawok.png",
+   "capturado": "",
+   "id": "1a8c4ed423ca",
+   "locales": [
+    {
+     "direccion": "Av. Américo Vespucio 1501 -Local B-310 (Plaza Oeste)",
+     "comuna": "Cerrillos",
+     "lat": -33.5148451,
+     "lon": -70.7180172,
+     "precision": "fuente",
+     "telefono": "2-25701772",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Cerrillos"
+   ]
+  },
+  {
+   "banco_id": "bci",
+   "banco": "Bci",
    "comercio": "China Wok Mall Plaza Sur",
    "categoria": "comida_rapida",
    "cocina": "asiatica",
@@ -34310,6 +34346,42 @@
    ],
    "comunas": [
     "Puente Alto"
+   ]
+  },
+  {
+   "banco_id": "bci",
+   "banco": "Bci",
+   "comercio": "China Wok Mall Plaza Vespucio",
+   "categoria": "comida_rapida",
+   "cocina": "asiatica",
+   "region": "Metropolitana",
+   "sitio_web": "http://www.chinawok.cl",
+   "porcentaje": null,
+   "oferta": "2x1",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "2 woky pack mongoliana a $6180 (2 woky pack de carne mongoliana con arroz chaunfa + 2 bebidas regulares) o 2 woki pack chapsui de ave a $5790 (2 woky pack chapsui de ave con arroz chaunfa + 2 bebidas regulares) Sólo en tiendas.",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/china-wok-10",
+   "logo": "https://bci-cdn.azureedge.net/uploads/52b85085-cc3d-4ae6-b95e-9d6bb78dc0dc/R320x240/chinawok.png",
+   "capturado": "",
+   "id": "47202b6388b6",
+   "locales": [
+    {
+     "direccion": "Av.Vicuña Mackenna 7110 loc FC -212 (Vespucio)",
+     "comuna": "La Florida",
+     "lat": -33.5622191,
+     "lon": -70.5851344,
+     "precision": "fuente",
+     "telefono": "2-29795947",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "La Florida"
    ]
   },
   {
@@ -35027,6 +35099,42 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
+   "comercio": "PizzaPizza Las Condes",
+   "categoria": "comida_rapida",
+   "cocina": "italiana",
+   "region": "Metropolitana",
+   "sitio_web": "http://www.pizzapizza.cl/",
+   "porcentaje": null,
+   "oferta": "",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-6",
+   "logo": "https://bci-cdn.azureedge.net/uploads/37f57263-4f7d-4df9-b7c4-a5dd4bef9cb3/original/imagen.jpg",
+   "capturado": "",
+   "id": "981457e51cd4",
+   "locales": [
+    {
+     "direccion": "Av. Las Condes 9081",
+     "comuna": "Las Condes",
+     "lat": -33.3926213,
+     "lon": -70.5436229,
+     "precision": "fuente",
+     "telefono": "2 2243 3333",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Las Condes"
+   ]
+  },
+  {
+   "banco_id": "bci",
+   "banco": "Bci",
    "comercio": "PizzaPizza Macul",
    "categoria": "comida_rapida",
    "cocina": "italiana",
@@ -35238,6 +35346,42 @@
    ],
    "comunas": [
     "Quilicura"
+   ]
+  },
+  {
+   "banco_id": "bci",
+   "banco": "Bci",
+   "comercio": "PizzaPizza San Miguel",
+   "categoria": "comida_rapida",
+   "cocina": "italiana",
+   "region": "Metropolitana",
+   "sitio_web": "http://www.pizzapizza.cl/",
+   "porcentaje": null,
+   "oferta": "",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-22",
+   "logo": "https://bci-cdn.azureedge.net/uploads/f6889e97-376a-477c-91c9-42503ae316ce/original/imagen.jpg",
+   "capturado": "",
+   "id": "642248791cbb",
+   "locales": [
+    {
+     "direccion": "Gran Avenida 5598",
+     "comuna": "San Miguel",
+     "lat": -33.5045432,
+     "lon": -70.6555543,
+     "precision": "calle",
+     "telefono": "2 2944 3535",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "San Miguel"
    ]
   },
   {
