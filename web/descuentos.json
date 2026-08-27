@@ -1,6 +1,6 @@
 {
- "generado": "2026-08-26T08:24:44",
- "total": 636,
+ "generado": "2026-08-27T17:23:12",
+ "total": 637,
  "locales": 1779,
  "bancos": [
   [
@@ -81,12 +81,12 @@
  ],
  "por_dia": {
   "miercoles": 227,
-  "sabado": 127,
+  "sabado": 128,
   "jueves": 183,
   "viernes": 137,
-  "lunes": 195,
-  "martes": 239,
-  "domingo": 100
+  "lunes": 196,
+  "martes": 238,
+  "domingo": 101
  },
  "descuentos": [
   {
@@ -12768,7 +12768,7 @@
    "dias": [
     "martes"
    ],
-   "vigencia_hasta": "2026-08-31",
+   "vigencia_hasta": "2026-09-30",
    "tarjetas": [
     "visa-credito-infinite",
     "visa-credito-signature",
@@ -12782,7 +12782,7 @@
    ],
    "modalidad": "",
    "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 31 de agosto de 2026, pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "condiciones": "Promoción válida desde el 01 al 30 de septiembre de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/pescados-capitales",
    "logo": "https://assets.bancochile.cl/uploads/000/077/278/5b619a92-e3a1-412c-bb51-66837d96e64f/original/logo-web-Pescados-Capitales.jpg",
    "capturado": "",
@@ -13696,7 +13696,7 @@
    "dias": [
     "martes"
    ],
-   "vigencia_hasta": "2026-08-31",
+   "vigencia_hasta": "2026-09-30",
    "tarjetas": [
     "visa-credito-infinite",
     "visa-credito-signature",
@@ -13710,7 +13710,7 @@
    ],
    "modalidad": "ambas",
    "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 31 de agosto de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "condiciones": "Promoción válida desde el 01 al 30 de septiembre de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/sakura-visa",
    "logo": "https://assets.bancochile.cl/uploads/000/087/554/b757933f-7a02-4a3a-92f5-90253a276ce1/original/banner-web-Sakura.jpg",
    "capturado": "",
@@ -13856,9 +13856,9 @@
    "oferta": "",
    "tope": 50000,
    "dias": [
-    "martes"
+    "lunes"
    ],
-   "vigencia_hasta": "2026-08-31",
+   "vigencia_hasta": "2026-09-30",
    "tarjetas": [
     "visa-credito-infinite",
     "visa-credito-signature",
@@ -13871,8 +13871,8 @@
     "visa-credito-gold"
    ],
    "modalidad": "",
-   "segmentado": true,
-   "condiciones": "Promoción válida desde el 01 al 31 de agosto de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "segmentado": false,
+   "condiciones": "Promoción válida desde el 01 al 30 de septiembre de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/santa-brasa-visa",
    "logo": "https://assets.bancochile.cl/uploads/000/079/907/93069146-314a-4571-85b9-3c39fd04e31a/original/logo-web-santa-brasa.jpg",
    "capturado": "",
@@ -19338,9 +19338,11 @@
    "oferta": "",
    "tope": null,
    "dias": [
-    "viernes"
+    "viernes",
+    "sabado",
+    "domingo"
    ],
-   "vigencia_hasta": "2026-12-31",
+   "vigencia_hasta": "2026-08-30",
    "tarjetas": [
     "visa-credito-infinite",
     "visa-credito-signature",
@@ -19357,7 +19359,7 @@
    ],
    "modalidad": "presencial",
    "segmentado": false,
-   "condiciones": "Promoción válida hasta el 31 de diciembre de 2026. Beneficio es válido en locales que se encuentren en Chile, para clientes que paguen en tiendas Starbucks con Tarjetas de Débito o Crédito Banco de Chile (incluye Banco Edwards). Descuento no aplica a extras agregados a las bebidas. No válido en aeropuerto. La entrega de los beneficios se realiza en el punto de venta y es de exclusiva responsabilidad de Starbucks Coffee Chile S.A., no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni en la ulterior atención que ello demande. Infórmese sobre la garantía estatal de los depósitos en su Banco o en www.cmfchile.cl",
+   "condiciones": "Promoción válida hasta el 30 de agosto de 2026. Beneficio es válido en locales que se encuentren en Chile, para clientes que paguen en tiendas Starbucks con Tarjetas de Débito o Crédito Banco de Chile (incluye Banco Edwards). Descuento no aplica a extras agregados a las bebidas. No válido en aeropuerto. La entrega de los beneficios se realiza en el punto de venta y es de exclusiva responsabilidad de Starbucks Coffee Chile S.A., no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni en la ulterior atención que ello demande. Infórmese sobre la garantía estatal de los depósitos en su Banco o en www.cmfchile.cl",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/starbucks",
    "logo": "https://assets.bancochile.cl/uploads/000/097/273/11de5601-b93c-472f-8c17-ade7ffb01f6a/original/logo-web-Starbucks.jpg",
    "capturado": "",
@@ -32186,6 +32188,32 @@
    ]
   },
   {
+   "banco_id": "entel",
+   "banco": "Entel",
+   "comercio": "Viña MontGras",
+   "categoria": "restaurantes",
+   "cocina": "bar",
+   "region": "Todo Chile",
+   "sitio_web": "",
+   "porcentaje": 20,
+   "oferta": "",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "entel"
+   ],
+   "modalidad": "online",
+   "segmentado": false,
+   "condiciones": "15% dcto. en enoturimo y 20% dcto. en compras online",
+   "url": "https://www.entel.cl/beneficios/descuentos/vina-montgras",
+   "logo": "",
+   "capturado": "",
+   "id": "cae647b544db",
+   "locales": [],
+   "comunas": []
+  },
+  {
    "banco_id": "bancochile",
    "banco": "Banco de Chile",
    "comercio": "Wayk´U",
@@ -33929,6 +33957,42 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
+   "comercio": "China Wok Arauco Maipú",
+   "categoria": "comida_rapida",
+   "cocina": "asiatica",
+   "region": "Metropolitana",
+   "sitio_web": "http://www.chinawok.cl",
+   "porcentaje": null,
+   "oferta": "2x1",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "2 woky pack mongoliana a $6180 (2 woky pack de carne mongoliana con arroz chaunfa + 2 bebidas regulares) o 2 woki pack chapsui de ave a $5790 (2 woky pack chapsui de ave con arroz chaunfa + 2 bebidas regulares) Sólo en tiendas.",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/china-wok-17",
+   "logo": "https://bci-cdn.azureedge.net/uploads/2987396c-36c8-4f4c-a706-f96ca93782f4/R320x240/chinawok.png",
+   "capturado": "",
+   "id": "bce107ec0108",
+   "locales": [
+    {
+     "direccion": "Av. Américo Vespucio 399 Loc. 19 (Arauco Maipú)",
+     "comuna": "Maipú",
+     "lat": -33.4833453,
+     "lon": -70.7497514,
+     "precision": "calle",
+     "telefono": "2-27453326",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Maipú"
+   ]
+  },
+  {
+   "banco_id": "bci",
+   "banco": "Bci",
    "comercio": "China Wok Costanera Center",
    "categoria": "comida_rapida",
    "cocina": "asiatica",
@@ -34179,42 +34243,6 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
-   "comercio": "China Wok Mall Plaza Oeste",
-   "categoria": "comida_rapida",
-   "cocina": "asiatica",
-   "region": "Metropolitana",
-   "sitio_web": "http://www.chinawok.cl",
-   "porcentaje": null,
-   "oferta": "2x1",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": null,
-   "tarjetas": [],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "2 woky pack mongoliana a $6180 (2 woky pack de carne mongoliana con arroz chaunfa + 2 bebidas regulares) o 2 woki pack chapsui de ave a $5790 (2 woky pack chapsui de ave con arroz chaunfa + 2 bebidas regulares) Sólo en tiendas.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/china-wok-9",
-   "logo": "https://bci-cdn.azureedge.net/uploads/c0ea481f-8b31-4f7f-89b5-9adcc601f0ce/R320x240/chinawok.png",
-   "capturado": "",
-   "id": "1a8c4ed423ca",
-   "locales": [
-    {
-     "direccion": "Av. Américo Vespucio 1501 -Local B-310 (Plaza Oeste)",
-     "comuna": "Cerrillos",
-     "lat": -33.5148451,
-     "lon": -70.7180172,
-     "precision": "fuente",
-     "telefono": "2-25701772",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Cerrillos"
-   ]
-  },
-  {
-   "banco_id": "bci",
-   "banco": "Bci",
    "comercio": "China Wok Mall Plaza Sur",
    "categoria": "comida_rapida",
    "cocina": "asiatica",
@@ -34287,42 +34315,6 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
-   "comercio": "China Wok Mall Plaza Vespucio",
-   "categoria": "comida_rapida",
-   "cocina": "asiatica",
-   "region": "Metropolitana",
-   "sitio_web": "http://www.chinawok.cl",
-   "porcentaje": null,
-   "oferta": "2x1",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": null,
-   "tarjetas": [],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "2 woky pack mongoliana a $6180 (2 woky pack de carne mongoliana con arroz chaunfa + 2 bebidas regulares) o 2 woki pack chapsui de ave a $5790 (2 woky pack chapsui de ave con arroz chaunfa + 2 bebidas regulares) Sólo en tiendas.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/china-wok-10",
-   "logo": "https://bci-cdn.azureedge.net/uploads/52b85085-cc3d-4ae6-b95e-9d6bb78dc0dc/R320x240/chinawok.png",
-   "capturado": "",
-   "id": "47202b6388b6",
-   "locales": [
-    {
-     "direccion": "Av.Vicuña Mackenna 7110 loc FC -212 (Vespucio)",
-     "comuna": "La Florida",
-     "lat": -33.5622191,
-     "lon": -70.5851344,
-     "precision": "fuente",
-     "telefono": "2-29795947",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "La Florida"
-   ]
-  },
-  {
-   "banco_id": "bci",
-   "banco": "Bci",
    "comercio": "China Wok Parque Arauco",
    "categoria": "comida_rapida",
    "cocina": "asiatica",
@@ -34354,6 +34346,42 @@
    ],
    "comunas": [
     "Las Condes"
+   ]
+  },
+  {
+   "banco_id": "bci",
+   "banco": "Bci",
+   "comercio": "China Wok Recoleta",
+   "categoria": "comida_rapida",
+   "cocina": "asiatica",
+   "region": "Metropolitana",
+   "sitio_web": "http://www.chinawok.cl",
+   "porcentaje": null,
+   "oferta": "2x1",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "2 woky pack mongoliana a $6180 (2 woky pack de carne mongoliana con arroz chaunfa + 2 bebidas regulares) o 2 woki pack chapsui de ave a $5790 (2 woky pack chapsui de ave con arroz chaunfa + 2 bebidas regulares) Sólo en tiendas.",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/china-wok-18",
+   "logo": "https://bci-cdn.azureedge.net/uploads/acecfccc-0aed-4d9a-98f3-96f85ec8a569/R320x240/chinawok.png",
+   "capturado": "",
+   "id": "8b41bf924714",
+   "locales": [
+    {
+     "direccion": "Eusebio Lillo 440-446 Loc. 10 -1er Nivel Patronato",
+     "comuna": "Recoleta",
+     "lat": -33.42871616,
+     "lon": -70.6444889,
+     "precision": "fuente",
+     "telefono": "2-25123800",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Recoleta"
    ]
   },
   {
@@ -34783,6 +34811,42 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
+   "comercio": "PizzaPizza Huechuraba",
+   "categoria": "comida_rapida",
+   "cocina": "italiana",
+   "region": "Metropolitana",
+   "sitio_web": "http://www.pizzapizza.cl/",
+   "porcentaje": null,
+   "oferta": "",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-13",
+   "logo": "https://bci-cdn.azureedge.net/uploads/c8e46226-3716-4d2a-b3e3-51da708a67c1/original/imagen.jpg",
+   "capturado": "",
+   "id": "2112b445bfb0",
+   "locales": [
+    {
+     "direccion": "Pedro Fontova 7281",
+     "comuna": "Huechuraba",
+     "lat": -33.3550624,
+     "lon": -70.67051839999999,
+     "precision": "fuente",
+     "telefono": "2 2948 8888",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Huechuraba"
+   ]
+  },
+  {
+   "banco_id": "bci",
+   "banco": "Bci",
    "comercio": "PizzaPizza Independencia",
    "categoria": "comida_rapida",
    "cocina": "italiana",
@@ -34963,42 +35027,6 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
-   "comercio": "PizzaPizza Las Condes",
-   "categoria": "comida_rapida",
-   "cocina": "italiana",
-   "region": "Metropolitana",
-   "sitio_web": "http://www.pizzapizza.cl/",
-   "porcentaje": null,
-   "oferta": "",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": null,
-   "tarjetas": [],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-6",
-   "logo": "https://bci-cdn.azureedge.net/uploads/37f57263-4f7d-4df9-b7c4-a5dd4bef9cb3/original/imagen.jpg",
-   "capturado": "",
-   "id": "981457e51cd4",
-   "locales": [
-    {
-     "direccion": "Av. Las Condes 9081",
-     "comuna": "Las Condes",
-     "lat": -33.3926213,
-     "lon": -70.5436229,
-     "precision": "fuente",
-     "telefono": "2 2243 3333",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Las Condes"
-   ]
-  },
-  {
-   "banco_id": "bci",
-   "banco": "Bci",
    "comercio": "PizzaPizza Macul",
    "categoria": "comida_rapida",
    "cocina": "italiana",
@@ -35107,6 +35135,42 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
+   "comercio": "PizzaPizza Peñalolén",
+   "categoria": "comida_rapida",
+   "cocina": "italiana",
+   "region": "Metropolitana",
+   "sitio_web": "http://www.pizzapizza.cl/",
+   "porcentaje": null,
+   "oferta": "",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-14",
+   "logo": "https://bci-cdn.azureedge.net/uploads/19a27e67-d4c2-4a79-92a2-a07610882369/original/imagen.jpg",
+   "capturado": "",
+   "id": "51418bad7124",
+   "locales": [
+    {
+     "direccion": "Los Presidentes 7640",
+     "comuna": "Peñalolén",
+     "lat": -33.486479,
+     "lon": -70.5572526,
+     "precision": "fuente",
+     "telefono": "2 2758 1212",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Peñalolén"
+   ]
+  },
+  {
+   "banco_id": "bci",
+   "banco": "Bci",
    "comercio": "PizzaPizza Providencia",
    "categoria": "comida_rapida",
    "cocina": "italiana",
@@ -35174,42 +35238,6 @@
    ],
    "comunas": [
     "Quilicura"
-   ]
-  },
-  {
-   "banco_id": "bci",
-   "banco": "Bci",
-   "comercio": "PizzaPizza San Miguel",
-   "categoria": "comida_rapida",
-   "cocina": "italiana",
-   "region": "Metropolitana",
-   "sitio_web": "http://www.pizzapizza.cl/",
-   "porcentaje": null,
-   "oferta": "",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": null,
-   "tarjetas": [],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-22",
-   "logo": "https://bci-cdn.azureedge.net/uploads/f6889e97-376a-477c-91c9-42503ae316ce/original/imagen.jpg",
-   "capturado": "",
-   "id": "642248791cbb",
-   "locales": [
-    {
-     "direccion": "Gran Avenida 5598",
-     "comuna": "San Miguel",
-     "lat": -33.5045432,
-     "lon": -70.6555543,
-     "precision": "calle",
-     "telefono": "2 2944 3535",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "San Miguel"
    ]
   },
   {
