@@ -1,5 +1,5 @@
 {
- "generado": "2026-08-28T18:16:01",
+ "generado": "2026-08-28T19:25:33",
  "total": 638,
  "locales": 1780,
  "bancos": [
@@ -34399,7 +34399,7 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
-   "comercio": "China Wok Recoleta",
+   "comercio": "China Wok Parque Arauco",
    "categoria": "comida_rapida",
    "cocina": "asiatica",
    "region": "Metropolitana",
@@ -34413,23 +34413,23 @@
    "modalidad": "",
    "segmentado": false,
    "condiciones": "2 woky pack mongoliana a $6180 (2 woky pack de carne mongoliana con arroz chaunfa + 2 bebidas regulares) o 2 woki pack chapsui de ave a $5790 (2 woky pack chapsui de ave con arroz chaunfa + 2 bebidas regulares) Sólo en tiendas.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/china-wok-18",
-   "logo": "https://bci-cdn.azureedge.net/uploads/acecfccc-0aed-4d9a-98f3-96f85ec8a569/R320x240/chinawok.png",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/china-wok-16",
+   "logo": "https://bci-cdn.azureedge.net/uploads/68e2d8e2-5026-48e2-bcec-b6c3f56c405f/R320x240/chinawok.png",
    "capturado": "",
-   "id": "8b41bf924714",
+   "id": "a6b17f8de6a0",
    "locales": [
     {
-     "direccion": "Eusebio Lillo 440-446 Loc. 10 -1er Nivel Patronato",
-     "comuna": "Recoleta",
-     "lat": -33.42871616,
-     "lon": -70.6444889,
+     "direccion": "Av. Kennedy 5413 Loc 604 (Parque Arauco)",
+     "comuna": "Las Condes",
+     "lat": -33.4019756,
+     "lon": -70.5805178,
      "precision": "fuente",
-     "telefono": "2-25123800",
+     "telefono": "2-25845312",
      "origen": ""
     }
    ],
    "comunas": [
-    "Recoleta"
+    "Las Condes"
    ]
   },
   {
@@ -34859,42 +34859,6 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
-   "comercio": "PizzaPizza Huechuraba",
-   "categoria": "comida_rapida",
-   "cocina": "italiana",
-   "region": "Metropolitana",
-   "sitio_web": "http://www.pizzapizza.cl/",
-   "porcentaje": null,
-   "oferta": "",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": null,
-   "tarjetas": [],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-13",
-   "logo": "https://bci-cdn.azureedge.net/uploads/c8e46226-3716-4d2a-b3e3-51da708a67c1/original/imagen.jpg",
-   "capturado": "",
-   "id": "2112b445bfb0",
-   "locales": [
-    {
-     "direccion": "Pedro Fontova 7281",
-     "comuna": "Huechuraba",
-     "lat": -33.3550624,
-     "lon": -70.67051839999999,
-     "precision": "fuente",
-     "telefono": "2 2948 8888",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Huechuraba"
-   ]
-  },
-  {
-   "banco_id": "bci",
-   "banco": "Bci",
    "comercio": "PizzaPizza Independencia",
    "categoria": "comida_rapida",
    "cocina": "italiana",
@@ -35173,6 +35137,42 @@
      "lon": -70.75770436923077,
      "precision": "calle",
      "telefono": "&nbsp;2 2534 2020",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Maipú"
+   ]
+  },
+  {
+   "banco_id": "bci",
+   "banco": "Bci",
+   "comercio": "PizzaPizza Maipú Poniente",
+   "categoria": "comida_rapida",
+   "cocina": "italiana",
+   "region": "Metropolitana",
+   "sitio_web": "http://www.pizzapizza.cl/",
+   "porcentaje": null,
+   "oferta": "",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-15",
+   "logo": "https://bci-cdn.azureedge.net/uploads/ac2a988f-63ed-4ddf-a40b-91590e0c64dd/original/imagen.jpg",
+   "capturado": "",
+   "id": "c64cc3ef8cbc",
+   "locales": [
+    {
+     "direccion": "3 Poniente 0876",
+     "comuna": "Maipú",
+     "lat": -33.012944,
+     "lon": -71.553406,
+     "precision": "fuente",
+     "telefono": "2 2942 3999",
      "origen": ""
     }
    ],
