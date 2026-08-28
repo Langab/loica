@@ -1,7 +1,7 @@
 {
- "generado": "2026-08-28T19:25:33",
- "total": 638,
- "locales": 1780,
+ "generado": "2026-08-28T19:00:44",
+ "total": 639,
+ "locales": 1781,
  "bancos": [
   [
    "bancochile",
@@ -34005,6 +34005,42 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
+   "comercio": "China Wok Arauco Maipú",
+   "categoria": "comida_rapida",
+   "cocina": "asiatica",
+   "region": "Metropolitana",
+   "sitio_web": "http://www.chinawok.cl",
+   "porcentaje": null,
+   "oferta": "2x1",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "2 woky pack mongoliana a $6180 (2 woky pack de carne mongoliana con arroz chaunfa + 2 bebidas regulares) o 2 woki pack chapsui de ave a $5790 (2 woky pack chapsui de ave con arroz chaunfa + 2 bebidas regulares) Sólo en tiendas.",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/china-wok-17",
+   "logo": "https://bci-cdn.azureedge.net/uploads/2987396c-36c8-4f4c-a706-f96ca93782f4/R320x240/chinawok.png",
+   "capturado": "",
+   "id": "bce107ec0108",
+   "locales": [
+    {
+     "direccion": "Av. Américo Vespucio 399 Loc. 19 (Arauco Maipú)",
+     "comuna": "Maipú",
+     "lat": -33.4833453,
+     "lon": -70.7497514,
+     "precision": "calle",
+     "telefono": "2-27453326",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Maipú"
+   ]
+  },
+  {
+   "banco_id": "bci",
+   "banco": "Bci",
    "comercio": "China Wok Costanera Center",
    "categoria": "comida_rapida",
    "cocina": "asiatica",
@@ -34859,6 +34895,42 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
+   "comercio": "PizzaPizza Huechuraba",
+   "categoria": "comida_rapida",
+   "cocina": "italiana",
+   "region": "Metropolitana",
+   "sitio_web": "http://www.pizzapizza.cl/",
+   "porcentaje": null,
+   "oferta": "",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-13",
+   "logo": "https://bci-cdn.azureedge.net/uploads/c8e46226-3716-4d2a-b3e3-51da708a67c1/original/imagen.jpg",
+   "capturado": "",
+   "id": "2112b445bfb0",
+   "locales": [
+    {
+     "direccion": "Pedro Fontova 7281",
+     "comuna": "Huechuraba",
+     "lat": -33.3550624,
+     "lon": -70.67051839999999,
+     "precision": "fuente",
+     "telefono": "2 2948 8888",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Huechuraba"
+   ]
+  },
+  {
+   "banco_id": "bci",
+   "banco": "Bci",
    "comercio": "PizzaPizza Independencia",
    "categoria": "comida_rapida",
    "cocina": "italiana",
@@ -34926,42 +34998,6 @@
    ],
    "comunas": [
     "La Cisterna"
-   ]
-  },
-  {
-   "banco_id": "bci",
-   "banco": "Bci",
-   "comercio": "PizzaPizza La Dehesa",
-   "categoria": "comida_rapida",
-   "cocina": "italiana",
-   "region": "Metropolitana",
-   "sitio_web": "http://www.pizzapizza.cl/",
-   "porcentaje": null,
-   "oferta": "",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": null,
-   "tarjetas": [],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-5",
-   "logo": "https://bci-cdn.azureedge.net/uploads/969ef88e-dce6-448e-a6a9-5de0c6e40dd5/original/imagen.jpg",
-   "capturado": "",
-   "id": "879e8d368e48",
-   "locales": [
-    {
-     "direccion": "El Rodeo 12576",
-     "comuna": "Lo Barnechea",
-     "lat": -33.353013636363634,
-     "lon": -70.52220012727273,
-     "precision": "calle",
-     "telefono": "2 2242 5777",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Lo Barnechea"
    ]
   },
   {
@@ -35075,42 +35111,6 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
-   "comercio": "PizzaPizza Macul",
-   "categoria": "comida_rapida",
-   "cocina": "italiana",
-   "region": "Metropolitana",
-   "sitio_web": "http://www.pizzapizza.cl/",
-   "porcentaje": null,
-   "oferta": "",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": null,
-   "tarjetas": [],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-21",
-   "logo": "https://bci-cdn.azureedge.net/uploads/6b1ff5bf-fcd8-40f4-ae17-afef3cab5416/original/imagen.jpg",
-   "capturado": "",
-   "id": "43edd700fb5b",
-   "locales": [
-    {
-     "direccion": "Jose Pedro Alessandri 4470",
-     "comuna": "Macul",
-     "lat": -33.4786217,
-     "lon": -70.5982051,
-     "precision": "fuente",
-     "telefono": "2 2755 1010",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Macul"
-   ]
-  },
-  {
-   "banco_id": "bci",
-   "banco": "Bci",
    "comercio": "PizzaPizza Maipú Centro",
    "categoria": "comida_rapida",
    "cocina": "italiana",
@@ -35178,6 +35178,42 @@
    ],
    "comunas": [
     "Maipú"
+   ]
+  },
+  {
+   "banco_id": "bci",
+   "banco": "Bci",
+   "comercio": "PizzaPizza Peñalolén",
+   "categoria": "comida_rapida",
+   "cocina": "italiana",
+   "region": "Metropolitana",
+   "sitio_web": "http://www.pizzapizza.cl/",
+   "porcentaje": null,
+   "oferta": "",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-14",
+   "logo": "https://bci-cdn.azureedge.net/uploads/19a27e67-d4c2-4a79-92a2-a07610882369/original/imagen.jpg",
+   "capturado": "",
+   "id": "51418bad7124",
+   "locales": [
+    {
+     "direccion": "Los Presidentes 7640",
+     "comuna": "Peñalolén",
+     "lat": -33.486479,
+     "lon": -70.5572526,
+     "precision": "fuente",
+     "telefono": "2 2758 1212",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Peñalolén"
    ]
   },
   {
