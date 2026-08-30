@@ -1,4 +1,4 @@
-# Cola de EVENTOS en categoría 'otros' — revisión del 2026-08-29.
+# Cola de EVENTOS en categoría 'otros' — revisión del 2026-08-30.
 # Ponles la categoría que corresponda (idiomas, familia, feria, deporte,
 # fiesta, cine, teatro, musica, arte, clases, aire_libre, charla) o
 # descartar: true si no son un panorama, y pégalos en
@@ -10,149 +10,149 @@ eventos:
   # Dia de Spa - Club Recrear | Ticketplus | 2026-06-15
   4d4cbb01465b4c08:
     categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
+    nota: revisado el 2026-08-30
 
   # "Convidado de piedra" de Cía. Granitova | Ticketplus | 2026-08-27
   9cc62ab44b00dfc8:
     categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
-
-  # Visitas guiadas CEAC / Gran Sala Sinfónica Nacional | Ticketplus | 2026-08-27
-  e7826281141fc99e:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
-
-  # PRÓFUGOS: Peter Blue x Noise Mafia | Passline | 2026-08-28
-  8e66ad12bead2d55:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
+    nota: revisado el 2026-08-30
 
   # SERGEJ KRYLOV ¡EL VIRTUOSO DE EUROPA VUELVE A CHILE! | Ticketplus | 2026-08-29
   22a42808948ef6ca:
     categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
-
-  # Museo en Calma | Museo Benjamin Vicuna Mackenna | 2026-08-29
-  8586f55402c60dda:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
-
-  # Evento “33 años de los Power Rangers” | Biblioteca de Santiago | 2026-08-29
-  5363d70670af2b1e:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
-
-  # Visitas Guiadas por Montecarmelo | Municipalidad de Providencia | 2026-08-29
-  1ff89e51e6db2663:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
-
-  # VISITA GUIADA, EXPOSICIÓN ARTEFACTO JOVEN | Lo Matta Cultural (Vitacura) | 2026-08-29
-  252a4b63cd0f502d:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
-
-  # Meet and Drink La Previa | Passline | 2026-08-29
-  5396fedda5c2d0b9:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
-
-  # Meet and Drink La Previa (+18) | Passline | 2026-08-29
-  b7b493c92ee9839b:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
-
-  # Meet and Drink La Previa (+18) | Passline | 2026-08-29
-  f622a1969ae855ce:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
-
-  # Párense De Pies 2 | Passline | 2026-08-29
-  15fa384b866d6808:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
-
-  # Párense De Pies 2 | Passline | 2026-08-29
-  cff8f2426b703198:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
-
-  # CRASH KIKI BALL | Ticketplus | 2026-08-29
-  67735a05af00bb22:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
-
-  # Museo y Tour Monumental 2026 en Estadio Monumental | Puntoticket (deportes, musica  | 2026-08-29
-  bb68cfea068fdce6:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
-
-  # SO LIQUID • FREQUENCIES (+18) | Passline | 2026-08-29
-  0ce313cb94dee40f:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
-
-  # SO LIQUID • FREQUENCIES (+18) | Passline | 2026-08-29
-  717905f19db2f483:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
-
-  # COFRADIAX (+18) | Passline | 2026-08-29
-  3d6e61ab5be74fbc:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
-
-  # La Soledad de las Arañas | Ticketplus | 2026-08-29
-  3e5a01c45e19083b:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
+    nota: revisado el 2026-08-30
 
   # COFRADIAX | Passline | 2026-08-29
   9deb25c2208c7060:
     categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
-
-  # CHANCES + ELNUEVEONCE + HAMADRYAS | Passline | 2026-08-29
-  aaf3077658741ec5:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
-
-  # COFRADIAX (+18) | Passline | 2026-08-29
-  fdced57324cff217:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
-
-  # Lemontur | Passline | 2026-08-29
-  75e1b4c5fbb1e14c:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
+    nota: revisado el 2026-08-30
 
   # Lemontur | Passline | 2026-08-29
   7bf5c8737ad74637:
     categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
-
-  # TOUR EN EL CEMENTERIO CATÓLICO: HISTORIAS DEL CEMENTERIO CATÓLICO | PortalTickets (PortalDisc) | 2026-08-29
-  3497e322b2a09c15:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
-
-  # Gran Final Miss Grand Chile 2026 (+10) | Passline | 2026-08-29
-  1736485932e97e8b:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
-
-  # Gran Final Miss Grand Chile 2026 (+10) | Passline | 2026-08-29
-  36e1bf3959813484:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
-
-  # EL HUASO FILOMENO / EN LA CAPITAL - SAN MIGUEL | Ticketplus | 2026-08-29
-  61d066fb5e01f149:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
+    nota: revisado el 2026-08-30
 
   # Noche de máscaras - Edición invierno | Ticketplus | 2026-08-29
   c3f15600fd0c6ee2:
     categoria: # COMPLETAR
-    nota: revisado el 2026-08-29
+    nota: revisado el 2026-08-30
+
+  # EXPLICITO VOL.27 - SPOT FREEDOM - SÁBADO 29 DE AGOSTO - 22:00 | Ticketplus | 2026-08-29
+  ab2df86fdc920b21:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-30
+
+  # MIlano The Jungle | Passline | 2026-08-29
+  2378fb4a3bd94ae3:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-30
+
+  # Información importante | 10° Concurso de Arte Artequin 2026 | Museo Artequin | 2026-08-30
+  cc9004dc96a04d28:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-30
+
+  # Un sueño y un viaje con retorno | Museo de la Memoria y los Dere | 2026-09-01
+  95ffba7630b9af04:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-30
+
+  # El ABC de Catar Vinos llega con una nueva edición en la Casona Nemesio | Corporacion Cultural de La Rei | 2026-09-02
+  26ff5df0d25f446d:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-30
+
+  # NOCHE DE MEEPLES EN TEATRO FÁBRICA | PortalTickets — carteleras por | 2026-09-02
+  4a02eb9efbcf0aeb:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-30
+
+  # JapoñolKai Santiago (+18) | Passline | 2026-09-02
+  ee49ed638bbde2d8:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-30
+
+  # JapoñolKai Santiago | Passline | 2026-09-02
+  feef7d4d61128a58:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-30
+
+  # No sé qué rima con te quiero | Ticketplus | 2026-09-03
+  1ab5366028758a4b:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-30
+
+  # Vicaría | Ticketplus | 2026-09-03
+  ab09861d5517e6af:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-30
+
+  # Barón y Barahona o la última función de el Tony Chico | Fundacion Centro Cultural Lo P | 2026-09-03
+  923e45c6274fa40c:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-30
+
+  # Neociclo Redroom XXI (+18) | Passline | 2026-09-03
+  ff2a4e7878423457:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-30
+
+  # Leyendas - Viernes 4 Septiembre - Surreal | Passline | 2026-09-04
+  bb74372a7a94af28:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-30
+
+  # Mamacita El Cartel 💵 en Basel, Vie. 04 Septiembre | Passline | 2026-09-04
+  c7b63be1baf736c5:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-30
+
+  # ESPHERA PRESENTA BLEX AR | Passline | 2026-09-04
+  8c046efe09dcd0e0:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-30
+
+  # ESPHERA PRESENTA BLEX AR (+18) | Passline | 2026-09-04
+  9d89f88c65992c88:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-30
+
+  # LOWERED CLASS by StrictlyLowered 🌐 | Passline | 2026-09-05
+  1b58a82a1f9de4e5:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-30
+
+  # Chile Lindo 2026 | Corporacion Cultural de Vitacu | 2026-09-05
+  0db5d48a64aacf59:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-30
+
+  # Certificación en felicidad de Tal Ben Shahar | Passline | 2026-09-05
+  ed92b20ee52a62f5:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-30
+
+  # 1 COMPETENCIA INTERNA DE LEVANTE DIVISION BOX | Passline | 2026-09-05
+  449cac4b853b2db2:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-30
+
+  # Mik y Leti, los aventureros del Hipocampo Espacial | Ticketplus | 2026-09-05
+  240b760d3b4f3248:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-30
+
+  # Tierra Chilena, 63 años... un viaje a la memoria | Fundacion Centro Cultural Lo P | 2026-09-05
+  36a13821261b39b7:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-30
+
+  # Bingo dieciochero en beneficio de Aaron Ortega | Passline | 2026-09-05
+  e85bcac126612c91:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-30
+
+  # Underground Session Chile Vol 1 | Ticketplus | 2026-09-05
+  b1ff6c0966425edb:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-08-30

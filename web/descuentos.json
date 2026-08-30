@@ -1,7 +1,7 @@
 {
- "generado": "2026-08-30T12:47:31",
- "total": 640,
- "locales": 1782,
+ "generado": "2026-08-30T12:23:30",
+ "total": 638,
+ "locales": 1780,
  "bancos": [
   [
    "bancochile",
@@ -34005,42 +34005,6 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
-   "comercio": "China Wok Arauco Maipú",
-   "categoria": "comida_rapida",
-   "cocina": "asiatica",
-   "region": "Metropolitana",
-   "sitio_web": "http://www.chinawok.cl",
-   "porcentaje": null,
-   "oferta": "2x1",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": null,
-   "tarjetas": [],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "2 woky pack mongoliana a $6180 (2 woky pack de carne mongoliana con arroz chaunfa + 2 bebidas regulares) o 2 woki pack chapsui de ave a $5790 (2 woky pack chapsui de ave con arroz chaunfa + 2 bebidas regulares) Sólo en tiendas.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/china-wok-17",
-   "logo": "https://bci-cdn.azureedge.net/uploads/2987396c-36c8-4f4c-a706-f96ca93782f4/R320x240/chinawok.png",
-   "capturado": "",
-   "id": "bce107ec0108",
-   "locales": [
-    {
-     "direccion": "Av. Américo Vespucio 399 Loc. 19 (Arauco Maipú)",
-     "comuna": "Maipú",
-     "lat": -33.4833453,
-     "lon": -70.7497514,
-     "precision": "calle",
-     "telefono": "2-27453326",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Maipú"
-   ]
-  },
-  {
-   "banco_id": "bci",
-   "banco": "Bci",
    "comercio": "China Wok Costanera Center",
    "categoria": "comida_rapida",
    "cocina": "asiatica",
@@ -34430,42 +34394,6 @@
    ],
    "comunas": [
     "La Florida"
-   ]
-  },
-  {
-   "banco_id": "bci",
-   "banco": "Bci",
-   "comercio": "China Wok Parque Arauco",
-   "categoria": "comida_rapida",
-   "cocina": "asiatica",
-   "region": "Metropolitana",
-   "sitio_web": "http://www.chinawok.cl",
-   "porcentaje": null,
-   "oferta": "2x1",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": null,
-   "tarjetas": [],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "2 woky pack mongoliana a $6180 (2 woky pack de carne mongoliana con arroz chaunfa + 2 bebidas regulares) o 2 woki pack chapsui de ave a $5790 (2 woky pack chapsui de ave con arroz chaunfa + 2 bebidas regulares) Sólo en tiendas.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/china-wok-16",
-   "logo": "https://bci-cdn.azureedge.net/uploads/68e2d8e2-5026-48e2-bcec-b6c3f56c405f/R320x240/chinawok.png",
-   "capturado": "",
-   "id": "a6b17f8de6a0",
-   "locales": [
-    {
-     "direccion": "Av. Kennedy 5413 Loc 604 (Parque Arauco)",
-     "comuna": "Las Condes",
-     "lat": -33.4019756,
-     "lon": -70.5805178,
-     "precision": "fuente",
-     "telefono": "2-25845312",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Las Condes"
    ]
   },
   {
