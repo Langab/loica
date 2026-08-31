@@ -1,7 +1,7 @@
 {
- "generado": "2026-08-31T00:35:09",
- "total": 635,
- "locales": 1663,
+ "generado": "2026-08-31T12:46:08",
+ "total": 636,
+ "locales": 1664,
  "bancos": [
   [
    "bancochile",
@@ -13058,7 +13058,7 @@
     "viernes",
     "sabado"
    ],
-   "vigencia_hasta": "2026-08-31",
+   "vigencia_hasta": "2026-09-30",
    "tarjetas": [
     "visa-credito-infinite",
     "visa-credito-signature",
@@ -13072,7 +13072,7 @@
    ],
    "modalidad": "",
    "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 31 de agosto de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "condiciones": "Promoción válida desde el 01 al 30 de septiembre de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/porfirio-visa",
    "logo": "https://assets.bancochile.cl/uploads/000/047/753/035ad596-cb58-4517-9d78-c34f7fb25b89/original/logo-web-PORFIRIO.jpg",
    "capturado": "",
@@ -33190,6 +33190,42 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
+   "comercio": "China Wok Mall Plaza Oeste",
+   "categoria": "comida_rapida",
+   "cocina": "asiatica",
+   "region": "Metropolitana",
+   "sitio_web": "http://www.chinawok.cl",
+   "porcentaje": null,
+   "oferta": "2x1",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "2 woky pack mongoliana a $6180 (2 woky pack de carne mongoliana con arroz chaunfa + 2 bebidas regulares) o 2 woki pack chapsui de ave a $5790 (2 woky pack chapsui de ave con arroz chaunfa + 2 bebidas regulares) Sólo en tiendas.",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/china-wok-9",
+   "logo": "https://bci-cdn.azureedge.net/uploads/c0ea481f-8b31-4f7f-89b5-9adcc601f0ce/R320x240/chinawok.png",
+   "capturado": "",
+   "id": "1a8c4ed423ca",
+   "locales": [
+    {
+     "direccion": "Av. Américo Vespucio 1501 -Local B-310 (Plaza Oeste)",
+     "comuna": "Cerrillos",
+     "lat": -33.5148451,
+     "lon": -70.7180172,
+     "precision": "fuente",
+     "telefono": "2-25701772",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Cerrillos"
+   ]
+  },
+  {
+   "banco_id": "bci",
+   "banco": "Bci",
    "comercio": "China Wok Mall Plaza Sur",
    "categoria": "comida_rapida",
    "cocina": "asiatica",
@@ -33257,6 +33293,42 @@
    ],
    "comunas": [
     "Puente Alto"
+   ]
+  },
+  {
+   "banco_id": "bci",
+   "banco": "Bci",
+   "comercio": "China Wok Mall Plaza Vespucio",
+   "categoria": "comida_rapida",
+   "cocina": "asiatica",
+   "region": "Metropolitana",
+   "sitio_web": "http://www.chinawok.cl",
+   "porcentaje": null,
+   "oferta": "2x1",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "2 woky pack mongoliana a $6180 (2 woky pack de carne mongoliana con arroz chaunfa + 2 bebidas regulares) o 2 woki pack chapsui de ave a $5790 (2 woky pack chapsui de ave con arroz chaunfa + 2 bebidas regulares) Sólo en tiendas.",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/china-wok-10",
+   "logo": "https://bci-cdn.azureedge.net/uploads/52b85085-cc3d-4ae6-b95e-9d6bb78dc0dc/R320x240/chinawok.png",
+   "capturado": "",
+   "id": "47202b6388b6",
+   "locales": [
+    {
+     "direccion": "Av.Vicuña Mackenna 7110 loc FC -212 (Vespucio)",
+     "comuna": "La Florida",
+     "lat": -33.5622191,
+     "lon": -70.5851344,
+     "precision": "fuente",
+     "telefono": "2-29795947",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "La Florida"
    ]
   },
   {
@@ -34032,42 +34104,6 @@
      "lon": -70.75770436923077,
      "precision": "calle",
      "telefono": "&nbsp;2 2534 2020",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Maipú"
-   ]
-  },
-  {
-   "banco_id": "bci",
-   "banco": "Bci",
-   "comercio": "PizzaPizza Maipú Poniente",
-   "categoria": "comida_rapida",
-   "cocina": "italiana",
-   "region": "Metropolitana",
-   "sitio_web": "http://www.pizzapizza.cl/",
-   "porcentaje": null,
-   "oferta": "",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": null,
-   "tarjetas": [],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-15",
-   "logo": "https://bci-cdn.azureedge.net/uploads/ac2a988f-63ed-4ddf-a40b-91590e0c64dd/original/imagen.jpg",
-   "capturado": "",
-   "id": "c64cc3ef8cbc",
-   "locales": [
-    {
-     "direccion": "3 Poniente 0876",
-     "comuna": "Maipú",
-     "lat": -33.012944,
-     "lon": -71.553406,
-     "precision": "fuente",
-     "telefono": "2 2942 3999",
      "origen": ""
     }
    ],
