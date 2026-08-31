@@ -324,6 +324,15 @@ def verificar_descuentos(errores: list[str], avisos: list[str]) -> None:
     if len(descuentos) < MIN_DESCUENTOS:
         errores.append(f"Solo {len(descuentos)} descuentos (mínimo {MIN_DESCUENTOS}).")
 
+    # El día en que la corrida escribió este JSON. Los vencidos de más abajo
+    # se miden contra ESTE día y no contra hoy, para poder revisar un archivo
+    # de la semana pasada sin acusar al pipeline por el paso del tiempo.
+    try:
+        generado = datetime.fromisoformat(str(datos.get("generado") or "")).date()
+    except ValueError:
+        generado = None
+        avisos.append(f"'generado' no es fecha ISO: {datos.get('generado')!r}")
+
     # Un descuento sin días declarados se muestra como "todos los días" y entra
     # al filtro de Hoy cualquier día. Eso es correcto para los convenios
     # permanentes de Bci, y es MENTIRA cuando la fuente sí dijo un día y no
@@ -359,6 +368,31 @@ def verificar_descuentos(errores: list[str], avisos: list[str]) -> None:
         for campo in ("comercio", "banco", "id"):
             if not d.get(campo):
                 errores.append(f"{donde}: sin {campo}")
+
+        # Un descuento vencido publicado quema la confianza más rápido que
+        # cualquier otro dato malo: se paga la cuenta completa delante de la
+        # mesa. `_sigue_viva` (loica/descuentos/__init__.py) lo descarta al
+        # extraer, así que si uno llegó hasta acá ese filtro se rompió — y en
+        # el cambio de mes se rompe a lo grande: el 31 de agosto vencía el 28%
+        # del catastro de una sola noche. De los que mueren ENTRE corridas se
+        # encarga la página, que los cuela al cargar (sinVencidos, loica.js);
+        # este chequeo cuida la otra mitad, que la corrida no los publique.
+        vigencia = d.get("vigencia_hasta")
+        if vigencia is not None:
+            try:
+                hasta = datetime.fromisoformat(str(vigencia)).date()
+            except ValueError:
+                # La página compara este texto tal cual ("2026-08-31" >= hoy):
+                # una fecha en otro formato no revienta nada, pero ese
+                # descuento no se colaría nunca y saldría "Invalid Date" en
+                # la ficha.
+                errores.append(f"{donde}: 'vigencia_hasta' no es fecha ISO: "
+                               f"{vigencia!r}")
+            else:
+                if generado and hasta < generado:
+                    errores.append(
+                        f"{donde}: venció el {vigencia} y la corrida del "
+                        f"{generado} igual lo publicó: _sigue_viva no lo filtró.")
 
         # Las sucursales se fueron de la raíz de la oferta a `locales`, y la
         # página recorre esa lista sin mirar el tipo: algo que no sea una lista

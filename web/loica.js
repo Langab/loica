@@ -1732,7 +1732,39 @@ async function cargarDescuentos(){
   // no-cache igual que eventos.json: sin esto, quien ya visitó la página
   // sigue viendo los descuentos de ayer aunque la corrida diaria publique.
   const r = await fetch("descuentos.json", {cache: "no-cache"});
-  return await r.json();
+  return sinVencidos(await r.json());
+}
+
+/* El colador de vencidos, y corre en el navegador a propósito. La corrida ya
+   descarta lo vencido al extraer (_sigue_viva, loica/descuentos/__init__.py),
+   pero publica UNA vez al día: el JSON del 31 de agosto trae los 178
+   descuentos que mueren esa misma noche, y quien abre la página el 1 de
+   septiembre antes de la corrida —o cualquier día que la corrida falle—
+   los vería como buenos. En el cambio de mes vence más de un cuarto del
+   catastro de una sola vez, así que la ventana no es teórica.
+
+   La fecha se compara en hora LOCAL (claveDia) y no con toISOString(): a las
+   21:00 de Santiago ya es mañana en UTC, y un descuento que corre hasta la
+   medianoche desaparecería tres horas antes de tiempo.
+
+   Cuando algo se descarta se recalculan los índices que las páginas leen del
+   JSON —`total` en la cifra de la portada, `bancos` y `comunas` en los chips
+   de filtros—: dejar el chip de una comuna cuyo único descuento venció sería
+   ofrecer una lista vacía, que es justo lo que los tramos de "Desde 30%" ya
+   se cuidan de no hacer. */
+function sinVencidos(datos){
+  const hoy = claveDia(new Date());
+  const todos = datos.descuentos || [];
+  const vivos = todos.filter(d => !d.vigencia_hasta || d.vigencia_hasta >= hoy);
+  if(vivos.length === todos.length) return datos;
+  return {...datos,
+    descuentos: vivos,
+    total: vivos.length,
+    locales: vivos.reduce((n, d) => n + (d.locales || []).length, 0),
+    bancos: [...new Map(vivos.map(d => [d.banco_id, [d.banco_id, d.banco]])).values()]
+      .sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)),
+    comunas: [...new Set(vivos.flatMap(d => d.comunas || []))].sort(),
+  };
 }
 
 /* La cinta del día sobre la miniatura. Es el dato por el que se entra a esta
