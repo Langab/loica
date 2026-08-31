@@ -1,7 +1,7 @@
 {
- "generado": "2026-08-31T12:46:08",
- "total": 636,
- "locales": 1664,
+ "generado": "2026-08-31T15:03:10",
+ "total": 629,
+ "locales": 1655,
  "bancos": [
   [
    "bancochile",
@@ -79,13 +79,13 @@
   "Ñuñoa"
  ],
  "por_dia": {
-  "miercoles": 227,
+  "miercoles": 225,
   "sabado": 127,
-  "jueves": 182,
-  "viernes": 135,
-  "lunes": 195,
-  "martes": 237,
-  "domingo": 100
+  "jueves": 181,
+  "viernes": 131,
+  "lunes": 193,
+  "martes": 234,
+  "domingo": 99
  },
  "descuentos": [
   {
@@ -1904,58 +1904,6 @@
    "id": "cbc9f7d1e9cb",
    "locales": [],
    "comunas": []
-  },
-  {
-   "banco_id": "bancochile",
-   "banco": "Banco de Chile",
-   "comercio": "Brasas del Arriero",
-   "categoria": "restaurantes",
-   "cocina": "parrilla",
-   "region": "Metropolitana",
-   "sitio_web": "",
-   "porcentaje": 40,
-   "oferta": "",
-   "tope": 50000,
-   "dias": [
-    "lunes",
-    "martes",
-    "miercoles",
-    "jueves",
-    "viernes"
-   ],
-   "vigencia_hasta": "2026-08-31",
-   "tarjetas": [
-    "visa-credito-infinite",
-    "visa-credito-signature",
-    "visa-credito-platinum",
-    "visa-fan-credito",
-    "visa-debito-infinite",
-    "visa-debito-signature",
-    "visa-debito-bch",
-    "visa-cuenta-fan",
-    "visa-credito-gold"
-   ],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 31 de agosto de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
-   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/brasas-del-arriero-40visa",
-   "logo": "https://assets.bancochile.cl/uploads/000/042/731/5e8f84ad-0d7c-4ad2-beee-e462a35a0e46/original/logo-web-arriero.jpg",
-   "capturado": "",
-   "id": "6cc27e76030b",
-   "locales": [
-    {
-     "direccion": "Trinidad Ote. 1307",
-     "comuna": "La Florida",
-     "lat": -33.5225,
-     "lon": -70.599,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "La Florida"
-   ]
   },
   {
    "banco_id": "cencosud",
@@ -4832,7 +4780,7 @@
     "sabado",
     "domingo"
    ],
-   "vigencia_hasta": "2027-02-28",
+   "vigencia_hasta": "2026-08-31",
    "tarjetas": [
     "visa-credito-infinite",
     "visa-credito-signature",
@@ -4849,7 +4797,7 @@
    ],
    "modalidad": "ambas",
    "segmentado": false,
-   "condiciones": "Promoción válida hasta el 28 de febrero de 2027. exclusivo para clientes que paguen con Tarjetas de Crédito y Débito Banco de Chile y Banco Edwards. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "condiciones": "Promoción válida hasta el 31 de agosto de 2026. exclusivo para clientes que paguen con Tarjetas de Crédito y Débito Banco de Chile y Banco Edwards. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/dominos-pizza",
    "logo": "https://assets.bancochile.cl/uploads/000/059/646/b9041115-7bdf-4a3c-a50f-243abad67d71/original/logo-web-domino.jpg",
    "capturado": "",
@@ -6661,7 +6609,7 @@
     "viernes",
     "sabado"
    ],
-   "vigencia_hasta": "2026-08-31",
+   "vigencia_hasta": "2026-09-30",
    "tarjetas": [
     "visa-credito-infinite",
     "visa-credito-signature",
@@ -6675,7 +6623,7 @@
    ],
    "modalidad": "",
    "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 31 de agosto de 2026. Pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "condiciones": "Promoción válida desde el 01 al 30 de septiembre de 2026. Pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/expendio-dcto-visa",
    "logo": "https://assets.bancochile.cl/uploads/000/047/747/ed10e876-377d-4ff4-bc7d-c961793a4433/original/logo-web-expendio.jpg",
    "capturado": "",
@@ -7311,7 +7259,7 @@
    "dias": [
     "sabado"
    ],
-   "vigencia_hasta": "2026-08-31",
+   "vigencia_hasta": "2026-09-30",
    "tarjetas": [
     "visa-credito-infinite",
     "visa-credito-signature",
@@ -7325,7 +7273,7 @@
    ],
    "modalidad": "",
    "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 31 de agosto de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "condiciones": "Promoción válida desde el 01 al 30 de septiembre de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/ica-restaurente-40visa",
    "logo": "https://assets.bancochile.cl/uploads/000/047/324/072b92b3-7e88-4a29-a7bf-3b8667e5e0d1/original/logo-web-ICA-RESTAURANTE.jpg",
    "capturado": "",
@@ -7503,54 +7451,6 @@
    ],
    "comunas": [
     "Providencia",
-    "Vitacura"
-   ]
-  },
-  {
-   "banco_id": "bancochile",
-   "banco": "Banco de Chile",
-   "comercio": "Jeronimo",
-   "categoria": "restaurantes",
-   "cocina": "",
-   "region": "Metropolitana",
-   "sitio_web": "",
-   "porcentaje": 40,
-   "oferta": "",
-   "tope": 50000,
-   "dias": [
-    "viernes"
-   ],
-   "vigencia_hasta": "2026-08-31",
-   "tarjetas": [
-    "visa-credito-infinite",
-    "visa-credito-signature",
-    "visa-credito-platinum",
-    "visa-fan-credito",
-    "visa-debito-infinite",
-    "visa-debito-signature",
-    "visa-debito-bch",
-    "visa-cuenta-fan",
-    "visa-credito-gold"
-   ],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 31 de agosto de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
-   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/jeronimo-40visa",
-   "logo": "https://assets.bancochile.cl/uploads/000/105/306/67bfc857-67a2-42f4-9d51-9e22a5080d24/original/logo-web-Jeronimo.jpg",
-   "capturado": "",
-   "id": "a87af07b724d",
-   "locales": [
-    {
-     "direccion": "Alonso de Córdova 4355",
-     "comuna": "Vitacura",
-     "lat": -33.40405175,
-     "lon": -70.58760695,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    }
-   ],
-   "comunas": [
     "Vitacura"
    ]
   },
@@ -8401,7 +8301,7 @@
     "miercoles",
     "sabado"
    ],
-   "vigencia_hasta": "2026-08-31",
+   "vigencia_hasta": "2026-09-30",
    "tarjetas": [
     "visa-credito-infinite",
     "visa-credito-signature",
@@ -8415,7 +8315,7 @@
    ],
    "modalidad": "",
    "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 31 de agosto de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "condiciones": "Promoción válida desde el 01 al 30 de septiembre de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/la-birreria",
    "logo": "https://assets.bancochile.cl/uploads/000/102/836/d35e890e-c608-4e26-a852-b9bd4660f0c7/original/logo-web-La-Birreria.jpg",
    "capturado": "",
@@ -10129,7 +10029,7 @@
     "jueves",
     "sabado"
    ],
-   "vigencia_hasta": "2026-08-31",
+   "vigencia_hasta": "2026-09-30",
    "tarjetas": [
     "visa-credito-infinite",
     "visa-credito-signature",
@@ -10143,7 +10043,7 @@
    ],
    "modalidad": "",
    "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 31 de agosto de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "condiciones": "Promoción válida desde el 01 al 30 de septiembre de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/majka-bistro-visa",
    "logo": "https://assets.bancochile.cl/uploads/000/095/710/351d7faa-1325-41e6-9b89-7f2469e088de/original/logo-web-Majka.jpg",
    "capturado": "",
@@ -13356,55 +13256,6 @@
    ]
   },
   {
-   "banco_id": "bancochile",
-   "banco": "Banco de Chile",
-   "comercio": "Rolls Sushi & Nikkei",
-   "categoria": "restaurantes",
-   "cocina": "japonesa",
-   "region": "Metropolitana",
-   "sitio_web": "",
-   "porcentaje": 40,
-   "oferta": "",
-   "tope": 50000,
-   "dias": [
-    "viernes",
-    "domingo"
-   ],
-   "vigencia_hasta": "2026-08-31",
-   "tarjetas": [
-    "visa-credito-infinite",
-    "visa-credito-signature",
-    "visa-credito-platinum",
-    "visa-fan-credito",
-    "visa-debito-infinite",
-    "visa-debito-signature",
-    "visa-debito-bch",
-    "visa-cuenta-fan",
-    "visa-credito-gold"
-   ],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 31 de agosto de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
-   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/rolls-sushi-and-nikkei",
-   "logo": "https://assets.bancochile.cl/uploads/000/106/712/43c0d410-39b9-4ac5-b37e-836319f2e1e2/original/logo-web-Rolls-Sushi-.jpg",
-   "capturado": "",
-   "id": "9fcc275796c2",
-   "locales": [
-    {
-     "direccion": "Av. Chicureo Km 2",
-     "comuna": "Colina",
-     "lat": -33.2019,
-     "lon": -70.6747,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Colina"
-   ]
-  },
-  {
    "banco_id": "ripley",
    "banco": "Banco Ripley",
    "comercio": "Rossie la Loca",
@@ -13580,64 +13431,6 @@
    "locales": [
     {
      "direccion": "Raúl labbe 12559, Lo Barnechea",
-     "comuna": "Lo Barnechea",
-     "lat": -33.367544,
-     "lon": -70.5183019,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Lo Barnechea"
-   ]
-  },
-  {
-   "banco_id": "bancochile",
-   "banco": "Banco de Chile",
-   "comercio": "SABOR Y AROMA",
-   "categoria": "restaurantes",
-   "cocina": "",
-   "region": "Metropolitana",
-   "sitio_web": "",
-   "porcentaje": 40,
-   "oferta": "",
-   "tope": 50000,
-   "dias": [
-    "miercoles",
-    "viernes"
-   ],
-   "vigencia_hasta": "2026-08-31",
-   "tarjetas": [
-    "visa-credito-infinite",
-    "visa-credito-signature",
-    "visa-credito-platinum",
-    "visa-fan-credito",
-    "visa-debito-infinite",
-    "visa-debito-signature",
-    "visa-debito-bch",
-    "visa-cuenta-fan",
-    "visa-credito-gold"
-   ],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 31 de agosto de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
-   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/sabor-y-aroma-40visa",
-   "logo": "https://assets.bancochile.cl/uploads/000/026/783/ed9482b6-d9e5-4a90-a68b-f4a4e4c8ad0f/original/logo-web-SABOR-Y-AROMA.jpg",
-   "capturado": "",
-   "id": "773b8df49de4",
-   "locales": [
-    {
-     "direccion": "Raúl Labbe #12559",
-     "comuna": "Lo Barnechea",
-     "lat": -33.367544,
-     "lon": -70.5183019,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Raúl Labbe 12559",
      "comuna": "Lo Barnechea",
      "lat": -33.367544,
      "lon": -70.5183019,
@@ -15318,55 +15111,6 @@
    ],
    "comunas": [
     "Las Condes"
-   ]
-  },
-  {
-   "banco_id": "bancochile",
-   "banco": "Banco de Chile",
-   "comercio": "Vitali´s",
-   "categoria": "restaurantes",
-   "cocina": "",
-   "region": "Metropolitana",
-   "sitio_web": "",
-   "porcentaje": 40,
-   "oferta": "",
-   "tope": 50000,
-   "dias": [
-    "martes",
-    "viernes"
-   ],
-   "vigencia_hasta": "2026-08-31",
-   "tarjetas": [
-    "visa-credito-infinite",
-    "visa-credito-signature",
-    "visa-credito-platinum",
-    "visa-fan-credito",
-    "visa-debito-infinite",
-    "visa-debito-signature",
-    "visa-debito-bch",
-    "visa-cuenta-fan",
-    "visa-credito-gold"
-   ],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 31 de agosto de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
-   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/vitalis-40-visa",
-   "logo": "https://assets.bancochile.cl/uploads/000/085/579/9ea44b2f-f003-431a-be42-74708ebf0638/original/logo-web-Vitali.jpg",
-   "capturado": "",
-   "id": "199470c3d1b3",
-   "locales": [
-    {
-     "direccion": "Av Vitacura #8133",
-     "comuna": "Vitacura",
-     "lat": -33.38562091,
-     "lon": -70.55564988,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Vitacura"
    ]
   },
   {
@@ -26990,60 +26734,6 @@
    ]
   },
   {
-   "banco_id": "bancochile",
-   "banco": "Banco de Chile",
-   "comercio": "Kiara",
-   "categoria": "restaurantes",
-   "cocina": "",
-   "region": "Metropolitana",
-   "sitio_web": "",
-   "porcentaje": 20,
-   "oferta": "",
-   "tope": null,
-   "dias": [
-    "lunes",
-    "martes",
-    "miercoles",
-    "jueves"
-   ],
-   "vigencia_hasta": "2026-12-31",
-   "tarjetas": [
-    "visa-credito-infinite",
-    "visa-credito-signature",
-    "visa-credito-platinum",
-    "visa-fan-credito",
-    "mastercard-credito-black",
-    "mastercard-credito-platinum",
-    "visa-debito-infinite",
-    "visa-debito-signature",
-    "visa-debito-bch",
-    "visa-cuenta-fan",
-    "visa-credito-gold",
-    "mastercard-credito-dorada"
-   ],
-   "modalidad": "presencial",
-   "segmentado": false,
-   "condiciones": "Promoción válida hasta el 31 de diciembre de 2026. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile (incluye Banco Edwards) y que soliciten el descuento al momento de pagar en forma presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande. Infórmese sobre la garantía estatal de los depósitos en su Banco o en www.cmfchile.cl",
-   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/kiara",
-   "logo": "https://assets.bancochile.cl/uploads/000/042/670/38b5204c-2e41-4cb3-8e94-a405f827458d/original/logo-web-kiara.jpg",
-   "capturado": "",
-   "id": "8ec828ebe254",
-   "locales": [
-    {
-     "direccion": "El Rodeo #13332",
-     "comuna": "Lo Barnechea",
-     "lat": -33.3515383,
-     "lon": -70.508239,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Lo Barnechea"
-   ]
-  },
-  {
    "banco_id": "ripley",
    "banco": "Banco Ripley",
    "comercio": "Koala Sushi",
@@ -29377,67 +29067,6 @@
   {
    "banco_id": "bancochile",
    "banco": "Banco de Chile",
-   "comercio": "Ohbok Korean Bbq",
-   "categoria": "restaurantes",
-   "cocina": "asiatica",
-   "region": "Metropolitana",
-   "sitio_web": "",
-   "porcentaje": 20,
-   "oferta": "",
-   "tope": null,
-   "dias": [
-    "lunes",
-    "martes"
-   ],
-   "vigencia_hasta": "2027-01-31",
-   "tarjetas": [
-    "visa-credito-infinite",
-    "visa-credito-signature",
-    "visa-credito-platinum",
-    "visa-fan-credito",
-    "mastercard-credito-black",
-    "mastercard-credito-platinum",
-    "visa-debito-infinite",
-    "visa-debito-signature",
-    "visa-debito-bch",
-    "visa-cuenta-fan",
-    "visa-credito-gold",
-    "mastercard-credito-dorada"
-   ],
-   "modalidad": "presencial",
-   "segmentado": false,
-   "condiciones": "Promoción válida hasta el 31 de enero de 2027. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile y Banco Edwards y que soliciten el descuento al momento de pagar en compra presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
-   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/ohbok-korean-bbq",
-   "logo": "https://assets.bancochile.cl/uploads/000/102/708/0bc0cd1e-bf42-40f4-ae63-e227a19f3373/original/logo-web-Ohbok.jpg",
-   "capturado": "",
-   "id": "164a05b708ce",
-   "locales": [
-    {
-     "direccion": "Av. Vitacura 4085",
-     "comuna": "Vitacura",
-     "lat": -33.40006092,
-     "lon": -70.59075814000002,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Vitacura 7261",
-     "comuna": "Vitacura",
-     "lat": -33.3864341,
-     "lon": -70.5633,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Vitacura"
-   ]
-  },
-  {
-   "banco_id": "bancochile",
-   "banco": "Banco de Chile",
    "comercio": "Olivia Cuccina Italiana",
    "categoria": "restaurantes",
    "cocina": "italiana",
@@ -30276,6 +29905,61 @@
    "comunas": [
     "La Cisterna",
     "San Miguel"
+   ]
+  },
+  {
+   "banco_id": "bancochile",
+   "banco": "Banco de Chile",
+   "comercio": "SABOR Y AROMA",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "Metropolitana",
+   "sitio_web": "",
+   "porcentaje": 20,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "lunes",
+    "martes",
+    "miercoles",
+    "jueves",
+    "viernes"
+   ],
+   "vigencia_hasta": "2026-12-31",
+   "tarjetas": [
+    "visa-credito-infinite",
+    "visa-credito-signature",
+    "visa-credito-platinum",
+    "visa-fan-credito",
+    "mastercard-credito-black",
+    "mastercard-credito-platinum",
+    "visa-debito-infinite",
+    "visa-debito-signature",
+    "visa-debito-bch",
+    "visa-cuenta-fan",
+    "visa-credito-gold",
+    "mastercard-credito-dorada"
+   ],
+   "modalidad": "presencial",
+   "segmentado": false,
+   "condiciones": "Promoción válida hasta el 31 de diciembre de 2026. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile (incluye Banco Edwards) y que soliciten el descuento al momento de pagar en forma presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande. Infórmese sobre la garantía estatal de los depósitos en su Banco o en www.cmfchile.cl",
+   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/sabor-y-aroma",
+   "logo": "https://assets.bancochile.cl/uploads/000/026/783/ed9482b6-d9e5-4a90-a68b-f4a4e4c8ad0f/original/logo-web-SABOR-Y-AROMA.jpg",
+   "capturado": "",
+   "id": "773b8df49de4",
+   "locales": [
+    {
+     "direccion": "Raúl Labbe 12559",
+     "comuna": "Lo Barnechea",
+     "lat": -33.367544,
+     "lon": -70.5183019,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Lo Barnechea"
    ]
   },
   {
@@ -33190,42 +32874,6 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
-   "comercio": "China Wok Mall Plaza Oeste",
-   "categoria": "comida_rapida",
-   "cocina": "asiatica",
-   "region": "Metropolitana",
-   "sitio_web": "http://www.chinawok.cl",
-   "porcentaje": null,
-   "oferta": "2x1",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": null,
-   "tarjetas": [],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "2 woky pack mongoliana a $6180 (2 woky pack de carne mongoliana con arroz chaunfa + 2 bebidas regulares) o 2 woki pack chapsui de ave a $5790 (2 woky pack chapsui de ave con arroz chaunfa + 2 bebidas regulares) Sólo en tiendas.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/china-wok-9",
-   "logo": "https://bci-cdn.azureedge.net/uploads/c0ea481f-8b31-4f7f-89b5-9adcc601f0ce/R320x240/chinawok.png",
-   "capturado": "",
-   "id": "1a8c4ed423ca",
-   "locales": [
-    {
-     "direccion": "Av. Américo Vespucio 1501 -Local B-310 (Plaza Oeste)",
-     "comuna": "Cerrillos",
-     "lat": -33.5148451,
-     "lon": -70.7180172,
-     "precision": "fuente",
-     "telefono": "2-25701772",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Cerrillos"
-   ]
-  },
-  {
-   "banco_id": "bci",
-   "banco": "Bci",
    "comercio": "China Wok Mall Plaza Sur",
    "categoria": "comida_rapida",
    "cocina": "asiatica",
@@ -33862,42 +33510,6 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
-   "comercio": "PizzaPizza La Cisterna",
-   "categoria": "comida_rapida",
-   "cocina": "italiana",
-   "region": "Metropolitana",
-   "sitio_web": "http://www.pizzapizza.cl/",
-   "porcentaje": null,
-   "oferta": "",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": null,
-   "tarjetas": [],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-17",
-   "logo": "https://bci-cdn.azureedge.net/uploads/9e644aca-2544-4415-966d-c3a59d7c3f75/original/imagen.jpg",
-   "capturado": "",
-   "id": "fc07c92ca0e5",
-   "locales": [
-    {
-     "direccion": "Gran Avenida 8159",
-     "comuna": "La Cisterna",
-     "lat": -33.5295951,
-     "lon": -70.6624795,
-     "precision": "calle",
-     "telefono": "2 2558 0200",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "La Cisterna"
-   ]
-  },
-  {
-   "banco_id": "bci",
-   "banco": "Bci",
    "comercio": "PizzaPizza La Dehesa",
    "categoria": "comida_rapida",
    "cocina": "italiana",
@@ -34104,6 +33716,42 @@
      "lon": -70.75770436923077,
      "precision": "calle",
      "telefono": "&nbsp;2 2534 2020",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Maipú"
+   ]
+  },
+  {
+   "banco_id": "bci",
+   "banco": "Bci",
+   "comercio": "PizzaPizza Maipú Poniente",
+   "categoria": "comida_rapida",
+   "cocina": "italiana",
+   "region": "Metropolitana",
+   "sitio_web": "http://www.pizzapizza.cl/",
+   "porcentaje": null,
+   "oferta": "",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-15",
+   "logo": "https://bci-cdn.azureedge.net/uploads/ac2a988f-63ed-4ddf-a40b-91590e0c64dd/original/imagen.jpg",
+   "capturado": "",
+   "id": "c64cc3ef8cbc",
+   "locales": [
+    {
+     "direccion": "3 Poniente 0876",
+     "comuna": "Maipú",
+     "lat": -33.012944,
+     "lon": -71.553406,
+     "precision": "fuente",
+     "telefono": "2 2942 3999",
      "origen": ""
     }
    ],
