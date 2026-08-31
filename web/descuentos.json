@@ -1,7 +1,7 @@
 {
- "generado": "2026-08-31T15:03:10",
- "total": 629,
- "locales": 1655,
+ "generado": "2026-08-31T11:44:25",
+ "total": 628,
+ "locales": 1619,
  "bancos": [
   [
    "bancochile",
@@ -85,7 +85,7 @@
   "viernes": 131,
   "lunes": 193,
   "martes": 234,
-  "domingo": 99
+  "domingo": 100
  },
  "descuentos": [
   {
@@ -18867,6 +18867,51 @@
    ]
   },
   {
+   "banco_id": "bancochile",
+   "banco": "Banco de Chile",
+   "comercio": "miCoca-Cola.cl",
+   "categoria": "gourmet",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "https://www.micoca-cola.cl/",
+   "porcentaje": 30,
+   "oferta": "Con regalo",
+   "tope": 30000,
+   "dias": [
+    "lunes",
+    "martes",
+    "miercoles",
+    "jueves",
+    "viernes",
+    "sabado",
+    "domingo"
+   ],
+   "vigencia_hasta": "2026-09-06",
+   "tarjetas": [
+    "visa-credito-infinite",
+    "visa-credito-signature",
+    "visa-credito-platinum",
+    "visa-fan-credito",
+    "mastercard-credito-black",
+    "mastercard-credito-platinum",
+    "visa-debito-infinite",
+    "visa-debito-signature",
+    "visa-debito-bch",
+    "visa-cuenta-fan",
+    "visa-credito-gold",
+    "mastercard-credito-dorada"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Promoción válida del 31 de agosto al 6 de septiembre de 2026. Para clientes que paguen con sus Tarjetas de Crédito y Débito del Banco de Chile (Incluye Banco Edwards) y que ingresen el código al momento de realizar el pago. No acumulable con otras promociones. Tope de descuento $30.000 por compra. Válido para dos compras por cliente durante los días de la promoción. Un código de descuento válido por pedido. La entrega de los beneficios es de exclusiva responsabilidad del comercio sin responsabilidad alguna para Banco de Chile en ello, ni en la ulterior atención que ello demande. Promoción válida del 31 de agosto al 6 de septiembre de 2026. Para personas naturales que posean Tarjeta de Crédito del Banco de Chile (incluye Banco Edwards). Válido para clientes que utilicen dichas tarjetas como medio de pago en compras en establecimientos comerciales afiliados a cualquier adquirente nacional. Transacciones en cuotas están afectas a impuesto de timbres DL 3475, el que es de cargo del cliente. Se excluyen compras en casino y juegos de azar, y pagos a través de Pago Automático de Tarjeta (PAT).",
+   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/micoca-cola-cl",
+   "logo": "https://assets.bancochile.cl/uploads/000/043/299/02581ef7-a116-49ac-8717-74f5f9e39140/original/logo2_micocacola_1_.jpg",
+   "capturado": "",
+   "id": "9da1a0ee734f",
+   "locales": [],
+   "comunas": []
+  },
+  {
    "banco_id": "security",
    "banco": "Banco Security",
    "comercio": "PedidosYa",
@@ -24390,61 +24435,6 @@
   {
    "banco_id": "bancochile",
    "banco": "Banco de Chile",
-   "comercio": "Citadelle",
-   "categoria": "restaurantes",
-   "cocina": "",
-   "region": "Metropolitana",
-   "sitio_web": "",
-   "porcentaje": 20,
-   "oferta": "",
-   "tope": null,
-   "dias": [
-    "martes",
-    "miercoles",
-    "jueves",
-    "viernes",
-    "sabado"
-   ],
-   "vigencia_hasta": "2027-06-30",
-   "tarjetas": [
-    "visa-credito-infinite",
-    "visa-credito-signature",
-    "visa-credito-platinum",
-    "visa-fan-credito",
-    "mastercard-credito-black",
-    "mastercard-credito-platinum",
-    "visa-debito-infinite",
-    "visa-debito-signature",
-    "visa-debito-bch",
-    "visa-cuenta-fan",
-    "visa-credito-gold",
-    "mastercard-credito-dorada"
-   ],
-   "modalidad": "presencial",
-   "segmentado": false,
-   "condiciones": "Promoción válida hasta el 30 de junio de 2027. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile y Banco Edwards y que soliciten el descuento al momento de pagar en compra presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
-   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/citadelle",
-   "logo": "https://assets.bancochile.cl/uploads/000/109/001/f678a998-6535-4719-8791-d818821996d5/original/logo-web-Citadelle.jpg",
-   "capturado": "",
-   "id": "7961448ed8d5",
-   "locales": [
-    {
-     "direccion": "Av. Tobalaba #1199",
-     "comuna": "Providencia",
-     "lat": -33.4256032,
-     "lon": -70.5922701,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Providencia"
-   ]
-  },
-  {
-   "banco_id": "bancochile",
-   "banco": "Banco de Chile",
    "comercio": "Ciudad Vieja",
    "categoria": "restaurantes",
    "cocina": "",
@@ -27081,380 +27071,6 @@
    ],
    "comunas": [
     "Lo Barnechea"
-   ]
-  },
-  {
-   "banco_id": "bancochile",
-   "banco": "Banco de Chile",
-   "comercio": "La Fête Chocolat",
-   "categoria": "gourmet",
-   "cocina": "panaderia",
-   "region": "Metropolitana",
-   "sitio_web": "https://www.lafetechocolat.com",
-   "porcentaje": 20,
-   "oferta": "",
-   "tope": 20000,
-   "dias": [
-    "lunes"
-   ],
-   "vigencia_hasta": "2026-08-31",
-   "tarjetas": [
-    "visa-credito-infinite",
-    "visa-credito-signature",
-    "visa-credito-platinum",
-    "visa-fan-credito",
-    "mastercard-credito-black",
-    "mastercard-credito-platinum",
-    "visa-debito-infinite",
-    "visa-debito-signature",
-    "visa-debito-bch",
-    "visa-cuenta-fan",
-    "visa-credito-gold",
-    "mastercard-credito-dorada"
-   ],
-   "modalidad": "ambas",
-   "segmentado": false,
-   "condiciones": "Promoción válida hasta el 31 de agosto de 2026. Para clientes titulares de Tarjetas del Chile / Tarjetas Banco Edwards. No acumulable con otras promociones o descuentos. Tope de descuento $20.000 por compra. Beneficio válido en la fete chocolat.com ingresando los 6 primeros dígitos de tarjetas como código de descuento y en compra presencial indicándolos al momento de pagar. No acumulable con códigos de Gift Cards. No válido en Clínica Las Condes y Puerto Natales. Válido solo para compras con boleta. Descuento no es válido en el valor del despacho. La entrega del beneficio es de exclusiva responsabilidad de Chocolates del Mundo SpA., no cabiéndole a Banco de Chile responsabilidad alguna en ello ni en la ulterior atención que ello demande.",
-   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/la-fete",
-   "logo": "https://assets.bancochile.cl/uploads/000/026/836/130402ec-40da-463b-a7f4-55101e798020/original/lafete_1_.jpg",
-   "capturado": "",
-   "id": "8878baf743e6",
-   "locales": [
-    {
-     "direccion": "Local B-114a, Piso 1",
-     "comuna": "Cerrillos",
-     "lat": -33.4967,
-     "lon": -70.7161,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local 7, Piso 1",
-     "comuna": "Colina",
-     "lat": -33.2019,
-     "lon": -70.6747,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local A-1140 / A-1144, Piso 1",
-     "comuna": "Huechuraba",
-     "lat": -33.3706,
-     "lon": -70.6408,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local TM-115A",
-     "comuna": "Independencia",
-     "lat": -33.415,
-     "lon": -70.665,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local 1073, Piso 1",
-     "comuna": "La Florida",
-     "lat": -33.5225,
-     "lon": -70.599,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local 18, Piso 2",
-     "comuna": "La Florida",
-     "lat": -33.5225,
-     "lon": -70.599,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local 52, Piso 1",
-     "comuna": "La Florida",
-     "lat": -33.5225,
-     "lon": -70.599,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local 209, Piso 2",
-     "comuna": "La Reina",
-     "lat": -33.4437,
-     "lon": -70.5405,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local A 1044, Piso 2",
-     "comuna": "La Reina",
-     "lat": -33.4437,
-     "lon": -70.5405,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local 112, Piso 2",
-     "comuna": "Las Condes",
-     "lat": -33.4088,
-     "lon": -70.5673,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local 1120, Piso 1",
-     "comuna": "Las Condes",
-     "lat": -33.4088,
-     "lon": -70.5673,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local 155",
-     "comuna": "Las Condes",
-     "lat": -33.4088,
-     "lon": -70.5673,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local 206-2, Piso 1",
-     "comuna": "Las Condes",
-     "lat": -33.4088,
-     "lon": -70.5673,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local B, Piso 1",
-     "comuna": "Las Condes",
-     "lat": -33.4088,
-     "lon": -70.5673,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local B1020/B1024, Piso 1",
-     "comuna": "Las Condes",
-     "lat": -33.4088,
-     "lon": -70.5673,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local L-110, Piso 1",
-     "comuna": "Las Condes",
-     "lat": -33.4088,
-     "lon": -70.5673,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Piso 1",
-     "comuna": "Las Condes",
-     "lat": -33.4088,
-     "lon": -70.5673,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local 1, Piso 1",
-     "comuna": "Lo Barnechea",
-     "lat": -33.3512,
-     "lon": -70.518,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local 116, Piso 1",
-     "comuna": "Lo Barnechea",
-     "lat": -33.3512,
-     "lon": -70.518,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local 5, Piso 1",
-     "comuna": "Lo Barnechea",
-     "lat": -33.3512,
-     "lon": -70.518,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Piso 1",
-     "comuna": "Lo Barnechea",
-     "lat": -33.3512,
-     "lon": -70.518,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local 1080, Piso 1",
-     "comuna": "Macul",
-     "lat": -33.489,
-     "lon": -70.598,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local 510, Piso 1",
-     "comuna": "Maipú",
-     "lat": -33.511,
-     "lon": -70.758,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Módulo 1, Piso 2",
-     "comuna": "Peñalolén",
-     "lat": -33.4849,
-     "lon": -70.5423,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local 110, Piso 1",
-     "comuna": "Providencia",
-     "lat": -33.4256,
-     "lon": -70.6096,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local 2212, Piso 2",
-     "comuna": "Providencia",
-     "lat": -33.4256,
-     "lon": -70.6096,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local 3, Piso 1",
-     "comuna": "Providencia",
-     "lat": -33.4256,
-     "lon": -70.6096,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Zona de Embarque Internacional",
-     "comuna": "Pudahuel",
-     "lat": -33.4406,
-     "lon": -70.753,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Zona de Embarque Nacional",
-     "comuna": "Pudahuel",
-     "lat": -33.4406,
-     "lon": -70.753,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local C-130 / C-134",
-     "comuna": "Puente Alto",
-     "lat": -33.611,
-     "lon": -70.576,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Módulo D-19, Piso 1",
-     "comuna": "Quilicura",
-     "lat": -33.367,
-     "lon": -70.729,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local 1035",
-     "comuna": "San Bernardo",
-     "lat": -33.5921,
-     "lon": -70.6994,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local 1097, Piso 1",
-     "comuna": "San Miguel",
-     "lat": -33.496,
-     "lon": -70.652,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local B-2, Piso 1",
-     "comuna": "Vitacura",
-     "lat": -33.3899,
-     "lon": -70.5817,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Local TM 190, Piso 1",
-     "comuna": "Vitacura",
-     "lat": -33.3899,
-     "lon": -70.5817,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Cerrillos",
-    "Colina",
-    "Huechuraba",
-    "Independencia",
-    "La Florida",
-    "La Reina",
-    "Las Condes",
-    "Lo Barnechea",
-    "Macul",
-    "Maipú",
-    "Peñalolén",
-    "Providencia",
-    "Pudahuel",
-    "Puente Alto",
-    "Quilicura",
-    "San Bernardo",
-    "San Miguel",
-    "Vitacura"
    ]
   },
   {

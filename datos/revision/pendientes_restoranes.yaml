@@ -222,14 +222,6 @@ restoranes:
     lon: # COMPLETAR
     nota: verificada el 2026-08-31 por # COMPLETAR
 
-  # 1 descuentos sin pin exacto (Banco de Chile)
-  Brasas del Arriero:
-    direccion: Trinidad Ote. 1307
-    comuna: La Florida
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-08-31 por # COMPLETAR
-
   # 1 descuentos sin pin exacto (Banco Falabella)
   Cabrera al Paso:
     direccion: # COMPLETAR
@@ -240,6 +232,14 @@ restoranes:
 
   # 1 descuentos sin pin exacto (Banco Falabella)
   Caffe Pascucci:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-31 por # COMPLETAR
+
+  # 1 descuentos sin pin exacto (Banco Falabella)
+  Cantina Montt:
     direccion: # COMPLETAR
     comuna: # COMPLETAR
     lat: # COMPLETAR
@@ -275,9 +275,6 @@ restoranes:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
   Gatopardo Bistró:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  Jeronimo:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
   Kechua:
@@ -335,4 +332,7 @@ restoranes:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
   Azotea Matilde:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Badass:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
