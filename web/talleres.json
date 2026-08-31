@@ -1,6 +1,6 @@
 {
- "generado": "2026-08-30T22:39:06",
- "total": 1945,
+ "generado": "2026-08-31T00:39:05",
+ "total": 1944,
  "talleres": [
   {
    "id": "bf9b4c354e93637b",
@@ -11020,142 +11020,6 @@
     0,
     5
    ]
-  },
-  {
-   "id": "0d1af7ad427a7017",
-   "titulo": "Entrenamiento Funcional / Parque Ramón Cruz",
-   "inicio": "2026-08-30T10:00:00",
-   "fin": "2026-09-27T10:00:00",
-   "lugar": "Parque Ramón Cruz",
-   "direccion": "Av. Irarrázaval con Ramón Cruz Montt",
-   "comuna": "Ñuñoa",
-   "lat": -33.45536,
-   "lon": -70.5808,
-   "precision": "correccion",
-   "gratis": true,
-   "precio": null,
-   "precio_texto": "Gratis",
-   "categoria": "deporte",
-   "subcategoria": "gimnasia",
-   "escala": "under",
-   "publico": "todos",
-   "descripcion": "todos los domingo de 10:00 a 11:00. El entrenamiento funcional es una actividad física que entrena el cuerpo para las tareas diarias utilizando movimientos multiarticulares que imitan acciones…",
-   "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1765366970677-396921476.webp",
-   "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
-   "url": "https://talleres.nunoadeportes.cl/talleres/693827a105e34566713f263c",
-   "dias_semana": [
-    6
-   ],
-   "sesiones": 5,
-   "formato": "taller"
-  },
-  {
-   "id": "3f7315b8069e002e",
-   "titulo": "Breath y Float en Piscina temperada Parque O'higgins",
-   "inicio": "2026-08-30T10:00:00",
-   "fin": null,
-   "lugar": "Piscina temperada Parque O'higgins",
-   "direccion": "Av. Blanco Encalada 2540",
-   "comuna": "Santiago",
-   "lat": -33.46306,
-   "lon": -70.66664,
-   "precision": "correccion",
-   "gratis": false,
-   "precio": 65043,
-   "precio_texto": "desde $65.043",
-   "categoria": "clases",
-   "subcategoria": "bienestar",
-   "escala": "masivo",
-   "publico": "todos",
-   "descripcion": "ANTES DE ASISTIRPara que disfrutes plenamente esta experiencia, te pedimos considerar las siguientes indicaciones:VestimentaVen con ropa completamente blanca",
-   "imagen": "https://static.ptocdn.net/images/eventos/omn001_rs.jpg",
-   "fuente": "Puntoticket (deportes, musica y familia)",
-   "url": "https://www.puntoticket.com/evento/breath-float-2026?utm_medium=organic&utm_source=microformat",
-   "formato": "taller"
-  },
-  {
-   "id": "71ebe22f20742cec",
-   "titulo": "Chikung / Parque Ramón Cruz",
-   "inicio": "2026-08-30T10:00:00",
-   "fin": "2026-09-27T10:00:00",
-   "lugar": "Parque Ramón Cruz",
-   "direccion": "Av. Irarrázaval con Ramón Cruz Montt",
-   "comuna": "Ñuñoa",
-   "lat": -33.45536,
-   "lon": -70.5808,
-   "precision": "correccion",
-   "gratis": true,
-   "precio": null,
-   "precio_texto": "Gratis",
-   "categoria": "deporte",
-   "subcategoria": "gimnasia",
-   "escala": "under",
-   "publico": "todos",
-   "descripcion": "todos los domingo de 10:00 a 11:00. Chikung es una práctica milenaria china que combina movimientos corporales lentos y fluidos, respiración controlada y enfoque mental para cultivar y equilibrar la…",
-   "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1765366569567-936696213.webp",
-   "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
-   "url": "https://talleres.nunoadeportes.cl/talleres/6938292cc7c097cd0e95e8ea",
-   "dias_semana": [
-    6
-   ],
-   "sesiones": 5,
-   "formato": "taller"
-  },
-  {
-   "id": "240e3b2052501de9",
-   "titulo": "Zumba / Parque Ramon Cruz",
-   "inicio": "2026-08-30T11:00:00",
-   "fin": "2026-09-27T11:00:00",
-   "lugar": "Parque Ramon Cruz",
-   "direccion": "Av. Irarrázaval con Ramón Cruz Montt",
-   "comuna": "Ñuñoa",
-   "lat": -33.45536,
-   "lon": -70.5808,
-   "precision": "correccion",
-   "gratis": true,
-   "precio": null,
-   "precio_texto": "Gratis",
-   "categoria": "deporte",
-   "subcategoria": "baile_fitness",
-   "escala": "under",
-   "publico": "todos",
-   "descripcion": "todos los domingo de 11:00 a 12:00. Zumba es una actividad física aeróbica divertida que fusiona baile con rutinas de ejercicio usando ritmos de música latina como salsa, merengue y reguetón. Se creó…",
-   "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1765367151389-718412532.webp",
-   "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
-   "url": "https://talleres.nunoadeportes.cl/talleres/6938269605e34566713f2546",
-   "dias_semana": [
-    6
-   ],
-   "sesiones": 5,
-   "formato": "taller"
-  },
-  {
-   "id": "dbd750936bac74e7",
-   "titulo": "Patinaje / Parque Ramón Cruz",
-   "inicio": "2026-08-30T11:00:00",
-   "fin": "2026-09-27T11:00:00",
-   "lugar": "Parque Ramón Cruz",
-   "direccion": "Av. Irarrázaval con Ramón Cruz Montt",
-   "comuna": "Ñuñoa",
-   "lat": -33.45536,
-   "lon": -70.5808,
-   "precision": "correccion",
-   "gratis": true,
-   "precio": null,
-   "precio_texto": "Gratis",
-   "categoria": "deporte",
-   "subcategoria": "gimnasia",
-   "escala": "under",
-   "publico": "todos",
-   "descripcion": "todos los domingo de 11:00 a 12:00. El patinaje es una actividad física y deportiva que enseña habilidades básicas de equilibrio, coordinación y control sobre patines, combinando elementos técnicos…",
-   "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1765456403339-774373422.webp",
-   "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
-   "url": "https://talleres.nunoadeportes.cl/talleres/6939aeb6d7eb1d55178aa1af",
-   "dias_semana": [
-    6
-   ],
-   "sesiones": 5,
-   "formato": "taller"
   },
   {
    "id": "39fb44e66ddec70e",
@@ -24067,7 +23931,7 @@
    "id": "0ade6e4efb085b4f",
    "titulo": "Taller de metal y calcografía II",
    "inicio": "2026-09-03T10:00:00",
-   "fin": "2026-10-08T10:00:00",
+   "fin": "2026-10-15T10:00:00",
    "lugar": "Taller 99",
    "direccion": "Zañartu 1016",
    "comuna": "Providencia",
@@ -24088,7 +23952,7 @@
    "dias_semana": [
     3
    ],
-   "sesiones": 6,
+   "sesiones": 7,
    "formato": "taller"
   },
   {
@@ -24122,7 +23986,7 @@
    "id": "a092077ccc4122b6",
    "titulo": "Taller de litografía (jueves 10:00)",
    "inicio": "2026-09-03T10:00:00",
-   "fin": "2026-10-08T10:00:00",
+   "fin": "2026-10-15T10:00:00",
    "lugar": "Taller 99",
    "direccion": "Zañartu 1016",
    "comuna": "Providencia",
@@ -24143,7 +24007,7 @@
    "dias_semana": [
     3
    ],
-   "sesiones": 6,
+   "sesiones": 7,
    "formato": "taller"
   },
   {
@@ -24179,7 +24043,7 @@
    "id": "a11ff1fb4aae8e56",
    "titulo": "Taller de xilografía",
    "inicio": "2026-09-03T15:00:00",
-   "fin": "2026-10-08T15:00:00",
+   "fin": "2026-10-15T15:00:00",
    "lugar": "Taller 99",
    "direccion": "Zañartu 1016",
    "comuna": "Providencia",
@@ -24200,14 +24064,14 @@
    "dias_semana": [
     3
    ],
-   "sesiones": 6,
+   "sesiones": 7,
    "formato": "taller"
   },
   {
    "id": "afe2797ccc1ce507",
    "titulo": "Taller de metal y calcografía I",
    "inicio": "2026-09-03T15:00:00",
-   "fin": "2026-10-08T15:00:00",
+   "fin": "2026-10-15T15:00:00",
    "lugar": "Taller 99",
    "direccion": "Zañartu 1016",
    "comuna": "Providencia",
@@ -24228,7 +24092,7 @@
    "dias_semana": [
     3
    ],
-   "sesiones": 6,
+   "sesiones": 7,
    "formato": "taller"
   },
   {
@@ -25879,6 +25743,118 @@
    "url": "https://talleres.nunoadeportes.cl/talleres/69b4156d33b67cef3de38f13",
    "dias_semana": [
     5
+   ],
+   "sesiones": 4,
+   "formato": "taller"
+  },
+  {
+   "id": "62045b7f580a2b3e",
+   "titulo": "Chikung / Parque Ramón Cruz",
+   "inicio": "2026-09-06T10:00:00",
+   "fin": "2026-09-27T10:00:00",
+   "lugar": "Parque Ramón Cruz",
+   "direccion": "Av. Irarrázaval con Ramón Cruz Montt",
+   "comuna": "Ñuñoa",
+   "lat": -33.45536,
+   "lon": -70.5808,
+   "precision": "correccion",
+   "gratis": true,
+   "precio": null,
+   "precio_texto": "Gratis",
+   "categoria": "deporte",
+   "subcategoria": "gimnasia",
+   "escala": "under",
+   "publico": "todos",
+   "descripcion": "todos los domingo de 10:00 a 11:00. Chikung es una práctica milenaria china que combina movimientos corporales lentos y fluidos, respiración controlada y enfoque mental para cultivar y equilibrar la…",
+   "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1765366569567-936696213.webp",
+   "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
+   "url": "https://talleres.nunoadeportes.cl/talleres/6938292cc7c097cd0e95e8ea",
+   "dias_semana": [
+    6
+   ],
+   "sesiones": 4,
+   "formato": "taller"
+  },
+  {
+   "id": "cfa0e72a0befbd4f",
+   "titulo": "Entrenamiento Funcional / Parque Ramón Cruz",
+   "inicio": "2026-09-06T10:00:00",
+   "fin": "2026-09-27T10:00:00",
+   "lugar": "Parque Ramón Cruz",
+   "direccion": "Av. Irarrázaval con Ramón Cruz Montt",
+   "comuna": "Ñuñoa",
+   "lat": -33.45536,
+   "lon": -70.5808,
+   "precision": "correccion",
+   "gratis": true,
+   "precio": null,
+   "precio_texto": "Gratis",
+   "categoria": "deporte",
+   "subcategoria": "gimnasia",
+   "escala": "under",
+   "publico": "todos",
+   "descripcion": "todos los domingo de 10:00 a 11:00. El entrenamiento funcional es una actividad física que entrena el cuerpo para las tareas diarias utilizando movimientos multiarticulares que imitan acciones…",
+   "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1765366970677-396921476.webp",
+   "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
+   "url": "https://talleres.nunoadeportes.cl/talleres/693827a105e34566713f263c",
+   "dias_semana": [
+    6
+   ],
+   "sesiones": 4,
+   "formato": "taller"
+  },
+  {
+   "id": "5c1617ee7d0c406c",
+   "titulo": "Patinaje / Parque Ramón Cruz",
+   "inicio": "2026-09-06T11:00:00",
+   "fin": "2026-09-27T11:00:00",
+   "lugar": "Parque Ramón Cruz",
+   "direccion": "Av. Irarrázaval con Ramón Cruz Montt",
+   "comuna": "Ñuñoa",
+   "lat": -33.45536,
+   "lon": -70.5808,
+   "precision": "correccion",
+   "gratis": true,
+   "precio": null,
+   "precio_texto": "Gratis",
+   "categoria": "deporte",
+   "subcategoria": "gimnasia",
+   "escala": "under",
+   "publico": "todos",
+   "descripcion": "todos los domingo de 11:00 a 12:00. El patinaje es una actividad física y deportiva que enseña habilidades básicas de equilibrio, coordinación y control sobre patines, combinando elementos técnicos…",
+   "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1765456403339-774373422.webp",
+   "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
+   "url": "https://talleres.nunoadeportes.cl/talleres/6939aeb6d7eb1d55178aa1af",
+   "dias_semana": [
+    6
+   ],
+   "sesiones": 4,
+   "formato": "taller"
+  },
+  {
+   "id": "c3c602a899c7941c",
+   "titulo": "Zumba / Parque Ramon Cruz",
+   "inicio": "2026-09-06T11:00:00",
+   "fin": "2026-09-27T11:00:00",
+   "lugar": "Parque Ramon Cruz",
+   "direccion": "Av. Irarrázaval con Ramón Cruz Montt",
+   "comuna": "Ñuñoa",
+   "lat": -33.45536,
+   "lon": -70.5808,
+   "precision": "correccion",
+   "gratis": true,
+   "precio": null,
+   "precio_texto": "Gratis",
+   "categoria": "deporte",
+   "subcategoria": "baile_fitness",
+   "escala": "under",
+   "publico": "todos",
+   "descripcion": "todos los domingo de 11:00 a 12:00. Zumba es una actividad física aeróbica divertida que fusiona baile con rutinas de ejercicio usando ritmos de música latina como salsa, merengue y reguetón. Se creó…",
+   "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1765367151389-718412532.webp",
+   "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres",
+   "url": "https://talleres.nunoadeportes.cl/talleres/6938269605e34566713f2546",
+   "dias_semana": [
+    6
    ],
    "sesiones": 4,
    "formato": "taller"

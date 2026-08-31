@@ -1,7 +1,7 @@
 {
- "generado": "2026-08-30T12:23:30",
- "total": 638,
- "locales": 1780,
+ "generado": "2026-08-31T00:35:09",
+ "total": 635,
+ "locales": 1663,
  "bancos": [
   [
    "bancochile",
@@ -59,7 +59,6 @@
   "Maipú",
   "Melipilla",
   "Padre Hurtado",
-  "Paine",
   "Pedro Aguirre Cerda",
   "Peñaflor",
   "Peñalolén",
@@ -80,13 +79,13 @@
   "Ñuñoa"
  ],
  "por_dia": {
-  "miercoles": 228,
-  "sabado": 128,
-  "jueves": 183,
-  "viernes": 137,
-  "lunes": 196,
-  "martes": 238,
-  "domingo": 101
+  "miercoles": 227,
+  "sabado": 127,
+  "jueves": 182,
+  "viernes": 135,
+  "lunes": 195,
+  "martes": 237,
+  "domingo": 100
  },
  "descuentos": [
   {
@@ -19375,1079 +19374,6 @@
    ]
   },
   {
-   "banco_id": "bancochile",
-   "banco": "Banco de Chile",
-   "comercio": "Starbucks",
-   "categoria": "cafeterias",
-   "cocina": "cafe",
-   "region": "Metropolitana",
-   "sitio_web": "https://www.starbucks.cl/",
-   "porcentaje": 30,
-   "oferta": "",
-   "tope": null,
-   "dias": [
-    "viernes",
-    "sabado",
-    "domingo"
-   ],
-   "vigencia_hasta": "2026-08-30",
-   "tarjetas": [
-    "visa-credito-infinite",
-    "visa-credito-signature",
-    "visa-credito-platinum",
-    "visa-fan-credito",
-    "mastercard-credito-black",
-    "mastercard-credito-platinum",
-    "visa-debito-infinite",
-    "visa-debito-signature",
-    "visa-debito-bch",
-    "visa-cuenta-fan",
-    "visa-credito-gold",
-    "mastercard-credito-dorada"
-   ],
-   "modalidad": "presencial",
-   "segmentado": false,
-   "condiciones": "Promoción válida hasta el 30 de agosto de 2026. Beneficio es válido en locales que se encuentren en Chile, para clientes que paguen en tiendas Starbucks con Tarjetas de Débito o Crédito Banco de Chile (incluye Banco Edwards). Descuento no aplica a extras agregados a las bebidas. No válido en aeropuerto. La entrega de los beneficios se realiza en el punto de venta y es de exclusiva responsabilidad de Starbucks Coffee Chile S.A., no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni en la ulterior atención que ello demande. Infórmese sobre la garantía estatal de los depósitos en su Banco o en www.cmfchile.cl",
-   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/starbucks",
-   "logo": "https://assets.bancochile.cl/uploads/000/097/273/11de5601-b93c-472f-8c17-ade7ffb01f6a/original/logo-web-Starbucks.jpg",
-   "capturado": "",
-   "id": "c132379fddd6",
-   "locales": [
-    {
-     "direccion": "Av. Américo Vespucio 1501",
-     "comuna": "Cerrillos",
-     "lat": -33.5170799,
-     "lon": -70.7134901,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Chamisero 9790",
-     "comuna": "Colina",
-     "lat": -33.2019,
-     "lon": -70.6747,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Paseo Colina Sur 14500",
-     "comuna": "Colina",
-     "lat": -33.2768715,
-     "lon": -70.6266196,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Libertador Bernardo OHiggins 3470",
-     "comuna": "Estación Central",
-     "lat": -33.461,
-     "lon": -70.679,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Américo Vespucio 1737",
-     "comuna": "Huechuraba",
-     "lat": -33.3641739,
-     "lon": -70.6791808,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Del Valle Sur 650",
-     "comuna": "Huechuraba",
-     "lat": -33.3938036,
-     "lon": -70.6192838,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. El Parque 4860",
-     "comuna": "Huechuraba",
-     "lat": -33.38908475294119,
-     "lon": -70.61817205294116,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Pedro Fontova 6251",
-     "comuna": "Huechuraba",
-     "lat": -33.36635576666668,
-     "lon": -70.67012216666667,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Independencia 565",
-     "comuna": "Independencia",
-     "lat": -33.4246263,
-     "lon": -70.6532803,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Vicuña Mackenna 6100",
-     "comuna": "La Florida",
-     "lat": -33.5104542,
-     "lon": -70.6057952,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Vicuña Mackenna 7110",
-     "comuna": "La Florida",
-     "lat": -33.5175368,
-     "lon": -70.5979896,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Vicuña Mackenna Oriente 7110",
-     "comuna": "La Florida",
-     "lat": -33.5175368,
-     "lon": -70.5979896,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Froilán Roa 580",
-     "comuna": "La Florida",
-     "lat": -33.5149167,
-     "lon": -70.5991577,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Larraín 5862",
-     "comuna": "La Reina",
-     "lat": -33.4527555,
-     "lon": -70.5694845,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Príncipe de Gales 6803",
-     "comuna": "La Reina",
-     "lat": -33.43840468,
-     "lon": -70.56160468,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Echeñique 8490",
-     "comuna": "La Reina",
-     "lat": -33.44177022,
-     "lon": -70.54214094,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Francisco Bilbao 8750",
-     "comuna": "La Reina",
-     "lat": -33.4284594,
-     "lon": -70.5411961,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Apoquindo 2827",
-     "comuna": "Las Condes",
-     "lat": -33.4180782,
-     "lon": -70.6003994,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Apoquindo 3472",
-     "comuna": "Las Condes",
-     "lat": -33.4159664,
-     "lon": -70.5938301,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Apoquindo 3575 C",
-     "comuna": "Las Condes",
-     "lat": -33.4162484,
-     "lon": -70.5924636,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Apoquindo 5400",
-     "comuna": "Las Condes",
-     "lat": -33.40980027142858,
-     "lon": -70.57261804285714,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Apoquindo 5950",
-     "comuna": "Las Condes",
-     "lat": -33.4089223,
-     "lon": -70.5691754,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Andrés Bello 2777",
-     "comuna": "Las Condes",
-     "lat": -33.414891,
-     "lon": -70.6045882,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Apoquindo 4400",
-     "comuna": "Las Condes",
-     "lat": -33.4137767,
-     "lon": -70.5843307,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Apoquindo 6550",
-     "comuna": "Las Condes",
-     "lat": -33.40732914444445,
-     "lon": -70.56302974444445,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Cerro El Plomo 5630",
-     "comuna": "Las Condes",
-     "lat": -33.4054733,
-     "lon": -70.5740836,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Cristóbal Colón 4289",
-     "comuna": "Las Condes",
-     "lat": -33.42402365454546,
-     "lon": -70.58041921818182,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Las Condes 12340",
-     "comuna": "Las Condes",
-     "lat": -33.3724608,
-     "lon": -70.5184561,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Las Condes 13451",
-     "comuna": "Las Condes",
-     "lat": -33.370569675,
-     "lon": -70.5065416125,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Las Condes 9765",
-     "comuna": "Las Condes",
-     "lat": -33.387968380000004,
-     "lon": -70.53989188,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Padre Hurtado Sur 78",
-     "comuna": "Las Condes",
-     "lat": -33.4092819,
-     "lon": -70.5420124,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Presidente Kennedy 5413",
-     "comuna": "Las Condes",
-     "lat": -33.4032393,
-     "lon": -70.5795786,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Presidente Kennedy 5601",
-     "comuna": "Las Condes",
-     "lat": -33.4011978,
-     "lon": -70.5756572,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Presidente Kennedy 9001",
-     "comuna": "Las Condes",
-     "lat": -33.3897496,
-     "lon": -70.5456739,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Vitacura 2850",
-     "comuna": "Las Condes",
-     "lat": -33.4143372,
-     "lon": -70.6035215,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Camino El Alba 11969",
-     "comuna": "Las Condes",
-     "lat": -33.4021018,
-     "lon": -70.5147311,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Camino Las Flores 12640",
-     "comuna": "Las Condes",
-     "lat": -33.3956111,
-     "lon": -70.5062549,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Cerro El Plomo 5855",
-     "comuna": "Las Condes",
-     "lat": -33.4046004,
-     "lon": -70.5702622,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Costanera Sur Río Mapocho 2730",
-     "comuna": "Las Condes",
-     "lat": -33.4088,
-     "lon": -70.5673,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Estoril 450",
-     "comuna": "Las Condes",
-     "lat": -33.384867704347826,
-     "lon": -70.53047827391305,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Fernández Concha 700",
-     "comuna": "Las Condes",
-     "lat": -33.375836955,
-     "lon": -70.50565420000001,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "General Blanche 11860",
-     "comuna": "Las Condes",
-     "lat": -33.4088,
-     "lon": -70.5673,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Isabel la Católica 4394",
-     "comuna": "Las Condes",
-     "lat": -33.4258709,
-     "lon": -70.5775197,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Lo Fontecilla 441",
-     "comuna": "Las Condes",
-     "lat": -33.3834815,
-     "lon": -70.530746,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Los Militares 4777",
-     "comuna": "Las Condes",
-     "lat": -33.4127156,
-     "lon": -70.5820729,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Magdalena 140",
-     "comuna": "Las Condes",
-     "lat": -33.41464898,
-     "lon": -70.59375036,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Manquehue Norte 457",
-     "comuna": "Las Condes",
-     "lat": -33.4037023,
-     "lon": -70.5684256,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Mariano Sánchez Fontecilla 310",
-     "comuna": "Las Condes",
-     "lat": -33.4199102,
-     "lon": -70.5984477,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Presidente Riesco 5333",
-     "comuna": "Las Condes",
-     "lat": -33.4052419,
-     "lon": -70.5760628,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Rosario Norte 100",
-     "comuna": "Las Condes",
-     "lat": -33.4075835,
-     "lon": -70.5716718,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "San Sebastián 2946",
-     "comuna": "Las Condes",
-     "lat": -33.4137274,
-     "lon": -70.60019278,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. El Rodeo 12850",
-     "comuna": "Lo Barnechea",
-     "lat": -33.3521363,
-     "lon": -70.5200481,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "José Alcalde Delano 10492",
-     "comuna": "Lo Barnechea",
-     "lat": -33.3572273,
-     "lon": -70.5404838,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "La Dehesa 1445",
-     "comuna": "Lo Barnechea",
-     "lat": -33.3584249,
-     "lon": -70.5165516,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Américo Vespucio 399",
-     "comuna": "Maipú",
-     "lat": -33.4833453,
-     "lon": -70.7497514,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Ruta 5 Sur Km 57 (Angostura)",
-     "comuna": "Paine",
-     "lat": -33.8083,
-     "lon": -70.7411,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Américo Vespucio 3300",
-     "comuna": "Peñalolén",
-     "lat": -33.487593,
-     "lon": -70.5781058,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Consistorial 2100",
-     "comuna": "Peñalolén",
-     "lat": -33.4790556,
-     "lon": -70.5441098,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Las Perdices 2990",
-     "comuna": "Peñalolén",
-     "lat": -33.4917487,
-     "lon": -70.539892,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Alfredo Barros Errázuriz 1953",
-     "comuna": "Providencia",
-     "lat": -33.4273785,
-     "lon": -70.61253110000001,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Andrés Bello 2447",
-     "comuna": "Providencia",
-     "lat": -33.4174378,
-     "lon": -70.6061487,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Andrés Bello 2465",
-     "comuna": "Providencia",
-     "lat": -33.4177299,
-     "lon": -70.6055567,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Nueva Providencia 1341",
-     "comuna": "Providencia",
-     "lat": -33.4295586,
-     "lon": -70.6192543,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Providencia 2102",
-     "comuna": "Providencia",
-     "lat": -33.422764,
-     "lon": -70.6116457,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Ricardo Lyon 172",
-     "comuna": "Providencia",
-     "lat": -33.4231983,
-     "lon": -70.6090922,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Suecia 0137",
-     "comuna": "Providencia",
-     "lat": -33.4256,
-     "lon": -70.6096,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Bellavista 052",
-     "comuna": "Providencia",
-     "lat": -33.4256,
-     "lon": -70.6096,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Bellavista 497",
-     "comuna": "Providencia",
-     "lat": -33.4315262,
-     "lon": -70.6286935,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Bilbao 1221",
-     "comuna": "Providencia",
-     "lat": -33.4398601,
-     "lon": -70.61648770000001,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "La Concepción 128",
-     "comuna": "Providencia",
-     "lat": -33.42443438,
-     "lon": -70.6157594,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Los Conquistadores 1726",
-     "comuna": "Providencia",
-     "lat": -33.42158768,
-     "lon": -70.61948952,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Pedro de Valdivia 273",
-     "comuna": "Providencia",
-     "lat": -33.42619194,
-     "lon": -70.61188242,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Aeropuerto Arturo Merino Benítez (AMB)",
-     "comuna": "Pudahuel",
-     "lat": -33.4406,
-     "lon": -70.753,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Aeropuerto Arturo Merino Benítez (Embarque Internacional, b215)",
-     "comuna": "Pudahuel",
-     "lat": -33.4406,
-     "lon": -70.753,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Aeropuerto Arturo Merino Benítez (Embarque Nacional)",
-     "comuna": "Pudahuel",
-     "lat": -33.4406,
-     "lon": -70.753,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Aeropuerto Arturo Merino Benítez (Jean Mermoz 2150)",
-     "comuna": "Pudahuel",
-     "lat": -33.4010807,
-     "lon": -70.7932921,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Camilo Henríquez 3692",
-     "comuna": "Puente Alto",
-     "lat": -33.5702929,
-     "lon": -70.5573382,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. San Ignacio 500",
-     "comuna": "Quilicura",
-     "lat": -33.331635355172416,
-     "lon": -70.70355972068965,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Presidente Jorge Alessandri Rodríguez 20040",
-     "comuna": "San Bernardo",
-     "lat": -33.6329429,
-     "lon": -70.7106787,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Vicuña Mackenna 4860",
-     "comuna": "San Joaquín",
-     "lat": -33.4967759,
-     "lon": -70.6130593,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Gran Avenida José Miguel Carrera 6150",
-     "comuna": "San Miguel",
-     "lat": -33.5125455,
-     "lon": -70.6570151,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Subercaseaux 3519",
-     "comuna": "San Miguel",
-     "lat": -33.4855952,
-     "lon": -70.6515257,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Agustinas 1161",
-     "comuna": "Santiago",
-     "lat": -33.4408987,
-     "lon": -70.6530027,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Agustinas 640",
-     "comuna": "Santiago",
-     "lat": -33.4404415,
-     "lon": -70.6459629,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Libertador Bernardo OHiggins 1449",
-     "comuna": "Santiago",
-     "lat": -33.4425,
-     "lon": -70.6505,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Libertador Bernardo OHiggins 2236",
-     "comuna": "Santiago",
-     "lat": -33.4425,
-     "lon": -70.6505,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Libertador Bernardo OHiggins 440",
-     "comuna": "Santiago",
-     "lat": -33.4425,
-     "lon": -70.6505,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Catedral 1421",
-     "comuna": "Santiago",
-     "lat": -33.4378767,
-     "lon": -70.6574143,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Compañía 1093",
-     "comuna": "Santiago",
-     "lat": -33.4390491,
-     "lon": -70.6531176,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Compañía 1214",
-     "comuna": "Santiago",
-     "lat": -33.4389749,
-     "lon": -70.6542584,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Estado 125",
-     "comuna": "Santiago",
-     "lat": -33.4415958,
-     "lon": -70.6490729,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "General Mackenna 1441",
-     "comuna": "Santiago",
-     "lat": -33.4333221,
-     "lon": -70.6577276,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Huérfanos 1016",
-     "comuna": "Santiago",
-     "lat": -33.43973490833334,
-     "lon": -70.64914645,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Huérfanos 1321",
-     "comuna": "Santiago",
-     "lat": -33.4398105,
-     "lon": -70.6550812,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "José Victorino Lastarria 88",
-     "comuna": "Santiago",
-     "lat": -33.4392538,
-     "lon": -70.6412571,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Merced 611",
-     "comuna": "Santiago",
-     "lat": -33.4380564,
-     "lon": -70.6459062,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Nueva York 52 y 54",
-     "comuna": "Santiago",
-     "lat": -33.4424104,
-     "lon": -70.6511716,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Paseo Bulnes 71",
-     "comuna": "Santiago",
-     "lat": -33.445113,
-     "lon": -70.6697726,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Paseo Huérfanos 830",
-     "comuna": "Santiago",
-     "lat": -33.43978174210527,
-     "lon": -70.64867053684212,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Serrano 75",
-     "comuna": "Santiago",
-     "lat": -33.4453338,
-     "lon": -70.6494329,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Vergara 324",
-     "comuna": "Santiago",
-     "lat": -33.45155884,
-     "lon": -70.661606,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Alonso de Córdova 2894",
-     "comuna": "Vitacura",
-     "lat": -33.40135192,
-     "lon": -70.59762426,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Alonso de Córdova 3788",
-     "comuna": "Vitacura",
-     "lat": -33.4019436,
-     "lon": -70.5930261,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Luis Pasteur 6666",
-     "comuna": "Vitacura",
-     "lat": -33.3804976,
-     "lon": -70.570932,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Nueva Costanera 3900",
-     "comuna": "Vitacura",
-     "lat": -33.398086,
-     "lon": -70.5989288,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Nueva Costanera 4177",
-     "comuna": "Vitacura",
-     "lat": -33.3944211,
-     "lon": -70.5969695,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Tabancura 1233",
-     "comuna": "Vitacura",
-     "lat": -33.3819525,
-     "lon": -70.5361669,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. Vitacura 6844",
-     "comuna": "Vitacura",
-     "lat": -33.38730146,
-     "lon": -70.56656382,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Santa María Manquehue 6736",
-     "comuna": "Vitacura",
-     "lat": -33.3899,
-     "lon": -70.5817,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Vitacura 4607",
-     "comuna": "Vitacura",
-     "lat": -33.3986481,
-     "lon": -70.5865143,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. José Pedro Alessandri 1166",
-     "comuna": "Ñuñoa",
-     "lat": -33.4655008,
-     "lon": -70.596966,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Irarrázaval 3107",
-     "comuna": "Ñuñoa",
-     "lat": -33.4541273,
-     "lon": -70.5983067,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Cerrillos",
-    "Colina",
-    "Estación Central",
-    "Huechuraba",
-    "Independencia",
-    "La Florida",
-    "La Reina",
-    "Las Condes",
-    "Lo Barnechea",
-    "Maipú",
-    "Paine",
-    "Peñalolén",
-    "Providencia",
-    "Pudahuel",
-    "Puente Alto",
-    "Quilicura",
-    "San Bernardo",
-    "San Joaquín",
-    "San Miguel",
-    "Santiago",
-    "Vitacura",
-    "Ñuñoa"
-   ]
-  },
-  {
    "banco_id": "entel",
    "banco": "Entel",
    "comercio": "Starbucks",
@@ -20475,1016 +19401,990 @@
    "id": "21381b66b42a",
    "locales": [
     {
-     "direccion": "Av. Américo Vespucio 1501",
+     "direccion": "Avenida Américo Vespucio 1501",
      "comuna": "Cerrillos",
-     "lat": -33.5170799,
-     "lon": -70.7134901,
-     "precision": "calle",
+     "lat": -33.5172766,
+     "lon": -70.7165748,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. Chamisero 9790",
+     "direccion": "Armando Cortínez Oriente 1704",
+     "comuna": "Cerro Navia",
+     "lat": -33.3964575,
+     "lon": -70.7935156,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Chamisero",
      "comuna": "Colina",
-     "lat": -33.2019,
-     "lon": -70.6747,
-     "precision": "comuna",
+     "lat": -33.3037981,
+     "lon": -70.6660564,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. Paseo Colina Sur 14500",
-     "comuna": "Colina",
-     "lat": -33.2768715,
-     "lon": -70.6266196,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Av. Libertador Bernardo OHiggins 3470",
-     "comuna": "Estación Central",
-     "lat": -33.461,
-     "lon": -70.679,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Av. Américo Vespucio 1737",
+     "direccion": "Avenida Américo Vespucio 1737",
      "comuna": "Huechuraba",
-     "lat": -33.3641739,
-     "lon": -70.6791808,
-     "precision": "calle",
+     "lat": -33.3675413,
+     "lon": -70.6784105,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. Del Valle Sur 650",
+     "direccion": "Avenida Pedro Fontova 6251",
      "comuna": "Huechuraba",
-     "lat": -33.3938036,
-     "lon": -70.6192838,
-     "precision": "calle",
+     "lat": -33.3665254,
+     "lon": -70.6701843,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. El Parque 4860",
+     "direccion": "Del Valle",
      "comuna": "Huechuraba",
-     "lat": -33.38908475294119,
-     "lon": -70.61817205294116,
-     "precision": "calle",
+     "lat": -33.3938154,
+     "lon": -70.6151456,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Pedro Fontova 6251",
-     "comuna": "Huechuraba",
-     "lat": -33.36635576666668,
-     "lon": -70.67012216666667,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Av. Independencia 565",
+     "direccion": "Avenida Independencia 565",
      "comuna": "Independencia",
-     "lat": -33.4246263,
-     "lon": -70.6532803,
-     "precision": "calle",
+     "lat": -33.4242415,
+     "lon": -70.6544439,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. Vicuña Mackenna 6100",
-     "comuna": "La Florida",
-     "lat": -33.5104542,
-     "lon": -70.6057952,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Av. Vicuña Mackenna 7110",
+     "direccion": "Avenida Vicuña Mackenna Oriente 7110",
      "comuna": "La Florida",
      "lat": -33.5175368,
      "lon": -70.5979896,
-     "precision": "calle",
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. Vicuña Mackenna Oriente 7110",
-     "comuna": "La Florida",
-     "lat": -33.5175368,
-     "lon": -70.5979896,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Froilán Roa 580",
-     "comuna": "La Florida",
-     "lat": -33.5149167,
-     "lon": -70.5991577,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Av. Larraín 5862",
+     "direccion": "Avenida Carlos Ossandón 1220",
      "comuna": "La Reina",
-     "lat": -33.4527555,
-     "lon": -70.5694845,
-     "precision": "calle",
+     "lat": -33.4413111,
+     "lon": -70.5436252,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. Príncipe de Gales 6803",
+     "direccion": "Avenida Larraín 5862",
      "comuna": "La Reina",
-     "lat": -33.43840468,
-     "lon": -70.56160468,
-     "precision": "calle",
+     "lat": -33.4531179,
+     "lon": -70.5702228,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Echeñique 8490",
-     "comuna": "La Reina",
-     "lat": -33.44177022,
-     "lon": -70.54214094,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Francisco Bilbao 8750",
-     "comuna": "La Reina",
-     "lat": -33.4284594,
-     "lon": -70.5411961,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Apoquindo 2827",
+     "direccion": "Avenida Apoquindo 2827",
      "comuna": "Las Condes",
      "lat": -33.4180782,
      "lon": -70.6003994,
-     "precision": "calle",
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Apoquindo 3472",
+     "direccion": "Avenida Apoquindo 3472",
      "comuna": "Las Condes",
      "lat": -33.4159664,
      "lon": -70.5938301,
-     "precision": "calle",
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Apoquindo 3575 C",
+     "direccion": "Avenida Apoquindo 3575",
      "comuna": "Las Condes",
      "lat": -33.4162484,
      "lon": -70.5924636,
-     "precision": "calle",
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Apoquindo 5400",
-     "comuna": "Las Condes",
-     "lat": -33.40980027142858,
-     "lon": -70.57261804285714,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Apoquindo 5950",
+     "direccion": "Avenida Apoquindo 5950",
      "comuna": "Las Condes",
      "lat": -33.4089223,
      "lon": -70.5691754,
-     "precision": "calle",
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. Andrés Bello 2777",
-     "comuna": "Las Condes",
-     "lat": -33.414891,
-     "lon": -70.6045882,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Av. Apoquindo 4400",
-     "comuna": "Las Condes",
-     "lat": -33.4137767,
-     "lon": -70.5843307,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Av. Apoquindo 6550",
-     "comuna": "Las Condes",
-     "lat": -33.40732914444445,
-     "lon": -70.56302974444445,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Av. Cerro El Plomo 5630",
-     "comuna": "Las Condes",
-     "lat": -33.4054733,
-     "lon": -70.5740836,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Av. Cristóbal Colón 4289",
+     "direccion": "Avenida Cristóbal Colón 4289",
      "comuna": "Las Condes",
      "lat": -33.42402365454546,
      "lon": -70.58041921818182,
-     "precision": "calle",
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. Las Condes 12340",
+     "direccion": "Avenida Isabel La Católica 4394",
      "comuna": "Las Condes",
-     "lat": -33.3724608,
-     "lon": -70.5184561,
-     "precision": "calle",
+     "lat": -33.4259089,
+     "lon": -70.5774473,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. Las Condes 13451",
-     "comuna": "Las Condes",
-     "lat": -33.370569675,
-     "lon": -70.5065416125,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Av. Las Condes 9765",
-     "comuna": "Las Condes",
-     "lat": -33.387968380000004,
-     "lon": -70.53989188,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Av. Padre Hurtado Sur 78",
-     "comuna": "Las Condes",
-     "lat": -33.4092819,
-     "lon": -70.5420124,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Av. Presidente Kennedy 5413",
-     "comuna": "Las Condes",
-     "lat": -33.4032393,
-     "lon": -70.5795786,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Av. Presidente Kennedy 5601",
-     "comuna": "Las Condes",
-     "lat": -33.4011978,
-     "lon": -70.5756572,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Av. Presidente Kennedy 9001",
-     "comuna": "Las Condes",
-     "lat": -33.3897496,
-     "lon": -70.5456739,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Av. Vitacura 2850",
-     "comuna": "Las Condes",
-     "lat": -33.4143372,
-     "lon": -70.6035215,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Camino El Alba 11969",
-     "comuna": "Las Condes",
-     "lat": -33.4021018,
-     "lon": -70.5147311,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Camino Las Flores 12640",
-     "comuna": "Las Condes",
-     "lat": -33.3956111,
-     "lon": -70.5062549,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Cerro El Plomo 5855",
-     "comuna": "Las Condes",
-     "lat": -33.4046004,
-     "lon": -70.5702622,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Costanera Sur Río Mapocho 2730",
-     "comuna": "Las Condes",
-     "lat": -33.4088,
-     "lon": -70.5673,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Estoril 450",
-     "comuna": "Las Condes",
-     "lat": -33.384867704347826,
-     "lon": -70.53047827391305,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Fernández Concha 700",
-     "comuna": "Las Condes",
-     "lat": -33.375836955,
-     "lon": -70.50565420000001,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "General Blanche 11860",
-     "comuna": "Las Condes",
-     "lat": -33.4088,
-     "lon": -70.5673,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Isabel la Católica 4394",
-     "comuna": "Las Condes",
-     "lat": -33.4258709,
-     "lon": -70.5775197,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Lo Fontecilla 441",
-     "comuna": "Las Condes",
-     "lat": -33.3834815,
-     "lon": -70.530746,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Los Militares 4777",
-     "comuna": "Las Condes",
-     "lat": -33.4127156,
-     "lon": -70.5820729,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Magdalena 140",
-     "comuna": "Las Condes",
-     "lat": -33.41464898,
-     "lon": -70.59375036,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Manquehue Norte 457",
+     "direccion": "Avenida Manquehue Norte 457",
      "comuna": "Las Condes",
      "lat": -33.4037023,
      "lon": -70.5684256,
-     "precision": "calle",
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Mariano Sánchez Fontecilla 310",
+     "direccion": "Avenida Padre Hurtado Sur 875",
      "comuna": "Las Condes",
-     "lat": -33.4199102,
-     "lon": -70.5984477,
-     "precision": "calle",
+     "lat": -33.414322,
+     "lon": -70.5404865,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Presidente Riesco 5333",
+     "direccion": "Avenida Presidente Kennedy 5413",
      "comuna": "Las Condes",
-     "lat": -33.4052419,
-     "lon": -70.5760628,
-     "precision": "calle",
+     "lat": -33.4022962,
+     "lon": -70.5787522,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Rosario Norte 100",
+     "direccion": "Avenida Presidente Kennedy 5601",
      "comuna": "Las Condes",
-     "lat": -33.4075835,
-     "lon": -70.5716718,
-     "precision": "calle",
+     "lat": -33.4010122,
+     "lon": -70.5756291,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Presidente Kennedy 9001",
+     "comuna": "Las Condes",
+     "lat": -33.3901519,
+     "lon": -70.5462718,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Presidente Riesco 5333",
+     "comuna": "Las Condes",
+     "lat": -33.4053959,
+     "lon": -70.5764582,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Presidente Sebastián Piñera Echenique 981",
+     "comuna": "Las Condes",
+     "lat": -33.4173638,
+     "lon": -70.554071,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Vitacura 2800",
+     "comuna": "Las Condes",
+     "lat": -33.4131826,
+     "lon": -70.6036086,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Camino El Alba 11865",
+     "comuna": "Las Condes",
+     "lat": -33.4023105,
+     "lon": -70.5167507,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Cerro El Plomo 5630",
+     "comuna": "Las Condes",
+     "lat": -33.4053825,
+     "lon": -70.5742722,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Isidora Goyenechea",
+     "comuna": "Las Condes",
+     "lat": -33.4144097,
+     "lon": -70.5937728,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Mariano Sánchez Fontecilla",
+     "comuna": "Las Condes",
+     "lat": -33.4197742,
+     "lon": -70.5985992,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
     },
     {
      "direccion": "San Sebastián 2946",
      "comuna": "Las Condes",
      "lat": -33.4137274,
      "lon": -70.60019278,
-     "precision": "calle",
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. El Rodeo 12850",
+     "direccion": "Avenida El Rodeo 12850",
      "comuna": "Lo Barnechea",
-     "lat": -33.3521363,
-     "lon": -70.5200481,
-     "precision": "calle",
+     "lat": -33.3522989,
+     "lon": -70.5205111,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "José Alcalde Delano 10492",
+     "direccion": "Avenida José Alcalde Délano 10492",
      "comuna": "Lo Barnechea",
-     "lat": -33.3572273,
-     "lon": -70.5404838,
-     "precision": "calle",
+     "lat": -33.35698432,
+     "lon": -70.54059104,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "La Dehesa 1445",
+     "direccion": "Avenida La Dehesa 1445",
      "comuna": "Lo Barnechea",
      "lat": -33.3584249,
      "lon": -70.5165516,
-     "precision": "calle",
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. Américo Vespucio 399",
+     "direccion": "Avenida Las Condes",
+     "comuna": "Lo Barnechea",
+     "lat": -33.372222,
+     "lon": -70.518421,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Las Condes 13451",
+     "comuna": "Lo Barnechea",
+     "lat": -33.3706314,
+     "lon": -70.5070512,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Paseo Pie Andino 4770",
+     "comuna": "Lo Barnechea",
+     "lat": -33.3255642,
+     "lon": -70.5170139,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Macul",
+     "comuna": "Macul",
+     "lat": -33.476860779999996,
+     "lon": -70.59866056,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Américo Vespucio 399",
      "comuna": "Maipú",
-     "lat": -33.4833453,
-     "lon": -70.7497514,
-     "precision": "calle",
+     "lat": -33.4813787,
+     "lon": -70.7518929,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Ruta 5 Sur Km 57 (Angostura)",
-     "comuna": "Paine",
-     "lat": -33.8083,
-     "lon": -70.7411,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Av. Américo Vespucio 3300",
-     "comuna": "Peñalolén",
-     "lat": -33.487593,
-     "lon": -70.5781058,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Av. Consistorial 2100",
+     "direccion": "Avenida Consistorial 2100",
      "comuna": "Peñalolén",
      "lat": -33.4790556,
      "lon": -70.5441098,
-     "precision": "calle",
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Las Perdices 2990",
+     "direccion": "Avenida Las Perdices 2990",
      "comuna": "Peñalolén",
-     "lat": -33.4917487,
-     "lon": -70.539892,
-     "precision": "calle",
+     "lat": -33.4911386,
+     "lon": -70.5405455,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Alfredo Barros Errázuriz 1953",
+     "direccion": "Avenida Andrés Bello",
      "comuna": "Providencia",
-     "lat": -33.4273785,
-     "lon": -70.61253110000001,
-     "precision": "calle",
+     "lat": -33.4145061,
+     "lon": -70.6046598,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. Andrés Bello 2447",
+     "direccion": "Avenida Andrés Bello 2461",
      "comuna": "Providencia",
-     "lat": -33.4174378,
-     "lon": -70.6061487,
-     "precision": "calle",
+     "lat": -33.417394,
+     "lon": -70.605346,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. Andrés Bello 2465",
+     "direccion": "Avenida Francisco Bilbao",
      "comuna": "Providencia",
-     "lat": -33.4177299,
-     "lon": -70.6055567,
-     "precision": "calle",
+     "lat": -33.439214,
+     "lon": -70.6161719,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. Nueva Providencia 1341",
+     "direccion": "Avenida Nueva Providencia 1341",
      "comuna": "Providencia",
      "lat": -33.4295586,
      "lon": -70.6192543,
-     "precision": "calle",
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. Providencia 2102",
-     "comuna": "Providencia",
-     "lat": -33.422764,
-     "lon": -70.6116457,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Av. Ricardo Lyon 172",
+     "direccion": "Avenida Ricardo Lyon 172",
      "comuna": "Providencia",
      "lat": -33.4231983,
      "lon": -70.6090922,
-     "precision": "calle",
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. Suecia 0137",
+     "direccion": "Avenida Suecia",
      "comuna": "Providencia",
-     "lat": -33.4256,
-     "lon": -70.6096,
-     "precision": "comuna",
+     "lat": -33.4195223,
+     "lon": -70.6087788,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Bellavista",
+     "comuna": "Providencia",
+     "lat": -33.4318028,
+     "lon": -70.6287156,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
     },
     {
      "direccion": "Bellavista 052",
      "comuna": "Providencia",
-     "lat": -33.4256,
-     "lon": -70.6096,
-     "precision": "comuna",
+     "lat": -33.4346222,
+     "lon": -70.6351223,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Bellavista 497",
+     "direccion": "La Concepción 120",
      "comuna": "Providencia",
-     "lat": -33.4315262,
-     "lon": -70.6286935,
-     "precision": "calle",
+     "lat": -33.4248185,
+     "lon": -70.6159257,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Bilbao 1221",
-     "comuna": "Providencia",
-     "lat": -33.4398601,
-     "lon": -70.61648770000001,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "La Concepción 128",
-     "comuna": "Providencia",
-     "lat": -33.42443438,
-     "lon": -70.6157594,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Los Conquistadores 1726",
-     "comuna": "Providencia",
-     "lat": -33.42158768,
-     "lon": -70.61948952,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Pedro de Valdivia 273",
-     "comuna": "Providencia",
-     "lat": -33.42619194,
-     "lon": -70.61188242,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Aeropuerto Arturo Merino Benítez (AMB)",
+     "direccion": "Armando Cortínez Oriente 1704",
      "comuna": "Pudahuel",
-     "lat": -33.4406,
-     "lon": -70.753,
-     "precision": "comuna",
+     "lat": -33.3963538,
+     "lon": -70.7897014,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Aeropuerto Arturo Merino Benítez (Embarque Internacional, b215)",
+     "direccion": "Jean Mermoz 2150",
      "comuna": "Pudahuel",
-     "lat": -33.4406,
-     "lon": -70.753,
-     "precision": "comuna",
+     "lat": -33.3999996,
+     "lon": -70.7937431,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Aeropuerto Arturo Merino Benítez (Embarque Nacional)",
-     "comuna": "Pudahuel",
-     "lat": -33.4406,
-     "lon": -70.753,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Aeropuerto Arturo Merino Benítez (Jean Mermoz 2150)",
-     "comuna": "Pudahuel",
-     "lat": -33.4010807,
-     "lon": -70.7932921,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Av. Camilo Henríquez 3692",
+     "direccion": "Avenida Camilo Henríquez 3296",
      "comuna": "Puente Alto",
-     "lat": -33.5702929,
-     "lon": -70.5573382,
-     "precision": "calle",
+     "lat": -33.5694606,
+     "lon": -70.5571636,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. San Ignacio 500",
-     "comuna": "Quilicura",
-     "lat": -33.331635355172416,
-     "lon": -70.70355972068965,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Av. Presidente Jorge Alessandri Rodríguez 20040",
+     "direccion": "Avenida Presidente Jorge Alessandri Rodríguez 20040",
      "comuna": "San Bernardo",
-     "lat": -33.6329429,
-     "lon": -70.7106787,
-     "precision": "calle",
+     "lat": -33.6317929,
+     "lon": -70.7118434,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. Vicuña Mackenna 4860",
-     "comuna": "San Joaquín",
-     "lat": -33.4967759,
-     "lon": -70.6130593,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Gran Avenida José Miguel Carrera 6150",
+     "direccion": "Llano Subercaseaux 3519",
      "comuna": "San Miguel",
-     "lat": -33.5125455,
-     "lon": -70.6570151,
-     "precision": "calle",
+     "lat": -33.4858294,
+     "lon": -70.6508883,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Subercaseaux 3519",
-     "comuna": "San Miguel",
-     "lat": -33.4855952,
-     "lon": -70.6515257,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
      "direccion": "Agustinas 1161",
      "comuna": "Santiago",
      "lat": -33.4408987,
      "lon": -70.6530027,
-     "precision": "calle",
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
      "direccion": "Agustinas 640",
      "comuna": "Santiago",
      "lat": -33.4404415,
      "lon": -70.6459629,
-     "precision": "calle",
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. Libertador Bernardo OHiggins 1449",
+     "direccion": "Avenida Libertador Bernardo O'Higgins 2236",
      "comuna": "Santiago",
-     "lat": -33.4425,
-     "lon": -70.6505,
-     "precision": "comuna",
+     "lat": -33.4480773,
+     "lon": -70.6671305,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. Libertador Bernardo OHiggins 2236",
+     "direccion": "Bandera",
      "comuna": "Santiago",
-     "lat": -33.4425,
-     "lon": -70.6505,
-     "precision": "comuna",
+     "lat": -33.4385117,
+     "lon": -70.6523716,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. Libertador Bernardo OHiggins 440",
+     "direccion": "Catedral",
      "comuna": "Santiago",
-     "lat": -33.4425,
-     "lon": -70.6505,
-     "precision": "comuna",
+     "lat": -33.4378349,
+     "lon": -70.6572467,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Catedral 1421",
-     "comuna": "Santiago",
-     "lat": -33.4378767,
-     "lon": -70.6574143,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Compañía 1093",
-     "comuna": "Santiago",
-     "lat": -33.4390491,
-     "lon": -70.6531176,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Compañía 1214",
-     "comuna": "Santiago",
-     "lat": -33.4389749,
-     "lon": -70.6542584,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Estado 125",
-     "comuna": "Santiago",
-     "lat": -33.4415958,
-     "lon": -70.6490729,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "General Mackenna 1441",
-     "comuna": "Santiago",
-     "lat": -33.4333221,
-     "lon": -70.6577276,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
      "direccion": "Huérfanos 1016",
      "comuna": "Santiago",
-     "lat": -33.43973490833334,
-     "lon": -70.64914645,
-     "precision": "calle",
+     "lat": -33.439784,
+     "lon": -70.6512508,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Huérfanos 1321",
-     "comuna": "Santiago",
-     "lat": -33.4398105,
-     "lon": -70.6550812,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
      "direccion": "José Victorino Lastarria 88",
      "comuna": "Santiago",
      "lat": -33.4392538,
      "lon": -70.6412571,
-     "precision": "calle",
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Merced 611",
+     "direccion": "La Bolsa",
      "comuna": "Santiago",
-     "lat": -33.4380564,
-     "lon": -70.6459062,
-     "precision": "calle",
+     "lat": -33.4424546,
+     "lon": -70.6514641,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Nueva York 52 y 54",
+     "direccion": "Merced",
      "comuna": "Santiago",
-     "lat": -33.4424104,
-     "lon": -70.6511716,
-     "precision": "calle",
+     "lat": -33.4378597,
+     "lon": -70.6457619,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Paseo Bulnes 71",
-     "comuna": "Santiago",
-     "lat": -33.445113,
-     "lon": -70.6697726,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Paseo Huérfanos 830",
-     "comuna": "Santiago",
-     "lat": -33.43978174210527,
-     "lon": -70.64867053684212,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
      "direccion": "Serrano 75",
      "comuna": "Santiago",
      "lat": -33.4453338,
      "lon": -70.6494329,
-     "precision": "calle",
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Vergara 324",
-     "comuna": "Santiago",
-     "lat": -33.45155884,
-     "lon": -70.661606,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
      "direccion": "Alonso de Córdova 2894",
      "comuna": "Vitacura",
      "lat": -33.40135192,
      "lon": -70.59762426,
-     "precision": "calle",
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
      "direccion": "Alonso de Córdova 3788",
      "comuna": "Vitacura",
      "lat": -33.4019436,
      "lon": -70.5930261,
-     "precision": "calle",
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. Luis Pasteur 6666",
+     "direccion": "Avenida Luis Pasteur 6666",
      "comuna": "Vitacura",
      "lat": -33.3804976,
      "lon": -70.570932,
-     "precision": "calle",
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. Nueva Costanera 3900",
+     "direccion": "Avenida Nueva Costanera 3900",
      "comuna": "Vitacura",
-     "lat": -33.398086,
-     "lon": -70.5989288,
-     "precision": "calle",
+     "lat": -33.3983566,
+     "lon": -70.5987139,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. Nueva Costanera 4177",
+     "direccion": "Avenida Nueva Costanera 4177",
      "comuna": "Vitacura",
-     "lat": -33.3944211,
-     "lon": -70.5969695,
-     "precision": "calle",
+     "lat": -33.3942693,
+     "lon": -70.5969529,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. Tabancura 1233",
+     "direccion": "Avenida Santa María 6736",
      "comuna": "Vitacura",
-     "lat": -33.3819525,
-     "lon": -70.5361669,
-     "precision": "calle",
+     "lat": -33.3768712,
+     "lon": -70.5712543,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Av. Vitacura 6844",
+     "direccion": "Avenida Vitacura 4607",
      "comuna": "Vitacura",
-     "lat": -33.38730146,
-     "lon": -70.56656382,
-     "precision": "calle",
+     "lat": -33.3986078,
+     "lon": -70.5865674,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Santa María Manquehue 6736",
+     "direccion": "Lo Beltrán",
      "comuna": "Vitacura",
-     "lat": -33.3899,
-     "lon": -70.5817,
-     "precision": "comuna",
+     "lat": -33.3873363,
+     "lon": -70.5663667,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Vitacura 4607",
-     "comuna": "Vitacura",
-     "lat": -33.3986481,
-     "lon": -70.5865143,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Av. José Pedro Alessandri 1166",
+     "direccion": "Avenida José Pedro Alessandri 1166",
      "comuna": "Ñuñoa",
-     "lat": -33.4655008,
-     "lon": -70.596966,
-     "precision": "calle",
+     "lat": -33.4650386,
+     "lon": -70.5980352,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
     },
     {
-     "direccion": "Irarrázaval 3107",
+     "direccion": "Avenida José Pedro Alessandri 19",
      "comuna": "Ñuñoa",
-     "lat": -33.4541273,
-     "lon": -70.5983067,
-     "precision": "calle",
+     "lat": -33.4551486,
+     "lon": -70.5984251,
+     "precision": "fuente",
      "telefono": "",
-     "origen": "Banco de Chile"
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Colina",
+     "lat": -33.271574,
+     "lon": -70.6238125,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Colina",
+     "lat": -33.2772308,
+     "lon": -70.6287471,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Estación Central",
+     "lat": -33.4514061,
+     "lon": -70.6792383,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Estación Central",
+     "lat": -33.4525385,
+     "lon": -70.6819455,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Huechuraba",
+     "lat": -33.3891567,
+     "lon": -70.6184441,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "La Florida",
+     "lat": -33.5187651,
+     "lon": -70.5969873,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "La Florida",
+     "lat": -33.5149856,
+     "lon": -70.5990288,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "La Reina",
+     "lat": -33.4283653,
+     "lon": -70.5404197,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Las Condes",
+     "lat": -33.4075143,
+     "lon": -70.5717187,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Las Condes",
+     "lat": -33.4141936,
+     "lon": -70.5837819,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Las Condes",
+     "lat": -33.4098287,
+     "lon": -70.5728434,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Las Condes",
+     "lat": -33.3870678,
+     "lon": -70.5380246,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Las Condes",
+     "lat": -33.4112578,
+     "lon": -70.5793908,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Las Condes",
+     "lat": -33.4300023,
+     "lon": -70.578048,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Las Condes",
+     "lat": -33.4049748,
+     "lon": -70.5708839,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Lo Barnechea",
+     "lat": -33.3843534,
+     "lon": -70.5306847,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Lo Barnechea",
+     "lat": -33.3956801,
+     "lon": -70.506631,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Macul",
+     "lat": -33.4982113,
+     "lon": -70.6103481,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Peñalolén",
+     "lat": -33.468792,
+     "lon": -70.5234365,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Providencia",
+     "lat": -33.4134026,
+     "lon": -70.606241,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Providencia",
+     "lat": -33.4227672,
+     "lon": -70.6221122,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Providencia",
+     "lat": -33.4226214,
+     "lon": -70.6115023,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Providencia",
+     "lat": -33.4273369,
+     "lon": -70.6126744,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Providencia",
+     "lat": -33.4170155,
+     "lon": -70.6009941,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Puente Alto",
+     "lat": -33.5987959,
+     "lon": -70.5185937,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Quilicura",
+     "lat": -33.3318265,
+     "lon": -70.7047567,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "San Miguel",
+     "lat": -33.5123038,
+     "lon": -70.6568728,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Santiago",
+     "lat": -33.4391495,
+     "lon": -70.6538213,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Santiago",
+     "lat": -33.4399512,
+     "lon": -70.655584,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Santiago",
+     "lat": -33.4416322,
+     "lon": -70.6491196,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Santiago",
+     "lat": -33.4331546,
+     "lon": -70.658097,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Santiago",
+     "lat": -33.4511894,
+     "lon": -70.661532,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Santiago",
+     "lat": -33.4417585,
+     "lon": -70.6423334,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Santiago",
+     "lat": -33.44391,
+     "lon": -70.6569814,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Santiago",
+     "lat": -33.439509,
+     "lon": -70.6485755,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Santiago",
+     "lat": -33.4458514,
+     "lon": -70.6534848,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
     }
    ],
    "comunas": [
     "Cerrillos",
+    "Cerro Navia",
     "Colina",
     "Estación Central",
     "Huechuraba",
@@ -21493,15 +20393,14 @@
     "La Reina",
     "Las Condes",
     "Lo Barnechea",
+    "Macul",
     "Maipú",
-    "Paine",
     "Peñalolén",
     "Providencia",
     "Pudahuel",
     "Puente Alto",
     "Quilicura",
     "San Bernardo",
-    "San Joaquín",
     "San Miguel",
     "Santiago",
     "Vitacura",
@@ -34005,6 +32904,42 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
+   "comercio": "China Wok Arauco Maipú",
+   "categoria": "comida_rapida",
+   "cocina": "asiatica",
+   "region": "Metropolitana",
+   "sitio_web": "http://www.chinawok.cl",
+   "porcentaje": null,
+   "oferta": "2x1",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "2 woky pack mongoliana a $6180 (2 woky pack de carne mongoliana con arroz chaunfa + 2 bebidas regulares) o 2 woki pack chapsui de ave a $5790 (2 woky pack chapsui de ave con arroz chaunfa + 2 bebidas regulares) Sólo en tiendas.",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/china-wok-17",
+   "logo": "https://bci-cdn.azureedge.net/uploads/2987396c-36c8-4f4c-a706-f96ca93782f4/R320x240/chinawok.png",
+   "capturado": "",
+   "id": "bce107ec0108",
+   "locales": [
+    {
+     "direccion": "Av. Américo Vespucio 399 Loc. 19 (Arauco Maipú)",
+     "comuna": "Maipú",
+     "lat": -33.4833453,
+     "lon": -70.7497514,
+     "precision": "calle",
+     "telefono": "2-27453326",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Maipú"
+   ]
+  },
+  {
+   "banco_id": "bci",
+   "banco": "Bci",
    "comercio": "China Wok Costanera Center",
    "categoria": "comida_rapida",
    "cocina": "asiatica",
@@ -34255,42 +33190,6 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
-   "comercio": "China Wok Mall Plaza Oeste",
-   "categoria": "comida_rapida",
-   "cocina": "asiatica",
-   "region": "Metropolitana",
-   "sitio_web": "http://www.chinawok.cl",
-   "porcentaje": null,
-   "oferta": "2x1",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": null,
-   "tarjetas": [],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "2 woky pack mongoliana a $6180 (2 woky pack de carne mongoliana con arroz chaunfa + 2 bebidas regulares) o 2 woki pack chapsui de ave a $5790 (2 woky pack chapsui de ave con arroz chaunfa + 2 bebidas regulares) Sólo en tiendas.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/china-wok-9",
-   "logo": "https://bci-cdn.azureedge.net/uploads/c0ea481f-8b31-4f7f-89b5-9adcc601f0ce/R320x240/chinawok.png",
-   "capturado": "",
-   "id": "1a8c4ed423ca",
-   "locales": [
-    {
-     "direccion": "Av. Américo Vespucio 1501 -Local B-310 (Plaza Oeste)",
-     "comuna": "Cerrillos",
-     "lat": -33.5148451,
-     "lon": -70.7180172,
-     "precision": "fuente",
-     "telefono": "2-25701772",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Cerrillos"
-   ]
-  },
-  {
-   "banco_id": "bci",
-   "banco": "Bci",
    "comercio": "China Wok Mall Plaza Sur",
    "categoria": "comida_rapida",
    "cocina": "asiatica",
@@ -34363,7 +33262,7 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
-   "comercio": "China Wok Mall Plaza Vespucio",
+   "comercio": "China Wok Parque Arauco",
    "categoria": "comida_rapida",
    "cocina": "asiatica",
    "region": "Metropolitana",
@@ -34377,23 +33276,23 @@
    "modalidad": "",
    "segmentado": false,
    "condiciones": "2 woky pack mongoliana a $6180 (2 woky pack de carne mongoliana con arroz chaunfa + 2 bebidas regulares) o 2 woki pack chapsui de ave a $5790 (2 woky pack chapsui de ave con arroz chaunfa + 2 bebidas regulares) Sólo en tiendas.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/china-wok-10",
-   "logo": "https://bci-cdn.azureedge.net/uploads/52b85085-cc3d-4ae6-b95e-9d6bb78dc0dc/R320x240/chinawok.png",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/china-wok-16",
+   "logo": "https://bci-cdn.azureedge.net/uploads/68e2d8e2-5026-48e2-bcec-b6c3f56c405f/R320x240/chinawok.png",
    "capturado": "",
-   "id": "47202b6388b6",
+   "id": "a6b17f8de6a0",
    "locales": [
     {
-     "direccion": "Av.Vicuña Mackenna 7110 loc FC -212 (Vespucio)",
-     "comuna": "La Florida",
-     "lat": -33.5622191,
-     "lon": -70.5851344,
+     "direccion": "Av. Kennedy 5413 Loc 604 (Parque Arauco)",
+     "comuna": "Las Condes",
+     "lat": -33.4019756,
+     "lon": -70.5805178,
      "precision": "fuente",
-     "telefono": "2-29795947",
+     "telefono": "2-25845312",
      "origen": ""
     }
    ],
    "comunas": [
-    "La Florida"
+    "Las Condes"
    ]
   },
   {
@@ -34709,46 +33608,6 @@
     "Las Condes",
     "Vitacura"
    ]
-  },
-  {
-   "banco_id": "security",
-   "banco": "Banco Security",
-   "comercio": "Juan Valdez",
-   "categoria": "gourmet",
-   "cocina": "cafe",
-   "region": "",
-   "sitio_web": "https://www.mastercard.com/cl/es/personal/experience-mastercard/priceless/everyday-value.html",
-   "porcentaje": null,
-   "oferta": "$3.000",
-   "tope": null,
-   "dias": [
-    "martes",
-    "jueves"
-   ],
-   "vigencia_hasta": "2026-08-30",
-   "tarjetas": [
-    "black one",
-    "black"
-   ],
-   "modalidad": "",
-   "segmentado": true,
-   "condiciones": "Los martes y jueves, con tu Tarjeta One en tiendas Juan Valdez. Disfruta las bebidas preparadas de Juan Valdez por solo $3.000 pagando con Mastercard en la app Copec. Además, participa por 1 año de combustible en Copec. Cada compra de combustible con Mastercard a través de app Copec te acerca a ganar 1 año de combustible. Promoción válida hasta el 30 de agosto de 2026.",
-   "url": "https://personas.bancosecurity.cl/beneficios/gourmet/juan-valdez",
-   "logo": "https://personas.bancosecurity.cl/sites/bancopersonas/files/2026-08/Logo%20-%202026-08-05T165326.485.png",
-   "capturado": "",
-   "id": "cdd93ff25686",
-   "locales": [
-    {
-     "direccion": "Tiendas Juan Valdés",
-     "comuna": "",
-     "lat": null,
-     "lon": null,
-     "precision": "sin_ubicar",
-     "telefono": "",
-     "origen": ""
-    }
-   ],
-   "comunas": []
   },
   {
    "banco_id": "bci",
@@ -35183,6 +34042,78 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
+   "comercio": "PizzaPizza Maipú Poniente",
+   "categoria": "comida_rapida",
+   "cocina": "italiana",
+   "region": "Metropolitana",
+   "sitio_web": "http://www.pizzapizza.cl/",
+   "porcentaje": null,
+   "oferta": "",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-15",
+   "logo": "https://bci-cdn.azureedge.net/uploads/ac2a988f-63ed-4ddf-a40b-91590e0c64dd/original/imagen.jpg",
+   "capturado": "",
+   "id": "c64cc3ef8cbc",
+   "locales": [
+    {
+     "direccion": "3 Poniente 0876",
+     "comuna": "Maipú",
+     "lat": -33.012944,
+     "lon": -71.553406,
+     "precision": "fuente",
+     "telefono": "2 2942 3999",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Maipú"
+   ]
+  },
+  {
+   "banco_id": "bci",
+   "banco": "Bci",
+   "comercio": "PizzaPizza Peñalolén",
+   "categoria": "comida_rapida",
+   "cocina": "italiana",
+   "region": "Metropolitana",
+   "sitio_web": "http://www.pizzapizza.cl/",
+   "porcentaje": null,
+   "oferta": "",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-14",
+   "logo": "https://bci-cdn.azureedge.net/uploads/19a27e67-d4c2-4a79-92a2-a07610882369/original/imagen.jpg",
+   "capturado": "",
+   "id": "51418bad7124",
+   "locales": [
+    {
+     "direccion": "Los Presidentes 7640",
+     "comuna": "Peñalolén",
+     "lat": -33.486479,
+     "lon": -70.5572526,
+     "precision": "fuente",
+     "telefono": "2 2758 1212",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Peñalolén"
+   ]
+  },
+  {
+   "banco_id": "bci",
+   "banco": "Bci",
    "comercio": "PizzaPizza Providencia",
    "categoria": "comida_rapida",
    "cocina": "italiana",
@@ -35571,45 +34502,6 @@
    ]
   },
   {
-   "banco_id": "security",
-   "banco": "Banco Security",
-   "comercio": "Pronto Copec",
-   "categoria": "gourmet",
-   "cocina": "",
-   "region": "",
-   "sitio_web": "https://www.mastercard.com/cl/es/personal/experience-mastercard/priceless/everyday-value.html",
-   "porcentaje": null,
-   "oferta": "$2.500",
-   "tope": null,
-   "dias": [
-    "miercoles"
-   ],
-   "vigencia_hasta": "2026-08-30",
-   "tarjetas": [
-    "black one",
-    "black"
-   ],
-   "modalidad": "",
-   "segmentado": true,
-   "condiciones": "Los miércoles, con tu Tarjeta One en tiendas Pronto Copec. Disfruta el Completo Palta Has por solo $2.500 pagando con Mastercard en la app Copec. Además, participa por 1 año de combustible en Copec. Cada compra de combustible con Mastercard a través de app Copec te acerca a ganar 1 año de combustible. Promoción válida hasta el 30 de agosto de 2026.",
-   "url": "https://personas.bancosecurity.cl/beneficios/gourmet/pronto-copec",
-   "logo": "https://personas.bancosecurity.cl/sites/bancopersonas/files/2026-08/Logo%20-%202026-08-05T165745.101.png",
-   "capturado": "",
-   "id": "d6ddfb95519c",
-   "locales": [
-    {
-     "direccion": "Tiendas Pronto Copec",
-     "comuna": "",
-     "lat": null,
-     "lon": null,
-     "precision": "sin_ubicar",
-     "telefono": "",
-     "origen": ""
-    }
-   ],
-   "comunas": []
-  },
-  {
    "banco_id": "falabella",
    "banco": "Banco Falabella",
    "comercio": "Quotidien Bistro",
@@ -35696,45 +34588,6 @@
    "comunas": []
   },
   {
-   "banco_id": "security",
-   "banco": "Banco Security",
-   "comercio": "SBARRO",
-   "categoria": "gourmet",
-   "cocina": "",
-   "region": "",
-   "sitio_web": "https://www.mastercard.com/cl/es/personal/experience-mastercard/priceless/everyday-value.html",
-   "porcentaje": null,
-   "oferta": "$4.000",
-   "tope": null,
-   "dias": [
-    "viernes"
-   ],
-   "vigencia_hasta": "2026-08-30",
-   "tarjetas": [
-    "black one",
-    "black"
-   ],
-   "modalidad": "",
-   "segmentado": true,
-   "condiciones": "Los viernes, con tu Tarjeta One en tiendas SBARRO. Disfruta un Stromboli + bebida de 330 cc por solo $4.000 pagando con Mastercard en la app Copec. Además, participa por 1 año de combustible en Copec. Cada compra de combustible con Mastercard a través de app Copec te acerca a ganar 1 año de combustible. Promoción válida hasta el 30 de agosto de 2026.",
-   "url": "https://personas.bancosecurity.cl/beneficios/gourmet/sbarro",
-   "logo": "https://personas.bancosecurity.cl/sites/bancopersonas/files/2026-08/Logo%20-%202026-08-05T170037.884.png",
-   "capturado": "",
-   "id": "4eedc1be263c",
-   "locales": [
-    {
-     "direccion": "Tiendas SBARRO",
-     "comuna": "",
-     "lat": null,
-     "lon": null,
-     "precision": "sin_ubicar",
-     "telefono": "",
-     "origen": ""
-    }
-   ],
-   "comunas": []
-  },
-  {
    "banco_id": "falabella",
    "banco": "Banco Falabella",
    "comercio": "Streat Burger",
@@ -35793,45 +34646,6 @@
     "Las Condes",
     "Ñuñoa"
    ]
-  },
-  {
-   "banco_id": "security",
-   "banco": "Banco Security",
-   "comercio": "Streat Burger",
-   "categoria": "gourmet",
-   "cocina": "hamburguesas",
-   "region": "",
-   "sitio_web": "https://www.mastercard.com/cl/es/personal/experience-mastercard/priceless/everyday-value.html",
-   "porcentaje": null,
-   "oferta": "$5.000",
-   "tope": null,
-   "dias": [
-    "lunes"
-   ],
-   "vigencia_hasta": "2026-08-30",
-   "tarjetas": [
-    "black one",
-    "black"
-   ],
-   "modalidad": "",
-   "segmentado": true,
-   "condiciones": "Los lunes, con tu Tarjeta One en tiendas Streat Burger. Disfruta la Hamburguesa Classic de Streat Burger por solo $5.000 pagando con Mastercard en la app Copec. Además, participa por 1 año de combustible en Copec. Cada compra de combustible con Mastercard a través de app Copec te acerca a ganar 1 año de combustible. Promoción válida hasta el 30 de agosto de 2026.",
-   "url": "https://personas.bancosecurity.cl/beneficios/gourmet/streat-burger",
-   "logo": "https://personas.bancosecurity.cl/sites/bancopersonas/files/2026-08/Logo%20-%202026-08-05T163721.034.png",
-   "capturado": "",
-   "id": "00c80a8410cb",
-   "locales": [
-    {
-     "direccion": "Tiendas Streat Burger",
-     "comuna": "",
-     "lat": null,
-     "lon": null,
-     "precision": "sin_ubicar",
-     "telefono": "",
-     "origen": ""
-    }
-   ],
-   "comunas": []
   },
   {
    "banco_id": "security",
