@@ -1,21 +1,8 @@
 {
- "generado": "2026-08-31T11:49:20",
+ "generado": "2026-08-31T15:17:33",
  "dias": 7,
- "total_funciones": 2853,
+ "total_funciones": 2782,
  "cines": [
-  {
-   "id": "cinemark-mallplaza-oeste",
-   "nombre": "Cinemark Mallplaza Oeste",
-   "cadena": "cinemark",
-   "circuito": "comercial",
-   "direccion": "Av. Américo Vespucio 1501, Local CN 100, 200 y 300, Cerrillos",
-   "comuna": "Cerrillos",
-   "lat": -33.5156,
-   "lon": -70.7183,
-   "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste",
-   "formatos": "PALCO | 3D | 2D | PLAY | XD | DBOX",
-   "funciones": 166
-  },
   {
    "id": "cinepolis-la-reina-la-reina",
    "nombre": "Cinépolis La Reina",
@@ -30,6 +17,19 @@
    "funciones": 159
   },
   {
+   "id": "cinemark-mallplaza-oeste",
+   "nombre": "Cinemark Mallplaza Oeste",
+   "cadena": "cinemark",
+   "circuito": "comercial",
+   "direccion": "Av. Américo Vespucio 1501, Local CN 100, 200 y 300, Cerrillos",
+   "comuna": "Cerrillos",
+   "lat": -33.5156,
+   "lon": -70.7183,
+   "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste",
+   "formatos": "PALCO | 3D | 2D | PLAY | XD | DBOX",
+   "funciones": 151
+  },
+  {
    "id": "cineplanet-florida-center",
    "nombre": "Cineplanet Florida Center",
    "cadena": "cineplanet",
@@ -41,19 +41,6 @@
    "url": "https://www.cineplanet.cl/",
    "formatos": "",
    "funciones": 137
-  },
-  {
-   "id": "cinemark-alto-las-condes",
-   "nombre": "Cinemark Alto Las Condes",
-   "cadena": "cinemark",
-   "circuito": "comercial",
-   "direccion": "Avenida Kennedy 9001, Local 3092, Las Condes",
-   "comuna": "Las Condes",
-   "lat": -33.3906,
-   "lon": -70.5466,
-   "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes",
-   "formatos": "3D | 2D | XD | PRE | DBOX",
-   "funciones": 136
   },
   {
    "id": "cineplanet-costanera-center",
@@ -82,17 +69,17 @@
    "funciones": 126
   },
   {
-   "id": "cinemark-mallplaza-vespucio",
-   "nombre": "Cinemark Mallplaza Vespucio",
+   "id": "cinemark-alto-las-condes",
+   "nombre": "Cinemark Alto Las Condes",
    "cadena": "cinemark",
    "circuito": "comercial",
-   "direccion": "Av. Vicuña Mackenna 7110, Local 158, La Florida",
-   "comuna": "La Florida",
-   "lat": -33.5167,
-   "lon": -70.5975,
-   "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio",
-   "formatos": "3D | 2D | PRE | DBOX | IMAX | 4D",
-   "funciones": 124
+   "direccion": "Avenida Kennedy 9001, Local 3092, Las Condes",
+   "comuna": "Las Condes",
+   "lat": -33.3906,
+   "lon": -70.5466,
+   "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes",
+   "formatos": "3D | 2D | XD | PRE | DBOX",
+   "funciones": 123
   },
   {
    "id": "cinepolis-parque-arauco",
@@ -106,6 +93,19 @@
    "url": "https://cinepolis.com/cl",
    "formatos": "",
    "funciones": 116
+  },
+  {
+   "id": "cinemark-mallplaza-vespucio",
+   "nombre": "Cinemark Mallplaza Vespucio",
+   "cadena": "cinemark",
+   "circuito": "comercial",
+   "direccion": "Av. Vicuña Mackenna 7110, Local 158, La Florida",
+   "comuna": "La Florida",
+   "lat": -33.5167,
+   "lon": -70.5975,
+   "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio",
+   "formatos": "3D | 2D | PRE | DBOX | IMAX | 4D",
+   "funciones": 112
   },
   {
    "id": "cinepolis-mallplaza-egana",
@@ -157,7 +157,7 @@
    "lon": -70.6787,
    "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte",
    "formatos": "3D | 2D | XD | DBOX",
-   "funciones": 94
+   "funciones": 85
   },
   {
    "id": "cineplanet-alameda",
@@ -183,20 +183,7 @@
    "lon": -70.5975,
    "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa",
    "formatos": "2D",
-   "funciones": 79
-  },
-  {
-   "id": "cinemark-mid-mall-maipu",
-   "nombre": "Cinemark Mid Mall Maipú",
-   "cadena": "cinemark",
-   "circuito": "comercial",
-   "direccion": "Camino a Melipilla 15.900, Maipú",
-   "comuna": "Maipú",
-   "lat": -33.5389,
-   "lon": -70.7702,
-   "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu",
-   "formatos": "2D | XD",
-   "funciones": 76
+   "funciones": 73
   },
   {
    "id": "cinepolis-portal-exposicion",
@@ -223,6 +210,19 @@
    "url": "https://cinepolis.com/cl",
    "formatos": "",
    "funciones": 72
+  },
+  {
+   "id": "cinemark-mid-mall-maipu",
+   "nombre": "Cinemark Mid Mall Maipú",
+   "cadena": "cinemark",
+   "circuito": "comercial",
+   "direccion": "Camino a Melipilla 15.900, Maipú",
+   "comuna": "Maipú",
+   "lat": -33.5389,
+   "lon": -70.7702,
+   "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu",
+   "formatos": "2D | XD",
+   "funciones": 70
   },
   {
    "id": "cinepolis-terrazas-maipu",
@@ -262,19 +262,6 @@
    "url": "https://muvix.cl/",
    "formatos": "",
    "funciones": 66
-  },
-  {
-   "id": "cinemark-mallplaza-tobalaba",
-   "nombre": "Cinemark Mallplaza Tobalaba",
-   "cadena": "cinemark",
-   "circuito": "comercial",
-   "direccion": "Av. Camilo Henríquez 3690, Puente Alto",
-   "comuna": "Puente Alto",
-   "lat": -33.5684,
-   "lon": -70.5579,
-   "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba",
-   "formatos": "2D | XD",
-   "funciones": 63
   },
   {
    "id": "cinepolis-arauco-quilicura",
@@ -342,6 +329,19 @@
    "funciones": 60
   },
   {
+   "id": "cinemark-mallplaza-tobalaba",
+   "nombre": "Cinemark Mallplaza Tobalaba",
+   "cadena": "cinemark",
+   "circuito": "comercial",
+   "direccion": "Av. Camilo Henríquez 3690, Puente Alto",
+   "comuna": "Puente Alto",
+   "lat": -33.5684,
+   "lon": -70.5579,
+   "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba",
+   "formatos": "2D | XD",
+   "funciones": 58
+  },
+  {
    "id": "cineplanet-quilin",
    "nombre": "Cineplanet Quilín",
    "cadena": "cineplanet",
@@ -365,19 +365,6 @@
    "lon": -70.5156,
    "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa",
    "formatos": "3D | 2D | PRE",
-   "funciones": 49
-  },
-  {
-   "id": "cinemark-gran-avenida",
-   "nombre": "Cinemark Gran Avenida",
-   "cadena": "cinemark",
-   "circuito": "comercial",
-   "direccion": "Gran Avenida José Miguel Carrera 6150, Local 1216",
-   "comuna": "San Miguel",
-   "lat": -33.5114,
-   "lon": -70.6567,
-   "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida",
-   "formatos": "3D | 2D",
    "funciones": 48
   },
   {
@@ -405,6 +392,19 @@
    "url": "https://cinepolis.com/cl",
    "formatos": "",
    "funciones": 48
+  },
+  {
+   "id": "cinemark-gran-avenida",
+   "nombre": "Cinemark Gran Avenida",
+   "cadena": "cinemark",
+   "circuito": "comercial",
+   "direccion": "Gran Avenida José Miguel Carrera 6150, Local 1216",
+   "comuna": "San Miguel",
+   "lat": -33.5114,
+   "lon": -70.6567,
+   "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida",
+   "formatos": "3D | 2D",
+   "funciones": 44
   },
   {
    "id": "cinepolis-maipu-maipu",
@@ -645,14 +645,6 @@
      "url": "https://cinepolis.com/cl?cinema=cinepolis-arauco-maipu-santiago-poniente-y-norte&selected=cinepolis-arauco-maipu-santiago-poniente-y-norte"
     },
     {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-31T12:00",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
      "cine": "cinepolis-mallplaza-egana",
      "inicio": "2026-08-31T12:00",
      "formato": "2D",
@@ -669,68 +661,12 @@
      "url": "https://cinepolis.com/cl?cinema=cinepolis-parque-arauco-santiago-oriente&selected=cinepolis-parque-arauco-santiago-oriente"
     },
     {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-08-31T12:20",
-     "formato": "2D XD",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
      "cine": "cinepolis-arauco-maipu",
      "inicio": "2026-08-31T12:20",
      "formato": "2D",
      "idioma": "doblada",
      "sala": "",
      "url": "https://cinepolis.com/cl?cinema=cinepolis-arauco-maipu-santiago-poniente-y-norte&selected=cinepolis-arauco-maipu-santiago-poniente-y-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-31T12:25",
-     "formato": "3D PALCO",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-31T12:30",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-31T12:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "14",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-31T12:30",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "10",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-08-31T12:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-31T13:00",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
     },
     {
      "cine": "cinepolis-la-reina-la-reina",
@@ -747,14 +683,6 @@
      "idioma": "doblada",
      "sala": "",
      "url": "https://cinepolis.com/cl?cinema=cinepolis-san-bernardo-santiago-sur&selected=cinepolis-san-bernardo-santiago-sur"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-31T13:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "8",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
     },
     {
      "cine": "cinepolis-parque-arauco",
@@ -821,14 +749,6 @@
      "url": "https://cinepolis.com/cl?cinema=cinepolis-patio-outlet-maipu-santiago-poniente-y-norte&selected=cinepolis-patio-outlet-maipu-santiago-poniente-y-norte"
     },
     {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-08-31T13:50",
-     "formato": "3D DBOX",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
      "cine": "cinepolis-paseo-san-bernardo",
      "inicio": "2026-08-31T13:50",
      "formato": "2D",
@@ -869,22 +789,6 @@
      "url": "https://cinepolis.com/cl?cinema=cinepolis-patio-outlet-la-florida-santiago-sur&selected=cinepolis-patio-outlet-la-florida-santiago-sur"
     },
     {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-31T14:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-08-31T14:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
      "cine": "cinepolis-portal-exposicion",
      "inicio": "2026-08-31T14:10",
      "formato": "2D",
@@ -899,14 +803,6 @@
      "idioma": "doblada",
      "sala": "",
      "url": "https://cinepolis.com/cl?cinema=cinepolis-patio-outlet-maipu-santiago-poniente-y-norte&selected=cinepolis-patio-outlet-maipu-santiago-poniente-y-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-31T14:30",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
     },
     {
      "cine": "cinepolis-arauco-quilicura",
@@ -941,30 +837,6 @@
      "url": "https://cinepolis.com/cl?cinema=cinepolis-vivo-imperio-santiago-centro&selected=cinepolis-vivo-imperio-santiago-centro"
     },
     {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-08-31T14:40",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-31T14:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-08-31T14:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
      "cine": "cinepolis-arauco-maipu",
      "inicio": "2026-08-31T14:40",
      "formato": "2D",
@@ -979,22 +851,6 @@
      "idioma": "doblada",
      "sala": "",
      "url": "https://cinepolis.com/cl?cinema=cinepolis-mall-plaza-sur-santiago-sur&selected=cinepolis-mall-plaza-sur-santiago-sur"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-31T14:50",
-     "formato": "3D PRE",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-08-31T14:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
     },
     {
      "cine": "cinepolis-melipilla-serrano-395",
@@ -5962,14 +5818,6 @@
      "url": "https://cinepolis.com/cl?cinema=cinepolis-arauco-maipu-santiago-poniente-y-norte&selected=cinepolis-arauco-maipu-santiago-poniente-y-norte"
     },
     {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-31T12:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
      "cine": "cinepolis-portal-exposicion",
      "inicio": "2026-08-31T12:40",
      "formato": "2D",
@@ -5984,14 +5832,6 @@
      "idioma": "doblada",
      "sala": "",
      "url": "https://cinepolis.com/cl?cinema=cinepolis-plaza-egana-santiago-oriente&selected=cinepolis-plaza-egana-santiago-oriente"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-31T12:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
     },
     {
      "cine": "cinepolis-vivo-imperio",
@@ -6018,14 +5858,6 @@
      "url": "https://cinepolis.com/cl?cinema=cinepolis-san-bernardo-santiago-sur&selected=cinepolis-san-bernardo-santiago-sur"
     },
     {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-31T13:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "13",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
      "cine": "cineplanet-costanera-center",
      "inicio": "2026-08-31T13:20",
      "formato": "PRIME",
@@ -6040,14 +5872,6 @@
      "idioma": "doblada",
      "sala": "",
      "url": "https://cinepolis.com/cl?cinema=cinepolis-arauco-maipu-santiago-poniente-y-norte&selected=cinepolis-arauco-maipu-santiago-poniente-y-norte"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-08-31T13:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
     },
     {
      "cine": "cinepolis-melipilla-serrano-395",
@@ -6082,14 +5906,6 @@
      "url": "https://www.cineplanet.cl/peliculas/coyote-vs-acme"
     },
     {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-08-31T13:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
      "cine": "cineplanet-alameda",
      "inicio": "2026-08-31T14:00",
      "formato": "2D",
@@ -6114,14 +5930,6 @@
      "url": "https://cinepolis.com/cl?cinema=cinepolis-parque-arauco-santiago-oriente&selected=cinepolis-parque-arauco-santiago-oriente"
     },
     {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-31T14:10",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
      "cine": "cinepolis-plaza-los-dominicos",
      "inicio": "2026-08-31T14:10",
      "formato": "2D",
@@ -6138,36 +5946,12 @@
      "url": "https://cinepolis.com/cl?cinema=cinepolis-patio-outlet-la-florida-santiago-sur&selected=cinepolis-patio-outlet-la-florida-santiago-sur"
     },
     {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-08-31T14:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
      "cine": "cineplanet-mall-barrio-independencia",
      "inicio": "2026-08-31T14:20",
      "formato": "2D",
      "idioma": "doblada",
      "sala": "",
      "url": "https://www.cineplanet.cl/peliculas/coyote-vs-acme"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-08-31T14:30",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-08-31T14:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
     },
     {
      "cine": "cinepolis-casacostanera",
@@ -6224,14 +6008,6 @@
      "idioma": "doblada",
      "sala": "",
      "url": "https://www.cinepolischile.cl/"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-08-31T15:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
     },
     {
      "cine": "cinepolis-portal-exposicion",
@@ -6784,6 +6560,14 @@
      "idioma": "doblada",
      "sala": "",
      "url": "https://cinepolis.com/cl?cinema=cinepolis-santa-maria-melipilla-santiago-poniente-y-norte&selected=cinepolis-santa-maria-melipilla-santiago-poniente-y-norte"
+    },
+    {
+     "cine": "cinemark-la-dehesa",
+     "inicio": "2026-08-31T19:40",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
     },
     {
      "cine": "cinemark-mallplaza-norte",
@@ -7850,6 +7634,14 @@
      "url": "https://cinepolis.com/cl?cinema=cinepolis-santa-maria-melipilla-santiago-poniente-y-norte&selected=cinepolis-santa-maria-melipilla-santiago-poniente-y-norte"
     },
     {
+     "cine": "cinemark-la-dehesa",
+     "inicio": "2026-09-01T19:40",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
+    },
+    {
      "cine": "cinemark-mallplaza-norte",
      "inicio": "2026-09-01T19:40",
      "formato": "2D",
@@ -8914,6 +8706,14 @@
      "url": "https://cinepolis.com/cl?cinema=cinepolis-santa-maria-melipilla-santiago-poniente-y-norte&selected=cinepolis-santa-maria-melipilla-santiago-poniente-y-norte"
     },
     {
+     "cine": "cinemark-la-dehesa",
+     "inicio": "2026-09-02T19:40",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
+    },
+    {
      "cine": "cinemark-mallplaza-norte",
      "inicio": "2026-09-02T19:40",
      "formato": "2D",
@@ -9182,14 +8982,6 @@
      "url": "https://cinepolis.com/cl?cinema=cinepolis-plaza-egana-santiago-oriente&selected=cinepolis-plaza-egana-santiago-oriente"
     },
     {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-31T12:40",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
      "cine": "cineplanet-costanera-center",
      "inicio": "2026-08-31T13:00",
      "formato": "2D",
@@ -9214,14 +9006,6 @@
      "url": "https://cinepolis.com/cl?cinema=boulevard-terrazas-maipu-santiago-poniente-y-norte&selected=boulevard-terrazas-maipu-santiago-poniente-y-norte"
     },
     {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-31T13:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "10",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
      "cine": "cinepolis-portal-exposicion",
      "inicio": "2026-08-31T13:20",
      "formato": "2D",
@@ -9236,14 +9020,6 @@
      "idioma": "",
      "sala": "",
      "url": "https://www.cinepolischile.cl/"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-08-31T13:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
     },
     {
      "cine": "cineplanet-mall-barrio-independencia",
@@ -9286,44 +9062,12 @@
      "url": "https://cinepolis.com/cl?cinema=cinepolis-mall-plaza-sur-santiago-sur&selected=cinepolis-mall-plaza-sur-santiago-sur"
     },
     {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-08-31T14:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "8",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-08-31T14:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
      "cine": "cinepolis-parque-arauco",
      "inicio": "2026-08-31T14:20",
      "formato": "2D",
      "idioma": "",
      "sala": "",
      "url": "https://cinepolis.com/cl?cinema=cinepolis-parque-arauco-santiago-oriente&selected=cinepolis-parque-arauco-santiago-oriente"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-08-31T14:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-31T14:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "12",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
     },
     {
      "cine": "cineplanet-florida-center",
@@ -9404,14 +9148,6 @@
      "idioma": "doblada",
      "sala": "",
      "url": "https://www.cineplanet.cl/peliculas/papi-ricky-la-pelcula"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-31T15:10",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
     },
     {
      "cine": "cinepolis-portal-exposicion",
@@ -12390,22 +12126,6 @@
      "url": "https://cinepolis.com/cl?cinema=cinepolis-vivo-imperio-santiago-centro&selected=cinepolis-vivo-imperio-santiago-centro"
     },
     {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-31T14:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "9",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-08-31T14:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
      "cine": "cineplanet-costanera-center",
      "inicio": "2026-08-31T14:30",
      "formato": "XTREME",
@@ -12414,36 +12134,12 @@
      "url": "https://www.cineplanet.cl/peliculas/la-noche-del-demonio-estn-entre-nosotros"
     },
     {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-08-31T14:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
      "cine": "cineplanet-alameda",
      "inicio": "2026-08-31T14:40",
      "formato": "2D",
      "idioma": "doblada",
      "sala": "",
      "url": "https://www.cineplanet.cl/peliculas/la-noche-del-demonio-estn-entre-nosotros"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-31T14:45",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "11",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-08-31T14:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
     },
     {
      "cine": "cinepolis-puente-alto-puente-alto",
@@ -14708,30 +14404,6 @@
      "url": "https://cinepolis.com/cl?cinema=cinepolis-parque-arauco-santiago-oriente&selected=cinepolis-parque-arauco-santiago-oriente"
     },
     {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-31T12:50",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "11",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-08-31T13:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-08-31T13:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
      "cine": "cineplanet-costanera-center",
      "inicio": "2026-08-31T13:10",
      "formato": "2D",
@@ -14748,36 +14420,12 @@
      "url": "https://www.cinepolischile.cl/"
     },
     {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-31T13:30",
-     "formato": "2D PALCO",
-     "idioma": "doblada",
-     "sala": "8",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
      "cine": "cinepolis-vivo-imperio",
      "inicio": "2026-08-31T13:30",
      "formato": "2D",
      "idioma": "subtitulada",
      "sala": "",
      "url": "https://cinepolis.com/cl?cinema=cinepolis-vivo-imperio-santiago-centro&selected=cinepolis-vivo-imperio-santiago-centro"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-08-31T13:50",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-08-31T14:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
     },
     {
      "cine": "cinepolis-mallplaza-sur",
@@ -14802,14 +14450,6 @@
      "idioma": "doblada",
      "sala": "",
      "url": "https://cinepolis.com/cl?cinema=cinepolis-plazuela-independencia-puente-alto-santiago-sur&selected=cinepolis-plazuela-independencia-puente-alto-santiago-sur"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-31T15:00",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
     },
     {
      "cine": "cinepolis-casacostanera",
@@ -16981,14 +16621,6 @@
      "url": "https://cinepolis.com/cl?cinema=cinepolis-estacion-central-santiago-centro&selected=cinepolis-estacion-central-santiago-centro"
     },
     {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-31T12:50",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "12",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
      "cine": "cinepolis-mallplaza-egana",
      "inicio": "2026-08-31T13:00",
      "formato": "2D",
@@ -17005,52 +16637,12 @@
      "url": "https://www.cinepolischile.cl/"
     },
     {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-31T13:30",
-     "formato": "2D XD",
-     "idioma": "subtitulada",
-     "sala": "8",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-08-31T13:30",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
      "cine": "cinepolis-arauco-maipu",
      "inicio": "2026-08-31T13:30",
      "formato": "2D",
      "idioma": "doblada",
      "sala": "",
      "url": "https://cinepolis.com/cl?cinema=cinepolis-arauco-maipu-santiago-poniente-y-norte&selected=cinepolis-arauco-maipu-santiago-poniente-y-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-31T13:50",
-     "formato": "2D IMAX",
-     "idioma": "subtitulada",
-     "sala": "11",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-08-31T13:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-31T14:00",
-     "formato": "2D PALCO",
-     "idioma": "doblada",
-     "sala": "9",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
     },
     {
      "cine": "cineplanet-florida-center",
@@ -17067,14 +16659,6 @@
      "idioma": "doblada",
      "sala": "",
      "url": "https://cinepolis.com/cl?cinema=cinepolis-vivo-imperio-santiago-centro&selected=cinepolis-vivo-imperio-santiago-centro"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-08-31T14:10",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
     },
     {
      "cine": "cineplanet-costanera-center",
@@ -18776,9 +18360,9 @@
   },
   {
    "clave": "harry-potter-y-la-piedra-filosofal",
-   "titulo": "Harry Potter y la Piedra Filosofal",
+   "titulo": "Harry Potter y la piedra filosofal",
    "poster": "https://tickets-static-content.cinepolis.com/pimcore/21310/assets/Chile/Tickets/Movies/HarryPotterPiedraFilosofal/Es/720x1022_19/resource.jpg",
-   "duracion": 164,
+   "duracion": 166,
    "clasificacion": "TE7",
    "cines": [
     "cinemark-alto-las-condes",
@@ -18821,30 +18405,6 @@
    ],
    "credito": "",
    "funciones": [
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-31T13:10",
-     "formato": "2D DBOX",
-     "idioma": "subtitulada",
-     "sala": "9",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-31T13:10",
-     "formato": "2D XD DBOX PALCO",
-     "idioma": "doblada",
-     "sala": "10",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-31T13:30",
-     "formato": "4D 2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
     {
      "cine": "cinepolis-parque-arauco",
      "inicio": "2026-08-31T13:30",
@@ -21082,544 +20642,6 @@
    ]
   },
   {
-   "clave": "paw-patrol-la-dino-pelicula",
-   "titulo": "PAW Patrol: La Dino Película",
-   "poster": "https://tickets-static-content.cinepolis.com/pimcore/20418/assets/Chile/Tickets/Movies/PAWPatrolLaDinoPelicula_copy/Es/PP3_Desktop_Poster_720x1022_2/resource.jpg",
-   "duracion": 88,
-   "clasificacion": "TE",
-   "cines": [
-    "cinemark-alto-las-condes",
-    "cinemark-gran-avenida",
-    "cinemark-la-dehesa",
-    "cinemark-mallplaza-oeste",
-    "cinemark-mallplaza-tobalaba",
-    "cinemark-mid-mall-maipu",
-    "cinemark-portal-nunoa",
-    "cineplanet-alameda",
-    "cineplanet-florida-center",
-    "cineplanet-mall-barrio-independencia",
-    "cinepolis-arauco-maipu",
-    "cinepolis-la-reina-la-reina",
-    "cinepolis-melipilla",
-    "cinepolis-paseo-los-trapenses",
-    "cinepolis-plaza-los-dominicos",
-    "cinepolis-puente-alto-puente-alto"
-   ],
-   "sinopsis": "Después de que su barco quedara atrapado en una misteriosa tormenta, los cachorros de la Patrulla Canina aterrizan de emergencia en una isla tropical inexplorada llena de dinosaurios. Allí conocen a Rex, un cachorro que lleva años abandonado en la isla y se ha convertido en un experto en todo lo relacionado con los dinosaurios. Cuando el archienemigo de la Patrulla Canina, el alcalde Humdinger, comienza a explotar minas de forma imprudente con la esperanza de saquear los recursos naturales de la isla, provoca sin querer la erupción de un enorme volcán inactivo.\r\nLos cachorros de la Patrulla Canina se ven envueltos en una serie de rescates de alto riesgo y a escala de dinosaurio, más grandes que cualquier cosa que hayan hecho antes, ya que deben detener a Humdinger antes de que todo en la isla se extinga.",
-   "trailer": "https://youtu.be/PwS4ANaznUc",
-   "generos": [
-    "Animación",
-    "Familiar"
-   ],
-   "credito": "",
-   "funciones": [
-    {
-     "cine": "cinepolis-arauco-maipu",
-     "inicio": "2026-08-31T11:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://cinepolis.com/cl?cinema=cinepolis-arauco-maipu-santiago-poniente-y-norte&selected=cinepolis-arauco-maipu-santiago-poniente-y-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-31T12:45",
-     "formato": "2D PLAY",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cineplanet-mall-barrio-independencia",
-     "inicio": "2026-08-31T13:05",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/paw-patrol-la-dino-pelcula"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-31T13:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cineplanet-alameda",
-     "inicio": "2026-08-31T13:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/paw-patrol-la-dino-pelcula"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-08-31T13:30",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinepolis-arauco-maipu",
-     "inicio": "2026-08-31T13:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://cinepolis.com/cl?cinema=cinepolis-arauco-maipu-santiago-poniente-y-norte&selected=cinepolis-arauco-maipu-santiago-poniente-y-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-08-31T13:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-08-31T14:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cineplanet-florida-center",
-     "inicio": "2026-08-31T14:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/paw-patrol-la-dino-pelcula"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-31T14:55",
-     "formato": "2D PLAY",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinepolis-la-reina-la-reina",
-     "inicio": "2026-08-31T15:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cinepolischile.cl/"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-08-31T15:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinepolis-melipilla",
-     "inicio": "2026-08-31T15:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://cinepolis.com/cl?cinema=cinepolis-santa-maria-melipilla-santiago-poniente-y-norte&selected=cinepolis-santa-maria-melipilla-santiago-poniente-y-norte"
-    },
-    {
-     "cine": "cinepolis-plaza-los-dominicos",
-     "inicio": "2026-08-31T15:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cinepolischile.cl/"
-    },
-    {
-     "cine": "cinepolis-puente-alto-puente-alto",
-     "inicio": "2026-08-31T15:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://cinepolis.com/cl?cinema=cinepolis-espacio-urbano-puente-alto-santiago-sur&selected=cinepolis-espacio-urbano-puente-alto-santiago-sur"
-    },
-    {
-     "cine": "cinepolis-paseo-los-trapenses",
-     "inicio": "2026-08-31T16:45",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cinepolischile.cl/"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-31T17:05",
-     "formato": "2D PLAY",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinepolis-puente-alto-puente-alto",
-     "inicio": "2026-08-31T18:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://cinepolis.com/cl?cinema=cinepolis-espacio-urbano-puente-alto-santiago-sur&selected=cinepolis-espacio-urbano-puente-alto-santiago-sur"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-08-31T19:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cinepolis-puente-alto-puente-alto",
-     "inicio": "2026-08-31T21:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://cinepolis.com/cl?cinema=cinepolis-espacio-urbano-puente-alto-santiago-sur&selected=cinepolis-espacio-urbano-puente-alto-santiago-sur"
-    },
-    {
-     "cine": "cinepolis-arauco-maipu",
-     "inicio": "2026-09-01T11:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://cinepolis.com/cl?cinema=cinepolis-arauco-maipu-santiago-poniente-y-norte&selected=cinepolis-arauco-maipu-santiago-poniente-y-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-01T12:45",
-     "formato": "2D PLAY",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cineplanet-mall-barrio-independencia",
-     "inicio": "2026-09-01T13:05",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/paw-patrol-la-dino-pelcula"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-01T13:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-09-01T13:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cineplanet-alameda",
-     "inicio": "2026-09-01T13:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/paw-patrol-la-dino-pelcula"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-09-01T13:30",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinepolis-arauco-maipu",
-     "inicio": "2026-09-01T13:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://cinepolis.com/cl?cinema=cinepolis-arauco-maipu-santiago-poniente-y-norte&selected=cinepolis-arauco-maipu-santiago-poniente-y-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-09-01T13:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-01T14:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cineplanet-florida-center",
-     "inicio": "2026-09-01T14:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/paw-patrol-la-dino-pelcula"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-01T14:55",
-     "formato": "2D PLAY",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinepolis-la-reina-la-reina",
-     "inicio": "2026-09-01T15:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cinepolischile.cl/"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-01T15:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinepolis-melipilla",
-     "inicio": "2026-09-01T15:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://cinepolis.com/cl?cinema=cinepolis-santa-maria-melipilla-santiago-poniente-y-norte&selected=cinepolis-santa-maria-melipilla-santiago-poniente-y-norte"
-    },
-    {
-     "cine": "cinepolis-plaza-los-dominicos",
-     "inicio": "2026-09-01T15:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cinepolischile.cl/"
-    },
-    {
-     "cine": "cinepolis-puente-alto-puente-alto",
-     "inicio": "2026-09-01T15:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://cinepolis.com/cl?cinema=cinepolis-espacio-urbano-puente-alto-santiago-sur&selected=cinepolis-espacio-urbano-puente-alto-santiago-sur"
-    },
-    {
-     "cine": "cinepolis-paseo-los-trapenses",
-     "inicio": "2026-09-01T16:45",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cinepolischile.cl/"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-01T17:05",
-     "formato": "2D PLAY",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinepolis-puente-alto-puente-alto",
-     "inicio": "2026-09-01T18:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://cinepolis.com/cl?cinema=cinepolis-espacio-urbano-puente-alto-santiago-sur&selected=cinepolis-espacio-urbano-puente-alto-santiago-sur"
-    },
-    {
-     "cine": "cinepolis-puente-alto-puente-alto",
-     "inicio": "2026-09-01T21:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://cinepolis.com/cl?cinema=cinepolis-espacio-urbano-puente-alto-santiago-sur&selected=cinepolis-espacio-urbano-puente-alto-santiago-sur"
-    },
-    {
-     "cine": "cinepolis-arauco-maipu",
-     "inicio": "2026-09-02T11:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://cinepolis.com/cl?cinema=cinepolis-arauco-maipu-santiago-poniente-y-norte&selected=cinepolis-arauco-maipu-santiago-poniente-y-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-02T12:45",
-     "formato": "2D PLAY",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cineplanet-mall-barrio-independencia",
-     "inicio": "2026-09-02T13:05",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/paw-patrol-la-dino-pelcula"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-02T13:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-09-02T13:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cineplanet-alameda",
-     "inicio": "2026-09-02T13:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/paw-patrol-la-dino-pelcula"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-09-02T13:30",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinepolis-arauco-maipu",
-     "inicio": "2026-09-02T13:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://cinepolis.com/cl?cinema=cinepolis-arauco-maipu-santiago-poniente-y-norte&selected=cinepolis-arauco-maipu-santiago-poniente-y-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-09-02T13:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-02T14:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cineplanet-florida-center",
-     "inicio": "2026-09-02T14:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cineplanet.cl/peliculas/paw-patrol-la-dino-pelcula"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-02T14:55",
-     "formato": "2D PLAY",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinepolis-la-reina-la-reina",
-     "inicio": "2026-09-02T15:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cinepolischile.cl/"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-02T15:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinepolis-melipilla",
-     "inicio": "2026-09-02T15:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://cinepolis.com/cl?cinema=cinepolis-santa-maria-melipilla-santiago-poniente-y-norte&selected=cinepolis-santa-maria-melipilla-santiago-poniente-y-norte"
-    },
-    {
-     "cine": "cinepolis-plaza-los-dominicos",
-     "inicio": "2026-09-02T15:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cinepolischile.cl/"
-    },
-    {
-     "cine": "cinepolis-puente-alto-puente-alto",
-     "inicio": "2026-09-02T15:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://cinepolis.com/cl?cinema=cinepolis-espacio-urbano-puente-alto-santiago-sur&selected=cinepolis-espacio-urbano-puente-alto-santiago-sur"
-    },
-    {
-     "cine": "cinepolis-paseo-los-trapenses",
-     "inicio": "2026-09-02T16:45",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.cinepolischile.cl/"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-02T17:05",
-     "formato": "2D PLAY",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinepolis-puente-alto-puente-alto",
-     "inicio": "2026-09-02T18:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://cinepolis.com/cl?cinema=cinepolis-espacio-urbano-puente-alto-santiago-sur&selected=cinepolis-espacio-urbano-puente-alto-santiago-sur"
-    },
-    {
-     "cine": "cinepolis-puente-alto-puente-alto",
-     "inicio": "2026-09-02T21:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://cinepolis.com/cl?cinema=cinepolis-espacio-urbano-puente-alto-santiago-sur&selected=cinepolis-espacio-urbano-puente-alto-santiago-sur"
-    }
-   ]
-  },
-  {
    "clave": "juan-gabriel-mi-primer-bellas-artes",
    "titulo": "Juan Gabriel: Mi Primer Bellas Artes",
    "poster": "https://cdn.cinemark.cl/content/posters/HO00015219.jpg",
@@ -22111,6 +21133,488 @@
    ]
   },
   {
+   "clave": "paw-patrol-la-dino-pelicula",
+   "titulo": "PAW Patrol: La Dino Película",
+   "poster": "https://tickets-static-content.cinepolis.com/pimcore/20418/assets/Chile/Tickets/Movies/PAWPatrolLaDinoPelicula_copy/Es/PP3_Desktop_Poster_720x1022_2/resource.jpg",
+   "duracion": 88,
+   "clasificacion": "TE",
+   "cines": [
+    "cinemark-alto-las-condes",
+    "cinemark-gran-avenida",
+    "cinemark-la-dehesa",
+    "cinemark-mallplaza-oeste",
+    "cinemark-mallplaza-tobalaba",
+    "cinemark-mid-mall-maipu",
+    "cinemark-portal-nunoa",
+    "cineplanet-alameda",
+    "cineplanet-florida-center",
+    "cineplanet-mall-barrio-independencia",
+    "cinepolis-arauco-maipu",
+    "cinepolis-la-reina-la-reina",
+    "cinepolis-melipilla",
+    "cinepolis-paseo-los-trapenses",
+    "cinepolis-plaza-los-dominicos",
+    "cinepolis-puente-alto-puente-alto"
+   ],
+   "sinopsis": "Después de que su barco quedara atrapado en una misteriosa tormenta, los cachorros de la Patrulla Canina aterrizan de emergencia en una isla tropical inexplorada llena de dinosaurios. Allí conocen a Rex, un cachorro que lleva años abandonado en la isla y se ha convertido en un experto en todo lo relacionado con los dinosaurios. Cuando el archienemigo de la Patrulla Canina, el alcalde Humdinger, comienza a explotar minas de forma imprudente con la esperanza de saquear los recursos naturales de la isla, provoca sin querer la erupción de un enorme volcán inactivo.\r\nLos cachorros de la Patrulla Canina se ven envueltos en una serie de rescates de alto riesgo y a escala de dinosaurio, más grandes que cualquier cosa que hayan hecho antes, ya que deben detener a Humdinger antes de que todo en la isla se extinga.",
+   "trailer": "https://youtu.be/PwS4ANaznUc",
+   "generos": [
+    "Animación",
+    "Familiar"
+   ],
+   "credito": "",
+   "funciones": [
+    {
+     "cine": "cinepolis-arauco-maipu",
+     "inicio": "2026-08-31T11:30",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://cinepolis.com/cl?cinema=cinepolis-arauco-maipu-santiago-poniente-y-norte&selected=cinepolis-arauco-maipu-santiago-poniente-y-norte"
+    },
+    {
+     "cine": "cineplanet-mall-barrio-independencia",
+     "inicio": "2026-08-31T13:05",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/paw-patrol-la-dino-pelcula"
+    },
+    {
+     "cine": "cineplanet-alameda",
+     "inicio": "2026-08-31T13:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/paw-patrol-la-dino-pelcula"
+    },
+    {
+     "cine": "cinepolis-arauco-maipu",
+     "inicio": "2026-08-31T13:40",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://cinepolis.com/cl?cinema=cinepolis-arauco-maipu-santiago-poniente-y-norte&selected=cinepolis-arauco-maipu-santiago-poniente-y-norte"
+    },
+    {
+     "cine": "cineplanet-florida-center",
+     "inicio": "2026-08-31T14:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/paw-patrol-la-dino-pelcula"
+    },
+    {
+     "cine": "cinepolis-la-reina-la-reina",
+     "inicio": "2026-08-31T15:00",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cinepolischile.cl/"
+    },
+    {
+     "cine": "cinepolis-melipilla",
+     "inicio": "2026-08-31T15:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://cinepolis.com/cl?cinema=cinepolis-santa-maria-melipilla-santiago-poniente-y-norte&selected=cinepolis-santa-maria-melipilla-santiago-poniente-y-norte"
+    },
+    {
+     "cine": "cinepolis-plaza-los-dominicos",
+     "inicio": "2026-08-31T15:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cinepolischile.cl/"
+    },
+    {
+     "cine": "cinepolis-puente-alto-puente-alto",
+     "inicio": "2026-08-31T15:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://cinepolis.com/cl?cinema=cinepolis-espacio-urbano-puente-alto-santiago-sur&selected=cinepolis-espacio-urbano-puente-alto-santiago-sur"
+    },
+    {
+     "cine": "cinepolis-paseo-los-trapenses",
+     "inicio": "2026-08-31T16:45",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cinepolischile.cl/"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-08-31T17:05",
+     "formato": "2D PLAY",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cinepolis-puente-alto-puente-alto",
+     "inicio": "2026-08-31T18:30",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://cinepolis.com/cl?cinema=cinepolis-espacio-urbano-puente-alto-santiago-sur&selected=cinepolis-espacio-urbano-puente-alto-santiago-sur"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-08-31T19:40",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
+    },
+    {
+     "cine": "cinepolis-puente-alto-puente-alto",
+     "inicio": "2026-08-31T21:00",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://cinepolis.com/cl?cinema=cinepolis-espacio-urbano-puente-alto-santiago-sur&selected=cinepolis-espacio-urbano-puente-alto-santiago-sur"
+    },
+    {
+     "cine": "cinepolis-arauco-maipu",
+     "inicio": "2026-09-01T11:30",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://cinepolis.com/cl?cinema=cinepolis-arauco-maipu-santiago-poniente-y-norte&selected=cinepolis-arauco-maipu-santiago-poniente-y-norte"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-09-01T12:45",
+     "formato": "2D PLAY",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cineplanet-mall-barrio-independencia",
+     "inicio": "2026-09-01T13:05",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/paw-patrol-la-dino-pelcula"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-01T13:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-09-01T13:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
+    },
+    {
+     "cine": "cineplanet-alameda",
+     "inicio": "2026-09-01T13:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/paw-patrol-la-dino-pelcula"
+    },
+    {
+     "cine": "cinemark-la-dehesa",
+     "inicio": "2026-09-01T13:30",
+     "formato": "2D PRE",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
+    },
+    {
+     "cine": "cinepolis-arauco-maipu",
+     "inicio": "2026-09-01T13:40",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://cinepolis.com/cl?cinema=cinepolis-arauco-maipu-santiago-poniente-y-norte&selected=cinepolis-arauco-maipu-santiago-poniente-y-norte"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-09-01T13:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-09-01T14:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
+    },
+    {
+     "cine": "cineplanet-florida-center",
+     "inicio": "2026-09-01T14:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/paw-patrol-la-dino-pelcula"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-09-01T14:55",
+     "formato": "2D PLAY",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cinepolis-la-reina-la-reina",
+     "inicio": "2026-09-01T15:00",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cinepolischile.cl/"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-09-01T15:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
+    },
+    {
+     "cine": "cinepolis-melipilla",
+     "inicio": "2026-09-01T15:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://cinepolis.com/cl?cinema=cinepolis-santa-maria-melipilla-santiago-poniente-y-norte&selected=cinepolis-santa-maria-melipilla-santiago-poniente-y-norte"
+    },
+    {
+     "cine": "cinepolis-plaza-los-dominicos",
+     "inicio": "2026-09-01T15:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cinepolischile.cl/"
+    },
+    {
+     "cine": "cinepolis-puente-alto-puente-alto",
+     "inicio": "2026-09-01T15:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://cinepolis.com/cl?cinema=cinepolis-espacio-urbano-puente-alto-santiago-sur&selected=cinepolis-espacio-urbano-puente-alto-santiago-sur"
+    },
+    {
+     "cine": "cinepolis-paseo-los-trapenses",
+     "inicio": "2026-09-01T16:45",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cinepolischile.cl/"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-09-01T17:05",
+     "formato": "2D PLAY",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cinepolis-puente-alto-puente-alto",
+     "inicio": "2026-09-01T18:30",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://cinepolis.com/cl?cinema=cinepolis-espacio-urbano-puente-alto-santiago-sur&selected=cinepolis-espacio-urbano-puente-alto-santiago-sur"
+    },
+    {
+     "cine": "cinepolis-puente-alto-puente-alto",
+     "inicio": "2026-09-01T21:00",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://cinepolis.com/cl?cinema=cinepolis-espacio-urbano-puente-alto-santiago-sur&selected=cinepolis-espacio-urbano-puente-alto-santiago-sur"
+    },
+    {
+     "cine": "cinepolis-arauco-maipu",
+     "inicio": "2026-09-02T11:30",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://cinepolis.com/cl?cinema=cinepolis-arauco-maipu-santiago-poniente-y-norte&selected=cinepolis-arauco-maipu-santiago-poniente-y-norte"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-09-02T12:45",
+     "formato": "2D PLAY",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cineplanet-mall-barrio-independencia",
+     "inicio": "2026-09-02T13:05",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/paw-patrol-la-dino-pelcula"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-02T13:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-09-02T13:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
+    },
+    {
+     "cine": "cineplanet-alameda",
+     "inicio": "2026-09-02T13:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/paw-patrol-la-dino-pelcula"
+    },
+    {
+     "cine": "cinemark-la-dehesa",
+     "inicio": "2026-09-02T13:30",
+     "formato": "2D PRE",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
+    },
+    {
+     "cine": "cinepolis-arauco-maipu",
+     "inicio": "2026-09-02T13:40",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://cinepolis.com/cl?cinema=cinepolis-arauco-maipu-santiago-poniente-y-norte&selected=cinepolis-arauco-maipu-santiago-poniente-y-norte"
+    },
+    {
+     "cine": "cinemark-mallplaza-tobalaba",
+     "inicio": "2026-09-02T13:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
+    },
+    {
+     "cine": "cinemark-mid-mall-maipu",
+     "inicio": "2026-09-02T14:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
+    },
+    {
+     "cine": "cineplanet-florida-center",
+     "inicio": "2026-09-02T14:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cineplanet.cl/peliculas/paw-patrol-la-dino-pelcula"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-09-02T14:55",
+     "formato": "2D PLAY",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cinepolis-la-reina-la-reina",
+     "inicio": "2026-09-02T15:00",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cinepolischile.cl/"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-09-02T15:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
+    },
+    {
+     "cine": "cinepolis-melipilla",
+     "inicio": "2026-09-02T15:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://cinepolis.com/cl?cinema=cinepolis-santa-maria-melipilla-santiago-poniente-y-norte&selected=cinepolis-santa-maria-melipilla-santiago-poniente-y-norte"
+    },
+    {
+     "cine": "cinepolis-plaza-los-dominicos",
+     "inicio": "2026-09-02T15:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cinepolischile.cl/"
+    },
+    {
+     "cine": "cinepolis-puente-alto-puente-alto",
+     "inicio": "2026-09-02T15:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://cinepolis.com/cl?cinema=cinepolis-espacio-urbano-puente-alto-santiago-sur&selected=cinepolis-espacio-urbano-puente-alto-santiago-sur"
+    },
+    {
+     "cine": "cinepolis-paseo-los-trapenses",
+     "inicio": "2026-09-02T16:45",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://www.cinepolischile.cl/"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-09-02T17:05",
+     "formato": "2D PLAY",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cinepolis-puente-alto-puente-alto",
+     "inicio": "2026-09-02T18:30",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://cinepolis.com/cl?cinema=cinepolis-espacio-urbano-puente-alto-santiago-sur&selected=cinepolis-espacio-urbano-puente-alto-santiago-sur"
+    },
+    {
+     "cine": "cinepolis-puente-alto-puente-alto",
+     "inicio": "2026-09-02T21:00",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://cinepolis.com/cl?cinema=cinepolis-espacio-urbano-puente-alto-santiago-sur&selected=cinepolis-espacio-urbano-puente-alto-santiago-sur"
+    }
+   ]
+  },
+  {
    "clave": "sagrado-corazon",
    "titulo": "Sagrado corazón",
    "poster": "https://tickets-static-content.cinepolis.com/pimcore/21449/assets/Chile/Tickets/Movies/SagradoCorazon/Es/720x1022_19/resource.jpg",
@@ -22522,30 +22026,6 @@
    "credito": "",
    "funciones": [
     {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-31T12:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-08-31T12:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-31T13:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
      "cine": "cineplanet-florida-center",
      "inicio": "2026-08-31T13:05",
      "formato": "2D",
@@ -22568,14 +22048,6 @@
      "idioma": "doblada",
      "sala": "",
      "url": "https://cinepolis.com/cl?cinema=cinepolis-plaza-egana-santiago-oriente&selected=cinepolis-plaza-egana-santiago-oriente"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-08-31T15:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
     },
     {
      "cine": "cineplanet-florida-center",
@@ -22860,174 +22332,6 @@
    ]
   },
   {
-   "clave": "mi-vecino-totoro",
-   "titulo": "Mi vecino Totoro",
-   "poster": "https://tickets-static-content.cinepolis.com/pimcore/20415/assets/Chile/Tickets/Movies/MiVecinoTotoro/Es/720x1022_19/resource.jpg",
-   "duracion": 87,
-   "clasificacion": "TE",
-   "cines": [
-    "cinemark-mallplaza-oeste",
-    "cinemark-mallplaza-vespucio",
-    "cinemark-portal-nunoa",
-    "cinepolis-arauco-maipu",
-    "cinepolis-la-reina-la-reina",
-    "cinepolis-mallplaza-egana"
-   ],
-   "sinopsis": "Cuando las hermanas Satsuki y Mei se mudan al campo junto a su padre para estar más cerca de su madre enferma, descubren un mundo mágico oculto entre los bosques. Allí conocen a Totoro, un misterioso y amable espíritu de la naturaleza que las acompañará en una inolvidable aventura llena de imaginación, amistad y asombro.",
-   "trailer": "https://youtu.be/Pr8drhw55A4",
-   "generos": [
-    "Animación",
-    "Anime"
-   ],
-   "credito": "",
-   "funciones": [
-    {
-     "cine": "cinepolis-arauco-maipu",
-     "inicio": "2026-08-31T11:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://cinepolis.com/cl?cinema=cinepolis-arauco-maipu-santiago-poniente-y-norte&selected=cinepolis-arauco-maipu-santiago-poniente-y-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-31T12:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-08-31T13:20",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinepolis-mallplaza-egana",
-     "inicio": "2026-08-31T14:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://cinepolis.com/cl?cinema=cinepolis-plaza-egana-santiago-oriente&selected=cinepolis-plaza-egana-santiago-oriente"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-08-31T14:30",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinepolis-la-reina-la-reina",
-     "inicio": "2026-08-31T21:35",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "",
-     "url": "https://www.cinepolischile.cl/"
-    },
-    {
-     "cine": "cinepolis-arauco-maipu",
-     "inicio": "2026-09-01T11:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://cinepolis.com/cl?cinema=cinepolis-arauco-maipu-santiago-poniente-y-norte&selected=cinepolis-arauco-maipu-santiago-poniente-y-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-01T12:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-01T13:40",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinepolis-la-reina-la-reina",
-     "inicio": "2026-09-01T14:00",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "",
-     "url": "https://www.cinepolischile.cl/"
-    },
-    {
-     "cine": "cinepolis-mallplaza-egana",
-     "inicio": "2026-09-01T14:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://cinepolis.com/cl?cinema=cinepolis-plaza-egana-santiago-oriente&selected=cinepolis-plaza-egana-santiago-oriente"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-01T14:30",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinepolis-arauco-maipu",
-     "inicio": "2026-09-02T11:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://cinepolis.com/cl?cinema=cinepolis-arauco-maipu-santiago-poniente-y-norte&selected=cinepolis-arauco-maipu-santiago-poniente-y-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-02T12:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-02T13:40",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinepolis-mallplaza-egana",
-     "inicio": "2026-09-02T14:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://cinepolis.com/cl?cinema=cinepolis-plaza-egana-santiago-oriente&selected=cinepolis-plaza-egana-santiago-oriente"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-02T14:30",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinepolis-la-reina-la-reina",
-     "inicio": "2026-09-02T21:35",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "",
-     "url": "https://www.cinepolischile.cl/"
-    }
-   ]
-  },
-  {
    "clave": "terminator-2-el-juicio-final",
    "titulo": "Terminator 2: El Juicio Final",
    "poster": "https://cdn.cinemark.cl/content/posters/HO00015299.jpg",
@@ -23177,6 +22481,150 @@
      "idioma": "doblada",
      "sala": "6",
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
+    }
+   ]
+  },
+  {
+   "clave": "mi-vecino-totoro",
+   "titulo": "Mi vecino Totoro",
+   "poster": "https://tickets-static-content.cinepolis.com/pimcore/20415/assets/Chile/Tickets/Movies/MiVecinoTotoro/Es/720x1022_19/resource.jpg",
+   "duracion": 87,
+   "clasificacion": "TE",
+   "cines": [
+    "cinemark-mallplaza-oeste",
+    "cinemark-mallplaza-vespucio",
+    "cinemark-portal-nunoa",
+    "cinepolis-arauco-maipu",
+    "cinepolis-la-reina-la-reina",
+    "cinepolis-mallplaza-egana"
+   ],
+   "sinopsis": "Cuando las hermanas Satsuki y Mei se mudan al campo junto a su padre para estar más cerca de su madre enferma, descubren un mundo mágico oculto entre los bosques. Allí conocen a Totoro, un misterioso y amable espíritu de la naturaleza que las acompañará en una inolvidable aventura llena de imaginación, amistad y asombro.",
+   "trailer": "https://youtu.be/Pr8drhw55A4",
+   "generos": [
+    "Animación",
+    "Anime"
+   ],
+   "credito": "",
+   "funciones": [
+    {
+     "cine": "cinepolis-arauco-maipu",
+     "inicio": "2026-08-31T11:20",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://cinepolis.com/cl?cinema=cinepolis-arauco-maipu-santiago-poniente-y-norte&selected=cinepolis-arauco-maipu-santiago-poniente-y-norte"
+    },
+    {
+     "cine": "cinepolis-mallplaza-egana",
+     "inicio": "2026-08-31T14:20",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://cinepolis.com/cl?cinema=cinepolis-plaza-egana-santiago-oriente&selected=cinepolis-plaza-egana-santiago-oriente"
+    },
+    {
+     "cine": "cinepolis-la-reina-la-reina",
+     "inicio": "2026-08-31T21:35",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.cinepolischile.cl/"
+    },
+    {
+     "cine": "cinepolis-arauco-maipu",
+     "inicio": "2026-09-01T11:20",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://cinepolis.com/cl?cinema=cinepolis-arauco-maipu-santiago-poniente-y-norte&selected=cinepolis-arauco-maipu-santiago-poniente-y-norte"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-09-01T12:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-09-01T13:40",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
+    },
+    {
+     "cine": "cinepolis-la-reina-la-reina",
+     "inicio": "2026-09-01T14:00",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.cinepolischile.cl/"
+    },
+    {
+     "cine": "cinepolis-mallplaza-egana",
+     "inicio": "2026-09-01T14:20",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://cinepolis.com/cl?cinema=cinepolis-plaza-egana-santiago-oriente&selected=cinepolis-plaza-egana-santiago-oriente"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-09-01T14:30",
+     "formato": "2D PRE",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
+    },
+    {
+     "cine": "cinepolis-arauco-maipu",
+     "inicio": "2026-09-02T11:20",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://cinepolis.com/cl?cinema=cinepolis-arauco-maipu-santiago-poniente-y-norte&selected=cinepolis-arauco-maipu-santiago-poniente-y-norte"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-09-02T12:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-09-02T13:40",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
+    },
+    {
+     "cine": "cinepolis-mallplaza-egana",
+     "inicio": "2026-09-02T14:20",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://cinepolis.com/cl?cinema=cinepolis-plaza-egana-santiago-oriente&selected=cinepolis-plaza-egana-santiago-oriente"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-09-02T14:30",
+     "formato": "2D PRE",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
+    },
+    {
+     "cine": "cinepolis-la-reina-la-reina",
+     "inicio": "2026-09-02T21:35",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "",
+     "url": "https://www.cinepolischile.cl/"
     }
    ]
   },
@@ -23454,14 +22902,6 @@
      "idioma": "doblada",
      "sala": "",
      "url": "https://cinepolis.com/cl?cinema=cinepolis-arauco-maipu-santiago-poniente-y-norte&selected=cinepolis-arauco-maipu-santiago-poniente-y-norte"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-08-31T14:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
     },
     {
      "cine": "cinepolis-puente-alto-puente-alto",
@@ -24095,14 +23535,6 @@
    ],
    "credito": "",
    "funciones": [
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-08-31T12:40",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
     {
      "cine": "cinemark-mallplaza-oeste",
      "inicio": "2026-09-01T12:40",

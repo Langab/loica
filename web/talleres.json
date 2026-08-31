@@ -1,5 +1,5 @@
 {
- "generado": "2026-08-31T11:47:16",
+ "generado": "2026-08-31T15:15:08",
  "total": 1948,
  "talleres": [
   {
@@ -54917,9 +54917,9 @@
    "lat": -33.4437,
    "lon": -70.5405,
    "precision": "comuna",
-   "gratis": false,
-   "precio": 13000,
-   "precio_texto": "s. Matrícula anual: $13.000 público general/ $10.000 vecinos",
+   "gratis": true,
+   "precio": 0,
+   "precio_texto": "Inscripción Taller gratuito de cuentacuentos con Teatristas",
    "categoria": "clases",
    "subcategoria": "",
    "escala": "",

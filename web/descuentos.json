@@ -1,7 +1,7 @@
 {
- "generado": "2026-08-31T11:44:25",
- "total": 628,
- "locales": 1619,
+ "generado": "2026-08-31T15:11:08",
+ "total": 623,
+ "locales": 1531,
  "bancos": [
   [
    "bancochile",
@@ -58,8 +58,6 @@
   "Macul",
   "Maipú",
   "Melipilla",
-  "Padre Hurtado",
-  "Pedro Aguirre Cerda",
   "Peñaflor",
   "Peñalolén",
   "Pirque",
@@ -79,13 +77,13 @@
   "Ñuñoa"
  ],
  "por_dia": {
-  "miercoles": 225,
-  "sabado": 127,
-  "jueves": 181,
-  "viernes": 131,
-  "lunes": 193,
+  "miercoles": 224,
+  "sabado": 126,
+  "jueves": 177,
+  "viernes": 132,
+  "lunes": 191,
   "martes": 234,
-  "domingo": 100
+  "domingo": 99
  },
  "descuentos": [
   {
@@ -700,7 +698,7 @@
     "jueves",
     "sabado"
    ],
-   "vigencia_hasta": "2026-08-31",
+   "vigencia_hasta": "2026-09-30",
    "tarjetas": [
     "visa-credito-infinite",
     "visa-credito-signature",
@@ -714,7 +712,7 @@
    ],
    "modalidad": "",
    "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 31 de agosto de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "condiciones": "Promoción válida desde el 01 al 30 de septiembre de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/al-pesto-visa",
    "logo": "https://assets.bancochile.cl/uploads/000/045/703/b23af271-165f-4332-a079-635335dd7372/original/logo-web-Al-Pesto.jpg",
    "capturado": "",
@@ -965,74 +963,6 @@
   {
    "banco_id": "bancochile",
    "banco": "Banco de Chile",
-   "comercio": "Ari Nikkei",
-   "categoria": "restaurantes",
-   "cocina": "japonesa",
-   "region": "Metropolitana",
-   "sitio_web": "",
-   "porcentaje": 40,
-   "oferta": "",
-   "tope": 50000,
-   "dias": [
-    "lunes",
-    "miercoles"
-   ],
-   "vigencia_hasta": "2026-08-31",
-   "tarjetas": [
-    "visa-credito-infinite",
-    "visa-credito-signature",
-    "visa-credito-platinum",
-    "visa-fan-credito",
-    "visa-debito-infinite",
-    "visa-debito-signature",
-    "visa-debito-bch",
-    "visa-cuenta-fan",
-    "visa-credito-gold"
-   ],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 31 de agosto de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
-   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/ari-nikkei",
-   "logo": "https://assets.bancochile.cl/uploads/000/042/509/c5c1b97c-293c-4600-9a07-0f17c33b901f/original/logo-Ari-Nikkei.jpg",
-   "capturado": "",
-   "id": "d10e01c9d665",
-   "locales": [
-    {
-     "direccion": "Cam. El Alba 11969",
-     "comuna": "Las Condes",
-     "lat": -33.4021018,
-     "lon": -70.5147311,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Locales 309 y 310",
-     "comuna": "Las Condes",
-     "lat": -33.4088,
-     "lon": -70.5673,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Av. José Alcalde Délano 10492",
-     "comuna": "Lo Barnechea",
-     "lat": -33.3572273,
-     "lon": -70.5404838,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Las Condes",
-    "Lo Barnechea"
-   ]
-  },
-  {
-   "banco_id": "bancochile",
-   "banco": "Banco de Chile",
    "comercio": "Aurea Restaurante",
    "categoria": "restaurantes",
    "cocina": "",
@@ -1044,7 +974,7 @@
    "dias": [
     "miercoles"
    ],
-   "vigencia_hasta": "2026-08-31",
+   "vigencia_hasta": "2026-09-30",
    "tarjetas": [
     "visa-credito-infinite",
     "visa-credito-signature",
@@ -1058,7 +988,7 @@
    ],
    "modalidad": "",
    "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 31 de agosto de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "condiciones": "Promoción válida desde el 01 al 30 de septiembre de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/aurea-restaurante-visa",
    "logo": "https://assets.bancochile.cl/uploads/000/055/658/2dbb346f-11e1-4791-88ef-fb63dc845dff/original/logo-web-aurea.jpg",
    "capturado": "",
@@ -1284,54 +1214,6 @@
    ]
   },
   {
-   "banco_id": "bancochile",
-   "banco": "Banco de Chile",
-   "comercio": "Barbazul - Terrazas San Cristóbal",
-   "categoria": "restaurantes",
-   "cocina": "",
-   "region": "Metropolitana",
-   "sitio_web": "",
-   "porcentaje": 40,
-   "oferta": "",
-   "tope": 50000,
-   "dias": [
-    "jueves"
-   ],
-   "vigencia_hasta": "2026-08-31",
-   "tarjetas": [
-    "visa-credito-infinite",
-    "visa-credito-signature",
-    "visa-credito-platinum",
-    "visa-fan-credito",
-    "visa-debito-infinite",
-    "visa-debito-signature",
-    "visa-debito-bch",
-    "visa-cuenta-fan",
-    "visa-credito-gold"
-   ],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 31 de agosto de 2026, pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
-   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/barbazul-40visa",
-   "logo": "https://assets.bancochile.cl/uploads/000/110/478/ee3f9ef7-c04c-4947-9b4a-87f46ba51c82/original/logo-web-Barbazul.jpg",
-   "capturado": "",
-   "id": "744db11d3979",
-   "locales": [
-    {
-     "direccion": "Constitución #241",
-     "comuna": "Providencia",
-     "lat": -33.4315449,
-     "lon": -70.6349799,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Providencia"
-   ]
-  },
-  {
    "banco_id": "security",
    "banco": "Banco Security",
    "comercio": "Barquillería",
@@ -1455,54 +1337,6 @@
    "id": "79d6778274a5",
    "locales": [],
    "comunas": []
-  },
-  {
-   "banco_id": "bancochile",
-   "banco": "Banco de Chile",
-   "comercio": "Barrica 94",
-   "categoria": "restaurantes",
-   "cocina": "",
-   "region": "Metropolitana",
-   "sitio_web": "",
-   "porcentaje": 40,
-   "oferta": "",
-   "tope": 50000,
-   "dias": [
-    "sabado"
-   ],
-   "vigencia_hasta": "2026-08-31",
-   "tarjetas": [
-    "visa-credito-infinite",
-    "visa-credito-signature",
-    "visa-credito-platinum",
-    "visa-fan-credito",
-    "visa-debito-infinite",
-    "visa-debito-signature",
-    "visa-debito-bch",
-    "visa-cuenta-fan",
-    "visa-credito-gold"
-   ],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 31 de agosto de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
-   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/barrica-94-visa",
-   "logo": "https://assets.bancochile.cl/uploads/000/055/813/b9ca145c-304b-458c-aa10-632532f57ef2/original/logo-web-barrica.jpg",
-   "capturado": "",
-   "id": "a51926fbd1bd",
-   "locales": [
-    {
-     "direccion": "local 1508",
-     "comuna": "Lo Barnechea",
-     "lat": -33.3512,
-     "lon": -70.518,
-     "precision": "comuna",
-     "telefono": "",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Lo Barnechea"
-   ]
   },
   {
    "banco_id": "falabella",
@@ -6328,55 +6162,6 @@
    ]
   },
   {
-   "banco_id": "bancochile",
-   "banco": "Banco de Chile",
-   "comercio": "El mesón de la Patagonia",
-   "categoria": "restaurantes",
-   "cocina": "",
-   "region": "Metropolitana",
-   "sitio_web": "",
-   "porcentaje": 40,
-   "oferta": "",
-   "tope": 50000,
-   "dias": [
-    "jueves",
-    "viernes"
-   ],
-   "vigencia_hasta": "2026-08-31",
-   "tarjetas": [
-    "visa-credito-infinite",
-    "visa-credito-signature",
-    "visa-credito-platinum",
-    "visa-fan-credito",
-    "visa-debito-infinite",
-    "visa-debito-signature",
-    "visa-debito-bch",
-    "visa-cuenta-fan",
-    "visa-credito-gold"
-   ],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 31 de agosto de 2026, pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
-   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/el-meson-de-la-patagonia",
-   "logo": "https://assets.bancochile.cl/uploads/000/043/315/4ef0fe24-aef9-43c7-9451-fbd910163026/original/logo_meson_patagonia.jpg",
-   "capturado": "",
-   "id": "e91028b594d1",
-   "locales": [
-    {
-     "direccion": "Lo Barnechea #1223",
-     "comuna": "Lo Barnechea",
-     "lat": -33.3576315,
-     "lon": -70.5065564,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Lo Barnechea"
-   ]
-  },
-  {
    "banco_id": "santander",
    "banco": "Santander",
    "comercio": "El Mundo del Vino",
@@ -9525,15 +9310,6 @@
    "id": "673b07fc01ff",
    "locales": [
     {
-     "direccion": "Los Militares #5934",
-     "comuna": "Las Condes",
-     "lat": -33.4052905,
-     "lon": -70.5697953,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
      "direccion": "Los Militares 5934, Las Condes",
      "comuna": "Las Condes",
      "lat": -33.4052905,
@@ -9543,15 +9319,6 @@
      "origen": "Banco Security"
     },
     {
-     "direccion": "Providencia #1403",
-     "comuna": "Providencia",
-     "lat": -33.4280174,
-     "lon": -70.6185386,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
      "direccion": "Providencia 1403, Providencia",
      "comuna": "Providencia",
      "lat": -33.4280174,
@@ -9559,15 +9326,6 @@
      "precision": "calle",
      "telefono": "",
      "origen": "Banco Security"
-    },
-    {
-     "direccion": "Irarrazaval #5350",
-     "comuna": "Ñuñoa",
-     "lat": -33.4531168,
-     "lon": -70.5743949,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
     },
     {
      "direccion": "Irarrázaval 5350, Ñuñoa",
@@ -9632,75 +9390,6 @@
     },
     {
      "direccion": "Irarrázaval 5350, Ñuñoa",
-     "comuna": "Ñuñoa",
-     "lat": -33.4531168,
-     "lon": -70.5743949,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Las Condes",
-    "Providencia",
-    "Ñuñoa"
-   ]
-  },
-  {
-   "banco_id": "bancochile",
-   "banco": "Banco de Chile",
-   "comercio": "Local Burger",
-   "categoria": "comida_rapida",
-   "cocina": "hamburguesas",
-   "region": "Metropolitana",
-   "sitio_web": "",
-   "porcentaje": 40,
-   "oferta": "",
-   "tope": 50000,
-   "dias": [
-    "lunes",
-    "domingo"
-   ],
-   "vigencia_hasta": "2026-08-31",
-   "tarjetas": [
-    "visa-credito-infinite",
-    "visa-credito-signature",
-    "visa-credito-platinum",
-    "visa-fan-credito",
-    "visa-debito-infinite",
-    "visa-debito-signature",
-    "visa-debito-bch",
-    "visa-cuenta-fan",
-    "visa-credito-gold"
-   ],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 31 de agosto de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
-   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/local-burger-visa",
-   "logo": "https://assets.bancochile.cl/uploads/000/057/764/13c4f8c2-6941-4910-ae9f-707bbf1d5505/original/banner-web-Local-Burger.jpg",
-   "capturado": "",
-   "id": "aa008b580668",
-   "locales": [
-    {
-     "direccion": "Los Militares #5934",
-     "comuna": "Las Condes",
-     "lat": -33.4052905,
-     "lon": -70.5697953,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Providencia #1403",
-     "comuna": "Providencia",
-     "lat": -33.4280174,
-     "lon": -70.6185386,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    },
-    {
-     "direccion": "Irarrazaval #5350",
      "comuna": "Ñuñoa",
      "lat": -33.4531168,
      "lon": -70.5743949,
@@ -10323,729 +10012,6 @@
    ]
   },
   {
-   "banco_id": "falabella",
-   "banco": "Banco Falabella",
-   "comercio": "McDonald's",
-   "categoria": "comida_rapida",
-   "cocina": "hamburguesas",
-   "region": "Metropolitana",
-   "sitio_web": "https://www.bancofalabella.cl/descuentos/detalle/mccombodelmes",
-   "porcentaje": 40,
-   "oferta": "",
-   "tope": null,
-   "dias": [
-    "lunes"
-   ],
-   "vigencia_hasta": "2026-08-31",
-   "tarjetas": [
-    "cmr",
-    "débito"
-   ],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Exclusivo para compras en mesón y automac · Dcto en Mcdonalds · McDonald's",
-   "url": "https://www.bancofalabella.cl/descuentos/detalle/mccombodelmes",
-   "logo": "https://images.ctfassets.net/p6eyia4djstu/4l4wyAT7I5BP6MLPSuN2tY/ad9a2084d54d14a379fc306a66a60309/Logos-Cards-App-McDonalds.jpg",
-   "capturado": "",
-   "id": "46071008629c",
-   "locales": [
-    {
-     "direccion": "Avenida Américo Vespucio 1501",
-     "comuna": "Cerrillos",
-     "lat": -33.516691949999995,
-     "lon": -70.71403769999999,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Chicureo 7001",
-     "comuna": "Colina",
-     "lat": -33.28025808571429,
-     "lon": -70.62840845714285,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Los Álamos",
-     "comuna": "Colina",
-     "lat": -33.21607813999999,
-     "lon": -70.68464264,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Américo Vespucio 1737",
-     "comuna": "Huechuraba",
-     "lat": -33.3644387,
-     "lon": -70.6787666,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Pedro Fontova 6121",
-     "comuna": "Huechuraba",
-     "lat": -33.3669488,
-     "lon": -70.6701517,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Independencia 565",
-     "comuna": "Independencia",
-     "lat": -33.424704,
-     "lon": -70.6536873,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Independencia 864",
-     "comuna": "Independencia",
-     "lat": -33.42093852000001,
-     "lon": -70.65616434,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Gran Avenida José Miguel Carrera",
-     "comuna": "La Cisterna",
-     "lat": -33.517939580000004,
-     "lon": -70.65940005999998,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Larraín 5862",
-     "comuna": "La Reina",
-     "lat": -33.4520973,
-     "lon": -70.5690153,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Príncipe de Gales 7170",
-     "comuna": "La Reina",
-     "lat": -33.43861092,
-     "lon": -70.55673672,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Apoquindo",
-     "comuna": "Las Condes",
-     "lat": -33.41337861111111,
-     "lon": -70.58135030000001,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Presidente Kennedy 5055",
-     "comuna": "Las Condes",
-     "lat": -33.40252075714286,
-     "lon": -70.5808339142857,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Presidente Kennedy 5413",
-     "comuna": "Las Condes",
-     "lat": -33.4020014,
-     "lon": -70.5769103,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Presidente Kennedy 9001",
-     "comuna": "Las Condes",
-     "lat": -33.3905063,
-     "lon": -70.5464397,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Tomás Moro 950",
-     "comuna": "Las Condes",
-     "lat": -33.4172339,
-     "lon": -70.5528464,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Camino El Alba 11969",
-     "comuna": "Las Condes",
-     "lat": -33.4021672,
-     "lon": -70.5144601,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida La Dehesa",
-     "comuna": "Lo Barnechea",
-     "lat": -33.3541682,
-     "lon": -70.5177837,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Las Condes 12207",
-     "comuna": "Lo Barnechea",
-     "lat": -33.373646,
-     "lon": -70.5188727,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Los Pajaritos 2872",
-     "comuna": "Maipú",
-     "lat": -33.5010658,
-     "lon": -70.75778808000001,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Caletera Camino a Melipilla 16850",
-     "comuna": "Maipú",
-     "lat": -33.544411100000005,
-     "lon": -70.77970056000001,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Cuatro Poniente 01197",
-     "comuna": "Maipú",
-     "lat": -33.5316452,
-     "lon": -70.79241912,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "General Velásquez",
-     "comuna": "Pedro Aguirre Cerda",
-     "lat": -33.496000460000005,
-     "lon": -70.69180556,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Balmaceda 962",
-     "comuna": "Peñaflor",
-     "lat": -33.6100222,
-     "lon": -70.8571816,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Américo Vespucio 3300",
-     "comuna": "Peñalolén",
-     "lat": -33.487593,
-     "lon": -70.5781058,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Tobalaba 11201",
-     "comuna": "Peñalolén",
-     "lat": -33.4729768,
-     "lon": -70.5554336,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Andrés Bello 2461",
-     "comuna": "Providencia",
-     "lat": -33.4179494,
-     "lon": -70.6061624,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Francisco Bilbao 0103",
-     "comuna": "Providencia",
-     "lat": -33.44276551428572,
-     "lon": -70.63002671428572,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Ricardo Lyon",
-     "comuna": "Providencia",
-     "lat": -33.4220352,
-     "lon": -70.6095172,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Bellavista 026",
-     "comuna": "Providencia",
-     "lat": -33.4345699,
-     "lon": -70.6349165,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Hernando de Aguirre 23",
-     "comuna": "Providencia",
-     "lat": -33.4186347,
-     "lon": -70.6015265,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Armando Cortínez Oriente 1704",
-     "comuna": "Pudahuel",
-     "lat": -33.3963669,
-     "lon": -70.7899897,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Ramón Freire 6991",
-     "comuna": "Pudahuel",
-     "lat": -33.46773375555556,
-     "lon": -70.73174496666667,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Jean Mermoz 2150",
-     "comuna": "Pudahuel",
-     "lat": -33.3998924,
-     "lon": -70.7960333,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Camilo Henríquez 3296",
-     "comuna": "Puente Alto",
-     "lat": -33.5694216,
-     "lon": -70.5570287,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Eyzaguirre",
-     "comuna": "Puente Alto",
-     "lat": -33.61150757142857,
-     "lon": -70.5449723,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Autopista Los Libertadores",
-     "comuna": "Quilicura",
-     "lat": -33.315050760000005,
-     "lon": -70.70494255999999,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Américo Vespucio 1651",
-     "comuna": "Quilicura",
-     "lat": -33.37476582,
-     "lon": -70.71830472,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Bernardo O'Higgins 581",
-     "comuna": "Quilicura",
-     "lat": -33.3685126,
-     "lon": -70.7293424,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Presidente Eduardo Frei Montalva 16870",
-     "comuna": "Quilicura",
-     "lat": -33.313359,
-     "lon": -70.72508578,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Arturo Prat 215",
-     "comuna": "San Bernardo",
-     "lat": -33.59400751666667,
-     "lon": -70.70038964999999,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Lo Blanco",
-     "comuna": "San Bernardo",
-     "lat": -33.57639306,
-     "lon": -70.69282396,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Presidente Jorge Alessandri Rodríguez 20040",
-     "comuna": "San Bernardo",
-     "lat": -33.6315145,
-     "lon": -70.710952,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Eyzaguirre",
-     "comuna": "San Bernardo",
-     "lat": -33.593468,
-     "lon": -70.7057587,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Gran Avenida José Miguel Carrera 6150",
-     "comuna": "San Miguel",
-     "lat": -33.5119294,
-     "lon": -70.6568025,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Santa Rosa 2174",
-     "comuna": "Santiago",
-     "lat": -33.4734994,
-     "lon": -70.64164846,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Puente 689",
-     "comuna": "Santiago",
-     "lat": -33.4354173,
-     "lon": -70.6509939,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Rosas",
-     "comuna": "Santiago",
-     "lat": -33.4357215,
-     "lon": -70.66172388,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Vitacura 7300",
-     "comuna": "Vitacura",
-     "lat": -33.385866155555554,
-     "lon": -70.56301148888889,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Américo Vespucio 645",
-     "comuna": "Ñuñoa",
-     "lat": -33.45932536,
-     "lon": -70.57290688,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida Américo Vespucio 881",
-     "comuna": "Ñuñoa",
-     "lat": -33.46322863333334,
-     "lon": -70.57477008333333,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "Avenida José Pedro Alessandri 1165",
-     "comuna": "Ñuñoa",
-     "lat": -33.46541360909091,
-     "lon": -70.59885731818181,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "",
-     "comuna": "Buin",
-     "lat": -33.7314597,
-     "lon": -70.7338512,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "",
-     "comuna": "Estación Central",
-     "lat": -33.4514268,
-     "lon": -70.6780877,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "",
-     "comuna": "Estación Central",
-     "lat": -33.4538733,
-     "lon": -70.6886662,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "",
-     "comuna": "Estación Central",
-     "lat": -33.448827,
-     "lon": -70.667951,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "",
-     "comuna": "Estación Central",
-     "lat": -33.4524183,
-     "lon": -70.6822385,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "",
-     "comuna": "Estación Central",
-     "lat": -33.4534616,
-     "lon": -70.6915509,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "",
-     "comuna": "Huechuraba",
-     "lat": -33.30452683333333,
-     "lon": -70.66589374444443,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "",
-     "comuna": "La Florida",
-     "lat": -33.5188892,
-     "lon": -70.596887,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "",
-     "comuna": "La Florida",
-     "lat": -33.547194963636365,
-     "lon": -70.56909145454546,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "",
-     "comuna": "La Florida",
-     "lat": -33.52880760000001,
-     "lon": -70.59638844000001,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "",
-     "comuna": "Maipú",
-     "lat": -33.5102635,
-     "lon": -70.7576133,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "",
-     "comuna": "Melipilla",
-     "lat": -33.6799278,
-     "lon": -71.2134573,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "",
-     "comuna": "Padre Hurtado",
-     "lat": -33.57056986,
-     "lon": -70.81640064,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "",
-     "comuna": "Providencia",
-     "lat": -33.4238055,
-     "lon": -70.6107232,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "",
-     "comuna": "Pudahuel",
-     "lat": -33.4402561,
-     "lon": -70.8417937,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "",
-     "comuna": "Puente Alto",
-     "lat": -33.600517960000005,
-     "lon": -70.57718517999999,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "",
-     "comuna": "Puente Alto",
-     "lat": -33.571445340000004,
-     "lon": -70.55590232,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "",
-     "comuna": "Puente Alto",
-     "lat": -33.59852428888888,
-     "lon": -70.51739377777778,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "",
-     "comuna": "Quilicura",
-     "lat": -33.277696,
-     "lon": -70.7386567,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "",
-     "comuna": "San Bernardo",
-     "lat": -33.5936084,
-     "lon": -70.6804888,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "",
-     "comuna": "Santiago",
-     "lat": -33.4432034,
-     "lon": -70.6506591,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "",
-     "comuna": "Santiago",
-     "lat": -33.4430448,
-     "lon": -70.645738,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    },
-    {
-     "direccion": "",
-     "comuna": "Santiago",
-     "lat": -33.4377048,
-     "lon": -70.6362421,
-     "precision": "fuente",
-     "telefono": "",
-     "origen": "OpenStreetMap"
-    }
-   ],
-   "comunas": [
-    "Buin",
-    "Cerrillos",
-    "Colina",
-    "Estación Central",
-    "Huechuraba",
-    "Independencia",
-    "La Cisterna",
-    "La Florida",
-    "La Reina",
-    "Las Condes",
-    "Lo Barnechea",
-    "Maipú",
-    "Melipilla",
-    "Padre Hurtado",
-    "Pedro Aguirre Cerda",
-    "Peñaflor",
-    "Peñalolén",
-    "Providencia",
-    "Pudahuel",
-    "Puente Alto",
-    "Quilicura",
-    "San Bernardo",
-    "San Miguel",
-    "Santiago",
-    "Vitacura",
-    "Ñuñoa"
-   ]
-  },
-  {
    "banco_id": "santander",
    "banco": "Santander",
    "comercio": "Melt Pizzas",
@@ -11430,7 +10396,7 @@
     "jueves",
     "sabado"
    ],
-   "vigencia_hasta": "2026-08-31",
+   "vigencia_hasta": "2026-09-30",
    "tarjetas": [
     "visa-credito-infinite",
     "visa-credito-signature",
@@ -11444,7 +10410,7 @@
    ],
    "modalidad": "",
    "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 31 de agosto de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "condiciones": "Promoción válida desde el 01 al 30 de septiembre de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/miscelaneo-bar-visa",
    "logo": "https://assets.bancochile.cl/uploads/000/079/840/4061906d-9bc8-452f-b4e1-128cdcb7357c/original/logo-web-Miscelaneo-Bar.jpg",
    "capturado": "",
@@ -13256,6 +12222,55 @@
    ]
   },
   {
+   "banco_id": "bancochile",
+   "banco": "Banco de Chile",
+   "comercio": "Rolls Sushi & Nikkei",
+   "categoria": "restaurantes",
+   "cocina": "japonesa",
+   "region": "Metropolitana",
+   "sitio_web": "",
+   "porcentaje": 40,
+   "oferta": "",
+   "tope": 50000,
+   "dias": [
+    "viernes",
+    "domingo"
+   ],
+   "vigencia_hasta": "2026-09-30",
+   "tarjetas": [
+    "visa-credito-infinite",
+    "visa-credito-signature",
+    "visa-credito-platinum",
+    "visa-fan-credito",
+    "visa-debito-infinite",
+    "visa-debito-signature",
+    "visa-debito-bch",
+    "visa-cuenta-fan",
+    "visa-credito-gold"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Promoción válida desde el 01 al 30 de septiembre de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/rolls-sushi-and-nikkei",
+   "logo": "https://assets.bancochile.cl/uploads/000/106/712/43c0d410-39b9-4ac5-b37e-836319f2e1e2/original/logo-web-Rolls-Sushi-.jpg",
+   "capturado": "",
+   "id": "9fcc275796c2",
+   "locales": [
+    {
+     "direccion": "Av. Chicureo Km 2",
+     "comuna": "Colina",
+     "lat": -33.2019,
+     "lon": -70.6747,
+     "precision": "comuna",
+     "telefono": "",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Colina"
+   ]
+  },
+  {
    "banco_id": "ripley",
    "banco": "Banco Ripley",
    "comercio": "Rossie la Loca",
@@ -13431,6 +12446,64 @@
    "locales": [
     {
      "direccion": "Raúl labbe 12559, Lo Barnechea",
+     "comuna": "Lo Barnechea",
+     "lat": -33.367544,
+     "lon": -70.5183019,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Lo Barnechea"
+   ]
+  },
+  {
+   "banco_id": "bancochile",
+   "banco": "Banco de Chile",
+   "comercio": "SABOR Y AROMA",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "Metropolitana",
+   "sitio_web": "",
+   "porcentaje": 40,
+   "oferta": "",
+   "tope": 50000,
+   "dias": [
+    "miercoles",
+    "viernes"
+   ],
+   "vigencia_hasta": "2026-09-30",
+   "tarjetas": [
+    "visa-credito-infinite",
+    "visa-credito-signature",
+    "visa-credito-platinum",
+    "visa-fan-credito",
+    "visa-debito-infinite",
+    "visa-debito-signature",
+    "visa-debito-bch",
+    "visa-cuenta-fan",
+    "visa-credito-gold"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Promoción válida desde el 01 al 30 de septiembre de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/sabor-y-aroma-40visa",
+   "logo": "https://assets.bancochile.cl/uploads/000/026/783/ed9482b6-d9e5-4a90-a68b-f4a4e4c8ad0f/original/logo-web-SABOR-Y-AROMA.jpg",
+   "capturado": "",
+   "id": "773b8df49de4",
+   "locales": [
+    {
+     "direccion": "Raúl Labbe #12559",
+     "comuna": "Lo Barnechea",
+     "lat": -33.367544,
+     "lon": -70.5183019,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "Raúl Labbe 12559",
      "comuna": "Lo Barnechea",
      "lat": -33.367544,
      "lon": -70.5183019,
@@ -14980,54 +14053,6 @@
    "comunas": []
   },
   {
-   "banco_id": "bancochile",
-   "banco": "Banco de Chile",
-   "comercio": "Vermutería - Terrazas San Cristóbal",
-   "categoria": "restaurantes",
-   "cocina": "",
-   "region": "Metropolitana",
-   "sitio_web": "",
-   "porcentaje": 40,
-   "oferta": "",
-   "tope": 50000,
-   "dias": [
-    "jueves"
-   ],
-   "vigencia_hasta": "2026-08-31",
-   "tarjetas": [
-    "visa-credito-infinite",
-    "visa-credito-signature",
-    "visa-credito-platinum",
-    "visa-fan-credito",
-    "visa-debito-infinite",
-    "visa-debito-signature",
-    "visa-debito-bch",
-    "visa-cuenta-fan",
-    "visa-credito-gold"
-   ],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 31 de agosto de 2026, pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
-   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/vermuteria-40visa",
-   "logo": "https://assets.bancochile.cl/uploads/000/110/481/49d99d5d-d492-42d8-81c7-e6cac4883baa/original/logo-web-Vermuteria.jpg",
-   "capturado": "",
-   "id": "77af3ad2cd0a",
-   "locales": [
-    {
-     "direccion": "Constitución #241",
-     "comuna": "Providencia",
-     "lat": -33.4315449,
-     "lon": -70.6349799,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Providencia"
-   ]
-  },
-  {
    "banco_id": "santander",
    "banco": "Santander",
    "comercio": "Vicenzo Cucina",
@@ -15068,7 +14093,7 @@
   {
    "banco_id": "bancochile",
    "banco": "Banco de Chile",
-   "comercio": "Vitalicio",
+   "comercio": "Vitali´s",
    "categoria": "restaurantes",
    "cocina": "",
    "region": "Metropolitana",
@@ -15077,9 +14102,10 @@
    "oferta": "",
    "tope": 50000,
    "dias": [
-    "domingo"
+    "martes",
+    "viernes"
    ],
-   "vigencia_hasta": "2026-08-31",
+   "vigencia_hasta": "2026-09-30",
    "tarjetas": [
     "visa-credito-infinite",
     "visa-credito-signature",
@@ -15093,24 +14119,24 @@
    ],
    "modalidad": "",
    "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 31 de agosto de 2026, pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
-   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/vitalicio-40visa",
-   "logo": "https://assets.bancochile.cl/uploads/000/111/012/d5ee0789-6aa4-4185-bc23-e10ab59b48e5/original/logo-web-Vitalicio.png",
+   "condiciones": "Promoción válida desde el 01 al 30 de septiembre de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/vitalis-40-visa",
+   "logo": "https://assets.bancochile.cl/uploads/000/085/579/9ea44b2f-f003-431a-be42-74708ebf0638/original/logo-web-Vitali.jpg",
    "capturado": "",
-   "id": "0e7a1b79b652",
+   "id": "199470c3d1b3",
    "locales": [
     {
-     "direccion": "San Sebastián #2800",
-     "comuna": "Las Condes",
-     "lat": -33.415774719999995,
-     "lon": -70.60188169999999,
+     "direccion": "Av Vitacura #8133",
+     "comuna": "Vitacura",
+     "lat": -33.38562091,
+     "lon": -70.55564988,
      "precision": "calle",
      "telefono": "",
      "origen": ""
     }
    ],
    "comunas": [
-    "Las Condes"
+    "Vitacura"
    ]
   },
   {
@@ -16035,15 +15061,6 @@
    "id": "5d6523f1589b",
    "locales": [
     {
-     "direccion": "Cam. El Alba 11969",
-     "comuna": "Las Condes",
-     "lat": -33.4021018,
-     "lon": -70.5147311,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
      "direccion": "Locales 309 y 310",
      "comuna": "Las Condes",
      "lat": -33.4088,
@@ -16051,20 +15068,10 @@
      "precision": "comuna",
      "telefono": "",
      "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Av. José Alcalde Délano 10492",
-     "comuna": "Lo Barnechea",
-     "lat": -33.3572273,
-     "lon": -70.5404838,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
     }
    ],
    "comunas": [
-    "Las Condes",
-    "Lo Barnechea"
+    "Las Condes"
    ]
   },
   {
@@ -21648,15 +20655,6 @@
    "id": "4b719fae3207",
    "locales": [
     {
-     "direccion": "Los Militares #5934",
-     "comuna": "Las Condes",
-     "lat": -33.4052905,
-     "lon": -70.5697953,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
      "direccion": "Los Militares 5934, Las Condes",
      "comuna": "Las Condes",
      "lat": -33.4052905,
@@ -21666,15 +20664,6 @@
      "origen": "Banco Security"
     },
     {
-     "direccion": "Providencia #1403",
-     "comuna": "Providencia",
-     "lat": -33.4280174,
-     "lon": -70.6185386,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
      "direccion": "Providencia 1403, Providencia",
      "comuna": "Providencia",
      "lat": -33.4280174,
@@ -21682,15 +20671,6 @@
      "precision": "calle",
      "telefono": "",
      "origen": "Banco Security"
-    },
-    {
-     "direccion": "Irarrazaval #5350",
-     "comuna": "Ñuñoa",
-     "lat": -33.4531168,
-     "lon": -70.5743949,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
     },
     {
      "direccion": "Irarrázaval 5350, Ñuñoa",
@@ -23387,6 +22367,57 @@
    "comunas": [
     "Lo Barnechea",
     "Vitacura"
+   ]
+  },
+  {
+   "banco_id": "bancochile",
+   "banco": "Banco de Chile",
+   "comercio": "Ari Nikkei",
+   "categoria": "restaurantes",
+   "cocina": "japonesa",
+   "region": "Metropolitana",
+   "sitio_web": "",
+   "porcentaje": 20,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "lunes"
+   ],
+   "vigencia_hasta": "2026-12-31",
+   "tarjetas": [
+    "visa-credito-infinite",
+    "visa-credito-signature",
+    "visa-credito-platinum",
+    "visa-fan-credito",
+    "mastercard-credito-black",
+    "mastercard-credito-platinum",
+    "visa-debito-infinite",
+    "visa-debito-signature",
+    "visa-debito-bch",
+    "visa-cuenta-fan",
+    "visa-credito-gold",
+    "mastercard-credito-dorada"
+   ],
+   "modalidad": "presencial",
+   "segmentado": false,
+   "condiciones": "Promoción válida hasta el 31 de diciembre de 2026. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile, Banco Edwards y que soliciten el descuento al momento de pagar en forma presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande. Infórmese sobre la garantía estatal de los depósitos en su Banco o en www.cmfchile.cl",
+   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/ari-nikkei-20",
+   "logo": "https://assets.bancochile.cl/uploads/000/042/509/c5c1b97c-293c-4600-9a07-0f17c33b901f/original/logo-Ari-Nikkei.jpg",
+   "capturado": "",
+   "id": "d10e01c9d665",
+   "locales": [
+    {
+     "direccion": "Locales 309 y 310",
+     "comuna": "Las Condes",
+     "lat": -33.4088,
+     "lon": -70.5673,
+     "precision": "comuna",
+     "telefono": "",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Las Condes"
    ]
   },
   {
@@ -26620,6 +25651,67 @@
   {
    "banco_id": "bancochile",
    "banco": "Banco de Chile",
+   "comercio": "Holy Moly",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "Metropolitana",
+   "sitio_web": "https://www.holymoly.cl/",
+   "porcentaje": 20,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "lunes"
+   ],
+   "vigencia_hasta": "2027-08-31",
+   "tarjetas": [
+    "visa-credito-infinite",
+    "visa-credito-signature",
+    "visa-credito-platinum",
+    "visa-fan-credito",
+    "mastercard-credito-black",
+    "mastercard-credito-platinum",
+    "visa-debito-infinite",
+    "visa-debito-signature",
+    "visa-debito-bch",
+    "visa-cuenta-fan",
+    "visa-credito-gold",
+    "mastercard-credito-dorada"
+   ],
+   "modalidad": "presencial",
+   "segmentado": false,
+   "condiciones": "Promoción válida hasta el 31 de agosto del 2027. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile y Banco Edwards y que soliciten el descuento al momento de pagar en compra presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/holy-moly",
+   "logo": "https://assets.bancochile.cl/uploads/000/114/862/225cbe89-2508-4fa3-8dda-bd326f3b2782/original/logo-web-Holy-Moly.jpg",
+   "capturado": "",
+   "id": "c54f2c414afe",
+   "locales": [
+    {
+     "direccion": "Hernando de Aguirre #129",
+     "comuna": "Providencia",
+     "lat": -33.419493100000004,
+     "lon": -70.60134960000002,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "Merced #318",
+     "comuna": "Santiago",
+     "lat": -33.4371835,
+     "lon": -70.6417362,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Providencia",
+    "Santiago"
+   ]
+  },
+  {
+   "banco_id": "bancochile",
+   "banco": "Banco de Chile",
    "comercio": "INFERNO BURGER",
    "categoria": "comida_rapida",
    "cocina": "hamburguesas",
@@ -29521,61 +28613,6 @@
    "comunas": [
     "La Cisterna",
     "San Miguel"
-   ]
-  },
-  {
-   "banco_id": "bancochile",
-   "banco": "Banco de Chile",
-   "comercio": "SABOR Y AROMA",
-   "categoria": "restaurantes",
-   "cocina": "",
-   "region": "Metropolitana",
-   "sitio_web": "",
-   "porcentaje": 20,
-   "oferta": "",
-   "tope": null,
-   "dias": [
-    "lunes",
-    "martes",
-    "miercoles",
-    "jueves",
-    "viernes"
-   ],
-   "vigencia_hasta": "2026-12-31",
-   "tarjetas": [
-    "visa-credito-infinite",
-    "visa-credito-signature",
-    "visa-credito-platinum",
-    "visa-fan-credito",
-    "mastercard-credito-black",
-    "mastercard-credito-platinum",
-    "visa-debito-infinite",
-    "visa-debito-signature",
-    "visa-debito-bch",
-    "visa-cuenta-fan",
-    "visa-credito-gold",
-    "mastercard-credito-dorada"
-   ],
-   "modalidad": "presencial",
-   "segmentado": false,
-   "condiciones": "Promoción válida hasta el 31 de diciembre de 2026. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile (incluye Banco Edwards) y que soliciten el descuento al momento de pagar en forma presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande. Infórmese sobre la garantía estatal de los depósitos en su Banco o en www.cmfchile.cl",
-   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/sabor-y-aroma",
-   "logo": "https://assets.bancochile.cl/uploads/000/026/783/ed9482b6-d9e5-4a90-a68b-f4a4e4c8ad0f/original/logo-web-SABOR-Y-AROMA.jpg",
-   "capturado": "",
-   "id": "773b8df49de4",
-   "locales": [
-    {
-     "direccion": "Raúl Labbe 12559",
-     "comuna": "Lo Barnechea",
-     "lat": -33.367544,
-     "lon": -70.5183019,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Lo Barnechea"
    ]
   },
   {
@@ -33126,6 +32163,42 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
+   "comercio": "PizzaPizza La Cisterna",
+   "categoria": "comida_rapida",
+   "cocina": "italiana",
+   "region": "Metropolitana",
+   "sitio_web": "http://www.pizzapizza.cl/",
+   "porcentaje": null,
+   "oferta": "",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-17",
+   "logo": "https://bci-cdn.azureedge.net/uploads/9e644aca-2544-4415-966d-c3a59d7c3f75/original/imagen.jpg",
+   "capturado": "",
+   "id": "fc07c92ca0e5",
+   "locales": [
+    {
+     "direccion": "Gran Avenida 8159",
+     "comuna": "La Cisterna",
+     "lat": -33.5295951,
+     "lon": -70.6624795,
+     "precision": "calle",
+     "telefono": "2 2558 0200",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "La Cisterna"
+   ]
+  },
+  {
+   "banco_id": "bci",
+   "banco": "Bci",
    "comercio": "PizzaPizza La Dehesa",
    "categoria": "comida_rapida",
    "cocina": "italiana",
@@ -33229,42 +32302,6 @@
    ],
    "comunas": [
     "La Reina"
-   ]
-  },
-  {
-   "banco_id": "bci",
-   "banco": "Bci",
-   "comercio": "PizzaPizza Las Condes",
-   "categoria": "comida_rapida",
-   "cocina": "italiana",
-   "region": "Metropolitana",
-   "sitio_web": "http://www.pizzapizza.cl/",
-   "porcentaje": null,
-   "oferta": "",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": null,
-   "tarjetas": [],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-6",
-   "logo": "https://bci-cdn.azureedge.net/uploads/37f57263-4f7d-4df9-b7c4-a5dd4bef9cb3/original/imagen.jpg",
-   "capturado": "",
-   "id": "981457e51cd4",
-   "locales": [
-    {
-     "direccion": "Av. Las Condes 9081",
-     "comuna": "Las Condes",
-     "lat": -33.3926213,
-     "lon": -70.5436229,
-     "precision": "fuente",
-     "telefono": "2 2243 3333",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Las Condes"
    ]
   },
   {
@@ -33481,42 +32518,6 @@
    ],
    "comunas": [
     "Quilicura"
-   ]
-  },
-  {
-   "banco_id": "bci",
-   "banco": "Bci",
-   "comercio": "PizzaPizza San Miguel",
-   "categoria": "comida_rapida",
-   "cocina": "italiana",
-   "region": "Metropolitana",
-   "sitio_web": "http://www.pizzapizza.cl/",
-   "porcentaje": null,
-   "oferta": "",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": null,
-   "tarjetas": [],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-22",
-   "logo": "https://bci-cdn.azureedge.net/uploads/f6889e97-376a-477c-91c9-42503ae316ce/original/imagen.jpg",
-   "capturado": "",
-   "id": "642248791cbb",
-   "locales": [
-    {
-     "direccion": "Gran Avenida 5598",
-     "comuna": "San Miguel",
-     "lat": -33.5045432,
-     "lon": -70.6555543,
-     "precision": "calle",
-     "telefono": "2 2944 3535",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "San Miguel"
    ]
   },
   {

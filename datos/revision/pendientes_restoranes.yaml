@@ -38,6 +38,14 @@ restoranes:
     lon: # COMPLETAR
     nota: verificada el 2026-08-31 por # COMPLETAR
 
+  # 2 descuentos sin pin exacto (Banco de Chile, Santander)
+  Ari Nikkei:
+    direccion: Locales 309 y 310
+    comuna: Las Condes
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-31 por # COMPLETAR
+
   # 2 descuentos sin pin exacto (Banco Security, Cencosud)
   PedidosYa:
     direccion: # COMPLETAR
@@ -158,14 +166,6 @@ restoranes:
     lon: # COMPLETAR
     nota: verificada el 2026-08-31 por # COMPLETAR
 
-  # 1 descuentos sin pin exacto (Banco de Chile)
-  Barrica 94:
-    direccion: local 1508
-    comuna: Lo Barnechea
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-08-31 por # COMPLETAR
-
   # 1 descuentos sin pin exacto (Banco Falabella)
   Berlín Doner Kebab:
     direccion: # COMPLETAR
@@ -277,6 +277,9 @@ restoranes:
   Gatopardo Bistró:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
+  Holy Moly:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
   Kechua:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
@@ -332,7 +335,4 @@ restoranes:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
   Azotea Matilde:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  Badass:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
