@@ -91,7 +91,7 @@
 <script src="../loica.js?v=27"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "f8ae7e4e01b63a1b", "titulo": "Gran Concierto", "inicio": "2026-10-31T16:00:00", "fin": null, "lugar": "Gran Auditorio ICTUE", "direccion": "", "comuna": "Cerrillos", "lat": -33.4967, "lon": -70.7161, "precision": "comuna", "gratis": false, "precio": 10000, "precio_texto": "", "categoria": "musica", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/gran-concierto-noche-de-gloria-541969-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/gran-concierto-noche-de-gloria", "formato": "panorama"};
+  const EV = {"id": "f8ae7e4e01b63a1b", "titulo": "Gran Concierto", "inicio": "2026-10-31T16:00:00", "fin": null, "lugar": "Gran Auditorio ICTUE", "direccion": "Americo Vespusio 2701", "comuna": "Cerrillos", "lat": -33.4967, "lon": -70.7161, "precision": "comuna", "gratis": false, "precio": 10000, "precio_texto": "", "categoria": "musica", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "", "imagen": "https://imagenes.passline.com/eventos/gran-concierto-noche-de-gloria-541969-rec.jpg", "fuente": "Passline", "url": "https://www.passline.com/eventos/gran-concierto-noche-de-gloria", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

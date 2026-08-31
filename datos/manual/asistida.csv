@@ -1,259 +1,588 @@
 fuente_nombre,nombre,categoria,fecha_inicio,hora_inicio,fecha_termino,lugar,direccion,lat,lon,comuna,precio_min,link_evento
-Passline,Internacional Tattoo Masters Fest 2026,,2026-07-02,15:00:00,2026-12-13,Alto San Francisco,San Francisco 75,,,Santiago,7000,https://www.passline.com/eventos/internacional-tattoo-masters-fest-2026
-Passline,Julie,teatro,2026-08-19,19:30:00,2026-08-28,Sala 211 - Laboratorio escénico,Santo domingo 711,,,Santiago,2500,https://www.passline.com/eventos/julie
-Passline,"OBRA: Si los cerdos no miran al cielo, ¿que hacemos con ellos?",teatro,2026-08-21,20:00:00,2026-08-30,"SALA CLUB DE TEATRO, CHUCRE MANZUR #10",Chucre Manzur #10,,,Providencia,8000,https://www.passline.com/eventos/obra-si-los-cernos-no-miran-al-cielo-que-hacemos-con-ellos
-Passline,Elephant / Centro Arte Alameda,,2026-08-25,18:45:00,,Centro Arte Alameda/ Sala Ceina,Arturo Prat 33 (B),,,Santiago,2500,https://www.passline.com/eventos/elephant-centro-arte-alameda
-Passline,Volver al futuro / Cine Blondie en Centro Arte Alameda,cine,2026-08-25,20:15:00,,Centro Arte Alameda,Arturo Prat #33,,,Santiago,2500,https://www.passline.com/eventos/volver-al-futuro-cine-blondie-en-centro-arte-alameda
-Passline,Cine Blondie: Volver al Futuro,cine,2026-08-25,20:30:00,,CENTRO ARTE ALAMEDA,Arturo Prat 33,,,Santiago,12000,https://www.passline.com/eventos/cine-blondie-volver-al-futuro
-Passline,NOA ★ MARTES 25 AGOSTO ★ Club Siete - Piso 4 Hotel W,fiesta,2026-08-25,22:00:00,2026-08-26,Club Siete,Isidora Goyenechea 3000,,,Las Condes,10000,https://www.passline.com/eventos/noa-martes-25-agosto-club-siete-piso-4-hotel-w
-Passline,Matapanki / Centro Arte Alameda,,2026-08-26,15:15:00,,Centro Arte Alameda,Arturo Prat #33,,,Santiago,2000,https://www.passline.com/eventos/matapanki-centro-arte-alameda-546342
-Passline,El final de la Calle Oak / Centro Arte Alameda,cine,2026-08-26,16:45:00,,Centro Arte Alameda,Arturo Prat #33,,,Santiago,2500,https://www.passline.com/eventos/el-final-de-la-calle-oak-centro-arte-alameda-546334
-Passline,Los Tetas Fiesta pregira,musica,2026-08-26,18:00:00,2026-08-27,Vrava Club,Av Presidente Riesco 5330 Local 104,,,Las Condes,30000,https://www.passline.com/eventos/los-tetas-la-despedida
-Passline,Cortocircuito: Dirección de Fotografía en Centro Arte Alameda,cine,2026-08-26,18:45:00,,Centro Arte Alameda,Arturo Prat #33,,,Santiago,1000,https://www.passline.com/eventos/cortocircuito-direccion-de-fotografia-en-centro-arte-alameda
-Passline,Demian The Rat Probando Quesito En Santiago !!,,2026-08-26,19:00:00,,Palermo Teatro Bar,José Manuel Infante 1414,,,Providencia,13000,https://www.passline.com/eventos/demian-the-rat-probando-quesito-en-santiago
-Passline,Julie,teatro,2026-08-26,19:30:00,,Sala 211 - Laboratorio escénico,Santo domingo 711,,,Santiago,1500,https://www.passline.com/eventos/julie-541506
-Passline,PANTHALASSA - Prismas de Navegación,arte,2026-08-26,20:00:00,2026-08-27,Centro Cultural Ceina,,,,Santiago,0,https://www.passline.com/eventos/panthalassa-prismas-de-navegacion
-Passline,Sergio Freire en Happy People,teatro,2026-08-26,20:00:00,,Teatro Happy People,Rancagua 395,,,Providencia,10000,https://www.passline.com/eventos/sergio-freire-en-happy-people-546068
-Passline,Deportes Recoleta vs OHiggins,,2026-08-26,20:30:00,,Estadio Municipal de La Pintana,Cdad. de México 1589,,,La Pintana,3000,https://www.passline.com/eventos/deportes-recoleta-vs-ohiggins
-Passline,Teenage Sex and Death at Camp Miasma / Centro Arte Alameda,cine,2026-08-26,20:45:00,,Centro Arte Alameda,Arturo Prat #33,,,Santiago,2500,https://www.passline.com/eventos/teenage-sex-and-death-at-camp-miasma-centro-arte-alameda-546330
-Passline,Rodrigo Villegas en Rustiko Huechuraba,teatro,2026-08-26,21:00:00,2026-08-27,Rustiko Huehuraba,Av. Pedro Fontova 7853,,,Huechuraba,20000,https://www.passline.com/eventos/rodrigo-villegas-en-rustiko-huechuraba
-Passline,HOT CUE ★ MIÉRCOLES 26 AGOSTO ★ Club Siete - Piso 4 Hotel W,,2026-08-26,22:00:00,2026-08-27,Club Siete,Isidora Goyenechea 3000,,,Las Condes,10000,https://www.passline.com/eventos/hot-cue-miercoles-26-agosto-club-siete-piso-4-hotel-w
-Passline,FIESTA ELEVEN BESITO EN LA BARRA EN ILLUMINATI ! SHOW EN VIVO SORPRESA #DIVADELPOP,musica,2026-08-26,23:30:00,2026-08-27,Illuminati,Antonia López de Bello 131,,,Recoleta,8000,https://www.passline.com/eventos/elevenmiercoles
-Passline,“26 miércoles,,2026-08-26,23:30:00,2026-08-27,FAUSTO,Avenida Santa María 0832,,,Providencia,6000,https://www.passline.com/eventos/26-miercoles-548668
-Passline,Teenage Sex and Death at Camp Miasma / Centro Arte Alameda,,2026-08-27,14:30:00,,Centro Arte Alameda,Arturo Prat #33,,,Santiago,2500,https://www.passline.com/eventos/teenage-sex-and-death-at-camp-miasma-centro-arte-alameda-548638
-Passline,Sunset Andes Winter | Ago - 4 Edición,,2026-08-27,15:30:00,,El Colorado Centro de Ski,,,,Lo Barnechea,,https://www.passline.com/eventos/sunset-andes-winter-ago-4-edicion
-Passline,La Negociación / Centro Arte Alameda,,2026-08-27,16:30:00,,Centro Arte Alameda / Sala CEINA,Arturo Prat 33b,,,Santiago,2500,https://www.passline.com/eventos/la-negociacion-centro-arte-alameda-548645
-Passline,Volare - Experiencia gastronómica,,2026-08-27,19:00:00,,Centro parque,Pdte. Riesco 5330,,,Las Condes,79990,https://www.passline.com/eventos/volare-experiencia-gastronomica-524217
-Passline,Sigrid y los Claveles / 27 de Agosto,,2026-08-27,19:00:00,,PICA14 / Paseo Intermodal Catorce,Vicuña Mackenna Oriente 7220,,,La Florida,12000,https://www.passline.com/eventos/sigrid-y-los-claveles-27-de-agosto
-Passline,CLASES DE CUECA Y SALSA MÁS CUECAS EN VIVO 27/08,musica,2026-08-27,19:00:00,2026-08-28,BAR VICTORIA,,,,Pedro Aguirre Cerda,0,https://www.passline.com/eventos/clases-de-cueca-y-salsa-mas-cuecas-en-vivo-2708
-Passline,CLASIFICATORIO MUNDIAL 2027 ▪︎ CHILE vs USA BASKET,,2026-08-27,19:10:00,,"EDIFICIO DE LOS DEPORTES COLECTIVOS, PARQUE ESTADIO NACIONAL.",,,,&Ntilde;u&ntilde;oa,,https://www.passline.com/eventos/clasificatorio-mundial-2027-chile-vs-usa-basket
-Passline,Julie,teatro,2026-08-27,19:30:00,,Sala 211 - Laboratorio escénico,Santo domingo 711,,,Santiago,1500,https://www.passline.com/eventos/julie-541507
-Passline,UN SHOW DE COMEDIA CON PEDRO RUMINOT - PAINE,teatro,2026-08-27,20:00:00,,Teatro Municipal de Paine,,,,Paine,,https://www.passline.com/eventos/un-show-de-comedia-con-pedro-ruminot-paine
-Passline,ARRUINARSE,teatro,2026-08-27,20:00:00,,Teatro Fiebre,,,,Providencia,10000,https://www.passline.com/eventos/arruinarse
-Passline,VOLVER A LA LEY - SESIONES 88 / 90,musica,2026-08-27,20:00:00,,CLUB CHOCOLATE,ERNESTO PINTO LAGARRIGUE #192,,,Recoleta,25000,https://www.passline.com/eventos/volver-a-la-ley-sesiones-88-90
-Passline,PANTHALASSA - Prismas de Navegación,arte,2026-08-27,20:00:00,,Centro Cultural Ceina,,,,Santiago,0,https://www.passline.com/eventos/panthalassa-prismas-de-navegacion-533181
-Passline,Bombo Fica: 40 años de humor y no me di cuenta,fiesta,2026-08-27,20:00:00,,Auditorio Caja Compensación Los Andres,Padre Alonso de Ovalle #1465,,,Santiago,25000,https://www.passline.com/eventos/bombo-fica-40-anos-de-humor-y-no-me-di-cuenta
-Passline,El Circo de Tony Caluga en Puente Alto / Vacaciones de invierno,,2026-08-27,20:00:00,,Puente Alto,Avenida San Carlos 1863,,,Puente Alto,5000,https://www.passline.com/eventos/el-circo-de-tony-caluga-en-puente-alto-vacaciones-de-invierno-542594
-Passline,"OBRA: Si los cerdos no miran al cielo, ¿que hacemos con ellos?",teatro,2026-08-27,20:00:00,,"SALA CLUB DE TEATRO, CHUCRE MANZUR #10",Chucre Manzur #10,,,Providencia,8000,https://www.passline.com/eventos/obra-si-los-cernos-no-miran-al-cielo-que-hacemos-con-ellos-542742
-Passline,The Doors / Centro Arte Alameda,,2026-08-27,20:00:00,,Centro Arte Alameda,Arturo Prat #33,,,Santiago,2500,https://www.passline.com/eventos/the-doors-centro-arte-alameda-548650
-Passline,Doble Vector y Ultrazord en Vivo!,musica,2026-08-27,21:00:00,,Rockstar Karaoke,Bombero Nuñez 343,,,Providencia,3000,https://www.passline.com/eventos/doble-vector-y-ultrazord-en-vivo
-Passline,Miss Grand Fashion Show,musica,2026-08-27,21:00:00,,Club Seven,Av Vitacura # 5480,,,Vitacura,15000,https://www.passline.com/eventos/miss-grand-fashion-show
-Passline,Yamila Reyna en Mystic Valley,teatro,2026-08-27,22:00:00,2026-08-28,Mystic Valley,Av. La Montaña 1957,,,Lampa,10000,https://www.passline.com/eventos/yamila-reyna-en-mystic-valley
-Passline,Darinka González Cabezona Show Free,teatro,2026-08-27,22:00:00,,Distrito 04,,,,San Miguel,0,https://www.passline.com/eventos/darinka-gonzalez-cabezona-show-free
-Passline,Rodrigo Salinas en Happy People,teatro,2026-08-27,22:00:00,,Teatro Happy People,Rancagua 395,,,Providencia,7000,https://www.passline.com/eventos/rodrigo-salinas-en-happy-people-546908
-Passline,Fonda Wynwood,fiesta,2026-08-27,22:00:00,2026-08-28,Teatro Alicia,Av. Raúl Labbé 14998,,,Lo Barnechea,13000,https://www.passline.com/eventos/fonda-wynwood
-Passline,PISO 4 - BY COCKTAIL SESSIONS - CLUB SIETE - JUE 27,fiesta,2026-08-27,22:00:00,2026-08-28,Club Siete,Isidora Goyenechea 3000,,,Las Condes,10000,https://www.passline.com/eventos/piso-4-by-cocktail-sessions-club-siete-jue-27
-Passline,"JUEVES LOWKEY EN CLUB LA RUBIA “NOCHE DE GALA” / JUE 27 AGOSTO, 23HRS",fiesta,2026-08-27,23:00:00,2026-08-28,CLUB LA RUBIA,,,,Las Condes,0,https://www.passline.com/eventos/jueves-lowkey-en-club-la-rubia-noche-de-gala-jue-27-agosto-23hrs
-Passline,LA FERIA CLUB - JUEVES 27 DE AGOSTO,,2026-08-27,23:00:00,2026-08-28,La Feria,Constitución 275,,,Providencia,17000,https://www.passline.com/eventos/la-feria-club-jueves-27-de-agosto
-Passline,EUPHORIA • THE BIRTHDAY QUEENS,,2026-08-27,23:30:00,2026-08-28,Blondie,Avda Liber Bernardo O`Higgins 2879,,,Santiago,3000,https://www.passline.com/eventos/euphoria-the-birthday-queens
-Passline,“27 JUEVES,,2026-08-27,23:30:00,2026-08-28,FAUSTO,Avenida Santa María 0832,,,Providencia,6000,https://www.passline.com/eventos/27-jueves-548669
-Passline,JUEVES LATINO VS POP 🪩 27 Ago,,2026-08-27,23:30:00,2026-08-28,Illuminati,Antonia López de Bello 131,,,Recoleta,10000,https://www.passline.com/eventos/jueves-latino-vs-pop-27-ago
-Passline,La gran fiesta chilena,musica,2026-08-28,09:00:00,2026-08-29,CUCA BUIN,PANAMERICANA SUR KM 28 SAN BERNARDO SALIDA LOS NARAJOS,,,San Bernardo,10000,https://www.passline.com/eventos/la-gran-fiesta-chilena
-Passline,La Misteriosa Mirada del Flamenco / Centro Arte Alameda,,2026-08-28,15:00:00,,Centro Arte Alameda,Arturo Prat 33,,,Santiago,2000,https://www.passline.com/eventos/la-misteriosa-mirada-del-flamenco-centro-arte-alameda-548651
-Passline,Grey Gardens / Centro Arte Alameda,cine,2026-08-28,17:00:00,,Centro Arte Alameda,Arturo Prat #33,,,Santiago,2000,https://www.passline.com/eventos/grey-gardens-centro-arte-alameda
-Passline,El Circo de Tony Caluga en Puente Alto / Vacaciones de invierno,,2026-08-28,18:00:00,,Puente Alto,Avenida San Carlos 1863,,,Puente Alto,5000,https://www.passline.com/eventos/el-circo-de-tony-caluga-en-puente-alto-vacaciones-de-invierno-542566
-Passline,FADE OUT*,musica,2026-08-28,19:00:00,2026-08-29,Trilab,Fanor Velasco 55,,,Santiago,5000,https://www.passline.com/eventos/fade-out-539112
-Passline,Paranoid Park / Centro Arte Alameda,cine,2026-08-28,19:00:00,,Centro Arte Alameda,Arturo Prat #33,,,Santiago,2500,https://www.passline.com/eventos/paranoid-park-centro-arte-alameda
-Passline,Pullman Xchange - El poder de la Resilencia,,2026-08-28,19:00:00,,Pullman Santiago Vitacura,Avenida Vitacura # 3201,,,Vitacura,39900,https://www.passline.com/eventos/pullman-xchange-el-poder-de-la-resilencia
-Passline,PUPILAS en Cocina Clandestina,musica,2026-08-28,19:00:00,,Cocina Clandestina,,,,Providencia,0,https://www.passline.com/eventos/pupilas-en-cocina-clandestina
-Passline,Concierto Orquesta Toki Rapa Nui,teatro,2026-08-28,19:30:00,,"Teatro Giuseppe Verdi, Scuola Italiana",Avenida Camino Las Flores 12.707,,,Las Condes,10000,https://www.passline.com/eventos/concierto-orquesta-toki-rapa-nui
-Passline,Julie,teatro,2026-08-28,19:30:00,,Sala 211 - Laboratorio escénico,Santo domingo 711,,,Santiago,1500,https://www.passline.com/eventos/julie-541508
-Passline,PANTHALASSA - Prismas de Navegación,arte,2026-08-28,20:00:00,,Centro Cultural Ceina,,,,Santiago,0,https://www.passline.com/eventos/panthalassa-prismas-de-navegacion-533183
-Passline,DESPECHADOS,musica,2026-08-28,20:00:00,2026-08-29,muranos resto bar,san francisco 69,,,Santiago,5000,https://www.passline.com/eventos/despechados
-Passline,CAMISETA 22 Y CUECAS CON ANTOLOGÍA CHILENA,musica,2026-08-28,20:00:00,2026-08-29,BAR VICTORIA,Av. Carlos Valdovinos 1951,,,Pedro Aguirre Cerda,15000,https://www.passline.com/eventos/camiseta-22-y-cuecas-con-antologia-chilena
-Passline,CLAUDIO VALENZUELA – GIRA ALFIN,musica,2026-08-28,20:00:00,,CLUB AMANDA,EMBAJADOR DOUSSINAGUE #1767,,,Vitacura,22000,https://www.passline.com/eventos/claudio-valenzuela-gira-alfin
-Passline,"OBRA: Si los cerdos no miran al cielo, ¿que hacemos con ellos?",teatro,2026-08-28,20:00:00,,"SALA CLUB DE TEATRO, CHUCRE MANZUR #10",Chucre Manzur #10,,,Providencia,8000,https://www.passline.com/eventos/obra-si-los-cernos-no-miran-al-cielo-que-hacemos-con-ellos-542743
-Passline,Chile Food&Wine,,2026-08-28,20:00:00,,Hotel Boutique Ladera,,,,Providencia,50000,https://www.passline.com/eventos/chile-foodwine-542907
-Passline,LA BAND ON THE EN CONCIERTO,musica,2026-08-28,20:00:00,,Teatro Fiebre,Dardignac 0163,,,Providencia,12000,https://www.passline.com/eventos/la-band-on-the-en-concierto
-Passline,Aguanten las cabras Vol.1,,2026-08-28,20:00:00,,Estadio Recoleta,,,,Recoleta,,https://www.passline.com/eventos/aguanten-las-cabras-vol1
-Passline,El Reencuentro con Luis Boicot,teatro,2026-08-28,20:00:00,,MD Pizzas,Alameda 2145,,,Santiago,8000,https://www.passline.com/eventos/el-reencuentro-con-luis-boicot
-Passline,RANCHO NIGHTS,musica,2026-08-28,20:00:00,2026-08-29,RANCHO X,,,,Las Condes,5990,https://www.passline.com/eventos/rancho-nights
-Passline,Aura ★ VIERNES 28 AGOSTO ★,,2026-08-28,20:30:00,2026-08-29,Aura club,,,,Vitacura,0,https://www.passline.com/eventos/aura-viernes-28-agosto
-Passline,Metal Allegiance VL 2,musica,2026-08-28,20:30:00,2026-08-29,Bar Oxido,Purisima 282,,,Recoleta,5000,https://www.passline.com/eventos/metal-allegiance-vl-2
-Passline,El Circo de Tony Caluga en Puente Alto / Vacaciones de invierno,,2026-08-28,20:30:00,,Puente Alto,Avenida San Carlos 1863,,,Puente Alto,5000,https://www.passline.com/eventos/el-circo-de-tony-caluga-en-puente-alto-vacaciones-de-invierno-542580
-Passline,Teenage Sex and Death at Camp Miasma / Centro Arte Alameda,,2026-08-28,20:40:00,,Centro Arte Alameda,Arturo Prat #33,,,Santiago,2500,https://www.passline.com/eventos/teenage-sex-and-death-at-camp-miasma-centro-arte-alameda-548639
-Passline,PRÓFUGOS: Peter Blue x Noise Mafia,,2026-08-28,21:00:00,2026-08-29,Complejo Industrial / Estacion Central,Exposición 221,,,Estacion Central,28000,https://www.passline.com/eventos/profugos-peter-blue-x-noise-mafia
-Passline,"🔥🎶 ¡ CRIS IBARRA, EL RONQUITO DE LA CUMBIA! 🎶🔥",musica,2026-08-28,21:00:00,2026-08-29,EL CHANCHO CON CHALECO,AVENIDA PAJARITOS 99,,,Maip&uacute;,5000,https://www.passline.com/eventos/cris-ibarra-el-ronquito-de-la-cumbia
-Passline,TECHNOBUS - 28 AGOSTO,,2026-08-28,21:30:00,2026-08-29,TECHNOBUS,,,,Santiago,14000,https://www.passline.com/eventos/technobus-28-agosto
-Passline,DIA DE LA CHORRILLANA,musica,2026-08-28,21:30:00,2026-08-29,La chimenea,Príncipe de Gales 90,,,Santiago,11900,https://www.passline.com/eventos/dia-de-la-chorrillana
-Passline,🍃 INAUGURACIÓN FIESTA LA MONGA 🦍 - “Desata el gorila que llevas dentro” / VIER 28 agost,fiesta,2026-08-28,22:00:00,2026-08-29,Fiesta LA MONGA,Av vicuña Mackenna #1895,,,&Ntilde;u&ntilde;oa,5000,https://www.passline.com/eventos/inauguracion-fiesta-la-monga-desata-el-gorila-que-llevas-dentro-vier-14-agosto-nunoa-santiago
-Passline,Joris Voorn presenta TRIP TO GALAXY,musica,2026-08-28,22:00:00,2026-08-29,Parque Titanium,Avenida Costanera Sur 2710-2730,,,Las Condes,40000,https://www.passline.com/eventos/joris-voorn-presenta-trip-to-galaxy
-Passline,Amerikan Sound en vivo en Montañita Las Vizcachas,musica,2026-08-28,22:00:00,2026-08-29,Montañita Las Vizcachas,Camino San José de Maipo 06680,,,Puente Alto,10000,https://www.passline.com/eventos/amerikan-sound-en-vivo-en-montanita-las-vizcachas
-Passline,Confesiones con La Abu,teatro,2026-08-28,22:00:00,,Donde La Chipi,Diagonal Paraguay 458,,,Santiago,5000,https://www.passline.com/eventos/confesiones-con-la-abu
-Passline,Confesiones y Copas,,2026-08-28,22:00:00,,Bar Teatro Fiebre,Dardignac 0165,,,Providencia,5000,https://www.passline.com/eventos/confesiones-y-copas
-Passline,SOCIAL W ★ VIERNES 28 AGOSTO ★ Club Siete - Piso 4 Hotel W,fiesta,2026-08-28,22:00:00,2026-08-29,Club Siete,Isidora Goyenechea 3000,,,Las Condes,10000,https://www.passline.com/eventos/social-w-viernes-28-agosto-club-siete-piso-4-hotel-w
-Passline,Pank en Happy People,teatro,2026-08-28,22:00:00,,Teatro Happy People,Rancagua 395,,,Providencia,7000,https://www.passline.com/eventos/pank-en-happy-people-546910
-Passline,NOVA VIBES || TERRAZA ARRAYÁN || VIERNES 28 AGOSTO,musica,2026-08-28,22:00:00,2026-08-29,Terraza Arrayan,,,,Lo Barnechea,0,https://www.passline.com/eventos/nova-vibes-terraza-arrayan-viernes-28-agosto
-Passline,Ustedes ¿Son pareja? – viernes 28 agosto,,2026-08-28,22:00:00,,Happy People - Teatro Bar,,,,Providencia,0,https://www.passline.com/eventos/ustedes-son-pareja-viernes-28-agosto
-Passline,R.E.D,musica,2026-08-28,23:00:00,2026-08-29,CLUB CLIMAX,Antonia López de Bello 80,,,Recoleta,5000,https://www.passline.com/eventos/red
-Passline,Todo Vale en Tom House - Viernes 28 de Agosto,musica,2026-08-28,23:00:00,2026-08-29,Tom House,Antonia Lopez de Bello 49,,,Providencia,11000,https://www.passline.com/eventos/todovaleviernes
-Passline,LA FERIA CLUB - VIERNES 28 DE AGOSTO,,2026-08-28,23:00:00,2026-08-29,La Feria,Constitución 275,,,Providencia,17000,https://www.passline.com/eventos/la-feria-club-viernes-28-de-agosto
-Passline,La Cero se viste a la moda,musica,2026-08-28,23:00:00,2026-08-29,Espacio Cero,Euclides 1204,,,San Miguel,6000,https://www.passline.com/eventos/la-cero-se-viste-a-la-moda
-Passline,LA ÉLITE - EL REGRESO,musica,2026-08-28,23:00:00,2026-08-29,La Suite Chicureo,,,,Colina,0,https://www.passline.com/eventos/la-elite-el-regreso
-Passline,Skins Party - 4 Pistas de Baile*,,2026-08-28,23:30:00,2026-08-29,Blondie,Alameda 2879,,,Alhu&eacute;,9500,https://www.passline.com/eventos/skins-party-4-pistas-de-baile
-Passline,“VIERNES 28,,2026-08-28,23:30:00,2026-08-29,FAUSTO,Avenida Santa María 0832,,,Providencia,7000,https://www.passline.com/eventos/viernes-28-548670
-Passline,VIERNES SUPER ILLU 💫 28 Ago,,2026-08-28,23:30:00,2026-08-29,Illuminati,Antonia López de Bello 131,,,Recoleta,12000,https://www.passline.com/eventos/viernes-super-illu-28-ago
-Passline,Lanzamiento Festival Vista Baker,,2026-08-29,09:00:00,,Kifit - Vitacura,,,,Vitacura,0,https://www.passline.com/eventos/lanzamiento-festival-vista-baker
-Passline,3D Printer Party 2026 Dia 1,,2026-08-29,10:00:00,,Omnium,Av. Apoquindo 4900,,,Las Condes,8500,https://www.passline.com/eventos/3d-printer-party-2026-dia-1
-Passline,Latin American TAAT World Championship Chile 2026,,2026-08-29,10:00:00,2026-08-30,Aldea Encuentro,Avenida alcalde Fernando Castillo Velasco #9750,,,La Reina,10000,https://www.passline.com/eventos/latin-american-taat-world-championship-chile-2026
-Passline,Catao,fiesta,2026-08-29,12:30:00,,Drip Café,av providencia 1053,,,Providencia,9900,https://www.passline.com/eventos/catao
-Passline,Meet and Drink La Previa,,2026-08-29,14:00:00,,Hotel Cumbres Lastarria,José Victorino Lastarria 299,,,Santiago,15000,https://www.passline.com/eventos/meet-and-drink-la-previa
-Passline,La Invitación / Centro Arte Alameda,,2026-08-29,14:45:00,,Centro Arte Alameda / Sala CEINA,Arturo Prat 33b,,,Santiago,2500,https://www.passline.com/eventos/la-invitacion-centro-arte-alameda-548653
-Passline,Párense De Pies 2,,2026-08-29,15:00:00,,cultura boxing,girardi 1560,,,&Ntilde;u&ntilde;oa,2000,https://www.passline.com/eventos/parense-de-pies-2
-Passline,Sonora,,2026-08-29,15:00:00,,Taringuita Farellones,Av El Colorado 1284,,,Lo Barnechea,40000,https://www.passline.com/eventos/sonora
-Passline,Peña Agrupación Folklórica Paqariy 2026,,2026-08-29,15:30:00,,Colegio Manquecura Ciudad Del Este,Diego Portales #07045,,,Puente Alto,3000,https://www.passline.com/eventos/pena-agrupacion-folklorica-paqariy-2026
-Passline,El Circo de Tony Caluga en Puente Alto / Vacaciones de invierno,,2026-08-29,15:30:00,,Puente Alto,Avenida San Carlos 1863,,,Puente Alto,5000,https://www.passline.com/eventos/el-circo-de-tony-caluga-en-puente-alto-vacaciones-de-invierno-542589
-Passline,Sky Sunset Winter,musica,2026-08-29,16:00:00,,MIRADOR SKY COSTANERA,,,,Providencia,,https://www.passline.com/eventos/sky-sunset-winter-532274
-Passline,"El Principito, Teatro en Factoría Franklin, Especial mes del niño",familia,2026-08-29,16:00:00,,Factoria Franklin,,,,Santiago,5000,https://www.passline.com/eventos/el-principito-teatro-en-factoria-franklin-especial-mes-del-nino-539363
-Passline,Michael is back,,2026-08-29,17:00:00,,teatro Palermo Puente Alto,,,,Puente Alto,10000,https://www.passline.com/eventos/michael-is-back
-Passline,La Negociación / Centro Arte Alameda,,2026-08-29,17:00:00,,Centro Arte Alameda / Sala CEINA,Arturo Prat 33b,,,Santiago,2500,https://www.passline.com/eventos/la-negociacion-centro-arte-alameda-548646
-Passline,Ecos De La Casa - Alex Caniulef,musica,2026-08-29,18:00:00,,Auditorio Sofofa,Av. Andrés Bello 2777,,,Las Condes,10000,https://www.passline.com/eventos/ecos-de-la-casa-alex-caniulef
-Passline,Moonchilds tributo a Iron Maiden en Club Hell Bar 🤘🔥,musica,2026-08-29,18:00:00,,Club Hell Bar,Rojas Magallanes 51,,,La Florida,3000,https://www.passline.com/eventos/moonchilds-tributo-a-iron-maiden-en-club-hell-bar
-Passline,SANTA FERIA EN MYSTIC,,2026-08-29,18:00:00,2026-08-30,Mystic Valley,Av la montaña 1957,,,Lampa,20000,https://www.passline.com/eventos/santa-feria-en-mystic
-Passline,El Circo de Tony Caluga en Puente Alto / Vacaciones de invierno,,2026-08-29,18:00:00,,Puente Alto,Avenida San Carlos 1863,,,Puente Alto,5000,https://www.passline.com/eventos/el-circo-de-tony-caluga-en-puente-alto-vacaciones-de-invierno-542567
-Passline,SO LIQUID • FREQUENCIES,musica,2026-08-29,18:00:00,,Centro de Eventos Ora,Irarrázaval #2051 / Metro Ñuñoa,,,&Ntilde;u&ntilde;oa,8000,https://www.passline.com/eventos/so-liquid-frequencies
-Passline,1er Encuentro Coral,musica,2026-08-29,18:00:00,,Centro Cultural Teatro Serrano,,,,Melipilla,0,https://www.passline.com/eventos/1er-encuentro-coral-melipilla-canta
-Passline,COFRADIAX,,2026-08-29,19:00:00,2026-08-30,Nasty Bar,Av Vitacura 9269,,,Vitacura,10000,https://www.passline.com/eventos/cofradiax
-Passline,CHANCES + ELNUEVEONCE + HAMADRYAS,musica,2026-08-29,19:00:00,,Epicentro,Huérfanos 786,,,Santiago,8000,https://www.passline.com/eventos/chances-elnueveonce-hamadryas
-Passline,Dont look back / Centro Arte Alameda,cine,2026-08-29,19:00:00,,Centro Arte Alameda,Arturo Prat #33,,,Santiago,2000,https://www.passline.com/eventos/dont-look-back-centro-arte-alameda
-Passline,Lemontur,,2026-08-29,19:30:00,2026-08-30,Rock Star,📍 Dónde: Bombero Núñez #343,,,Recoleta,5000,https://www.passline.com/eventos/lemontur
-Passline,PANTHALASSA - Prismas de Navegación,arte,2026-08-29,20:00:00,,Centro Cultural Ceina,,,,Santiago,0,https://www.passline.com/eventos/panthalassa-prismas-de-navegacion-533185
-Passline,GENESIS EN SANTIAGO DE CHILE,,2026-08-29,20:00:00,2026-08-31,Discoteca La Fama,Av. México 609,,,Recoleta,10000,https://www.passline.com/eventos/genesis-en-santiago-de-chile
-Passline,DREAM THEATER EXPERIENCE - NIGHTMARE CINEMA,musica,2026-08-29,20:00:00,,CLUB AMANDA,EMBAJADOR DOUSSINAGUE #1767,,,Vitacura,14000,https://www.passline.com/eventos/dream-theater-experience-nightmare-cinema
-Passline,GRUPO KARICIA Y CUECAS CON LOS META Y PONGA,musica,2026-08-29,20:00:00,2026-08-30,BAR VICTORIA,Av. Carlos Valdovinos 1951,,,Pedro Aguirre Cerda,15000,https://www.passline.com/eventos/grupo-karicia-y-cuecas-con-los-meta-y-ponga
-Passline,The Legend / El Concierto,musica,2026-08-29,20:00:00,,Carpa Extraordinario Circo,,,,Huechuraba,15000,https://www.passline.com/eventos/the-legend-el-concierto-542695
-Passline,"OBRA: Si los cerdos no miran al cielo, ¿que hacemos con ellos?",teatro,2026-08-29,20:00:00,,"SALA CLUB DE TEATRO, CHUCRE MANZUR #10",Chucre Manzur #10,,,Providencia,8000,https://www.passline.com/eventos/obra-si-los-cernos-no-miran-al-cielo-que-hacemos-con-ellos-542744
-Passline,Obra El Chileno Agūeboniao,teatro,2026-08-29,20:00:00,,Teatro fiebre,Dardignac 0163,,,Providencia,12990,https://www.passline.com/eventos/obra-el-chileno-ageboniao
-Passline,CLUB 30 || SABADO 29 AGOSTO,,2026-08-29,20:00:00,2026-08-30,Bosque Luz,Av. del Parque 420,,,Huechuraba,14000,https://www.passline.com/eventos/club-30-sabado-29-agosto
-Passline,"¿Cachái, pana? 🇨🇱🇻🇪 Una chilena y un venezolano intentando entenderse",teatro,2026-08-29,20:00:00,,Happy People,Rancagua 395,,,Providencia,7000,https://www.passline.com/eventos/cachai-pana-una-chilena-y-un-venezolano-intentando-entenderse
-Passline,Pank en Happy People,teatro,2026-08-29,20:00:00,,Teatro Happy People,Rancagua 395,,,Providencia,7000,https://www.passline.com/eventos/pank-en-happy-people-546909
-Passline,Gran Final Miss Grand Chile 2026,musica,2026-08-29,20:00:00,2026-08-30,Gran Espacio Parque,Walker Martínez # 2295,,,La Florida,39900,https://www.passline.com/eventos/gran-final-miss-grand-chile-2026
-Passline,Rock en La Morgue,musica,2026-08-29,20:00:00,,Bar La Morgue,Club Hípico 2940,,,Pedro Aguirre Cerda,3000,https://www.passline.com/eventos/rock-en-la-morgue
-Passline,Aura ★ SABADO 29 AGOSTO ★,,2026-08-29,20:30:00,2026-08-30,Aura club,,,,Vitacura,0,https://www.passline.com/eventos/aura-sabado-29-agosto-532210
-Passline,Evil Empire V,,2026-08-29,20:30:00,2026-08-30,Bar Oxido,Purisima 282,,,Recoleta,8000,https://www.passline.com/eventos/evil-empire-v
-Passline,SURVENTO SONIDO LATINOAMERICANO,musica,2026-08-29,20:30:00,2026-08-30,La chimenea,Príncipe de Gales 90,,,Santiago,9500,https://www.passline.com/eventos/survento-sonido-latinoamericano
-Passline,Ponte en mis zapatos - Noche de Teatro DIVINO MAIPO,teatro,2026-08-29,20:30:00,,DIVINO MAIPO,Santelices 865,,,Isla de Maipo,20000,https://www.passline.com/eventos/ponte-en-mis-zapatos-noche-de-teatro-divino-maipo
-Passline,El Circo de Tony Caluga en Puente Alto / Vacaciones de invierno,,2026-08-29,20:30:00,,Puente Alto,Avenida San Carlos 1863,,,Puente Alto,5000,https://www.passline.com/eventos/el-circo-de-tony-caluga-en-puente-alto-vacaciones-de-invierno-542581
-Passline,Teenage Sex and Death at Camp Miasma / Centro Arte Alameda,,2026-08-29,20:45:00,,Centro Arte Alameda,Arturo Prat #33,,,Santiago,2500,https://www.passline.com/eventos/teenage-sex-and-death-at-camp-miasma-centro-arte-alameda-548642
-Passline,PABLO RUIZ EN CONCIERTO - TOUR SIEMPRE JUNTOS,musica,2026-08-29,21:00:00,2026-08-30,Teatro Cariola,San Diego 246,,,Santiago,20000,https://www.passline.com/eventos/pablo-ruiz-en-concierto-tour-siempre-juntos
-Passline,OSCAR ANDRADE - COME BACK,,2026-08-29,21:00:00,,CLUB CHOCOLATE,ERNESTO PINTO LAGARRIGUE #192,,,Recoleta,10000,https://www.passline.com/eventos/oscar-andrade-come-back
-Passline,CERATI & SODA - BANDA HOMENAJE PLAN C + DJ PATO FERNÁNDEZ,musica,2026-08-29,21:00:00,,CLUB AMANDA,EMBAJADOR DOUSSINAGUE #1767,,,Vitacura,14000,https://www.passline.com/eventos/cerati-soda-banda-homenaje-plan-c-dj-pato-fernandez
-Passline,glam metal fest,,2026-08-29,21:00:00,2026-08-30,Sala RBX,Av. Vicuña Mackenna 1220,,,&Ntilde;u&ntilde;oa,5000,https://www.passline.com/eventos/glam-metal-fest
-Passline,Noche de Rock - Matías Oviedo y su banda,musica,2026-08-29,21:00:00,2026-08-30,Bar Club Palestino,Av Kennedy 9351,,,Las Condes,15000,https://www.passline.com/eventos/noche-de-rock-matias-oviedo-y-su-banda
-Passline,Evilive Tributo Misfits en Bar Clavero 46 Puente Alto,musica,2026-08-29,21:00:00,2026-08-30,Bar Clavero 46,Clavero 46,,,Puente Alto,5000,https://www.passline.com/eventos/evilive-tributo-misfits-en-bar-clavero-46-puente-alto
-Passline,Recreo de Reinas,fiesta,2026-08-29,21:00:00,2026-08-30,"Av. Bernardo O’Higgins 2900, Talagante",Av. Bernardo O’Higgins 2900,,,Talagante,10000,https://www.passline.com/eventos/recreo-de-reinas
-Passline,La Noche del Roto Chileno Agosto,fiesta,2026-08-29,21:00:00,2026-08-30,Peluquería Francesa,Compañia 2789,,,Santiago,13000,https://www.passline.com/eventos/la-noche-del-roto-chileno-agosto
-Passline,🎙️💥¡NOCHES DE COMEDIA EN LA PELUQUERÍA!💈,teatro,2026-08-29,21:00:00,,Peluquería Francesa,Compañía 2789,,,Santiago,8000,https://www.passline.com/eventos/noches-de-comedia-en-la-peluqueria-542049
-Passline,JIRAFAS EN KLUB KROSS,musica,2026-08-29,21:30:00,,Kross Bar,,,,Las Condes,7000,https://www.passline.com/eventos/jirafas-en-klub-kross-537679
-Passline,TECHNOBUS - 29 AGOSTO,,2026-08-29,21:30:00,2026-08-30,TECHNOBUS,,,,Santiago,14000,https://www.passline.com/eventos/technobus-29-agosto
-Passline,AURA EN METRONOMO,fiesta,2026-08-29,22:00:00,2026-08-30,SALA METRONOMO,,,,Recoleta,18000,https://www.passline.com/eventos/aura-en-metronomo
-Passline,EL SHOW DE LUIS HACHEM EN SANTIAGO,teatro,2026-08-29,22:00:00,,DISTRITO 04,SAN IGNACIO DE LOYOLA 3199,,,San Miguel,12000,https://www.passline.com/eventos/el-show-de-luis-hachem-en-santiago
-Passline,The Project X Volumen 4 | Centro Parque | Sábado 29 Agosto,musica,2026-08-29,22:00:00,2026-08-30,Centro parque,Pdte. Riesco 5330,,,Las Condes,14000,https://www.passline.com/eventos/the-project-x-volumen-4-centro-parque-sabado-29-agosto
-Passline,killahz b-day,musica,2026-08-29,22:00:00,2026-08-30,Jammin' Club,antonia lopez de bello 40,,,Providencia,5000,https://www.passline.com/eventos/killahz-bday
-Passline,★ KISS & SHOOT presenta: #SoldOUTSeries | Teatro Alicia ★ Sábado 29 Agosto ★,fiesta,2026-08-29,22:00:00,2026-08-30,Teatro Alicia,Av. Raúl Labbé 14998,,,Lo Barnechea,10000,https://www.passline.com/eventos/kiss-shoot-presenta-soldoutseries-teatro-alicia-sabado-29-agosto
-Passline,200 - REGGAETÓN CLASSICS - HOTEL W - SÁBADO 29,fiesta,2026-08-29,22:00:00,2026-08-30,Club Siete,Isidora Goyenechea 3000,,,Las Condes,10000,https://www.passline.com/eventos/200-reggaeton-classics-hotel-w-sabado-29
-Passline,KISS & SHOOT - TEATRO ALICIA,fiesta,2026-08-29,22:00:00,2026-08-30,Teatro Alicia,Av. Raúl Labbé 14998,,,Lo Barnechea,10000,https://www.passline.com/eventos/kiss-shoot-teatro-alicia-548218
-Passline,LETS DANCE GIRLS NIGHT || TERRAZA ARRAYÁN || SÁBADO 29 AGOSTO,fiesta,2026-08-29,22:00:00,2026-08-30,Terraza Arrayan,,,,Lo Barnechea,0,https://www.passline.com/eventos/lets-dance-girls-night-terraza-arrayan-sabado-29-agosto
-Passline,MIlano The Jungle,,2026-08-29,22:30:00,2026-08-30,,av manuel castillo 1201 Malloco,,,Isla de Maipo,5000,https://www.passline.com/eventos/milano-the-jungle
-Passline,PAAX - LA FERIA CLUB,,2026-08-29,23:00:00,2026-08-30,La Feria,Constitución 275,,,Providencia,25000,https://www.passline.com/eventos/paax-la-feria-club
-Passline,TOM HOUSE NEW WAVE · 80’S & 90’S,fiesta,2026-08-29,23:00:00,2026-08-30,.,Antonia López de Bello 49,,,Recoleta,10000,https://www.passline.com/eventos/tom-house-new-wave-80s-90s
-Passline,Goes To The Disco - 4 Pistas de Baile:_,,2026-08-29,23:30:00,2026-08-30,Blondie,alameda 2879 local 104,,,Santiago,10000,https://www.passline.com/eventos/goes-to-the-disco-4-pistas-de-baile_
-Passline,FIESTA: TA VIVO MALUCO CON LO MEJOR DEL AXÉ,musica,2026-08-29,23:30:00,2026-08-30,Porto Alegre Restaurant,Camino a melipilla km 26,,,Pe&ntilde;aflor,10000,https://www.passline.com/eventos/fiesta-ta-vivo-maluco-con-lo-mejor-del-axe
-Passline,Mega Eleven + Perreito en Safari - Sabado 29 Agosto !,musica,2026-08-29,23:30:00,2026-08-30,Safari Club,Ernesto Pinto Lagarrigue 123,,,Recoleta,10000,https://www.passline.com/eventos/mega-eleven-perreito-en-safari-sabado-29-agosto
-Passline,“29 SÁBADO,,2026-08-29,23:30:00,2026-08-30,FAUSTO,Avenida Santa María 0832,,,Providencia,7000,https://www.passline.com/eventos/29-sabado-548671
-Passline,Shoxx vol2,musica,2026-08-30,03:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,&Ntilde;u&ntilde;oa,7000,https://www.passline.com/eventos/shoxx-vol2
-Passline,3D Printer Party 2026 - Puesto Maker,,2026-08-30,09:30:00,,Omnium,Av. Apoquindo 4900,,,Las Condes,40000,https://www.passline.com/eventos/3d-printer-party-2026-puesto-maker-514301
-Passline,3D Printer Party Chile 2026 | Abono 2 Días,,2026-08-30,10:00:00,,Omnium,Av. Apoquindo 4900,,,Las Condes,11500,https://www.passline.com/eventos/3d-printer-party-chile-2026-abono-2-dias-512408
-Passline,3D Printer Party 2026 Dia 2,,2026-08-30,10:00:00,,Omnium,Av. Apoquindo 4900,,,Las Condes,7000,https://www.passline.com/eventos/3d-printer-party-2026-dia-2
-Passline,Elencos CEINA en Concierto,musica,2026-08-30,12:00:00,,Centro Cultural Ceina,,,,Santiago,0,https://www.passline.com/eventos/elencos-ceina-en-concierto
-Passline,Santiago Morning vs Provincial Ovalle,,2026-08-30,15:00:00,,Estadio Municipal de La Pintana,Avenida Ciudad de México n°1589,,,La Pintana,3000,https://www.passline.com/eventos/santiago-morning-vs-provincial-ovalle
-Passline,Matapanki / Centro Arte Alameda,,2026-08-30,15:15:00,,Centro Arte Alameda,Arturo Prat #33,,,Santiago,2000,https://www.passline.com/eventos/matapanki-centro-arte-alameda-548655
-Passline,El Circo de Tony Caluga en Puente Alto / Vacaciones de invierno,,2026-08-30,15:30:00,,Puente Alto,Avenida San Carlos 1863,,,Puente Alto,5000,https://www.passline.com/eventos/el-circo-de-tony-caluga-en-puente-alto-vacaciones-de-invierno-542590
-Passline,"El Principito, Teatro en Factoría Franklin, Especial mes del niño",familia,2026-08-30,16:00:00,,Factoria Franklin,,,,Santiago,5000,https://www.passline.com/eventos/el-principito-teatro-en-factoria-franklin-especial-mes-del-nino-539364
-Passline,TOM HOUSE • CLUB FIST • 3ª EDICIÓN,fiesta,2026-08-30,17:00:00,,.,Antonia López de Bello 49,,,Recoleta,15000,https://www.passline.com/eventos/tom-house-club-fist-3-edicion
-Passline,Los Domingos / Centro Arte Alameda,cine,2026-08-30,17:00:00,,Centro Arte Alameda / Sala CEINA,Arturo Prat 33b,,,Santiago,2500,https://www.passline.com/eventos/los-domingos-centro-arte-alameda
-Passline,FLOR DE RAP Y SUS GRANDES EXITOS,,2026-08-30,18:00:00,,DISTRITO 04,San Ignacio Loyola 3199,,,San Miguel,5000,https://www.passline.com/eventos/flor-de-rap-y-sus-grandes-exitos
-Passline,El Circo de Tony Caluga en Puente Alto / Vacaciones de invierno,,2026-08-30,18:00:00,,Puente Alto,Avenida San Carlos 1863,,,Puente Alto,5000,https://www.passline.com/eventos/el-circo-de-tony-caluga-en-puente-alto-vacaciones-de-invierno-542568
-Passline,La Misteriosa Mirada del Flamenco / Centro Arte Alameda,,2026-08-30,19:00:00,,Centro Arte Alameda,Arturo Prat 33,,,Santiago,2000,https://www.passline.com/eventos/la-misteriosa-mirada-del-flamenco-centro-arte-alameda-548652
-Passline,FINAL “AMIGAS & RIVALES “ 20 AÑOS,teatro,2026-08-30,20:00:00,,TEATRO CARIOLA,,,,Santiago,,https://www.passline.com/eventos/final-amigas-rivales-20-anos
-Passline,ARRUINARSE,teatro,2026-08-30,20:00:00,,Teatro Fiebre,,,,Providencia,10000,https://www.passline.com/eventos/arruinarse-530711
-Passline,"OBRA: Si los cerdos no miran al cielo, ¿que hacemos con ellos?",teatro,2026-08-30,20:00:00,,"SALA CLUB DE TEATRO, CHUCRE MANZUR #10",Chucre Manzur #10,,,Providencia,8000,https://www.passline.com/eventos/obra-si-los-cernos-no-miran-al-cielo-que-hacemos-con-ellos-542745
-Passline,El Circo de Tony Caluga en Puente Alto / Vacaciones de invierno,,2026-08-30,20:30:00,,Puente Alto,Avenida San Carlos 1863,,,Puente Alto,5000,https://www.passline.com/eventos/el-circo-de-tony-caluga-en-puente-alto-vacaciones-de-invierno-542582
-Passline,11° ANIVERSARIO FLAIRMACHINE,fiesta,2026-08-30,21:00:00,2026-08-31,Club Siete,Isidora Goyenechea 3000,,,Las Condes,3000,https://www.passline.com/eventos/11-aniversario-flairmachine
-Passline,“30 DOMINGO,,2026-08-30,23:30:00,2026-08-31,FAUSTO,Avenida Santa María 0832,,,Providencia,6000,https://www.passline.com/eventos/30-domingo-548673
-Passline,Obsesión / Centro Arte Alameda,,2026-08-31,14:30:00,,Centro Arte Alameda,Arturo Prat #33,,,Santiago,2500,https://www.passline.com/eventos/obsesion-centro-arte-alameda-548658
-Passline,Teenage Sex and Death at Camp Miasma / Centro Arte Alameda,,2026-08-31,16:45:00,,Centro Arte Alameda,Arturo Prat #33,,,Santiago,2500,https://www.passline.com/eventos/teenage-sex-and-death-at-camp-miasma-centro-arte-alameda-548643
-Passline,Matapanki / Centro Arte Alameda,,2026-08-31,19:00:00,,Centro Arte Alameda,Arturo Prat #33,,,Santiago,2000,https://www.passline.com/eventos/matapanki-centro-arte-alameda-548656
-Passline,Backrooms Extended / Centro Arte Alameda,,2026-08-31,20:30:00,,Centro Arte Alameda,Arturo Prat #33,,,Santiago,2500,https://www.passline.com/eventos/backrooms-extended-centro-arte-alameda-548660
-Passline,Workshop Velas de Soya en Las Condes Design,,2026-09-01,11:00:00,,Las Condes Design,,,,Las Condes,15000,https://www.passline.com/eventos/workshop-velas-de-soya-en-las-condes-design
-Passline,Teenage Sex and Death at Camp Miasma / Centro Arte Alameda,,2026-09-01,14:30:00,,Centro Arte Alameda,Arturo Prat #33,,,Santiago,2500,https://www.passline.com/eventos/teenage-sex-and-death-at-camp-miasma-centro-arte-alameda-548644
-Passline,La Invitación / Centro Arte Alameda,,2026-09-01,16:30:00,,Centro Arte Alameda / Sala CEINA,Arturo Prat 33b,,,Santiago,2500,https://www.passline.com/eventos/la-invitacion-centro-arte-alameda-548654
-Passline,POL PABLO | UP10 UNPLUGGED | V R A V A,musica,2026-09-01,20:00:00,2026-09-02,Centro parque,Pdte. Riesco 5330,,,Las Condes,5000,https://www.passline.com/eventos/pol-pablo-up10-unplugged-v-r-a-v-a
-Passline,La Negociación / Centro Arte Alameda,,2026-09-01,21:00:00,,Centro Arte Alameda / Sala CEINA,Arturo Prat 33b,,,Santiago,2500,https://www.passline.com/eventos/la-negociacion-centro-arte-alameda-548647
-Passline,JapoñolKai Santiago,arte,2026-09-02,19:00:00,,Bar el Bosque,,,,Providencia,0,https://www.passline.com/eventos/japonolkai-santiago
-Passline,LA TRANSA PRESENTA: LANZAMIENTO NUEVO SINGLE - CAMINO AL NUEVO DISCO,musica,2026-09-02,19:30:00,,Teatro fiebre,Dardignac 0163,,,Providencia,5000,https://www.passline.com/eventos/la-transa-presenta-lanzamiento-nuevo-single-camino-al-nuevo-disco
-Passline,Un Son Para Chile - Música que trasciende,musica,2026-09-02,20:00:00,,Centro Cultural Ceina,,,,Santiago,7000,https://www.passline.com/eventos/un-son-para-chile
-Passline,Castillo Ilabaca en Centro Arte Alameda,musica,2026-09-02,20:00:00,,CENTRO ARTE ALAMEDA,Arturo Prat 33,,,Santiago,15000,https://www.passline.com/eventos/castillo-ilabaca-en-centro-arte-alameda
-Passline,Para vivir. El implacable tiempo de Pablo Milanés / Centro Arte Alameda,cine,2026-09-03,18:45:00,,Centro Arte Alameda,Arturo Prat #33,,,Santiago,2500,https://www.passline.com/eventos/para-vivir-el-implacable-tiempo-de-pablo-milanes-centro-arte-alameda
-Passline,El Show de Soy Kleiii,,2026-09-03,19:00:00,,Centro Cultural Ceina,,,,Santiago,,https://www.passline.com/eventos/el-show-de-soy-kleiii
-Passline,LUNA EN LESBOS EDICIÓN ESPECIAL +38 a 50 años.,,2026-09-03,19:00:00,,Cabaret Piraña,Bombero ñuñez 365,,,Recoleta,10000,https://www.passline.com/eventos/luna-en-lesbos-edicion-especial-38-a-50-anos
-Passline,Rock Nacional 2,musica,2026-09-03,19:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,&Ntilde;u&ntilde;oa,7000,https://www.passline.com/eventos/rock-nacional-2
-Passline,"Melancolía - Trepidar, Buen dia Abril y Autodefensa en vivo",musica,2026-09-03,19:30:00,,Bar Estudio Oculto,,,,&Ntilde;u&ntilde;oa,0,https://www.passline.com/eventos/melancolia-trepidar-buen-dia-abril-y-autodefensa-en-vivo
-Passline,Lanzamiento The Orbitals,musica,2026-09-03,20:00:00,,Kross Bar Laguna Mall Sport,Av. Las Condes 13451,,,Las Condes,9000,https://www.passline.com/eventos/lanzamiento-the-orbitals
-Passline,CASAPARLANTE: FiestaParlante!,fiesta,2026-09-03,20:00:00,2026-09-04,Alto San Francisco,San Francisco 75,,,Santiago,35000,https://www.passline.com/eventos/casaparlante-fiestaparlante
-Passline,BIENVENIDO SEPTIEMBRE JUNTO A LOS TRICOLORES,,2026-09-03,20:00:00,2026-09-04,BAR VICTORIA,Av. Carlos Valdovinos 1951,,,Pedro Aguirre Cerda,5000,https://www.passline.com/eventos/bienvenido-septiembre-junto-a-los-tricolores
-Passline,ENTRE COMEDIA - Un Show Extravagante,teatro,2026-09-03,20:00:00,,Casa Irarrazaval,Av. Irarrázaval 3344 / Ñuñoa,,,&Ntilde;u&ntilde;oa,3000,https://www.passline.com/eventos/entre-comedia-un-show-extravagante
-Passline,COLDPLAY • TRIBUTO UNIVERSE,musica,2026-09-03,20:00:00,,CLUB AMANDA,EMBAJADOR DOUSSINAGUE #1767,,,Vitacura,10000,https://www.passline.com/eventos/coldplay-tributo-universe-545142
-Passline,Héctor Pavez en Cafetería Popular 2,musica,2026-09-03,20:00:00,,Cafetería Popular,Maipu 363,,,Santiago,7000,https://www.passline.com/eventos/hector-pavez-en-cafeteria-popular-2
-Passline,HieloNegro & Sinasilo en Mibar El lado oscuro del Rock,musica,2026-09-03,21:00:00,2026-09-04,Mibar,Sta Isabel #350,,,Providencia,7000,https://www.passline.com/eventos/hielonegro-sinasilo-en-mibar-el-lado-oscuro-delnrick
-Passline,Inti Illimani en tu Barrio - Fiebre Bar,musica,2026-09-03,21:00:00,,Bar Teatro Fiebre,Dardignac 0165,,,Providencia,25000,https://www.passline.com/eventos/inti-illimani-en-tu-barrio-fiebre-bar
-Passline,Neociclo Redroom XXI,musica,2026-09-03,21:30:00,,House of rock and blues,República de Israel 960,,,&Ntilde;u&ntilde;oa,5000,https://www.passline.com/eventos/neociclo-redroom-xx
-Passline,Volver a La Ley - Sesiones 88/90 en Ruta 78,familia,2026-09-03,22:00:00,,BAR RUTA 78,Independencia 043,,,Puente Alto,20000,https://www.passline.com/eventos/volver-a-la-ley-sesiones-8890-en-ruta-78
-Passline,🇨🇱 PRE FIESTAS PATRIAS 🇨🇱 - JUEVES 3 SEP - TEATRO ALICIA 🌴- KINKI X NYX 💥,fiesta,2026-09-03,22:00:00,2026-09-04,Teatro Alicia,,,,Lo Barnechea,0,https://www.passline.com/eventos/pre-fiestas-patrias-jueves-3-sep-teatro-alicia-kinki-x-nyx
-Passline,CHEFAYISSI & KAROLECAROS: en un Sailor Stand Up,teatro,2026-09-03,22:00:00,,Teatro&Bar Happy People,Rancagua 395,,,Providencia,4000,https://www.passline.com/eventos/chefayissi-karolecaros-en-un-sailor-stand-up
-Passline,🇨🇱 PRE FIESTAS PATRIAS 🇨🇱 - TEATRO ALICIA / KINKI / NYX,fiesta,2026-09-03,22:00:00,2026-09-04,Teatro Alicia,Av. Raúl Labbé 14998,,,Lo Barnechea,12000,https://www.passline.com/eventos/pre-fiestas-patrias-teatro-alicia-kinki-nyx
-Passline,SAD RAVE 020 • BRUTALISMUS 3000 EDIT,musica,2026-09-03,23:30:00,2026-09-04,Blondie,Avda Liber Bernardo O`Higgins 2879,,,Santiago,3000,https://www.passline.com/eventos/sad-rave-020-brutalismus-3000-edit
-Passline,Leyendas - Viernes 4 Septiembre - Surreal,,2026-09-04,20:30:00,2026-09-05,SURREAL,San Enrique 14951,,,Lo Barnechea,12000,https://www.passline.com/eventos/leyendas-viernes-4-septiembre-surreal
-Passline,"Violeta, Retazos de una Parra - Cía Pajaro Azul",arte,2026-09-04,17:00:00,,Centro Cultural Ceina,,,,Santiago,,https://www.passline.com/eventos/violeta-retazos-de-una-parra-cia-pajaro-azul
-Passline,"Mal Gusto, Stand Up Comedy",teatro,2026-09-04,19:00:00,,Palermo Teatro Bar,José Manuel Infante 1414,,,Providencia,22000,https://www.passline.com/eventos/mal-gusto-stand-up-comedy
-Passline,POLY DÍAZ | Stand Up Comedy - 1ra Función 04/08,teatro,2026-09-04,19:30:00,,CLUB SAN MIGUEL,,,,San Miguel,23000,https://www.passline.com/eventos/poly-diaz-stand-up-comedy-1ra-funcion-0408-538656
-Passline,Alicia en el Circo de las Maravillas,familia,2026-09-04,19:30:00,,Carpa Extraordinario Circo,,,,La Florida,8000,https://www.passline.com/eventos/alicia-en-el-circo-de-las-maravillas-546201
-Passline,ES HORA DE HABLAR,,2026-09-04,20:00:00,,Teatro fiebre,,,,Providencia,,https://www.passline.com/eventos/es-hora-de-hablar
-Passline,Las Tinajas Live Fest aniversario 2026,musica,2026-09-04,20:00:00,2026-09-05,Restaurant Las Tinajas,Gabriela 03125,,,La Pintana,10000,https://www.passline.com/eventos/las-tinajas-live-fest-aniversario-2026
-Passline,TRIBUTO OASIS EN RBX,musica,2026-09-04,20:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,&Ntilde;u&ntilde;oa,8000,https://www.passline.com/eventos/tributo-oasis-en-rbx
-Passline,Tocata Jamás - La Octava Dimensión - Wastarantino (Show de stand-up),musica,2026-09-04,20:00:00,,La Juguera,Rogelio Ugarte 1162,,,Santiago,5000,https://www.passline.com/eventos/tocata-jamas-la-octava-dimension-wastarantino-show-de-standup
-Passline,Rockout Aniversario,,2026-09-04,20:30:00,2026-09-05,Bar Oxido,Purisima 282,,,Recoleta,7000,https://www.passline.com/eventos/rockout-aniversario
-Passline,Aura ★ VIERNES 04 SEPTIEMBRE ★,,2026-09-04,20:30:00,2026-09-05,Aura club,,,,Vitacura,0,https://www.passline.com/eventos/aura-viernes-04-septiembre
-Passline,PAUL GILBERT WROC,,2026-09-04,21:00:00,,Teatro Cariola,San Diego 246,,,Santiago,45000,https://www.passline.com/eventos/paul-gilbert-wroc
-Passline,Brain Damage - Tributo a PinkFloyd en La Florida,musica,2026-09-04,21:00:00,,Parque La Araucana,,,,La Florida,12000,https://www.passline.com/eventos/brain-damage-tributo-a-pinkfloyd-en-la-florida
-Passline,A.N.I.M.A.L. EN METRÓNOMO,musica,2026-09-04,21:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,25000,https://www.passline.com/eventos/animal-en-metronomo
-Passline,BOWIE THE LEGEND BY STARMAN,musica,2026-09-04,21:00:00,,CLUB AMANDA,EMBAJADOR DOUSSINAGUE #1767,,,Vitacura,10000,https://www.passline.com/eventos/bowie-the-legend-by-starman
-Passline,Release Party,,2026-09-04,21:00:00,,CLUB GORDOS,,,,Providencia,0,https://www.passline.com/eventos/release-party-focus
-Passline,💃🌙 ¡NOCHE MÁGICA DE SALSA Y CUMBIA! 🕺🔥,musica,2026-09-04,21:00:00,2026-09-05,EL CHANCHO CON CHALECO,AVENIDA PAJARITOS 99,,,Maip&uacute;,5000,https://www.passline.com/eventos/noche-magica-de-salsa-y-cumbia
-Passline,"Mamacita El Cartel 💵 en Basel, Vie. 04 Septiembre",,2026-09-04,21:30:00,2026-09-05,"Basel, Mall Independencia",,,,Independencia,0,https://www.passline.com/eventos/mamacita-el-cartel-en-basel-vie-04-septiembre
-Passline,ES HORA DE HABLAR | 2da. Función,,2026-09-04,22:00:00,,Teatro fiebre,Dardignac 0163,,,Providencia,25000,https://www.passline.com/eventos/es-hora-de-hablar-2da-funcion
-Passline,"Feucen & la monga presentan: PERGOLAZO 2026 🎉, La FIESTA DE LA CENTRAL 👨‍🎓 - Vier 04 sept",fiesta,2026-09-04,22:00:00,2026-09-05,Fiesta LA MONGA,Av vicuña mackenna #1895,,,&Ntilde;u&ntilde;oa,3000,https://www.passline.com/eventos/feucen-la-monga-presentan-pergolazo-2026-la-fiesta-de-la-central-vier-04-septiembre-av-vicuna-mackenna-1895
-Passline,Fiesta Montañita de los 90s&2000 con DJ Pelo Verde,musica,2026-09-04,22:00:00,2026-09-05,Montañita Las Vizcachas,Camino San José de Maipo 06680,,,La Florida,7000,https://www.passline.com/eventos/fiesta-montanita-de-los-90s2000-con-dj-pelo-verde
-Passline,FIESTA FOTOLOG X MAISON DEL BELLAQUEO,fiesta,2026-09-04,22:00:00,2026-09-05,Maison del bellaqueo,,,,San Bernardo,10000,https://www.passline.com/eventos/fiesta-fotolog-x-maison-del-bellaqueo
-Passline,🏳️‍🌈​ FONDA MARICUECA 🇨🇱 - VIERNES 4 DE SEPTIEMBRE - TEATRO ALICIA 🌴,fiesta,2026-09-04,22:00:00,2026-09-05,Teatro Alicia,,,,Lo Barnechea,0,https://www.passline.com/eventos/fonda-maricueca-jueves-27-agosto-teatro-alicia-18
-Passline,Noche de Jazz en Fiebre Bar,musica,2026-09-04,22:00:00,2026-09-05,Teatro fiebre,Dardignac 0163,,,Providencia,6000,https://www.passline.com/eventos/noche-de-jazz-en-fiebre-bar
-Passline,Under Sound,,2026-09-04,23:00:00,2026-09-05,Sala RBX,Av. Vicuña Mackenna 1220,,,&Ntilde;u&ntilde;oa,8000,https://www.passline.com/eventos/under-sound
-Passline,WOOF - HOT 2016,fiesta,2026-09-04,23:00:00,2026-09-05,Tom House,Antonia Lopez de Bello 49,,,Santiago,8000,https://www.passline.com/eventos/woof-hot-2016
-Passline,ESPHERA PRESENTA BLEX AR,,2026-09-04,23:00:00,2026-09-05,La Feria,Constitución 275,,,Providencia,15000,https://www.passline.com/eventos/esphera-presenta-blex-ar
-Passline,Trainspotting 30 años - 4 Pistas de baile,fiesta,2026-09-04,23:30:00,2026-09-05,Blondie,Alameda 2879,,,Santiago,10000,https://www.passline.com/eventos/trainspotting-30-anos-4-pistas-de-baile
-Passline,LOWERED CLASS by StrictlyLowered 🌐,,2026-09-05,10:00:00,,Cancha club deportivo noviciado,,,,Pudahuel,3000,https://www.passline.com/eventos/lowered-class-by-strictlylowered
-Passline,Certificación en felicidad de Tal Ben Shahar,,2026-09-05,11:00:00,,Hotel Le Meridien,,,,Santiago,540000,https://www.passline.com/eventos/certificacion-en-felicidad-de-tal-ben-shahar
-Passline,Estacionamiento Fiebre de Cumbia la Fonda,,2026-09-05,11:00:00,,Club Hipico,,,,Santiago,15000,https://www.passline.com/eventos/estacionamiento-fiebre-de-cumbia-la-fonda
-Passline,⚔️🔥 RAGNAROK FEST – ¡EL TRUENO DEL ROCK LLEGA A LA REINA! 🎸⚡🍺,,2026-09-05,11:00:00,,Aldea Encuentro,Avenida alcalde Fernando Castillo Velasco #9750,,,La Reina,3850,https://www.passline.com/eventos/ragnarok-fest-el-trueno-del-rock-llega-a-la-reina
-Passline,MEDIEVAL PARTY & VELADAA - PALACIO ASTORECA,,2026-09-05,12:00:00,,PALACIO ASTORECA,Dieciocho #121 Santiago Centro,,,Santiago,5000,https://www.passline.com/eventos/medieval-party-veladaa-palacio-astoreca
-Passline,Fiebre de Cumbia la Fonda.,,2026-09-05,13:00:00,,Club Hipico,,,,Santiago,30000,https://www.passline.com/eventos/fiebre-de-cumbia-la-fonda-532553
-Passline,🍷 Feria Día Nacional del Vino D-COPAS | Patio Bellavista,,2026-09-05,13:00:00,,"Patio Bellavista en Providencia, Santiago",Constitución 30-70,,,Providencia,15000,https://www.passline.com/eventos/feria-dia-nacional-del-vino-dcopas-patio-bellavista
-Passline,RAMONES DAY CHILE N3 2026,musica,2026-09-05,13:00:00,,HONESTO MIKE VITACURA,,,,Vitacura,0,https://www.passline.com/eventos/ramones-day-chile-n3-2026
-Passline,1 COMPETENCIA INTERNA DE LEVANTE DIVISION BOX,,2026-09-05,13:30:00,,🏋️ Gimnasio Division Box,Carmen Mena 745,,,San Miguel,5000,https://www.passline.com/eventos/1-competencia-interna-de-levante-division-box
-Passline,Fiebre de Cumbia la Fonda,,2026-09-05,14:00:00,,Club Hipico,,,,Santiago,30000,https://www.passline.com/eventos/fiebre-de-cumbia-la-fonda
-Passline,Sonora Sunset IV,,2026-09-05,14:00:00,,Taringuita Farellones,Av el colorado 1284,,,Lo Barnechea,40000,https://www.passline.com/eventos/sonora-sunset-iv
-Centro de Estudios Públicos (CEP),Crecer en campamentos: El drama de un doble vínculo,charla,2026-08-25,12:00:00,,Auditorio CEP,Monseñor Sótero Sanz 162,,,Providencia,,https://www.cepchile.cl/eventos/crecer-en-campamentos-el-drama-de-un-doble-vinculo/
-Centro de Estudios Públicos (CEP),Más allá de las utilidades: cómo evaluar a las empresas públicas,charla,2026-08-27,18:30:00,,Auditorio CEP,Monseñor Sótero Sanz 162,,,Providencia,,https://www.cepchile.cl/eventos/mas-alla-de-las-utilidades-como-evaluar-a-las-empresas-publicas/
 Centro de Estudios Públicos (CEP),Ciclo de cine: 250 años de la independencia de Estados Unidos | Lincoln (2012),cine,2026-08-31,18:00:00,,Auditorio CEP,Monseñor Sótero Sanz 162,,,Providencia,,https://www.cepchile.cl/eventos/ciclo-de-cine-250-anos-de-la-independencia-de-estados-unidos-lincoln-2012/
-Centro de Estudios Públicos (CEP),Magallanes V: concierto audiovisual,musica,2026-09-03,18:00:00,,Auditorio CEP,Monseñor Sótero Sanz 162,,,Providencia,,https://www.cepchile.cl/eventos/magallanes-v-concierto-audiovisual/
-Municipalidad de Recoleta,"Masterclass: Mujeres, cooperación y nuevas formas de emprender",charla,2026-08-25,10:00:00,,Sala Multiuso Biblioteca Pedro Lemebel,Inocencia 2505,,,Recoleta,,https://www.recoleta.cl/masterclass-mujeres-de-recoleta-podran-conocer-nuevas-formas-de-emprender-y-fortalecer-sus-negocios-a-traves-del-cooperativismo/
+Centro de Estudios Públicos (CEP),Magallanes V: concierto audiovisual,musica,2026-09-03,18:00:00,,Auditorio CEP,Monseñor Sótero Sanz 162,,,Providencia,0,https://www.cepchile.cl/eventos/magallanes-v-concierto-audiovisual/
+Cultura Providencia,Ciclo de Cine Chileno: Mi mejor enemigo,cine,2026-09-03,19:00:00,,Teatro Oriente,Av. Pedro de Valdivia 099,,,Providencia,0,https://culturaprovidencia.cl/2026/08/26/celebremos-septiembre/
+Cultura Providencia,La Ruta del Circo,,2026-09-05,12:00:00,,Centro Deportivo El Aguilucho,Arzobispo Fuenzalida 2615,,,Providencia,0,https://culturaprovidencia.cl/2026/08/26/celebremos-septiembre/
+Cultura Providencia,BAFOCHI: Desde el fin del mundo,,2026-09-08,19:30:00,,Teatro Oriente,Av. Pedro de Valdivia 099,,,Providencia,0,https://culturaprovidencia.cl/2026/08/26/celebremos-septiembre/
+Cultura Providencia,La Ruta del Circo y del Organillero,aire_libre,2026-09-09,19:00:00,,Plaza Río de Janeiro,,,,Providencia,0,https://culturaprovidencia.cl/2026/08/26/celebremos-septiembre/
+Cultura Providencia,La Ruta del Circo y del Organillero,aire_libre,2026-09-09,19:00:00,,Anfiteatro Parque Bustamante,,,,Providencia,0,https://culturaprovidencia.cl/2026/08/26/celebremos-septiembre/
+Cultura Providencia,BAFOCHI: Desde el fin del mundo,,2026-09-09,19:30:00,,Teatro Oriente,Av. Pedro de Valdivia 099,,,Providencia,0,https://culturaprovidencia.cl/2026/08/26/celebremos-septiembre/
+Cultura Providencia,La Ruta del Circo y del Organillero,aire_libre,2026-09-10,19:00:00,,Plaza 18 de Septiembre,,,,Providencia,0,https://culturaprovidencia.cl/2026/08/26/celebremos-septiembre/
+Cultura Providencia,La Ruta del Circo y del Organillero,aire_libre,2026-09-10,19:00:00,,Parque Augusto Errázuriz,,,,Providencia,0,https://culturaprovidencia.cl/2026/08/26/celebremos-septiembre/
+Cultura Providencia,Concierto Los Huasos de Algarrobal,musica,2026-09-10,19:30:00,,Teatro Oriente,Av. Pedro de Valdivia 099,,,Providencia,,https://culturaprovidencia.cl/2026/08/26/celebremos-septiembre/
+Cultura Providencia,La Ruta del Circo y del Organillero,aire_libre,2026-09-11,19:00:00,,Plaza Patricio Aylwin,,,,Providencia,0,https://culturaprovidencia.cl/2026/08/26/celebremos-septiembre/
+Cultura Providencia,La Ruta del Circo y del Organillero,aire_libre,2026-09-11,19:00:00,,Plaza Las Lilas,,,,Providencia,0,https://culturaprovidencia.cl/2026/08/26/celebremos-septiembre/
+Cultura Providencia,La Ruta del Circo,,2026-09-12,12:00:00,,Gimnasio Santa Isabel,Los Jesuitas 827,,,Providencia,0,https://culturaprovidencia.cl/2026/08/26/celebremos-septiembre/
+Cultura Providencia,La Ruta del Circo y del Organillero,aire_libre,2026-09-15,19:00:00,,Plaza Ambrosio del Río,,,,Providencia,0,https://culturaprovidencia.cl/2026/08/26/celebremos-septiembre/
+Cultura Providencia,La Ruta del Circo y del Organillero,aire_libre,2026-09-15,19:00:00,,Plaza Padre Letelier,,,,Providencia,0,https://culturaprovidencia.cl/2026/08/26/celebremos-septiembre/
+Cultura Providencia,Esquinazo musical: Grupo Trinares,musica,2026-09-16,18:00:00,,Jardín de las Artes,Av. Nueva Providencia 1995,,,Providencia,0,https://culturaprovidencia.cl/2026/08/26/celebremos-septiembre/
+Cultura Providencia,Concierto Horacio Hernández,musica,2026-09-22,19:00:00,,Teatro Oriente,Av. Pedro de Valdivia 099,,,Providencia,0,https://culturaprovidencia.cl/2026/08/26/celebremos-septiembre/
+Cultura Providencia,Ciclo de Cine Chileno: Historias de fútbol,cine,2026-09-23,19:00:00,,Teatro Oriente,Av. Pedro de Valdivia 099,,,Providencia,0,https://culturaprovidencia.cl/2026/08/26/celebremos-septiembre/
+Cultura Providencia,Ciclo de Cine Chileno: Denominación de origen,cine,2026-09-30,19:00:00,,Teatro Oriente,Av. Pedro de Valdivia 099,,,Providencia,0,https://culturaprovidencia.cl/2026/08/26/celebremos-septiembre/
+Cultura Providencia,Exposición de grabados: Tàpies (colección Barbarà),arte,,,2026-10-11,Sala de exposiciones Parque de las Esculturas,Av. Santa María 2201,,,Providencia,0,https://culturaprovidencia.cl/2026/08/28/exposicion-de-grabados/
+Cultura Providencia,Exposición El ciclo de dar y recibir,arte,2026-08-21,,2026-11-01,Fundación Cultural de Providencia,Av. Nueva Providencia 1995,,,Providencia,0,https://culturaprovidencia.cl/2026/08/20/exposicion-el-ciclo-de-dar-y-recibir/
+Cultura Providencia,Exposición Expansión / Hemisferios / Acumulados,arte,2026-07-30,,2026-11-01,Palacio Schacht - Sala Nueva Providencia,,,,Providencia,0,https://culturaprovidencia.cl/2026/07/30/exposicion-expansion-hemisferios-acumulados/
+Teatro Oriente,Ciclo de cine: Mi mejor enemigo,cine,2026-09-03,19:00:00,,Teatro Oriente,Av. Pedro de Valdivia 099,,,Providencia,0,https://teatrooriente.cl/evento/ciclo-de-cine-mi-mejor-enemigo/
+Teatro Oriente,Juan Pablo López - Un poco chill,teatro,2026-09-04,19:00:00,2026-09-05,Teatro Oriente,Av. Pedro de Valdivia 099,,,Providencia,23000,https://teatrooriente.cl/evento/juan-pablo-lopez-4/
+Teatro Oriente,BAFOCHI «Desde el fin del mundo»,,2026-09-08,19:30:00,2026-09-09,Teatro Oriente,Av. Pedro de Valdivia 099,,,Providencia,0,https://teatrooriente.cl/evento/bafochi-desde-el-fin-del-mundo/
+Teatro Oriente,Los Huasos de Algarrobal - 60 años de canto,musica,2026-09-10,19:30:00,,Teatro Oriente,Av. Pedro de Valdivia 099,,,Providencia,17250,https://teatrooriente.cl/evento/los-huasos-de-algarrobal-60-anos-de-canto/
+Teatro Oriente,Tomás va a morir: Ley de Murphy,teatro,2026-09-15,20:00:00,2026-09-16,Teatro Oriente,Av. Pedro de Valdivia 099,,,Providencia,13800,https://teatrooriente.cl/evento/tomas-va-a-morir-ley-de-murphy-7/
+Teatro Oriente,Ciclo de cine: Historias de fútbol,cine,2026-09-23,19:00:00,,Teatro Oriente,Av. Pedro de Valdivia 099,,,Providencia,0,https://teatrooriente.cl/evento/ciclo-de-cine-historias-de-futbol/
+Teatro Oriente,Felipe Avello,teatro,2026-09-25,20:00:00,,Teatro Oriente,Av. Pedro de Valdivia 099,,,Providencia,20700,https://teatrooriente.cl/evento/felipe-avello/
+Teatro Oriente,Ciclo de cine: Denominación de origen,cine,2026-09-30,19:00:00,,Teatro Oriente,Av. Pedro de Valdivia 099,,,Providencia,0,https://teatrooriente.cl/evento/ciclo-de-cine-denominacion-de-origen/
+Teatro Oriente,Nico Ruiz - Instinto La Gira,musica,2026-10-03,20:30:00,,Teatro Oriente,Av. Pedro de Valdivia 099,,,Providencia,29900,https://teatrooriente.cl/evento/nico-ruiz/
+Teatro Oriente,Beatlemanía en concierto,musica,2026-10-10,18:00:00,,Teatro Oriente,Av. Pedro de Valdivia 099,,,Providencia,13800,https://teatrooriente.cl/evento/beatlemania-en-concierto-20/
+Teatro Oriente,Pamela Leiva,teatro,2026-10-16,20:00:00,,Teatro Oriente,Av. Pedro de Valdivia 099,,,Providencia,20700,https://teatrooriente.cl/evento/pamela-leiva-2/
+Teatro Oriente,Ariztía - Único concierto en Teatro Oriente,musica,2026-10-17,20:00:00,,Teatro Oriente,Av. Pedro de Valdivia 099,,,Providencia,28750,https://teatrooriente.cl/evento/ariztia-unico-concierto-en-teatro-oriente/
+Teatro Oriente,Undertale Sinfónico,musica,2026-11-28,19:00:00,,Teatro Oriente,Av. Pedro de Valdivia 099,,,Providencia,23000,https://teatrooriente.cl/evento/undertale-sinfonico/
+Teatro Oriente,Ignacio Socías,teatro,2026-12-11,20:00:00,,Teatro Oriente,Av. Pedro de Valdivia 099,,,Providencia,16100,https://teatrooriente.cl/evento/ignacio-socias-2/
+Club Chocolate,Michael Graves - Gira Psycho Monsters,musica,2026-09-04,,,Club Chocolate,Ernesto Pinto Lagarrigue 192,,,Recoleta,,https://clubchocolate.cl/eventos/michael-graves-gira-psycho-monsters/
+Club Chocolate,Mar de Copas - Santiago de Chile,musica,2026-09-05,,,Club Chocolate,Ernesto Pinto Lagarrigue 192,,,Recoleta,,https://clubchocolate.cl/eventos/mar-de-copas-santiago-de-chile/
+Club Chocolate,Amy Winehouse & George Michael - Doble show tributo,musica,2026-10-11,,,Club Chocolate,Ernesto Pinto Lagarrigue 192,,,Recoleta,,https://clubchocolate.cl/eventos/amy-winehouse-george-michael-doble-show-tributo/
+Club Chocolate,El Caribefunk - Desde el patio tour,musica,2026-11-13,,,Club Chocolate,Ernesto Pinto Lagarrigue 192,,,Recoleta,,https://clubchocolate.cl/eventos/el-caribefunk-desde-el-patio-tour/
+Club Chocolate,Leo Middea,musica,2026-11-26,,,Club Chocolate,Ernesto Pinto Lagarrigue 192,,,Recoleta,,https://clubchocolate.cl/eventos/leo-middea/
+Feria Friki,Friki Matsuri - Feria Friki La Florida,feria,2026-08-30,12:00:00,,CENDYR,El Ulmo 824,,,La Florida,,https://www.feriafriki.cl/eventos/feria-friki-la-florida-2/
+Feria Friki,Feria Friki La Pintana,feria,2026-09-05,11:00:00,,Plaza Cívica de La Pintana,Aníbal Pinto 12952,,,La Pintana,,https://www.feriafriki.cl/eventos/feria-friki-la-pintana/
+Feria Friki,Mega Feria Friki Cerrillos,feria,2026-09-06,12:00:00,,Parque Bicentenario de Cerrillos,Av. Pedro Aguirre Cerda 6100,,,Cerrillos,,https://www.feriafriki.cl/eventos/mega-feria-friki-cerrillos/
+Feria Friki,Friki Jedi - Feria Friki PAC,feria,2026-09-13,11:00:00,,Parque André Jarlán,Av. Pdte. Salvador Allende 2701,,,Pedro Aguirre Cerda,,https://www.feriafriki.cl/eventos/feria-friki-pac/
+Teatro UC,Gladys,teatro,2026-09-02,20:00:00,2026-09-12,Teatro UC - Sala Ana González,Jorge Washington 26,,,Ñuñoa,,https://teatrouc.uc.cl/evento/gladys/
+Teatro UC,L@s niñ@s del Winnipeg,teatro,2026-09-03,19:00:00,2026-09-12,Teatro UC - Sala Eugenio Dittborn,Jorge Washington 26,,,Ñuñoa,,https://teatrouc.uc.cl/evento/los-ninos-del-winnipeg/
+Passline,Shoxx vol2,,2026-08-30,03:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,10000,https://www.passline.com/eventos/shoxx-vol2
+Passline,Internacional Tattoo Masters Fest 2026,,2026-07-02,15:00:00,2026-12-13,Alto San Francisco,San Francisco 75,,,,7000,https://www.passline.com/eventos/internacional-tattoo-masters-fest-2026
+Passline,"El Principito, Teatro en Factoría Franklin, Especial mes del niño",,2026-08-30,16:00:00,,Factoria Franklin,,,,Santiago,5000,https://www.passline.com/eventos/el-principito-teatro-en-factoria-franklin-especial-mes-del-nino-539364
+Passline,TOM HOUSE • CLUB FIST • 3ª EDICIÓN,,2026-08-30,17:00:00,,,Antonia López de Bello 49,,,,15000,https://www.passline.com/eventos/tom-house-club-fist-3-edicion
+Passline,3D Printer Party Chile 2026 | Abono 2 Días,,2026-08-30,10:00:00,,Omnium,Av. Apoquindo 4900,,,Las Condes,12000,https://www.passline.com/eventos/3d-printer-party-chile-2026-abono-2-dias-512408
+Passline,GENESIS EN SANTIAGO DE CHILE,,2026-08-29,20:00:00,2026-08-30,Discoteca La Fama,Av. México 609,,,Recoleta,10000,https://www.passline.com/eventos/genesis-en-santiago-de-chile
+Passline,Latin American TAAT World Championship Chile 2026,,2026-08-29,10:00:00,2026-08-30,Aldea Encuentro,Avenida alcalde Fernando Castillo Velasco #9750,,,,10000,https://www.passline.com/eventos/latin-american-taat-world-championship-chile-2026
+Passline,FLOR DE RAP Y SUS GRANDES EXITOS,,2026-08-30,18:00:00,,DISTRITO 04,San Ignacio Loyola 3199,,,San Miguel,5000,https://www.passline.com/eventos/flor-de-rap-y-sus-grandes-exitos
+Passline,ARRUINARSE,,2026-08-30,20:00:00,,Teatro Fiebre,Dardignac 0163,,,Providencia,10000,https://www.passline.com/eventos/arruinarse-530711
+Passline,El Circo de Tony Caluga en Puente Alto / Vacaciones de invierno,,2026-08-30,18:00:00,,Puente Alto,Avenida San Carlos 1863,,,,5000,https://www.passline.com/eventos/el-circo-de-tony-caluga-en-puente-alto-vacaciones-de-invierno-542568
+Passline,El Circo de Tony Caluga en Puente Alto / Vacaciones de invierno,,2026-08-30,20:30:00,,Puente Alto,Avenida San Carlos 1863,,,,5000,https://www.passline.com/eventos/el-circo-de-tony-caluga-en-puente-alto-vacaciones-de-invierno-542582
+Passline,FINAL “AMIGAS & RIVALES “ 20 AÑOS,,2026-08-30,20:00:00,,TEATRO CARIOLA,San Diego 246,,,,30000,https://www.passline.com/eventos/final-amigas-rivales-20-anos
+Passline,"OBRA: Si los cerdos no miran al cielo, ¿que hacemos con ellos?",,2026-08-30,20:00:00,,"SALA CLUB DE TEATRO, CHUCRE MANZUR #10",Chucre Manzur #10,,,,8000,https://www.passline.com/eventos/obra-si-los-cernos-no-miran-al-cielo-que-hacemos-con-ellos-542745
+Passline,Los Domingos / Centro Arte Alameda,,2026-08-30,17:00:00,,Centro Arte Alameda / Sala CEINA,Arturo Prat 33b,,,,2500,https://www.passline.com/eventos/los-domingos-centro-arte-alameda
+Passline,REAL SAN JOAQUIN V/S DEPORTES RENGO - LIGUILLA DESCENSO,,2026-08-31,12:00:00,,ESTADIO MUNICIPAL DE LO BARNECHEA,,,,,5000,https://www.passline.com/eventos/real-san-joaquin-vs-deportes-rengo-liguilla-descenso
+Passline,“30 DOMINGO,,2026-08-30,23:30:00,,FAUSTO,Avenida Santa María 0832,,,,6000,https://www.passline.com/eventos/30-domingo-548673
+Passline,Matapanki / Centro Arte Alameda,,2026-08-31,19:00:00,,Centro Arte Alameda,Arturo Prat #33,,,,2000,https://www.passline.com/eventos/matapanki-centro-arte-alameda-548656
+Passline,Obsesión / Centro Arte Alameda,,2026-08-31,14:30:00,,Centro Arte Alameda,Arturo Prat #33,,,,2500,https://www.passline.com/eventos/obsesion-centro-arte-alameda-548658
+Passline,Teenage Sex and Death at Camp Miasma / Centro Arte Alameda,,2026-08-31,16:45:00,,Centro Arte Alameda,Arturo Prat #33,,,Santiago,2500,https://www.passline.com/eventos/teenage-sex-and-death-at-camp-miasma-centro-arte-alameda-548643
+Passline,Backrooms Extended / Centro Arte Alameda,,2026-08-31,20:30:00,,Centro Arte Alameda,Arturo Prat #33,,,,2500,https://www.passline.com/eventos/backrooms-extended-centro-arte-alameda-548660
+Passline,POL PABLO | UP10 UNPLUGGED | V R A V A,,2026-09-01,20:00:00,,Centro parque,Pdte. Riesco 5330,,,Las Condes,5000,https://www.passline.com/eventos/pol-pablo-up10-unplugged-v-r-a-v-a
+Passline,LA TRANSA PRESENTA: LANZAMIENTO NUEVO SINGLE - CAMINO AL NUEVO DISCO,,2026-09-02,19:30:00,,Teatro fiebre,Dardignac 0163,,,Providencia,5000,https://www.passline.com/eventos/la-transa-presenta-lanzamiento-nuevo-single-camino-al-nuevo-disco
+Passline,La Negociación / Centro Arte Alameda,,2026-09-01,21:00:00,,Centro Arte Alameda / Sala CEINA,Arturo Prat 33b,,,,2500,https://www.passline.com/eventos/la-negociacion-centro-arte-alameda-548647
+Passline,La Invitación / Centro Arte Alameda,,2026-09-01,16:30:00,,Centro Arte Alameda / Sala CEINA,Arturo Prat 33b,,,,2500,https://www.passline.com/eventos/la-invitacion-centro-arte-alameda-548654
+Passline,Teenage Sex and Death at Camp Miasma / Centro Arte Alameda,,2026-09-01,14:30:00,,Centro Arte Alameda,Arturo Prat #33,,,Santiago,2500,https://www.passline.com/eventos/teenage-sex-and-death-at-camp-miasma-centro-arte-alameda-548644
+Passline,Sergio Freire en Happy People,,2026-09-02,20:00:00,,Teatro Happy People,Rancagua 395,,,Providencia,10000,https://www.passline.com/eventos/sergio-freire-en-happy-people-549583
+Passline,LUNA EN LESBOS EDICIÓN ESPECIAL +38 a 50 años.,,2026-09-03,19:00:00,,Cabaret Piraña,Bombero ñuñez 365,,,,10000,https://www.passline.com/eventos/luna-en-lesbos-edicion-especial-38-a-50-anos
+Passline,HOT CUE ★ MIÉRCOLES 2 SEPTIEMBRE ★ Club Siete - Piso 4 Hotel W,,2026-09-02,22:00:00,,Club Siete,Isidora Goyenechea 3000,,,Las Condes,10000,https://www.passline.com/eventos/hot-cue-miercoles-2-septiembre-club-siete-piso-4-hotel-w
+Passline,Para vivir. El implacable tiempo de Pablo Milanés / Centro Arte Alameda,,2026-09-03,18:45:00,,Centro Arte Alameda,Arturo Prat #33,,,,2500,https://www.passline.com/eventos/para-vivir-el-implacable-tiempo-de-pablo-milanes-centro-arte-alameda
+Passline,El Deshielo / Centro Arte Alameda,,2026-09-03,16:45:00,,Centro Arte Alameda / Sala CEINA,Arturo Prat 33b,,,,2500,https://www.passline.com/eventos/el-deshielo-centro-arte-alameda
+Passline,Castillo Ilabaca en Centro Arte Alameda,,2026-09-02,20:00:00,,CENTRO ARTE ALAMEDA,Arturo Prat 33,,,Santiago,15000,https://www.passline.com/eventos/castillo-ilabaca-en-centro-arte-alameda
+Passline,Un Son Para Chile - Música que trasciende,,2026-09-02,20:00:00,,Centro Cultural Ceina,,,,,7000,https://www.passline.com/eventos/un-son-para-chile
+Passline,Lanzamiento The Orbitals,,2026-09-03,20:00:00,,Kross Bar Laguna Mall Sport,Av. Las Condes 13451,,,,9000,https://www.passline.com/eventos/lanzamiento-the-orbitals
+Passline,HieloNegro & Sinasilo en Mibar El lado oscuro del Rock,,2026-09-03,21:00:00,,Mibar,Sta Isabel #350,,,,7000,https://www.passline.com/eventos/hielonegro-sinasilo-en-mibar-el-lado-oscuro-delnrick
+Passline,ENTRE COMEDIA - Un Show Extravagante,,2026-09-03,20:00:00,,Casa Irarrazaval,Av. Irarrázaval 3344 / Ñuñoa,,,,3000,https://www.passline.com/eventos/entre-comedia-un-show-extravagante
+Passline,COLDPLAY • TRIBUTO UNIVERSE,,2026-09-03,20:00:00,,CLUB AMANDA,EMBAJADOR DOUSSINAGUE #1767,,,,10000,https://www.passline.com/eventos/coldplay-tributo-universe-545142
+Passline,BIENVENIDO SEPTIEMBRE JUNTO A LOS TRICOLORES,,2026-09-03,20:00:00,,BAR VICTORIA,Av. Carlos Valdovinos 1951,,,Pedro Aguirre Cerda,5000,https://www.passline.com/eventos/bienvenido-septiembre-junto-a-los-tricolores
+Passline,Héctor Pavez en Cafetería Popular 2,,2026-09-03,20:00:00,,Cafetería Popular,Maipu 363,,,,7000,https://www.passline.com/eventos/hector-pavez-en-cafeteria-popular-2
+Passline,Rock Nacional 2,,2026-09-03,19:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,7000,https://www.passline.com/eventos/rock-nacional-2
+Passline,CHEFAYISSI & KAROLECAROS: en un Sailor Stand Up,,2026-09-03,22:00:00,,Teatro&Bar Happy People,Rancagua 395,,,Providencia,4000,https://www.passline.com/eventos/chefayissi-karolecaros-en-un-sailor-stand-up
+Passline,🇨🇱 PRE FIESTAS PATRIAS 🇨🇱 - TEATRO ALICIA / KINKI / NYX,,2026-09-03,22:00:00,,Teatro Alicia,Av. Raúl Labbé 14998,,,Lo Barnechea,12000,https://www.passline.com/eventos/pre-fiestas-patrias-teatro-alicia-kinki-nyx
+Passline,Neociclo Redroom XXI,,2026-09-03,21:30:00,,House of rock and blues,República de Israel 960,,,,5000,https://www.passline.com/eventos/neociclo-redroom-xx
+Passline,PELAO RODRIGO EN MYSTIC,,2026-09-03,22:00:00,2026-10-01,Mystic Valley,Av. La Montaña 1957,,,,10000,https://www.passline.com/eventos/pelao-rodrigo-en-mystic
+Passline,Inti Illimani en tu Barrio - Fiebre Bar,,2026-09-03,21:00:00,,Bar Teatro Fiebre,Dardignac 0165,,,Providencia,25000,https://www.passline.com/eventos/inti-illimani-en-tu-barrio-fiebre-bar
+Passline,Volver a La Ley - Sesiones 88/90 en Ruta 78,,2026-09-03,22:00:00,,BAR RUTA 78,Independencia 043,,,Puente Alto,20000,https://www.passline.com/eventos/volver-a-la-ley-sesiones-8890-en-ruta-78
+Passline,Las Tinajas Live Fest aniversario 2026,,2026-09-04,20:00:00,,Restaurant Las Tinajas,Gabriela 03125,,,,10000,https://www.passline.com/eventos/las-tinajas-live-fest-aniversario-2026
+Passline,SAD RAVE 020 • BRUTALISMUS 3000 EDIT,,2026-09-03,23:30:00,,Blondie,Avda Liber Bernardo O`Higgins 2879,,,Santiago,3000,https://www.passline.com/eventos/sad-rave-020-brutalismus-3000-edit
+Passline,"Violeta, Retazos de una Parra - Cía Pajaro Azul",,2026-09-04,17:00:00,,Centro Cultural Ceina,Arturo Prat 33 - Santiago Centro,,,,5000,https://www.passline.com/eventos/violeta-retazos-de-una-parra-cia-pajaro-azul
+Passline,"Mal Gusto, Stand Up Comedy",,2026-09-04,19:00:00,,Palermo Teatro Bar,José Manuel Infante 1414,,,,22000,https://www.passline.com/eventos/mal-gusto-stand-up-comedy
+Passline,Alicia en el Circo de las Maravillas,,2026-09-04,19:30:00,,Carpa Extraordinario Circo,,,,,8000,https://www.passline.com/eventos/alicia-en-el-circo-de-las-maravillas-546201
+Passline,Tocata Jamás - La Octava Dimensión - Wastarantino (Show de stand-up),,2026-09-04,20:00:00,,La Juguera,Rogelio Ugarte 1162,,,,5000,https://www.passline.com/eventos/tocata-jamas-la-octava-dimension-wastarantino-show-de-standup
+Passline,TRIBUTO OASIS EN RBX,,2026-09-04,20:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,8000,https://www.passline.com/eventos/tributo-oasis-en-rbx
+Passline,Leyendas - Viernes 4 Septiembre - Surreal,,2026-09-04,20:30:00,,SURREAL,San Enrique 14951,,,Lo Barnechea,12000,https://www.passline.com/eventos/leyendas-viernes-4-septiembre-surreal
+Passline,Rockout Aniversario,,2026-09-04,20:30:00,,Bar Oxido,Purisima 282,,,,7000,https://www.passline.com/eventos/rockout-aniversario
+Passline,AMERIKAN SOUND Y CUECAS CON LAS CAPITALINAS,,2026-09-04,20:00:00,,BAR VICTORIA,Av. Carlos Valdovinos 1951,,,Pedro Aguirre Cerda,15000,https://www.passline.com/eventos/amerikan-sound-y-cuecas-con-las-capitalinas
+Passline,PAUL GILBERT WROC,,2026-09-04,21:00:00,,Teatro Cariola,San Diego 246,,,Santiago,45000,https://www.passline.com/eventos/paul-gilbert-wroc
+Passline,Circo Los Maluenda en Maipu,,2026-09-04,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu
+Passline,"Feucen & la monga presentan: PERGOLAZO 2026 🎉, La FIESTA DE LA CENTRAL 👨‍🎓 - Vier 04 septiembre / Av vicuña mackenna #1895 📍",,2026-09-04,22:00:00,,Fiesta LA MONGA,Av vicuña mackenna #1895,,,,3000,https://www.passline.com/eventos/feucen-la-monga-presentan-pergolazo-2026-la-fiesta-de-la-central-vier-04-septiembre-av-vicuna-mackenna-1895
+Passline,RODA DE SAMBA...ESPERANDO EL 18,,2026-09-04,21:00:00,,La chimenea,Príncipe de Gales 90,,,Santiago,8500,https://www.passline.com/eventos/roda-de-sambaesperando-el-18
+Passline,💃🌙 ¡NOCHE MÁGICA DE SALSA Y CUMBIA! 🕺🔥,,2026-09-04,21:00:00,,EL CHANCHO CON CHALECO,AVENIDA PAJARITOS 99,,,,5000,https://www.passline.com/eventos/noche-magica-de-salsa-y-cumbia
+Passline,BOWIE THE LEGEND BY STARMAN,,2026-09-04,21:00:00,,CLUB AMANDA,EMBAJADOR DOUSSINAGUE #1767,,,,10000,https://www.passline.com/eventos/bowie-the-legend-by-starman
+Passline,A.N.I.M.A.L. EN METRÓNOMO,,2026-09-04,21:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,25000,https://www.passline.com/eventos/animal-en-metronomo
+Passline,Brain Damage - Tributo a PinkFloyd en La Florida,,2026-09-04,21:00:00,,Parque La Araucana,,,,,15000,https://www.passline.com/eventos/brain-damage-tributo-a-pinkfloyd-en-la-florida
+Passline,ES HORA DE HABLAR | 2da. Función,,2026-09-04,22:00:00,,Teatro fiebre,Dardignac 0163,,,Providencia,25000,https://www.passline.com/eventos/es-hora-de-hablar-2da-funcion
+Passline,FIESTA FOTOLOG X MAISON DEL BELLAQUEO,,2026-09-04,22:00:00,,Maison del bellaqueo,,,,,10000,https://www.passline.com/eventos/fiesta-fotolog-x-maison-del-bellaqueo
+Passline,JassonMix el Máster of the Swing presenta “EL REENCUENTRO,,2026-09-04,22:30:00,,CLUB OLIMPO EL PARRON,AV EL PARRON 01140,,,,10000,https://www.passline.com/eventos/jassonmix-el-master-of-the-swing-presenta-el-reencuentro-549554
+Passline,Noche de Jazz en Fiebre Bar,,2026-09-04,22:00:00,,Teatro fiebre,Dardignac 0163,,,Providencia,6000,https://www.passline.com/eventos/noche-de-jazz-en-fiebre-bar
+Passline,Fiesta Montañita de los 90s&2000 con DJ Pelo Verde,,2026-09-04,22:00:00,,Montañita Las Vizcachas,Camino San José de Maipo 06680,,,,7000,https://www.passline.com/eventos/fiesta-montanita-de-los-90s2000-con-dj-pelo-verde
+Passline,Hasta que el RAMO nos separe 📚 / Fiesta de bienvenida UBO - Vier 04 sept - FIESTA LA MONGA 🦍 - Av vicuña mackenna #1895 ÑUÑOA 📍,,2026-09-04,22:00:00,,Fiesta la monga,Av vicuña mackenna #1895,,,,3000,https://www.passline.com/eventos/hasta-que-el-ramo-nos-separe-fiesta-de-bienvenida-ubo-vier-04-sept-fiesta-la-monga-av-vicuna-mackenna-1895-nunoa
+Passline,Fonda Wynwood,,2026-09-04,22:00:00,,Teatro Alicia,Av. Raúl Labbé 14998,,,Lo Barnechea,13000,https://www.passline.com/eventos/fonda-wynwood
+Passline,SOCIAL W ★ VIERNES 4 SEPTIEMBRE ★ Club Siete - Piso 4 Hotel W,,2026-09-04,22:00:00,,Club Siete,Isidora Goyenechea 3000,,,Las Condes,10000,https://www.passline.com/eventos/social-w-viernes-4-septiembre-club-siete-piso-4-hotel-w
+Passline,SOMOS MARISOL,,2026-09-05,09:00:00,,Restobar Calabria,constitución 61,,,,10000,https://www.passline.com/eventos/somos-marisol
+Passline,WOOF - HOT 2016,,2026-09-04,23:00:00,,Tom House,Antonia Lopez de Bello 49,,,,8000,https://www.passline.com/eventos/woof-hot-2016
+Passline,LOWERED CLASS by StrictlyLowered 🌐,,2026-09-05,10:00:00,,Cancha club deportivo noviciado,,,,,3000,https://www.passline.com/eventos/lowered-class-by-strictlylowered
+Passline,Certificación en felicidad de Tal Ben Shahar,,2026-09-05,11:00:00,,Hotel Le Meridien,,,,,540000,https://www.passline.com/eventos/certificacion-en-felicidad-de-tal-ben-shahar
+Passline,ESPHERA PRESENTA BLEX AR,,2026-09-04,23:00:00,,La Feria,Constitución 275,,,Providencia,15000,https://www.passline.com/eventos/esphera-presenta-blex-ar
+Passline,Estacionamiento Fiebre de Cumbia la Fonda,,2026-09-05,11:00:00,,Club Hipico,,,,,15000,https://www.passline.com/eventos/estacionamiento-fiebre-de-cumbia-la-fonda
+Passline,Trainspotting 30 años - 4 Pistas de baile,,2026-09-04,23:30:00,,Blondie,Alameda 2879,,,,10000,https://www.passline.com/eventos/trainspotting-30-anos-4-pistas-de-baile
+Passline,1 COMPETENCIA INTERNA DE LEVANTE DIVISION BOX,,2026-09-05,13:30:00,,🏋️ Gimnasio Division Box,Carmen Mena 745,,,,5000,https://www.passline.com/eventos/1-competencia-interna-de-levante-division-box
+Passline,Sonora Sunset IV,,2026-09-05,14:00:00,,Taringuita Farellones,Av el colorado 1284,,,,40000,https://www.passline.com/eventos/sonora-sunset-iv
+Passline,⚔️🔥 RAGNAROK FEST – ¡EL TRUENO DEL ROCK LLEGA A LA REINA! 🎸⚡🍺,,2026-09-05,11:00:00,,Aldea Encuentro,Avenida alcalde Fernando Castillo Velasco #9750,,,,3850,https://www.passline.com/eventos/ragnarok-fest-el-trueno-del-rock-llega-a-la-reina
+Passline,MEDIEVAL PARTY & VELADAA - PALACIO ASTORECA,,2026-09-05,12:00:00,,PALACIO ASTORECA,Dieciocho #121 Santiago Centro,,,,5000,https://www.passline.com/eventos/medieval-party-veladaa-palacio-astoreca
+Passline,🍷 Feria Día Nacional del Vino D-COPAS | Patio Bellavista,,2026-09-05,13:00:00,,"Patio Bellavista en Providencia, Santiago",Constitución 30-70,,,,15000,https://www.passline.com/eventos/feria-dia-nacional-del-vino-dcopas-patio-bellavista
+Passline,LUCHITO JESUS,,2026-09-05,19:30:00,,HAPPY PEOPLE,Rancagua 395,,,,5000,https://www.passline.com/eventos/luchito-jesus
+Passline,Little Big Under 2,,2026-09-05,15:30:00,,LA CASA BELLAVISTA,Ernesto Pinto Lagarrigue 70,,,,2000,https://www.passline.com/eventos/little-big-under-2
+Passline,Bingo dieciochero en beneficio de Aaron Ortega,,2026-09-05,18:00:00,,Colegio República de Grecia Talagante,Balmaceda 1133,,,,2380,https://www.passline.com/eventos/bingo-dieciochero-en-beneficio-de-aaron-ortega
+Passline,Claro Oscuro Fest,,2026-09-05,17:00:00,,Estudio Mirador,Millaray 200,,,,5000,https://www.passline.com/eventos/claro-oscuro-fest
+Passline,NOES FEST VOL. 3,,2026-09-05,16:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,8000,https://www.passline.com/eventos/noes-fest-vol-3
+Passline,Alicia en el Circo de las Maravillas,,2026-09-05,16:00:00,,Carpa Extraordinario Circo,,,,,8000,https://www.passline.com/eventos/alicia-en-el-circo-de-las-maravillas-546203
+Passline,Circo Los Maluenda en Maipu,,2026-09-05,17:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549271
+Passline,Cabarésque,,2026-09-05,20:00:00,,Bar Amelia,Irarrazabal 1060,,,,8000,https://www.passline.com/eventos/cabaresque-543671
+Passline,primer año de comedia,,2026-09-05,20:30:00,,wayas restobar,avenida santa isabel 911,,,,3000,https://www.passline.com/eventos/primer-ano-de-comedia-542475
+Passline,MAR DE COPAS - SANTIAGO DE CHILE,,2026-09-05,20:00:00,,CLUB CHOCOLATE,ERNESTO PINTO LAGARRIGUE #192,,,,30000,https://www.passline.com/eventos/mar-de-copas-santiago-de-chile
+Passline,LUIS HACHEM EN TALAGANTE,,2026-09-05,20:00:00,,AREPAZZO RESTO-BAR,AV BERNARDO OHIGGINS 1306,,,,15000,https://www.passline.com/eventos/luis-hachem-en-talagante
+Passline,SONORA PALACIOS Y LA ZALAGARDA CUECA CHILENA,,2026-09-05,20:00:00,,BAR VICTORIA,Av. Carlos Valdovinos 1951,,,Pedro Aguirre Cerda,15000,https://www.passline.com/eventos/sonora-palacios-0509
+Passline,The Legend / El Concierto,,2026-09-05,20:00:00,,Carpa Extraordinario Circo,,,,,15000,https://www.passline.com/eventos/the-legend-el-concierto-542697
+Passline,LOS CARIBEÑOS DE GUADALUPE EN SANTIAGO DE CHILE,,2026-09-05,20:00:00,,Discoteca La Fama,Av. México 609,,,Recoleta,20000,https://www.passline.com/eventos/los-caribenos-de-guadalupe-en-santiago-de-chile
+Passline,Circo Los Maluenda en Maipu,,2026-09-05,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549243
+Passline,ANIVERSARIO FIESTA FOREVER 80’ 90’ en CASA MAYOR DE CHENA,,2026-09-05,21:00:00,,CASA MAYOR DE CHENA,BARRANCON 3240 SAN BERNARDO,,,,10000,https://www.passline.com/eventos/fiesta-forever-80-90-en-casa-mayor-de-chena-546143
+Passline,NIÑO MILAGRO: Grabación de Especial,,2026-09-05,20:30:00,,Donde La Chipi,Diagonal Paraguay 458,,,,7000,https://www.passline.com/eventos/nino-milagro-grabacion-de-especial
+Passline,THE TIME MACHINE : MTV EXPERIENCE + RAMONES + MISFITS,,2026-09-05,21:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,3000,https://www.passline.com/eventos/time-machine-mtv-experiencie-ramones-misfits
+Passline,The Ganjas & The Polvos / Bar de René,,2026-09-05,21:00:00,,Bar de Rene,Sta isabel 369,,,,15000,https://www.passline.com/eventos/the-ganjas-the-polvos-bar-de-rene
+Passline,SODA STEREO DE CULTO - HOMENAJE MAMUT,,2026-09-05,21:00:00,,CLUB AMANDA,EMBAJADOR DOUSSINAGUE #1767,,,,14000,https://www.passline.com/eventos/soda-stereo-de-culto-homenaje-mamut
+Passline,"Violeta, Retazos de una Parra - Cía Pajaro Azul",,2026-09-05,20:30:00,,Centro Cultural Ceina,Arturo Prat 33 - Santiago Centro,,,,5000,https://www.passline.com/eventos/violeta-retazos-de-una-parra-cia-pajaro-azul-546545
+Passline,TINDEROOM HEROES Y VILLANOS,,2026-09-05,22:00:00,,Av. Calera de tango,,,,,15000,https://www.passline.com/eventos/tinderoom-heroes-y-villanos
+Passline,Ricardo Montaner Tributo,,2026-09-05,21:00:00,,MD PIZZAS,Alameda #2145,,,,6000,https://www.passline.com/eventos/ricardo-montaner-tributo
+Passline,"LOS NOGALINOS, CELEBRANDO SU NUEVO DISCO PATRIMONIO",,2026-09-05,21:30:00,,La chimenea,Príncipe de Gales 90,,,Santiago,7000,https://www.passline.com/eventos/los-nogalinos-celebrando-su-nuevo-disco-patrimonio
+Passline,SOUNDLIGHT - EL REENCUENTRO,,2026-09-05,22:00:00,,DISCOTHEQUE MULTIESPACIO BRASAS VALDENEGRO,VICUÑA MACKENA 1030,,,Melipilla,10000,https://www.passline.com/eventos/soundlight-el-reencuentro
+Passline,Sicalipticas Cabaret Galáctico,,2026-09-05,21:00:00,,Peluquería Francesa,Compañia 2789,,,,13000,https://www.passline.com/eventos/sicalipticas-cabaret-galactico
+Passline,CORTENTRAMITE TRIBUTO A LOS BUNKERS EN KLUB KROSS,,2026-09-05,21:30:00,,Kross Bar,,,,Las Condes,10000,https://www.passline.com/eventos/cortentramite-tributo-a-los-bunkers-en-klub-kross-546109
+Passline,The Metal Gods,,2026-09-05,21:00:00,,Bar Oxido,Purisima 282,,,,6000,https://www.passline.com/eventos/the-metal-gods
+Passline,POLY DÍAZ | Stand Up Comedy - 2da. Función 05/09,,2026-09-05,22:00:00,,CLUB SAN MIGUEL,,,,,23000,https://www.passline.com/eventos/poly-diaz-stand-up-comedy-2da-funcion
+Passline,BARCELONA ~ SÁB.05.09 ~ CIRCULO ESPAÑOL,,2026-09-05,22:00:00,,CIRCULO ESPAÑOL,ALAMEDA 1550,,,,10000,https://www.passline.com/eventos/barcelona-sab0509-circulo-espanol
+Passline,Papi • Sábado 5 de Septiembre,,2026-09-05,23:00:00,,Climax,Antonia López de Bello 80,,,,8000,https://www.passline.com/eventos/papi-sabado-5-de-septiembre
+Passline,Gabriel Colmenares - Show de Stand Up Comedy 2.0,,2026-09-05,22:00:00,,Gran Refugio Barrio Italia,Rancagua 395,,,Providencia,6000,https://www.passline.com/eventos/gabriel-colmenares-show-de-stand-up-comedy-20
+Passline,"OTAKU DANCE MAID - Sábado 05 Sept, Spot Freedom.",,2026-09-05,22:30:00,,Spot Freedom,Av. Recoleta 345,,,Recoleta,10000,https://www.passline.com/eventos/otaku-dance-maid-sabado-05-sept-spot-freedom
+Passline,"MALAVENTURADOS - Sábado 05 Sept, Sala Pandora.",,2026-09-05,23:00:00,,SALA PANDORA,Pio nono 286,,,,8000,https://www.passline.com/eventos/malaventurados-sabado-05-sept-sala-pandora
+Passline,Previa a SEPULTURA en Chile,,2026-09-06,13:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,8000,https://www.passline.com/eventos/previa-a-sepultura-en-chile
+Passline,Lucha Libre Xplosion presenta: Aniversario 16,,2026-09-06,17:00:00,,Teatro Municipal de San Miguel,Alcalde Pedro Alarcón 1063,,,,3500,https://www.passline.com/eventos/lucha-libre-xplosion-presenta-aniversario-16
+Passline,El Show del Videoclub 4 - Santiago,,2026-09-06,16:30:00,,Santiago Fight Club,General Gana 109,,,Ñuñoa,4000,https://www.passline.com/eventos/el-show-del-videoclub-4-santiago
+Passline,CRUZITO EN MYSTIC VALLEY,,2026-09-05,23:30:00,,Mystic Valley,Av. la montaña 1957,,,,10000,https://www.passline.com/eventos/cruzito-en-mystic-valley
+Passline,Stranger Blondie: Back To The Future - 4 pistas,,2026-09-05,23:30:00,,Blondie,Alameda 2879,,,,10000,https://www.passline.com/eventos/stranger-blondie-back-to-the-future-4-pistas
+Passline,Alicia en el Circo de las Maravillas,,2026-09-06,16:00:00,,Carpa Extraordinario Circo,,,,,8000,https://www.passline.com/eventos/alicia-en-el-circo-de-las-maravillas-546206
+Passline,Tributo BTS Teatro Cousiño,,2026-09-06,18:00:00,,Teatro Parque Cousiño,San Ignacio de Loyola #1249,,,,11000,https://www.passline.com/eventos/tributo-bts-teatro-cousino
+Passline,"Concierto 1 - Luces y Lamentos: Serenatas, Cuerdas y Elegías",,2026-09-07,19:30:00,,Estación Mapocho,,,,,6000,https://www.passline.com/eventos/concierto-1-luces-y-lamentos-serenatas-cuerdas-y-elegias
+Passline,La Pérgola de las Flores: Entre Flores y Tacones,,2026-09-06,20:00:00,,Cabaret Piraña Resto Bar,Bombero Núñez 365,,,Recoleta,12000,https://www.passline.com/eventos/la-pergola-de-las-flores-entre-flores-y-tacones
+Passline,"Violeta, Retazos de una Parra - Cía Pajaro Azul",,2026-09-06,17:00:00,,Centro Cultural Ceina,Arturo Prat 33 - Santiago Centro,,,,5000,https://www.passline.com/eventos/violeta-retazos-de-una-parra-cia-pajaro-azul-546546
+Passline,Clara Ulrich presenta Yo Quiero Ser Mi Marido en Chile,,2026-09-06,19:00:00,,Centro Cultural Ceina,,,,,27000,https://www.passline.com/eventos/clara-ulrich-presenta-yo-quiero-ser-mi-marido-en-chile
+Passline,Alicia en el Circo de las Maravillas,,2026-09-06,19:30:00,,Carpa Extraordinario Circo,,,,,8000,https://www.passline.com/eventos/alicia-en-el-circo-de-las-maravillas-546207
+Passline,Circo Los Maluenda en Maipu,,2026-09-06,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549244
+Passline,Circo Los Maluenda en Maipu,,2026-09-06,17:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549272
+Passline,Don Carter en Rustiko Huechuraba,,2026-09-08,21:00:00,,Rustiko Huehuraba,Av. Pedro Fontova 7853,,,Huechuraba,20000,https://www.passline.com/eventos/don-carter-en-rustiko-huechuraba
+Passline,Pablo Etcheverri y José Manuel Lattus en cafetería popular,,2026-09-09,20:00:00,,Cafetería Popular,Maipu 363,,,,5000,https://www.passline.com/eventos/pablo-etcheverri-y-jose-manuel-lattus-en-cafeteria-popular
+Passline,"Concierto 2 - Luces y Lamentos: Serenatas, Cuerdas y Elegías",,2026-09-08,19:30:00,,Estación Mapocho,,,,,6000,https://www.passline.com/eventos/concierto-2-luces-y-lamentos-serenatas-cuerdas-y-elegias
+Passline,Alicia en el Circo de las Maravillas,,2026-09-09,19:30:00,,Carpa Extraordinario Circo,,,,,8000,https://www.passline.com/eventos/alicia-en-el-circo-de-las-maravillas-546208
+Passline,Circo Los Maluenda en Maipu,,2026-09-08,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549246
+Passline,Circo Los Maluenda en Maipu,,2026-09-07,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549245
+Passline,Circo Los Maluenda en Maipu,,2026-09-09,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549247
+Passline,Tributo Grunge Hits,,2026-09-10,21:00:00,,Klub Krossbar,Av Las Condes 13451 Local L108,,,,6000,https://www.passline.com/eventos/tributo-grunge-hits
+Passline,La Pérgola de las Flores: Entre Flores y Tacones,,2026-09-10,20:00:00,,Cabaret Piraña Resto Bar,Bombero Núñez 365,,,Recoleta,12000,https://www.passline.com/eventos/la-pergola-de-las-flores-entre-flores-y-tacones-548562
+Passline,Linea Aspera en Chile,,2026-09-10,21:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,28000,https://www.passline.com/eventos/linea-aspera-en-chile
+Passline,TODOS POR EL TAN,,2026-09-10,19:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,15000,https://www.passline.com/eventos/todos-por-el-tan
+Passline,The Haunted,,2026-09-10,20:00:00,,Teatro Cariola,San Diego 246,,,Santiago,42000,https://www.passline.com/eventos/the-haunted
+Passline,Alicia en el Circo de las Maravillas,,2026-09-10,19:30:00,,Carpa Extraordinario Circo,,,,,8000,https://www.passline.com/eventos/alicia-en-el-circo-de-las-maravillas-546209
+Passline,Circo Los Maluenda en Maipu,,2026-09-10,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549248
+Passline,Tributo Silvio Rodríguez Noche Emotiva y Reflexión,,2026-09-10,21:00:00,,Montañita Las Vizcachas,Camino San José de maipo 06680,,,,5000,https://www.passline.com/eventos/tributo-silvio-rodriguez-noche-emotiva-y-reflexion
+Passline,INDIE UNIVERSITY PARTY - THE STROKES NIGHT,,2026-09-10,23:30:00,,Blondie,Avda Liber Bernardo O`Higgins 2879,,,Santiago,3000,https://www.passline.com/eventos/indie-university-party-the-strokes-night
+Passline,STONE NATION LANZAMIENTO OFICIAL ALCHEMY,,2026-09-10,21:00:00,,Amanda,EMBAJADOR DOUSSINAGUE #1767,,,Vitacura,15000,https://www.passline.com/eventos/stone-nation-lanzamiento-oficial-alchemy
+Passline,SOL Y LLUVIA 11/09,,2026-09-11,20:00:00,,BAR VICTORIA,Av. Carlos Valdovinos 1951,,,Pedro Aguirre Cerda,15000,https://www.passline.com/eventos/sol-y-lluvia-1109
+Passline,Veneno Espectaculo de Circo,,2026-09-11,20:00:00,,Aldea Encuentro,,,,,20000,https://www.passline.com/eventos/veneno-espectaculo-de-circo
+Passline,Alicia en el Circo de las Maravillas,,2026-09-11,19:30:00,,Carpa Extraordinario Circo,,,,,8000,https://www.passline.com/eventos/alicia-en-el-circo-de-las-maravillas-546210
+Passline,Circo Los Maluenda en Maipu,,2026-09-11,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549249
+Passline,Fiesta de la Comunidad Stade Français 🇨🇱,,2026-09-12,11:00:00,,Stade Français,Presidente errazuriz 2950 las condes,,,,5000,https://www.passline.com/eventos/fiesta-de-la-comunidad-stade-francais
+Passline,La gran SUBLIME city,,2026-09-11,22:00:00,,paseo san Damián,Av. Las Condes 11271,,,Las Condes,12000,https://www.passline.com/eventos/la-gran-sublime-city
+Passline,Homenaje a Silvio Rodriguez y Victor Jara en Ruta 78,,2026-09-11,20:30:00,,BAR RUTA 78,Independencia 043,,,Puente Alto,10000,https://www.passline.com/eventos/homenaje-a-silvio-rodriguez-y-victor-jara-en-ruta-78
+Passline,Yajaira / Burdo - MIBAR,,2026-09-11,21:00:00,,Mi Bar,Av. Sta. Isabel 0350,,,Providencia,10000,https://www.passline.com/eventos/yajaira-burdo-mibar
+Passline,Fiesta Nuestras Raices,,2026-09-12,11:30:00,,Club Médico,Av. La Dehesa 2245,,,Lo Barnechea,15000,https://www.passline.com/eventos/fiesta-nuestras-raices
+Passline,SOCIAL W ★ VIERNES 11 SEPTIEMBRE ★ Club Siete - Piso 4 Hotel W,,2026-09-11,22:00:00,,Club Siete,Isidora Goyenechea 3000,,,Las Condes,10000,https://www.passline.com/eventos/social-w-viernes-11-septiembre-club-siete-piso-4-hotel-w
+Passline,Dark Machine - Antichrist Superstar - 4 Pistas de baile,,2026-09-11,23:30:00,,Blondie,Alameda 2879,,,,8000,https://www.passline.com/eventos/dark-machine-antichrist-superstar-4-pistas-de-baile
+Passline,LIGA KING OF THE RING,,2026-09-12,12:00:00,,GIMNNASIO NUEVO BOX,GARCIA HUIDOBRO 712,,,,9000,https://www.passline.com/eventos/liga-king-of-the-ring
+Passline,FIESTAS PATRIAS DRIFT TUNNING - Tío Supra & Lions Graphic,,2026-09-12,12:00:00,,CUCA BUIN,PANAMERICANA SUR KM 28 SAN BERNARDO SALIDA LOS NARAJOS,,,,2000,https://www.passline.com/eventos/fiestas-patrias-drift-tunning-tio-supra-lions-graphic
+Passline,British Rock Night - RADIOHEAD - OASIS,,2026-09-12,17:00:00,,Espacio Rock and Roll,Avenida Vicula Mackenna Oriente 7320,,,,8000,https://www.passline.com/eventos/british-rock-night-radiohead-oasis
+Passline,Sonora Sunset V,,2026-09-12,14:00:00,,Taringuita Farellones,Av El Colorado 1284,,,,40000,https://www.passline.com/eventos/sonora-sunset-v
+Passline,Todavía y otra vez - Septiembre 2026,,2026-09-12,18:00:00,,Aldea Encuentro,Avenida alcalde Fernando Castillo Velasco #9750,,,,5000,https://www.passline.com/eventos/todavia-y-otra-vez-septiembre-2026
+Passline,Alicia en el Circo de las Maravillas,,2026-09-12,16:00:00,,Carpa Extraordinario Circo,,,,,8000,https://www.passline.com/eventos/alicia-en-el-circo-de-las-maravillas-546211
+Passline,Circo Los Maluenda en Maipu,,2026-09-12,17:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549273
+Passline,¡A Jugar y Apoyar! Gran Bingo Solidario a Beneficio Evelyn Contreras,,2026-09-12,18:00:00,,Centro Cultural Quinta Normal,Gonzalo Bulnes 2484,,,,2500,https://www.passline.com/eventos/a-jugar-y-apoyar-gran-bingo-solidario-a-beneficio-evelyn-contreras
+Passline,Disco Sour Machine & FOMO presentan Jigit,,2026-09-12,20:00:00,,Anfiteatro Pablo Neruda,,,,Providencia,35000,https://www.passline.com/eventos/disco-sour-machine-fomo-presentan-jigit
+Passline,HOMER EL MERO MERO - Resurreccion tour 2026 en Santiago,,2026-09-12,20:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,25000,https://www.passline.com/eventos/homer-el-mero-mero-resurreccion-tour-2026-en-santiago
+Passline,Kaya World Tour 2026 the world Chile,,2026-09-12,18:30:00,,Teatro Cousiño,San Ignacio de Loyola 1249,,,Santiago,35000,https://www.passline.com/eventos/kaya-world-tour-2026-the-world-chile
+Passline,DJ PELIGRO EN SANTIAGO DE CHILE,,2026-09-12,20:00:00,,Discoteca La Fama,Av. México 609,,,Recoleta,15000,https://www.passline.com/eventos/dj-peligro-en-santiago-de-chile
+Passline,The Legend / El Concierto,,2026-09-12,20:00:00,,Carpa Extraordinario Circo,,,,,15000,https://www.passline.com/eventos/the-legend-el-concierto-542698
+Passline,Veneno Espectaculo de Circo,,2026-09-12,20:00:00,,Aldea Encuentro,Avenida alcalde Fernando Castillo Velasco #9750,,,,20000,https://www.passline.com/eventos/veneno-espectaculo-de-circo-536649
+Passline,LEFT TO DIE,,2026-09-12,20:00:00,,Teatro Cariola,San Diego 246,,,Santiago,32000,https://www.passline.com/eventos/lef-to-die
+Passline,ABOMINABLE DR. GÜIÑA. En vivo,,2026-09-12,20:00:00,,Restaurant Cocina Clandestina,ANTONIA LOPEZ DE BELLO 0108,,,,6000,https://www.passline.com/eventos/abominable-dr-guina-en-vivo-545474
+Passline,CHULERIA PARTY: 4ta EDICIÓN,,2026-09-12,21:00:00,,AV MATTA 310,Av Matta 310,,,,3000,https://www.passline.com/eventos/chuleria-party-4ta-edicion
+Passline,DoblaJam level 152 - 12/09,,2026-09-12,20:00:00,,Level 152,Av. Ricardo Cumming 152,,,,14000,https://www.passline.com/eventos/doblajam-level-152-1209
+Passline,CRIATURA 11 x Andrés Salas,,2026-09-12,20:00:00,,Centro Coreográfico de Santiago,Huerfanos 1869,,,,8000,https://www.passline.com/eventos/criatura-11-x-andres-salas
+Passline,Alvaro Scaramelli Éxitos en vivo,,2026-09-12,21:00:00,,Peluquería Francesa,Compañía 2789,,,,15000,https://www.passline.com/eventos/alvaro-scaramelli-exitos-en-vivo
+Passline,PEARL JAM - ESPECIAL TEN & VERSUS / TRIBUTO PIEDRA NEGRA,,2026-09-12,21:00:00,,CLUB CHOCOLATE,ERNESTO PINTO LAGARRIGUE #192,,,,10000,https://www.passline.com/eventos/pearl-jam-especial-ten-versus-tributo-piedra-negra
+Passline,Sabbath Ritual 12,,2026-09-12,20:30:00,,Bar Oxido,Purisima 282,,,,5000,https://www.passline.com/eventos/sabbath-ritual-12
+Passline,Circo Los Maluenda en Maipu,,2026-09-12,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549251
+Passline,Rootz HiFi Full Soundsystem,,2026-09-12,22:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,10000,https://www.passline.com/eventos/rootz-hifi-full-soundsystem
+Passline,GRUPO RED EN VIVO en Coyotes Club Maipu !!!,,2026-09-12,22:30:00,,COYOTES CLUB,Av. Pajaritos 2680 Maipu,,,,10000,https://www.passline.com/eventos/grupo-red-en-vivo-en-coyotes-club-maipu
+Passline,Criminal Mambo: Pegotes + Pulso Gaiano + Miguelitos,,2026-09-12,22:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,7000,https://www.passline.com/eventos/criminal-mambo-pegotes-pulso-gaiano-miguelitos
+Passline,FUTURE NOISE,,2026-09-12,22:00:00,,El RITO,Antonia López de bello 80,,,,10000,https://www.passline.com/eventos/future-noise
+Passline,THE PROFIT EN KLUB KROSS,,2026-09-12,21:30:00,,Kross Bar,,,,Las Condes,8000,https://www.passline.com/eventos/the-profit-en-klub-kross
+Passline,SCHWENKE&NILO...SEPTIEMBRE POPULAR Y REFLEXIVO,,2026-09-12,21:30:00,,La chimenea,Príncipe de Gales 90,,,Santiago,12000,https://www.passline.com/eventos/schwenkeniloseptiembre-popular-y-reflexivo
+Passline,Fiesta Infinito Deluxe,,2026-09-12,22:00:00,,Ex restaurant Granja Educativa,Camino Las Parcelas #20,,,,5000,https://www.passline.com/eventos/fiesta-infinito-deluxe
+Passline,AFTER PIKNIC ELECTRONIK SANTIAGO EN CLUB AMANDA,,2026-09-12,22:00:00,,Club Amanda,Embajador Doussinague 1767,,,Vitacura,14000,https://www.passline.com/eventos/after-piknic-electronik-santiago-en-club-amanda
+Passline,🇨🇱 FONDA CANDELARIA 🇨🇱 || DOMINGO 13 SEPTIEMBRE,,2026-09-13,13:00:00,,Bosque Luz,Av. del Parque 420,,,Huechuraba,15000,https://www.passline.com/eventos/fonda-candelaria-domingo-13-septiembre
+Passline,SIN PRETENSION,,2026-09-12,23:00:00,2026-09-13,Casa Marika Escalera,,,,,5000,https://www.passline.com/eventos/sin-pretension-546059
+Passline,MISERERE ~KaputMundiTour~ YUCATÁN-MANO DE OBRA-HOLLOW HUMANITY,,2026-09-13,19:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,10000,https://www.passline.com/eventos/miserere-kaputmunditour-yucatanmano-de-obrahollow-humanity
+Passline,Todavía y otra vez - Septiembre 2026,,2026-09-13,18:00:00,,Aldea Encuentro,Avenida alcalde Fernando Castillo Velasco #9750,,,,5000,https://www.passline.com/eventos/todavia-y-otra-vez-septiembre-2026-544937
+Passline,Morning Glory - Brit Pop 30 años - 4 Pistas,,2026-09-12,23:30:00,,Blondie,Alameda 2879,,,,8000,https://www.passline.com/eventos/morning-glory-brit-pop-30-anos-4-pistas
+Passline,ERICK BRIAN EN CHILE,,2026-09-13,18:00:00,,Epicentro,Huérfanos 786,,,Santiago,30000,https://www.passline.com/eventos/erick-brian-en-chile
+Passline,Alicia en el Circo de las Maravillas,,2026-09-13,16:00:00,,Carpa Extraordinario Circo,,,,,8000,https://www.passline.com/eventos/alicia-en-el-circo-de-las-maravillas-546212
+Passline,Circo Los Maluenda en Maipu,,2026-09-13,17:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549274
+Passline,Blanco White - 14 Septiembre - La Puerta Amarilla (2da noche!),,2026-09-14,19:30:00,,Bar La Puerta Amarilla,Av. Alcalde Fernando Castillo Velasco 7150,,,La Reina,9000,https://www.passline.com/eventos/blanco-white-14-septiembre-la-puerta-amarilla-2da-noche
+Passline,La Pérgola de las Flores: Entre Flores y Tacones,,2026-09-13,20:00:00,,Cabaret Piraña Resto Bar,Bombero Núñez 365,,,Recoleta,12000,https://www.passline.com/eventos/la-pergola-de-las-flores-entre-flores-y-tacones-548563
+Passline,SAINT CATTIVERIA - LA J MIXTAPE,,2026-09-13,20:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,15000,https://www.passline.com/eventos/saint-cattiveria-la-j-mixtape
+Passline,Alicia en el Circo de las Maravillas,,2026-09-13,19:30:00,,Carpa Extraordinario Circo,,,,,8000,https://www.passline.com/eventos/alicia-en-el-circo-de-las-maravillas-546213
+Passline,Circo Los Maluenda en Maipu,,2026-09-14,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549253
+Passline,Circo Los Maluenda en Maipu,,2026-09-13,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549252
+Passline,Circo Los Maluenda en Maipu,,2026-09-15,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549254
+Passline,ONE PACT - 2026 World Tour,,2026-09-16,20:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,34783,https://www.passline.com/eventos/one-pact-2026-world-tour
+Passline,OK-JHONY + ACIDA en MiBar.,,2026-09-15,20:30:00,,Mi Bar,Av. Sta. Isabel 0350,,,Providencia,5000,https://www.passline.com/eventos/okjhony-acida-en-mibar
+Passline,Fondas Oficiales de Linderos : Los Parientes - JUEVES 17,,2026-09-17,12:00:00,,Club Deportivo Linderos,Camino La Cervera #00,,,,2500,https://www.passline.com/eventos/fondas-oficiales-de-linderos-los-parientes-jueves-17
+Passline,Fondas Oficiales de Linderos : Los Parientes - MIERCOLES 16,,2026-09-16,12:00:00,,Club Deportivo Linderos,Camino La Cervera #00,,,,2500,https://www.passline.com/eventos/fondas-oficiales-de-linderos-los-parientes-miercoles-16
+Passline,The Legend / El Concierto,,2026-09-16,20:00:00,,Carpa Extraordinario Circo,,,,,15000,https://www.passline.com/eventos/the-legend-el-concierto-542702
+Passline,GRUPO RED Y CUECAS EN VIVO,,2026-09-16,19:00:00,,BAR VICTORIA,Av. Carlos Valdovinos 1951,,,Pedro Aguirre Cerda,10000,https://www.passline.com/eventos/grupo-red-y-cuecas-en-vivo
+Passline,Niña Carolo en Centro Arte Alameda,,2026-09-16,19:00:00,,CENTRO ARTE ALAMEDA,Arturo Prat 33,,,Santiago,7000,https://www.passline.com/eventos/nina-carolo-en-centro-arte-alameda
+Passline,Circo Los Maluenda en Maipu,,2026-09-16,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549255
+Passline,PROMO 4 DIAS **GENERAL**,,2026-09-17,12:30:00,2026-09-20,COSTADO CLUB AÉREO MELEPÍLLA,,,,,39000,https://www.passline.com/eventos/promo-4-dias-general-538111
+Passline,Forever Underground Fucking Fest,,2026-09-17,20:00:00,,Bar Oxido,Purisima 282,,,,5000,https://www.passline.com/eventos/forever-underground-fucking-fest
+Passline,17 DE SEPTIEMBRE - Fiesta de la Chilenidad Melipilla,,2026-09-17,12:30:00,,COSTADO CLUB AÉREO MELIPILLA,,,,,5000,https://www.passline.com/eventos/17-de-septiembre-fiesta-de-la-chilenidad-melipilla
+Passline,The Legend / El Concierto,,2026-09-17,20:00:00,,Carpa Extraordinario Circo,,,,,15000,https://www.passline.com/eventos/the-legend-el-concierto-542699
+Passline,LOS OLIMPICOS DE HUANCAYO EN SANTIAGO DE CHILE,,2026-09-17,20:00:00,,Discoteca La Fama,Av. México 609,,,Recoleta,15000,https://www.passline.com/eventos/los-olimpicos-de-huancayo-en-santiago-de-chile
+Passline,CHAMAL - Cantos y danzas de Chile,,2026-09-17,19:00:00,,Centro Cultural Ceina,,,,,4000,https://www.passline.com/eventos/chamal-cantos-y-danzas-de-chile
+Passline,Alicia en el Circo de las Maravillas,,2026-09-17,16:00:00,,Carpa Extraordinario Circo,,,,,8000,https://www.passline.com/eventos/alicia-en-el-circo-de-las-maravillas-546220
+Passline,Circo Los Maluenda en Maipu,,2026-09-17,17:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549275
+Passline,LA MEDIA LUNA DE LESBOS,,2026-09-17,21:00:00,,AKBAR PLAZA ÑUÑOA,Av. Irarrázaval 3481,,,,7000,https://www.passline.com/eventos/la-media-luna-de-lesbos
+Passline,LOS CHAMULLENTOS Esencia de Parra.,,2026-09-17,21:00:00,,Peluquería Francesa,COMPAÑIA 2789,,,,13000,https://www.passline.com/eventos/los-chamullentos-esencia-de-parra
+Passline,"🇨🇱 Fonda la MONGA 🇨🇱 🦍, FULL BAILABLE 💃🕺🪩 / Jueves 17 de septiembre / Av vicuña mackenna #1895 📍",,2026-09-17,22:00:00,,Fiesta LA MONGA,Av vicuña mackenna #1895,,,,6000,https://www.passline.com/eventos/fonda-la-monga-full-bailable-jueves-17-de-septiembre-av-vicuna-mackenna-1895
+Passline,Fonda Ochentera Tributo Los Prisioneros y Soda Stereo en Ruta 78,,2026-09-17,21:30:00,,BAR RUTA 78,Independencia 043,,,Puente Alto,10000,https://www.passline.com/eventos/fonda-ochentera-tributo-los-prisioneros-y-soda-stereo-en-ruta-78
+Passline,🇨🇱 CentroFonda | Jueves 17 Septiembre | La Primera Patita 🇨🇱,,2026-09-17,22:00:00,,Centro parque,Pdte. Riesco 5330,,,Las Condes,8000,https://www.passline.com/eventos/centrofonda-jueves-17-septiembre-centro-parque
+Passline,LOS MIRLOS EN VIVO!,,2026-09-17,21:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,20000,https://www.passline.com/eventos/los-mirlos-en-vivo-545408
+Passline,LOS PIBES CHOROS Y CUECAS CON LOS DEL VICTORIA,,2026-09-17,20:00:00,,BAR VICTORIA,Av. Carlos Valdovinos 1951,,,Pedro Aguirre Cerda,15000,https://www.passline.com/eventos/los-pibes-choros-y-cuecas-con-los-del-victoria
+Passline,Circo Los Maluenda en Maipu,,2026-09-17,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549256
+Passline,🇨🇱 FONDA TÍO VORTEX 2026 🇨🇱 17 Septiembre,,2026-09-17,23:55:00,2026-09-18,Munich Malloco,Av. Balmaceda 2933,,,Peñaflor,12000,https://www.passline.com/eventos/fonda-tio-vortex-2026-17-septiembre
+Passline,"FIESTAS PATRIAS LETS DANCE || TERRAZA ARRAYÁN || 17, 18 & 19 SEPTIEMBRE",,2026-09-17,22:30:00,2026-09-19,Terraza Arrayan,Av. Las Condes 14950,,,Lo Barnechea,10000,https://www.passline.com/eventos/fiestas-patrias-lets-dance-terraza-arrayan-17-18-19-septiembre
+Passline,JOHN DIGWEED - LA FERIA CLUB,,2026-09-17,23:00:00,,La Feria,Constitución 275,,,Providencia,45000,https://www.passline.com/eventos/john-digweed-la-feria-club
+Passline,Florida Bier Fest - 18 Septiembre,,2026-09-18,12:00:00,,Estadio Estrella Manuel Rodriguez,Calle Jose Miguel Carrera #865,,,,10000,https://www.passline.com/eventos/florida-bier-fest-18-septiembre
+Passline,🇨🇱 CentroFonda | Pase 2 Días (17 y 18 Septiembre) | Centro Parque 🇨🇱,,2026-09-17,22:00:00,2026-09-19,Centro parque,Pdte. Riesco 5330,,,Las Condes,15000,https://www.passline.com/eventos/centrofonda-pase-2-dias-17-y-18-septiembre-centro-parque
+Passline,"WHIP ME - Jueves 17 Septiembre, Spot Freedom.",,2026-09-17,23:30:00,2026-09-18,Spot Freedom,Av. Recoleta 345,,,Recoleta,8000,https://www.passline.com/eventos/whip-me-jueves-17-septiembre-spot-freedom
+Passline,Adrelatina - Organización X - Aniversario Blondie,,2026-09-17,23:30:00,,Blondie,Alameda 2879,,,,10000,https://www.passline.com/eventos/adrelatina-organizacion-x-aniversario-blondie
+Passline,La Fonda de Fiebre ! Viernes 18 de Septiembre,,2026-09-18,12:00:00,,Parque la Araucana,Avenida Walker Martinez 2295,,,,7000,https://www.passline.com/eventos/la-fonda-de-fiebre-viernes-18-de-septiembre
+Passline,SINTETICO LA FONDA INDUSTRIAL,,2026-09-18,15:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,5000,https://www.passline.com/eventos/sintetico-la-fonda-industrial
+Passline,​🏳️‍🌈​ Gay Fonda 🇨🇱 Bosque Luz📍18.09,,2026-09-18,16:00:00,,Bosque Luz,Av. del Parque 420,,,Huechuraba,13000,https://www.passline.com/eventos/lagayfonda
+Passline,Gran Fonda Las Vizcachas 2026,,2026-09-18,13:00:00,2026-09-19,Las Vizcachas,Club de Campo Las Vizcachas - Av. San José de Maipo 05669,,,Puente Alto,10000,https://www.passline.com/eventos/gran-fonda-las-vizcachas-2026
+Passline,Abonos 3 días Fonda de Fiebre,,2026-09-18,12:00:00,2026-09-20,Parque la Araucana,Avenida Walker Matinez 2295,,,,48000,https://www.passline.com/eventos/abonos-3-dias-fonda-de-fiebre
+Passline,18 SEPTIEMBRE - Fiesta de la Chilenidad Melipilla,,2026-09-18,12:30:00,,COSTADO CLUB AÉREO MELEPÍLLA,,,,,5000,https://www.passline.com/eventos/18-septiembre-fiesta-de-la-chilenidad-melipilla-538106
+Passline,MEDIEVAL PARTY FIESTAS PATRIAS 2026 - FACTORIA FRANKLIN,,2026-09-18,12:00:00,2026-09-20,Factoria Franklin,,,,Santiago,5000,https://www.passline.com/eventos/medieval-party-fiestas-patrias-2026-factoria-franklin
+Passline,Alicia en el Circo de las Maravillas,,2026-09-18,16:00:00,,Carpa Extraordinario Circo,,,,,8000,https://www.passline.com/eventos/alicia-en-el-circo-de-las-maravillas-546221
+Passline,"🇨🇱 Fonda la MONGA 🇨🇱 🦍, FULL BAILABLE 💃🕺🪩 / Viernes 18 de septiembre / Av vicuña mackenna #1895 📍",,2026-09-18,22:00:00,,Fiesta LA MONGA,Av vicuña mackenna #1895,,,,6000,https://www.passline.com/eventos/fonda-la-monga-full-bailable-viernes-18-de-septiembre-av-vicuna-mackenna-1895
+Passline,GRAN FONDA DEL CHANCHO CON CHALECO - DÍA 1 🐷🇨🇱,,2026-09-18,21:00:00,,EL CHANCHO CON CHALECO,AVENIDA PAJARITOS 99,,,,8000,https://www.passline.com/eventos/gran-fonda-del-chancho-con-chaleco
+Passline,Fiesta Acampao 18 de Septiembre,,2026-09-18,20:30:00,,Ex Restaurant Granja Educativa,Camino Las Parcelas #20,,,,5000,https://www.passline.com/eventos/fiesta-acampao-18-de-septiembre
+Passline,LOS CHUMBEKES Y LOS TRICOLORES,,2026-09-18,20:00:00,,BAR VICTORIA,Av. Carlos Valdovinos 1951,,,Pedro Aguirre Cerda,15000,https://www.passline.com/eventos/los-chumbekes-y-los-tricolores
+Passline,ARMONIA 10 EN SANTIAGO DE CHILEE,,2026-09-18,20:00:00,,Discoteca La Fama,Av. México 609,,,Recoleta,20000,https://www.passline.com/eventos/armonia-10-en-santiago-de-chilee
+Passline,The Legend / El Concierto,,2026-09-18,20:00:00,,Carpa Extraordinario Circo,,,,,15000,https://www.passline.com/eventos/the-legend-el-concierto-542700
+Passline,Circo Los Maluenda en Maipu,,2026-09-18,17:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549276
+Passline,Circo Los Maluenda en Maipu,,2026-09-18,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549257
+Passline,KOFFE EL KAFETERO EN VIVO | FIESTAS PATRIAS 2026 |,,2026-09-19,08:00:00,,Discoteca WAO 2.0,Pío Nono 270,,,,15000,https://www.passline.com/eventos/koffe-el-kafetero-en-vivo-fiestas-patrias-2026
+Passline,Sonora,,2026-09-19,15:00:00,,Taringuita Farellones,Av El Colorado 1284,,,,40000,https://www.passline.com/eventos/sonora-547096
+Passline,19 SEPTIEMBRE - Fiesta de la Chilenidad Melipilla,,2026-09-19,12:30:00,,COSTADO CLUB AÉREO MELEPÍLLA,,,,,5000,https://www.passline.com/eventos/19-septiembre-fiesta-de-la-chilenidad-melipilla-538108
+Passline,Florida Bier Fest - 19 Septiembre,,2026-09-19,12:00:00,,Estadio Estrella Manuel Rodriguez,Calle Jose Miguel Carrera #865,,,,10000,https://www.passline.com/eventos/florida-bier-fest-19-septiembre
+Passline,🇨🇱 FONDA TÍO VORTEX 2026 🇨🇱 18 Septiembre,,2026-09-18,23:30:00,2026-09-19,Munich Malloco,Av. Balmaceda 2933,,,Peñaflor,12000,https://www.passline.com/eventos/fonda-tio-vortex-2026-18-septiembre
+Passline,🇨🇱 #NomeTikiti | Centro Fonda | Viernes 18 Septiembre | Centro Parque 🇨🇱,,2026-09-18,22:00:00,2026-09-19,Centro parque,Pdte. Riesco 5330,,,Las Condes,8000,https://www.passline.com/eventos/nometikiti-pre-fonda-universitaria-centro-parque-viernes-18septiembre
+Passline,La Fonda de Fiebre ! Sabado 19 de Septiembre,,2026-09-19,12:00:00,,Parque la Araucana,Avenida Walker Martinez 2295,,,,7000,https://www.passline.com/eventos/la-fonda-de-fiebre-sabado-19-de-septiembre
+Passline,Alicia en el Circo de las Maravillas,,2026-09-19,16:00:00,,Carpa Extraordinario Circo,,,,,8000,https://www.passline.com/eventos/alicia-en-el-circo-de-las-maravillas-546222
+Passline,GRAN FONDA DEL CHANCHO CON CHALECO- DÍA 2 🐷🇨🇱,,2026-09-19,21:00:00,,EL CHANCHO CON CHALECO,AVENIDA PAJARITOS 99,,,,8000,https://www.passline.com/eventos/gran-fonda-del-chancho-con-chaleco-dia-2
+Passline,Fiesta Acampao 19 de Septiembre,,2026-09-19,20:30:00,,Ex Restaurant Granja Educativa,Camino Las Parcelas #20,,,,5000,https://www.passline.com/eventos/fiesta-acampao-19-de-septiembre
+Passline,ASSPERA EN CHILE,,2026-09-19,20:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,22000,https://www.passline.com/eventos/asspera-en-chile
+Passline,"LA SONORA BARÓN, LA SONORA DEL VITOKO Y CUECAS EN VIVO",,2026-09-19,20:00:00,,BAR VICTORIA,Av. Carlos Valdovinos 1951,,,Pedro Aguirre Cerda,15000,https://www.passline.com/eventos/la-sonora-baron-la-sonora-del-vitoko-y-cuecas-en-vivo
+Passline,CENTELLA Y SAICO EN SANTIAGO DE CHILE,,2026-09-19,20:00:00,2026-09-20,Discoteca La Fama,Av. México 609,,,Recoleta,15000,https://www.passline.com/eventos/centella-y-saico-en-santiago-de-chile
+Passline,The Legend / El Concierto,,2026-09-19,20:00:00,,Carpa Extraordinario Circo,,,,,15000,https://www.passline.com/eventos/the-legend-el-concierto-542701
+Passline,Circo Los Maluenda en Maipu,,2026-09-19,17:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549277
+Passline,Circo Los Maluenda en Maipu,,2026-09-19,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549258
+Passline,Black Market 5ta Edición Antifonda Emo,,2026-09-20,13:00:00,,Sala Tessier,Dardignac 172,,,,4000,https://www.passline.com/eventos/black-market-5ta-edicion-antifonda-emo
+Passline,20 SEPTIEMBRE - Fiesta de la Chilenidad Melipilla,,2026-09-20,12:30:00,,COSTADO CLUB AÉREO MELEPÍLLA,,,,,12000,https://www.passline.com/eventos/20-septiembre-fiesta-de-la-chilenidad-melipilla-538109
+Passline,La Fonda de Fiebre ! Domingo 20 de Septiembre,,2026-09-20,12:00:00,,Parque la Araucana,Avenida Walker Martinez 2295,,,,7000,https://www.passline.com/eventos/la-fonda-de-fiebre-domingo-20-de-septiembre
+Passline,"KPOPTOUCH Tiki Tiki Tii - Sábado 19 Sept, Sala Pandora.",,2026-09-19,23:30:00,,SALA PANDORA,Pio Nono 286,,,,6000,https://www.passline.com/eventos/kpoptouch-tiki-tiki-tii-sabado-19-sept-sala-pandora
+Passline,Alicia en el Circo de las Maravillas,,2026-09-20,16:00:00,,Carpa Extraordinario Circo,,,,,8000,https://www.passline.com/eventos/alicia-en-el-circo-de-las-maravillas-546214
+Passline,Alicia en el Circo de las Maravillas,,2026-09-20,19:30:00,,Carpa Extraordinario Circo,,,,,8000,https://www.passline.com/eventos/alicia-en-el-circo-de-las-maravillas-546215
+Passline,Circo Los Maluenda en Maipu,,2026-09-20,17:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549278
+Passline,Circo Los Maluenda en Maipu,,2026-09-20,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549259
+Passline,Los Viajes de Carloto | Cena Maridaje junto a Viña Invina,,2026-09-23,20:00:00,,Carloto,Av. Italia 1402,,,Providencia,59000,https://www.passline.com/eventos/los-viajes-de-carloto-cena-maridaje-junto-a-vina-invina-547275
+Passline,Too Hot Show Santiago,,2026-09-22,19:00:00,,Cousino Park Theater,San Ignacio de Loyola 1249,,,Santiago,9000,https://www.passline.com/eventos/too-hot-show-santiago
+Passline,Old Mans Child,,2026-09-22,20:00:00,,Teatro Cariola,San Diego 246,,,Santiago,45000,https://www.passline.com/eventos/old-mans-child
+Passline,Alicia en el Circo de las Maravillas,,2026-09-24,19:30:00,,Carpa Extraordinario Circo,,,,,8000,https://www.passline.com/eventos/alicia-en-el-circo-de-las-maravillas-546224
+Passline,Alicia en el Circo de las Maravillas,,2026-09-23,19:30:00,,Carpa Extraordinario Circo,,,,,8000,https://www.passline.com/eventos/alicia-en-el-circo-de-las-maravillas-546223
+Passline,Circo Los Maluenda en Maipu,,2026-09-23,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549262
+Passline,Circo Los Maluenda en Maipu,,2026-09-22,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549261
+Passline,Circo Los Maluenda en Maipu,,2026-09-21,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549260
+Passline,GRUNGE NIGHT | TRIBUTO NIRVANA (LITHIUM) TRIBUTO ALICE IN CHAINS (THE FREAK),,2026-09-25,20:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,8000,https://www.passline.com/eventos/grunge-night-tributo-nirvana-lithium-tributo-alice-in-chains-the-freak
+Passline,IRON SCALPEL EN SALA RBX,,2026-09-24,21:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,2000,https://www.passline.com/eventos/iron-scalpel-en-sala-rbx
+Passline,VIVE Y DEJA REÍR,,2026-09-25,20:00:00,,Happy People Teatro Restaurant,Rancagua 395,,,,5000,https://www.passline.com/eventos/vive-y-deja-vivir
+Passline,SOFÍA ALVEZ presenta VENTILARÉ AÑOS,,2026-09-25,20:00:00,,Epicentro,Huérfanos 786,,,Santiago,25000,https://www.passline.com/eventos/sofia-alvez-presenta-ventilare-anos
+Passline,Puras Cosas Maravillosas en Chile - Septiembre 2026,,2026-09-24,20:00:00,,Teatro Mori Parque Arauco,,,,,35000,https://www.passline.com/eventos/puras-cosas-maravillosas-en-chile-septiembre-2026
+Passline,Puras Cosas Maravillosas en Chile - Septiembre 2026,,2026-09-25,20:00:00,,Teatro Mori Parque Arauco,,,,,35000,https://www.passline.com/eventos/puras-cosas-maravillosas-en-chile-septiembre-2026-524416
+Passline,Alicia en el Circo de las Maravillas,,2026-09-25,19:30:00,,Carpa Extraordinario Circo,,,,,8000,https://www.passline.com/eventos/alicia-en-el-circo-de-las-maravillas-546225
+Passline,Circo Los Maluenda en Maipu,,2026-09-24,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549263
+Passline,BARDOT & LA TM °°° Viernes 25 Septiembre,,2026-09-25,22:00:00,,BARDOT,Costanera Sur 2730,,,Las Condes,25000,https://www.passline.com/eventos/bardot-la-tm-viernes-25-septiembre
+Passline,Evento solidario de la CVTO,,2026-09-25,22:00:00,,Bar Raíces,Cueto 816,,,,6000,https://www.passline.com/eventos/evento-solidario-de-la-cvto
+Passline,Seven deadly sins Tributo Iron Maiden,,2026-09-25,20:00:00,,Bar oxido,Purisima 282,,,,6500,https://www.passline.com/eventos/seven-deadly-sins-tributo-iron-maiden
+Passline,Previa Run For Your Lives World Tour 2026,,2026-09-25,21:00:00,2026-09-26,Bar La Puerta Amarilla,Av. Alcalde Fernando Castillo Velasco 7150,,,La Reina,3000,https://www.passline.com/eventos/previa-run-for-your-lives-world-tour-2026
+Passline,SOCIAL W ★ VIERNES 25 SEPTIEMBRE ★ Club Siete - Piso 4 Hotel W,,2026-09-25,22:00:00,,Club Siete,Isidora Goyenechea 3000,,,Las Condes,10000,https://www.passline.com/eventos/social-w-viernes-25-septiembre-club-siete-piso-4-hotel-w
+Passline,CLASES DE COCTELERÍA + FIESTA ★ VIERNES 25 SEPTIEMBRE ★ Club Siete - Piso 4 Hotel W,,2026-09-25,20:00:00,,Club Siete,Isidora Goyenechea 3000,,,Las Condes,35000,https://www.passline.com/eventos/clases-de-cocteleria-fiesta-viernes-25-septiembre-club-siete-piso-4-hotel-w
+Passline,EL PLAN DE LA MARIPOSA EN VIVO,,2026-09-25,21:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,25000,https://www.passline.com/eventos/el-plan-de-la-mariposa-en-vivo
+Passline,Circo Los Maluenda en Maipu,,2026-09-25,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549264
+Passline,Cafe con Fe CSV 2026,,2026-09-26,17:00:00,,Gimnasio del Colegio San Viator de Macul,Froilán Roa 5755,,,Macul,1000,https://www.passline.com/eventos/cafe-con-fe-csv-2026
+Passline,Samurai Fight House 31: Vergara vs. Salvador,,2026-09-26,18:30:00,,Gimnasio Liceo José Toribio Medina,Avenida Irarrázaval 1897,,,,25000,https://www.passline.com/eventos/samurai-fight-house-chile
+Passline,Sonora,,2026-09-26,15:00:00,,Taringuita Farellones,Av El Colorado 1284,,,,40000,https://www.passline.com/eventos/sonora-547099
+Passline,Puras Cosas Maravillosas en Chile - Septiembre 2026,,2026-09-26,16:00:00,,Teatro Mori Parque Arauco,,,,,35000,https://www.passline.com/eventos/puras-cosas-maravillosas-en-chile-septiembre-2026-524417
+Passline,Alicia en el Circo de las Maravillas,,2026-09-26,16:00:00,,Carpa Extraordinario Circo,,,,,8000,https://www.passline.com/eventos/alicia-en-el-circo-de-las-maravillas-546216
+Passline,Alicia en el Circo de las Maravillas,,2026-09-26,19:30:00,,Carpa Extraordinario Circo,,,,,8000,https://www.passline.com/eventos/alicia-en-el-circo-de-las-maravillas-546217
+Passline,Circo Los Maluenda en Maipu,,2026-09-26,17:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549279
+Passline,ROCK AL FALLO,,2026-09-26,20:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,7000,https://www.passline.com/eventos/rock-al-fallo
+Passline,Panteon del Rock,,2026-09-26,20:30:00,,Bar Oxido,Purisima 282,,,,5000,https://www.passline.com/eventos/panteon-del-rock
+Passline,Onda Vaga en Chile,,2026-09-26,20:00:00,,Epicentro,Huérfanos 786,,,Santiago,25500,https://www.passline.com/eventos/onda-vaga-en-chile
+Passline,GONZÁLO SCHAFER CANOBRA - LA SEÑAL,,2026-09-26,21:00:00,,CLUB AMANDA,EMBAJADOR DOUSSINAGUE #1767,,,,10000,https://www.passline.com/eventos/gonzalo-schafer-canobra-la-senal
+Passline,LOS CAMPESINOS DE BAMBAMARCA EN SANTIAGO DE CHILEE,,2026-09-26,20:00:00,2026-09-27,Discoteca La Fama,Av. México 609,,,Recoleta,10000,https://www.passline.com/eventos/los-campesinos-de-bambamarca-en-santiago-de-chilee
+Passline,Puras Cosas Maravillosas en Chile - Septiembre 2026,,2026-09-26,20:00:00,,Teatro Mori Parque Arauco,,,,,35000,https://www.passline.com/eventos/puras-cosas-maravillosas-en-chile-septiembre-2026-524418
+Passline,Circo Los Maluenda en Maipu,,2026-09-26,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549265
+Passline,Cómo emprender y no morir en el intento septiembre,,2026-09-27,04:00:00,,Calabria Restobar,Constitución 61,,,,6990,https://www.passline.com/eventos/como-emprender-y-no-morir-en-el-intento-septiembre
+Passline,5-STAR DOME TOUR + BIRTHDAY VIRGO LINE,,2026-09-27,12:00:00,,TEATRO COUSIÑO,San Ignacio de Loyola 1249,,,,5500,https://www.passline.com/eventos/5star-dome-tour-birthday-virgo-line
+Passline,RACSOULRAS & REGGAE ROCKERS - TRIBUTO OFICIAL BOB MARLEY CHILE,,2026-09-26,21:00:00,,CLUB CHOCOLATE,ERNESTO PINTO LAGARRIGUE #192,,,,8000,https://www.passline.com/eventos/racsoulras-reggae-rockers-tributo-oficial-bob-marley-chile
+Passline,WITCH PERFECT,,2026-09-27,19:00:00,,Centro Cultural Ceina,,,,,20000,https://www.passline.com/eventos/witch-perfect
+Passline,Alicia en el Circo de las Maravillas,,2026-09-27,19:30:00,,Carpa Extraordinario Circo,,,,,8000,https://www.passline.com/eventos/alicia-en-el-circo-de-las-maravillas-546219
+Passline,Alicia en el Circo de las Maravillas,,2026-09-27,16:00:00,,Carpa Extraordinario Circo,,,,,8000,https://www.passline.com/eventos/alicia-en-el-circo-de-las-maravillas-546218
+Passline,Circo Los Maluenda en Maipu,,2026-09-27,17:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549280
+Passline,Circo Los Maluenda en Maipu,,2026-09-27,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549269
+Passline,INSPECTOR EN CHILE,,2026-09-30,21:00:00,,Club Chocolate,Ernesto Pinto Lagarrigue 192,,,,35000,https://www.passline.com/eventos/inspector-en-chile
+Passline,Sumatiz en Krossbar Laguna Mall Sport,,2026-09-29,20:00:00,,Kross Bar,,,,Las Condes,5000,https://www.passline.com/eventos/sumatiz-en-krossbar-laguna-mall-sport
+Passline,La Elvira con Hogar de Cristo,,2026-09-30,19:30:00,,Teatro Mori Parque Arauco,,,,,12000,https://www.passline.com/eventos/la-elvira-con-hogar-de-cristo
+Passline,TESTEЯ - Tu sonido no es una canción,,2026-09-30,19:00:00,,Centro Cultural Ceina,Arturo Prat 33 - Santiago Centro,,,,15000,https://www.passline.com/eventos/tester-tusonidonoesunacancion
+Passline,Pickua en Centro Arte Alameda,,2026-09-30,20:00:00,,CENTRO ARTE ALAMEDA,Arturo Prat 33,,,Santiago,5000,https://www.passline.com/eventos/pickua-en-centro-arte-alameda
+Passline,Circo Los Maluenda en Maipu,,2026-09-29,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549267
+Passline,Circo Los Maluenda en Maipu,,2026-09-28,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549266
+Passline,Circo Los Maluenda en Maipu,,2026-09-30,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549268
+Passline,XIV Congreso de Imagenología Veterinaria SOCHIRAV,,2026-10-01,08:30:00,2026-10-02,Hotel Fundador,Serrano 34,,,,96000,https://www.passline.com/eventos/xiv-congreso-de-imagenologia-veterinaria-sochirav
+Passline,YKATO: HORROR FREEK | SANTIAGO DE CHILE,,2026-10-02,19:00:00,,Sala CreaRock,Av. Carmen 973,,,,14000,https://www.passline.com/eventos/ykato-horror-freek-santiago-de-chile
+Passline,High Vis en Chile,,2026-10-01,19:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,38000,https://www.passline.com/eventos/high-vis-en-chile
+Passline,TESTEЯ - Tu sonido no es una canción - 19H,,2026-10-01,19:00:00,,Centro Cultural Ceina,Arturo Prat 33 - Santiago Centro,,,,15000,https://www.passline.com/eventos/tester-carlos-casella-533263
+Passline,TESTEЯ - Tu sonido no es una canción - 21H,,2026-10-01,21:00:00,,Centro Cultural Ceina,Arturo Prat 33 - Santiago Centro,,,,15000,https://www.passline.com/eventos/tester-carlos-casella-533264
+Passline,Tirando Flechas con Luis Chataing | Santiago de Chile,,2026-10-01,19:00:00,,Palermo Teatro Bar,José Manuel Infante 1414,,,,22000,https://www.passline.com/eventos/tirando-flechas
+Passline,Encuentro con el Buda / Centro Arte Alameda,,2026-10-01,18:30:00,,CENTRO ARTE ALAMEDA,Arturo Prat 33,,,Santiago,2500,https://www.passline.com/eventos/encuentro-con-el-buda-centro-arte-alameda
+Passline,Circo Los Maluenda en Maipu,,2026-10-01,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549284
+Passline,ANIVERSARIO N°1 DEL PRIMER EP DE NUESTRO SILENCIO,,2026-10-02,19:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,6000,https://www.passline.com/eventos/aniversario-n1-del-primer-ep-de-nuestro-silencio
+Passline,Puto y Orquesta,,2026-10-02,20:00:00,,Centro Cultural Ceina,Arturo Prat 33 - Santiago Centro,,,,15000,https://www.passline.com/eventos/puto-y-orquesta
+Passline,LOS REBELDES DE LA CUMBIA EN SANTIAGO DE CHILE,,2026-10-02,20:00:00,2026-10-04,Discoteca La Fama,Av. México 609,,,Recoleta,12000,https://www.passline.com/eventos/los-rebeldes-de-la-cumbia-en-santiago-de-chile
+Passline,METALLICA • TRIBUTO DRINK INC.,,2026-10-02,20:00:00,,CLUB AMANDA,EMBAJADOR DOUSSINAGUE #1767,,,,10000,https://www.passline.com/eventos/metallica-tributo-drink-inc-531596
+Passline,OBRA: ENCUENTROS BREVES CON HOMBRES REPULSIVOS - EN PAINE,,2026-10-02,20:00:00,,TEATRO MUNICIPAL DE PAINE,,,,,8000,https://www.passline.com/eventos/obra-encuentros-breves-con-hombres-repulsivos-en-panie
+Passline,Circo Los Maluenda en Maipu,,2026-10-02,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549285
+Passline,Festival El Jardín de la Diosa,,2026-10-03,10:00:00,,El Manzano,,,,,29000,https://www.passline.com/eventos/festival-el-jardin-de-la-diosa
+Passline,"Mercedes Cañas en concierto, Santiago de Chile, Ganas de volar Tour 2026",,2026-10-02,21:00:00,,Club Chocolate,Ernesto Pinto Lagarrigue 192,,,,28000,https://www.passline.com/eventos/mercedes-canas-en-concierto-santiago-de-chile-ganas-de-volar-tour-2026
+Passline,CARRERA MOUNTAIN BIKE UC BY CMPC,,2026-10-03,09:00:00,,Club Deportivo Universidad Católica,Camino las flores 13.000,,,,10000,https://www.passline.com/eventos/carrera-mountain-bike-uc-by-cmpc-461324
+Passline,HARDER INTERNACIONAL,,2026-10-02,22:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,15000,https://www.passline.com/eventos/harder-internacional
+Passline,ALBERT PLA AND THE SURPRISE BAND,,2026-10-02,21:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,30000,https://www.passline.com/eventos/albert-pla-and-the-surprise-band
+Passline,RITMOSORDXS 03.10.26,,2026-10-03,20:00:00,,Evento privado,,,,Providencia,10000,https://www.passline.com/eventos/ritmosordxs-031026
+Passline,Santiago Gothic Treffen 2026 - DIA 1 - HOCICO,,2026-10-03,20:00:00,,Teatro Roma,San Diego 236,,,Santiago,25000,https://www.passline.com/eventos/santiago-gothic-treffen-2026-dia-1-hocico
+Passline,FIESTA FAMILIAR DE LA HISPANIDAD,,2026-10-03,13:30:00,,Bosque Luz,Av. del Parque 420,,,Huechuraba,6000,https://www.passline.com/eventos/fiesta-familiar-de-la-hispanidad
+Passline,OCTUBRE - MEDIEVAL PARTY & VELADAA - PALACIO ASTORECA,,2026-10-03,12:00:00,,PALACIO ASTORECA,Dieciocho #121,,,,5000,https://www.passline.com/eventos/octubre-medieval-party-veladaa-palacio-astoreca
+Passline,Circo Los Maluenda en Maipu,,2026-10-03,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549286
+Passline,Circo Los Maluenda en Maipu,,2026-10-03,17:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549295
+Passline,DE LO PRADO PAL MUNDO LIVE SESSION,,2026-10-04,16:00:00,,Teatro Cousiño,San Ignacio de Loyola 1249,,,,3000,https://www.passline.com/eventos/de-lo-prado-pal-mundo-live-session
+Passline,ELPINTOR tributo a INTERPOL en Good Luck Santiago Centro,,2026-10-03,22:00:00,,Good Luck,Lira 401,,,,5000,https://www.passline.com/eventos/elpintor-tributo-a-interpol-en-good-luck-santiago-centro
+Passline,CAMINO AL NACIONAL PREVIA OFICIAL IRON MAIDEN CHILE 2026,,2026-10-04,14:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,10000,https://www.passline.com/eventos/camino-al-nacional-previa-oficial-iron-maiden-chile-2026
+Passline,Bandalos Chinos: Vandalos,,2026-10-04,21:00:00,,Blondie,Avda Liber Bernardo O`Higgins 2879,,,Santiago,38000,https://www.passline.com/eventos/bandalos-chinos-vandalos-513689
+Passline,No Fun At All + Authority Zero en Chile,,2026-10-06,19:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,32000,https://www.passline.com/eventos/no-fun-at-all-authority-zero-en-chile
+Passline,Circo Los Maluenda en Maipu,,2026-10-05,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549288
+Passline,Circo Los Maluenda en Maipu,,2026-10-04,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549287
+Passline,Circo Los Maluenda en Maipu,,2026-10-04,17:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549296
+Passline,Classic Rock en Vivo,,2026-10-07,20:00:00,,Kross Bar,,,,Las Condes,7000,https://www.passline.com/eventos/classic-rock-en-vivo-545044
+Passline,Volare - Experiencia gastronómica,,2026-10-08,19:00:00,,Centro parque,Pdte. Riesco 5330,,,Las Condes,79990,https://www.passline.com/eventos/volare-experiencia-gastronomica-545116
+Passline,TIGERS JAW EN CHILE,,2026-10-07,19:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,38000,https://www.passline.com/eventos/tigers-jaw-en-chile-512020
+Passline,H-SUR A TRIBUTE TO RUSH: LIMELIGHT,,2026-10-08,20:00:00,,CLUB AMANDA,EMBAJADOR DOUSSINAGUE #1767,,,,22000,https://www.passline.com/eventos/hsur-a-tribute-to-rush-limelight
+Passline,Sepultura en el Instituto Nacional: Labor Omnia Vincit,,2026-10-07,19:00:00,,CENTRO ARTE ALAMEDA,Arturo Prat 33,,,Santiago,3000,https://www.passline.com/eventos/sepultura-en-el-instituto-nacional-labor-omnia-vincit
+Passline,Grave en Chile,,2026-10-06,20:00:00,,Teatro Cariola,San Diego 246,,,Santiago,35000,https://www.passline.com/eventos/grave-en-chile
+Passline,Circo Los Maluenda en Maipu,,2026-10-06,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549289
+Passline,Circo Los Maluenda en Maipu,,2026-10-07,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549290
+Passline,The Alan Freeds,,2026-10-10,20:00:00,,Salas tempo,Duble almeyda 2420,,,,6000,https://www.passline.com/eventos/the-alan-freeds
+Passline,Cemetery Market II,,2026-10-10,12:30:00,,Casa Palacio,Av Libertador Bernardo O’higgins 2133,,,,2500,https://www.passline.com/eventos/cemetery-market-ii
+Passline,DREGEN EN CHILE / RBX,,2026-10-08,20:30:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,20000,https://www.passline.com/eventos/dregen-en-chile-rbx
+Passline,Chapterhouse por primera vez en Chile,,2026-10-09,20:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,35000,https://www.passline.com/eventos/chapterhouse-por-primera-vez-en-chile
+Passline,CODA - One night stand,,2026-10-10,20:00:00,,Teatro Cariola,San Diego 246,,,Santiago,49000,https://www.passline.com/eventos/coda-one-night-stand
+Passline,Circo Los Maluenda en Maipu,,2026-10-08,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549291
+Passline,Circo Los Maluenda en Maipu,,2026-10-09,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549292
+Passline,Circo Los Maluenda en Maipu,,2026-10-10,17:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549297
+Passline,The Live Jam,,2026-10-11,14:30:00,,Teatro Parque Cousiño,San Ignacio de Loyola 1249,,,,8000,https://www.passline.com/eventos/the-live-jam
+Passline,Delirancia de Vino y Tarot,,2026-10-11,19:00:00,,Teatro Mori Bellavista,Constitución 183,,,Providencia,24000,https://www.passline.com/eventos/delirancia-de-vino-y-tarot
+Passline,A Flock of Seagulls en vivo.,,2026-10-10,21:00:00,,Blondie,Avda Liber Bernardo O`Higgins 2879,,,Santiago,32000,https://www.passline.com/eventos/a-flock-of-seagulls-en-vivo-530174
+Passline,LOS HERMANOS SANCHEZ EN SANTIAGO DE CHILE,,2026-10-11,19:00:00,,Discoteca La Fama,Av. México 609,,,Recoleta,12000,https://www.passline.com/eventos/los-hermanos-sanchez-en-santiago-de-chile
+Passline,SUPER BRILLANTES DEL ANDE EN SANTIAGO DE CHILE,,2026-10-10,20:00:00,,Discoteca La Fama,Av. México 609,,,Recoleta,15000,https://www.passline.com/eventos/super-brillantes-del-ande-en-santiago-de-chile
+Passline,Circo Los Maluenda en Maipu,,2026-10-11,17:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549298
+Passline,Circo Los Maluenda en Maipu,,2026-10-10,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549293
+Passline,HELLBUTCHER en Chile,,2026-10-13,20:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,30000,https://www.passline.com/eventos/hellbutcher-en-chile
+Passline,Lets Cowboy Up - Post Mortem (En Vivo),,2026-10-15,20:00:00,,BarZuo,Av. Presidente José Batle y Ordóñez 3714,,,,6000,https://www.passline.com/eventos/lets-cowboy-up-post-mortem-en-vivo
+Passline,Circles Acústico - INCUBUS tributo,,2026-10-15,21:00:00,,Bar La Puerta Amarilla,Av. Alcalde Fernando Castillo Velasco 7150,,,La Reina,5000,https://www.passline.com/eventos/circles-acustico-incubus-tributo
+Passline,3 DUEÑOS | INTERNACIONALES TOUR,,2026-10-15,20:00:00,,Club Chocolate,Ernesto Pinto Lagarrigue 192,,,,29000,https://www.passline.com/eventos/3-duenos-internacionales-tour
+Passline,Yorka en Centro Arte Alameda,,2026-10-14,20:00:00,,CENTRO ARTE ALAMEDA,Arturo Prat 33,,,Santiago,17000,https://www.passline.com/eventos/yorka-en-centro-arte-alameda
+Passline,Between the Buried and Me,,2026-10-13,20:00:00,,Teatro Cariola,San Diego 246,,,Santiago,46000,https://www.passline.com/eventos/between-the-buried-and-me
+Passline,Circo Los Maluenda en Maipu,,2026-10-11,20:00:00,,Frente al Lider / Carpa Los Maluenda,3 Poniente,,,,5000,https://www.passline.com/eventos/circo-los-maluenda-en-maipu-549294
+Passline,Batalla del Tattoo - Chimkowe en Tinta,,2026-10-17,12:00:00,2026-10-18,Chimkowe,Av. Grecia 8787,,,Peñalolén,14000,https://www.passline.com/eventos/batalla-del-tattoo-chimkowe-en-tinta-502990
+Passline,ExpoYoga 2026 Dia 1,,2026-10-17,09:00:00,,Estación Mapocho,,,,,8000,https://www.passline.com/eventos/expoyoga-2026-536030
+Passline,MEDIEVAL PARTY HALLOWEEN FEST 2026,,2026-10-17,12:00:00,2026-10-18,Aldea Encuentro,Avenida alcalde Fernando Castillo Velasco #9750,,,,4000,https://www.passline.com/eventos/medieval-party-halloween-fest-2026
+Passline,SISTEMA DE ENTRETENIMIENTO (España) en Chile 2026,,2026-10-16,22:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,25000,https://www.passline.com/eventos/sistema-de-entretenimiento-espana-en-chile-2026
+Passline,DÍA DEL PROFESOR Y PROFESORA EN TEATRO CARIOLA,,2026-10-16,16:00:00,,BAR VICTORIA,Av. Carlos Valdovinos 1951,,,Pedro Aguirre Cerda,10000,https://www.passline.com/eventos/dia-del-profesor-y-profesora-en-teatro-cariola
+Passline,SEGOVIA ORQUESTA EN SANTIAGO DE CHILE,,2026-10-16,20:00:00,2026-10-18,Discoteca La Fama,Av. México 609,,,Recoleta,10000,https://www.passline.com/eventos/segovia-orquesta-en-santiago-de-chile
+Passline,"VA TARDE, Stand up Comedy",,2026-10-15,22:00:00,,Palermo Teatro Bar,José Manuel Infante 1414,,,,20000,https://www.passline.com/eventos/va-tarde-carlos-jelambi
+Passline,ExpoYoga 2026 / Stands,,2026-10-17,08:00:00,2026-10-18,Estación Mapocho,,,,,297500,https://www.passline.com/eventos/expo-yoga-2026-stands
+Passline,Ai yazawa fest 4 Akindo,,2026-10-17,12:00:00,,Palacio circulo español,Alameda Libertador Bernardo O'Higgins 1550,,,,2000,https://www.passline.com/eventos/ai-yazawa-fest-4-akindo
+Passline,Incógnita,,2026-10-17,18:00:00,,La Candelaria,Av. Italia 1449,,,,10000,https://www.passline.com/eventos/incognita-546672
+Passline,ATARDECERES PRESENTA : DJ TENNIS OPEN AIRE - 17 OCT PARQUE PADRE HURTADO,,2026-10-17,14:00:00,,Parque padre Hurtado,Parque Padre Hurtado - Francisco Bilbao 8105,,,La Reina,25000,https://www.passline.com/eventos/atardeceres-presenta-dj-tennis-open-aire-17-oct-parque-padre-hurtado
+Passline,El Honesto Mike: Mike Fest,,2026-10-17,14:00:00,,Alto San Francisco,San Francisco 75,,,Santiago,25000,https://www.passline.com/eventos/el-honesto-mike-mike-fest
+Passline,Candy66 Vuelve a Santiago de Chile tour 2026,,2026-10-17,20:00:00,,Club Chocolate,Ernesto Pinto Lagarrigue 192,,,,26000,https://www.passline.com/eventos/candy66-vuelve-a-santiago-de-chile-tour-2026
+Passline,Matias Rodriguez La despedida,,2026-10-17,15:00:00,,Bicentenario de la Florida,,,,,10000,https://www.passline.com/eventos/matias-rodriguez-la-despedida
+Passline,FULLY SEGUNDO ANIVERSARIO,,2026-10-17,22:00:00,,HANGAR,SANTA FILOMENA 10,,,,8000,https://www.passline.com/eventos/fully-segundo-aniversario
+Passline,Gruesomes + Los perros del ritmo,,2026-10-17,21:30:00,,Bar de Rene,Sta isabel 369,,,,12000,https://www.passline.com/eventos/the-grusomes-los-perros-del-ritmo
+Passline,"ASTRONOMY, TRIBUTO A PINK FLOYD EN RBX",,2026-10-17,22:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,5000,https://www.passline.com/eventos/astronomy-tributo-a-pink-floyd-en-rbx
+Passline,Cachoeira - Favela Rouge,,2026-10-17,21:00:00,,California Cantina,Las Urbinas 56,,,Providencia,10000,https://www.passline.com/eventos/cachoeira-favela-rouge
+Passline,ExpoYoga 2026 Dia 2,,2026-10-18,10:00:00,,Estación Mapocho,,,,,8000,https://www.passline.com/eventos/expoyoga-2026-539652
+Passline,ExpoYoga 2026 Promo Dos Dias 17 & 18 de Oct,,2026-10-18,09:00:00,,Estación Mapocho,,,,,27000,https://www.passline.com/eventos/expoyoga-2026-promo-dos-dias-539872
+Passline,Mortiis en Sala RBX,,2026-10-18,20:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,28000,https://www.passline.com/eventos/mortiis-en-sala-rbx
+Passline,Los PetitFellas en Chile,,2026-10-23,19:00:00,,Club Chocolate,Ernesto Pinto Lagarrigue 192,,,,25000,https://www.passline.com/eventos/los-petitfellas-en-chile
+Passline,World Climbing Series Santiago 2026 Día 1,,2026-10-23,15:00:00,,PARQUE BICENTENARIO CERRILLOS,Av. Pedro Aguirre Cerda 6100,,,Cerrillos,3000,https://www.passline.com/eventos/world-climbing-series-santiago-2026-dia-1
+Passline,Obus en Chile 2026,,2026-10-23,19:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,25000,https://www.passline.com/eventos/obus-en-chile-2026
+Passline,Fit For A King en Chile,,2026-10-20,21:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,35000,https://www.passline.com/eventos/fit-for-a-king-en-chile
+Passline,Cadáver Exquisito una Comedia Improvisada,,2026-10-21,20:00:00,,CENTRO ARTE ALAMEDA,Arturo Prat 33,,,Santiago,10000,https://www.passline.com/eventos/cadaver-exquisito-una-comedia-improvisada
+Passline,Horna en Chile,,2026-10-20,20:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,28000,https://www.passline.com/eventos/horna-en-chile
+Passline,Malevolent Creation + Mystic Circle,,2026-10-22,20:00:00,,Teatro Cariola,San Diego 246,,,Santiago,30000,https://www.passline.com/eventos/malevolent-creation-mystic-circle
+Passline,Fiesta ‘80 y ‘90,,2026-10-23,21:00:00,,CUCA BUIN,PANAMERICANA SUR KM 28 SAN BERNARDO SALIDA LOS NARAJOS,,,,7000,https://www.passline.com/eventos/fiesta-80-y-90
+Passline,Gabo Santoro - Estreno en Vivo del Nuevo EP - Regreso Gira Argentina.,,2026-10-23,22:00:00,,Bar Raices,Cueto 816,,,,5000,https://www.passline.com/eventos/gabo-santoro-estreno-en-vivo-del-nuevo-ep-regreso-gira-argentina
+Passline,World Climbing Series Santiago 2026 Día 2,,2026-10-24,18:00:00,,PARQUE BICENTENARIO CERRILLOS,Av. Pedro Aguirre Cerda 6100,,,Cerrillos,3000,https://www.passline.com/eventos/world-climbing-series-santiago-2026-dia-2
+Passline,Luis Angel Diaz Acosta gran homenaje a Diomedes Díaz y al Gran Martín Elías,,2026-10-23,21:00:00,,La Quinta Muranos,Av. Manuel Antonio Matta 533,,,,15000,https://www.passline.com/eventos/luis-angel-diaz-acosta-gran-homenaje-a-diomedez-diaz-y-al-gran-martin-elias
+Passline,AC/DC Fans Fest Chile,,2026-10-24,16:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,12000,https://www.passline.com/eventos/acdc-fans-fest-chile
+Passline,Pensar en Grande- Primavera 2026,,2026-10-24,15:00:00,,PROXIMAMENTE,,,,,35000,https://www.passline.com/eventos/pensar-en-grande-primavera-2026
+Passline,BRUNO BORLONE Y LA FUNKY FANTÁSTICA ORQUESTA,,2026-10-23,20:00:00,,CLUB AMANDA,EMBAJADOR DOUSSINAGUE #1767,,,,20000,https://www.passline.com/eventos/bruno-borlone-y-la-funky-fantastica-orquesta
+Passline,Apocalyptica en Teatro Cariola,,2026-10-23,20:00:00,,Teatro Cariola,San Diego 246,,,Santiago,42000,https://www.passline.com/eventos/apocalyptica-en-teatro-cariola
+Passline,"Roce de Mente - VERTIENTES, CAMINOS, SERPIENTES",,2026-10-24,19:00:00,,Rojas Magallanes,Estados Unidos 8741,,,La Florida,10000,https://www.passline.com/eventos/roce-de-mente-vertientes-caminos-serpientes
+Passline,Classic Super Nationals Cheer 2026,,2026-10-25,09:00:00,,Centro Cultural Chimkowe,Avenida Grecia #8787,,,,10000,https://www.passline.com/eventos/classic-super-nationals-cheer-2026
+Passline,Six Feet Under en Chile,,2026-10-25,17:00:00,,Teatro Cariola,San Diego 246,,,Santiago,40000,https://www.passline.com/eventos/six-feet-under-en-chile
+Passline,SIX SEX / SANTIAGO DE CHILE / RAVE3000,,2026-10-24,21:00:00,,Basel,Av. Independencia 565,,,Independencia,30000,https://www.passline.com/eventos/six-sex-santiago-de-chile-rave3000
+Passline,Mario Gallo ★,,2026-10-24,21:00:00,,CLUB AMANDA,EMBAJADOR DOUSSINAGUE #1767,,,,15000,https://www.passline.com/eventos/mario-gallo-y-los-incondicionales
+Passline,Piero / Gracias Mi Viejo / La Florida,,2026-10-24,20:00:00,,Parque la Araucana,,,,,25000,https://www.passline.com/eventos/piero-gracias-mi-viejo-la-florida
+Passline,Volare - Experiencia gastronómica,,2026-10-29,19:00:00,,Centro parque,Pdte. Riesco 5330,,,Las Condes,79990,https://www.passline.com/eventos/volare-experiencia-gastronomica-545117
+Passline,World Climbing Series Santiago 2026 Día 3,,2026-10-25,18:00:00,,PARQUE BICENTENARIO CERRILLOS,Av. Pedro Aguirre Cerda 6100,,,Cerrillos,3000,https://www.passline.com/eventos/world-climbing-series-santiago-2026-dia-3
+Passline,H2O vuelve a Chile,,2026-10-28,19:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,36000,https://www.passline.com/eventos/h2o-vuelve-a-chile
+Passline,Un Mentes Expertas de Nathaly Marcus,,2026-10-26,19:00:00,,Hotel Intercontinental,,,,,50000,https://www.passline.com/eventos/un-mentes-expertas-de-nathaly-marcus
+Passline,Inventada Podcast en Centro Arte Alameda,,2026-10-28,19:30:00,,CENTRO ARTE ALAMEDA,Arturo Prat 33,,,Santiago,15000,https://www.passline.com/eventos/inventada-podcast-en-centro-arte-alameda
+Passline,The Rasmus - Weirdo Tour 2026,,2026-10-29,20:00:00,,Teatro Cariola,San Diego 246,,,Santiago,42000,https://www.passline.com/eventos/the-rasmus-weirdo-tour-2026
+Passline,BENEDICTION,,2026-10-28,21:00:00,,Teatro Cariola,San Diego 246,,,Santiago,39000,https://www.passline.com/eventos/benediction
+Passline,TRIBUTO ROXETTE CHILE REFUGIO DEL SOL,,2026-10-29,20:00:00,,Refugio del Sol,Calle Antupirén 9401,,,,5000,https://www.passline.com/eventos/tributo-roxette-chile-refugio-del-sol-547447
+Passline,"Concierto Optimistas bien informados, Sicoide y Rey Fango",,2026-10-29,20:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,5000,https://www.passline.com/eventos/concierto-optimistas-bien-informados-sicoide-y-rey-fango
+Passline,CONVERGENCE VOL1,,2026-10-30,20:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,8000,https://www.passline.com/eventos/convergence-vol1
+Passline,TIPLING ROCK EN SANTIAGO,,2026-10-29,20:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,20000,https://www.passline.com/eventos/tipling-rock-en-santiago
+Passline,Akapellah La Cruz Tour 2026 en Santiago de Chile,,2026-10-30,21:00:00,,Club Chocolate,Ernesto Pinto Lagarrigue 192,,,,28000,https://www.passline.com/eventos/akapellah-la-cruz-tour-2026-en-santiago-de-chile
+Passline,Cryptic Celebration VII: Mar de Grises y Poema Arcanus,,2026-10-30,19:00:00,,Teatro Cariola,San Diego 246,,,Santiago,12000,https://www.passline.com/eventos/cryptic-celebration-vii-mar-de-grises-y-poema-arcanus
+Passline,Gran Concierto,,2026-10-31,16:00:00,,Gran Auditorio ICTUE,Americo Vespusio 2701,,,Cerrillos,10000,https://www.passline.com/eventos/gran-concierto-noche-de-gloria
+Passline,EL FUEGO DEL RENACER,,2026-10-31,19:00:00,,Teatro Cariola,San Diego 246,,,Santiago,15000,https://www.passline.com/eventos/el-fuego-del-renacer
+Passline,La noche de la MONGA 🦍: Terror en la JUNGLA 🍃 / mega spot secreto - BAR ABIERTO 🥃 - SAB 31 OCT 🗓️🩸,,2026-10-31,22:00:00,,Spot secreto,,,,,8000,https://www.passline.com/eventos/la-noche-de-la-monga-terror-en-la-jungla-mega-spot-secreto-bar-abierto-sab-31-oct
+Passline,🩸 SINIESTRO HALLOWEEN 2026 ⚠️ 🩸 Versión payasos 🤡 asesin0s 🤡 - mega parcelazo / sab 31 oct - spot secreto 🤫,,2026-10-31,22:00:00,,Spot secreto 🤐,,,,,6000,https://www.passline.com/eventos/siniestro-halloween-2026-version-payasos-asesin0s-mega-parcelazo-sab-31-oct-spot-secreto
+Passline,THE VIBE HALLOWEEN - BLOODY OLIMPUS,,2026-10-31,22:00:00,,Lo barnechea.,,,,Lo Barnechea,5000,https://www.passline.com/eventos/the-vibe-halloween-bloody-olimpus
+Passline,Open Blondie: Noche de Brujas 2026,,2026-10-31,19:00:00,,Club Hipico,Av. Almte. Blanco Encalada 2540,,,Santiago,16000,https://www.passline.com/eventos/open-blondie-noche-de-brujas-2026
+Passline,Grupo Disparo 7º Aniversario,,2026-10-31,20:00:00,,Centro Cultural de Buin,,,,,8000,https://www.passline.com/eventos/grupo-disparo-7-aniversario
+Passline,TALENT WOMAN Power Skills,,2026-11-04,09:00:00,,Auditorio Cámara de Comercio Santiago,Monjitas 392,,,,30000,https://www.passline.com/eventos/talent-woman-power-skills
+Passline,Ungravity Experience,,2026-11-01,11:00:00,2026-12-31,Cenco Alto Las Condes,Av. Presidente Kennedy Lateral 9001,,,Las Condes,39990,https://www.passline.com/eventos/ungravity-experience
+Passline,Halloween Xperience 🎃 La fiesta,,2026-10-31,22:00:00,,Casona irarrazaval,Av José Manuel irarrazaval 0374,,,,8000,https://www.passline.com/eventos/halloween-xperience-la-fiesta
+Passline,AVANT PREMIÈRE AROMASFEST,,2026-11-06,18:00:00,,Chat Noir,Malbec 12851,,,,60000,https://www.passline.com/eventos/avant-premiere-aromasfest
+Passline,TR/ST en Blondie,,2026-11-05,21:00:00,,Blondie,Avda Liber Bernardo O`Higgins 2879,,,Santiago,35000,https://www.passline.com/eventos/trst-en-blondie
+Passline,REIS BELICO en Santiago de Chile,,2026-11-05,21:00:00,,Club Chocolate,Ernesto Pinto Lagarrigue 192,,,,26000,https://www.passline.com/eventos/reis-belico-en-santiago-de-chile
+Passline,Me La Hiciste Tour en Santiago de Chile,,2026-11-01,20:00:00,,Teatro Mori Parque Arauco,Av. Pdte. Kennedy 5413,,,Las Condes,25000,https://www.passline.com/eventos/me-la-hiciste-tour-en-santiago-de-chile
+Passline,Placebo + Interpol : Noche de Tributos,,2026-11-06,20:30:00,,Cocina Clandestina,Antonia Lopez de Bello 0108,,,,6000,https://www.passline.com/eventos/placebo-interpol-noche-de-tributos
+Passline,"“Un día para transformar cuerpo, mente y espíritu, conectando con la naturaleza, saberes ancestrales y experiencias de bienestar, sanación y comunidad.”",,2026-11-07,10:00:00,,Espacio Ceibo,las perdices 6782,,,,45000,https://www.passline.com/eventos/un-dia-para-transformar-cuerpo-mente-y-espiritu-conectando-con-la-naturaleza-saberes-ancestrales-y-experiencias-de-bienestar-sanacion-y-comunidad
+Passline,Audiostoners (Arg) - Homenaje a Chris Cornell en Santiago de Chile,,2026-11-06,21:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,10000,https://www.passline.com/eventos/audiostoners-arg-homenaje-a-chris-cornell-en-santiago-de-chile
+Passline,La Matanza Lanzamiento Mácula,,2026-11-06,20:30:00,,Bar Oxido,Purisima 282,,,,7000,https://www.passline.com/eventos/la-matanza-lanzamiento-macula
+Passline,III Versión AromasFest 2026 - 7 Noviembre,,2026-11-07,11:00:00,,"Hotel Wyndham Pettra, La Dehesa",Malbec 12851,,,,10000,https://www.passline.com/eventos/iii-version-aromasfest-2026
+Passline,GAMUZA PRESENTA: “¿QUÉ TE CUESTA? – TOUR” + MACERADOZ (PERÚ),,2026-11-06,20:00:00,,CLUB CHOCOLATE,ERNESTO PINTO LAGARRIGUE #192,,,,15000,https://www.passline.com/eventos/gamuza-presenta-que-te-cuesta-tour-maceradoz-peru
+Passline,Zell en Santiago de Chile,,2026-11-06,21:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,18000,https://www.passline.com/eventos/zell-en-santiago-de-chile-538553
+Passline,Veneno Espectaculo de Circo,,2026-11-06,20:00:00,,Aldea Encuentro,,,,,20000,https://www.passline.com/eventos/veneno-espectaculo-de-circo-536650
+Passline,Lepoka en chile,,2026-11-07,21:00:00,,Epicentro,Huérfanos 786,,,Santiago,30000,https://www.passline.com/eventos/lepoka-en-chile
+Passline,CASAPARLANTE: FiestaParlante!,,2026-11-07,20:00:00,,Basel,Av. Independencia 565,,,Independencia,15000,https://www.passline.com/eventos/casaparlante-fiestaparlante
+Passline,HEAVY METAL FEST 2,,2026-11-08,14:00:00,,Sala Metronomo,Ernesto pinto lagarrigue 179,,,,10000,https://www.passline.com/eventos/heavy-metal-fest-2
+Passline,TALLER,,2026-11-07,11:00:00,,Hotel Wyndham Pettra,Av. Comandante Malbec 12851,,,,69000,https://www.passline.com/eventos/taller-crea-tu-propio-perfume
+Passline,Taller de Perfumería Botánica,,2026-11-07,11:00:00,,Hotel Wyndham Santiago Pettra,Comandante Malbec 12851,,,,69000,https://www.passline.com/eventos/taller-de-perfumeria-botanica
+Passline,FAB MORVAN DE MILLI VANILLY,,2026-11-07,20:00:00,,CLUB CHOCOLATE,ERNESTO PINTO LAGARRIGUE #192,,,,30000,https://www.passline.com/eventos/fab-morvan-de-milli-vanilly
+Passline,Stairway to Hell Fest 2,,2026-11-08,18:00:00,,Teatro Cariola,San Diego 246,,,Santiago,10000,https://www.passline.com/eventos/stairway-to-hell-fest-2
+Passline,Veneno Espectaculo de Circo,,2026-11-07,20:00:00,,Aldea Encuentro,,,,,20000,https://www.passline.com/eventos/veneno-espectaculo-de-circo-536651
+Passline,Kash Farmers Night,,2026-11-13,19:30:00,,Salas Crearock,carmen 973,,,,2000,https://www.passline.com/eventos/kash-farmers-night
+Passline,TiamaT Fest,,2026-11-13,21:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,7000,https://www.passline.com/eventos/tiamat-fest
+Passline,EXPO VIZCACHAS RACING by TIO SUPRA,,2026-11-14,10:00:00,,Autodromo Las Vizcachas,avenida san jose de maipo 05669,,,,3000,https://www.passline.com/eventos/expo-vizcachas-racing-by-tio-supra
+Passline,PIRQUEBIER 2026,,2026-11-14,12:00:00,,pueblito de artesanos de pirque,avenida alcalde hernan prieto 7210,,,,10000,https://www.passline.com/eventos/pirquebier-2026
+Passline,ADANOWSKY PRESENTA AMADOR Y EL ÍDOLO,,2026-11-10,19:00:00,,CLUB CHOCOLATE,ERNESTO PINTO LAGARRIGUE #192,,,,38000,https://www.passline.com/eventos/adanowsky-presenta-amador-y-el-idolo
+Passline,EL CARIBEFUNK - DESDE EL PATIO TOUR,,2026-11-13,20:00:00,,CLUB CHOCOLATE,ERNESTO PINTO LAGARRIGUE #192,,,,15000,https://www.passline.com/eventos/el-caribefunk-desde-el-patio-tour
+Passline,Ty Segall en Blondie,,2026-11-10,21:00:00,,Blondie,Avda Liber Bernardo O`Higgins 2879,,,Santiago,35000,https://www.passline.com/eventos/ty-segall-en-blondie
+Passline,PERU ARMONIA Y CLASE EN SANTIAGO DE CHILE,,2026-11-13,08:00:00,2026-11-15,Discoteca La Fama,Av. México 609,,,Recoleta,10000,https://www.passline.com/eventos/peru-armonia-y-clase-en-santiago-de-chile
+Passline,Vengeance of Hell 1,,2026-11-14,17:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,8000,https://www.passline.com/eventos/vengeance-of-hell-1
+Passline,MCI EXPO 2026,,2026-11-20,09:30:00,,Hotel Le Méridien,Avenida Libertador Bernardo O’Higgins 136,,,,8000,https://www.passline.com/eventos/mci-expo-2026
+Passline,Paula Mattheus - Todo lo alto que quiera,,2026-11-14,21:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,35000,https://www.passline.com/eventos/paula-mattheus-todo-lo-alto-que-quiera
+Passline,"XTFEST Santiago, El festival del mundo tuerca",,2026-11-15,12:00:00,,Espacio XTFEST Santiago,Cacique Colin 6200,,,,10990,https://www.passline.com/eventos/xtfest-santiago-el-festival-del-mundo-tuerca
+Passline,Fiesta 90 2000 Santiago - Centro Parque - 14 de noviembre 2026,,2026-11-14,21:00:00,,Centro parque,Pdte. Riesco 5330,,,Las Condes,10000,https://www.passline.com/eventos/fiesta-90-2000-santiago-centro-parque-14-de-noviembre-2026
+Passline,DAVID REES EN SANTIAGO DE CHILE LATAM TOUR 2026,,2026-11-20,19:00:00,,Club Ambar,Ernesto Pinto Lagarrigue 154,,,Recoleta,35000,https://www.passline.com/eventos/david-rees-en-santiago-de-chile-latam-tour-2026
+Passline,WE ARE THE GRAND - ANIVERSARIO 10 AÑOS DISCO VOLVER,,2026-11-14,20:30:00,,CLUB AMANDA,EMBAJADOR DOUSSINAGUE #1767,,,,16000,https://www.passline.com/eventos/we-are-the-grand-aniversario-10-anos-disco-volver
+Passline,Marty Friedman en Santiago 2026,,2026-11-14,20:00:00,,Teatro Cariola,San Diego 246,,,Santiago,39000,https://www.passline.com/eventos/marty-friedman-en-santiago-2026
+Passline,THIS IS SANTIAGO SKANKING,,2026-11-27,19:00:00,,La Casona de Hilda Parra,Ernesto Pinto Lagarrigue 90,,,,10000,https://www.passline.com/eventos/this-is-santiago-skanking
+Passline,MAURICIO PALMA & VIOLENTO PALMA EN PALERMO,,2026-11-21,20:00:00,,Palermo Teatro Bar,José Manuel Infante 1414,,,,15000,https://www.passline.com/eventos/mauricio-palma-violento-palma-en-palermo
+Passline,CYCLO EN SANTIAGO DE CHILE PRESENTA ¨FISHERMAN LATAM TOUR 2026,,2026-11-21,19:00:00,,Club Ambar,Ernesto Pinto Lagarrigue 154,,,Recoleta,32000,https://www.passline.com/eventos/cyclo-en-santiago-de-chile-presenta-fisherman-latam-tour-2026
+Passline,Saratoga Chile 2026,,2026-11-21,20:30:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,35000,https://www.passline.com/eventos/saratoga-chile-2026
+Passline,Dancing Mood + Mimi Maura,,2026-11-27,21:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,15000,https://www.passline.com/eventos/dancing-mood-mimi-maura
+Passline,The Space Lady en Centro Arte Alameda,,2026-11-21,20:00:00,,CENTRO ARTE ALAMEDA,Arturo Prat 33,,,Santiago,35000,https://www.passline.com/eventos/the-space-lady-en-centro-arte-alameda
+Passline,My Dying Bride,,2026-11-23,20:00:00,,Teatro Cariola,San Diego 246,,,Santiago,38000,https://www.passline.com/eventos/my-dying-bride
+Passline,ALTO VOLTAJE celebra los 20 años de Historia de mi vida hasta mi muerte,,2026-11-21,17:30:00,,Teatro Cariola,San Diego 246,,,Santiago,10000,https://www.passline.com/eventos/alto-voltaje-20-anos-de-historia-de-mi-vida-hasta-mi-muerte
+Passline,Baile Escarlata,,2026-11-28,19:00:00,,Palacio Astoreca,Calle dieciocho #121,,,,40000,https://www.passline.com/eventos/baile-escarlata
+Passline,"Descorchados - Mandarin Oriental, Santiago 03 de diciembre 2026",,2026-12-03,19:00:00,,"Hotel Mandarin Oriental, Santiago",Av. Kennedy 4601,,,Las Condes,98000,https://www.passline.com/eventos/descorchados-mandarin-oriental-santiago-03-de-diciembre-2026
+Passline,Power Melodic Hits,,2026-11-28,15:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,7000,https://www.passline.com/eventos/power-melodic-hits
+Passline,"Descorchados con Early Tasting - Mandarin Oriental, Santiago 3 de diciembre 2026",,2026-12-03,18:00:00,,"Hotel Mandarin Oriental, Santiago",Av. Kennedy 4601,,,Las Condes,156000,https://www.passline.com/eventos/descorchados-con-early-tasting-mandarin-oriental-santiago-3-de-diciembre-2026
+Passline,Machine Girl vuelve a Chile,,2026-12-01,19:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,36000,https://www.passline.com/eventos/machine-girl-vuelve-a-chile
+Passline,Capitán Memo en Concierto,,2026-11-29,19:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,20000,https://www.passline.com/eventos/capitan-memo-en-concierto
+Passline,"Pedro Aznar, una noche entre amigos.Teatro Municipal de Santiago",,2026-11-28,20:00:00,,Teatro Municipal de Santiago,,,,,36000,https://www.passline.com/eventos/pedro-aznar-en-teatro-municipal-de-santiago
+Passline,🔥CHAO PAES🔥OFICIAL ★ JUEVES 03 DIC ★,,2026-12-03,22:00:00,,Terraza Arrayan,Av. Las Condes 14950,,,Lo Barnechea,12000,https://www.passline.com/eventos/chao-paesoficial-jueves-03-dic
+Passline,ABHIR - ULTRASWAN TOUR,,2026-12-04,20:00:00,,Epicentro,Huérfanos 786,,,Santiago,25000,https://www.passline.com/eventos/abhir-ultraswan-tour
+Passline,"Rebellion Night — Tributos a Paramore, Blink-182 & Incubus",,2026-12-04,22:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,6000,https://www.passline.com/eventos/rebellion-night-tributos-a-paramore-blink182-incubus
+Passline,Noches Oscuras en RBX,,2026-12-03,21:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,4000,https://www.passline.com/eventos/noches-oscuras-en-rbx
+Passline,Marc Almond (SOFT CELL) en Santiago 2026,,2026-12-03,20:00:00,,Blondie,Avda Liber Bernardo O`Higgins 2879,,,Santiago,35000,https://www.passline.com/eventos/marc-almond-soft-cell-en-santiago-2026
+Passline,"Descorchados - Mandarin Oriental, Santiago 04 de diciembre 2026",,2026-12-04,19:00:00,,"Hotel Mandarin Oriental, Santiago",Av. Kennedy 4601,,,Las Condes,98000,https://www.passline.com/eventos/descorchados-mandarin-oriental-santiago-04-de-diciembre-2026
+Passline,"Descorchados con Early Tasting - Mandarin Oriental, Santiago 04 de diciembre 2026",,2026-12-04,18:00:00,,"Hotel Mandarin Oriental, Santiago",Av. Kennedy 4601,,,Las Condes,156000,https://www.passline.com/eventos/descorchados-con-early-tasting-mandarin-oriental-santiago-04-de-diciembre-2026
+Passline,FUTURO INCIERTO EN CHILE,,2026-12-04,21:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,20000,https://www.passline.com/eventos/futuro-incierto-en-chile
+Passline,FREEK CHILE,,2026-12-06,15:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,15000,https://www.passline.com/eventos/freek-chile
+Passline,YOUTH OF TODAY EN CHILE,,2026-12-09,19:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,36000,https://www.passline.com/eventos/youth-of-today-en-chile
+Passline,LATIN BITMAN BANDA E INVITADOS,,2026-12-05,20:00:00,,CLUB CHOCOLATE,ERNESTO PINTO LAGARRIGUE #192,,,,10000,https://www.passline.com/eventos/latin-bitman-banda-e-invitados
+Passline,pablopablo - pianopiano tour (Santiago de Chile),,2026-12-12,20:00:00,,Centro de Extensión Campus Oriente UC,Jaime Guzmán Errázuriz 3300,,,,35000,https://www.passline.com/eventos/pablopablo-chile
+Passline,Planeta No en Centro Arte Alameda,,2026-12-16,20:00:00,,CENTRO ARTE ALAMEDA,Arturo Prat 33,,,Santiago,10000,https://www.passline.com/eventos/planeta-no-en-centro-arte-alameda
+Passline,Angelo Pierattini: Disco Rojo de Weichafe en vivo,,2026-12-19,20:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,15000,https://www.passline.com/eventos/angelo-pierattini-disco-rojo-de-weichafe-en-vivo
+Passline,Hvnvbi,,2027-01-16,19:30:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,9000,https://www.passline.com/eventos/hvnvbi
+Passline,The Vibe - Año Nuevo 2027 - Los Trapenses.,,2027-01-01,00:15:00,,Lo Barnechea,,,,Lo Barnechea,6990,https://www.passline.com/eventos/the-vibe-ano-nuevo-2027-los-trapenses
+Passline,Geoff Tate - Operation: mindcrime / the final chapter,,2027-01-16,21:00:00,,Teatro Cariola,San Diego 246,,,Santiago,40000,https://www.passline.com/eventos/geoff-tate-operation-mindcrime-the-final-chapter
+Passline,NXRCICISTXS - TOUR XX AÑOS DEMENTES,,2026-12-19,20:00:00,,CLUB CHOCOLATE,ERNESTO PINTO LAGARRIGUE #192,,,,16000,https://www.passline.com/eventos/nxrcicistxs-tour-xx-anos-dementes
+Passline,Avatar,,2027-01-15,20:00:00,,Teatro Cariola,San Diego 246,,,Santiago,42000,https://www.passline.com/eventos/avatar
+Passline,Hellripper,,2027-01-20,20:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,28000,https://www.passline.com/eventos/hellripper
+Passline,Eva Ayllón + Inti Illimani + Cuarteto Austral,,2026-12-27,19:00:00,,Teatro Municipal de Santiago,,,,,18000,https://www.passline.com/eventos/eva-allon-inti-illimani-cuarteto-austral
+Passline,Edu Falaschi Rebirth of Shadows Santiago,,2027-03-25,21:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,30000,https://www.passline.com/eventos/edu-falaschi-rebirth-of-shadows-santiago
+Passline,Antimatter en Chile,,2027-02-25,21:00:00,,Epicentro,Huérfanos 786,,,Santiago,42000,https://www.passline.com/eventos/antimatter-en-chile
+Passline,HERNÁN CATTÁNEO - ON TOUR →,,2027-01-30,16:00:00,,Parque Ciudad Empresarial,Avda el cóndor sur 457,,,,45000,https://www.passline.com/eventos/hernan-cattaneo-on-tour
+Passline,ULTRA SUNN en Chile 2027,,2027-03-24,21:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,30000,https://www.passline.com/eventos/ultra-sunn-en-chile-2027
+Passline,Elisa C. Martin Chile - The Gates of Oblivion 25th Anniversary,,2027-05-08,19:00:00,,Amsterdam Club (Ex-Rbx),Av. Vicuña Mackenna 1220,,,,20000,https://www.passline.com/eventos/elisa-c-martin-chile-the-gates-of-oblivion-25th-anniversary
+Passline,BLAZE BAYLEY EN CHILE,,2027-01-22,21:00:00,,SALA METRONOMO,Ernesto Pinto Lagarrigue 179,,,Recoleta,30000,https://www.passline.com/eventos/blaze-bayley-en-chile
+Passline,Alcest,,2027-02-15,20:00:00,,Teatro Cariola,San Diego 246,,,Santiago,42000,https://www.passline.com/eventos/alcest
+Passline,Eleine en Sala RBX,,2027-02-25,20:00:00,,Sala RBX,Av. Vicuña Mackenna 1220,,,Ñuñoa,25000,https://www.passline.com/eventos/eleine-en-sala-rbx
+Passline,CL.prog 2027: Pase Ambos Dias,,2027-11-20,15:30:00,2027-11-21,Aldea del Encuentro,Av. Alcalde Fernando Castillo Velasco 9750,,,,80000,https://www.passline.com/eventos/clprog-2027-pase-doble

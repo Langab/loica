@@ -91,7 +91,7 @@
 <script src="../loica.js?v=27"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "248b5add30e16a84", "titulo": "“30 DOMINGO", "inicio": "2026-08-30T23:30:00", "fin": "2026-08-31T00:00:00", "lugar": "FAUSTO", "direccion": "Av. Santa María 832", "comuna": "Providencia", "lat": -33.42976, "lon": -70.62536, "precision": "correccion", "gratis": false, "precio": 6000, "precio_texto": "", "categoria": "fiesta", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "", "imagen": "", "fuente": "Passline", "url": "https://www.passline.com/eventos/30-domingo-548673", "formato": "panorama"};
+  const EV = {"id": "248b5add30e16a84", "titulo": "“30 DOMINGO", "inicio": "2026-08-30T23:30:00", "fin": null, "lugar": "FAUSTO", "direccion": "Av. Santa María 832", "comuna": "Providencia", "lat": -33.42976, "lon": -70.62536, "precision": "correccion", "gratis": false, "precio": 6000, "precio_texto": "", "categoria": "fiesta", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "", "imagen": "", "fuente": "Passline", "url": "https://www.passline.com/eventos/30-domingo-548673", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

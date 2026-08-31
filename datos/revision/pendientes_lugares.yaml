@@ -93,6 +93,14 @@ lugares:
     lon: # COMPLETAR
     nota: verificada el 2026-08-30 por # COMPLETAR
 
+  # 4 eventos sin pin exacto
+  Kross Bar:
+    direccion: # COMPLETAR
+    comuna: Las Condes
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-30 por # COMPLETAR
+
   # 3 eventos sin pin exacto
   Teatro Universidad de Chile:
     direccion: Av. Providencia 043
@@ -118,6 +126,22 @@ lugares:
     nota: verificada el 2026-08-30 por # COMPLETAR
 
   # 3 eventos sin pin exacto
+  Carpa Extraordinario Circo:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-30 por # COMPLETAR
+
+  # 3 eventos sin pin exacto
+  EL CHANCHO CON CHALECO:
+    direccion: AVENIDA PAJARITOS 99
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-08-30 por # COMPLETAR
+
+  # 3 eventos sin pin exacto
   COSTADO CLUB AÉREO MELEPÍLLA:
     direccion: # COMPLETAR
     comuna: # COMPLETAR
@@ -133,10 +157,10 @@ lugares:
     lon: # COMPLETAR
     nota: verificada el 2026-08-30 por # COMPLETAR
 
-  # 2 eventos sin pin exacto
-  Terraza Arrayan:
-    direccion: # COMPLETAR
-    comuna: Lo Barnechea
+  # 3 eventos sin pin exacto
+  Parque Ciudad Empresarial:
+    direccion: Avenida del Parque 420
+    comuna: Huechuraba
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-08-30 por # COMPLETAR
@@ -198,9 +222,9 @@ lugares:
     nota: verificada el 2026-08-30 por # COMPLETAR
 
   # 2 eventos sin pin exacto
-  Restaurant Las Tinajas:
-    direccion: Gabriela 03125
-    comuna: La Pintana
+  Cafetería Popular:
+    direccion: Maipu 363
+    comuna: Maipú
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-08-30 por # COMPLETAR
@@ -214,32 +238,8 @@ lugares:
     nota: verificada el 2026-08-30 por # COMPLETAR
 
   # 2 eventos sin pin exacto
-  Maison del bellaqueo:
-    direccion: # COMPLETAR
-    comuna: San Bernardo
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-08-30 por # COMPLETAR
-
-  # 2 eventos sin pin exacto
   Montañita Las Vizcachas:
     direccion: Camino San José de Maipo 06680
-    comuna: La Florida
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-08-30 por # COMPLETAR
-
-  # 2 eventos sin pin exacto
-  Bar Amelia:
-    direccion: # COMPLETAR
-    comuna: Ñuñoa
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-08-30 por # COMPLETAR
-
-  # 2 eventos sin pin exacto
-  Av. Calera de tango:
-    direccion: # COMPLETAR
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
