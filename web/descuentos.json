@@ -1,7 +1,7 @@
 {
- "generado": "2026-09-01T11:08:59",
- "total": 598,
- "locales": 1472,
+ "generado": "2026-09-01T12:32:26",
+ "total": 599,
+ "locales": 1541,
  "bancos": [
   [
    "bancochile",
@@ -83,7 +83,7 @@
   "jueves": 175,
   "viernes": 124,
   "lunes": 182,
-  "martes": 224,
+  "martes": 225,
   "domingo": 96
  },
  "descuentos": [
@@ -3895,7 +3895,7 @@
    "comercio": "Domino's Pizza",
    "categoria": "comida_rapida",
    "cocina": "italiana",
-   "region": "Todo Chile",
+   "region": "Metropolitana",
    "sitio_web": "https://www.bancofalabella.cl/descuentos/detalle/dominos-pizza",
    "porcentaje": 40,
    "oferta": "",
@@ -3915,8 +3915,234 @@
    "logo": "https://images.ctfassets.net/p6eyia4djstu/N2Z8RzaZpOtYSTaZJ7ncz/b22d5c6b37349711a6749619fc5f6189/Beneficio-App-alianzas-domino-spizza.jpg",
    "capturado": "",
    "id": "7118b7a2594c",
-   "locales": [],
-   "comunas": []
+   "locales": [
+    {
+     "direccion": "Jose Manuel Balmaceda 224 local 5",
+     "comuna": "Buin",
+     "lat": -33.7327718,
+     "lon": -70.7397103,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "AV. CHICUREO 3100",
+     "comuna": "Colina",
+     "lat": -33.2019,
+     "lon": -70.6747,
+     "precision": "comuna",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "AV. LIBERTADOR BERNARDO O´HIGGINS 4050 LOCAL 1",
+     "comuna": "Estación Central",
+     "lat": -33.45459014000001,
+     "lon": -70.69154664,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "AV. PEDRO FONTOVA 7810 LOCAL 8",
+     "comuna": "Huechuraba",
+     "lat": -33.3455154,
+     "lon": -70.6705578,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Av. FROILAN ROA 922",
+     "comuna": "La Florida",
+     "lat": -33.516350919999994,
+     "lon": -70.59663198,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Av. LA FLORIDA 9746 LOCAL 23 B",
+     "comuna": "La Florida",
+     "lat": -33.545071279999995,
+     "lon": -70.5681078,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Av. CUARTO CENTENARIO 996",
+     "comuna": "Las Condes",
+     "lat": -33.4088,
+     "lon": -70.5673,
+     "precision": "comuna",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Av. MACUL 3023",
+     "comuna": "Macul",
+     "lat": -33.48254451666667,
+     "lon": -70.59956398333333,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "AV. PAJARITOS 2292",
+     "comuna": "Maipú",
+     "lat": -33.50620954,
+     "lon": -70.75776285999999,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "AV. PAJARITOS 4630",
+     "comuna": "Maipú",
+     "lat": -33.4808539,
+     "lon": -70.7439576,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Av. TOBALABA 12175",
+     "comuna": "Peñalolén",
+     "lat": -33.4873285,
+     "lon": -70.5590236,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "AV. LOS LEONES 136",
+     "comuna": "Providencia",
+     "lat": -33.42106454444444,
+     "lon": -70.60520571111111,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "MANUEL MONTT 15",
+     "comuna": "Providencia",
+     "lat": -33.4290231,
+     "lon": -70.6200725,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "TOBALABA 1385",
+     "comuna": "Providencia",
+     "lat": -33.4268991,
+     "lon": -70.5906698,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Av. CAMINO HENRIQUEZ 3594 LOCAL A",
+     "comuna": "Puente Alto",
+     "lat": -33.56764825789474,
+     "lon": -70.55385015263157,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "AV. JOSE FRANCISCO VERGARA 409",
+     "comuna": "Quilicura",
+     "lat": -33.3687917,
+     "lon": -70.7313833,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Av. RECOLETA 901 LOCAL 1 Y 2",
+     "comuna": "Recoleta",
+     "lat": -33.421836677777776,
+     "lon": -70.6444180888889,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Av. JOSE MIGUEL CARRERA 5919, LOCAL 2",
+     "comuna": "San Miguel",
+     "lat": -33.5091852,
+     "lon": -70.6567943,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Av. COMPAÑÍA 1579 LOCAL 4,5,6,7",
+     "comuna": "Santiago",
+     "lat": -33.4393625,
+     "lon": -70.6586934,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "SAN FRANCISCO 520",
+     "comuna": "Santiago",
+     "lat": -33.4510809,
+     "lon": -70.6465335,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Av. LUIS PASTEUR 5515 LOCAL 3 Y 4",
+     "comuna": "Vitacura",
+     "lat": -33.3925892,
+     "lon": -70.5805542,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Av. IRARRAZAVAL 200",
+     "comuna": "Ñuñoa",
+     "lat": -33.452061042857146,
+     "lon": -70.62844952857142,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Av. Irarrazabal 2087",
+     "comuna": "Ñuñoa",
+     "lat": -33.4569,
+     "lon": -70.5975,
+     "precision": "comuna",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    }
+   ],
+   "comunas": [
+    "Buin",
+    "Colina",
+    "Estación Central",
+    "Huechuraba",
+    "La Florida",
+    "Las Condes",
+    "Macul",
+    "Maipú",
+    "Peñalolén",
+    "Providencia",
+    "Puente Alto",
+    "Quilicura",
+    "Recoleta",
+    "San Miguel",
+    "Santiago",
+    "Vitacura",
+    "Ñuñoa"
+   ]
   },
   {
    "banco_id": "entel",
@@ -3924,7 +4150,7 @@
    "comercio": "Domino's Pizza",
    "categoria": "restaurantes",
    "cocina": "italiana",
-   "region": "Todo Chile",
+   "region": "Metropolitana",
    "sitio_web": "",
    "porcentaje": 40,
    "oferta": "",
@@ -3943,8 +4169,499 @@
    "logo": "",
    "capturado": "",
    "id": "fb3b5ca7286a",
-   "locales": [],
-   "comunas": []
+   "locales": [
+    {
+     "direccion": "Jose Manuel Balmaceda 224 local 5",
+     "comuna": "Buin",
+     "lat": -33.7327718,
+     "lon": -70.7397103,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "AV. CHICUREO 3100",
+     "comuna": "Colina",
+     "lat": -33.2019,
+     "lon": -70.6747,
+     "precision": "comuna",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "AV. LIBERTADOR BERNARDO O´HIGGINS 4050 LOCAL 1",
+     "comuna": "Estación Central",
+     "lat": -33.45459014000001,
+     "lon": -70.69154664,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "AV. PEDRO FONTOVA 7810 LOCAL 8",
+     "comuna": "Huechuraba",
+     "lat": -33.3455154,
+     "lon": -70.6705578,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Av. FROILAN ROA 922",
+     "comuna": "La Florida",
+     "lat": -33.516350919999994,
+     "lon": -70.59663198,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Av. LA FLORIDA 9746 LOCAL 23 B",
+     "comuna": "La Florida",
+     "lat": -33.545071279999995,
+     "lon": -70.5681078,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Av. CUARTO CENTENARIO 996",
+     "comuna": "Las Condes",
+     "lat": -33.4088,
+     "lon": -70.5673,
+     "precision": "comuna",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Av. MACUL 3023",
+     "comuna": "Macul",
+     "lat": -33.48254451666667,
+     "lon": -70.59956398333333,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "AV. PAJARITOS 2292",
+     "comuna": "Maipú",
+     "lat": -33.50620954,
+     "lon": -70.75776285999999,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "AV. PAJARITOS 4630",
+     "comuna": "Maipú",
+     "lat": -33.4808539,
+     "lon": -70.7439576,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Av. TOBALABA 12175",
+     "comuna": "Peñalolén",
+     "lat": -33.4873285,
+     "lon": -70.5590236,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "AV. LOS LEONES 136",
+     "comuna": "Providencia",
+     "lat": -33.42106454444444,
+     "lon": -70.60520571111111,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "MANUEL MONTT 15",
+     "comuna": "Providencia",
+     "lat": -33.4290231,
+     "lon": -70.6200725,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "TOBALABA 1385",
+     "comuna": "Providencia",
+     "lat": -33.4268991,
+     "lon": -70.5906698,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Av. CAMINO HENRIQUEZ 3594 LOCAL A",
+     "comuna": "Puente Alto",
+     "lat": -33.56764825789474,
+     "lon": -70.55385015263157,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "AV. JOSE FRANCISCO VERGARA 409",
+     "comuna": "Quilicura",
+     "lat": -33.3687917,
+     "lon": -70.7313833,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Av. RECOLETA 901 LOCAL 1 Y 2",
+     "comuna": "Recoleta",
+     "lat": -33.421836677777776,
+     "lon": -70.6444180888889,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Av. JOSE MIGUEL CARRERA 5919, LOCAL 2",
+     "comuna": "San Miguel",
+     "lat": -33.5091852,
+     "lon": -70.6567943,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Av. COMPAÑÍA 1579 LOCAL 4,5,6,7",
+     "comuna": "Santiago",
+     "lat": -33.4393625,
+     "lon": -70.6586934,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "SAN FRANCISCO 520",
+     "comuna": "Santiago",
+     "lat": -33.4510809,
+     "lon": -70.6465335,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Av. LUIS PASTEUR 5515 LOCAL 3 Y 4",
+     "comuna": "Vitacura",
+     "lat": -33.3925892,
+     "lon": -70.5805542,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Av. IRARRAZAVAL 200",
+     "comuna": "Ñuñoa",
+     "lat": -33.452061042857146,
+     "lon": -70.62844952857142,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Av. Irarrazabal 2087",
+     "comuna": "Ñuñoa",
+     "lat": -33.4569,
+     "lon": -70.5975,
+     "precision": "comuna",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    }
+   ],
+   "comunas": [
+    "Buin",
+    "Colina",
+    "Estación Central",
+    "Huechuraba",
+    "La Florida",
+    "Las Condes",
+    "Macul",
+    "Maipú",
+    "Peñalolén",
+    "Providencia",
+    "Puente Alto",
+    "Quilicura",
+    "Recoleta",
+    "San Miguel",
+    "Santiago",
+    "Vitacura",
+    "Ñuñoa"
+   ]
+  },
+  {
+   "banco_id": "bancochile",
+   "banco": "Banco de Chile",
+   "comercio": "Domino’s Pizza",
+   "categoria": "restaurantes",
+   "cocina": "italiana",
+   "region": "Metropolitana",
+   "sitio_web": "https://www.dominospizza.cl",
+   "porcentaje": 40,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "martes"
+   ],
+   "vigencia_hasta": "2026-09-30",
+   "tarjetas": [
+    "visa-credito-infinite",
+    "visa-credito-signature",
+    "visa-credito-platinum",
+    "visa-fan-credito",
+    "mastercard-credito-black",
+    "mastercard-credito-platinum",
+    "visa-debito-infinite",
+    "visa-debito-signature",
+    "visa-debito-bch",
+    "visa-cuenta-fan",
+    "visa-credito-gold",
+    "mastercard-credito-dorada"
+   ],
+   "modalidad": "ambas",
+   "segmentado": false,
+   "condiciones": "Promoción válida hasta el 30 de septiembre de 2026. exclusivo para clientes que paguen con Tarjetas de Crédito y Débito Banco de Chile y Banco Edwards. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/dominos-pizza",
+   "logo": "https://assets.bancochile.cl/uploads/000/059/646/b9041115-7bdf-4a3c-a50f-243abad67d71/original/logo-web-domino.jpg",
+   "capturado": "",
+   "id": "111e3a9ac6ef",
+   "locales": [
+    {
+     "direccion": "Jose Manuel Balmaceda 224 local 5",
+     "comuna": "Buin",
+     "lat": -33.7327718,
+     "lon": -70.7397103,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "AV. CHICUREO 3100",
+     "comuna": "Colina",
+     "lat": -33.2019,
+     "lon": -70.6747,
+     "precision": "comuna",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "AV. LIBERTADOR BERNARDO O´HIGGINS 4050 LOCAL 1",
+     "comuna": "Estación Central",
+     "lat": -33.45459014000001,
+     "lon": -70.69154664,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "AV. PEDRO FONTOVA 7810 LOCAL 8",
+     "comuna": "Huechuraba",
+     "lat": -33.3455154,
+     "lon": -70.6705578,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "Av. FROILAN ROA 922",
+     "comuna": "La Florida",
+     "lat": -33.516350919999994,
+     "lon": -70.59663198,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "Av. LA FLORIDA 9746 LOCAL 23 B",
+     "comuna": "La Florida",
+     "lat": -33.545071279999995,
+     "lon": -70.5681078,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "Av. CUARTO CENTENARIO 996",
+     "comuna": "Las Condes",
+     "lat": -33.4088,
+     "lon": -70.5673,
+     "precision": "comuna",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "Av. MACUL 3023",
+     "comuna": "Macul",
+     "lat": -33.48254451666667,
+     "lon": -70.59956398333333,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "AV. PAJARITOS 2292",
+     "comuna": "Maipú",
+     "lat": -33.50620954,
+     "lon": -70.75776285999999,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "AV. PAJARITOS 4630",
+     "comuna": "Maipú",
+     "lat": -33.4808539,
+     "lon": -70.7439576,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "Av. TOBALABA 12175",
+     "comuna": "Peñalolén",
+     "lat": -33.4873285,
+     "lon": -70.5590236,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "AV. LOS LEONES 136",
+     "comuna": "Providencia",
+     "lat": -33.42106454444444,
+     "lon": -70.60520571111111,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "MANUEL MONTT 15",
+     "comuna": "Providencia",
+     "lat": -33.4290231,
+     "lon": -70.6200725,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "TOBALABA 1385",
+     "comuna": "Providencia",
+     "lat": -33.4268991,
+     "lon": -70.5906698,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "Av. CAMINO HENRIQUEZ 3594 LOCAL A",
+     "comuna": "Puente Alto",
+     "lat": -33.56764825789474,
+     "lon": -70.55385015263157,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "AV. JOSE FRANCISCO VERGARA 409",
+     "comuna": "Quilicura",
+     "lat": -33.3687917,
+     "lon": -70.7313833,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "Av. RECOLETA 901 LOCAL 1 Y 2",
+     "comuna": "Recoleta",
+     "lat": -33.421836677777776,
+     "lon": -70.6444180888889,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "Av. JOSE MIGUEL CARRERA 5919, LOCAL 2",
+     "comuna": "San Miguel",
+     "lat": -33.5091852,
+     "lon": -70.6567943,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "Av. COMPAÑÍA 1579 LOCAL 4,5,6,7",
+     "comuna": "Santiago",
+     "lat": -33.4393625,
+     "lon": -70.6586934,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "SAN FRANCISCO 520",
+     "comuna": "Santiago",
+     "lat": -33.4510809,
+     "lon": -70.6465335,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "Av. LUIS PASTEUR 5515 LOCAL 3 Y 4",
+     "comuna": "Vitacura",
+     "lat": -33.3925892,
+     "lon": -70.5805542,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "Av. IRARRAZAVAL 200",
+     "comuna": "Ñuñoa",
+     "lat": -33.452061042857146,
+     "lon": -70.62844952857142,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "Av. Irarrazabal 2087",
+     "comuna": "Ñuñoa",
+     "lat": -33.4569,
+     "lon": -70.5975,
+     "precision": "comuna",
+     "telefono": "",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Buin",
+    "Colina",
+    "Estación Central",
+    "Huechuraba",
+    "La Florida",
+    "Las Condes",
+    "Macul",
+    "Maipú",
+    "Peñalolén",
+    "Providencia",
+    "Puente Alto",
+    "Quilicura",
+    "Recoleta",
+    "San Miguel",
+    "Santiago",
+    "Vitacura",
+    "Ñuñoa"
+   ]
   },
   {
    "banco_id": "santander",
@@ -31073,42 +31790,6 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
-   "comercio": "PizzaPizza Las Condes",
-   "categoria": "comida_rapida",
-   "cocina": "italiana",
-   "region": "Metropolitana",
-   "sitio_web": "http://www.pizzapizza.cl/",
-   "porcentaje": null,
-   "oferta": "",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": null,
-   "tarjetas": [],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-6",
-   "logo": "https://bci-cdn.azureedge.net/uploads/37f57263-4f7d-4df9-b7c4-a5dd4bef9cb3/original/imagen.jpg",
-   "capturado": "",
-   "id": "981457e51cd4",
-   "locales": [
-    {
-     "direccion": "Av. Las Condes 9081",
-     "comuna": "Las Condes",
-     "lat": -33.3926213,
-     "lon": -70.5436229,
-     "precision": "fuente",
-     "telefono": "2 2243 3333",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Las Condes"
-   ]
-  },
-  {
-   "banco_id": "bci",
-   "banco": "Bci",
    "comercio": "PizzaPizza Macul",
    "categoria": "comida_rapida",
    "cocina": "italiana",
@@ -31181,6 +31862,78 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
+   "comercio": "PizzaPizza Maipú Poniente",
+   "categoria": "comida_rapida",
+   "cocina": "italiana",
+   "region": "Metropolitana",
+   "sitio_web": "http://www.pizzapizza.cl/",
+   "porcentaje": null,
+   "oferta": "",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-15",
+   "logo": "https://bci-cdn.azureedge.net/uploads/ac2a988f-63ed-4ddf-a40b-91590e0c64dd/original/imagen.jpg",
+   "capturado": "",
+   "id": "c64cc3ef8cbc",
+   "locales": [
+    {
+     "direccion": "3 Poniente 0876",
+     "comuna": "Maipú",
+     "lat": -33.012944,
+     "lon": -71.553406,
+     "precision": "fuente",
+     "telefono": "2 2942 3999",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Maipú"
+   ]
+  },
+  {
+   "banco_id": "bci",
+   "banco": "Bci",
+   "comercio": "PizzaPizza Peñalolén",
+   "categoria": "comida_rapida",
+   "cocina": "italiana",
+   "region": "Metropolitana",
+   "sitio_web": "http://www.pizzapizza.cl/",
+   "porcentaje": null,
+   "oferta": "",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
+   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-14",
+   "logo": "https://bci-cdn.azureedge.net/uploads/19a27e67-d4c2-4a79-92a2-a07610882369/original/imagen.jpg",
+   "capturado": "",
+   "id": "51418bad7124",
+   "locales": [
+    {
+     "direccion": "Los Presidentes 7640",
+     "comuna": "Peñalolén",
+     "lat": -33.486479,
+     "lon": -70.5572526,
+     "precision": "fuente",
+     "telefono": "2 2758 1212",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Peñalolén"
+   ]
+  },
+  {
+   "banco_id": "bci",
+   "banco": "Bci",
    "comercio": "PizzaPizza Providencia",
    "categoria": "comida_rapida",
    "cocina": "italiana",
@@ -31248,42 +32001,6 @@
    ],
    "comunas": [
     "Quilicura"
-   ]
-  },
-  {
-   "banco_id": "bci",
-   "banco": "Bci",
-   "comercio": "PizzaPizza San Miguel",
-   "categoria": "comida_rapida",
-   "cocina": "italiana",
-   "region": "Metropolitana",
-   "sitio_web": "http://www.pizzapizza.cl/",
-   "porcentaje": null,
-   "oferta": "",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": null,
-   "tarjetas": [],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-22",
-   "logo": "https://bci-cdn.azureedge.net/uploads/f6889e97-376a-477c-91c9-42503ae316ce/original/imagen.jpg",
-   "capturado": "",
-   "id": "642248791cbb",
-   "locales": [
-    {
-     "direccion": "Gran Avenida 5598",
-     "comuna": "San Miguel",
-     "lat": -33.5045432,
-     "lon": -70.6555543,
-     "precision": "calle",
-     "telefono": "2 2944 3535",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "San Miguel"
    ]
   },
   {
