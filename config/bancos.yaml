@@ -44,11 +44,23 @@ bancos:
   - sabores/comida-rapida
   - sabores/gourmet-y-delicatessen
   crawl_delay_seg: 2
+  # Desde el 02-09-2026 el catálogo entra por la pasada asistida
+  # (`descuentos_bci.csv` dentro de datos/manual/loica_asistida_AAAAMMDD/),
+  # igual que Santander, y el portal de arriba queda solo de respaldo. Bci
+  # rota su parrilla por mes (el 30-09-2026 vencen 77 de las 80 filas), así
+  # que a los 45 días la captura ya es vieja.
+  avisar_dias: 45
+  rehacer: una pasada asistida nueva (datos/manual/_runbook_asistido.md, punto 3)
   activo: true
-  notas: 'Mucho volumen (2.296 promociones en total) pero ni el día ni el porcentaje son campos:
-    hay que sacarlos del HTML de `description` y `options.conditions`. Ese HTML es regular —usa
-    clases `direccion` y `telefono`—, así que se parsea con selectores estables. Publica
-    promociones sin tocar desde 2021: el filtro de vigencia acá no es opcional.
+  notas: 'Hasta el 02-09-2026 se leía vivirconbeneficios.cl y era un catálogo MUERTO: sus 27
+    promociones de restaurantes traen `end_date` entre 2018 y 2020, `updated_at` entre 2017 y
+    2021, y solo una sigue en el catálogo vivo de bci.cl. Como el adaptador no miraba `end_date`,
+    Loica publicaba 143 descuentos de hace seis años como vigentes. Ahora el portal filtra por
+    `end_date` (y por eso hoy no devuelve nada) y manda la pasada con el navegador: 80 filas en
+    la RM al 01-09-2026, 77 con vigencia al 30-09, todas con logo y día, ninguna con dirección
+    (Bci no publica direcciones de local en ninguna parte: caen en el mapa solo por el préstamo
+    de sucursales entre bancos o por el índice OSM). bci.cl/beneficios responde 403 a todo lo que
+    no sea un navegador (WAF) y no se rodea.
 
     '
 
@@ -90,17 +102,28 @@ bancos:
   # NO se rastrea. banco.santander.cl responde 403 a todo lo que no sea un
   # navegador y bloquea hasta /robots.txt, así que ni siquiera se puede leer
   # qué permite. Rodear eso sería evadir un control puesto a propósito.
-  # El catálogo se anota a mano en el archivo de abajo, con su fecha.
+  # El catálogo lo trae la pasada asistida: desde el 01-09-2026 sale de
+  # `descuentos_santander.csv` dentro de datos/manual/loica_asistida_AAAAMMDD/,
+  # y la fecha de captura es la de la carpeta. El `archivo` de abajo es el
+  # formato viejo y queda como respaldo: se usa solo si no hay ninguna pasada.
   adaptador: santander
   archivo: datos/manual/descuentos_santander.yaml
   # Días desde la captura a partir de los cuales la corrida avisa que hay que
   # rehacerla. Santander arma campañas mensuales: 45 días ya es viejo.
   avisar_dias: 45
+  # Dónde se rehace, para que el aviso no mande a editar el respaldo viejo.
+  rehacer: una pasada asistida nueva (datos/manual/_runbook_asistido.md, punto 3)
   activo: true
-  notas: 'El mejor catálogo del mercado y el único que no se puede automatizar. 83 restaurantes,
-    casi todos con día declarado, pero sin dirección ni link por local: Santander solo publica
-    región y tipo de tarjeta (Amex y Limited son de gama alta, así que van marcados como
-    segmentados).
+  notas: 'El mejor catálogo del mercado y el único que no se puede automatizar. Con el CSV de la
+    pasada son 180 filas (una por LOCAL, no por convenio: 1213 aparece dos veces porque tiene dos
+    direcciones), 167 con comuna, 179 con día, 180 con logo y vigencia.
+
+    Lo que el CSV no trae es el tipo de tarjeta, que el YAML viejo sí tenía: sin esa columna
+    ninguna fila queda marcada como segmentada, aunque Amex y Limited sigan siendo de gama alta.
+
+    Ojo con la vigencia: el pie legal del sitio NO rota (el 01-09-2026 todavía decía "válidos
+    durante el mes de marzo de 2026"), así que la fecha hay que leerla en la ficha de cada
+    promoción. El 30-09-2026 vencen 173 de las 180.
 
     '
 
@@ -110,14 +133,22 @@ bancos:
   adaptador: cencosud
   url_base: https://www.tarjetacencosud.cl
   url_agenda: https://www.tarjetacencosud.cl/publico/beneficios/landing/la-ruta-del-sabor
-  # `categories` del JSON incrustado. "comida" es la única gastronómica.
+  # `categories` del JSON incrustado. Filtra SOLO el carrusel de tarjetas: la
+  # grilla de restaurantes de la landing no declara rubro porque entera es
+  # gastronómica. "comida" es la única categoría del carrusel que sirve.
   categorias:
   - comida
   crawl_delay_seg: 2
   activo: true
-  notas: 'El catálogo va incrustado en la página como `window.CardsAPI`: no hay endpoint aparte,
-    es un GET normal y un JSON dentro de un <script>. Aporta poco (de 83 beneficios, la categoría
-    comida son 14 y ahí adentro hay cine y viajes) pero es abierto y sale barato.
+  notas: 'Una sola URL con dos catálogos adentro, y hay que leer los dos. La grilla de
+    `div.grilla_item` de la landing trae las 58 fichas de restaurante ya renderizadas, con
+    nombre, mall o comuna, día, tope, legal y sitio web; `window.CardsAPI` es el carrusel del
+    sitio entero (85 beneficios, los mismos en cualquier landing) y de ahí solo sirven los
+    convenios de cadena de la categoría comida. Hasta el 02-09-2026 el adaptador miraba solo el
+    JSON y se perdía la grilla completa: 8 comercios en vez de 43.
+
+    Ojo con la grilla: trae nueve fichas COMENTADAS (promociones de noviembre que no arrancan).
+    Se parsea con BeautifulSoup justamente para que las descarte; un regex las levantaría.
 
     '
 
@@ -214,5 +245,12 @@ bancos:
     miércoles"). El catálogo va como JSON incrustado en el HTML (CMS Modyo), igual que Cencosud.
     No publica dirección ni comuna: esos locales dependen del préstamo entre bancos o de la
     memoria de correcciones para caer en el mapa.
+
+    La vigencia NO viene en el catálogo: está en la ficha de cada beneficio
+    (/beneficios/descuentos/<slug>, renderizada en el servidor), dentro de los términos
+    ("Descuento válido desde el 02/01/2026 hasta el 31/12/2026"). Desde el 02-09-2026 el
+    adaptador abre esas fichas (una petición por beneficio, con caché de un día) porque Entel
+    arrastra promociones vencidas hace más de un año como si estuvieran activas: la pasada del
+    01-09-2026 contó 22 vencidas de 63 con fecha, la más vieja de abril de 2025.
 
     '

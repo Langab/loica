@@ -9,7 +9,8 @@ proyecto no las fuerza: se pide el dato como lo pediría una persona, mirando
 la página.
 
 Ese recorrido lo hace alguien con el navegador siguiendo
-`datos/manual/_prompt_cine.md`, que devuelve un CSV. Acá entra ese CSV y se
+`datos/manual/_prompt_cine.md`, que devuelve un CSV dentro de la carpeta con
+fecha de la pasada (`datos/manual/loica_asistida_AAAAMMDD/`). Acá entra ese CSV y se
 convierte en funciones iguales a las que trae cualquier otro adaptador. Es la
 misma puerta que ya usa Passline para los eventos, con el mismo trato: sin
 link no se guarda, porque sin atribución esto deja de ser un índice.
@@ -31,6 +32,7 @@ import re
 from datetime import date, datetime
 from pathlib import Path
 
+from .. import asistida
 from ..cines import buscar
 from ..modelo import es_url_publica
 from .modelo import (Cartelera, Funcion, clave_pelicula, normalizar_idioma,
@@ -38,7 +40,6 @@ from .modelo import (Cartelera, Funcion, clave_pelicula, normalizar_idioma,
 
 log = logging.getLogger("loica.cartelera.asistida")
 
-DIR_MANUAL = Path(__file__).resolve().parent.parent.parent / "datos" / "manual"
 PATRON = "cartelera*.csv"
 
 COLUMNAS = ("cine", "pelicula", "fecha", "hora", "formato", "idioma",
@@ -133,12 +134,20 @@ def _de_fila(fila: dict, archivo: str) -> tuple[Funcion | None, str, dict | None
 
 
 def extraer(_cliente=None) -> Cartelera:
-    """No hace ninguna petición de red: lee datos/manual/cartelera*.csv."""
-    salida = Cartelera()
-    if not DIR_MANUAL.exists():
-        return salida
+    """No hace ninguna petición de red: lee la pasada asistida más nueva.
 
-    for ruta in sorted(DIR_MANUAL.glob(PATRON)):
+    Los archivos salen de `loica.asistida`: manda la carpeta con fecha más
+    nueva de `datos/manual/`. La cartelera es el caso donde eso más importa,
+    porque una función es de un día concreto: leer la pasada de la semana
+    pasada junto a la de hoy no suma salas, publica horarios que ya pasaron.
+    """
+    salida = Cartelera()
+    rutas = asistida.archivos(PATRON)
+    if not rutas:
+        return salida
+    log.info("  %s", asistida.describir())
+
+    for ruta in rutas:
         try:
             # utf-8-sig porque Excel y varios exportadores dejan BOM al inicio.
             with ruta.open(encoding="utf-8-sig", newline="") as f:

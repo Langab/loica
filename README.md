@@ -201,9 +201,10 @@ con los eventos nuevos agrupados por comuna, listos para revisar.
 ## Cómo corre solo (GitHub Actions)
 
 La corrida completa vive en `.github/workflows/corrida.yml` y corre todos los
-días a las **06:00 de Chile** en un runner de GitHub: dura unos 105 minutos, así
-que el sitio queda actualizado antes de las 08:00 y nadie abre Loica con la
-agenda de ayer. **No depende de ningún
+días a las **06:23 de Chile** en un runner de GitHub: dura unos 105 minutos, así
+que el sitio queda actualizado antes de las 08:30 y nadie abre Loica con la
+agenda de ayer (el minuto 23 no es capricho: ver las dos trampas al final de
+esta sección). **No depende de ningún
 computador prendido.** Sigue siendo Python puro —no llama a ningún modelo, no
 consume tokens— y en un repositorio público los minutos de Actions no cuestan.
 
@@ -242,8 +243,8 @@ gh workflow run corrida.yml -f modo=sin-publicar   # deja sitio e informes como 
 gh workflow run corrida.yml -f modo=probar         # solo lista lo que traería cada fuente
 ```
 
-Subir un CSV o YAML nuevo a `datos/manual/` también la dispara: la extracción
-asistida entra al sitio sin esperar a mañana y sin prender ningún Mac.
+Subir una pasada asistida nueva a `datos/manual/` también la dispara: la
+extracción entra al sitio sin esperar a mañana y sin prender ningún Mac.
 
 **En el Mac** queda la corrida a mano, para probar:
 
@@ -275,13 +276,24 @@ pero ya no es la corrida oficial y no conviene tenerla instalada a la vez: dos
 corridas publicando el mismo día se pisan la base. Se desinstala con
 `bash scripts/instalar_agenda.sh --quitar`.
 
-> Los descuentos corren además en `descuentos.yml` a las 03:00, tres horas antes
-> a propósito: la corrida grande regenera ese mismo JSON en su paso 2/7, y si se
-> cruzaran habría dos workflows empujando `web/descuentos.json` a la vez. Queda
-> de red de seguridad: si la corrida falla, los descuentos igual se actualizaron.
-> Un commit hecho desde Actions no dispara `pages.yml` (es la regla de GitHub
-> contra los bucles), así que ese JSON recién llega al sitio con la corrida de
-> las 06:00, que sí le avisa a Pages.
+> Los descuentos corren además en `descuentos.yml` a las 02:23, cuatro horas
+> antes a propósito: la corrida grande regenera ese mismo JSON en su paso 2/8, y
+> si se cruzaran habría dos workflows empujando `web/descuentos.json` a la vez.
+> Queda de red de seguridad: si la corrida falla, los descuentos igual se
+> actualizaron. Un commit hecho desde Actions no dispara `pages.yml` (es la
+> regla de GitHub contra los bucles), así que los dos workflows le avisan a
+> Pages con `gh workflow run pages.yml` después de publicar.
+
+**Dos trampas del calendario de Actions que ya costaron un sitio viejo.**
+(1) GitHub encola las crons "en punto" detrás de todo el mundo: programadas a
+las 10:00 UTC, las corridas venían arrancando entre 4 y 4½ horas tarde (la del
+02-09-2026 partió a las 09:58 de Chile), así que las dos crons van al minuto
+23. (2) El paso *Publicar en Pages* estaba condicionado a "push o modo
+completo", y una corrida PROGRAMADA no es ninguna de las dos (`inputs.modo`
+está vacío fuera de un dispatch): del 31-08 al 02-09-2026 la corrida comiteaba
+todos los días y el sitio siguió mostrando la agenda del 31. Ahora publica
+siempre salvo cuando alguien la lanza a mano en un modo que no publica. Si el
+sitio amanece viejo, lo primero es mirar si ese paso dice `skipped`.
 
 ## El dominio
 
@@ -436,7 +448,7 @@ Conviene probarla sola antes de sumarla a la corrida diaria:
 | `talleres` | Catastro de talleres permanentes (`config/talleres.yaml`): lugares que enseñan todas las semanas y no publican agenda. No hace peticiones. |
 | `json` | API JSON propia, con el mapeo de campos declarado en el YAML. |
 | `ticketmaster` | Ticketmaster Discovery (API oficial con permiso explícito). |
-| `manual` | Ingesta asistida desde `datos/manual/*.yaml` y `*.csv`. No hace peticiones. |
+| `manual` | Ingesta asistida desde la pasada con fecha más nueva de `datos/manual/`. No hace peticiones. |
 
 ### El circuito under: `carteleras`
 
@@ -487,7 +499,42 @@ Acepta dos formatos:
 - **`.yaml`** escrito a mano (ver `_plantilla.yaml`), para el dato suelto.
 - **`.csv`** exportado, para volúmenes. El mapeo de columnas por defecto es el
   de una exportación de Passline y se cambia con `csv_columnas`. El nombre del
-  archivo pasa a ser la fuente: `passline.csv` → "Passline".
+  archivo pasa a ser la fuente: `passline.csv` → "Passline". Si el CSV trae
+  columna `fuente_nombre`, manda ella: un mismo archivo puede traer quince
+  municipios distintos y cada evento tiene que poder decir de dónde salió.
+
+#### Una carpeta con fecha por pasada
+
+Desde el **01-09-2026** cada sesión con el navegador entrega una carpeta, no
+archivos sueltos:
+
+    datos/manual/
+      _prompt_cine.md              plantillas y prompts (los que empiezan con _)
+      blondie.yaml                 catastros sueltos escritos a mano
+      fondas_2026.yaml
+      loica_asistida_20260901/     ← la pasada del 01-09, la que manda hoy
+        asistida.csv                 1.097 eventos
+        cartelera_cinepolis.csv      2.983 funciones
+        cartelera_cineplanet.csv
+        cartelera_independientes.csv
+        descuentos_santander.csv     180 descuentos, uno por local
+        RESUMEN_2026-09-01.md        los hallazgos que no caben en un CSV
+
+Manda la carpeta con la fecha más nueva, y manda **por nombre de archivo**: si
+la pasada trae `asistida.csv`, la copia suelta de la raíz queda tapada. Lo que
+la pasada no trae —`blondie.yaml`, `fondas_2026.yaml`, catastros escritos a
+mano que no dependen de la sesión— se sigue leyendo de la raíz.
+
+Esa regla es la que hace que la carpeta sea una **foto completa** y no un
+parche. Importa sobre todo en la cartelera: una función es de un día concreto,
+así que leer la pasada de la semana pasada junto a la de hoy no suma salas,
+publica horarios que ya pasaron. Y como la carpeta anterior queda ahí al lado,
+comparar dos pasadas es un `diff` entre dos carpetas — lo que antes obligaba a
+guardar una copia aparte en `notas/asistida/`.
+
+La fecha de la carpeta viaja con los datos: es la que hace que un descuento
+capturado a mano diga en su ficha cuándo se capturó, en vez de hacerse pasar
+por fresco. Quien resuelve todo esto es [`loica/asistida.py`](loica/asistida.py).
 
 El CSV es la vía que hoy trae Passline: su API está tras un Cloudflare Managed
 Challenge que responde 403 a cualquier cliente automático —probado con nuestro
@@ -767,7 +814,7 @@ falla a propósito en vez de publicar una página vacía.
 | Banco | Cómo se lee | Día | Dirección | Link al local |
 |---|---|---|---|---|
 | **Banco de Chile** (+ Edwards) | CMS propio, API abierta | ✅ 99% | ✅ 94% | ✅ 51% |
-| **Bci** | `vivirconbeneficios.cl`, JSON de Rails | ❌ convenios permanentes | ✅ 100% | ✅ 99% |
+| **Bci** | ⚠️ **captura manual** desde el 02-09-2026 (`bci.cl` bloquea el rastreo; el portal abierto `vivirconbeneficios.cl` está muerto desde 2021) | ✅ 99% | ❌ no publica | ✅ ficha |
 | **Banco Falabella** | Contentful, token público de lectura | ✅ 100% | ❌ solo región | ✅ 100% |
 | **Santander** | ⚠️ **captura manual**, ver abajo | ✅ 88% | ❌ solo región | ❌ |
 | **Cencosud Scotiabank** | JSON incrustado en la landing | ✅ 55% | ❌ | ❌ |
@@ -789,11 +836,17 @@ permite y qué no. Con cabeceras completas de navegador devuelve un desafío de
 evadir un control que el banco puso a propósito. Este proyecto pide permiso
 antes de leer (`loica/red.py`); no va a hacer la excepción justo acá.
 
-Así que su catálogo —83 restaurantes, el mejor del mercado— se anota a mano en
-[`datos/manual/descuentos_santander.yaml`](datos/manual/descuentos_santander.yaml),
-igual que los eventos que no se pueden rastrear. Como es una foto y no un flujo,
-**envejece**: la corrida avisa a los 45 días y cada ficha muestra en la página
-la fecha en que se anotó. Para actualizar, se abre la fuente y se rehace la lista.
+Así que su catálogo —el mejor del mercado— lo trae la pasada asistida, igual
+que los eventos que no se pueden rastrear: `descuentos_santander.csv` dentro de
+la carpeta con fecha, **una fila por local** (1213 aparece dos veces porque
+tiene dos direcciones, y así las dos caen en el mapa). Al 01-09-2026 son 180
+filas, 167 con comuna y 179 con día declarado.
+
+Como es una foto y no un flujo, **envejece**: la corrida avisa a los 45 días y
+cada ficha muestra en la página la fecha de la carpeta. Para actualizar, se
+rehace la pasada. Ojo con la vigencia: el pie legal del sitio no rota —el
+01-09-2026 todavía decía "válidos durante el mes de marzo de 2026"— así que la
+fecha se lee en la ficha de cada promoción, no en el pie.
 
 Scotiabank (tras login), Itaú, BancoEstado, BICE, Security, Ripley, Consorcio,
 Coopeuch y Tenpo quedaron fuera por ahora. El sondeo de los quince emisores está
@@ -814,12 +867,26 @@ son en su mayoría cadenas nacionales que sí tienen local en Santiago.
 convenios de Bci son de 10-25% cualquier día, y dejarlos fuera del filtro de Hoy
 sería esconder 229 descuentos que hoy sirven.
 
-*La frescura es el riesgo real.* Bci todavía publica promociones sin tocar desde
-2021. Todo lo que declara vigencia vencida se descarta en la corrida; lo que no
-declara ninguna pasa, pero va marcado en la página como "sin fecha declarada" en
-vez de darse por bueno. Mandar a alguien a un restaurante con un descuento
-muerto quema la confianza mucho más rápido que un evento pasado en la agenda:
-allá se perdió un panorama, acá se paga la cuenta completa delante de la mesa.
+*La frescura es el riesgo real.* Todo lo que declara vigencia vencida se
+descarta en la corrida; lo que no declara ninguna pasa, pero va marcado en la
+página como "sin fecha declarada" en vez de darse por bueno. Mandar a alguien a
+un restaurante con un descuento muerto quema la confianza mucho más rápido que
+un evento pasado en la agenda: allá se perdió un panorama, acá se paga la
+cuenta completa delante de la mesa.
+
+Lo que costó aprender (02-09-2026): la vigencia casi nunca viene como fecha
+ISO. Viene como prosa —"hasta el 30 de septiembre", "todos los sábados de
+agosto", "válido desde el 02/01/2026 hasta el 31/12/2026"— y el parser
+(`vigencia_en` en `loica/descuentos/texto.py`) tiene que entender las tres
+formas: la fecha completa (prefiriendo la que viene tras "hasta"/"al" y nunca
+la que viene tras "desde"), el día y mes sin año, y el mes a secas en contexto
+de vigencia, que vale hasta el último día de ese mes. Antes solo leía la
+primera fecha completa del texto, y así Banco Ripley entró a septiembre con 25
+convenios "de agosto" sin fecha de término, Entel arrastraba beneficios
+vencidos en 2025, y Bci publicaba un catálogo entero de 2018-2020 porque el
+campo `end_date` del portal ni se miraba. El mes sin año se resuelve con un
+sesgo declarado: si cae dentro de los tres meses que vienen es futuro, si no
+es el más reciente ya pasado —ante la duda, vencido.
 
 Para agregar un banco se edita `config/bancos.yaml`, pero a diferencia de las
 fuentes de eventos **sí hay que escribir un adaptador**: los tres publican
@@ -853,7 +920,7 @@ de sus cuatro vías lee `web/eventos.json`.
 | `jsonld` | 8 | Cinemark publica `ScreeningEvent` de schema.org en el HTML de cada sala. Es el dato que ellos mismos publican para las máquinas: se lee con `requests` y punto. Una petición extra por película trae la clasificación y el idioma, que el JSON-LD no incluye. |
 | `semanal` | 2 | El Normandie y El Biógrafo publican **la semana**, no la función. Un parser por sala. |
 | `agenda` | 4 | La Cineteca Nacional, Matucana 100, el Centro Arte Alameda y el CCC ya llegan por las fuentes de siempre: se recogen de `web/eventos.json` y no se piden dos veces. |
-| `asistida` | 30 | Cineplanet y Cinépolis cierran su cartelera. Las mira una persona con el navegador siguiendo `datos/manual/_prompt_cine.md` y deja `datos/manual/cartelera_cines.csv`, que dispara la corrida al subirse. |
+| `asistida` | 30 | Cineplanet y Cinépolis cierran su cartelera. Las mira una persona con el navegador siguiendo `datos/manual/_prompt_cine.md` y deja los `cartelera_*.csv` en la carpeta con fecha de la pasada, que dispara la corrida al subirse. |
 
 **Por qué esas dos cadenas no se leen solas**, medido el 24-08-2026:
 Cineplanet entrega la cartelera solo a quien trae la cookie de sesión que su

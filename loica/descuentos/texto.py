@@ -16,7 +16,7 @@ from __future__ import annotations
 
 import re
 import unicodedata
-from datetime import date
+from datetime import date, timedelta
 
 # Orden canónico. Es el que usa la página para ordenar los chips, así que
 # lunes va primero y no domingo (que es lo que devolvería `Date.getDay()`).
@@ -236,24 +236,108 @@ def tope_en(*textos: str) -> int | None:
         return None
 
 
-def vigencia_en(*textos: str) -> date | None:
+# Lo que precede a una fecha de TÉRMINO ("hasta el 30/09", "del 1 al 30 de
+# septiembre", "vence el 31") y lo que precede a una de INICIO ("desde el 1 de
+# septiembre", "a partir del 02/01/2026"). La diferencia es la que evita dar
+# por muerta una promoción el día después de que empezó.
+_CIERRE = re.compile(r"(?:hasta|al|vence|vencimiento|termina|finaliza|expira)\s*(?:el|la|dia)?\s*$")
+_APERTURA = re.compile(r"(?:desde|a partir de|a partir del|a contar de|a contar del|inicio|comienza|comienzo)\s*(?:el|dia)?\s*$")
+
+# Un mes a secas ("todos los sabados de agosto", "valido durante septiembre",
+# "bases de agosto de 2026") solo cuenta como vigencia si aparece en un
+# contexto que hable de cuándo corre la promoción. Sin ese freno, "el menú de
+# septiembre" o "inaugurado en marzo" pondrían fecha de término a un descuento
+# que no la declara, y un descuento que se cae antes de tiempo es un local
+# perdido para quien lo busca.
+_CONTEXTO_MES = re.compile(
+    r"(?:valid[oa]s?|vigen[a-z]*|durante|mes de|promocion|campana|bases|hasta"
+    r"|dcto|descuento|beneficio|oferta"
+    r"|los (?:lunes|martes|miercoles|jueves|viernes|sabados?|domingos?))"
+    r"[^.·;]{0,40}?\b(?:de |del |en |durante )?(" + "|".join(MESES) + r")\b(?:\s+(?:de |del )?(\d{4}))?")
+
+
+def _anio_para(mes: int, hoy: date) -> int:
+    """El año de un mes que llegó sin año.
+
+    Los bancos escriben "hasta el 30 de septiembre" y "válido en agosto" sin
+    decir de qué año, porque para ellos es obvio: es la campaña de este mes o
+    de los próximos. Se toma como FUTURO solo si cae dentro de los tres meses
+    que vienen; cualquier otro mes se lee como el más reciente ya pasado. El
+    sesgo es a propósito: leído el 2 de septiembre, "agosto" es el agosto que
+    acaba de terminar y no el del año que viene, y ante la duda es mejor dar
+    por vencido un descuento que mandar a alguien a pagar la cuenta entera.
+    """
+    adelante = (mes - hoy.month) % 12
+    if adelante <= 3:
+        return hoy.year if mes >= hoy.month else hoy.year + 1
+    return hoy.year if mes < hoy.month else hoy.year - 1
+
+
+def _ultimo_dia(anio: int, mes: int) -> date:
+    return date(anio + (mes == 12), mes % 12 + 1, 1) - timedelta(days=1)
+
+
+def vigencia_en(*textos: str, hoy: date | None = None) -> date | None:
     """Hasta cuándo sirve. Es el dato que evita mandar a alguien a un local
-    con una promoción muerta, que es la forma más rápida de perder la confianza."""
+    con una promoción muerta, que es la forma más rápida de perder la confianza.
+
+    Tres formas de decirlo, de la más precisa a la más vaga:
+
+    1. Una fecha completa: "hasta el 30 de septiembre de 2026", "31/08/2026".
+       Si hay varias, manda la primera que venga precedida de "hasta", "al",
+       "vence"; si ninguna lo dice, la última del texto. Una fecha precedida
+       de "desde" o "a partir de" es el INICIO y nunca se toma como término:
+       antes "válido desde el 02/01/2026 hasta el 31/12/2026" devolvía enero y
+       la promoción moría a los dos días de publicada.
+    2. Día y mes sin año: "hasta el 30 de septiembre". El año lo pone
+       `_anio_para`.
+    3. Un mes a secas, en contexto de vigencia: "todos los sábados de agosto",
+       "válido durante septiembre", "bases de agosto de 2026". Se toma el
+       último día de ese mes. Hasta el 02-09-2026 esto no se leía, y Banco
+       Ripley seguía publicando en septiembre 25 convenios "de agosto" como si
+       corrieran todavía.
+
+    Sin nada de eso devuelve None, que la página muestra como "sin fecha
+    declarada" en vez de dar el descuento por bueno.
+    """
     texto = plano(" · ".join(str(t) for t in textos if t))
+    hoy = hoy or date.today()
+    candidatas: list[tuple[int, date, bool, bool]] = []   # (posición, fecha, cierre, apertura)
 
-    largo = re.search(r"(\d{1,2})\s+de\s+([a-z]+)\s+(?:de\s+|del\s+)?(\d{4})", texto)
-    if largo and largo.group(2) in MESES:
+    def anotar(posicion: int, anio: int, mes: int, dia: int) -> None:
         try:
-            return date(int(largo.group(3)), MESES[largo.group(2)], int(largo.group(1)))
+            fecha = date(anio, mes, dia)
         except ValueError:
-            return None
+            return
+        antes = texto[max(0, posicion - 18):posicion]
+        candidatas.append((posicion, fecha,
+                           bool(_CIERRE.search(antes)), bool(_APERTURA.search(antes))))
 
-    corto = re.search(r"(\d{1,2})[/-](\d{1,2})[/-](\d{4})", texto)
-    if corto:
-        try:
-            return date(int(corto.group(3)), int(corto.group(2)), int(corto.group(1)))
-        except ValueError:
-            return None
+    for m in re.finditer(r"(\d{1,2})\s+de\s+([a-z]+)(?:\s+(?:de|del)\s+(\d{4}))?", texto):
+        mes = MESES.get(m.group(2))
+        if not mes:
+            continue
+        anio = int(m.group(3)) if m.group(3) else _anio_para(mes, hoy)
+        anotar(m.start(), anio, mes, int(m.group(1)))
+
+    for m in re.finditer(r"(\d{1,2})[/-](\d{1,2})[/-](\d{4})", texto):
+        anotar(m.start(), int(m.group(3)), int(m.group(2)), int(m.group(1)))
+
+    if candidatas:
+        candidatas.sort()
+        cerradas = [c for c in candidatas if c[2]]
+        if cerradas:
+            return cerradas[0][1]
+        abiertas = [c for c in candidatas if not c[3]]
+        if abiertas:
+            return abiertas[-1][1]
+        return None
+
+    mes_solo = _CONTEXTO_MES.search(texto)
+    if mes_solo:
+        mes = MESES[mes_solo.group(1)]
+        anio = int(mes_solo.group(2)) if mes_solo.group(2) else _anio_para(mes, hoy)
+        return _ultimo_dia(anio, mes)
     return None
 
 

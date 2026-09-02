@@ -13,9 +13,12 @@ En los tres el descubrimiento lo hace una persona navegando normal. Lo que
 aporta el pipeline es lo de siempre: normalizar, deduplicar contra lo que ya
 existe, geocodificar y dejarlo en revisión con su link de origen.
 
-Se escriben en `datos/manual/*.yaml` y entran como cualquier otra fuente, con
-las mismas reglas: sin `fuente_url` no se guarda, porque sin atribución el
-proyecto deja de ser un índice y pasa a ser una copia.
+Se escriben en la carpeta con fecha de la pasada
+(`datos/manual/loica_asistida_AAAAMMDD/`, ver `loica/asistida.py`) o sueltos en
+`datos/manual/*.yaml` para los catastros que no dependen de la sesión con el
+navegador. Entran como cualquier otra fuente y con las mismas reglas: sin
+`fuente_url` no se guarda, porque sin atribución el proyecto deja de ser un
+índice y pasa a ser una copia.
 
     eventos:
       - titulo: Colo-Colo vs Everton
@@ -37,13 +40,12 @@ from pathlib import Path
 
 import yaml
 
+from .. import asistida
 from ..modelo import Evento
 from ..normalizar import detectar_comuna, parsear_precio, resumir
 from ..red import ClienteEducado
 
 log = logging.getLogger("loica.manual")
-
-DIR_MANUAL = Path(__file__).resolve().parent.parent.parent / "datos" / "manual"
 
 # Campos que se aceptan tal cual desde el YAML. Cualquier otro se ignora en
 # silencio: el archivo lo escribe una persona apurada, no un programa.
@@ -263,17 +265,41 @@ def _leer_csv(ruta: Path, fuente: dict) -> list[dict]:
     return [c for c in crudos if c]
 
 
+# La pasada trae dos catastros más que no se leen desde acá: la cartelera de
+# cine (loica/cartelera/asistida.py) y los descuentos de banco
+# (loica/descuentos/bancos.py) llegan en la misma sesión del navegador y en la
+# misma carpeta, pero son otro modelo. Sin este filtro, la pasada del
+# 01-09-2026 metía 3.900 filas de cine y descuentos por esta puerta para que
+# `_desde_fila` las botara una por una: ninguna tiene columna `nombre`. Se
+# descartaban bien, pero en silencio, que es la manera de que un día algo se
+# descarte mal y nadie se entere.
+PREFIJOS_AJENOS = ("cartelera", "descuentos")
+
+
+def _es_de_eventos(ruta: Path) -> bool:
+    return not ruta.stem.lower().startswith(PREFIJOS_AJENOS)
+
+
 def extraer_manual(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
-    """Lee todos los YAML de datos/manual/. No hace ninguna petición de red."""
-    carpeta = Path(fuente.get("carpeta") or DIR_MANUAL)
-    if not carpeta.exists():
-        log.info("%s: todavía no existe %s", fuente.get("nombre"), carpeta)
+    """Lee la pasada asistida más nueva. No hace ninguna petición de red.
+
+    Los archivos salen de `loica.asistida`: manda la carpeta con fecha más
+    nueva de `datos/manual/`, y lo que ella no trae se completa con los
+    catastros sueltos de la raíz (blondie.yaml, fondas_2026.yaml).
+    """
+    raiz = Path(fuente["carpeta"]) if fuente.get("carpeta") else None
+    base = raiz or asistida.DIR_MANUAL
+    if not base.exists():
+        log.info("%s: todavía no existe %s", fuente.get("nombre"), base)
         return []
 
     eventos: list[Evento] = []
-    archivos = sorted(p for p in carpeta.iterdir()
-                      if p.suffix.lower() in (".yaml", ".yml", ".csv")
-                      and not p.name.startswith("_"))
+    archivos = [ruta
+                for patron in ("*.yaml", "*.yml", "*.csv")
+                for ruta in asistida.archivos(patron, raiz)
+                if _es_de_eventos(ruta)]
+    archivos.sort(key=lambda r: r.name)
+    log.info("%s: %s", fuente.get("nombre"), asistida.describir(raiz))
 
     for ruta in archivos:
         if ruta.suffix.lower() == ".csv":
@@ -299,6 +325,6 @@ def extraer_manual(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
             if evento:
                 eventos.append(evento)
 
-    log.info("%s: %d eventos desde %d archivo(s) en %s",
-             fuente.get("nombre"), len(eventos), len(archivos), carpeta.name)
+    log.info("%s: %d eventos desde %d archivo(s)",
+             fuente.get("nombre"), len(eventos), len(archivos))
     return eventos

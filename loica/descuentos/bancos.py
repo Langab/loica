@@ -15,6 +15,7 @@ entre peticiones y con qué URL se arma el link de vuelta a la fuente.
 
 from __future__ import annotations
 
+import csv
 import json
 import logging
 import os
@@ -23,13 +24,15 @@ from datetime import date, datetime
 from pathlib import Path
 
 import yaml
+from bs4 import BeautifulSoup
 
+from .. import asistida
 from ..normalizar import limpiar_html
 from ..red import ClienteEducado
 from .modelo import Descuento
-from .texto import (COMUNAS, datos_bci, dias_en, lugar_en, modalidad_en, oferta_en,
-                    plano, porcentaje_en, sucursales_bch, tope_en, url_normal,
-                    vigencia_en)
+from .texto import (COMUNAS, MESES, REGIONES, datos_bci, dias_en, lugar_en, modalidad_en,
+                    oferta_en, plano, porcentaje_en, sucursales_bch, tope_en,
+                    url_normal, vigencia_en)
 
 
 def token_de(banco: dict) -> str:
@@ -138,6 +141,21 @@ def _coord(valor) -> float | None:
 
 
 def _bci(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
+    # Desde el 02-09-2026 manda la pasada asistida, si existe. El portal
+    # vivirconbeneficios.cl que se leía hasta entonces es un catálogo MUERTO:
+    # sus 27 promociones de restaurantes traen `end_date` entre 2018 y 2020 y
+    # `updated_at` entre 2017 y 2021, y solo una de ellas sigue en el catálogo
+    # vivo de bci.cl (80 restaurantes en la RM al 01-09-2026, 77 con vigencia
+    # hasta el 30-09). Como el adaptador no miraba `end_date`, se publicaban
+    # 143 descuentos de hace seis años como si corrieran hoy. bci.cl responde
+    # 403 a clientes que no son un navegador (WAF), así que su catálogo entra
+    # por la pasada con el navegador, igual que Santander, con su fecha de
+    # captura a la vista. El portal viejo queda de respaldo y ahora sí filtra
+    # por `end_date`, con lo que hoy no devuelve nada vigente: es lo correcto.
+    csv_pasada = asistida.archivos("descuentos_bci.csv")
+    if csv_pasada:
+        return _csv_pasada(banco, csv_pasada[0])
+
     recogidos: list[Descuento] = []
 
     for categoria in banco.get("categorias") or []:
@@ -181,7 +199,11 @@ def _bci(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
                     # día, solo prosa. Buena parte no dice ninguno y queda sin
                     # día, que es lo honesto: mejor vacío que un martes inventado.
                     dias=dias_en(descripcion, condiciones),
-                    vigencia_hasta=vigencia_en(condiciones, descripcion),
+                    # `end_date` es un campo del JSON y manda sobre la prosa.
+                    # Hasta el 02-09-2026 no se leía, y por eso ninguna de las
+                    # promociones de 2018-2020 caía como vencida.
+                    vigencia_hasta=(_fecha_iso(promo.get("end_date"))
+                                    or vigencia_en(condiciones, descripcion)),
                     tarjetas=[],       # Bci no las publica por promoción
                     modalidad=modalidad_en(descripcion, condiciones),
                     condiciones=condiciones,
@@ -413,6 +435,13 @@ def _santander(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
     de captura hasta la ficha en la página. Un descuento que dice "capturado
     hace tres meses" es honesto; uno que se hace pasar por fresco, no.
     """
+    # Desde el 01-09-2026 la pasada del navegador entrega Santander como CSV
+    # dentro de su carpeta con fecha, y ese CSV trae lo que el YAML no tenía:
+    # dirección, comuna, logo, tope y vigencia por local. Si hay CSV, manda.
+    csv_nuevo = asistida.archivos("descuentos_santander.csv")
+    if csv_nuevo:
+        return _csv_pasada(banco, csv_nuevo[0])
+
     ruta = Path(__file__).resolve().parents[2] / banco["archivo"]
     if not ruta.exists():
         log.warning("Santander: falta %s — se omite", ruta)
@@ -480,27 +509,275 @@ def _santander(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
     return recogidos
 
 
+def _csv_pasada(banco: dict, ruta: Path) -> list[Descuento]:
+    """Un banco capturado con el navegador, en el formato de la pasada con fecha.
+
+        banco,comercio,direccion,comuna,lat,lon,logo,dias,monto,tope,vigencia,
+        sitio_web,categoria,url
+
+    Lo usan los bancos que le cierran la puerta al robot y se anotan a mano:
+    Santander desde el 01-09-2026 y Bci desde el 02-09-2026. Es el mismo
+    archivo para los dos, cambia solo el nombre (`descuentos_<id>.csv`).
+
+    Cada fila es UN LOCAL, no un convenio: Santander publica "Holy Moly" dos
+    veces porque tiene dos direcciones, y así las dos caen en el mapa. La
+    columna `url` es la ficha de esa promoción —Santander le da página propia a
+    cada una—, que es mejor atribución que el link único a la parrilla que
+    traía el YAML.
+
+    Lo que el CSV NO trae es el tipo de tarjeta, que el YAML sí tenía. Sin esa
+    columna no se puede saber si la promoción es solo para Amex o Limited, y
+    marcar `segmentado` a ojo sería inventarlo: queda en falso, que es lo que
+    el dato publicado permite afirmar.
+    """
+    try:
+        # utf-8-sig porque Excel y varios exportadores dejan BOM al inicio.
+        with ruta.open(encoding="utf-8-sig", newline="") as f:
+            filas = list(csv.DictReader(f))
+    except (OSError, csv.Error) as e:
+        log.error("%s: no pude leer %s (%s)", banco["nombre"], ruta.name, e)
+        return []
+
+    # La fecha de la carpeta ES la fecha de captura, y sale de la carpeta DE
+    # ESTE archivo, no de "la pasada más nueva": si el CSV viniera suelto de la
+    # raíz mientras existe una pasada, ponerle la fecha de la pasada sería
+    # firmar como fresco algo que no lo es. Viaja hasta la ficha en la página,
+    # porque un descuento que dice "capturado hace tres meses" es honesto; uno
+    # que se hace pasar por fresco, no.
+    fecha = asistida.fecha_de_carpeta(ruta.parent)
+    capturado = fecha.isoformat() if fecha else ""
+
+    recogidos = []
+    for fila in filas:
+        comercio = str(fila.get("comercio") or "").strip()
+        if not comercio:
+            continue
+        monto = str(fila.get("monto") or "").strip()
+        recogidos.append(Descuento(
+            banco_id=banco["id"],
+            banco=banco["nombre"],
+            comercio=comercio,
+            # Santander no publica rubro. La columna trae lo que dedujo quien
+            # capturó, y el modelo lo homologa; vacío deja que lo deduzca del
+            # nombre del local.
+            categoria=str(fila.get("categoria") or "").strip(),
+            direccion=str(fila.get("direccion") or "").strip(),
+            comuna=str(fila.get("comuna") or "").strip(),
+            lat=_coordenada(fila.get("lat")),
+            lon=_coordenada(fila.get("lon")),
+            sitio_web=str(fila.get("sitio_web") or "").strip(),
+            # Región VACÍA a propósito, igual que en el YAML: Santander no
+            # publica región por local. Las 167 filas con comuna ya pasan el
+            # filtro de la RM por comuna, y las 13 sin comuna son cadenas
+            # (Bar TPM, Vapiano, Kento Sushi) que pasan igual, porque lo que no
+            # declara región se deja pasar. Escribir "Metropolitana" acá sería
+            # afirmar por el banco algo que el banco no dijo.
+            region="",
+            logo=str(fila.get("logo") or "").strip(),
+            porcentaje=porcentaje_en(monto),
+            # "2x1", "Con regalo": lo que no es porcentaje. Un descuento tiene
+            # uno u otro, nunca los dos.
+            oferta="" if porcentaje_en(monto) else oferta_en(monto),
+            tope=int(fila["tope"]) if str(fila.get("tope") or "").strip().isdigit() else None,
+            vigencia_hasta=_fecha_iso(fila.get("vigencia")),
+            dias=dias_en(str(fila.get("dias") or "").replace(";", " y ")),
+            modalidad=modalidad_en(monto),
+            # `condiciones` es la letra chica que la ficha muestra al pie. El
+            # CSV no trae letra chica, y repetir ahí el "40% dcto." que ya es
+            # el titular no informa: lo llena de ruido.
+            condiciones="",
+            url=str(fila.get("url") or "").strip(),
+            capturado=capturado,
+        ))
+
+    log.info("%s: %d descuentos de la captura del %s (%s)",
+             banco["nombre"], len(recogidos), capturado or "?", ruta.parent.name)
+    return recogidos
+
+
+def _coordenada(valor) -> float | None:
+    try:
+        return float(str(valor).strip())
+    except (TypeError, ValueError):
+        return None
+
+
 # --------------------------------------------------------------------------
 # Tarjeta Cencosud Scotiabank
 # --------------------------------------------------------------------------
 def _cencosud(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
-    """El catálogo va incrustado en la página como `window.CardsAPI`.
+    """La landing publica DOS catálogos distintos y hay que leer los dos.
 
-    No hay endpoint aparte: es un GET normal a la landing y un JSON adentro de
-    una etiqueta <script>. Aporta poco —de 83 beneficios solo la categoría
-    "comida" sirve, y ahí adentro hay cine y viajes— pero es otro emisor, es
-    abierto y sale barato.
+    `window.CardsAPI` es el carrusel de tarjetas del sitio entero —el mismo
+    JSON en todas las landings— y ahí viven los convenios de cadena: Burger
+    King, PedidosYa, Rappi, Papa Johns. Son un puñado y hasta ahora eran los
+    únicos que entraban.
 
-    El nombre del local está dentro del título ("40% dcto. en Burger King"),
-    así que se corta por el " en ".
+    Los restaurantes no están en ese JSON. Están en el HTML de la propia
+    landing, en una grilla de `div.grilla_item` con nombre, mall o comuna,
+    día, tope, legal y sitio web, servida ya renderizada. Son 58 fichas que
+    el adaptador ignoraba enteras por mirar solo la variable de JavaScript:
+    la captura asistida del 01-09-2026 trajo 51 comercios y el adaptador
+    veía 8.
     """
     respuesta = cliente.obtener(banco["url_agenda"])
     if respuesta is None or not respuesta.ok:
         log.warning("Cencosud: no respondió")
         return []
 
-    bloque = re.search(r"window\.CardsAPI\s*=\s*\{.*?return\s*(\[.*?\]);",
-                       respuesta.text, re.S)
+    grilla = _grilla_cencosud(banco, respuesta.text)
+    tarjetas = _tarjetas_cencosud(banco, respuesta.text)
+    log.info("Cencosud: %d de la grilla + %d del carrusel", len(grilla), len(tarjetas))
+    return grilla + tarjetas
+
+
+def _grilla_cencosud(banco: dict, html: str) -> list[Descuento]:
+    """Las fichas de restaurante de la landing, una por local.
+
+    Cada `div.grilla_item` es una ficha completa y no hay que abrir nada:
+
+        <div class="grilla_item">
+          <a href="https://santabrasa.cl/"><img alt="logo Santa Brasa" src="...">
+            <div class="tit">Santa Brasa</div>
+            <div class="desc">40% <span>Dcto.</span></div>
+            <ul><li>Cenco Costanera</li><li>Jueves</li></ul></a>
+          <p class="legal">Promoción válida todos los jueves ... tope de $40.000 ...</p>
+        </div>
+
+    Se parsea con BeautifulSoup y no con expresión regular a propósito: la
+    página trae otras nueve fichas iguales COMENTADAS —promociones de
+    noviembre que todavía no arrancan— y un `re.findall` las levantaría como
+    si estuvieran vivas. El parser las descarta solo.
+    """
+    sopa = BeautifulSoup(html, "html.parser")
+    recogidos = []
+    for ficha in sopa.select("div.grilla_item"):
+        titulo = ficha.select_one(".tit")
+        comercio = titulo.get_text(" ", strip=True) if titulo else ""
+        if not comercio:
+            continue
+
+        etiquetas = [li.get_text(" ", strip=True) for li in ficha.select("ul li")]
+        donde = etiquetas[0] if etiquetas else ""
+        cuando = " · ".join(etiquetas[1:])
+        rebaja = ficha.select_one(".desc")
+        rebaja = rebaja.get_text(" ", strip=True) if rebaja else ""
+        letra_chica = ficha.select_one("p.legal")
+        legal = letra_chica.get_text(" ", strip=True) if letra_chica else ""
+        enlace, imagen = ficha.find("a"), ficha.find("img")
+
+        # Manda el <li>, no la letra chica. Se contradicen en una de las 58
+        # fichas —La Cocina de Javier dice "de lunes a viernes" arriba y
+        # "lunes a jueves" en el legal— y arriba es lo que la persona lee.
+        # El legal solo entra cuando el <li> no trae ningún día.
+        dias = dias_en(cuando) or dias_en(legal)
+
+        for comuna, direccion, region in _locales_cencosud(donde, _seccion_cencosud(ficha)):
+            recogidos.append(Descuento(
+                banco_id=banco["id"],
+                banco=banco["nombre"],
+                comercio=comercio,
+                categoria="restaurantes",
+                comuna=comuna,
+                region=region,
+                direccion=direccion,
+                sitio_web=url_normal(enlace.get("href") if enlace else ""),
+                porcentaje=porcentaje_en(rebaja, legal),
+                # Uno u otro, nunca los dos: el "2x1" solo tiene sentido
+                # cuando no hay un por ciento que mostrar.
+                oferta="" if porcentaje_en(rebaja, legal) else oferta_en(rebaja),
+                tope=tope_en(legal),
+                dias=dias,
+                vigencia_hasta=vigencia_en(legal),
+                tarjetas=["cencosud"],
+                modalidad=modalidad_en(legal),
+                condiciones=legal[:300],
+                url=banco["url_agenda"],
+                logo=url_normal(imagen.get("src") if imagen else ""),
+            ))
+    return recogidos
+
+
+def _seccion_cencosud(ficha) -> str:
+    """El título de bloque bajo el que cuelga la ficha: "Santiago", "Regiones".
+
+    Cencosud parte la grilla en bloques con `h4.titulo_region` y ese título es
+    la única señal de que un local no es de Santiago cuando la ficha nombra un
+    mall en vez de una comuna.
+    """
+    encabezado = ficha.find_previous("h4", class_="titulo_region")
+    return encabezado.get_text(" ", strip=True) if encabezado else ""
+
+
+def _locales_cencosud(donde: str, seccion: str) -> list[tuple[str, str, str]]:
+    """"Providencia, Las Condes y Vitacura" son tres locales, no uno.
+
+    Devuelve (comuna, dirección, región) por cada local. En esa misma línea
+    Cencosud mezcla tres cosas que no son lo mismo:
+
+        "Vitacura"              la comuna
+        "Cenco Costanera"       el mall, que no dice en qué comuna queda
+        "Viña del Mar"          la ciudad, cuando el local no es de Santiago
+
+    Lo que calza con el diccionario de comunas queda como comuna; lo que no,
+    es el nombre de un mall y queda como dirección para que lo resuelva la
+    geocodificación, que es donde vive ese problema. "Mirador Alto las Condes"
+    cae en las dos: es un mall Y dice su comuna, así que se lee de adentro.
+    """
+    piezas = [p.strip(" .-") for p in re.split(r",| y |/| - |–", donde) if p.strip(" .-")]
+    locales: list[tuple[str, str, str]] = []
+    for pieza in piezas:
+        plana = plano(pieza)
+        adentro = _comuna_adentro(pieza)
+        if plana in COMUNAS:
+            locales.append((COMUNAS[plana], "", ""))
+        elif plana in REGIONES:
+            locales.append(("", "", REGIONES[plana]))
+        elif adentro or not locales or locales[-1][1]:
+            locales.append((adentro, pieza, ""))
+        else:
+            # "Lo Barnechea, Portal La Dehesa" es UN local dicho dos veces: la
+            # comuna y después el mall. Sin esto Margó salía con una sucursal
+            # de más, la misma contada como comuna y como dirección.
+            comuna, _, region = locales[-1]
+            locales[-1] = (comuna, pieza, region)
+
+    if not locales:
+        locales = [("", "", "")]
+
+    # Un mall de regiones no dice su ciudad ("Mall Marina Arauco" no contiene
+    # "Viña"), y sin esto entraría a la lista de Santiago por no declarar
+    # nada. El título del bloque es de Cencosud, no nuestro: lo que cuelga de
+    # "Regiones" no es de la RM aunque el nombre del local no lo delate.
+    if plano(seccion).startswith("regiones"):
+        locales = [(comuna, direccion, region or "Regiones")
+                   for comuna, direccion, region in locales]
+    return locales
+
+
+# Las comunas de más de una palabra primero: "Las Condes" tiene que ganarle a
+# una hipotética "Condes" y "San Pedro de la Paz" a "San Pedro".
+_COMUNAS_LARGAS = sorted(COMUNAS, key=len, reverse=True)
+
+
+def _comuna_adentro(texto: str) -> str:
+    """La comuna que el nombre del mall lleva escrita: "Mirador Alto las Condes"."""
+    plana = plano(texto)
+    for clave in _COMUNAS_LARGAS:
+        if re.search(rf"(?<![a-z0-9]){re.escape(clave)}(?![a-z0-9])", plana):
+            return COMUNAS[clave]
+    return ""
+
+
+def _tarjetas_cencosud(banco: dict, html: str) -> list[Descuento]:
+    """El carrusel de tarjetas del sitio, incrustado como `window.CardsAPI`.
+
+    Es el catálogo del sitio entero —85 beneficios, los mismos en cualquier
+    landing— y de ahí solo sirve la categoría "comida", que es la que filtra
+    `config/bancos.yaml`. Aporta poco pero es el único lugar donde están los
+    convenios de cadena, que no tienen ficha en la grilla.
+    """
+    bloque = re.search(r"window\.CardsAPI\s*=\s*\{.*?return\s*(\[.*?\]);", html, re.S)
     if not bloque:
         log.warning("Cencosud: no encontré window.CardsAPI (¿cambiaron la página?)")
         return []
@@ -519,17 +796,27 @@ def _cencosud(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
         if categorias and not (categorias & suyas):
             continue
 
+        url = str(item.get("url") or "")
+        # La tarjeta de "La Ruta del Sabor" es la landing que acabamos de
+        # abrir, no un comercio: entraba como un descuento llamado
+        # "restaurantes" que era la grilla entera disfrazada de una fila.
+        if url.rstrip("/") == banco["url_agenda"].rstrip("/"):
+            continue
+
         titulo = str(item.get("title") or "").strip()
         corta = str(item.get("short_description") or "")
         legal = limpiar_html(item.get("legal_text") or "")
         dias = dias_en(titulo, corta)
-        if not dias and not porcentaje_en(titulo):
+        # El monto se mira en el titular Y en la bajada, igual que dos líneas
+        # más abajo. Mirando solo el titular se caía Cineplanet, que anuncia
+        # "¡Tu nuevo beneficio está imperdible!" y deja el 50% en la bajada.
+        if not dias and porcentaje_en(titulo, corta) is None:
             continue        # sin día ni monto no queda nada que mostrar
 
         recogidos.append(Descuento(
             banco_id=banco["id"],
             banco=banco["nombre"],
-            comercio=_comercio_cencosud(titulo),
+            comercio=_comercio_cencosud(titulo, url),
             categoria="restaurantes",
             region="Todo Chile",
             porcentaje=porcentaje_en(titulo, corta),
@@ -539,18 +826,44 @@ def _cencosud(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
             tarjetas=["cencosud"],
             modalidad=modalidad_en(titulo, corta),
             condiciones=corta.strip() or legal[:300],
-            url=str(item.get("url") or banco["url_agenda"]),
+            url=url or banco["url_agenda"],
+            logo=url_normal(item.get("logo_card") or ""),
         ))
     return recogidos
 
 
-def _comercio_cencosud(titulo: str) -> str:
-    """"40% dcto. en Burger King" → "Burger King"."""
+# Palabras que en un nombre propio van en minúscula: "Escapadas en Chile".
+_MINUSCULAS = {"de", "del", "la", "las", "el", "los", "en", "y", "con", "a"}
+
+
+def _comercio_cencosud(titulo: str, url: str = "") -> str:
+    """El nombre del comercio, que Cencosud no publica como campo.
+
+    Hay dos lugares donde buscarlo y ninguno solo alcanza:
+
+        "40% dcto. en Burger King"          el titular, cortado por el " en "
+        ".../landing/burger-king"           el slug de la landing del beneficio
+
+    El titular tiene la ortografía buena ("PedidosYa" pegado) pero la mitad de
+    las veces es un eslogan: "¡Platos preparados todos los días!" es Fork y
+    "Un beneficio hecho a su medida" es KidZania. El slug siempre nombra al
+    comercio pero pierde tildes y mayúsculas.
+
+    Así que manda el titular cuando dice lo mismo que el slug, y el slug
+    cuando el titular se fue a vender.
+    """
     corte = re.split(r"\s+en\s+", titulo, maxsplit=1)
     nombre = corte[1] if len(corte) > 1 else titulo
     # Se les cuela el día pegado al nombre: "PedidosYa todos los viernes"
-    nombre = re.split(r"\s+todos los\s+", nombre, maxsplit=1)[0]
-    return nombre.strip(" .,")
+    nombre = re.split(r"\s+todos los\s+", nombre, maxsplit=1)[0].strip(" .,¡!")
+
+    slug = url.rstrip("/").rsplit("/", 1)[-1] if "/landing/" in url else ""
+    if not slug:
+        return nombre
+    if plano(nombre).replace(" ", "") == slug.replace("-", ""):
+        return nombre           # el titular lo escribe mejor: "PedidosYa"
+    return " ".join(p if p in _MINUSCULAS else p.capitalize()
+                    for p in slug.split("-"))
 
 
 def _ripley(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
@@ -653,6 +966,17 @@ def _descuento_ripley(banco: dict, item: dict) -> Descuento | None:
     # proyecto la lista vacía significa "sin restricción de día".
     dias = dias_en(_valor(params, "txtValidezBeneficio"))
 
+    # La letra chica que ve la persona. `txtVigenciaDetalle` es lo que el
+    # banco declara como vigencia del beneficio ("Hasta el 30 de septiembre")
+    # y va primero. De `arrVigencia` —la campaña— entra solo lo que no nombra
+    # un mes: Ripley no la rota, y el 02-09-2026 seguía diciendo "Todos los
+    # sábados de agosto" en 25 locales con vigencia declarada al 30-09.
+    # Publicar ese texto en septiembre es decirle a alguien que llegó tarde.
+    vigencia_txt = _valor(params, "txtVigenciaDetalle")
+    sin_mes = [v for v in vigencias
+               if not re.search(r"\b(" + "|".join(MESES) + r")\b", plano(v))]
+    letra_chica = ([vigencia_txt] if vigencia_txt else []) + sin_mes + _lista(detalles, "arrHorarios")
+
     return Descuento(
         banco_id=banco["id"],
         banco=banco["nombre"],
@@ -669,10 +993,10 @@ def _descuento_ripley(banco: dict, item: dict) -> Descuento | None:
         oferta=oferta_en(_valor(params, "txtDescuento")),
         tope=tope_en(legal),
         dias=dias,
-        vigencia_hasta=vigencia_en(_valor(params, "txtVigenciaDetalle"), *vigencias, legal),
+        vigencia_hasta=vigencia_en(vigencia_txt, *vigencias, legal),
         tarjetas=["ripley"],
         modalidad=modalidad_en(legal, _valor(params, "txtDetalleCard")),
-        condiciones=" · ".join(vigencias + _lista(detalles, "arrHorarios"))[:300],
+        condiciones=" · ".join(letra_chica)[:300],
         url=banco.get("url_agenda", ""),
         logo=_valor(params, "imgLogo"),
     )
@@ -708,22 +1032,52 @@ def _entel(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
         nombre = titulo.replace("&#39;", "'").strip()
         if not nombre:
             continue
+        # La vigencia vive en la ficha, no en el catálogo. Entel arrastra
+        # beneficios vencidos hace más de un año como si estuvieran activos
+        # (la pasada del 01-09-2026 contó 22 de 63), y sin esta petición extra
+        # todos entraban a la página con "sin fecha declarada", que se lee
+        # como "sirve".
+        terminos = _terminos_entel(cliente, url)
         vistos[url] = Descuento(
             banco_id=banco["id"],
             banco=banco["nombre"],
             comercio=nombre,
             region="Todo Chile",
-            porcentaje=porcentaje_en(limpio),
+            porcentaje=porcentaje_en(limpio, terminos),
             oferta=oferta_en(limpio),
-            dias=dias_en(limpio),
+            dias=dias_en(limpio) or dias_en(terminos),
+            tope=tope_en(terminos),
+            vigencia_hasta=vigencia_en(terminos),
             tarjetas=["entel"],
-            modalidad=modalidad_en(limpio),
+            modalidad=modalidad_en(limpio, terminos),
             condiciones=limpio[:300],
             url=url,
         )
-    log.info("Entel: %d beneficios en %s", len(vistos),
-             ", ".join(banco.get("categorias") or ["todas las secciones"]))
+    log.info("Entel: %d beneficios en %s (%d con vigencia)", len(vistos),
+             ", ".join(banco.get("categorias") or ["todas las secciones"]),
+             sum(1 for d in vistos.values() if d.vigencia_hasta))
     return list(vistos.values())
+
+
+def _terminos_entel(cliente: ClienteEducado, url: str) -> str:
+    """Los términos legales de una ficha de Entel, como texto plano.
+
+    La ficha viene renderizada en el servidor (no hace falta navegador) y los
+    términos van en uno o más `.modal-text`: ahí está la única fecha de
+    término que Entel publica. Se lee SOLO ese bloque y no la página entera:
+    el resto trae un carrusel con otros beneficios y sus propias fechas, y la
+    primera que apareciera se le colgaría al beneficio equivocado.
+
+    Con caché de un día: son ~30 fichas y los términos no cambian a diario.
+    Si la ficha no responde, se devuelve vacío y el beneficio queda sin
+    vigencia, que es lo que se sabía hasta ahora.
+    """
+    respuesta = cliente.obtener(url, max_edad_cache_seg=24 * 3600)
+    if respuesta is None or not respuesta.ok:
+        return ""
+    sopa = BeautifulSoup(respuesta.text, "html.parser")
+    bloques = [b.get_text(" ", strip=True) for b in sopa.select(".modal-text")]
+    return " · ".join(b for b in bloques if b)
 
 
 # --------------------------------------------------------------------------

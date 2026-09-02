@@ -24,7 +24,7 @@ Por eso esto es un runbook y no un script.
 
 ```
 extracción asistida  ─┐
-                      ├─→  datos/manual/*.yaml|csv
+                      ├─→  datos/manual/loica_asistida_AAAAMMDD/
 scrapers automáticos ─┤          │
                       │          ↓
                       └─→  datos/eventos.db   ← LA BASE CONSOLIDADA
@@ -32,6 +32,30 @@ scrapers automáticos ─┤          │
                                  ↓
                           web/eventos.json  →  el sitio
 ```
+
+### Una carpeta con fecha por pasada
+
+Desde el **01-09-2026** la sesión entrega una CARPETA, no archivos sueltos:
+
+    datos/manual/loica_asistida_20260901/
+      asistida.csv                  los eventos
+      cartelera_cinepolis.csv       el cine
+      cartelera_cineplanet.csv
+      cartelera_independientes.csv
+      descuentos_santander.csv      los descuentos que no se pueden rastrear
+      RESUMEN_2026-09-01.md          los hallazgos que no caben en un CSV
+
+Manda la carpeta con la fecha más nueva, y manda **por nombre de archivo**: lo
+que la carpeta trae tapa a la copia suelta de la raíz; lo que no trae
+(`blondie.yaml`, `fondas_2026.yaml`) se sigue leyendo de la raíz.
+
+Dos cosas que esto arregla y conviene no perder:
+
+1. **La pasada es una foto completa, no un parche.** Sobre todo en el cine: una
+   función es de un día concreto, y mezclar la pasada de la semana pasada con
+   la de hoy no suma salas, publica horarios que ya pasaron.
+2. **Comparar dos pasadas es un `diff` entre dos carpetas.** Ya no hace falta
+   guardar una copia aparte en `notas/asistida/`.
 
 La base consolidada es **`datos/eventos.db`**. Todo lo que entra —automático o
 asistido— pasa por las mismas reglas: se normaliza, se deduplica por
@@ -53,10 +77,11 @@ cualquier user-agent, incluso desde la máquina donde corre el pipeline.
 
 **Qué obtengo:** título, fecha, hora, recinto, comuna y el link de cada evento.
 
-**Dónde queda:** `datos/manual/passline.csv`
+**Dónde queda:** `asistida.csv` dentro de la carpeta de la pasada.
 
-> El CSV se **reemplaza**, no se acumula. Los eventos que ya pasaron se caducan
-> solos, así que un CSV viejo se va vaciando sin rellenarse.
+> La carpeta **reemplaza** a la anterior, no se acumula con ella. Los eventos
+> que ya pasaron se caducan solos, así que una pasada vieja se va vaciando sin
+> rellenarse.
 
 ### 2. Instagram — el circuito sin ticketera
 
@@ -73,22 +98,44 @@ estructurado.
 
 **Cuentas a vigilar:** ver `_instagram.md`
 
-**Dónde queda:** `datos/manual/instagram.yaml`
+**Dónde queda:** `instagram.yaml` dentro de la carpeta de la pasada.
 
-### 3. Santander — los descuentos
+### 3. Santander y Bci — los descuentos
 
 **Por qué a mano:** `banco.santander.cl` responde 403 a todo, incluido
-`/robots.txt`. Ni siquiera se puede leer qué permite.
+`/robots.txt`. Ni siquiera se puede leer qué permite. Y `bci.cl/beneficios`
+hace lo mismo (WAF): el portal abierto que se leía en su lugar,
+`vivirconbeneficios.cl`, es un catálogo muerto desde 2021 —sus promociones
+traen `end_date` de 2018 a 2020— y desde el 02-09-2026 ya no se publica. El
+catálogo vivo de Bci entra por acá, como `descuentos_bci.csv`, con el mismo
+formato que Santander.
 
-**Qué falta hoy:** sus 72 descuentos no tienen dirección, así que no caen en el
-mapa ni se filtran por comuna. Salen como "Metropolitana" a secas.
+**Cuándo:** el primer día hábil de cada mes. Los dos bancos rotan la parrilla
+por mes y la mayoría vence el día 30: el 01-09-2026, 173 de 180 filas de
+Santander y 77 de 80 de Bci vencían el 30-09. La corrida avisa sola cuando la
+captura pasa de 45 días (`avisar_dias` en `config/bancos.yaml`).
+
+**Qué falta hoy:** de las 180 filas del 01-09-2026, 64 traen calle y número.
+Las otras 116 caen en el centroide de su comuna, no en la puerta del local.
 
 **Qué pedirme:** *"abrí la ficha de cada descuento de Santander y sacá la
 dirección"*. La ficha (al hacer clic en el local) tiene **dirección, logo, tope
-y vigencia** — los cuatro campos que faltan.
+y vigencia**.
 
-**Dónde queda:** `datos/manual/descuentos_santander.yaml` — el formato completo
-está documentado en la cabecera de ese archivo.
+**Dónde queda:** `descuentos_santander.csv` dentro de la carpeta de la pasada,
+con estas columnas:
+
+    banco,comercio,direccion,comuna,lat,lon,logo,dias,monto,tope,vigencia,
+    sitio_web,categoria,url
+
+Una fila por **local**, no por convenio: 1213 va dos veces porque tiene dos
+direcciones, y así las dos caen en el mapa. `dias` separa con `;`, `vigencia`
+es ISO (`2026-09-30`) y `url` es la ficha de esa promoción, que Santander
+publica con página propia.
+
+Ojo con la vigencia: **el pie legal del sitio no rota** —el 01-09-2026 todavía
+decía "válidos durante el mes de marzo de 2026"— así que hay que leerla en la
+ficha de cada promoción.
 
 ---
 

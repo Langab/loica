@@ -2,19 +2,20 @@
 
 Se usa cuando hay tiempo —idealmente un jueves, que es cuando las cadenas
 cambian la programación y cargan la semana— y devuelve **un CSV por cadena**,
-que se guardan en `datos/manual/` y se suben con git: la corrida en la nube
-arranca sola al ver el archivo nuevo y lo publica en la página de cine.
+que se guardan **dentro de la carpeta con fecha de la pasada**
+—`datos/manual/loica_asistida_AAAAMMDD/`— y se suben con git: la corrida en la
+nube arranca sola al ver la carpeta nueva y la publica en la página de cine.
 
 ```bash
-git add datos/manual/cartelera_*.csv
+git add datos/manual/loica_asistida_$(date +%Y%m%d)/
 git commit -m "Cartelera de cine al $(date +%F)"
 git push
 ```
 
 ## Un archivo por cadena, y por qué importa
 
-`loica/cartelera/asistida.py` lee **todos** los `datos/manual/cartelera*.csv`,
-así que conviven sin pisarse:
+`loica/cartelera/asistida.py` lee **todos** los `cartelera*.csv` de la carpeta
+con fecha más nueva, así que conviven sin pisarse:
 
 | Archivo | Qué trae |
 |---|---|
@@ -27,6 +28,13 @@ Estaban todas en un solo `cartelera_cines.csv` y eso era una trampa: como el
 archivo se reemplaza, una pasada que trajera solo Cinépolis **borraba las 424
 funciones de Cineplanet** sin que nadie lo notara hasta ver la página. Con un
 archivo por cadena, extraer una no toca a las otras.
+
+Ojo con la carpeta con fecha: **manda la más nueva y entera**. Si esa pasada
+trae solo `cartelera_cinepolis.csv`, Cineplanet se queda sin funciones —la
+carpeta anterior NO la completa, porque una función es de un día concreto y
+mezclar dos pasadas publicaría horarios que ya pasaron. Una pasada de cine trae
+las tres cadenas o se copian las que no se refrescaron desde la carpeta
+anterior.
 
 Lo que no se refresca se apaga solo: las funciones pasadas se descartan al
 publicar, así que un archivo viejo se vacía en unos días en vez de mentir.

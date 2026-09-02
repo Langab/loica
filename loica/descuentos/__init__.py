@@ -137,5 +137,9 @@ def _avisar_si_vieja(banco: dict, descuentos: list[Descuento]) -> None:
     except ValueError:
         return
     if dias > int(limite):
+        # `rehacer` dice DÓNDE se rehace. Antes decía `archivo`, que desde que
+        # Santander llega en la pasada con fecha es el respaldo viejo: el aviso
+        # mandaba a editar un YAML que ya no se lee.
         log.warning("%s: la captura es del %s (%d días). Toca rehacerla: %s",
-                    banco["nombre"], capturado, dias, banco.get("archivo", ""))
+                    banco["nombre"], capturado, dias,
+                    banco.get("rehacer") or banco.get("archivo", ""))

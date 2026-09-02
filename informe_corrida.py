@@ -460,9 +460,9 @@ METODOS_EVENTOS = {
 
 METODOS_BANCOS = {
     "bancochile": "CMS público de beneficios (JSON)",
-    "bci": "Portal vivirconbeneficios (JSON por categoría)",
+    "bci": "Captura a mano (CSV de la pasada): bci.cl bloquea el rastreo y vivirconbeneficios está muerto desde 2021",
     "falabella": "Contentful Content Delivery (JSON)",
-    "cencosud": "JSON incrustado en la página (window.CardsAPI)",
+    "cencosud": "Grilla HTML de la landing + JSON incrustado (window.CardsAPI)",
     "santander": "Captura a mano: el sitio bloquea el rastreo",
 }
 

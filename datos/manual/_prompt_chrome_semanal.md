@@ -1,15 +1,19 @@
 # Prompt semanal para Claude en Chrome — solo Passline
 
 Copiar el bloque de abajo completo y pegarlo en Claude en el navegador, una vez
-por semana. Devuelve un CSV que se guarda como `datos/manual/asistida.csv`
-(se **reemplaza**, no se acumula) y se sube con git: la corrida en la nube
-arranca sola al ver el archivo nuevo y lo publica.
+por semana. Devuelve un CSV que se guarda como `asistida.csv` **dentro de la
+carpeta con fecha de la pasada** —`datos/manual/loica_asistida_AAAAMMDD/`— y se
+sube con git: la corrida en la nube arranca sola al ver la carpeta nueva y la
+publica.
 
 ```bash
-git add datos/manual/asistida.csv
+git add datos/manual/loica_asistida_$(date +%Y%m%d)/
 git commit -m "Passline al $(date +%F)"
 git push
 ```
+
+Manda la carpeta con la fecha más nueva. La anterior queda ahí al lado como
+historia: comparar dos pasadas es un `diff` entre dos carpetas.
 
 ## Por qué solo Passline
 
@@ -99,9 +103,10 @@ Passline,Gran Final Miss Grand Chile 2026,,2026-08-29,20:00:00,,Gran Espacio Par
 
 ## Qué hago yo con el resultado
 
-1. Guardar el CSV como `datos/manual/asistida.csv` (reemplaza al anterior; lo
-   pasado se caduca solo).
-2. `git add datos/manual/asistida.csv && git commit -m "Passline al $(date +%F)" && git push`.
+1. Guardar el CSV como `asistida.csv` dentro de
+   `datos/manual/loica_asistida_AAAAMMDD/` (la carpeta reemplaza a la pasada
+   anterior; lo pasado se caduca solo).
+2. `git add datos/manual/loica_asistida_$(date +%Y%m%d)/ && git commit -m "Passline al $(date +%F)" && git push`.
    La corrida en la nube arranca sola con ese push y publica en ~1 hora.
 3. Para probarlo antes, en el Mac: `python3 run_diario.py --fuente ingesta_manual --probar`.
 
