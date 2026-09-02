@@ -1,41 +1,33 @@
-# Cola de LUGARES sin ubicación exacta — revisión del 2026-09-01.
+# Cola de LUGARES sin ubicación exacta — revisión del 2026-09-02.
 # Completa lat/lon (Google Maps: click derecho → copiar coordenadas),
 # borra las entradas que no puedas verificar, y pega las listas en
 # config/correcciones/lugares.yaml bajo la clave `lugares:`.
 # Ordenadas por impacto: la primera arregla más eventos que ninguna.
 
 lugares:
-  # 30 eventos sin pin exacto
-  Corporacion Cultural de La Reina:
-    direccion: # COMPLETAR
-    comuna: La Reina
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
-
-  # 27 eventos sin pin exacto
+  # 33 eventos sin pin exacto
   Red Salas de Teatro (agregador de salas RM):
     direccion: # COMPLETAR
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
-  # 13 eventos sin pin exacto
+  # 29 eventos sin pin exacto
+  Corporacion Cultural de La Reina:
+    direccion: # COMPLETAR
+    comuna: La Reina
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
+
+  # 15 eventos sin pin exacto
   PortalTickets (PortalDisc):
     direccion: # COMPLETAR
     comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
-
-  # 12 eventos sin pin exacto
-  PortalTickets (PortalDisc):
-    direccion: # COMPLETAR
-    comuna: Providencia
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 12 eventos sin pin exacto
   Agenda Cultural Las Condes:
@@ -43,7 +35,15 @@ lugares:
     comuna: Las Condes
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
+
+  # 11 eventos sin pin exacto
+  PortalTickets (PortalDisc):
+    direccion: # COMPLETAR
+    comuna: Providencia
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 11 eventos sin pin exacto
   Disfruta Santiago:
@@ -51,23 +51,31 @@ lugares:
     comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
-  # 8 eventos sin pin exacto
-  Campus Pdte. Errázuriz:
-    direccion: # COMPLETAR
-    comuna: # COMPLETAR
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
-
-  # 6 eventos sin pin exacto
+  # 7 eventos sin pin exacto
   Capilla Finis Terrae:
     direccion: # COMPLETAR
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
+
+  # 5 eventos sin pin exacto
+  Campus Pdte. Errázuriz:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
+
+  # 5 eventos sin pin exacto
+  Red Salas de Teatro (agregador de salas RM):
+    direccion: # COMPLETAR
+    comuna: Santiago
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 5 eventos sin pin exacto
   Disfruta Santiago:
@@ -75,31 +83,7 @@ lugares:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
-
-  # 4 eventos sin pin exacto
-  Auditorio MMDH:
-    direccion: # COMPLETAR
-    comuna: Santiago
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
-
-  # 4 eventos sin pin exacto
-  PortalTickets (PortalDisc):
-    direccion: # COMPLETAR
-    comuna: Ñuñoa
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
-
-  # 4 eventos sin pin exacto
-  Red Salas de Teatro (agregador de salas RM):
-    direccion: # COMPLETAR
-    comuna: Santiago
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 4 eventos sin pin exacto
   Kross Bar:
@@ -107,7 +91,23 @@ lugares:
     comuna: Las Condes
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
+
+  # 4 eventos sin pin exacto
+  Municipalidad de Nunoa:
+    direccion: # COMPLETAR
+    comuna: Ñuñoa
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
+
+  # 3 eventos sin pin exacto
+  Auditorio MMDH:
+    direccion: # COMPLETAR
+    comuna: Santiago
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 3 eventos sin pin exacto
   Teatro Universidad de Chile:
@@ -115,15 +115,15 @@ lugares:
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 3 eventos sin pin exacto
-  Fundacion Centro Cultural Lo Prado (Teatro Joan Jara):
-    direccion: Paseo de las Artes 880
-    comuna: Lo Prado
+  PortalTickets (PortalDisc):
+    direccion: # COMPLETAR
+    comuna: Ñuñoa
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 3 eventos sin pin exacto
   PortalTickets (PortalDisc):
@@ -131,7 +131,7 @@ lugares:
     comuna: Recoleta
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 3 eventos sin pin exacto
   Carpa Extraordinario Circo:
@@ -139,7 +139,7 @@ lugares:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 3 eventos sin pin exacto
   EL CHANCHO CON CHALECO:
@@ -147,15 +147,7 @@ lugares:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
-
-  # 3 eventos sin pin exacto
-  Municipalidad de Nunoa:
-    direccion: # COMPLETAR
-    comuna: Ñuñoa
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 3 eventos sin pin exacto
   COSTADO CLUB AÉREO MELEPÍLLA:
@@ -163,7 +155,15 @@ lugares:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
+
+  # 3 eventos sin pin exacto
+  USACH - Departamento de Extension (agenda cultural):
+    direccion: # COMPLETAR
+    comuna: Estación Central
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 3 eventos sin pin exacto
   USACH - Departamento de Extension (agenda cultural):
@@ -171,7 +171,7 @@ lugares:
     comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 3 eventos sin pin exacto
   Parque Ciudad Empresarial:
@@ -179,15 +179,7 @@ lugares:
     comuna: Huechuraba
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
-
-  # 2 eventos sin pin exacto
-  PortalTickets (PortalDisc):
-    direccion: # COMPLETAR
-    comuna: La Reina
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Auditorio B601:
@@ -195,7 +187,7 @@ lugares:
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Bar el Bosque:
@@ -203,7 +195,15 @@ lugares:
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
+
+  # 2 eventos sin pin exacto
+  Fundacion Centro Cultural Lo Prado (Teatro Joan Jara):
+    direccion: Paseo de las Artes 880
+    comuna: Lo Prado
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Bar Estudio Oculto:
@@ -211,7 +211,7 @@ lugares:
     comuna: Ñuñoa
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Mall Cenco Florida:
@@ -219,7 +219,7 @@ lugares:
     comuna: La Florida
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Cafetería Popular:
@@ -227,7 +227,15 @@ lugares:
     comuna: Maipú
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
+
+  # 2 eventos sin pin exacto
+  PortalTickets (PortalDisc):
+    direccion: # COMPLETAR
+    comuna: La Reina
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   La Quinta Muranos:
@@ -235,12 +243,4 @@ lugares:
     comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
-
-  # 2 eventos sin pin exacto
-  Montañita Las Vizcachas:
-    direccion: Camino San José de Maipo 06680
-    comuna: # COMPLETAR
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR

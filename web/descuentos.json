@@ -1,7 +1,7 @@
 {
- "generado": "2026-09-02T12:06:19",
- "total": 624,
- "locales": 1795,
+ "generado": "2026-09-02T11:53:28",
+ "total": 625,
+ "locales": 1796,
  "bancos": [
   [
    "bancochile",
@@ -80,13 +80,13 @@
   "Ñuñoa"
  ],
  "por_dia": {
-  "miercoles": 218,
+  "miercoles": 219,
   "viernes": 134,
   "sabado": 129,
   "domingo": 105,
   "jueves": 177,
   "lunes": 193,
-  "martes": 236
+  "martes": 237
  },
  "descuentos": [
   {
@@ -3231,6 +3231,67 @@
    "id": "c0172d0566fb",
    "locales": [],
    "comunas": []
+  },
+  {
+   "banco_id": "falabella",
+   "banco": "Banco Falabella",
+   "comercio": "Chili's",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "Metropolitana",
+   "sitio_web": "https://www.bancofalabella.cl/descuentos/detalle/chilis",
+   "porcentaje": 40,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "miercoles"
+   ],
+   "vigencia_hasta": "2026-09-30",
+   "tarjetas": [
+    "cmr",
+    "débito"
+   ],
+   "modalidad": "presencial",
+   "segmentado": false,
+   "condiciones": "Exclusivo presencial · Dcto en Restaurante · Chili's",
+   "url": "https://www.bancofalabella.cl/descuentos/detalle/chilis",
+   "logo": "https://images.ctfassets.net/p6eyia4djstu/4BSR2mhB8WzOn6I4JpxdF/a05df7066cb1dcd33d3e78d990858856/Cards_CHILLIS_LOGO_APP.webp",
+   "capturado": "",
+   "id": "3dd937bb13d4",
+   "locales": [
+    {
+     "direccion": "Avenida Presidente Kennedy 5413",
+     "comuna": "Las Condes",
+     "lat": -33.4017523,
+     "lon": -70.5790168,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Américo Vespucio 399",
+     "comuna": "Maipú",
+     "lat": -33.4814001,
+     "lon": -70.7522038,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Andrés Bello 2461",
+     "comuna": "Providencia",
+     "lat": -33.4176257,
+     "lon": -70.6056684,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    }
+   ],
+   "comunas": [
+    "Las Condes",
+    "Maipú",
+    "Providencia"
+   ]
   },
   {
    "banco_id": "santander",
@@ -8294,7 +8355,7 @@
    "segmentado": false,
    "condiciones": "Exclusivo presencial · La Dicha",
    "url": "https://www.bancofalabella.cl/descuentos/detalle/la-dicha",
-   "logo": "",
+   "logo": "https://images.ctfassets.net/p6eyia4djstu/3pZlVUqALYveR0U8arvBaA/2c20b821d7e545419733ee02ada8b428/Cards_2_Logo_App_La_Dicha.jpg",
    "capturado": "",
    "id": "b3cf5a2f09b9",
    "locales": [
@@ -12560,6 +12621,35 @@
    "logo": "",
    "capturado": "2026-08-12",
    "id": "dcd5875fecbc",
+   "locales": [],
+   "comunas": []
+  },
+  {
+   "banco_id": "falabella",
+   "banco": "Banco Falabella",
+   "comercio": "PF Chang's",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "Metropolitana",
+   "sitio_web": "https://www.bancofalabella.cl/descuentos/detalle/pf-changs",
+   "porcentaje": 40,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "martes"
+   ],
+   "vigencia_hasta": "2026-09-30",
+   "tarjetas": [
+    "cmr",
+    "débito"
+   ],
+   "modalidad": "presencial",
+   "segmentado": false,
+   "condiciones": "Exclusivo presencial · Dcto en Restaurante · PF Chang's",
+   "url": "https://www.bancofalabella.cl/descuentos/detalle/pf-changs",
+   "logo": "https://images.ctfassets.net/p6eyia4djstu/6Al5X3E8uSYEK6YxI5XsPs/56c3761b73d736f77ecdb2bae475b450/Cards_Febrero_LOGO_APP_PF_Changs.webp",
+   "capturado": "",
+   "id": "f1dd8bc51935",
    "locales": [],
    "comunas": []
   },
@@ -18007,6 +18097,32 @@
     "Vitacura",
     "Ñuñoa"
    ]
+  },
+  {
+   "banco_id": "cencosud",
+   "banco": "Cencosud",
+   "comercio": "Entradas La Cava Jumbo con hasta 30% de descuento",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "Todo Chile",
+   "sitio_web": "",
+   "porcentaje": 30,
+   "oferta": "",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "cencosud"
+   ],
+   "modalidad": "online",
+   "segmentado": false,
+   "condiciones": "Asegura tu entrada para La Cava Jumbo. Disfruta vinos, destilados y gastronomía con descuentos exclusivos. ¡Compra online ahora!",
+   "url": "https://www.tarjetacencosud.cl/publico/beneficios/landing/la-cava-jumbo",
+   "logo": "",
+   "capturado": "",
+   "id": "32b5b901e044",
+   "locales": [],
+   "comunas": []
   },
   {
    "banco_id": "santander",
@@ -34748,42 +34864,6 @@
   {
    "banco_id": "bci",
    "banco": "Bci",
-   "comercio": "PizzaPizza La Dehesa",
-   "categoria": "comida_rapida",
-   "cocina": "italiana",
-   "region": "Metropolitana",
-   "sitio_web": "http://www.pizzapizza.cl/",
-   "porcentaje": null,
-   "oferta": "",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": null,
-   "tarjetas": [],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-5",
-   "logo": "https://bci-cdn.azureedge.net/uploads/969ef88e-dce6-448e-a6a9-5de0c6e40dd5/original/imagen.jpg",
-   "capturado": "",
-   "id": "879e8d368e48",
-   "locales": [
-    {
-     "direccion": "El Rodeo 12576",
-     "comuna": "Lo Barnechea",
-     "lat": -33.353013636363634,
-     "lon": -70.52220012727273,
-     "precision": "calle",
-     "telefono": "2 2242 5777",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Lo Barnechea"
-   ]
-  },
-  {
-   "banco_id": "bci",
-   "banco": "Bci",
    "comercio": "PizzaPizza La Florida",
    "categoria": "comida_rapida",
    "cocina": "italiana",
@@ -34887,42 +34967,6 @@
    ],
    "comunas": [
     "Las Condes"
-   ]
-  },
-  {
-   "banco_id": "bci",
-   "banco": "Bci",
-   "comercio": "PizzaPizza Macul",
-   "categoria": "comida_rapida",
-   "cocina": "italiana",
-   "region": "Metropolitana",
-   "sitio_web": "http://www.pizzapizza.cl/",
-   "porcentaje": null,
-   "oferta": "",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": null,
-   "tarjetas": [],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Descuento en pizza grande por el precio de una mediana, ahorro de $2.000 a $3.000. Beneficio válido presentando esta página impresa. No acumulable con otra promociones. Oferta por tiempo limitado.",
-   "url": "https://www.vivirconbeneficios.cl/descuentos/sabores/comida-rapida/promotions/pizzapizza-21",
-   "logo": "https://bci-cdn.azureedge.net/uploads/6b1ff5bf-fcd8-40f4-ae17-afef3cab5416/original/imagen.jpg",
-   "capturado": "",
-   "id": "43edd700fb5b",
-   "locales": [
-    {
-     "direccion": "Jose Pedro Alessandri 4470",
-     "comuna": "Macul",
-     "lat": -33.4786217,
-     "lon": -70.5982051,
-     "precision": "fuente",
-     "telefono": "2 2755 1010",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Macul"
    ]
   },
   {

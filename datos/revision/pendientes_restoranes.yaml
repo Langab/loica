@@ -1,4 +1,4 @@
-# Cola de RESTORANES con descuento — revisión del 2026-09-01.
+# Cola de RESTORANES con descuento — revisión del 2026-09-02.
 # Arriba los sin ubicación (completar direccion/comuna/lat/lon), abajo
 # los sin tipo de cocina (completar cocina). Pegar en
 # config/correcciones/restoranes.yaml bajo `restoranes:`.
@@ -12,7 +12,7 @@ restoranes:
     comuna: Colina
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Cencosud, Entel)
   Rappi:
@@ -20,7 +20,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco Falabella, Entel)
   Boost:
@@ -28,7 +28,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco Ripley, Banco de Chile)
   Majestic:
@@ -36,7 +36,7 @@ restoranes:
     comuna: Vitacura
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco Falabella, Santander)
   Vapiano:
@@ -44,7 +44,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Cencosud, Entel)
   Papa Johns:
@@ -52,7 +52,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco de Chile)
   Viña Undurraga:
@@ -60,7 +60,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco Security)
   Maribérico - Justo:
@@ -68,7 +68,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco Security)
   Pizzería Capri - Justo:
@@ -76,7 +76,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Santander)
   Punta del Sol:
@@ -84,7 +84,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco Security)
   Street Wrap - Justo:
@@ -92,7 +92,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco Security)
   Sushi Ryge - Justo:
@@ -100,7 +100,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Santander)
   Aquality:
@@ -108,7 +108,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco Security)
   Azotea Matilde:
@@ -116,7 +116,7 @@ restoranes:
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco Falabella)
   Badass:
@@ -124,7 +124,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco Falabella)
   Barra Chalaca:
@@ -132,7 +132,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco Falabella)
   Barra Olivo:
@@ -140,7 +140,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco de Chile)
   Barrica 94:
@@ -148,7 +148,7 @@ restoranes:
     comuna: Lo Barnechea
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco Falabella)
   Berlín Doner Kebab:
@@ -156,7 +156,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco Falabella)
   Bianco latte:
@@ -164,7 +164,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco Falabella)
   Bistro Cascade:
@@ -172,7 +172,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco de Chile)
   Boga:
@@ -180,7 +180,7 @@ restoranes:
     comuna: Las Condes
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco Falabella)
   Boka Sushi:
@@ -188,7 +188,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Santander)
   Bozzo:
@@ -196,7 +196,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco de Chile)
   Brasas del Arriero:
@@ -204,7 +204,7 @@ restoranes:
     comuna: La Florida
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco Falabella)
   Cabrera al Paso:
@@ -212,7 +212,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco Falabella)
   Caffe Pascucci:
@@ -220,7 +220,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco Falabella)
   Cantina Montt:
@@ -228,7 +228,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco Falabella)
   Casa Roque:
@@ -236,7 +236,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Santander)
   Chicken Love You:
@@ -244,7 +244,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-01 por # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
 
   # ---- sin tipo de cocina ----
   Rappi:
@@ -260,6 +260,9 @@ restoranes:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
   Barra Olivo:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Casa Vitalis:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
   CuracaRibs:
@@ -281,6 +284,9 @@ restoranes:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
   Kechua:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  La Dicha:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
   La Maestranza:
@@ -329,10 +335,4 @@ restoranes:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
   Vinolia:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  Aquality:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  Aurea Restaurante:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
