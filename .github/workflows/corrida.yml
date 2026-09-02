@@ -21,8 +21,15 @@ on:
     # programan las dos horas posibles y el job `hora` decide cuál es la buena
     # mirando el desfase de Santiago ese día (UTC-4 en invierno, UTC-3 en
     # verano). La otra termina en un minuto sin hacer nada.
-    - cron: "0 10 * * *"
-    - cron: "0 9 * * *"
+    #
+    # Minuto 23 y no 0: GitHub encola las crons de "en punto" detrás de todo
+    # el mundo y esta corrida venía arrancando entre 4 y 4½ horas tarde (la
+    # del 02-09-2026 partió a las 09:58 de Chile y terminó a las 11:58). La
+    # documentación de Actions lo dice con todas sus letras: la carga alta es
+    # al inicio de cada hora. El job `hora` compara contra la cadena exacta,
+    # así que las dos crons y el `case` de abajo tienen que cambiar juntos.
+    - cron: "23 9 * * *"
+    - cron: "23 8 * * *"
   workflow_dispatch:
     inputs:
       modo:
@@ -37,11 +44,17 @@ on:
   push:
     branches: [main]
     paths:
-      # Subir el CSV de la extracción asistida (Passline) dispara la corrida:
-      # el dato entra al sitio sin esperar a mañana ni prender ningún Mac.
-      - "datos/manual/*.csv"
-      - "datos/manual/*.yaml"
-      - "datos/manual/*.yml"
+      # Subir una pasada asistida dispara la corrida: el dato entra al sitio sin
+      # esperar a mañana ni prender ningún Mac.
+      #
+      # Va con `**` y no con `*` porque desde el 01-09-2026 la pasada llega en
+      # una carpeta con fecha (datos/manual/loica_asistida_AAAAMMDD/) y `*` no
+      # cruza la barra: con el patrón viejo, subir la carpeta nueva no
+      # disparaba nada y la extracción se quedaba esperando a la corrida de las
+      # 06:00 del día siguiente.
+      - "datos/manual/**.csv"
+      - "datos/manual/**.yaml"
+      - "datos/manual/**.yml"
 
 permissions:
   contents: write   # run_todo.py comitea y pushea su salida
@@ -75,7 +88,7 @@ jobs:
           fi
           desfase=$(TZ=America/Santiago date +%z)   # -0400 en invierno, -0300 en verano
           case "${{ github.event.schedule }}|$desfase" in
-            "0 10 * * *|-0400"|"0 9 * * *|-0300")
+            "23 9 * * *|-0400"|"23 8 * * *|-0300")
               echo "correr=true" >> "$GITHUB_OUTPUT"
               echo "Son las 06:00 en Santiago (desfase $desfase): corre." ;;
             *)
@@ -143,8 +156,16 @@ jobs:
       # la regla de GitHub contra los bucles), así que pages.yml no se entera
       # del commit de la corrida y hay que pedirle que publique. Solo desde la
       # rama principal: una corrida de prueba en otra rama no toca el sitio.
+      #
+      # La condición se lee al revés de lo que parece: corre SIEMPRE salvo
+      # cuando alguien la lanzó a mano en un modo que no publica. Antes decía
+      # "push o modo completo", y una corrida PROGRAMADA no es ninguna de las
+      # dos —`inputs.modo` está vacío fuera de un dispatch—, así que el paso
+      # quedaba en `skipped` todos los días: la corrida comiteaba, el commit
+      # llegaba a main y el sitio seguía mostrando la agenda de tres días
+      # antes. Pasó del 31-08 al 02-09-2026 sin que ningún log dijera error.
       - name: Publicar en Pages
-        if: success() && github.ref_name == github.event.repository.default_branch && (github.event_name == 'push' || inputs.modo == 'completo')
+        if: success() && github.ref == 'refs/heads/main' && (github.event_name != 'workflow_dispatch' || inputs.modo == 'completo')
         env:
           GH_TOKEN: ${{ github.token }}
         run: |

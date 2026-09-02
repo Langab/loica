@@ -18,12 +18,18 @@ on:
     # y en verano (UTC-3) la de las 06:00. La otra encuentra el JSON idéntico
     # y no commitea nada. (La nota anterior tenía las estaciones al revés:
     # Chile está en UTC-4 en invierno y UTC-3 en verano, no al contrario.)
-    - cron: "0 7 * * *"
-    - cron: "0 6 * * *"
+    #
+    # Minuto 23 y no 0, igual que corrida.yml: las crons "en punto" se encolan
+    # detrás de todo GitHub y estas venían arrancando entre 4 y 6 horas tarde
+    # (las del 02-09-2026 corrieron a las 06:38 y 08:02 de Chile, encima de la
+    # corrida grande). Fuera de la hora en punto la espera baja a minutos.
+    - cron: "23 6 * * *"
+    - cron: "23 5 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
+  actions: write    # para avisarle a pages.yml después de publicar
 
 concurrency:
   group: descuentos
@@ -102,4 +108,16 @@ jobs:
           else
             git commit -m "Descuentos al $(date -u +%Y-%m-%d)"
             git push
+            echo "publicado=true" >> "$GITHUB_ENV"
+          fi
+
+      # Un push hecho con el token del workflow NO dispara pages.yml (la regla
+      # de GitHub contra los bucles). Hasta el 02-09-2026 este commit se
+      # quedaba en main sin llegar al sitio: la página seguía con los
+      # descuentos del día en que alguien publicó a mano por última vez.
+      - name: Avisar a Pages
+        if: env.publicado == 'true' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run pages.yml --ref main
           fi
