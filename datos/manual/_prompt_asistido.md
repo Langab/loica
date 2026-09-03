@@ -3,7 +3,7 @@
 **Qué cambió respecto de la v6.** La v6 no alcanzó a correrse: la última pasada sigue siendo
 la del 01-09-2026 (**1.097 eventos, 3.296 funciones de cine y 526 descuentos**), y entre ese
 día y el 02-09 el pipeline cambió cómo recibe la pasada y qué cosas lee solo. La v7 recoge
-eso. Todo lo que sigue está verificado el 02-09-2026. Seis cambios:
+eso. Todo lo que sigue está verificado el 02-09-2026. Siete cambios:
 
 1. **La entrega es una carpeta con fecha, y el nombre importa.** El zip se llama
    `loica_asistida_AAAAMMDD.zip` —**ocho dígitos, sin guiones**; la v6 decía `AAAA-MM-DD` y
@@ -39,6 +39,11 @@ eso. Todo lo que sigue está verificado el 02-09-2026. Seis cambios:
 
 6. **Una sección final, "Si esto se quiere programar"**, para el día en que el bloque de
    cine corra como tarea programada del escritorio. Passline y Santander no se programan.
+
+7. **Ticketplus sí se extrae, y queda explícito.** La v6 la daba por "ya la trae el robot",
+   y no era cierto: la fuente automática estaba apagada. Desde el 03-09-2026 está encendida
+   (120 fichas por corrida), y la pasada la cubre entera por el sitemap y el JSON-LD de
+   cada ficha, que acá sí parsea. Está en el Bloque 1, al lado de Passline.
 
 Copiá desde la línea de abajo.
 
@@ -361,11 +366,12 @@ Passline,Fiesta Retro 90s,,2026-09-05,23:00:00,,Club Subterráneo,Paseo Orrego L
 
 ## Las fuentes de eventos
 
-### Bloque 1 — Todas las semanas: Passline
+### Bloque 1 — Todas las semanas: Passline y Ticketplus
 
 | fuente_nombre | Dónde mirar |
 |---|---|
 | `Passline` | https://home.passline.com/eventos.php?region=13&page=1 |
+| `Ticketplus` | https://ticketplus.cl/sitemap.xml → cada `/events/<slug>` (ver "Ticketplus", más abajo) |
 
 Passline es el 61% de lo que trae esta sesión: 666 de 1.097 filas en la última pasada.
 
@@ -422,6 +428,48 @@ Passline es el 61% de lo que trae esta sesión: 666 de 1.097 filas en la última
 
 **Comparación de pasadas:** 632 filas el 12-08, 279 el 25-08, 539 el 30-08, **666 el
 01-09**. La del 25-08 se quedó corta por no apretar "ver más" hasta el final.
+
+### Ticketplus — sí se extrae, y es la más fácil de las dos
+
+Ticketplus es la segunda ticketera de la sesión (292 de 700 filas el 21-08) y **sí hay que
+traerla**. Desde el 03-09-2026 el robot también la lee todos los días —su `robots.txt`
+permite `/events/*` y no hay desafío de Cloudflare—, pero con un tope de 120 fichas por
+corrida ordenadas por `lastmod`, así que la pasada es la que cubre el catálogo entero y la
+red de seguridad si un día el runner queda fuera. **No la saltes porque "el robot ya la
+trae"**: mirá en el resumen de la corrida cuántas filas trajo y traé el resto.
+
+**Cómo se saca, y es lo mismo que Passline sin sus trampas:**
+
+1. Parate en una pestaña de `ticketplus.cl` y leé **`/sitemap.xml`** con `fetch` del mismo
+   origen: lista todas las fichas de eventos del país (`https://ticketplus.cl/events/<slug>`)
+   con su `lastmod`. Ordenalas por `lastmod` descendente y andá de las más nuevas a las más
+   viejas.
+2. **Cada ficha trae `schema.org/Event` que sí parsea como JSON** (a diferencia de
+   Passline): `name`, `startDate`, `endDate`, `location.name`,
+   `location.address.streetAddress` (con la coma antes del número: "Enrique Olivares,
+   1003" → `Enrique Olivares 1003`), `location.address.addressLocality` (la comuna),
+   `addressRegion`, `offers.price` en pesos (`AggregateOffer`, el mínimo), `image`,
+   `description` y `url`. **De ahí sale toda la fila.** Nada de leer a ojo.
+3. Concurrencia 3 y pausa de 400 ms, como en Passline. El servidor no bloquea, pero no
+   hay motivo para pegarle más fuerte.
+4. Quedate con lo de la Región Metropolitana: `addressRegion` que diga Metropolitana o
+   `addressLocality` en la lista de las 52 comunas. Ticketplus vende en todo Chile y la
+   mitad de las fichas son de regiones.
+
+**Tres cosas que se cuelan si no las mirás:**
+
+- **Los abonos y pases no son eventos.** Una ficha "Abono Famiglia" con `startDate` en
+  junio de 2025 y `endDate` el 31 de diciembre es una membresía, no un panorama. Si el
+  nombre dice abono, pase, membresía o temporada completa, dejala fuera y anotala en el
+  resumen; el pipeline las descarta igual (memoria de categorías), pero mejor que no
+  lleguen.
+- **`eventAttendanceMode` online** (`OnlineEventAttendanceMode`) → fuera: no cae en
+  ningún mapa.
+- **Ticketplus no publica categoría** en la ficha: `categoria` vacía, como Passline.
+
+Si el sitemap no responde o cambia de forma, la página de cada local
+(`/companies/<slug>`, que `robots.txt` también permite) lista sus fichas con la misma
+estructura: es lo que el robot usa para el Club Subterráneo.
 
 ### Bloque 2 — Todas las semanas: las que le cierran la puerta al servidor
 
@@ -1217,9 +1265,10 @@ listas y cruzando por slug se mapea a las 13 de Loica (Comedia y Teatro y Musica
 
 # Lo que NO tenés que mirar, y por qué
 
-**Ya las trae el robot todos los días:**
+**Ya las trae el robot todos los días** (Ticketplus NO está en esta lista a propósito: el
+robot la lee, pero con tope, y la pasada la cubre entera — ver el Bloque 1):
 
-Ticketplus · Ticketmaster · Puntoticket · PortalTickets · Toliv · GAM · Matucana 100 ·
+Ticketmaster · Puntoticket · PortalTickets · Toliv · GAM · Matucana 100 ·
 Centro Cultural La Moneda · Teatro Municipal de Santiago · los museos del Patrimonio
 (Bellas Artes, Historia Natural, Histórico Nacional, Vicuña Mackenna, Educación,
 Archivo Nacional, Biblioteca Nacional, Biblioteca de Santiago) · MAVI · MAC · MUT ·

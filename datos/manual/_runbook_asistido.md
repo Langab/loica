@@ -68,7 +68,12 @@ deduplicador lo reconoce.
 
 ## La rutina semanal
 
-### 1. Passline — la cartelera nacional
+### 1. Passline y Ticketplus — las dos ticketeras
+
+**Ticketplus** entra sola desde el 03-09-2026 (fuente `ticketplus`, sitemap +
+JSON-LD, 120 fichas por corrida) y además va en la pasada, que cubre el
+catálogo entero: el bloque 1 de `_prompt_asistido.md` dice cómo. Lo que sigue
+es Passline, que solo se puede mirar con el navegador.
 
 **Por qué a mano:** Cloudflare Managed Challenge. Devuelve 403 a Python con
 cualquier user-agent, incluso desde la máquina donde corre el pipeline.

@@ -727,11 +727,12 @@ fuentes:
   requiere_comuna: true
   comuna: ''
   crawl_delay_seg: 3
-  activa: false
-  notas: 'LISTA PARA ENCENDER: cambiar activa a true. Apagada por una decision estrategica del
-    fundador cuya nota quedo truncada en este archivo (terminaba en "y publica si"), asi que la
-    razon no esta escrita en ninguna parte; mientras tanto Ticketplus se extraia A MANO cada
-    semana con Claude en Chrome (292 de las 700 filas de datos/manual/asistida.csv el 21-08-2026).
+  activa: true
+  notas: 'ENCENDIDA el 03-09-2026 por decision del fundador ("si hay que extraer Ticketplus,
+    obviamente"). Habia quedado apagada por una decision estrategica anterior cuya nota quedo
+    truncada en este archivo (terminaba en "y publica si"), y mientras tanto se extraia A MANO
+    cada semana con Claude en Chrome (292 de las 700 filas de datos/manual/asistida.csv el
+    21-08-2026). La pasada asistida la sigue cubriendo como respaldo (bloque 1 del prompt).
     Tecnicamente es la misma puerta que ya usa ticketplus_subterraneo: robots.txt permite
     /events/* y /companies/* (solo veda api, cuentas, carro, venta y cortesias), sitemap.xml
     publica ~400 fichas de eventos de todo Chile con lastmod, y cada ficha trae schema.org/Event
