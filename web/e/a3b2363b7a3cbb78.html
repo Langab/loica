@@ -37,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=28">
+<link rel="stylesheet" href="../loica.css?v=29">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -63,7 +63,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../teatro.html">← Ver todo el teatro</a>
   <div class="foto" id="foto"><img src="https://www.estacionmapocho.cl/wp-content/uploads/2026/08/Extraordinario-circo-banner-768x417.png" alt="" onerror="this.remove();document.getElementById('foto').classList.add('sin-foto')"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">El Extraordinario Circo de Primavera</h1>
@@ -81,16 +81,16 @@
   <div class="dato"><span class="et"></span><span>El Extraordinario Circo “Primavera” nace en el año 2021 como una propuesta innovadora del Extraordinario Circo , parte del Museo del Circo Nacional , que busca florecer luego del gris invierno y…</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../mapa.html#/e/a3b2363b7a3cbb78">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../teatro.html#/e/a3b2363b7a3cbb78">Ver en el mapa de teatro</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Centro Cultural Estacion Mapocho</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=28"></script>
+<script src="../loica.js?v=29"></script>
 <script>
-  pintarBarra("mapa.html", "../");
+  pintarBarra("teatro.html", "../");
   const EV = {"id": "a3b2363b7a3cbb78", "titulo": "El Extraordinario Circo de Primavera", "inicio": "2026-09-16T18:00:00", "fin": null, "lugar": "Centro Cultural Estacion Mapocho", "direccion": "Plaza de la Cultura s/n, ex Estación Mapocho", "comuna": "Santiago", "lat": -33.43225, "lon": -70.65445, "precision": "correccion", "gratis": false, "precio": null, "precio_texto": "", "categoria": "teatro", "subcategoria": "circo", "escala": "masivo", "publico": "todos", "descripcion": "El Extraordinario Circo “Primavera” nace en el año 2021 como una propuesta innovadora del Extraordinario Circo , parte del Museo del Circo Nacional , que busca florecer luego del gris invierno y…", "imagen": "https://www.estacionmapocho.cl/wp-content/uploads/2026/08/Extraordinario-circo-banner-768x417.png", "fuente": "Centro Cultural Estacion Mapocho", "url": "https://www.estacionmapocho.cl/?evngrnpb=el-extraordinario-circo-de-primavera", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];

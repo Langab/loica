@@ -37,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=28">
+<link rel="stylesheet" href="../loica.css?v=29">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -63,7 +63,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../fiestas.html">← Ver todas las fiestas</a>
   <div class="foto" id="foto"><img src="https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/57d03723eb8bf14d03a29af19ebe7d5ea69cbafdfa931590d7f3a08fe9f48fae.jpg" alt="" onerror="this.remove();document.getElementById('foto').classList.add('sin-foto')"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">MAMISONGA / HOTEL W / MIÉRCOLES 9 SEPT</h1>
@@ -81,16 +81,16 @@
   <div class="dato"><span class="et"></span><span>MAMISONGA ❌ HOTEL W MIÉRCOLES 9 SEPTIEMBRE - ⚡️ A POCA LUZ ⚡️ LLEVAMOS MUCHO TIEMPO LEYENDO COMENTARIOS DE QUE POR QUÉ NO HACEMOS UNA FIESTA ENFOCADA 100% AL OLD SCHOOL, CLÁSICOS DEL 2000, 2005,…</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../mapa.html#/e/8e6a9d15d5a0fd6e">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../fiestas.html#/e/8e6a9d15d5a0fd6e">Ver en el mapa de fiestas</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Toliv (eventos under, fiestas y musica emergente)</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=28"></script>
+<script src="../loica.js?v=29"></script>
 <script>
-  pintarBarra("mapa.html", "../");
+  pintarBarra("fiestas.html", "../");
   const EV = {"id": "8e6a9d15d5a0fd6e", "titulo": "MAMISONGA / HOTEL W / MIÉRCOLES 9 SEPT", "inicio": "2026-09-10T02:00:00", "fin": "2026-09-10T06:45:00", "lugar": "Club Siete (Hotel W)", "direccion": "Isidora Goyenechea 3000, piso 4", "comuna": "Las Condes", "lat": -33.41385, "lon": -70.5986, "precision": "correccion", "gratis": false, "precio": 10000, "precio_texto": "desde $10.000", "categoria": "fiesta", "subcategoria": "ochentera", "escala": "under", "publico": "adultos", "descripcion": "MAMISONGA ❌ HOTEL W MIÉRCOLES 9 SEPTIEMBRE - ⚡️ A POCA LUZ ⚡️ LLEVAMOS MUCHO TIEMPO LEYENDO COMENTARIOS DE QUE POR QUÉ NO HACEMOS UNA FIESTA ENFOCADA 100% AL OLD SCHOOL, CLÁSICOS DEL 2000, 2005,…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/57d03723eb8bf14d03a29af19ebe7d5ea69cbafdfa931590d7f3a08fe9f48fae.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/santiago-centro/mamisonga-hotel-w-miercoles-9-sept-26227", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];

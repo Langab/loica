@@ -37,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=28">
+<link rel="stylesheet" href="../loica.css?v=29">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -63,7 +63,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../teatro.html">← Ver todo el teatro</a>
   <div class="foto" id="foto"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Ciclo de teatro-Ánimas de día claro-Viernes 4 Septiembre 22:15 hrs</h1>
@@ -81,16 +81,16 @@
   
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../mapa.html#/e/29f241323ff1d0b4">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../teatro.html#/e/29f241323ff1d0b4">Ver en el mapa de teatro</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Ticketplus</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=28"></script>
+<script src="../loica.js?v=29"></script>
 <script>
-  pintarBarra("mapa.html", "../");
+  pintarBarra("teatro.html", "../");
   const EV = {"id": "29f241323ff1d0b4", "titulo": "Ciclo de teatro-Ánimas de día claro-Viernes 4 Septiembre 22:15 hrs", "inicio": "2026-09-04T22:15:00", "fin": null, "lugar": "TEATRO CACHAFAZ", "direccion": "Av. Italia 1679", "comuna": "Ñuñoa", "lat": -33.45051, "lon": -70.624, "precision": "correccion", "gratis": false, "precio": 8800, "precio_texto": "", "categoria": "teatro", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "", "imagen": "", "fuente": "Ticketplus", "url": "https://ticketplus.cl/events/ciclo-de-teatro-animas-de-dia-claro-viernes-4-septiembre-22-15-hrs", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];

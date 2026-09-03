@@ -37,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=28">
+<link rel="stylesheet" href="../loica.css?v=29">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -63,7 +63,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../fiestas.html">← Ver todas las fiestas</a>
   <div class="foto" id="foto"><img src="https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/f5d92900017754d322e8f38f47e8cab266288d40c27b617dce5e3a74da12c633.jpg" alt="" onerror="this.remove();document.getElementById('foto').classList.add('sin-foto')"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">TRAP CITY</h1>
@@ -81,16 +81,16 @@
   <div class="dato"><span class="et"></span><span>VOLVEMOS GENTE A LA CAPITAL 😈🔥 NOS ENCONTRAMOS ESTE SABADO 05 DE SEPTIEMBRE PARA VER LO MEJOR DEL TRAP Y UNDER NACIONAL, EN UN SPOT QUE MAS QUE UN ESCENARIO ES UN PUNTO DE ENCUENTRO Y CONNEXIONES EN…</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../mapa.html#/e/bcdf596aab5a6a66">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../fiestas.html#/e/bcdf596aab5a6a66">Ver en el mapa de fiestas</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Toliv (eventos under, fiestas y musica emergente)</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=28"></script>
+<script src="../loica.js?v=29"></script>
 <script>
-  pintarBarra("mapa.html", "../");
+  pintarBarra("fiestas.html", "../");
   const EV = {"id": "bcdf596aab5a6a66", "titulo": "TRAP CITY", "inicio": "2026-09-06T01:00:00", "fin": "2026-09-06T06:00:00", "lugar": "TRAP CITY", "direccion": "Rogelio Ugarte #1162, Santiago", "comuna": "Santiago", "lat": -33.4568861, "lon": -70.6352585, "precision": "calle", "gratis": false, "precio": 3000, "precio_texto": "desde $3.000", "categoria": "fiesta", "subcategoria": "urbano", "escala": "under", "publico": "adultos", "descripcion": "VOLVEMOS GENTE A LA CAPITAL 😈🔥 NOS ENCONTRAMOS ESTE SABADO 05 DE SEPTIEMBRE PARA VER LO MEJOR DEL TRAP Y UNDER NACIONAL, EN UN SPOT QUE MAS QUE UN ESCENARIO ES UN PUNTO DE ENCUENTRO Y CONNEXIONES EN…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/f5d92900017754d322e8f38f47e8cab266288d40c27b617dce5e3a74da12c633.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/santiago-centro/trap-city-26017", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];

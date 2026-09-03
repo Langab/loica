@@ -37,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=28">
+<link rel="stylesheet" href="../loica.css?v=29">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -63,7 +63,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../teatro.html">← Ver todo el teatro</a>
   <div class="foto" id="foto"><img src="https://www.ed.cl/wp-content/uploads/2026/08/pergola.jpg" alt="" onerror="this.remove();document.getElementById('foto').classList.add('sin-foto')"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">«La pérgola de las flores” vuelve al GAM</h1>
@@ -81,16 +81,16 @@
   <div class="dato"><span class="et"></span><span>Una de las obras más emblemáticas del teatro chileno vuelve a escena con la aclamada versión de Héctor Noguera de La pérgola de las flores . El montaje se presentará en GAM entre el 28 de agosto y el…</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../mapa.html#/e/0c57e832f7a15805">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../teatro.html#/e/0c57e832f7a15805">Ver en el mapa de teatro</a></p>
 
   <div class="pie-fuente">Información publicada por <b>ED — Ferias y Bazar ED</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=28"></script>
+<script src="../loica.js?v=29"></script>
 <script>
-  pintarBarra("mapa.html", "../");
+  pintarBarra("teatro.html", "../");
   const EV = {"id": "0c57e832f7a15805", "titulo": "«La pérgola de las flores” vuelve al GAM", "inicio": "2026-08-28T00:00:00", "fin": "2026-09-13T23:59:00", "lugar": "Centro GAM", "direccion": "Av. Libertador Bernardo O'Higgins 227, Santiago, Santiago", "comuna": "Santiago", "lat": -33.43893434583333, "lon": -70.63941524166668, "precision": "calle", "gratis": true, "precio": 0, "precio_texto": "", "categoria": "teatro", "subcategoria": "obra", "escala": "", "publico": "todos", "descripcion": "Una de las obras más emblemáticas del teatro chileno vuelve a escena con la aclamada versión de Héctor Noguera de La pérgola de las flores . El montaje se presentará en GAM entre el 28 de agosto y el…", "imagen": "https://www.ed.cl/wp-content/uploads/2026/08/pergola.jpg", "fuente": "ED — Ferias y Bazar ED", "url": "https://www.ed.cl/event/la-pergola-de-las-flores-vuelve-a-gam-con-hector-noguera/", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];

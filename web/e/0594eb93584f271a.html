@@ -37,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=28">
+<link rel="stylesheet" href="../loica.css?v=29">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -63,7 +63,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../teatro.html">← Ver todo el teatro</a>
   <div class="foto" id="foto"><img src="https://www.sangines.cl/wp-content/uploads/2026/08/0c071f80-4ebf-4cfa-b7ad-b1b053285736-640x640-1-300x300.jpg" alt="" onerror="this.remove();document.getElementById('foto').classList.add('sin-foto')"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">LA PÉRGOLA DE LAS FLORES</h1>
@@ -81,16 +81,16 @@
   <div class="dato"><span class="et"></span><span>A 65 años del estreno del clásico de Isidora Aguirre, musicalizado por Francisco Flores del Campo, El Actor, musico y director teatral Gustavo Becerra junto al Kolectivo Mutante nos presentan su…</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../mapa.html#/e/0594eb93584f271a">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../teatro.html#/e/0594eb93584f271a">Ver en el mapa de teatro</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Teatro San Gines</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=28"></script>
+<script src="../loica.js?v=29"></script>
 <script>
-  pintarBarra("mapa.html", "../");
+  pintarBarra("teatro.html", "../");
   const EV = {"id": "0594eb93584f271a", "titulo": "LA PÉRGOLA DE LAS FLORES", "inicio": "2026-09-19T00:00:00", "fin": null, "lugar": "Teatro San Gines", "direccion": "Mallinkrodt 76", "comuna": "Providencia", "lat": -33.43343, "lon": -70.6335, "precision": "correccion", "gratis": false, "precio": null, "precio_texto": "", "categoria": "teatro", "subcategoria": "obra", "escala": "", "publico": "todos", "descripcion": "A 65 años del estreno del clásico de Isidora Aguirre, musicalizado por Francisco Flores del Campo, El Actor, musico y director teatral Gustavo Becerra junto al Kolectivo Mutante nos presentan su…", "imagen": "https://www.sangines.cl/wp-content/uploads/2026/08/0c071f80-4ebf-4cfa-b7ad-b1b053285736-640x640-1-300x300.jpg", "fuente": "Teatro San Gines", "url": "https://www.sangines.cl/evento/la-pergola-de-las-flores/", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];

@@ -37,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=28">
+<link rel="stylesheet" href="../loica.css?v=29">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -63,7 +63,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../charlas.html">← Ver todas las charlas</a>
   <div class="foto" id="foto"><img src="https://finis.cl/wp-content/uploads/2026/07/congreso-patologias-maxilofacial.jpg" alt="" onerror="this.remove();document.getElementById('foto').classList.add('sin-foto')"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">1er Congreso Nacional de Patología y Cirugía Oral y Maxilofacial: Bases actuales para el clínico en ejercicio</h1>
@@ -81,16 +81,16 @@
   <div class="dato"><span class="et"></span><span>Fecha: viernes 2 y sábado 3 de octubre de 2026 Horario: 8:00 a 18:00 h (Chile) Lugar: B201 y B202, Universidad Finis Terrae – Actualiza tus conocimientos junto a destacados especialistas en un…</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../mapa.html#/e/71d6aa7cd525e71c">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../charlas.html#/e/71d6aa7cd525e71c">Ver en el mapa de charlas</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Universidad Finis Terrae - Agenda</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=28"></script>
+<script src="../loica.js?v=29"></script>
 <script>
-  pintarBarra("mapa.html", "../");
+  pintarBarra("charlas.html", "../");
   const EV = {"id": "71d6aa7cd525e71c", "titulo": "1er Congreso Nacional de Patología y Cirugía Oral y Maxilofacial: Bases actuales para el clínico en ejercicio", "inicio": "2026-10-02T08:00:00", "fin": "2026-10-03T18:00:00", "lugar": "Universidad Finis Terrae - Agenda", "direccion": "Av. Pedro de Valdivia 1509", "comuna": "Providencia", "lat": -33.43669, "lon": -70.6084, "precision": "correccion", "gratis": true, "precio": 0, "precio_texto": "d width=\"112\"\u003e \u003cpre\u003e$40.000\u003c/pre\u003e \u003c/td\u003e \u003c/tr\u003e \u003ctr\u003e \u003ctd width", "categoria": "charla", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "Fecha: viernes 2 y sábado 3 de octubre de 2026 Horario: 8:00 a 18:00 h (Chile) Lugar: B201 y B202, Universidad Finis Terrae – Actualiza tus conocimientos junto a destacados especialistas en un…", "imagen": "https://finis.cl/wp-content/uploads/2026/07/congreso-patologias-maxilofacial.jpg", "fuente": "Universidad Finis Terrae - Agenda", "url": "https://finis.cl/agenda/postgrado-y-educacion-continua/1er-congreso-nacional-de-patologia-y-cirugia-oral-y-maxilofacial-bases-actuales-para-el-clinico-en-ejercicio/", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];

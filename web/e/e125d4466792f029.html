@@ -37,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=28">
+<link rel="stylesheet" href="../loica.css?v=29">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -63,7 +63,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../charlas.html">← Ver todas las charlas</a>
   <div class="foto" id="foto"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Ciclo Premios Nacionales junto a Teatro Zoco</h1>
@@ -81,16 +81,16 @@
   <div class="dato"><span class="et"></span><span>Se trata de siete instancias en las que el Premio Nacional de Periodismo, Ascanio Cavallo, guiará conversaciones abiertas acerca de distintas…</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../mapa.html#/e/e125d4466792f029">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../charlas.html#/e/e125d4466792f029">Ver en el mapa de charlas</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Corporacion Cultural de Lo Barnechea (El Tranque)</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=28"></script>
+<script src="../loica.js?v=29"></script>
 <script>
-  pintarBarra("mapa.html", "../");
+  pintarBarra("charlas.html", "../");
   const EV = {"id": "e125d4466792f029", "titulo": "Ciclo Premios Nacionales junto a Teatro Zoco", "inicio": "2026-09-08T00:00:00", "fin": null, "lugar": "Corporacion Cultural de Lo Barnechea (El Tranque)", "direccion": "Av. El Tranque 10300", "comuna": "Lo Barnechea", "lat": -33.36076, "lon": -70.54118, "precision": "correccion", "gratis": false, "precio": null, "precio_texto": "", "categoria": "charla", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "Se trata de siete instancias en las que el Premio Nacional de Periodismo, Ascanio Cavallo, guiará conversaciones abiertas acerca de distintas…", "imagen": "", "fuente": "Corporacion Cultural de Lo Barnechea (El Tranque)", "url": "https://corporacionculturaldelobarnechea.cl/actividades/actividades/ciclo-premios-nacionales-junto-a-teatro-zoco/", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];

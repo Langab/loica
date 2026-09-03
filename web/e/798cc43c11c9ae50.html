@@ -37,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=28">
+<link rel="stylesheet" href="../loica.css?v=29">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -63,7 +63,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../musica.html">← Ver toda la música</a>
   <div class="foto" id="foto"><img src="https://ceina.cl/wp-content/uploads/2026/07/grafica4_-02-1-768x722.png" alt="" onerror="this.remove();document.getElementById('foto').classList.add('sin-foto')"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">PUTO Y ORQUESTA</h1>
@@ -81,16 +81,16 @@
   
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../mapa.html#/e/798cc43c11c9ae50">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../musica.html#/e/798cc43c11c9ae50">Ver en el mapa de música</a></p>
 
   <div class="pie-fuente">Información publicada por <b>CEINA</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=28"></script>
+<script src="../loica.js?v=29"></script>
 <script>
-  pintarBarra("mapa.html", "../");
+  pintarBarra("musica.html", "../");
   const EV = {"id": "798cc43c11c9ae50", "titulo": "PUTO Y ORQUESTA", "inicio": "2026-10-02T20:00:00", "fin": null, "lugar": "CEINA", "direccion": "", "comuna": "Santiago", "lat": -33.4453, "lon": -70.6502, "precision": "recinto", "gratis": false, "precio": null, "precio_texto": "", "categoria": "musica", "subcategoria": "clasica", "escala": "", "publico": "todos", "descripcion": "", "imagen": "https://ceina.cl/wp-content/uploads/2026/07/grafica4_-02-1-768x722.png", "fuente": "CEINA", "url": "https://ceina.cl/cartelera/puto-y-orquesta/", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];

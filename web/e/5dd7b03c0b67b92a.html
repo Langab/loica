@@ -37,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=28">
+<link rel="stylesheet" href="../loica.css?v=29">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -63,7 +63,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../musica.html">← Ver toda la música</a>
   <div class="foto" id="foto"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">BEATLEMANÍA EN CONCIERTO</h1>
@@ -81,16 +81,16 @@
   
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../mapa.html#/e/5dd7b03c0b67b92a">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../musica.html#/e/5dd7b03c0b67b92a">Ver en el mapa de música</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Teatro Oriente</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=28"></script>
+<script src="../loica.js?v=29"></script>
 <script>
-  pintarBarra("mapa.html", "../");
+  pintarBarra("musica.html", "../");
   const EV = {"id": "5dd7b03c0b67b92a", "titulo": "BEATLEMANÍA EN CONCIERTO", "inicio": "2026-10-10T18:00:00", "fin": null, "lugar": "Teatro Oriente", "direccion": "Av. Pedro de Valdivia 099", "comuna": "Providencia", "lat": -33.42262622222222, "lon": -70.6130340222222, "precision": "recinto", "gratis": false, "precio": 13800, "precio_texto": "", "categoria": "musica", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "", "imagen": "", "fuente": "Teatro Oriente", "url": "https://teatrooriente.cl/evento/beatlemania-en-concierto-20/", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];

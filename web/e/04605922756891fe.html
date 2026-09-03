@@ -37,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=28">
+<link rel="stylesheet" href="../loica.css?v=29">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -63,7 +63,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../musica.html">← Ver toda la música</a>
   <div class="foto" id="foto"><img src="https://static.ptocdn.net/images/eventos/cco115_rs.jpg" alt="" onerror="this.remove();document.getElementById('foto').classList.add('sin-foto')"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Undertale: The Determination Symphony en Teatro Coliseo</h1>
@@ -81,16 +81,16 @@
   <div class="dato"><span class="et"></span><span>Compra tus entradas para Undertale: The Determination Symphony en PuntoTicket.com</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../mapa.html#/e/04605922756891fe">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../musica.html#/e/04605922756891fe">Ver en el mapa de música</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Puntoticket (deportes, musica y familia)</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=28"></script>
+<script src="../loica.js?v=29"></script>
 <script>
-  pintarBarra("mapa.html", "../");
+  pintarBarra("musica.html", "../");
   const EV = {"id": "04605922756891fe", "titulo": "Undertale: The Determination Symphony en Teatro Coliseo", "inicio": "2027-03-06T20:00:00", "fin": null, "lugar": "Teatro Coliseo", "direccion": "Nataniel Cox 59, Santiago Centro", "comuna": "Santiago", "lat": -33.44583, "lon": -70.6540756, "precision": "fuente", "gratis": true, "precio": 0, "precio_texto": "", "categoria": "musica", "subcategoria": "", "escala": "masivo", "publico": "todos", "descripcion": "Compra tus entradas para Undertale: The Determination Symphony en PuntoTicket.com", "imagen": "https://static.ptocdn.net/images/eventos/cco115_rs.jpg", "fuente": "Puntoticket (deportes, musica y familia)", "url": "https://www.puntoticket.com/evento/undertale-symphony-teatro-coliseo-mar-2027?utm_medium=organic\u0026utm_source=microformat", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];

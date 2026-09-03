@@ -37,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=28">
+<link rel="stylesheet" href="../loica.css?v=29">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -63,7 +63,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../fiestas.html">← Ver todas las fiestas</a>
   <div class="foto" id="foto"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Friends Park en Fantasilandia — Fiestas Patrias</h1>
@@ -81,16 +81,16 @@
   <div class="dato"><span class="et"></span><span>Fiesta after de Fiestas Patrias en Fantasilandia, de 03:30 a 11:00. Edad mínima +18 mujeres, +21 hombres.</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../mapa.html#/e/bf790d53905a794f">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../fiestas.html#/e/bf790d53905a794f">Ver en el mapa de fiestas</a></p>
 
   <div class="pie-fuente">Información publicada por <b>DyzGO</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=28"></script>
+<script src="../loica.js?v=29"></script>
 <script>
-  pintarBarra("mapa.html", "../");
+  pintarBarra("fiestas.html", "../");
   const EV = {"id": "bf790d53905a794f", "titulo": "Friends Park en Fantasilandia — Fiestas Patrias", "inicio": "2026-09-17T03:30:00", "fin": null, "lugar": "Fantasilandia", "direccion": "Avenida Beauchef 938", "comuna": "Santiago", "lat": -33.461664, "lon": -70.6641502, "precision": "calle", "gratis": false, "precio": null, "precio_texto": "", "categoria": "fiesta", "subcategoria": "folclor", "escala": "", "publico": "adultos", "descripcion": "Fiesta after de Fiestas Patrias en Fantasilandia, de 03:30 a 11:00. Edad mínima +18 mujeres, +21 hombres.", "imagen": "", "fuente": "DyzGO", "url": "https://app.dyzgo.com/friends-park-fantasilandia-fiestas-patrias-jueves-17-septiem", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];

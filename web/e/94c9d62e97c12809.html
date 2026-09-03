@@ -37,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=28">
+<link rel="stylesheet" href="../loica.css?v=29">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -63,7 +63,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../charlas.html">← Ver todas las charlas</a>
   <div class="foto" id="foto"><img src="https://www.uahurtado.cl/wp-content/uploads/2026/08/SeminarioLITHA.png" alt="" onerror="this.remove();document.getElementById('foto').classList.add('sin-foto')"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Seminario “El giro mariano de la Compañía de Jesús : marcos iconográficos.”</h1>
@@ -81,16 +81,16 @@
   <div class="dato"><span class="et"></span><span>La Licenciatura en Teoría e Historia del Arte invita al seminario “El giro mariano de la Compañía de Jesús: marcos iconográficos”, que será dictado por el profesor Pierre-Antoine Fabre el día…</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../mapa.html#/e/94c9d62e97c12809">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../charlas.html#/e/94c9d62e97c12809">Ver en el mapa de charlas</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Universidad Alberto Hurtado - Agenda de eventos</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=28"></script>
+<script src="../loica.js?v=29"></script>
 <script>
-  pintarBarra("mapa.html", "../");
+  pintarBarra("charlas.html", "../");
   const EV = {"id": "94c9d62e97c12809", "titulo": "Seminario “El giro mariano de la Compañía de Jesús : marcos iconográficos.”", "inicio": "2026-10-28T14:00:00", "fin": "2026-10-28T17:30:00", "lugar": "Auditorio Manuel Larraín E11 (Avenida Bernardo O’Higgins #1825, metro Los Héroes)", "direccion": "", "comuna": "Santiago", "lat": -33.44589814285714, "lon": -70.66189820714285, "precision": "calle", "gratis": true, "precio": 0, "precio_texto": "", "categoria": "charla", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "La Licenciatura en Teoría e Historia del Arte invita al seminario “El giro mariano de la Compañía de Jesús: marcos iconográficos”, que será dictado por el profesor Pierre-Antoine Fabre el día…", "imagen": "https://www.uahurtado.cl/wp-content/uploads/2026/08/SeminarioLITHA.png", "fuente": "Universidad Alberto Hurtado - Agenda de eventos", "url": "https://www.uahurtado.cl/event/seminario-el-giro-mariano-de-la-compania-de-jesus-marcos-iconograficos/", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];

@@ -37,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=28">
+<link rel="stylesheet" href="../loica.css?v=29">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -63,7 +63,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../musica.html">← Ver toda la música</a>
   <div class="foto" id="foto"><img src="https://static.ptocdn.net/images/eventos/glo200_rs.jpg" alt="" onerror="this.remove();document.getElementById('foto').classList.add('sin-foto')"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">The Grid: Outworld en Espacio Riesco</h1>
@@ -81,16 +81,16 @@
   <div class="dato"><span class="et"></span><span>Compra tus entradas para The Grid: Outworld en PuntoTicket.com</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../mapa.html#/e/f7f21658ae0f08ce">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../musica.html#/e/f7f21658ae0f08ce">Ver en el mapa de música</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Puntoticket (deportes, musica y familia)</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=28"></script>
+<script src="../loica.js?v=29"></script>
 <script>
-  pintarBarra("mapa.html", "../");
+  pintarBarra("musica.html", "../");
   const EV = {"id": "f7f21658ae0f08ce", "titulo": "The Grid: Outworld en Espacio Riesco", "inicio": "2026-09-05T20:00:00", "fin": null, "lugar": "Espacio Riesco", "direccion": "Av. El Salto 5000, Huechuraba", "comuna": "Huechuraba", "lat": -33.3863525, "lon": -70.62242, "precision": "fuente", "gratis": false, "precio": 62100, "precio_texto": "desde $62.100", "categoria": "musica", "subcategoria": "", "escala": "masivo", "publico": "todos", "descripcion": "Compra tus entradas para The Grid: Outworld en PuntoTicket.com", "imagen": "https://static.ptocdn.net/images/eventos/glo200_rs.jpg", "fuente": "Puntoticket (deportes, musica y familia)", "url": "https://www.puntoticket.com/evento/the-grid-outworld-espacio-riesco-sep-2026?utm_medium=organic\u0026utm_source=microformat", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];

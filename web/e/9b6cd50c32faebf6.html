@@ -37,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=28">
+<link rel="stylesheet" href="../loica.css?v=29">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -63,7 +63,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../musica.html">← Ver toda la música</a>
   <div class="foto" id="foto"><img src="https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/2e5d2cd4aeeb4482420fc027617d2c985d764661d06c7cda62aa7260ce490d8c.jpg" alt="" onerror="this.remove();document.getElementById('foto').classList.add('sin-foto')"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">INFINITO - AMA X FUTURO 05 DE SEPTIEMBRE</h1>
@@ -81,16 +81,16 @@
   <div class="dato"><span class="et"></span><span>INFINITO — AMA × FUTURO FUTURO y AMA se unen nuevamente para traer otra edición de INFINITO. Modo after: once horas de música en dos salas, desde que la ciudad se apaga hasta bien entrada la mañana…</span></div>
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../mapa.html#/e/9b6cd50c32faebf6">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../musica.html#/e/9b6cd50c32faebf6">Ver en el mapa de música</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Toliv (eventos under, fiestas y musica emergente)</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=28"></script>
+<script src="../loica.js?v=29"></script>
 <script>
-  pintarBarra("mapa.html", "../");
+  pintarBarra("musica.html", "../");
   const EV = {"id": "9b6cd50c32faebf6", "titulo": "INFINITO - AMA X FUTURO 05 DE SEPTIEMBRE", "inicio": "2026-09-06T03:00:00", "fin": "2026-09-06T03:00:00", "lugar": "INFINITO - AMA X FUTURO 05 DE SEPTIEMBRE", "direccion": "Lord Cochrane #567, Santiago", "comuna": "Santiago", "lat": -33.4534082, "lon": -70.6543093, "precision": "calle", "gratis": false, "precio": 8000, "precio_texto": "desde $8.000", "categoria": "musica", "subcategoria": "", "escala": "under", "publico": "todos", "descripcion": "INFINITO — AMA × FUTURO FUTURO y AMA se unen nuevamente para traer otra edición de INFINITO. Modo after: once horas de música en dos salas, desde que la ciudad se apaga hasta bien entrada la mañana…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/2e5d2cd4aeeb4482420fc027617d2c985d764661d06c7cda62aa7260ce490d8c.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/santiago-centro/infinito-ama-x-futuro-05-de-septiembre-26156", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
