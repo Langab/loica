@@ -485,17 +485,25 @@ fuentes:
 - id: vitacura_muni
   nombre: Municipalidad de Vitacura
   url_base: https://vitacura.cl
-  url_agenda: https://vitacura.cl/wp-sitemap.xml
-  tipo_adaptador: rss
-  endpoint: /wp-sitemap.xml
+  url_agenda: https://vitacura.cl/actividades/
+  tipo_adaptador: fichas
+  endpoint: /actividades/
+  paginacion: '?pagina={n}'
+  tope_paginas: 8
+  patron_url: /actividad/
+  ficha:
+    fecha: .actividad-detalle-fecha
+    hora: .actividad-detalle-hora
+    lugar: .actividad-detalle-ubicacion
+    precio: .actividad-detalle-entrada
+  lugares_sin_comuna:
+  - En línea
+  - Online
   comuna: Vitacura
-  crawl_delay_seg: 5
-  buscar_detalle: false
-  tope_detalle: 25
-  activa: false
-  notas: API REST cerrada (401). robots.txt permisivo (solo bloquea /wp/wp-admin/) y declara wp-sitemap.xml,
-    que responde 200. Tiene un post type 'actividad' visible en las URLs (/actividad/<slug>/) y un listado
-    en /actividades/,
+  crawl_delay_seg: 3
+  tope_fichas: 60
+  activa: true
+  notas: pendiente
 - id: las_condes_muni
   nombre: Municipalidad de Las Condes
   url_base: https://www.lascondes.cl
@@ -668,17 +676,33 @@ fuentes:
 - id: providencia_muni
   nombre: Municipalidad de Providencia
   url_base: https://providencia.cl
-  url_agenda: https://providencia.cl/provi/explora/actividades/
-  tipo_adaptador: html
-  endpoint: /provi/explora/actividades/
+  url_agenda: https://providencia.cl/provi/site/list/port/actividades_mes.html
+  tipo_adaptador: providencia
   comuna: Providencia
-  crawl_delay_seg: 5
-  buscar_detalle: false
-  tope_detalle: 25
-  activa: false
-  notas: 'CMS legado de gobierno (rutas tipo /provi/site/edic/base/port/ y /provi/explora/). SIN robots.txt
-    (404) y SIN sitemap.xml (404): no declara restricciones ni ofrece indice. Publica muchas actividades
-    gratuitas (mas de 100'
+  crawl_delay_seg: 3
+  buscar_detalle: true
+  tope_detalle: 120
+  activa: true
+  notas: 'ENCENDIDA 02-09-2026 con adaptador propio (loica/fuentes/providencia.py). CMS legado de
+    gobierno (rutas /provi/site/... y /provi/explora/...), SIN robots.txt (404) ni sitemap.xml (404):
+    no declara restricciones ni ofrece indice. La agenda visible (/provi/explora/actividades/) responde
+    200 con el cuerpo vacio y por eso estuvo apagada; lo que esa pagina arma con JavaScript sale
+    renderizado en el servidor en el fragmento actividades_mes.html (~800 KB, las ultimas 1.000
+    tarjetas). Cada tarjeta trae titulo, recinto (<em>), link, imagen y el dia. OJO: data_fecha es la
+    fecha de PUBLICACION; el dia del evento va en data_mes/data_dia, y data_dia=0 es el mes entero
+    segun el rotulo ("Todos los Martes del mes", "Todo el mes", "De Lunes a Sabado", "Todos los dias.
+    Del 5 al 30"); el anio solo viene en el sufijo DDMMAA de la mitad de los slugs. La ficha agrega
+    Horario, Valor y cuerpo; se abre solo para lo vigente, de lo mas proximo a lo mas lejano y hasta
+    tope_detalle, porque el runner nace sin cache cada dia: a 3 s por ficha, 120 fichas son unos 7
+    minutos, y el tope va holgado porque los ~55 talleres de mes entero caen todos en "hoy" y se
+    llevan su parte cada dia. "Pagada con y sin descuento de Tarjeta Vecino" no es un monto: queda es_gratis=false sin
+    precio. Si la URL del fragmento cambia, se descubre desde la agenda visible
+    /provi/site/edic/base/port/actividades.html. Sondeo del 02-09-2026: 1.000 tarjetas (publicadas
+    entre abril y agosto), 770 pasadas, 230 vigentes (176 de un dia y 54 de mes entero), 196 tras
+    colapsar, 0 sin fecha y 0 descartadas; 121 peticiones (1 fragmento + 120 fichas), unos 6 minutos
+    sin cache. Solo 2 fichas dicen gratis y 40 dicen Pagada: el resto queda sin precio, no se asume.
+    El recinto tambien engaña: "Dinamarca con Av. El Bosque" es una esquina de Providencia, asi que
+    la comuna de la fuente manda sobre lo que diga el texto, como en las tablas municipales.'
 - id: maipu
   nombre: Municipalidad de Maipu
   url_base: https://www.maipu.cl
@@ -780,15 +804,39 @@ fuentes:
   nombre: Universidad Adolfo Ibanez - Eventos
   url_base: https://www.uai.cl
   url_agenda: https://www.uai.cl/eventos
-  tipo_adaptador: html
+  tipo_adaptador: fichas
   endpoint: /eventos
-  comuna: Penalolen
+  patron_url: /eventos/
+  descartar_tarjeta:
+  - Online
+  lugares_sin_comuna:
+  - Online
+  - En línea
+  sedes:
+  - clave: Errázuriz
+    lugar: UAI Sede Presidente Errázuriz
+    direccion: Av. Presidente Errázuriz 3485
+    comuna: Las Condes
+  - clave: Peñalolén
+    lugar: UAI Campus Peñalolén
+    direccion: Diagonal Las Torres 2640
+    comuna: Peñalolén
+  - clave: Vitacura
+    lugar: UAI Sede Vitacura
+    direccion: Av. Santa María 5870
+    comuna: Vitacura
+  ficha:
+    fecha: 'etiqueta:Fecha'
+    hora: 'etiqueta:Hora de inicio'
+    fin: 'etiqueta:Término'
+    lugar: 'etiqueta:Ubicación'
+    categoria: 'etiqueta:Tipo de evento'
+  comuna: ''
+  requiere_comuna: true
   crawl_delay_seg: 3
-  activa: false
-  notas: 'NO es WordPress: es Next.js App Router (RSC streaming, sin __NEXT_DATA__) tras Cloudflare. Todos
-    los endpoints wp-json, /feed/ y /sitemap_index.xml dan 404 - verificado. robots.txt totalmente abierto:'
-  tipos_post:
-  - evento
+  tope_fichas: 60
+  activa: true
+  notas: pendiente
 - id: usach_extension
   nombre: USACH - Departamento de Extension (agenda cultural)
   url_base: https://extension.usach.cl
@@ -1163,14 +1211,16 @@ fuentes:
 - id: penalolen_deportes
   nombre: Corp. Municipal de Deportes y Recreacion de Penalolen
   url_base: https://deportespenalolen.cl
-  url_agenda: https://deportespenalolen.cl/sitemap_index.xml
-  tipo_adaptador: html
-  endpoint: /sitemap_index.xml
-  comuna: Penalolen
+  url_agenda: https://deportespenalolen.cl/page-sitemap.xml
+  tipo_adaptador: horarios
+  endpoint: /page-sitemap.xml
+  patron_url: /talleres-ligup/
+  comuna: Peñalolén
   crawl_delay_seg: 3
-  activa: false
-  notas: 'robots.txt Yoast con Disallow vacio, pero wp-json responde 403: usar sitemap + HTML. Una pagina
-    por disciplina (/yoga/, /zumba/, /pilates/, /spinning/...). OJO: parte del contenido va dentro'
+  horizonte_dias: 30
+  tope_fichas: 25
+  activa: true
+  notas: pendiente
 - id: penalolen_municipio
   nombre: Municipalidad de Penalolen
   url_base: https://www.penalolen.cl
@@ -1409,7 +1459,7 @@ fuentes:
   notas: 'IMPORTANTE: robots.txt PROHIBE explicitamente /wp-json/ y /?rest_route= (y la API responde 403).
     Usar solo sitemap_index.xml + HTML. Paginas relevantes: /talleres-portada/talleres-presencial'
 - id: vitacura_municipio
-  nombre: Municipalidad de Vitacura
+  nombre: Municipalidad de Vitacura (duplicada)
   url_base: https://www.vitacura.cl
   url_agenda: https://www.vitacura.cl/wp-sitemap.xml
   tipo_adaptador: html
@@ -1417,8 +1467,9 @@ fuentes:
   comuna: Vitacura
   crawl_delay_seg: 3
   activa: false
-  notas: 'robots.txt permite todo salvo /wp/wp-admin/, pero wp-json responde 401: usar sitemap + HTML.
-    /wp-sitemap.xml valido. Publica mas de 400 talleres por ciclo semestral como noticias bajo /notic'
+  notas: 'DUPLICADA de vitacura_muni (www.vitacura.cl redirige a vitacura.cl). Desde 2026-09-03 la agenda
+    entra por vitacura_muni con el adaptador fichas; esta entrada se puede borrar. Los 400+ talleres del
+    ciclo semestral siguen sin publicarse (catalogo vacio).'
 - id: nunoa_municipio
   nombre: Municipalidad de Nunoa
   url_base: https://www.nunoa.cl
@@ -1520,7 +1571,7 @@ fuentes:
     (verificado hoy con curl: HTTP 403 en 0,1 s) y el adaptador json registraba 0 encontrados SIN error,
     asi que la fuente se veia viva en el informe mientras pedia todos los dias para nada. No se arregla
     cambiando el user-agent: eso seria evadir un control de acceso, y la regla del proyecto es no hacerlo.
-    La via real de Passline es `ingesta_manual`, que lee datos/manual/asistida.csv (el CSV semanal del prompt de Chrome, solo Passline desde el 22-08-2026; subirlo con git dispara la corrida en la nube) — un export que una
+    La via real de Passline es `ingesta_manual`, que lee el asistida.csv de la carpeta con fecha de la pasada (el CSV semanal del prompt de Chrome, solo Passline desde el 22-08-2026; subirlo con git dispara la corrida en la nube) — un export que una
     persona baja del sitio navegando normal. Si algun dia abren una API publica, se reactiva.'
 - id: normandie
   nombre: Cine Arte Normandie
@@ -1600,7 +1651,13 @@ fuentes:
   tipo_adaptador: manual
   crawl_delay_seg: 0
   activa: true
-  notas: 'No hace ninguna peticion de red: lee datos/manual/*.yaml.
+  notas: 'No hace ninguna peticion de red: lee la pasada asistida mas nueva de datos/manual/.
+
+    Desde el 01-09-2026 cada sesion con el navegador entrega una CARPETA CON FECHA
+    (datos/manual/loica_asistida_AAAAMMDD/) en vez de archivos sueltos. Manda la carpeta mas
+    nueva, y manda por nombre de archivo: lo que ella trae tapa a la copia suelta de la raiz, y
+    lo que no trae (blondie.yaml, fondas_2026.yaml) se sigue leyendo de la raiz. Quien lo
+    resuelve es loica/asistida.py.
 
     Es la via para lo que no se puede rastrear. Passline responde 403 a cualquier cliente automatico (probado
     con user-agent vacio, de Chrome y neutro): no es el filtro por la palabra "bot" que tiene chilecultura
@@ -2091,17 +2148,16 @@ fuentes:
     de obras, no cartelera: no se pide.'
 - id: precolombino
   nombre: Museo Chileno de Arte Precolombino
-  url_base: https://precolombino.cl
-  url_agenda: https://precolombino.cl/exposiciones/
-  tipo_adaptador: html
+  url_base: https://museo.precolombino.cl
+  url_agenda: https://museo.precolombino.cl/wp-sitemap-posts-event_listing-1.xml
+  tipo_adaptador: sitemap
+  endpoint: /wp-sitemap-posts-event_listing-1.xml
+  patron_url: /evento/
+  tope_fichas: 15
   comuna: Santiago
   crawl_delay_seg: 5
-  activa: false
-  notas: 'REVISADO 13-08-2026: WordPress 6.7.7 pero con la API REST cerrada (/wp-json devuelve el HTML
-    de la pagina, no JSON) y un sitemap.xml que solo declara la home. /exposiciones, /agenda, /actividades
-    y /feed devuelven TODAS el mismo documento de 96 KB: la programacion la arma JavaScript. Sin puerta
-    estructurada, queda apagada. Bandera 361, a media cuadra de la Plaza de Armas; su direccion esta verificada
-    en correcciones/lugares.yaml por si entra por datos/manual/.'
+  activa: true
+  notas: pendiente
 - id: museo_ferroviario
   nombre: Museo Ferroviario de Santiago
   url_base: https://museoferroviario.cl

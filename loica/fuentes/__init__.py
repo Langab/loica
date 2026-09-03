@@ -14,8 +14,11 @@ una fuente trayendo los datos de otra.
 from .apis import extraer_ticketmaster
 from .carteleras import extraer_carteleras
 from .cine import extraer_cine
+from .fichas import extraer_fichas
+from .horarios import extraer_horarios
 from .json_api import extraer_json
 from .manual import extraer_manual
+from .providencia import extraer_providencia
 from .tablas import extraer_tabla
 from .talleres import extraer_talleres
 from .web import extraer_html, extraer_rss, extraer_sitemap_fichas
@@ -34,7 +37,10 @@ ADAPTADORES = {
     "talleres": extraer_talleres,
     "json": extraer_json,
     "manual": extraer_manual,
+    "providencia": extraer_providencia,
     "ticketmaster": extraer_ticketmaster,
+    "fichas": extraer_fichas,
+    "horarios": extraer_horarios,
 }
 
 __all__ = ["ADAPTADORES"]

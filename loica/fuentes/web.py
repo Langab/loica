@@ -385,7 +385,7 @@ def extraer_sitemap_fichas(fuente: dict, cliente: ClienteEducado) -> list[Evento
         entradas = []
         if respuesta is not None and respuesta.ok:
             try:
-                raiz = ElementTree.fromstring(respuesta.content)
+                raiz = ElementTree.fromstring(respuesta.content.strip())
                 for item in raiz.findall(".//item"):
                     enlace = item.find("link")
                     fecha = item.find("pubDate")
@@ -404,7 +404,11 @@ def extraer_sitemap_fichas(fuente: dict, cliente: ClienteEducado) -> list[Evento
             return []
 
         try:
-            raiz = ElementTree.fromstring(respuesta.content)
+            # strip() porque los sitemaps nativos de WordPress (wp-sitemap*.xml)
+            # traen un salto de línea ANTES de <?xml ...?>, y el parser exige
+            # que la declaración sea lo primero: sin esto el Precolombino y
+            # cualquier sitio con wp-sitemap quedaban en "sitemap ilegible".
+            raiz = ElementTree.fromstring(respuesta.content.strip())
         except ElementTree.ParseError:
             log.warning("%s: sitemap ilegible", fuente.get("nombre"))
             return []
@@ -529,7 +533,7 @@ def extraer_rss(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
         return []
 
     try:
-        raiz = ElementTree.fromstring(respuesta.content)
+        raiz = ElementTree.fromstring(respuesta.content.strip())
     except ElementTree.ParseError as e:
         log.warning("%s: RSS ilegible (%s)", fuente.get("nombre"), e)
         return []

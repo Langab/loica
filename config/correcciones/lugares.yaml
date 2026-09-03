@@ -585,6 +585,14 @@ lugares:
     lon: -70.62893
     nota: 'talleres de oficios (cerámica gres: modelado, torno, encargos); matrícula permanente, sin fechas; investigado
       y verificado 2026-08-13'
+  Palacio Cousiño:
+    comuna: Santiago
+    direccion: Dieciocho 438
+    lat: -33.45238
+    lon: -70.65658
+    nota: 'Vitacura publica salidas a este palacio sin decir la comuna y la ficha heredaba Vitacura; el museo está en
+      la comuna de Santiago. Coordenadas del índice local de OSM (local "museo palacio cousino", Dieciocho 438),
+      verificado 2026-09-03'
   Palermo Teatro Bar:
     comuna: Providencia
     direccion: Avenida José Manuel Infante 1414
