@@ -288,7 +288,7 @@ PLANTILLA_FICHA = """<!doctype html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=28">
+<link rel="stylesheet" href="../loica.css?v=29">
 <style>
   body{{min-height:100vh;min-height:100dvh}}
   .ficha-sola{{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}}
@@ -338,7 +338,7 @@ PLANTILLA_FICHA = """<!doctype html>
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=28"></script>
+<script src="../loica.js?v=29"></script>
 <script>
   pintarBarra("{pagina_madre}", "../");
   const EV = {evento_json};
@@ -413,6 +413,28 @@ def _url_publicable(url: str) -> str:
     return url
 
 
+# La página a la que vuelve una ficha, con sus dos textos de vuelta. Un taller
+# vuelve a la de talleres; un panorama de una categoría con pestaña propia
+# (fiestas, teatro, música, charlas, desde el 02-09-2026) vuelve a su pestaña;
+# el resto, al mapa general. Es el espejo de CATEGORIA_DE_PAGINA en loica.js:
+# si se agrega una pestaña allá, se agrega acá.
+PAGINA_DE_CATEGORIA = {
+    "fiesta": ("fiestas.html", "Ver todas las fiestas", "Ver en el mapa de fiestas"),
+    "teatro": ("teatro.html", "Ver todo el teatro", "Ver en el mapa de teatro"),
+    "musica": ("musica.html", "Ver toda la música", "Ver en el mapa de música"),
+    "charla": ("charlas.html", "Ver todas las charlas", "Ver en el mapa de charlas"),
+}
+
+
+def pagina_madre(ev: dict) -> tuple[str, str, str]:
+    """(página, texto del link de volver, texto del botón de abajo)."""
+    if ev.get("formato") == "taller":
+        return ("talleres.html", "Ver todos los talleres y clases",
+                "Ver en la página de talleres")
+    return PAGINA_DE_CATEGORIA.get(ev.get("categoria") or "", (
+        "mapa.html", "Ver todos los panoramas de Santiago", "Ver en el mapa"))
+
+
 def escribir_fichas(eventos: list[dict]) -> int:
     """Una página HTML por evento — panoramas Y talleres.
 
@@ -422,14 +444,15 @@ def escribir_fichas(eventos: list[dict]) -> int:
 
     La ficha de un taller vuelve a la página de talleres, no al mapa: el botón
     "Ver en el mapa" de una clase de natación llevaba a un mapa donde la clase
-    ya no existe, que es un link que promete y no cumple.
+    ya no existe, que es un link que promete y no cumple. Por la misma razón
+    una fiesta vuelve a fiestas.html y no al mapa general (ver pagina_madre).
     """
     DIR_FICHAS.mkdir(parents=True, exist_ok=True)
     for viejo in DIR_FICHAS.glob("*.html"):
         viejo.unlink()
 
     for ev in eventos:
-        de_taller = ev.get("formato") == "taller"
+        madre, volver_texto, ver_todos_texto = pagina_madre(ev)
         inicio = datetime.fromisoformat(ev["inicio"]) if ev["inicio"] else None
         dias = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
         meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio",
@@ -501,11 +524,8 @@ def escribir_fichas(eventos: list[dict]) -> int:
                                 if ev["descripcion"] else ""),
             id_evento=_escapar(ev["id"]), fuente_html=_escapar(ev["fuente"]),
             evento_json=_json_en_script(ev),
-            pagina_madre="talleres.html" if de_taller else "mapa.html",
-            volver_texto=("Ver todos los talleres y clases" if de_taller
-                          else "Ver todos los panoramas de Santiago"),
-            ver_todos_texto=("Ver en la página de talleres" if de_taller
-                             else "Ver en el mapa"),
+            pagina_madre=madre, volver_texto=volver_texto,
+            ver_todos_texto=ver_todos_texto,
         )
         (DIR_FICHAS / f"{ev['id']}.html").write_text(html, encoding="utf-8")
 
@@ -514,10 +534,12 @@ def escribir_fichas(eventos: list[dict]) -> int:
 
 # Las páginas fijas del sitio. El sitemap descubre solo las fichas de web/e/
 # porque se generan acá; estas hay que nombrarlas.
+# Habla, comer y blog no están a propósito: desde el 02-09-2026 quedaron
+# ocultas —existen y abren por URL, pero no se enlazan ni se indexan—.
 PAGINAS_FIJAS = [
-    "", "mapa.html", "calendario.html", "cine.html", "talleres.html",
-    "descuentos.html", "comer.html", "blog.html", "nosotros.html", "habla.html",
-    "agrega.html",
+    "", "mapa.html", "fiestas.html", "teatro.html", "musica.html", "charlas.html",
+    "cine.html", "talleres.html", "descuentos.html", "calendario.html",
+    "agrega.html", "nosotros.html",
 ]
 
 # Los ids de ficha son hashes hexadecimales. Al sitemap solo entra lo que

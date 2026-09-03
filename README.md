@@ -16,14 +16,14 @@ El pipeline implementa este circuito, y cada paso tiene su comando:
 | # | Paso | Dónde vive |
 |---|---|---|
 | 1 | **Identificación de fuentes** | `config/fuentes.yaml` (100 fuentes catastradas, ~50 activas) y `config/bancos.yaml` |
-| 2 | **Metodología según la fuente** | `tipo_adaptador` por fuente: API (wordpress/eventon/json/ticketmaster), scraping educado (html/rss/sitemap/carteleras/cine/tabla) o captura asistida (`manual`, para lo que bloquea bots) |
+| 2 | **Metodología según la fuente** | `tipo_adaptador` por fuente: API (wordpress/eventon/json/ticketmaster), scraping educado (html/rss/sitemap/carteleras/cine/tabla/fichas/horarios/providencia) o captura asistida (`manual`, para lo que bloquea bots) |
 | 3 | **Extracción** | `run_diario.py` (eventos → SQLite) y `run_descuentos.py` (bancos → JSON) |
 | 4 | **Consolidación** | todo converge a `datos/eventos.db` deduplicado por título+fecha+lugar; el export arma `web/eventos.json` (panoramas) y `web/talleres.json` (clases semanales) |
 | 5 | **Revisión + memoria de correcciones** | `revisar_extraccion.py` produce el informe y las colas; los arreglos viven en `config/correcciones/` y se aplican solos en cada corrida (ver abajo) |
 | 6 | **Diagnóstico de la corrida** | `informe_corrida.py` deja un Excel en `informes/` para mirar el proceso, no el catastro (ver abajo) |
 | 7 | **Doble check** | `verificar_web.py`: si el sitio quedó roto, vacío o cayó a la mitad, **no hay push** |
 | 8 | **Publicación** | `run_todo.py` comitea solo su salida y pushea; GitHub Actions deja `web/` en Pages |
-| 9 | **Corrida diaria a las 06:00** | GitHub Actions (`.github/workflows/corrida.yml`): no depende de ningún computador prendido. El Mac queda para probar (`--sin-publicar`) |
+| 9 | **Corrida diaria a las 06:23** | GitHub Actions (`.github/workflows/corrida.yml`): no depende de ningún computador prendido. El Mac queda para probar (`--sin-publicar`) |
 
 Un solo comando encadena los pasos 3 a 8:
 
@@ -351,8 +351,8 @@ ahí baja el beacon) y `https://cloudflareinsights.com` en `connect-src` (ahí
 reporta, en `/cdn-cgi/rum`).
 
 `web/sitemap.xml` y `web/robots.txt` los genera `exportar_web.py` en cada
-corrida (`escribir_sitemap` y `escribir_robots`). El sitemap lleva las diez
-páginas fijas más una línea por ficha; sin él, Google descubre una ficha solo
+corrida (`escribir_sitemap` y `escribir_robots`). El sitemap lleva las doce
+páginas fijas (las ocultas no van) más una línea por ficha; sin él, Google descubre una ficha solo
 si alguien la enlaza, y a un panorama que dura tres días no lo enlaza nadie a
 tiempo.
 
@@ -371,9 +371,10 @@ Las páginas son:
 
 | Archivo | Qué es |
 |---|---|
-| `web/index.html` | La **portada**: hero con el elenco de animales, panoramas de hoy y los cuatro destinos |
-| `web/mapa.html` | El **mapa**: un pin-animal por evento (sin agrupar, a propósito), filtros de fecha (Hoy / Mañana / 7 días / Finde), precio, público y categoría, lista lateral y ficha con anterior/siguiente |
-| `web/habla.html` | **Habla con la Loica**: el elenco recomienda por turnos, sin tokens ni servidor |
+| `web/index.html` | La **portada**: hero con el elenco de animales, panoramas de hoy y los destinos |
+| `web/mapa.html` | El **mapa general**: un pin-animal por evento (sin agrupar, a propósito), filtros de fecha (Hoy / Mañana / 7 días / Finde), precio, público y categoría, lista lateral y ficha con anterior/siguiente. Desde el 02-09-2026 su CSS y su JS viven en `mapa.css` y `mapa.js`, compartidos con las cuatro páginas de abajo |
+| `web/fiestas.html`, `web/teatro.html`, `web/musica.html`, `web/charlas.html` | **Una pestaña por categoría**: el mismo mapa con la categoría fija (`CATEGORIA_FIJA` en cada página), el animal guía en la cabecera y los chips de subcategoría en el riel. Son 105 líneas cada una: lo que cambia es el `<head>` y dos constantes. Las fichas de esas categorías vuelven a su pestaña (`PAGINA_DE_CATEGORIA` en `exportar_web.py`, espejo de `CATEGORIA_DE_PAGINA` en `loica.js`: si se agrega una pestaña en uno, se agrega en el otro) |
+| `web/habla.html` | **Habla con la Loica**: el elenco recomienda por turnos, sin tokens ni servidor. **Oculta desde el 02-09-2026**: existe y abre por URL, pero no está en la barra ni en el sitemap (igual que `comer.html` y `blog.html`) |
 | `web/calendario.html` | Mes a mes |
 | `web/talleres.html` | Los **talleres y clases** semanales (natación, yoga, cerámica, grabado, teatro, danza, cursos para personas mayores), con filtro por día, tipo y comuna y su propio mapa. Salen de `web/talleres.json`, separados de los panoramas por `es_taller()` en el export: una maratón es un panorama, la clase de natación de los martes es un taller. Lo que no es municipal entra por `config/talleres.yaml` (ver el adaptador `talleres`) |
 | `web/descuentos.html` | Los **descuentos** de restaurante por banco, día y comuna |
@@ -387,10 +388,13 @@ animales guía en SVG, categorías y subcategorías, traducciones es/en/pt y
 utilidades). Los enlaces
 a esos dos archivos llevan `?v=N`: el sitio es estático y sin build, así que
 ese número es lo único que obliga al navegador a soltar la versión vieja
-después de un cambio de estilos. **Si tocas `loica.css` o `loica.js`, sube el
-número en las nueve páginas y en la plantilla de `exportar_web.py`.** Van todos
+después de un cambio de estilos. **Si tocas `loica.css`, `loica.js`, `mapa.css`
+o `mapa.js`, sube el número en TODAS las páginas de `web/` (las once de la
+barra, las tres ocultas) y en la plantilla de `exportar_web.py`.** Van todos
 juntos: la plantilla se había quedado en `v=5` mientras el resto iba en `v=9`,
-y las 2.486 fichas servían CSS viejo a quien ya hubiera entrado antes.
+y las 2.486 fichas servían CSS viejo a quien ya hubiera entrado antes. Los
+cuatro archivos comparten el mismo número a propósito, para que el `sed` de
+abajo los suba a la par.
 
 ```bash
 # sube el cache-buster en todo el sitio de una vez
@@ -509,7 +513,7 @@ Desde el **01-09-2026** cada sesión con el navegador entrega una carpeta, no
 archivos sueltos:
 
     datos/manual/
-      _prompt_cine.md              plantillas y prompts (los que empiezan con _)
+      _prompt_asistido.md          plantillas y prompts (los que empiezan con _)
       blondie.yaml                 catastros sueltos escritos a mano
       fondas_2026.yaml
       loica_asistida_20260901/     ← la pasada del 01-09, la que manda hoy
@@ -920,7 +924,7 @@ de sus cuatro vías lee `web/eventos.json`.
 | `jsonld` | 8 | Cinemark publica `ScreeningEvent` de schema.org en el HTML de cada sala. Es el dato que ellos mismos publican para las máquinas: se lee con `requests` y punto. Una petición extra por película trae la clasificación y el idioma, que el JSON-LD no incluye. |
 | `semanal` | 2 | El Normandie y El Biógrafo publican **la semana**, no la función. Un parser por sala. |
 | `agenda` | 4 | La Cineteca Nacional, Matucana 100, el Centro Arte Alameda y el CCC ya llegan por las fuentes de siempre: se recogen de `web/eventos.json` y no se piden dos veces. |
-| `asistida` | 30 | Cineplanet y Cinépolis cierran su cartelera. Las mira una persona con el navegador siguiendo `datos/manual/_prompt_cine.md` y deja los `cartelera_*.csv` en la carpeta con fecha de la pasada, que dispara la corrida al subirse. |
+| `asistida` | 30 | Cineplanet y Cinépolis cierran su cartelera. Las mira una persona con el navegador siguiendo `datos/manual/_prompt_asistido.md (bloque CSV 2)` y deja los `cartelera_*.csv` en la carpeta con fecha de la pasada, que dispara la corrida al subirse. |
 
 **Por qué esas dos cadenas no se leen solas**, medido el 24-08-2026:
 Cineplanet entrega la cartelera solo a quien trae la cookie de sesión que su

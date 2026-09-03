@@ -250,18 +250,21 @@ img{max-width:100%;display:block}
 }
 .barra-fin{margin-left:auto;display:flex;align-items:center;gap:var(--e-2)}
 
-/* Diez destinos en español no caben a tamaño natural bajo los ~1340px. Antes
-   de dejar que la barra scrollee —un scroll sin barra visible esconde enlaces
-   sin avisar— se aprieta el enlace: menos padding, un paso menos de tipo. Con
-   esto los diez entran completos hasta ~1140px, que cubre las pantallas de
-   laptop reales. Bajo eso sí scrollea, y el degradado del borde lo avisa. */
-@media(min-width:880px) and (max-width:1339px){
+/* Once destinos en español —con "Mapa general", que es el más largo— piden
+   1.146 px a tamaño natural, y con el logo y los botones del costado no caben
+   bajo los ~1500 px. Antes de dejar que la barra scrollee —un scroll sin barra
+   visible esconde enlaces sin avisar— se aprieta el enlace: menos padding, un
+   paso menos de tipo. Apretados piden 894 px y entran completos hasta ~1170,
+   que cubre las pantallas de laptop reales (1280, 1366, 1440). Bajo eso sí
+   scrollea, y el degradado del borde lo avisa. Con diez destinos el corte
+   estaba en 1339 y a 1366 la barra se desbordaba 79 px sin avisar. */
+@media(min-width:880px) and (max-width:1499px){
   .barra{gap:var(--e-2);padding-left:var(--e-3);padding-right:var(--e-3)}
   .barra .nav{margin-left:var(--e-2);gap:2px}
   .barra .nav a{padding:0 10px;font-size:var(--t-sm)}
 }
 
-/* Entre 880 y 1139 los diez enlaces siguen sin caber y la barra scrollea. Un
+/* Entre 880 y 1169 los once enlaces siguen sin caber y la barra scrollea. Un
    scroll sin barra visible esconde destinos sin avisar, así que el borde se
    difumina para decir "sigue". Va con timeline de scroll y no con un degradado
    fijo porque un degradado fijo MIENTE: dejaría el último enlace apagado
@@ -269,7 +272,7 @@ img{max-width:100%;display:block}
    no haya timeline de scroll simplemente no hay degradado —el enlace se ve
    entero, que es el peor caso aceptable. */
 @supports (animation-timeline:scroll()){
-  @media(min-width:880px) and (max-width:1139px){
+  @media(min-width:880px) and (max-width:1169px){
     .barra .nav{
       animation:desvanece-nav linear both;
       animation-timeline:scroll(self inline);
@@ -362,9 +365,23 @@ img{max-width:100%;display:block}
 
 /* Un color por destino; cada color viaja con su tinta (el naranjo y el
    amarillo son claros: llevan tinta azul, no crema). */
-:root[data-pagina="mapa"]       {--nav-color:var(--c-musica); --nav-tinta:var(--arena-50)}
-/* Habla se lleva el rosado del Pingüino: es la única familia que quedaba sin
-   destino y además es la de las charlas, que es literalmente lo que pasa ahí. */
+/* El mapa general atiende a TODAS las categorías, así que no puede llevar el
+   color de una: el rojo que tenía es del Cóndor, y desde que Música tiene
+   pestaña propia le pertenece a ella. Toma el amarillo de "otros", que en
+   CATEGORIAS es literalmente el color de la Loica cuando atiende a todos, y
+   como todo amarillo va con tinta azul (7,76:1, _direccion_visual §7.6). */
+:root[data-pagina="mapa"]       {--nav-color:var(--c-otros);  --nav-tinta:var(--azul-900)}
+/* Las cuatro pestañas de categoría llevan el color de su animal guía, el
+   mismo del chip y del pin: la pastilla de la barra y el pin del mapa tienen
+   que decir lo mismo. Teatro comparte el azul con el calendario porque los
+   dos son de la Chinchilla. */
+:root[data-pagina="fiestas"]    {--nav-color:var(--c-fiesta); --nav-tinta:var(--arena-50)}
+:root[data-pagina="teatro"]     {--nav-color:var(--c-cultura);--nav-tinta:var(--arena-50)}
+:root[data-pagina="musica"]     {--nav-color:var(--c-musica); --nav-tinta:var(--arena-50)}
+:root[data-pagina="charlas"]    {--nav-color:var(--c-charla); --nav-tinta:var(--arena-50)}
+/* Habla se lleva el rosado del Pingüino, el de las charlas, que es
+   literalmente lo que pasa ahí. Está fuera de la barra desde el 02-09-2026
+   pero la página sigue existiendo y conserva su color. */
 :root[data-pagina="habla"]      {--nav-color:var(--c-charla); --nav-tinta:var(--arena-50)}
 :root[data-pagina="calendario"] {--nav-color:var(--c-cultura);--nav-tinta:var(--arena-50)}
 :root[data-pagina="blog"]       {--nav-color:var(--c-fiesta); --nav-tinta:var(--arena-50)}

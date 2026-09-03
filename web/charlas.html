@@ -4,42 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- Esta página es el MAPA GENERAL: todas las categorías. fiestas.html,
-     teatro.html, musica.html y charlas.html son este mismo archivo con la
-     categoría fija (CATEGORIA_FIJA, abajo). El CSS y el JS del mapa viven en
-     mapa.css y mapa.js, compartidos por las cinco: si se cambia algo del mapa
-     se cambia ahí, y esta página queda como la plantilla de las otras. -->
+<!-- Esta página es mapa.html con la categoría fija: mismos eventos, mismos
+     filtros, mismo panel. Lo único propio es el <head>, la cabecera con el
+     animal guía y las dos constantes de abajo. Todo lo demás está en mapa.css
+     y mapa.js, compartidos por las cinco páginas del mapa. -->
 
-<!-- Red de seguridad, no la seguridad. Lo que de verdad impide una inyeccion es
-     que todo lo que se pinta pase por escapar() y urlSegura(); esto es lo que
-     queda en pie si algun dia se escapa uno. Notas:
-     - `img-src https:` va abierto a proposito: las fotos son de los
-       organizadores y viven en cientos de dominios que no se pueden listar.
-     - `'unsafe-inline'` en script-src es obligatorio mientras las paginas
-       tengan su logica en un <script> inline. Aun asi la CSP sirve: bloquea
-       cargar un script de OTRO dominio y bloquea que algo inyectado mande los
-       datos afuera (connect-src 'self').
-     - `frame-ancestors` NO va: en un <meta> el navegador lo ignora, solo
-       funciona como cabecera HTTP y GitHub Pages no deja poner cabeceras.
-     - `upgrade-insecure-requests` tampoco va, y no es olvido. En GitHub Pages
-       no hace nada: el sitio ya se sirve por https y github.io está en la
-       lista de precarga HSTS, así que no queda ninguna petición http que
-       subir. Y en el servidor de desarrollo (`python3 -m http.server 8777`)
-       abierto desde el celular por la IP de la red —http://192.168.x.x:8777—
-       la directiva subía loica.js, loica.css y eventos.json a un https:// que
-       no existe: el script moría en la primera línea (`pintarBarra is not
-       defined`) y la página quedaba sin estilos, sin lista y sin mapa. Ese
-       era "en celular el mapa no funciona". En el Mac no se notaba porque
-       Chrome exime a localhost de la subida; Safari ni eso. -->
+<!-- Red de seguridad, no la seguridad: la misma CSP de mapa.html, copiada tal
+     cual. La explicación de cada directiva —y de por qué NO van
+     frame-ancestors ni upgrade-insecure-requests— está ahí, una sola vez. -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; worker-src blob:; connect-src 'self' https://*.basemaps.cartocdn.com https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>Mapa general — ¿Qué hay hoy en Santiago?</title>
-<meta name="description" content="Todos los panoramas de Santiago en un mapa. Filtra por gratis, hoy, mañana o este fin de semana.">
-<link rel="canonical" href="https://loicasantiago.cl/mapa.html">
-<meta property="og:title" content="Loica — ¿Qué hay hoy en Santiago?">
-<meta property="og:description" content="Panoramas gratis y de los otros, en un mapa. Fiestas, teatro, ferias, clases y conciertos de Santiago de Chile.">
+<title>Charlas y seminarios en Santiago — Loica</title>
+<meta name="description" content="Charlas, conversatorios y seminarios abiertos de Santiago, en un mapa. Filtra por hoy, mañana, este finde o gratis.">
+<link rel="canonical" href="https://loicasantiago.cl/charlas.html">
+<meta property="og:title" content="Charlas y seminarios en Santiago — Loica">
+<meta property="og:description" content="Charlas, conversatorios y seminarios abiertos de Santiago, en un mapa. Filtra por hoy, mañana, este finde o gratis.">
 <meta property="og:image" content="https://loicasantiago.cl/og-default.png">
-<meta property="og:url" content="https://loicasantiago.cl/mapa.html">
+<meta property="og:url" content="https://loicasantiago.cl/charlas.html">
 <meta property="og:site_name" content="Loica">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,6 +43,9 @@
 <div id="app">
   <header>
     <div class="barra" id="barra"></div>
+    <!-- El animal guía con el nombre de la categoría: lo pinta
+         pintarCabezaCat() en mapa.js. Es el <h1> de la página. -->
+    <div class="cabeza-cat" id="cabeza-cat"></div>
     <div class="riel-fecha" id="riel-fecha">
       <div class="segmentado" id="fechas" role="group"></div>
       <span class="cuenta-rango" id="cuenta-rango"></span>
@@ -111,16 +95,11 @@
 <script>
   /* Lo único propio de esta página: qué archivo es y qué categoría muestra.
      mapa.js las lee al arrancar; PAGINA manda en la barra de navegación y
-     CATEGORIA_FIJA recorta el catálogo (null = todas las categorías). */
-  const PAGINA = "mapa.html", CATEGORIA_FIJA = null;
+     CATEGORIA_FIJA recorta el catálogo (la clave de CATEGORIAS en loica.js). */
+  const PAGINA = "charlas.html", CATEGORIA_FIJA = "charla";
 </script>
 <script src="mapa.js?v=29"></script>
-<!-- Cloudflare Web Analytics: cuenta visitas sin cookies y sin huella
-     digital, así que el sitio no necesita banner de consentimiento (la Ley
-     21.719 rige desde diciembre de 2026). El token es público a propósito:
-     viaja en el HTML de todas las páginas, no es una credencial. Si se toca,
-     hay que tocarlo en las diez páginas Y en la plantilla de exportar_web.py,
-     igual que el ?v= de los estilos. -->
+<!-- Cloudflare Web Analytics: el mismo beacon y el mismo token público de las demás páginas (la explicación está en mapa.html). -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "05b8b07df9224b248d539904774ba661"}'></script>
 </body>
 </html>

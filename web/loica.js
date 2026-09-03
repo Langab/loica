@@ -662,7 +662,14 @@ const ELENCO = [
 const TEXTOS = {
   es:{
     lema:"Santiago está pasando",
-    mapa:"Mapa", habla:"Habla", blog:"Blog", cine:"Cine", comer:"Dónde comer", ninos:"Niños", mas18:"+18", calendario:"Calendario", agregar:"Agrega tu evento", nosotros:"Quién hace esto",
+    mapa:"Mapa general", fiestas:"Fiestas", teatro:"Teatro", musica:"Música", charlas:"Charlas",
+    habla:"Habla", blog:"Blog", cine:"Cine", comer:"Dónde comer", ninos:"Niños", mas18:"+18", calendario:"Calendario", agregar:"Agrega tu evento", nosotros:"Quién hace esto",
+    /* La bajada de cada página de categoría (fiestas, teatro, musica, charlas):
+       va al lado del animal guía desde 560 px de ancho (ver mapa.js). */
+    catBajada:{fiesta:"Carretes y fiestas de Santiago: reggaetón, electrónica, cumbia, ochentera.",
+               teatro:"Obras, comedia, danza y circo en las salas de Santiago.",
+               musica:"Conciertos, tocatas y festivales: lo que suena en Santiago.",
+               charla:"Charlas, conversatorios y seminarios abiertos en Santiago."},
     eventos:"eventos", evento:"evento", gratis:"Gratis",
     hoy:"Hoy", manana:"Mañana", semana:"7 días", finde:"Finde",
     cuandoLargo:{hoy:"Hoy", manana:"Mañana", semana:"En estos 7 días", finde:"Este fin de semana", todo:"Todos"},
@@ -685,7 +692,7 @@ const TEXTOS = {
     pTitulo:"¿Qué hacemos hoy", pTituloAcento:"por Santiago?",
     pBajada:"Todo lo que está pasando en Santiago, en un solo lugar. Lo junta un robot todas las mañanas y siempre te deja en la fuente original.",
     pSaludo:"¡Hola! Soy la Loica. ¿Te muestro Santiago?",
-    pVerMapa:"Ver el mapa", pVerHoy:"Panoramas de hoy",
+    pVerMapa:"Ver el mapa general", pVerHoy:"Panoramas de hoy",
     pHoyTitulo:"Hoy en Santiago", pHoyVer:"Ver los", pHoyVacio:"Hoy está tranquilo. Mira lo que viene.",
     pDondeIr:"¿Por dónde partimos?",
     pMapaT:"El mapa", pMapaD:"Qué hay cerca tuyo, ahora mismo.",
@@ -736,7 +743,12 @@ const TEXTOS = {
   },
   en:{
     lema:"Santiago is happening",
-    mapa:"Map", habla:"Talk", blog:"Blog", cine:"Cinema", comer:"Where to eat", ninos:"Kids", mas18:"18+", calendario:"Calendar", agregar:"Add your event", nosotros:"Who makes this",
+    mapa:"Full map", fiestas:"Parties", teatro:"Theatre", musica:"Music", charlas:"Talks",
+    habla:"Talk", blog:"Blog", cine:"Cinema", comer:"Where to eat", ninos:"Kids", mas18:"18+", calendario:"Calendar", agregar:"Add your event", nosotros:"Who makes this",
+    catBajada:{fiesta:"Santiago's parties and club nights: reggaeton, electronic, cumbia, 80s.",
+               teatro:"Plays, comedy, dance and circus in Santiago's theatres.",
+               musica:"Concerts, gigs and festivals: what's playing in Santiago.",
+               charla:"Talks, panels and open seminars in Santiago."},
     eventos:"events", evento:"event", gratis:"Free",
     hoy:"Today", manana:"Tomorrow", semana:"7 days", finde:"Weekend",
     cuandoLargo:{hoy:"Today", manana:"Tomorrow", semana:"Within 7 days", finde:"This weekend", todo:"All"},
@@ -759,7 +771,7 @@ const TEXTOS = {
     pTitulo:"What's on today", pTituloAcento:"around Santiago?",
     pBajada:"Everything happening in Santiago, in one place. A robot gathers it every morning and always sends you to the original source.",
     pSaludo:"Hi! I'm the Loica. Shall I show you Santiago?",
-    pVerMapa:"Open the map", pVerHoy:"What's on today",
+    pVerMapa:"Open the full map", pVerHoy:"What's on today",
     pHoyTitulo:"Today in Santiago", pHoyVer:"See all", pHoyVacio:"Quiet today. Have a look at what's coming.",
     pDondeIr:"Where do we start?",
     pMapaT:"The map", pMapaD:"What's near you, right now.",
@@ -810,7 +822,12 @@ const TEXTOS = {
   },
   pt:{
     lema:"Santiago está acontecendo",
-    mapa:"Mapa", habla:"Fale", blog:"Blog", cine:"Cinema", comer:"Onde comer", ninos:"Crianças", mas18:"+18", calendario:"Calendário", agregar:"Adicione seu evento", nosotros:"Quem faz isso",
+    mapa:"Mapa geral", fiestas:"Festas", teatro:"Teatro", musica:"Música", charlas:"Palestras",
+    habla:"Fale", blog:"Blog", cine:"Cinema", comer:"Onde comer", ninos:"Crianças", mas18:"+18", calendario:"Calendário", agregar:"Adicione seu evento", nosotros:"Quem faz isso",
+    catBajada:{fiesta:"Festas e baladas de Santiago: reggaeton, eletrônica, cumbia, anos 80.",
+               teatro:"Peças, comédia, dança e circo nos teatros de Santiago.",
+               musica:"Shows, festivais e música ao vivo: o que está tocando em Santiago.",
+               charla:"Palestras, debates e seminários abertos em Santiago."},
     eventos:"eventos", evento:"evento", gratis:"Grátis",
     hoy:"Hoje", manana:"Amanhã", semana:"7 dias", finde:"Fim de semana",
     cuandoLargo:{hoy:"Hoje", manana:"Amanhã", semana:"Nestes 7 dias", finde:"Neste fim de semana", todo:"Todos"},
@@ -833,7 +850,7 @@ const TEXTOS = {
     pTitulo:"O que a gente faz hoje", pTituloAcento:"por Santiago?",
     pBajada:"Tudo o que está acontecendo em Santiago, num só lugar. Um robô junta tudo toda manhã e sempre te leva à fonte original.",
     pSaludo:"Oi! Eu sou a Loica. Te mostro Santiago?",
-    pVerMapa:"Abrir o mapa", pVerHoy:"Programas de hoje",
+    pVerMapa:"Abrir o mapa geral", pVerHoy:"Programas de hoje",
     pHoyTitulo:"Hoje em Santiago", pHoyVer:"Ver os", pHoyVacio:"Hoje está calmo. Veja o que vem por aí.",
     pDondeIr:"Por onde começamos?",
     pMapaT:"O mapa", pMapaD:"O que tem perto de você, agora.",
@@ -942,8 +959,12 @@ function alternarTema(){
 aplicarTema(temaGuardado() || "claro", false);
 
 /* ---------- CABECERA COMPARTIDA ---------- */
-// Íconos de la navegación inferior. Simples a propósito: compiten con las
-// mascotas y a 22px la mascota no se lee.
+/* Íconos de línea de la navegación inferior: los llevan las HERRAMIENTAS
+   (mapa general, cine, talleres, descuentos, agenda, publicar, quiénes). Las
+   pestañas de una categoría no están acá: llevan a su animal guía, que se
+   dibuja en iconoNav() con la misma carita del chip y del pin. Habla, blog y
+   comer siguen dibujados aunque ya no estén en la barra: las páginas existen
+   y abren por URL directa. */
 const ICONOS_NAV = {
   /* Talleres: dos flechas en círculo — la clase que vuelve cada semana. */
   talleres:`<path d="M20 12a8 8 0 1 1-2.9-6.2" fill="none" stroke="currentColor"
@@ -1000,35 +1021,72 @@ const ICONOS_NAV = {
         <path d="M17 13.2V21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>`,
 };
 /* index.html es la PORTADA y no está en esta lista a propósito: se llega a
-   ella por el logo. Seis destinos no caben en la barra inferior de un
-   celular sin que las etiquetas se corten. */
-const PAGINAS = [["mapa.html","mapa"],["habla.html","habla"],["calendario.html","calendario"],
-                 ["cine.html","cine"], ["talleres.html","talleres"],
-                 ["descuentos.html","descuentos"],["comer.html","comer"],["blog.html","blog"],
-                 ["agrega.html","agregar"],["nosotros.html","nosotros"]];
-// En la barra inferior el espacio manda: con OCHO destinos cada celda baja a
-// 47 px en un teléfono de 375, así que las etiquetas son de UNA palabra corta
-// y ninguna pasa de seis letras. "Calendario" ya no cabía con seis y pasó a
-// "Agenda"; "Descuentos" tampoco cabe y va como "Dctos", que es como se
-// escribe en cualquier vitrina de Chile; y "Publicar" —que con siete todavía
-// entraba— se cortaba con ocho y pasó a "Subir".
-//
-// Ocho es el techo de verdad. A 375 px la celda mide 47 y el área táctil
-// sigue sobre los 44; en un teléfono de 320 px baja a 40 y queda bajo la
-// recomendación, que es el precio conocido de este destino. Un noveno destino
-// deja de caber en cualquier teléfono y tendría que vivir en otra parte.
+   ella por el logo.
+
+   El orden es el que pidió el dueño del sitio (02-09-2026): primero el mapa
+   general, después una pestaña por categoría —fiestas, teatro, música,
+   charlas— y recién entonces las herramientas (cine, talleres, descuentos,
+   agenda, publicar, quiénes). Las cuatro de categoría son el mismo mapa con
+   la categoría fija (ver mapa.js): en vez de explicarle a alguien que Teatro
+   es un chip adentro de Mapa, Teatro es una pestaña.
+
+   Habla, Dónde comer y el Blog SALIERON de la barra pero no del sitio: sus
+   archivos siguen en web/ y abren por URL directa. Van en PAGINAS_OCULTAS
+   para que pintarBarra siga sabiendo qué página es (el color de la nav y
+   cualquier CSS colgado de data-pagina) aunque no las dibuje. */
+const PAGINAS = [["mapa.html","mapa"],["fiestas.html","fiestas"],["teatro.html","teatro"],
+                 ["musica.html","musica"],["charlas.html","charlas"],["cine.html","cine"],
+                 ["talleres.html","talleres"],["descuentos.html","descuentos"],
+                 ["calendario.html","calendario"],["agrega.html","agregar"],
+                 ["nosotros.html","nosotros"]];
+const PAGINAS_OCULTAS = [["habla.html","habla"],["comer.html","comer"],["blog.html","blog"]];
+
+/* Qué categoría muestra cada pestaña de categoría. Lo usa la barra inferior
+   para dibujar al animal guía en vez de un ícono de línea, y es el espejo de
+   PAGINA_DE_CATEGORIA en exportar_web.py, que decide a qué página vuelve
+   cada ficha. Si se agrega una pestaña acá, se agrega allá. */
+const CATEGORIA_DE_PAGINA = {"fiestas.html":"fiesta", "teatro.html":"teatro",
+                             "musica.html":"musica", "charlas.html":"charla"};
+
+// En la barra inferior el espacio manda: la fila se desliza (ver loica.css)
+// y cada celda mide 54 px como mínimo, así que las etiquetas son de UNA
+// palabra y ninguna pasa de siete letras. "Calendario" no cabía y pasó a
+// "Agenda"; "Descuentos" tampoco y va como "Dctos", que es como se escribe
+// en cualquier vitrina de Chile; "Publicar" se cortaba y pasó a "Subir";
+// "Palestras" (nueve letras) va como "Debates". El mapa general se queda
+// con "Mapa": abajo el "general" no cabe y no hace falta, porque las otras
+// pestañas ya dicen de qué es cada mapa. Los cortos de habla, comer y blog
+// se quedan por si vuelven a la barra.
 const CORTOS = {
-  es:{mapa:"Mapa", habla:"Habla", calendario:"Agenda", cine:"Cine", talleres:"Clases", descuentos:"Dctos", comer:"Comer", blog:"Blog", agregar:"Subir", nosotros:"Quién"},
-  en:{mapa:"Map", habla:"Talk", calendario:"Agenda", cine:"Cinema", talleres:"Class", descuentos:"Deals", comer:"Eat", blog:"Blog", agregar:"Post", nosotros:"Who"},
-  pt:{mapa:"Mapa", habla:"Fale", calendario:"Agenda", cine:"Cinema", talleres:"Aulas", descuentos:"Dctos", comer:"Comer", blog:"Blog", agregar:"Subir", nosotros:"Quem"},
+  es:{mapa:"Mapa", fiestas:"Fiestas", teatro:"Teatro", musica:"Música", charlas:"Charlas", cine:"Cine", talleres:"Clases", descuentos:"Dctos", calendario:"Agenda", agregar:"Subir", nosotros:"Quién", habla:"Habla", comer:"Comer", blog:"Blog"},
+  en:{mapa:"Map", fiestas:"Parties", teatro:"Theatre", musica:"Music", charlas:"Talks", cine:"Cinema", talleres:"Class", descuentos:"Deals", calendario:"Agenda", agregar:"Post", nosotros:"Who", habla:"Talk", comer:"Eat", blog:"Blog"},
+  pt:{mapa:"Mapa", fiestas:"Festas", teatro:"Teatro", musica:"Música", charlas:"Debates", cine:"Cinema", talleres:"Aulas", descuentos:"Dctos", calendario:"Agenda", agregar:"Subir", nosotros:"Quem", habla:"Fale", comer:"Comer", blog:"Blog"},
 };
+
+/* El ícono de cada celda de la barra inferior. Las pestañas de categoría
+   llevan a su animal guía y no un ícono de línea: en este sitio el animal al
+   lado ES la señalética (misma carita que el chip y el pin, a 21 px, que es
+   el tamaño para el que se redibujaron en el elenco v2). Apagada va con su
+   color, como el chip en reposo; prendida va crema sobre la pastilla del
+   color del destino, con la tinta FIJA como en los pines: el contorno de
+   var(--contorno) es crema de noche y se fundía con el relleno. */
+function iconoNav(url, clave, activo){
+  const categoria = CATEGORIA_DE_PAGINA[url];
+  if(!categoria) return `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONOS_NAV[clave]}</svg>`;
+  const info = CATEGORIAS[categoria];
+  return activo ? carita(info.mascota, "currentColor", 21, {tinta:"#1E2A4A"})
+                : carita(info.mascota, info.hex, 21);
+}
 
 /* `raiz` es el prefijo hacia la raíz del sitio. Las fichas de `e/` viven un
    nivel más abajo y le pasan "../"; sin eso su navegación apuntaba a
    `e/calendario.html` y los cinco enlaces daban 404. */
 function pintarBarra(paginaActual, raiz = ""){
-  // El color de la página activa (nav superior e inferior) sale de este atributo
-  const claveActual = (PAGINAS.find(([url]) => url === paginaActual) || [,"portada"])[1];
+  // El color de la página activa (nav superior e inferior) sale de este
+  // atributo. Las páginas ocultas también lo reciben: no están en la barra,
+  // pero siguen siendo ellas mismas.
+  const claveActual = (PAGINAS.find(([url]) => url === paginaActual)
+    || PAGINAS_OCULTAS.find(([url]) => url === paginaActual) || [,"portada"])[1];
   document.documentElement.dataset.pagina = claveActual;
   const logo = `<a class="logo" href="${raiz}index.html" aria-label="Loica">
       ${carita("loica", "var(--acento)", 34, {acc:false})}<b>loica</b></a>`;
@@ -1041,7 +1099,7 @@ function pintarBarra(paginaActual, raiz = ""){
   if(inferior){
     inferior.innerHTML = PAGINAS.map(([url,clave]) =>
       `<a href="${raiz}${url}" ${url===paginaActual?'aria-current="page"':""}>
-         <svg viewBox="0 0 24 24" aria-hidden="true">${ICONOS_NAV[clave]}</svg>
+         ${iconoNav(url, clave, url === paginaActual)}
          <span data-corto="${clave}">${CORTOS[IDIOMA][clave]}</span></a>`).join("");
   }
   const oscuro = document.documentElement.dataset.tema === "oscuro"

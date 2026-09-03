@@ -1,0 +1,455 @@
+/* ============================================================
+   LOICA — el mapa: estilos compartidos por mapa.html y por las páginas de
+   una sola categoría (fiestas, teatro, musica, charlas).
+   ------------------------------------------------------------
+   Vivía dentro de mapa.html. Salió a este archivo el día en que el mapa pasó
+   a tener cinco páginas: cinco copias de 400 líneas se desalinean en la
+   primera semana. Lo que es del mecanismo de la hoja (arrastre, agarre)
+   sigue en loica.css §4b; acá va solo lo que es de la página del mapa.
+   Lleva ?v=N como loica.css: si se toca, se sube el número en las cinco
+   páginas (ver README, "sube el cache-buster").
+   ============================================================ */
+
+html,body{height:100%;overflow:hidden}
+/* Los dos altos van en este orden a proposito: `dvh` no existe en
+   Safari de iOS anterior a 15.4 ni en Chrome anterior a 108, y ahi la
+   declaracion se descarta entera. Sin el 100vh de respaldo el alto
+   quedaba en `auto` y la pagina —que es una app de alto fijo con
+   scroll interno— se desarmaba: la lista crecia sin fin y la barra de
+   abajo se iba de la pantalla. */
+#app{display:flex;flex-direction:column;height:100vh;height:100dvh}
+header{flex:none;z-index:6}
+main{flex:1;position:relative;min-height:0}
+#mapa{position:absolute;inset:0;background:var(--fondo-hundido)}
+
+/* Los botones de zoom de MapLibre vienen en 29px. Con el dedo eso es la
+   mitad de lo que pide el pulgar, y acercar el mapa es de las tres cosas
+   que más se hacen en esta página. El `no-repeat` no es adorno: el ícono
+   es una imagen de fondo y sin él `background-size` la MOSAICA — quedaban
+   cuatro lupas apiladas en cada botón. */
+@media (pointer:coarse){
+  .maplibregl-ctrl-group button{width:44px;height:44px}
+  .maplibregl-ctrl-group button .maplibregl-ctrl-icon{
+    background-size:22px 22px;background-repeat:no-repeat;background-position:center;
+  }
+}
+
+/* Los botones de zoom en el lenguaje del sitio: contorno y repisa. El fondo
+   va en crema FIJO también de noche: los íconos de MapLibre son negros y
+   sobre el panel oscuro desaparecían. En celular no van: se pellizca, y cada
+   píxel de mapa cuenta. */
+.maplibregl-ctrl-group{background:var(--arena-50)!important;border:2px solid var(--contorno);
+  border-radius:var(--r-md);box-shadow:var(--repisa-1)!important}
+.maplibregl-ctrl-group button+button{border-top:2px solid var(--arena-300)!important}
+@media(max-width:879px){.maplibregl-ctrl-top-left{display:none}}
+
+/* La atribución de OSM y CARTO sube al borde superior en celular.
+   MapLibre la deja abajo a la derecha, que es justo donde viven el panel
+   de la lista y la barra de destinos: el crédito quedaba dibujado a 778px
+   de una pantalla de 812, con las dos capas encima. No se mostraba nunca,
+   y las dos licencias lo piden a la vista.
+   Se mueve el RINCÓN y no se crea otro control: el control interno es el
+   único que recibe el `styledata` de arranque y por lo tanto el único que
+   llega a saber qué dicen las fuentes del estilo. */
+@media(max-width:879px){
+  .maplibregl-ctrl-bottom-right{top:0;bottom:auto}
+  .maplibregl-ctrl-bottom-right .maplibregl-ctrl{margin:8px 8px 0 0}
+}
+
+/* --- Cabecera: dos rieles y no tres ---
+   La fecha es una pregunta de una sola respuesta, así que va en un control
+   segmentado (compacto, se ve entero, no se puede elegir dos). Todo lo
+   demás son chips que sí se combinan. Antes las dos filas de chips se
+   comían 100px de mapa en un celular de 812px. */
+.riel-fecha{
+  display:flex;gap:5px;padding:var(--e-2) var(--e-4);background:var(--fondo-elevado);
+  overflow-x:auto;scrollbar-width:none;
+}
+.riel-fecha::-webkit-scrollbar{display:none}
+.segmentado{
+  display:inline-flex;gap:3px;padding:3px;flex:none;
+  background:var(--fondo-hundido);border:2.5px solid var(--contorno);
+  border-radius:var(--r-pill);box-shadow:var(--repisa-1);
+}
+.segmentado button{
+  flex:none;border:0;background:transparent;color:var(--tinta-suave);cursor:pointer;
+  padding:0 var(--e-4);min-height:36px;border-radius:var(--r-pill);
+  font:800 var(--t-sm)/1 var(--fuente-marca);white-space:nowrap;transition:var(--rapido);
+}
+.segmentado button:hover{color:var(--tinta)}
+.segmentado button[aria-pressed="true"]{
+  background:var(--acento-solido);color:var(--acento-contraste);
+}
+.cuenta-rango{
+  display:flex;align-items:center;gap:5px;flex:none;margin-left:auto;padding-left:var(--e-3);
+  font-size:var(--t-xs);font-weight:700;color:var(--tinta-tenue);white-space:nowrap;
+}
+
+/* --- El buscador, dentro del riel de fechas ---
+   Va acá y no en una tercera banda: es donde lo pidió el dueño y además una
+   banda más convierte la cabecera en un formulario.
+
+   El problema real es el ancho. A 360px el riel deja 336px útiles y el
+   segmentado de fechas ya mide 288: el campo entero no cabe al lado. Se
+   resuelve con una lupa de 44px y el campo plegado; al tocarla, la fila
+   completa pasa a ser el campo y las fechas se esconden mientras escribes.
+
+   La lupa va PEGADA al borde derecho con `sticky` y no simplemente al final
+   del riel: el riel se desplaza de lado, así que sin eso la lupa se iba con
+   el desplazamiento y quedaba fuera de la pantalla justo cuando el riel está
+   lleno, que es exactamente cuando hace falta. */
+.buscador{
+  position:sticky;right:0;flex:none;display:flex;align-items:center;
+  margin-left:auto;background:var(--fondo-elevado);padding-left:7px;
+}
+/* El filo de tinta que separa la lupa de las fechas que le pasan por debajo.
+   Mismo recurso que `.separa-chips`: línea dura, cero desenfoque. */
+.buscador::before{
+  content:"";position:absolute;left:0;top:4px;bottom:4px;width:2px;
+  background:var(--borde-fuerte);border-radius:2px;
+}
+.lupa{
+  flex:none;width:44px;height:38px;display:grid;place-items:center;
+  border:2px solid var(--contorno);border-radius:var(--r-pill);
+  background:var(--fondo-elevado);color:var(--tinta);cursor:pointer;
+  box-shadow:0 2px 0 var(--contorno);transition:var(--rapido);
+}
+.lupa svg{width:20px;height:20px}
+.lupa:active{transform:translateY(2px);box-shadow:none}
+/* Con el campo plegado y una palabra escrita, la lupa queda RELLENA. Si no,
+   la búsqueda seguiría filtrando la pantalla sin nada en la cabecera que lo
+   delate, que es el mismo problema que esta auditoría vino a arreglar. */
+.lupa.activo{
+  background:var(--tinta);color:var(--fondo-elevado);
+  transform:translateY(2px);box-shadow:none;
+}
+.campo-buscar{
+  display:none;align-items:center;gap:4px;flex:1;min-width:0;height:38px;
+  padding:0 5px 0 10px;border:2px solid var(--contorno);border-radius:var(--r-pill);
+  background:var(--fondo-elevado);box-shadow:0 2px 0 var(--contorno);
+}
+.campo-buscar > svg{width:18px;height:18px;flex:none;color:var(--tinta-tenue)}
+/* 16px y no --t-base: bajo 16px Safari de iOS hace zoom solo al enfocar el
+   campo y deja la página corrida (la misma razón está escrita en loica.css
+   para los formularios). */
+.campo-buscar input{
+  flex:1;min-width:0;height:100%;border:0;background:transparent;color:var(--tinta);
+  font:600 16px/1 var(--fuente-ui);padding:0;
+}
+.campo-buscar input::placeholder{color:var(--tinta-tenue);font-weight:500}
+.campo-buscar input:focus{outline:none}
+/* WebKit dibuja su propia ✕ dentro de los input[type=search] y quedaban dos,
+   una al lado de la otra, haciendo cosas parecidas pero no iguales. */
+.campo-buscar input::-webkit-search-cancel-button{display:none}
+/* El anillo de foco se pinta en la CÁPSULA: el <input> no tiene borde propio
+   y el anillo quedaba dibujado por dentro, escondido bajo el contorno. */
+.campo-buscar:focus-within{box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno)}
+.borra-buscar{
+  flex:none;width:34px;height:34px;border-radius:var(--r-pill);border:0;
+  background:transparent;color:var(--tinta-suave);font-size:17px;line-height:1;
+  cursor:pointer;display:grid;place-items:center;
+}
+.borra-buscar[hidden]{display:none}
+.borra-buscar:hover{background:var(--fondo-hundido);color:var(--tinta)}
+@media (pointer:coarse){
+  .lupa,.borra-buscar{position:relative}
+  .lupa::before,.borra-buscar::before{
+    content:"";position:absolute;left:-5px;right:-5px;top:50%;
+    height:44px;transform:translateY(-50%);
+  }
+}
+
+/* Modo búsqueda en celular: la fila entera se la lleva el campo. Las fechas
+   vuelven al cerrar y la palabra NO se borra al cerrar — por eso la lupa
+   queda rellena: el filtro sigue puesto y tiene que verse. */
+.riel-fecha.buscando .segmentado{display:none}
+.riel-fecha.buscando .lupa{display:none}
+.riel-fecha.buscando .campo-buscar{display:flex}
+.riel-fecha.buscando .buscador{position:static;flex:1;margin-left:0;padding-left:0}
+.riel-fecha.buscando .buscador::before{display:none}
+
+/* Desde 560px el campo cabe siempre junto a las fechas: no hay nada que
+   plegar, así que la lupa sobra y el campo se queda abierto. */
+@media(min-width:560px){
+  .riel-fecha .segmentado{display:inline-flex}
+  .buscador{position:static;flex:1 1 auto;max-width:330px;
+    margin-left:var(--e-3);padding-left:0}
+  .buscador::before{display:none}
+  .lupa{display:none}
+  .campo-buscar{display:flex}
+}
+
+header .filtros{padding:var(--e-2) var(--e-4) var(--e-3);border-bottom:2.5px solid var(--contorno)}
+
+/* --- La cabecera de la categoría (solo fiestas, teatro, música y charlas) ---
+   El animal guía con su nombre, que es lo que dice "acá estás en Fiestas"
+   antes de leer ningún chip. Es una banda y no un hero: en celular la
+   cabecera ya se lleva 150 px y el mapa pelea por cada uno. El animal va en
+   el mismo disco que "quién atiende" en el panel, para que se lea como la
+   misma persona en los dos lugares. La bajada se ve desde 560 px; en un
+   teléfono el nombre y el animal alcanzan, y la pestaña activa de abajo
+   repite la seña. En el mapa general el elemento no existe. */
+.cabeza-cat{display:flex;align-items:center;gap:var(--e-3);
+  padding:6px var(--e-4) 4px;background:var(--fondo-elevado)}
+.cabeza-cat:empty{display:none}
+.cabeza-cat-masc{flex:none;display:grid;place-items:center;width:38px;height:38px;
+  border-radius:50%;background:var(--fondo-hundido);border:2px solid var(--contorno)}
+.cabeza-cat-masc svg{width:28px;height:28px}
+.cabeza-cat h1{font-size:var(--t-xl);line-height:1.1;white-space:nowrap}
+.cabeza-cat-bajada{display:none;margin:0;min-width:0;font-size:var(--t-sm);
+  color:var(--tinta-suave);line-height:1.3;overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap}
+@media(min-width:560px){.cabeza-cat-bajada{display:block}}
+/* En celular la banda mide 38 px: 4+32+2. Cada píxel que se le da acá se le
+   quita al mapa, que en un teléfono ya arranca con 155 de cabecera. */
+@media(max-width:879px){
+  .cabeza-cat{padding:4px var(--e-3) 2px}
+  .cabeza-cat-masc{width:32px;height:32px}
+  .cabeza-cat-masc svg{width:24px;height:24px}
+  .cabeza-cat h1{font-size:var(--t-lg)}
+}
+/* Acostado no hay alto para presentaciones: la pestaña de abajo ya dice
+   dónde estás. */
+@media(max-width:879px) and (max-height:460px){.cabeza-cat{display:none}}
+/* UN chip para las dos filas (cabecera y afinar): 40 px de alto, repisa de 3
+   como el resto del sitio. Antes había cuatro alturas en la misma pantalla
+   (34, 36, 38 y 42) y dos repisas, que se leían como cuatro componentes. */
+header .filtros .chip,.afinar .chip{padding:6px 13px 6px 8px;gap:5px;font-size:var(--t-xs);
+  border-width:2px;box-shadow:var(--repisa-1);min-height:40px}
+header .filtros .chip svg{width:22px;height:22px}
+header .filtros .chip:active,.afinar .chip:active,
+header .filtros .chip[aria-pressed="true"],
+.afinar .chip[aria-pressed="true"]{transform:translateY(3px);box-shadow:none}
+/* El anillo de foco de loica.css se apila sobre la repisa; el selector de
+   acá es más específico y la pisaba. Se repone; el chip prendido está
+   hundido y no tiene repisa, solo anillo. */
+header .filtros .chip:focus-visible,.afinar .chip:focus-visible{
+  box-shadow:var(--repisa-1),0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+}
+header .filtros .chip[aria-pressed="true"]:focus-visible,
+.afinar .chip[aria-pressed="true"]:focus-visible{
+  box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
+}
+/* El separador entre "precio y público" y "tipo de panorama": son dos
+   preguntas distintas metidas en un solo riel para ahorrar alto. */
+.separa-chips{flex:none;width:2px;background:var(--borde-fuerte);margin:4px 3px;border-radius:2px}
+
+/* La Loica que vuela: guía, no adorno. Nunca tapa un dato. */
+#loica-vuelo{
+  position:absolute;top:0;left:0;width:56px;height:56px;z-index:5;
+  pointer-events:none;opacity:0;offset-rotate:auto;offset-distance:0%;
+  will-change:offset-distance,opacity;
+}
+#loica-vuelo.vuela{animation:loica-vuela var(--dur-vuelo,700ms) cubic-bezier(.3,0,.25,1) forwards}
+@keyframes loica-vuela{
+  0%{opacity:0;offset-distance:0%} 12%{opacity:1}
+  88%{opacity:1} 100%{opacity:0;offset-distance:100%}
+}
+@media(prefers-reduced-motion:reduce){#loica-vuelo{display:none}}
+
+.conteo b{display:inline-block}
+.conteo b.pop{animation:pop var(--rebote)}
+@keyframes pop{0%{transform:scale(1)}45%{transform:scale(1.35)}100%{transform:scale(1)}}
+
+/* --- Panel inferior: tres alturas y arrastre real --- */
+.panel-lista{
+  position:absolute;left:0;right:0;bottom:0;background:var(--fondo-elevado);
+  border-radius:var(--r-xl) var(--r-xl) 0 0;
+  border:2.5px solid var(--contorno);border-bottom:0;
+  display:flex;flex-direction:column;z-index:4;
+  height:var(--alto-panel,268px);max-height:88%;
+  transition:height var(--medio);
+}
+/* `oculto` NO es "la escondió el usuario" —eso es `hoja-fuera`, de la hoja—
+   sino "hay una ficha encima": el panel se aparta para no asomar bajo ella.
+   Dos estados distintos con el mismo destino visual y por eso dos clases. */
+.panel-lista.oculto{transform:translateY(104%);pointer-events:none}
+/* El resto del tirador —los 44 px de blanco táctil, el cursor, el
+   touch-action, el anillo de foco— vive en loica.css §4b, junto al mecanismo
+   de la hoja, porque es igual en las cuatro páginas con mapa. Acá queda solo
+   lo que es de esta página. */
+.tirador{padding:0 var(--e-4);flex:none}
+/* Pastilla de tinta de 52×7 (§7.5): la rayita gris de 44×4,5 no se veía
+   como algo que se agarra. */
+.barra-tirador{width:52px;height:7px;background:var(--tinta);border-radius:4px;margin:0 auto}
+/* Quién atiende: la carita de la categoría puesta (o la Loica, sin filtro)
+   al lado del número. Es la misma señalética de los chips a 30 px dentro
+   de un disco, y contesta "¿qué estoy mirando?" sin leer la línea de
+   estado. Uno a la vez: el del filtro puesto. */
+.conteo{display:grid;grid-template-columns:auto 1fr;column-gap:10px;align-items:center;
+  font-size:var(--t-sm);color:var(--tinta-suave);padding:var(--e-1) var(--e-4) var(--e-2)}
+.conteo .atiende{grid-row:1/3;display:grid;place-items:center;width:40px;height:40px;
+  border-radius:50%;background:var(--fondo-hundido);border:2px solid var(--contorno)}
+.conteo .atiende svg{width:30px;height:30px}
+.conteo .conteo-num{display:flex;align-items:baseline;gap:6px}
+.conteo b{font-family:var(--fuente-marca);font-size:var(--t-lg);color:var(--tinta)}
+/* La línea de estado: POR QUÉ ves 12 eventos.
+   Con seis filtros combinables, quien vuelve a la pestaña al otro día no
+   tiene cómo saber que quedaron puestos "Hoy + Gratis + Deporte". Va pegada
+   al número y no en la cabecera —que era donde la pedía el encargo— porque
+   la pregunta la hace el número y la respuesta tiene que estar donde está la
+   pregunta; y porque en un teléfono de 760px la cabecera ya se lleva 140 y
+   una tercera banda es justo lo que este archivo viene evitando desde
+   arriba. Se ve en los dos modos: el contador es lo primero del panel tanto
+   en la hoja de celular como en la columna de escritorio.
+   Dos líneas de tope: con todo puesto son siete etiquetas y no puede empujar
+   la lista fuera de la pantalla. */
+.conteo-estado{
+  flex:1 1 100%;font-size:var(--t-xs);line-height:1.35;color:var(--tinta-tenue);
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.conteo-estado:empty{display:none}
+
+/* --- Afinar: subcategorías y tamaño, dentro del panel ---
+   Bajo el contador, que es donde los pidió el dueño y donde corresponde: la
+   cabecera ya tiene dos rieles. Cada fila se desplaza de lado en vez de
+   envolver: música tiene nueve géneros y apilados le comían al panel las dos
+   tarjetas que alcanza a mostrar en reposo. */
+.afinar{flex:none;border-bottom:1px solid var(--borde)}
+.afinar-fila{display:flex;align-items:center;gap:6px;
+  padding:4px var(--e-4) 6px;overflow-x:auto;scrollbar-width:none}
+.afinar-fila::-webkit-scrollbar{display:none}
+.afinar-et{flex:none;font-size:var(--t-xs);font-weight:800;color:var(--tinta-tenue);
+  text-transform:uppercase;letter-spacing:.05em}
+/* Los chips de afinar comparten la regla de la cabecera (ver arriba). */
+/* El número va más apagado que el nombre, pero no tanto como para perderse:
+   a .72 da 5,3:1 sobre el chip apagado y 7,4:1 sobre el relleno del activo,
+   en claro y en oscuro. En las páginas de una categoría los géneros suben a
+   la cabecera (ver pintarFiltros en mapa.js) y el número viaja con ellos. */
+.afinar .cuenta,header .filtros .cuenta{opacity:.72;font-variant-numeric:tabular-nums}
+.afinar-nota{margin:0;padding:0 var(--e-4) 7px;font-size:var(--t-xs);
+  color:var(--tinta-tenue);font-style:italic;line-height:1.3}
+
+.lista{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;flex:1;min-height:0}
+.fin-lista{padding:var(--e-4);text-align:center;color:var(--tinta-tenue);font-size:var(--t-xs)}
+
+.ficha{
+  position:absolute;inset:auto 0 0 0;background:var(--fondo-elevado);z-index:8;
+  border-radius:var(--r-xl) var(--r-xl) 0 0;
+  border:2.5px solid var(--contorno);border-bottom:0;
+  transform:translateY(103%);transition:transform var(--medio);
+  max-height:88%;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  display:flex;flex-direction:column;
+}
+.ficha.visible{transform:translateY(0)}
+.ficha.cambiando .ficha-scroll{animation:entra-ficha var(--medio)}
+@keyframes entra-ficha{from{opacity:.3;transform:translateX(var(--desde,14px))}to{opacity:1;transform:none}}
+.ficha-scroll{overflow-y:auto;flex:1;min-height:0}
+
+/* --- La barra de avanzar: el arreglo del pedido ---
+   Antes, para ver el evento de al lado había que cerrar con la X, buscar
+   dónde había quedado la lista y tocar el siguiente. Ahora los dos
+   vecinos están siempre en pantalla y también responden a swipe y a las
+   flechas del teclado. */
+.ficha-nav{
+  flex:none;display:flex;align-items:center;gap:var(--e-2);
+  padding:var(--e-2) var(--e-3);background:var(--fondo-elevado);
+  border-bottom:2px solid var(--borde);border-radius:var(--r-xl) var(--r-xl) 0 0;
+}
+/* 44 y no 40: anterior, siguiente y cerrar son los tres botones que más se
+   aprietan seguidos en la ficha, y acá el alto no le quita nada al mapa
+   —la ficha es una capa encima. */
+.nav-ev{
+  display:inline-flex;align-items:center;justify-content:center;gap:5px;
+  min-height:44px;padding:0 var(--e-3);border-radius:var(--r-pill);
+  border:2px solid var(--contorno);background:var(--fondo-elevado);color:var(--tinta);
+  font:800 var(--t-sm)/1 var(--fuente-marca);cursor:pointer;box-shadow:0 2px 0 var(--contorno);
+  transition:var(--rapido);
+}
+.nav-ev:hover:not(:disabled){background:var(--fondo-hundido)}
+.nav-ev:active:not(:disabled){transform:translateY(2px);box-shadow:none}
+.nav-ev:disabled{opacity:.34;cursor:default;box-shadow:none}
+.nav-ev svg{width:16px;height:16px}
+.ficha-pos{
+  flex:1;text-align:center;font-size:var(--t-xs);font-weight:700;
+  color:var(--tinta-tenue);font-variant-numeric:tabular-nums;
+}
+.cerrar-ficha{
+  flex:none;width:44px;height:44px;border-radius:var(--r-pill);
+  border:2px solid var(--contorno);background:var(--fondo-elevado);color:var(--tinta);
+  font-size:19px;line-height:1;cursor:pointer;box-shadow:0 2px 0 var(--contorno);
+}
+.cerrar-ficha:active{transform:translateY(2px);box-shadow:none}
+
+.ficha-foto{height:158px;background:var(--fondo-hundido);position:relative;overflow:hidden}
+.ficha-foto img{width:100%;height:100%;object-fit:cover}
+.ficha-cuerpo{padding:var(--e-4) var(--e-5) var(--e-6)}
+.ficha h2{margin:var(--e-1) 0 var(--e-3)}
+.dato{display:flex;gap:var(--e-3);padding:9px 0;border-top:1px solid var(--borde);font-size:var(--t-base)}
+.dato .et{color:var(--tinta-tenue);width:82px;flex:none;font-size:var(--t-sm);font-weight:600}
+.aprox{font-size:var(--t-xs);color:var(--tinta-tenue);font-style:italic}
+.fuente-pie{margin-top:var(--e-3);font-size:var(--t-xs);color:var(--tinta-tenue);text-align:center}
+
+/* display:flex le gana a [hidden] del navegador, así que la pastilla vacía
+   quedaba flotando sobre el mapa siempre. Se veía como un bug y lo era. */
+.aviso[hidden]{display:none}
+.aviso{
+  position:absolute;top:var(--e-3);left:50%;transform:translateX(-50%);z-index:7;
+  background:var(--fondo-elevado);border:2px solid var(--contorno);border-radius:var(--r-full);
+  padding:8px var(--e-4);font-size:var(--t-sm);font-weight:600;box-shadow:var(--repisa-2);
+  display:flex;align-items:center;gap:7px;max-width:calc(100% - var(--e-8));
+}
+
+/* En celular la cabecera compite con el mapa por cada píxel: tres bandas
+   de controles se comían el 21% de la pantalla. Acá se aprieta todo lo que
+   se puede sin bajar de 44px de área táctil en los chips. */
+@media(max-width:879px){
+  .panel-lista{bottom:var(--hueco-nav)}
+  .ficha{bottom:var(--hueco-nav)}
+  .barra{padding:7px var(--e-3)}
+  .logo svg{width:30px;height:30px}
+  .logo b{font-size:19px}
+  .riel-fecha{padding:5px var(--e-3)}
+  .segmentado{padding:2px}
+  .segmentado button{min-height:36px;padding:0 var(--e-3)}
+  header .filtros{padding:5px var(--e-3) 8px}
+  .cuenta-rango{display:none}
+}
+/* Teléfono acostado. Los 150px de cabecera que en vertical son el 18% de la
+   pantalla acá son el 40%, y entre eso, el panel y la barra de abajo no
+   quedaba un solo píxel de mapa. Se aprieta todo lo que se puede sin bajar
+   de 32px de área táctil, que con el pulgar de lado alcanza. */
+@media(max-width:879px) and (max-height:460px){
+  .barra{padding:3px var(--e-3)}
+  .logo svg{width:24px;height:24px}
+  .logo b{font-size:16px}
+  .riel-fecha{padding:3px var(--e-3)}
+  .segmentado{padding:2px}
+  .segmentado button{min-height:30px;font-size:var(--t-xs)}
+  header .filtros{padding:3px var(--e-3) 4px}
+  header .filtros .chip{min-height:32px}
+  header .filtros .chip svg{width:18px;height:18px}
+
+  /* Acostado el panel se va AL COSTADO, que es lo que ya hace el escritorio.
+     Apretar la cabecera no alcanzaba: entre ella, el panel y la barra de
+     abajo el mapa quedaba en 55px de alto. De lado sobra ancho (667) y
+     falta alto (375), así que la lista se lleva una columna y el mapa se
+     queda con los otros dos tercios, enteros y de arriba abajo. */
+  .panel-lista{
+    left:auto;right:0;top:0;bottom:var(--hueco-nav);width:44%;max-width:320px;
+    height:auto;max-height:none;border-radius:var(--r-xl) 0 0 0;
+    border-right:0;transition:none;
+  }
+  .tirador{display:none}
+  .conteo{padding-top:var(--e-3)}
+  .ficha{
+    left:auto;right:0;top:0;bottom:var(--hueco-nav);width:44%;max-width:320px;
+    max-height:none;border-radius:var(--r-xl) 0 0 0;border-right:0;
+  }
+  .ficha-nav{border-radius:var(--r-xl) 0 0 0}
+  /* En columna la lista y la ficha entran y salen POR EL COSTADO. Con el
+     translateY de vertical se iban hacia abajo, que en esta disposición se
+     lee como que la lista se cae de la pantalla. */
+  .panel-lista.oculto{transform:translateX(104%)}
+  .ficha{transform:translateX(103%)}
+  .ficha.visible{transform:translateX(0)}
+}
+@media(min-width:880px){
+  .panel-lista{left:auto;right:var(--e-4);top:var(--e-4);bottom:var(--e-4);width:410px;
+    height:auto!important;border-radius:var(--r-lg);max-height:none;transition:none}
+  .tirador{display:none}
+  .conteo{padding-top:var(--e-3)}
+  .ficha{left:auto;right:var(--e-4);bottom:var(--e-4);width:410px;
+    border-radius:var(--r-lg);max-height:82%}
+  .ficha-nav{border-radius:var(--r-lg) var(--r-lg) 0 0}
+}
