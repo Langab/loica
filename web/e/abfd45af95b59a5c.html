@@ -63,7 +63,7 @@
 <div class="barra" id="barra"></div>
 
 <article class="ficha-sola">
-  <a class="volver" href="../mapa.html">← Ver todos los panoramas de Santiago</a>
+  <a class="volver" href="../talleres.html">← Ver todos los talleres y clases</a>
   <div class="foto" id="foto"></div>
   <span class="mascota-nombre" id="etiqueta-cat"></span>
   <h1 style="margin:var(--e-2) 0 var(--e-4)">Sonora</h1>
@@ -81,7 +81,7 @@
   
 
   <p style="margin-top:var(--e-5)">
-    <a class="boton secundario bloque" href="../mapa.html#/e/abfd45af95b59a5c">Ver en el mapa</a></p>
+    <a class="boton secundario bloque" href="../talleres.html#/e/abfd45af95b59a5c">Ver en la página de talleres</a></p>
 
   <div class="pie-fuente">Información publicada por <b>Passline</b>.<br>
     Loica solo la indexa y te manda a la fuente.</div>
@@ -90,8 +90,8 @@
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 <script src="../loica.js?v=28"></script>
 <script>
-  pintarBarra("mapa.html", "../");
-  const EV = {"id": "abfd45af95b59a5c", "titulo": "Sonora", "inicio": "2026-09-19T15:00:00", "fin": null, "lugar": "Taringuita Farellones", "direccion": "Av. Los Cóndores 1284", "comuna": "Lo Barnechea", "lat": -33.35167, "lon": -70.31217, "precision": "correccion", "gratis": false, "precio": 40000, "precio_texto": "", "categoria": "musica", "subcategoria": "cumbia", "escala": "", "publico": "todos", "descripcion": "", "imagen": "", "fuente": "Passline", "url": "https://www.passline.com/eventos/sonora-547096", "formato": "panorama"};
+  pintarBarra("talleres.html", "../");
+  const EV = {"id": "abfd45af95b59a5c", "titulo": "Sonora", "inicio": "2026-09-19T15:00:00", "fin": "2026-10-03T15:00:00", "lugar": "Taringuita Farellones", "direccion": "Av. Los Cóndores 1284", "comuna": "Lo Barnechea", "lat": -33.35167, "lon": -70.31217, "precision": "correccion", "gratis": false, "precio": 40000, "precio_texto": "", "categoria": "musica", "subcategoria": "cumbia", "escala": "", "publico": "todos", "descripcion": "", "imagen": "", "fuente": "Passline", "url": "https://www.passline.com/eventos/sonora-547096", "dias_semana": [5], "sesiones": 3, "formato": "taller"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

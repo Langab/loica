@@ -22,10 +22,34 @@ restoranes:
     lon: # COMPLETAR
     nota: verificada el 2026-09-02 por # COMPLETAR
 
-  # 2 descuentos sin pin exacto (Banco Falabella, Entel)
-  Boost:
+  # 2 descuentos sin pin exacto (Banco Falabella, Cencosud)
+  Cantina Montt:
     direccion: # COMPLETAR
-    comuna: # COMPLETAR
+    comuna: Providencia
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
+
+  # 2 descuentos sin pin exacto (Cencosud, Santander)
+  Fork:
+    direccion: # COMPLETAR
+    comuna: La Reina
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
+
+  # 2 descuentos sin pin exacto (Bci, Cencosud)
+  Güeros:
+    direccion: # COMPLETAR
+    comuna: Providencia
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
+
+  # 2 descuentos sin pin exacto (Banco Falabella, Cencosud)
+  La Maestranza:
+    direccion: Mirador Alto las Condes
+    comuna: Las Condes
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-09-02 por # COMPLETAR
@@ -54,10 +78,34 @@ restoranes:
     lon: # COMPLETAR
     nota: verificada el 2026-09-02 por # COMPLETAR
 
+  # 2 descuentos sin pin exacto (Banco Falabella, Cencosud)
+  App Copec:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
+
   # 1 descuentos sin pin exacto (Banco de Chile)
   Viña Undurraga:
     direccion: # COMPLETAR
     comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
+
+  # 1 descuentos sin pin exacto (Cencosud)
+  Cineplanet:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
+
+  # 1 descuentos sin pin exacto (Santander)
+  Do Sushi:
+    direccion: Suecia 0155, local 102
+    comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-09-02 por # COMPLETAR
@@ -70,16 +118,16 @@ restoranes:
     lon: # COMPLETAR
     nota: verificada el 2026-09-02 por # COMPLETAR
 
-  # 1 descuentos sin pin exacto (Banco Security)
-  Pizzería Capri - Justo:
+  # 1 descuentos sin pin exacto (Bci)
+  Marriott:
     direccion: # COMPLETAR
-    comuna: # COMPLETAR
+    comuna: Las Condes
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-09-02 por # COMPLETAR
 
-  # 1 descuentos sin pin exacto (Santander)
-  Punta del Sol:
+  # 1 descuentos sin pin exacto (Banco Security)
+  Pizzería Capri - Justo:
     direccion: # COMPLETAR
     comuna: # COMPLETAR
     lat: # COMPLETAR
@@ -102,6 +150,14 @@ restoranes:
     lon: # COMPLETAR
     nota: verificada el 2026-09-02 por # COMPLETAR
 
+  # 1 descuentos sin pin exacto (Cencosud)
+  Anima:
+    direccion: # COMPLETAR
+    comuna: Providencia
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
+
   # 1 descuentos sin pin exacto (Santander)
   Aquality:
     direccion: # COMPLETAR
@@ -120,6 +176,14 @@ restoranes:
 
   # 1 descuentos sin pin exacto (Banco Falabella)
   Badass:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
+
+  # 1 descuentos sin pin exacto (Bci)
+  Bar sociedad 0306:
     direccion: # COMPLETAR
     comuna: # COMPLETAR
     lat: # COMPLETAR
@@ -182,105 +246,26 @@ restoranes:
     lon: # COMPLETAR
     nota: verificada el 2026-09-02 por # COMPLETAR
 
-  # 1 descuentos sin pin exacto (Banco Falabella)
-  Boka Sushi:
-    direccion: # COMPLETAR
-    comuna: # COMPLETAR
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-02 por # COMPLETAR
-
-  # 1 descuentos sin pin exacto (Santander)
-  Bozzo:
-    direccion: # COMPLETAR
-    comuna: # COMPLETAR
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-02 por # COMPLETAR
-
-  # 1 descuentos sin pin exacto (Banco de Chile)
-  Brasas del Arriero:
-    direccion: Trinidad Ote. 1307
-    comuna: La Florida
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-02 por # COMPLETAR
-
-  # 1 descuentos sin pin exacto (Banco Falabella)
-  Cabrera al Paso:
-    direccion: # COMPLETAR
-    comuna: # COMPLETAR
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-02 por # COMPLETAR
-
-  # 1 descuentos sin pin exacto (Banco Falabella)
-  Caffe Pascucci:
-    direccion: # COMPLETAR
-    comuna: # COMPLETAR
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-02 por # COMPLETAR
-
-  # 1 descuentos sin pin exacto (Banco Falabella)
-  Cantina Montt:
-    direccion: # COMPLETAR
-    comuna: # COMPLETAR
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-02 por # COMPLETAR
-
-  # 1 descuentos sin pin exacto (Banco Falabella)
-  Casa Roque:
-    direccion: # COMPLETAR
-    comuna: # COMPLETAR
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-02 por # COMPLETAR
-
-  # 1 descuentos sin pin exacto (Santander)
-  Chicken Love You:
-    direccion: # COMPLETAR
-    comuna: # COMPLETAR
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-02 por # COMPLETAR
-
   # ---- sin tipo de cocina ----
   Rappi:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Infiltrados:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  La Cocina de Javier:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Santa Brasa:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
   Al Pesto:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
-  Dagan:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  Holy Moly:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  Barra Olivo:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
   Casa Vitalis:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
-  CuracaRibs:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  Demencia:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  Don Carlos:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  El Taller:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  Exò Nuit:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  Gatopardo Bistró:
+  Dagan:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
   Kechua:
@@ -289,34 +274,7 @@ restoranes:
   La Dicha:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
-  La Maestranza:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  Lumiere Bistró:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  Ruta 41:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  Santa Brasa:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  TPM:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  Vapiano:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  PedidosYa:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  Papa Johns:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  Green Lab:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  99 Restaurante:
+  Rishtedar:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
   Cuerovaca:
@@ -325,14 +283,56 @@ restoranes:
   Jerónimo:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
-  Maribérico - Justo:
+  Zulu:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
-  Punta del Sol:
+  Barra Olivo:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
-  Street Wrap - Justo:
+  CuracaRibs:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
-  Vinolia:
+  Danubio Azul:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Danés:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  El Taller:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Expendio:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Exò Nuit:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Fork:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Güeros:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Holy Moly:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  La Maestranza:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  La Santoría:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Pristino:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Sabor y Aroma:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Tigre Bravo:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  TPM:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Vapiano:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)

@@ -7,8 +7,23 @@
 # arreglo de verdad va en loica/clasificar.py, no acá.
 
 eventos:
+  # Refugiados | Museo de la Memoria y los Dere | 2026-05-07
+  76d124dee1fb9697:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-02
+
   # Dia de Spa - Club Recrear | Ticketplus | 2026-06-15
   4d4cbb01465b4c08:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-02
+
+  # Para algunas caídas no existe la gravedad | Museo de la Memoria y los Dere | 2026-06-25
+  3dcac940206221f1:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-02
+
+  # Un siglo de voces juveniles. De scouts, cristaleros y pingüinos | Museo de la Memoria y los Dere | 2026-07-10
+  13d9a5e5e099eca8:
     categoria: # COMPLETAR
     nota: revisado el 2026-09-02
 
@@ -77,8 +92,18 @@ eventos:
     categoria: # COMPLETAR
     nota: revisado el 2026-09-02
 
+  # JUEVES LOWKEY EN CLUB LA RUBIA / JUE 3 DE SEPTIEMBRE, 23HRS | Passline | 2026-09-03
+  3261db4d247031ac:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-02
+
   # Leyendas - Viernes 4 Septiembre - Surreal | Passline | 2026-09-04
   bb74372a7a94af28:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-02
+
+  # RANCHO NIGHTS VOL. II | Passline | 2026-09-04
+  5747661165f94138:
     categoria: # COMPLETAR
     nota: revisado el 2026-09-02
 
@@ -107,6 +132,11 @@ eventos:
     categoria: # COMPLETAR
     nota: revisado el 2026-09-02
 
+  # 80s 90s Espacio Cero | Passline | 2026-09-04
+  f8aba6460bf5bf5e:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-02
+
   # SOMOS MARISOL | Passline | 2026-09-05
   e094947182c6c825:
     categoria: # COMPLETAR
@@ -117,42 +147,12 @@ eventos:
     categoria: # COMPLETAR
     nota: revisado el 2026-09-02
 
+  # Dios Mío presenta Paula Burgos | Passline | 2026-09-05
+  05997cb25bb0a7d2:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-02
+
   # Chile Lindo 2026 | Corporacion Cultural de Vitacu | 2026-09-05
   0db5d48a64aacf59:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-02
-
-  # Certificación en felicidad de Tal Ben Shahar | Passline | 2026-09-05
-  ed92b20ee52a62f5:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-02
-
-  # 1 COMPETENCIA INTERNA DE LEVANTE DIVISION BOX | Passline | 2026-09-05
-  449cac4b853b2db2:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-02
-
-  # Encuentro de Saberes: Territorio, museo y participación | Museo Violeta Parra | 2026-09-05
-  31ed222853b57d5b:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-02
-
-  # Little Big Under 2 | Passline | 2026-09-05
-  8ab247f7228b4bd6:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-02
-
-  # Mik y Leti, los aventureros del Hipocampo Espacial | Ticketplus | 2026-09-05
-  240b760d3b4f3248:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-02
-
-  # Tierra Chilena, 63 años... un viaje a la memoria | Fundacion Centro Cultural Lo P | 2026-09-05
-  36a13821261b39b7:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-02
-
-  # Bingo dieciochero en beneficio de Aaron Ortega | Passline | 2026-09-05
-  e85bcac126612c91:
     categoria: # COMPLETAR
     nota: revisado el 2026-09-02

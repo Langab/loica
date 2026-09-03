@@ -5,7 +5,7 @@
 # Ordenadas por impacto: la primera arregla más eventos que ninguna.
 
 lugares:
-  # 33 eventos sin pin exacto
+  # 37 eventos sin pin exacto
   Red Salas de Teatro (agregador de salas RM):
     direccion: # COMPLETAR
     comuna: # COMPLETAR
@@ -25,6 +25,14 @@ lugares:
   PortalTickets (PortalDisc):
     direccion: # COMPLETAR
     comuna: Santiago
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
+
+  # 14 eventos sin pin exacto
+  Online:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-09-02 por # COMPLETAR
@@ -61,6 +69,14 @@ lugares:
     lon: # COMPLETAR
     nota: verificada el 2026-09-02 por # COMPLETAR
 
+  # 6 eventos sin pin exacto
+  Disfruta Santiago:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
+
   # 5 eventos sin pin exacto
   Campus Pdte. Errázuriz:
     direccion: # COMPLETAR
@@ -77,10 +93,10 @@ lugares:
     lon: # COMPLETAR
     nota: verificada el 2026-09-02 por # COMPLETAR
 
-  # 5 eventos sin pin exacto
-  Disfruta Santiago:
+  # 4 eventos sin pin exacto
+  PortalTickets (PortalDisc):
     direccion: # COMPLETAR
-    comuna: # COMPLETAR
+    comuna: Ñuñoa
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-09-02 por # COMPLETAR
@@ -120,23 +136,23 @@ lugares:
   # 3 eventos sin pin exacto
   PortalTickets (PortalDisc):
     direccion: # COMPLETAR
-    comuna: Ñuñoa
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-02 por # COMPLETAR
-
-  # 3 eventos sin pin exacto
-  PortalTickets (PortalDisc):
-    direccion: # COMPLETAR
     comuna: Recoleta
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 3 eventos sin pin exacto
-  Carpa Extraordinario Circo:
+  Plaza Río de Janeiro:
     direccion: # COMPLETAR
-    comuna: # COMPLETAR
+    comuna: Providencia
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
+
+  # 3 eventos sin pin exacto
+  Cafetería Popular:
+    direccion: Maipu 363
+    comuna: Maipú
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-09-02 por # COMPLETAR
@@ -145,6 +161,14 @@ lugares:
   EL CHANCHO CON CHALECO:
     direccion: AVENIDA PAJARITOS 99
     comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-02 por # COMPLETAR
+
+  # 3 eventos sin pin exacto
+  Online Zoom:
+    direccion: # COMPLETAR
+    comuna: Maipú
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-09-02 por # COMPLETAR
@@ -190,7 +214,7 @@ lugares:
     nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 2 eventos sin pin exacto
-  Bar el Bosque:
+  CIDES Los Misioneros:
     direccion: # COMPLETAR
     comuna: Providencia
     lat: # COMPLETAR
@@ -206,14 +230,6 @@ lugares:
     nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 2 eventos sin pin exacto
-  Bar Estudio Oculto:
-    direccion: # COMPLETAR
-    comuna: Ñuñoa
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-02 por # COMPLETAR
-
-  # 2 eventos sin pin exacto
   Mall Cenco Florida:
     direccion: Av. Vicuña Mackenna Ote. 6100, La Florida
     comuna: La Florida
@@ -222,25 +238,9 @@ lugares:
     nota: verificada el 2026-09-02 por # COMPLETAR
 
   # 2 eventos sin pin exacto
-  Cafetería Popular:
-    direccion: Maipu 363
-    comuna: Maipú
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-02 por # COMPLETAR
-
-  # 2 eventos sin pin exacto
   PortalTickets (PortalDisc):
     direccion: # COMPLETAR
     comuna: La Reina
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-02 por # COMPLETAR
-
-  # 2 eventos sin pin exacto
-  La Quinta Muranos:
-    direccion: # COMPLETAR
-    comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-09-02 por # COMPLETAR
