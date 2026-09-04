@@ -1,6 +1,6 @@
 {
- "generado": "2026-09-03T12:00:12",
- "total": 563,
+ "generado": "2026-09-04T09:48:03",
+ "total": 564,
  "locales": 1735,
  "bancos": [
   [
@@ -79,13 +79,13 @@
   "Ñuñoa"
  ],
  "por_dia": {
-  "miercoles": 243,
-  "viernes": 158,
+  "miercoles": 244,
+  "viernes": 159,
   "sabado": 141,
   "domingo": 106,
   "jueves": 206,
-  "lunes": 205,
-  "martes": 265
+  "lunes": 206,
+  "martes": 266
  },
  "descuentos": [
   {
@@ -1494,7 +1494,7 @@
    "sitio_web": "",
    "porcentaje": 40,
    "oferta": "",
-   "tope": 50000,
+   "tope": null,
    "dias": [
     "jueves"
    ],
@@ -1512,7 +1512,7 @@
    ],
    "modalidad": "",
    "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 30 de septiembre de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "condiciones": "Promoción válida del 01 al 30 de septiembre de 20‍26. Exclusivo para clientes que paguen con Tarjetas Visa Banco de Chile (Incluye Banco Edwards) y que soliciten el descuento al momento de pagar en el restaurante. Descuento no acumulable con otras promociones. Quedan excluidas del beneficio las compras respecto de las cuales se solicite o se emita factura. Descuento es de exclusiva responsabilidad del restaurante no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/barbazul-40visa",
    "logo": "https://assets.bancochile.cl/uploads/000/110/478/ee3f9ef7-c04c-4947-9b4a-87f46ba51c82/original/logo-web-Barbazul.jpg",
    "capturado": "",
@@ -4754,6 +4754,38 @@
    ]
   },
   {
+   "banco_id": "falabella",
+   "banco": "Banco Falabella",
+   "comercio": "De Barrio",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "Metropolitana",
+   "sitio_web": "https://www.bancofalabella.cl/descuentos/detalle/de-barrio",
+   "porcentaje": 40,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "lunes",
+    "martes",
+    "miercoles",
+    "jueves"
+   ],
+   "vigencia_hasta": "2026-09-30",
+   "tarjetas": [
+    "débito",
+    "cmr"
+   ],
+   "modalidad": "presencial",
+   "segmentado": false,
+   "condiciones": "Exclusivo presencial · Dcto en Restaurante · De Barrio",
+   "url": "https://www.bancofalabella.cl/descuentos/detalle/de-barrio",
+   "logo": "https://images.ctfassets.net/p6eyia4djstu/5KDFNBUqE95QaL3R0g979f/baf707a6ad70daa1c16563d2c7579c68/Cards_Logo_App_De_Barrio.webp",
+   "capturado": "",
+   "id": "63f178befa11",
+   "locales": [],
+   "comunas": []
+  },
+  {
    "banco_id": "bci",
    "banco": "Bci",
    "comercio": "De Barrio",
@@ -7318,7 +7350,7 @@
    "sitio_web": "",
    "porcentaje": 40,
    "oferta": "",
-   "tope": 50000,
+   "tope": null,
    "dias": [
     "jueves",
     "viernes"
@@ -7337,7 +7369,7 @@
    ],
    "modalidad": "",
    "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 30 de septiembre de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "condiciones": "Promoción válida del 01 al 30 de septiembre de 20‍26. Exclusivo para clientes que paguen con Tarjetas Visa Banco de Chile (Incluye Banco Edwards) y que soliciten el descuento al momento de pagar en el restaurante. Descuento no acumulable con otras promociones. Quedan excluidas del beneficio las compras respecto de las cuales se solicite o se emita factura. Descuento es de exclusiva responsabilidad del restaurante no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/el-meson-de-la-patagonia",
    "logo": "https://assets.bancochile.cl/uploads/000/043/315/4ef0fe24-aef9-43c7-9451-fbd910163026/original/logo_meson_patagonia.jpg",
    "capturado": "",
@@ -9905,7 +9937,7 @@
    "sitio_web": "",
    "porcentaje": 40,
    "oferta": "",
-   "tope": 50000,
+   "tope": null,
    "dias": [
     "jueves"
    ],
@@ -9923,7 +9955,7 @@
    ],
    "modalidad": "",
    "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 30 de septiembre de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "condiciones": "Promoción válida del 01 al 30 de septiembre de 20‍26. Exclusivo para clientes que paguen con Tarjetas Visa Banco de Chile (Incluye Banco Edwards) y que soliciten el descuento al momento de pagar en el restaurante. Descuento no acumulable con otras promociones. Quedan excluidas del beneficio las compras respecto de las cuales se solicite o se emita factura. Descuento es de exclusiva responsabilidad del restaurante no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/la-chimba-40visa",
    "logo": "https://assets.bancochile.cl/uploads/000/110/477/b3f577e1-b619-4fbf-83da-b171276308ec/original/logo-web-La-Chimba.jpg",
    "capturado": "",
@@ -11411,7 +11443,7 @@
    "oferta": "",
    "tope": null,
    "dias": [
-    "jueves"
+    "viernes"
    ],
    "vigencia_hasta": "2026-09-30",
    "tarjetas": [
@@ -17957,7 +17989,7 @@
    "sitio_web": "",
    "porcentaje": 40,
    "oferta": "",
-   "tope": 50000,
+   "tope": null,
    "dias": [
     "jueves"
    ],
@@ -17975,7 +18007,7 @@
    ],
    "modalidad": "",
    "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 30 de septiembre de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "condiciones": "Promoción válida del 01 al 30 de septiembre de 20‍26. Exclusivo para clientes que paguen con Tarjetas Visa Banco de Chile (Incluye Banco Edwards) y que soliciten el descuento al momento de pagar en el restaurante. Descuento no acumulable con otras promociones. Quedan excluidas del beneficio las compras respecto de las cuales se solicite o se emita factura. Descuento es de exclusiva responsabilidad del restaurante no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/vermuteria-40visa",
    "logo": "https://assets.bancochile.cl/uploads/000/110/481/49d99d5d-d492-42d8-81c7-e6cac4883baa/original/logo-web-Vermuteria.jpg",
    "capturado": "",
@@ -18449,7 +18481,7 @@
    "sitio_web": "",
    "porcentaje": 40,
    "oferta": "",
-   "tope": 50000,
+   "tope": null,
    "dias": [
     "jueves"
    ],
@@ -18467,7 +18499,7 @@
    ],
    "modalidad": "",
    "segmentado": false,
-   "condiciones": "Promoción válida desde el 01 al 30 de septiembre de 2026. pagando con Tarjetas de Crédito y Débito VISA del Banco de Chile y Banco Edwards. Tope de descuento máximo $50.000 por mesa. No incluye propinas, happy hours, menús ni cigarrillos. Descuento no acumulable con otras promociones. Descuento es de exclusiva responsabilidad del restaurant no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "condiciones": "Promoción válida del 01 al 30 de septiembre de 20‍26. Exclusivo para clientes que paguen con Tarjetas Visa Banco de Chile (Incluye Banco Edwards) y que soliciten el descuento al momento de pagar en el restaurante. Descuento no acumulable con otras promociones. Quedan excluidas del beneficio las compras respecto de las cuales se solicite o se emita factura. Descuento es de exclusiva responsabilidad del restaurante no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/zacarias-40visa",
    "logo": "https://assets.bancochile.cl/uploads/000/110/472/c0283576-9324-4b63-b31b-527fa1ab7e77/original/logo-web-Zacarias.jpg",
    "capturado": "",
