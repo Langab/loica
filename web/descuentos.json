@@ -1,6 +1,6 @@
 {
- "generado": "2026-09-04T12:00:04",
- "total": 564,
+ "generado": "2026-09-05T09:14:08",
+ "total": 565,
  "locales": 1735,
  "bancos": [
   [
@@ -84,8 +84,8 @@
   "sabado": 141,
   "domingo": 106,
   "jueves": 206,
-  "lunes": 206,
-  "martes": 266
+  "lunes": 207,
+  "martes": 267
  },
  "descuentos": [
   {
@@ -8504,6 +8504,36 @@
     "Santiago",
     "Vitacura"
    ]
+  },
+  {
+   "banco_id": "falabella",
+   "banco": "Banco Falabella",
+   "comercio": "Hijo Del Sol Santiago",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "Metropolitana",
+   "sitio_web": "https://www.bancofalabella.cl/descuentos/detalle/hijo-del-sol-santiago",
+   "porcentaje": 40,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "lunes",
+    "martes"
+   ],
+   "vigencia_hasta": "2026-09-30",
+   "tarjetas": [
+    "débito",
+    "cmr"
+   ],
+   "modalidad": "presencial",
+   "segmentado": false,
+   "condiciones": "Exclusivo presencial · Dcto en Restaurante · Hijo Del Sol Santiago",
+   "url": "https://www.bancofalabella.cl/descuentos/detalle/hijo-del-sol-santiago",
+   "logo": "https://images.ctfassets.net/p6eyia4djstu/3IUhRHwv3aKBZjngvrqOYR/43386df14a34b1edb8645653f2e8a9ac/Cards_LOGO_App_Hijo_del_Sol.webp",
+   "capturado": "",
+   "id": "ae6e673af417",
+   "locales": [],
+   "comunas": []
   },
   {
    "banco_id": "santander",
