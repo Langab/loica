@@ -1,4 +1,4 @@
-# Cola de EVENTOS en categoría 'otros' — revisión del 2026-09-05.
+# Cola de EVENTOS en categoría 'otros' — revisión del 2026-09-06.
 # Ponles la categoría que corresponda (idiomas, familia, feria, deporte,
 # fiesta, cine, teatro, musica, arte, clases, aire_libre, charla) o
 # descartar: true si no son un panorama, y pégalos en
@@ -10,149 +10,149 @@ eventos:
   # Refugiados | Museo de la Memoria y los Dere | 2026-05-07
   76d124dee1fb9697:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
+    nota: revisado el 2026-09-06
 
   # Dia de Spa - Club Recrear | Ticketplus | 2026-06-15
   4d4cbb01465b4c08:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
+    nota: revisado el 2026-09-06
 
   # Para algunas caídas no existe la gravedad | Museo de la Memoria y los Dere | 2026-06-25
   3dcac940206221f1:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
+    nota: revisado el 2026-09-06
 
   # Un siglo de voces juveniles. De scouts, cristaleros y pingüinos | Museo de la Memoria y los Dere | 2026-07-10
   13d9a5e5e099eca8:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
-
-  # "Convidado de piedra" de Cía. Granitova | Ticketplus | 2026-08-27
-  9cc62ab44b00dfc8:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
+    nota: revisado el 2026-09-06
 
   # No sé qué rima con te quiero | Ticketplus | 2026-09-03
   1ab5366028758a4b:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
+    nota: revisado el 2026-09-06
 
   # Vicaría | Ticketplus | 2026-09-03
   ab09861d5517e6af:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
+    nota: revisado el 2026-09-06
 
   # Favorito del Público | Fundacion Centro Cultural Lo P | 2026-09-04
   aaa0863fc155431c:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
-
-  # Mamacita El Cartel 💵 en Basel, Vie. 04 Septiembre | Passline | 2026-09-04
-  c7b63be1baf736c5:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
-
-  # NACION TRIBAL - SPOT FREEDOM - 23:00 - VIERNES 04 DE SEPTIEMBRE | Ticketplus | 2026-09-04
-  4567b8c438ae5029:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
-
-  # SOMOS MARISOL | Passline | 2026-09-05
-  e094947182c6c825:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
-
-  # Dios Mío presenta Paula Burgos | Passline | 2026-09-05
-  05997cb25bb0a7d2:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
-
-  # LOWERED CLASS by StrictlyLowered 🌐 | Passline | 2026-09-05
-  1b58a82a1f9de4e5:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
+    nota: revisado el 2026-09-06
 
   # Chile Lindo 2026 | Corporacion Cultural de Vitacu | 2026-09-05
   0db5d48a64aacf59:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
-
-  # Certificación en felicidad de Tal Ben Shahar | Passline | 2026-09-05
-  ed92b20ee52a62f5:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
-
-  # RAMONES DAY CHILE N3 2026 | Passline | 2026-09-05
-  476a0698c1bc252f:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
-
-  # 1 COMPETENCIA INTERNA DE LEVANTE DIVISION BOX | Passline | 2026-09-05
-  449cac4b853b2db2:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
-
-  # Encuentro de Saberes: Territorio, museo y participación | Museo Violeta Parra | 2026-09-05
-  31ed222853b57d5b:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
-
-  # Little Big Under 2 | Passline | 2026-09-05
-  8ab247f7228b4bd6:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
-
-  # Mik y Leti, los aventureros del Hipocampo Espacial | Ticketplus | 2026-09-05
-  240b760d3b4f3248:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
-
-  # Tierra Chilena, 63 años... un viaje a la memoria | Fundacion Centro Cultural Lo P | 2026-09-05
-  36a13821261b39b7:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
-
-  # Bingo dieciochero en beneficio de Aaron Ortega | Passline | 2026-09-05
-  e85bcac126612c91:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
-
-  # TOUR EN EL CEMENTERIO CATÓLICO: HISTORIAS DEL CEMENTERIO CATÓLICO | PortalTickets (PortalDisc) | 2026-09-05
-  36d727f1f93ae8a4:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
-
-  # Cabarésque | Passline | 2026-09-05
-  a32d108d82a49dd1:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
+    nota: revisado el 2026-09-06
 
   # Underground Session Chile Vol 1 | Ticketplus | 2026-09-05
   b1ff6c0966425edb:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
+    nota: revisado el 2026-09-06
 
-  # Cabarésque (+12) | Passline | 2026-09-05
-  c9b894ef22717373:
+  # TINDEROOM HEROES Y VILLANOS | Passline | 2026-09-05
+  d0bd731e17298b2f:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
+    nota: revisado el 2026-09-06
 
-  # NIÑO MILAGRO: Grabación de Especial | Passline | 2026-09-05
-  e68a0de1030cc351:
+  # LUNATICA PRESENTA: JULIAN ANTHONY | Ticketplus | 2026-09-05
+  ee06e7b382add927:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
+    nota: revisado el 2026-09-06
 
-  # LOS NOGALINOS, CELEBRANDO SU NUEVO DISCO PATRIMONIO | Passline | 2026-09-05
-  f5abc1091ca9051c:
+  # “Entre Barrios” vuelve para celebrar el Día Nacional del Vino conectan | Disfruta Santiago | 2026-09-06
+  9a3179d0da5bfcdc:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
+    nota: revisado el 2026-09-06
 
-  # TINDEROOM HEROES Y VILLANOS (+21) | Passline | 2026-09-05
-  641a4e651a94061b:
+  # Primer domingo del mes gratis para público nacional y residente | Museo Chileno de Arte Precolom | 2026-09-06
+  83481da0681fa3d7:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
+    nota: revisado el 2026-09-06
 
-  # BARCELONA ~ SÁB.05.09 ~ CIRCULO ESPAÑOL (+18) | Passline | 2026-09-05
-  7ca176a3e0cee057:
+  # Museo y Tour Monumental 2026 en Estadio Monumental | Puntoticket (deportes, musica  | 2026-09-06
+  797c16d62cda431f:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-05
+    nota: revisado el 2026-09-06
+
+  # El Show del Videoclub 4 - Santiago | Passline | 2026-09-06
+  e7f3551fbd664454:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-06
+
+  # Clitemnestra o el crimen juicio abierto | Passline | 2026-09-06
+  1a76d2826a11e6a6:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-06
+
+  # INHOUSE ★ DOMINGO 6 SEPTIEMBRE ★ Club Siete - Piso 4 Hotel W | Passline | 2026-09-06
+  fa0b07651a76f0f0:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-06
+
+  # Inauguración "MONTEALEGRE Resistencia en Nueva York" | Museo de la Memoria y los Dere | 2026-09-08
+  f9c72fed5680ea4a:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-06
+
+  # BAFOCHI "Desde el fin del mundo" | Cultura Providencia | 2026-09-08
+  c5bd6dd2a970d113:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-06
+
+  # Don Carter en Rustiko Huechuraba | Passline | 2026-09-08
+  359f15b42e3f71b4:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-06
+
+  # Don Carter en Rustiko Huechuraba (+18) | Passline | 2026-09-08
+  6c6561d5ca3077cf:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-06
+
+  # NOA ★ MARTES 8 SEPTIEMBRE ★ Club Siete - Piso 4 Hotel W | Passline | 2026-09-08
+  d1bfebbc4edeb676:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-06
+
+  # Estación Precolombino junto al Museo Escolar Laguna Tagua Tagua | Museo Chileno de Arte Precolom | 2026-09-09
+  510a97525c4d3e66:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-06
+
+  # Los Viajes de Carloto | Cena Maridaje junto a Viña Invina (+18) | Passline | 2026-09-09
+  d7575a3650db6ef1:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-06
+
+  # Pablo Etcheverri y José Manuel Lattus en cafetería popular | Passline | 2026-09-09
+  f11e4553c455387d:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-06
+
+  # "ABRAMOS LIBROS, CELEBREMOS CHILE." | Passline | 2026-09-10
+  15cc5f7e63de541d:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-06
+
+  # Canciones UPelientas / Francisco Villa y Camila Chascona | Passline | 2026-09-10
+  a42f50212d0e8f7b:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-06
+
+  # SUBLIME X DISTRITO ARGENTINO 11-07 (+22) | Passline | 2026-09-11
+  04035b82141a92a3:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-06
+
+  # Confesiones y copass | Passline | 2026-09-11
+  0266f07f1e8d286e:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-06
+
+  # Yajaira / Burdo - MIBAR | Passline | 2026-09-11
+  13feb809a6ef100b:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-06
