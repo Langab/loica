@@ -1,17 +1,17 @@
-# Cola de LUGARES sin ubicación exacta — revisión del 2026-09-06.
+# Cola de LUGARES sin ubicación exacta — revisión del 2026-09-07.
 # Completa lat/lon (Google Maps: click derecho → copiar coordenadas),
 # borra las entradas que no puedas verificar, y pega las listas en
 # config/correcciones/lugares.yaml bajo la clave `lugares:`.
 # Ordenadas por impacto: la primera arregla más eventos que ninguna.
 
 lugares:
-  # 33 eventos sin pin exacto
+  # 39 eventos sin pin exacto
   Red Salas de Teatro (agregador de salas RM):
     direccion: # COMPLETAR
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
 
   # 28 eventos sin pin exacto
   Corporacion Cultural de La Reina:
@@ -19,23 +19,7 @@ lugares:
     comuna: La Reina
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
-
-  # 12 eventos sin pin exacto
-  PortalTickets (PortalDisc):
-    direccion: # COMPLETAR
-    comuna: Santiago
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
-
-  # 10 eventos sin pin exacto
-  Disfruta Santiago:
-    direccion: # COMPLETAR
-    comuna: Santiago
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
 
   # 10 eventos sin pin exacto
   PortalTickets (PortalDisc):
@@ -43,7 +27,15 @@ lugares:
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
+
+  # 10 eventos sin pin exacto
+  PortalTickets (PortalDisc):
+    direccion: # COMPLETAR
+    comuna: Santiago
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
 
   # 9 eventos sin pin exacto
   Online:
@@ -51,7 +43,15 @@ lugares:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
+
+  # 9 eventos sin pin exacto
+  Disfruta Santiago:
+    direccion: # COMPLETAR
+    comuna: Santiago
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
 
   # 7 eventos sin pin exacto
   Capilla Finis Terrae:
@@ -59,15 +59,15 @@ lugares:
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
 
   # 6 eventos sin pin exacto
-  Disfruta Santiago:
-    direccion: # COMPLETAR
-    comuna: # COMPLETAR
+  Plaza Pedro de Valdivia:
+    direccion: Av. Suecia
+    comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
 
   # 6 eventos sin pin exacto
   PortalTickets (PortalDisc):
@@ -75,23 +75,7 @@ lugares:
     comuna: Ñuñoa
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
-
-  # 5 eventos sin pin exacto
-  Plaza Pedro de Valdivia:
-    direccion: Av. Suecia
-    comuna: Providencia
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
-
-  # 5 eventos sin pin exacto
-  Municipalidad de Nunoa:
-    direccion: # COMPLETAR
-    comuna: Ñuñoa
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
 
   # 5 eventos sin pin exacto
   Agenda Cultural Las Condes:
@@ -99,7 +83,7 @@ lugares:
     comuna: Las Condes
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
 
   # 5 eventos sin pin exacto
   Teatro Oriente Av. Pedro de Valdivia 099:
@@ -107,39 +91,47 @@ lugares:
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
 
-  # 3 eventos sin pin exacto
-  Teatro Universidad de Chile:
-    direccion: Av. Providencia 043
-    comuna: Providencia
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
-
-  # 3 eventos sin pin exacto
-  Plaza Río de Janeiro:
+  # 5 eventos sin pin exacto
+  Disfruta Santiago:
     direccion: # COMPLETAR
-    comuna: Providencia
+    comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
 
-  # 3 eventos sin pin exacto
+  # 4 eventos sin pin exacto
+  Municipalidad de Nunoa:
+    direccion: # COMPLETAR
+    comuna: Ñuñoa
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
+
+  # 4 eventos sin pin exacto
   PortalTickets (PortalDisc):
     direccion: # COMPLETAR
     comuna: Recoleta
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
 
-  # 3 eventos sin pin exacto
+  # 4 eventos sin pin exacto
   Red Salas de Teatro (agregador de salas RM):
     direccion: # COMPLETAR
     comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
+
+  # 4 eventos sin pin exacto
+  Parque Ciudad Empresarial:
+    direccion: Avenida del Parque 420
+    comuna: Huechuraba
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
 
   # 3 eventos sin pin exacto
   Kross Bar:
@@ -147,7 +139,7 @@ lugares:
     comuna: Las Condes
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
 
   # 3 eventos sin pin exacto
   COSTADO CLUB AÉREO MELEPÍLLA:
@@ -155,7 +147,7 @@ lugares:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
 
   # 3 eventos sin pin exacto
   USACH - Departamento de Extension (agenda cultural):
@@ -163,7 +155,7 @@ lugares:
     comuna: Estación Central
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
 
   # 3 eventos sin pin exacto
   USACH - Departamento de Extension (agenda cultural):
@@ -171,15 +163,7 @@ lugares:
     comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
-
-  # 3 eventos sin pin exacto
-  Parque Ciudad Empresarial:
-    direccion: Avenida del Parque 420
-    comuna: Huechuraba
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Av. Santa Isabel con Caupolicán:
@@ -187,7 +171,7 @@ lugares:
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Los Concilios:
@@ -195,7 +179,7 @@ lugares:
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Av Santa Maria:
@@ -203,7 +187,7 @@ lugares:
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Andrés Fuenzalida entre Av. Providencia y Av. Andrés Bello:
@@ -211,7 +195,7 @@ lugares:
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Francisco Noguera entre Av. Providencia y Av. Andrés Bello:
@@ -219,7 +203,7 @@ lugares:
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   MATUCANA 100 / CINE:
@@ -227,20 +211,36 @@ lugares:
     comuna: Estación Central
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
 
   # 2 eventos sin pin exacto
-  Parque Balmaceda:
+  Eugenio Dittborn:
     direccion: # COMPLETAR
-    comuna: Providencia
+    comuna: Ñuñoa
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
 
   # 2 eventos sin pin exacto
-  PortalTickets (PortalDisc):
-    direccion: # COMPLETAR
-    comuna: Las Condes
+  Fundacion Centro Cultural Lo Prado (Teatro Joan Jara):
+    direccion: Paseo de las Artes 880
+    comuna: Lo Prado
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-06 por # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
+
+  # 2 eventos sin pin exacto
+  Online Zoom:
+    direccion: # COMPLETAR
+    comuna: Maipú
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR
+
+  # 2 eventos sin pin exacto
+  Cafetería Popular:
+    direccion: Maipu 363
+    comuna: Maipú
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-07 por # COMPLETAR

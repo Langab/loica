@@ -1,7 +1,7 @@
 {
- "generado": "2026-09-07T12:51:58",
- "total": 564,
- "locales": 1735,
+ "generado": "2026-09-07T13:35:08",
+ "total": 566,
+ "locales": 1738,
  "bancos": [
   [
    "bancochile",
@@ -80,12 +80,12 @@
  ],
  "por_dia": {
   "miercoles": 243,
-  "viernes": 158,
+  "viernes": 159,
   "sabado": 140,
   "domingo": 105,
   "jueves": 205,
   "lunes": 206,
-  "martes": 266
+  "martes": 267
  },
  "descuentos": [
   {
@@ -1683,8 +1683,20 @@
    "logo": "https://images.ctfassets.net/p6eyia4djstu/40peMo2BbZrGypa9RGxCx6/7bff6f4da01fbb7895bfce65d0364d9b/Cards_2_Logo_App_Barra_Olivo.webp",
    "capturado": "",
    "id": "a228940d7399",
-   "locales": [],
-   "comunas": []
+   "locales": [
+    {
+     "direccion": "Local 16",
+     "comuna": "Colina",
+     "lat": -33.2019,
+     "lon": -70.6747,
+     "precision": "comuna",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    }
+   ],
+   "comunas": [
+    "Colina"
+   ]
   },
   {
    "banco_id": "security",
@@ -19316,6 +19328,57 @@
    "comunas": []
   },
   {
+   "banco_id": "bancochile",
+   "banco": "Banco de Chile",
+   "comercio": "Barra Olivo",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "Metropolitana",
+   "sitio_web": "",
+   "porcentaje": 30,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "viernes"
+   ],
+   "vigencia_hasta": "2027-12-30",
+   "tarjetas": [
+    "visa-credito-infinite",
+    "visa-credito-signature",
+    "visa-credito-platinum",
+    "visa-fan-credito",
+    "mastercard-credito-black",
+    "mastercard-credito-platinum",
+    "visa-debito-infinite",
+    "visa-debito-signature",
+    "visa-debito-bch",
+    "visa-cuenta-fan",
+    "visa-credito-gold",
+    "mastercard-credito-dorada"
+   ],
+   "modalidad": "presencial",
+   "segmentado": false,
+   "condiciones": "Promoción válida hasta el 30 de diciembre del 2027. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile y Banco Edwards y que soliciten el descuento al momento de pagar en compra presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/barra-olivo",
+   "logo": "https://assets.bancochile.cl/uploads/000/115/474/cc21e97a-346c-4b03-acf5-031f692e96cc/original/logo-web-Barra-Olivo.jpg",
+   "capturado": "",
+   "id": "0b521dc8d015",
+   "locales": [
+    {
+     "direccion": "Local 16",
+     "comuna": "Colina",
+     "lat": -33.2019,
+     "lon": -70.6747,
+     "precision": "comuna",
+     "telefono": "",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Colina"
+   ]
+  },
+  {
    "banco_id": "santander",
    "banco": "Santander",
    "comercio": "Berlin Döner Kebab",
@@ -32968,6 +33031,57 @@
    ],
    "comunas": [
     "Vitacura"
+   ]
+  },
+  {
+   "banco_id": "bancochile",
+   "banco": "Banco de Chile",
+   "comercio": "Pedro es una Pizza",
+   "categoria": "restaurantes",
+   "cocina": "italiana",
+   "region": "Metropolitana",
+   "sitio_web": "",
+   "porcentaje": 20,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "martes"
+   ],
+   "vigencia_hasta": "2027-06-30",
+   "tarjetas": [
+    "visa-credito-infinite",
+    "visa-credito-signature",
+    "visa-credito-platinum",
+    "visa-fan-credito",
+    "mastercard-credito-black",
+    "mastercard-credito-platinum",
+    "visa-debito-infinite",
+    "visa-debito-signature",
+    "visa-debito-bch",
+    "visa-cuenta-fan",
+    "visa-credito-gold",
+    "mastercard-credito-dorada"
+   ],
+   "modalidad": "presencial",
+   "segmentado": false,
+   "condiciones": "Promoción válida hasta el 30 de junio del 2027. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile y Banco Edwards y que soliciten el descuento al momento de pagar en compra presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/pedro-es-una-pizza",
+   "logo": "https://assets.bancochile.cl/uploads/000/112/360/3ffffd9c-6251-4dec-bb9f-69606b2ef2b3/original/logo-web-Pedro-es-una-Pizza.png",
+   "capturado": "",
+   "id": "be237cffec48",
+   "locales": [
+    {
+     "direccion": "Av. Los Leones 952",
+     "comuna": "Providencia",
+     "lat": -33.4284968,
+     "lon": -70.60289997142857,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Providencia"
    ]
   },
   {
