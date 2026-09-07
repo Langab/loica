@@ -1,6 +1,6 @@
 {
- "generado": "2026-09-06T11:24:14",
- "total": 565,
+ "generado": "2026-09-07T10:32:46",
+ "total": 564,
  "locales": 1735,
  "bancos": [
   [
@@ -79,13 +79,13 @@
   "Ñuñoa"
  ],
  "por_dia": {
-  "miercoles": 244,
-  "viernes": 159,
-  "sabado": 141,
-  "domingo": 106,
-  "jueves": 206,
-  "lunes": 207,
-  "martes": 267
+  "miercoles": 243,
+  "viernes": 158,
+  "sabado": 140,
+  "domingo": 105,
+  "jueves": 205,
+  "lunes": 206,
+  "martes": 266
  },
  "descuentos": [
   {
@@ -22270,51 +22270,6 @@
    "comunas": [
     "Curacaví"
    ]
-  },
-  {
-   "banco_id": "bancochile",
-   "banco": "Banco de Chile",
-   "comercio": "miCoca-Cola.cl",
-   "categoria": "gourmet",
-   "cocina": "",
-   "region": "",
-   "sitio_web": "https://www.micoca-cola.cl/",
-   "porcentaje": 30,
-   "oferta": "Con regalo",
-   "tope": 30000,
-   "dias": [
-    "lunes",
-    "martes",
-    "miercoles",
-    "jueves",
-    "viernes",
-    "sabado",
-    "domingo"
-   ],
-   "vigencia_hasta": "2026-09-06",
-   "tarjetas": [
-    "visa-credito-infinite",
-    "visa-credito-signature",
-    "visa-credito-platinum",
-    "visa-fan-credito",
-    "mastercard-credito-black",
-    "mastercard-credito-platinum",
-    "visa-debito-infinite",
-    "visa-debito-signature",
-    "visa-debito-bch",
-    "visa-cuenta-fan",
-    "visa-credito-gold",
-    "mastercard-credito-dorada"
-   ],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Promoción válida del 31 de agosto al 6 de septiembre de 2026. Para clientes que paguen con sus Tarjetas de Crédito y Débito del Banco de Chile (Incluye Banco Edwards) y que ingresen el código al momento de realizar el pago. No acumulable con otras promociones. Tope de descuento $30.000 por compra. Válido para dos compras por cliente durante los días de la promoción. Un código de descuento válido por pedido. La entrega de los beneficios es de exclusiva responsabilidad del comercio sin responsabilidad alguna para Banco de Chile en ello, ni en la ulterior atención que ello demande. Promoción válida del 31 de agosto al 6 de septiembre de 2026. Para personas naturales que posean Tarjeta de Crédito del Banco de Chile (incluye Banco Edwards). Válido para clientes que utilicen dichas tarjetas como medio de pago en compras en establecimientos comerciales afiliados a cualquier adquirente nacional. Transacciones en cuotas están afectas a impuesto de timbres DL 3475, el que es de cargo del cliente. Se excluyen compras en casino y juegos de azar, y pagos a través de Pago Automático de Tarjeta (PAT).",
-   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/micoca-cola-cl",
-   "logo": "https://assets.bancochile.cl/uploads/000/043/299/02581ef7-a116-49ac-8717-74f5f9e39140/original/logo2_micocacola_1_.jpg",
-   "capturado": "",
-   "id": "9da1a0ee734f",
-   "locales": [],
-   "comunas": []
   },
   {
    "banco_id": "security",
