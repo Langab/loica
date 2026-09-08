@@ -1,7 +1,7 @@
 {
- "generado": "2026-09-07T13:35:08",
- "total": 566,
- "locales": 1738,
+ "generado": "2026-09-08T09:53:50",
+ "total": 565,
+ "locales": 1751,
  "bancos": [
   [
    "bancochile",
@@ -81,11 +81,11 @@
  "por_dia": {
   "miercoles": 243,
   "viernes": 159,
-  "sabado": 140,
+  "sabado": 141,
   "domingo": 105,
   "jueves": 205,
   "lunes": 206,
-  "martes": 267
+  "martes": 266
  },
  "descuentos": [
   {
@@ -12171,6 +12171,217 @@
    "comunas": []
   },
   {
+   "banco_id": "falabella",
+   "banco": "Banco Falabella",
+   "comercio": "Mamut",
+   "categoria": "cafeterias",
+   "cocina": "panaderia",
+   "region": "Metropolitana",
+   "sitio_web": "https://www.bancofalabella.cl/descuentos/detalle/mamut",
+   "porcentaje": 40,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "lunes"
+   ],
+   "vigencia_hasta": "2026-09-30",
+   "tarjetas": [],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Dcto en Restaurante · Mamut",
+   "url": "https://www.bancofalabella.cl/descuentos/detalle/mamut",
+   "logo": "",
+   "capturado": "",
+   "id": "8118e7447d66",
+   "locales": [
+    {
+     "direccion": "Avenida Américo Vespucio 1501",
+     "comuna": "Cerrillos",
+     "lat": -33.5170799,
+     "lon": -70.7134901,
+     "precision": "calle",
+     "telefono": "+562 23848062",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Avenida Américo Vespucio 1737",
+     "comuna": "Huechuraba",
+     "lat": -33.3641739,
+     "lon": -70.6791808,
+     "precision": "calle",
+     "telefono": "+562 23848062",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Avenida del Parque 4860",
+     "comuna": "Huechuraba",
+     "lat": -33.38908475294119,
+     "lon": -70.61817205294116,
+     "precision": "calle",
+     "telefono": "+562 23848062",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Avenida Vicuña Mackenna Oriente 6100",
+     "comuna": "La Florida",
+     "lat": -33.5104542,
+     "lon": -70.6057952,
+     "precision": "calle",
+     "telefono": "+562 23848062",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Vicuña Mackenna 7110",
+     "comuna": "La Florida",
+     "lat": -33.5175368,
+     "lon": -70.5979896,
+     "precision": "calle",
+     "telefono": "+562 23848062",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Avenida Larrain 5862",
+     "comuna": "La Reina",
+     "lat": -33.4527555,
+     "lon": -70.5694845,
+     "precision": "calle",
+     "telefono": "+562 23848062",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Avenida Padre Hurtado Sur 875",
+     "comuna": "Las Condes",
+     "lat": -33.4144484,
+     "lon": -70.541223,
+     "precision": "calle",
+     "telefono": "+562 23848062",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Avenida Presidente Kennedy 9001",
+     "comuna": "Las Condes",
+     "lat": -33.3897496,
+     "lon": -70.5456739,
+     "precision": "calle",
+     "telefono": "+562 23848062",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Avenida Presidente Kennedy Lateral 5151",
+     "comuna": "Las Condes",
+     "lat": -33.4088,
+     "lon": -70.5673,
+     "precision": "comuna",
+     "telefono": "+562 23848062",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Avenida Américo Vespucio 399",
+     "comuna": "Maipú",
+     "lat": -33.4833453,
+     "lon": -70.7497514,
+     "precision": "calle",
+     "telefono": "+562 23848062",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Altos del Parque Sur 5800",
+     "comuna": "Peñalolén",
+     "lat": -33.4849,
+     "lon": -70.5423,
+     "precision": "comuna",
+     "telefono": "+562 23848062",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Mar Tirreno 3349",
+     "comuna": "Peñalolén",
+     "lat": -33.48852451249999,
+     "lon": -70.57673935,
+     "precision": "calle",
+     "telefono": "+562 23848062",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Diego de Velásquez 2051",
+     "comuna": "Providencia",
+     "lat": -33.4242373,
+     "lon": -70.6112295,
+     "precision": "calle",
+     "telefono": "+562 23848062",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Diego de Velásquez 2059",
+     "comuna": "Providencia",
+     "lat": -33.4239128,
+     "lon": -70.6102065,
+     "precision": "calle",
+     "telefono": "+562 23848062",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Avenida Camilo Henríquez 3692",
+     "comuna": "Puente Alto",
+     "lat": -33.5702929,
+     "lon": -70.5573382,
+     "precision": "calle",
+     "telefono": "+562 23848062",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Avenida Presidente Jorge Alessandri Rodríguez 20040",
+     "comuna": "San Bernardo",
+     "lat": -33.6329429,
+     "lon": -70.7106787,
+     "precision": "calle",
+     "telefono": "+562 23848062",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Gran Avenida Jose Miguel Carrera 6150 San Miguel",
+     "comuna": "San Miguel",
+     "lat": -33.5125455,
+     "lon": -70.6570151,
+     "precision": "calle",
+     "telefono": "+562 23848062",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Agustinas 1115",
+     "comuna": "Santiago",
+     "lat": -33.4409727,
+     "lon": -70.6517733,
+     "precision": "calle",
+     "telefono": "+562 23848062",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Avenida Libertador Bernardo OHiggins 3470",
+     "comuna": "Santiago",
+     "lat": -33.4425,
+     "lon": -70.6505,
+     "precision": "comuna",
+     "telefono": "+562 23848062",
+     "origen": "Banco de Chile"
+    }
+   ],
+   "comunas": [
+    "Cerrillos",
+    "Huechuraba",
+    "La Florida",
+    "La Reina",
+    "Las Condes",
+    "Maipú",
+    "Peñalolén",
+    "Providencia",
+    "Puente Alto",
+    "San Bernardo",
+    "San Miguel",
+    "Santiago"
+   ]
+  },
+  {
    "banco_id": "bancochile",
    "banco": "Banco de Chile",
    "comercio": "Mamut",
@@ -22569,9 +22780,11 @@
    "oferta": "",
    "tope": null,
    "dias": [
-    "viernes"
+    "viernes",
+    "sabado",
+    "domingo"
    ],
-   "vigencia_hasta": "2026-12-31",
+   "vigencia_hasta": "2026-09-13",
    "tarjetas": [
     "visa-credito-infinite",
     "visa-credito-signature",
@@ -22588,7 +22801,7 @@
    ],
    "modalidad": "presencial",
    "segmentado": false,
-   "condiciones": "Promoción válida hasta el 31 de diciembre de 2026. Beneficio es válido en locales que se encuentren en Chile, para clientes que paguen en tiendas Starbucks con Tarjetas de Débito o Crédito Banco de Chile (incluye Banco Edwards). Descuento no aplica a extras agregados a las bebidas. No válido en aeropuerto. La entrega de los beneficios se realiza en el punto de venta y es de exclusiva responsabilidad de Starbucks Coffee Chile S.A., no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni en la ulterior atención que ello demande. Infórmese sobre la garantía estatal de los depósitos en su Banco o en www.cmfchile.cl",
+   "condiciones": "Promoción válida hasta el 13 de septiembre de 2026. Beneficio es válido en locales que se encuentren en Chile, para clientes que paguen en tiendas Starbucks con Tarjetas de Débito o Crédito Banco de Chile (incluye Banco Edwards). Descuento no aplica a extras agregados a las bebidas. No válido en aeropuerto. La entrega de los beneficios se realiza en el punto de venta y es de exclusiva responsabilidad de Starbucks Coffee Chile S.A., no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni en la ulterior atención que ello demande. Infórmese sobre la garantía estatal de los depósitos en su Banco o en www.cmfchile.cl",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/starbucks",
    "logo": "https://assets.bancochile.cl/uploads/000/097/273/11de5601-b93c-472f-8c17-ade7ffb01f6a/original/logo-web-Starbucks.jpg",
    "capturado": "",
@@ -25878,95 +26091,6 @@
    ],
    "comunas": [
     "La Reina"
-   ]
-  },
-  {
-   "banco_id": "entel",
-   "banco": "Entel",
-   "comercio": "Local Burger",
-   "categoria": "comida_rapida",
-   "cocina": "hamburguesas",
-   "region": "Todo Chile",
-   "sitio_web": "",
-   "porcentaje": 25,
-   "oferta": "",
-   "tope": 50000,
-   "dias": [
-    "lunes",
-    "martes",
-    "domingo"
-   ],
-   "vigencia_hasta": "2026-12-31",
-   "tarjetas": [
-    "entel"
-   ],
-   "modalidad": "ambas",
-   "segmentado": false,
-   "condiciones": "25% de dcto. de Domingo a Martes.",
-   "url": "https://www.entel.cl/beneficios/descuentos/local-burguer",
-   "logo": "",
-   "capturado": "",
-   "id": "4b719fae3207",
-   "locales": [
-    {
-     "direccion": "Los Militares #5934",
-     "comuna": "Las Condes",
-     "lat": -33.4052905,
-     "lon": -70.5697953,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Los Militares 5934, Las Condes",
-     "comuna": "Las Condes",
-     "lat": -33.4052905,
-     "lon": -70.5697953,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco Security"
-    },
-    {
-     "direccion": "Providencia #1403",
-     "comuna": "Providencia",
-     "lat": -33.4280174,
-     "lon": -70.6185386,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Providencia 1403, Providencia",
-     "comuna": "Providencia",
-     "lat": -33.4280174,
-     "lon": -70.6185386,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco Security"
-    },
-    {
-     "direccion": "Irarrazaval #5350",
-     "comuna": "Ñuñoa",
-     "lat": -33.4531168,
-     "lon": -70.5743949,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco de Chile"
-    },
-    {
-     "direccion": "Irarrázaval 5350, Ñuñoa",
-     "comuna": "Ñuñoa",
-     "lat": -33.4531168,
-     "lon": -70.5743949,
-     "precision": "calle",
-     "telefono": "",
-     "origen": "Banco Security"
-    }
-   ],
-   "comunas": [
-    "Las Condes",
-    "Providencia",
-    "Ñuñoa"
    ]
   },
   {
@@ -30370,32 +30494,6 @@
    "comunas": [
     "Santiago"
    ]
-  },
-  {
-   "banco_id": "entel",
-   "banco": "Entel",
-   "comercio": "Hola Ola",
-   "categoria": "restaurantes",
-   "cocina": "",
-   "region": "Todo Chile",
-   "sitio_web": "",
-   "porcentaje": 20,
-   "oferta": "",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": "2026-12-31",
-   "tarjetas": [
-    "entel"
-   ],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "20% dcto. en cafetería",
-   "url": "https://www.entel.cl/beneficios/descuentos/hola-ola",
-   "logo": "",
-   "capturado": "",
-   "id": "ccbe5677ad99",
-   "locales": [],
-   "comunas": []
   },
   {
    "banco_id": "bancochile",
