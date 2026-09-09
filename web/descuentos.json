@@ -1,7 +1,7 @@
 {
- "generado": "2026-09-09T11:39:04",
+ "generado": "2026-09-09T12:15:56",
  "total": 565,
- "locales": 1751,
+ "locales": 1752,
  "bancos": [
   [
    "bancochile",
@@ -85,35 +85,9 @@
   "domingo": 105,
   "jueves": 205,
   "lunes": 206,
-  "martes": 265
+  "martes": 266
  },
  "descuentos": [
-  {
-   "banco_id": "entel",
-   "banco": "Entel",
-   "comercio": "Rappi",
-   "categoria": "restaurantes",
-   "cocina": "",
-   "region": "Todo Chile",
-   "sitio_web": "",
-   "porcentaje": 80,
-   "oferta": "",
-   "tope": null,
-   "dias": [],
-   "vigencia_hasta": "2026-12-31",
-   "tarjetas": [
-    "entel"
-   ],
-   "modalidad": "online",
-   "segmentado": false,
-   "condiciones": "80% dcto en envíos por 3 meses",
-   "url": "https://www.entel.cl/beneficios/descuentos/rappi",
-   "logo": "",
-   "capturado": "",
-   "id": "f816872bebe5",
-   "locales": [],
-   "comunas": []
-  },
   {
    "banco_id": "bancochile",
    "banco": "Banco de Chile",
@@ -1361,6 +1335,47 @@
    ],
    "comunas": [
     "Providencia"
+   ]
+  },
+  {
+   "banco_id": "security",
+   "banco": "Banco Security",
+   "comercio": "Açaí Delight",
+   "categoria": "gourmet",
+   "cocina": "panaderia",
+   "region": "",
+   "sitio_web": "https://www.instagram.com/acaidelight.cl/",
+   "porcentaje": 40,
+   "oferta": "",
+   "tope": 10000,
+   "dias": [
+    "martes"
+   ],
+   "vigencia_hasta": "2026-09-30",
+   "tarjetas": [
+    "black one",
+    "black"
+   ],
+   "modalidad": "",
+   "segmentado": true,
+   "condiciones": "40% de dcto. los martes, con tu Tarjeta One en tienda física. Pide tu descuento y paga con tu Tarjeta One. Solicita tu descuento al momento de pagar la cuenta. No acumulable con otras promociones y sujeto a disponibilidad. Beneficio válido solo en compras con boleta. Tope de descuento: $10.000 por cuenta. Se excluyen propinas. No todos los comercios aceptan pagar con billeteras digitales, por lo tanto, recomendamos siempre llevar la tarjeta de crédito de manera física. Local de venta de helados de açai y otros sabores exóticos con diversos complementos. Horario de atención: lunes a domingo de 11:00 a 20:00 hrs. (a partir de octubre hasta las 21:00).",
+   "url": "https://personas.bancosecurity.cl/beneficios/gourmet/acai-delight",
+   "logo": "https://personas.bancosecurity.cl/sites/bancopersonas/files/2026-09/Logo%20-%202026-09-09T114603.568.png",
+   "capturado": "",
+   "id": "626b04dc4b26",
+   "locales": [
+    {
+     "direccion": "Av. Cristóbal Colón 6555 local 11, Las Condes",
+     "comuna": "Las Condes",
+     "lat": -33.4172918,
+     "lon": -70.5607932,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Las Condes"
    ]
   },
   {
