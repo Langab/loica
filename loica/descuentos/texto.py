@@ -156,6 +156,15 @@ def dias_en(*textos: str) -> list[str]:
     if not texto:
         return []
 
+    # La excepción tiene que ir ANTES de "todos los días": de otro modo
+    # "todos los días excepto lunes" se publicaba como disponible el lunes,
+    # justo el día en que el comercio no honra el beneficio.
+    excepcion = re.search(r"todos? los dias excepto\s+(.+)$", texto)
+    if excepcion:
+        excluidos = {dia for dia in DIAS if _tiene_dia(excepcion.group(1), dia)}
+        if excluidos:
+            return [dia for dia in DIAS if dia not in excluidos]
+
     if re.search(r"todos los dias|todo los dias|de lunes a domingo|toda la semana", texto):
         return list(DIAS)
 

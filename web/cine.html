@@ -11,7 +11,7 @@
      CDN de cada cadena; 'unsafe-inline' mientras la logica viva en un <script>
      inline; y frame-ancestors no va porque en un <meta> el navegador lo ignora,
      igual que upgrade-insecure-requests (el detalle esta en mapa.html). -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; worker-src blob:; connect-src 'self' https://*.basemaps.cartocdn.com https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; worker-src blob:; connect-src 'self' https://tiles.openfreemap.org https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Cine en Santiago — Loica</title>
 <meta name="description" content="Qué dan hoy en los cines de Santiago y cuál te queda cerca: las salas de mall y el circuito de cine arte, con sus horarios y el link para comprar en el cine.">
@@ -607,36 +607,14 @@ let mapa = null, popup = null, hayMapa = false;
 const esOscuro = () => document.documentElement.dataset.tema === "oscuro"
   || (!document.documentElement.dataset.tema && matchMedia("(prefers-color-scheme: dark)").matches);
 
-/* Las mismas teselas que el mapa de panoramas y el de talleres, copiadas tal
-   cual y no reinventadas: que las tres páginas se vean iguales es la mitad de
-   que se sientan del mismo sitio.
-
-   Acá había un `glyphs: null` y costó un mapa entero. MapLibre valida el
-   estilo antes de montarlo y `glyphs` tiene que ser una cadena o no estar:
-   con null el estilo se rechaza, el evento `load` NUNCA se dispara y
-   `montarCapas()` —que cuelga de ese evento— no llega a correr. El resultado
-   no es un mapa feo, es un rectángulo en blanco sin un solo pin, porque la
-   capa de cines jamás se agregó. Ninguna otra página del sitio declara
-   `glyphs`, y esta tampoco debe. */
-const TESELAS = {
-  claro:"https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png",
-  claroEtiquetas:"https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
-  oscuro:"https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png",
-  oscuroEtiquetas:"https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png",
+/* CARTO ahora marca las teselas sin API key. OpenFreeMap entrega estilos
+   vectoriales compatibles con MapLibre sin registro y con versión nocturna. */
+const ESTILOS_BASE = {
+  claro:"https://tiles.openfreemap.org/styles/positron",
+  oscuro:"https://tiles.openfreemap.org/styles/dark",
 };
-const urlesTeselas = clave => ["a","b","c"].map(s =>
-  TESELAS[clave].replace("{s}", s).replace("{r}", devicePixelRatio > 1.5 ? "@2x" : ""));
-
 function estiloMapa(){
-  const t = esOscuro() ? ["oscuro","oscuroEtiquetas"] : ["claro","claroEtiquetas"];
-  return {version:8,
-    sources:{
-      base:{type:"raster", tiles:urlesTeselas(t[0]), tileSize:256,
-            attribution:'© OpenStreetMap © CARTO'},
-      etiquetas:{type:"raster", tiles:urlesTeselas(t[1]), tileSize:256},
-    },
-    layers:[{id:"base",type:"raster",source:"base"},
-            {id:"etiquetas",type:"raster",source:"etiquetas"}]};
+  return ESTILOS_BASE[esOscuro() ? "oscuro" : "claro"];
 }
 
 try{

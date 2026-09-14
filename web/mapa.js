@@ -32,34 +32,20 @@ let listaActual = [], seleccionado = null, mapa = null, hayMapa = false;
 pintarBarra(PAGINA_MAPA);
 pintarCabezaCat();
 
-/* Teselas CARTO en vez de OpenStreetMap crudo: el estilo por defecto de OSM
-   mete más de 25 íconos propios en pantalla y el producto pierde contra su
-   propio fondo. Además hay versión oscura, y la marca dice que el modo oscuro
-   es de primera clase porque la app se usa de noche. */
-const TESELAS = {
-  claro:"https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png",
-  claroEtiquetas:"https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
-  oscuro:"https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png",
-  oscuroEtiquetas:"https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png",
+/* CARTO comenzó a estampar “API KEY REQUIRED” en las teselas sin clave.
+   OpenFreeMap publica estilos vectoriales de OpenStreetMap para MapLibre sin
+   registro ni API key; conserva las dos apariencias y se ve nítido en pantallas
+   de alta densidad. */
+const ESTILOS_BASE = {
+  claro:"https://tiles.openfreemap.org/styles/positron",
+  oscuro:"https://tiles.openfreemap.org/styles/dark",
 };
-// Las teselas siguen al tema elegido y NADA más. Antes miraban también el
+// El estilo sigue al tema elegido y NADA más. Antes miraba también el
 // `prefers-color-scheme` del aparato, y desde que el sitio arranca claro por
 // defecto eso dejaba el mapa negro dentro de una página crema.
 const esOscuro = () => document.documentElement.dataset.tema === "oscuro";
-
-const urlesTeselas = clave => ["a","b","c"].map(s =>
-  TESELAS[clave].replace("{s}", s).replace("{r}", devicePixelRatio > 1.5 ? "@2x" : ""));
-
 function estiloMapa(){
-  const t = esOscuro() ? ["oscuro","oscuroEtiquetas"] : ["claro","claroEtiquetas"];
-  return {version:8,
-    sources:{
-      base:{type:"raster", tiles:urlesTeselas(t[0]), tileSize:256,
-            attribution:'© OpenStreetMap © CARTO'},
-      etiquetas:{type:"raster", tiles:urlesTeselas(t[1]), tileSize:256},
-    },
-    layers:[{id:"base",type:"raster",source:"base"},
-            {id:"etiquetas",type:"raster",source:"etiquetas"}]};
+  return ESTILOS_BASE[esOscuro() ? "oscuro" : "claro"];
 }
 
 /* El mapa se crea desde el ARRANQUE, después de pintar la cabecera, y no al

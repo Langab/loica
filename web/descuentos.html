@@ -25,7 +25,7 @@
        HSTS) y en el servidor local abierto desde el celular por la IP de la
        red subía loica.js y loica.css a un https:// inexistente, y la página
        quedaba en blanco. El detalle está en mapa.html. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; worker-src blob:; connect-src 'self' https://*.basemaps.cartocdn.com https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; worker-src blob:; connect-src 'self' https://tiles.openfreemap.org https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Descuentos — ¿Dónde como hoy en Santiago?</title>
 <meta name="description" content="Descuentos de restaurantes con tarjetas de bancos chilenos, filtrados por día, banco y comuna. Banco de Chile, Bci, Falabella, Santander, Ripley, Cencosud y Entel.">
@@ -571,33 +571,14 @@ pintarBarra("descuentos.html");
 let mapa = null, hayMapa = false, popup = null;
 
 const esOscuro = () => document.documentElement.dataset.tema === "oscuro";
-const TESELAS = {
-  claro:"https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png",
-  claroEtiquetas:"https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
-  oscuro:"https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png",
-  oscuroEtiquetas:"https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png",
+/* CARTO ahora marca las teselas sin API key. Este proveedor vectorial público
+   es compatible con MapLibre y no exige registro. */
+const ESTILOS_BASE = {
+  claro:"https://tiles.openfreemap.org/styles/positron",
+  oscuro:"https://tiles.openfreemap.org/styles/dark",
 };
-const urlesTeselas = clave => ["a","b","c"].map(s =>
-  TESELAS[clave].replace("{s}", s).replace("{r}", devicePixelRatio > 1.5 ? "@2x" : ""));
 function estiloMapa(){
-  const t = esOscuro() ? ["oscuro","oscuroEtiquetas"] : ["claro","claroEtiquetas"];
-  return {version:8,
-    sources:{
-      base:{type:"raster", tiles:urlesTeselas(t[0]), tileSize:256,
-            attribution:'© OpenStreetMap © CARTO'},
-      etiquetas:{type:"raster", tiles:urlesTeselas(t[1]), tileSize:256},
-    },
-    /* La capa de fondo va primero y no es adorno: mientras las teselas no
-       llegan, el lienzo de MapLibre es transparente y se ve el crema de la
-       página, que se lee como una banda rota bajo los filtros. Con un fondo
-       propio, un mapa a medio cargar se lee como un mapa a medio cargar.
-       Los dos colores van escritos porque un estilo de MapLibre es JSON y no
-       puede leer una variable de CSS; son --arena-200 y --azul-975, el mismo
-       criterio con que mapa.html escribe el borde de sus pines. */
-    layers:[{id:"papel", type:"background",
-             paint:{"background-color":esOscuro() ? "#0B0F1C" : "#EDE7DE"}},
-            {id:"base",type:"raster",source:"base"},
-            {id:"etiquetas",type:"raster",source:"etiquetas"}]};
+  return ESTILOS_BASE[esOscuro() ? "oscuro" : "claro"];
 }
 
 try{
