@@ -1,4 +1,4 @@
-# Cola de EVENTOS en categoría 'otros' — revisión del 2026-09-09.
+# Cola de EVENTOS en categoría 'otros' — revisión del 2026-09-13.
 # Ponles la categoría que corresponda (idiomas, familia, feria, deporte,
 # fiesta, cine, teatro, musica, arte, clases, aire_libre, charla) o
 # descartar: true si no son un panorama, y pégalos en
@@ -7,152 +7,152 @@
 # arreglo de verdad va en loica/clasificar.py, no acá.
 
 eventos:
-  # Refugiados | Museo de la Memoria y los Dere | 2026-05-07
-  76d124dee1fb9697:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
-
-  # Dia de Spa - Club Recrear | Ticketplus | 2026-06-15
-  4d4cbb01465b4c08:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
-
-  # Para algunas caídas no existe la gravedad | Museo de la Memoria y los Dere | 2026-06-25
-  3dcac940206221f1:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
-
-  # Un siglo de voces juveniles. De scouts, cristaleros y pingüinos | Museo de la Memoria y los Dere | 2026-07-10
-  13d9a5e5e099eca8:
-    categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
-
   # Trienal Art Cut 26: Conoce la obra de Ximena Lecca en Sala Chile antes | Museo Chileno de Arte Precolom | 2026-09-01
   7388ede4773aa999:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # No sé qué rima con te quiero | Ticketplus | 2026-09-03
-  1ab5366028758a4b:
+  # Trienal Art Cut 26: Conoce la obra de Ximena Garrido-Lecca en Sala Chi | Museo Chileno de Arte Precolom | 2026-09-01
+  347c078e0ac70c67:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # Vicaría | Ticketplus | 2026-09-03
-  ab09861d5517e6af:
+  # LUNATICA PRESENTA: VOIGTMANN | Ticketplus | 2026-09-12
+  5191f159d763fef0:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # Favorito del Público | Fundacion Centro Cultural Lo P | 2026-09-04
-  aaa0863fc155431c:
+  # Sobeteo Guaracha ? en Hangar Bellavita Sabado 12 de Septiembre | Ticketplus | 2026-09-12
+  c9b66c43db44bb29:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # BAFOCHI "Desde el fin del mundo" | Cultura Providencia | 2026-09-08
-  c5bd6dd2a970d113:
+  # CD U. Catolica vs Espanol de talca/ Liga Chery by Cecinas LLanquihue 2 | Ticketplus | 2026-09-14
+  702d2b8c3cd36436:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # Estación Precolombino junto al Museo Escolar Laguna Tagua Tagua | Museo Chileno de Arte Precolom | 2026-09-09
-  510a97525c4d3e66:
+  # M. Puente Alto vs UDEC / LNB / Liga CHERY by Cecinas Llanquihue / Sema | Ticketplus | 2026-09-14
+  6a0d25661701d5a5:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # Los Viajes de Carloto | Cena Maridaje junto a Viña Invina (+18) | Passline | 2026-09-09
-  d7575a3650db6ef1:
+  # Encuentro con la escritora Ana Huang | Biblioteca de Santiago | 2026-09-15
+  3fb441ba141ddb4e:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # Pablo Etcheverri y José Manuel Lattus en cafetería popular | Passline | 2026-09-09
-  f11e4553c455387d:
+  # TOUR EN EL CEMENTERIO CATÓLICO: HISTORIAS DEL CEMENTERIO CATÓLICO | PortalTickets (PortalDisc) | 2026-09-17
+  67475d86cedcd374:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # Visitas guiadas CEAC / Gran Sala Sinfonica Nacional | Ticketplus | 2026-09-10
-  191c2c43004cb722:
+  # M. Puente Alto vs Leones de Quilpue / LNB / Liga CHERY by Cecinas Llan | Ticketplus | 2026-09-17
+  79e8fbcd1f8cf5c6:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # "ABRAMOS LIBROS, CELEBREMOS CHILE." | Passline | 2026-09-10
-  15cc5f7e63de541d:
+  # Sala Nemesio presenta “El deshielo” junto a su directora Manuela Marte | Corporacion Cultural de La Rei | 2026-09-18
+  558357755fa57439:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # Inauguración Luis Vargas Rosas. Un museo al ritmo de lo contemporáneo  | Museo Nacional de Bellas Artes | 2026-09-10
-  a8072df1b962f9d4:
+  # Eventos | Corporacion Cultural de La Rei | 2026-09-18
+  6783274dc16dade5:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # Canciones UPelientas / Francisco Villa y Camila Chascona | Passline | 2026-09-10
-  a42f50212d0e8f7b:
+  # El ABC de Catar Vinos llega con una nueva edición en la Casona Nemesio | Corporacion Cultural de La Rei | 2026-09-18
+  ba6187cf231ced4d:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # JUEVEOOO x La Mamiparis ? Jueves 10 de Septiembre en Hangar Bellavista | Ticketplus | 2026-09-10
-  0aa6f9cfcc0e8e4c:
+  # Encontrémonos este 18 en La Reina 2026 | Corporacion Cultural de La Rei | 2026-09-18
+  c13789c2fef96465:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # SUBLIME X DISTRITO ARGENTINO 11-07 (+22) | Passline | 2026-09-11
-  04035b82141a92a3:
+  # I Concurso Nacional de Cerámica Contemporánea 2026: La Reina Florece | Corporacion Cultural de La Rei | 2026-09-18
+  e913378453f3c240:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # Confesiones y copass | Passline | 2026-09-11
-  0266f07f1e8d286e:
+  # Fonda Doña Florinda | Chile es Tuyo | 2026-09-18
+  06f45b42469b2b85:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # Yajaira / Burdo - MIBAR | Passline | 2026-09-11
-  13feb809a6ef100b:
+  # Ruta Marina | Parquemet (Cerro San Cristobal | 2026-09-19
+  c1a3a4038224cb30:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # La gran SUBLIME city | Passline | 2026-09-11
-  54cf16f045fc97c9:
+  # Ruta Nativa | Parquemet (Cerro San Cristobal | 2026-09-19
+  cb290be202971a3d:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # SOCIAL W ★ VIERNES 11 SEPTIEMBRE ★ Club Siete - Piso 4 Hotel W | Passline | 2026-09-11
-  c386b64df0cf8b5a:
+  # Fichas a la calle: septiembre 2026 | Corporacion Cultural de Lo Bar | 2026-09-21
+  abb020a3aa7ec20a:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # Cuentos y canciones con Nicolito | Biblioteca de Santiago | 2026-09-12
-  0d43f7b43c4cca09:
+  # Los Concho'e Vino | Fundacion Centro Cultural Lo P | 2026-09-21
+  e79e225cbcc90021:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # LIGA KING OF THE RING | Passline | 2026-09-12
-  5dde4925d01d7572:
+  # Carolina Candia Antich lanza Pulsión Ritual en CEDOC | Centro Nacional de Arte Contem | 2026-09-22
+  e1cedab02c278c78:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # Cuentos con Feña Lara | Biblioteca de Santiago | 2026-09-12
-  9748d83b42f6715f:
+  # Exploraciones curatoriales: “Observaciones Americanas. Alberto Cruz vi | Museo Chileno de Arte Precolom | 2026-09-24
+  61cac8319a091a48:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # Todavía y otra vez - Septiembre 2026 | Passline | 2026-09-12
-  15800a59b43d7c25:
+  # Visitas guiadas CEAC / Gran Sala Sinfonica Nacional | Ticketplus | 2026-09-24
+  8b851d76db77d920:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # ¡A Jugar y Apoyar! Gran Bingo Solidario a Beneficio Evelyn Contreras | Passline | 2026-09-12
-  ff9f33b317e32881:
+  # Provocación lectora para recibir la primavera. | Biblioteca de Santiago | 2026-09-25
+  dcb74d89fb5f50d4:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # CRIATURA 11 x Andrés Salas | Passline | 2026-09-12
-  72bd166fbd3bb6b1:
+  # Visita guiada nocturna: Historias y misterios | Teatro Municipal de Santiago | 2026-09-25
+  511fde078e1497c8:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # DoblaJam level 152 - 12/09 | Passline | 2026-09-12
-  9dd63a39434a8164:
+  # Maly Jorquera | Ticketplus | 2026-09-25
+  efa4200d4bd13730:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
 
-  # SCHWENKE&NILO...SEPTIEMBRE POPULAR Y REFLEXIVO | Passline | 2026-09-12
-  59b3b10a878a2045:
+  # Tour Claro Arena en Claro Arena | Puntoticket (deportes, musica  | 2026-09-26
+  0f62ef0c3b1b28da:
     categoria: # COMPLETAR
-    nota: revisado el 2026-09-09
+    nota: revisado el 2026-09-13
+
+  # Visitas guiadas CEAC / Gran Sala Sinfonica Nacional | Ticketplus | 2026-09-26
+  b6b454dc68bd65cf:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-13
+
+  # LUNATICA PRESENTA: GABBS | Ticketplus | 2026-09-26
+  f09ed0550303b1ea:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-13
+
+  # Flor de 18 en Lo Matta Cultural | Lo Matta Cultural (Vitacura) | 2026-09-27
+  45949bdd91b4a377:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-13
+
+  # Tour virtual al Museo de Colchagua | Universidad Andres Bello - Cul | 2026-09-30
+  c010ffbb4a779ee6:
+    categoria: # COMPLETAR
+    nota: revisado el 2026-09-13
