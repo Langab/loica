@@ -15,6 +15,14 @@
      ficha en blanco (el detalle está en mapa.html). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Ícono de pestaña, ícono de "agregar a inicio" y manifiesto de app: sin
+     esto el sitio instalado en la pantalla de inicio era un cuadrito en
+     blanco con el logo de Safari. theme-color lo actualiza aplicarTema(). -->
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../icono-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#FFFBF5">
 
 <title>Mercado costanera — Loica</title>
 <meta name="description" content="miércoles 9 de septiembre, 10:00 · Cenco Costanera, Providencia · Sin información — 10.00 a 22.00 hrs. En colaboración con cenco costanera se desarrollará la actividad Mercado Cost">
@@ -37,7 +45,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=29">
+<link rel="stylesheet" href="../loica.css?v=30">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -88,7 +96,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=29"></script>
+<script src="../loica.js?v=30"></script>
 <script>
   pintarBarra("charlas.html", "../");
   const EV = {"id": "04d66827f228f027", "titulo": "Mercado costanera", "inicio": "2026-09-09T10:00:00", "fin": "2026-09-16T10:00:00", "lugar": "Cenco Costanera", "direccion": "", "comuna": "Providencia", "lat": -33.4256, "lon": -70.6096, "precision": "comuna", "gratis": false, "precio": null, "precio_texto": "", "categoria": "charla", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "10.00 a 22.00 hrs. En colaboración con cenco costanera se desarrollará la actividad Mercado Costanera, donde participarán 24 emprendedores locales.", "imagen": "https://providencia.cl/provi/site/artic/20260831/imag/foto_0000000320260831193523.jpg", "fuente": "Municipalidad de Providencia", "url": "https://providencia.cl/provi/explora/actividades/familia/mercado-costanera-090926", "formato": "panorama"};

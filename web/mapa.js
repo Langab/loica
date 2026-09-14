@@ -63,7 +63,7 @@ function crearMapa(){
 try{
   mapa = new maplibregl.Map({
     container:"mapa", style:estiloMapa(),
-    center:[-70.645,-33.437], zoom:12.2, attributionControl:{compact:true}
+    center:[-70.645,-33.437], zoom:12.2, attributionControl:false
   });
   hayMapa = true;
 }catch(e){
@@ -75,6 +75,10 @@ try{
 }
 {
   mapa.addControl(new maplibregl.NavigationControl({showCompass:false}), "top-left");
+  creditoMapa(mapa);
+  // Las fuentes web llegan después de que nació el mapa y la cabecera cambia
+  // de alto con ellas: se vuelve a medir cuando terminan de cargar.
+  if(document.fonts) document.fonts.ready.then(() => { mapa.resize(); mapa.triggerRepaint(); });
 
   // El mapa nace antes de que su caja tenga tamaño final. Se compara el
   // tamaño anterior porque redimensionar vuelve a disparar al observador.

@@ -948,6 +948,10 @@ function aplicarTema(tema, guardar = true){
   if(tema) document.documentElement.dataset.tema = tema;
   else delete document.documentElement.dataset.tema;
   if(guardar) localStorage.setItem("loica-tema", tema || "");
+  // La barra del navegador del teléfono (y la de la PWA) sigue al tema:
+  // --fondo-elevado de cada uno, escrito porque un <meta> no lee CSS.
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if(meta) meta.setAttribute("content", tema === "oscuro" ? "#1E2740" : "#FFFBF5");
 }
 function alternarTema(){
   const actual = document.documentElement.dataset.tema || "claro";
@@ -982,6 +986,11 @@ const ICONOS_NAV = {
         stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
         <path d="M17.1 8.4 21.1 3.6" fill="none" stroke="currentColor" stroke-width="1.8"
         stroke-linecap="round"/>`,
+  /* "Más": cuatro cuadraditos, la rejilla donde están las demás secciones. */
+  mas:`<rect x="3.4" y="3.4" width="7.2" height="7.2" rx="2.1" fill="none" stroke="currentColor" stroke-width="1.8"/>
+        <rect x="13.4" y="3.4" width="7.2" height="7.2" rx="2.1" fill="none" stroke="currentColor" stroke-width="1.8"/>
+        <rect x="3.4" y="13.4" width="7.2" height="7.2" rx="2.1" fill="none" stroke="currentColor" stroke-width="1.8"/>
+        <rect x="13.4" y="13.4" width="7.2" height="7.2" rx="2.1" fill="none" stroke="currentColor" stroke-width="1.8"/>`,
   mapa:`<path d="M9 3 3 5.4v15.1l6-2.4 6 2.4 6-2.4V2.9l-6 2.4L9 3z" fill="none"
         stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
         <path d="M9 3v15.1M15 5.4v15.1" stroke="currentColor" stroke-width="1.8"/>`,
@@ -1058,15 +1067,15 @@ const CATEGORIA_DE_PAGINA = {"fiestas.html":"fiesta", "teatro.html":"teatro",
 // pestañas ya dicen de qué es cada mapa. Los cortos de habla, comer y blog
 // se quedan por si vuelven a la barra.
 const CORTOS = {
-  es:{mapa:"Mapa", fiestas:"Fiestas", teatro:"Teatro", musica:"Música", charlas:"Charlas", cine:"Cine", talleres:"Clases", descuentos:"Dctos", calendario:"Agenda", agregar:"Subir", nosotros:"Quién", habla:"Habla", comer:"Comer", blog:"Blog"},
-  en:{mapa:"Map", fiestas:"Parties", teatro:"Theatre", musica:"Music", charlas:"Talks", cine:"Cinema", talleres:"Class", descuentos:"Deals", calendario:"Agenda", agregar:"Post", nosotros:"Who", habla:"Talk", comer:"Eat", blog:"Blog"},
-  pt:{mapa:"Mapa", fiestas:"Festas", teatro:"Teatro", musica:"Música", charlas:"Debates", cine:"Cinema", talleres:"Aulas", descuentos:"Dctos", calendario:"Agenda", agregar:"Subir", nosotros:"Quem", habla:"Fale", comer:"Comer", blog:"Blog"},
+  es:{mapa:"Mapa", fiestas:"Fiestas", teatro:"Teatro", musica:"Música", charlas:"Charlas", cine:"Cine", talleres:"Clases", descuentos:"Dctos", calendario:"Agenda", agregar:"Subir", nosotros:"Quién", mas:"Más", habla:"Habla", comer:"Comer", blog:"Blog"},
+  en:{mapa:"Map", fiestas:"Parties", teatro:"Theatre", musica:"Music", charlas:"Talks", cine:"Cinema", talleres:"Class", descuentos:"Deals", calendario:"Agenda", agregar:"Post", nosotros:"Who", mas:"More", habla:"Talk", comer:"Eat", blog:"Blog"},
+  pt:{mapa:"Mapa", fiestas:"Festas", teatro:"Teatro", musica:"Música", charlas:"Debates", cine:"Cinema", talleres:"Aulas", descuentos:"Dctos", calendario:"Agenda", agregar:"Subir", nosotros:"Quem", mas:"Mais", habla:"Fale", comer:"Comer", blog:"Blog"},
 };
 
 /* El ícono de cada celda de la barra inferior. Las pestañas de categoría
    llevan a su animal guía y no un ícono de línea: en este sitio el animal al
-   lado ES la señalética (misma carita que el chip y el pin, a 21 px, que es
-   el tamaño para el que se redibujaron en el elenco v2). Apagada va con su
+   lado ES la señalética (misma carita que el chip y el pin, a 24 px; se
+   redibujaron para 21 en el elenco v2 y a 24 siguen nítidas). Apagada va con su
    color, como el chip en reposo; prendida va crema sobre la pastilla del
    color del destino, con la tinta FIJA como en los pines: el contorno de
    var(--contorno) es crema de noche y se fundía con el relleno. */
@@ -1074,8 +1083,8 @@ function iconoNav(url, clave, activo){
   const categoria = CATEGORIA_DE_PAGINA[url];
   if(!categoria) return `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONOS_NAV[clave]}</svg>`;
   const info = CATEGORIAS[categoria];
-  return activo ? carita(info.mascota, "currentColor", 21, {tinta:"#1E2A4A"})
-                : carita(info.mascota, info.hex, 21);
+  return activo ? carita(info.mascota, "currentColor", 24, {tinta:"#1E2A4A"})
+                : carita(info.mascota, info.hex, 24);
 }
 
 /* `raiz` es el prefijo hacia la raíz del sitio. Las fichas de `e/` viven un
@@ -1094,13 +1103,18 @@ function pintarBarra(paginaActual, raiz = ""){
     .map(([url,clave]) => `<a href="${raiz}${url}" data-tr="${clave}"
         ${url===paginaActual?'aria-current="page"':""}>${t(clave)}</a>`).join("");
 
-  // Barra inferior: en celular es la navegación de verdad
+  // Barra inferior: en celular es la navegación de verdad. Van las NAV_FIJAS
+  // primeras de PAGINAS y después "Más", que abre la capa con las once.
   const inferior = document.getElementById("nav-inferior");
   if(inferior){
-    inferior.innerHTML = PAGINAS.map(([url,clave]) =>
+    inferior.innerHTML = PAGINAS.slice(0, NAV_FIJAS).map(([url,clave]) =>
       `<a href="${raiz}${url}" ${url===paginaActual?'aria-current="page"':""}>
          ${iconoNav(url, clave, url === paginaActual)}
-         <span data-corto="${clave}">${CORTOS[IDIOMA][clave]}</span></a>`).join("");
+         <span data-corto="${clave}">${CORTOS[IDIOMA][clave]}</span></a>`).join("") +
+      `<button type="button" class="nav-mas" id="nav-mas" aria-haspopup="dialog"
+               aria-expanded="false" aria-controls="capa-mas">
+         <svg viewBox="0 0 24 24" aria-hidden="true">${ICONOS_NAV.mas}</svg>
+         <span data-corto="mas">${CORTOS[IDIOMA].mas}</span></button>`;
   }
   const oscuro = document.documentElement.dataset.tema === "oscuro"
     || (!document.documentElement.dataset.tema && matchMedia("(prefers-color-scheme: dark)").matches);
@@ -1115,18 +1129,119 @@ function pintarBarra(paginaActual, raiz = ""){
       </div>
     </div>`;
 
-  document.getElementById("btn-tema").onclick = e => {
-    e.currentTarget.textContent = alternarTema() === "oscuro" ? "☀" : "☾";
+  document.getElementById("btn-tema").onclick = () => { alternarTema(); pintarBotonesTema(); };
+  document.querySelectorAll(".barra .idiomas button").forEach(b =>
+    b.onclick = () => cambiarIdioma(b.dataset.idioma));
+  montarCapaMas(paginaActual, raiz);
+}
+
+/* Cambiar de idioma desde cualquiera de los dos selectores (barra de arriba
+   en escritorio, capa "Más" en celular): se guarda, se actualizan TODOS los
+   botones de idioma, se traducen los textos que cuelgan de data-tr y
+   data-corto, y se avisa a la página con `loica:idioma` para que repinte lo
+   suyo. */
+function cambiarIdioma(nuevo){
+  fijarIdioma(nuevo);
+  document.querySelectorAll(".idiomas button").forEach(o =>
+    o.setAttribute("aria-pressed", o.dataset.idioma === nuevo));
+  document.querySelectorAll("[data-tr]").forEach(el => el.textContent = t(el.dataset.tr));
+  document.querySelectorAll("[data-corto]").forEach(el =>
+    el.textContent = CORTOS[IDIOMA][el.dataset.corto]);
+  window.dispatchEvent(new CustomEvent("loica:idioma"));
+}
+/* El glifo del botón de tema (sol de noche, luna de día) en todos los
+   botones que haya: el de la barra y el de la capa "Más". */
+function pintarBotonesTema(){
+  const oscuro = document.documentElement.dataset.tema === "oscuro";
+  document.querySelectorAll(".tema").forEach(b => b.textContent = oscuro ? "☀" : "☾");
+}
+
+/* ---------- "MÁS": la capa con todas las secciones (celular) ----------
+   Cuántas pestañas van fijas en la barra inferior. Las demás —y también
+   estas— viven en la capa que abre "Más". Cinco más "Más" son seis celdas:
+   62px de ancho a 375px, que es lo que pide el pulgar y lo que necesita una
+   etiqueta de 11px. Con cuatro sobraría espacio; con seis "Charlas" ya no
+   cabría entera. */
+const NAV_FIJAS = 5;
+const TEXTOS_MAS = {
+  es:{titulo:"Todas las secciones", idioma:"Idioma", tema:"Tema", cerrar:"Cerrar"},
+  en:{titulo:"All sections",        idioma:"Language", tema:"Theme", cerrar:"Close"},
+  pt:{titulo:"Todas as seções",     idioma:"Idioma", tema:"Tema", cerrar:"Fechar"},
+};
+/* La capa se crea la primera vez que se abre y se vuelve a pintar entera en
+   cada apertura y en cada cambio de idioma o tema: son once enlaces y dos
+   filas, pintarla cuesta nada y así nunca queda con un texto viejo. Deja la
+   barra inferior a la vista (termina donde empieza, ver .capa-mas en
+   loica.css): se cierra desde el mismo botón, con Escape, con la ✕ o
+   cambiando de pestaña. El foco entra a la ✕ al abrir y vuelve al botón
+   "Más" al cerrar. */
+function montarCapaMas(paginaActual, raiz){
+  const boton = document.getElementById("nav-mas");
+  if(!boton) return;
+  let capa = document.getElementById("capa-mas");
+  const pintar = () => {
+    const M = TEXTOS_MAS[IDIOMA] || TEXTOS_MAS.es;
+    capa.innerHTML = `
+      <div class="cm-cabeza"><b>${escapar(M.titulo)}</b>
+        <button type="button" class="cm-cerrar" id="cm-cerrar" aria-label="${escapar(M.cerrar)}">✕</button></div>
+      <div class="cm-grilla">${PAGINAS.map(([url,clave]) =>
+        `<a class="cm-destino" href="${raiz}${url}" ${url===paginaActual?'aria-current="page"':""}>
+           ${iconoNav(url, clave, url === paginaActual)}<span data-tr="${clave}">${t(clave)}</span></a>`).join("")}
+      </div>
+      <div class="cm-ajustes">
+        <div class="cm-fila"><span>${escapar(M.idioma)}</span>
+          <div class="idiomas" role="group" aria-label="${escapar(M.idioma)}">
+            ${["es","en","pt"].map(i => `<button type="button" data-idioma="${i}"
+                aria-pressed="${i===IDIOMA}">${i.toUpperCase()}</button>`).join("")}
+          </div></div>
+        <div class="cm-fila"><span>${escapar(M.tema)}</span>
+          <button type="button" class="tema" aria-label="Cambiar tema"></button></div>
+      </div>
+      <p class="cm-pie">Loica · Santiago de Chile</p>`;
+    pintarBotonesTema();
+    capa.querySelector("#cm-cerrar").onclick = cerrar;
+    capa.querySelectorAll(".idiomas button").forEach(b =>
+      b.onclick = () => { cambiarIdioma(b.dataset.idioma); pintar(); });
+    capa.querySelector(".tema").onclick = () => { alternarTema(); pintarBotonesTema(); };
   };
-  document.querySelectorAll(".idiomas button").forEach(b => b.onclick = () => {
-    fijarIdioma(b.dataset.idioma);
-    document.querySelectorAll(".idiomas button").forEach(o =>
-      o.setAttribute("aria-pressed", o === b));
-    document.querySelectorAll("[data-tr]").forEach(el => el.textContent = t(el.dataset.tr));
-    document.querySelectorAll("[data-corto]").forEach(el =>
-      el.textContent = CORTOS[IDIOMA][el.dataset.corto]);
-    window.dispatchEvent(new CustomEvent("loica:idioma"));
-  });
+  const abrir = () => {
+    if(!capa){
+      capa = document.createElement("div");
+      capa.className = "capa-mas"; capa.id = "capa-mas";
+      capa.setAttribute("role", "dialog");
+      capa.setAttribute("aria-label", (TEXTOS_MAS[IDIOMA] || TEXTOS_MAS.es).titulo);
+      document.body.appendChild(capa);
+    }
+    pintar();
+    capa.hidden = false;
+    document.body.classList.add("capa-abierta");
+    boton.setAttribute("aria-expanded", "true");
+    capa.querySelector("#cm-cerrar").focus({preventScroll:true});
+  };
+  const cerrar = () => {
+    if(!capa || capa.hidden) return;
+    capa.hidden = true;
+    document.body.classList.remove("capa-abierta");
+    boton.setAttribute("aria-expanded", "false");
+    boton.focus({preventScroll:true});
+  };
+  boton.onclick = () => (capa && !capa.hidden) ? cerrar() : abrir();
+  addEventListener("keydown", e => { if(e.key === "Escape") cerrar(); });
+}
+
+/* ---------- MAPAS: el crédito de las teselas ----------
+   Lo llaman las cuatro páginas con mapa después de crear el suyo. MapLibre
+   trae su propio control de atribución, pero en celular arrancaba abierto de
+   lado a lado hasta el primer arrastre; este es una pastilla chica y fija
+   que cumple con las dos licencias sin taparle la primera fila de pines al
+   mapa. El CSS está en loica.css §4c. */
+function creditoMapa(mapa){
+  const d = document.createElement("div");
+  d.className = "credito-mapa";
+  d.innerHTML = `© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>` +
+                ` contributors · <a href="https://openfreemap.org" target="_blank" rel="noopener">OpenFreeMap</a>`;
+  mapa.getContainer().appendChild(d);
+  return d;
 }
 
 /* ---------- DATOS ----------

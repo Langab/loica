@@ -15,6 +15,14 @@
      ficha en blanco (el detalle está en mapa.html). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Ícono de pestaña, ícono de "agregar a inicio" y manifiesto de app: sin
+     esto el sitio instalado en la pantalla de inicio era un cuadrito en
+     blanco con el logo de Safari. theme-color lo actualiza aplicarTema(). -->
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../icono-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#FFFBF5">
 
 <title>Inundaremos presenta: tanquemante (¡Nueva fecha!) — Loica</title>
 <meta name="description" content="miércoles 7 de octubre · Matucana 100, Estación Central · $10.000 — Tras agotar entradas para su lanzamiento, la banda santiaguina abre nueva fecha para presentar su aclamado tan">
@@ -37,7 +45,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=29">
+<link rel="stylesheet" href="../loica.css?v=30">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -88,7 +96,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=29"></script>
+<script src="../loica.js?v=30"></script>
 <script>
   pintarBarra("musica.html", "../");
   const EV = {"id": "8103d1957672f6c8", "titulo": "Inundaremos presenta: tanquemante (¡Nueva fecha!)", "inicio": "2026-10-07T00:00:00", "fin": null, "lugar": "Matucana 100", "direccion": "", "comuna": "Estación Central", "lat": -33.4436, "lon": -70.6836, "precision": "recinto", "gratis": false, "precio": 10000, "precio_texto": "rs 120 min General: $10.000 Espacio Patricio Bunster, de pie", "categoria": "musica", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "Tras agotar entradas para su lanzamiento, la banda santiaguina abre nueva fecha para presentar su aclamado tanquemante en nuestro Espacio Bunster, un disco clave de la escena local de este 2026.…", "imagen": "https://www.m100.cl/wp-content/uploads/2026/08/inundaremos_slidehome_1920x1488-768x595.jpg", "fuente": "Matucana 100", "url": "https://www.m100.cl/programacion/musica/inundaremos-presenta-tanquemante-2da-fecha/", "formato": "panorama"};

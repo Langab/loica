@@ -15,6 +15,14 @@
      ficha en blanco (el detalle está en mapa.html). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Ícono de pestaña, ícono de "agregar a inicio" y manifiesto de app: sin
+     esto el sitio instalado en la pantalla de inicio era un cuadrito en
+     blanco con el logo de Safari. theme-color lo actualiza aplicarTema(). -->
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../icono-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#FFFBF5">
 
 <title>VI Congreso Internacional de Psicología Integral de la Persona “Del modelo a la práctica: Relectura de la técnica psicológica desde una mirada integral de la persona” — Loica</title>
 <meta name="description" content="viernes 23 de octubre, 08:30 · Universidad Finis Terrae, Providencia · Entrada liberada — La Escuela de Psicología de la Universidad Finis Terrae, en colaboración con la Facultad d">
@@ -37,7 +45,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=29">
+<link rel="stylesheet" href="../loica.css?v=30">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -88,7 +96,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=29"></script>
+<script src="../loica.js?v=30"></script>
 <script>
   pintarBarra("charlas.html", "../");
   const EV = {"id": "91167a506dbb4940", "titulo": "VI Congreso Internacional de Psicología Integral de la Persona “Del modelo a la práctica: Relectura de la técnica psicológica desde una mirada integral de la persona”", "inicio": "2026-10-23T08:30:00", "fin": "2026-10-24T17:30:00", "lugar": "Universidad Finis Terrae", "direccion": "Av. Pedro de Valdivia 1509", "comuna": "Providencia", "lat": -33.43669, "lon": -70.6084, "precision": "correccion", "gratis": true, "precio": 0, "precio_texto": "", "categoria": "charla", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "La Escuela de Psicología de la Universidad Finis Terrae, en colaboración con la Facultad de Psicología y Humanidades de la Universidad San Sebastián y la Asociación de Psicología Integral de la…", "imagen": "https://finis.cl/wp-content/uploads/2026/06/Agenda-web-2026-06-30T173910.335.jpg", "fuente": "Universidad Finis Terrae - Agenda", "url": "https://finis.cl/agenda/comunidad-finis-terrae/vi-congreso-internacional-de-psicologia-integral-de-la-persona-del-modelo-a-la-practica-relectura-de-la-tecnica-psicologica-desde-una-mirada-integral-de-la-persona-2/", "formato": "panorama"};

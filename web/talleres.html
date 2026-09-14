@@ -14,6 +14,14 @@
      el celular dejaba la página en blanco (el detalle está en mapa.html). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; worker-src blob:; connect-src 'self' https://tiles.openfreemap.org https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Ícono de pestaña, ícono de "agregar a inicio" y manifiesto de app: sin
+     esto el sitio instalado en la pantalla de inicio era un cuadrito en
+     blanco con el logo de Safari. theme-color lo actualiza aplicarTema(). -->
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="icono-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#FFFBF5">
 <title>Talleres y clases — Loica</title>
 <meta name="description" content="Los talleres y clases semanales de Santiago: natación, yoga, baile, cerámica, idiomas. Casi todo municipal y de barrio.">
 <link rel="canonical" href="https://loicasantiago.cl/talleres.html">
@@ -27,7 +35,7 @@
      caería el script entero en la primera línea. Las páginas sin mapa siguen
      en 25 a propósito —no usan nada nuevo— y suben en el próximo barrido
      general, que incluye la plantilla de exportar_web.py. -->
-<link rel="stylesheet" href="loica.css?v=29">
+<link rel="stylesheet" href="loica.css?v=30">
 <style>
   html,body{height:100%;overflow:hidden}
   /* Los dos altos van en este orden a propósito: `dvh` no existe en Safari de
@@ -148,7 +156,7 @@
      celular es una hoja que se arrastra desde abajo. Antes había un botón
      que TURNABA lista y mapa, y era peor: obligaba a elegir entre saber
      dónde y saber qué. */
-  #mapa-talleres{position:absolute;inset:0}
+  #mapa-talleres{position:absolute;inset:0;background:var(--mapa-fondo)}
   .panel-lista{
     position:absolute;left:0;right:0;bottom:0;background:var(--fondo-elevado);
     border-radius:var(--r-xl) var(--r-xl) 0 0;
@@ -305,7 +313,7 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
         integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
         crossorigin="anonymous"></script>
-<script src="loica.js?v=29"></script>
+<script src="loica.js?v=30"></script>
 <script>
 /* ------------------------------------------------------------------
    Talleres y clases: lo que se toma todas las semanas. El esqueleto es el
@@ -484,7 +492,7 @@ function estiloMapa(){
 try{
   mapa = new maplibregl.Map({
     container:"mapa-talleres", style:estiloMapa(),
-    center:[-70.645,-33.46], zoom:11.4, attributionControl:{compact:true}
+    center:[-70.645,-33.46], zoom:11.4, attributionControl:false
   });
   hayMapa = true;
 }catch(e){
@@ -495,6 +503,8 @@ try{
 
 if(hayMapa){
   mapa.addControl(new maplibregl.NavigationControl({showCompass:false}), "top-left");
+  creditoMapa(mapa);
+  if(document.fonts) document.fonts.ready.then(() => { mapa.resize(); mapa.triggerRepaint(); });
   // El mapa nace antes de que su caja tenga tamaño final (ver mapa.html).
   (() => {
     const caja = document.getElementById("mapa-talleres");

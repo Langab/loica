@@ -15,6 +15,14 @@
      ficha en blanco (el detalle está en mapa.html). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Ícono de pestaña, ícono de "agregar a inicio" y manifiesto de app: sin
+     esto el sitio instalado en la pantalla de inicio era un cuadrito en
+     blanco con el logo de Safari. theme-color lo actualiza aplicarTema(). -->
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../icono-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#FFFBF5">
 
 <title>IV Congreso de Políticas Públicas Profamilia 2026 — Loica</title>
 <meta name="description" content="jueves 22 de octubre · UAI Sede Presidente Errázuriz, Las Condes · Sin información — El Congreso busca promover la corresponsabilidad y responder al desafío demográfico.">
@@ -37,7 +45,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=29">
+<link rel="stylesheet" href="../loica.css?v=30">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -88,7 +96,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=29"></script>
+<script src="../loica.js?v=30"></script>
 <script>
   pintarBarra("charlas.html", "../");
   const EV = {"id": "6e219ff5eabab562", "titulo": "IV Congreso de Políticas Públicas Profamilia 2026", "inicio": "2026-10-22T00:00:00", "fin": null, "lugar": "UAI Sede Presidente Errázuriz", "direccion": "Av. Presidente Errázuriz 3485", "comuna": "Las Condes", "lat": -33.421362493749996, "lon": -70.5918175625, "precision": "calle", "gratis": false, "precio": null, "precio_texto": "", "categoria": "charla", "subcategoria": "", "escala": "under", "publico": "todos", "descripcion": "El Congreso busca promover la corresponsabilidad y responder al desafío demográfico.", "imagen": "https://uai.cdn7pm.net/media/22066/libro-gonzalo-serrano---2026-08-26T132306.271.jpg", "fuente": "Universidad Adolfo Ibanez - Eventos", "url": "https://www.uai.cl/eventos/gobierno/iv-congreso-de-politicas-publicas-profamilia-2026", "formato": "panorama"};

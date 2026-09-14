@@ -38,6 +38,11 @@
   --fondo:var(--arena-100);
   --fondo-elevado:var(--arena-50);
   --fondo-hundido:var(--arena-200);
+  /* El color de fondo de las teselas de OpenFreeMap (positron / dark). El
+     contenedor del mapa lo lleva puesto para que, si la cabecera crece
+     DESPUÉS de que nació el mapa y la franja de arriba se queda un cuadro sin
+     teselas, se vea del color del mapa y no como una banda crema rota. */
+  --mapa-fondo:#F2F3F0;
   --tinta:var(--azul-900);
   --tinta-suave:var(--azul-700);
   --tinta-tenue:var(--arena-700);
@@ -107,6 +112,7 @@
   --fondo:var(--azul-950);
   --fondo-elevado:#1E2740;
   --fondo-hundido:var(--azul-975);
+  --mapa-fondo:#0C0C0C;
   --tinta:var(--arena-100);
   --tinta-suave:var(--arena-300);
   --tinta-tenue:var(--arena-400);
@@ -311,57 +317,103 @@ img{max-width:100%;display:block}
     height:calc(var(--alto-nav) + env(safe-area-inset-bottom));
     box-sizing:border-box;
   }
-  /* La barra SE DESLIZA, y esa fue la única salida honesta.
-     Con ocho destinos cada celda quedaba en 47px a 375px de ancho, que ya era
-     el límite; el noveno la bajó a 41 y el cine —el décimo— la habría dejado
-     en 37, bien debajo de los 44px que mide un dedo. Repartir diez celdas en
-     una pantalla de teléfono no se puede, así que en vez de encoger el área
-     táctil hasta que deje de funcionar, la fila se desliza: cada celda tiene
-     un ancho mínimo de 54px, se ven las primeras y las demás llegan
-     arrastrando. Nada se esconde en un menú y ningún destino queda con un
-     área táctil que no se puede apretar.
-
-     `scroll-snap` alinea las celdas al soltar para que ninguna quede cortada
-     a la mitad, que es lo que hace que una fila deslizable se lea como un
-     error de maquetación. */
-  .nav-inferior{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;
-    scroll-snap-type:x proximity;overscroll-behavior-x:contain}
-  .nav-inferior::-webkit-scrollbar{display:none}
+  /* La barra YA NO se desliza. Deslizarla fue la salida honesta cuando eran
+     ocho destinos y después once: cada celda quedaba en 54px y las demás
+     llegaban arrastrando. Pero medido en la calle era una barra que escondía
+     cuatro destinos sin ninguna señal —ni barra de scroll ni borde cortado—,
+     con etiquetas de 9,5px que ningún referente usa (la guía de diseño pide
+     11px como piso y cinco pestañas como tope). Ahora van las CINCO primeras
+     de PAGINAS (mapa general y las cuatro categorías, en el orden que pidió el
+     dueño el 02-09-2026) más "Más", que abre una capa con las once secciones
+     a 60px cada una, el idioma y el tema. Seis celdas a 375px son 62px de
+     ancho: el pulgar cabe y la etiqueta también. Cuántas van fijas lo decide
+     NAV_FIJAS en loica.js. */
+  .nav-inferior{overflow:hidden}
 
   /* Es una REJILLA y no una columna flex por una razón concreta: el ícono de
-     la página activa lleva pastilla y mide 30px contra los 21 de los demás.
-     En flex ese ícono estiraba la fila entera, la barra pasaba de 54 a 65px
-     y las reservas de espacio calculadas sobre 52 quedaban cortas: la última
-     línea de cada página terminaba debajo de la barra. Con la primera fila
-     fijada en 30px la altura es la misma haya pastilla o no.
-
+     la página activa lleva pastilla y mide 32px contra los 24 de los demás.
+     En flex ese ícono estiraba la fila entera y las reservas de espacio
+     calculadas sobre --alto-nav quedaban cortas. Con la primera fila fijada
+     en 32px la altura es la misma haya pastilla o no.
      La etiqueta no envuelve nunca: prefiero que se corte a que la barra
      crezca a dos líneas. */
-  .nav-inferior a{
-    flex:1 0 auto;min-width:54px;position:relative;scroll-snap-align:center;
-    display:grid;grid-template-rows:30px auto;gap:2px;
+  .nav-inferior a,.nav-inferior .nav-mas{
+    flex:1 1 0;min-width:0;position:relative;
+    display:grid;grid-template-rows:32px auto;gap:1px;
     justify-items:center;align-content:center;
-    height:100%;padding:0 2px;
-    text-decoration:none;color:var(--tinta-tenue);
-    font-size:9.5px;font-weight:700;letter-spacing:-.01em;
+    height:100%;padding:0 2px;margin:0;border:0;background:none;
+    text-decoration:none;color:var(--tinta-tenue);cursor:pointer;
+    font:700 11px/1.2 var(--fuente-ui);letter-spacing:-.01em;
   }
-  .nav-inferior a span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .nav-inferior a svg{width:21px;height:21px;align-self:center;transition:var(--rapido)}
-  .nav-inferior a[aria-current="page"]{color:var(--tinta)}
+  .nav-inferior a span,.nav-inferior .nav-mas span{
+    max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .nav-inferior a svg,.nav-inferior .nav-mas svg{width:24px;height:24px;align-self:center;transition:var(--rapido)}
+  .nav-inferior a[aria-current="page"],.nav-inferior .nav-mas[aria-expanded="true"]{color:var(--tinta)}
   /* La pastilla de color tras el ícono: los colores de la Loica en la nav.
-     20 de alto + 3+3 de relleno + 2+2 de contorno = los 30px de la fila.
-     El relleno lateral era de 9px cuando había siete destinos; con ocho la
-     celda bajó a 47px y la pastilla (21+18+4 = 43) quedaba a dos píxeles de
-     tocar a la vecina. A 6px vuelve a respirar sin dejar de leerse pastilla. */
-  .nav-inferior a[aria-current="page"] svg{
+     22 de alto + 3+3 de relleno + 2+2 de contorno = los 32px de la fila. */
+  .nav-inferior a[aria-current="page"] svg,.nav-inferior .nav-mas[aria-expanded="true"] svg{
     background:var(--nav-color,var(--acento));color:var(--nav-tinta,var(--arena-50));
     border:2px solid var(--contorno);border-radius:var(--r-pill);
-    padding:3px 6px;width:auto;height:20px;box-sizing:content-box;
+    padding:3px 8px;width:auto;height:22px;box-sizing:content-box;
   }
+  /* "Más" abierto se prende con la tinta, no con el color de la página: no es
+     un destino, es el cajón donde están los demás. */
+  .nav-inferior .nav-mas[aria-expanded="true"] svg{background:var(--tinta);color:var(--fondo-elevado)}
   .nav-inferior a[aria-current="page"] .punto{display:none}
+  /* Tema e idioma salen de la barra de arriba en celular: son ajustes, no
+     navegación, y ocupaban 160 de los 375px del encabezado. Viven en "Más". */
+  .barra .barra-fin{display:none}
   :root{--hueco-nav:calc(var(--alto-nav) + env(safe-area-inset-bottom))}
   body.con-nav-inferior{padding-bottom:var(--hueco-nav)}
 }
+
+/* ---------- 3b. "MÁS": la capa con todas las secciones (celular) ----------
+   La abre el último botón de la barra inferior y la pinta montarCapaMas()
+   (loica.js). Deja la barra de abajo a la vista —termina donde empieza la
+   barra— para que se cierre desde el mismo botón que la abrió, o cambiando
+   de pestaña, que es lo que hace el "Más" de cualquier app de teléfono.
+   Va sobre la ficha del mapa (8) y la cabecera (6) y bajo el telón de la
+   portada (60) y la barra (20 no importa: no se pisan). */
+.capa-mas{
+  position:fixed;left:0;right:0;top:0;bottom:var(--hueco-nav);z-index:30;
+  background:var(--fondo);overflow-y:auto;overscroll-behavior:contain;
+  padding:calc(var(--e-3) + env(safe-area-inset-top)) var(--e-4) var(--e-8);
+}
+.capa-mas[hidden]{display:none}
+.cm-cabeza{display:flex;align-items:center;justify-content:space-between;gap:var(--e-3);margin-bottom:var(--e-4)}
+.cm-cabeza b{font-family:var(--fuente-marca);font-size:var(--t-lg);letter-spacing:-.02em}
+.cm-cerrar{
+  width:44px;height:44px;flex:none;border-radius:50%;border:2px solid var(--contorno);
+  background:var(--fondo-elevado);color:var(--tinta);font-size:18px;line-height:1;
+  cursor:pointer;box-shadow:var(--repisa-1);display:grid;place-items:center;
+}
+.cm-cerrar:active{transform:translateY(3px);box-shadow:none}
+.cm-grilla{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--e-3)}
+.cm-destino{
+  display:flex;align-items:center;gap:var(--e-3);min-height:60px;padding:var(--e-2) var(--e-3);
+  border:2.5px solid var(--contorno);border-radius:var(--r-md);background:var(--fondo-elevado);
+  box-shadow:var(--repisa-1);text-decoration:none;color:var(--tinta);
+  font:700 var(--t-base)/1.2 var(--fuente-marca);transition:var(--rapido);
+}
+.cm-destino svg{width:28px;height:28px;flex:none}
+.cm-destino span{min-width:0}
+.cm-destino:active{transform:translateY(3px);box-shadow:none}
+.cm-destino[aria-current="page"]{
+  background:var(--nav-color,var(--tinta));color:var(--nav-tinta,var(--arena-50));
+  transform:translateY(3px);box-shadow:none;
+}
+.cm-ajustes{margin-top:var(--e-6);display:grid;gap:var(--e-3)}
+.cm-fila{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--e-3);
+  padding:var(--e-2) var(--e-4);min-height:56px;
+  border:2px solid var(--contorno);border-radius:var(--r-md);background:var(--fondo-elevado);
+  font-weight:700;
+}
+.cm-fila .idiomas{gap:6px}
+.cm-fila .idiomas button,.cm-fila .tema{min-height:40px;min-width:44px;font-size:var(--t-sm);padding:6px 10px}
+.cm-fila .tema{font-size:17px}
+.cm-pie{margin:var(--e-8) 0 0;text-align:center;color:var(--tinta-tenue);font-size:var(--t-xs)}
+body.capa-abierta{overflow:hidden}
 
 /* Un color por destino; cada color viaja con su tinta (el naranjo y el
    amarillo son claros: llevan tinta azul, no crema). */
@@ -461,6 +513,51 @@ img{max-width:100%;display:block}
 .chip[aria-pressed="true"]:focus-visible{
   box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno);
 }
+
+/* ---------- 4c. MAPAS: lo que comparten las cuatro páginas con MapLibre ----------
+   mapa.html (y sus cuatro pestañas de categoría), cine, talleres y descuentos
+   crean cada una su propio mapa. Lo que se ve igual en las cuatro vive acá y
+   no en mapa.css, que es solo del mapa de panoramas. */
+
+/* Los botones de zoom de MapLibre vienen en 29px. Con el dedo eso es la
+   mitad de lo que pide el pulgar. El `no-repeat` no es adorno: el ícono es
+   una imagen de fondo y sin él `background-size` la MOSAICA. */
+@media (pointer:coarse){
+  .maplibregl-ctrl-group button{width:44px;height:44px}
+  .maplibregl-ctrl-group button .maplibregl-ctrl-icon{
+    background-size:22px 22px;background-repeat:no-repeat;background-position:center;
+  }
+}
+/* Los botones de zoom en el lenguaje del sitio: contorno y repisa. El fondo
+   va en crema FIJO también de noche: los íconos de MapLibre son negros y
+   sobre el panel oscuro desaparecían. En celular no van: se pellizca, y cada
+   píxel de mapa cuenta; antes solo el mapa de panoramas los escondía y en
+   cine, talleres y descuentos flotaban sobre el mapa a 29px. */
+.maplibregl-ctrl-group{background:var(--arena-50)!important;border:2px solid var(--contorno);
+  border-radius:var(--r-md);box-shadow:var(--repisa-1)!important}
+.maplibregl-ctrl-group button+button{border-top:2px solid var(--arena-300)!important}
+@media(max-width:879px){.maplibregl-ctrl-top-left{display:none}}
+
+/* El crédito de las teselas. MapLibre trae su propio control de atribución,
+   pero en modo compacto arranca ABIERTO de lado a lado hasta el primer
+   arrastre —es su forma de cumplir con la licencia— y en celular eso era una
+   pastilla de 370px tapando la primera fila de pines. Las dos licencias
+   (ODbL de OpenStreetMap y la de OpenFreeMap) piden el crédito a la vista,
+   no un botón que lo esconde: va como una pastilla chica y fija, que se lee
+   y no estorba. La pone creditoMapa() (loica.js). Abajo a la izquierda,
+   donde lo espera cualquiera que haya visto un mapa; en celular ese rincón
+   vive debajo de la hoja de resultados, así que sube al rincón de arriba a
+   la derecha, que es el único que no ocupa nada. */
+.credito-mapa{
+  position:absolute;left:6px;bottom:6px;z-index:3;
+  font:600 10.5px/1 var(--fuente-ui);color:var(--tinta-suave);
+  background:var(--fondo-elevado);
+  background:color-mix(in srgb,var(--fondo-elevado) 84%,transparent);
+  border:1px solid var(--borde);border-radius:var(--r-pill);padding:4px 8px;white-space:nowrap;
+}
+.credito-mapa a{color:inherit;text-decoration:none;font-weight:700}
+.credito-mapa a:hover{text-decoration:underline}
+@media(max-width:879px){.credito-mapa{left:auto;right:6px;bottom:auto;top:6px}}
 
 /* ---------- 4b. LA HOJA INFERIOR ----------
    El mecanismo de la lista que sube y baja con el dedo en celular. Lo monta

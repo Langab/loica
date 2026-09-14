@@ -414,6 +414,39 @@ página vivía debajo de la barra: en las fichas de evento, la que dice de qué
 fuente salió el panorama. En escritorio la barra no existe y `--hueco-nav`
 vale cero solo.
 
+### La barra inferior: cinco pestañas y «Más»
+
+En celular la barra de abajo lleva las cinco primeras entradas de `PAGINAS`
+(`loica.js`) —mapa general y las cuatro categorías— y un sexto botón, «Más»,
+que abre una capa con las once secciones a 60 px cada una, el selector de
+idioma y el interruptor de tema (que por eso desaparecen de la barra de arriba
+en celular: son ajustes, no navegación). Antes la barra se deslizaba de lado
+con once celdas de 54 px y etiquetas de 9,5 px, y cuatro destinos quedaban
+fuera de pantalla sin ninguna señal. Cuántas pestañas van fijas lo decide
+`NAV_FIJAS`; la capa la pinta `montarCapaMas()` y su CSS es `loica.css` §3b.
+
+### Ícono, manifiesto y «agregar a inicio»
+
+`favicon.svg`, `icono-32.png`, `apple-touch-icon.png`, `icono-192.png`,
+`icono-512.png`, `icono-512-maskable.png` y `manifest.webmanifest` viven en
+`web/`. Se generaron dibujando `carita("loica")` sobre crema; si cambia el
+logo, se vuelven a generar. El bloque de `<link rel="icon">`,
+`<link rel="manifest">` y `<meta name="theme-color">` está repetido en las
+quince páginas y en la plantilla de `exportar_web.py`, como el `?v=` y el
+token del beacon. No hay service worker: el sitio todavía no anda sin señal.
+
+### El mapa base y su crédito
+
+Las teselas son de OpenFreeMap (estilos `positron` y `dark`, sin API key;
+CARTO empezó a estampar «API KEY REQUIRED» en las suyas en septiembre de
+2026). Las cuatro páginas con mapa desactivan el control de atribución de
+MapLibre —en celular arrancaba abierto de lado a lado— y ponen el crédito con
+`creditoMapa()` (`loica.js`): una pastilla fija abajo a la izquierda, arriba a
+la derecha en celular. El contenedor del mapa lleva `--mapa-fondo`, el color
+de fondo de cada estilo, para que un cuadro sin teselas no se vea como una
+banda crema. Los botones de zoom van ocultos en celular en las cuatro páginas:
+se pellizca. Todo eso es compartido y vive en `loica.css` §4c, no en `mapa.css`.
+
 Es un **prototipo para ver la idea funcionando**, no la app de producción: usa
 MapLibre con mosaicos de OpenStreetMap (sin API key) y lee un archivo JSON en
 vez de Supabase. La decisión de stack para el MVP real sigue siendo la de

@@ -15,6 +15,14 @@
      ficha en blanco (el detalle está en mapa.html). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Ícono de pestaña, ícono de "agregar a inicio" y manifiesto de app: sin
+     esto el sitio instalado en la pantalla de inicio era un cuadrito en
+     blanco con el logo de Safari. theme-color lo actualiza aplicarTema(). -->
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../icono-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#FFFBF5">
 
 <title>El papel de la mujer en el mundo precolombino — Loica</title>
 <meta name="description" content="miércoles 30 de septiembre, 07:30 · Universidad Andres Bello - Cultura UNAB, Las Condes · Sin información">
@@ -37,7 +45,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=29">
+<link rel="stylesheet" href="../loica.css?v=30">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -88,7 +96,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=29"></script>
+<script src="../loica.js?v=30"></script>
 <script>
   pintarBarra("charlas.html", "../");
   const EV = {"id": "7402a2b024aea2f0", "titulo": "El papel de la mujer en el mundo precolombino", "inicio": "2026-09-30T07:30:00", "fin": null, "lugar": "Universidad Andres Bello - Cultura UNAB", "direccion": "Fernández Concha 700, Campus Casona de Las Condes", "comuna": "Las Condes", "lat": -33.37584, "lon": -70.50565, "precision": "correccion", "gratis": false, "precio": null, "precio_texto": "", "categoria": "charla", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "", "imagen": "https://cultura.unab.cl/app/uploads/2026/04/museo_colchagua_1_large-768x512.jpg", "fuente": "Universidad Andres Bello - Cultura UNAB", "url": "https://cultura.unab.cl/evento/tour-virtual-al-museo-de-colchagua/", "formato": "panorama"};

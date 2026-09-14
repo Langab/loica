@@ -15,6 +15,14 @@
      ficha en blanco (el detalle está en mapa.html). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Ícono de pestaña, ícono de "agregar a inicio" y manifiesto de app: sin
+     esto el sitio instalado en la pantalla de inicio era un cuadrito en
+     blanco con el logo de Safari. theme-color lo actualiza aplicarTema(). -->
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../icono-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#FFFBF5">
 
 <title>Tributo Jet Set (Soda Stereo) fiesta post show VJ Dorian Grobier — Loica</title>
 <meta name="description" content="viernes 2 de octubre, 23:00 · Stadio Italiano, Las Condes · $20.356 — Tributo Jet Set (Soda Stereo) fiesta post show VJ Dorian Grobier, Av. Apoquindo 6589, 7560903 Las Condes, Regi">
@@ -37,7 +45,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=29">
+<link rel="stylesheet" href="../loica.css?v=30">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -88,7 +96,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=29"></script>
+<script src="../loica.js?v=30"></script>
 <script>
   pintarBarra("musica.html", "../");
   const EV = {"id": "3d555c9e15b75025", "titulo": "Tributo Jet Set (Soda Stereo) fiesta post show VJ Dorian Grobier", "inicio": "2026-10-02T23:00:00", "fin": "2026-10-03T01:00:00", "lugar": "Stadio Italiano", "direccion": "Avenida Apoquindo, Las Condes", "comuna": "Las Condes", "lat": -33.4077889, "lon": -70.5620619, "precision": "comuna", "gratis": false, "precio": 20356, "precio_texto": "desde $20.356", "categoria": "musica", "subcategoria": "tributo", "escala": "", "publico": "todos", "descripcion": "Tributo Jet Set (Soda Stereo) fiesta post show VJ Dorian Grobier, Av. Apoquindo 6589, 7560903 Las Condes, Región Metropolitana, Chile, 02/10/2026", "imagen": "https://ticketing-uploads-1.ticketplus.global/images/thumbs/92dc73d7d7206b08a434d51dfa5a1ca57092fe5d.png?1787689702", "fuente": "Ticketplus", "url": "https://ticketplus.cl/events/tributo-jet-set-soda-stereo-fiesta-post-show-vj-dorian-grobier", "formato": "panorama"};

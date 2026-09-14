@@ -21,6 +21,14 @@
        quedaba en blanco. El detalle está en mapa.html. -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Ícono de pestaña, ícono de "agregar a inicio" y manifiesto de app: sin
+     esto el sitio instalado en la pantalla de inicio era un cuadrito en
+     blanco con el logo de Safari. theme-color lo actualiza aplicarTema(). -->
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="icono-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#FFFBF5">
 <title>Loica — ¿Qué hay hoy en Santiago?</title>
 <meta name="description" content="Todos los panoramas de Santiago en un solo lugar: mapa, calendario y recomendaciones. Gratis y de los otros.">
 <link rel="canonical" href="https://loicasantiago.cl/">
@@ -33,7 +41,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=29">
+<link rel="stylesheet" href="loica.css?v=30">
 <style>
   body{overflow-x:hidden}
 
@@ -513,6 +521,19 @@
     .titulo-seccion h2{font-size:var(--t-xl)}
     .destino{min-height:auto}
     .destino span{max-width:100%}
+    /* El elenco en dos columnas y sin la historia. Doce tarjetas de 300px a
+       una columna eran 3.600px de portada en celular —la mitad de la página—
+       y ninguna de las guías de diseño de referencia deja una home así de
+       larga. La historia de cada animal sigue entera en su ficha, que se abre
+       tocando la tarjeta (ya era así); la tarjeta chica dice quién es y de
+       qué se hace cargo, que es lo que hace falta para leer la señalética. */
+    .elenco{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--e-3)}
+    .bicho{padding:var(--e-4) var(--e-2) var(--e-3)}
+    .bicho > svg{width:72px;height:72px;margin-bottom:var(--e-1)}
+    .bicho b{font-size:var(--t-md)}
+    .bicho .rol{margin:4px 0 0;font-size:11px;padding:3px 8px}
+    .bicho p{display:none}
+    .bicho .lupa{opacity:1;transform:none;margin-top:var(--e-2)}
   }
   /* Cada animal del desfile es un botón que lleva a su categoría, y con el
      dedo medían 34x37. Nueve celdas de 44 no caben en 375px, así que se
@@ -612,7 +633,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
-<script src="loica.js?v=29"></script>
+<script src="loica.js?v=30"></script>
 <script>
 /* La raíz del sitio era el mapa hasta este cambio, así que hay links dando
    vueltas por WhatsApp con la forma `.../#/e/<id>`. Se reenvían al mapa en vez

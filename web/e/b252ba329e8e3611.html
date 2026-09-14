@@ -15,6 +15,14 @@
      ficha en blanco (el detalle está en mapa.html). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Ícono de pestaña, ícono de "agregar a inicio" y manifiesto de app: sin
+     esto el sitio instalado en la pantalla de inicio era un cuadrito en
+     blanco con el logo de Safari. theme-color lo actualiza aplicarTema(). -->
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../icono-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#FFFBF5">
 
 <title>MAMISONGA / SABADO 19 SEPT / CASA HUEMUL — Loica</title>
 <meta name="description" content="domingo 20 de septiembre, 02:00 · Casa Huemul, Santiago · $6.000 — MAMISONGA ❌ CLUB DE PERREO 🇨🇱 FIESTAS PATRIAS 🇨🇱 COMO TODOS LOS AÑOS ABRIMOS NUESTRA #MAMIFONDA CON 3 DÍAS DE ">
@@ -37,7 +45,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=29">
+<link rel="stylesheet" href="../loica.css?v=30">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -88,7 +96,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=29"></script>
+<script src="../loica.js?v=30"></script>
 <script>
   pintarBarra("fiestas.html", "../");
   const EV = {"id": "b252ba329e8e3611", "titulo": "MAMISONGA / SABADO 19 SEPT / CASA HUEMUL", "inicio": "2026-09-20T02:00:00", "fin": "2026-09-20T07:45:00", "lugar": "Casa Huemul", "direccion": "ernesto pinto lagarrigue  #80, Santiago", "comuna": "Santiago", "lat": -33.4346878, "lon": -70.6372844, "precision": "calle", "gratis": false, "precio": 6000, "precio_texto": "desde $6.000", "categoria": "fiesta", "subcategoria": "reggaeton", "escala": "under", "publico": "adultos", "descripcion": "MAMISONGA ❌ CLUB DE PERREO 🇨🇱 FIESTAS PATRIAS 🇨🇱 COMO TODOS LOS AÑOS ABRIMOS NUESTRA #MAMIFONDA CON 3 DÍAS DE BELLAKEO EN DISTINTOS CLUBES 💃🏻 UNA MEZCLA DE PERREO, DEMBOW Y OBVIO, NO PUEDEN FALTAR…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/3eea137b38f866289894fbb3b7d8bbd63bbad1a5470acc383544cab3e65ef0f4.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/santiago-centro/mamisonga-sabado-19-sept-casa-huemul-26165", "formato": "panorama"};

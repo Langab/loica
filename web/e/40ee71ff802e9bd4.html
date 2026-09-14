@@ -15,6 +15,14 @@
      ficha en blanco (el detalle está en mapa.html). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Ícono de pestaña, ícono de "agregar a inicio" y manifiesto de app: sin
+     esto el sitio instalado en la pantalla de inicio era un cuadrito en
+     blanco con el logo de Safari. theme-color lo actualiza aplicarTema(). -->
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../icono-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#FFFBF5">
 
 <title>CONFERENCIA YO SOY PODER — Loica</title>
 <meta name="description" content="sábado 10 de octubre, 20:00 · Enjoy Santiago, Sala Cenit, Santiago · $11.500 — Información importante:1. Evento para mayores de 18 años.2. El valor de la entrada al casino está inc">
@@ -37,7 +45,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=29">
+<link rel="stylesheet" href="../loica.css?v=30">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -88,7 +96,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=29"></script>
+<script src="../loica.js?v=30"></script>
 <script>
   pintarBarra("charlas.html", "../");
   const EV = {"id": "40ee71ff802e9bd4", "titulo": "CONFERENCIA YO SOY PODER", "inicio": "2026-10-10T20:00:00", "fin": "2026-10-10T22:00:00", "lugar": "Enjoy Santiago, Sala Cenit", "direccion": "Autopista los Libertadores, , Rinconada", "comuna": "Santiago", "lat": -32.9265636, "lon": -70.6792525, "precision": "comuna", "gratis": false, "precio": 11500, "precio_texto": "desde $11.500", "categoria": "charla", "subcategoria": "", "escala": "", "publico": "adultos", "descripcion": "Información importante:1. Evento para mayores de 18 años.2. El valor de la entrada al casino está incluido en el valor del acceso al espectáculo. Podrás solicitarla en el acceso al casino desde las…", "imagen": "https://ticketing-uploads-1.ticketplus.global/images/thumbs/437d66123726646b0b21f3b24c4d1f27269f88ae.jpeg?1788301893", "fuente": "Ticketplus", "url": "https://ticketplus.cl/events/conferencia-yo-soy-poder", "formato": "panorama"};

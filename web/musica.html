@@ -14,6 +14,14 @@
      frame-ancestors ni upgrade-insecure-requests— está ahí, una sola vez. -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; worker-src blob:; connect-src 'self' https://tiles.openfreemap.org https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Ícono de pestaña, ícono de "agregar a inicio" y manifiesto de app: sin
+     esto el sitio instalado en la pantalla de inicio era un cuadrito en
+     blanco con el logo de Safari. theme-color lo actualiza aplicarTema(). -->
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="icono-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#FFFBF5">
 <title>Música en vivo en Santiago — Loica</title>
 <meta name="description" content="Conciertos, tocatas y festivales de Santiago en un mapa: rock, clásica, folclor, jazz. Filtra por hoy, mañana, este finde o gratis.">
 <link rel="canonical" href="https://loicasantiago.cl/musica.html">
@@ -36,8 +44,8 @@
 <!-- El ?v= es el cache-buster del sitio y va PAREJO en las once páginas, en
      mapa.css/mapa.js y en la plantilla de exportar_web.py: si se toca uno de
      esos archivos, se sube el número en todos (README, "sube el cache-buster"). -->
-<link rel="stylesheet" href="loica.css?v=29">
-<link rel="stylesheet" href="mapa.css?v=29">
+<link rel="stylesheet" href="loica.css?v=30">
+<link rel="stylesheet" href="mapa.css?v=30">
 </head>
 <body>
 <div id="app">
@@ -91,14 +99,14 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
         integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
         crossorigin="anonymous"></script>
-<script src="loica.js?v=29"></script>
+<script src="loica.js?v=30"></script>
 <script>
   /* Lo único propio de esta página: qué archivo es y qué categoría muestra.
      mapa.js las lee al arrancar; PAGINA manda en la barra de navegación y
      CATEGORIA_FIJA recorta el catálogo (la clave de CATEGORIAS en loica.js). */
   const PAGINA = "musica.html", CATEGORIA_FIJA = "musica";
 </script>
-<script src="mapa.js?v=29"></script>
+<script src="mapa.js?v=30"></script>
 <!-- Cloudflare Web Analytics: el mismo beacon y el mismo token público de las demás páginas (la explicación está en mapa.html). -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "05b8b07df9224b248d539904774ba661"}'></script>
 </body>

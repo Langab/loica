@@ -15,6 +15,14 @@
      ficha en blanco (el detalle está en mapa.html). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Ícono de pestaña, ícono de "agregar a inicio" y manifiesto de app: sin
+     esto el sitio instalado en la pantalla de inicio era un cuadrito en
+     blanco con el logo de Safari. theme-color lo actualiza aplicarTema(). -->
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../icono-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#FFFBF5">
 
 <title>Fonda Po&#39; — Loica</title>
 <meta name="description" content="jueves 17 de septiembre, 01:30 · Fonda Po&#39;, Recoleta · $8.000 — 🇨🇱🔥 ¡SE VIENE LA FONDA PO, WEÓN! 🔥🇨🇱 Porque septiembre se celebra como corresponde: con cueca, empanás, terrem">
@@ -37,7 +45,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=29">
+<link rel="stylesheet" href="../loica.css?v=30">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -88,7 +96,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=29"></script>
+<script src="../loica.js?v=30"></script>
 <script>
   pintarBarra("fiestas.html", "../");
   const EV = {"id": "7adcc542beb6037d", "titulo": "Fonda Po'", "inicio": "2026-09-17T01:30:00", "fin": "2026-09-17T06:45:00", "lugar": "Fonda Po'", "direccion": "Santa Filomena #10, Recoleta", "comuna": "Recoleta", "lat": -33.4303457, "lon": -70.6379465, "precision": "calle", "gratis": false, "precio": 8000, "precio_texto": "desde $8.000", "categoria": "fiesta", "subcategoria": "folclor", "escala": "under", "publico": "adultos", "descripcion": "🇨🇱🔥 ¡SE VIENE LA FONDA PO, WEÓN! 🔥🇨🇱 Porque septiembre se celebra como corresponde: con cueca, empanás, terremotos, wena música y una noche que va a terminar más prendía que fonda a las 3 AM. 🕺💃🍻…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/b1cec3c09c588756b62853bd8385154d1a06a8842bae412ebff9da34b4dee7d6.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/recoleta/fonda-po-26307", "formato": "panorama"};

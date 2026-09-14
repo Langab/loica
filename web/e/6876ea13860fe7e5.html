@@ -15,6 +15,14 @@
      ficha en blanco (el detalle está en mapa.html). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Ícono de pestaña, ícono de "agregar a inicio" y manifiesto de app: sin
+     esto el sitio instalado en la pantalla de inicio era un cuadrito en
+     blanco con el logo de Safari. theme-color lo actualiza aplicarTema(). -->
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../icono-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#FFFBF5">
 
 <title>Mil Pedazos — Loica</title>
 <meta name="description" content="miércoles 2 de septiembre · MATUCANA 100 / CINE, Estación Central · $3.200 — Mil Pedazos, Matucana 100, Santiago, Estación Central, Santiago, Chile, 02/09/2026">
@@ -37,7 +45,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=29">
+<link rel="stylesheet" href="../loica.css?v=30">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -88,7 +96,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=29"></script>
+<script src="../loica.js?v=30"></script>
 <script>
   pintarBarra("mapa.html", "../");
   const EV = {"id": "6876ea13860fe7e5", "titulo": "Mil Pedazos", "inicio": "2026-09-02T00:00:00", "fin": "2026-09-13T00:00:00", "lugar": "MATUCANA 100 / CINE", "direccion": "Matucana, 100, Estación Central", "comuna": "Estación Central", "lat": -33.4453508, "lon": -70.6795141, "precision": "comuna", "gratis": false, "precio": 3200, "precio_texto": "desde $3.200", "categoria": "cine", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "Mil Pedazos, Matucana 100, Santiago, Estación Central, Santiago, Chile, 02/09/2026", "imagen": "https://ticketing-uploads-1.ticketplus.global/images/thumbs/9b185f244d48ec870a32d8396210b3050d6863bf.jpg?1788357235", "fuente": "Ticketplus", "url": "https://ticketplus.cl/events/mil-pedazos-2026-09-02-20-00-00-0400", "formato": "panorama"};

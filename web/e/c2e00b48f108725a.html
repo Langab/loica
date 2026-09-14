@@ -15,6 +15,14 @@
      ficha en blanco (el detalle está en mapa.html). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Ícono de pestaña, ícono de "agregar a inicio" y manifiesto de app: sin
+     esto el sitio instalado en la pantalla de inicio era un cuadrito en
+     blanco con el logo de Safari. theme-color lo actualiza aplicarTema(). -->
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../icono-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#FFFBF5">
 
 <title>Ensayo abierto &quot;Ardilla y Nogal&quot; — Loica</title>
 <meta name="description" content="viernes 25 de septiembre, 18:00 · Espacio Alberto Vega, Campus Oriente, Santiago · Entrada liberada — La Escuela de Teatro UC invita a su comunidad al ensayo abierto de la obra &quot;AR">
@@ -37,7 +45,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=29">
+<link rel="stylesheet" href="../loica.css?v=30">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -88,7 +96,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=29"></script>
+<script src="../loica.js?v=30"></script>
 <script>
   pintarBarra("teatro.html", "../");
   const EV = {"id": "c2e00b48f108725a", "titulo": "Ensayo abierto \"Ardilla y Nogal\"", "inicio": "2026-09-25T18:00:00", "fin": "2026-09-25T18:30:00", "lugar": "Espacio Alberto Vega, Campus Oriente", "direccion": "Jaime Guzmán Errázuriz 3300, Providencia, Santiago", "comuna": "Santiago", "lat": -33.4814788, "lon": -70.6580144, "precision": "calle", "gratis": true, "precio": 0, "precio_texto": "ra toda la familia, gratuita con cupos limitados, previa ins", "categoria": "teatro", "subcategoria": "danza", "escala": "", "publico": "todos", "descripcion": "La Escuela de Teatro UC invita a su comunidad al ensayo abierto de la obra \"ARDILLA Y NOGAL\" , creación escénica de formato breve (20 minutos) apta para todas las edades, sobre la temática del…", "imagen": "https://escueladeteatro.uc.cl/wp-content/uploads/sites/10/2026/09/image-e1788958513319.png", "fuente": "Escuela de Teatro UC (talleres y extension)", "url": "https://escueladeteatro.uc.cl/evento/ensayo-abierto-ardilla-y-nogal/", "formato": "panorama"};

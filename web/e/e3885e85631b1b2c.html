@@ -15,6 +15,14 @@
      ficha en blanco (el detalle está en mapa.html). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Ícono de pestaña, ícono de "agregar a inicio" y manifiesto de app: sin
+     esto el sitio instalado en la pantalla de inicio era un cuadrito en
+     blanco con el logo de Safari. theme-color lo actualiza aplicarTema(). -->
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../icono-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#FFFBF5">
 
 <title>Escuela de arte Septiembre 2026 “Ciclos naturales y transformación” — Loica</title>
 <meta name="description" content="sábado 26 de septiembre, 11:30 · Museo Artequin, Estación Central · $35.000 — Durante septiembre nos convertiremos en observadores y observadoras de los cambios que ocurren en la n">
@@ -37,7 +45,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=29">
+<link rel="stylesheet" href="../loica.css?v=30">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -88,7 +96,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=29"></script>
+<script src="../loica.js?v=30"></script>
 <script>
   pintarBarra("talleres.html", "../");
   const EV = {"id": "e3885e85631b1b2c", "titulo": "Escuela de arte Septiembre 2026 “Ciclos naturales y transformación”", "inicio": "2026-09-26T11:30:00", "fin": null, "lugar": "Museo Artequin", "direccion": "Av. Portales 3530", "comuna": "Estación Central", "lat": -33.44467, "lon": -70.6841, "precision": "correccion", "gratis": false, "precio": 35000, "precio_texto": "hrs Valor mensual: $35.000 por 4 sesiones (corresponde a un", "categoria": "clases", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "Durante septiembre nos convertiremos en observadores y observadoras de los cambios que ocurren en la naturaleza, comprendiendo que todo está en constante transformación. Exploraremos los ciclos…", "imagen": "https://www.artequin.cl/wp-content/uploads/2026/08/foto-destacada.png", "fuente": "Museo Artequin", "url": "https://www.artequin.cl/escuela-de-arte-septiembre-2026-ciclos-naturales-y-transformacion/", "formato": "taller"};

@@ -15,6 +15,14 @@
      ficha en blanco (el detalle está en mapa.html). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Ícono de pestaña, ícono de "agregar a inicio" y manifiesto de app: sin
+     esto el sitio instalado en la pantalla de inicio era un cuadrito en
+     blanco con el logo de Safari. theme-color lo actualiza aplicarTema(). -->
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../icono-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#FFFBF5">
 
 <title>SUNDAY — Loica</title>
 <meta name="description" content="lunes 14 de septiembre, 02:00 · SUNDAY, Providencia · Entrada liberada — SUNDAY 💖 13 SEPTIEMBRE 💖 💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖 SUNDAY VUELVE A SU FORMA 🔋 NOS ENCONTRAMOS ESTE DOMINGO PARA DARL">
@@ -37,7 +45,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=29">
+<link rel="stylesheet" href="../loica.css?v=30">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -88,7 +96,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=29"></script>
+<script src="../loica.js?v=30"></script>
 <script>
   pintarBarra("fiestas.html", "../");
   const EV = {"id": "de863428943b5508", "titulo": "SUNDAY", "inicio": "2026-09-14T02:00:00", "fin": "2026-09-14T10:00:00", "lugar": "SUNDAY", "direccion": " #, Providencia", "comuna": "Providencia", "lat": -33.431447, "lon": -70.609333, "precision": "comuna", "gratis": true, "precio": 0, "precio_texto": "", "categoria": "fiesta", "subcategoria": "", "escala": "under", "publico": "adultos", "descripcion": "SUNDAY 💖 13 SEPTIEMBRE 💖 💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖 SUNDAY VUELVE A SU FORMA 🔋 NOS ENCONTRAMOS ESTE DOMINGO PARA DARLE RIENDA SUELTA AL MOVIMIENTO DE CADERA DEL DOMINGO 💖LINE UP 💖 [⚡️] LAPOCA HOMBRE TREMOR…", "imagen": "https://tolivmarket-production.s3.sa-east-1.amazonaws.com/events/covers/263b47011b9d4e855a3686e36f0dd0fbd48f738816c8196d164e102880a197cd.jpg", "fuente": "Toliv (eventos under, fiestas y musica emergente)", "url": "https://www.toliv.com/eventos/chile/providencia/sunday-26290", "formato": "panorama"};

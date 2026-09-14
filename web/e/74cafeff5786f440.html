@@ -15,6 +15,14 @@
      ficha en blanco (el detalle está en mapa.html). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Ícono de pestaña, ícono de "agregar a inicio" y manifiesto de app: sin
+     esto el sitio instalado en la pantalla de inicio era un cuadrito en
+     blanco con el logo de Safari. theme-color lo actualiza aplicarTema(). -->
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../icono-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#FFFBF5">
 
 <title>Gimnasia Adulto Mayor Ma-Ju 09:00 h. / JJVV Contramaestre Micalvi. — Loica</title>
 <meta name="description" content="jueves 1 de octubre, 09:00 · JJVV Contramaestre Micalvi, Ñuñoa · Entrada liberada — todos los martes y jueves de 09:00 a 10:00. La gimnasia para adultos mayores, es una actividad f">
@@ -37,7 +45,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=29">
+<link rel="stylesheet" href="../loica.css?v=30">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -88,7 +96,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=29"></script>
+<script src="../loica.js?v=30"></script>
 <script>
   pintarBarra("talleres.html", "../");
   const EV = {"id": "74cafeff5786f440", "titulo": "Gimnasia Adulto Mayor Ma-Ju 09:00 h. / JJVV Contramaestre Micalvi.", "inicio": "2026-10-01T09:00:00", "fin": null, "lugar": "JJVV Contramaestre Micalvi", "direccion": "Contramaestre Micalvi 536", "comuna": "Ñuñoa", "lat": -33.45985, "lon": -70.57924, "precision": "correccion", "gratis": true, "precio": null, "precio_texto": "Gratis", "categoria": "deporte", "subcategoria": "gimnasia", "escala": "under", "publico": "todos", "descripcion": "todos los martes y jueves de 09:00 a 10:00. La gimnasia para adultos mayores, es una actividad física adaptada que busca mantener y mejorar la salud física y mental, la autonomía y la calidad de vida…", "imagen": "https://talleres-municipales.s3.sa-east-1.amazonaws.com/imagenes_sitio_talleres/1788353248193-345107284.webp", "fuente": "Corporacion Municipal de Deportes de Nunoa - Talleres", "url": "https://talleres.nunoadeportes.cl/talleres/69aeeb4080ce05b67cf9a428", "formato": "taller", "dias_semana": [1, 3]};

@@ -15,6 +15,14 @@
      ficha en blanco (el detalle está en mapa.html). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Ícono de pestaña, ícono de "agregar a inicio" y manifiesto de app: sin
+     esto el sitio instalado en la pantalla de inicio era un cuadrito en
+     blanco con el logo de Safari. theme-color lo actualiza aplicarTema(). -->
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../icono-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#FFFBF5">
 
 <title>CONCIERTO DE GALA DERECHO UC — Loica</title>
 <meta name="description" content="viernes 2 de octubre, 19:00 · Teatro Oriente, Providencia · Entrada liberada — &lt;p&gt;La Facultad de Derecho de la Pontificia Universidad Católica de Chile y la Fundación Cultural de P">
@@ -37,7 +45,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=29">
+<link rel="stylesheet" href="../loica.css?v=30">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -88,7 +96,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=29"></script>
+<script src="../loica.js?v=30"></script>
 <script>
   pintarBarra("musica.html", "../");
   const EV = {"id": "8eb0c02352a4593e", "titulo": "CONCIERTO DE GALA DERECHO UC", "inicio": "2026-10-02T19:00:00", "fin": "2026-10-02T19:00:00", "lugar": "Teatro Oriente", "direccion": "Av. Pedro de Valdivia 099", "comuna": "Providencia", "lat": -33.42262622222222, "lon": -70.6130340222222, "precision": "recinto", "gratis": true, "precio": 0, "precio_texto": "", "categoria": "musica", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "\u003cp\u003eLa Facultad de Derecho de la Pontificia Universidad Católica de Chile y la Fundación Cultural de Providencia invitan al Concierto de Gala Derecho UC 2026 a realizarse en el Teatro […]\u003c/p\u003e\\n", "imagen": "https://teatrooriente.cl/wp-content/uploads/2026/09/Concierto-de-Gala-Derecho-UC-2026_banner-teatro.jpg", "fuente": "Teatro Oriente", "url": "https://teatrooriente.cl/evento/concierto-de-gala-derecho-uc/", "formato": "panorama"};

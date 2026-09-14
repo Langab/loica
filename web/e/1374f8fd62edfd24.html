@@ -15,6 +15,14 @@
      ficha en blanco (el detalle está en mapa.html). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Ícono de pestaña, ícono de "agregar a inicio" y manifiesto de app: sin
+     esto el sitio instalado en la pantalla de inicio era un cuadrito en
+     blanco con el logo de Safari. theme-color lo actualiza aplicarTema(). -->
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../icono-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#FFFBF5">
 
 <title>Magallanes vs. Deportes Pto. Montt en Estadio Municipal de San Bernardo — Loica</title>
 <meta name="description" content="domingo 13 de septiembre, 12:30 · Estadio Municipal de San Bernardo, San Bernardo · $1.650 — Información ImportanteEntradas nominativas e intransferibles">
@@ -37,7 +45,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=29">
+<link rel="stylesheet" href="../loica.css?v=30">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -88,7 +96,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=29"></script>
+<script src="../loica.js?v=30"></script>
 <script>
   pintarBarra("mapa.html", "../");
   const EV = {"id": "1374f8fd62edfd24", "titulo": "Magallanes vs. Deportes Pto. Montt en Estadio Municipal de San Bernardo", "inicio": "2026-09-13T12:30:00", "fin": null, "lugar": "Estadio Municipal de San Bernardo", "direccion": "O'Higgins 0370, San Bernardo", "comuna": "San Bernardo", "lat": -33.5921, "lon": -70.6994, "precision": "comuna", "gratis": false, "precio": 1650, "precio_texto": "desde $1.650", "categoria": "deporte", "subcategoria": "futbol", "escala": "masivo", "publico": "todos", "descripcion": "Información ImportanteEntradas nominativas e intransferibles", "imagen": "https://static.ptocdn.net/images/eventos/mag134_rs.jpg", "fuente": "Puntoticket (deportes, musica y familia)", "url": "https://www.puntoticket.com/evento/magallanes-vs-puerto-montt-fecha26-liga-ascenso-2026?utm_medium=organic\u0026utm_source=microformat", "formato": "panorama"};

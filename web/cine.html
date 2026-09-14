@@ -13,6 +13,14 @@
      igual que upgrade-insecure-requests (el detalle esta en mapa.html). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; worker-src blob:; connect-src 'self' https://tiles.openfreemap.org https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Ícono de pestaña, ícono de "agregar a inicio" y manifiesto de app: sin
+     esto el sitio instalado en la pantalla de inicio era un cuadrito en
+     blanco con el logo de Safari. theme-color lo actualiza aplicarTema(). -->
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="icono-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#FFFBF5">
 <title>Cine en Santiago — Loica</title>
 <meta name="description" content="Qué dan hoy en los cines de Santiago y cuál te queda cerca: las salas de mall y el circuito de cine arte, con sus horarios y el link para comprar en el cine.">
 <link rel="canonical" href="https://loicasantiago.cl/cine.html">
@@ -21,7 +29,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
       integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V" crossorigin="anonymous">
-<link rel="stylesheet" href="loica.css?v=29">
+<link rel="stylesheet" href="loica.css?v=30">
 <style>
   html,body{height:100%;overflow:hidden}
   /* Los dos altos van en este orden a propósito: `dvh` no existe en Safari de
@@ -124,7 +132,7 @@
   .chip-select:has(select:focus-visible){box-shadow:0 0 0 3px var(--foco),0 0 0 6px var(--contorno)}
 
   /* --- El mapa de fondo y la lista encima, igual que en talleres --- */
-  #mapa-cines{position:absolute;inset:0}
+  #mapa-cines{position:absolute;inset:0;background:var(--mapa-fondo)}
   /* La cinta de "el mapa está pero sin pines": angosta y arriba, para no tapar
      un mapa que sí sirve para ubicarse. */
   .aviso-mapa{
@@ -473,7 +481,7 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
         integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
         crossorigin="anonymous"></script>
-<script src="loica.js?v=29"></script>
+<script src="loica.js?v=30"></script>
 <script>
 /* ------------------------------------------------------------------
    Cine: qué dan hoy y en qué sala.
@@ -620,7 +628,7 @@ function estiloMapa(){
 try{
   mapa = new maplibregl.Map({
     container:"mapa-cines", style:estiloMapa(),
-    center:[-70.645,-33.46], zoom:11.2, attributionControl:{compact:true}
+    center:[-70.645,-33.46], zoom:11.2, attributionControl:false
   });
   hayMapa = true;
 }catch(e){
@@ -631,6 +639,8 @@ try{
 
 if(hayMapa){
   mapa.addControl(new maplibregl.NavigationControl({showCompass:false}), "top-left");
+  creditoMapa(mapa);
+  if(document.fonts) document.fonts.ready.then(() => { mapa.resize(); mapa.triggerRepaint(); });
   // El mapa nace antes de que su caja tenga tamaño final (ver mapa.html).
   (() => {
     const caja = document.getElementById("mapa-cines");

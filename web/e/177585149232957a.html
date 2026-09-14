@@ -15,6 +15,14 @@
      ficha en blanco (el detalle está en mapa.html). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Ícono de pestaña, ícono de "agregar a inicio" y manifiesto de app: sin
+     esto el sitio instalado en la pantalla de inicio era un cuadrito en
+     blanco con el logo de Safari. theme-color lo actualiza aplicarTema(). -->
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../icono-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#FFFBF5">
 
 <title>Alicia, el musical de las maravillas — Loica</title>
 <meta name="description" content="domingo 27 de septiembre, 16:00 · Red Salas de Teatro (agregador de salas RM), La Reina · $10.000 — Musical chileno inspirado en el clásico de Lewis Carroll. Alicia persigue al Señ">
@@ -37,7 +45,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=29">
+<link rel="stylesheet" href="../loica.css?v=30">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -88,7 +96,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=29"></script>
+<script src="../loica.js?v=30"></script>
 <script>
   pintarBarra("musica.html", "../");
   const EV = {"id": "177585149232957a", "titulo": "Alicia, el musical de las maravillas", "inicio": "2026-09-27T16:00:00", "fin": null, "lugar": "Red Salas de Teatro (agregador de salas RM)", "direccion": "", "comuna": "La Reina", "lat": -33.4437, "lon": -70.5405, "precision": "comuna", "gratis": false, "precio": 10000, "precio_texto": "n ENTRADAS General: $10.000 | Niñas y niños: $6.000 RESTRICC", "categoria": "musica", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "Musical chileno inspirado en el clásico de Lewis Carroll. Alicia persigue al Señor Conejo y llega al País de las Maravillas, donde conoce a la Gata Sonriente, la Sabia Oruga, el Sombrerero Loco, la…", "imagen": "https://redsalasdeteatro.cl/wp-content/uploads/2026/09/ALICIA-EL-MUSICAL-DE-LAS-MARAVILLAS-copia-768x960.jpg", "fuente": "Red Salas de Teatro (agregador de salas RM)", "url": "https://redsalasdeteatro.cl/events/alicia-el-musical-de-las-maravillas/", "formato": "panorama"};

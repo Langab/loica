@@ -20,41 +20,11 @@ html,body{height:100%;overflow:hidden}
 #app{display:flex;flex-direction:column;height:100vh;height:100dvh}
 header{flex:none;z-index:6}
 main{flex:1;position:relative;min-height:0}
-#mapa{position:absolute;inset:0;background:var(--fondo-hundido)}
+#mapa{position:absolute;inset:0;background:var(--mapa-fondo)}
 
-/* Los botones de zoom de MapLibre vienen en 29px. Con el dedo eso es la
-   mitad de lo que pide el pulgar, y acercar el mapa es de las tres cosas
-   que más se hacen en esta página. El `no-repeat` no es adorno: el ícono
-   es una imagen de fondo y sin él `background-size` la MOSAICA — quedaban
-   cuatro lupas apiladas en cada botón. */
-@media (pointer:coarse){
-  .maplibregl-ctrl-group button{width:44px;height:44px}
-  .maplibregl-ctrl-group button .maplibregl-ctrl-icon{
-    background-size:22px 22px;background-repeat:no-repeat;background-position:center;
-  }
-}
-
-/* Los botones de zoom en el lenguaje del sitio: contorno y repisa. El fondo
-   va en crema FIJO también de noche: los íconos de MapLibre son negros y
-   sobre el panel oscuro desaparecían. En celular no van: se pellizca, y cada
-   píxel de mapa cuenta. */
-.maplibregl-ctrl-group{background:var(--arena-50)!important;border:2px solid var(--contorno);
-  border-radius:var(--r-md);box-shadow:var(--repisa-1)!important}
-.maplibregl-ctrl-group button+button{border-top:2px solid var(--arena-300)!important}
-@media(max-width:879px){.maplibregl-ctrl-top-left{display:none}}
-
-/* La atribución de OSM y CARTO sube al borde superior en celular.
-   MapLibre la deja abajo a la derecha, que es justo donde viven el panel
-   de la lista y la barra de destinos: el crédito quedaba dibujado a 778px
-   de una pantalla de 812, con las dos capas encima. No se mostraba nunca,
-   y las dos licencias lo piden a la vista.
-   Se mueve el RINCÓN y no se crea otro control: el control interno es el
-   único que recibe el `styledata` de arranque y por lo tanto el único que
-   llega a saber qué dicen las fuentes del estilo. */
-@media(max-width:879px){
-  .maplibregl-ctrl-bottom-right{top:0;bottom:auto}
-  .maplibregl-ctrl-bottom-right .maplibregl-ctrl{margin:8px 8px 0 0}
-}
+/* Los botones de zoom (44px con el dedo, contorno y repisa, ocultos en
+   celular) y el crédito de las teselas son iguales en las cuatro páginas con
+   mapa y viven en loica.css §4c. Acá no se repiten. */
 
 /* --- Cabecera: dos rieles y no tres ---
    La fecha es una pregunta de una sola respuesta, así que va en un control
