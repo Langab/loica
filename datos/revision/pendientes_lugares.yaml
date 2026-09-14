@@ -29,7 +29,7 @@ lugares:
     lon: # COMPLETAR
     nota: verificada el 2026-09-13 por # COMPLETAR
 
-  # 15 eventos sin pin exacto
+  # 16 eventos sin pin exacto
   PortalTickets (PortalDisc):
     direccion: # COMPLETAR
     comuna: Santiago

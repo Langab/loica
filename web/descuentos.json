@@ -1,11 +1,15 @@
 {
- "generado": "2026-09-13T22:54:13",
- "total": 565,
- "locales": 1752,
+ "generado": "2026-09-13T23:24:12",
+ "total": 602,
+ "locales": 1804,
  "bancos": [
   [
    "bancochile",
    "Banco de Chile"
+  ],
+  [
+   "bancoestado",
+   "BancoEstado"
   ],
   [
    "bci",
@@ -79,13 +83,13 @@
   "Ñuñoa"
  ],
  "por_dia": {
-  "miercoles": 243,
-  "viernes": 159,
-  "sabado": 141,
-  "domingo": 105,
-  "jueves": 205,
-  "lunes": 206,
-  "martes": 266
+  "miercoles": 260,
+  "viernes": 170,
+  "sabado": 153,
+  "domingo": 117,
+  "lunes": 218,
+  "martes": 287,
+  "jueves": 220
  },
  "descuentos": [
   {
@@ -127,6 +131,138 @@
    "logo": "https://assets.bancochile.cl/uploads/000/088/934/79fbfaef-e120-41d5-addd-2a7f917ed169/original/logo-web-Undurraga.jpg",
    "capturado": "",
    "id": "7d43f2b9d8b7",
+   "locales": [],
+   "comunas": []
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Bar Porfirio",
+   "categoria": "bar",
+   "cocina": "bar",
+   "region": "",
+   "sitio_web": "https://barporfirio.com/",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "lunes",
+    "martes",
+    "miercoles",
+    "jueves",
+    "viernes",
+    "sabado",
+    "domingo"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Beneficio publicado para Región Metropolitana; revisar locales y condiciones en la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "6fdf9405149f",
+   "locales": [
+    {
+     "direccion": "Manuel Montt 697",
+     "comuna": "Providencia",
+     "lat": -33.4345945,
+     "lon": -70.6169074,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Santander"
+    }
+   ],
+   "comunas": [
+    "Providencia"
+   ]
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Cantina Montt",
+   "categoria": "restaurantes",
+   "cocina": "mexicana",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "miercoles",
+    "viernes"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Beneficio publicado para Región Metropolitana; revisar condiciones en la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "98b164b4530a",
+   "locales": [],
+   "comunas": []
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Castillo Forestal",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "martes"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Beneficio publicado para Región Metropolitana; revisar condiciones en la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "537255d92619",
+   "locales": [],
+   "comunas": []
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Chicken International",
+   "categoria": "comida_rapida",
+   "cocina": "pollo",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "lunes",
+    "martes"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Beneficio publicado para Región Metropolitana; revisar condiciones en la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "14ea8f18db34",
    "locales": [],
    "comunas": []
   },
@@ -197,6 +333,97 @@
    ]
   },
   {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Dimoe Restobar",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "martes",
+    "miercoles",
+    "jueves",
+    "viernes",
+    "sabado",
+    "domingo"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Beneficio publicado para Región Metropolitana; revisar condiciones en la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "8d52c5c64b3c",
+   "locales": [],
+   "comunas": []
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Distrito 04",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "lunes",
+    "miercoles"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Beneficio publicado para Región Metropolitana; revisar condiciones en la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "860817669af5",
+   "locales": [],
+   "comunas": []
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Distrito Garden",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "lunes",
+    "miercoles"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Beneficio publicado para Región Metropolitana; revisar condiciones en la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "f2dea1a55066",
+   "locales": [],
+   "comunas": []
+  },
+  {
    "banco_id": "santander",
    "banco": "Santander",
    "comercio": "Do Sushi",
@@ -232,6 +459,263 @@
    ],
    "comunas": [
     "Providencia"
+   ]
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "El Hoyo Mallplaza",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "martes"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Beneficio publicado para Región Metropolitana; revisar condiciones en la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "0839649ea0e3",
+   "locales": [],
+   "comunas": []
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "El Mesón Nerudiano",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "miercoles"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Beneficio publicado para Región Metropolitana; revisar condiciones en la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "1cf1601a7a95",
+   "locales": [],
+   "comunas": []
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "El Valenciano",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Días y locales dependen de la sucursal; revisar fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "3a6bda9aebb6",
+   "locales": [],
+   "comunas": []
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Embarcadero 41",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "lunes",
+    "miercoles"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Beneficio publicado para Región Metropolitana; revisar condiciones en la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "f031f2169570",
+   "locales": [],
+   "comunas": []
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Expendio Montt",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "http://www.expendio.cl/",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "jueves"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Beneficio publicado para Región Metropolitana; revisar condiciones en la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "b0596a438e77",
+   "locales": [
+    {
+     "direccion": "Avenida Manuel Montt 727",
+     "comuna": "Providencia",
+     "lat": -33.43478,
+     "lon": -70.61682,
+     "precision": "correccion",
+     "telefono": "",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Providencia"
+   ]
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Gorilas",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "Metropolitana",
+   "sitio_web": "",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "lunes",
+    "martes",
+    "miercoles",
+    "jueves",
+    "viernes",
+    "sabado",
+    "domingo"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Disponible en Región Metropolitana según la fuente oficial; revisar locales adheridos.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "ba5b7faaeb9f",
+   "locales": [
+    {
+     "direccion": "Cristóbal Colón #7435",
+     "comuna": "Las Condes",
+     "lat": -33.41776945555555,
+     "lon": -70.55488175555556,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Gran Avenida José Miguel Carrera #5001",
+     "comuna": "San Miguel",
+     "lat": -33.4996769,
+     "lon": -70.6541342,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    }
+   ],
+   "comunas": [
+    "Las Condes",
+    "San Miguel"
+   ]
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Green Lab",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "Metropolitana",
+   "sitio_web": "",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "sabado"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Beneficio publicado para Región Metropolitana; revisar condiciones en la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "c00eed513be3",
+   "locales": [
+    {
+     "direccion": "Cerro el Plomo #5931",
+     "comuna": "Las Condes",
+     "lat": -33.4046004,
+     "lon": -70.5702622,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    },
+    {
+     "direccion": "Pio XI #1615",
+     "comuna": "Vitacura",
+     "lat": -33.3972239,
+     "lon": -70.5823636,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    }
+   ],
+   "comunas": [
+    "Las Condes",
+    "Vitacura"
    ]
   },
   {
@@ -314,6 +798,76 @@
    ]
   },
   {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Kechua",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "domingo"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Sin tope indicado en la fuente; revisar condiciones y locales adheridos.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "1d5151b1e47c",
+   "locales": [
+    {
+     "direccion": "Alcaldesa Balbina Vera 3561, local 102",
+     "comuna": "Ñuñoa",
+     "lat": -33.45385,
+     "lon": -70.59371,
+     "precision": "correccion",
+     "telefono": "",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Ñuñoa"
+   ]
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Kunstmann Craftbar",
+   "categoria": "bar",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "miercoles",
+    "sabado",
+    "domingo"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Sin tope indicado en la fuente; revisar locales adheridos y condiciones.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "fc2975868fb9",
+   "locales": [],
+   "comunas": []
+  },
+  {
    "banco_id": "bci",
    "banco": "Bci",
    "comercio": "La Cocina de Javier",
@@ -350,6 +904,68 @@
    "comunas": [
     "Vitacura"
    ]
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "La Piojera",
+   "categoria": "bar",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "martes"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Beneficio publicado para Región Metropolitana; revisar condiciones en la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "6c9bccc7edda",
+   "locales": [],
+   "comunas": []
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Londres 45",
+   "categoria": "bar",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "lunes",
+    "martes",
+    "miercoles",
+    "jueves",
+    "viernes",
+    "sabado",
+    "domingo"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Beneficio publicado para Región Metropolitana; revisar locales y condiciones en la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "d838748a62b6",
+   "locales": [],
+   "comunas": []
   },
   {
    "banco_id": "security",
@@ -419,6 +1035,102 @@
    ]
   },
   {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Mit Burger",
+   "categoria": "comida_rapida",
+   "cocina": "hamburguesas",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "martes"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Beneficio publicado para Región Metropolitana; revisar condiciones en la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "70feb336e812",
+   "locales": [],
+   "comunas": []
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Nice To Meet",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "martes"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Beneficio publicado para Región Metropolitana; revisar condiciones en la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "83de3920c722",
+   "locales": [],
+   "comunas": []
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Pastamore",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "Metropolitana de Santiago",
+   "sitio_web": "",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "jueves"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Beneficio publicado para Región Metropolitana; revisar condiciones en la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "1a82530b7c90",
+   "locales": [
+    {
+     "direccion": "Las Tranqueras 1471, Vitacura",
+     "comuna": "Vitacura",
+     "lat": -33.386209820000005,
+     "lon": -70.55282768,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco Ripley"
+    }
+   ],
+   "comunas": [
+    "Vitacura"
+   ]
+  },
+  {
    "banco_id": "security",
    "banco": "Banco Security",
    "comercio": "Pizzería Capri - Justo",
@@ -483,6 +1195,52 @@
    ],
    "comunas": [
     "Vitacura"
+   ]
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Psiquis Bar",
+   "categoria": "bar",
+   "cocina": "bar",
+   "region": "Metropolitana de Santiago",
+   "sitio_web": "",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "lunes",
+    "martes",
+    "miercoles",
+    "jueves",
+    "viernes",
+    "sabado",
+    "domingo"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Beneficio publicado para Región Metropolitana; revisar locales y condiciones en la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "67bdf8453e61",
+   "locales": [
+    {
+     "direccion": "General Flores 51, Providencia",
+     "comuna": "Providencia",
+     "lat": -33.4274536,
+     "lon": -70.618784,
+     "precision": "calle",
+     "telefono": "",
+     "origen": "Banco Ripley"
+    }
+   ],
+   "comunas": [
+    "Providencia"
    ]
   },
   {
@@ -635,6 +1393,104 @@
    "logo": "https://personas.bancosecurity.cl/sites/bancopersonas/files/2026-02/120x120_sushi-ryge.png",
    "capturado": "",
    "id": "40b8d239ee3f",
+   "locales": [],
+   "comunas": []
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Taproom Tübinger",
+   "categoria": "bar",
+   "cocina": "bar",
+   "region": "Metropolitana",
+   "sitio_web": "",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "miercoles",
+    "jueves",
+    "viernes"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Beneficio publicado para Región Metropolitana; revisar condiciones en la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "c6bb7c7597df",
+   "locales": [
+    {
+     "direccion": "9480000 Pirque",
+     "comuna": "Pirque",
+     "lat": -33.6403,
+     "lon": -70.5544,
+     "precision": "comuna",
+     "telefono": "",
+     "origen": "Banco de Chile"
+    }
+   ],
+   "comunas": [
+    "Pirque"
+   ]
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "TPM Restobar",
+   "categoria": "bar",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "jueves"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Beneficio publicado para Región Metropolitana; revisar condiciones en la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "05d355cd12c8",
+   "locales": [],
+   "comunas": []
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Tropera Drugstore",
+   "categoria": "bar",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "jueves"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Beneficio publicado para Región Metropolitana; revisar condiciones en la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "73c3c49154be",
    "locales": [],
    "comunas": []
   },
@@ -2355,6 +3211,40 @@
    ]
   },
   {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Buffalo Wafles",
+   "categoria": "cafeterias",
+   "cocina": "cafe",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": 40,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "lunes",
+    "martes",
+    "miercoles",
+    "jueves",
+    "viernes",
+    "sabado",
+    "domingo"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Disponible en Región Metropolitana según la fuente oficial; revisar locales adheridos.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "798920fbc50b",
+   "locales": [],
+   "comunas": []
+  },
+  {
    "banco_id": "cencosud",
    "banco": "Cencosud",
    "comercio": "Burger King",
@@ -3723,6 +4613,34 @@
    ]
   },
   {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Carls Jr",
+   "categoria": "comida_rapida",
+   "cocina": "comida_rapida",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": 40,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "martes"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Disponible en Región Metropolitana según la fuente oficial; revisar locales adheridos.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "337031e52ecb",
+   "locales": [],
+   "comunas": []
+  },
+  {
    "banco_id": "falabella",
    "banco": "Banco Falabella",
    "comercio": "Casa Roque",
@@ -3892,6 +4810,36 @@
     "Macul",
     "Providencia"
    ]
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Chicken Love You",
+   "categoria": "comida_rapida",
+   "cocina": "pollo",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": 40,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "martes",
+    "sabado",
+    "domingo"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Disponible en Región Metropolitana según la fuente oficial; revisar locales adheridos.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "4b72cca98cf6",
+   "locales": [],
+   "comunas": []
   },
   {
    "banco_id": "santander",
@@ -5709,6 +6657,34 @@
     "Vitacura",
     "Ñuñoa"
    ]
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Dominos Pizza",
+   "categoria": "comida_rapida",
+   "cocina": "italiana",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": 40,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "jueves"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjetas bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Presencial y online los jueves; revisar condiciones en la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "af73710083e7",
+   "locales": [],
+   "comunas": []
   },
   {
    "banco_id": "bancochile",
@@ -9081,6 +10057,86 @@
    "logo": "https://images.ctfassets.net/p6eyia4djstu/6FSRQo4oLkzFOanxyeIC9o/d2582327b8df9350b062878532bb87b3/Cards_2_LOGO_Just_Burger-02.webp",
    "capturado": "",
    "id": "dcbe5abcc072",
+   "locales": [
+    {
+     "direccion": "Avenida Pedro Fontova 6651",
+     "comuna": "Huechuraba",
+     "lat": -33.3615727,
+     "lon": -70.6702985,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Príncipe de Gales 6853",
+     "comuna": "La Reina",
+     "lat": -33.4389493,
+     "lon": -70.561236,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Presidente Sebastián Piñera Echenique 999",
+     "comuna": "Las Condes",
+     "lat": -33.4176101,
+     "lon": -70.5537687,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Américo Vespucio 3300",
+     "comuna": "Peñalolén",
+     "lat": -33.4883435,
+     "lon": -70.5775245,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Santiago",
+     "lat": -33.4533552,
+     "lon": -70.6608034,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    }
+   ],
+   "comunas": [
+    "Huechuraba",
+    "La Reina",
+    "Las Condes",
+    "Peñalolén",
+    "Santiago"
+   ]
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Just Burger",
+   "categoria": "comida_rapida",
+   "cocina": "hamburguesas",
+   "region": "Metropolitana",
+   "sitio_web": "",
+   "porcentaje": 40,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "martes"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Disponible en Región Metropolitana según la fuente oficial; revisar locales adheridos.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "76f117d9b972",
    "locales": [
     {
      "direccion": "Avenida Pedro Fontova 6651",
@@ -17465,6 +18521,136 @@
    ]
   },
   {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Tarragona",
+   "categoria": "comida_rapida",
+   "cocina": "comida_rapida",
+   "region": "Metropolitana",
+   "sitio_web": "",
+   "porcentaje": 40,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "miercoles"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjetas bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "En toda la carta en locales Tarragona los miércoles, según la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "c2aeb2703310",
+   "locales": [
+    {
+     "direccion": "Gran Avenida José Miguel Carrera 10375",
+     "comuna": "El Bosque",
+     "lat": -33.5530228,
+     "lon": -70.6765787,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Américo Vespucio 1737",
+     "comuna": "Huechuraba",
+     "lat": -33.3645948,
+     "lon": -70.6789958,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Macul 3297",
+     "comuna": "Macul",
+     "lat": -33.48448033333334,
+     "lon": -70.59961893333333,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Andrés Bello 2461",
+     "comuna": "Providencia",
+     "lat": -33.4179988,
+     "lon": -70.6068779,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida San Ignacio 500",
+     "comuna": "Quilicura",
+     "lat": -33.332339,
+     "lon": -70.7042704,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Alcalde Carlos Valdovinos 200",
+     "comuna": "San Joaquín",
+     "lat": -33.4863421,
+     "lon": -70.6264438,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Gran Avenida José Miguel Carrera",
+     "comuna": "San Miguel",
+     "lat": -33.4876745,
+     "lon": -70.6503652,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Estación Central",
+     "lat": -33.4539005,
+     "lon": -70.6921794,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Puente Alto",
+     "lat": -33.5672101,
+     "lon": -70.5574811,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Quinta Normal",
+     "lat": -33.4565972,
+     "lon": -70.7051465,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    }
+   ],
+   "comunas": [
+    "El Bosque",
+    "Estación Central",
+    "Huechuraba",
+    "Macul",
+    "Providencia",
+    "Puente Alto",
+    "Quilicura",
+    "Quinta Normal",
+    "San Joaquín",
+    "San Miguel"
+   ]
+  },
+  {
    "banco_id": "bci",
    "banco": "Bci",
    "comercio": "Tera Restoran",
@@ -19604,6 +20790,34 @@
    ]
   },
   {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Barrio Chicken",
+   "categoria": "comida_rapida",
+   "cocina": "pollo",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": 30,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "martes"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjetas bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Todos los martes en Barrio Chicken, según la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "9cbca30a4146",
+   "locales": [],
+   "comunas": []
+  },
+  {
    "banco_id": "santander",
    "banco": "Santander",
    "comercio": "Berlin Döner Kebab",
@@ -20247,6 +21461,163 @@
     "Providencia",
     "Santiago",
     "Vitacura"
+   ]
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Doggis",
+   "categoria": "comida_rapida",
+   "cocina": "hamburguesas",
+   "region": "Metropolitana",
+   "sitio_web": "",
+   "porcentaje": 30,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "martes"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjetas bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Todos los martes en Doggis, según la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "b4b4d7191f46",
+   "locales": [
+    {
+     "direccion": "Gran Avenida José Miguel Carrera 10375",
+     "comuna": "El Bosque",
+     "lat": -33.5531569,
+     "lon": -70.6767464,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Américo Vespucio 1737",
+     "comuna": "Huechuraba",
+     "lat": -33.3646934,
+     "lon": -70.6789566,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Vicente Valdés 87",
+     "comuna": "La Florida",
+     "lat": -33.5270631,
+     "lon": -70.5962572,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Andrés Bello 2461",
+     "comuna": "Providencia",
+     "lat": -33.4178241,
+     "lon": -70.6063563,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Ramón Freire",
+     "comuna": "San Bernardo",
+     "lat": -33.593098,
+     "lon": -70.7042051,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Estación Central",
+     "lat": -33.453803,
+     "lon": -70.6886031,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "La Florida",
+     "lat": -33.5198536,
+     "lon": -70.6019762,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "La Florida",
+     "lat": -33.5196225,
+     "lon": -70.5946163,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Las Condes",
+     "lat": -33.4141044,
+     "lon": -70.5851654,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Melipilla",
+     "lat": -33.6849001,
+     "lon": -71.2133013,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Quinta Normal",
+     "lat": -33.4566506,
+     "lon": -70.7051236,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Santiago",
+     "lat": -33.4400673,
+     "lon": -70.6486355,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Santiago",
+     "lat": -33.4515375,
+     "lon": -70.6638914,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    }
+   ],
+   "comunas": [
+    "El Bosque",
+    "Estación Central",
+    "Huechuraba",
+    "La Florida",
+    "Las Condes",
+    "Melipilla",
+    "Providencia",
+    "Quinta Normal",
+    "San Bernardo",
+    "Santiago"
    ]
   },
   {
@@ -22206,6 +23577,105 @@
    ]
   },
   {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Juan Maestro",
+   "categoria": "comida_rapida",
+   "cocina": "comida_rapida",
+   "region": "Metropolitana",
+   "sitio_web": "",
+   "porcentaje": 30,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "martes"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjetas bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Todos los martes en Juan Maestro, según la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "1d406221e8f7",
+   "locales": [
+    {
+     "direccion": "Avenida Américo Vespucio 1737",
+     "comuna": "Huechuraba",
+     "lat": -33.3644641,
+     "lon": -70.6784898,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Andrés Bello 2461",
+     "comuna": "Providencia",
+     "lat": -33.4180993,
+     "lon": -70.6062587,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Armando Cortínez Oriente 1704",
+     "comuna": "Pudahuel",
+     "lat": -33.3969573,
+     "lon": -70.7956569,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Irarrázaval 2928",
+     "comuna": "Ñuñoa",
+     "lat": -33.4536166,
+     "lon": -70.6005066,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Estación Central",
+     "lat": -33.4513955,
+     "lon": -70.6786777,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Estación Central",
+     "lat": -33.4524518,
+     "lon": -70.6824826,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Quilicura",
+     "lat": -33.3356423,
+     "lon": -70.7131423,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    }
+   ],
+   "comunas": [
+    "Estación Central",
+    "Huechuraba",
+    "Providencia",
+    "Pudahuel",
+    "Quilicura",
+    "Ñuñoa"
+   ]
+  },
+  {
    "banco_id": "santander",
    "banco": "Santander",
    "comercio": "Kento Sushi",
@@ -22602,6 +24072,40 @@
      "origen": ""
     }
    ],
+   "comunas": []
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "PedidosYa",
+   "categoria": "delivery",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": 30,
+   "oferta": "",
+   "tope": 5000,
+   "dias": [
+    "lunes",
+    "martes",
+    "miercoles",
+    "jueves",
+    "viernes",
+    "sabado",
+    "domingo"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjetas bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "En PedidosYa Market y Restaurantes; tope $5.000, según la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "101abc399515",
+   "locales": [],
    "comunas": []
   },
   {
@@ -35367,6 +36871,108 @@
    ]
   },
   {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Castaño",
+   "categoria": "cafeterias",
+   "cocina": "cafe",
+   "region": "Metropolitana",
+   "sitio_web": "",
+   "porcentaje": null,
+   "oferta": "Combo",
+   "tope": null,
+   "dias": [
+    "lunes",
+    "martes",
+    "miercoles",
+    "jueves",
+    "viernes",
+    "sabado",
+    "domingo"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjetas bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Oferta publicada por BancoEstado; revisar condiciones en la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "0740ee6fb938",
+   "locales": [
+    {
+     "direccion": "Rosario Norte 530",
+     "comuna": "Las Condes",
+     "lat": -33.4051696,
+     "lon": -70.573203,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Vicuña Mackenna 4860",
+     "comuna": "Macul",
+     "lat": -33.4981786,
+     "lon": -70.6100544,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Antonio Bellet",
+     "comuna": "Providencia",
+     "lat": -33.4265477,
+     "lon": -70.6168253,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Manuel Montt",
+     "comuna": "Providencia",
+     "lat": -33.4282381,
+     "lon": -70.6205731,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Providencia 1353",
+     "comuna": "Providencia",
+     "lat": -33.4284898,
+     "lon": -70.6190086,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Guardia Vieja",
+     "comuna": "Providencia",
+     "lat": -33.4240941,
+     "lon": -70.6103962,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Providencia",
+     "lat": -33.4199608,
+     "lon": -70.606838,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    }
+   ],
+   "comunas": [
+    "Las Condes",
+    "Macul",
+    "Providencia"
+   ]
+  },
+  {
    "banco_id": "security",
    "banco": "Banco Security",
    "comercio": "Dagan",
@@ -35827,6 +37433,40 @@
     "San Joaquín",
     "Vitacura"
    ]
+  },
+  {
+   "banco_id": "bancoestado",
+   "banco": "BancoEstado",
+   "comercio": "Rappi",
+   "categoria": "delivery",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "",
+   "porcentaje": null,
+   "oferta": "",
+   "tope": 5000,
+   "dias": [
+    "lunes",
+    "martes",
+    "miercoles",
+    "jueves",
+    "viernes",
+    "sabado",
+    "domingo"
+   ],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "tarjeta de crédito visa bancoestado"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Por compras desde $10.000, según la fuente oficial.",
+   "url": "https://www.bancoestado.cl/content/bancoestado-public/cl/es/home/home/todosuma---bancoestado-personas/un-mes-de-sabores---bancoestado-personas.html#sabores",
+   "logo": "",
+   "capturado": "",
+   "id": "add423f72dab",
+   "locales": [],
+   "comunas": []
   },
   {
    "banco_id": "cencosud",

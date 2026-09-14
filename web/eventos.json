@@ -1,6 +1,6 @@
 {
- "generado": "2026-09-13T22:57:51",
- "total": 1048,
+ "generado": "2026-09-13T23:26:30",
+ "total": 1049,
  "eventos": [
   {
    "id": "dfdf19b8d835aeee",
@@ -4416,6 +4416,30 @@
    "imagen": "",
    "fuente": "Cine Arte Normandie",
    "url": "https://normandie.cl/cartelera/",
+   "formato": "panorama"
+  },
+  {
+   "id": "c5f445ddf29b5005",
+   "titulo": "SHOW SECRETO CELESTE",
+   "inicio": "2026-09-14T19:30:00",
+   "fin": null,
+   "lugar": "PortalTickets (PortalDisc)",
+   "direccion": "",
+   "comuna": "Santiago",
+   "lat": -33.4425,
+   "lon": -70.6505,
+   "precision": "comuna",
+   "gratis": false,
+   "precio": 10000,
+   "precio_texto": "SPONIBLES: General: $10.000 + Cargo Comprar o Regalar Fecha:",
+   "categoria": "musica",
+   "subcategoria": "",
+   "escala": "",
+   "publico": "todos",
+   "descripcion": "SHOW SECRETO CELESTE // PortalTickets.cl Sitio en mantención SHOW SECRETO CELESTE Lunes 14 de septiembre 2026, 19:30 OFERTAS ESPECIALES (CLICK PARA INFO) TICKETS DISPONIBLES:…",
+   "imagen": "https://images.portaldisc.com/l/eventos/360/22565.jpg",
+   "fuente": "PortalTickets (PortalDisc)",
+   "url": "https://www.portaldisc.com/evento/showsecretoceleste",
    "formato": "panorama"
   },
   {

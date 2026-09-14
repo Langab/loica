@@ -6,10 +6,50 @@
 # 'Sushi Home Ñuñoa'.
 
 restoranes:
+  # 3 descuentos sin pin exacto (Banco Falabella, BancoEstado, Cencosud)
+  Cantina Montt:
+    direccion: # COMPLETAR
+    comuna: Providencia
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-13 por # COMPLETAR
+
   # 3 descuentos sin pin exacto (Banco Falabella, Banco de Chile, Santander)
   Al Pesto:
     direccion: Av. Chicureo Km 2
     comuna: Colina
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-13 por # COMPLETAR
+
+  # 2 descuentos sin pin exacto (BancoEstado, Bci)
+  Chicken International:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-13 por # COMPLETAR
+
+  # 2 descuentos sin pin exacto (BancoEstado, Cencosud)
+  Embarcadero 41:
+    direccion: # COMPLETAR
+    comuna: Providencia
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-13 por # COMPLETAR
+
+  # 2 descuentos sin pin exacto (Banco de Chile, BancoEstado)
+  Taproom Tübinger:
+    direccion: 9480000 Pirque
+    comuna: Pirque
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-13 por # COMPLETAR
+
+  # 2 descuentos sin pin exacto (Banco Falabella, BancoEstado)
+  Tropera Drugstore:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-09-13 por # COMPLETAR
@@ -22,10 +62,10 @@ restoranes:
     lon: # COMPLETAR
     nota: verificada el 2026-09-13 por # COMPLETAR
 
-  # 2 descuentos sin pin exacto (Banco Falabella, Cencosud)
-  Cantina Montt:
+  # 2 descuentos sin pin exacto (BancoEstado, Santander)
+  Chicken Love You:
     direccion: # COMPLETAR
-    comuna: Providencia
+    comuna: La Florida
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-09-13 por # COMPLETAR
@@ -78,6 +118,14 @@ restoranes:
     lon: # COMPLETAR
     nota: verificada el 2026-09-13 por # COMPLETAR
 
+  # 2 descuentos sin pin exacto (BancoEstado, Cencosud)
+  PedidosYa:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-13 por # COMPLETAR
+
   # 2 descuentos sin pin exacto (Cencosud, Entel)
   Papa Johns:
     direccion: # COMPLETAR
@@ -94,8 +142,24 @@ restoranes:
     lon: # COMPLETAR
     nota: verificada el 2026-09-13 por # COMPLETAR
 
+  # 2 descuentos sin pin exacto (BancoEstado, Cencosud)
+  Rappi:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-13 por # COMPLETAR
+
   # 1 descuentos sin pin exacto (Banco de Chile)
   Viña Undurraga:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-13 por # COMPLETAR
+
+  # 1 descuentos sin pin exacto (BancoEstado)
+  Castillo Forestal:
     direccion: # COMPLETAR
     comuna: # COMPLETAR
     lat: # COMPLETAR
@@ -110,6 +174,30 @@ restoranes:
     lon: # COMPLETAR
     nota: verificada el 2026-09-13 por # COMPLETAR
 
+  # 1 descuentos sin pin exacto (BancoEstado)
+  Dimoe Restobar:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-13 por # COMPLETAR
+
+  # 1 descuentos sin pin exacto (BancoEstado)
+  Distrito 04:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-13 por # COMPLETAR
+
+  # 1 descuentos sin pin exacto (BancoEstado)
+  Distrito Garden:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-13 por # COMPLETAR
+
   # 1 descuentos sin pin exacto (Santander)
   Do Sushi:
     direccion: Suecia 0155, local 102
@@ -118,135 +206,53 @@ restoranes:
     lon: # COMPLETAR
     nota: verificada el 2026-09-13 por # COMPLETAR
 
-  # 1 descuentos sin pin exacto (Banco Security)
-  Maribérico - Justo:
+  # 1 descuentos sin pin exacto (BancoEstado)
+  El Hoyo Mallplaza:
     direccion: # COMPLETAR
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-09-13 por # COMPLETAR
 
-  # 1 descuentos sin pin exacto (Bci)
-  Marriott:
-    direccion: # COMPLETAR
-    comuna: Las Condes
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-13 por # COMPLETAR
-
-  # 1 descuentos sin pin exacto (Banco Security)
-  Pizzería Capri - Justo:
+  # 1 descuentos sin pin exacto (BancoEstado)
+  El Mesón Nerudiano:
     direccion: # COMPLETAR
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-09-13 por # COMPLETAR
 
-  # 1 descuentos sin pin exacto (Banco Security)
-  Street Wrap - Justo:
+  # 1 descuentos sin pin exacto (BancoEstado)
+  El Valenciano:
     direccion: # COMPLETAR
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-09-13 por # COMPLETAR
 
-  # 1 descuentos sin pin exacto (Banco Security)
-  Sushi Ryge - Justo:
+  # 1 descuentos sin pin exacto (BancoEstado)
+  Kunstmann Craftbar:
     direccion: # COMPLETAR
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-09-13 por # COMPLETAR
 
-  # 1 descuentos sin pin exacto (Cencosud)
-  Anima:
-    direccion: # COMPLETAR
-    comuna: Providencia
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-13 por # COMPLETAR
-
-  # 1 descuentos sin pin exacto (Santander)
-  Aquality:
+  # 1 descuentos sin pin exacto (BancoEstado)
+  La Piojera:
     direccion: # COMPLETAR
     comuna: # COMPLETAR
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-13 por # COMPLETAR
-
-  # 1 descuentos sin pin exacto (Banco Security)
-  Azotea Matilde:
-    direccion: Antonia López de Bello 0118, piso 5 y 6, Providencia
-    comuna: Providencia
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-13 por # COMPLETAR
-
-  # 1 descuentos sin pin exacto (Banco Falabella)
-  Badass:
-    direccion: # COMPLETAR
-    comuna: # COMPLETAR
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-13 por # COMPLETAR
-
-  # 1 descuentos sin pin exacto (Bci)
-  Bar sociedad 0306:
-    direccion: # COMPLETAR
-    comuna: # COMPLETAR
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-13 por # COMPLETAR
-
-  # 1 descuentos sin pin exacto (Banco Falabella)
-  Barra Chalaca:
-    direccion: # COMPLETAR
-    comuna: # COMPLETAR
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-13 por # COMPLETAR
-
-  # 1 descuentos sin pin exacto (Banco de Chile)
-  Barrica 94:
-    direccion: local 1508
-    comuna: Lo Barnechea
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-13 por # COMPLETAR
-
-  # 1 descuentos sin pin exacto (Banco Falabella)
-  Berlín Doner Kebab:
-    direccion: # COMPLETAR
-    comuna: # COMPLETAR
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-13 por # COMPLETAR
-
-  # 1 descuentos sin pin exacto (Banco Falabella)
-  Bianco latte:
-    direccion: # COMPLETAR
-    comuna: # COMPLETAR
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-13 por # COMPLETAR
-
-  # 1 descuentos sin pin exacto (Banco Falabella)
-  Bistro Cascade:
-    direccion: # COMPLETAR
-    comuna: # COMPLETAR
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-13 por # COMPLETAR
-
-  # 1 descuentos sin pin exacto (Banco de Chile)
-  Boga:
-    direccion: Alto las Condes local 3236
-    comuna: Las Condes
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-09-13 por # COMPLETAR
 
   # ---- sin tipo de cocina ----
+  Kechua:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Green Lab:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
   Infiltrados:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
@@ -268,19 +274,37 @@ restoranes:
   Dagan:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
-  Kechua:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
   La Dicha:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
   Rishtedar:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
+  PedidosYa:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Rappi:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
   Cuerovaca:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
+  Embarcadero 41:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Expendio Montt:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Gorilas:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
   Jerónimo:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Pastamore:
+    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
+
+  Tropera Drugstore:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
   Zulu:
@@ -311,28 +335,4 @@ restoranes:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
 
   Güeros:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  Holy Moly:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  La Maestranza:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  La Santoría:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  Pristino:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  Sabor y Aroma:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  Tigre Bravo:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  TPM:
-    cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
-
-  Vapiano:
     cocina: # COMPLETAR (japonesa, peruana, italiana, parrilla, cafe, bar, chilena...)
