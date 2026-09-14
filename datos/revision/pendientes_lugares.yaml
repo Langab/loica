@@ -29,18 +29,18 @@ lugares:
     lon: # COMPLETAR
     nota: verificada el 2026-09-13 por # COMPLETAR
 
-  # 14 eventos sin pin exacto
+  # 15 eventos sin pin exacto
   PortalTickets (PortalDisc):
     direccion: # COMPLETAR
-    comuna: Providencia
+    comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-09-13 por # COMPLETAR
 
-  # 12 eventos sin pin exacto
+  # 14 eventos sin pin exacto
   PortalTickets (PortalDisc):
     direccion: # COMPLETAR
-    comuna: Santiago
+    comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-09-13 por # COMPLETAR
@@ -158,6 +158,14 @@ lugares:
     nota: verificada el 2026-09-13 por # COMPLETAR
 
   # 2 eventos sin pin exacto
+  PortalTickets (PortalDisc):
+    direccion: # COMPLETAR
+    comuna: Recoleta
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-13 por # COMPLETAR
+
+  # 2 eventos sin pin exacto
   Red Salas de Teatro (agregador de salas RM):
     direccion: # COMPLETAR
     comuna: Santiago
@@ -168,7 +176,7 @@ lugares:
   # 2 eventos sin pin exacto
   PortalTickets (PortalDisc):
     direccion: # COMPLETAR
-    comuna: Recoleta
+    comuna: Puente Alto
     lat: # COMPLETAR
     lon: # COMPLETAR
     nota: verificada el 2026-09-13 por # COMPLETAR
@@ -231,14 +239,6 @@ lugares:
 
   # 1 eventos sin pin exacto
   Spa Club Providencia:
-    direccion: # COMPLETAR
-    comuna: Providencia
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-13 por # COMPLETAR
-
-  # 1 eventos sin pin exacto
-  Montecarmelo:
     direccion: # COMPLETAR
     comuna: Providencia
     lat: # COMPLETAR

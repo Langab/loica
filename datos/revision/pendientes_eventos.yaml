@@ -7,13 +7,13 @@
 # arreglo de verdad va en loica/clasificar.py, no acá.
 
 eventos:
-  # Trienal Art Cut 26: Conoce la obra de Ximena Lecca en Sala Chile antes | Museo Chileno de Arte Precolom | 2026-09-01
-  7388ede4773aa999:
+  # Trienal Art Cut 26: Conoce la obra de Ximena Garrido-Lecca en Sala Chi | Museo Chileno de Arte Precolom | 2026-09-01
+  347c078e0ac70c67:
     categoria: # COMPLETAR
     nota: revisado el 2026-09-13
 
-  # Trienal Art Cut 26: Conoce la obra de Ximena Garrido-Lecca en Sala Chi | Museo Chileno de Arte Precolom | 2026-09-01
-  347c078e0ac70c67:
+  # Trienal Art Cut 26: Conoce la obra de Ximena Lecca en Sala Chile antes | Museo Chileno de Arte Precolom | 2026-09-01
+  7388ede4773aa999:
     categoria: # COMPLETAR
     nota: revisado el 2026-09-13
 
@@ -27,13 +27,13 @@ eventos:
     categoria: # COMPLETAR
     nota: revisado el 2026-09-13
 
-  # CD U. Catolica vs Espanol de talca/ Liga Chery by Cecinas LLanquihue 2 | Ticketplus | 2026-09-14
-  702d2b8c3cd36436:
+  # M. Puente Alto vs UDEC / LNB / Liga CHERY by Cecinas Llanquihue / Sema | Ticketplus | 2026-09-14
+  6a0d25661701d5a5:
     categoria: # COMPLETAR
     nota: revisado el 2026-09-13
 
-  # M. Puente Alto vs UDEC / LNB / Liga CHERY by Cecinas Llanquihue / Sema | Ticketplus | 2026-09-14
-  6a0d25661701d5a5:
+  # CD U. Catolica vs Espanol de talca/ Liga Chery by Cecinas LLanquihue 2 | Ticketplus | 2026-09-14
+  702d2b8c3cd36436:
     categoria: # COMPLETAR
     nota: revisado el 2026-09-13
 
