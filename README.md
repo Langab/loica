@@ -182,7 +182,8 @@ lo llevaría al repositorio. Agrega únicamente lo que produce: el sitio
 (`web/eventos.json`, `web/talleres.json`, `web/descuentos.json`, `web/e/`), la
 ingesta asistida (`datos/manual/`) y el estado que la corrida de mañana
 necesita (`datos/eventos.jsonl`, `datos/coordenadas.json`,
-`datos/historial_corridas.json`, `datos/revision/pendientes_*.yaml`).
+`datos/historial_corridas.json`, `datos/historial_fuentes.json`,
+`datos/revision/pendientes_*.yaml`).
 
 **Resuelve solo los choques en archivos generados.** Los dos catastros
 regeneran su JSON todos los días, así que dos corridas seguidas chocan siempre
@@ -216,6 +217,7 @@ recordar viaja en git:
 | `datos/eventos.jsonl` | La copia de la base. `datos/eventos.db` sigue fuera de git (es binaria y cambia entera cada día); esto es la misma tabla, una línea por evento ordenada por hash, para que el diff de cada corrida muestre solo lo que cambió |
 | `datos/coordenadas.json` | La caché de geocodificación |
 | `datos/historial_corridas.json` | Contra qué compara el diagnóstico ("la corrida anterior") |
+| `datos/historial_fuentes.json` | Últimas 60 señales por fuente: volumen, duración, HTTP y alertas de salud |
 | `datos/revision/pendientes_*.yaml` | Las colas de corrección del día, listas para trabajarlas después de un `git pull` |
 
 `Almacen` restaura la base desde `datos/eventos.jsonl` cuando está vacía o
@@ -822,6 +824,7 @@ falla a propósito en vez de publicar una página vacía.
 | **Banco Falabella** | Contentful, token público de lectura | ✅ 100% | ❌ solo región | ✅ 100% |
 | **Santander** | ⚠️ **captura manual**, ver abajo | ✅ 88% | ❌ solo región | ❌ |
 | **Cencosud Scotiabank** | JSON incrustado en la landing | ✅ 55% | ❌ | ❌ |
+| **BancoEstado** | ⚠️ captura humana fechada; su host está tras Akamai | según ficha | según ficha | ✅ ficha |
 
 De Banco de Chile sale **una fila por sucursal**: un restaurante con local en
 Ñuñoa y otro en Concepción son dos datos distintos, y aplastarlos en uno obliga
@@ -852,7 +855,7 @@ rehace la pasada. Ojo con la vigencia: el pie legal del sitio no rota —el
 01-09-2026 todavía decía "válidos durante el mes de marzo de 2026"— así que la
 fecha se lee en la ficha de cada promoción, no en el pie.
 
-Scotiabank (tras login), Itaú, BancoEstado, BICE, Security, Ripley, Consorcio,
+Scotiabank (tras login), Itaú, BICE, Consorcio,
 Coopeuch y Tenpo quedaron fuera por ahora. El sondeo de los quince emisores está
 en [`notas/catastro_descuentos_bancos.md`](notas/catastro_descuentos_bancos.md).
 

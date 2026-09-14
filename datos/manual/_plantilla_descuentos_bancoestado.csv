@@ -1,0 +1,2 @@
+banco,comercio,direccion,comuna,lat,lon,logo,dias,monto,tope,vigencia,sitio_web,categoria,url,tarjeta,condiciones
+BancoEstado,Ejemplo cafetería,Av. Ejemplo 123,Providencia,,,https://ejemplo.cl/logo.png,miércoles,40% descuento,5000,2026-09-30,https://ejemplo.cl,cafeteria,https://www.bancoestado.cl/beneficios/ejemplo,Tarjeta de Crédito Visa BancoEstado,"Válido pagando con la tarjeta indicada; no acumulable."

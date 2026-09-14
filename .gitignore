@@ -9,6 +9,7 @@ datos/*
 !datos/eventos.jsonl
 !datos/coordenadas.json
 !datos/historial_corridas.json
+!datos/historial_fuentes.json
 !datos/revision/
 datos/revision/*
 !datos/revision/pendientes_*.yaml

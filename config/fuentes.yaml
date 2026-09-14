@@ -1651,6 +1651,10 @@ fuentes:
   url_base: https://loica.cl
   tipo_adaptador: manual
   crawl_delay_seg: 0
+  # La pasada asistida es una foto, no una agenda que se actualice sola. Al
+  # cuarto día se deja fuera hasta que una persona suba una captura nueva.
+  # Los YAML permanentes de datos/manual/ siguen entrando normalmente.
+  max_edad_dias: 3
   activa: true
   notas: 'No hace ninguna peticion de red: lee la pasada asistida mas nueva de datos/manual/.
 

@@ -17,11 +17,15 @@ tokens. Puede correr todos los días sin costo.
 from __future__ import annotations
 
 import argparse
+import json
 import logging
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from pathlib import Path
+from statistics import median
+from urllib.parse import urlparse
 
 import yaml
 
@@ -30,11 +34,14 @@ from loica.almacen import SQL_VIGENTE, Almacen
 from loica.filtros import motivo_de_descarte
 from loica.fuentes import ADAPTADORES
 from loica.red import ClienteEducado
+from loica import asistida
 
 RAIZ = Path(__file__).resolve().parent
 RUTA_CONFIG = RAIZ / "config" / "fuentes.yaml"
 DIR_INFORMES = RAIZ / "informes"
 DIR_LOGS = RAIZ / "datos" / "logs"
+RUTA_HISTORIAL_FUENTES = RAIZ / "datos" / "historial_fuentes.json"
+MAX_HISTORIAL_FUENTES = 60
 
 
 def configurar_logs(verboso: bool) -> None:
@@ -82,14 +89,15 @@ def escribir_informe(almacen: Almacen, estadisticas: list[dict], duracion: float
         "",
         "## Por fuente",
         "",
-        "| Fuente | Encontrados | Nuevos | Actualizados | Descartados | Estado |",
-        "|---|---:|---:|---:|---:|---|",
+        "| Fuente | Encontrados | Nuevos | Actualizados | Descartados | Red | Estado |",
+        "|---|---:|---:|---:|---:|---|---|",
     ]
     for e in estadisticas:
-        estado = "error" if e["error"] else "ok"
+        estado = "error" if e["error"] else ("alerta: " + e["alertas"][0]
+                                                if e.get("alertas") else "ok")
         lineas.append(
             f"| {e['fuente']} | {e['encontrados']} | {e['nuevos']} | "
-            f"{e['actualizados']} | {e['descartados']} | {estado} |"
+            f"{e['actualizados']} | {e['descartados']} | {_resumen_red(e.get('red'))} | {estado} |"
         )
 
     if any(e["error"] for e in estadisticas):
@@ -157,10 +165,152 @@ def escribir_informe(almacen: Almacen, estadisticas: list[dict], duracion: float
     return ruta
 
 
+def _resumen_red(red: dict | None) -> str:
+    """Una celda legible del diagnóstico HTTP de una fuente."""
+    if not red:
+        return "—"
+    codigos = red.get("codigos") or {}
+    partes = [f"{codigo}×{n}" for codigo, n in codigos.items()]
+    if red.get("robots"):
+        partes.append(f"robots×{red['robots']}")
+    if red.get("errores"):
+        partes.append(f"red×{red['errores']}")
+    return ", ".join(partes) or "—"
+
+
+def _dominio(fuente: dict) -> str:
+    """Dominio de una fuente para no correr dos extractores del mismo host a la vez."""
+    url = fuente.get("url_base") or fuente.get("url_agenda") or fuente["id"]
+    return urlparse(url).netloc or fuente["id"]
+
+
+def _extraer_fuente(fuente: dict, sin_cache: bool) -> dict:
+    """Parte de red de una fuente; no toca SQLite y por eso puede ir en paralelo."""
+    t0 = time.time()
+    conteo = {"fuente": fuente["nombre"], "encontrados": 0, "nuevos": 0,
+              "actualizados": 0, "descartados": 0, "error": None, "alertas": []}
+    adaptador = ADAPTADORES.get(fuente["tipo_adaptador"])
+    eventos = []
+    cliente = None
+    if adaptador is None:
+        conteo["error"] = f"tipo_adaptador desconocido: {fuente['tipo_adaptador']}"
+        return {"fuente": fuente, "conteo": conteo, "eventos": eventos,
+                "duracion": time.time() - t0}
+    try:
+        cliente = ClienteEducado(crawl_delay_seg=float(fuente.get("crawl_delay_seg", 2)),
+                                 usar_cache=not sin_cache)
+        eventos = adaptador(fuente, cliente)
+        conteo["encontrados"] = len(eventos)
+        if fuente.get("tipo_adaptador") == "manual":
+            pasada = asistida.ultima_pasada(Path(fuente["carpeta"])
+                                             if fuente.get("carpeta") else None)
+            if pasada and not asistida.manifest(Path(fuente["carpeta"])
+                                                 if fuente.get("carpeta") else None):
+                conteo["alertas"].append("pasada asistida sin manifest")
+            if pasada and fuente.get("max_edad_dias") is not None:
+                edad = (datetime.now().date() - pasada[0]).days
+                if edad > int(fuente["max_edad_dias"]):
+                    conteo["alertas"].append(
+                        f"pasada asistida vencida ({edad} días; máximo {fuente['max_edad_dias']})")
+    except Exception as e:  # una fuente caída no puede tumbar la corrida
+        conteo["error"] = f"{type(e).__name__}: {e}"
+        logging.getLogger("loica").exception("%s falló", fuente["nombre"])
+    conteo["red"] = cliente.resumen_red() if cliente else {}
+    return {"fuente": fuente, "conteo": conteo, "eventos": eventos,
+            "duracion": time.time() - t0}
+
+
+def _extraer_en_paralelo(fuentes: list[dict], sin_cache: bool, concurrencia: int) -> list[dict]:
+    """Extrae hosts distintos en paralelo, serializando siempre un mismo dominio.
+
+    El crawl-delay vive en ClienteEducado y sigue aplicando a cada petición.
+    Agrupar antes de enviar al pool evita que dos fuentes del mismo host se
+    salten ese intervalo por una carrera entre hilos.
+    """
+    grupos: dict[str, list[tuple[int, dict]]] = {}
+    for indice, fuente in enumerate(fuentes):
+        grupos.setdefault(_dominio(fuente), []).append((indice, fuente))
+
+    resultados: list[dict | None] = [None] * len(fuentes)
+
+    def correr_grupo(items: list[tuple[int, dict]]) -> list[tuple[int, dict]]:
+        return [(indice, _extraer_fuente(fuente, sin_cache)) for indice, fuente in items]
+
+    trabajadores = min(max(1, concurrencia), len(grupos))
+    if trabajadores == 1:
+        for items in grupos.values():
+            for indice, resultado in correr_grupo(items):
+                resultados[indice] = resultado
+    else:
+        with ThreadPoolExecutor(max_workers=trabajadores, thread_name_prefix="loica") as pool:
+            futuros = [pool.submit(correr_grupo, items) for items in grupos.values()]
+            for futuro in as_completed(futuros):
+                for indice, resultado in futuro.result():
+                    resultados[indice] = resultado
+    return [r for r in resultados if r is not None]
+
+
+def _cargar_historial_fuentes() -> dict[str, list[dict]]:
+    try:
+        datos = json.loads(RUTA_HISTORIAL_FUENTES.read_text(encoding="utf-8"))
+        fuentes = datos.get("fuentes", {})
+        return fuentes if isinstance(fuentes, dict) else {}
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def _anotar_salud(estadisticas: list[dict]) -> None:
+    """Compara cada fuente con su propia línea base y guarda el último tramo.
+
+    La base SQLite de Actions nace de cero todos los días, así que esta memoria
+    versionada es la que permite detectar un parser que pasó de 40 a 0 aunque
+    la corrida actual técnicamente no haya lanzado una excepción.
+    """
+    historial = _cargar_historial_fuentes()
+    ahora = datetime.now().isoformat(timespec="seconds")
+    for e in estadisticas:
+        previas = historial.get(e["fuente"], [])[-7:]
+        hallazgos = [p.get("encontrados", 0) for p in previas
+                     if not p.get("error") and p.get("encontrados", 0) > 0]
+        if e["error"]:
+            e["alertas"].append("error de extracción")
+        red = e.get("red") or {}
+        codigos = red.get("codigos") or {}
+        if e["encontrados"] == 0 and (codigos.get("403") or codigos.get("429")):
+            e["alertas"].append("acceso bloqueado (HTTP 403/429)")
+        if e["encontrados"] == 0 and red.get("robots"):
+            e["alertas"].append("robots.txt impidió la extracción")
+        if red.get("cortadas"):
+            e["alertas"].append(
+                f"dominio omitido tras fallos ({red['cortadas']} peticiones evitadas)")
+        elif len(hallazgos) >= 3:
+            base = median(hallazgos)
+            if e["encontrados"] == 0 and base >= 5:
+                e["alertas"].append(f"cero inesperado (mediana reciente: {base:.0f})")
+            elif e["encontrados"] < base * 0.2:
+                e["alertas"].append(f"volumen -80% (mediana reciente: {base:.0f})")
+        if e["duracion_seg"] > 300:
+            e["alertas"].append(f"lenta ({e['duracion_seg'] / 60:.1f} min)")
+
+        fila = {"momento": ahora, "encontrados": e["encontrados"],
+                "nuevos": e["nuevos"], "actualizados": e["actualizados"],
+                "descartados": e["descartados"], "error": e["error"],
+                "duracion_seg": e["duracion_seg"], "red": e.get("red", {}),
+                "alertas": e["alertas"]}
+        historial.setdefault(e["fuente"], []).append(fila)
+        historial[e["fuente"]] = historial[e["fuente"]][-MAX_HISTORIAL_FUENTES:]
+
+    RUTA_HISTORIAL_FUENTES.write_text(
+        json.dumps({"version": 1, "fuentes": historial}, ensure_ascii=False,
+                   indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Corrida diaria del pipeline de eventos")
     parser.add_argument("--fuente", help="correr solo esta fuente (por id)")
     parser.add_argument("--sin-cache", action="store_true", help="ignorar la caché local")
+    parser.add_argument("--concurrencia", type=int, default=6,
+                        help="hosts distintos en paralelo (por defecto: 6)")
     parser.add_argument("--probar", action="store_true", help="no guardar, solo mostrar")
     parser.add_argument("-v", "--verboso", action="store_true")
     args = parser.parse_args()
@@ -175,26 +325,11 @@ def main() -> int:
     almacen = None if args.probar else Almacen()
     estadisticas: list[dict] = []
 
-    for fuente in fuentes:
-        t0 = time.time()
-        nombre = fuente["nombre"]
-        adaptador = ADAPTADORES.get(fuente["tipo_adaptador"])
-        conteo = {"fuente": nombre, "encontrados": 0, "nuevos": 0,
-                  "actualizados": 0, "descartados": 0, "error": None}
-
-        if adaptador is None:
-            conteo["error"] = f"tipo_adaptador desconocido: {fuente['tipo_adaptador']}"
-            estadisticas.append(conteo)
-            log.error("%s: %s", nombre, conteo["error"])
-            continue
-
-        try:
-            cliente = ClienteEducado(
-                crawl_delay_seg=float(fuente.get("crawl_delay_seg", 2)),
-                usar_cache=not args.sin_cache,
-            )
-            eventos = adaptador(fuente, cliente)
-            conteo["encontrados"] = len(eventos)
+    for resultado in _extraer_en_paralelo(fuentes, args.sin_cache, args.concurrencia):
+        fuente = resultado["fuente"]
+        conteo = resultado["conteo"]
+        eventos = resultado["eventos"]
+        if not conteo["error"]:
             # Una exposición de un mes llega como 30 entradas iguales: se unen.
             # Los cines son la excepción: cada función es el dato que importa,
             # y fusionar la del jueves con la del domingo borra los horarios.
@@ -229,26 +364,27 @@ def main() -> int:
                     conteo["nuevos"] += 1
                     continue
 
-                resultado = almacen.guardar(evento)
-                conteo["nuevos" if resultado == "nuevo" else "actualizados"] += 1
+                estado_guardado = almacen.guardar(evento)
+                conteo["nuevos" if estado_guardado == "nuevo" else "actualizados"] += 1
 
-        except Exception as e:  # una fuente caída no puede tumbar la corrida
-            conteo["error"] = f"{type(e).__name__}: {e}"
-            log.exception("%s falló", nombre)
-
-        duracion = time.time() - t0
+        duracion = resultado["duracion"]
+        conteo["duracion_seg"] = round(duracion, 1)
         estadisticas.append(conteo)
         if almacen:
-            almacen.registrar_corrida(nombre, conteo["encontrados"], conteo["nuevos"],
+            almacen.registrar_corrida(conteo["fuente"], conteo["encontrados"], conteo["nuevos"],
                                       conteo["actualizados"], conteo["descartados"],
                                       conteo["error"], duracion)
         log.info("%s → %d encontrados, %d nuevos, %d actualizados, %d descartados (%.1fs)",
-                 nombre, conteo["encontrados"], conteo["nuevos"],
+                 conteo["fuente"], conteo["encontrados"], conteo["nuevos"],
                  conteo["actualizados"], conteo["descartados"], duracion)
 
     total = time.time() - inicio
 
     if almacen:
+        _anotar_salud(estadisticas)
+        for e in estadisticas:
+            for alerta in e["alertas"]:
+                log.warning("%s: %s", e["fuente"], alerta)
         revividos = almacen.revivir_vigentes()
         if revividos:
             log.info("Rescatados %d eventos que seguían en cartelera y estaban "

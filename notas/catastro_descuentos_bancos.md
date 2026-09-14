@@ -25,7 +25,7 @@ fuente**, no la reemplaza. Cada descuento queda amarrado al link del banco.
 | **Banco Security** | personas.bancosecurity.cl | JSON:API de Drupal, sin token | ★★★ | ✅ 100% en taxonomía | **Encendido el 25-08** |
 | Scotiabank | scotiarewards.cl | Tras login | — | — | Descartado |
 | Itaú | itau.cl | WAF Incapsula (403) | — | — | Bloqueado (25-08) |
-| BancoEstado | bancoestado.cl | WAF Akamai (403 con cara de 200) | — | — | Bloqueado (25-08) |
+| BancoEstado | bancoestado.cl | WAF Akamai (403 con cara de 200) | captura humana fechada | según ficha | Integrado sin evadir WAF (13-09) |
 | MACH | machbank.cl | Contentful (7,4 MB) | ? | ? | Pendiente |
 | Coopeuch | coopeuch.cl | WAF Akamai (retrocedió) | — | — | Bloqueado (25-08) |
 | Ripley / BICE / Security / Cencosud / Tenpo | varios | 404 en rutas probadas | — | — | Falta encontrar ruta |
@@ -371,6 +371,11 @@ mismo criterio que Santander y BICE: hacerse pasar por Googlebot, abrir la
 página con navegador automatizado —acá el control discrimina justamente
 navegador contra no-navegador, así que usar uno *es* la evasión— y bajar el
 contenido por un caché de terceros.
+
+**Vía incorporada el 13-09-2026:** `descuentos_bancoestado.csv` dentro de la
+pasada asistida. Una persona consulta el catálogo normalmente y deja una fila
+por comercio/local, con la URL oficial y la vigencia. El pipeline valida y
+publica esa captura sin automatizar ni intentar eludir Akamai.
 
 **Y un hallazgo que sirve más allá de BancoEstado: el bloqueo responde HTTP
 200.** Son 650 bytes de HTML con `server: Classified`. Un adaptador que confíe

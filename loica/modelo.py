@@ -8,12 +8,32 @@ se copian.
 from __future__ import annotations
 
 import hashlib
+import math
 import re
 import unicodedata
 from dataclasses import dataclass, field, asdict
 from datetime import datetime, date
 
 ESTADOS = ("borrador", "publicado", "descartado", "caducado")
+
+# Loica sólo publica panoramas de la Región Metropolitana. Esta caja es un
+# guardia deliberadamente amplio: no pretende trazar el límite administrativo,
+# sino impedir que una coordenada de Valdivia, Viña o del hemisferio equivocado
+# viaje hasta el mapa. La comuna sigue siendo el segundo control para las
+# ticketeras nacionales.
+CAJA_RM = (-34.35, -32.90, -71.75, -69.75)  # lat_min, lat_max, lon_min, lon_max
+
+
+def coordenadas_en_rm(lat: object, lon: object) -> bool:
+    """True sólo para un par finito de coordenadas dentro de la RM."""
+    try:
+        latitud, longitud = float(lat), float(lon)
+    except (TypeError, ValueError):
+        return False
+    if not math.isfinite(latitud) or not math.isfinite(longitud):
+        return False
+    lat_min, lat_max, lon_min, lon_max = CAJA_RM
+    return lat_min <= latitud <= lat_max and lon_min <= longitud <= lon_max
 
 
 def _sin_tildes(texto: str) -> str:
@@ -153,6 +173,10 @@ class Evento:
             return False, f"el link no es http(s): {self.fuente_url[:80]}"
         if es_enlace_de_maquina(self.fuente_url):
             return False, f"el link es un endpoint, no una página: {self.fuente_url}"
+        if (self.lat is None) != (self.lon is None):
+            return False, "coordenadas incompletas"
+        if self.lat is not None and not coordenadas_en_rm(self.lat, self.lon):
+            return False, "coordenadas fuera de la Región Metropolitana"
         # Pasado es lo que ya TERMINÓ, no lo que ya empezó. Una muestra que
         # abrió en julio y cierra en septiembre se descartaba acá mismo, en la
         # puerta de entrada, sin llegar nunca a la base: es la forma normal de

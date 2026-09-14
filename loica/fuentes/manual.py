@@ -293,13 +293,35 @@ def extraer_manual(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
         log.info("%s: todavía no existe %s", fuente.get("nombre"), base)
         return []
 
+    # Una pasada asistida no es una fuente que se pueda refrescar sola. Si se
+    # deja envejecer, conservarla silenciosamente publica una agenda antigua
+    # como si fuera actual. Los catastros sueltos de la raíz siguen entrando:
+    # son datos mantenidos por separado (p. ej. Blondie), no una foto semanal.
+    usar_pasada = True
+    max_edad = fuente.get("max_edad_dias")
+    ultima = asistida.ultima_pasada(raiz)
+    if max_edad is not None and ultima:
+        edad = (date.today() - ultima[0]).days
+        if edad > int(max_edad):
+            usar_pasada = False
+            log.warning("%s: la pasada %s tiene %d días (máximo %s); "
+                        "se omite hasta una captura nueva",
+                        fuente.get("nombre"), ultima[1].name, edad, max_edad)
+
     eventos: list[Evento] = []
     archivos = [ruta
                 for patron in ("*.yaml", "*.yml", "*.csv")
-                for ruta in asistida.archivos(patron, raiz)
+                for ruta in asistida.archivos(patron, raiz, incluir_pasada=usar_pasada)
                 if _es_de_eventos(ruta)]
+    if not usar_pasada:
+        # Los CSV de la raíz son el formato histórico de una captura puntual
+        # (`asistida.csv`, `passline.csv`). No se pueden distinguir de una
+        # pasada vencida por su nombre; los YAML de raíz sí son catastros
+        # explícitamente permanentes y se mantienen.
+        archivos = [ruta for ruta in archivos if ruta.suffix.lower() != ".csv"]
     archivos.sort(key=lambda r: r.name)
-    log.info("%s: %s", fuente.get("nombre"), asistida.describir(raiz))
+    log.info("%s: %s", fuente.get("nombre"),
+             asistida.describir(raiz) if usar_pasada else "pasada vencida; solo archivos permanentes")
 
     for ruta in archivos:
         if ruta.suffix.lower() == ".csv":

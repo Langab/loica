@@ -39,6 +39,8 @@ import re
 from datetime import date
 from pathlib import Path
 
+import yaml
+
 log = logging.getLogger("loica.asistida")
 
 DIR_MANUAL = Path(__file__).resolve().parent.parent / "datos" / "manual"
@@ -96,7 +98,26 @@ def fecha_de_carpeta(carpeta: Path) -> date | None:
     return _fecha_de(carpeta.name)
 
 
-def archivos(patron: str, raiz: Path | None = None) -> list[Path]:
+def manifest(raiz: Path | None = None) -> dict | None:
+    """Metadatos de la última captura asistida, si quien la hizo los dejó."""
+    ultima = ultima_pasada(raiz)
+    if not ultima:
+        return None
+    for nombre in ("manifest.yaml", "manifest.yml"):
+        ruta = ultima[1] / nombre
+        if not ruta.exists():
+            continue
+        try:
+            datos = yaml.safe_load(ruta.read_text(encoding="utf-8"))
+        except (OSError, yaml.YAMLError) as e:
+            log.warning("Manifest inválido en %s: %s", ruta, e)
+            return None
+        return datos if isinstance(datos, dict) else None
+    return None
+
+
+def archivos(patron: str, raiz: Path | None = None,
+             incluir_pasada: bool = True) -> list[Path]:
     """Los archivos que calzan con `patron`, con la pasada tapando a la raíz.
 
     Devuelve una lista ordenada por nombre. Un archivo de la raíz que tenga el
@@ -111,14 +132,15 @@ def archivos(patron: str, raiz: Path | None = None) -> list[Path]:
     elegidos: dict[str, Path] = {}
 
     ultima = ultima_pasada(base)
-    if ultima:
+    if ultima and incluir_pasada:
         for ruta in sorted(ultima[1].glob(patron)):
-            if not ruta.name.startswith("_"):
+            if not ruta.name.startswith("_") and not ruta.name.startswith("manifest."):
                 elegidos[ruta.name] = ruta
 
     if base.exists():
         for ruta in sorted(base.glob(patron)):
-            if ruta.is_dir() or ruta.name.startswith("_"):
+            if (ruta.is_dir() or ruta.name.startswith("_")
+                    or ruta.name.startswith("manifest.")):
                 continue
             elegidos.setdefault(ruta.name, ruta)
 

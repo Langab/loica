@@ -32,6 +32,7 @@ RAIZ = Path(__file__).resolve().parent
 RUTA_EVENTOS = RAIZ / "web" / "eventos.json"
 RUTA_DESCUENTOS = RAIZ / "web" / "descuentos.json"
 RUTA_DB = RAIZ / "datos" / "eventos.db"
+RUTA_HISTORIAL_FUENTES = RAIZ / "datos" / "historial_fuentes.json"
 DIR_INFORMES = RAIZ / "informes"
 DIR_PENDIENTES = RAIZ / "datos" / "revision"
 
@@ -127,41 +128,62 @@ def nombres_activos() -> set[str] | None:
         return None
 
 
-def fuentes_degradadas(con: sqlite3.Connection) -> list[dict]:
+def fuentes_degradadas() -> list[dict]:
     """Fuentes ACTIVAS cuyas últimas 3 corridas vienen en error o en cero.
 
     Una fuente que respondió bien durante meses y lleva tres días en cero no
     es "una fuente tranquila": o el sitio cambió y el adaptador quedó ciego,
     o de verdad no hay agenda. Las dos cosas se miran, no se adivinan.
 
-    Las apagadas no cuentan: sus corridas viejas quedan para siempre en la
-    tabla, así que sin este filtro una fuente que uno apagó justamente porque
-    no servía seguía apareciendo en la lista todos los días, al lado de las
-    que sí se rompieron, y la lista dejaba de leerse. Ticketmaster fue el caso.
+    El historial está en JSON versionado y no en SQLite: el runner de Actions
+    nace vacío y la tabla `corridas` sólo conoce la ejecución actual.
     """
     activas = nombres_activos()
-    filas = con.execute(
-        """SELECT fuente, encontrados, error, momento FROM corridas
-           ORDER BY momento DESC""").fetchall()
-    if activas is not None:
-        filas = [f for f in filas if f["fuente"] in activas]
-    ultimas: dict[str, list] = defaultdict(list)
-    for f in filas:
-        if len(ultimas[f["fuente"]]) < 3:
-            ultimas[f["fuente"]].append(f)
+    datos = _cargar_json(RUTA_HISTORIAL_FUENTES) or {}
+    ultimas = datos.get("fuentes", {}) if isinstance(datos, dict) else {}
 
     degradadas = []
-    for fuente, corridas in ultimas.items():
+    for fuente, historial in ultimas.items():
+        if activas is not None and fuente not in activas:
+            continue
+        corridas = list(historial)[-3:]
         if len(corridas) < 3:
             continue
-        malas = all((c["error"] or (c["encontrados"] or 0) == 0) for c in corridas)
+        malas = all((c.get("error") or (c.get("encontrados") or 0) == 0)
+                    for c in corridas)
         if malas:
             degradadas.append({
                 "fuente": fuente,
-                "ultimo_error": next((c["error"] for c in corridas if c["error"]), ""),
-                "desde": corridas[-1]["momento"][:10],
+                "ultimo_error": next((c.get("error") for c in corridas if c.get("error")), ""),
+                "desde": corridas[0].get("momento", "")[:10],
             })
     return sorted(degradadas, key=lambda d: d["fuente"])
+
+
+def alertas_recientes() -> list[dict]:
+    """Alertas de la última corrida, sin esperar tres días para verlas.
+
+    La degradación persistente exige tres malas corridas para no confundir una
+    caída transitoria con una rotura. Eso no debe esconder un 403, una clave
+    ausente o un circuito abierto que ocurrió hoy: se muestran por separado.
+    """
+    activas = nombres_activos()
+    datos = _cargar_json(RUTA_HISTORIAL_FUENTES) or {}
+    historial = datos.get("fuentes", {}) if isinstance(datos, dict) else {}
+    alertas = []
+    for fuente, corridas in historial.items():
+        if activas is not None and fuente not in activas:
+            continue
+        if not corridas:
+            continue
+        ultima = corridas[-1]
+        mensajes = list(ultima.get("alertas") or [])
+        if ultima.get("error") and not mensajes:
+            mensajes.append(str(ultima["error"]))
+        if mensajes:
+            alertas.append({"fuente": fuente, "alertas": mensajes,
+                            "momento": ultima.get("momento", "")})
+    return sorted(alertas, key=lambda d: d["fuente"])
 
 
 def sin_fecha(con: sqlite3.Connection) -> list[sqlite3.Row]:
@@ -274,12 +296,14 @@ def main() -> int:
     # ausente dejaría un eventos.db vacío de 0 bytes que la corrida siguiente
     # tomaría por buena. Mejor revisar sin esta parte.
     degradadas: list[dict] = []
+    alertas_hoy: list[dict] = []
     sinfecha: list = []
     if RUTA_DB.exists():
         try:
             con = sqlite3.connect(f"file:{RUTA_DB}?mode=ro", uri=True)
             con.row_factory = sqlite3.Row
-            degradadas = fuentes_degradadas(con)
+            degradadas = fuentes_degradadas()
+            alertas_hoy = alertas_recientes()
             sinfecha = sin_fecha(con)
             con.close()
         except sqlite3.Error as e:
@@ -346,6 +370,11 @@ def main() -> int:
                    + (f" — `{d['ultimo_error'][:80]}`" if d["ultimo_error"] else "")
                    for d in degradadas]
 
+    if alertas_hoy:
+        lineas += ["", "## Alertas de la última corrida", ""]
+        lineas += [f"- **{d['fuente']}** — " + "; ".join(d["alertas"])
+                   for d in alertas_hoy]
+
     if descuentos:
         # La precisión es de cada sucursal y no del convenio: Dunkin' es una
         # sola oferta con veintiún pines, y contarla una vez escondería veinte.
@@ -392,7 +421,7 @@ def main() -> int:
     print(f"  Ubicación exacta: {exactos}/{total} ({pct(exactos)}) · "
           f"comuna: {precision.get('comuna', 0)} · sin pin: {precision.get('sin_ubicar', 0)}")
     print(f"  En 'otros': {categorias.get('otros', 0)} · sin fecha: {len(sinfecha)} · "
-          f"fuentes degradadas: {len(degradadas)}")
+          f"degradadas persistentes: {len(degradadas)} · alertas hoy: {len(alertas_hoy)}")
     print(f"  Colas de corrección en {DIR_PENDIENTES.relative_to(RAIZ)}/")
     return 0
 

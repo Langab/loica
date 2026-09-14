@@ -12,13 +12,13 @@ import json
 import re
 import logging
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 from loica.almacen import SQL_VIGENTE, Almacen
 from loica.correcciones import Correcciones
 from loica.geo import Geocodificador
-from loica.modelo import es_enlace_de_maquina, es_url_publica
+from loica.modelo import coordenadas_en_rm, es_enlace_de_maquina, es_url_publica
 
 log_urls = logging.getLogger("exportar.urls")
 
@@ -32,6 +32,11 @@ DIR_FICHAS = RAIZ / "web" / "e"
 # el JSON-LD de cada ficha, el sitemap y el robots.txt. Cambiarlo y volver a
 # correr basta para mudar el sitio entero de dirección.
 SITIO = "https://loicasantiago.cl"
+# La fuente manual se refresca desde una pasada humana. Cuando deja de entrar,
+# sus filas antiguas no deben quedar visibles sólo porque su fecha de evento
+# aún está en el futuro. Los YAML permanentes se vuelven a verificar en cada
+# corrida y por eso no caen en este límite.
+MAX_EDAD_MANUAL_DIAS = 3
 
 # Taxonomía provisional: mapea lo que dicen las fuentes a las categorías del
 # producto. La definitiva está en definicion_producto_mvp.md.
@@ -605,6 +610,21 @@ def main() -> int:
     descartados = []
 
     for fila in filas:
+        if fila["fuente_tipo"] == "manual":
+            try:
+                ultima = datetime.fromisoformat(fila["fecha_ultima_verificacion"])
+            except (TypeError, ValueError):
+                ultima = datetime.min
+            if ultima < datetime.now() - timedelta(days=MAX_EDAD_MANUAL_DIAS):
+                descartados.append(f'{fila["titulo"][:52]} (captura asistida vencida)')
+                continue
+        # Defensa en profundidad: los eventos nuevos se rechazan en
+        # Evento.es_valido(), pero una fila vieja puede haber entrado antes de
+        # que existiera esa regla. No dejamos que un pin de otra región
+        # bloquee la publicación completa ni que aparezca en el mapa.
+        if fila["lat"] is not None and not coordenadas_en_rm(fila["lat"], fila["lon"]):
+            descartados.append(f'{fila["titulo"][:52]} (coordenadas fuera de la RM)')
+            continue
         panorama, senal = es_panorama(fila["titulo"], fila["descripcion_corta"] or "")
         if not panorama:
             descartados.append(f'{fila["titulo"][:52]} (por "{senal}")')

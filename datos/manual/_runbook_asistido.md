@@ -38,6 +38,7 @@ scrapers automáticos ─┤          │
 Desde el **01-09-2026** la sesión entrega una CARPETA, no archivos sueltos:
 
     datos/manual/loica_asistida_20260901/
+      manifest.yaml                fecha, fuentes y cobertura de la pasada
       asistida.csv                  los eventos
       cartelera_cinepolis.csv       el cine
       cartelera_cineplanet.csv
@@ -56,6 +57,13 @@ Dos cosas que esto arregla y conviene no perder:
    la de hoy no suma salas, publica horarios que ya pasaron.
 2. **Comparar dos pasadas es un `diff` entre dos carpetas.** Ya no hace falta
    guardar una copia aparte en `notas/asistida/`.
+
+La pasada debe traer además `manifest.yaml`, usando
+`datos/manual/_manifest.example.yaml` como base. Declara quién la capturó,
+qué fuentes cubre y qué archivos espera. La ingesta de eventos deja de usar la
+carpeta a los **3 días**: es preferible una cobertura menor que publicar
+Passline o Instagram antiguos como si fueran de hoy. Los YAML permanentes de
+la raíz siguen entrando.
 
 La base consolidada es **`datos/eventos.db`**. Todo lo que entra —automático o
 asistido— pasa por las mismas reglas: se normaliza, se deduplica por
@@ -141,6 +149,28 @@ publica con página propia.
 Ojo con la vigencia: **el pie legal del sitio no rota** —el 01-09-2026 todavía
 decía "válidos durante el mes de marzo de 2026"— así que hay que leerla en la
 ficha de cada promoción.
+
+---
+
+### 4. BancoEstado — descuentos de gastronomía
+
+**Por qué a mano:** el host público de BancoEstado está protegido por Akamai;
+la página de bloqueo incluso puede devolver HTTP 200. No se automatiza ni se
+intenta eludir ese control.
+
+**Qué hacer:** desde el navegador normal, abrir los beneficios de gastronomía
+vigentes y guardar una fila por comercio/local en
+`descuentos_bancoestado.csv` dentro de la carpeta de la pasada. Usar este
+encabezado exacto:
+
+```csv
+banco,comercio,direccion,comuna,lat,lon,logo,dias,monto,tope,vigencia,sitio_web,categoria,url,tarjeta,condiciones
+```
+
+`url` es obligatorio: apunta a la ficha oficial de BancoEstado. `tarjeta` y
+`condiciones` son opcionales, pero conviene anotarlos cuando la oferta es solo
+para una tarjeta específica. `vigencia` va como `AAAA-MM-DD`; no subir una
+captura si no se pudo verificar esa fecha.
 
 ---
 

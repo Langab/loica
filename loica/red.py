@@ -12,6 +12,7 @@ import logging
 import re
 import time
 import urllib.robotparser as robotparser
+from collections import Counter
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
@@ -42,6 +43,12 @@ DIR_CACHE.mkdir(parents=True, exist_ok=True)
 # son sesenta minutos de corrida para cero eventos. Tres bastan para
 # saberlo; mañana se vuelve a intentar desde cero.
 FALLOS_PARA_CORTAR = 3
+# Un 5xx o 429 confirma que el servidor está accesible, pero no que sea capaz
+# de servir el calendario. Sin este segundo circuito una fuente que abre 50
+# fichas vuelve a agotar los tres reintentos para cada una cuando está en 503.
+# Dos respuestas finales fallidas ya incluyen seis intentos HTTP y sus esperas;
+# es suficiente señal y mañana se vuelve a probar desde cero.
+RESPUESTAS_DEGRADADAS_PARA_CORTAR = 2
 
 
 class ClienteEducado:
@@ -52,6 +59,7 @@ class ClienteEducado:
     # Fallos de conexión seguidos por dominio. Es de clase a propósito: dos
     # fuentes del mismo dominio comparten el veredicto dentro de una corrida.
     _fallos_seguidos: dict[str, int] = {}
+    _respuestas_degradadas: dict[str, int] = {}
     _cortados: set[str] = set()
 
     def __init__(self, crawl_delay_seg: float = 2.0, timeout: int = 20, usar_cache: bool = True):
@@ -63,6 +71,20 @@ class ClienteEducado:
             "User-Agent": USER_AGENT,
             "Accept-Language": "es-CL,es;q=0.9",
         })
+        # El adaptador convierte respuestas no utilizables en una lista vacía,
+        # pero la corrida necesita saber si eso fue un calendario vacío, un
+        # 403 o un timeout. Se guardan sólo contadores, nunca URLs ni cuerpos.
+        self._codigos: Counter[str] = Counter()
+        self._cache_hits = 0
+        self._prohibidas_robots = 0
+        self._errores_red = 0
+        self._cortadas = 0
+
+    def resumen_red(self) -> dict:
+        """Diagnóstico serializable de esta fuente para el historial diario."""
+        return {"codigos": dict(sorted(self._codigos.items())),
+                "cache": self._cache_hits, "robots": self._prohibidas_robots,
+                "errores": self._errores_red, "cortadas": self._cortadas}
 
     # -- robots.txt ---------------------------------------------------------
     def _robots_de(self, url: str) -> robotparser.RobotFileParser | None:
@@ -152,11 +174,13 @@ class ClienteEducado:
         entra en el molde de GET-con-params ni en el de POST-con-JSON.
         """
         if not self.permitido(url):
+            self._prohibidas_robots += 1
             log.warning("robots.txt prohíbe %s — se omite", url)
             return None
 
         dominio = urlparse(url).netloc
         if dominio in self._cortados:
+            self._cortadas += 1
             log.debug("%s no responde en esta corrida — se omite %s", dominio, url)
             return None
 
@@ -179,6 +203,8 @@ class ClienteEducado:
         if self.usar_cache:
             cacheado = self._leer_cache(url_completa, max_edad_cache_seg)
             if cacheado:
+                self._cache_hits += 1
+                self._codigos[f"cache:{cacheado['status']}"] += 1
                 log.debug("caché: %s", url_completa)
                 falsa = requests.Response()
                 falsa.status_code = cacheado["status"]
@@ -204,8 +230,10 @@ class ClienteEducado:
                     respuesta = self.sesion.get(url, params=params, headers=cabeceras,
                                                 timeout=self.timeout)
                 self._ultima_peticion[dominio] = time.time()
+                self._codigos[str(respuesta.status_code)] += 1
 
-                if respuesta.status_code == 429 or respuesta.status_code >= 500:
+                respuesta_degradada = respuesta.status_code == 429 or respuesta.status_code >= 500
+                if respuesta_degradada:
                     if intento < reintentos:
                         pausa = espera * (2 ** (intento + 1))
                         log.warning("%s devolvió %s — reintento en %.0fs",
@@ -213,7 +241,15 @@ class ClienteEducado:
                         time.sleep(pausa)
                         continue
 
-                # Respondió, aunque sea un 403: el dominio está vivo.
+                    # Se agotaron los reintentos: esta respuesta no sirve para
+                    # una fuente de calendario. Cortar el dominio después de
+                    # dos secuencias evita repetir la misma espera por ficha.
+                    self._anotar_respuesta_degradada(dominio, respuesta.status_code)
+                else:
+                    self._respuestas_degradadas[dominio] = 0
+
+                # Respondió, aunque sea un 403: el dominio está vivo a nivel
+                # de red (la cuenta de timeouts es independiente de 5xx/429).
                 self._fallos_seguidos[dominio] = 0
                 if respuesta.ok and self.usar_cache:
                     self._guardar_cache(url_completa, respuesta.text, respuesta.status_code)
@@ -225,6 +261,7 @@ class ClienteEducado:
                     time.sleep(espera * (2 ** (intento + 1)))
                     continue
                 log.error("Falló %s: %s", url, e)
+                self._errores_red += 1
                 self._anotar_fallo(dominio)
                 return None
         return None
@@ -236,6 +273,14 @@ class ClienteEducado:
             self._cortados.add(dominio)
             log.warning("%s no responde (%d peticiones seguidas sin conexión): "
                         "se omite por el resto de la corrida", dominio, fallos)
+
+    def _anotar_respuesta_degradada(self, dominio: str, estado: int) -> None:
+        fallos = self._respuestas_degradadas.get(dominio, 0) + 1
+        self._respuestas_degradadas[dominio] = fallos
+        if fallos >= RESPUESTAS_DEGRADADAS_PARA_CORTAR and dominio not in self._cortados:
+            self._cortados.add(dominio)
+            log.warning("%s sigue devolviendo %s (%d peticiones fallidas): "
+                        "se omite por el resto de la corrida", dominio, estado, fallos)
 
     def json(self, url: str, params: dict | None = None, **kw) -> list | dict | None:
         respuesta = self.obtener(url, params=params, **kw)

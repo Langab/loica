@@ -57,13 +57,14 @@ RUTAS_PUBLICABLES = ["web/eventos.json", "web/talleres.json",
                      "web/descuentos.json", "web/cine.json",
                      "web/e", "datos/manual",
                      "datos/eventos.jsonl", "datos/coordenadas.json",
-                     "datos/historial_corridas.json", "datos/revision"]
+                     "datos/historial_corridas.json", "datos/historial_fuentes.json",
+                     "datos/revision"]
 
 # Archivos que cada corrida regenera enteros: en un choque entre dos corridas
 # no hay nada que fusionar, gana la más nueva.
 GENERADOS = {"web/eventos.json", "web/talleres.json", "web/descuentos.json",
              "web/cine.json", "datos/eventos.jsonl", "datos/coordenadas.json",
-             "datos/historial_corridas.json"}
+             "datos/historial_corridas.json", "datos/historial_fuentes.json"}
 PREFIJOS_GENERADOS = ("web/e/", "datos/revision/")
 
 

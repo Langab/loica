@@ -198,6 +198,7 @@ jobs:
           path: |
             informes/
             datos/revision/
+            datos/historial_fuentes.json
             web/eventos.json
             web/talleres.json
             web/descuentos.json

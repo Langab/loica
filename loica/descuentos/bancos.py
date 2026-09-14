@@ -513,7 +513,7 @@ def _csv_pasada(banco: dict, ruta: Path) -> list[Descuento]:
     """Un banco capturado con el navegador, en el formato de la pasada con fecha.
 
         banco,comercio,direccion,comuna,lat,lon,logo,dias,monto,tope,vigencia,
-        sitio_web,categoria,url
+        sitio_web,categoria,url,tarjeta,condiciones
 
     Lo usan los bancos que le cierran la puerta al robot y se anotan a mano:
     Santander desde el 01-09-2026 y Bci desde el 02-09-2026. Es el mismo
@@ -582,10 +582,12 @@ def _csv_pasada(banco: dict, ruta: Path) -> list[Descuento]:
             vigencia_hasta=_fecha_iso(fila.get("vigencia")),
             dias=dias_en(str(fila.get("dias") or "").replace(";", " y ")),
             modalidad=modalidad_en(monto),
-            # `condiciones` es la letra chica que la ficha muestra al pie. El
-            # CSV no trae letra chica, y repetir ahí el "40% dcto." que ya es
-            # el titular no informa: lo llena de ruido.
-            condiciones="",
+            # Quien captura BancoEstado puede conservar la letra chica y el
+            # medio de pago exacto. Las capturas antiguas no tienen esas
+            # columnas, así que ambas siguen siendo opcionales.
+            tarjetas=([str(fila.get("tarjeta") or "").strip().lower()]
+                      if str(fila.get("tarjeta") or "").strip() else []),
+            condiciones=str(fila.get("condiciones") or "").strip(),
             url=str(fila.get("url") or "").strip(),
             capturado=capturado,
         ))
@@ -593,6 +595,25 @@ def _csv_pasada(banco: dict, ruta: Path) -> list[Descuento]:
     log.info("%s: %d descuentos de la captura del %s (%s)",
              banco["nombre"], len(recogidos), capturado or "?", ruta.parent.name)
     return recogidos
+
+
+def _bancoestado(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
+    """Lee la captura humana de BancoEstado sin intentar evadir su WAF.
+
+    BancoEstado protege todo su host público con Akamai y hasta responde el
+    HTML de bloqueo con código 200. La fuente no se raspa ni se abre con un
+    navegador automatizado: una persona puede consultar los beneficios como
+    cliente normal y dejar una foto fechada en la pasada asistida. El resto
+    del pipeline (vigencia, RM, mapa y ficha) funciona igual que para los
+    demás bancos.
+    """
+    nombre = banco.get("archivo_pasada", "descuentos_bancoestado.csv")
+    rutas = asistida.archivos(nombre)
+    if rutas:
+        return _csv_pasada(banco, rutas[0])
+    log.warning("%s: falta %s en la pasada asistida; se omite hasta una captura nueva",
+                banco["nombre"], nombre)
+    return []
 
 
 def _coordenada(valor) -> float | None:
@@ -1440,4 +1461,5 @@ ADAPTADORES = {
     "ripley": _ripley,
     "entel": _entel,
     "security": _security,
+    "bancoestado": _bancoestado,
 }

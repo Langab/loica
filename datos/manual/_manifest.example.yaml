@@ -1,0 +1,12 @@
+# Copiar como datos/manual/loica_asistida_AAAAMMDD/manifest.yaml.
+# Es trazabilidad de una captura humana; no se ingiere como eventos.
+capturada_en: "2026-09-13"
+responsable: "nombre o iniciales"
+fuentes:
+  - Passline
+  - Instagram
+archivos:
+  - asistida.csv
+  - cartelera_cineplanet.csv
+  - cartelera_cinepolis.csv
+nota: "Cobertura RM; revisar enlaces, fecha, recinto y comuna antes de subir."

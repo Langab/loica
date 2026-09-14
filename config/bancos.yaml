@@ -2,11 +2,29 @@
 # El sondeo completo (qué banco sirve, cuál está tras WAF y por qué) está en
 # notas/catastro_descuentos_bancos.md
 #
-# adaptador: bancochile | bci | falabella
-# Los tres endpoints son públicos y no piden credencial de usuario. Ninguno
-# usa modelo de lenguaje: es Python leyendo JSON.
+# adaptador: bancochile | bci | falabella | bancoestado
+# Las fuentes automáticas leen contenido público; las que tienen controles de
+# acceso (BancoEstado, Bci y Santander) entran sólo mediante una captura humana
+# fechada. Ninguna usa modelo de lenguaje.
 
 bancos:
+- id: bancoestado
+  nombre: BancoEstado
+  emisor: BancoEstado
+  # bancoestado.cl está protegido por Akamai y devuelve una página de bloqueo
+  # con HTTP 200. No se elude: una captura humana fechada entra en la carpeta
+  # asistida y se procesa como el resto de los bancos.
+  adaptador: bancoestado
+  archivo_pasada: descuentos_bancoestado.csv
+  avisar_dias: 45
+  rehacer: una pasada asistida nueva (datos/manual/_runbook_asistido.md, punto 4)
+  activo: true
+  notas: 'BancoEstado publica beneficios de gastronomía, pero su host completo
+    está tras Akamai y no expone una vía pública automatizable. Una persona
+    captura los beneficios vigentes desde el sitio normal en el CSV de la
+    pasada asistida. Cada fila debe llevar el vínculo de la ficha y su vigencia;
+    no se publica una copia vieja ni se intenta evadir el control de acceso.'
+
 - id: bancochile
   nombre: Banco de Chile
   # Edwards emite con la misma plataforma y los descuentos son los mismos
