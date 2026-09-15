@@ -1,5 +1,5 @@
 {
- "generado": "2026-09-15T11:58:22",
+ "generado": "2026-09-15T11:07:21",
  "total": 601,
  "locales": 1804,
  "bancos": [
@@ -13721,17 +13721,15 @@
     },
     {
      "direccion": "Portal La Dehesa",
-     "comuna": "Lo Barnechea",
-     "lat": -33.3512,
-     "lon": -70.518,
-     "precision": "comuna",
+     "comuna": "",
+     "lat": null,
+     "lon": null,
+     "precision": "sin_ubicar",
      "telefono": "",
      "origen": ""
     }
    ],
-   "comunas": [
-    "Lo Barnechea"
-   ]
+   "comunas": []
   },
   {
    "banco_id": "falabella",
