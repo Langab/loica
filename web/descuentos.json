@@ -1,6 +1,6 @@
 {
- "generado": "2026-09-14T12:32:27",
- "total": 602,
+ "generado": "2026-09-15T10:13:51",
+ "total": 601,
  "locales": 1804,
  "bancos": [
   [
@@ -83,13 +83,13 @@
   "Ñuñoa"
  ],
  "por_dia": {
-  "miercoles": 260,
-  "viernes": 170,
-  "sabado": 152,
-  "domingo": 116,
-  "lunes": 218,
-  "martes": 287,
-  "jueves": 220
+  "miercoles": 259,
+  "viernes": 169,
+  "sabado": 151,
+  "domingo": 115,
+  "lunes": 217,
+  "martes": 286,
+  "jueves": 219
  },
  "descuentos": [
   {
@@ -37110,41 +37110,6 @@
    "comunas": [
     "Vitacura"
    ]
-  },
-  {
-   "banco_id": "falabella",
-   "banco": "Banco Falabella",
-   "comercio": "Dunkin CMR Puntos",
-   "categoria": "comida_rapida",
-   "cocina": "comida_rapida",
-   "region": "Todo Chile",
-   "sitio_web": "https://www.bancofalabella.cl/descuentos/detalle/dunkin-cmrpuntos",
-   "porcentaje": null,
-   "oferta": "3.000",
-   "tope": null,
-   "dias": [
-    "lunes",
-    "martes",
-    "miercoles",
-    "jueves",
-    "viernes",
-    "sabado",
-    "domingo"
-   ],
-   "vigencia_hasta": "2026-12-31",
-   "tarjetas": [
-    "cmr",
-    "débito"
-   ],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Cupones por 3.000 CMR Puntos  · Canje de Dunkin' · Dunkin CMR Puntos",
-   "url": "https://www.bancofalabella.cl/descuentos/detalle/dunkin-cmrpuntos",
-   "logo": "https://images.ctfassets.net/p6eyia4djstu/6beLoQRyGCH4YNEEdZKGgh/195636d43a57d16b20823c381b88eb5a/7.png",
-   "capturado": "",
-   "id": "1dfbb735c520",
-   "locales": [],
-   "comunas": []
   },
   {
    "banco_id": "bancochile",
