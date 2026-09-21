@@ -1,7 +1,7 @@
 {
- "generado": "2026-09-21T13:06:21",
- "total": 601,
- "locales": 1804,
+ "generado": "2026-09-21T12:37:51",
+ "total": 605,
+ "locales": 1808,
  "bancos": [
   [
    "bancochile",
@@ -83,13 +83,13 @@
   "Ñuñoa"
  ],
  "por_dia": {
-  "miercoles": 259,
-  "viernes": 169,
+  "miercoles": 260,
+  "viernes": 170,
   "sabado": 151,
   "domingo": 115,
-  "lunes": 217,
-  "martes": 286,
-  "jueves": 219
+  "lunes": 218,
+  "martes": 287,
+  "jueves": 220
  },
  "descuentos": [
   {
@@ -37213,6 +37213,46 @@
   {
    "banco_id": "security",
    "banco": "Banco Security",
+   "comercio": "Juan Valdez",
+   "categoria": "gourmet",
+   "cocina": "cafe",
+   "region": "",
+   "sitio_web": "https://www.mastercard.com/cl/es/personal/experience-mastercard/priceless/everyday-value.html",
+   "porcentaje": null,
+   "oferta": "$3.000",
+   "tope": null,
+   "dias": [
+    "martes",
+    "jueves"
+   ],
+   "vigencia_hasta": "2026-09-30",
+   "tarjetas": [
+    "black one",
+    "black"
+   ],
+   "modalidad": "",
+   "segmentado": true,
+   "condiciones": "Los martes y jueves, con tu Tarjeta One en tiendas Juan Valdez. Disfruta las bebidas preparadas de Juan Valdez por solo $3.000 pagando con Mastercard en la app Copec. Además, participa por 1 año de combustible en Copec. Cada compra de combustible con Mastercard a través de app Copec te acerca a ganar 1 año de combustible.",
+   "url": "https://personas.bancosecurity.cl/beneficios/gourmet/juan-valdez",
+   "logo": "https://personas.bancosecurity.cl/sites/bancopersonas/files/2026-08/Logo%20-%202026-08-05T165326.485.png",
+   "capturado": "",
+   "id": "cdd93ff25686",
+   "locales": [
+    {
+     "direccion": "Tiendas Juan Valdés",
+     "comuna": "",
+     "lat": null,
+     "lon": null,
+     "precision": "sin_ubicar",
+     "telefono": "",
+     "origen": ""
+    }
+   ],
+   "comunas": []
+  },
+  {
+   "banco_id": "security",
+   "banco": "Banco Security",
    "comercio": "La Campiña",
    "categoria": "restaurantes",
    "cocina": "",
@@ -37396,6 +37436,45 @@
    ]
   },
   {
+   "banco_id": "security",
+   "banco": "Banco Security",
+   "comercio": "Pronto Copec",
+   "categoria": "gourmet",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "https://www.mastercard.com/cl/es/personal/experience-mastercard/priceless/everyday-value.html",
+   "porcentaje": null,
+   "oferta": "$2.500",
+   "tope": null,
+   "dias": [
+    "miercoles"
+   ],
+   "vigencia_hasta": "2026-09-30",
+   "tarjetas": [
+    "black one",
+    "black"
+   ],
+   "modalidad": "",
+   "segmentado": true,
+   "condiciones": "Los miércoles, con tu Tarjeta One en tiendas Pronto Copec. Disfruta el Completo Palta Has por solo $2.500 pagando con Mastercard en la app Copec. Además, participa por 1 año de combustible en Copec. Cada compra de combustible con Mastercard a través de app Copec te acerca a ganar 1 año de combustible.",
+   "url": "https://personas.bancosecurity.cl/beneficios/gourmet/pronto-copec",
+   "logo": "https://personas.bancosecurity.cl/sites/bancopersonas/files/2026-08/Logo%20-%202026-08-05T165745.101.png",
+   "capturado": "",
+   "id": "d6ddfb95519c",
+   "locales": [
+    {
+     "direccion": "Tiendas Pronto Copec",
+     "comuna": "",
+     "lat": null,
+     "lon": null,
+     "precision": "sin_ubicar",
+     "telefono": "",
+     "origen": ""
+    }
+   ],
+   "comunas": []
+  },
+  {
    "banco_id": "bancoestado",
    "banco": "BancoEstado",
    "comercio": "Rappi",
@@ -37487,6 +37566,45 @@
    "comunas": []
   },
   {
+   "banco_id": "security",
+   "banco": "Banco Security",
+   "comercio": "SBARRO",
+   "categoria": "gourmet",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "https://www.mastercard.com/cl/es/personal/experience-mastercard/priceless/everyday-value.html",
+   "porcentaje": null,
+   "oferta": "$4.000",
+   "tope": null,
+   "dias": [
+    "viernes"
+   ],
+   "vigencia_hasta": "2026-09-30",
+   "tarjetas": [
+    "black one",
+    "black"
+   ],
+   "modalidad": "",
+   "segmentado": true,
+   "condiciones": "Los viernes, con tu Tarjeta One en tiendas SBARRO. Disfruta un Stromboli + bebida de 330 cc por solo $4.000 pagando con Mastercard en la app Copec. Además, participa por 1 año de combustible en Copec. Cada compra de combustible con Mastercard a través de app Copec te acerca a ganar 1 año de combustible.",
+   "url": "https://personas.bancosecurity.cl/beneficios/gourmet/sbarro",
+   "logo": "https://personas.bancosecurity.cl/sites/bancopersonas/files/2026-08/Logo%20-%202026-08-05T170037.884.png",
+   "capturado": "",
+   "id": "4eedc1be263c",
+   "locales": [
+    {
+     "direccion": "Tiendas SBARRO",
+     "comuna": "",
+     "lat": null,
+     "lon": null,
+     "precision": "sin_ubicar",
+     "telefono": "",
+     "origen": ""
+    }
+   ],
+   "comunas": []
+  },
+  {
    "banco_id": "falabella",
    "banco": "Banco Falabella",
    "comercio": "Streat Burger",
@@ -37545,6 +37663,45 @@
     "Las Condes",
     "Ñuñoa"
    ]
+  },
+  {
+   "banco_id": "security",
+   "banco": "Banco Security",
+   "comercio": "Streat Burger",
+   "categoria": "gourmet",
+   "cocina": "hamburguesas",
+   "region": "",
+   "sitio_web": "https://www.mastercard.com/cl/es/personal/experience-mastercard/priceless/everyday-value.html",
+   "porcentaje": null,
+   "oferta": "$5.000",
+   "tope": null,
+   "dias": [
+    "lunes"
+   ],
+   "vigencia_hasta": "2026-09-30",
+   "tarjetas": [
+    "black one",
+    "black"
+   ],
+   "modalidad": "",
+   "segmentado": true,
+   "condiciones": "Los lunes, con tu Tarjeta One en tiendas Streat Burger. Disfruta la Hamburguesa Classic de Streat Burger por solo $5.000 pagando con Mastercard en la app Copec. Además, participa por 1 año de combustible en Copec. Cada compra de combustible con Mastercard a través de app Copec te acerca a ganar 1 año de combustible.",
+   "url": "https://personas.bancosecurity.cl/beneficios/gourmet/streat-burger",
+   "logo": "https://personas.bancosecurity.cl/sites/bancopersonas/files/2026-08/Logo%20-%202026-08-05T163721.034.png",
+   "capturado": "",
+   "id": "00c80a8410cb",
+   "locales": [
+    {
+     "direccion": "Tiendas Streat Burger",
+     "comuna": "",
+     "lat": null,
+     "lon": null,
+     "precision": "sin_ubicar",
+     "telefono": "",
+     "origen": ""
+    }
+   ],
+   "comunas": []
   },
   {
    "banco_id": "bci",

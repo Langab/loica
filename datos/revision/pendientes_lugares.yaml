@@ -1,4 +1,4 @@
-# Cola de LUGARES sin ubicación exacta — revisión del 2026-09-20.
+# Cola de LUGARES sin ubicación exacta — revisión del 2026-09-21.
 # Completa lat/lon (Google Maps: click derecho → copiar coordenadas),
 # borra las entradas que no puedas verificar, y pega las listas en
 # config/correcciones/lugares.yaml bajo la clave `lugares:`.
@@ -11,7 +11,7 @@ lugares:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
   # 23 eventos sin pin exacto
   Corporacion Cultural de La Reina:
@@ -19,7 +19,7 @@ lugares:
     comuna: La Reina
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
   # 17 eventos sin pin exacto
   Complejo La Foresta:
@@ -27,15 +27,7 @@ lugares:
     comuna: Peñalolén
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
-
-  # 12 eventos sin pin exacto
-  PortalTickets (PortalDisc):
-    direccion: # COMPLETAR
-    comuna: Santiago
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
   # 12 eventos sin pin exacto
   MATUCANA 100 / TEATRO PRINCIPAL:
@@ -43,15 +35,23 @@ lugares:
     comuna: Estación Central
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
   # 11 eventos sin pin exacto
+  PortalTickets (PortalDisc):
+    direccion: # COMPLETAR
+    comuna: Santiago
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
+
+  # 10 eventos sin pin exacto
   PortalTickets (PortalDisc):
     direccion: # COMPLETAR
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
   # 9 eventos sin pin exacto
   Disfruta Santiago:
@@ -59,15 +59,15 @@ lugares:
     comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
-  # 6 eventos sin pin exacto
-  PortalTickets (PortalDisc):
+  # 7 eventos sin pin exacto
+  Espacio Diana:
     direccion: # COMPLETAR
-    comuna: Ñuñoa
+    comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
   # 6 eventos sin pin exacto
   Capilla Finis Terrae:
@@ -75,15 +75,15 @@ lugares:
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
   # 6 eventos sin pin exacto
-  Espacio Diana:
+  PortalTickets (PortalDisc):
     direccion: # COMPLETAR
-    comuna: Santiago
+    comuna: Ñuñoa
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
   # 6 eventos sin pin exacto
   MATUCANA 100 / ESPACIO PATRICIO BUNSTER:
@@ -91,7 +91,15 @@ lugares:
     comuna: Estación Central
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
+
+  # 5 eventos sin pin exacto
+  Municipalidad de Independencia:
+    direccion: # COMPLETAR
+    comuna: Independencia
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
   # 5 eventos sin pin exacto
   MATUCANA 100 / CINE:
@@ -99,7 +107,7 @@ lugares:
     comuna: Estación Central
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
   # 5 eventos sin pin exacto
   Disfruta Santiago:
@@ -107,7 +115,7 @@ lugares:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
   # 4 eventos sin pin exacto
   PortalTickets (PortalDisc):
@@ -115,7 +123,7 @@ lugares:
     comuna: Recoleta
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
   # 4 eventos sin pin exacto
   Agenda Cultural Las Condes:
@@ -123,7 +131,7 @@ lugares:
     comuna: Las Condes
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
   # 4 eventos sin pin exacto
   Estadio Nacional:
@@ -131,7 +139,7 @@ lugares:
     comuna: Ñuñoa
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
   # 4 eventos sin pin exacto
   Enjoy Santiago, Sala Cenit:
@@ -139,7 +147,7 @@ lugares:
     comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
   # 4 eventos sin pin exacto
   USACH - Departamento de Extension (agenda cultural):
@@ -147,7 +155,7 @@ lugares:
     comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
   # 4 eventos sin pin exacto
   MATUCANA 100 / EXPLANADA:
@@ -155,7 +163,7 @@ lugares:
     comuna: Estación Central
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
   # 3 eventos sin pin exacto
   Teatro Oriente Av. Pedro de Valdivia 099:
@@ -163,7 +171,7 @@ lugares:
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
   # 3 eventos sin pin exacto
   PortalTickets (PortalDisc):
@@ -171,7 +179,7 @@ lugares:
     comuna: La Reina
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
   # 3 eventos sin pin exacto
   USACH - Departamento de Extension (agenda cultural):
@@ -179,23 +187,15 @@ lugares:
     comuna: Estación Central
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
-  # 2 eventos sin pin exacto
-  SATURDAY X ETERNA FEAT TUEDAY:
-    direccion:  #, Providencia
-    comuna: Providencia
+  # 3 eventos sin pin exacto
+  Parque Ciudad Empresarial:
+    direccion: Avenida del Parque 420
+    comuna: Huechuraba
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
-
-  # 2 eventos sin pin exacto
-  Mall Cenco Florida:
-    direccion: Av. Vicuña Mackenna Ote. 6100, La Florida
-    comuna: La Florida
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Centro Nacional de Arte Contemporaneo Cerrillos:
@@ -203,7 +203,7 @@ lugares:
     comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Eugenio Dittborn:
@@ -211,7 +211,7 @@ lugares:
     comuna: Ñuñoa
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   PortalTickets (PortalDisc):
@@ -219,7 +219,7 @@ lugares:
     comuna: Maipú
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Centro Nacional de Arte Contemporaneo Cerrillos:
@@ -227,15 +227,7 @@ lugares:
     comuna: Cerrillos
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
-
-  # 2 eventos sin pin exacto
-  Parque Ciudad Empresarial:
-    direccion: Avenida del Parque 420
-    comuna: Huechuraba
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
 
   # 1 eventos sin pin exacto
   Universidad de Chile (Dirección por definir en cada actividad):
@@ -243,4 +235,12 @@ lugares:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-09-20 por # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
+
+  # 1 eventos sin pin exacto
+  Spa Club Providencia:
+    direccion: # COMPLETAR
+    comuna: Providencia
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-09-21 por # COMPLETAR
