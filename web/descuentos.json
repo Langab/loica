@@ -1,5 +1,5 @@
 {
- "generado": "2026-09-20T10:30:07",
+ "generado": "2026-09-21T10:54:28",
  "total": 601,
  "locales": 1804,
  "bancos": [
@@ -31712,7 +31712,7 @@
    "dias": [
     "jueves"
    ],
-   "vigencia_hasta": "2026-12-31",
+   "vigencia_hasta": "2027-09-30",
    "tarjetas": [
     "visa-credito-infinite",
     "visa-credito-signature",
@@ -31729,7 +31729,7 @@
    ],
    "modalidad": "presencial",
    "segmentado": true,
-   "condiciones": "Promoción válida hasta el 31 de diciembre de 2026. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile (incluye Banco Edwards) y que soliciten el descuento al momento de pagar en forma presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande. Infórmese sobre la garantía estatal de los depósitos en su Banco o en www.cmfchile.cl",
+   "condiciones": "Promoción válida hasta el 30 de septiembre de 2027. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile (incluye Banco Edwards) y que soliciten el descuento al momento de pagar en forma presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande. Infórmese sobre la garantía estatal de los depósitos en su Banco o en www.cmfchile.cl",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/gorilas",
    "logo": "https://assets.bancochile.cl/uploads/000/059/764/21e5e79c-e825-43e2-8681-d966eafb5ae3/original/logo-web-Gorilas.jpg",
    "capturado": "",
