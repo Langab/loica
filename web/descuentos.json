@@ -1,7 +1,7 @@
 {
- "generado": "2026-09-21T12:37:51",
- "total": 605,
- "locales": 1808,
+ "generado": "2026-09-22T10:09:02",
+ "total": 606,
+ "locales": 1810,
  "bancos": [
   [
    "bancochile",
@@ -83,11 +83,11 @@
   "Ñuñoa"
  ],
  "por_dia": {
-  "miercoles": 260,
+  "miercoles": 261,
   "viernes": 170,
   "sabado": 151,
   "domingo": 115,
-  "lunes": 218,
+  "lunes": 219,
   "martes": 287,
   "jueves": 220
  },
@@ -29519,6 +29519,68 @@
    ],
    "comunas": [
     "Maipú"
+   ]
+  },
+  {
+   "banco_id": "bancochile",
+   "banco": "Banco de Chile",
+   "comercio": "Bonheur Keto Pâtisserie",
+   "categoria": "cafeterias",
+   "cocina": "cafe",
+   "region": "Metropolitana",
+   "sitio_web": "https://bonheurketopatisserie.com/",
+   "porcentaje": 20,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "lunes",
+    "miercoles"
+   ],
+   "vigencia_hasta": "2027-09-01",
+   "tarjetas": [
+    "visa-credito-infinite",
+    "visa-credito-signature",
+    "visa-credito-platinum",
+    "visa-fan-credito",
+    "mastercard-credito-black",
+    "mastercard-credito-platinum",
+    "visa-debito-infinite",
+    "visa-debito-signature",
+    "visa-debito-bch",
+    "visa-cuenta-fan",
+    "visa-credito-gold",
+    "mastercard-credito-dorada"
+   ],
+   "modalidad": "presencial",
+   "segmentado": false,
+   "condiciones": "Promoción válida hasta el 01 de septiembre del 2027. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile y Banco Edwards y que soliciten el descuento al momento de pagar en compra presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/bonheur-keto-patisserie",
+   "logo": "https://assets.bancochile.cl/uploads/000/117/102/e2babc15-7a72-4722-98bf-89b4a5f4d21a/original/logo-web-Bonheur_Keto_Pa_tisserie.jpg",
+   "capturado": "",
+   "id": "daa2b92f1df9",
+   "locales": [
+    {
+     "direccion": "local 8",
+     "comuna": "Lo Barnechea",
+     "lat": -33.3512,
+     "lon": -70.518,
+     "precision": "comuna",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "local 11",
+     "comuna": "Vitacura",
+     "lat": -33.3899,
+     "lon": -70.5817,
+     "precision": "comuna",
+     "telefono": "",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Lo Barnechea",
+    "Vitacura"
    ]
   },
   {
