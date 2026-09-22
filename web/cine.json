@@ -1,7 +1,7 @@
 {
- "generado": "2026-09-21T12:44:16",
+ "generado": "2026-09-22T11:01:27",
  "dias": 7,
- "total_funciones": 920,
+ "total_funciones": 689,
  "cines": [
   {
    "id": "cinemark-mallplaza-oeste",
@@ -14,20 +14,7 @@
    "lon": -70.7183,
    "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste",
    "formatos": "PALCO | 3D | 2D | PLAY | XD | DBOX",
-   "funciones": 182
-  },
-  {
-   "id": "cinemark-mallplaza-vespucio",
-   "nombre": "Cinemark Mallplaza Vespucio",
-   "cadena": "cinemark",
-   "circuito": "comercial",
-   "direccion": "Av. Vicuña Mackenna 7110, Local 158, La Florida",
-   "comuna": "La Florida",
-   "lat": -33.5167,
-   "lon": -70.5975,
-   "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio",
-   "formatos": "3D | 2D | PRE | DBOX | IMAX | 4D",
-   "funciones": 142
+   "funciones": 130
   },
   {
    "id": "cinemark-alto-las-condes",
@@ -40,7 +27,20 @@
    "lon": -70.5466,
    "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes",
    "formatos": "3D | 2D | XD | PRE | DBOX",
-   "funciones": 111
+   "funciones": 114
+  },
+  {
+   "id": "cinemark-mallplaza-vespucio",
+   "nombre": "Cinemark Mallplaza Vespucio",
+   "cadena": "cinemark",
+   "circuito": "comercial",
+   "direccion": "Av. Vicuña Mackenna 7110, Local 158, La Florida",
+   "comuna": "La Florida",
+   "lat": -33.5167,
+   "lon": -70.5975,
+   "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio",
+   "formatos": "3D | 2D | PRE | DBOX | IMAX | 4D",
+   "funciones": 101
   },
   {
    "id": "cinemark-mallplaza-norte",
@@ -53,7 +53,7 @@
    "lon": -70.6787,
    "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte",
    "formatos": "3D | 2D | XD | DBOX",
-   "funciones": 101
+   "funciones": 72
   },
   {
    "id": "cinemark-mid-mall-maipu",
@@ -66,7 +66,7 @@
    "lon": -70.7702,
    "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu",
    "formatos": "2D | XD",
-   "funciones": 90
+   "funciones": 64
   },
   {
    "id": "cinemark-portal-nunoa",
@@ -79,7 +79,7 @@
    "lon": -70.5975,
    "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa",
    "formatos": "2D",
-   "funciones": 86
+   "funciones": 62
   },
   {
    "id": "cinemark-mallplaza-tobalaba",
@@ -92,20 +92,7 @@
    "lon": -70.5579,
    "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba",
    "formatos": "2D | XD",
-   "funciones": 82
-  },
-  {
-   "id": "cinemark-la-dehesa",
-   "nombre": "Cinemark Portal La Dehesa",
-   "cadena": "cinemark",
-   "circuito": "comercial",
-   "direccion": "Avenida La Dehesa 1445, Local 2000",
-   "comuna": "Lo Barnechea",
-   "lat": -33.3568,
-   "lon": -70.5156,
-   "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa",
-   "formatos": "3D | 2D | PRE",
-   "funciones": 55
+   "funciones": 60
   },
   {
    "id": "cinemark-gran-avenida",
@@ -118,7 +105,20 @@
    "lon": -70.6567,
    "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida",
    "formatos": "3D | 2D",
-   "funciones": 53
+   "funciones": 38
+  },
+  {
+   "id": "cinemark-la-dehesa",
+   "nombre": "Cinemark Portal La Dehesa",
+   "cadena": "cinemark",
+   "circuito": "comercial",
+   "direccion": "Avenida La Dehesa 1445, Local 2000",
+   "comuna": "Lo Barnechea",
+   "lat": -33.3568,
+   "lon": -70.5156,
+   "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa",
+   "formatos": "3D | 2D | PRE",
+   "funciones": 36
   },
   {
    "id": "cine-arte-normandie",
@@ -131,7 +131,7 @@
    "lon": -70.652052,
    "url": "https://normandie.cl/cartelera/",
    "formatos": "",
-   "funciones": 9
+   "funciones": 6
   },
   {
    "id": "el-biografo",
@@ -144,7 +144,7 @@
    "lon": -70.640977,
    "url": "https://elbiografo.cl/",
    "formatos": "",
-   "funciones": 9
+   "funciones": 6
   },
   {
    "id": "centro-arte-alameda-sala-ceina",
@@ -602,582 +602,6 @@
    ],
    "credito": "",
    "funciones": [
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T12:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "9",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T13:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "14",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T13:30",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-09-21T13:30",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-21T13:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T14:00",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-09-21T14:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T14:00",
-     "formato": "2D IMAX",
-     "idioma": "subtitulada",
-     "sala": "11",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T14:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T14:20",
-     "formato": "2D XD DBOX PALCO",
-     "idioma": "doblada",
-     "sala": "10",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T14:20",
-     "formato": "4D 2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T14:30",
-     "formato": "2D XD",
-     "idioma": "subtitulada",
-     "sala": "8",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-09-21T14:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-21T14:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-09-21T15:00",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T15:00",
-     "formato": "2D XD",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-09-21T15:00",
-     "formato": "2D XD",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T15:00",
-     "formato": "2D XD",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T15:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "9",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T15:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "14",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T16:00",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-21T16:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T16:20",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-09-21T16:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T16:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T16:30",
-     "formato": "2D IMAX",
-     "idioma": "subtitulada",
-     "sala": "11",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T16:40",
-     "formato": "2D XD DBOX PALCO",
-     "idioma": "doblada",
-     "sala": "10",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T17:00",
-     "formato": "2D XD",
-     "idioma": "subtitulada",
-     "sala": "8",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-09-21T17:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-21T17:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-09-21T17:20",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T17:20",
-     "formato": "2D XD",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-09-21T17:20",
-     "formato": "2D XD",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T17:20",
-     "formato": "2D XD",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T17:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "14",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T17:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "9",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T18:30",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T18:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T18:40",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-09-21T18:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T18:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-21T18:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T19:00",
-     "formato": "2D IMAX",
-     "idioma": "doblada",
-     "sala": "11",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T19:10",
-     "formato": "2D XD DBOX PALCO",
-     "idioma": "doblada",
-     "sala": "10",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-09-21T19:20",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T19:30",
-     "formato": "2D XD",
-     "idioma": "subtitulada",
-     "sala": "8",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T19:30",
-     "formato": "4D 2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-09-21T19:40",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T19:40",
-     "formato": "2D XD",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-09-21T19:40",
-     "formato": "2D XD",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T19:40",
-     "formato": "2D XD",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-21T19:40",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T20:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "14",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T20:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "9",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T20:45",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T21:00",
-     "formato": "2D DBOX",
-     "idioma": "subtitulada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T21:00",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-09-21T21:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T21:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-21T21:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T21:30",
-     "formato": "2D XD DBOX PALCO",
-     "idioma": "doblada",
-     "sala": "10",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T21:30",
-     "formato": "2D IMAX",
-     "idioma": "subtitulada",
-     "sala": "11",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-09-21T21:40",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T22:00",
-     "formato": "2D XD",
-     "idioma": "subtitulada",
-     "sala": "8",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-09-21T22:00",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T22:00",
-     "formato": "2D XD",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-09-21T22:00",
-     "formato": "2D XD",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T22:00",
-     "formato": "2D XD",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T22:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "14",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T22:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "9",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-21T22:20",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-09-21T22:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
     {
      "cine": "cinemark-alto-las-condes",
      "inicio": "2026-09-22T12:00",
@@ -1747,6 +1171,14 @@
      "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
     },
     {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T12:00",
+     "formato": "2D XD",
+     "idioma": "subtitulada",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
      "cine": "cinemark-mallplaza-vespucio",
      "inicio": "2026-09-23T12:50",
      "formato": "2D",
@@ -1761,6 +1193,14 @@
      "idioma": "doblada",
      "sala": "14",
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T13:30",
+     "formato": "2D DBOX",
+     "idioma": "doblada",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
     },
     {
      "cine": "cinemark-portal-nunoa",
@@ -1817,6 +1257,14 @@
      "idioma": "doblada",
      "sala": "2",
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T14:30",
+     "formato": "2D XD",
+     "idioma": "subtitulada",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
     },
     {
      "cine": "cinemark-gran-avenida",
@@ -1883,6 +1331,14 @@
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
     },
     {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T16:00",
+     "formato": "2D DBOX",
+     "idioma": "doblada",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
      "cine": "cinemark-portal-nunoa",
      "inicio": "2026-09-23T16:00",
      "formato": "2D",
@@ -1929,6 +1385,14 @@
      "idioma": "doblada",
      "sala": "10",
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T16:50",
+     "formato": "2D XD",
+     "idioma": "subtitulada",
+     "sala": "8",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
     },
     {
      "cine": "cinemark-gran-avenida",
@@ -1995,6 +1459,14 @@
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
     },
     {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T18:30",
+     "formato": "2D DBOX",
+     "idioma": "doblada",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
      "cine": "cinemark-mallplaza-oeste",
      "inicio": "2026-09-23T18:30",
      "formato": "2D",
@@ -2057,6 +1529,14 @@
      "idioma": "subtitulada",
      "sala": "4",
      "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T19:30",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
     },
     {
      "cine": "cinemark-mallplaza-vespucio",
@@ -2131,6 +1611,14 @@
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
     },
     {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T21:00",
+     "formato": "2D DBOX",
+     "idioma": "subtitulada",
+     "sala": "7",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
      "cine": "cinemark-mallplaza-norte",
      "inicio": "2026-09-23T21:00",
      "formato": "2D DBOX",
@@ -2185,6 +1673,14 @@
      "idioma": "subtitulada",
      "sala": "4",
      "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T22:00",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
     },
     {
      "cine": "cinemark-la-dehesa",
@@ -2356,14 +1852,6 @@
      "idioma": "doblada",
      "sala": "7",
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-09-24T16:10",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
     },
     {
      "cine": "cinemark-alto-las-condes",
@@ -3329,310 +2817,6 @@
    "credito": "",
    "funciones": [
     {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T13:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T13:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T13:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T13:30",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T13:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-09-21T13:50",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-21T13:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T14:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "8",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T15:10",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "9",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-09-21T15:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T15:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "11",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-09-21T15:30",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-09-21T15:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T15:30",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T15:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T15:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T16:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T16:00",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T16:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T16:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "8",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-21T16:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-09-21T17:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T18:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "11",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-09-21T18:10",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-09-21T18:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T18:20",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T18:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T18:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T19:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "8",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-21T19:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-09-21T20:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T20:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "11",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T20:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T21:10",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T21:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-09-21T21:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T21:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "8",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-21T21:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
      "cine": "cinemark-mallplaza-tobalaba",
      "inicio": "2026-09-22T12:30",
      "formato": "2D",
@@ -3961,6 +3145,14 @@
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
     },
     {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T12:40",
+     "formato": "2D DBOX",
+     "idioma": "doblada",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
      "cine": "cinemark-mallplaza-oeste",
      "inicio": "2026-09-23T12:40",
      "formato": "2D",
@@ -3975,6 +3167,14 @@
      "idioma": "doblada",
      "sala": "1",
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T13:20",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
     },
     {
      "cine": "cinemark-la-dehesa",
@@ -4023,6 +3223,14 @@
      "idioma": "doblada",
      "sala": "4",
      "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T15:10",
+     "formato": "2D DBOX",
+     "idioma": "doblada",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
     },
     {
      "cine": "cinemark-gran-avenida",
@@ -4089,6 +3297,14 @@
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
     },
     {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T16:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
      "cine": "cinemark-mallplaza-norte",
      "inicio": "2026-09-23T16:30",
      "formato": "2D",
@@ -4145,6 +3361,14 @@
      "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
     },
     {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T18:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
      "cine": "cinemark-la-dehesa",
      "inicio": "2026-09-23T19:00",
      "formato": "2D PRE",
@@ -4199,6 +3423,14 @@
      "idioma": "doblada",
      "sala": "5",
      "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T21:20",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
     },
     {
      "cine": "cinemark-mallplaza-tobalaba",
@@ -4259,238 +3491,6 @@
    ],
    "credito": "",
    "funciones": [
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T13:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "12",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T13:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-09-21T14:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T14:10",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-21T14:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T14:40",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T14:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T15:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-09-21T15:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T15:30",
-     "formato": "2D PALCO",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T15:40",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "11",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-09-21T16:30",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-09-21T17:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T17:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "12",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T17:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-21T17:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T18:00",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T18:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T18:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-09-21T18:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T18:45",
-     "formato": "2D PALCO",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T19:00",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "11",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T20:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T20:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "12",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T21:20",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T21:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-09-21T21:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T22:10",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "11",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T22:10",
-     "formato": "2D PALCO",
-     "idioma": "doblada",
-     "sala": "7",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
     {
      "cine": "cinemark-alto-las-condes",
      "inicio": "2026-09-22T12:10",
@@ -4732,12 +3732,28 @@
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
     },
     {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T12:10",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
      "cine": "cinemark-mallplaza-tobalaba",
      "inicio": "2026-09-23T12:10",
      "formato": "2D",
      "idioma": "doblada",
      "sala": "4",
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T12:30",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
     },
     {
      "cine": "cinemark-mallplaza-oeste",
@@ -4780,6 +3796,14 @@
      "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
     },
     {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T14:40",
+     "formato": "2D PRE",
+     "idioma": "doblada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
      "cine": "cinemark-la-dehesa",
      "inicio": "2026-09-23T14:40",
      "formato": "2D PRE",
@@ -4820,6 +3844,14 @@
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
     },
     {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T15:40",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
      "cine": "cinemark-mallplaza-vespucio",
      "inicio": "2026-09-23T17:10",
      "formato": "2D",
@@ -4850,6 +3882,14 @@
      "idioma": "doblada",
      "sala": "5",
      "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T18:00",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
     },
     {
      "cine": "cinemark-mid-mall-maipu",
@@ -4884,6 +3924,14 @@
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
     },
     {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T19:00",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
      "cine": "cinemark-mallplaza-vespucio",
      "inicio": "2026-09-23T20:40",
      "formato": "2D",
@@ -4900,6 +3948,14 @@
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
     },
     {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T21:20",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
      "cine": "cinemark-mallplaza-norte",
      "inicio": "2026-09-23T21:40",
      "formato": "2D",
@@ -4914,6 +3970,14 @@
      "idioma": "doblada",
      "sala": "4",
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T22:10",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "11",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
     },
     {
      "cine": "cinemark-mallplaza-oeste",
@@ -4946,174 +4010,6 @@
    ],
    "credito": "",
    "funciones": [
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-09-21T13:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T14:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "13",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T14:20",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "10",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T14:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T14:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-09-21T16:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T16:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "13",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T17:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T17:00",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "10",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T17:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T19:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "13",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-09-21T19:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T19:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T19:40",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "10",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T20:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-09-21T22:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T22:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "13",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T22:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-09-21T22:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T22:30",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "10",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T22:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
     {
      "cine": "cinemark-mallplaza-tobalaba",
      "inicio": "2026-09-22T13:40",
@@ -5477,150 +4373,6 @@
    "credito": "Christopher Nolan · Reino Unido · 2026",
    "funciones": [
     {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T13:20",
-     "formato": "2D PALCO",
-     "idioma": "doblada",
-     "sala": "9",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T13:50",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "10",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T13:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-09-21T14:10",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T14:10",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "8",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T16:30",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T17:00",
-     "formato": "2D PALCO",
-     "idioma": "doblada",
-     "sala": "9",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T17:40",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "10",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-09-21T17:50",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T18:00",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "8",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-21T20:00",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T20:20",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T20:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T20:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T20:40",
-     "formato": "2D PALCO",
-     "idioma": "doblada",
-     "sala": "9",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-09-21T21:30",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T21:40",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "10",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T21:40",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "8",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
      "cine": "cinemark-alto-las-condes",
      "inicio": "2026-09-22T12:40",
      "formato": "2D PRE",
@@ -5773,12 +4525,28 @@
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
     },
     {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T12:40",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
      "cine": "cinemark-mallplaza-oeste",
      "inicio": "2026-09-23T13:20",
      "formato": "2D PALCO",
      "idioma": "doblada",
      "sala": "9",
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T13:50",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
     },
     {
      "cine": "cinemark-mid-mall-maipu",
@@ -5813,12 +4581,28 @@
      "url": "https://www.flow.cl/btn.php?token=khnkf1c"
     },
     {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T16:30",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
      "cine": "cinemark-mallplaza-oeste",
      "inicio": "2026-09-23T17:00",
      "formato": "2D PALCO",
      "idioma": "doblada",
      "sala": "9",
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T17:40",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
     },
     {
      "cine": "cinemark-mallplaza-vespucio",
@@ -5835,6 +4619,14 @@
      "idioma": "subtitulada",
      "sala": "2",
      "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T20:20",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
     },
     {
      "cine": "cinemark-mallplaza-norte",
@@ -5869,6 +4661,14 @@
      "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
     },
     {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T21:40",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "10",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
      "cine": "cinemark-mallplaza-vespucio",
      "inicio": "2026-09-23T21:40",
      "formato": "2D",
@@ -5899,126 +4699,6 @@
    ],
    "credito": "",
    "funciones": [
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T12:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T14:00",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T14:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T15:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-09-21T16:00",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T17:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T18:55",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T19:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T19:40",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T19:50",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-09-21T20:00",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T21:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T21:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T22:20",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T22:40",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
     {
      "cine": "cinemark-mallplaza-norte",
      "inicio": "2026-09-22T12:30",
@@ -6164,6 +4844,14 @@
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
     },
     {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T14:00",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
      "cine": "cinemark-mid-mall-maipu",
      "inicio": "2026-09-23T14:20",
      "formato": "2D",
@@ -6220,6 +4908,14 @@
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
     },
     {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T21:10",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
      "cine": "cinemark-mallplaza-oeste",
      "inicio": "2026-09-23T21:40",
      "formato": "2D",
@@ -6270,118 +4966,6 @@
    ],
    "credito": "",
    "funciones": [
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T14:20",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-21T16:50",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T17:45",
-     "formato": "2D PALCO",
-     "idioma": "doblada",
-     "sala": "8",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T17:50",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T18:00",
-     "formato": "2D DBOX",
-     "idioma": "subtitulada",
-     "sala": "9",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-09-21T18:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-21T20:20",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-09-21T20:30",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-09-21T20:40",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T20:40",
-     "formato": "2D DBOX",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T21:00",
-     "formato": "2D PALCO",
-     "idioma": "subtitulada",
-     "sala": "8",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T21:20",
-     "formato": "2D DBOX",
-     "idioma": "subtitulada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T21:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T21:30",
-     "formato": "2D DBOX",
-     "idioma": "subtitulada",
-     "sala": "9",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
     {
      "cine": "cinemark-mallplaza-vespucio",
      "inicio": "2026-09-22T14:20",
@@ -6527,6 +5111,14 @@
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
     },
     {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T18:00",
+     "formato": "2D DBOX",
+     "idioma": "subtitulada",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
      "cine": "cinemark-mallplaza-tobalaba",
      "inicio": "2026-09-23T18:00",
      "formato": "2D",
@@ -6583,12 +5175,253 @@
      "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
     },
     {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T21:30",
+     "formato": "2D DBOX",
+     "idioma": "subtitulada",
+     "sala": "9",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
      "cine": "cinemark-la-dehesa",
      "inicio": "2026-09-23T21:30",
      "formato": "2D PRE",
      "idioma": "subtitulada",
      "sala": "1",
      "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
+    }
+   ]
+  },
+  {
+   "clave": "hechizo-de-amor-la-magia-continua",
+   "titulo": "Hechizo de Amor: La Magia Continúa",
+   "poster": "https://cdn.cinemark.cl/content/posters/HO00015047.jpg",
+   "duracion": 130,
+   "clasificacion": "TE+7",
+   "cines": [
+    "cinemark-alto-las-condes",
+    "cinemark-gran-avenida",
+    "cinemark-la-dehesa",
+    "cinemark-mallplaza-norte",
+    "cinemark-mallplaza-oeste",
+    "cinemark-mallplaza-vespucio",
+    "cinemark-portal-nunoa"
+   ],
+   "sinopsis": "Secuela de Hechizo de amor. Una familia multigeneracional de brujas, condenada a no tener amor durante siglos, intenta romper el hechizo enfrentándose a oscuros secretos y sacrificándose unas por otras.",
+   "trailer": "https://www.youtube.com/watch?v=b42FjwKKiT0",
+   "generos": [
+    "Fantasía",
+    "Romance"
+   ],
+   "credito": "",
+   "funciones": [
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-22T12:10",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "12",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-09-22T13:00",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-09-22T13:20",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-22T15:30",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "12",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-09-22T15:40",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-09-22T16:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-09-22T16:40",
+     "formato": "2D PRE",
+     "idioma": "doblada",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
+    },
+    {
+     "cine": "cinemark-la-dehesa",
+     "inicio": "2026-09-22T17:10",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-09-22T18:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-09-22T18:30",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-22T18:40",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "12",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-22T21:50",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "12",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
+     "cine": "cinemark-la-dehesa",
+     "inicio": "2026-09-22T22:40",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T12:10",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "12",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-09-23T13:00",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-09-23T13:20",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T15:30",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "12",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-09-23T15:40",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cinemark-la-dehesa",
+     "inicio": "2026-09-23T16:00",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-09-23T16:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-09-23T16:40",
+     "formato": "2D PRE",
+     "idioma": "doblada",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
+    },
+    {
+     "cine": "cinemark-mallplaza-norte",
+     "inicio": "2026-09-23T18:10",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "1",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
+    },
+    {
+     "cine": "cinemark-gran-avenida",
+     "inicio": "2026-09-23T18:30",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T18:40",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "12",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-09-23T21:20",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "6",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T21:50",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "12",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
     }
    ]
   },
@@ -6615,94 +5448,6 @@
    ],
    "credito": "",
    "funciones": [
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-09-21T13:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T13:40",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-09-21T15:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-09-21T16:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T16:20",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T16:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T17:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T21:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mallplaza-tobalaba",
-     "inicio": "2026-09-21T21:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T22:00",
-     "formato": "4D 2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T22:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
     {
      "cine": "cinemark-mallplaza-oeste",
      "inicio": "2026-09-22T12:30",
@@ -6816,6 +5561,14 @@
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-tobalaba"
     },
     {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T13:40",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
      "cine": "cinemark-mallplaza-tobalaba",
      "inicio": "2026-09-23T15:40",
      "formato": "2D",
@@ -6830,6 +5583,14 @@
      "idioma": "doblada",
      "sala": "3",
      "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
+    },
+    {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T16:20",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
     },
     {
      "cine": "cinemark-mid-mall-maipu",
@@ -6882,295 +5643,6 @@
    ]
   },
   {
-   "clave": "hechizo-de-amor-la-magia-continua",
-   "titulo": "Hechizo de Amor: La Magia Continúa",
-   "poster": "https://cdn.cinemark.cl/content/posters/HO00015047.jpg",
-   "duracion": 130,
-   "clasificacion": "TE+7",
-   "cines": [
-    "cinemark-alto-las-condes",
-    "cinemark-gran-avenida",
-    "cinemark-la-dehesa",
-    "cinemark-mallplaza-norte",
-    "cinemark-mallplaza-oeste",
-    "cinemark-mallplaza-vespucio",
-    "cinemark-portal-nunoa"
-   ],
-   "sinopsis": "Secuela de Hechizo de amor. Una familia multigeneracional de brujas, condenada a no tener amor durante siglos, intenta romper el hechizo enfrentándose a oscuros secretos y sacrificándose unas por otras.",
-   "trailer": "https://www.youtube.com/watch?v=b42FjwKKiT0",
-   "generos": [
-    "Fantasía",
-    "Romance"
-   ],
-   "credito": "",
-   "funciones": [
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-09-21T13:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-21T15:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T15:30",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "12",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T15:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T16:40",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T18:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-09-21T18:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T18:40",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "12",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-21T20:40",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-09-21T21:00",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T21:50",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "12",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-22T12:10",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "12",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-09-22T13:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-22T13:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-22T15:30",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "12",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-22T15:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-22T16:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-22T16:40",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-09-22T17:10",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-22T18:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-09-22T18:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-22T18:40",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "12",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-22T21:50",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "12",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-09-22T22:40",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-09-23T13:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-23T13:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-23T15:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-09-23T16:00",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-23T16:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-23T16:40",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-23T18:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-gran-avenida",
-     "inicio": "2026-09-23T18:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-gran-avenida"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-23T21:20",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    }
-   ]
-  },
-  {
    "clave": "zona-cero",
    "titulo": "Zona Cero",
    "poster": "https://cdn.cinemark.cl/content/posters/HO00015162.jpg",
@@ -7191,70 +5663,6 @@
    ],
    "credito": "",
    "funciones": [
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T13:10",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-norte",
-     "inicio": "2026-09-21T17:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-norte"
-    },
-    {
-     "cine": "cinemark-mid-mall-maipu",
-     "inicio": "2026-09-21T17:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T18:20",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T18:30",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T18:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T21:30",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T21:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
     {
      "cine": "cinemark-mallplaza-oeste",
      "inicio": "2026-09-22T13:10",
@@ -7344,6 +5752,14 @@
      "url": "https://www.cinemark.cl/cartelera/cinemark-mid-mall-maipu"
     },
     {
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T18:20",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
      "cine": "cinemark-mallplaza-vespucio",
      "inicio": "2026-09-23T18:30",
      "formato": "2D PRE",
@@ -7395,46 +5811,6 @@
    ],
    "credito": "",
    "funciones": [
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T14:00",
-     "formato": "2D PLAY",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-21T14:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T16:30",
-     "formato": "2D PLAY",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T19:00",
-     "formato": "2D PLAY",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T21:20",
-     "formato": "2D PLAY",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
     {
      "cine": "cinemark-mallplaza-oeste",
      "inicio": "2026-09-22T14:00",
@@ -7518,6 +5894,91 @@
    ]
   },
   {
+   "clave": "one-piece-la-pelicula",
+   "titulo": "One Piece: La Película",
+   "poster": "https://cdn.cinemark.cl/content/posters/HO00015383.jpg",
+   "duracion": 57,
+   "clasificacion": "TE+7",
+   "cines": [
+    "cinemark-mallplaza-oeste",
+    "cinemark-mallplaza-vespucio",
+    "cinemark-portal-nunoa"
+   ],
+   "sinopsis": "La tripulación original (Luffy, Zoro, Nami y Usopp) conoce a Tobio, un niño que sueña con encontrar el tesoro de oro de Woonan. Se enfrentan a El Drago, un peligroso pirata que comió la Fruta del Diablo Gomu Gomu (en su variante de voz) y busca dominar el mundo con esta fortuna.",
+   "trailer": "https://youtu.be/FnQ_ALoBAhk",
+   "generos": [
+    "Anime",
+    "Aventuras"
+   ],
+   "credito": "",
+   "funciones": [
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-09-22T14:50",
+     "formato": "2D PRE",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-09-22T15:00",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-09-22T15:30",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-09-22T16:30",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-09-23T14:50",
+     "formato": "2D PRE",
+     "idioma": "doblada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-09-23T15:00",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-09-23T15:30",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-09-23T16:30",
+     "formato": "2D PRE",
+     "idioma": "subtitulada",
+     "sala": "3",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
+    }
+   ]
+  },
+  {
    "clave": "sagrado-corazon",
    "titulo": "Sagrado Corazón",
    "poster": "https://cdn.cinemark.cl/content/posters/HO00015495.jpg",
@@ -7525,7 +5986,6 @@
    "clasificacion": "TE+7",
    "cines": [
     "cinemark-alto-las-condes",
-    "cinemark-la-dehesa",
     "cinemark-mallplaza-oeste",
     "cinemark-mallplaza-vespucio",
     "cinemark-portal-nunoa"
@@ -7537,46 +5997,6 @@
    ],
    "credito": "",
    "funciones": [
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-21T18:20",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "6",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T18:40",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-09-21T18:40",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T18:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T18:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
     {
      "cine": "cinemark-alto-las-condes",
      "inicio": "2026-09-22T18:40",
@@ -7652,7 +6072,6 @@
    "cines": [
     "cine-arte-normandie",
     "cinemark-alto-las-condes",
-    "cinemark-la-dehesa",
     "cinemark-mallplaza-oeste",
     "cinemark-mallplaza-vespucio",
     "cinemark-portal-nunoa"
@@ -7664,46 +6083,6 @@
    ],
    "credito": "Dylan Southern, Will Lovelace · Reino Unido · 2026",
    "funciones": [
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-21T20:50",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T21:00",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "1",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T21:10",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T21:10",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-la-dehesa",
-     "inicio": "2026-09-21T22:30",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-la-dehesa"
-    },
     {
      "cine": "cine-arte-normandie",
      "inicio": "2026-09-22T17:20",
@@ -7763,119 +6142,71 @@
    ]
   },
   {
-   "clave": "one-piece-la-pelicula",
-   "titulo": "One Piece: La Película",
-   "poster": "https://cdn.cinemark.cl/content/posters/HO00015383.jpg",
-   "duracion": 57,
-   "clasificacion": "TE+7",
+   "clave": "puella-magi-madoka-magica-rebellion",
+   "titulo": "Puella Magi Madoka Magica - Rebellion",
+   "poster": "https://cdn.cinemark.cl/content/posters/HO00015295.jpg",
+   "duracion": 116,
+   "clasificacion": "MA14",
    "cines": [
+    "cinemark-alto-las-condes",
     "cinemark-mallplaza-oeste",
-    "cinemark-mallplaza-vespucio",
     "cinemark-portal-nunoa"
    ],
-   "sinopsis": "La tripulación original (Luffy, Zoro, Nami y Usopp) conoce a Tobio, un niño que sueña con encontrar el tesoro de oro de Woonan. Se enfrentan a El Drago, un peligroso pirata que comió la Fruta del Diablo Gomu Gomu (en su variante de voz) y busca dominar el mundo con esta fortuna.",
-   "trailer": "https://youtu.be/FnQ_ALoBAhk",
+   "sinopsis": "Madoka Kaname y sus amigas llevan una vida aparentemente perfecta, pero Homura Akemi comienza a sospechar que algo no está bien. Mientras extraños acontecimientos se suceden a su alrededor, Homura se verá obligada a confrontar sus propios recuerdos y descubrir la verdad detrás de este mundo aparentemente ideal.\r\n\r\nVive en pantalla grande Puella Magi Madoka Magica: Rebellion, la tercer entrega que llevará los límites de las chicas mágicas a un nuevo y sorprendente destino.",
+   "trailer": "https://youtu.be/sih1-WkbDZ8",
    "generos": [
-    "Anime",
-    "Aventuras"
+    "Aventuras",
+    "Anime"
    ],
    "credito": "",
    "funciones": [
     {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T14:50",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T15:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-21T15:30",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T16:30",
-     "formato": "2D PRE",
-     "idioma": "subtitulada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-22T14:50",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-22T15:00",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
+     "cine": "cinemark-alto-las-condes",
      "inicio": "2026-09-22T15:30",
      "formato": "2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-22T16:30",
-     "formato": "2D PRE",
      "idioma": "subtitulada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-23T14:50",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
+     "sala": "5",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
     },
     {
      "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-23T15:00",
+     "inicio": "2026-09-22T16:10",
      "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
+     "idioma": "subtitulada",
+     "sala": "4",
      "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
     },
     {
      "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-23T15:30",
+     "inicio": "2026-09-22T17:20",
      "formato": "2D",
-     "idioma": "doblada",
+     "idioma": "subtitulada",
      "sala": "2",
      "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
     },
     {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-23T16:30",
-     "formato": "2D PRE",
+     "cine": "cinemark-alto-las-condes",
+     "inicio": "2026-09-23T15:30",
+     "formato": "2D",
      "idioma": "subtitulada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
+     "sala": "5",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-09-23T16:10",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "4",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cinemark-portal-nunoa",
+     "inicio": "2026-09-23T17:20",
+     "formato": "2D",
+     "idioma": "subtitulada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
     }
    ]
   },
@@ -7897,30 +6228,6 @@
    ],
    "credito": "",
    "funciones": [
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T13:40",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T14:10",
-     "formato": "2D PRE",
-     "idioma": "doblada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T16:20",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "3",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
     {
      "cine": "cinemark-mallplaza-oeste",
      "inicio": "2026-09-22T13:40",
@@ -7972,161 +6279,9 @@
    ]
   },
   {
-   "clave": "puella-magi-madoka-magica-rebellion",
-   "titulo": "Puella Magi Madoka Magica - Rebellion",
-   "poster": "https://cdn.cinemark.cl/content/posters/HO00015296.jpg",
-   "duracion": 116,
-   "clasificacion": "MA14",
-   "cines": [
-    "cinemark-alto-las-condes",
-    "cinemark-mallplaza-oeste",
-    "cinemark-portal-nunoa"
-   ],
-   "sinopsis": "Madoka Kaname y sus amigas llevan una vida aparentemente perfecta, pero Homura Akemi comienza a sospechar que algo no está bien. Mientras extraños acontecimientos se suceden a su alrededor, Homura se verá obligada a confrontar sus propios recuerdos y descubrir la verdad detrás de este mundo aparentemente ideal.\r\n\r\nVive en pantalla grande Puella Magi Madoka Magica: Rebellion, la tercer entrega que llevará los límites de las chicas mágicas a un nuevo y sorprendente destino.",
-   "trailer": "https://youtu.be/sih1-WkbDZ8",
-   "generos": [
-    "Aventuras",
-    "Anime"
-   ],
-   "credito": "",
-   "funciones": [
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T15:30",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T16:10",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-21T17:20",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-22T15:30",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-22T16:10",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-22T17:20",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-23T16:10",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "4",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-portal-nunoa",
-     "inicio": "2026-09-23T17:20",
-     "formato": "2D",
-     "idioma": "subtitulada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-portal-nunoa"
-    }
-   ]
-  },
-  {
-   "clave": "el-final-de-la-calle-oak",
-   "titulo": "El Final de la Calle Oak",
-   "poster": "https://cdn.cinemark.cl/content/posters/HO00015411.jpg",
-   "duracion": 99,
-   "clasificacion": "MA14",
-   "cines": [
-    "cinemark-mallplaza-oeste",
-    "cinemark-mallplaza-vespucio"
-   ],
-   "sinopsis": "Después de que un misterioso fenómeno cósmico arranque Oak Street de su entorno suburbano y transporte a sus habitantes a un lugar desconocido, la familia Platt pronto descubre que su propia upervivencia depende de que permanezcan unidos mientras se orientan en un entorno que ya no reconocen.",
-   "trailer": "https://www.youtube.com/watch?v=kdrry0xfHzA",
-   "generos": [
-    "Ciencia Ficción"
-   ],
-   "credito": "",
-   "funciones": [
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-21T16:50",
-     "formato": "4D 2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T19:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-22T16:50",
-     "formato": "4D 2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-22T19:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
-    {
-     "cine": "cinemark-mallplaza-vespucio",
-     "inicio": "2026-09-23T16:50",
-     "formato": "4D 2D",
-     "idioma": "doblada",
-     "sala": "2",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
-    },
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-23T19:50",
-     "formato": "2D",
-     "idioma": "doblada",
-     "sala": "5",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    }
-   ]
-  },
-  {
    "clave": "el-corazon-de-la-bestia",
    "titulo": "El Corazón de la Bestia",
-   "poster": "https://cdn.cinemark.cl/content/posters/HO00015509.jpg",
+   "poster": "https://cdn.cinemark.cl/content/posters/HO00015608.jpg",
    "duracion": 101,
    "clasificacion": "MA14",
    "cines": [
@@ -8187,6 +6342,57 @@
    ]
   },
   {
+   "clave": "el-final-de-la-calle-oak",
+   "titulo": "El Final de la Calle Oak",
+   "poster": "https://cdn.cinemark.cl/content/posters/HO00015411.jpg",
+   "duracion": 99,
+   "clasificacion": "MA14",
+   "cines": [
+    "cinemark-mallplaza-oeste",
+    "cinemark-mallplaza-vespucio"
+   ],
+   "sinopsis": "Después de que un misterioso fenómeno cósmico arranque Oak Street de su entorno suburbano y transporte a sus habitantes a un lugar desconocido, la familia Platt pronto descubre que su propia upervivencia depende de que permanezcan unidos mientras se orientan en un entorno que ya no reconocen.",
+   "trailer": "https://www.youtube.com/watch?v=kdrry0xfHzA",
+   "generos": [
+    "Ciencia Ficción"
+   ],
+   "credito": "",
+   "funciones": [
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-09-22T16:50",
+     "formato": "4D 2D",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-09-22T19:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    },
+    {
+     "cine": "cinemark-mallplaza-vespucio",
+     "inicio": "2026-09-23T16:50",
+     "formato": "4D 2D",
+     "idioma": "doblada",
+     "sala": "2",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-vespucio"
+    },
+    {
+     "cine": "cinemark-mallplaza-oeste",
+     "inicio": "2026-09-23T19:50",
+     "formato": "2D",
+     "idioma": "doblada",
+     "sala": "5",
+     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
+    }
+   ]
+  },
+  {
    "clave": "toy-story-5",
    "titulo": "Toy Story 5",
    "poster": "https://cdn.cinemark.cl/content/posters/HO00014966.jpg",
@@ -8203,14 +6409,6 @@
    ],
    "credito": "",
    "funciones": [
-    {
-     "cine": "cinemark-mallplaza-oeste",
-     "inicio": "2026-09-21T15:05",
-     "formato": "2D PALCO",
-     "idioma": "doblada",
-     "sala": "8",
-     "url": "https://www.cinemark.cl/cartelera/cinemark-mallplaza-oeste"
-    },
     {
      "cine": "cinemark-mallplaza-oeste",
      "inicio": "2026-09-22T12:35",
@@ -8246,55 +6444,6 @@
    ]
   },
   {
-   "clave": "el-deshielo",
-   "titulo": "El deshielo",
-   "poster": "https://elbiografo.cl/wp-content/uploads/2026/09/El-Deshielo.jpg",
-   "duracion": 108,
-   "clasificacion": "+14",
-   "cines": [
-    "cine-arte-normandie",
-    "el-biografo"
-   ],
-   "sinopsis": "Chile, 1992. Durante su estancia en el hotel de sus abuelos en las montañas, Inés (9) se hace amiga de Hanna (15), una esquiadora alemana. Cuando Hanna desaparece sin dejar rastro, su búsqueda revela verdades que se mantenían ocultas.",
-   "trailer": "https://www.youtube.com/watch?v=KVAOgph9kIs",
-   "generos": [],
-   "credito": "Manuela Martelli · Chile · 2026",
-   "funciones": [
-    {
-     "cine": "cine-arte-normandie",
-     "inicio": "2026-09-21T17:30",
-     "formato": "",
-     "idioma": "subtitulada",
-     "sala": "",
-     "url": "https://www.flow.cl/btn.php?token=eruduaq"
-    },
-    {
-     "cine": "el-biografo",
-     "inicio": "2026-09-21T20:15",
-     "formato": "",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://elbiografo.cl/"
-    },
-    {
-     "cine": "el-biografo",
-     "inicio": "2026-09-22T20:15",
-     "formato": "",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://elbiografo.cl/"
-    },
-    {
-     "cine": "el-biografo",
-     "inicio": "2026-09-23T20:15",
-     "formato": "",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://elbiografo.cl/"
-    }
-   ]
-  },
-  {
    "clave": "calle-malaga",
    "titulo": "Calle Malaga",
    "poster": "https://elbiografo.cl/wp-content/uploads/2026/07/Calle_MALAGA_AF.jpg",
@@ -8308,14 +6457,6 @@
    "generos": [],
    "credito": "",
    "funciones": [
-    {
-     "cine": "el-biografo",
-     "inicio": "2026-09-21T15:30",
-     "formato": "",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://elbiografo.cl/"
-    },
     {
      "cine": "el-biografo",
      "inicio": "2026-09-22T15:30",
@@ -8335,10 +6476,10 @@
    ]
   },
   {
-   "clave": "los-domingos",
-   "titulo": "Los Domingos",
-   "poster": "https://elbiografo.cl/wp-content/uploads/2026/07/LosDomingos_Af.jpg",
-   "duracion": 110,
+   "clave": "el-deshielo",
+   "titulo": "El Deshielo",
+   "poster": "https://elbiografo.cl/wp-content/uploads/2026/09/El-Deshielo.jpg",
+   "duracion": 108,
    "clasificacion": "+14",
    "cines": [
     "el-biografo"
@@ -8350,7 +6491,7 @@
    "funciones": [
     {
      "cine": "el-biografo",
-     "inicio": "2026-09-21T18:00",
+     "inicio": "2026-09-22T20:15",
      "formato": "",
      "idioma": "doblada",
      "sala": "",
@@ -8358,15 +6499,7 @@
     },
     {
      "cine": "el-biografo",
-     "inicio": "2026-09-22T18:00",
-     "formato": "",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://elbiografo.cl/"
-    },
-    {
-     "cine": "el-biografo",
-     "inicio": "2026-09-23T18:00",
+     "inicio": "2026-09-23T20:15",
      "formato": "",
      "idioma": "doblada",
      "sala": "",
@@ -8393,7 +6526,7 @@
    "funciones": [
     {
      "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T21:25",
+     "inicio": "2026-09-22T21:25",
      "formato": "2D",
      "idioma": "subtitulada",
      "sala": "5",
@@ -8401,11 +6534,43 @@
     },
     {
      "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-22T21:25",
+     "inicio": "2026-09-23T21:25",
      "formato": "2D",
      "idioma": "subtitulada",
      "sala": "5",
      "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
+    }
+   ]
+  },
+  {
+   "clave": "los-domingos",
+   "titulo": "Los Domingos",
+   "poster": "https://elbiografo.cl/wp-content/uploads/2026/07/LosDomingos_Af.jpg",
+   "duracion": 110,
+   "clasificacion": "+14",
+   "cines": [
+    "el-biografo"
+   ],
+   "sinopsis": "",
+   "trailer": "",
+   "generos": [],
+   "credito": "",
+   "funciones": [
+    {
+     "cine": "el-biografo",
+     "inicio": "2026-09-22T18:00",
+     "formato": "",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://elbiografo.cl/"
+    },
+    {
+     "cine": "el-biografo",
+     "inicio": "2026-09-23T18:00",
+     "formato": "",
+     "idioma": "doblada",
+     "sala": "",
+     "url": "https://elbiografo.cl/"
     }
    ]
   },
@@ -8427,7 +6592,7 @@
    "funciones": [
     {
      "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-21T16:50",
+     "inicio": "2026-09-22T16:50",
      "formato": "2D",
      "idioma": "doblada",
      "sala": "6",
@@ -8435,35 +6600,11 @@
     },
     {
      "cine": "cinemark-alto-las-condes",
-     "inicio": "2026-09-22T16:50",
+     "inicio": "2026-09-23T16:50",
      "formato": "2D",
      "idioma": "doblada",
      "sala": "6",
      "url": "https://www.cinemark.cl/cartelera/cinemark-alto-las-condes"
-    }
-   ]
-  },
-  {
-   "clave": "alex-doll-presenta-doble-de-cuerpo",
-   "titulo": "Alex Doll presenta Doble de cuerpo",
-   "poster": "",
-   "duracion": null,
-   "clasificacion": "",
-   "cines": [
-    "cine-arte-normandie"
-   ],
-   "sinopsis": "",
-   "trailer": "",
-   "generos": [],
-   "credito": "",
-   "funciones": [
-    {
-     "cine": "cine-arte-normandie",
-     "inicio": "2026-09-21T15:00",
-     "formato": "",
-     "idioma": "doblada",
-     "sala": "",
-     "url": "https://www.flow.cl/btn.php?token=aw3xqrg"
     }
    ]
   },
@@ -8512,30 +6653,6 @@
      "idioma": "subtitulada",
      "sala": "",
      "url": "https://www.flow.cl/btn.php?token=e031328bb770dd4c0eca9b942f74b70e7af0e173"
-    }
-   ]
-  },
-  {
-   "clave": "memento",
-   "titulo": "Memento",
-   "poster": "",
-   "duracion": null,
-   "clasificacion": "",
-   "cines": [
-    "cine-arte-normandie"
-   ],
-   "sinopsis": "",
-   "trailer": "",
-   "generos": [],
-   "credito": "",
-   "funciones": [
-    {
-     "cine": "cine-arte-normandie",
-     "inicio": "2026-09-21T19:40",
-     "formato": "",
-     "idioma": "subtitulada",
-     "sala": "",
-     "url": "https://www.flow.cl/btn.php?token=wm4mnau"
     }
    ]
   },
