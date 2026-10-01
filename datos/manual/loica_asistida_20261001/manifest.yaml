@@ -1,0 +1,18 @@
+# Pasada asistida del 01-10-2026: SOLO descuentos (la corrida mensual de bancos).
+# No trae eventos ni cartelera: no se hizo Passline ni cines en esta pasada.
+capturada_en: "2026-10-01"
+responsable: "Claude (navegador integrado), a pedido de Benjamín"
+fuentes:
+  - Santander (banco.santander.cl/beneficios/descuentos-restaurantes)
+  - Bci (bci.cl/beneficios/beneficios-bci)
+  - BancoEstado (Un mes de Sabores; abierta una vez con permiso explícito de Benjamín)
+archivos:
+  - descuentos_santander.csv
+  - descuentos_bci.csv
+  - descuentos_bancoestado.csv
+nota: >-
+  Solo RM. Datos leídos del estado que cada página ya había renderizado y
+  verificados por SHA-256 contra la pestaña. Como esta carpeta pasa a ser la
+  pasada más nueva, durante 3 días la fuente manual de eventos vuelve a leer
+  los CSV sueltos de la raíz (asistida.csv, passline.csv), que son capturas
+  viejas ya presentes en la base.
