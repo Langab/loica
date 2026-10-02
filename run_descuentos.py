@@ -64,6 +64,53 @@ def cargar_bancos(solo: str | None = None) -> list[dict]:
     return bancos
 
 
+def comprobar_fichas(descuentos, bancos) -> tuple[list, dict]:
+    """Lo que ya no está en la página del banco no se publica.
+
+    El 01-10-2026 se publicó Holy Moly (Falabella, 40% los jueves, "hasta el
+    31-10") y al día siguiente el banco ya lo había sacado: quien fue pagó la
+    cuenta completa. La vigencia que declara el banco no prueba que la promoción
+    siga; su página sí. Los bancos cuya ficha de detalle responde 404 cuando la
+    promoción sale (`comprobar_ficha: true` en config/bancos.yaml) se comprueban
+    uno por uno con un HEAD, que no baja la página: un 404 o un 410 la saca. Si
+    no se puede comprobar (red caída, robots.txt, 5xx) se deja, y se cuenta.
+    """
+    import requests
+    from loica.red import USER_AGENT, ClienteEducado
+
+    log = logging.getLogger("loica")
+    ids = {b["id"] for b in bancos if b.get("comprobar_ficha")}
+    urls = sorted({d.url for d in descuentos if d.banco_id in ids and d.url})
+    robots = ClienteEducado(usar_cache=False)
+    sesion = requests.Session()
+    sesion.headers["User-Agent"] = USER_AGENT
+    caidas, sin_comprobar = set(), 0
+    for url in urls:
+        if not robots.permitido(url):
+            sin_comprobar += 1
+            continue
+        estado = None
+        for _ in range(2):
+            try:
+                estado = sesion.head(url, timeout=15, allow_redirects=True).status_code
+                break
+            except requests.RequestException:
+                time.sleep(2)
+        if estado in (404, 410):
+            caidas.add(url)
+        elif estado is None or estado >= 400:
+            sin_comprobar += 1
+        time.sleep(0.4)
+    quedan = [d for d in descuentos if d.url not in caidas]
+    sacados = sorted({f"{d.banco}: {d.comercio}" for d in descuentos if d.url in caidas})
+    log.info("Fichas comprobadas: %d · ya no están en la página: %d · sin poder comprobar: %d",
+             len(urls), len(caidas), sin_comprobar)
+    for s in sacados:
+        log.info("  fuera (la página ya no lo muestra): %s", s)
+    return quedan, {"comprobadas": len(urls), "sacadas": len(caidas),
+                    "sin_comprobar": sin_comprobar, "sacados": sacados}
+
+
 def ubicar(descuentos) -> tuple[list, Counter, dict]:
     """Le pone coordenadas a cada descuento para que caiga en el mapa.
 
@@ -284,6 +331,8 @@ def main() -> int:
     parser.add_argument("--banco", help="correr solo este banco (por id)")
     parser.add_argument("--sin-cache", action="store_true", help="ignorar la caché local")
     parser.add_argument("--probar", action="store_true", help="no escribir el JSON")
+    parser.add_argument("--sin-comprobar", action="store_true",
+                        help="no comprobar que cada ficha siga en la página del banco")
     parser.add_argument("-v", "--verboso", action="store_true")
     args = parser.parse_args()
 
@@ -295,6 +344,8 @@ def main() -> int:
     log.info("Revisando %d bancos%s", len(bancos), " (modo prueba)" if args.probar else "")
 
     descuentos, estadisticas = recolectar(bancos, usar_cache=not args.sin_cache)
+    if not args.sin_comprobar and not args.probar:
+        descuentos, _comprobacion = comprobar_fichas(descuentos, bancos)
     duracion = time.time() - inicio
 
     con_dia = sum(1 for d in descuentos if d.dias)

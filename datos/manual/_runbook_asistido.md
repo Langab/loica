@@ -115,6 +115,16 @@ estructurado.
 
 ### 3. Santander y Bci — los descuentos
 
+> **Regla desde el 02-10-2026: solo lo que la página muestra hoy.** Una pasada de
+> descuentos vale solo durante el mes en que se hizo: el 1 del mes siguiente Santander,
+> Bci y BancoEstado dejan de publicarse hasta que se rehace (antes seguían saliendo con
+> la captura vieja mientras no vencieran). Los CSV sueltos de la raíz ya no se leen para
+> descuentos. Y `run_descuentos.py` comprueba con un HEAD la ficha de cada descuento de
+> Banco de Chile, Falabella, Security y Entel: si da 404, no se publica. Origen: Holy Moly
+> (Falabella) salió de la página el 01-10 con vigencia "hasta el 31-10" y se siguió
+> publicando.
+
+
 **Por qué a mano:** `banco.santander.cl` responde 403 a todo, incluido
 `/robots.txt`. Ni siquiera se puede leer qué permite. Y `bci.cl/beneficios`
 hace lo mismo (WAF): el portal abierto que se leía en su lugar,

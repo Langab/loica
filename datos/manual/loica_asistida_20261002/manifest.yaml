@@ -1,0 +1,18 @@
+# Pasada asistida del 02-10-2026: SOLO descuentos. Rehecha al día siguiente de la
+# corrida mensual porque Benjamín encontró un descuento (Holy Moly, Falabella) que
+# ya no estaba en la página del banco: la regla desde hoy es publicar solo lo que
+# la página muestra el día de la captura.
+capturada_en: "2026-10-02"
+responsable: "Claude (navegador integrado), a pedido de Benjamín: «deja solo lo que está actualmente en la página para todos los bancos»"
+fuentes:
+  - Santander (banco.santander.cl/beneficios/descuentos-restaurantes, store Vue)
+  - Bci (bci.cl/beneficios/beneficios-bci, store Vuex)
+  - BancoEstado (Un mes de Sabores; abierta para esta pasada como parte del pedido de Benjamín de revisar todos los bancos)
+archivos:
+  - descuentos_santander.csv
+  - descuentos_bci.csv
+  - descuentos_bancoestado.csv
+nota: >-
+  Comparada promoción por promoción contra la pasada del 01-10. Ver RESUMEN.
+  Los archivos con _ son el crudo de BancoEstado (verificado por SHA-256 contra
+  la pestaña) y el script que lo arma; asistida.py no los lee.

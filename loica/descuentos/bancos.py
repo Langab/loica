@@ -140,6 +140,34 @@ def _coord(valor) -> float | None:
     return numero if -56.0 < numero < -17.0 or -76.0 < numero < -66.0 else None
 
 
+def _pasada_del_mes(nombre: str) -> Path | None:
+    """El CSV de la pasada asistida más nueva, SOLO si la pasada es de este mes.
+
+    Regla desde el 02-10-2026: se publica solo lo que la página del banco
+    muestra. Una captura del mes pasado ya no lo prueba —las parrillas rotan el
+    último día del mes y una promoción puede salir antes de vencer (Holy Moly
+    en Falabella: vigente "hasta el 31-10" y sacada de la página el 01-10)—,
+    así que el banco se omite hasta que alguien haga la pasada de este mes. Un
+    banco que falta se nota y se arregla; uno con datos viejos manda a la gente
+    a pagar la cuenta completa. Tampoco se aceptan CSV sueltos de la raíz de
+    datos/manual/: no traen fecha de captura.
+    """
+    ultima = asistida.ultima_pasada()
+    if not ultima:
+        return None
+    fecha, carpeta = ultima
+    ruta = carpeta / nombre
+    if not ruta.exists():
+        log.warning("La pasada más nueva (%s) no trae %s: ese banco se omite", carpeta.name, nombre)
+        return None
+    hoy = date.today()
+    if (fecha.year, fecha.month) != (hoy.year, hoy.month):
+        log.warning("La pasada más nueva es del %s, de otro mes: %s no se publica "
+                    "hasta la pasada de este mes", fecha.isoformat(), nombre)
+        return None
+    return ruta
+
+
 def _bci(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
     # Desde el 02-09-2026 manda la pasada asistida, si existe. El portal
     # vivirconbeneficios.cl que se leía hasta entonces es un catálogo MUERTO:
@@ -152,9 +180,9 @@ def _bci(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
     # por la pasada con el navegador, igual que Santander, con su fecha de
     # captura a la vista. El portal viejo queda de respaldo y ahora sí filtra
     # por `end_date`, con lo que hoy no devuelve nada vigente: es lo correcto.
-    csv_pasada = asistida.archivos("descuentos_bci.csv")
+    csv_pasada = _pasada_del_mes("descuentos_bci.csv")
     if csv_pasada:
-        return _csv_pasada(banco, csv_pasada[0])
+        return _csv_pasada(banco, csv_pasada)
 
     recogidos: list[Descuento] = []
 
@@ -293,6 +321,7 @@ def _falabella(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
     # Sin esto, las 137 promociones de Falabella salían con día y región pero
     # sin decir de cuánto es el descuento, que es lo único que importa.
     montos = _montos_falabella(banco, cliente, url)
+    sin_tarjeta = 0
 
     saltar, total = 0, None
     while total is None or saltar < total:
@@ -326,6 +355,13 @@ def _falabella(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
             campos = item.get("fields") or {}
             suyas = set(campos.get("categoriaV2") or [])
             if categorias and not (categorias & suyas):
+                continue
+
+            # Lo que no tiene tarjeta en `newBenefits` no se ve en el sitio del
+            # banco aunque siga en el CMS: no se publica. Es la misma regla que
+            # el resto (solo lo que la página muestra), aplicada a la fuente.
+            if montos and campos.get("permalink", "") not in montos:
+                sin_tarjeta += 1
                 continue
 
             regiones = campos.get("region") or []
@@ -365,6 +401,8 @@ def _falabella(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
             ))
         saltar += por_pagina
 
+    if sin_tarjeta:
+        log.info("Falabella: %d entradas del CMS sin tarjeta en el sitio quedan fuera", sin_tarjeta)
     return recogidos
 
 
@@ -438,9 +476,13 @@ def _santander(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
     # Desde el 01-09-2026 la pasada del navegador entrega Santander como CSV
     # dentro de su carpeta con fecha, y ese CSV trae lo que el YAML no tenía:
     # dirección, comuna, logo, tope y vigencia por local. Si hay CSV, manda.
-    csv_nuevo = asistida.archivos("descuentos_santander.csv")
+    csv_nuevo = _pasada_del_mes("descuentos_santander.csv")
     if csv_nuevo:
-        return _csv_pasada(banco, csv_nuevo[0])
+        return _csv_pasada(banco, csv_nuevo)
+    # El YAML de respaldo es una captura de marzo: publicarlo sería mostrar lo
+    # que la página ya no muestra. Sin pasada de este mes, Santander no sale.
+    log.warning("Santander: sin pasada asistida de este mes; se omite (el YAML viejo ya no se publica)")
+    return []
 
     ruta = Path(__file__).resolve().parents[2] / banco["archivo"]
     if not ruta.exists():
@@ -608,9 +650,9 @@ def _bancoestado(banco: dict, cliente: ClienteEducado) -> list[Descuento]:
     demás bancos.
     """
     nombre = banco.get("archivo_pasada", "descuentos_bancoestado.csv")
-    rutas = asistida.archivos(nombre)
-    if rutas:
-        return _csv_pasada(banco, rutas[0])
+    ruta = _pasada_del_mes(nombre)
+    if ruta:
+        return _csv_pasada(banco, ruta)
     log.warning("%s: falta %s en la pasada asistida; se omite hasta una captura nueva",
                 banco["nombre"], nombre)
     return []
