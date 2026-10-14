@@ -1,6 +1,6 @@
 # ============================================================
 #  CLASIFICACIÓN — categorías y público
-#  Reemplaza a CATEGORIAS/clasificar(). Ver web/_ux_filtros.md
+#  Reemplaza a CATEGORIAS/clasificar(). Ver notas/diseno/ux_filtros.md
 # ============================================================
 # El `from __future__` no es decorativo: el runner de la corrida usa Python
 # 3.11 pero el Mac trae el 3.9 de las Command Line Tools, y ahí un

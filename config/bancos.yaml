@@ -1,6 +1,6 @@
 # Registro de bancos del catastro de descuentos.
 # El sondeo completo (qué banco sirve, cuál está tras WAF y por qué) está en
-# notas/catastro_descuentos_bancos.md
+# notas/extraccion/catastro_descuentos_bancos.md
 #
 # adaptador: bancochile | bci | falabella | bancoestado
 # Las fuentes automáticas leen contenido público; las que tienen controles de

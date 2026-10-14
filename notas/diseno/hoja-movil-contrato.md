@@ -210,7 +210,7 @@ En su lugar:
 ```js
 /* --- La hoja de la lista: cuatro topes, agarre ancho y botón de vuelta ---
    El arrastre vive en montarHoja() (loica.js). Contrato:
-   notas/hoja-movil-contrato.md. El rótulo del botón lo pone ESTA página: la
+   notas/diseno/hoja-movil-contrato.md. El rótulo del botón lo pone ESTA página: la
    hoja no sabe si cuenta películas, descuentos o talleres. */
 const hoja = montarHoja({
   rotulo: () => `${document.getElementById("conteo").textContent} ` +

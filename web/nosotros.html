@@ -113,7 +113,7 @@
        - cada uno es un ENLACE a su ficha del elenco, que es la pregunta que
          uno se hace mirando la fila ("¿y este quién es?").
      El retardo entre uno y otro son 20 ms con tope de 240 (la regla del
-     stagger, _direccion_visual.md 8.4). Con eso el escalonamiento no lo pone
+     stagger, notas/diseno/direccion_visual.md 8.4). Con eso el escalonamiento no lo pone
      el retardo sino las entradas mismas, que duran entre 0,5 y 1,3 s y traen
      su propio desfase: la Chinchilla llega 0,9 s tarde y la Cabra 0,15. */
   /* La franja se sale del relleno lateral de la portada: la cordillera tiene
@@ -960,7 +960,7 @@ function pintar(){
      Los once NO llevan tic: la fila de la portada ya los presenta en
      movimiento y una leyenda es una tabla de referencia, no un escenario.
      Además evita dejar doce animaciones infinitas dentro de una grilla
-     (_direccion_visual.md 8.3). La única que se mueve acá es la Loica, que es
+     (notas/diseno/direccion_visual.md 8.3). La única que se mueve acá es la Loica, que es
      la anfitriona y la encargada de esta página. */
   document.getElementById("elenco").innerHTML = x("ele").map(([clave,nombre,rol,desc],i) => {
     const p = paleta(clave), anfitriona = i === 0;

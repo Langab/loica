@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deja un Excel de diagnóstico de la corrida en `informes/`.
+"""Deja un Excel de diagnóstico de la corrida en `informes/diagnostico/`.
 
     python3 informe_corrida.py
 
@@ -56,7 +56,7 @@ from loica.clasificar import clasificar
 from loica.modelo import es_url_publica
 
 RAIZ = Path(__file__).resolve().parent
-DIR_INFORMES = RAIZ / "informes"
+DIR_INFORMES = RAIZ / "informes" / "diagnostico"
 RUTA_EVENTOS = RAIZ / "web" / "eventos.json"
 RUTA_TALLERES = RAIZ / "web" / "talleres.json"
 RUTA_HISTORIAL = RAIZ / "datos" / "historial_corridas.json"

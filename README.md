@@ -20,7 +20,7 @@ El pipeline implementa este circuito, y cada paso tiene su comando:
 | 3 | **Extracción** | `run_diario.py` (eventos → SQLite) y `run_descuentos.py` (bancos → JSON) |
 | 4 | **Consolidación** | todo converge a `datos/eventos.db` deduplicado por título+fecha+lugar; el export arma `web/eventos.json` (panoramas) y `web/talleres.json` (clases semanales) |
 | 5 | **Revisión + memoria de correcciones** | `revisar_extraccion.py` produce el informe y las colas; los arreglos viven en `config/correcciones/` y se aplican solos en cada corrida (ver abajo) |
-| 6 | **Diagnóstico de la corrida** | `informe_corrida.py` deja un Excel en `informes/` para mirar el proceso, no el catastro (ver abajo) |
+| 6 | **Diagnóstico de la corrida** | `informe_corrida.py` deja un Excel en `informes/diagnostico/` para mirar el proceso, no el catastro (ver abajo) |
 | 7 | **Doble check** | `verificar_web.py`: si el sitio quedó roto, vacío o cayó a la mitad, **no hay push** |
 | 8 | **Publicación** | `run_todo.py` comitea solo su salida y pushea; GitHub Actions deja `web/` en Pages |
 | 9 | **Corrida diaria a las 06:23** | GitHub Actions (`.github/workflows/corrida.yml`): no depende de ningún computador prendido. El Mac queda para probar (`--sin-publicar`) |
@@ -58,7 +58,7 @@ y queda en la memoria:
   rubro y ubicación. Aplica en todos los bancos que lo publiquen.
 
 El ciclo diario: `revisar_extraccion.py` deja el informe en
-`informes/AAAA-MM-DD_revision.md` y las **colas priorizadas** en
+`informes/revision/AAAA-MM-DD_revision.md` y las **colas priorizadas** en
 `datos/revision/pendientes_*.yaml` (esqueleto listo para completar). Una
 persona —o una sesión de Claude— verifica los datos, los pega en
 `config/correcciones/` y comitea. La corrida siguiente los aplica sola.
@@ -148,7 +148,7 @@ python3 run_descuentos.py --banco bci  # un solo banco
 
 ## El diagnóstico de la corrida (paso 6)
 
-`informe_corrida.py` deja `informes/AAAA-MM-DD_diagnostico.xlsx` en cada
+`informe_corrida.py` deja `informes/diagnostico/AAAA-MM-DD_diagnostico.xlsx` en cada
 corrida. **No es el catastro, es el proceso**: el sitio contesta "¿qué hago
 hoy?" y esto contesta "¿está funcionando y dónde se está rompiendo?". Por eso
 vive fuera de `web/` y fuera de git — `informes/` está en `.gitignore`.
@@ -196,7 +196,7 @@ con datos de ayer que uno vacío. Los descuentos, en cambio, no abortan la
 corrida — que Bci cambie su JSON no es razón para dejar sin actualizar la
 agenda, que es el corazón del proyecto.
 
-Después de cada corrida queda un informe en `informes/AAAA-MM-DD_corrida.md`
+Después de cada corrida queda un informe en `informes/corridas/AAAA-MM-DD_corrida.md`
 con los eventos nuevos agrupados por comuna, listos para revisar.
 
 ## Cómo corre solo (GitHub Actions)
@@ -569,7 +569,7 @@ parche. Importa sobre todo en la cartelera: una función es de un día concreto,
 así que leer la pasada de la semana pasada junto a la de hoy no suma salas,
 publica horarios que ya pasaron. Y como la carpeta anterior queda ahí al lado,
 comparar dos pasadas es un `diff` entre dos carpetas — lo que antes obligaba a
-guardar una copia aparte en `notas/asistida/`.
+guardar una copia aparte en `notas/extraccion/asistida/`.
 
 La fecha de la carpeta viaja con los datos: es la que hace que un descuento
 capturado a mano diga en su ficha cuándo se capturó, en vez de hacerse pasar
@@ -841,7 +841,7 @@ python3 run_descuentos.py --banco bancochile # un solo banco, para depurar
 python3 run_descuentos.py --probar           # muestra sin escribir el JSON
 ```
 
-Deja `web/descuentos.json` y un informe en `informes/AAAA-MM-DD_descuentos.md`.
+Deja `web/descuentos.json` y un informe en `informes/descuentos/AAAA-MM-DD_descuentos.md`.
 Igual que el de eventos: **no llama a ningún modelo de lenguaje**, es Python
 leyendo JSON público, y ninguna de las tres fuentes pide credencial de usuario.
 
@@ -890,7 +890,7 @@ fecha se lee en la ficha de cada promoción, no en el pie.
 
 Scotiabank (tras login), Itaú, BICE, Consorcio,
 Coopeuch y Tenpo quedaron fuera por ahora. El sondeo de los quince emisores está
-en [`notas/catastro_descuentos_bancos.md`](notas/catastro_descuentos_bancos.md).
+en [`notas/extraccion/catastro_descuentos_bancos.md`](notas/extraccion/catastro_descuentos_bancos.md).
 
 ### Solo Región Metropolitana
 
@@ -992,24 +992,51 @@ pero no pisa una entrada con `verificado: true`.
 
 ## Estructura
 
+Los puntos de entrada viven en la raíz a propósito: GitHub Actions, la
+agenda de launchd (`scripts/instalar_agenda.sh`) y este README los llaman por
+ese nombre, y `guareneitor` lee `web/descuentos.json` a través del atajo
+`~/dev/loica-pipeline`. Moverlos rompe la corrida.
+
 ```
-loica/
-  modelo.py      Qué es un evento y cómo se identifica
-  red.py         Cliente HTTP educado (robots, delays, caché)
-  normalizar.py  Fechas y precios en español chileno → datos
-  agrupar.py     Colapsa eventos de varios días
-  almacen.py     Base SQLite y estados de curaduría
-  fuentes/       Un adaptador por tipo de fuente
-  descuentos/    El catastro bancario: modelo, parseo y un adaptador por banco
-  cines.py       El catastro de salas de cine y cómo se le pega una función
-  cartelera/     Las cuatro vías de la cartelera: jsonld, semanal, agenda, asistida
-run_diario.py    Punto de entrada de los eventos
-run_descuentos.py Punto de entrada de los descuentos
-run_cine.py      Punto de entrada de la cartelera de cine
-config/          Registro de fuentes, de bancos y de salas de cine (esto es lo que se edita)
-datos/           Base, caché y logs (fuera de git) + el estado que sí viaja: eventos.jsonl, coordenadas.json, historial_corridas.json, revision/, manual/
-informes/        Un informe por corrida
+run_todo.py           Pasos 3 a 8 de punta a punta (lo que corre GitHub cada día)
+run_diario.py         Punto de entrada de los eventos
+run_descuentos.py     Punto de entrada de los descuentos
+run_cine.py           Punto de entrada de la cartelera de cine
+revisar_extraccion.py Informe de calidad + colas de corrección (paso 5)
+informe_corrida.py    Excel de diagnóstico (paso 6)
+exportar_web.py       Base → web/eventos.json, talleres.json y fichas web/e/
+verificar_web.py      Doble check antes de publicar (paso 7)
+
+loica/                El paquete
+  modelo.py           Qué es un evento y cómo se identifica
+  red.py              Cliente HTTP educado (robots, delays, caché)
+  normalizar.py       Fechas y precios en español chileno → datos
+  agrupar.py          Colapsa eventos de varios días
+  almacen.py          Base SQLite y estados de curaduría
+  fuentes/            Un adaptador por tipo de fuente
+  descuentos/         El catastro bancario: modelo, parseo y un adaptador por banco
+  cines.py            El catastro de salas de cine y cómo se le pega una función
+  cartelera/          Las cuatro vías de la cartelera: jsonld, semanal, agenda, asistida
+config/               Registro de fuentes, bancos y salas + correcciones/ (esto es lo que se edita)
+datos/                Base, caché y logs (fuera de git) + el estado que sí viaja:
+                      eventos.jsonl, coordenadas.json, historial_*.json, revision/, manual/
+scripts/              Herramientas sueltas: auditorías, índice OSM, catastros, agenda launchd
+web/                  El sitio que publica Pages (solo lo que se sirve; nada de notas)
+notas/                Documentos de trabajo, por tema:
+  diseno/             Dirección visual, filtros, blog, auditorías y críticas de diseño, elenco
+  extraccion/         Auditoría de extracción, catastro de bancos, pasadas asistidas archivadas
+  plan/               Traspasos y planes de la app
+informes/             Salida de cada corrida (fuera de git), una carpeta por tipo:
+  corridas/           AAAA-MM-DD_corrida.md      (run_diario.py)
+  revision/           AAAA-MM-DD_revision.md     (revisar_extraccion.py)
+  descuentos/         AAAA-MM-DD_descuentos.md   (run_descuentos.py)
+  diagnostico/        AAAA-MM-DD_diagnostico.xlsx (informe_corrida.py)
+  auditorias/         Capturas de auditorías de diseño y de la hoja móvil
+.github/workflows/    corrida.yml (diaria), descuentos.yml, pages.yml
 ```
+
+La estrategia comercial (`propuesta-de-valor/`) ya no vive en este repo
+público: está en `../negocio/propuesta-de-valor/`, fuera de git.
 
 ## Pendientes conocidos
 

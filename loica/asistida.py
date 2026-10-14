@@ -3,7 +3,7 @@
 Hasta el 01-09-2026 la pasada con el navegador dejaba sus archivos sueltos en
 `datos/manual/`: `asistida.csv`, `cartelera_*.csv`, el YAML de Santander. Cada
 pasada pisaba a la anterior y la única forma de ver la de la semana pasada era
-ir al historial de git o a la copia archivada en `notas/asistida/`.
+ir al historial de git o a la copia archivada en `notas/extraccion/asistida/`.
 
 Desde entonces cada pasada llega como una CARPETA CON FECHA:
 

@@ -472,7 +472,7 @@ mascota("chinchilla", "var(--c-cultura)", 120, {
 <section class="seccion auditoria" id="auditoria">
   <p class="ceja">Auditoría del sitio · 22 de agosto</p>
   <h2>Diecisiete hallazgos en nueve páginas. Tres bloquean en celular.</h2>
-  <p class="sub">Nueve páginas y una ficha, en 390/768/1440, claro y oscuro, Chromium y WebKit, contra la dirección visual vigente y las críticas del 9 de agosto. Todo está medido; el informe completo con las 300 capturas citadas queda en <code>notas/_auditoria_diseno_2026-08-22.md</code> e <code>informes/auditoria-diseno-2026-08-22/</code>.</p>
+  <p class="sub">Nueve páginas y una ficha, en 390/768/1440, claro y oscuro, Chromium y WebKit, contra la dirección visual vigente y las críticas del 9 de agosto. Todo está medido; el informe completo con las 300 capturas citadas queda en <code>notas/diseno/auditoria_diseno_2026-08-22.md</code> e <code>informes/auditoria-diseno-2026-08-22/</code>.</p>
   <ol>
     <li><span class="sev bloquea">Bloquea</span><b>Calendario en celular:</b> la rejilla mide 195 px y necesita 289; los días 24-31 quedan bajo la agenda con <code>overflow:hidden</code>. La última semana del mes no se puede tocar.</li>
     <li><span class="sev bloquea">Bloquea</span><b>Descuentos:</b> el botón "Mapa" y el contador viven en un riel de 713 px sin aviso de scroll (x=494 y 586 en una pantalla de 390). El mapa no existe para el celular.</li>
@@ -900,7 +900,7 @@ return {carita, cuerpo, mascota, CARITAS, ojos, OJO, TINTA_VAR};
         de la tierra, la Chinchilla llega tarde y aplaude).
    Misma API que loica.js: carita() / cuerpo() / mascota(), más las
    opciones {acc:false} (sin accesorio, para el logo) y {anima:true}.
-   Las reglas de dibujo siguen siendo las de _direccion_visual.md §6:
+   Las reglas de dibujo siguen siendo las de notas/diseno/direccion_visual.md §6:
    cabeza ≥70%, ojo ≥1,6, contorno 1,6, nada bajo 1/15 del lienzo.
    ============================================================ */
 const V2 = (() => {

@@ -38,7 +38,7 @@ from loica import asistida
 
 RAIZ = Path(__file__).resolve().parent
 RUTA_CONFIG = RAIZ / "config" / "fuentes.yaml"
-DIR_INFORMES = RAIZ / "informes"
+DIR_INFORMES = RAIZ / "informes" / "corridas"
 DIR_LOGS = RAIZ / "datos" / "logs"
 RUTA_HISTORIAL_FUENTES = RAIZ / "datos" / "historial_fuentes.json"
 MAX_HISTORIAL_FUENTES = 60

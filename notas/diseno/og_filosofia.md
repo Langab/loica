@@ -1,6 +1,6 @@
 # Filosofía visual de la imagen social (proceso canvas-design)
 
-Movimiento: **serigrafía chilena** — la misma dirección de _direccion_visual.md
+Movimiento: **serigrafía chilena** — la misma dirección de notas/diseno/direccion_visual.md
 llevada al afiche. Tinta plana sin degradados, contorno grueso Azul Cordillera,
 sombra dura desplazada como repisa de imprenta. El paisaje es protagonista
 silencioso: la cordillera como silueta, el sol Amarillo Micro como punto focal

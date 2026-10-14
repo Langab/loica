@@ -603,7 +603,7 @@ Con los 268 eventos del snapshot, el reparto de origen queda:
 ```python
 # ============================================================
 #  CLASIFICACIÓN — categorías y público
-#  Reemplaza a CATEGORIAS/clasificar(). Ver web/_ux_filtros.md
+#  Reemplaza a CATEGORIAS/clasificar(). Ver notas/diseno/ux_filtros.md
 # ============================================================
 import re
 import unicodedata

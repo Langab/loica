@@ -9,7 +9,7 @@ descuento amarrado al link del banco que lo publica. La app indexa y deriva
 tráfico a la fuente; no la reemplaza.
 
 El sondeo de qué banco sirve y cuál no está en
-`notas/catastro_descuentos_bancos.md`.
+`notas/extraccion/catastro_descuentos_bancos.md`.
 """
 
 from __future__ import annotations

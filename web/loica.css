@@ -6,7 +6,7 @@
 
 /* ---------- 1. TOKENS ----------
    Dirección "serigrafía chilena": tinta plana, contorno grueso, repisa dura.
-   Detalle y contrastes calculados en _direccion_visual.md. */
+   Detalle y contrastes calculados en notas/diseno/direccion_visual.md. */
 :root{
   /* Primitivos: rampas OKLCH ancladas en los 6 colores de marca */
   --rojo-50:#FFF4F1;  --rojo-100:#FFE5DF; --rojo-200:#FFC9BE; --rojo-300:#FEA493;
@@ -421,7 +421,7 @@ body.capa-abierta{overflow:hidden}
    color de una: el rojo que tenía es del Cóndor, y desde que Música tiene
    pestaña propia le pertenece a ella. Toma el amarillo de "otros", que en
    CATEGORIAS es literalmente el color de la Loica cuando atiende a todos, y
-   como todo amarillo va con tinta azul (7,76:1, _direccion_visual §7.6). */
+   como todo amarillo va con tinta azul (7,76:1, notas/diseno/direccion_visual.md §7.6). */
 :root[data-pagina="mapa"]       {--nav-color:var(--c-otros);  --nav-tinta:var(--azul-900)}
 /* Las cuatro pestañas de categoría llevan el color de su animal guía, el
    mismo del chip y del pin: la pastilla de la barra y el pin del mapa tienen
@@ -562,7 +562,7 @@ body.capa-abierta{overflow:hidden}
 /* ---------- 4b. LA HOJA INFERIOR ----------
    El mecanismo de la lista que sube y baja con el dedo en celular. Lo monta
    `montarHoja()` (loica.js) y lo usan mapa, cine, descuentos y talleres; el
-   contrato está escrito en notas/hoja-movil-contrato.md.
+   contrato está escrito en notas/diseno/hoja-movil-contrato.md.
 
    Acá vive SOLO lo que es del mecanismo. La caja del panel —dónde se para, qué
    ancho tiene, en qué corte se va al costado— sigue siendo de cada página,
@@ -695,7 +695,7 @@ body.capa-abierta{overflow:hidden}
 .tarjeta:hover{background:var(--fondo-hundido)}
 .tarjeta-gratis{box-shadow:inset 3px 0 0 var(--gratis)}
 
-/* Entrada escalonada. La regla es de _direccion_visual.md §8.4 y es una regla
+/* Entrada escalonada. La regla es de notas/diseno/direccion_visual.md §8.4 y es una regla
    de rendimiento antes que de gusto: escalonar 345 tarjetas es un desastre.
    Solo las 12 primeras, 20ms entre una y otra, 240ms de techo. */
 .lista-anima .tarjeta{animation:tarjeta-entra var(--medio) backwards}
@@ -1053,7 +1053,7 @@ body.capa-abierta{overflow:hidden}
    `!important` apaga cosas que nadie revisó una por una, empezando por los
    `transition` donde la transición ES el mecanismo. Acortar la duración es más
    preciso: la animación corre, termina en el mismo tick y el elemento queda en
-   su estado final. Es lo que pide _direccion_visual.md 8.5.
+   su estado final. Es lo que pide notas/diseno/direccion_visual.md 8.5.
 
    Lo que la regla previene HACIA ADELANTE —y conviene decirlo como riesgo y no
    como bug, porque hoy no muerde— es una animación cuyo estado de reposo

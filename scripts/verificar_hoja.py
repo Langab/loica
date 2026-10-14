@@ -75,7 +75,7 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
 DIR_WEB = RAIZ / "web"
-DIR_INFORME = RAIZ / "informes" / "hoja-movil-2026-08-25"
+DIR_INFORME = RAIZ / "informes" / "auditorias" / "hoja-movil-2026-08-25"
 BASE = "http://localhost:8777"
 
 PAGINAS = [

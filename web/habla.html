@@ -307,7 +307,7 @@
   @media(min-width:640px){.opciones.elenco{grid-template-columns:repeat(3,minmax(0,1fr))}}
   @media(max-width:540px){.opciones{margin-left:0}}
   /* --- El escalonado de entrada, en un solo lugar ---
-     Regla 8.4 de _direccion_visual.md: se escalonan los primeros DOCE, 20ms
+     Regla 8.4 de notas/diseno/direccion_visual.md: se escalonan los primeros DOCE, 20ms
      entre uno y otro, 240ms de tope. Los tres escalonados de esta página lo
      incumplían con tres constantes distintas —45ms las opciones, 45ms los
      chips de afinar, 90ms los resultados— y ninguno tenía corte: la lista de
@@ -1503,7 +1503,7 @@ function pintarEscenario(){
   desfile.innerHTML = guias.map((a, i) => {
     const sit = SITUACIONES.find(s => s.guia === a.clave);
     const g = GUIAS[a.clave];
-    /* El escalonado sigue la regla 8.4 de _direccion_visual.md: solo los
+    /* El escalonado sigue la regla 8.4 de notas/diseno/direccion_visual.md: solo los
        primeros doce, 20ms entre uno y otro, 240ms de tope. Estaba en 200ms
        por animal, o sea 2,0 s para que entraran los once: a los dos segundos
        y medio de cargar la página el último todavía se estaba dibujando, y

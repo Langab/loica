@@ -41,7 +41,7 @@ MAX_EDAD_MANUAL_DIAS = 3
 # Taxonomía provisional: mapea lo que dicen las fuentes a las categorías del
 # producto. La definitiva está en definicion_producto_mvp.md.
 # La clasificación (categorías + público/edad) vive en loica/clasificar.py,
-# generado desde web/_ux_filtros.md. Devuelven (valor, motivo).
+# generado desde notas/diseno/ux_filtros.md. Devuelven (valor, motivo).
 from loica.clasificar import clasificar as _clasificar
 from loica.clasificar import clasificar_publico
 from loica.clasificar import memoria as memoria_categorias, _norm as _norm_clasificador

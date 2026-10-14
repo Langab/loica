@@ -782,7 +782,7 @@ function cerrarFicha(){
    desde la cabecera del contador y desde la lista, el tope OCULTA para ver el
    mapa entero, y el botón flotante que la trae de vuelta con el conteo vivo.
    Las otras tres páginas usan exactamente esto mismo; el contrato para
-   portarlas está en notas/hoja-movil-contrato.md.
+   portarlas está en notas/diseno/hoja-movil-contrato.md.
 
    El rótulo del botón lo pone ESTA página: la hoja no sabe si cuenta eventos,
    películas o descuentos, y "128" solo no es una respuesta. */

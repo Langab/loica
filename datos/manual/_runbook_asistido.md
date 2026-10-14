@@ -56,7 +56,7 @@ Dos cosas que esto arregla y conviene no perder:
    función es de un día concreto, y mezclar la pasada de la semana pasada con
    la de hoy no suma salas, publica horarios que ya pasaron.
 2. **Comparar dos pasadas es un `diff` entre dos carpetas.** Ya no hace falta
-   guardar una copia aparte en `notas/asistida/`.
+   guardar una copia aparte en `notas/extraccion/asistida/`.
 
 La pasada debe traer además `manifest.yaml`, usando
 `datos/manual/_manifest.example.yaml` como base. Declara quién la capturó,

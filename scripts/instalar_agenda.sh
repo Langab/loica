@@ -91,4 +91,4 @@ echo "  launchctl list | grep ${ETIQUETA}          # ver si está cargado"
 echo "  launchctl kickstart gui/$(id -u)/${ETIQUETA}  # correr ahora mismo"
 echo "  bash scripts/instalar_agenda.sh --quitar   # desinstalar"
 echo
-echo "Los informes quedan en: ${PROYECTO}/informes/"
+echo "Los informes quedan en: ${PROYECTO}/informes/ (corridas/, revision/, descuentos/, diagnostico/)"

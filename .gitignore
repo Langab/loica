@@ -31,5 +31,18 @@ __pycache__/
 .claude/settings.local.json
 
 # Estrategia comercial con precios y gestiones: el repo es público y esto no.
-# Para versionarla, moverla a un repo privado (no basta con borrar esta línea).
+# Desde el 14-10-2026 vive fuera del repo (../negocio/propuesta-de-valor/);
+# la línea queda por si alguien la vuelve a copiar acá.
 propuesta-de-valor/
+
+# Estado local de Cloudflare Wrangler
+.wrangler/
+
+# Exploración de APIs con reverse-api-engineer (herramientas/reverse_api/):
+# los HAR graban cookies y cabeceras de la sesión del navegador. La carpeta de
+# trabajo vive FUERA del repo (../exploracion_apis/), pero si alguien corre la
+# herramienta desde adentro, que nada de eso viaje a git.
+exploracion_apis/
+*.har
+.reverse-api/
+herramientas/reverse_api/scripts/

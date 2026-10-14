@@ -252,7 +252,7 @@
   /* La cola se mueve SOLO al apuntar o enfocar la tarjeta. Es el gesto del
      Quiltro (m-colita, ya definido en loica.css) y acá se pide prestado por
      nombre, sin redeclararlo. No corre solo por la regla 8.3 de
-     _direccion_visual.md: nada infinito dentro de una fila de lista repetida.
+     notas/diseno/direccion_visual.md: nada infinito dentro de una fila de lista repetida.
      Aunque hoy haya un solo local sin foto, mañana pueden ser seis colas
      moviéndose a la vez en una grilla que scrollea. */
   .local:hover  > svg .p-cola,
@@ -585,7 +585,7 @@ function pintarIndice(noEncontrado){
   const orden = [...visibles].sort((a,b) =>
     (!!b.destacado - !!a.destacado) || a.nombre.localeCompare(b.nombre, "es"));
 
-  /* Estado vacío: el Quiltro a 72px como manda la escala de _direccion_visual
+  /* Estado vacío: el Quiltro a 72px como manda la escala de notas/diseno/direccion_visual.md
      6.3, y con los ojos cerrados (pose "durmiendo"). Un perro moviendo la cola
      sobre una lista vacía diría lo contrario de lo que pasó. */
   const lista = orden.length

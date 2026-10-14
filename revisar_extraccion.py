@@ -5,7 +5,7 @@
 
 Corre después del export y produce dos cosas:
 
-1. Un informe en `informes/AAAA-MM-DD_revision.md` con la foto de calidad de
+1. Un informe en `informes/revision/AAAA-MM-DD_revision.md` con la foto de calidad de
    la base consolidada: cuántos eventos tienen ubicación exacta, cuántos caen
    al centro de comuna, cuántos quedaron en "otros", qué fuentes están
    degradadas y cómo vienen los descuentos.
@@ -33,7 +33,7 @@ RUTA_EVENTOS = RAIZ / "web" / "eventos.json"
 RUTA_DESCUENTOS = RAIZ / "web" / "descuentos.json"
 RUTA_DB = RAIZ / "datos" / "eventos.db"
 RUTA_HISTORIAL_FUENTES = RAIZ / "datos" / "historial_fuentes.json"
-DIR_INFORMES = RAIZ / "informes"
+DIR_INFORMES = RAIZ / "informes" / "revision"
 DIR_PENDIENTES = RAIZ / "datos" / "revision"
 
 # Cuántas entradas mostrar en cada cola. Las colas son para trabajarlas, no

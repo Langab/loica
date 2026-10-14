@@ -11,7 +11,7 @@
         de la tierra, la Chinchilla llega tarde y aplaude).
    Misma API que loica.js: carita() / cuerpo() / mascota(), más las
    opciones {acc:false} (sin accesorio, para el logo) y {anima:true}.
-   Las reglas de dibujo siguen siendo las de _direccion_visual.md §6:
+   Las reglas de dibujo siguen siendo las de notas/diseno/direccion_visual.md §6:
    cabeza ≥70%, ojo ≥1,6, contorno 1,6, nada bajo 1/15 del lienzo.
    ============================================================ */
 const V2 = (() => {

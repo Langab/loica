@@ -304,7 +304,7 @@ const vista = document.getElementById("vista");
 const DESCRIPCION_DEFECTO = "El finde, lo gratis y las rutas de barrio en Santiago, revisados uno por uno y con precio real. La versión larga de Los datos del finde.";
 
 // Aviso simple si el idioma global no es español. El blog no se traduce
-// todavía (ver _blog_plan.md §5.5) pero las tarjetas de evento sí, porque
+// todavía (ver notas/diseno/blog_plan.md §5.5) pero las tarjetas de evento sí, porque
 // esas ya son multi-idioma en todo el sitio vía cat()/t().
 const AVISO_IDIOMA = {
   en: "This blog is written in Spanish for now.",
@@ -586,7 +586,7 @@ function pintarPost(post){
 }
 
 /* Un string por párrafo. "## " al inicio = subtítulo. *cursiva* y **negrita**,
-   nada más — igual que dice el esquema en _blog_plan.md §2.2. */
+   nada más — igual que dice el esquema en notas/diseno/blog_plan.md §2.2. */
 function formatearParrafo(texto){
   let s = escapar(texto);
   s = s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
@@ -608,7 +608,7 @@ function tarjetaEventoPost(ref, pal, animalNota){
   const ev = EVENTOS.find(e => e.id === ref.id);
   if(!ev){
     // Defensivo: si algún día un id queda huérfano, no se rompe la página
-    // (ver _blog_plan.md §2.4, chequeo 1 — esto no debería pasar nunca).
+    // (ver notas/diseno/blog_plan.md §2.4, chequeo 1 — esto no debería pasar nunca).
     return `<article class="reco reco-rota" style="--tono:${pal.tono};--suave:${pal.suave}">
       <div class="reco-cuerpo">
         <p class="reco-rota-msg">${mascota("loica","var(--tinta-tenue)",20)}
@@ -658,7 +658,7 @@ function tarjetaEventoPost(ref, pal, animalNota){
 /* ---------- compartir un post ----------
    Paralelo a botonesCompartir(ev) de loica.js (que asume forma de evento,
    no de post). Reutiliza REDES y copiarLink tal cual — solo cambia el texto
-   y la URL, como pide _blog_plan.md §4.3. */
+   y la URL, como pide notas/diseno/blog_plan.md §4.3. */
 function compartirPost(post){
   const url = `${SITIO}/blog.html#/p/${post.slug}`;
   const texto = `${post.titulo}\n${post.bajada}`;

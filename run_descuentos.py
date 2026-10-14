@@ -35,7 +35,7 @@ RAIZ = Path(__file__).resolve().parent
 RUTA_CONFIG = RAIZ / "config" / "bancos.yaml"
 RUTA_SALIDA = RAIZ / "web" / "descuentos.json"
 RUTA_ESTADO = RAIZ / "datos" / "ultima_corrida_descuentos.json"
-DIR_INFORMES = RAIZ / "informes"
+DIR_INFORMES = RAIZ / "informes" / "descuentos"
 DIR_LOGS = RAIZ / "datos" / "logs"
 
 

@@ -183,7 +183,7 @@ jobs:
           hoy=$(date +%F)
           {
             echo "## Corrida del $hoy · modo ${{ inputs.modo || 'completo' }}"
-            for informe in "informes/${hoy}_corrida.md" "informes/${hoy}_revision.md"; do
+            for informe in "informes/corridas/${hoy}_corrida.md" "informes/revision/${hoy}_revision.md"; do
               if [ -f "$informe" ]; then echo; cat "$informe"; fi
             done
           } >> "$GITHUB_STEP_SUMMARY"
