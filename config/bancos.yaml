@@ -26,6 +26,9 @@ bancos:
     no se publica una copia vieja ni se intenta evadir el control de acceso.'
 
 - id: bancochile
+  # Su ficha de detalle da 404 cuando la promoción sale de la página: run_descuentos la
+  # comprueba (HEAD) y no publica lo que ya no está. Ver comprobar_fichas().
+  comprobar_ficha: true
   nombre: Banco de Chile
   # Edwards emite con la misma plataforma y los descuentos son los mismos
   emisor: Banco de Chile y Banco Edwards
@@ -83,6 +86,9 @@ bancos:
     '
 
 - id: falabella
+  # Su ficha de detalle da 404 cuando la promoción sale de la página: run_descuentos la
+  # comprueba (HEAD) y no publica lo que ya no está. Ver comprobar_fichas().
+  comprobar_ficha: true
   nombre: Banco Falabella
   emisor: Banco Falabella · CMR
   adaptador: falabella
@@ -193,6 +199,9 @@ bancos:
     '
 
 - id: security
+  # Su ficha de detalle da 404 cuando la promoción sale de la página: run_descuentos la
+  # comprueba (HEAD) y no publica lo que ya no está. Ver comprobar_fichas().
+  comprobar_ficha: true
   nombre: Banco Security
   # Las dos marcas son el mismo emisor: la letra chica de los 80 beneficios
   # gastronómicos dice "Banco BICE, continuador legal de Banco Security".
@@ -246,6 +255,9 @@ bancos:
     '
 
 - id: entel
+  # Su ficha de detalle da 404 cuando la promoción sale de la página: run_descuentos la
+  # comprueba (HEAD) y no publica lo que ya no está. Ver comprobar_fichas().
+  comprobar_ficha: true
   nombre: Entel
   emisor: Club Entel
   adaptador: entel
