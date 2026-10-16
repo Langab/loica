@@ -22,6 +22,43 @@ from ..red import ClienteEducado
 
 log = logging.getLogger("loica.web")
 
+
+# Algunos sitios arman su JSON-LD con una codificación que no sabe de Unicode:
+# Ticketplus publica "MARTES SE SALE! ? MARTES 25 AGOSTO ? Club Subterraneo"
+# en el JSON-LD y, en la MISMA página, "… ★ MARTES 25 AGOSTO ★ Club
+# Subterráneo" en el <h1>, el og:title y el <title>. La estrella se volvió
+# "?" y las tildes se cayeron. Cuando el nombre trae un "?" que no cierra una
+# pregunta (no hay "¿"), se busca ese mismo título en los textos visibles de
+# la página, sin mirar tildes y dejando que cada "?" calce con uno o dos
+# caracteres cualesquiera, y se usa la versión de la página. Si no calza
+# exacto, queda el del JSON-LD: nunca se inventa un título.
+def _sin_tildes(texto: str) -> str:
+    import unicodedata
+    # Carácter por carácter, para que las posiciones del resultado sigan
+    # siendo las del original y el trozo que calce se pueda cortar de ahí.
+    return "".join((unicodedata.normalize("NFKD", c)[:1] or c) for c in texto)
+
+
+def _reparar_titulo(titulo: str, sopa: BeautifulSoup) -> str:
+    if "?" not in titulo or "¿" in titulo:
+        return titulo
+    patron = r"\s*".join(
+        ".{1,2}" if trozo == "?" else re.escape(trozo)
+        for trozo in re.findall(r"\?|[^?\s]+", _sin_tildes(titulo).lower()))
+    candidatos = [n.get_text(" ", strip=True) for n in sopa.find_all("h1")]
+    for prop in ("og:title", "twitter:title"):
+        nodo = sopa.find("meta", property=prop) or sopa.find("meta", attrs={"name": prop})
+        if nodo and nodo.get("content"):
+            candidatos.append(nodo["content"])
+    if sopa.title and sopa.title.string:
+        candidatos.append(sopa.title.string)
+    for candidato in candidatos:
+        candidato = " ".join(candidato.split())
+        m = re.search(patron, _sin_tildes(candidato).lower())
+        if m:
+            return candidato[m.start():m.end()]
+    return titulo
+
 # Datos estructurados: muchos sitios ya publican sus eventos en JSON-LD
 # (schema.org/Event). Cuando existe, es la mejor fuente posible de un HTML.
 def _desde_jsonld(sopa: BeautifulSoup, fuente: dict) -> list[Evento]:
@@ -118,7 +155,7 @@ def _desde_jsonld(sopa: BeautifulSoup, fuente: dict) -> list[Evento]:
                 enlace = fuente["url_base"].rstrip("/") + enlace
 
             eventos.append(Evento(
-                titulo=limpiar_html(str(item.get("name", ""))),
+                titulo=_reparar_titulo(limpiar_html(str(item.get("name", ""))), sopa),
                 descripcion_corta=resumir(str(item.get("description", ""))),
                 inicio=parsear_fecha(str(item.get("startDate", ""))),
                 fin=parsear_fecha(str(item.get("endDate", ""))),

@@ -52,7 +52,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <!-- `integrity` no es adorno: unpkg sirve lo que el paquete tenga publicado, y
      una versión republicada o un unpkg comprometido inyectaría JavaScript en
      la página con todo el dominio a su disposición. Con el hash, el navegador
@@ -63,8 +63,8 @@
 <!-- El ?v= es el cache-buster del sitio y va PAREJO en las once páginas, en
      mapa.css/mapa.js y en la plantilla de exportar_web.py: si se toca uno de
      esos archivos, se sube el número en todos (README, "sube el cache-buster"). -->
-<link rel="stylesheet" href="loica.css?v=31">
-<link rel="stylesheet" href="mapa.css?v=31">
+<link rel="stylesheet" href="loica.css?v=32">
+<link rel="stylesheet" href="mapa.css?v=32">
 </head>
 <body>
 <div id="app">
@@ -115,14 +115,14 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
         integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
         crossorigin="anonymous"></script>
-<script src="loica.js?v=31"></script>
+<script src="loica.js?v=32"></script>
 <script>
   /* Lo único propio de esta página: qué archivo es y qué categoría muestra.
      mapa.js las lee al arrancar; PAGINA manda en la barra de navegación y
      CATEGORIA_FIJA recorta el catálogo (null = todas las categorías). */
   const PAGINA = "mapa.html", CATEGORIA_FIJA = null;
 </script>
-<script src="mapa.js?v=31"></script>
+<script src="mapa.js?v=32"></script>
 <!-- Cloudflare Web Analytics: cuenta visitas sin cookies y sin huella
      digital, así que el sitio no necesita banner de consentimiento (la Ley
      21.719 rige desde diciembre de 2026). El token es público a propósito:

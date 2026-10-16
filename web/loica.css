@@ -67,7 +67,7 @@
   --foco:var(--amarillo-300);
 
   /* Tipografía */
-  --fuente-marca:"Baloo 2","Nunito",system-ui,sans-serif;
+  --fuente-marca:"Bricolage Grotesque","Baloo 2",system-ui,sans-serif;
   --fuente-ui:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
   --t-xs:12px; --t-sm:13px; --t-base:15px; --t-md:17px;
   --t-lg:21px; --t-xl:27px; --t-2xl:35px; --t-3xl:46px;

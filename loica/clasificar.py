@@ -133,13 +133,17 @@ PATRONES_CATEGORIA = [
                 # Los partidos se pescan por la disciplina, por el nombre del
                 # club, o por PARTIDO cuando el título no trae ninguno.
                 r"|escalada|halterofilia|powerlifting"
+                # "Actividades deportivas gratuitas" no nombra la disciplina.
+                r"|deportiv[oa]s?"
                 r"|fight house|ufc|mma|clasificatorio|mountain ?bike|mtb)\b"),
     ("familia", r"\b(publico infantil|teatro infantil|infantil(es)?|para nin[oa]s"
                 r"|cuenta ?cuentos|titeres|marionetas|panorama familiar"
                 # "Magia Sobre Hielo Melipilla" no dice en ninguna parte que sea
                 # para niños, pero un show sobre patines es exactamente eso.
                 r"|sobre hielo|on ice"
-                r"|para toda la familia|publico familiar|primera infancia|parvul)"),
+                r"|para toda la familia|publico familiar|primera infancia|parvul"
+                # El cuidado después del colegio es para niños, no un after.
+                r"|after ?school)"),
     # "club" va acá y no en otro lado: NO_ES_FIESTA lo protege más abajo.
     ("feria",   r"\b(feria de disen\w*|feria artesanal|feria costumbrista"
                 r"|feria navidena|feria del libro|feria vintage"
@@ -184,10 +188,16 @@ PATRONES_CATEGORIA = [
                 # escribió "Circdomingo HALLOWEN".
                 r"|hallowe+n|noche de brujas|ano nuevo"
                 r"|cumbia bailable|fonda\w*|ramada\w*|fiestas patrias"
+                # Las noches de pista del Club Subterráneo no traen otra señal
+                # que el formato: "MIERCOLES SE BAILA", "RUMBA Full
+                # Ultrabailable", "MARTES SE SALE!". Caían en fiesta por el
+                # "club" del recinto, que ya no cuenta (16-10-2026).
+                r"|(lunes|martes|miercoles|jueves|viernes|sabado|domingo) se (sale|baila)"
+                r"|ultra ?bailable|full bailable"
                 # La Cumbre Guachaca es la fonda grande de agosto: cueca,
                 # cumbia y vino en jarro. Va con chilenidad, no en "otros".
                 r"|chilenidad|dieciochera|guachaca)"),
-    ("cine",    r"\b(cine(teca|club)?|pelicula|documental|cortometraje"
+    ("cine",    r"\b(cine(teca| ?club)?|pelicula|documental|cortometraje"
                 r"|largometraje|audiovisual|proyeccion)"),
     ("teatro",  r"\b(teatr|obra|dramaturg|escenic|monologo|danza|circo"
                 # "Cirque" del Soleil no es "circo", y "comedy" tampoco es
@@ -242,7 +252,8 @@ PATRONES_CATEGORIA = [
 
 # "club de lectura" NO es una fiesta. Este era el bug que mandaba
 # "Grupo de lectura: George Canguilhem" a la categoría fiesta.
-NO_ES_FIESTA = re.compile(r"club de (lectura|conversacion|libro|cine)")
+# Tampoco un "Cine Club" (16-10-2026: "Run Run se fue pal Cine Club").
+NO_ES_FIESTA = re.compile(r"club de (lectura|conversacion|libro|cine)|cine ?club")
 
 # Un partido publicado solo con los nombres de los equipos. "Universidad
 # Católica vs. Estudiantes de La Plata en Claro Arena" no trae ni una palabra
@@ -473,8 +484,12 @@ def clasificar(titulo, categoria_fuente, descripcion, lugar="", fuente="",
         if categoria:
             return categoria, "etiqueta"
 
-    # 2. Recién ahora la descripción.
-    categoria = _buscar_categoria(cuerpo)
+    # 2. Recién ahora la descripción, también sin el recinto. La descripción
+    #    repite el lugar tanto como el título ("Clases deportivas gratuitas
+    #    todos los domingos en Club Providencia") y el "club" del nombre
+    #    mandaba a fiesta un taller deportivo, un afterschool y la entrada a
+    #    una piscina (16-10-2026).
+    categoria = _buscar_categoria(_sin_nombre_del_lugar(cuerpo, lugar))
     if categoria:
         return categoria, "descripcion"
 

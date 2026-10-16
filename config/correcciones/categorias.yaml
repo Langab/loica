@@ -605,3 +605,9 @@ reglas:
     donde: titulo
     categoria: feria
     nota: "'La Fiesta de la Lana' del GAM es un encuentro textil con stands y talleres (2026-08-22)"
+
+  - nombre: la visita mediada es una muestra
+    palabras: [mediacion, recorrido mediado, visita mediada]
+    donde: titulo
+    categoria: arte
+    nota: "'Mediación «Chile, mi media mitad»' del Museo Violeta Parra es un recorrido por la obra, y caía en fiesta por 'chilenidad' en la descripción (2026-10-16)"

@@ -40,8 +40,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="loica.css?v=31">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="loica.css?v=32">
 <style>
   body{overflow-x:hidden}
 
@@ -53,30 +53,9 @@
      ============================================================ */
   .hero{position:relative;overflow:hidden;background:var(--fondo-elevado);
     border-bottom:2.5px solid var(--contorno)}
-  /* Manchas de color plano, sin degradados: son las de la serigrafía.
-     En oscuro se mezclan con `screen`: sin eso, el amarillo sobre azul-950
-     daba un café grisáceo que parecía una mancha de humedad. */
-  .hero .mancha{position:absolute;border-radius:50%;opacity:.16;pointer-events:none}
-  /* Y el amarillo se cambia por el rojo de marca: un amarillo desaturado
-     sobre azul oscuro no se lee como color, se lee como suciedad. */
-
-  
-  :root[data-tema="oscuro"] .hero .mancha{mix-blend-mode:screen;opacity:.26}
-  :root[data-tema="oscuro"] .hero .m2{background:var(--c-musica)}
-  /* Las tres manchas entran POR EL BORDE, no flotan dentro del cuadro.
-     Estaban puestas con el centro del círculo todavía dentro del hero (la
-     lila: 340px de diámetro en left:-90, o sea centro en x=80), y un círculo
-     recortado por un lado con el centro adentro no se lee como una mancha que
-     sigue más allá del papel: se lee como un círculo mordido. La regla es
-     simple y vale para las tres: el centro va FUERA del cuadro, y entonces lo
-     que queda dentro es un arco limpio.
-
-     La menta era peor porque no tocaba ningún borde: era un disco suelto
-     detrás de las patas de la Loica, cortado abajo por la cordillera. Ahora
-     entra por la derecha como las otras dos. */
-  .hero .m1{width:340px;height:340px;background:var(--c-fiesta);top:-200px;left:-190px}
-  .hero .m2{width:280px;height:280px;background:var(--c-otros);top:-165px;right:-160px}
-  .hero .m3{width:260px;height:260px;background:var(--c-deporte);bottom:52px;right:-140px}
+  /* Las tres manchas de color de las esquinas se fueron el 16-10-2026 con
+     el elenco v3: con retratos de cuerpo entero en escena, tres círculos que
+     no significaban nada competían con los animales, que sí significan. */
 
   /* Dos columnas: el texto y la anfitriona. La Loica deja de ser un adorno
      que cruza el cielo y pasa a ser la guía del proyecto: llega volando,
@@ -273,10 +252,10 @@
      168 y no 196: el desfile sobre la cordillera es el momento de identidad de
      la portada y no se toca, pero tenía 28px de cielo vacío arriba de las
      cabezas que no hacían nada salvo empujar los panoramas fuera de pantalla. */
-  .paseo{position:relative;height:168px;margin-top:var(--e-5)}
+  .paseo{position:relative;height:196px;margin-top:var(--e-5)}
     .desfile{
     position:absolute;inset:auto 0 18px 0;display:flex;align-items:flex-end;
-    justify-content:center;gap:clamp(2px,2.4vw,22px);padding:0 var(--e-3);
+    justify-content:center;gap:clamp(0px,.6vw,8px);padding:0 var(--e-3);
   }
   /* Ya no marchan todos con el mismo balanceo: cada animal entra a escena
      con su propia historia (el Degú sale de la tierra, la Chinchilla llega
@@ -289,7 +268,7 @@
   .desfile .bicho-hero:hover{transform:translateY(-10px) scale(1.08)}
   /* Nueve animales: a 375px, nueve por 40px más los espacios se pasaban del
      ancho de la pantalla y el último quedaba cortado por la mitad. */
-  .desfile .bicho-hero svg{width:clamp(33px,9vw,74px);height:auto}
+  .desfile .bicho-hero svg{width:clamp(34px,8.2vw,100px);height:auto}
 
   /* La anfitriona. Llega volando desde fuera de la pantalla, aterriza al
      lado del título y el globo aparece después: primero se posa, después
@@ -297,7 +276,7 @@
   .hero-guia{display:flex;flex-direction:column;align-items:center;gap:var(--e-3);
     padding-bottom:var(--e-2)}
   #loica-guia{animation:loica-llega 1.15s cubic-bezier(.25,0,.35,1) .25s both}
-  #loica-guia svg{width:clamp(150px,19vw,224px);height:auto;display:block}
+  #loica-guia svg{width:clamp(170px,24vw,290px);height:auto;display:block}
   #loica-guia.posada{animation:loica-flota 4.4s ease-in-out .2s infinite}
   @keyframes loica-llega{from{transform:translate(-52vw,70px) rotate(-10deg)}
                          to{transform:none}}
@@ -327,6 +306,9 @@
 
   /* --- Los cuatro destinos --- */
   .destinos{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:var(--e-4)}
+  /* Son seis: en cuatro columnas quedaba una fila de cuatro y otra de dos
+     cojas. Tres y tres desde 900px. */
+  @media(min-width:900px){.destinos{grid-template-columns:repeat(3,1fr)}}
   .destino{
     position:relative;overflow:hidden;text-decoration:none;color:var(--azul-900);
     background:var(--tono);border:3px solid var(--contorno);border-radius:var(--r-xl);
@@ -501,12 +483,6 @@
   .pie{text-align:center;padding:var(--e-6) var(--e-5);color:var(--tinta-tenue);font-size:var(--t-xs)}
 
   @media(max-width:600px){
-    /* Las manchas están calculadas para 1200px de ancho. A 375px la de 340
-       tapaba media pantalla y el hero se leía como un fondo abstracto, no
-       como una portada. Se achican y se corren a los bordes. */
-    .hero .m1{width:190px;height:190px;top:-90px;left:-70px}
-    .hero .m2{width:170px;height:170px;top:-50px;right:-60px}
-    .hero .m3{display:none}
     /* La guía pasa arriba del título y todo vuelve a centrarse */
     .hero-interior{padding:var(--e-6) var(--e-4) 0;grid-template-columns:1fr;
       gap:var(--e-4);text-align:center}
@@ -515,8 +491,18 @@
     .hero .bajada{font-size:var(--t-base);margin-inline:auto}
     .hero-botones{gap:var(--e-2);margin-bottom:var(--e-5);justify-content:center}
     .hero-botones .boton{flex:1;min-width:150px;padding:12px var(--e-4);font-size:var(--t-base)}
-    .paseo{height:150px;margin-top:var(--e-5)}
-    .desfile{bottom:10px;gap:1px}
+    /* Doce retratos en una fila de 375px salían de 34px: se veían como
+       manchas. En celular van en dos filas de seis, como foto de grupo: la de
+       atrás parada en los cerros, la de adelante en el suelo. */
+    .paseo{height:212px;margin-top:var(--e-4)}
+    .desfile{bottom:6px;display:grid;grid-template-columns:repeat(13,1fr);
+      justify-items:center;gap:0;padding:0 var(--e-2)}
+    .desfile .bicho-hero{grid-column:span 2}
+    .desfile .bicho-hero svg{width:min(16vw,64px)}
+    /* La fila de atrás corrida media columna: cada cabeza asoma entre dos */
+    .desfile .bicho-hero:nth-child(1){grid-column:2 / span 2}
+    .desfile .bicho-hero:nth-child(-n+6){margin-bottom:-30px}
+    .desfile .bicho-hero:nth-child(7){grid-column:1 / span 2}
     section{padding:var(--e-8) var(--e-4)}
     .titulo-seccion h2{font-size:var(--t-xl)}
     .destino{min-height:auto}
@@ -557,9 +543,6 @@
 <div class="barra" id="barra"></div>
 
 <header class="hero">
-  <span class="mancha m1" aria-hidden="true"></span>
-  <span class="mancha m2" aria-hidden="true"></span>
-  <span class="mancha m3" aria-hidden="true"></span>
   <div class="hero-interior">
     <div class="hero-texto">
       <!-- Lo pinta pintarSello(); nace vacío para que no parpadee una fecha
@@ -633,7 +616,7 @@
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
 
-<script src="loica.js?v=31"></script>
+<script src="loica.js?v=32"></script>
 <script>
 /* La raíz del sitio era el mapa hasta este cambio, así que hay links dando
    vueltas por WhatsApp con la forma `.../#/e/<id>`. Se reenvían al mapa en vez
@@ -699,7 +682,7 @@ function pintarPortada(){
   const globo = document.getElementById("loica-globo");
   globo.textContent = t("pSaludo");
   const posarse = () => {
-    guia.innerHTML = cuerpo("loica", "var(--acento)", 224, {anima:true});
+    guia.innerHTML = cuerpo("loica", "var(--acento)", 290, {anima:true});
     guia.classList.add("posada");
     globo.classList.add("visible");
   };
@@ -707,7 +690,7 @@ function pintarPortada(){
     guia.dataset.lista = "1";
     if(matchMedia("(prefers-reduced-motion: reduce)").matches) posarse();
     else{
-      guia.innerHTML = cuerpo("loica", "var(--acento)", 224, {pose:"volando", anima:true});
+      guia.innerHTML = cuerpo("loica", "var(--acento)", 290, {pose:"volando", anima:true});
       guia.addEventListener("animationend", posarse, {once:true});
     }
   }
@@ -728,7 +711,7 @@ function pintarPortada(){
     `<button class="bicho-hero" style="--d:${Math.min(i, 11) * 20}ms"
              data-ir="${a.clave}" title="${escapar(a[IDIOMA][0])}"
              aria-label="${escapar(a[IDIOMA][0])} — ${escapar(a[IDIOMA][1])}">
-       ${cuerpo(a.clave, a.hex, 74, {anima:true})}</button>`).join("");
+       ${cuerpo(a.clave, a.hex, 100, {anima:true})}</button>`).join("");
   if(!desfile.dataset.entro){
     desfile.dataset.entro = "1";
     desfile.classList.add("entra");
@@ -778,7 +761,7 @@ function pintarPortada(){
   document.getElementById("elenco").innerHTML = ELENCO.map(a =>
     `<button class="bicho" type="button" data-bicho="${a.clave}"
              style="--tono:${a.hex};--tono-tinta:${a.tinta}">
-       ${cuerpo(a.clave, a.hex, 96, {anima:true})}
+       ${cuerpo(a.clave, a.hex, 124, {anima:true})}
        <b>${escapar(a[IDIOMA][0])}</b>
        <span class="rol">${escapar(a[IDIOMA][1])}</span>
        <p>${escapar(a[IDIOMA][2])}</p>
