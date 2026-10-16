@@ -53,7 +53,7 @@ RAIZ = Path(__file__).resolve().parent
 # la copia de la base (datos/eventos.jsonl), la caché de coordenadas, el
 # historial del diagnóstico y las colas de revisión. Un runner nuevo cada
 # día no recuerda nada; lo que no esté en git mañana no existe.
-RUTAS_PUBLICABLES = ["web/eventos.json", "web/talleres.json",
+RUTAS_PUBLICABLES = ["web/eventos.json", "web/talleres.json", "web/sitemap.xml",
                      "web/descuentos.json", "web/cine.json",
                      "web/e", "datos/manual",
                      "datos/eventos.jsonl", "datos/coordenadas.json",
@@ -62,7 +62,7 @@ RUTAS_PUBLICABLES = ["web/eventos.json", "web/talleres.json",
 
 # Archivos que cada corrida regenera enteros: en un choque entre dos corridas
 # no hay nada que fusionar, gana la más nueva.
-GENERADOS = {"web/eventos.json", "web/talleres.json", "web/descuentos.json",
+GENERADOS = {"web/eventos.json", "web/talleres.json", "web/descuentos.json", "web/sitemap.xml",
              "web/cine.json", "datos/eventos.jsonl", "datos/coordenadas.json",
              "datos/historial_corridas.json", "datos/historial_fuentes.json"}
 PREFIJOS_GENERADOS = ("web/e/", "datos/revision/")
