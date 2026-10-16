@@ -1022,6 +1022,7 @@ datos/                Base, caché y logs (fuera de git) + el estado que sí via
                       eventos.jsonl, coordenadas.json, historial_*.json, revision/, manual/
 scripts/              Herramientas sueltas: auditorías, índice OSM, catastros, agenda launchd
 web/                  El sitio que publica Pages (solo lo que se sirve; nada de notas)
+arte/elenco/          Fuentes de los retratos de las mascotas (svg/ + construir.py --web → web/loica.js)
 notas/                Documentos de trabajo, por tema:
   diseno/             Dirección visual, filtros, blog, auditorías y críticas de diseño, elenco
   extraccion/         Auditoría de extracción, catastro de bancos, pasadas asistidas archivadas

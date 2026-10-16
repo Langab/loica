@@ -1,0 +1,74 @@
+<g class="an-cuerpo">
+  <!-- cola gruesa -->
+  <g class="an-cola">
+    <path d="M130 204q34 8 50-12q8-12 2-24q-10 16-28 14q-16-2-24 4z" fill="#7D5842"/>
+  </g>
+  <!-- patas palmeadas -->
+  <rect x="72" y="192" width="20" height="26" rx="8" fill="#7D5842"/>
+  <rect x="108" y="192" width="20" height="26" rx="8" fill="#7D5842"/>
+  <path d="M62 226q0-13 18-13q16 0 16 13z" fill="#A87E62"/>
+  <path d="M104 226q0-13 16-13q18 0 18 13z" fill="#A87E62"/>
+  <path d="M74 226v-6M84 226v-6M116 226v-6M126 226v-6" stroke-width="2.5"/>
+  <!-- brazo izquierdo arriba, celebrando -->
+  <g transform="rotate(130 60 148)">
+    <rect x="50" y="142" width="20" height="40" rx="10" fill="#7D5842"/>
+    <ellipse cx="60" cy="185" rx="10" ry="9" fill="#7D5842"/>
+    <path d="M54 190h12M53 185h14" stroke-width="2.5"/>
+  </g>
+  <!-- cuerpo -->
+  <path d="M60 152q0-24 40-24q40 0 40 24l4 42q0 12-44 12q-44 0-44-12z" fill="#7D5842"/>
+  <!-- shorts -->
+  <path d="M57 184h86l1 10q0 12-44 12q-44 0-44-12z" fill="#2F4A7A"/>
+  <path d="M60 186v14M140 186v14" stroke="#FFF4DC" stroke-width="3"/>
+  <path d="M100 194v12" stroke-width="3"/>
+  <!-- camiseta sin mangas -->
+  <path d="M64 144q4-12 18-16q18 16 36 0q14 4 18 16l4 44h-80z" fill="#0C8B9B"/>
+  <path d="M64 182h72v6h-76z" fill="#0A7180" stroke="none"/>
+  <path d="M64 144q4-12 18-16q18 16 36 0q14 4 18 16l4 44h-80z"/>
+  <path d="M92 164h16l-9 21" stroke-width="9"/>
+  <path d="M92 164h16l-9 21" stroke="#FFF4DC" stroke-width="4.5"/>
+  <!-- brazo que saluda -->
+  <g class="an-brazo">
+    <g transform="rotate(-16 140 148)">
+      <rect x="130" y="142" width="20" height="46" rx="10" fill="#7D5842"/>
+      <path d="M134 184v-6M140 186v-7M146 184v-6" stroke-width="2.5"/>
+    </g>
+  </g>
+  <!-- cronómetro al cuello -->
+  <g class="an-extra">
+    <path d="M86 128l14 12l14-12" stroke="#1E2A4A" stroke-width="2.5"/>
+    <rect x="96.5" y="136" width="7" height="6" rx="1.5" fill="#C9D2DC" stroke-width="2.5"/>
+    <circle cx="100" cy="151" r="11" fill="#C9D2DC"/>
+    <circle cx="100" cy="151" r="7" fill="#FFFDF8" stroke-width="2"/>
+    <path d="M100 151v-5M100 151l3.5 2" stroke="#1E2A4A" stroke-width="2"/>
+  </g>
+  <!-- orejitas -->
+  <g class="an-oreja-i an-o-r"><circle cx="46" cy="90" r="10" fill="#7D5842"/><circle cx="47" cy="91" r="4.5" fill="#5C3E2E" stroke="none"/></g>
+  <g class="an-oreja-d an-o-l"><circle cx="154" cy="90" r="10" fill="#7D5842"/><circle cx="153" cy="91" r="4.5" fill="#5C3E2E" stroke="none"/></g>
+  <!-- cabeza ancha -->
+  <path d="M42 92q0-50 58-50q58 0 58 50q0 22-22 34q-36 14-72 0q-22-12-22-34z" fill="#7D5842"/>
+  <g stroke="none">
+    <path d="M100 94q-22 0-36 10q-8 8 0 18q14 12 36 12q22 0 36-12q8-10 0-18q-14-10-36-10z" fill="#C9A585"/>
+    <ellipse cx="58" cy="108" rx="8" ry="5" fill="#F2778C" opacity=".55"/>
+    <ellipse cx="142" cy="108" rx="8" ry="5" fill="#F2778C" opacity=".55"/>
+    <ellipse cx="77" cy="87" rx="9" ry="11" fill="#1E2A4A"/>
+    <circle cx="80" cy="82" r="3.6" fill="#fff"/><circle cx="74" cy="92" r="1.8" fill="#fff"/>
+    <ellipse cx="123" cy="87" rx="9" ry="11" fill="#1E2A4A"/>
+    <circle cx="126" cy="82" r="3.6" fill="#fff"/><circle cx="120" cy="92" r="1.8" fill="#fff"/>
+    <g class="an-parpado" transform="scale(1 0)"><ellipse cx="77" cy="87" rx="10.5" ry="12.5" fill="#7D5842"/><path d="M69.5 90.8 q7.5 9.4 15 0" fill="none" stroke="#1E2A4A" stroke-width="3" stroke-linecap="round"/></g>
+    <g class="an-parpado" transform="scale(1 0)"><ellipse cx="123" cy="87" rx="10.5" ry="12.5" fill="#7D5842"/><path d="M115.5 90.8 q7.5 9.4 15 0" fill="none" stroke="#1E2A4A" stroke-width="3" stroke-linecap="round"/></g>
+    <ellipse cx="100" cy="104" rx="11" ry="7.5" fill="#3A2A26"/>
+    <ellipse cx="96" cy="102" rx="3.5" ry="1.8" fill="#fff" opacity=".7"/>
+    <circle cx="82" cy="116" r="1.5" fill="#7D5842"/><circle cx="87" cy="122" r="1.5" fill="#7D5842"/>
+    <circle cx="118" cy="116" r="1.5" fill="#7D5842"/><circle cx="113" cy="122" r="1.5" fill="#7D5842"/>
+  </g>
+  <path d="M100 112v5M100 117q-6 7-13 2M100 117q6 7 13 2" stroke-width="3"/>
+  <path d="M74 114l-30-6M74 120l-30 4M126 114l30-6M126 120l30 4" stroke="#FFFDF8" stroke-width="2.5"/>
+  <!-- cintillo de toalla -->
+  <path d="M43 80q57-28 114 0l-2-16q-55-26-110 0z" fill="#FFFDF8"/>
+  <path d="M44 72q56-27 112 0" stroke="#0C8B9B" stroke-width="3"/>
+  <path d="M58 68v4M72 62v4M86 58v4M114 58v4M128 62v4M142 68v4" stroke="#D5DCE4" stroke-width="2.5"/>
+  <!-- gotas de sudor -->
+  <path d="M164 46q8 10 0 15q-8-5 0-15z" fill="#7CC8EE" stroke-width="2.5"/>
+  <path d="M174 62q6 7 0 11q-6-4 0-11z" fill="#7CC8EE" stroke-width="2.5"/>
+</g>

@@ -1,0 +1,70 @@
+/* Los retratos (elenco v3, arte/elenco/). Mismo sistema que los compañeros
+   del Libro Digital de Aldeas: cada pieza tiene clase an-* y gira desde su
+   base. Como el resto de las mascotas, nada se mueve si no se pide: los tics
+   corren con {anima:true} (clase .anima en el <svg>). --d desfasa a cada uno
+   para que no parpadeen todos juntos. */
+.retrato{display:block;overflow:visible}
+.retrato .an-cuerpo,.retrato .an-parpado,.retrato .an-oreja-i,.retrato .an-oreja-d,
+.retrato .an-cola,.retrato .an-brazo,.retrato .an-extra{transform-box:fill-box}
+.retrato .an-cuerpo{transform-origin:50% 100%}
+.retrato .an-parpado{transform-origin:50% 0%;transform:scaleY(0)}
+.retrato .an-oreja-i{transform-origin:85% 100%}
+.retrato .an-oreja-d{transform-origin:15% 100%}
+.retrato .an-cola{transform-origin:0% 100%}
+.retrato .an-brazo{transform-origin:25% 10%}
+.retrato .an-extra{transform-origin:50% 0%}
+.retrato .an-o-t{transform-origin:50% 0%}
+.retrato .an-o-b{transform-origin:50% 100%}
+.retrato .an-o-l{transform-origin:0% 50%}
+.retrato .an-o-r{transform-origin:100% 50%}
+.retrato .an-o-tl{transform-origin:0% 0%}
+.retrato .an-o-tr{transform-origin:100% 0%}
+.retrato .an-o-bl{transform-origin:0% 100%}
+.retrato .an-o-br{transform-origin:100% 100%}
+
+/* --- Tics de reposo --- */
+.retrato.anima .an-cuerpo{animation:rt-respira 2.8s ease-in-out var(--d,0s) infinite}
+.retrato.anima .an-parpado{animation:rt-parpadeo 4.2s linear calc(var(--d,0s) * 1.7) infinite}
+.retrato.anima .an-oreja-i{animation:rt-oreja-i 5.2s ease-in-out calc(var(--d,0s) * 1.3) infinite}
+.retrato.anima .an-oreja-d{animation:rt-oreja-d 5.2s ease-in-out calc(var(--d,0s) * 1.3 - .35s) infinite}
+.retrato.anima .an-cola{animation:rt-cola 1.9s ease-in-out calc(var(--d,0s) * .8) infinite}
+.retrato.anima .an-brazo{animation:rt-saludo 7s ease-in-out calc(var(--d,0s) * 2.1 - 1s) infinite}
+.retrato.anima .an-extra{animation:rt-extra 3.4s ease-in-out calc(var(--d,0s) * 1.1) infinite}
+
+/* --- Poses --- */
+/* Durmiendo: los estados vacíos. Ojos cerrados y quieto, solo respira. */
+.retrato.rt-dormido .an-parpado{transform:scaleY(1);animation:none}
+.retrato.rt-dormido .an-brazo{animation:none}
+/* Celebrando: un salto y un saludo rápido (la ficha del animal). */
+.retrato.rt-celebra .an-cuerpo{animation:rt-salto .6s cubic-bezier(.3,.7,.4,1) 1,rt-respira 2.8s ease-in-out .6s infinite}
+.retrato.rt-celebra .an-brazo{animation:rt-saludo-rapido .6s ease-in-out 3}
+/* Volando: aletea (la Loica llegando a la portada). */
+.retrato.rt-vuela .an-brazo{animation:rt-aleteo .22s ease-in-out infinite alternate}
+.retrato.rt-vuela .an-oreja-i{animation:rt-aleteo-i .22s ease-in-out infinite alternate}
+/* Marca de agua: el retrato hecho una sola tinta (tarjetas de color). */
+.retrato.rt-silueta{filter:brightness(0) invert(1)}
+.retrato.rt-silueta-oscura{filter:brightness(0)}
+/* Apagado: "no hay nada acá". Pierde color pero no carácter. */
+.retrato.rt-apagado{filter:saturate(.3);opacity:.85}
+/* Modo oscuro: la tinta del contorno se funde con el fondo, así que el
+   retrato lleva un halo crema finito que le devuelve el borde. */
+:root[data-tema="oscuro"] .retrato:not(.rt-silueta):not(.rt-silueta-oscura){filter:drop-shadow(0 0 1.4px rgba(250,243,231,.6))}
+:root[data-tema="oscuro"] .retrato.rt-apagado{filter:saturate(.3) drop-shadow(0 0 1.4px rgba(250,243,231,.6))}
+
+@keyframes rt-respira{0%,100%{transform:translateY(0) scaleY(1)}50%{transform:translateY(-3px) scaleY(1.015)}}
+@keyframes rt-parpadeo{0%,91%{transform:scaleY(0)}94%,96%{transform:scaleY(1)}99%,100%{transform:scaleY(0)}}
+@keyframes rt-oreja-i{0%,78%,100%{transform:rotate(0)}82%{transform:rotate(-9deg)}86%{transform:rotate(3deg)}90%{transform:rotate(-6deg)}95%{transform:rotate(0)}}
+@keyframes rt-oreja-d{0%,78%,100%{transform:rotate(0)}82%{transform:rotate(9deg)}86%{transform:rotate(-3deg)}90%{transform:rotate(6deg)}95%{transform:rotate(0)}}
+@keyframes rt-cola{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+@keyframes rt-saludo{0%,68%,100%{transform:rotate(0)}74%{transform:rotate(-118deg)}78%{transform:rotate(-96deg)}82%{transform:rotate(-122deg)}86%{transform:rotate(-96deg)}90%{transform:rotate(-118deg)}96%{transform:rotate(0)}}
+@keyframes rt-saludo-rapido{0%,100%{transform:rotate(-96deg)}50%{transform:rotate(-126deg)}}
+@keyframes rt-extra{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+@keyframes rt-salto{0%{transform:translateY(0) scale(1,1)}15%{transform:translateY(2px) scale(1.06,.9)}45%{transform:translateY(-22px) scale(.96,1.06)}70%{transform:translateY(0) scale(1.05,.93)}85%{transform:translateY(-4px) scale(1,1)}100%{transform:translateY(0) scale(1,1)}}
+@keyframes rt-aleteo{from{transform:rotate(-20deg)}to{transform:rotate(-70deg)}}
+@keyframes rt-aleteo-i{from{transform:rotate(20deg)}to{transform:rotate(70deg)}}
+
+@media (prefers-reduced-motion:reduce){
+  .retrato .an-cuerpo,.retrato .an-parpado,.retrato .an-oreja-i,.retrato .an-oreja-d,
+  .retrato .an-cola,.retrato .an-brazo,.retrato .an-extra{animation:none!important}
+  .retrato:not(.rt-dormido) .an-parpado{transform:scaleY(0)}
+}

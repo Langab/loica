@@ -1,0 +1,92 @@
+<g class="an-cuerpo">
+  <!-- colita -->
+  <g class="an-cola"><path d="M136 188q14-6 14-20q-10 0-16 10z" fill="#F4ECDD"/></g>
+  <!-- patas con pezuñas -->
+  <rect x="72" y="186" width="20" height="38" rx="8" fill="#F4ECDD"/>
+  <rect x="108" y="186" width="20" height="38" rx="8" fill="#F4ECDD"/>
+  <path d="M112 196q6-2 12 2q0 6-6 8q-6-2-6-10z" fill="#C9A27A" stroke="none"/>
+  <path d="M72 213h20v5q0 8-10 8q-10 0-10-8z" fill="#4A3A34"/>
+  <path d="M108 213h20v5q0 8-10 8q-10 0-10-8z" fill="#4A3A34"/>
+  <path d="M82 217v8M118 217v8" stroke-width="2.5"/>
+  <!-- capucha caída detrás -->
+  <path d="M52 146q-8-24 14-32h68q22 8 14 32q-48 16-96 0z" fill="#7E1475"/>
+  <!-- polerón -->
+  <path d="M60 152q0-24 40-24q40 0 40 24l4 38q0 10-12 10h-64q-12 0-12-10z" fill="#A51D99"/>
+  <path d="M57 186h86l1 5q0 9-12 9h-64q-12 0-12-9z" fill="#7E1475" stroke="none"/>
+  <path d="M60 152q0-24 40-24q40 0 40 24l4 38q0 10-12 10h-64q-12 0-12-10z"/>
+  <path d="M57 186h86" stroke-width="3"/>
+  <path d="M84 166h32l6 16h-44z" fill="#7E1475" stroke-width="3.5"/>
+  <path d="M84 136l-4 18M116 136l4 18" stroke="#FFF4E3" stroke-width="3.5"/>
+  <circle cx="80" cy="156" r="3" fill="#FFF4E3" stroke-width="2.5"/>
+  <circle cx="120" cy="156" r="3" fill="#FFF4E3" stroke-width="2.5"/>
+  <!-- caja de cabritas -->
+  <path d="M14 150h36l-5 46h-26z" fill="#FFF4E3"/>
+  <path d="M22 150l2 46h8l-1-46zM40 150l-2 46h7l5-46z" fill="#E23B3B" stroke="none"/>
+  <path d="M14 150h36l-5 46h-26z"/>
+  <g fill="#FFF6D8" stroke-width="3">
+    <circle cx="19" cy="147" r="6"/><circle cx="45" cy="147" r="6"/>
+    <circle cx="32" cy="146" r="7"/><circle cx="24" cy="138" r="6.5"/><circle cx="39" cy="137" r="6.5"/><circle cx="31" cy="130" r="6"/>
+  </g>
+  <g fill="#F5C443" stroke="none"><circle cx="30" cy="128" r="1.6"/><circle cx="43" cy="145" r="1.6"/><circle cx="22" cy="137" r="1.6"/></g>
+  <!-- brazo izquierdo sujetando la caja -->
+  <g transform="rotate(10 60 148)">
+    <rect x="50" y="142" width="20" height="42" rx="10" fill="#A51D99"/>
+    <path d="M50 174h20v4q0 6-10 6q-10 0-10-6z" fill="#7E1475" stroke-width="3"/>
+    <ellipse cx="58" cy="186" rx="8" ry="7" fill="#F4ECDD"/>
+  </g>
+  <!-- brazo que saluda -->
+  <g class="an-brazo">
+    <g transform="rotate(-16 140 148)">
+      <ellipse cx="140" cy="186" rx="8" ry="7" fill="#F4ECDD"/>
+      <rect x="130" y="142" width="20" height="42" rx="10" fill="#A51D99"/>
+      <path d="M130 174h20v4q0 6-10 6q-10 0-10-6z" fill="#7E1475" stroke-width="3"/>
+    </g>
+  </g>
+  <!-- cuernos curvos hacia atrás, con anillos -->
+  <path d="M82 50q-6-24-22-32q-10-4-16 2" stroke-width="15"/>
+  <path d="M118 50q6-24 22-32q10-4 16 2" stroke-width="15"/>
+  <path d="M82 50q-6-24-22-32q-10-4-16 2" stroke="#E8DCC0" stroke-width="7"/>
+  <path d="M118 50q6-24 22-32q10-4 16 2" stroke="#E8DCC0" stroke-width="7"/>
+  <path d="M81 46q-5-19-18-26q-8-3-13 0" stroke="#B8A47E" stroke-width="7" stroke-dasharray="2 6" stroke-linecap="butt"/>
+  <path d="M119 46q5-19 18-26q8-3 13 0" stroke="#B8A47E" stroke-width="7" stroke-dasharray="2 6" stroke-linecap="butt"/>
+  <!-- orejas caídas a los lados -->
+  <g class="an-oreja-i">
+    <path d="M54 80q-30 2-44 20q20 14 48-2z" fill="#F4ECDD"/>
+    <path d="M50 86q-20 2-30 12q16 6 32-2z" fill="#E9B8A0" stroke="none"/>
+  </g>
+  <g class="an-oreja-d">
+    <path d="M146 80q30 2 44 20q-20 14-48-2z" fill="#C9A27A"/>
+    <path d="M150 86q20 2 30 12q-16 6-32-2z" fill="#E9B8A0" stroke="none"/>
+  </g>
+  <!-- cabeza -->
+  <path d="M48 86q0-46 52-46q52 0 52 46q0 28-24 42q-28 14-56 0q-24-14-24-42z" fill="#F4ECDD"/>
+  <path d="M60 118q14 14 40 16q26-2 40-16q-8 22-40 22q-32 0-40-22z" fill="#E3D6C0" stroke="none"/>
+  <path d="M116 42q20 2 30 18q-12 4-22-2q-10-6-8-16z" fill="#C9A27A" stroke="none"/>
+  <path d="M48 86q0-46 52-46q52 0 52 46q0 28-24 42q-28 14-56 0q-24-14-24-42z"/>
+  <!-- chiva -->
+  <path d="M88 130q12 6 24 0q0 10-4 16q-2 8-8 18q-4-6-5-12q-5-6-7-22z" fill="#F4ECDD"/>
+  <path d="M95 140q2 6 5 10M104 138q0 8-2 14" stroke="#C9A27A" stroke-width="2.5"/>
+  <!-- cara -->
+  <g stroke="none">
+    <ellipse cx="100" cy="114" rx="20" ry="14" fill="#FFF9EE"/>
+    <ellipse cx="64" cy="110" rx="8" ry="5" fill="#F2778C" opacity=".55"/>
+    <ellipse cx="136" cy="110" rx="8" ry="5" fill="#F2778C" opacity=".55"/>
+    <ellipse cx="76" cy="91" rx="9" ry="11" fill="#1E2A4A"/>
+    <circle cx="79" cy="86" r="3.6" fill="#fff"/>
+    <circle cx="73" cy="96" r="1.8" fill="#fff"/>
+    <ellipse cx="124" cy="91" rx="9" ry="11" fill="#1E2A4A"/>
+    <circle cx="127" cy="86" r="3.6" fill="#fff"/>
+    <circle cx="121" cy="96" r="1.8" fill="#fff"/>
+    <g class="an-parpado" transform="scale(1 0)"><ellipse cx="76" cy="91" rx="10.5" ry="12.5" fill="#F4ECDD"/><path d="M68.5 94.8 q7.5 9.4 15 0" fill="none" stroke="#1E2A4A" stroke-width="3" stroke-linecap="round"/></g>
+    <g class="an-parpado" transform="scale(1 0)"><ellipse cx="124" cy="91" rx="10.5" ry="12.5" fill="#F4ECDD"/><path d="M116.5 94.8 q7.5 9.4 15 0" fill="none" stroke="#1E2A4A" stroke-width="3" stroke-linecap="round"/></g>
+    <path d="M93 107h14q0 7-7 7q-7 0-7-7z" fill="#4A3A34"/>
+    <ellipse cx="98" cy="109" rx="2.4" ry="1.3" fill="#fff" opacity=".7"/>
+  </g>
+  <path d="M100 114v4M91 120q9 8 18 0" stroke-width="3"/>
+  <!-- lentes 3D -->
+  <path d="M56 86l-8-2M144 86l8-2" stroke-width="4"/>
+  <rect x="57" y="78" width="38" height="27" rx="6" fill="#E8343B" fill-opacity=".45" stroke-width="5"/>
+  <rect x="105" y="78" width="38" height="27" rx="6" fill="#22C3E6" fill-opacity=".45" stroke-width="5"/>
+  <path d="M95 86q5-4 10 0" stroke-width="5"/>
+  <path d="M63 84l7-3M111 84l7-3" stroke="#fff" stroke-width="2.5" opacity=".7"/>
+</g>

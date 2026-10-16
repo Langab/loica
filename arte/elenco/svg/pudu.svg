@@ -1,0 +1,93 @@
+<g class="an-cuerpo">
+  <!-- colita -->
+  <g class="an-cola"><path d="M136 192q16-2 16-16q-12-1-18 8z" fill="#A9653A"/><path d="M146 180q3 4 1 8" stroke="none"/></g>
+  <!-- mochila (asoma detrás, por la izquierda) -->
+  <rect x="38" y="134" width="36" height="58" rx="12" fill="#D9643A"/>
+  <path d="M38 166h36" stroke-width="3"/>
+  <rect x="34" y="170" width="14" height="18" rx="5" fill="#B04E2B" stroke-width="3.5"/>
+  <path d="M54 138q20-14 46-10q26-4 46 10l-4 8q-42-12-84 0z" fill="#B04E2B"/>
+  <!-- patas y botas de trekking -->
+  <rect x="72" y="186" width="20" height="26" rx="8" fill="#A9653A"/>
+  <rect x="108" y="186" width="20" height="26" rx="8" fill="#A9653A"/>
+  <path d="M94 202h-24v12q-6 2-6 7v1h32z" fill="#8B5A33"/>
+  <path d="M106 202h24v12q6 2 6 7v1h-32z" fill="#8B5A33"/>
+  <rect x="61" y="219" width="36" height="8" rx="4" fill="#3B2A22"/>
+  <rect x="103" y="219" width="36" height="8" rx="4" fill="#3B2A22"/>
+  <path d="M75 207h14M75 212h14M111 207h14M111 212h14" stroke="#F5B52E" stroke-width="2.5"/>
+  <!-- brazo izquierdo -->
+  <g transform="rotate(16 60 148)">
+    <ellipse cx="60" cy="186" rx="8" ry="7" fill="#4A3426"/>
+    <rect x="50" y="142" width="20" height="42" rx="10" fill="#0E8757"/>
+    <path d="M50 174h20v4q0 6-10 6q-10 0-10-6z" fill="#0A6B45" stroke-width="3"/>
+  </g>
+  <!-- parka de excursión -->
+  <path d="M60 152q0-24 40-24q40 0 40 24l4 38q0 10-12 10h-64q-12 0-12-10z" fill="#0E8757"/>
+  <path d="M57 186h86l1 5q0 9-12 9h-64q-12 0-12-9z" fill="#0A6B45" stroke="none"/>
+  <path d="M60 152q0-24 40-24q40 0 40 24l4 38q0 10-12 10h-64q-12 0-12-10z"/>
+  <path d="M57 186h86" stroke-width="3"/>
+  <path d="M100 140v60" stroke-width="3"/>
+  <!-- bolsillos con tapa -->
+  <rect x="68" y="168" width="22" height="18" rx="3" fill="#0A6B45" stroke-width="3"/>
+  <path d="M66 166h26v7h-26z" fill="#0E8757" stroke-width="3"/>
+  <rect x="110" y="168" width="22" height="18" rx="3" fill="#0A6B45" stroke-width="3"/>
+  <path d="M108 166h26v7h-26z" fill="#0E8757" stroke-width="3"/>
+  <circle cx="79" cy="170" r="1.8" fill="#F5B52E" stroke="none"/>
+  <circle cx="121" cy="170" r="1.8" fill="#F5B52E" stroke="none"/>
+  <!-- tiras de la mochila -->
+  <path d="M74 132q-5 20-2 34M126 132q5 20 2 34" stroke-width="11"/>
+  <path d="M74 132q-5 20-2 34M126 132q5 20 2 34" stroke="#D9643A" stroke-width="5"/>
+  <!-- brazo que saluda -->
+  <g class="an-brazo">
+    <g transform="rotate(-16 140 148)">
+      <ellipse cx="140" cy="186" rx="8" ry="7" fill="#4A3426"/>
+      <rect x="130" y="142" width="20" height="42" rx="10" fill="#0E8757"/>
+      <path d="M130 174h20v4q0 6-10 6q-10 0-10-6z" fill="#0A6B45" stroke-width="3"/>
+      <rect x="134" y="152" width="12" height="9" rx="2" fill="#F5B52E" stroke-width="2.5"/>
+    </g>
+  </g>
+  <!-- pañuelo scout -->
+  <g class="an-extra an-o-t">
+    <path d="M76 132h48l-24 44z" fill="#F5B52E"/>
+    <path d="M100 132h24l-24 44z" fill="#E09F1F" stroke="none"/>
+    <path d="M76 132h48l-24 44z"/>
+  </g>
+  <path d="M70 126q30 14 60 0l-2 10q-28 12-56 0z" fill="#F5B52E"/>
+  <rect x="92" y="136" width="16" height="12" rx="5" fill="#8B5A33" stroke-width="3"/>
+  <path d="M96 142h8" stroke="#5E3A1F" stroke-width="2"/>
+  <!-- orejas redondeadas hacia los lados -->
+  <g class="an-oreja-i">
+    <path d="M58 78q-28 2-42-18q-4-8 4-10q26-4 42 16z" fill="#A9653A"/>
+    <path d="M52 71q-20 0-29-13q16-3 30 7z" fill="#E9B48F" stroke="none"/>
+  </g>
+  <g class="an-oreja-d">
+    <path d="M142 78q28 2 42-18q4-8-4-10q-26-4-42 16z" fill="#A9653A"/>
+    <path d="M148 71q20 0 29-13q-16-3-30 7z" fill="#E9B48F" stroke="none"/>
+  </g>
+  <!-- cuernitos cortos y rectos -->
+  <path d="M76 54q1-18 3-28q2-5 6 0q2 12 5 27z" fill="#E8D6B0"/>
+  <path d="M124 54q-1-18-3-28q-2-5-6 0q-2 12-5 27z" fill="#E8D6B0"/>
+  <!-- cabeza -->
+  <path d="M46 86q0-48 54-48q54 0 54 48q0 28-28 42q-26 12-52 0q-28-14-28-42z" fill="#A9653A"/>
+  <path d="M60 116q14 14 40 16q26-2 40-16q-8 22-40 22q-32 0-40-22z" fill="#8A4F2B" stroke="none"/>
+  <path d="M90 40q10-8 20 0q-3 8-10 6q-7 2-10-6z" fill="#8A4F2B" stroke="none"/>
+  <path d="M46 86q0-48 54-48q54 0 54 48q0 28-28 42q-26 12-52 0q-28-14-28-42z"/>
+  <!-- cara -->
+  <g stroke="none">
+    <ellipse cx="76" cy="70" rx="6" ry="3.5" fill="#D9995F"/>
+    <ellipse cx="124" cy="70" rx="6" ry="3.5" fill="#D9995F"/>
+    <ellipse cx="100" cy="115" rx="19" ry="13" fill="#F6E3C5"/>
+    <ellipse cx="66" cy="108" rx="8" ry="5" fill="#F2778C" opacity=".55"/>
+    <ellipse cx="134" cy="108" rx="8" ry="5" fill="#F2778C" opacity=".55"/>
+    <ellipse cx="77" cy="90" rx="9" ry="11" fill="#1E2A4A"/>
+    <circle cx="80" cy="85" r="3.6" fill="#fff"/>
+    <circle cx="74" cy="95" r="1.8" fill="#fff"/>
+    <ellipse cx="123" cy="90" rx="9" ry="11" fill="#1E2A4A"/>
+    <circle cx="126" cy="85" r="3.6" fill="#fff"/>
+    <circle cx="120" cy="95" r="1.8" fill="#fff"/>
+    <g class="an-parpado" transform="scale(1 0)"><ellipse cx="77" cy="90" rx="10.5" ry="12.5" fill="#A9653A"/><path d="M69.5 93.8 q7.5 9.4 15 0" fill="none" stroke="#1E2A4A" stroke-width="3" stroke-linecap="round"/></g>
+    <g class="an-parpado" transform="scale(1 0)"><ellipse cx="123" cy="90" rx="10.5" ry="12.5" fill="#A9653A"/><path d="M115.5 93.8 q7.5 9.4 15 0" fill="none" stroke="#1E2A4A" stroke-width="3" stroke-linecap="round"/></g>
+    <path d="M88 103q12-4 24 0q0 12-12 12q-12 0-12-12z" fill="#1E2A4A"/>
+    <ellipse cx="95" cy="106" rx="3.2" ry="1.7" fill="#fff" opacity=".7"/>
+  </g>
+  <path d="M100 115v3M91 120q9 8 18 0" stroke-width="3"/>
+</g>

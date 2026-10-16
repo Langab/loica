@@ -46,3 +46,7 @@ exploracion_apis/
 *.har
 .reverse-api/
 herramientas/reverse_api/scripts/
+
+# Hojas de prueba del elenco: se regeneran con arte/elenco/construir.py
+arte/elenco/hoja*.html
+arte/elenco/hoja*.png

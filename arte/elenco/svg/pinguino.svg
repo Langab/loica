@@ -1,0 +1,65 @@
+<g class="an-cuerpo">
+  <!-- colita -->
+  <g class="an-cola an-o-t"><path d="M90 200l10 16l10-16z" fill="#2F2C46"/></g>
+  <!-- patas palmeadas rosadas -->
+  <path d="M62 226q0-13 18-13q16 0 16 13z" fill="#F0A19B"/>
+  <path d="M104 226q0-13 16-13q18 0 18 13z" fill="#F0A19B"/>
+  <path d="M74 226v-6M84 226v-6M116 226v-6M126 226v-6" stroke-width="2.5"/>
+  <!-- cuerpo -->
+  <path d="M58 152q0-26 42-26q42 0 42 26l3 38q0 20-45 20q-45 0-45-20z" fill="#2F2C46"/>
+  <path d="M68 140q32-12 64 0l3 50q0 12-35 12q-35 0-35-12z" fill="#FFFBF5" stroke="none"/>
+  <!-- banda negra en herradura (Humboldt) -->
+  <path d="M77 200q-9-28-1-44q24 11 48 0q8 16-1 44" stroke="#2F2C46" stroke-width="7.5"/>
+  <g fill="#2F2C46" stroke="none"><circle cx="92" cy="180" r="2"/><circle cx="108" cy="188" r="2"/><circle cx="99" cy="195" r="1.8"/><circle cx="111" cy="174" r="1.6"/></g>
+  <!-- aleta izquierda con libro rosado -->
+  <g class="an-oreja-i an-o-tr">
+    <g transform="rotate(-14 46 182)">
+      <rect x="28" y="162" width="32" height="40" rx="3" fill="#E8689A"/>
+      <path d="M28 194h32" stroke-width="3"/>
+      <path d="M30 197h28" stroke="#FFF4E3" stroke-width="3"/>
+      <path d="M35 162v32" stroke="#C42B67" stroke-width="4"/>
+    </g>
+    <path d="M64 142q-18 10-22 34q-2 14 6 22q14-10 18-30z" fill="#2F2C46"/>
+    <path d="M58 168q-4 14-10 22" stroke="#6B6690" stroke-width="3"/>
+  </g>
+  <!-- aleta que pide la palabra -->
+  <g class="an-brazo">
+    <path d="M136 142q18 10 22 34q2 14-6 22q-14-10-18-30z" fill="#2F2C46"/>
+    <path d="M142 168q4 14 10 22" stroke="#6B6690" stroke-width="3"/>
+  </g>
+  <!-- cabeza -->
+  <ellipse cx="100" cy="86" rx="54" ry="46" fill="#2F2C46"/>
+  <path d="M86 68q-29 0-30 26q2 22 30 30h28q28-8 30-30q-1-26-30-26" stroke="#FFFBF5" stroke-width="9"/>
+  <g stroke="none">
+    <ellipse cx="100" cy="106" rx="19" ry="8.5" fill="#F4A9A8"/>
+    <ellipse cx="68" cy="111" rx="7" ry="4.5" fill="#F2778C" opacity=".55"/>
+    <ellipse cx="132" cy="111" rx="7" ry="4.5" fill="#F2778C" opacity=".55"/>
+    <ellipse cx="78" cy="92" rx="11" ry="13" fill="#FFFBF5"/>
+    <ellipse cx="122" cy="92" rx="11" ry="13" fill="#FFFBF5"/>
+    <ellipse cx="79" cy="93" rx="8" ry="10" fill="#1E2A4A"/>
+    <ellipse cx="121" cy="93" rx="8" ry="10" fill="#1E2A4A"/>
+    <circle cx="82" cy="88" r="3.4" fill="#fff"/><circle cx="76" cy="98" r="1.7" fill="#fff"/>
+    <circle cx="124" cy="88" r="3.4" fill="#fff"/><circle cx="118" cy="98" r="1.7" fill="#fff"/>
+    <g class="an-parpado" transform="scale(1 0)"><ellipse cx="78" cy="92" rx="12" ry="14" fill="#2F2C46"/><path d="M70 96q8 10 16 0" fill="none" stroke="#FFFBF5" stroke-width="3" stroke-linecap="round"/></g>
+    <g class="an-parpado" transform="scale(1 0)"><ellipse cx="122" cy="92" rx="12" ry="14" fill="#2F2C46"/><path d="M114 96q8 10 16 0" fill="none" stroke="#FFFBF5" stroke-width="3" stroke-linecap="round"/></g>
+  </g>
+  <!-- pico negro -->
+  <path d="M87 104q13-9 26 0q-2 15-13 20q-11-5-13-20z" fill="#2F2C46"/>
+  <path d="M91 114q9 4 18 0" stroke="#6B6690" stroke-width="3"/>
+  <path d="M94 106v1M106 106v1" stroke="#6B6690" stroke-width="2.5"/>
+  <!-- humita rosada -->
+  <path d="M100 136l-20-11q-5 11 0 23zM100 136l20-11q5 11 0 23z" fill="#C42B67"/>
+  <path d="M86 130q-2 6 0 12M114 130q2 6 0 12" stroke="#9E1F52" stroke-width="3"/>
+  <rect x="93" y="130" width="14" height="13" rx="4" fill="#E8689A"/>
+  <!-- birrete -->
+  <path d="M70 52q30-12 60 0l-2 16q-28-8-56 0z" fill="#2F2C46"/>
+  <path d="M44 42l56-20l56 20l-56 20z" fill="#3A3656"/>
+  <path d="M100 62l56-20l0 5l-56 20l-56-20l0-5z" fill="#2F2C46" stroke-width="3.5"/>
+  <path d="M100 42l48 2" stroke="#F5B52E" stroke-width="3"/>
+  <circle cx="100" cy="42" r="4" fill="#F5B52E" stroke-width="3"/>
+  <g class="an-extra">
+    <path d="M148 44q3 10 2 22" stroke="#F5B52E" stroke-width="3"/>
+    <path d="M145 64h10l3 16q-8 4-16 0z" fill="#F5B52E" stroke-width="3"/>
+    <path d="M148 70v8M152 70v8" stroke="#C98A14" stroke-width="2"/>
+  </g>
+</g>

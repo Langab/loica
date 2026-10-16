@@ -44,8 +44,8 @@
 <!-- El ?v= es el cache-buster del sitio y va PAREJO en las once páginas, en
      mapa.css/mapa.js y en la plantilla de exportar_web.py: si se toca uno de
      esos archivos, se sube el número en todos (README, "sube el cache-buster"). -->
-<link rel="stylesheet" href="loica.css?v=30">
-<link rel="stylesheet" href="mapa.css?v=30">
+<link rel="stylesheet" href="loica.css?v=31">
+<link rel="stylesheet" href="mapa.css?v=31">
 </head>
 <body>
 <div id="app">
@@ -99,14 +99,14 @@
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
         integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
         crossorigin="anonymous"></script>
-<script src="loica.js?v=30"></script>
+<script src="loica.js?v=31"></script>
 <script>
   /* Lo único propio de esta página: qué archivo es y qué categoría muestra.
      mapa.js las lee al arrancar; PAGINA manda en la barra de navegación y
      CATEGORIA_FIJA recorta el catálogo (la clave de CATEGORIAS en loica.js). */
   const PAGINA = "fiestas.html", CATEGORIA_FIJA = "fiesta";
 </script>
-<script src="mapa.js?v=30"></script>
+<script src="mapa.js?v=31"></script>
 <!-- Cloudflare Web Analytics: el mismo beacon y el mismo token público de las demás páginas (la explicación está en mapa.html). -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "05b8b07df9224b248d539904774ba661"}'></script>
 </body>

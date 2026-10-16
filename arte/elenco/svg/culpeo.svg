@@ -1,0 +1,97 @@
+<g class="an-cuerpo">
+  <!-- cola frondosa con punta blanca -->
+  <g class="an-cola">
+    <path d="M130 200q44 8 56-30q8-28-10-52q-4 22-20 32q-22 14-26 50z" fill="#D8692E"/>
+    <path d="M176 118q18 24 10 52q-2 8-7 14q-12-12-20-28q12-10 17-38z" fill="#FFF4E3"/>
+    <path d="M150 168q6 6 6 14M162 158q7 6 8 14" stroke-width="3"/>
+  </g>
+  <!-- patas oscuras -->
+  <rect x="72" y="190" width="20" height="30" rx="8" fill="#5A3A2A"/>
+  <rect x="108" y="190" width="20" height="30" rx="8" fill="#5A3A2A"/>
+  <path d="M66 226q0-13 16-13q14 0 14 13z" fill="#5A3A2A"/>
+  <path d="M104 226q0-13 14-13q16 0 16 13z" fill="#5A3A2A"/>
+  <path d="M76 226v-5M86 226v-5M114 226v-5M124 226v-5" stroke="#FFF4E3" stroke-width="2.5"/>
+  <!-- brazo izquierdo: manga corta y antebrazo -->
+  <g transform="rotate(16 60 148)">
+    <rect x="51" y="150" width="18" height="36" rx="9" fill="#D8692E"/>
+    <ellipse cx="60" cy="187" rx="8.5" ry="7.5" fill="#5A3A2A"/>
+    <path d="M48 152q0-12 12-12q12 0 12 12v14h-24z" fill="#7A3FE0"/>
+    <path d="M48 162h24v4h-24z" fill="#5E2CB8" stroke="none"/>
+    <path d="M48 166h24" stroke-width="3"/>
+  </g>
+  <!-- camisa de fiesta -->
+  <path d="M60 152q0-24 40-24q40 0 40 24l4 40q0 10-12 10h-64q-12 0-12-10z" fill="#7A3FE0"/>
+  <path d="M57 186h86l1 6q0 10-12 10h-64q-12 0-12-10z" fill="#5E2CB8" stroke="none"/>
+  <path d="M60 152q0-24 40-24q40 0 40 24l4 40q0 10-12 10h-64q-12 0-12-10z"/>
+  <!-- cuello abierto: pecho crema -->
+  <path d="M82 130q18-4 36 0l-18 34z" fill="#FFF4E3"/>
+  <path d="M93 142q4 4 2 9M107 142q-4 4-2 9" stroke="#E8C9A6" stroke-width="2.5"/>
+  <path d="M82 129l-16 8l10 18l24 9zM118 129l16 8l-10 18l-24 9z" fill="#9A6BF0" stroke-width="3.5"/>
+  <path d="M100 164v38" stroke-width="3"/>
+  <g fill="#FFF4E3" stroke-width="2"><circle cx="100" cy="172" r="2.6"/><circle cx="100" cy="187" r="2.6"/></g>
+  <!-- lentejuelas -->
+  <g fill="#FFF4E3" stroke="none">
+    <circle cx="72" cy="160" r="2.6"/><circle cx="84" cy="174" r="2.6"/><circle cx="70" cy="184" r="2.2"/>
+    <circle cx="128" cy="160" r="2.6"/><circle cx="116" cy="174" r="2.6"/><circle cx="130" cy="184" r="2.2"/>
+    <circle cx="88" cy="194" r="2"/><circle cx="114" cy="194" r="2"/><circle cx="78" cy="148" r="1.8"/><circle cx="122" cy="148" r="1.8"/>
+  </g>
+  <path d="M92 166l1.6 3.4l3.4 1.6l-3.4 1.6l-1.6 3.4l-1.6-3.4l-3.4-1.6l3.4-1.6zM110 154l1.3 2.7l2.7 1.3l-2.7 1.3l-1.3 2.7l-1.3-2.7l-2.7-1.3l2.7-1.3z" fill="#FFD447" stroke="none"/>
+  <!-- brazo que saluda, con barra luminosa -->
+  <g class="an-brazo">
+    <g transform="rotate(-16 140 148)">
+      <rect x="131" y="150" width="18" height="36" rx="9" fill="#D8692E"/>
+      <path d="M151 170l7-4M153 188h8M151 206l7 4" stroke="#FFD447" stroke-width="3"/>
+      <rect x="135" y="167" width="10" height="44" rx="5" fill="#FFD447"/>
+      <path d="M138.5 171v8M138.5 197v8" stroke="#FFFBEA" stroke-width="2.5"/>
+      <ellipse cx="140" cy="187" rx="8.5" ry="7.5" fill="#5A3A2A"/>
+      <path d="M128 152q0-12 12-12q12 0 12 12v14h-24z" fill="#7A3FE0"/>
+      <path d="M128 162h24v4h-24z" fill="#5E2CB8" stroke="none"/>
+      <path d="M128 166h24" stroke-width="3"/>
+      <circle cx="136" cy="153" r="2.2" fill="#FFF4E3" stroke="none"/>
+    </g>
+  </g>
+  <!-- orejas grandes con interior oscuro -->
+  <g class="an-oreja-i">
+    <path d="M52 66q-16-38-8-62q30 12 48 42z" fill="#D8692E"/>
+    <path d="M57 56q-9-22-6-38q18 9 29 27z" fill="#5A3A2A" stroke="none"/>
+    <path d="M60 50q-4-12-3-22q9 6 15 15z" fill="#FFE2C4" stroke="none"/>
+  </g>
+  <g class="an-oreja-d">
+    <path d="M148 66q16-38 8-62q-30 12-48 42z" fill="#D8692E"/>
+    <path d="M143 56q9-22 6-38q-18 9-29 27z" fill="#5A3A2A" stroke="none"/>
+    <path d="M140 50q4-12 3-22q-9 6-15 15z" fill="#FFE2C4" stroke="none"/>
+  </g>
+  <!-- cabeza con mechones de mejilla -->
+  <path d="M100 38q-40 0-50 34q-4 14-20 26q15 4 23 13q18 27 47 27q29 0 47-27q8-9 23-13q-16-12-20-26q-10-34-50-34z" fill="#D8692E"/>
+  <path d="M32 98q26-3 42 4q16 5 26-18q10 23 26 18q16-7 42-4q-14 4-21 13q-18 27-47 27q-29 0-47-27q-7-9-21-13z" fill="#FFF4E3" stroke="none"/>
+  <path d="M100 38q-40 0-50 34q-4 14-20 26q15 4 23 13q18 27 47 27q29 0 47-27q8-9 23-13q-16-12-20-26q-10-34-50-34z"/>
+  <!-- cara (ojos y párpados quedan detrás de los lentes) -->
+  <g stroke="none">
+    <ellipse cx="62" cy="108" rx="8" ry="5" fill="#F2778C" opacity=".55"/>
+    <ellipse cx="138" cy="108" rx="8" ry="5" fill="#F2778C" opacity=".55"/>
+    <ellipse cx="77" cy="88" rx="9" ry="11" fill="#1E2A4A"/>
+    <circle cx="80" cy="83" r="3.6" fill="#fff"/>
+    <circle cx="74" cy="93" r="1.8" fill="#fff"/>
+    <ellipse cx="123" cy="88" rx="9" ry="11" fill="#1E2A4A"/>
+    <circle cx="126" cy="83" r="3.6" fill="#fff"/>
+    <circle cx="120" cy="93" r="1.8" fill="#fff"/>
+    <g class="an-parpado" transform="scale(1 0)"><ellipse cx="77" cy="88" rx="10.5" ry="12.5" fill="#D8692E"/><path d="M69.5 91.8 q7.5 9.4 15 0" fill="none" stroke="#1E2A4A" stroke-width="3" stroke-linecap="round"/></g>
+    <g class="an-parpado" transform="scale(1 0)"><ellipse cx="123" cy="88" rx="10.5" ry="12.5" fill="#D8692E"/><path d="M115.5 91.8 q7.5 9.4 15 0" fill="none" stroke="#1E2A4A" stroke-width="3" stroke-linecap="round"/></g>
+  </g>
+  <!-- lentes de sol -->
+  <path d="M57 82l-9-5M143 82l9-5" stroke-width="3.5"/>
+  <path d="M94 82q6-5 12 0" stroke-width="4"/>
+  <path d="M57 80q0-5 5-5h28q5 0 5 5q0 20-19 20q-19 0-19-20z" fill="#2B2752"/>
+  <path d="M105 80q0-5 5-5h28q5 0 5 5q0 20-19 20q-19 0-19-20z" fill="#2B2752"/>
+  <g fill="#fff" stroke="none">
+    <path d="M64 80h7l-9 13q-2-5-2-9z"/><circle cx="74" cy="81" r="2"/>
+    <path d="M112 80h7l-9 13q-2-5-2-9z"/><circle cx="122" cy="81" r="2"/>
+  </g>
+  <path d="M62 68q10-6 21-1M117 65q11-4 21 3" stroke-width="4"/>
+  <!-- hocico y sonrisa -->
+  <path d="M92 108h16q0 9-8 9q-8 0-8-9z" fill="#1E2A4A" stroke="none"/>
+  <ellipse cx="97" cy="110.5" rx="2.6" ry="1.4" fill="#fff" opacity=".7" stroke="none"/>
+  <path d="M100 117v3" stroke-width="3"/>
+  <path d="M88 121q12 12 24 0z" fill="#B23A48" stroke-width="3"/>
+  <path d="M95 126q5-3 10 0q-5 3-10 0z" fill="#F58BA0" stroke="none"/>
+</g>

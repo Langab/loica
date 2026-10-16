@@ -1,0 +1,122 @@
+[
+  {
+    "clave": "loica",
+    "nombre": "Loica",
+    "especie": "Loica (Leistes loyca), pájaro de pecho rojo",
+    "categoria": "La anfitriona",
+    "color": "#E8442E",
+    "anatomia": "Pájaro: cuerpo café (#7A5C45) con estrías claras, PECHO ROJO intenso (#E8413C) que se ve entero por el frente, ceja blanca sobre cada ojo, pico largo y fino color hueso (#F1E2C8), patas delgadas rosadas. Cabeza café con garganta roja. Sin cresta (la loica no tiene).",
+    "vestuario": "Chaleco abierto de anfitriona azul tinta (#2B3F7A) que deja ver el pecho rojo, con una credencial amarilla (#FFB61F) colgando de un cordón al cuello. Cintillo-audífono con micrófono que baja hasta el pico (es la única que habla). El ala derecha (an-brazo) saluda.",
+    "aria": "La Loica, un pájaro de pecho rojo con chaleco azul, credencial amarilla y un audífono con micrófono"
+  },
+  {
+    "clave": "condor",
+    "nombre": "Cóndor",
+    "especie": "Cóndor andino",
+    "categoria": "Música",
+    "color": "#DE3A1E",
+    "anatomia": "Cabeza pelada rosada-gris (#C98B86) con cresta carnosa oscura sobre el pico, collar de plumas blancas esponjoso (#FFFBF5) alrededor del cuello, cuerpo y alas negro azulado (#2F2C46) con plumas de punta blanca en las alas. Pico ganchudo color hueso con punta oscura.",
+    "vestuario": "Audífonos grandes de DJ sobre la cabeza (copas de tinta con aro rojo). Polera roja (#DE3A1E) de banda con un rayo crema al centro, que asoma bajo el collar. El ala derecha (an-brazo) levantada haciendo saludo; la izquierda sostiene una uñeta o un vinilo pequeño.",
+    "aria": "El Cóndor, con audífonos de DJ y polera roja de banda con un rayo"
+  },
+  {
+    "clave": "culpeo",
+    "nombre": "Culpeo",
+    "especie": "Zorro culpeo (zorro andino)",
+    "categoria": "Fiestas",
+    "color": "#7A3FE0",
+    "anatomia": "Zorro: pelaje anaranjado-rojizo (#D8692E), hocico, mejillas y pecho crema (#FFF4E3), orejas grandes y puntiagudas con interior oscuro, cola frondosa con punta blanca, patas oscuras (#5A3A2A).",
+    "vestuario": "Lentes de sol oscuros con un destello blanco (cubren los ojos; los párpados van igual, por detrás). Camisa de fiesta morada (#7A3FE0) brillante con lunares/lentejuelas crema, cuello abierto. En la mano derecha (an-brazo) una pulsera o barra luminosa amarilla (#FFD447).",
+    "aria": "El Culpeo, un zorro andino con lentes de sol y camisa morada de fiesta"
+  },
+  {
+    "clave": "chinchilla",
+    "nombre": "Chinchilla",
+    "especie": "Chinchilla de cola larga",
+    "categoria": "Teatro y cultura",
+    "color": "#1B6FD1",
+    "anatomia": "Muy redonda y esponjosa, gris azulado (#AEB4C6) con panza clara (#E9EBF2). OREJAS ENORMES y redondas (an-oreja-i / an-oreja-d) con interior rosado (#F2B7C2). Bigotes largos (trazo 2). Cola tupida y enroscada.",
+    "vestuario": "Boina azul (#1B6FD1) ladeada con un pitucho rojo arriba, polera marinera a rayas azul y crema, pañuelo rojo (#E8442E) al cuello (an-extra). En la mano izquierda unos binoculares de teatro dorados (#F5B52E).",
+    "aria": "La Chinchilla, de orejas enormes, con boina azul, polera marinera y binoculares de teatro"
+  },
+  {
+    "clave": "cabra",
+    "nombre": "Cabra",
+    "especie": "Cabra",
+    "categoria": "Cine",
+    "color": "#A51D99",
+    "anatomia": "Cabra blanca-crema (#F4ECDD) con manchas café claro (#C9A27A), cuernitos curvos hacia atrás color hueso con anillos, orejas caídas hacia los lados, chiva (barbita) bajo el hocico, pezuñas oscuras.",
+    "vestuario": "Polerón con capucha magenta (#A51D99). Lentes 3D: marco de tinta, un cristal rojo y uno cian TRANSLÚCIDOS (fill-opacity .45) para que los ojos sigan visibles. Bajo el brazo izquierdo una caja de cabritas a rayas rojas y crema con cabritas (palomitas) asomando. El brazo derecho (an-brazo) saluda.",
+    "aria": "La Cabra, con polerón magenta, lentes 3D y una caja de cabritas"
+  },
+  {
+    "clave": "pinguino",
+    "nombre": "Pingüino",
+    "especie": "Pingüino de Humboldt",
+    "categoria": "Charlas",
+    "color": "#C42B67",
+    "anatomia": "Espalda y aletas negro azulado (#2F2C46), cara y panza blancas, la banda negra en forma de herradura sobre el pecho típica del Humboldt, zona rosada alrededor de la base del pico, pico negro, patas rosadas palmeadas.",
+    "vestuario": "Birrete de graduado negro con borla amarilla (#F5B52E) que cuelga y se mece (an-extra). Humita (corbata de lazo) rosada (#C42B67). Bajo la aleta izquierda un libro rosado; la aleta derecha (an-brazo) levantada como pidiendo la palabra. Una credencial colgando es opcional.",
+    "aria": "El Pingüino de Humboldt, con birrete, humita rosada y un libro bajo la aleta"
+  },
+  {
+    "clave": "chincol",
+    "nombre": "Chincol",
+    "especie": "Chincol",
+    "categoria": "Clases, talleres y ferias (barrio)",
+    "color": "#F08800",
+    "anatomia": "Pajarito redondo: cabeza gris con dos franjas negras a los lados y un pequeño copete levantado (an-extra o parte del dibujo), COLLAR CANELA-ANARANJADO (#C9772E) en la nuca y los lados del cuello, mancha negra en el pecho, panza blanca, alas café con estrías oscuras y claras, pico corto cónico gris, patitas finas.",
+    "vestuario": "Delantal de taller naranjo (#F08800) con bolsillo y un lápiz amarillo asomando; otro lápiz detrás de la cabeza. Bolsa de feria de malla o de tela al hombro izquierdo con una lechuga/pan asomando. El ala derecha (an-brazo) saluda.",
+    "aria": "El Chincol, un pajarito de copete con delantal naranjo, lápiz y bolsa de feria"
+  },
+  {
+    "clave": "pudu",
+    "nombre": "Pudú",
+    "especie": "Pudú, el ciervo más chico del mundo",
+    "categoria": "Aire libre y familia",
+    "color": "#0E8757",
+    "anatomia": "Ciervito café rojizo (#A9653A), hocico oscuro, orejas redondeadas hacia los lados (an-oreja-i / an-oreja-d), dos cuernitos cortos y rectos, patas cortas con pezuñas oscuras, colita corta.",
+    "vestuario": "Parka o chaleco de excursión verde (#0E8757) con bolsillos y cierre, pañuelo scout amarillo (#F5B52E) con nudo al cuello, mochila pequeña (se ven las tiras y asoma por un lado), zapatos de trekking. La mano derecha (an-brazo) saluda.",
+    "aria": "El Pudú, un ciervo pequeño con parka verde de excursión, pañuelo scout amarillo y mochila"
+  },
+  {
+    "clave": "degu",
+    "nombre": "Degú",
+    "especie": "Degú",
+    "categoria": "Gratis",
+    "color": "#2E7D5B",
+    "anatomia": "Roedor café ocre (#B48A57) con panza crema, orejas redondas grandes algo oscuras, ojos grandes, nariz rosada, bigotes, dientes delanteros chiquitos. COLA LARGA y delgada que termina en un PINCEL de pelo negro (an-cola).",
+    "vestuario": "Overol o jardinera verde (#2E7D5B) con un bolsillo. De la oreja derecha cuelga una etiqueta de precio crema con un «0» de tinta dibujado con trazos (no texto), que se mece (an-extra). En la mano izquierda una libretita donde anota lo gratis.",
+    "aria": "El Degú, un roedor de cola con pincel, con jardinera verde y una etiqueta de precio en cero colgando de la oreja"
+  },
+  {
+    "clave": "guaren",
+    "nombre": "Guarén",
+    "especie": "Guarén (rata café)",
+    "categoria": "Descuentos",
+    "color": "#95521C",
+    "anatomia": "Rata gris parda (#8D8478) con panza más clara, orejas grandes redondas rosadas por dentro, hocico puntudo con nariz rosada, dos dientes delanteros grandes, bigotes, cola larga rosada pelada con anillitos (an-cola).",
+    "vestuario": "Chaleco café (#95521C) de cuatro botones con un bolsillo lleno de folletos y cupones asomando. Una tarjeta de banco dorada (#F5B52E, con banda de tinta) sujeta entre los dientes o en la mano derecha levantada (an-brazo). Opcional: una moneda en la otra mano.",
+    "aria": "El Guarén, una rata con chaleco café lleno de cupones y una tarjeta de banco dorada"
+  },
+  {
+    "clave": "chungungo",
+    "nombre": "Chungungo",
+    "especie": "Chungungo (nutria marina)",
+    "categoria": "Deporte",
+    "color": "#0C8B9B",
+    "anatomia": "Nutria café oscuro (#7D5842) con cara y pecho más claros (#C9A585), orejas chicas, nariz ancha oscura, bigotes, cola gruesa (an-cola), patas palmeadas.",
+    "vestuario": "Camiseta deportiva sin mangas turquesa (#0C8B9B) con un número crema dibujado con trazos simples (no texto), shorts, cintillo de toalla blanco en la frente con dos gotas de sudor celeste, cronómetro colgando del cuello. El brazo derecho (an-brazo) arriba como celebrando.",
+    "aria": "El Chungungo, una nutria con camiseta turquesa, cintillo y cronómetro"
+  },
+  {
+    "clave": "quiltro",
+    "nombre": "Quiltro",
+    "especie": "Perro quiltro (mestizo)",
+    "categoria": "Comer",
+    "color": "#5C7A1E",
+    "anatomia": "Perro guatón y bonachón: pelaje café caramelo (#C68A4E) con parche crema en hocico y pecho, una mancha oscura alrededor de un ojo, una oreja levantada y otra caída (an-oreja-i / an-oreja-d), lengua rosada afuera, cola que se mueve (an-cola), panza redonda.",
+    "vestuario": "Pañuelo o bandana verde oliva (#5C7A1E) con lunares crema al cuello (an-extra) y una servilleta blanca a cuadros metida en el cuello como babero. En la mano izquierda un tenedor o una sopaipilla; la derecha (an-brazo) saluda.",
+    "aria": "El Quiltro, un perro guatón con bandana verde oliva, servilleta de babero y la lengua afuera"
+  }
+]

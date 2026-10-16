@@ -1,0 +1,88 @@
+<g class="an-cuerpo">
+  <!-- cola larga con pincel negro -->
+  <g class="an-cola">
+    <path d="M132 200q34 8 46-12q6-10 4-24" stroke-width="12"/>
+    <path d="M132 200q34 8 46-12q6-10 4-24" stroke="#B48A57" stroke-width="6"/>
+    <g transform="translate(182 168) rotate(4)">
+      <path d="M-4 4Q-12-6-9-18Q-6-30 0-40Q6-30 9-18Q12-6 4 4Q0 7-4 4z" fill="#2B2420"/>
+      <path d="M-3-6q-1-10 2-22M3-8q1-8-1-16" stroke="#5A4A40" stroke-width="2"/>
+    </g>
+  </g>
+  <!-- piernas de la jardinera -->
+  <rect x="72" y="190" width="20" height="28" rx="8" fill="#2E7D5B"/>
+  <rect x="108" y="190" width="20" height="28" rx="8" fill="#2E7D5B"/>
+  <path d="M72 210h20M108 210h20" stroke-width="3"/>
+  <path d="M64 226q0-12 17-12q15 0 15 12z" fill="#E8BFA0"/>
+  <path d="M104 226q0-12 15-12q17 0 17 12z" fill="#E8BFA0"/>
+  <path d="M75 226v-5M85 226v-5M115 226v-5M125 226v-5" stroke-width="2.5"/>
+  <!-- libretita -->
+  <g transform="rotate(-8 36 180)">
+    <rect x="22" y="164" width="28" height="34" rx="3" fill="#FFF4DC"/>
+    <path d="M28 176h16M28 183h16M28 190h10" stroke="#9FB0C8" stroke-width="2"/>
+    <path d="M26 172l3 3l6-7" stroke="#2E7D5B" stroke-width="3"/>
+    <path d="M22 164h28v6h-28z" fill="#2E7D5B" stroke-width="3"/>
+  </g>
+  <!-- brazo izquierdo -->
+  <g transform="rotate(24 60 148)">
+    <ellipse cx="60" cy="186" rx="8.5" ry="7.5" fill="#E8BFA0"/>
+    <rect x="50" y="142" width="20" height="40" rx="10" fill="#B48A57"/>
+  </g>
+  <!-- cuerpo -->
+  <path d="M60 152q0-24 40-24q40 0 40 24l4 42q0 12-44 12q-44 0-44-12z" fill="#B48A57"/>
+  <path d="M100 136q-20 0-20 22q0 14 6 20h28q6-6 6-20q0-22-20-22z" fill="#F3E3C3" stroke="none"/>
+  <!-- jardinera verde -->
+  <path d="M58 176h84l2 18q0 12-44 12q-44 0-44-12z" fill="#2E7D5B"/>
+  <path d="M60 194q40 10 80 0l1 4q-4 8-41 8q-37 0-41-8z" fill="#23634A" stroke="none"/>
+  <path d="M58 176h84l2 18q0 12-44 12q-44 0-44-12z"/>
+  <path d="M80 150q-6-14-16-20M120 150q6-14 16-20" stroke-width="11"/>
+  <path d="M80 150q-6-14-16-20M120 150q6-14 16-20" stroke="#2E7D5B" stroke-width="6"/>
+  <rect x="76" y="146" width="48" height="36" rx="6" fill="#2E7D5B"/>
+  <path d="M90 158h20v9q0 5-5 5h-10q-5 0-5-5z" fill="#23634A" stroke-width="3"/>
+  <circle cx="82" cy="152" r="3.6" fill="#F5B52E" stroke-width="2.5"/>
+  <circle cx="118" cy="152" r="3.6" fill="#F5B52E" stroke-width="2.5"/>
+  <!-- brazo que saluda -->
+  <g class="an-brazo">
+    <g transform="rotate(-16 140 148)">
+      <ellipse cx="140" cy="186" rx="8.5" ry="7.5" fill="#E8BFA0"/>
+      <rect x="130" y="142" width="20" height="40" rx="10" fill="#B48A57"/>
+    </g>
+  </g>
+  <!-- orejas redondas -->
+  <g class="an-oreja-i">
+    <circle cx="56" cy="44" r="19" fill="#8E6A40"/>
+    <circle cx="58" cy="47" r="11" fill="#E8A9A0" stroke="none"/>
+  </g>
+  <g class="an-oreja-d">
+    <circle cx="144" cy="44" r="19" fill="#8E6A40"/>
+    <circle cx="142" cy="47" r="11" fill="#E8A9A0" stroke="none"/>
+  </g>
+  <!-- cabeza -->
+  <path d="M44 88q0-50 56-50q56 0 56 50q0 26-24 40q-32 14-64 0q-24-14-24-40z" fill="#B48A57"/>
+  <g stroke="none">
+    <path d="M58 116q12 14 42 17q30-3 42-17q-6 22-42 22q-36 0-42-22z" fill="#9A7243"/>
+    <path d="M100 96q-12 0-21 7q-8 7-5 16q5 12 26 12q21 0 26-12q3-9-5-16q-9-7-21-7z" fill="#F3E3C3"/>
+    <ellipse cx="77" cy="89" rx="13" ry="15" fill="#E2C89A"/>
+    <ellipse cx="123" cy="89" rx="13" ry="15" fill="#E2C89A"/>
+    <ellipse cx="62" cy="110" rx="8" ry="5" fill="#F2778C" opacity=".55"/>
+    <ellipse cx="138" cy="110" rx="8" ry="5" fill="#F2778C" opacity=".55"/>
+    <ellipse cx="77" cy="89" rx="9.5" ry="11.5" fill="#1E2A4A"/>
+    <circle cx="80.5" cy="84" r="3.6" fill="#fff"/><circle cx="73.5" cy="94" r="1.8" fill="#fff"/>
+    <ellipse cx="123" cy="89" rx="9.5" ry="11.5" fill="#1E2A4A"/>
+    <circle cx="126.5" cy="84" r="3.6" fill="#fff"/><circle cx="119.5" cy="94" r="1.8" fill="#fff"/>
+    <g class="an-parpado" transform="scale(1 0)"><ellipse cx="77" cy="89" rx="11" ry="13" fill="#E2C89A"/><path d="M69.5 92.8 q7.5 9.4 15 0" fill="none" stroke="#1E2A4A" stroke-width="3" stroke-linecap="round"/></g>
+    <g class="an-parpado" transform="scale(1 0)"><ellipse cx="123" cy="89" rx="11" ry="13" fill="#E2C89A"/><path d="M115.5 92.8 q7.5 9.4 15 0" fill="none" stroke="#1E2A4A" stroke-width="3" stroke-linecap="round"/></g>
+    <path d="M93 103h14q0 8-7 8q-7 0-7-8z" fill="#E77E8A"/>
+  </g>
+  <path d="M93 103h14q0 8-7 8q-7 0-7-8z" stroke-width="3"/>
+  <path d="M96 117h8v5q0 2-2 2h-4q-2 0-2-2z" fill="#FFFDF8" stroke-width="2.5"/>
+  <path d="M100 111v5M100 116q-5 5-10 2M100 116q5 5 10 2" stroke-width="3"/>
+  <path d="M86 113l-34-5M86 118l-33 4M114 113l34-5M114 118l33 4" stroke="#1E2A4A" stroke-width="2"/>
+  <path d="M66 70q9-5 18-1M134 70q-9-5-18-1" stroke-width="3.5"/>
+  <!-- etiqueta de precio en cero -->
+  <g class="an-extra">
+    <path d="M154 58q10 6 13 18" stroke="#1E2A4A" stroke-width="2.5"/>
+    <path d="M156 82l11-9l11 9v24q0 3-3 3h-16q-3 0-3-3z" fill="#FFF4DC"/>
+    <circle cx="167" cy="80" r="2" fill="#1E2A4A" stroke="none"/>
+    <ellipse cx="167" cy="95" rx="5" ry="7" stroke="#1E2A4A" stroke-width="3.2"/>
+  </g>
+</g>
