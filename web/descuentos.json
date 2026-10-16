@@ -1,7 +1,7 @@
 {
- "generado": "2026-10-02T00:32:32",
- "total": 627,
- "locales": 1882,
+ "generado": "2026-10-16T01:49:25",
+ "total": 641,
+ "locales": 1935,
  "bancos": [
   [
    "bancochile",
@@ -83,13 +83,13 @@
   "Ñuñoa"
  ],
  "por_dia": {
-  "miercoles": 297,
-  "jueves": 240,
-  "viernes": 188,
+  "miercoles": 300,
+  "jueves": 242,
+  "viernes": 191,
   "sabado": 175,
-  "domingo": 144,
-  "lunes": 250,
-  "martes": 317
+  "domingo": 145,
+  "lunes": 252,
+  "martes": 318
  },
  "descuentos": [
   {
@@ -520,6 +520,32 @@
    ]
   },
   {
+   "banco_id": "cencosud",
+   "banco": "Cencosud",
+   "comercio": "Cineplanet",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "Todo Chile",
+   "sitio_web": "",
+   "porcentaje": 50,
+   "oferta": "",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": "2026-10-31",
+   "tarjetas": [
+    "cencosud"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "50% de dcto en tus entradas con Tarjeta Cencosud",
+   "url": "https://www.tarjetacencosud.cl/publico/beneficios/landing/cineplanet",
+   "logo": "https://staticresourcesfiles.blob.core.windows.net/content/wpub/static/12912721027179286-logo-cineplanet.webp",
+   "capturado": "",
+   "id": "b8bb0c4ed57f",
+   "locales": [],
+   "comunas": []
+  },
+  {
    "banco_id": "bancoestado",
    "banco": "BancoEstado",
    "comercio": "Cocina de kaleta",
@@ -585,7 +611,7 @@
    ],
    "modalidad": "presencial",
    "segmentado": false,
-   "condiciones": "Promoción válida todos los sabados de Octubre de 2026. Promoción consiste en un 50% de descuento con tope de $100.000 por cuenta o tarjeta. Válido en restaurante \"Cuerovaca\" de Vitacura, pagando con Tarjeta Cencosud Scotiabank Mastercard emitidas por CAT Administradora de Tarjetas S.A, filial de Sco",
+   "condiciones": "Promoción válida todos los sabados de Octubre de 2026. Promoción consiste en un 50% de descuento con tope de $100.000 por cuenta o tarjeta. Válido en restaurante \"Cuerovaca\" de Vitacura, pagando con Tarjeta Cencosud Scotiabank Black emitidas por CAT Administradora de Tarjetas S.A, filial de Scotiaba",
    "url": "https://www.tarjetacencosud.cl/publico/beneficios/landing/la-ruta-del-sabor",
    "logo": "https://staticresourcesfiles.blob.core.windows.net/content/wpub/static/0024705267007658627-178.webp",
    "capturado": "",
@@ -1342,7 +1368,7 @@
    ],
    "modalidad": "presencial",
    "segmentado": false,
-   "condiciones": "Promoción válida todos los viernes de Octubre de 2026. Promoción consiste en un 50% de descuento con tope de $100.000 por cuenta o tarjeta. Válido en restaurante \"Jeronimo\" de Vitacura, pagando con Tarjeta Cencosud Scotiabank Mastercard emitidas por CAT Administradora de Tarjetas S.A, filial de Scot",
+   "condiciones": "Promoción válida todos los viernes de Octubre de 2026. Promoción consiste en un 50% de descuento con tope de $100.000 por cuenta o tarjeta. Válido en restaurante \"Jeronimo\" de Vitacura, pagando con Tarjeta Cencosud Scotiabank Black emitidas por CAT Administradora de Tarjetas S.A, filial de Scotiaban",
    "url": "https://www.tarjetacencosud.cl/publico/beneficios/landing/la-ruta-del-sabor",
    "logo": "https://staticresourcesfiles.blob.core.windows.net/content/wpub/static/6719722117624412-177.webp",
    "capturado": "",
@@ -1515,7 +1541,7 @@
    ],
    "modalidad": "presencial",
    "segmentado": false,
-   "condiciones": "Promoción válida todos los lunes de Octubre de 2026. Promoción consiste en un 50% de descuento con tope de $100.000 por cuenta o tarjeta. Válido en restaurante \"Kato\" de Las Condes, pagando con Tarjeta Cencosud Scotiabank Mastercard emitidas por CAT Administradora de Tarjetas S.A, filial de Scotiaba",
+   "condiciones": "Promoción válida todos los lunes de Octubre de 2026. Promoción consiste en un 50% de descuento con tope de $100.000 por cuenta o tarjeta. Válido en restaurante \"Kato\" de Las Condes, pagando con Tarjeta Cencosud Scotiabank Black emitidas por CAT Administradora de Tarjetas S.A, filial de Scotiabank Ch",
    "url": "https://www.tarjetacencosud.cl/publico/beneficios/landing/la-ruta-del-sabor",
    "logo": "https://staticresourcesfiles.blob.core.windows.net/content/wpub/static/2982481586466268-174.webp",
    "capturado": "",
@@ -1649,7 +1675,7 @@
    ],
    "modalidad": "presencial",
    "segmentado": false,
-   "condiciones": "Promoción válida todos los miercoles de Octubre de 2026. Promoción consiste en un 50% de descuento con tope de $100.000 por cuenta o tarjeta. Válido en restaurante \"La Cabrera\" de Vitacura y Las Condes, pagando con Tarjeta Cencosud Scotiabank Mastercard emitidas por CAT Administradora de Tarjetas S.",
+   "condiciones": "Promoción válida todos los miercoles de Octubre de 2026. Promoción consiste en un 50% de descuento con tope de $100.000 por cuenta o tarjeta. Válido en restaurante \"La Cabrera\" de Vitacura y Las Condes, pagando con Tarjeta Cencosud Scotiabank Black emitidas por CAT Administradora de Tarjetas S.A, fi",
    "url": "https://www.tarjetacencosud.cl/publico/beneficios/landing/la-ruta-del-sabor",
    "logo": "https://staticresourcesfiles.blob.core.windows.net/content/wpub/static/9480430682139016-176.webp",
    "capturado": "",
@@ -2293,7 +2319,7 @@
    ],
    "modalidad": "presencial",
    "segmentado": false,
-   "condiciones": "Promoción válida todos los lunes de Octubre de 2026. Promoción consiste en un 50% de descuento con tope de $100.000 por cuenta o tarjeta. Válido en restaurante \"Kato\" de Las Condes, pagando con Tarjeta Cencosud Scotiabank Mastercard emitidas por CAT Administradora de Tarjetas S.A, filial de Scotiaba",
+   "condiciones": "Promoción válida todos los martes de Octubre de 2026. Promoción consiste en un 50% de descuento con tope de $100.000 por cuenta o tarjeta. Válido en restaurante \"Piegari\" de Vitacura, pagando con Tarjeta Cencosud Scotiabank Black emitidas por CAT Administradora de Tarjetas S.A, filial de Scotiabank ",
    "url": "https://www.tarjetacencosud.cl/publico/beneficios/landing/la-ruta-del-sabor",
    "logo": "https://staticresourcesfiles.blob.core.windows.net/content/wpub/static/6712270833542355-175.webp",
    "capturado": "",
@@ -5422,6 +5448,386 @@
    ]
   },
   {
+   "banco_id": "cencosud",
+   "banco": "Cencosud",
+   "comercio": "Burger King",
+   "categoria": "comida_rapida",
+   "cocina": "hamburguesas",
+   "region": "Metropolitana",
+   "sitio_web": "",
+   "porcentaje": 40,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "lunes"
+   ],
+   "vigencia_hasta": "2026-10-31",
+   "tarjetas": [
+    "cencosud"
+   ],
+   "modalidad": "presencial",
+   "segmentado": false,
+   "condiciones": "Todos los lunes en locales Burger King y Auto King. Pagando con tu Tarjeta Cencosud Scotiabank",
+   "url": "https://www.tarjetacencosud.cl/publico/beneficios/landing/burger-king",
+   "logo": "https://staticresourcesfiles.blob.core.windows.net/content/wpub/static/3337289444216194-logo-burger.webp",
+   "capturado": "",
+   "id": "da354e81294b",
+   "locales": [
+    {
+     "direccion": "Avenida Américo Vespucio 1737",
+     "comuna": "Huechuraba",
+     "lat": -33.3644319,
+     "lon": -70.6785509,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Pedro Fontova 6251",
+     "comuna": "Huechuraba",
+     "lat": -33.3662734,
+     "lon": -70.6702744,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Independencia 684",
+     "comuna": "Independencia",
+     "lat": -33.42338221999999,
+     "lon": -70.65564756,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Vicuña Mackenna",
+     "comuna": "La Florida",
+     "lat": -33.5273834,
+     "lon": -70.5967867,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Vicuña Mackenna Oriente 7110",
+     "comuna": "La Florida",
+     "lat": -33.5172223,
+     "lon": -70.5973144,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Larraín 5862",
+     "comuna": "La Reina",
+     "lat": -33.4520807,
+     "lon": -70.568747,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Monseñor Edwards 1635",
+     "comuna": "La Reina",
+     "lat": -33.43914206666667,
+     "lon": -70.56107054,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Apoquindo",
+     "comuna": "Las Condes",
+     "lat": -33.407277457142854,
+     "lon": -70.55867651428572,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Apoquindo 6009",
+     "comuna": "Las Condes",
+     "lat": -33.4095416,
+     "lon": -70.5685984,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Padre Hurtado Sur 875",
+     "comuna": "Las Condes",
+     "lat": -33.4152865,
+     "lon": -70.5411088,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Presidente Kennedy 5413",
+     "comuna": "Las Condes",
+     "lat": -33.4019037,
+     "lon": -70.5768527,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Presidente Kennedy 9001",
+     "comuna": "Las Condes",
+     "lat": -33.3904348,
+     "lon": -70.5466382,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida 5 de Abril 90",
+     "comuna": "Maipú",
+     "lat": -33.510859,
+     "lon": -70.7584675,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Los Pajaritos 2973",
+     "comuna": "Maipú",
+     "lat": -33.50008476000001,
+     "lon": -70.75707193999999,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Consistorial 2100",
+     "comuna": "Peñalolén",
+     "lat": -33.4790313,
+     "lon": -70.544661,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Andrés Bello 2461",
+     "comuna": "Providencia",
+     "lat": -33.4180947,
+     "lon": -70.6069493,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Manuel Montt 122",
+     "comuna": "Providencia",
+     "lat": -33.4297964875,
+     "lon": -70.6193940875,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Providencia",
+     "comuna": "Providencia",
+     "lat": -33.4207596,
+     "lon": -70.6084235,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Camilo Henríquez 3296",
+     "comuna": "Puente Alto",
+     "lat": -33.5692765,
+     "lon": -70.5572999,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Bernardo O'Higgins 314",
+     "comuna": "Quilicura",
+     "lat": -33.35732292857143,
+     "lon": -70.72762254285715,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Bernardo O'Higgins 581",
+     "comuna": "Quilicura",
+     "lat": -33.368607,
+     "lon": -70.7293194,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Llano Subercaseaux 3519",
+     "comuna": "San Miguel",
+     "lat": -33.4855684,
+     "lon": -70.6507829,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Libertador Bernardo O'Higgins",
+     "comuna": "Santiago",
+     "lat": -33.4443468,
+     "lon": -70.6548172,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Libertador Bernardo O'Higgins 1770",
+     "comuna": "Santiago",
+     "lat": -33.447009575,
+     "lon": -70.66105177499999,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Enrique Mac Iver 273",
+     "comuna": "Santiago",
+     "lat": -33.439501353333334,
+     "lon": -70.64665196666667,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Puente 689",
+     "comuna": "Santiago",
+     "lat": -33.4353926,
+     "lon": -70.6512849,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Vitacura 6857",
+     "comuna": "Vitacura",
+     "lat": -33.387811175,
+     "lon": -70.56583247500001,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Américo Vespucio 571",
+     "comuna": "Ñuñoa",
+     "lat": -33.45851233999999,
+     "lon": -70.57272084,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Irarrázaval 2912",
+     "comuna": "Ñuñoa",
+     "lat": -33.454231920000005,
+     "lon": -70.60079576000001,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Estación Central",
+     "lat": -33.4515633,
+     "lon": -70.6799867,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Estación Central",
+     "lat": -33.4525274,
+     "lon": -70.6821976,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Huechuraba",
+     "lat": -33.306445628571424,
+     "lon": -70.66429457142856,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Lo Barnechea",
+     "lat": -33.35243831111111,
+     "lon": -70.51974378888889,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Macul",
+     "lat": -33.4807461,
+     "lon": -70.5989017,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Providencia",
+     "lat": -33.4236873,
+     "lon": -70.6106095,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Providencia",
+     "lat": -33.4190581,
+     "lon": -70.6009879,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Santiago",
+     "lat": -33.4428063,
+     "lon": -70.6489838,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    }
+   ],
+   "comunas": [
+    "Estación Central",
+    "Huechuraba",
+    "Independencia",
+    "La Florida",
+    "La Reina",
+    "Las Condes",
+    "Lo Barnechea",
+    "Macul",
+    "Maipú",
+    "Peñalolén",
+    "Providencia",
+    "Puente Alto",
+    "Quilicura",
+    "San Miguel",
+    "Santiago",
+    "Vitacura",
+    "Ñuñoa"
+   ]
+  },
+  {
    "banco_id": "santander",
    "banco": "Santander",
    "comercio": "Burger King",
@@ -8131,13 +8537,7 @@
    "oferta": "",
    "tope": null,
    "dias": [
-    "lunes",
-    "martes",
-    "miercoles",
-    "jueves",
-    "viernes",
-    "sabado",
-    "domingo"
+    "miercoles"
    ],
    "vigencia_hasta": "2026-10-31",
    "tarjetas": [
@@ -13237,7 +13637,7 @@
    ],
    "modalidad": "ambas",
    "segmentado": false,
-   "condiciones": "Hasta el 31 de octubre · Local La Florida: Lunes a Miércoles de 12:30 a 23:00 hrs, Jueves de 12:30 a 00:00 hrs, Viernes de 12:30 a 01:00 hrs, Sábado de 12:30 a 01:00 hrs y Domingo de 13:30 a 22:00 hrs · Local Ñuñoa: Lunes de 13:00 a 23:30 hrs, Martes y Miércoles de 13:00 a 00:30 hrs, Jueves a Sábado",
+   "condiciones": "Hasta el 31 de octubre · Local La Florida: Lunes a Miércoles de 12:30 a 23:00 hrs, Jueves de 12:30 a 00:00 hrs, Viernes de 12:30 a 01:00 hrs, Sábado de 12:30 a 01:00 hrs y Domingo de 13:30 a 22:00 hrs · Local Providencia: Lunes de 14:00 a 23:30 hrs, Martes de 12:30 a 23:30 hrs, Miércoles de 12:30 a ",
    "url": "https://www.bancoripley.cl/beneficios-y-promociones",
    "logo": "https://firebasestorage.googleapis.com/v0/b/banco-ripley-sp-2-0.appspot.com/o/logo-Kunstmann-Craftbar_1782315611991.jpg?alt=media&token=fc47ea98-51ec-42ca-97ee-aeb0407a22a1",
    "capturado": "",
@@ -14425,11 +14825,11 @@
    "id": "749e1c093ac2",
    "locales": [
     {
-     "direccion": "San Pedro Lote 3 Parcela 12 KM 62 San Francisco de Mostazal",
+     "direccion": "Ruta Travesía Km 94, cruce Los Lirios, Requinoa",
      "comuna": "",
-     "lat": -33.2506472882353,
-     "lon": -70.70104282941176,
-     "precision": "calle",
+     "lat": null,
+     "lon": null,
+     "precision": "sin_ubicar",
      "telefono": "",
      "origen": ""
     }
@@ -16693,9 +17093,9 @@
     "black one",
     "black"
    ],
-   "modalidad": "",
+   "modalidad": "online",
    "segmentado": true,
-   "condiciones": "40% de dcto. los martes, con tu Tarjeta One en tienda física. Pide tu descuento y paga con tu Tarjeta One. Solicita tu descuento al momento de pagar la cuenta. No acumulable con otras promociones y sujeto a disponibilidad. Beneficio válido solo en compras con boleta. Tope de descuento: $30.000 por cuenta. Se excluyen propinas. No todos los comercios aceptan pagar con billeteras digitales, por lo tanto, recomendamos siempre llevar la tarjeta de crédito de manera física. ¡Las mejores galletas de almendras del mundo! Horario de atención en tiendas Dulcería Frutillar: de lunes a domingo de 10:30 a 19:30 hrs.",
+   "condiciones": "40% de dcto. los martes, con tu Tarjeta One en tienda física y tienda online Pide tu descuento y paga con tu Tarjeta One. En tienda física, solicita tu descuento al momento de pagar la cuenta. En tienda online, ingresa como cupón los 6 primeros dígitos de tu Tarjeta One. No acumulable con otras promociones y sujeto a disponibilidad. Beneficio válido solo en compras con boleta. Tope de descuento: $30.000 por cuenta. Se excluyen propinas. No todos los comercios aceptan pagar con billeteras digitales, por lo tanto, recomendamos siempre llevar la tarjeta de crédito de manera física. ¡Las mejores galletas de almendras del mundo! Horario de atención en tiendas Dulcería Frutillar: de lunes a domingo de 10:30 a 19:30 hrs.",
    "url": "https://personas.bancosecurity.cl/beneficios/gourmet/melinas",
    "logo": "https://personas.bancosecurity.cl/sites/bancopersonas/files/2026-09/Logo%20-%202026-09-30T123845.263.png",
    "capturado": "",
@@ -17212,7 +17612,7 @@
    ],
    "modalidad": "",
    "segmentado": true,
-   "condiciones": "40% de dcto. los martes, con tu Tarjeta One en tienda física. Pide tu descuento y paga con tu Tarjeta One. Solicita tu descuento al momento de pagar la cuenta. No acumulable con otras promociones y sujeto a disponibilidad. Tope de descuento: $40.000 por cuenta. Se excluyen propinas. No todos los comercios aceptan pagar con billeteras digitales, por lo tanto, recomendamos siempre llevar la tarjeta de crédito de manera física. Comida Japonesa con productos endémicos de Chile, una experiencia única con un servicio personalizado. Horario de atención de 12:00 a 16:30 y 17:00 a 23:00 hrs.",
+   "condiciones": "40% de dcto. los martes, con tu Tarjeta One en tienda física. Pide tu descuento y paga con tu Tarjeta One. Solicita tu descuento al momento de pagar la cuenta. No acumulable con otras promociones y sujeto a disponibilidad. Tope de descuento: $40.000 por cuenta. Se excluyen propinas. No todos los comercios aceptan pagar con billeteras digitales, por lo tanto, recomendamos siempre llevar la tarjeta de crédito de manera física. Comida Japonesa con productos endémicos de Chile, una experiencia única con un servicio personalizado. Horario de atención de 12:00 a 16:30 y 18:00 a 23:00 hrs.",
    "url": "https://personas.bancosecurity.cl/beneficios/gourmet/naoki",
    "logo": "https://personas.bancosecurity.cl/sites/bancopersonas/files/2026-06/Logo%20%2884%29.png",
    "capturado": "",
@@ -18954,6 +19354,47 @@
    ]
   },
   {
+   "banco_id": "security",
+   "banco": "Banco Security",
+   "comercio": "Révéler",
+   "categoria": "gourmet",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "https://www.instagram.com/reveler.cl/",
+   "porcentaje": 40,
+   "oferta": "",
+   "tope": 30000,
+   "dias": [
+    "jueves"
+   ],
+   "vigencia_hasta": "2026-10-31",
+   "tarjetas": [
+    "black one",
+    "black"
+   ],
+   "modalidad": "",
+   "segmentado": true,
+   "condiciones": "40% de dcto. los jueves, con tu Tarjeta One en tienda física. Pide tu descuento y paga con tu Tarjeta One. Solicita tu descuento al momento de pagar la cuenta. No acumulable con otras promociones y sujeto a disponibilidad. Beneficio válido solo en compras con boleta. Tope de descuento: $30.000 por cuenta. Se excluyen propinas. No todos los comercios aceptan pagar con billeteras digitales, por lo tanto, recomendamos siempre llevar la tarjeta de crédito de manera física. Comunidad de Café y punto de encuentro Pet Friendly para tostadores, emprendedores y amantes del café.",
+   "url": "https://personas.bancosecurity.cl/beneficios/gourmet/reveler",
+   "logo": "https://personas.bancosecurity.cl/sites/bancopersonas/files/2026-10/Logo%20-%202026-10-02T103517.732.png",
+   "capturado": "",
+   "id": "1b8646e62d9b",
+   "locales": [
+    {
+     "direccion": "Paul Harris 10521, Las Condes",
+     "comuna": "Las Condes",
+     "lat": -33.3857122,
+     "lon": -70.5290761,
+     "precision": "calle",
+     "telefono": "",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Las Condes"
+   ]
+  },
+  {
    "banco_id": "cencosud",
    "banco": "Cencosud",
    "comercio": "Sabor & Aroma",
@@ -19569,6 +20010,56 @@
    "id": "a46770cdb6ed",
    "locales": [],
    "comunas": []
+  },
+  {
+   "banco_id": "cencosud",
+   "banco": "Cencosud",
+   "comercio": "Soho",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "https://sohothai.cl/",
+   "porcentaje": 40,
+   "oferta": "",
+   "tope": 40000,
+   "dias": [
+    "viernes"
+   ],
+   "vigencia_hasta": "2026-10-31",
+   "tarjetas": [
+    "cencosud"
+   ],
+   "modalidad": "presencial",
+   "segmentado": false,
+   "condiciones": "Promoción válida todos los viernes de Octubre de 2026. Promoción consiste en un 40% de descuento con tope de $40.000 por cuenta o tarjeta. Válido en restaurante \"Soho Thai\" de La Condes y Santiago, pagando con Tarjeta Cencosud Scotiabank Mastercard emitidas por CAT Administradora de Tarjetas S.A, fi",
+   "url": "https://www.tarjetacencosud.cl/publico/beneficios/landing/la-ruta-del-sabor",
+   "logo": "https://staticresourcesfiles.blob.core.windows.net/content/wpub/static/9991075456146319-soho.webp",
+   "capturado": "",
+   "id": "2e2656f73b32",
+   "locales": [
+    {
+     "direccion": "",
+     "comuna": "Las Condes",
+     "lat": -33.4088,
+     "lon": -70.5673,
+     "precision": "comuna",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "",
+     "comuna": "Santiago",
+     "lat": -33.4425,
+     "lon": -70.6505,
+     "precision": "comuna",
+     "telefono": "",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Las Condes",
+    "Santiago"
+   ]
   },
   {
    "banco_id": "ripley",
@@ -20829,7 +21320,7 @@
   {
    "banco_id": "ripley",
    "banco": "Banco Ripley",
-   "comercio": "Uncle Flecth",
+   "comercio": "Uncle Fletch",
    "categoria": "restaurantes",
    "cocina": "Hamburguesas",
    "region": "Metropolitana de Santiago",
@@ -20850,7 +21341,7 @@
    "url": "https://www.bancoripley.cl/beneficios-y-promociones",
    "logo": "https://firebasestorage.googleapis.com/v0/b/banco-ripley-sp-2-0.appspot.com/o/logo-uncle-fletch_1790103483347.jpg?alt=media&token=2c786c3c-bc8f-4d94-b2a1-d7e6acfd0f04",
    "capturado": "",
-   "id": "20a06ec0b104",
+   "id": "c174b3a5829c",
    "locales": [
     {
      "direccion": "Jorge Washington 111, Ñuñoa",
@@ -20955,54 +21446,6 @@
    "id": "7342edc754d4",
    "locales": [],
    "comunas": []
-  },
-  {
-   "banco_id": "bancochile",
-   "banco": "Banco de Chile",
-   "comercio": "Vermutería - Terrazas San Cristóbal",
-   "categoria": "restaurantes",
-   "cocina": "",
-   "region": "Metropolitana",
-   "sitio_web": "",
-   "porcentaje": 40,
-   "oferta": "",
-   "tope": null,
-   "dias": [
-    "jueves"
-   ],
-   "vigencia_hasta": "2026-10-31",
-   "tarjetas": [
-    "visa-credito-infinite",
-    "visa-credito-signature",
-    "visa-credito-platinum",
-    "visa-fan-credito",
-    "visa-debito-infinite",
-    "visa-debito-signature",
-    "visa-debito-bch",
-    "visa-cuenta-fan",
-    "visa-credito-gold"
-   ],
-   "modalidad": "",
-   "segmentado": false,
-   "condiciones": "Promoción válida del 01 al 31 de octubre de 2026. Exclusivo para clientes que paguen con Tarjetas Visa Banco de Chile (Incluye Banco Edwards) y que soliciten el descuento al momento de pagar en el restaurante. Descuento no acumulable con otras promociones. Quedan excluidas del beneficio las compras respecto de las cuales se solicite o se emita factura. Descuento es de exclusiva responsabilidad del restaurante no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
-   "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/vermuteria-40visa",
-   "logo": "https://assets.bancochile.cl/uploads/000/110/481/49d99d5d-d492-42d8-81c7-e6cac4883baa/original/logo-web-Vermuteria.jpg",
-   "capturado": "",
-   "id": "77af3ad2cd0a",
-   "locales": [
-    {
-     "direccion": "Constitución #241",
-     "comuna": "Providencia",
-     "lat": -33.4315449,
-     "lon": -70.6349799,
-     "precision": "calle",
-     "telefono": "",
-     "origen": ""
-    }
-   ],
-   "comunas": [
-    "Providencia"
-   ]
   },
   {
    "banco_id": "cencosud",
@@ -21895,6 +22338,134 @@
     "Puente Alto",
     "Santiago",
     "Vitacura"
+   ]
+  },
+  {
+   "banco_id": "cencosud",
+   "banco": "Cencosud",
+   "comercio": "Melt Pizzas",
+   "categoria": "restaurantes",
+   "cocina": "italiana",
+   "region": "Metropolitana",
+   "sitio_web": "",
+   "porcentaje": 35,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "miercoles"
+   ],
+   "vigencia_hasta": "2026-10-31",
+   "tarjetas": [
+    "cencosud"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Disfruta tu comida favorita con ahorro exclusivo con tu Tarjeta Cencosud Scotiabank.",
+   "url": "https://www.tarjetacencosud.cl/publico/beneficios/landing/melt-pizzas",
+   "logo": "https://staticresourcesfiles.blob.core.windows.net/content/wpub/static/043488294534234084-melt-pizzas-logo.webp",
+   "capturado": "",
+   "id": "7535580e6d8f",
+   "locales": [
+    {
+     "direccion": "Avenida Chicureo",
+     "comuna": "Colina",
+     "lat": -33.2794396,
+     "lon": -70.6281717,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Pedro Fontova 6251",
+     "comuna": "Huechuraba",
+     "lat": -33.3660121,
+     "lon": -70.6702533,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Monumento 2196",
+     "comuna": "Maipú",
+     "lat": -33.5071177,
+     "lon": -70.7590558,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "Avenida Camilo Henríquez",
+     "comuna": "Puente Alto",
+     "lat": -33.5674101,
+     "lon": -70.5549303,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "La Cisterna",
+     "lat": -33.52315204,
+     "lon": -70.65992436,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Providencia",
+     "lat": -33.4305565,
+     "lon": -70.6190071,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Puente Alto",
+     "lat": -33.5806896,
+     "lon": -70.5687169,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Puente Alto",
+     "lat": -33.6057116,
+     "lon": -70.5758846,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "Quilicura",
+     "lat": -33.3650065,
+     "lon": -70.7306898,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    },
+    {
+     "direccion": "",
+     "comuna": "San Miguel",
+     "lat": -33.4854536,
+     "lon": -70.6507301,
+     "precision": "fuente",
+     "telefono": "",
+     "origen": "OpenStreetMap"
+    }
+   ],
+   "comunas": [
+    "Colina",
+    "Huechuraba",
+    "La Cisterna",
+    "Maipú",
+    "Providencia",
+    "Puente Alto",
+    "Quilicura",
+    "San Miguel"
    ]
   },
   {
@@ -25472,6 +26043,34 @@
    "comunas": []
   },
   {
+   "banco_id": "cencosud",
+   "banco": "Cencosud",
+   "comercio": "Pedidos Ya",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "Todo Chile",
+   "sitio_web": "",
+   "porcentaje": 30,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "viernes"
+   ],
+   "vigencia_hasta": "2026-10-31",
+   "tarjetas": [
+    "cencosud"
+   ],
+   "modalidad": "online",
+   "segmentado": false,
+   "condiciones": "Pide comida y restaurantes con delivery usando tu beneficio exclusivo de Tarjeta Cencosud Scotiabank",
+   "url": "https://www.tarjetacencosud.cl/publico/beneficios/landing/pedidos-ya",
+   "logo": "https://staticresourcesfiles.blob.core.windows.net/content/wpub/static/5205108990216476-logo-card-4-.webp",
+   "capturado": "",
+   "id": "6ba28954d587",
+   "locales": [],
+   "comunas": []
+  },
+  {
    "banco_id": "security",
    "banco": "Banco Security",
    "comercio": "PedidosYa",
@@ -25498,7 +26097,7 @@
    ],
    "modalidad": "",
    "segmentado": true,
-   "condiciones": "Hasta 30% de dcto. con tu Tarjeta One en PedidosYa app. Enrola tu tarjeta de crédito, e ingresa como cupón BSPEYAOCT26. Selecciona tu tarjeta de crédito como medio de pago, y selecciona tu cupón antes de pagar. Solo 1 cupón por cliente, pagando con tarjeta de crédito. Tope de dcto. $6.000. Sabemos que la hora de la comida es un momento para compartir, por eso queremos llevar a tu mesa, tu comida favorita directamente desde los mejores restaurantes. ¿La mejor parte? ¡Te la llevamos a donde estés! Los mejores restaurantes están en un mismo lugar: Ingresa tu dirección, elige el restaurante, selecciona tu comida favorita y disfruta de los más ricos sabores ¡No te quedes con ganas! PedidosYa, te llena el corazón.",
+   "condiciones": "Hasta 30% de dcto. con tu Tarjeta One en PedidosYa app. Enrola tu tarjeta de crédito, e ingresa como cupón BSPEYAOCT26. Selecciona tu tarjeta de crédito como medio de pago, y selecciona tu cupón antes de pagar. Solo 1 cupón por cliente, pagando con tarjeta de crédito. Tope de dcto. $6.000. No válido para compras con Tarjeta Black One. Sabemos que la hora de la comida es un momento para compartir, por eso queremos llevar a tu mesa, tu comida favorita directamente desde los mejores restaurantes. ¿La mejor parte? ¡Te la llevamos a donde estés! Los mejores restaurantes están en un mismo lugar: Ingresa tu dirección, elige el restaurante, selecciona tu comida favorita y disfruta de los más ricos sabores ¡No te quedes con ganas! PedidosYa, te llena el corazón.",
    "url": "https://personas.bancosecurity.cl/beneficios/gourmet/pedidosya-0",
    "logo": "https://personas.bancosecurity.cl/sites/bancopersonas/files/2026-03/Logo%20%2818%29_0.png",
    "capturado": "",
@@ -25559,7 +26158,7 @@
    ],
    "modalidad": "online",
    "segmentado": true,
-   "condiciones": "Hasta 30% de dcto., con tu Tarjeta One en Rappi app. Hasta agotar fondo promocional. Enrola tu tarjeta de crédito e ingresa como cupón: BSRAPPIOCT26. Selecciona tu tarjeta de crédito como medio de pago y selecciona tu cupón antes de pagar. Solo 1 cupón por cliente, pagando con tarjeta de crédito. Tope de dcto. $6.000 disponible para 1 pedido. Hasta agotar fondo promocional. Encuentra tu comida favorita en Rappi y te llevamos tu pedido a donde estés. ¡Pide ahora! Rappi se encarga automáticamente de mostrarte las tiendas que te quedan más cercanas. Tu salud es lo primero. Envío gratis en Farmacias. Entrega sin contacto. Cuidamos de ti.",
+   "condiciones": "Hasta 30% de dcto., con tu Tarjeta One en Rappi app. Hasta agotar fondo promocional. Enrola tu tarjeta de crédito e ingresa como cupón: BSRAPPIOCT26. Selecciona tu tarjeta de crédito como medio de pago y selecciona tu cupón antes de pagar. Solo 1 cupón por cliente, pagando con tarjeta de crédito. Tope de dcto. $6.000 disponible para 1 pedido. No válido para compras con Tarjeta Black One. Hasta agotar fondo promocional. Encuentra tu comida favorita en Rappi y te llevamos tu pedido a donde estés. ¡Pide ahora! Rappi se encarga automáticamente de mostrarte las tiendas que te quedan más cercanas. Tu salud es lo primero. Envío gratis en Farmacias. Entrega sin contacto. Cuidamos de ti.",
    "url": "https://personas.bancosecurity.cl/beneficios/gourmet/rappi-0",
    "logo": "https://personas.bancosecurity.cl/sites/bancopersonas/files/2026-03/Logo%20%2818%29_1.png",
    "capturado": "",
@@ -28244,6 +28843,32 @@
    ]
   },
   {
+   "banco_id": "entel",
+   "banco": "Entel",
+   "comercio": "Viña Aromo",
+   "categoria": "restaurantes",
+   "cocina": "bar",
+   "region": "Todo Chile",
+   "sitio_web": "",
+   "porcentaje": 30,
+   "oferta": "",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": null,
+   "tarjetas": [
+    "entel"
+   ],
+   "modalidad": "online",
+   "segmentado": false,
+   "condiciones": "30% dcto. online en elaromo.cl",
+   "url": "https://www.entel.cl/beneficios/descuentos/vina-aromo",
+   "logo": "",
+   "capturado": "",
+   "id": "87e75c9ab673",
+   "locales": [],
+   "comunas": []
+  },
+  {
    "banco_id": "bci",
    "banco": "Bci",
    "comercio": "Wendys",
@@ -28329,7 +28954,7 @@
     "jueves",
     "sabado"
    ],
-   "vigencia_hasta": "2027-01-31",
+   "vigencia_hasta": "2026-10-31",
    "tarjetas": [
     "visa-credito-infinite",
     "visa-credito-signature",
@@ -28346,7 +28971,7 @@
    ],
    "modalidad": "presencial",
    "segmentado": false,
-   "condiciones": "Promoción válida hasta el 31 de enero de 2027. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile y Banco Edwards y que soliciten el descuento al momento de pagar en compra presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "condiciones": "Promoción válida hasta el 31 de octubre de 2026. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile y Banco Edwards y que soliciten el descuento al momento de pagar en compra presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/brisas-del-mar-nunoa",
    "logo": "https://assets.bancochile.cl/uploads/000/112/939/17858f86-d0aa-4ad4-866c-e8f594a5175d/original/logo-web-Brisas-del-Mar-nunoa.png",
    "capturado": "",
@@ -28764,7 +29389,7 @@
     "jueves",
     "sabado"
    ],
-   "vigencia_hasta": "2027-01-31",
+   "vigencia_hasta": "2026-10-31",
    "tarjetas": [
     "visa-credito-infinite",
     "visa-credito-signature",
@@ -28781,7 +29406,7 @@
    ],
    "modalidad": "presencial",
    "segmentado": false,
-   "condiciones": "Promoción válida hasta el 31 de enero de 2027. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile y Banco Edwards y que soliciten el descuento al momento de pagar en compra presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "condiciones": "Promoción válida hasta el 31 de octubre de 2026. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile y Banco Edwards y que soliciten el descuento al momento de pagar en compra presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/casa-valerio-tenedor-libre",
    "logo": "https://assets.bancochile.cl/uploads/000/111/438/2405599f-4d9c-4bf2-a088-eb1bc7bb5317/original/logo-web-Valerio-Parilladas-Quilicura.png",
    "capturado": "",
@@ -28942,7 +29567,7 @@
     "jueves",
     "sabado"
    ],
-   "vigencia_hasta": "2027-01-31",
+   "vigencia_hasta": "2026-10-31",
    "tarjetas": [
     "visa-credito-infinite",
     "visa-credito-signature",
@@ -28959,7 +29584,7 @@
    ],
    "modalidad": "presencial",
    "segmentado": false,
-   "condiciones": "Promoción válida hasta el 31 de enero de 2027. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile y Banco Edwards y que soliciten el descuento al momento de pagar en compra presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "condiciones": "Promoción válida hasta el 31 de octubre de 2026. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile y Banco Edwards y que soliciten el descuento al momento de pagar en compra presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/lima-limon",
    "logo": "https://assets.bancochile.cl/uploads/000/111/419/8f0a3d05-6a0e-4807-a882-18071618ae48/original/logo-web-Lima-Limon.png",
    "capturado": "",
@@ -28997,7 +29622,7 @@
     "jueves",
     "sabado"
    ],
-   "vigencia_hasta": "2027-01-31",
+   "vigencia_hasta": "2026-10-31",
    "tarjetas": [
     "visa-credito-infinite",
     "visa-credito-signature",
@@ -29014,7 +29639,7 @@
    ],
    "modalidad": "presencial",
    "segmentado": false,
-   "condiciones": "Promoción válida hasta el 31 de enero de 2027. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile y Banco Edwards y que soliciten el descuento al momento de pagar en compra presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "condiciones": "Promoción válida hasta el 31 de octubre de 2026. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile y Banco Edwards y que soliciten el descuento al momento de pagar en compra presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/machu-picchu-providencia",
    "logo": "https://assets.bancochile.cl/uploads/000/111/425/70522171-8965-49cc-9382-c4b4076df2da/original/logo-web-Machu-Picchu-Providencia.png",
    "capturado": "",
@@ -29191,7 +29816,7 @@
     "jueves",
     "sabado"
    ],
-   "vigencia_hasta": "2027-01-31",
+   "vigencia_hasta": "2026-10-31",
    "tarjetas": [
     "visa-credito-infinite",
     "visa-credito-signature",
@@ -29208,7 +29833,7 @@
    ],
    "modalidad": "presencial",
    "segmentado": false,
-   "condiciones": "Promoción válida hasta el 31 de enero de 2027. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile y Banco Edwards y que soliciten el descuento al momento de pagar en compra presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "condiciones": "Promoción válida hasta el 31 de octubre de 2026. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile y Banco Edwards y que soliciten el descuento al momento de pagar en compra presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/pachamama-tenedor-libre",
    "logo": "https://assets.bancochile.cl/uploads/000/111/431/03f3f8ae-ea2f-4f8d-a6ec-24b08bf49c3e/original/logo-web-Pachamama.png",
    "capturado": "",
@@ -30520,6 +31145,34 @@
    ]
   },
   {
+   "banco_id": "cencosud",
+   "banco": "Cencosud",
+   "comercio": "Papa Johns",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "Todo Chile",
+   "sitio_web": "",
+   "porcentaje": 25,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "domingo"
+   ],
+   "vigencia_hasta": "2026-10-31",
+   "tarjetas": [
+    "cencosud"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Compra tu pizza con tu Tarjeta Cencosud Scotiabank a través de la web y app Papa Johns",
+   "url": "https://www.tarjetacencosud.cl/publico/beneficios/landing/papa-johns",
+   "logo": "https://staticresourcesfiles.blob.core.windows.net/content/wpub/static/5195866453099944-bene-logo-papajohns.webp",
+   "capturado": "",
+   "id": "1256a698f485",
+   "locales": [],
+   "comunas": []
+  },
+  {
    "banco_id": "entel",
    "banco": "Entel",
    "comercio": "Papa Johns",
@@ -30728,7 +31381,7 @@
     "jueves",
     "sabado"
    ],
-   "vigencia_hasta": "2027-01-31",
+   "vigencia_hasta": "2026-10-31",
    "tarjetas": [
     "visa-credito-infinite",
     "visa-credito-signature",
@@ -30745,7 +31398,7 @@
    ],
    "modalidad": "presencial",
    "segmentado": false,
-   "condiciones": "Promoción válida hasta el 31 de enero de 2027. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile y Banco Edwards y que soliciten el descuento al momento de pagar en compra presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "condiciones": "Promoción válida hasta el 31 de octubre de 2026. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile y Banco Edwards y que soliciten el descuento al momento de pagar en compra presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/restaurant-son-peru",
    "logo": "https://assets.bancochile.cl/uploads/000/111/434/d7efa3ca-a074-4155-81d7-bd5499e5ad15/original/logo-web-Restaurant-Son-Peru.png",
    "capturado": "",
@@ -30864,7 +31517,7 @@
     "jueves",
     "sabado"
    ],
-   "vigencia_hasta": "2027-01-30",
+   "vigencia_hasta": "2026-10-31",
    "tarjetas": [
     "visa-credito-infinite",
     "visa-credito-signature",
@@ -30881,7 +31534,7 @@
    ],
    "modalidad": "presencial",
    "segmentado": false,
-   "condiciones": "Promoción válida hasta el 30 de enero de 2027. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile y Banco Edwards y que soliciten el descuento al momento de pagar en compra presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "condiciones": "Promoción válida hasta el 31 de octubre de 2026. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile y Banco Edwards y que soliciten el descuento al momento de pagar en compra presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/valerio-parrilladas-tenedor-libre-quilicura",
    "logo": "https://assets.bancochile.cl/uploads/000/111/415/49d6b0ad-586a-49de-9216-f42939388feb/original/logo-web-Casa-Valerio.png",
    "capturado": "",
@@ -30919,7 +31572,7 @@
     "jueves",
     "sabado"
    ],
-   "vigencia_hasta": "2027-01-31",
+   "vigencia_hasta": "2026-10-31",
    "tarjetas": [
     "visa-credito-infinite",
     "visa-credito-signature",
@@ -30936,7 +31589,7 @@
    ],
    "modalidad": "presencial",
    "segmentado": false,
-   "condiciones": "Promoción válida hasta el 31 de enero de 2027. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile y Banco Edwards y que soliciten el descuento al momento de pagar en compra presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
+   "condiciones": "Promoción válida hasta el 31 de octubre de 2026. Exclusivo para clientes que paguen con Tarjetas emitidas por Banco de Chile y Banco Edwards y que soliciten el descuento al momento de pagar en compra presencial. No acumulable con otras promociones. Descuento es de exclusiva responsabilidad del comercio no cabiéndole a Banco de Chile responsabilidad alguna en ello, ni la ulterior atención que ello demande.",
    "url": "https://sitiospublicos.bancochile.cl/personas/beneficios/detalle/warique",
    "logo": "https://assets.bancochile.cl/uploads/000/111/443/0889964e-2174-4122-b920-789ed8a755e9/original/logo-web-Warique.png",
    "capturado": "",
@@ -34092,6 +34745,32 @@
    "comunas": [
     "San Miguel"
    ]
+  },
+  {
+   "banco_id": "cencosud",
+   "banco": "Cencosud",
+   "comercio": "Hello Wine",
+   "categoria": "restaurantes",
+   "cocina": "bar",
+   "region": "Todo Chile",
+   "sitio_web": "",
+   "porcentaje": 20,
+   "oferta": "",
+   "tope": null,
+   "dias": [],
+   "vigencia_hasta": "2026-10-31",
+   "tarjetas": [
+    "cencosud"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "¿Un vinito? Aprovecha y usa tu 20% de descuento en el primer mes de suscripción de Hello Wine",
+   "url": "https://www.tarjetacencosud.cl/publico/beneficios/landing/hello-wine",
+   "logo": "https://staticresourcesfiles.blob.core.windows.net/content/wpub/static/6929925446615499-hello-wine-logo.webp",
+   "capturado": "",
+   "id": "d8eff1de050d",
+   "locales": [],
+   "comunas": []
   },
   {
    "banco_id": "bancochile",
@@ -39317,6 +39996,225 @@
     "Las Condes",
     "Vitacura"
    ]
+  },
+  {
+   "banco_id": "cencosud",
+   "banco": "Cencosud",
+   "comercio": "Fork",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "Todo Chile",
+   "sitio_web": "",
+   "porcentaje": null,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "lunes",
+    "martes",
+    "miercoles",
+    "jueves",
+    "viernes",
+    "sabado",
+    "domingo"
+   ],
+   "vigencia_hasta": "2026-10-31",
+   "tarjetas": [
+    "cencosud"
+   ],
+   "modalidad": "",
+   "segmentado": false,
+   "condiciones": "Disfruta y date un gusto con este beneficio",
+   "url": "https://www.tarjetacencosud.cl/publico/beneficios/landing/fork",
+   "logo": "https://staticresourcesfiles.blob.core.windows.net/content/wpub/static/9249709502593682-beneficio-fork-logo.webp",
+   "capturado": "",
+   "id": "3559c5a267ad",
+   "locales": [],
+   "comunas": []
+  },
+  {
+   "banco_id": "security",
+   "banco": "Banco Security",
+   "comercio": "Juan Valdez",
+   "categoria": "gourmet",
+   "cocina": "cafe",
+   "region": "",
+   "sitio_web": "https://www.mastercard.com/cl/es/personal/experience-mastercard/priceless/everyday-value.html",
+   "porcentaje": null,
+   "oferta": "$3.000",
+   "tope": null,
+   "dias": [
+    "martes",
+    "jueves"
+   ],
+   "vigencia_hasta": "2026-10-31",
+   "tarjetas": [
+    "black one",
+    "black"
+   ],
+   "modalidad": "",
+   "segmentado": true,
+   "condiciones": "Los martes y jueves, con tu Tarjeta One en tiendas Juan Valdez. Disfruta las bebidas preparadas de Juan Valdez por solo $3.000 pagando con Mastercard en la app Copec. Además, participa por 1 año de combustible en Copec. Cada compra de combustible con Mastercard a través de app Copec te acerca a ganar 1 año de combustible.",
+   "url": "https://personas.bancosecurity.cl/beneficios/gourmet/juan-valdez",
+   "logo": "https://personas.bancosecurity.cl/sites/bancopersonas/files/2026-08/Logo%20-%202026-08-05T165326.485.png",
+   "capturado": "",
+   "id": "cdd93ff25686",
+   "locales": [
+    {
+     "direccion": "Tiendas Juan Valdez",
+     "comuna": "",
+     "lat": null,
+     "lon": null,
+     "precision": "sin_ubicar",
+     "telefono": "",
+     "origen": ""
+    }
+   ],
+   "comunas": []
+  },
+  {
+   "banco_id": "security",
+   "banco": "Banco Security",
+   "comercio": "Pronto Copec",
+   "categoria": "gourmet",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "https://www.mastercard.com/cl/es/personal/experience-mastercard/priceless/everyday-value.html",
+   "porcentaje": null,
+   "oferta": "$2.000",
+   "tope": null,
+   "dias": [
+    "miercoles"
+   ],
+   "vigencia_hasta": "2026-10-31",
+   "tarjetas": [
+    "black one",
+    "black"
+   ],
+   "modalidad": "",
+   "segmentado": true,
+   "condiciones": "Los miércoles, con tu Tarjeta One en tiendas Pronto Copec. Disfruta el Completo Palta Has por $2.000 pagando con Mastercard en la app Copec. Además, participa por 1 año de combustible en Copec. Cada compra de combustible con Mastercard a través de app Copec te acerca a ganar 1 año de combustible.",
+   "url": "https://personas.bancosecurity.cl/beneficios/gourmet/pronto-copec",
+   "logo": "https://personas.bancosecurity.cl/sites/bancopersonas/files/2026-08/Logo%20-%202026-08-05T165745.101.png",
+   "capturado": "",
+   "id": "d6ddfb95519c",
+   "locales": [
+    {
+     "direccion": "Tiendas Pronto Copec",
+     "comuna": "",
+     "lat": null,
+     "lon": null,
+     "precision": "sin_ubicar",
+     "telefono": "",
+     "origen": ""
+    }
+   ],
+   "comunas": []
+  },
+  {
+   "banco_id": "cencosud",
+   "banco": "Cencosud",
+   "comercio": "Rappi",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "Todo Chile",
+   "sitio_web": "",
+   "porcentaje": null,
+   "oferta": "",
+   "tope": null,
+   "dias": [
+    "jueves"
+   ],
+   "vigencia_hasta": "2026-10-31",
+   "tarjetas": [
+    "cencosud"
+   ],
+   "modalidad": "online",
+   "segmentado": false,
+   "condiciones": "Pide comida en restaurantes con beneficios exclusivos de Tarjeta Cencosud Scotiabank",
+   "url": "https://www.tarjetacencosud.cl/publico/beneficios/landing/rappi",
+   "logo": "https://staticresourcesfiles.blob.core.windows.net/content/wpub/static/8105974372063509-beneficio-rappi-logo.webp",
+   "capturado": "",
+   "id": "82dc75467265",
+   "locales": [],
+   "comunas": []
+  },
+  {
+   "banco_id": "security",
+   "banco": "Banco Security",
+   "comercio": "SBARRO",
+   "categoria": "gourmet",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "https://www.mastercard.com/cl/es/personal/experience-mastercard/priceless/everyday-value.html",
+   "porcentaje": null,
+   "oferta": "$4.500",
+   "tope": null,
+   "dias": [
+    "viernes"
+   ],
+   "vigencia_hasta": "2026-10-31",
+   "tarjetas": [
+    "black one",
+    "black"
+   ],
+   "modalidad": "",
+   "segmentado": true,
+   "condiciones": "Los viernes, con tu Tarjeta One en tiendas SBARRO. Disfruta de 2 slices + bebida de 330 cc por $4.500 pagando con Mastercard en la app Copec. Además, participa por 1 año de combustible en Copec. Cada compra de combustible con Mastercard a través de app Copec te acerca a ganar 1 año de combustible.",
+   "url": "https://personas.bancosecurity.cl/beneficios/gourmet/sbarro",
+   "logo": "https://personas.bancosecurity.cl/sites/bancopersonas/files/2026-08/Logo%20-%202026-08-05T170037.884.png",
+   "capturado": "",
+   "id": "4eedc1be263c",
+   "locales": [
+    {
+     "direccion": "Tiendas SBARRO",
+     "comuna": "",
+     "lat": null,
+     "lon": null,
+     "precision": "sin_ubicar",
+     "telefono": "",
+     "origen": ""
+    }
+   ],
+   "comunas": []
+  },
+  {
+   "banco_id": "security",
+   "banco": "Banco Security",
+   "comercio": "Streat Burger",
+   "categoria": "gourmet",
+   "cocina": "hamburguesas",
+   "region": "",
+   "sitio_web": "https://www.mastercard.com/cl/es/personal/experience-mastercard/priceless/everyday-value.html",
+   "porcentaje": null,
+   "oferta": "$8.000",
+   "tope": null,
+   "dias": [
+    "lunes"
+   ],
+   "vigencia_hasta": "2026-10-31",
+   "tarjetas": [
+    "black one",
+    "black"
+   ],
+   "modalidad": "",
+   "segmentado": true,
+   "condiciones": "Los lunes, con tu Tarjeta One en tiendas Streat Burger. Disfruta del Combo West por $8.000 pagando con Mastercard en la app Copec. Además, participa por 1 año de combustible en Copec. Cada compra de combustible con Mastercard a través de app Copec te acerca a ganar 1 año de combustible.",
+   "url": "https://personas.bancosecurity.cl/beneficios/gourmet/streat-burger",
+   "logo": "https://personas.bancosecurity.cl/sites/bancopersonas/files/2026-08/Logo%20-%202026-08-05T163721.034.png",
+   "capturado": "",
+   "id": "00c80a8410cb",
+   "locales": [
+    {
+     "direccion": "Tiendas Streat Burger",
+     "comuna": "",
+     "lat": null,
+     "lon": null,
+     "precision": "sin_ubicar",
+     "telefono": "",
+     "origen": ""
+    }
+   ],
+   "comunas": []
   },
   {
    "banco_id": "security",

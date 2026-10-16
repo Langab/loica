@@ -15,6 +15,14 @@
      ficha en blanco (el detalle está en mapa.html). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Ícono de pestaña, ícono de "agregar a inicio" y manifiesto de app: sin
+     esto el sitio instalado en la pantalla de inicio era un cuadrito en
+     blanco con el logo de Safari. theme-color lo actualiza aplicarTema(). -->
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../icono-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#FFFBF5">
 
 <title>Prácticas artísticas en el espacio público en Chile: Redes, territorios y nuevas miradas — Loica</title>
 <meta name="description" content="lunes 2 de noviembre · GAM (Centro Cultural Gabriela Mistral), Santiago · Sin información — Ideas y Pensamiento Ver más">
@@ -37,7 +45,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=29">
+<link rel="stylesheet" href="../loica.css?v=32">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -88,7 +96,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=29"></script>
+<script src="../loica.js?v=32"></script>
 <script>
   pintarBarra("mapa.html", "../");
   const EV = {"id": "ee0e7b4fcd7eb9ed", "titulo": "Prácticas artísticas en el espacio público en Chile: Redes, territorios y nuevas miradas", "inicio": "2026-11-02T00:00:00", "fin": null, "lugar": "GAM (Centro Cultural Gabriela Mistral)", "direccion": "", "comuna": "Santiago", "lat": -33.4372, "lon": -70.6403, "precision": "recinto", "gratis": false, "precio": null, "precio_texto": "", "categoria": "arte", "subcategoria": "", "escala": "", "publico": "todos", "descripcion": "Ideas y Pensamiento Ver más", "imagen": "", "fuente": "GAM (Centro Cultural Gabriela Mistral)", "url": "https://gam.cl/es/que-hacer-en-gam/ideasypensamiento/primer-seminario-nacional-de-arte-publico-practicas-artisticas-en-el-espacio-publico-en-chile-redes-territorios-y-nuevas-miradas/", "formato": "panorama"};

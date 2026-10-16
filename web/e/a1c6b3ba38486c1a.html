@@ -15,6 +15,14 @@
      ficha en blanco (el detalle está en mapa.html). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Ícono de pestaña, ícono de "agregar a inicio" y manifiesto de app: sin
+     esto el sitio instalado en la pantalla de inicio era un cuadrito en
+     blanco con el logo de Safari. theme-color lo actualiza aplicarTema(). -->
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../icono-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#FFFBF5">
 
 <title>Esteban Duch - San Miguel Stgo - 28 Octubre — Loica</title>
 <meta name="description" content="miércoles 28 de octubre, 20:00 · Club San Miguel, San Miguel · $11.000 — &quot;¡Prepárate para entrar al nuevo espectáculo de Duch! 🛸✨ El nuevo show de Esteban Duch es una mezcla explos">
@@ -37,7 +45,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=29">
+<link rel="stylesheet" href="../loica.css?v=32">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -88,7 +96,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=29"></script>
+<script src="../loica.js?v=32"></script>
 <script>
   pintarBarra("teatro.html", "../");
   const EV = {"id": "a1c6b3ba38486c1a", "titulo": "Esteban Duch - San Miguel Stgo - 28 Octubre", "inicio": "2026-10-28T20:00:00", "fin": "2026-10-28T21:30:00", "lugar": "Club San Miguel", "direccion": "Llano Subercaseaux, San Miguel", "comuna": "San Miguel", "lat": -33.4872621, "lon": -70.6513972, "precision": "fuente", "gratis": false, "precio": 11000, "precio_texto": "desde $11.000", "categoria": "teatro", "subcategoria": "comedia", "escala": "", "publico": "todos", "descripcion": "\"¡Prepárate para entrar al nuevo espectáculo de Duch! 🛸✨ El nuevo show de Esteban Duch es una mezcla explosiva de música y muchísima comedia. Una hora de risas garantizadas para todas las edades,…", "imagen": "https://ticketing-uploads-1.ticketplus.global/images/thumbs/96660515bf49362e7654c6bc3fa87b403969ddbc.jpg?1789869906", "fuente": "Ticketplus", "url": "https://ticketplus.cl/events/esteban-duch-san-miguel-stgo-28-octubre", "formato": "panorama"};

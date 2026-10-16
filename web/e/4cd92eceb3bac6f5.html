@@ -15,6 +15,14 @@
      ficha en blanco (el detalle está en mapa.html). -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Ícono de pestaña, ícono de "agregar a inicio" y manifiesto de app: sin
+     esto el sitio instalado en la pantalla de inicio era un cuadrito en
+     blanco con el logo de Safari. theme-color lo actualiza aplicarTema(). -->
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../icono-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#FFFBF5">
 
 <title>VERDE SUSPIRO, UN VIAJE A TRAVES DEL TIEMPO - CICLO DE TITERES PARA LA FAMILIA 2026 — Loica</title>
 <meta name="description" content="sábado 17 de octubre, 12:00 · Teatro Azares - HUERFANOS 2146 SANTIAGO, Santiago · $4.480 — “VERDE SUSPIRO, UN VIAJE A TRAVES DEL TIEMPO”Cía. La Cleta AmbulanteCiclo de Títeres para">
@@ -37,7 +45,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../loica.css?v=29">
+<link rel="stylesheet" href="../loica.css?v=32">
 <style>
   body{min-height:100vh;min-height:100dvh}
   .ficha-sola{max-width:620px;margin:0 auto;padding:var(--e-4) var(--e-4) var(--e-12)}
@@ -88,7 +96,7 @@
 </article>
 
 <nav class="nav-inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
-<script src="../loica.js?v=29"></script>
+<script src="../loica.js?v=32"></script>
 <script>
   pintarBarra("mapa.html", "../");
   const EV = {"id": "4cd92eceb3bac6f5", "titulo": "VERDE SUSPIRO, UN VIAJE A TRAVES DEL TIEMPO - CICLO DE TITERES PARA LA FAMILIA 2026", "inicio": "2026-10-17T12:00:00", "fin": "2026-10-17T12:30:00", "lugar": "Teatro Azares - HUERFANOS 2146 SANTIAGO", "direccion": "Huérfanos, 2146, Santiago", "comuna": "Santiago", "lat": -33.4412879, "lon": -70.6661137, "precision": "fuente", "gratis": false, "precio": 4480, "precio_texto": "desde $4.480", "categoria": "familia", "subcategoria": "", "escala": "", "publico": "ninos", "descripcion": "“VERDE SUSPIRO, UN VIAJE A TRAVES DEL TIEMPO”Cía. La Cleta AmbulanteCiclo de Títeres para la FamiliaPúblico Objetivo: FamiliaGénero: Teatro de Títeres Edad Recomendada: 3+Días: Sábado 17 de Octubre…", "imagen": "https://ticketing-uploads-1.ticketplus.global/images/thumbs/a8278fdff34181f9675fcea7bedc96fdb39f2fb7.jpg?1789410311", "fuente": "Ticketplus", "url": "https://ticketplus.cl/events/verde-suspiro-un-viaje-a-traves-del-tiempo-ciclo-de-titeres-para-la-familia-2026", "formato": "panorama"};
