@@ -1,4 +1,4 @@
-# Cola de RESTORANES con descuento — revisión del 2026-10-16.
+# Cola de RESTORANES con descuento — revisión del 2026-10-18.
 # Arriba los sin ubicación (completar direccion/comuna/lat/lon), abajo
 # los sin tipo de cocina (completar cocina). Pegar en
 # config/correcciones/restoranes.yaml bajo `restoranes:`.
@@ -12,7 +12,7 @@ restoranes:
     comuna: Colina
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 3 descuentos sin pin exacto (Banco Falabella, Cencosud, Entel)
   Papa Johns:
@@ -20,7 +20,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco Falabella, BancoEstado)
   Berlín Doner Kebab:
@@ -28,7 +28,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Bci, Cencosud)
   Cuerovaca:
@@ -36,7 +36,7 @@ restoranes:
     comuna: Vitacura
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco Security, Santander)
   Do Sushi:
@@ -44,7 +44,7 @@ restoranes:
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco Falabella, Cencosud)
   Kato:
@@ -52,7 +52,7 @@ restoranes:
     comuna: Las Condes
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco de Chile, BancoEstado)
   Taproom Tübinger:
@@ -60,7 +60,7 @@ restoranes:
     comuna: Pirque
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco de Chile, Santander)
   Barra Olivo:
@@ -68,7 +68,7 @@ restoranes:
     comuna: Colina
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco Falabella, Cencosud)
   Cantina Montt:
@@ -76,7 +76,7 @@ restoranes:
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco Falabella, Banco de Chile)
   Coppelia:
@@ -84,7 +84,7 @@ restoranes:
     comuna: La Florida
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Cencosud, Santander)
   Fork:
@@ -92,7 +92,7 @@ restoranes:
     comuna: La Reina
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco Falabella, Cencosud)
   La Maestranza:
@@ -100,7 +100,7 @@ restoranes:
     comuna: Las Condes
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco Falabella, Santander)
   Vapiano:
@@ -108,7 +108,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Banco Security, BancoEstado)
   PedidosYa:
@@ -116,7 +116,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 2 descuentos sin pin exacto (Bci, Entel)
   Roof Burger:
@@ -124,7 +124,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco de Chile)
   Viña Undurraga:
@@ -132,7 +132,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (BancoEstado)
   Bao:
@@ -140,7 +140,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (BancoEstado)
   Bombo Burger:
@@ -148,7 +148,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Cencosud)
   Cineplanet:
@@ -156,7 +156,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (BancoEstado)
   DMNG Boutique:
@@ -164,7 +164,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco Security)
   Don Carlos:
@@ -172,7 +172,7 @@ restoranes:
     comuna: Las Condes
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (BancoEstado)
   El Valenciano:
@@ -180,7 +180,7 @@ restoranes:
     comuna: La Florida
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (BancoEstado)
   Gain Lab:
@@ -188,7 +188,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (BancoEstado)
   Gaman Asian Food:
@@ -196,7 +196,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (BancoEstado)
   Hocha:
@@ -204,7 +204,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (BancoEstado)
   Il Mascarpone:
@@ -212,7 +212,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (BancoEstado)
   Kbross Burger:
@@ -220,7 +220,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (BancoEstado)
   La Piojera:
@@ -228,7 +228,7 @@ restoranes:
     comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco Security)
   La Punta - Justo:
@@ -236,7 +236,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # 1 descuentos sin pin exacto (Banco Security)
   Maribérico - Justo:
@@ -244,7 +244,7 @@ restoranes:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-16 por # COMPLETAR
+    nota: verificada el 2026-10-18 por # COMPLETAR
 
   # ---- sin tipo de cocina ----
   Kechua:

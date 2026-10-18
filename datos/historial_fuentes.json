@@ -260,6 +260,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 40,
+        "alertas": [],
+        "descartados": 9,
+        "duracion_seg": 15.6,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 13,
+          "codigos": {
+            "200": 1,
+            "404": 1,
+            "cache:200": 13
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Archivo Nacional de Chile": [
@@ -500,6 +521,25 @@
         "error": null,
         "momento": "2026-10-16T01:39:34",
         "nuevos": 1,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 2,
+        "alertas": [],
+        "descartados": 46,
+        "duracion_seg": 20.2,
+        "encontrados": 49,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
         "red": {
           "cache": 0,
           "codigos": {
@@ -771,6 +811,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 10,
+        "alertas": [],
+        "descartados": 39,
+        "duracion_seg": 6.7,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 1,
+        "red": {
+          "cache": 14,
+          "codigos": {
+            "200": 1,
+            "404": 1,
+            "cache:200": 14
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Biblioteca Nacional de Chile": [
@@ -1020,6 +1081,25 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 4,
+        "alertas": [],
+        "descartados": 46,
+        "duracion_seg": 7.8,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Biblioteca de Santiago": [
@@ -1260,6 +1340,25 @@
         "error": null,
         "momento": "2026-10-16T01:39:34",
         "nuevos": 16,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 13,
+        "alertas": [],
+        "descartados": 30,
+        "duracion_seg": 12.0,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 1,
         "red": {
           "cache": 0,
           "codigos": {
@@ -1531,6 +1630,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 11,
+        "alertas": [],
+        "descartados": 35,
+        "duracion_seg": 8.3,
+        "encontrados": 46,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 41,
+          "codigos": {
+            "200": 2,
+            "404": 2,
+            "cache:200": 41
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Centro Cultural Estacion Mapocho": [
@@ -1789,6 +1909,27 @@
           "codigos": {
             "200": 21,
             "404": 2
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 12,
+        "alertas": [],
+        "descartados": 35,
+        "duracion_seg": 7.9,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 1,
+        "red": {
+          "cache": 20,
+          "codigos": {
+            "200": 1,
+            "404": 2,
+            "cache:200": 20
           },
           "cortadas": 0,
           "errores": 0,
@@ -2057,6 +2198,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 28,
+        "alertas": [],
+        "descartados": 22,
+        "duracion_seg": 5.9,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 26,
+          "codigos": {
+            "200": 1,
+            "404": 1,
+            "cache:200": 26
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Centro Nacional de Arte Contemporaneo Cerrillos": [
@@ -2314,6 +2476,27 @@
           "codigos": {
             "200": 11,
             "404": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 1,
+        "alertas": [],
+        "descartados": 49,
+        "duracion_seg": 7.0,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 10,
+          "codigos": {
+            "200": 1,
+            "404": 1,
+            "cache:200": 10
           },
           "cortadas": 0,
           "errores": 0,
@@ -2588,6 +2771,25 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 42,
+        "alertas": [],
+        "descartados": 7,
+        "duracion_seg": 4.6,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 1,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Centro para las artes Zoco (Teatro Zoco)": [
@@ -2846,6 +3048,27 @@
           "codigos": {
             "200": 20,
             "404": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 4,
+        "alertas": [],
+        "descartados": 28,
+        "duracion_seg": 10.6,
+        "encontrados": 32,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 19,
+          "codigos": {
+            "200": 1,
+            "404": 1,
+            "cache:200": 19
           },
           "cortadas": 0,
           "errores": 0,
@@ -3126,6 +3349,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 0,
+        "alertas": [
+          "acceso bloqueado (HTTP 403/429)"
+        ],
+        "descartados": 0,
+        "duracion_seg": 63.0,
+        "encontrados": 0,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "403": 16
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Cine Arte Normandie": [
@@ -3366,6 +3610,25 @@
         "error": null,
         "momento": "2026-10-16T01:39:34",
         "nuevos": 22,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 15,
+        "alertas": [],
+        "descartados": 10,
+        "duracion_seg": 2.9,
+        "encontrados": 25,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
         "red": {
           "cache": 0,
           "codigos": {
@@ -3640,6 +3903,27 @@
           "codigos": {
             "200": 3,
             "404": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 28,
+        "alertas": [],
+        "descartados": 0,
+        "duracion_seg": 8.4,
+        "encontrados": 28,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 1,
+          "codigos": {
+            "200": 2,
+            "404": 1,
+            "cache:200": 1
           },
           "cortadas": 0,
           "errores": 0,
@@ -3924,6 +4208,26 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 30,
+        "alertas": [],
+        "descartados": 0,
+        "duracion_seg": 101.8,
+        "encontrados": 30,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 4,
+          "codigos": {
+            "200": 27,
+            "cache:200": 4
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Corp. Municipal de Deportes y Recreacion de Penalolen": [
@@ -4194,6 +4498,25 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 158,
+        "alertas": [],
+        "descartados": 0,
+        "duracion_seg": 67.9,
+        "encontrados": 820,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 57,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 17
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Corporacion Cultural Municipal de Quilicura": [
@@ -4453,6 +4776,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 0,
+        "alertas": [],
+        "descartados": 50,
+        "duracion_seg": 11.3,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 11,
+          "codigos": {
+            "200": 1,
+            "404": 1,
+            "cache:200": 11
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Corporacion Cultural de Estacion Central": [
@@ -4707,6 +5051,27 @@
           "codigos": {
             "200": 27,
             "404": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 25,
+        "alertas": [],
+        "descartados": 4,
+        "duracion_seg": 5.4,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 26,
+          "codigos": {
+            "200": 1,
+            "404": 1,
+            "cache:200": 26
           },
           "cortadas": 0,
           "errores": 0,
@@ -4974,6 +5339,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 2,
+        "alertas": [],
+        "descartados": 46,
+        "duracion_seg": 13.3,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 1,
+        "red": {
+          "cache": 1,
+          "codigos": {
+            "200": 1,
+            "404": 1,
+            "cache:200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Corporacion Cultural de La Reina": [
@@ -5223,6 +5609,25 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 11,
+        "alertas": [],
+        "descartados": 27,
+        "duracion_seg": 170.1,
+        "encontrados": 40,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 1,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 41
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Corporacion Cultural de Lo Barnechea (El Tranque)": [
@@ -5463,6 +5868,25 @@
         "error": null,
         "momento": "2026-10-16T01:39:34",
         "nuevos": 16,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 18,
+        "alertas": [],
+        "descartados": 0,
+        "duracion_seg": 3.0,
+        "encontrados": 20,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 2,
         "red": {
           "cache": 0,
           "codigos": {
@@ -5734,6 +6158,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 22,
+        "alertas": [],
+        "descartados": 28,
+        "duracion_seg": 4.0,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 26,
+          "codigos": {
+            "200": 1,
+            "404": 1,
+            "cache:200": 26
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Corporacion Municipal de Deportes de Nunoa - Talleres": [
@@ -5974,6 +6419,25 @@
         "error": null,
         "momento": "2026-10-16T01:39:34",
         "nuevos": 464,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 3
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 464,
+        "alertas": [],
+        "descartados": 0,
+        "duracion_seg": 15.6,
+        "encontrados": 1657,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 134,
         "red": {
           "cache": 0,
           "codigos": {
@@ -6245,6 +6709,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 18,
+        "alertas": [],
+        "descartados": 32,
+        "duracion_seg": 8.2,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 11,
+          "codigos": {
+            "200": 1,
+            "404": 1,
+            "cache:200": 11
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Corporación Cultural de Independencia": [
@@ -6502,6 +6987,27 @@
           "codigos": {
             "200": 19,
             "404": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 0,
+        "alertas": [],
+        "descartados": 230,
+        "duracion_seg": 29.7,
+        "encontrados": 230,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 12,
+          "codigos": {
+            "200": 7,
+            "404": 1,
+            "cache:200": 12
           },
           "cortadas": 0,
           "errores": 0,
@@ -6776,6 +7282,25 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 4,
+        "alertas": [],
+        "descartados": 33,
+        "duracion_seg": 166.3,
+        "encontrados": 40,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 41
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Disfruta Santiago": [
@@ -7038,6 +7563,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 24,
+        "alertas": [],
+        "descartados": 25,
+        "duracion_seg": 4.9,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 1,
+          "codigos": {
+            "200": 1,
+            "404": 1,
+            "cache:200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "ED — Ferias y Bazar ED": [
@@ -7278,6 +7824,25 @@
         "error": null,
         "momento": "2026-10-16T01:39:34",
         "nuevos": 3,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 2,
+        "alertas": [],
+        "descartados": 0,
+        "duracion_seg": 0.9,
+        "encontrados": 2,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
         "red": {
           "cache": 0,
           "codigos": {
@@ -7544,6 +8109,25 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 2,
+        "alertas": [],
+        "descartados": 0,
+        "duracion_seg": 1.0,
+        "encontrados": 2,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Feria Friki": [
@@ -7792,6 +8376,25 @@
         "error": null,
         "momento": "2026-10-16T01:39:34",
         "nuevos": 4,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 21
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 4,
+        "alertas": [],
+        "descartados": 16,
+        "duracion_seg": 71.0,
+        "encontrados": 20,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
         "red": {
           "cache": 0,
           "codigos": {
@@ -8050,6 +8653,25 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 1,
+        "alertas": [],
+        "descartados": 21,
+        "duracion_seg": 96.9,
+        "encontrados": 22,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 26
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "GAM (Centro Cultural Gabriela Mistral)": [
@@ -8290,6 +8912,25 @@
         "error": null,
         "momento": "2026-10-16T01:39:34",
         "nuevos": 2,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 3,
+        "alertas": [],
+        "descartados": 2,
+        "duracion_seg": 10.6,
+        "encontrados": 90,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
         "red": {
           "cache": 0,
           "codigos": {
@@ -8561,6 +9202,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 14,
+        "alertas": [],
+        "descartados": 202,
+        "duracion_seg": 80.9,
+        "encontrados": 216,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 15,
+          "codigos": {
+            "200": 8,
+            "404": 17,
+            "cache:200": 15
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Ingesta asistida (Passline, Instagram, afiches)": [
@@ -8814,6 +9476,25 @@
         "encontrados": 8,
         "error": null,
         "momento": "2026-10-16T01:39:34",
+        "nuevos": 0,
+        "red": {
+          "cache": 0,
+          "codigos": {},
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 0,
+        "alertas": [
+          "pasada asistida vencida (16 días; máximo 3)"
+        ],
+        "descartados": 8,
+        "duracion_seg": 0.0,
+        "encontrados": 8,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
         "nuevos": 0,
         "red": {
           "cache": 0,
@@ -9079,6 +9760,27 @@
           "codigos": {
             "200": 24,
             "404": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 9,
+        "alertas": [],
+        "descartados": 98,
+        "duracion_seg": 27.2,
+        "encontrados": 107,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 21,
+          "codigos": {
+            "200": 3,
+            "404": 1,
+            "cache:200": 21
           },
           "cortadas": 0,
           "errores": 0,
@@ -9580,6 +10282,44 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 14,
+        "alertas": [],
+        "descartados": 1,
+        "duracion_seg": 2.5,
+        "encontrados": 15,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 1,
+        "alertas": [],
+        "descartados": 23,
+        "duracion_seg": 4.4,
+        "encontrados": 24,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "MAVI UC (Museo de Artes Visuales)": [
@@ -9837,6 +10577,27 @@
           "codigos": {
             "200": 10,
             "404": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 8,
+        "alertas": [],
+        "descartados": 0,
+        "duracion_seg": 32.1,
+        "encontrados": 8,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 9,
+          "codigos": {
+            "200": 1,
+            "404": 1,
+            "cache:200": 9
           },
           "cortadas": 0,
           "errores": 0,
@@ -10104,6 +10865,27 @@
           "codigos": {
             "200": 22,
             "404": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 34,
+        "alertas": [],
+        "descartados": 16,
+        "duracion_seg": 7.7,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 21,
+          "codigos": {
+            "200": 1,
+            "404": 1,
+            "cache:200": 21
           },
           "cortadas": 0,
           "errores": 0,
@@ -10387,6 +11169,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 16,
+        "alertas": [],
+        "descartados": 31,
+        "duracion_seg": 16.1,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 3,
+        "red": {
+          "cache": 38,
+          "codigos": {
+            "200": 4,
+            "404": 1,
+            "cache:200": 38
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Municipalidad de Colina": [
@@ -10644,6 +11447,27 @@
           "codigos": {
             "200": 6,
             "404": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 1,
+        "alertas": [],
+        "descartados": 12,
+        "duracion_seg": 34.5,
+        "encontrados": 13,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 1,
+          "codigos": {
+            "200": 5,
+            "404": 1,
+            "cache:200": 1
           },
           "cortadas": 0,
           "errores": 0,
@@ -10911,6 +11735,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 0,
+        "alertas": [],
+        "descartados": 0,
+        "duracion_seg": 288.1,
+        "encontrados": 0,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 1,
+          "codigos": {
+            "200": 5,
+            "404": 76,
+            "cache:200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Municipalidad de El Bosque - Cartelera de Eventos": [
@@ -11173,6 +12018,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 2,
+        "alertas": [],
+        "descartados": 48,
+        "duracion_seg": 9.8,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 3,
+          "codigos": {
+            "200": 1,
+            "404": 1,
+            "cache:200": 3
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Municipalidad de Huechuraba - Actividades y Talleres Deportivos": [
@@ -11413,6 +12279,25 @@
         "error": null,
         "momento": "2026-10-16T01:39:34",
         "nuevos": 262,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 321,
+        "alertas": [],
+        "descartados": 0,
+        "duracion_seg": 0.8,
+        "encontrados": 848,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 70,
         "red": {
           "cache": 0,
           "codigos": {
@@ -11706,6 +12591,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 33,
+        "alertas": [],
+        "descartados": 122,
+        "duracion_seg": 142.6,
+        "encontrados": 155,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 26,
+          "codigos": {
+            "200": 8,
+            "404": 17,
+            "cache:200": 26
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Municipalidad de Lo Espejo": [
@@ -11963,6 +12869,27 @@
           "codigos": {
             "200": 15,
             "404": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 0,
+        "alertas": [],
+        "descartados": 65,
+        "duracion_seg": 28.6,
+        "encontrados": 65,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 7,
+          "codigos": {
+            "200": 8,
+            "404": 1,
+            "cache:200": 7
           },
           "cortadas": 0,
           "errores": 0,
@@ -12230,6 +13157,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 4,
+        "alertas": [],
+        "descartados": 23,
+        "duracion_seg": 43.2,
+        "encontrados": 27,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 4,
+          "codigos": {
+            "200": 5,
+            "404": 2,
+            "cache:200": 4
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Municipalidad de Nunoa": [
@@ -12470,6 +13418,25 @@
         "error": null,
         "momento": "2026-10-16T01:39:34",
         "nuevos": 1,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 0,
+        "alertas": [],
+        "descartados": 4,
+        "duracion_seg": 2.2,
+        "encontrados": 6,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 2,
         "red": {
           "cache": 0,
           "codigos": {
@@ -12736,6 +13703,27 @@
           "codigos": {
             "200": 27,
             "404": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 0,
+        "alertas": [],
+        "descartados": 35,
+        "duracion_seg": 8.2,
+        "encontrados": 35,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 26,
+          "codigos": {
+            "200": 1,
+            "404": 1,
+            "cache:200": 26
           },
           "cortadas": 0,
           "errores": 0,
@@ -13008,6 +13996,26 @@
           "cache": 0,
           "codigos": {
             "200": 121
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 143,
+        "alertas": [],
+        "descartados": 0,
+        "duracion_seg": 50.7,
+        "encontrados": 155,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 1,
+        "red": {
+          "cache": 104,
+          "codigos": {
+            "200": 17,
+            "cache:200": 104
           },
           "cortadas": 0,
           "errores": 0,
@@ -13299,6 +14307,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 1,
+        "alertas": [],
+        "descartados": 273,
+        "duracion_seg": 146.4,
+        "encontrados": 274,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 26,
+          "codigos": {
+            "200": 8,
+            "404": 9,
+            "cache:200": 26
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Municipalidad de San Bernardo": [
@@ -13561,6 +14590,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 0,
+        "alertas": [],
+        "descartados": 125,
+        "duracion_seg": 39.1,
+        "encontrados": 125,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 16,
+          "codigos": {
+            "200": 8,
+            "404": 1,
+            "cache:200": 16
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Municipalidad de Santiago - Talleres Deportivos": [
@@ -13801,6 +14851,25 @@
         "error": null,
         "momento": "2026-10-16T01:39:34",
         "nuevos": 105,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 128,
+        "alertas": [],
+        "descartados": 0,
+        "duracion_seg": 0.9,
+        "encontrados": 379,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 38,
         "red": {
           "cache": 0,
           "codigos": {
@@ -14054,6 +15123,25 @@
           "cache": 0,
           "codigos": {
             "200": 22
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 16,
+        "alertas": [],
+        "descartados": 0,
+        "duracion_seg": 76.7,
+        "encontrados": 17,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 1,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 20
           },
           "cortadas": 0,
           "errores": 0,
@@ -14328,6 +15416,28 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 11,
+        "alertas": [],
+        "descartados": 36,
+        "duracion_seg": 20.5,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 3,
+        "red": {
+          "cache": 17,
+          "codigos": {
+            "200": 4,
+            "401": 1,
+            "404": 1,
+            "cache:200": 17
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Museo Benjamin Vicuna Mackenna": [
@@ -14567,6 +15677,25 @@
         "encontrados": 50,
         "error": null,
         "momento": "2026-10-16T01:39:34",
+        "nuevos": 0,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 0,
+        "alertas": [],
+        "descartados": 50,
+        "duracion_seg": 15.8,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
         "nuevos": 0,
         "red": {
           "cache": 0,
@@ -14828,6 +15957,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 0,
+        "alertas": [
+          "cero inesperado (mediana reciente: 14)"
+        ],
+        "descartados": 0,
+        "duracion_seg": 3.3,
+        "encontrados": 0,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Museo Historico Nacional": [
@@ -15068,6 +16218,25 @@
         "error": null,
         "momento": "2026-10-16T01:39:34",
         "nuevos": 2,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 4,
+        "alertas": [],
+        "descartados": 46,
+        "duracion_seg": 11.9,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
         "red": {
           "cache": 0,
           "codigos": {
@@ -15326,6 +16495,25 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 6,
+        "alertas": [],
+        "descartados": 43,
+        "duracion_seg": 10.7,
+        "encontrados": 49,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Museo Nacional de Historia Natural": [
@@ -15565,6 +16753,25 @@
         "encontrados": 50,
         "error": null,
         "momento": "2026-10-16T01:39:34",
+        "nuevos": 2,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 6,
+        "alertas": [],
+        "descartados": 42,
+        "duracion_seg": 16.2,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
         "nuevos": 2,
         "red": {
           "cache": 0,
@@ -15837,6 +17044,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 46,
+        "alertas": [],
+        "descartados": 23,
+        "duracion_seg": 20.2,
+        "encontrados": 71,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 26,
+          "codigos": {
+            "200": 2,
+            "404": 1,
+            "cache:200": 26
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Museo de la Educacion Gabriela Mistral": [
@@ -16076,6 +17304,25 @@
         "encontrados": 28,
         "error": null,
         "momento": "2026-10-16T01:39:34",
+        "nuevos": 0,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 0,
+        "alertas": [],
+        "descartados": 27,
+        "duracion_seg": 13.7,
+        "encontrados": 28,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
         "nuevos": 0,
         "red": {
           "cache": 0,
@@ -16335,6 +17582,25 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 2,
+        "alertas": [],
+        "descartados": 2,
+        "duracion_seg": 0.4,
+        "encontrados": 4,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Parquemet (Cerro San Cristobal y parques urbanos)": [
@@ -16582,6 +17848,27 @@
           "codigos": {
             "200": 29,
             "404": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 28,
+        "alertas": [],
+        "descartados": 9,
+        "duracion_seg": 19.5,
+        "encontrados": 37,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 26,
+          "codigos": {
+            "200": 3,
+            "404": 1,
+            "cache:200": 26
           },
           "cortadas": 0,
           "errores": 0,
@@ -16845,6 +18132,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 1,
+        "alertas": [],
+        "descartados": 44,
+        "duracion_seg": 10.1,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 18,
+          "codigos": {
+            "200": 1,
+            "404": 1,
+            "cache:200": 18
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "PortalTickets (PortalDisc)": [
@@ -17085,6 +18393,25 @@
         "error": null,
         "momento": "2026-10-16T01:39:34",
         "nuevos": 28,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 51
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 0,
+        "alertas": [],
+        "descartados": 15,
+        "duracion_seg": 278.5,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 33,
         "red": {
           "cache": 0,
           "codigos": {
@@ -17355,6 +18682,26 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 144,
+        "alertas": [],
+        "descartados": 49,
+        "duracion_seg": 133.3,
+        "encontrados": 201,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 8,
+        "red": {
+          "cache": 1,
+          "codigos": {
+            "200": 25,
+            "cache:200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Puntoticket (deportes, musica y familia)": [
@@ -17597,6 +18944,25 @@
         "error": null,
         "momento": "2026-10-16T01:39:34",
         "nuevos": 36,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 61
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 43,
+        "alertas": [],
+        "descartados": 2,
+        "duracion_seg": 209.6,
+        "encontrados": 56,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 11,
         "red": {
           "cache": 0,
           "codigos": {
@@ -17868,6 +19234,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 34,
+        "alertas": [],
+        "descartados": 16,
+        "duracion_seg": 5.5,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 2,
+          "codigos": {
+            "200": 1,
+            "404": 1,
+            "cache:200": 2
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Sala K (Cultura Maipú)": [
@@ -18108,6 +19495,25 @@
         "error": null,
         "momento": "2026-10-16T01:39:34",
         "nuevos": 15,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 11,
+        "alertas": [],
+        "descartados": 4,
+        "duracion_seg": 1.4,
+        "encontrados": 18,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
         "red": {
           "cache": 0,
           "codigos": {
@@ -18379,6 +19785,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 6,
+        "alertas": [],
+        "descartados": 44,
+        "duracion_seg": 5.0,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 1,
+          "codigos": {
+            "200": 1,
+            "404": 1,
+            "cache:200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Talleres permanentes de Santiago (catastro)": [
@@ -18595,6 +20022,23 @@
         "error": null,
         "momento": "2026-10-16T01:39:34",
         "nuevos": 74,
+        "red": {
+          "cache": 0,
+          "codigos": {},
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 140,
+        "alertas": [],
+        "descartados": 0,
+        "duracion_seg": 0.0,
+        "encontrados": 152,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 12,
         "red": {
           "cache": 0,
           "codigos": {},
@@ -18851,6 +20295,26 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 1,
+        "alertas": [],
+        "descartados": 0,
+        "duracion_seg": 10.9,
+        "encontrados": 1,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 2,
+          "codigos": {
+            "200": 4,
+            "cache:200": 2
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Teatro Mori (Parque Arauco, Bellavista, Vitacura, Recoleta)": [
@@ -19091,6 +20555,25 @@
         "error": null,
         "momento": "2026-10-16T01:39:34",
         "nuevos": 13,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 13,
+        "alertas": [],
+        "descartados": 1,
+        "duracion_seg": 0.6,
+        "encontrados": 14,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
         "red": {
           "cache": 0,
           "codigos": {
@@ -19344,6 +20827,26 @@
           "cache": 0,
           "codigos": {
             "200": 26
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 11,
+        "alertas": [],
+        "descartados": 39,
+        "duracion_seg": 12.6,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 22,
+          "codigos": {
+            "200": 4,
+            "cache:200": 22
           },
           "cortadas": 0,
           "errores": 0,
@@ -19618,6 +21121,25 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 7,
+        "alertas": [],
+        "descartados": 32,
+        "duracion_seg": 170.2,
+        "encontrados": 40,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 1,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 41
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Teatro San Gines": [
@@ -19878,6 +21400,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 8,
+        "alertas": [],
+        "descartados": 6,
+        "duracion_seg": 4.7,
+        "encontrados": 14,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 12,
+          "codigos": {
+            "200": 1,
+            "404": 1,
+            "cache:200": 12
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Teatro UC": [
@@ -20122,6 +21665,25 @@
         "error": null,
         "momento": "2026-10-16T01:39:34",
         "nuevos": 1,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 1,
+        "alertas": [],
+        "descartados": 0,
+        "duracion_seg": 1.1,
+        "encontrados": 1,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
         "red": {
           "cache": 0,
           "codigos": {
@@ -20392,6 +21954,25 @@
         "encontrados": 0,
         "error": "RuntimeError: falta TICKETMASTER_API_KEY en el entorno (se saca gratis en developer.ticketmaster.com)",
         "momento": "2026-10-16T01:39:34",
+        "nuevos": 0,
+        "red": {
+          "cache": 0,
+          "codigos": {},
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 0,
+        "alertas": [
+          "error de extracción"
+        ],
+        "descartados": 0,
+        "duracion_seg": 0.0,
+        "encontrados": 0,
+        "error": "RuntimeError: falta TICKETMASTER_API_KEY en el entorno (se saca gratis en developer.ticketmaster.com)",
+        "momento": "2026-10-18T17:07:33",
         "nuevos": 0,
         "red": {
           "cache": 0,
@@ -20691,6 +22272,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 56,
+        "alertas": [
+          "lenta (6.7 min)"
+        ],
+        "descartados": 41,
+        "duracion_seg": 403.8,
+        "encontrados": 120,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 23,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 121
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Toliv (eventos under, fiestas y musica emergente)": [
@@ -20931,6 +22533,25 @@
         "error": null,
         "momento": "2026-10-16T01:39:34",
         "nuevos": 25,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 46
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 15,
+        "alertas": [],
+        "descartados": 25,
+        "duracion_seg": 152.7,
+        "encontrados": 45,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 5,
         "red": {
           "cache": 0,
           "codigos": {
@@ -21189,6 +22810,25 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 4,
+        "alertas": [],
+        "descartados": 0,
+        "duracion_seg": 0.6,
+        "encontrados": 4,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Universidad Adolfo Ibanez - Eventos": [
@@ -21438,6 +23078,25 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 26,
+        "alertas": [],
+        "descartados": 14,
+        "duracion_seg": 157.2,
+        "encontrados": 42,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 2,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 43
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Universidad Alberto Hurtado - Agenda de eventos": [
@@ -21678,6 +23337,25 @@
         "error": null,
         "momento": "2026-10-16T01:39:34",
         "nuevos": 16,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 24,
+        "alertas": [],
+        "descartados": 2,
+        "duracion_seg": 0.5,
+        "encontrados": 27,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
         "red": {
           "cache": 0,
           "codigos": {
@@ -21986,6 +23664,30 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 44,
+        "alertas": [
+          "dominio omitido tras fallos (30 peticiones evitadas)"
+        ],
+        "descartados": 6,
+        "duracion_seg": 64.0,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 5,
+          "codigos": {
+            "200": 5,
+            "404": 1,
+            "503": 6,
+            "cache:200": 5
+          },
+          "cortadas": 30,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Universidad Diego Portales (extension)": [
@@ -22248,6 +23950,27 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 23,
+        "alertas": [],
+        "descartados": 27,
+        "duracion_seg": 4.3,
+        "encontrados": 50,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 0,
+        "red": {
+          "cache": 26,
+          "codigos": {
+            "200": 1,
+            "404": 1,
+            "cache:200": 26
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Universidad Finis Terrae - Agenda": [
@@ -22497,6 +24220,25 @@
           "errores": 0,
           "robots": 0
         }
+      },
+      {
+        "actualizados": 32,
+        "alertas": [],
+        "descartados": 4,
+        "duracion_seg": 1.2,
+        "encontrados": 40,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
+        "nuevos": 3,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
       }
     ],
     "Universidad de Chile - Agenda": [
@@ -22736,6 +24478,25 @@
         "encontrados": 9,
         "error": null,
         "momento": "2026-10-16T01:39:34",
+        "nuevos": 6,
+        "red": {
+          "cache": 0,
+          "codigos": {
+            "200": 1
+          },
+          "cortadas": 0,
+          "errores": 0,
+          "robots": 0
+        }
+      },
+      {
+        "actualizados": 4,
+        "alertas": [],
+        "descartados": 0,
+        "duracion_seg": 0.2,
+        "encontrados": 10,
+        "error": null,
+        "momento": "2026-10-18T17:07:33",
         "nuevos": 6,
         "red": {
           "cache": 0,
