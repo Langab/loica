@@ -141,6 +141,32 @@ def _cumple_filtros(item: dict, filtros: dict) -> bool:
     return True
 
 
+def _fecha(item: dict, ruta: str, config: dict):
+    """La fecha de un campo. Con `zona_horaria: UTC` en el YAML, el instante
+    se pasa a hora de Santiago.
+
+    parsear_fecha() ignora la zona a propósito: Cinemark etiqueta con "Z"
+    horas que en realidad son de Chile (sus funciones van de 11 a 22 "Z" y
+    ninguna entre 0 y 3, que es donde caerían las de la noche si fueran UTC),
+    y convertir para todos le corría la cartelera tres horas. Pero un Strapi
+    —el del Museo de la Memoria— guarda UTC de verdad: "21:30Z" es la charla
+    que su propia ficha anuncia a las 18:30. Por eso es opción por fuente.
+    """
+    crudo = _texto(item, ruta) if ruta else ""
+    if crudo and str(config.get("zona_horaria", "")).upper() == "UTC":
+        from datetime import datetime, timezone
+        from zoneinfo import ZoneInfo
+        try:
+            instante = datetime.fromisoformat(crudo.replace("Z", "+00:00"))
+        except ValueError:
+            instante = None
+        if instante is not None:
+            if instante.tzinfo is None:
+                instante = instante.replace(tzinfo=timezone.utc)
+            return instante.astimezone(ZoneInfo("America/Santiago")).replace(tzinfo=None)
+    return parsear_fecha(crudo)
+
+
 def _sesiones_del_taller(item: dict, config: dict, horizonte: int) -> tuple:
     """Traduce rango de ciclo + bloques semanales a (sesiones, cadencia, fin).
 
@@ -151,8 +177,8 @@ def _sesiones_del_taller(item: dict, config: dict, horizonte: int) -> tuple:
     temporada o quedan sueltas (ver `sesiones_futuras`).
     """
     campos = config.get("campos") or {}
-    desde = parsear_fecha(_texto(item, campos.get("inicio", "")))
-    hasta = parsear_fecha(_texto(item, campos.get("fin", "")))
+    desde = _fecha(item, campos.get("inicio", ""), config)
+    hasta = _fecha(item, campos.get("fin", ""), config)
 
     # Varias APIs parten la fecha y la hora en dos campos (Passline manda
     # fecha_inicio + hora_inicio). Sin esto todos los eventos quedan a las 00:00
@@ -268,6 +294,13 @@ def extraer_json(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
             crudo = _camino(item, campos["es_gratis"])
             if isinstance(crudo, bool):
                 gratis = crudo
+        # Hay CMS que traen el precio como frase ("Entrada liberada, sin
+        # inscripción previa"). Se publica la frase tal cual y, si dice que
+        # no se paga, cuenta como gratis.
+        precio_texto = _texto(item, campos.get("precio_texto", "")) if campos.get("precio_texto") else ""
+        if gratis is None and precio_texto and re.search(
+                r"\b(gratis|gratuit[oa]s?|liberad[oa]s?|sin costo)\b", precio_texto, re.I):
+            gratis = True
 
         direccion = _texto(item, campos.get("lugar_direccion", ""))
         lugar = _texto(item, campos.get("lugar_nombre", ""))
@@ -275,6 +308,10 @@ def extraer_json(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
                                  direccion, fuente.get("comuna", ""))
         categoria = _texto(item, campos.get("categoria", ""))
         imagen = _texto(item, campos.get("imagen_url", ""))
+        # Strapi y compañía devuelven la imagen relativa a SU dominio (el de
+        # la API), no al del sitio: "/uploads/afiche.png".
+        if imagen.startswith("/") and config.get("prefijo_imagen"):
+            imagen = config["prefijo_imagen"].rstrip("/") + imagen
         id_externo = _texto(item, campos.get("id_externo", ""))
         resumen = resumir(descripcion)
 
@@ -293,7 +330,7 @@ def extraer_json(fuente: dict, cliente: ClienteEducado) -> list[Evento]:
                 lugar_direccion=direccion,
                 comuna=comuna,
                 es_gratis=gratis,
-                precio_texto="Gratis" if gratis else "",
+                precio_texto=precio_texto or ("Gratis" if gratis else ""),
                 fuente_tipo="json",
                 fuente_nombre=fuente.get("nombre", ""),
                 fuente_url=enlace,

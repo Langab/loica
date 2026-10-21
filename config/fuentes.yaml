@@ -644,19 +644,49 @@ fuentes:
     juegos de mesa).'
 - id: mmdh
   nombre: Museo de la Memoria y los Derechos Humanos
-  url_base: https://mmdh.cl
-  url_agenda: https://mmdh.cl/
-  tipo_adaptador: html
-  endpoint: /
+  url_base: https://manager.mmdh.cl
+  url_agenda: https://mmdh.cl/cartelera
+  tipo_adaptador: json
+  # La cartelera de mmdh.cl la arma JavaScript desde un Strapi v4 público en
+  # manager.mmdh.cl (sin token ni sesión). Descubierto el 14-10-2026 con
+  # reverse-api-engineer (herramientas/reverse_api/); robots.txt de los dos
+  # dominios permite todo (revisado 2026-10-20).
+  endpoint: /api/post-carteleras
   comuna: Santiago
   crawl_delay_seg: 5
-  buscar_detalle: false
-  tope_detalle: 25
-  activa: false
-  notas: 'REVISADO 13-08-2026: robots.txt explicito y permisivo (Allow: /), pero sin sitemap.xml, sin
-    RSS y sin API. Tiene /cartelera y /exposiciones, y ahi las tarjetas las arma JavaScript: el HTML servido
-    trae 7 enlaces y ninguna fecha. Queda apagada. Su direccion (Matucana 501) si esta verificada en correcciones/lugares.yaml
-    para cuando entre por manual.'
+  activa: true
+  parametros:
+    sort[0]: fecha_y_hora_de_inicio:desc
+    filters[modalidad][$eq]: presencial
+    populate[poster][populate]: '*'
+    populate[tipo_de_evento][populate][tipo_de_evento][populate]: '*'
+    populate[seo][populate][meta_descripcion][populate]: '*'
+  json:
+    lista: data
+    plantilla_url: https://mmdh.cl/cartelera/{attributes.slug}
+    # Strapi guarda UTC de verdad: "21:30Z" es la charla que la ficha
+    # anuncia a las 18:30 (comprobado 2026-10-20).
+    zona_horaria: UTC
+    prefijo_imagen: https://manager.mmdh.cl
+    paginacion:
+      parametro: pagination[page]
+      parametro_limite: pagination[pageSize]
+      limite: 25
+      max_paginas: 3
+      campo_total_paginas: meta.pagination.pageCount
+    campos:
+      titulo: attributes.titulo
+      descripcion_corta: attributes.seo.meta_descripcion
+      categoria: attributes.tipo_de_evento.data.attributes.tipo_de_evento
+      inicio: attributes.fecha_y_hora_de_inicio
+      fin: attributes.fecha_y_hora_de_termino
+      precio_texto: attributes.precio
+      imagen_url: attributes.poster.data.attributes.formats.medium.url
+      id_externo: id
+  notas: 'Antes (13-08-2026) quedó apagada porque el HTML servido no traía fechas. Desde el 20-10-2026
+    entra por la API del Strapi; el lugar se deja en blanco a propósito para que tome el nombre de la
+    fuente y la dirección verificada de correcciones/lugares.yaml (Matucana 501). La sala (Auditorio,
+    Explanada) queda fuera: no hay campo para ella.'
 - id: mim
   nombre: MIM - Museo Interactivo Mirador
   url_base: https://www.mim.cl
