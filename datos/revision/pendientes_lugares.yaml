@@ -1,4 +1,4 @@
-# Cola de LUGARES sin ubicación exacta — revisión del 2026-10-18.
+# Cola de LUGARES sin ubicación exacta — revisión del 2026-10-21.
 # Completa lat/lon (Google Maps: click derecho → copiar coordenadas),
 # borra las entradas que no puedas verificar, y pega las listas en
 # config/correcciones/lugares.yaml bajo la clave `lugares:`.
@@ -6,28 +6,28 @@
 
 lugares:
   # 27 eventos sin pin exacto
-  Corporacion Cultural de La Reina:
-    direccion: # COMPLETAR
-    comuna: La Reina
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
-
-  # 24 eventos sin pin exacto
-  Disfruta Santiago:
-    direccion: # COMPLETAR
-    comuna: Santiago
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
-
-  # 22 eventos sin pin exacto
   Complejo La Foresta:
     direccion: # COMPLETAR
     comuna: Peñalolén
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
+
+  # 27 eventos sin pin exacto
+  Corporacion Cultural de La Reina:
+    direccion: # COMPLETAR
+    comuna: La Reina
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
+
+  # 25 eventos sin pin exacto
+  Disfruta Santiago:
+    direccion: # COMPLETAR
+    comuna: Santiago
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
 
   # 19 eventos sin pin exacto
   Red Salas de Teatro (agregador de salas RM):
@@ -35,39 +35,55 @@ lugares:
     comuna: # COMPLETAR
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
 
-  # 17 eventos sin pin exacto
-  PortalTickets (PortalDisc):
-    direccion: # COMPLETAR
-    comuna: Santiago
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
-
-  # 13 eventos sin pin exacto
+  # 15 eventos sin pin exacto
   PortalTickets (PortalDisc):
     direccion: # COMPLETAR
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
 
-  # 11 eventos sin pin exacto
+  # 13 eventos sin pin exacto
+  PortalTickets (PortalDisc):
+    direccion: # COMPLETAR
+    comuna: Santiago
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
+
+  # 12 eventos sin pin exacto
   Espacio Diana:
     direccion: # COMPLETAR
     comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
 
-  # 9 eventos sin pin exacto
+  # 7 eventos sin pin exacto
   Red Salas de Teatro (agregador de salas RM):
     direccion: # COMPLETAR
     comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
+
+  # 6 eventos sin pin exacto
+  MATUCANA 100 / ESPACIO PATRICIO BUNSTER:
+    direccion: Matucana, 100, Estación Central
+    comuna: Estación Central
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
+
+  # 6 eventos sin pin exacto
+  Disfruta Santiago:
+    direccion: # COMPLETAR
+    comuna: # COMPLETAR
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
 
   # 5 eventos sin pin exacto
   MATUCANA 100 / TEATRO PRINCIPAL:
@@ -75,23 +91,7 @@ lugares:
     comuna: Estación Central
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
-
-  # 5 eventos sin pin exacto
-  MATUCANA 100 / ESPACIO PATRICIO BUNSTER:
-    direccion: Matucana, 100, Estación Central
-    comuna: Estación Central
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
-
-  # 5 eventos sin pin exacto
-  Disfruta Santiago:
-    direccion: # COMPLETAR
-    comuna: # COMPLETAR
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
 
   # 4 eventos sin pin exacto
   Online:
@@ -99,7 +99,7 @@ lugares:
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
 
   # 4 eventos sin pin exacto
   Agenda Cultural Las Condes:
@@ -107,7 +107,7 @@ lugares:
     comuna: Las Condes
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
 
   # 4 eventos sin pin exacto
   Red Salas de Teatro (agregador de salas RM):
@@ -115,15 +115,7 @@ lugares:
     comuna: Ñuñoa
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
-
-  # 3 eventos sin pin exacto
-  USACH - Departamento de Extension (agenda cultural):
-    direccion: # COMPLETAR
-    comuna: Estación Central
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
 
   # 3 eventos sin pin exacto
   USACH - Departamento de Extension (agenda cultural):
@@ -131,7 +123,7 @@ lugares:
     comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
 
   # 3 eventos sin pin exacto
   Teatro Oriente Av. Pedro de Valdivia 099:
@@ -139,7 +131,15 @@ lugares:
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
+
+  # 3 eventos sin pin exacto
+  Teatro y Centro Cultural San Joaquín:
+    direccion: # COMPLETAR
+    comuna: San Joaquín
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Plaza Río de Janeiro:
@@ -147,7 +147,7 @@ lugares:
     comuna: Providencia
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Eugenio Dittborn:
@@ -155,47 +155,31 @@ lugares:
     comuna: Ñuñoa
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
 
   # 2 eventos sin pin exacto
-  Plaza Loreto Cousiño:
-    direccion: # COMPLETAR
-    comuna: Providencia
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
-
-  # 2 eventos sin pin exacto
-  MATUCANA 100 / EXPLANADA:
+  MATUCANA100/ MICROSALA:
     direccion: Matucana, 100, Estación Central
     comuna: Estación Central
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   PortalTickets (PortalDisc):
     direccion: # COMPLETAR
-    comuna: La Reina
+    comuna: Ñuñoa
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
 
   # 2 eventos sin pin exacto
-  Auditorio B201:
+  PortalTickets (PortalDisc):
     direccion: # COMPLETAR
-    comuna: Providencia
+    comuna: Maipú
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
-
-  # 2 eventos sin pin exacto
-  Disfruta Santiago:
-    direccion: # COMPLETAR
-    comuna: Providencia
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Universidad Alberto Hurtado - Agenda de eventos:
@@ -203,7 +187,23 @@ lugares:
     comuna: Santiago
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
+
+  # 2 eventos sin pin exacto
+  Disfruta Santiago:
+    direccion: # COMPLETAR
+    comuna: Providencia
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
+
+  # 2 eventos sin pin exacto
+  PortalTickets (PortalDisc):
+    direccion: # COMPLETAR
+    comuna: Recoleta
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Centro para las artes Zoco (Teatro Zoco):
@@ -211,7 +211,7 @@ lugares:
     comuna: Lo Barnechea
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Disfruta Santiago:
@@ -219,7 +219,15 @@ lugares:
     comuna: Las Condes
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
+
+  # 2 eventos sin pin exacto
+  USACH - Departamento de Extension (agenda cultural):
+    direccion: # COMPLETAR
+    comuna: Estación Central
+    lat: # COMPLETAR
+    lon: # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Onaciú Stage Magic:
@@ -227,7 +235,7 @@ lugares:
     comuna: Recoleta
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR
 
   # 2 eventos sin pin exacto
   Parque Ciudad Empresarial:
@@ -235,12 +243,4 @@ lugares:
     comuna: Huechuraba
     lat: # COMPLETAR
     lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
-
-  # 1 eventos sin pin exacto
-  MATUCANA 100 / CINE:
-    direccion: Matucana, 100, Estación Central
-    comuna: Estación Central
-    lat: # COMPLETAR
-    lon: # COMPLETAR
-    nota: verificada el 2026-10-18 por # COMPLETAR
+    nota: verificada el 2026-10-21 por # COMPLETAR

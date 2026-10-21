@@ -99,7 +99,7 @@
 <script src="../loica.js?v=32"></script>
 <script>
   pintarBarra("mapa.html", "../");
-  const EV = {"id": "a57c17d78e8df290", "titulo": "Vóleibol", "inicio": "2026-11-17T17:00:00", "fin": null, "lugar": "Complejo La Foresta", "direccion": "", "comuna": "Peñalolén", "lat": -33.4849, "lon": -70.5423, "precision": "comuna", "gratis": false, "precio": 20000, "precio_texto": "Mensualidad $20.000", "categoria": "deporte", "subcategoria": "equipo", "escala": "", "publico": "todos", "descripcion": "todos los martes y jueves de 17:00 a 18:30", "imagen": "", "fuente": "Corp. Municipal de Deportes y Recreacion de Penalolen", "url": "https://deportespenalolen.cl/talleres-ligup/talleres-deportivos-en-penalolen-complejo-la-foresta/", "formato": "panorama"};
+  const EV = {"id": "a57c17d78e8df290", "titulo": "Vóleibol", "inicio": "2026-11-17T17:00:00", "fin": "2026-11-19T17:00:00", "lugar": "Complejo La Foresta", "direccion": "", "comuna": "Peñalolén", "lat": -33.4849, "lon": -70.5423, "precision": "comuna", "gratis": false, "precio": 20000, "precio_texto": "Mensualidad $20.000", "categoria": "deporte", "subcategoria": "equipo", "escala": "", "publico": "todos", "descripcion": "todos los martes y jueves de 17:00 a 18:30", "imagen": "", "fuente": "Corp. Municipal de Deportes y Recreacion de Penalolen", "url": "https://deportespenalolen.cl/talleres-ligup/talleres-deportivos-en-penalolen-complejo-la-foresta/", "formato": "panorama"};
   document.getElementById("etiqueta-cat").innerHTML =
     carita(cat(EV.categoria).mascota, cat(EV.categoria).hex, 20) + " " + cat(EV.categoria)[IDIOMA];
   document.getElementById("compartir").appendChild(botonesCompartir(EV));

@@ -1,7 +1,7 @@
 {
- "generado": "2026-10-18T17:17:37",
- "total": 641,
- "locales": 1935,
+ "generado": "2026-10-21T00:32:13",
+ "total": 642,
+ "locales": 1937,
  "bancos": [
   [
    "bancochile",
@@ -83,7 +83,7 @@
   "Ñuñoa"
  ],
  "por_dia": {
-  "miercoles": 300,
+  "miercoles": 301,
   "jueves": 242,
   "viernes": 191,
   "sabado": 175,
@@ -21387,6 +21387,55 @@
    "id": "889c9ff2a105",
    "locales": [],
    "comunas": []
+  },
+  {
+   "banco_id": "cencosud",
+   "banco": "Cencosud",
+   "comercio": "Vapiano",
+   "categoria": "restaurantes",
+   "cocina": "",
+   "region": "",
+   "sitio_web": "https://www.instagram.com/vapianochile/",
+   "porcentaje": 40,
+   "oferta": "",
+   "tope": 40000,
+   "dias": [
+    "miercoles"
+   ],
+   "vigencia_hasta": "2026-10-31",
+   "tarjetas": [
+    "cencosud"
+   ],
+   "modalidad": "presencial",
+   "segmentado": false,
+   "condiciones": "Promoción válida todos los miércoles de octubre de 2026. Promoción consiste en un 40% de descuento con tope de $40.000 por cuenta o tarjeta. Válido en restaurante \"Vapiano\" de Parque Arauco y Providencia, pagando con Tarjeta Cencosud Scotiabank Mastercard emitidas por CAT Administradora de Tarjetas ",
+   "url": "https://www.tarjetacencosud.cl/publico/beneficios/landing/la-ruta-del-sabor",
+   "logo": "https://staticresourcesfiles.blob.core.windows.net/content/wpub/static/9352741495675614-199.webp",
+   "capturado": "",
+   "id": "d14da9d610ed",
+   "locales": [
+    {
+     "direccion": "Parque Arauco",
+     "comuna": "",
+     "lat": null,
+     "lon": null,
+     "precision": "sin_ubicar",
+     "telefono": "",
+     "origen": ""
+    },
+    {
+     "direccion": "",
+     "comuna": "Providencia",
+     "lat": -33.4256,
+     "lon": -70.6096,
+     "precision": "comuna",
+     "telefono": "",
+     "origen": ""
+    }
+   ],
+   "comunas": [
+    "Providencia"
+   ]
   },
   {
    "banco_id": "santander",
