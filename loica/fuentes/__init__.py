@@ -21,6 +21,7 @@ from .manual import extraer_manual
 from .providencia import extraer_providencia
 from .tablas import extraer_tabla
 from .talleres import extraer_talleres
+from .torneostcg import extraer_torneostcg
 from .web import extraer_html, extraer_rss, extraer_sitemap_fichas
 from .wordpress import extraer as extraer_wordpress
 from .wordpress import extraer_eventon
@@ -41,6 +42,7 @@ ADAPTADORES = {
     "ticketmaster": extraer_ticketmaster,
     "fichas": extraer_fichas,
     "horarios": extraer_horarios,
+    "torneostcg": extraer_torneostcg,
 }
 
 __all__ = ["ADAPTADORES"]

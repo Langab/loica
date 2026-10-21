@@ -689,20 +689,42 @@ fuentes:
     Explanada) queda fuera: no hay campo para ella.'
 - id: mim
   nombre: MIM - Museo Interactivo Mirador
-  url_base: https://www.mim.cl
-  url_agenda: https://www.mim.cl/
-  tipo_adaptador: html
-  endpoint: /
+  url_base: https://enduring-authority-d160bd805e.strapiapp.com
+  url_agenda: https://www.mim.cl/eventos
+  tipo_adaptador: json
+  # mim.cl es un Next.js que arma la cartelera en el servidor desde un Strapi
+  # Cloud (v5). reverse-api-engineer encontró el dominio del Strapi el
+  # 20-10-2026 y se cortó por saldo; /api/events se confirmó a mano: público,
+  # sin token, y robots.txt del dominio no restringe nada.
+  endpoint: /api/events
   comuna: La Granja
   crawl_delay_seg: 5
-  buscar_detalle: false
-  tope_detalle: 25
-  activa: false
-  notas: 'REVISADO 13-08-2026: aplicacion Next.js sin puerta estructurada. /robots.txt, /sitemap.xml,
-    /agenda, /actividades y /panoramas devuelven todos el mismo HTML de la SPA (~49 KB) y /wp-json responde
-    403. Sin JSON-LD ni RSS. No declara restricciones, pero tampoco ofrece por donde entrar sin ejecutar
-    su JavaScript. Queda apagada hasta que publiquen algo legible; su cartelera puede entrar por datos/manual/
-    mientras tanto.'
+  activa: true
+  parametros:
+    sort[0]: starts_at:desc
+    populate[image]: 'true'
+  json:
+    lista: data
+    plantilla_url: https://www.mim.cl/eventos/{slug}
+    # UTC de verdad: la API dice 14:00Z y la ficha pública "11:00 h"
+    # (comprobado 2026-10-20 con "La Mediateca Hipatia celebra dos años").
+    zona_horaria: UTC
+    paginacion:
+      parametro: pagination[page]
+      parametro_limite: pagination[pageSize]
+      limite: 50
+      max_paginas: 2
+      campo_total_paginas: meta.pagination.pageCount
+    campos:
+      titulo: title
+      descripcion_corta: description
+      inicio: starts_at
+      fin: ends_at
+      imagen_url: image.formats.medium.url
+      id_externo: documentId
+  notas: 'Apagada el 13-08-2026 porque el HTML no traía fechas. Desde el 20-10-2026 entra por la API del
+    Strapi. Publica pocos eventos (2 vigentes al activarla) pero son de un museo grande y familiar. El
+    lugar sale del nombre de la fuente y la dirección de correcciones/lugares.yaml (Punta Arenas 6711).'
 - id: providencia_muni
   nombre: Municipalidad de Providencia
   url_base: https://providencia.cl
@@ -1863,17 +1885,18 @@ fuentes:
 - id: torneostcg
   nombre: Torneos TCG Chile
   url_base: https://www.torneostcg.cl
-  url_agenda: https://www.torneostcg.cl/sitemap.xml
-  tipo_adaptador: sitemap
-  endpoint: /sitemap.xml
-  patron_url: /torneo
+  url_agenda: https://www.torneostcg.cl/region-metropolitana
+  tipo_adaptador: torneostcg
   tope_fichas: 30
   comuna: ''
   crawl_delay_seg: 4
-  activa: false
-  requiere_comuna: true
-  notas: 'APAGADA hasta revisar: agregador nacional de torneos TCG (Magic, Pokemon, One Piece). Next.js
-    server-rendered, robots Allow. Es nacional: exige comuna para no traer regiones.'
+  activa: true
+  notas: 'Agregador nacional de torneos de cartas (Pokémon, One Piece, Magic…). Next.js sin JSON-LD ni
+    API: los datos van en el payload del HTML. Desde el 20-10-2026 entra con su adaptador propio
+    (loica/fuentes/torneostcg.py), que abre solo las páginas /region-metropolitana/torneos/<juego> del
+    sitemap y toma las "Próximas fechas destacadas" (regionales, prereleases). El calendario semanal de
+    cada tienda queda fuera a propósito: son ligas de barrio que se repiten cada semana. robots.txt:
+    Allow: /. La exploración con reverse-api-engineer se cortó por saldo; el payload se leyó a mano.'
 - id: chilecultura
   nombre: ChileCultura (Ministerio de las Culturas)
   url_base: https://chilecultura.gob.cl

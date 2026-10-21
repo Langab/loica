@@ -64,4 +64,11 @@ herramientas/reverse_api/explorar_fuente.sh <id_fuente> <url> "<qué buscar>"
 
 | Fuente | Fecha | robots.txt | Resultado |
 |---|---|---|---|
-| `mmdh` | 14-10-2026 | permite (mmdh.cl y manager.mmdh.cl) | Strapi v4 público `manager.mmdh.cl/api/post-carteleras`. **Activa desde el 20-10-2026** |
+| `mmdh` | 14-10-2026 | permite (mmdh.cl y manager.mmdh.cl) | Strapi v4 público `manager.mmdh.cl/api/post-carteleras`. **Activa desde el 20-10-2026** (9 eventos vigentes) |
+| `mim` | 20-10-2026 | mim.cl no tiene robots.txt real; el del Strapi no restringe | La herramienta encontró el Strapi Cloud (`enduring-authority-d160bd805e.strapiapp.com`) y se cortó por saldo; `/api/events` se confirmó a mano. **Activa** (2 vigentes) |
+| `torneostcg` | 20-10-2026 | `Allow: /` | Sin API: los datos vienen en el payload de Next.js. Adaptador propio (`loica/fuentes/torneostcg.py`) que toma solo los destacados de la RM. **Activa** (3 regionales) |
+| `maipu` | 20-10-2026 | no tiene robots.txt real | La app Vue no tiene ruta de agenda: solo noticias, trámites y licitaciones. Los panoramas irían mezclados con noticias. **Sigue apagada** |
+
+Si la herramienta se corta por saldo ("Credit balance is too low"), lo que
+alcanzó a ver queda en el log de `../exploracion_apis/<id>/`: casi siempre ya
+nombra el dominio de la API, y desde ahí se sigue a mano con `curl -g`.
