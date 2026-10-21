@@ -50,3 +50,11 @@ herramientas/reverse_api/scripts/
 # Hojas de prueba del elenco: se regeneran con arte/elenco/construir.py
 arte/elenco/hoja*.html
 arte/elenco/hoja*.png
+
+# Copias de conflicto de iCloud Drive: el repo vive en iCloud y cuando una
+# corrida reescribe miles de fichas seguidas, iCloud guarda la versión anterior
+# como "<nombre> 2.html". run_todo.py hace `git add web/e`, así que sin esta
+# regla se publicarían como páginas duplicadas.
+* [0-9].html
+* [0-9].json
+* [0-9].md

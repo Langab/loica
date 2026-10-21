@@ -635,3 +635,16 @@ eventos:
   8a67d7009ce571ec:
     categoria: musica
     nota: auditoría del 2026-08-22
+
+  # Fichas de Ticketplus que el organizador retiró o movió. Seguían publicadas
+  # porque el adaptador abre solo las 40 fichas más nuevas del sitemap y estas
+  # no volvieron a pasar. Revisado el 18-10-2026.
+  922ff7709d17d11b:
+    descartar: true
+    nota: '"BORIS BILBRAUT ★ SÁBADO 24 OCTUBRE" — ya no está en el sitemap de Ticketplus y su página quedó genérica'
+  c950efe6c6397215:
+    descartar: true
+    nota: '"The cat empire ★ VIERNES 20 NOVIEMBRE" — ya no está en el sitemap de Ticketplus y su página quedó genérica'
+  484bac709d92d98a:
+    descartar: true
+    nota: '"INTERFASE ★ SÁBADO 31 OCTUBRE" — se movió al viernes 30, que ya está publicado como 83e36e7563c21cd9'

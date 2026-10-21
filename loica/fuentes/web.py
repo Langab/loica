@@ -32,10 +32,17 @@ log = logging.getLogger("loica.web")
 # la página, sin mirar tildes y dejando que cada "?" calce con uno o dos
 # caracteres cualesquiera, y se usa la versión de la página. Si no calza
 # exacto, queda el del JSON-LD: nunca se inventa un título.
+# Letras que Unicode no descompone en base + tilde y que la fuente igual
+# escribe sin marca: "Fredrik Svabø" llega como "Svabo" en el JSON-LD. Solo
+# las que se cambian por UNA letra, para no correr las posiciones.
+_LETRAS_SIMPLES = str.maketrans("øØłŁđĐıħĦŧŦ", "oOlLdDihHtT")
+
+
 def _sin_tildes(texto: str) -> str:
     import unicodedata
     # Carácter por carácter, para que las posiciones del resultado sigan
     # siendo las del original y el trozo que calce se pueda cortar de ahí.
+    texto = texto.translate(_LETRAS_SIMPLES)
     return "".join((unicodedata.normalize("NFKD", c)[:1] or c) for c in texto)
 
 
